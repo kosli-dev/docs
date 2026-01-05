@@ -103,6 +103,7 @@
             "group": "CLI documentation",
             "pages": [
               "client_reference/kosli_attest_artifact",
+              "client_reference/kosli_attest_snyk",
               "client_reference/kosli_begin_trail"
             ]
           }
