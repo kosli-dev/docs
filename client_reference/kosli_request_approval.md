@@ -1,17 +1,15 @@
 ---
-title: "kosli report artifact"
-description: "Report an artifact creation to a Kosli flow."
+title: "kosli request approval"
+description: "Request an approval of a deployment of an artifact to an environment in Kosli."
 ---
-<Warning>
-**kosli report artifact** is deprecated. see kosli attest commands  Deprecated commands will be removed in a future release.
-</Warning>
 ## Synopsis
 
 ```shell
-kosli report artifact {IMAGE-NAME | FILE-PATH | DIR-PATH} [flags]
+kosli request approval [IMAGE-NAME | FILE-PATH | DIR-PATH] [flags]
 ```
 
-Report an artifact creation to a Kosli flow.  
+Request an approval of a deployment of an artifact to an environment in Kosli.  
+The request should be reviewed in the Kosli UI.  
 
 The artifact fingerprint can be provided directly with the `--fingerprint` flag, or 
 calculated based on `--artifact-type` flag.
@@ -23,18 +21,19 @@ images in registries or "docker" for local docker images.
 | Flag | Description |
 | :--- | :--- |
 |    -t, --artifact-type string  |  The type of the artifact to calculate its SHA256 fingerprint. One of: [oci, docker, file, dir]. Only required if you want Kosli to calculate the fingerprint for you (i.e. when you don't specify '--fingerprint' on commands that allow it).  |
-|    -b, --build-url string  |  The url of CI pipeline that built the artifact. (defaulted in some CIs: /ci-defaults ).  |
-|    -u, --commit-url string  |  The url for the git commit that created the artifact. (defaulted in some CIs: /ci-defaults ).  |
+|    -d, --description string  |  [optional] The approval description.  |
 |    -D, --dry-run  |  [optional] Run in dry-run mode. When enabled, no data is sent to Kosli and the CLI exits with 0 exit code regardless of any errors.  |
+|    -e, --environment string  |  [defaulted] The environment the artifact is approved for. (defaults to all environments)  |
 |    -x, --exclude strings  |  [optional] The comma separated list of directories and files to exclude from fingerprinting. Can take glob patterns. Only applicable for --artifact-type dir.  |
 |    -F, --fingerprint string  |  [conditional] The SHA256 fingerprint of the artifact. Only required if you don't specify '--artifact-type'.  |
 |    -f, --flow string  |  The Kosli flow name.  |
-|    -g, --git-commit string  |  [defaulted] The git commit from which the artifact was created. (defaulted in some CIs: /ci-defaults, otherwise defaults to HEAD ).  |
-|    -h, --help  |  help for artifact  |
-|    -n, --name string  |  [optional] Artifact display name, if different from file, image or directory name.  |
+|    -h, --help  |  help for approval  |
+|        --newest-commit string  |  [defaulted] The source commit sha for the newest change in the deployment. Can be any commit-ish. (default "HEAD")  |
+|        --oldest-commit string  |  [conditional] The source commit sha for the oldest change in the deployment. Can be any commit-ish. Only required if you don't specify '--environment'.  |
 |        --registry-password string  |  [conditional] The container registry password or access token. Only required if you want to read container image SHA256 digest from a remote container registry.  |
 |        --registry-username string  |  [conditional] The container registry username. Only required if you want to read container image SHA256 digest from a remote container registry.  |
 |        --repo-root string  |  [defaulted] The directory where the source git repository is available. (default ".")  |
+|    -u, --user-data string  |  [optional] The path to a JSON file containing additional data you would like to attach to the approval.  |
 
 ## Flags inherited from parent commands
 | Flag | Description |
@@ -51,31 +50,38 @@ images in registries or "docker" for local docker images.
 
 These examples all assume that the flags  `--api-token`, `--org`, `--host`, (and `--flow`, `--trail` when required), are [set/provided](/getting_started/install/#assigning-flags-via-environment-variables). 
 
-<AccordionGroup>
-	<Accordion title="Report to a Kosli flow that a file type artifact has been created">
+```shell
+# Request an approval for an artifact with a provided fingerprint (sha256)
+# for deployment to environment <yourEnvironmentName>.
+# The approval is for all git commits since the last approval to this environment.
+kosli request approval \
+	--api-token yourAPIToken \
+	--description "An optional description for the approval" \
+	--environment yourEnvironmentName \
+	--org yourOrgName \
+	--flow yourFlowName \
+	--fingerprint yourArtifactFingerprint
 
-	
-	```shell
-	kosli report artifact FILE.tgz 
-		--artifact-type file 
-		--build-url https://exampleci.com 
-		--commit-url https://github.com/YourOrg/YourProject/commit/yourCommitShaThatThisArtifactWasBuiltFrom 
-		--git-commit yourCommitShaThatThisArtifactWasBuiltFrom 
-	
-	```
-	
-	</Accordion>
-	<Accordion title="Report to a Kosli flow that an artifact with a provided fingerprint (sha256) has been created">
+# Request that a file type artifact needs approval for deployment to environment <yourEnvironmentName>.
+# The approval is for all git commits since the last approval to this environment.
+kosli request approval FILE.tgz \
+	--api-token yourAPIToken \
+	--artifact-type file \
+	--description "An optional description for the requested approval" \
+	--environment yourEnvironmentName \
+	--newest-commit HEAD \
+	--org yourOrgName \
+	--flow yourFlowName 
 
-	
-	```shell
-	kosli report artifact ANOTHER_FILE.txt 
-		--build-url https://exampleci.com 
-		--commit-url https://github.com/YourOrg/YourProject/commit/yourCommitShaThatThisArtifactWasBuiltFrom 
-		--git-commit yourCommitShaThatThisArtifactWasBuiltFrom 
-		--fingerprint yourArtifactFingerprint
-	```
-	
-	
-	</Accordion>
-</AccordionGroup>
+# Request an approval for an artifact with a provided fingerprint (sha256).
+# The approval is for all environments.
+# The approval is for all commits since the git commit of origin/production branch.
+kosli request approval \
+	--api-token yourAPIToken \
+	--description "An optional description for the requested approval" \
+	--newest-commit HEAD \
+	--oldest-commit origin/production \
+	--org yourOrgName \
+	--flow yourFlowName \
+	--fingerprint yourArtifactFingerprint
+```

@@ -1,8 +1,7 @@
 ---
 title: "kosli allow artifact"
-description: "Add an artifact to an environment's allowlist.  "
+description: "Add an artifact to an environment's allowlist."
 ---
-
 ## Synopsis
 
 ```shell
@@ -17,8 +16,6 @@ calculated based on `--artifact-type` flag.
 Artifact type can be one of: "file" for files, "dir" for directories, "oci" for container
 images in registries or "docker" for local docker images.
 
-
-
 ## Flags
 | Flag | Description |
 | :--- | :--- |
@@ -32,16 +29,13 @@ images in registries or "docker" for local docker images.
 |        --registry-password string  |  [conditional] The container registry password or access token. Only required if you want to read container image SHA256 digest from a remote container registry.  |
 |        --registry-username string  |  [conditional] The container registry username. Only required if you want to read container image SHA256 digest from a remote container registry.  |
 
-
 ## Flags inherited from parent commands
 | Flag | Description |
 | :--- | :--- |
 |    -a, --api-token string  |  The Kosli API token.  |
 |    -c, --config-file string  |  [optional] The Kosli config file path. (default "kosli")  |
-|        --debug  |  [optional] Print debug logs to stdout. A boolean flag https://docs.kosli.com/faq/#boolean-flags (default false)  |
+|        --debug  |  [optional] Print debug logs to stdout. A boolean flag /faq/#boolean-flags (default false)  |
 |    -H, --host string  |  [defaulted] The Kosli endpoint. (default "https://app.kosli.com")  |
 |        --http-proxy string  |  [optional] The HTTP proxy URL including protocol and port number. e.g. 'http://proxy-server-ip:proxy-port'  |
 |    -r, --max-api-retries int  |  [defaulted] How many times should API calls be retried when the API host is not reachable. (default 3)  |
 |        --org string  |  The Kosli organization.  |
-
-

@@ -1,8 +1,7 @@
 ---
 title: "kosli attest custom"
-description: "Report a custom attestation to an artifact or a trail in a Kosli flow. "
+description: "Report a custom attestation to an artifact or a trail in a Kosli flow."
 ---
-
 ## Synopsis
 
 ```shell
@@ -12,7 +11,6 @@ kosli attest custom [IMAGE-NAME | FILE-PATH | DIR-PATH] [flags]
 Report a custom attestation to an artifact or a trail in a Kosli flow. 
 The name of the custom attestation type is specified using the `--type` flag.
 The path to the JSON file the custom type will evaluate is specified using the `--attestation-data` flag.
-
 
 The attestation can be bound to a *trail* using the trail name.  
 The attestation can be bound to an *artifact* in two ways:
@@ -31,7 +29,7 @@ binding the attestation to the right artifact.
 |    -t, --artifact-type string  |  The type of the artifact to calculate its SHA256 fingerprint. One of: [oci, docker, file, dir]. Only required if you want Kosli to calculate the fingerprint for you (i.e. when you don't specify '--fingerprint' on commands that allow it).  |
 |        --attachments strings  |  [optional] The comma-separated list of paths of attachments for the reported attestation. Attachments can be files or directories. All attachments are compressed and uploaded to Kosli's evidence vault.  |
 |        --attestation-data string  |  The filepath of a json file containing the custom attestation data.  |
-|    -g, --commit string  |  [conditional] The git commit for which the attestation is associated to. Becomes required when reporting an attestation for an artifact before reporting it to Kosli. (defaulted in some CIs: https://docs.kosli.com/ci-defaults ).  |
+|    -g, --commit string  |  [conditional] The git commit for which the attestation is associated to. Becomes required when reporting an attestation for an artifact before reporting it to Kosli. (defaulted in some CIs: /ci-defaults ).  |
 |        --description string  |  [optional] attestation description  |
 |    -D, --dry-run  |  [optional] Run in dry-run mode. When enabled, no data is sent to Kosli and the CLI exits with 0 exit code regardless of any errors.  |
 |    -x, --exclude strings  |  [optional] The comma separated list of directories and files to exclude from fingerprinting. Can take glob patterns. Only applicable for --artifact-type dir.  |
@@ -41,92 +39,103 @@ binding the attestation to the right artifact.
 |    -f, --flow string  |  The Kosli flow name.  |
 |    -h, --help  |  help for custom  |
 |    -n, --name string  |  The name of the attestation as declared in the flow or trail yaml template.  |
-|    -o, --origin-url string  |  [optional] The url pointing to where the attestation came from or is related. (defaulted to the CI url in some CIs: https://docs.kosli.com/integrations/ci_cd/#defaulted-kosli-command-flags-from-ci-variables ).  |
+|    -o, --origin-url string  |  [optional] The url pointing to where the attestation came from or is related. (defaulted to the CI url in some CIs: /integrations/ci_cd/#defaulted-kosli-command-flags-from-ci-variables ).  |
 |        --redact-commit-info strings  |  [optional] The list of commit info to be redacted before sending to Kosli. Allowed values are one or more of [author, message, branch].  |
 |        --registry-password string  |  [conditional] The container registry password or access token. Only required if you want to read container image SHA256 digest from a remote container registry.  |
 |        --registry-username string  |  [conditional] The container registry username. Only required if you want to read container image SHA256 digest from a remote container registry.  |
-|        --repo-root string  |  [defaulted] The directory where the source git repository is available. Only used if --commit is used or defaulted in CI, see https://docs.kosli.com/integrations/ci_cd/#defaulted-kosli-command-flags-from-ci-variables . (default ".")  |
+|        --repo-root string  |  [defaulted] The directory where the source git repository is available. Only used if --commit is used or defaulted in CI, see /integrations/ci_cd/#defaulted-kosli-command-flags-from-ci-variables . (default ".")  |
 |    -T, --trail string  |  The Kosli trail name.  |
 |        --type string  |  The name of the custom attestation type.  |
 |    -u, --user-data string  |  [optional] The path to a JSON file containing additional data you would like to attach to the attestation.  |
-
 
 ## Flags inherited from parent commands
 | Flag | Description |
 | :--- | :--- |
 |    -a, --api-token string  |  The Kosli API token.  |
 |    -c, --config-file string  |  [optional] The Kosli config file path. (default "kosli")  |
-|        --debug  |  [optional] Print debug logs to stdout. A boolean flag https://docs.kosli.com/faq/#boolean-flags (default false)  |
+|        --debug  |  [optional] Print debug logs to stdout. A boolean flag /faq/#boolean-flags (default false)  |
 |    -H, --host string  |  [defaulted] The Kosli endpoint. (default "https://app.kosli.com")  |
 |        --http-proxy string  |  [optional] The HTTP proxy URL including protocol and port number. e.g. 'http://proxy-server-ip:proxy-port'  |
 |    -r, --max-api-retries int  |  [defaulted] How many times should API calls be retried when the API host is not reachable. (default 3)  |
 |        --org string  |  The Kosli organization.  |
 
-
 ## Live Examples in different CI systems
 
 <Tabs>
-<Tab title="GitHub" icon="github">
+	<Tab title="GitHub">
 View an example of the `kosli attest custom` command in GitHub.
 
 In [this YAML file](https://app.kosli.com/api/v2/livedocs/cyber-dojo/yaml?ci=github&command=kosli+attest+custom), which created [this Kosli Event](https://app.kosli.com/api/v2/livedocs/cyber-dojo/event?ci=github&command=kosli+attest+custom).
-</Tab>
+	</Tab>
 </Tabs>
 
 ## Examples Use Cases
 
-These examples all assume that the flags  `--api-token`, `--org`, `--host`, (and `--flow`, `--trail` when required), are [set/provided](https://docs.kosli.com/getting_started/install/#assigning-flags-via-environment-variables). 
+These examples all assume that the flags  `--api-token`, `--org`, `--host`, (and `--flow`, `--trail` when required), are [set/provided](/getting_started/install/#assigning-flags-via-environment-variables). 
 
-##### report a custom attestation about a pre-built container image artifact (kosli finds the fingerprint)
+<AccordionGroup>
+	<Accordion title="report a custom attestation about a pre-built container image artifact (kosli finds the fingerprint)">
 
-```shell
-kosli attest custom yourDockerImageName 
-	--artifact-type oci 
-	--type customTypeName 
-	--name yourAttestationName 
-	--attestation-data yourJsonFilePath 
+	
+	```shell
+	kosli attest custom yourDockerImageName 
+		--artifact-type oci 
+		--type customTypeName 
+		--name yourAttestationName 
+		--attestation-data yourJsonFilePath 
+	
+	```
+	
+	</Accordion>
+	<Accordion title="report a custom attestation about a pre-built docker artifact (you provide the fingerprint)">
 
-```
+	
+	```shell
+	kosli attest custom 
+		--fingerprint yourDockerImageFingerprint 
+		--type customTypeName 
+		--name yourAttestationName 
+		--attestation-data yourJsonFilePath 
+	
+	```
+	
+	</Accordion>
+	<Accordion title="report a custom attestation about a trail">
 
-##### report a custom attestation about a pre-built docker artifact (you provide the fingerprint)
+	
+	```shell
+	kosli attest custom 
+		--type customTypeName 
+		--name yourAttestationName 
+		--attestation-data yourJsonFilePath 
+	
+	```
+	
+	</Accordion>
+	<Accordion title="report a custom attestation about an artifact which has not been reported yet in a trail">
 
-```shell
-kosli attest custom 
-	--fingerprint yourDockerImageFingerprint 
-	--type customTypeName 
-	--name yourAttestationName 
-	--attestation-data yourJsonFilePath 
+	
+	```shell
+	kosli attest custom 
+		--type customTypeName 
+		--name yourTemplateArtifactName.yourAttestationName 
+		--attestation-data yourJsonFilePath 
+		--commit yourArtifactGitCommit 
+	
+	```
+	
+	</Accordion>
+	<Accordion title="report a custom attestation about a trail with an attachment">
 
-```
-
-##### report a custom attestation about a trail
-
-```shell
-kosli attest custom 
-	--type customTypeName 
-	--name yourAttestationName 
-	--attestation-data yourJsonFilePath 
-
-```
-
-##### report a custom attestation about an artifact which has not been reported yet in a trail
-
-```shell
-kosli attest custom 
-	--type customTypeName 
-	--name yourTemplateArtifactName.yourAttestationName 
-	--attestation-data yourJsonFilePath 
-	--commit yourArtifactGitCommit 
-
-```
-
-##### report a custom attestation about a trail with an attachment
-
-```shell
-kosli attest custom 
-    --type customTypeName 
-	--name yourAttestationName 
-	--attestation-data yourJsonFilePath 
-	--attachments yourAttachmentPathName 
-```
-
+	
+	```shell
+	kosli attest custom 
+	    --type customTypeName 
+		--name yourAttestationName 
+		--attestation-data yourJsonFilePath 
+		--attachments yourAttachmentPathName 
+	```
+	
+	
+	</Accordion>
+</AccordionGroup>
