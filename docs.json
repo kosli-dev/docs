@@ -137,21 +137,9 @@
                 "icon": "terminal",
                 "groups": [
                   {
-                    "group": "CLI Commands",
+                    "group": "General",
                     "pages": [
-                      "client_reference/kosli_allow_artifact",
-                      "client_reference/kosli_attest_artifact",
-                      "client_reference/kosli_attest_custom",
-                      "client_reference/kosli_attest_generic",
-                      "client_reference/kosli_attest_snyk",
-                      "client_reference/kosli_begin_trail"
-                    ]
-                  },
-                  {
-                    "group": "Deprecated",
-                    "pages": [
-                      "client_reference/kosli_expect_deployment",
-                      "client_reference/kosli_report_artifact"
+                      "client_reference/overview"
                     ]
                   }
                 ]
@@ -194,15 +182,15 @@
   },
   "contextual": {
     "options": [
-     "copy",
-     "view",
-     "chatgpt",
-     "claude",
-     "perplexity",
-     "mcp",
-     "cursor",
-     "vscode"
-   ]
+      "copy",
+      "view",
+      "chatgpt",
+      "claude",
+      "perplexity",
+      "mcp",
+      "cursor",
+      "vscode"
+    ]
   },
   "footer": {
     "socials": {

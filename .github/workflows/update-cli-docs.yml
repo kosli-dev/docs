@@ -1,0 +1,69 @@
+name: Update CLI Reference Docs
+
+on:
+  workflow_dispatch:
+    inputs:
+      cli_tag:
+        description: 'CLI release tag (e.g. v2.11.2)'
+        required: true
+  repository_dispatch:
+    types: [cli-release]
+
+permissions:
+  contents: write
+  pull-requests: write
+
+jobs:
+  update-cli-docs:
+    runs-on: ubuntu-latest
+    steps:
+      - name: Determine CLI tag
+        id: tag
+        run: |
+          if [ "${{ github.event_name }}" = "repository_dispatch" ]; then
+            echo "cli_tag=${{ github.event.client_payload.tag }}" >> "$GITHUB_OUTPUT"
+          else
+            echo "cli_tag=${{ github.event.inputs.cli_tag }}" >> "$GITHUB_OUTPUT"
+          fi
+
+      - name: Checkout docs repo
+        uses: actions/checkout@v4
+
+      - name: Download kosli CLI from release
+        run: |
+          TAG="${{ steps.tag.outputs.cli_tag }}"
+          curl -sL "https://github.com/kosli-dev/cli/releases/download/${TAG}/kosli_${TAG#v}_linux_amd64.tar.gz" | tar xz kosli
+          chmod +x kosli
+
+      - name: Generate Mintlify CLI docs
+        run: |
+          rm -f client_reference/kosli*.md
+          DOCS=true ./kosli docs --mintlify --dir client_reference/
+
+      - name: Set up Python
+        uses: actions/setup-python@v5
+        with:
+          python-version: '3.12'
+
+      - name: Install Python dependencies
+        run: pip install pyyaml
+
+      - name: Stamp CLI version in overview page
+        run: |
+          TAG="${{ steps.tag.outputs.cli_tag }}"
+          sed -i "s/\*\*v[0-9][0-9.]*\*\*/**${TAG}**/" client_reference/overview.md
+
+      - name: Update CLI navigation in docs.json
+        run: python scripts/update-cli-nav.py --docs-dir client_reference/ --config docs.json
+
+      - name: Create Pull Request
+        uses: peter-evans/create-pull-request@v7
+        with:
+          commit-message: "docs: update CLI reference for ${{ steps.tag.outputs.cli_tag }}"
+          title: "docs: update CLI reference for ${{ steps.tag.outputs.cli_tag }}"
+          body: |
+            Automated update of CLI reference documentation for release `${{ steps.tag.outputs.cli_tag }}`.
+
+            Generated directly with `kosli docs --mintlify` (no Python conversion).
+          branch: cli-docs/${{ steps.tag.outputs.cli_tag }}
+          delete-branch: true
