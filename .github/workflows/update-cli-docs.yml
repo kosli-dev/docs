@@ -39,6 +39,7 @@ jobs:
         run: |
           rm -f client_reference/kosli*.md
           DOCS=true ./kosli docs --mintlify --dir client_reference/
+          rm -f kosli
 
       - name: Set up Python
         uses: actions/setup-python@v5
@@ -63,7 +64,5 @@ jobs:
           title: "docs: update CLI reference for ${{ steps.tag.outputs.cli_tag }}"
           body: |
             Automated update of CLI reference documentation for release `${{ steps.tag.outputs.cli_tag }}`.
-
-            Generated directly with `kosli docs --mintlify` (no Python conversion).
           branch: cli-docs/${{ steps.tag.outputs.cli_tag }}
           delete-branch: true
