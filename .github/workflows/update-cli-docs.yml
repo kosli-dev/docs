@@ -58,7 +58,7 @@ jobs:
         run: python scripts/update-cli-nav.py --docs-dir client_reference/ --config docs.json
 
       - name: Create Pull Request
-        uses: peter-evans/create-pull-request@v7
+        uses: peter-evans/create-pull-request@v8
         with:
           commit-message: "docs: update CLI reference for ${{ steps.tag.outputs.cli_tag }}"
           title: "docs: update CLI reference for ${{ steps.tag.outputs.cli_tag }}"
@@ -66,3 +66,4 @@ jobs:
             Automated update of CLI reference documentation for release `${{ steps.tag.outputs.cli_tag }}`.
           branch: cli-docs/${{ steps.tag.outputs.cli_tag }}
           delete-branch: true
+          sign-commits: true
