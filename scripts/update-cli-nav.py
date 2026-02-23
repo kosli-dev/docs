@@ -102,6 +102,10 @@ def build_nav_groups(docs_dir):
     for filename in sorted(os.listdir(docs_dir)):
         if not filename.endswith('.md'):
             continue
+        # Skip the overview page — it's manually maintained and always
+        # inserted as the first page in the General group below.
+        if filename == 'overview.md':
+            continue
 
         filepath = os.path.join(docs_dir, filename)
         info = get_command_info(filepath)
@@ -135,7 +139,7 @@ def build_nav_groups(docs_dir):
     if 'General' in groups_dict:
         nav_groups.append({
             'group': 'General',
-            'pages': groups_dict.pop('General'),
+            'pages': ['client_reference/overview'] + groups_dict.pop('General'),
         })
 
     for group_name in sorted(groups_dict.keys()):
