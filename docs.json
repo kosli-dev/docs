@@ -93,6 +93,13 @@
                 ]
               },
               {
+                "group": "Troubleshooting",
+                "icon": "wrench",
+                "pages": [
+                  "troubleshooting/what_do_i_do_if_kosli_is_down"
+                ]
+              },
+              {
                 "group": "Integrations",
                 "icon": "puzzle-piece",
                 "pages": [
