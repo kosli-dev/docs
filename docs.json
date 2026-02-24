@@ -90,7 +90,8 @@
                 "icon": "graduation-cap",
                 "pages": [
                   "tutorials/get_familiar_with_Kosli",
-                  "tutorials/attest_snyk"
+                  "tutorials/attest_snyk",
+                  "tutorials/cli_and_http_proxy"
                 ]
               },
               {
