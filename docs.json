@@ -117,6 +117,12 @@
                       "tutorials/following_a_git_commit_to_runtime_environments",
                       "tutorials/tracing_a_production_incident_back_to_git_commits"
                     ]
+                  },
+                  {
+                    "group": "Security",
+                    "pages": [
+                      "tutorials/unauthorized_iac_changes"
+                    ]
                   }
                 ]
               },
