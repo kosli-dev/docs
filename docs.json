@@ -82,6 +82,12 @@
                     "pages": [
                       "administration/managing_users/roles_in_kosli"
                     ]
+                  },
+                  {
+                    "group": "Managing Environments",
+                    "pages": [
+                      "administration/managing_environments/overview"
+                    ]
                   }
                 ]
               },
