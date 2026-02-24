@@ -93,7 +93,8 @@
                   "tutorials/attest_snyk",
                   "tutorials/cli_and_http_proxy",
                   "tutorials/custom-attestation-ctrf",
-                  "tutorials/following_a_git_commit_to_runtime_environments"
+                  "tutorials/following_a_git_commit_to_runtime_environments",
+                  "tutorials/querying_kosli"
                 ]
               },
               {
