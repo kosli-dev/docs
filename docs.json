@@ -97,7 +97,8 @@
                   "tutorials/querying_kosli",
                   "tutorials/report_aws_envs",
                   "tutorials/report_k8s_envs",
-                  "tutorials/tracing_a_production_incident_back_to_git_commits"
+                  "tutorials/tracing_a_production_incident_back_to_git_commits",
+                  "tutorials/unauthorized_iac_changes"
                 ]
               },
               {
