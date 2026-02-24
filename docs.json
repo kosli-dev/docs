@@ -95,7 +95,8 @@
                   "tutorials/custom-attestation-ctrf",
                   "tutorials/following_a_git_commit_to_runtime_environments",
                   "tutorials/querying_kosli",
-                  "tutorials/report_aws_envs"
+                  "tutorials/report_aws_envs",
+                  "tutorials/report_k8s_envs"
                 ]
               },
               {
