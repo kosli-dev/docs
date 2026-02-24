@@ -89,15 +89,35 @@
                 "group": "Tutorials",
                 "icon": "graduation-cap",
                 "pages": [
-                  "tutorials/get_familiar_with_Kosli",
-                  "tutorials/attest_snyk",
-                  "tutorials/cli_and_http_proxy",
-                  "tutorials/custom-attestation-ctrf",
-                  "tutorials/following_a_git_commit_to_runtime_environments",
-                  "tutorials/querying_kosli",
-                  "tutorials/report_aws_envs",
-                  "tutorials/report_k8s_envs",
-                  "tutorials/tracing_a_production_incident_back_to_git_commits"
+                  {
+                    "group": "Getting started",
+                    "pages": [
+                      "tutorials/get_familiar_with_Kosli",
+                      "tutorials/cli_and_http_proxy"
+                    ]
+                  },
+                  {
+                    "group": "Attesting",
+                    "pages": [
+                      "tutorials/attest_snyk",
+                      "tutorials/custom-attestation-ctrf"
+                    ]
+                  },
+                  {
+                    "group": "Reporting environments",
+                    "pages": [
+                      "tutorials/report_aws_envs",
+                      "tutorials/report_k8s_envs"
+                    ]
+                  },
+                  {
+                    "group": "Querying & tracing",
+                    "pages": [
+                      "tutorials/querying_kosli",
+                      "tutorials/following_a_git_commit_to_runtime_environments",
+                      "tutorials/tracing_a_production_incident_back_to_git_commits"
+                    ]
+                  }
                 ]
               },
               {
