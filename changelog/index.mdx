@@ -1,0 +1,53 @@
+---
+title: "Changelog"
+description: "Release notes for Kosli products."
+---
+
+<Update label="February 2026" description="v0.3.1" tags={["Terraform Provider"]}>
+
+## Bug fixes
+
+- Fixed handling of Python boolean (`true`/`false`) and null values in custom attestation type schemas.
+
+[View on GitHub](https://github.com/kosli-dev/terraform-provider-kosli/releases/tag/v0.3.1)
+
+</Update>
+
+<Update label="February 2026" description="v0.3.0" tags={["Terraform Provider"]}>
+
+## New features
+
+- **`kosli_logical_environment` resource** — create and manage logical environments that aggregate multiple physical environments into a single view.
+- **`kosli_logical_environment` data source** — query details of existing logical environments.
+- **Drift detection for logical environments** — Kosli now detects when the `included_environments` of a logical environment change outside of Terraform.
+- **User agent header** — the provider now sends a versioned user agent on every API request, improving diagnostics.
+
+## Bug fixes
+
+- Fixed a missing `flow` field in pull request attestation resources.
+- Fixed `terraform plan` showing `(known after apply)` for the `type` attribute of logical environments instead of `"logical"`.
+
+[View on GitHub](https://github.com/kosli-dev/terraform-provider-kosli/releases/tag/v0.3.0)
+
+</Update>
+
+<Update label="January 2026" description="v0.2.0" tags={["Terraform Provider"]}>
+
+## New features
+
+- **`kosli_environment` resource** — create and manage physical Kosli environments (K8S, ECS, S3, docker, server, lambda) as Terraform resources.
+- **`kosli_environment` data source** — query details of existing physical environments.
+
+[View on GitHub](https://github.com/kosli-dev/terraform-provider-kosli/releases/tag/v0.2.0)
+
+</Update>
+
+<Update label="January 2026" description="v0.1.0" tags={["Terraform Provider"]}>
+
+## Changes
+
+- `schema` and `jq_rules` are now optional fields on `kosli_attestation_type`, allowing you to create attestation types without a validation schema.
+
+[View on GitHub](https://github.com/kosli-dev/terraform-provider-kosli/releases/tag/v0.1.0)
+
+</Update>
