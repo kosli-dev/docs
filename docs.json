@@ -89,7 +89,8 @@
                 "group": "Tutorials",
                 "icon": "graduation-cap",
                 "pages": [
-                  "tutorials/get_familiar_with_Kosli"
+                  "tutorials/get_familiar_with_Kosli",
+                  "tutorials/what_do_i_do_if_kosli_is_down"
                 ]
               },
               {
