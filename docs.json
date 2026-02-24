@@ -89,7 +89,8 @@
                 "group": "Tutorials",
                 "icon": "graduation-cap",
                 "pages": [
-                  "tutorials/get_familiar_with_Kosli"
+                  "tutorials/get_familiar_with_Kosli",
+                  "tutorials/attest_snyk"
                 ]
               },
               {
