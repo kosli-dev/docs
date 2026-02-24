@@ -35,6 +35,12 @@
     "timestamp": true
   },
   "favicon": "/favicon-32x32.png",
+  "redirects": [
+    {
+      "source": "/ci-defaults",
+      "destination": "/integrations/ci_cd"
+    }
+  ],
   "navigation": {
     "products": [
       {
@@ -139,7 +145,169 @@
                   {
                     "group": "General",
                     "pages": [
-                      "client_reference/overview"
+                      "client_reference/overview",
+                      "client_reference/kosli",
+                      "client_reference/kosli_attach-policy",
+                      "client_reference/kosli_completion",
+                      "client_reference/kosli_config",
+                      "client_reference/kosli_detach-policy",
+                      "client_reference/kosli_fingerprint",
+                      "client_reference/kosli_search",
+                      "client_reference/kosli_status",
+                      "client_reference/kosli_tag",
+                      "client_reference/kosli_version"
+                    ]
+                  },
+                  {
+                    "group": "kosli allow",
+                    "pages": [
+                      "client_reference/kosli_allow_artifact"
+                    ]
+                  },
+                  {
+                    "group": "kosli archive",
+                    "pages": [
+                      "client_reference/kosli_archive_attestation-type",
+                      "client_reference/kosli_archive_environment",
+                      "client_reference/kosli_archive_flow"
+                    ]
+                  },
+                  {
+                    "group": "kosli assert",
+                    "pages": [
+                      "client_reference/kosli_assert_approval",
+                      "client_reference/kosli_assert_artifact",
+                      "client_reference/kosli_assert_pullrequest_azure",
+                      "client_reference/kosli_assert_pullrequest_bitbucket",
+                      "client_reference/kosli_assert_pullrequest_github",
+                      "client_reference/kosli_assert_pullrequest_gitlab",
+                      "client_reference/kosli_assert_snapshot",
+                      "client_reference/kosli_assert_status"
+                    ]
+                  },
+                  {
+                    "group": "kosli attest",
+                    "pages": [
+                      "client_reference/kosli_attest_artifact",
+                      "client_reference/kosli_attest_custom",
+                      "client_reference/kosli_attest_generic",
+                      "client_reference/kosli_attest_jira",
+                      "client_reference/kosli_attest_junit",
+                      "client_reference/kosli_attest_pullrequest_azure",
+                      "client_reference/kosli_attest_pullrequest_bitbucket",
+                      "client_reference/kosli_attest_pullrequest_github",
+                      "client_reference/kosli_attest_pullrequest_gitlab",
+                      "client_reference/kosli_attest_snyk",
+                      "client_reference/kosli_attest_sonar"
+                    ]
+                  },
+                  {
+                    "group": "kosli begin",
+                    "pages": [
+                      "client_reference/kosli_begin_trail"
+                    ]
+                  },
+                  {
+                    "group": "kosli create",
+                    "pages": [
+                      "client_reference/kosli_create_attestation-type",
+                      "client_reference/kosli_create_environment",
+                      "client_reference/kosli_create_flow",
+                      "client_reference/kosli_create_policy"
+                    ]
+                  },
+                  {
+                    "group": "kosli diff",
+                    "pages": [
+                      "client_reference/kosli_diff_snapshots"
+                    ]
+                  },
+                  {
+                    "group": "kosli disable / enable",
+                    "pages": [
+                      "client_reference/kosli_disable_beta",
+                      "client_reference/kosli_enable_beta"
+                    ]
+                  },
+                  {
+                    "group": "kosli get",
+                    "pages": [
+                      "client_reference/kosli_get_approval",
+                      "client_reference/kosli_get_artifact",
+                      "client_reference/kosli_get_attestation-type",
+                      "client_reference/kosli_get_attestation",
+                      "client_reference/kosli_get_deployment",
+                      "client_reference/kosli_get_environment",
+                      "client_reference/kosli_get_flow",
+                      "client_reference/kosli_get_policy",
+                      "client_reference/kosli_get_snapshot",
+                      "client_reference/kosli_get_trail"
+                    ]
+                  },
+                  {
+                    "group": "kosli join",
+                    "pages": [
+                      "client_reference/kosli_join_environment"
+                    ]
+                  },
+                  {
+                    "group": "kosli list",
+                    "pages": [
+                      "client_reference/kosli_list_approvals",
+                      "client_reference/kosli_list_artifacts",
+                      "client_reference/kosli_list_attestation-types",
+                      "client_reference/kosli_list_deployments",
+                      "client_reference/kosli_list_environments",
+                      "client_reference/kosli_list_flows",
+                      "client_reference/kosli_list_policies",
+                      "client_reference/kosli_list_snapshots",
+                      "client_reference/kosli_list_trails"
+                    ]
+                  },
+                  {
+                    "group": "kosli log",
+                    "pages": [
+                      "client_reference/kosli_log_environment"
+                    ]
+                  },
+                  {
+                    "group": "kosli rename",
+                    "pages": [
+                      "client_reference/kosli_rename_environment",
+                      "client_reference/kosli_rename_flow"
+                    ]
+                  },
+                  {
+                    "group": "kosli report",
+                    "pages": [
+                      "client_reference/kosli_report_approval"
+                    ]
+                  },
+                  {
+                    "group": "kosli request",
+                    "pages": [
+                      "client_reference/kosli_request_approval"
+                    ]
+                  },
+                  {
+                    "group": "kosli snapshot",
+                    "pages": [
+                      "client_reference/kosli_snapshot_azure",
+                      "client_reference/kosli_snapshot_docker",
+                      "client_reference/kosli_snapshot_ecs",
+                      "client_reference/kosli_snapshot_k8s",
+                      "client_reference/kosli_snapshot_lambda",
+                      "client_reference/kosli_snapshot_path",
+                      "client_reference/kosli_snapshot_paths",
+                      "client_reference/kosli_snapshot_s3"
+                    ]
+                  },
+                  {
+                    "group": "Deprecated",
+                    "pages": [
+                      "client_reference/kosli_expect_deployment",
+                      "client_reference/kosli_report_artifact",
+                      "client_reference/kosli_snapshot_server"
                     ]
                   }
                 ]
