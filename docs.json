@@ -86,6 +86,13 @@
                 ]
               },
               {
+                "group": "Tutorials",
+                "icon": "graduation-cap",
+                "pages": [
+                  "tutorials/get_familiar_with_Kosli"
+                ]
+              },
+              {
                 "group": "Integrations",
                 "icon": "puzzle-piece",
                 "pages": [
