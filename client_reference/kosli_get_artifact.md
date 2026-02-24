@@ -16,11 +16,11 @@ You can get an artifact by its fingerprint or by its git commit sha.
 In case of using the git commit, it is possible to get multiple artifacts matching the git commit.
 
 The expected argument is an expression to specify the artifact to get.
-It has the format `FLOW_NAME``SEPARATOR`<COMMIT_SHA1|ARTIFACT_FINGERPRINT> 
+It has the format `FLOW_NAME``SEPARATOR``COMMIT_SHA1|ARTIFACT_FINGERPRINT` 
 
 Expression can be specified as follows:
-- flowName@<fingerprint>  artifact with a given fingerprint. The fingerprint can be short or complete.
-- flowName:<commit_sha>   artifact with a given commit SHA. The commit sha can be short or complete.
+- flowName@`fingerprint`  artifact with a given fingerprint. The fingerprint can be short or complete.
+- flowName:`commit_sha`   artifact with a given commit SHA. The commit sha can be short or complete.
 
 Examples of valid expressions are:
 - flow@184c799cd551dd1d8d5c5f9a5d593b2e931f5e36122ee5c793c1d08a19839cc0

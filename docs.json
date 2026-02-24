@@ -35,6 +35,12 @@
     "timestamp": true
   },
   "favicon": "/favicon-32x32.png",
+  "redirects": [
+    {
+      "source": "/ci-defaults",
+      "destination": "/integrations/ci_cd"
+    }
+  ],
   "navigation": {
     "products": [
       {

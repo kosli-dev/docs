@@ -66,7 +66,7 @@ binding the attestation to the right artifact.
 |        --jira-issue-fields string  |  [optional] The comma separated list of fields to include from the Jira issue. Default no fields are included. '*all' will give all fields.  |
 |        --jira-pat string  |  Jira personal access token (for self-hosted Jira)  |
 |        --jira-project-key strings  |  [optional] Jira project key to match against. Can be repeated. Defaults to matching any jira project key.  |
-|        --jira-secondary-source string  |  [optional] An optional string to search for Jira ticket reference, e.g. '--jira-secondary-source ${{ github.head_ref }}'  |
+|        --jira-secondary-source string  |  [optional] An optional string to search for Jira ticket reference, e.g. '--jira-secondary-source $\{\{ github.head_ref \}\}'  |
 |        --jira-username string  |  Jira username (for Jira Cloud)  |
 |    -n, --name string  |  The name of the attestation as declared in the flow or trail yaml template.  |
 |    -o, --origin-url string  |  [optional] The url pointing to where the attestation came from or is related. (defaulted to the CI url in some CIs: [docs](/integrations/ci_cd/#defaulted-kosli-command-flags-from-ci-variables) ).  |

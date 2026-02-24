@@ -25,7 +25,7 @@ ENVIRONMENT-NAME-OR-EXPRESSION can be specified as follows:
 - environmentName@\{YYYY-MM-DDTHH:MM:SS\}
     - the snapshot at specific moment in time in UTC
     - e.g., **prod@\{2023-10-02T12:00:00\}**
-- environmentName@\{N.<hours|days|weeks|months>.ago\}
+- environmentName@\{N.`hours|days|weeks|months`.ago\}
     - the snapshot at a time relative to the time of the request
     - e.g., **prod@\{2.hours.ago\}**
 
