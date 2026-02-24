@@ -91,7 +91,8 @@
                 "pages": [
                   "tutorials/get_familiar_with_Kosli",
                   "tutorials/attest_snyk",
-                  "tutorials/cli_and_http_proxy"
+                  "tutorials/cli_and_http_proxy",
+                  "tutorials/custom-attestation-ctrf"
                 ]
               },
               {
