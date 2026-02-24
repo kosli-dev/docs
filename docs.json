@@ -382,6 +382,18 @@
                 ]
               }
             ]
+          },
+          {
+            "tab": "Changelog",
+            "icon": "clock",
+            "groups": [
+              {
+                "group": "Changelog",
+                "pages": [
+                  "changelog/index"
+                ]
+              }
+            ]
           }
         ]
       }
