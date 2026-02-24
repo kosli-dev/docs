@@ -91,7 +91,9 @@
                 "pages": [
                   "integrations/actions",
                   "integrations/ci_cd",
-                  "integrations/slack"
+                  "integrations/slack",
+                  "integrations/launchdarkly",
+                  "integrations/sonar"
                 ]
               }
             ]
