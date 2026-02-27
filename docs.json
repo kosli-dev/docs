@@ -3,9 +3,9 @@
   "theme": "mint",
   "name": "Kosli Documentation",
   "colors": {
-    "primary": "#2E6C47",
-    "light": "#67AA7C",
-    "dark": "#67AA7C"
+    "primary": "#1C4BC6",
+    "light": "#ABBDFF",
+    "dark": "#1C4BC6"
   },
   "fonts": {
     "family": "IBM Plex Sans"
@@ -27,8 +27,8 @@
   "background": {
     "decoration": "windows",
     "color": {
-      "dark": "#121C2A",
-      "light": "#F2F3F6"
+      "dark": "#111A26",
+      "light": "#F6F8FC"
     }
   },
   "metadata": {
