@@ -1,0 +1,17 @@
+/*
+ * Kosli docs custom styles
+ * Applied on top of Mintlify's mint theme.
+ */
+
+
+
+/* ─── Steps component ─────────────────────────────────────────────────────── */
+/*
+ * Step number circles use Tailwind's bg-gray-50 (#F9FAFB) which is nearly
+ * invisible against the light page background (#F6F8FC).
+ * Target via the confirmed data-component-part attribute.
+ */
+[data-component-part="step-number"] > div {
+  background-color: #CFD8FF !important;
+  color: #111A26 !important;
+}
