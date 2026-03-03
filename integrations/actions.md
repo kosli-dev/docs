@@ -88,6 +88,11 @@ Custom webhook notifications empower you to implement automation workflows for "
 }
 ```
 
+## Email
+
+Provide a comma-separated list of recipient email addresses. Notifications are sent from `noreply@kosli.com`.
+
+
 # Manage Actions in the UI
 
 You can manage Actions for your organization in the Kosli UI from the `Actions` section in the left navigation menu. The Actions sections enables you to:
