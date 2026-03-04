@@ -4,7 +4,7 @@ description: "Reference documentation for the Kosli CLI."
 ---
 
 <Info>
-  This reference was generated from Kosli CLI **v2.11.44**.
+  This reference was generated from Kosli CLI **v2.11.46**.
 </Info>
 
 The Kosli CLI allows you to interact with Kosli from your terminal and CI/CD pipelines.
