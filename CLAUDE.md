@@ -1,6 +1,16 @@
 # CLAUDE.md
 
-This file provides guidance to Claude Code (claude.ai/code) when working with code in this repository.
+This file governs repo-specific conventions for Claude Code. Skills and system prompts govern their own domains and take precedence for their scope.
+
+## Core rules
+
+These are non-negotiable — follow them regardless of other instructions:
+
+1. Never commit directly to `main` — always work on a branch and open a PR.
+2. Never create a page file without also adding it to `navigation` in `docs.json`.
+3. Never use relative links — always use root-relative paths (e.g., `/getting_started/install`).
+4. Commit messages and PR titles must follow [Conventional Commits](https://www.conventionalcommits.org/): `type: short description` (lowercase, no period). Common types: `feat`, `fix`, `docs`, `style`, `chore`.
+5. Run `mint broken-links` before committing navigation or link changes.
 
 ## Project Overview
 
@@ -14,6 +24,7 @@ mint dev               # Start local dev server at http://localhost:3000
 mint dev --port 3333   # Start on custom port
 mint update            # Update Mintlify CLI
 mint broken-links      # Validate all internal links
+mint a11y              # Check color contrast and accessibility
 ```
 
 Requires Node.js v19+.
@@ -23,18 +34,54 @@ Requires Node.js v19+.
 - **`docs.json`** — Central config: navigation structure, theme, API settings, logos, footer. All page routing is defined here under `navigation.products[].tabs[].groups`.
 - **Content directories** — `understand_kosli/`, `getting_started/`, `administration/`, `integrations/`, `implementation_guide/`, `client_reference/`, `api-reference/`
 - **`snippets/`** — Reusable MDX content fragments
+- **`style.css`** — Custom CSS overrides applied on top of the Mintlify theme
 - **`api-reference/openapi.json`** — OpenAPI spec for Kosli API endpoints
-- **`essentials/`** — Mintlify's own docs guide (not Kosli user-facing content)
+- **`essentials/`** — Mintlify's own getting-started guide, kept as a reference. Do not edit or link to these pages in Kosli navigation.
 
 ## Content Conventions
 
-- Every page needs YAML front matter with `title` and `description`. Optional `icon` field uses Font Awesome names.
-- Use root-relative paths for internal links (e.g., `/understand_kosli/what_is_kosli`), not relative paths.
-- Adding a new page requires both creating the file and adding its path to the `navigation` section in `docs.json`.
+Every page requires YAML front matter:
+
+```yaml
+---
+title: Short, specific title
+description: One sentence describing the page purpose.
+---
+```
+
+The optional `icon` field accepts [Font Awesome](https://fontawesome.com/icons) icon names (e.g., `icon: rocket`).
+
+- Use root-relative paths for internal links: `/understand_kosli/what_is_kosli` ✓ — `../what_is_kosli` ✗
+- Adding a new page: create the file AND add its path to `navigation` in `docs.json`. Both steps are required.
+- Follow the [Diátaxis](https://diataxis.fr/) framework: tutorials teach, how-to guides direct, reference informs, explanation clarifies. Match the page type to the right form.
 
 ### MDX Components
 
-Common components: `<Steps>`, `<Tabs>`/`<Tab>`, `<Card>`/`<CardGroup>`, `<Accordion>`/`<AccordionGroup>`, `<Tip>`, `<Info>`, `<Warning>`, `<Note>`, `<CodeGroup>`, `<Frame>`.
+| Component | Use for |
+|---|---|
+| `<Steps>` / `<Step>` | Sequential procedures |
+| `<Tabs>` / `<Tab>` | Platform-specific or alternative content |
+| `<Card>` / `<CardGroup>` | Navigational links, feature highlights |
+| `<Accordion>` / `<AccordionGroup>` | Progressive disclosure, FAQs |
+| `<Tip>` / `<Info>` / `<Warning>` / `<Note>` | Callouts — use sparingly |
+| `<CodeGroup>` | Same command in multiple languages/tools |
+| `<Frame>` | Wrapping images |
+
+### Writing style
+
+- Use active voice and imperative mood for instructions ("Run `kosli attest`", not "You should run").
+- Refer to the product as **Kosli** — not "the Kosli platform" or "KOSLI".
+- Use "audit trail" not "audit log"; "attest" not "certify".
+- Sentence case for all headings.
+
+## Don'ts
+
+- Don't use relative links — they break when pages move.
+- Don't create a page without updating `docs.json` navigation — it won't appear in the site.
+- Don't edit files in `essentials/` — they are Mintlify's content, not Kosli's.
+- Don't add content to `snippets/` unless it is genuinely reused in 2+ pages.
+- Don't commit image files without placing them in an appropriate subdirectory.
+- Don't push to `main` directly — always use a PR.
 
 ## Deployment
 
