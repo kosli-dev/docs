@@ -49,11 +49,14 @@ description: One sentence describing the page purpose.
 ---
 ```
 
-The optional `icon` field accepts [Font Awesome](https://fontawesome.com/icons) icon names (e.g., `icon: rocket`).
-
-- Use root-relative paths for internal links: `/understand_kosli/what_is_kosli` ✓ — `../what_is_kosli` ✗
-- Adding a new page: create the file AND add its path to `navigation` in `docs.json`. Both steps are required.
-- Follow the [Diátaxis](https://diataxis.fr/) framework: tutorials teach, how-to guides direct, reference informs, explanation clarifies. Match the page type to the right form.
+- **MUST** Use root-relative paths for internal links: `/understand_kosli/what_is_kosli` ✓ — `../what_is_kosli` ✗
+- **MUST** Adding a new page: create the file AND add its path to `navigation` in `docs.json`. Both steps are required.
+- **SHOULD** Follow the [Diátaxis](https://diataxis.fr/) framework when choosing page form:
+  - **Tutorial** — teaches by doing (e.g., "Get familiar with Kosli")
+  - **How-to guide** — step-by-step for a specific goal (e.g., "Report AWS environments")
+  - **Reference** — factual, lookup-oriented (e.g., CLI reference pages)
+  - **Explanation** — concepts and background (e.g., "What is Kosli?")
+- **MAY** Add an `icon` field to front matter using [Font Awesome](https://fontawesome.com/icons) names.
 
 ### MDX Components
 
@@ -82,6 +85,25 @@ The optional `icon` field accepts [Font Awesome](https://fontawesome.com/icons) 
 - Don't add content to `snippets/` unless it is genuinely reused in 2+ pages.
 - Don't commit image files without placing them in an appropriate subdirectory.
 - Don't push to `main` directly — always use a PR.
+
+## Skills
+
+When available, prefer skills over ad-hoc approaches:
+
+- **PR creation** — use the `pr-creator` skill if available.
+- **Changelog entries** — use the `changelog-creator` skill if available. Follow the existing `<Update>` format in `changelog/index.mdx` exactly:
+  ```mdx
+  <Update label="Month Year" description="vX.X.X" tags={["Product Name"]}>
+
+  ## New features / Bug fixes / Changes
+
+  - ...
+
+  [View on GitHub](https://github.com/kosli-dev/...)
+
+  </Update>
+  ```
+  Always prompt the user for the `tags` value (e.g., `"Terraform Provider"`, `"CLI"`) before generating an entry.
 
 ## Deployment
 
