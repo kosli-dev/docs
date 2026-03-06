@@ -182,6 +182,7 @@
                         "group": "Naming Conventions",
                         "pages": [
                           "implementation_guide/phase_2/plan_organizational_structure/naming_conventions/overview",
+                          "implementation_guide/phase_2/plan_organizational_structure/naming_conventions/attestation_types",
                           "implementation_guide/phase_2/plan_organizational_structure/naming_conventions/flows_and_trails"
                         ]
                       }
