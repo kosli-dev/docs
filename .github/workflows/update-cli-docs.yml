@@ -3,7 +3,7 @@ name: Update CLI Reference Docs
 on:
   workflow_dispatch:
     inputs:
-      cli_tag:
+      kosli_cli_tag:
         description: 'CLI release tag (e.g. v2.11.2)'
         required: true
   repository_dispatch:
@@ -21,9 +21,9 @@ jobs:
         id: tag
         run: |
           if [ "${{ github.event_name }}" = "repository_dispatch" ]; then
-            echo "cli_tag=${{ github.event.client_payload.tag }}" >> "$GITHUB_OUTPUT"
+            echo "cli_tag=${{ github.event.client_payload.kosli_cli_tag }}" >> "$GITHUB_OUTPUT"
           else
-            echo "cli_tag=${{ github.event.inputs.cli_tag }}" >> "$GITHUB_OUTPUT"
+            echo "cli_tag=${{ github.event.inputs.kosli_cli_tag }}" >> "$GITHUB_OUTPUT"
           fi
 
       - name: Checkout docs repo
