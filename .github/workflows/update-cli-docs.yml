@@ -57,14 +57,6 @@ jobs:
       - name: Update CLI navigation in docs.json
         run: python scripts/update-cli-nav.py --docs-dir client_reference/ --config docs.json
 
-      - name: Checkout CLI repo at tag (sparse)
-        uses: actions/checkout@v4
-        with:
-          repository: kosli-dev/cli
-          ref: refs/tags/${{ steps.tag.outputs.cli_tag }}
-          sparse-checkout: charts/k8s-reporter
-          path: cli-repo
-
       - name: Install helm-docs
         run: |
           curl -sL https://github.com/norwoodj/helm-docs/releases/download/v1.14.2/helm-docs_1.14.2_Linux_x86_64.deb --output helm-docs.deb
@@ -73,8 +65,13 @@ jobs:
 
       - name: Generate helm docs
         run: |
-          cd $GITHUB_WORKSPACE/cli-repo/charts/k8s-reporter
-          helm-docs --template-files README.md.gotmpl,_templates.gotmpl --output-file $GITHUB_WORKSPACE/helm/k8s_reporter.md
+          git clone --sparse --filter=blob:none --depth=1 \
+            --branch ${{ steps.tag.outputs.cli_tag }} \
+            https://github.com/kosli-dev/cli.git /tmp/cli-repo
+          cd /tmp/cli-repo && git sparse-checkout set charts/k8s-reporter
+          cd /tmp/cli-repo/charts/k8s-reporter
+          helm-docs --template-files README.md.gotmpl,_templates.gotmpl
+          cp /tmp/cli-repo/charts/k8s-reporter/README.md $GITHUB_WORKSPACE/helm/k8s_reporter.md
 
       - name: Create Pull Request
         uses: peter-evans/create-pull-request@v8
