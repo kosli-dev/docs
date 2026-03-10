@@ -1,4 +1,4 @@
-name: Update CLI Reference Docs
+name: Update Reference Docs
 
 on:
   workflow_dispatch:
@@ -14,7 +14,7 @@ permissions:
   pull-requests: write
 
 jobs:
-  update-cli-docs:
+  update-docs:
     runs-on: ubuntu-latest
     steps:
       - name: Determine CLI tag
@@ -57,13 +57,32 @@ jobs:
       - name: Update CLI navigation in docs.json
         run: python scripts/update-cli-nav.py --docs-dir client_reference/ --config docs.json
 
+      - name: Checkout CLI repo at tag (sparse)
+        uses: actions/checkout@v4
+        with:
+          repository: kosli-dev/cli
+          ref: refs/tags/${{ steps.tag.outputs.cli_tag }}
+          sparse-checkout: charts/k8s-reporter
+          path: cli-repo
+
+      - name: Install helm-docs
+        run: |
+          curl -sL https://github.com/norwoodj/helm-docs/releases/download/v1.14.2/helm-docs_1.14.2_linux_amd64.deb --output helm-docs.deb
+          sudo dpkg -i helm-docs.deb
+          rm helm-docs.deb
+
+      - name: Generate helm docs
+        run: |
+          cd $GITHUB_WORKSPACE/cli-repo/charts/k8s-reporter
+          helm-docs --template-files README.md.gotmpl,_templates.gotmpl --output-file $GITHUB_WORKSPACE/helm/k8s_reporter.md
+
       - name: Create Pull Request
         uses: peter-evans/create-pull-request@v8
         with:
-          commit-message: "docs: update CLI reference for ${{ steps.tag.outputs.cli_tag }}"
-          title: "docs: update CLI reference for ${{ steps.tag.outputs.cli_tag }}"
+          commit-message: "docs: update CLI and helm reference for ${{ steps.tag.outputs.cli_tag }}"
+          title: "docs: update CLI and helm reference for ${{ steps.tag.outputs.cli_tag }}"
           body: |
-            Automated update of CLI reference documentation for release `${{ steps.tag.outputs.cli_tag }}`.
-          branch: cli-docs/${{ steps.tag.outputs.cli_tag }}
+            Automated update of CLI and Helm reference documentation for release `${{ steps.tag.outputs.cli_tag }}`.
+          branch: reference-docs/${{ steps.tag.outputs.cli_tag }}
           delete-branch: true
           sign-commits: true
