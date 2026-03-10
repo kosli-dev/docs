@@ -377,6 +377,16 @@
                 ]
               },
               {
+                "item": "Helm Reference",
+                "icon": "helm",
+                "groups": [
+                  {
+                    "group": "Helm Charts",
+                    "pages": ["helm/k8s_reporter"]
+                  }
+                ]
+              },
+              {
                 "item": "API Reference",
                 "icon": "code",
                 "groups": [
