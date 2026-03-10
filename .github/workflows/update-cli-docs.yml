@@ -14,7 +14,7 @@ permissions:
   pull-requests: write
 
 jobs:
-  update-cli-docs:
+  update-docs:
     runs-on: ubuntu-latest
     steps:
       - name: Determine CLI tag
@@ -57,32 +57,6 @@ jobs:
       - name: Update CLI navigation in docs.json
         run: python scripts/update-cli-nav.py --docs-dir client_reference/ --config docs.json
 
-      - name: Create Pull Request
-        uses: peter-evans/create-pull-request@v8
-        with:
-          commit-message: "docs: update CLI reference for ${{ steps.tag.outputs.cli_tag }}"
-          title: "docs: update CLI reference for ${{ steps.tag.outputs.cli_tag }}"
-          body: |
-            Automated update of CLI reference documentation for release `${{ steps.tag.outputs.cli_tag }}`.
-          branch: cli-docs/${{ steps.tag.outputs.cli_tag }}
-          delete-branch: true
-          sign-commits: true
-
-  update-helm-docs:
-    runs-on: ubuntu-latest
-    steps:
-      - name: Determine CLI tag
-        id: tag
-        run: |
-          if [ "${{ github.event_name }}" = "repository_dispatch" ]; then
-            echo "cli_tag=${{ github.event.client_payload.kosli_cli_tag }}" >> "$GITHUB_OUTPUT"
-          else
-            echo "cli_tag=${{ github.event.inputs.kosli_cli_tag }}" >> "$GITHUB_OUTPUT"
-          fi
-
-      - name: Checkout docs repo
-        uses: actions/checkout@v4
-
       - name: Checkout CLI repo at tag (sparse)
         uses: actions/checkout@v4
         with:
@@ -105,10 +79,10 @@ jobs:
       - name: Create Pull Request
         uses: peter-evans/create-pull-request@v8
         with:
-          commit-message: "docs: update helm reference for ${{ steps.tag.outputs.cli_tag }}"
-          title: "docs: update helm reference for ${{ steps.tag.outputs.cli_tag }}"
+          commit-message: "docs: update CLI and helm reference for ${{ steps.tag.outputs.cli_tag }}"
+          title: "docs: update CLI and helm reference for ${{ steps.tag.outputs.cli_tag }}"
           body: |
-            Automated update of Helm reference documentation for release `${{ steps.tag.outputs.cli_tag }}`.
-          branch: helm-docs/${{ steps.tag.outputs.cli_tag }}
+            Automated update of CLI and Helm reference documentation for release `${{ steps.tag.outputs.cli_tag }}`.
+          branch: reference-docs/${{ steps.tag.outputs.cli_tag }}
           delete-branch: true
           sign-commits: true
