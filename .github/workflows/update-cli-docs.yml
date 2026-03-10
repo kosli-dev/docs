@@ -67,7 +67,7 @@ jobs:
 
       - name: Install helm-docs
         run: |
-          curl -sL https://github.com/norwoodj/helm-docs/releases/download/v1.14.2/helm-docs_1.14.2_linux_amd64.deb --output helm-docs.deb
+          curl -sL https://github.com/norwoodj/helm-docs/releases/download/v1.14.2/helm-docs_1.14.2_Linux_x86_64.deb --output helm-docs.deb
           sudo dpkg -i helm-docs.deb
           rm helm-docs.deb
 
