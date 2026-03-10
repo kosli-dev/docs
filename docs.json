@@ -287,13 +287,6 @@
                     ]
                   },
                   {
-                    "group": "kosli evaluate",
-                    "pages": [
-                      "client_reference/kosli_evaluate_trail",
-                      "client_reference/kosli_evaluate_trails"
-                    ]
-                  },
-                  {
                     "group": "kosli get",
                     "pages": [
                       "client_reference/kosli_get_approval",
