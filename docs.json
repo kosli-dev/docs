@@ -382,7 +382,9 @@
                 "groups": [
                   {
                     "group": "Helm Charts",
-                    "pages": ["helm/k8s_reporter"]
+                    "pages": [
+                      "helm/k8s_reporter"
+                    ]
                   }
                 ]
               },
