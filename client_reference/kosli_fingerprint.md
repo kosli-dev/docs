@@ -73,7 +73,7 @@ The `.kosli_ignore` will be treated as part of the artifact like any other file,
 	<Tab title="GitHub">
 	View an example of the `kosli fingerprint` command in GitHub.
 
-	In [this YAML file](https://app.kosli.com/api/v2/livedocs/cyber-dojo/yaml?ci=github&command=kosli+fingerprint)
+	In [this YAML file](https://app.kosli.com/api/v2/livedocs/cyber-dojo/yaml?ci=github&command=kosli%2Bfingerprint)
 	</Tab>
 </Tabs>
 

@@ -59,12 +59,12 @@ images in registries or "docker" for local docker images.
 	<Tab title="GitHub">
 	View an example of the `kosli report approval` command in GitHub.
 
-	In [this YAML file](https://app.kosli.com/api/v2/livedocs/cyber-dojo/yaml?ci=github&command=kosli+report+approval), which created [this Kosli Event](https://app.kosli.com/api/v2/livedocs/cyber-dojo/event?ci=github&command=kosli+report+approval).
+	In [this YAML file](https://app.kosli.com/api/v2/livedocs/cyber-dojo/yaml?ci=github&command=kosli%2Breport%2Bapproval), which created [this Kosli Event](https://app.kosli.com/api/v2/livedocs/cyber-dojo/event?ci=github&command=kosli%2Breport%2Bapproval).
 	</Tab>
 	<Tab title="GitLab">
 	View an example of the `kosli report approval` command in GitLab.
 
-	In [this YAML file](https://app.kosli.com/api/v2/livedocs/cyber-dojo/yaml?ci=gitlab&command=kosli+report+approval), which created [this Kosli Event](https://app.kosli.com/api/v2/livedocs/cyber-dojo/event?ci=gitlab&command=kosli+report+approval).
+	In [this YAML file](https://app.kosli.com/api/v2/livedocs/cyber-dojo/yaml?ci=gitlab&command=kosli%2Breport%2Bapproval), which created [this Kosli Event](https://app.kosli.com/api/v2/livedocs/cyber-dojo/event?ci=gitlab&command=kosli%2Breport%2Bapproval).
 	</Tab>
 </Tabs>
 
