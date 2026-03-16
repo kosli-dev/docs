@@ -11,7 +11,7 @@ Logical environments can ONLY contain physical environments (K8S, ECS, S3, docke
 </Warning>
 
 <Warning>
-This resource manages logical environment configuration only. For querying environment metadata such as `last_modified_at` and `archived` status, use the [`kosli_logical_environment` data source](/administration/terraform/data-sources/logical_environment).
+This resource manages logical environment configuration only. For querying environment metadata such as `last_modified_at` and `archived` status, use the [`kosli_logical_environment` data source](/terraform-reference/data-sources/logical_environment).
 </Warning>
 
 Logical environments in Kosli aggregate multiple physical environments for organizational purposes, providing:
@@ -182,7 +182,7 @@ terraform import kosli_logical_environment.future_environments future-environmen
 ## Querying metadata
 
 <Warning>
-This resource manages logical environment configuration only. For querying environment metadata such as `last_modified_at` and `archived` status, use the [`kosli_logical_environment` data source](/administration/terraform/data-sources/logical_environment).
+This resource manages logical environment configuration only. For querying environment metadata such as `last_modified_at` and `archived` status, use the [`kosli_logical_environment` data source](/terraform-reference/data-sources/logical_environment).
 </Warning>
 
 ## Schema

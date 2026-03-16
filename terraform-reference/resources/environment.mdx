@@ -7,7 +7,7 @@ icon: "cube"
 Manages a Kosli environment. Environments represent deployment targets where artifacts are deployed. Supports physical environment types: K8S, ECS, S3, docker, server, and lambda.
 
 <Warning>
-This resource manages the environment configuration only. Environment tags are managed through a separate Kosli API. Environment policies will be available in a future release. For querying environment metadata such as `last_modified_at`, `last_reported_at`, and `archived` status, use the [`kosli_environment` data source](/administration/terraform/data-sources/environment).
+This resource manages the environment configuration only. Environment tags are managed through a separate Kosli API. Environment policies will be available in a future release. For querying environment metadata such as `last_modified_at`, `last_reported_at`, and `archived` status, use the [`kosli_environment` data source](/terraform-reference/data-sources/environment).
 </Warning>
 
 Kosli environments track deployments and provide visibility into what's running in your infrastructure. Physical environments represent actual runtime locations such as:
@@ -20,7 +20,7 @@ Kosli environments track deployments and provide visibility into what's running 
 - **lambda**: AWS Lambda functions
 
 <Note>
-For aggregating multiple physical environments into logical groups, use the [`kosli_logical_environment` resource](/administration/terraform/resources/logical_environment).
+For aggregating multiple physical environments into logical groups, use the [`kosli_logical_environment` resource](/terraform-reference/resources/logical_environment).
 </Note>
 
 <Warning>
@@ -120,7 +120,7 @@ terraform import kosli_environment.data_lake data-lake-s3
 
 ## Monitoring environments
 
-For querying environment metadata such as `last_modified_at` and `last_reported_at` timestamps, use the [`kosli_environment` data source](/administration/terraform/data-sources/environment). This is useful for monitoring and creating conditional logic based on environment state.
+For querying environment metadata such as `last_modified_at` and `last_reported_at` timestamps, use the [`kosli_environment` data source](/terraform-reference/data-sources/environment). This is useful for monitoring and creating conditional logic based on environment state.
 
 ## Schema
 
