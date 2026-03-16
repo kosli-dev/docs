@@ -373,6 +373,18 @@
             ]
           },
           {
+            "item": "Template Reference",
+            "icon": "file-code",
+            "groups": [
+              {
+                "group": "Templates",
+                "pages": [
+                  "template-reference/flow_template"
+                ]
+              }
+            ]
+          },
+          {
             "item": "API Reference",
             "icon": "code",
             "groups": [

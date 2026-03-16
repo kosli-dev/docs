@@ -1,0 +1,97 @@
+{
+  "$schema": "http://json-schema.org/draft-07/schema#",
+  "$id": "https://kosli.mintlify.app/schemas/flow-template.json",
+  "title": "Kosli Flow Template",
+  "description": "Schema for Kosli flow template YAML files used with `kosli create flow --template-file`.",
+  "type": "object",
+  "required": ["version"],
+  "additionalProperties": false,
+  "properties": {
+    "version": {
+      "description": "The version of the specification schema.",
+      "type": "integer",
+      "enum": [1]
+    },
+    "trail": {
+      "description": "The trail specification.",
+      "type": "object",
+      "additionalProperties": false,
+      "properties": {
+        "attestations": {
+          "description": "Attestations required at the trail level for it to be compliant.",
+          "type": "array",
+          "items": {
+            "$ref": "#/$defs/trailAttestation"
+          }
+        },
+        "artifacts": {
+          "description": "Artifacts expected to be produced in the trail.",
+          "type": "array",
+          "items": {
+            "$ref": "#/$defs/artifact"
+          }
+        }
+      }
+    }
+  },
+  "$defs": {
+    "trailAttestation": {
+      "type": "object",
+      "required": ["name", "type"],
+      "additionalProperties": false,
+      "properties": {
+        "name": {
+          "description": "A unique name for the attestation within this template.",
+          "type": "string"
+        },
+        "type": {
+          "description": "The attestation type.",
+          "type": "string",
+          "enum": ["generic", "jira", "junit", "pull_request", "snyk", "sonar", "*"]
+        }
+      }
+    },
+    "artifactAttestation": {
+      "type": "object",
+      "required": ["name", "type"],
+      "additionalProperties": false,
+      "properties": {
+        "name": {
+          "description": "A unique name for the attestation within this artifact.",
+          "type": "string"
+        },
+        "type": {
+          "description": "The attestation type. Use `custom:<type-name>` for custom attestation types.",
+          "oneOf": [
+            {
+              "type": "string",
+              "enum": ["generic", "jira", "junit", "pull_request", "snyk", "sonar"]
+            },
+            {
+              "type": "string",
+              "pattern": "^custom:.+"
+            }
+          ]
+        }
+      }
+    },
+    "artifact": {
+      "type": "object",
+      "required": ["name"],
+      "additionalProperties": false,
+      "properties": {
+        "name": {
+          "description": "A reference name for the artifact (e.g. `frontend-app`, `backend`).",
+          "type": "string"
+        },
+        "attestations": {
+          "description": "Attestations required for this artifact to be compliant.",
+          "type": "array",
+          "items": {
+            "$ref": "#/$defs/artifactAttestation"
+          }
+        }
+      }
+    }
+  }
+}
