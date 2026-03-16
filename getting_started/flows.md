@@ -23,11 +23,12 @@ kosli create flow process-a --description "My SW delivery process" \
 
 When creating a Flow, you can optionally provide a `Flow Template`. This template defines the necessary steps within the business or software process represented by a Kosli Flow. The compliance of Flow trails and artifacts will be assessed using the template.
 
-A Flow template is a YAML file following the syntax outlined in the [flow template spec](/template_ref).
+A Flow template is a YAML file following the syntax outlined in the [flow template spec](/template-reference/flow_template).
 
 Here is an example:
 
 ```yml sw-delivery-template.yml
+# yaml-language-server: $schema=https://kosli.mintlify.app/schemas/flow-template.json
 version: 1
 trail:
   attestations:
