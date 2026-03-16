@@ -17,6 +17,7 @@ Let's take a look at this example to understand how to make attestations to Kosl
 The following compliance template is expecting 4 attestations, each with its own `name`.
 
 ```yml
+# yaml-language-server: $schema=https://kosli.mintlify.app/schemas/flow-template.json
 version: 1
 trail:
   attestations:
@@ -30,6 +31,10 @@ trail:
     - name: security-scan
       type: snyk
 ```
+
+<Tip>
+  See the [Flow Template reference](/template-reference/flow_template) for the full specification, available attestation types, and editor validation with JSON Schema.
+</Tip>
 
 It expects `jira-ticket` on the trail, the `backend` artifact, with `unit-tests` and `security-scan` attached to it.
 When you make an attestation, you have the choice of what `name` to attach it to.
