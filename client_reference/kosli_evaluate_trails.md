@@ -12,6 +12,13 @@ kosli evaluate trails TRAIL-NAME [TRAIL-NAME...] [flags]
 ```
 
 Evaluate multiple trails against a policy.
+Fetch multiple trails from Kosli and evaluate them together against a Rego policy using OPA.
+The trail data is passed to the policy as `input.trails` (an array), unlike
+`evaluate trail` which passes `input.trail` (a single object).
+
+Use `--attestations` to enrich the input with detailed attestation data
+(e.g. pull request approvers, scan results). Use `--show-input` to inspect the
+full data structure available to the policy. Use `--output json` for structured output.
 
 ## Flags
 | Flag | Description |
@@ -35,4 +42,34 @@ Evaluate multiple trails against a policy.
 |    -r, --max-api-retries int  |  [defaulted] How many times should API calls be retried when the API host is not reachable. (default 3)  |
 |        --org string  |  The Kosli organization.  |
 
+
+## Examples Use Cases
+
+These examples all assume that the flags  `--api-token`, `--org`, `--host`, (and `--flow`, `--trail` when required), are [set/provided](/getting_started/install/#assigning-flags-via-environment-variables). 
+
+<AccordionGroup>
+<Accordion title="evaluate multiple trails against a policy">
+```shell
+kosli evaluate trails yourTrailName1 yourTrailName2 
+	--policy yourPolicyFile.rego 
+
+```
+</Accordion>
+<Accordion title="evaluate trails with attestation enrichment">
+```shell
+kosli evaluate trails yourTrailName1 yourTrailName2 
+	--policy yourPolicyFile.rego 
+	--attestations pull-request 
+
+```
+</Accordion>
+<Accordion title="evaluate trails with JSON output and show the policy input">
+```shell
+kosli evaluate trails yourTrailName1 yourTrailName2 
+	--policy yourPolicyFile.rego 
+	--show-input 
+	--output json 
+```
+</Accordion>
+</AccordionGroup>
 

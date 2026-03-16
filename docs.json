@@ -215,6 +215,15 @@
                 "group": "kosli allow",
                 "pages": [
                   "client_reference/kosli_allow_artifact"
+                "item": "Helm Reference",
+                "icon": "helm",
+                "groups": [
+                  {
+                    "group": "Helm Charts",
+                    "pages": [
+                      "helm/k8s_reporter"
+                    ]
+                  }
                 ]
               },
               {
