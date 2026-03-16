@@ -1,0 +1,144 @@
+---
+title: "Lab 4: Release Controls"
+description: "Define compliance requirements with Flow Templates and gate deployments with kosli assert artifact."
+icon: lock
+---
+
+<Info>
+  **Prerequisites**: Complete [Lab 3: Build Controls](/labs/lab-03-build-controls) before starting this lab.
+</Info>
+
+## Learning goals
+
+- Understand Flow Templates and how they define compliance requirements
+- Update an existing Flow to enforce specific attestations
+- Understand the difference between compliant and non-compliant Trails
+- Use `kosli assert artifact` to gate deployments based on compliance status
+
+## Introduction
+
+In the previous labs, you've been recording evidence (attestations) for your builds. However, recording evidence is only half the picture — you also need to ensure the *required* evidence is actually present before allowing a release.
+
+**Flow Templates** define the "shape" of a compliant release. They specify:
+
+- Which artifacts are expected in the Trail
+- Which attestations are required for each artifact
+- Which attestations are required at the Trail level
+
+When a Trail is evaluated against its Flow Template, Kosli determines if it is <Badge color="green">Compliant</Badge> or <Badge color="red">Non-compliant</Badge>. By adding `kosli assert artifact` to your pipeline, you can automatically block deployments that don't meet your compliance standards.
+
+See [Flow Templates](/template-reference/flow_template) for the full template specification.
+
+## Exercise
+
+<Steps>
+  <Step title="Define compliance requirements">
+    Create a file named `flow-template.yaml` in the root of your repository:
+
+    ```yaml
+    # yaml-language-server: $schema=https://kosli.mintlify.app/schemas/flow-template.json
+    version: 1
+    trail:
+      artifacts:
+        - name: application
+          attestations:
+            - name: unit-tests
+              type: junit
+        - name: docker-image
+          attestations:
+            - name: sbom
+              type: generic
+    ```
+
+    This template matches the attestations you set up in Lab 3:
+    1. An `application` artifact that must have `unit-tests`
+    2. A `docker-image` artifact that must have an `sbom`
+  </Step>
+
+  <Step title="Update the Flow to use the template">
+    In `.github/workflows/full-pipeline.yaml`, find the `Create/Update Flow` step (added in Lab 2) and replace `--use-empty-template` with `--template-file`:
+
+    ```yaml
+          - name: Create/Update Flow
+            run: |
+              kosli create flow ${APP_NAME}-pipeline \
+                --description "CI/CD pipeline for ${APP_NAME} application" \
+                --template-file flow-template.yaml
+    ```
+  </Step>
+
+  <Step title="Gate the release">
+    In the `Deploy` job, add the following steps **before** the "Deploy to production" step:
+
+    ```yaml
+        - name: Setup Kosli CLI
+          uses: kosli-dev/setup-cli-action@v2
+          with:
+            version: 2.11.32
+
+        - name: Assert compliance
+          run: |
+            IMAGE_NAME="ghcr.io/${IMAGE}:latest"
+            kosli assert artifact ${IMAGE_NAME} \
+              --artifact-type oci \
+              --flow ${APP_NAME}-pipeline
+    ```
+
+    This command asks Kosli: *"Is this artifact and its Trail compliant?"*
+    - <Badge color="green">Compliant</Badge> (all required attestations present and none failing): exits `0` — pipeline continues to deploy
+    - <Badge color="red">Non-compliant</Badge> (missing or failing attestations): exits `1` — pipeline fails, deployment is blocked
+
+    See [`kosli assert artifact`](/client_reference/kosli_assert_artifact) for full flag reference.
+  </Step>
+
+  <Step title="Push and test the gate">
+    ```bash
+    git add flow-template.yaml .github/workflows/full-pipeline.yaml
+    git commit -m "Add Flow Template and Release Gate"
+    git push origin main
+    ```
+
+    Watch the workflow run. Since you're providing all required attestations from Lab 3, the `Assert compliance` step should pass (green).
+
+    Then in [app.kosli.com](https://app.kosli.com), navigate to your Flow → latest Trail. The **Compliance** status should show <Badge color="green">Compliant</Badge> with all template requirements checked off.
+  </Step>
+</Steps>
+
+<Accordion title="Optional: test non-compliance">
+  To see the gate in action, add a non-existent attestation requirement to `flow-template.yaml`:
+
+  ```yaml
+      - name: docker-image
+        attestations:
+          - name: sbom
+            type: generic
+          - name: performance-test  # We haven't implemented this yet!
+            type: generic
+  ```
+
+  Commit and push. The `Assert compliance` step should **fail**, preventing the deploy step from running. The Trail in Kosli will be marked <Badge color="red">Non-compliant</Badge>.
+
+  <Warning>
+    Remember to revert this change to make your pipeline green again.
+  </Warning>
+</Accordion>
+
+## Verification checklist
+
+- [ ] `flow-template.yaml` created in repository root
+- [ ] Workflow updated to apply the template
+- [ ] `kosli assert artifact` added to the Deploy job
+- [ ] A fully attested build passes the compliance gate
+- [ ] Trail shows as <Badge color="green">Compliant</Badge> in the Kosli web interface
+
+<Note>
+  If anything didn't go to plan, refer to the reference solution at `pipelines/04-complete.yaml` in the [labs repository](https://github.com/kosli-dev/labs).
+</Note>
+
+## Next steps
+
+Continue to [Lab 5: Runtime Controls](/labs/lab-05-runtime-controls) to track what's running in production and enforce compliance policies.
+
+**Further reading:**
+- [Flows](/getting_started/flows)
+- [Flow Template reference](/template-reference/flow_template)

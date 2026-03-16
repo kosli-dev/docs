@@ -50,3 +50,7 @@ Notably, change sources can originate from diverse environments, including build
   style={{width: "1000px"}}
   className="rounded-lg"
 />
+
+<Tip>
+  Ready to try Kosli hands-on? The [Kosli Learning Labs](/labs) walk you from account creation to runtime compliance enforcement in five progressive labs.
+</Tip>

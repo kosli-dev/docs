@@ -27,7 +27,7 @@ A Flow template is a YAML file following the syntax outlined in the [flow templa
 
 Here is an example:
 
-```yml sw-delivery-template.yml
+```yaml sw-delivery-template.yml
 version: 1
 trail:
   attestations:
