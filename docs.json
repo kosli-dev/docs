@@ -373,11 +373,11 @@
             ]
           },
           {
-            "item": "Templates",
+            "item": "Template Reference",
             "icon": "file-code",
             "groups": [
               {
-                "group": "Flow Templates",
+                "group": "Templates",
                 "pages": [
                   "template-reference/flow_template"
                 ]
