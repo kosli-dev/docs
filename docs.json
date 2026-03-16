@@ -84,6 +84,12 @@
                 "pages": [
                   "administration/managing_environments/overview"
                 ]
+              },
+              {
+                "group": "Managing Custom Attestation Types",
+                "pages": [
+                  "administration/managing_custom_attestation_types/overview"
+                ]
               }
             ]
           },
