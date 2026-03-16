@@ -3,6 +3,28 @@ title: "Changelog"
 description: "Release notes for Kosli products."
 ---
 
+<Update label="March 2026" description="v2.12.1" tags={["CLI"]}>
+
+## Bug fixes
+
+- Fixed `kosli attest artifact` sending empty repository information when no repo data is available.
+
+[View on GitHub](https://github.com/kosli-dev/cli/releases/tag/v2.12.1)
+
+</Update>
+
+<Update label="March 2026" description="v2.12.0" tags={["CLI"]}>
+
+## New features
+
+- **`kosli evaluate trail` and `kosli evaluate trails`** — evaluate one or more trails against a [Rego](https://www.openpolicyagent.org/docs/latest/policy-language/) policy and get a structured pass/fail decision. Use `--attestations` to filter which attestations are checked, and `--output json` for machine-readable results. Exit code reflects the policy decision, making it ideal for CI/CD gates. See the [evaluate trail](/client_reference/kosli_evaluate_trail) and [evaluate trails](/client_reference/kosli_evaluate_trails) reference for details.
+- **Multi-environment K8s reporting** — `kosli snapshot k8s` now accepts a `--config-file` flag to report multiple Kosli environments in a single command. Define environment-to-namespace mappings in a YAML file instead of running the command once per environment. See the [snapshot k8s](/client_reference/kosli_snapshot_k8s) reference.
+- **Helm chart v2.0.0** — the [k8s-reporter Helm chart](/helm/k8s_reporter) now uses a `reporterConfig.environments` list, enabling multi-environment reporting from a single chart installation. This is a breaking change from v1.x — see the chart README for migration steps.
+
+[View on GitHub](https://github.com/kosli-dev/cli/releases/tag/v2.12.0)
+
+</Update>
+
 <Update label="February 2026" description="v0.3.1" tags={["Terraform Provider"]}>
 
 ## Bug fixes
