@@ -107,7 +107,7 @@ terraform import kosli_logical_environment.production_all production-all
 
 ## Reference
 
-- [`kosli_environment` resource](https://registry.terraform.io/providers/kosli-dev/kosli/latest/docs/resources/environment)
-- [`kosli_environment` data source](https://registry.terraform.io/providers/kosli-dev/kosli/latest/docs/data-sources/environment)
-- [`kosli_logical_environment` resource](https://registry.terraform.io/providers/kosli-dev/kosli/latest/docs/resources/logical_environment)
-- [`kosli_logical_environment` data source](https://registry.terraform.io/providers/kosli-dev/kosli/latest/docs/data-sources/logical_environment)
+- [`kosli_environment` resource](/terraform-reference/resources/environment)
+- [`kosli_environment` data source](/terraform-reference/data-sources/environment)
+- [`kosli_logical_environment` resource](/terraform-reference/resources/logical_environment)
+- [`kosli_logical_environment` data source](/terraform-reference/data-sources/logical_environment)

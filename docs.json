@@ -84,6 +84,12 @@
                 "pages": [
                   "administration/managing_environments/overview"
                 ]
+              },
+              {
+                "group": "Managing Custom Attestation Types",
+                "pages": [
+                  "administration/managing_custom_attestation_types/overview"
+                ]
               }
             ]
           },
@@ -405,6 +411,34 @@
                 "group": "Helm Charts",
                 "pages": [
                   "helm/k8s_reporter"
+                ]
+              }
+            ]
+          },
+          {
+            "item": "Terraform Reference",
+            "icon": "cubes",
+            "groups": [
+              {
+                "group": "Provider",
+                "pages": [
+                  "terraform-reference/index"
+                ]
+              },
+              {
+                "group": "Resources",
+                "pages": [
+                  "terraform-reference/resources/environment",
+                  "terraform-reference/resources/logical_environment",
+                  "terraform-reference/resources/custom_attestation_type"
+                ]
+              },
+              {
+                "group": "Data Sources",
+                "pages": [
+                  "terraform-reference/data-sources/environment",
+                  "terraform-reference/data-sources/logical_environment",
+                  "terraform-reference/data-sources/custom_attestation_type"
                 ]
               }
             ]
