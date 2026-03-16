@@ -1,35 +1,45 @@
-# Kosli Docs
+# Kosli Documentation
 
-> [!NOTE]
->
-> This documentation is still work in progress. and is currently not the official Kosli documentation.
+> [!WARNING]
+> This documentation is still a work in progress and is not yet the official Kosli documentation.
+
+Source for [docs.kosli.com](https://docs.kosli.com), built with [Mintlify](https://mintlify.com).
 
 ## Development
 
-Install the [Mintlify CLI](https://www.npmjs.com/package/mint) to preview your documentation changes locally. To install, use the following command:
+Install the Mintlify CLI (requires Node.js v19+):
 
-```
+```bash
 npm i -g mint
 ```
 
-Run the following command at the root of your documentation, where your `docs.json` is located:
+Start a local preview at `http://localhost:3000`:
 
-```
+```bash
 mint dev
 ```
 
-View your local preview at `http://localhost:3000`.
+Other useful commands:
 
-## Publishing changes
+```bash
+mint broken-links   # Validate all internal links
+mint a11y           # Check colour contrast and accessibility
+mint update         # Update the CLI
+```
 
-Install our GitHub app from your [dashboard](https://dashboard.mintlify.com/settings/organization/github-app) to propagate changes from your repo to your deployment. Changes are deployed to production automatically after pushing to the default branch.
+## Content
 
-## Need help?
+- **`docs.json`** — Navigation, theme, and site configuration. Every new page must be added here.
+- **Content directories** — `understand_kosli/`, `getting_started/`, `administration/`, `integrations/`, `implementation_guide/`, `client_reference/`, `terraform-reference/`, `api-reference/`
+- **`snippets/`** — Reusable MDX fragments (only for content used in 2+ pages)
+- **`changelog/`** — Product changelog
 
-### Troubleshooting
+See [`CLAUDE.md`](CLAUDE.md) for full authoring conventions.
 
-- If your dev environment isn't running: Run `mint update` to ensure you have the most recent version of the CLI.
-- If a page loads as a 404: Make sure you are running in a folder with a valid `docs.json`.
+## Deployment
 
-### Resources
-- [Mintlify documentation](https://mintlify.com/docs)
+Opening a PR automatically creates a Mintlify preview environment. Merging to `main` deploys to production automatically via the Mintlify GitHub app.
+
+## Automation
+
+**`.mintlify/workflows/update-changelog.md`** — A Mintlify agent workflow that runs every Monday at 09:00 UTC. It reviews all PRs merged to [`kosli-dev/cli`](https://github.com/kosli-dev/cli) and [`kosli-dev/terraform-provider-kosli`](https://github.com/kosli-dev/terraform-provider-kosli) since the last changelog entry and writes a new `<Update>` block to `changelog/index.mdx`. Notifications are posted to the `#docs` Slack channel.
