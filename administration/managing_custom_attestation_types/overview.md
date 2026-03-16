@@ -96,3 +96,4 @@ terraform import kosli_custom_attestation_type.security_scan security-scan
 
 - [`kosli_custom_attestation_type` resource](/terraform-reference/resources/custom_attestation_type)
 - [`kosli_custom_attestation_type` data source](/terraform-reference/data-sources/custom_attestation_type)
+- [Kosli Terraform provider on the Terraform Registry](https://registry.terraform.io/providers/kosli-dev/kosli/latest)
