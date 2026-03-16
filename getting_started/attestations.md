@@ -17,6 +17,7 @@ Let's take a look at this example to understand how to make attestations to Kosl
 The following compliance template is expecting 4 attestations, each with its own `name`.
 
 ```yml
+# yaml-language-server: $schema=https://kosli.mintlify.app/schemas/flow-template.json
 version: 1
 trail:
   attestations:
@@ -31,6 +32,10 @@ trail:
       type: snyk
 ```
 
+<Tip>
+  See the [Flow Template reference](/template-reference/flow_template) for the full specification, available attestation types, and editor validation with JSON Schema.
+</Tip>
+
 It expects `jira-ticket` on the trail, the `backend` artifact, with `unit-tests` and `security-scan` attached to it.
 When you make an attestation, you have the choice of what `name` to attach it to.
 
@@ -39,7 +44,7 @@ When you make an attestation, you have the choice of what `name` to attach it to
 The following sections show how to make each of the four attestations defined in the template above.
 
 <Steps>
-  <Step title="Jira ticket attestation to a trail">
+  <Step title="Attest a Jira ticket to the trail">
     The `jira-ticket` attestation belongs to a single trail and is not linked to a specific artifact. In this example, the id of the trail is the git commit.
 
     ```shell
@@ -50,7 +55,7 @@ The following sections show how to make each of the four attestations defined in
         ...
     ```
   </Step>
-  <Step title="Unit-test attestation to the backend artifact">
+  <Step title="Attest unit tests to the backend artifact">
   Some attestations are attached to a specific artifact, like the unit tests for the `backend` artifact. Often, evidence like unit tests are created _before_ the artifact is built. To attach the evidence to the artifact before its creation, use `backend` (the artifact's `name` from the template), as well as `unit-tests` (the attestation's `name` from the template).
 
   ```shell
@@ -63,7 +68,7 @@ The following sections show how to make each of the four attestations defined in
 
   This attestation belongs to any artifact attested with the matching `name` from the template (in this example `backend`) and a matching git commit.
   </Step>
-  <Step title="Make the backend artifact attestation">
+  <Step title="Attest the backend artifact">
   Once the artifact has been built, it can be attested with the following command.
 
   ```shell
@@ -77,13 +82,11 @@ The following sections show how to make each of the four attestations defined in
 
   In this case the Kosli CLI will calculate the fingerprint of the docker image called `my_company/backend:latest` and attest it as the `backend` artifact `name` in the trail.
 
-  <Accordion title="Automatically gather git commit and CI environment information" icon="circle-info">
-
-  In all attestation commands the Kosli CLI will automatically gather the git commit and other information from the current git repository and the [CI environment](https://docs.kosli.com/integrations/ci_cd/).
-  This is how the git commit is used to match attestations to artifacts.
-  </Accordion>
+  <Info>
+  In all attestation commands the Kosli CLI automatically gathers the git commit and other information from the current git repository and the [CI environment](https://docs.kosli.com/integrations/ci_cd/). This is how the git commit is used to match attestations to artifacts.
+  </Info>
   </Step>
-  <Step title="Make the security-scan attestation to the backend artifact">
+  <Step title="Attest a security scan to the backend artifact">
   Often, evidence like snyk reports are created _after_ the artifact is built. In this case, you can attach the evidence to the artifact after its creation. Use `backend` (the artifact's `name` from the template), as well as `security-scan` (the attestation's `name` from the template) to name the attestation.
 
   The following attestation will only belong to the artifact `my_company/backend:latest` attested above and its fingerprint, in this case calculated by the Kosli CLI.
