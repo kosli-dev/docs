@@ -84,28 +84,6 @@
                 "pages": [
                   "administration/managing_environments/overview"
                 ]
-              },
-              {
-                "group": "Terraform Provider",
-                "pages": [
-                  "administration/terraform/index",
-                  {
-                    "group": "Resources",
-                    "pages": [
-                      "administration/terraform/resources/environment",
-                      "administration/terraform/resources/logical_environment",
-                      "administration/terraform/resources/custom_attestation_type"
-                    ]
-                  },
-                  {
-                    "group": "Data Sources",
-                    "pages": [
-                      "administration/terraform/data-sources/environment",
-                      "administration/terraform/data-sources/logical_environment",
-                      "administration/terraform/data-sources/custom_attestation_type"
-                    ]
-                  }
-                ]
               }
             ]
           },
@@ -415,6 +393,34 @@
                 "pages": [
                   "api-reference/endpoint/list_environments",
                   "api-reference/endpoint/put_environment"
+                ]
+              }
+            ]
+          },
+          {
+            "item": "Terraform Reference",
+            "icon": "layer-group",
+            "groups": [
+              {
+                "group": "Provider",
+                "pages": [
+                  "administration/terraform/index"
+                ]
+              },
+              {
+                "group": "Resources",
+                "pages": [
+                  "administration/terraform/resources/environment",
+                  "administration/terraform/resources/logical_environment",
+                  "administration/terraform/resources/custom_attestation_type"
+                ]
+              },
+              {
+                "group": "Data Sources",
+                "pages": [
+                  "administration/terraform/data-sources/environment",
+                  "administration/terraform/data-sources/logical_environment",
+                  "administration/terraform/data-sources/custom_attestation_type"
                 ]
               }
             ]
