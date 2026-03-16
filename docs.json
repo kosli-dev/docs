@@ -398,6 +398,18 @@
             ]
           },
           {
+            "item": "Helm Reference",
+            "icon": "layer-group",
+            "groups": [
+              {
+                "group": "Helm Charts",
+                "pages": [
+                  "helm/k8s_reporter"
+                ]
+              }
+            ]
+          },
+          {
             "item": "Terraform Reference",
             "icon": "layer-group",
             "groups": [
@@ -421,18 +433,6 @@
                   "administration/terraform/data-sources/environment",
                   "administration/terraform/data-sources/logical_environment",
                   "administration/terraform/data-sources/custom_attestation_type"
-                ]
-              }
-            ]
-          },
-          {
-            "item": "Helm Reference",
-            "icon": "layer-group",
-            "groups": [
-              {
-                "group": "Helm Charts",
-                "pages": [
-                  "helm/k8s_reporter"
                 ]
               }
             ]
