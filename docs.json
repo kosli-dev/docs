@@ -417,7 +417,7 @@
           },
           {
             "item": "Terraform Reference",
-            "icon": "layer-group",
+            "icon": "cubes",
             "groups": [
               {
                 "group": "Provider",
