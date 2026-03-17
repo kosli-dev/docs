@@ -1,0 +1,160 @@
+---
+title: "Lab 1: Get Ready"
+description: "Create a Kosli account, fork the sample repository, verify the CI/CD pipeline, and install the Kosli CLI."
+icon: rocket
+---
+
+## Learning goals
+
+- Create a Kosli account and organization
+- Create a copy of the sample application repository
+- Verify the CI/CD pipeline runs successfully
+- Install the Kosli CLI and create an API key
+- Understand the basic structure of the application and its deployment process
+
+## Introduction
+
+Before diving into Kosli's features, you need to set up your account and verify that your sample application builds and deploys correctly.
+
+This lab uses a simple Java application with a complete CI/CD pipeline already configured in GitHub Actions. The pipeline builds the application, creates a Docker image, runs tests, and deploys it. In subsequent labs, you'll integrate Kosli to track all these activities.
+
+## Exercise
+
+<Steps>
+  <Step title="Create a Kosli account">
+    - Navigate to [app.kosli.com/sign-up](https://app.kosli.com/sign-up)
+    - Choose to sign up with GitHub
+    - Complete the registration process and verify your email if required
+    - Log in to [app.kosli.com](https://app.kosli.com)
+  </Step>
+
+  <Step title="Fork the sample repository">
+    - Navigate to [github.com/kosli-dev/labs](https://github.com/kosli-dev/labs)
+    - Click the **Use this template** button in the top-right corner
+    - Select **Create a new repository**
+    - Set your personal GitHub account as the **Owner** and name the repository `labs`
+    - Click **Create repository from template**
+
+    <Tip>
+      From now on, "your repository" refers to your copy of the labs repository at `https://github.com/YOUR-GITHUB-USERNAME/labs`.
+    </Tip>
+  </Step>
+
+  <Step title="Enable GitHub Actions">
+    1. Go to your repository on GitHub
+    2. Click the **Actions** tab
+    3. If prompted, click **I understand my workflows, go ahead and enable them**
+    4. If the workflow doesn't start automatically, trigger it manually:
+       - Click **Main workflow** in the left sidebar
+       - Click **Run workflow**, select `main`, and click **Run workflow**
+  </Step>
+
+  <Step title="Verify the pipeline">
+    In the **Actions** tab, click the most recent workflow run and observe the jobs:
+
+    | Job | What it does |
+    |-----|-------------|
+    | Build | Compiles the Java application using Gradle |
+    | Linting | Checks code quality (warnings are expected) |
+    | Docker-image | Builds and pushes a Docker container image |
+    | Security-scan | Scans the Docker image for vulnerabilities |
+    | Component-test | Runs integration tests |
+    | Performance-test | Runs basic performance checks |
+    | Deploy | Starts and stops the application container |
+
+    Wait for all jobs to show green checkmarks.
+
+    <Frame>
+      <img src="/images/labs/pipeline.png" alt="GitHub Actions pipeline showing all jobs completing successfully" />
+    </Frame>
+
+    <Tip>
+      The pipeline may take 3–6 minutes on the first run. GitHub Actions provides free minutes for public repositories.
+    </Tip>
+
+    <Accordion title="Common issues">
+      - **Docker-image job fails with permission error**: Make sure your repository has package write permissions enabled.
+      - **Linting shows warnings**: This is expected and won't fail the build (`DISABLE_ERRORS` is set to `true`).
+    </Accordion>
+  </Step>
+
+  <Step title="Install the Kosli CLI">
+    Run the one-line install script:
+
+    ```bash
+    curl -fL https://raw.githubusercontent.com/kosli-dev/cli/refs/heads/main/install-cli.sh | sh
+
+    # Verify installation
+    kosli version
+    ```
+
+    <Tip>
+      If this method fails, see [Install Kosli CLI](/getting_started/install) for alternative installation options (Homebrew, APT, Docker, etc.).
+    </Tip>
+  </Step>
+
+  <Step title="Create a Kosli API key">
+    - Log in to [app.kosli.com/settings/profile](https://app.kosli.com/settings/profile)
+    - Navigate to the **API Keys** section
+    - Click **Add API Key**, give it a name (e.g., "CLI Access"), and copy the key immediately — it won't be shown again
+
+    Configure it for local use:
+
+    ```bash
+    export KOSLI_API_TOKEN="your-api-key-here"
+    export KOSLI_ORG="your-gh-username"
+    ```
+
+    Verify the CLI can reach Kosli:
+
+    ```bash
+    kosli list flows
+    ```
+
+    You should see "No flows were found" — which confirms authentication is working.
+
+    <Warning>
+      Never commit API keys to your repository. You'll add this key to GitHub Secrets in Lab 2.
+    </Warning>
+
+    See [Service Accounts](/getting_started/service-accounts) for more on API key management.
+  </Step>
+
+  <Step title="Explore the workflow file">
+    In your repository, navigate to `.github/workflows/full-pipeline.yaml` and review the structure:
+
+    - Notice how it triggers on every push
+    - Observe the environment variables at the top
+    - See how artifacts are shared between jobs using `upload-artifact` and `download-artifact`
+    - Note the dependencies between jobs (e.g., Docker-image requires Build to complete first)
+
+    In later labs, you'll add Kosli integration to this file.
+  </Step>
+
+  <Step title="View the published Docker image">
+    1. Go to your GitHub profile page
+    2. Click the **Packages** tab
+    3. You should see the `labs` package
+    4. Click it to view the Docker image details — note the image tag (`latest`) and SHA digest
+
+    <Tip>
+      The Docker image is automatically published to GitHub Container Registry (`ghcr.io`) by the pipeline.
+    </Tip>
+  </Step>
+</Steps>
+
+## Verification checklist
+
+Before moving to the next lab, confirm:
+
+- [ ] Kosli account created at app.kosli.com
+- [ ] Copy of the labs repository under your GitHub account
+- [ ] GitHub Actions completed all jobs successfully
+- [ ] Docker image published to your GitHub Container Registry
+- [ ] Kosli CLI installed (`kosli version` works)
+- [ ] API key created and `kosli list flows` returns successfully
+- [ ] You understand the basic pipeline structure
+
+## Next steps
+
+Continue to [Lab 2: Flows and Trails](/labs/lab-02-flows-and-trails) to create your first Flow and Trail and integrate them into your pipeline.

@@ -116,6 +116,10 @@ icon: "download"
   </Step>
 </Steps>
 
+<Info>
+  New to Kosli? The [Kosli Learning Labs](/labs) provide a guided, project-based introduction covering Flows, Trails, attestations, and runtime compliance.
+</Info>
+
 ## Using the CLI
 
 The [CLI Reference](/client_reference/) section contains all the information you may need to run the Kosli CLI. The CLI flags offer flexibility for configuration and can be assigned in three distinct manners:

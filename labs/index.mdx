@@ -1,0 +1,41 @@
+---
+title: Kosli Learning Labs
+description: "A hands-on five-lab series taking you from your first Kosli account to full supply chain compliance enforcement."
+icon: flask
+---
+
+These labs provide a progressive, practical introduction to Kosli's core features. You'll learn how to track your software delivery process from build through deployment, establish compliance requirements, and maintain complete visibility into your software supply chain.
+
+Each lab builds on the previous one — complete them in order.
+
+<Info>
+  Want something shorter first? [Try Kosli locally](/tutorials/get_familiar_with_Kosli) is a 10-minute Docker-based demo that requires no GitHub account or CI pipeline.
+</Info>
+
+<Info>
+  **Prerequisites**: A GitHub account, basic familiarity with Git and CI/CD concepts. No prior Kosli experience required.
+</Info>
+
+<CardGroup cols={2}>
+  <Card title="Lab 1: Get Ready" icon="rocket" href="/labs/lab-01-get-ready">
+    Create a Kosli account, fork the sample repository, and verify the CI/CD pipeline runs successfully.
+  </Card>
+  <Card title="Lab 2: Flows and Trails" icon="code-branch" href="/labs/lab-02-flows-and-trails">
+    Install the Kosli CLI, create Flows and Trails, and integrate them into your GitHub Actions workflow.
+  </Card>
+  <Card title="Lab 3: Build Controls" icon="shield-check" href="/labs/lab-03-build-controls">
+    Attest artifacts, attach JUnit test results, and generate and attest a Software Bill of Materials.
+  </Card>
+  <Card title="Lab 4: Release Controls" icon="lock" href="/labs/lab-04-release-controls">
+    Define compliance requirements with Flow Templates and gate deployments with `kosli assert artifact`.
+  </Card>
+  <Card title="Lab 5: Runtime Controls" icon="server" href="/labs/lab-05-runtime-controls">
+    Create environments, snapshot what's running in production, and enforce compliance policies.
+  </Card>
+</CardGroup>
+
+<Note>
+  The labs use a sample Java application with a pre-built GitHub Actions pipeline. You'll progressively add Kosli integration to that pipeline across Labs 2–5.
+</Note>
+
+The standalone lab repository is also available at [github.com/kosli-dev/labs](https://github.com/kosli-dev/labs).

@@ -39,6 +39,10 @@
     {
       "source": "/ci-defaults",
       "destination": "/integrations/ci_cd"
+    },
+    {
+      "source": "/tutorials/get_familiar_with_kosli",
+      "destination": "/tutorials/try_kosli_locally"
     }
   ],
   "navigation": {
@@ -100,7 +104,7 @@
               {
                 "group": "Getting started",
                 "pages": [
-                  "tutorials/get_familiar_with_Kosli",
+                  "tutorials/try_kosli_locally",
                   "tutorials/cli_and_http_proxy"
                 ]
               },
@@ -150,6 +154,22 @@
               "integrations/slack",
               "integrations/launchdarkly",
               "integrations/sonar"
+            ]
+          }
+        ]
+      },
+      {
+        "tab": "Labs",
+        "groups": [
+          {
+            "group": "Kosli Learning Labs",
+            "pages": [
+              "labs/index",
+              "labs/lab-01-get-ready",
+              "labs/lab-02-flows-and-trails",
+              "labs/lab-03-build-controls",
+              "labs/lab-04-release-controls",
+              "labs/lab-05-runtime-controls"
             ]
           }
         ]
@@ -513,7 +533,7 @@
         "items": [
           {
             "label": "Labs",
-            "href": "https://github.com/kosli-dev/labs"
+            "href": "/labs"
           },
           {
             "label": "Blog",
