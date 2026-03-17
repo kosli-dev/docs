@@ -57,7 +57,7 @@ When this flag is used, a CLI command:
 
 We recommend using the `KOSLI_DRY_RUN` environment variable to automatically set the `--dry-run` flag.
 This will allow you to instantly turn off all Kosli CLI commands if Kosli is down, as detailed in
-[this tutorial](/tutorials/what_do_i_do_if_kosli_is_down/).
+[this tutorial](/troubleshooting/what_do_i_do_if_kosli_is_down).
 
 The `--dry-run` flag is also useful when trying commands locally. For example:
 
