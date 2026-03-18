@@ -21,7 +21,12 @@
   "styling": {
     "eyebrows": "breadcrumbs",
     "codeblocks": {
-      "theme": "dracula"
+      "theme": "dracula",
+      "languages": {
+        "custom": [
+          "/languages/rego.json"
+        ]
+      }
     }
   },
   "background": {
@@ -134,6 +139,12 @@
                 "group": "Security",
                 "pages": [
                   "tutorials/unauthorized_iac_changes"
+                ]
+              },
+              {
+                "group": "Evaluation",
+                "pages": [
+                  "tutorials/evaluate_trails_with_opa"
                 ]
               }
             ]
@@ -406,6 +417,18 @@
                 "group": "Templates",
                 "pages": [
                   "template-reference/flow_template"
+                ]
+              }
+            ]
+          },
+          {
+            "item": "Policy Reference",
+            "icon": "scroll",
+            "groups": [
+              {
+                "group": "Policies",
+                "pages": [
+                  "policy-reference/rego_policy"
                 ]
               }
             ]
