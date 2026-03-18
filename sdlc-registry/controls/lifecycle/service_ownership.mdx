@@ -1,0 +1,60 @@
+---
+title: "Service Ownership"
+description: "All services running in production environments have registered ownership, ensuring clear accountability for maintenance, support, and security."
+icon: "user-tie"
+---
+
+import AuditCard from '/snippets/sdlc/risks/audit_and_compliance_failure.mdx';
+import EnvironmentBreachCard from '/snippets/sdlc/risks/environment_breach.mdx';
+
+<Note>**SDLC-CTRL-0011** · Lifecycle</Note>
+
+## Description
+In any governance system, risks are managed by controls, but humans are ultimately responsible. In diverse software landscapes, a register of service ownership is essential for multiple reasons:
+
+* **Knowledge** — who understands how this service works, and how can I get help?
+* **Incident response** — alerts are firing for a service, who do I contact? What has changed lately?
+* **Audit** — who is responsible for ensuring the SDLC is followed for this service?
+
+Service ownership maps live systems to the teams and individuals accountable for them, including links to source code repositories, documentation, and operational metadata.
+
+## Requirements
+* Every service running in production MUST have a registered owner
+* Ownership records MUST include the responsible team or individual, source code location, and operational metadata
+* Ownership information MUST be kept up-to-date and reviewed periodically
+* Ownership records SHOULD be accessible from a single location
+
+## How we implement this control
+
+At this stage, as we have a relatively simple system and a single tech team, simply recording the services in [Kosli's environment monitoring](/sdlc-registry/controls/runtime/workload_monitoring) meets this need.
+
+<Frame><img src="/images/sdlc-registry/controls/secrets-management.svg" alt="Service Ownership" /></Frame>
+
+## Mitigates risks
+
+<div className="sdlc-grid sdlc-grid--5">
+  <AuditCard />
+  <EnvironmentBreachCard />
+</div>
+
+## Compliance references
+
+<AccordionGroup>
+  <Accordion title="NIST SP 800-53 R5">
+    | Control | Note |
+    |---|---|
+    | PM-10 | Authorisation process — requires clear identification of who is responsible for each system. |
+    | CM-8 | System component inventory — service ownership provides a registry of live services and their responsible owners. |
+    | IR-4 | Incident handling — clear ownership enables rapid incident response by identifying the responsible team. |
+    | PL-2 | Security and privacy plans — ownership assignment ensures accountability for each service's security posture. |
+  </Accordion>
+  <Accordion title="SOC 2 Type II">
+    | Control | Note |
+    |---|---|
+    | CC1.3 | Requires defined accountability and authority for control activities; service ownership establishes who is responsible for each system component. |
+    | A1.2 | Requires monitoring and maintenance of infrastructure supporting system availability; service owners are accountable for the availability and health of their services. |
+  </Accordion>
+</AccordionGroup>
+
+## Links
+- [Kosli — Environments](https://docs.kosli.com/getting_started/environments/)

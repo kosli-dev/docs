@@ -1,0 +1,61 @@
+---
+title: "Deployment Controls"
+description: "Deployment controls are enforced in the pipeline and at runtime to ensure only compliant, approved software is deployed to production."
+icon: "shield-check"
+---
+
+import UnauthorisedDeploymentCard from '/snippets/sdlc/risks/unauthorised_deployment.mdx';
+import SupplyChainCard from '/snippets/sdlc/risks/supply_chain_compromise.mdx';
+import VulnerableSoftwareCard from '/snippets/sdlc/risks/vulnerable_software_in_production.mdx';
+
+<Note>**SDLC-CTRL-0013** · Runtime</Note>
+
+## Description
+Deployment controls automatically ensure that only software which has gone through the complete Software Development Lifecycle reaches production. This can be implemented as a gate in the CI/CD pipeline, as an admission controller in the runtime environment, or ideally both.
+
+Pipeline gates verify that all required attestations (tests, reviews, scans, approvals) are present and passing before allowing deployment. Runtime monitoring provides a second layer of assurance, alerting when non-compliant or unauthorised workloads are detected in production.
+
+<Frame><img src="/images/sdlc-registry/controls/deployment-controls.svg" alt="Deployment Controls" /></Frame>
+
+## Requirements
+* Deployment pipelines MUST verify that all required compliance attestations are present and passing before deploying to production
+* Artefact identity MUST be verified using cryptographic hashes at the point of deployment
+* Non-compliant or unauthorised workloads in production MUST generate alerts
+* Deployment controls SHOULD be implemented both as pipeline gates and runtime admission controls
+
+## How we implement this control
+
+* We use [Kosli's assert artifact command](https://docs.kosli.com/client_reference/kosli_assert_artifact/) prior to deployment
+* We use [Kosli's environment monitoring](/sdlc-registry/controls/runtime/workload_monitoring) to alert on non-compliant workloads
+
+## Mitigates risks
+
+<div className="sdlc-grid sdlc-grid--5">
+  <UnauthorisedDeploymentCard />
+  <SupplyChainCard />
+  <VulnerableSoftwareCard />
+</div>
+
+## Compliance references
+
+<AccordionGroup>
+  <Accordion title="NIST SP 800-53 R5">
+    | Control | Note |
+    |---|---|
+    | CM-3 | Configuration change control — deployment controls enforce that only approved changes reach production. |
+    | CM-5 | Access restrictions for change — deployment gates restrict which artefacts are permitted in production. |
+    | SA-10 | Developer configuration management — ensures that the software built and tested is the same software deployed. |
+    | SI-7 | Software and information integrity — deployment controls verify artefact integrity before allowing deployment. |
+    | CA-7 | Continuous monitoring — runtime compliance monitoring alerts on non-compliant workloads. |
+  </Accordion>
+  <Accordion title="SOC 2 Type II">
+    | Control | Note |
+    |---|---|
+    | CC8.1 | Requires controlled migration of changes to production; deployment controls enforce that only compliant artifacts are deployed. |
+    | CC6.1 | Requires logical access controls; deployment controls restrict who and what can deploy to production environments. |
+  </Accordion>
+</AccordionGroup>
+
+## Links
+- [Kosli — Assert Artifact](https://docs.kosli.com/client_reference/kosli_assert_artifact/)
+- [Kosli — Environment Monitoring](https://docs.kosli.com/getting_started/environments/)

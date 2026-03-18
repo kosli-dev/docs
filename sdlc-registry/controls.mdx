@@ -1,0 +1,73 @@
+---
+title: "Controls"
+description: "Security and compliance controls organized across Build, Release, Runtime, and Lifecycle phases."
+icon: "shield-halved"
+mode: "wide"
+---
+
+import VersionControlCard from '/snippets/sdlc/controls/build/versioncontrol.mdx';
+import BinaryProvenanceCard from '/snippets/sdlc/controls/build/binary_provenance.mdx';
+import ToolchainCard from '/snippets/sdlc/controls/build/toolchain.mdx';
+import DependenciesCard from '/snippets/sdlc/controls/build/dependencies.mdx';
+import InfraCard from '/snippets/sdlc/controls/build/infrastructure_and_config_management.mdx';
+import SecretsScanningCard from '/snippets/sdlc/controls/build/secrets-scanning.mdx';
+import CodeReviewCard from '/snippets/sdlc/controls/release/code_review.mdx';
+import QualityCard from '/snippets/sdlc/controls/release/quality.mdx';
+import DeploymentApprovalsCard from '/snippets/sdlc/controls/release/deployment_approvals.mdx';
+import VulnSastCard from '/snippets/sdlc/controls/release/vulnerability_scanning_sast.mdx';
+import VulnScaCard from '/snippets/sdlc/controls/release/vulnerability_scanning_sca.mdx';
+import VulnContainersCard from '/snippets/sdlc/controls/release/vulnerability_scanning_containers.mdx';
+import FeatureFlagsCard from '/snippets/sdlc/controls/release/feature_flags.mdx';
+import ChangeRecordsCard from '/snippets/sdlc/controls/runtime/change_records.mdx';
+import DeploymentControlsCard from '/snippets/sdlc/controls/runtime/deployment_controls.mdx';
+import SecretsManagementCard from '/snippets/sdlc/controls/runtime/secrets_managment.mdx';
+import SystemAccessCard from '/snippets/sdlc/controls/runtime/system_access.mdx';
+import WorkloadMonitoringCard from '/snippets/sdlc/controls/runtime/workload_monitoring.mdx';
+import DriftDetectionCard from '/snippets/sdlc/controls/runtime/drift_detection.mdx';
+import ServiceOwnershipCard from '/snippets/sdlc/controls/lifecycle/service_ownership.mdx';
+import TrainingCard from '/snippets/sdlc/controls/lifecycle/training.mdx';
+import PenTestCard from '/snippets/sdlc/controls/lifecycle/penetration_testing.mdx';
+
+Controls are the specific practices and technical measures we apply to mitigate identified risks across the software delivery lifecycle. Each control maps to one or more risks, carries a unique identifier, and links to verifiable evidence in Kosli.
+
+## <Icon icon="hammer" /> Build
+
+<div className="sdlc-grid sdlc-grid--4">
+  <VersionControlCard />
+  <BinaryProvenanceCard />
+  <ToolchainCard />
+  <DependenciesCard />
+  <InfraCard />
+  <SecretsScanningCard />
+</div>
+
+## <Icon icon="rocket" /> Release
+
+<div className="sdlc-grid sdlc-grid--4">
+  <CodeReviewCard />
+  <QualityCard />
+  <DeploymentApprovalsCard />
+  <VulnSastCard />
+  <VulnScaCard />
+  <VulnContainersCard />
+  <FeatureFlagsCard />
+</div>
+
+## <Icon icon="server" /> Runtime
+
+<div className="sdlc-grid sdlc-grid--4">
+  <ChangeRecordsCard />
+  <DeploymentControlsCard />
+  <SecretsManagementCard />
+  <SystemAccessCard />
+  <WorkloadMonitoringCard />
+  <DriftDetectionCard />
+</div>
+
+## <Icon icon="recycle" /> Lifecycle
+
+<div className="sdlc-grid sdlc-grid--4">
+  <ServiceOwnershipCard />
+  <TrainingCard />
+  <PenTestCard />
+</div>

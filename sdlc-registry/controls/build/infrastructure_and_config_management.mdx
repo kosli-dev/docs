@@ -1,0 +1,63 @@
+---
+title: "Infrastructure and Configuration as Code"
+description: "Infrastructure and configurations are defined as code, stored in version control, and applied through automation to ensure auditability and reproducibility."
+icon: "server"
+---
+
+import ConfigDriftCard from '/snippets/sdlc/risks/configuration_drift.mdx';
+import InsiderThreatCard from '/snippets/sdlc/risks/insider_threat.mdx';
+import AuditCard from '/snippets/sdlc/risks/audit_and_compliance_failure.mdx';
+
+<Note>**SDLC-CTRL-0005** · Build</Note>
+
+## Description
+Infrastructure setup, configuration, and evolution must be auditable, secure, and reproducible. Defining cloud environments as code and using automation tools to roll out changes ensures that infrastructure changes go through the same rigorous processes as application code — including version control, peer review, and automated testing.
+
+Infrastructure as code eliminates manual configuration steps that are error-prone and difficult to audit. It enables teams to reproduce environments consistently across development, testing, and production, and provides a clear audit trail of what changed, when, and by whom.
+
+## Requirements
+* All production and test infrastructure MUST be defined as code and stored in version control
+* Infrastructure changes MUST be rolled out via automated CI pipelines
+* The appropriate tooling MUST be used for the type and level of change (e.g. Terraform for infrastructure, Docker for application runtimes)
+* Infrastructure documentation MUST be maintained and kept up-to-date
+* Infrastructure code MUST go through the same review process as application code
+
+## How we implement this control
+
+* We define all our production and test infrastructure using code. Changes are rolled out via CI pipelines in GitHub
+* We use the appropriate tooling for the type and level of the change (e.g. Terraform for infrastructure, Docker for application runtimes)
+* All documentation around our infrastructure, security approaches and automation is maintained and up-to-date in our [Knowledge Base](https://github.com/kosli-dev/knowledge-base)
+
+## Mitigates risks
+
+<div className="sdlc-grid sdlc-grid--5">
+  <ConfigDriftCard />
+  <InsiderThreatCard />
+  <AuditCard />
+</div>
+
+## Compliance references
+
+<AccordionGroup>
+  <Accordion title="NIST SP 800-53 R5">
+    | Control | Note |
+    |---|---|
+    | CM-2 | Baseline configuration — infrastructure as code establishes and maintains a documented baseline for all environments. |
+    | CM-3 | Configuration change control — all infrastructure changes are tracked in version control with full audit trails. |
+    | CM-6 | Configuration settings — environment configurations are defined as code and enforced through automation. |
+    | CM-9 | Configuration management plan — infrastructure as code is a core component of the overall configuration management approach. |
+    | SA-10 | Developer configuration management — infrastructure definitions are subject to the same controls as application source code. |
+    | SC-28 | Protection of information at rest — infrastructure definitions include security configurations for data protection. |
+  </Accordion>
+  <Accordion title="SOC 2 Type II">
+    | Control | Note |
+    |---|---|
+    | CC8.1 | Requires changes to be authorised and tested; infrastructure as code subjects environment changes to the same review and approval process as application code. |
+    | CC6.1 | Requires logical access controls; maps to controlling who can modify infrastructure definitions and deploy configuration changes. |
+    | CC7.1 | Requires infrastructure to be managed to meet objectives; codified infrastructure ensures environments are consistent and reproducible. |
+  </Accordion>
+</AccordionGroup>
+
+## Links
+- [Terraform by HashiCorp](https://www.terraform.io/)
+- [Infrastructure as Code — Martin Fowler](https://martinfowler.com/bliki/InfrastructureAsCode.html)

@@ -1,0 +1,60 @@
+---
+title: "Penetration Testing"
+description: "Penetration testing is conducted periodically to identify exploitable vulnerabilities in applications and infrastructure that automated scanning may not detect."
+icon: "bug"
+---
+
+import VulnerableSoftwareCard from '/snippets/sdlc/risks/vulnerable_software_in_production.mdx';
+import EnvironmentBreachCard from '/snippets/sdlc/risks/environment_breach.mdx';
+
+<Note>**SDLC-CTRL-0019** · Lifecycle</Note>
+
+## Description
+Penetration testing simulates real-world attack scenarios against applications and infrastructure to identify exploitable vulnerabilities. Unlike automated scanning tools (SAST, SCA), penetration testing assesses the actual exploitability of vulnerabilities in context, tests for business logic flaws, and evaluates the effectiveness of security controls as a whole.
+
+Penetration testing serves as the organisation's approach to dynamic application security testing (DAST), providing assurance that systems are resilient against attack when viewed from an external perspective.
+
+## Requirements
+* Penetration testing MUST be conducted at least annually against customer-facing applications and critical infrastructure
+* Penetration testing scope MUST include both application-layer and infrastructure-layer testing
+* Findings MUST be classified by severity and tracked to resolution
+* Critical and high severity findings MUST be remediated within defined SLAs
+* Penetration test reports and remediation evidence MUST be retained for audit purposes
+* Penetration testing SHOULD be conducted by qualified personnel, either internal or external
+
+## How we implement this control
+
+* We conduct periodic penetration testing against our production applications and infrastructure
+* Findings are tracked and remediated according to severity
+* Penetration test reports are retained for compliance and audit purposes
+
+## Mitigates risks
+
+<div className="sdlc-grid sdlc-grid--5">
+  <VulnerableSoftwareCard />
+  <EnvironmentBreachCard />
+</div>
+
+## Compliance references
+
+<AccordionGroup>
+  <Accordion title="NIST SP 800-53 R5">
+    | Control | Note |
+    |---|---|
+    | CA-8 | Penetration testing — requires organisations to conduct penetration testing on systems and applications. |
+    | RA-5 | Vulnerability monitoring and scanning — penetration testing complements automated scanning by testing for exploitable vulnerabilities. |
+    | SA-11 | Developer testing and evaluation — includes security testing as part of the development process. |
+    | SI-2 | Flaw remediation — findings from penetration tests must be tracked to resolution. |
+  </Accordion>
+  <Accordion title="SOC 2 Type II">
+    | Control | Note |
+    |---|---|
+    | CC4.1 | Requires ongoing monitoring to ascertain whether controls are functioning; penetration testing provides independent validation of security control effectiveness. |
+    | CC7.1 | Requires detection of vulnerabilities; penetration testing identifies exploitable weaknesses that automated scanning may miss. |
+  </Accordion>
+</AccordionGroup>
+
+## Links
+- [OWASP Testing Guide](https://owasp.org/www-project-web-security-testing-guide/)
+- [NIST SP 800-53r5 CA-8: Penetration Testing](https://nvlpubs.nist.gov/nistpubs/SpecialPublications/NIST.SP.800-53r5.pdf)
+- [PTES — Penetration Testing Execution Standard](http://www.pentest-standard.org/)

@@ -1,0 +1,92 @@
+---
+title: "Overview"
+description: "All risks and controls in Kosli's SDLC governance framework at a glance."
+icon: "table-cells"
+---
+
+import SupplyChainCard from '/snippets/sdlc/risks/supply_chain_compromise.mdx';
+import InsiderThreatCard from '/snippets/sdlc/risks/insider_threat.mdx';
+import UnauthorisedDeploymentCard from '/snippets/sdlc/risks/unauthorised_deployment.mdx';
+import CredentialExposureCard from '/snippets/sdlc/risks/credential_and_secret_exposure.mdx';
+import VulnerableSoftwareCard from '/snippets/sdlc/risks/vulnerable_software_in_production.mdx';
+import AuditFailureCard from '/snippets/sdlc/risks/audit_and_compliance_failure.mdx';
+import UnauthorisedSystemAccessCard from '/snippets/sdlc/risks/unauthorised_system_access.mdx';
+import ConfigDriftCard from '/snippets/sdlc/risks/configuration_drift.mdx';
+import EnvironmentBreachCard from '/snippets/sdlc/risks/environment_breach.mdx';
+
+import VersionControlCard from '/snippets/sdlc/controls/build/versioncontrol.mdx';
+import BinaryProvenanceCard from '/snippets/sdlc/controls/build/binary_provenance.mdx';
+import ToolchainCard from '/snippets/sdlc/controls/build/toolchain.mdx';
+import DependenciesCard from '/snippets/sdlc/controls/build/dependencies.mdx';
+import InfraCard from '/snippets/sdlc/controls/build/infrastructure_and_config_management.mdx';
+import SecretsScanningCard from '/snippets/sdlc/controls/build/secrets-scanning.mdx';
+import CodeReviewCard from '/snippets/sdlc/controls/release/code_review.mdx';
+import QualityCard from '/snippets/sdlc/controls/release/quality.mdx';
+import DeploymentApprovalsCard from '/snippets/sdlc/controls/release/deployment_approvals.mdx';
+import VulnSastCard from '/snippets/sdlc/controls/release/vulnerability_scanning_sast.mdx';
+import VulnScaCard from '/snippets/sdlc/controls/release/vulnerability_scanning_sca.mdx';
+import VulnContainersCard from '/snippets/sdlc/controls/release/vulnerability_scanning_containers.mdx';
+import FeatureFlagsCard from '/snippets/sdlc/controls/release/feature_flags.mdx';
+import ChangeRecordsCard from '/snippets/sdlc/controls/runtime/change_records.mdx';
+import DeploymentControlsCard from '/snippets/sdlc/controls/runtime/deployment_controls.mdx';
+import SecretsManagementCard from '/snippets/sdlc/controls/runtime/secrets_managment.mdx';
+import SystemAccessCard from '/snippets/sdlc/controls/runtime/system_access.mdx';
+import WorkloadMonitoringCard from '/snippets/sdlc/controls/runtime/workload_monitoring.mdx';
+import DriftDetectionCard from '/snippets/sdlc/controls/runtime/drift_detection.mdx';
+import ServiceOwnershipCard from '/snippets/sdlc/controls/lifecycle/service_ownership.mdx';
+import TrainingCard from '/snippets/sdlc/controls/lifecycle/training.mdx';
+import PenTestCard from '/snippets/sdlc/controls/lifecycle/penetration_testing.mdx';
+
+## Risks
+
+<div className="sdlc-grid sdlc-grid--5">
+  <SupplyChainCard />
+  <InsiderThreatCard />
+  <UnauthorisedDeploymentCard />
+  <CredentialExposureCard />
+  <VulnerableSoftwareCard />
+  <AuditFailureCard />
+  <UnauthorisedSystemAccessCard />
+  <ConfigDriftCard />
+  <EnvironmentBreachCard />
+</div>
+
+## Controls
+
+<p className="sdlc-area-label sdlc-area-label--build">Build</p>
+<div className="sdlc-grid sdlc-grid--4">
+  <VersionControlCard />
+  <BinaryProvenanceCard />
+  <ToolchainCard />
+  <DependenciesCard />
+  <InfraCard />
+  <SecretsScanningCard />
+</div>
+
+<p className="sdlc-area-label sdlc-area-label--release">Release</p>
+<div className="sdlc-grid sdlc-grid--4">
+  <CodeReviewCard />
+  <QualityCard />
+  <DeploymentApprovalsCard />
+  <VulnSastCard />
+  <VulnScaCard />
+  <VulnContainersCard />
+  <FeatureFlagsCard />
+</div>
+
+<p className="sdlc-area-label sdlc-area-label--runtime">Runtime</p>
+<div className="sdlc-grid sdlc-grid--4">
+  <ChangeRecordsCard />
+  <DeploymentControlsCard />
+  <SecretsManagementCard />
+  <SystemAccessCard />
+  <WorkloadMonitoringCard />
+  <DriftDetectionCard />
+</div>
+
+<p className="sdlc-area-label sdlc-area-label--lifecycle">Lifecycle</p>
+<div className="sdlc-grid sdlc-grid--4">
+  <ServiceOwnershipCard />
+  <TrainingCard />
+  <PenTestCard />
+</div>

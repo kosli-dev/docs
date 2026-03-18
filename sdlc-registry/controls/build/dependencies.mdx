@@ -1,0 +1,68 @@
+---
+title: "Dependency Management"
+description: "Every dependency is defined securely, managed, and auditable as part of the software development lifecycle."
+icon: "cubes"
+---
+
+import SupplyChainCard from '/snippets/sdlc/risks/supply_chain_compromise.mdx';
+import VulnerableSoftwareCard from '/snippets/sdlc/risks/vulnerable_software_in_production.mdx';
+
+<Note>**SDLC-CTRL-0004** · Build</Note>
+
+## Description
+Inputs to the build process — including third-party libraries, container base images, and other source code — can introduce security and quality issues. Dependencies must be explicitly defined, controlled, and transparent to maintain the integrity of the software supply chain.
+
+During build, these inputs can be recorded as the software bill of materials alongside binary provenance, enabling traceability of all components included in a release.
+
+## Requirements
+* All dependencies MUST be explicitly defined in version-controlled dependency files (e.g. `go.mod`, `requirements.txt`, `package.json`, `Dockerfile`)
+* Dependencies MUST comply with licensing requirements agreed by the company
+* Lock files MUST be used to ensure reproducible builds and prevent silent dependency changes
+* Dependencies SHOULD be recorded as a software bill of materials when recording [binary provenance](/sdlc-registry/controls/build/binary_provenance)
+* Container base images MUST be explicitly versioned and pinned
+
+## How we implement this control
+
+We define these dependencies in the source code, at the application level and if relevant, at the Docker image level.
+
+| Application | Dependencies |
+| ----------- | ------------ |
+| CLI | [Golang Dependencies](https://github.com/kosli-dev/cli/blob/main/go.mod) |
+| Server | [Python Dependencies](https://github.com/kosli-dev/server/blob/master/src/requirements.txt) <br/> [Docker Dependencies](https://github.com/kosli-dev/server/blob/master/Dockerfile) <br /> [NPM Dependencies](https://github.com/kosli-dev/server/blob/master/package.json) |
+| Slack Application | [Python Dependencies](https://github.com/kosli-dev/slack-auth-app/blob/main/src/requirements.txt) <br/> [Docker Dependencies](https://github.com/kosli-dev/slack-auth-app/blob/main/Dockerfile) |
+
+<Frame><img src="/images/sdlc-registry/controls/dependency-management.svg" alt="Dependency Management" /></Frame>
+
+## Mitigates risks
+
+<div className="sdlc-grid sdlc-grid--5">
+  <SupplyChainCard />
+  <VulnerableSoftwareCard />
+</div>
+
+## Compliance references
+
+<AccordionGroup>
+  <Accordion title="NIST SP 800-53 R5">
+    | Control | Note |
+    |---|---|
+    | SA-9 | External system services — third-party dependencies are external services/components that must be managed and controlled. |
+    | SA-12 | Supply chain protection — dependency management controls the inputs to the build process. |
+    | SA-22 | Unsupported system components — dependencies must be actively maintained and not end-of-life. |
+    | CM-8 | System component inventory — all dependencies must be catalogued and traceable. |
+    | SR-4 | Provenance — requires tracking the origin and integrity of software components. |
+    | CM-7 | Least functionality — only necessary dependencies should be included. |
+  </Accordion>
+  <Accordion title="SOC 2 Type II">
+    | Control | Note |
+    |---|---|
+    | CC8.1 | Requires changes to be authorised and tested; dependency management ensures third-party components are explicitly declared and reviewed. |
+    | PI1.3 | Requires processing integrity; pinned and verified dependencies prevent unexpected behaviour from upstream changes. |
+    | CC7.2 | Requires monitoring of system components; maps to tracking dependency versions and known vulnerabilities. |
+  </Accordion>
+</AccordionGroup>
+
+## Links
+- [OWASP Dependency-Check](https://owasp.org/www-project-dependency-check/)
+- [CycloneDX SBOM Standard](https://cyclonedx.org/)
+- [SPDX SBOM Standard](https://spdx.dev/)

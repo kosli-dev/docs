@@ -1,0 +1,63 @@
+---
+title: "Drift Detection"
+description: "Infrastructure and configuration are continuously monitored for drift from the approved baseline defined as code, detecting unauthorised or unintended changes."
+icon: "arrows-left-right"
+---
+
+import ConfigDriftCard from '/snippets/sdlc/risks/configuration_drift.mdx';
+import InsiderThreatCard from '/snippets/sdlc/risks/insider_threat.mdx';
+import EnvironmentBreachCard from '/snippets/sdlc/risks/environment_breach.mdx';
+
+<Note>**SDLC-CTRL-0018** · Runtime</Note>
+
+## Description
+Even when infrastructure is defined as code and applied through automation, configuration drift can occur through manual interventions, failed deployments, or external changes. Drift detection continuously compares the actual state of infrastructure and configuration against the approved baseline, identifying deviations that may indicate unauthorised access, operational errors, or compliance violations.
+
+Drift detection complements the preventative control of defining infrastructure as code (SDLC-CTRL-0005) by providing a detective layer that identifies when the actual state diverges from the declared state, regardless of how the change occurred.
+
+## Requirements
+* Production infrastructure MUST be continuously monitored for configuration drift from the approved baseline
+* Detected drift MUST generate alerts to the appropriate response channels
+* Drift events MUST be recorded with details of what changed, when, and the expected versus actual state
+* Drift MUST be remediated by either updating the infrastructure code or reverting the unauthorised change
+* Drift detection SHOULD be automated and run at regular intervals
+
+## How we implement this control
+
+* We use Kosli environment monitoring to detect drift in our runtime environments
+* Drift alerts are delivered to our Slack channels for immediate review
+* Detected drift is investigated and resolved by either updating the infrastructure code or reverting the change
+
+## Mitigates risks
+
+<div className="sdlc-grid sdlc-grid--5">
+  <ConfigDriftCard />
+  <InsiderThreatCard />
+  <EnvironmentBreachCard />
+</div>
+
+## Compliance references
+
+<AccordionGroup>
+  <Accordion title="NIST SP 800-53 R5">
+    | Control | Note |
+    |---|---|
+    | CM-2 | Baseline configuration — drift detection identifies deviations from the documented infrastructure baseline. |
+    | CM-3 | Configuration change control — detects unauthorised changes that bypass the formal change management process. |
+    | CM-6 | Configuration settings — ensures runtime configuration matches the approved settings defined as code. |
+    | SI-4 | System monitoring — continuous monitoring of infrastructure for unauthorised modifications. |
+    | CA-7 | Continuous monitoring — drift detection is a key component of the continuous compliance monitoring strategy. |
+    | SI-7 | Software and information integrity — detects tampering or unintended modifications to infrastructure and configuration. |
+  </Accordion>
+  <Accordion title="SOC 2 Type II">
+    | Control | Note |
+    |---|---|
+    | CC7.2 | Requires monitoring for anomalies indicative of security events; drift detection identifies unexpected changes to running environments. |
+    | CC7.3 | Requires evaluation of detected anomalies; drift detection alerts enable investigation of whether changes are authorised. |
+    | CC8.1 | Requires only authorised changes in production; drift detection identifies when the running state diverges from the approved configuration. |
+  </Accordion>
+</AccordionGroup>
+
+## Links
+- [Kosli — Environment Monitoring](https://docs.kosli.com/getting_started/environments/)
+- [Terraform — Detecting Drift](https://developer.hashicorp.com/terraform/tutorials/state/resource-drift)

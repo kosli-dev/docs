@@ -1,0 +1,59 @@
+---
+title: "Training"
+description: "All team members complete annual security awareness training covering the OWASP Top 10, ensuring a security-conscious development workforce."
+icon: "graduation-cap"
+---
+
+import InsiderThreatCard from '/snippets/sdlc/risks/insider_threat.mdx';
+import VulnerableSoftwareCard from '/snippets/sdlc/risks/vulnerable_software_in_production.mdx';
+import CredentialExposureCard from '/snippets/sdlc/risks/credential_and_secret_exposure.mdx';
+
+<Note>**SDLC-CTRL-0017** · Lifecycle</Note>
+
+## Description
+Security awareness reduces the likelihood of negligent or accidental insider threats and ensures every team member understands their responsibilities in the software development lifecycle. Training covers the most common security risks and their implications for software development and operations.
+
+New employees and members of the tech team receive this training as part of the onboarding process, and all team members refresh their knowledge at least annually.
+
+## Requirements
+* All team members MUST complete security awareness training covering the OWASP Top 10 at least annually
+* New employees MUST complete security awareness training as part of onboarding
+* Training completion MUST be documented in an audit trail
+* Training content SHOULD be reviewed and updated annually to reflect current threats
+
+## How we implement this control
+
+* The team study the [OWASP Top 10 security risks](https://owasp.org/www-project-top-ten/) and discuss their implications for our software development and operations, at least annually.
+* The activity and participants are logged in a Kosli audit trail.
+* For new employees the OWASP Top 10 is done together with one of the other team members.
+
+## Mitigates risks
+
+<div className="sdlc-grid sdlc-grid--5">
+  <InsiderThreatCard />
+  <VulnerableSoftwareCard />
+  <CredentialExposureCard />
+</div>
+
+## Compliance references
+
+<AccordionGroup>
+  <Accordion title="NIST SP 800-53 R5">
+    | Control | Note |
+    |---|---|
+    | AT-2 | Literacy training and awareness — requires security awareness training for all personnel. |
+    | AT-3 | Role-based training — requires training tailored to the individual's role and responsibilities in the SDLC. |
+    | AT-4 | Training records — requires documentation and retention of training completion. |
+    | PM-13 | Security and privacy workforce — requires maintaining a security-aware development workforce. |
+  </Accordion>
+  <Accordion title="SOC 2 Type II">
+    | Control | Note |
+    |---|---|
+    | CC1.4 | Requires the entity to attract, develop, and retain competent individuals; training ensures personnel have the skills to fulfil their security responsibilities. |
+    | CC2.2 | Requires communication of responsibilities to internal personnel; security awareness training ensures staff understand their role in maintaining controls. |
+  </Accordion>
+</AccordionGroup>
+
+## Links
+- [OWASP Top 10](https://owasp.org/www-project-top-ten/)
+- [NIST SP 800-53r5 AT-2: Literacy Training and Awareness](https://nvlpubs.nist.gov/nistpubs/SpecialPublications/NIST.SP.800-53r5.pdf)
