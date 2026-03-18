@@ -129,7 +129,7 @@ The following sections provide more details about each Kosli user role, includin
   - **Generate Reports**: Export and analyze compliance data
   - **View Configurations**: See flow definitions, policies, attestation types, and actions (but cannot modify them)
 
-  Snapshotterss cannot:
+  Snapshotters cannot:
   - Create, update, or delete any resources
   - Report attestations
   - Manage approvals
@@ -141,7 +141,6 @@ The following sections provide more details about each Kosli user role, includin
 
   Assign the Snapshotter role to:
   - Environment teams who need to manage runtime environments and report snapshots
-  - Operations teams responsible for defining compliance policies
   - Systems that only need to report environment state without modifying build pipelines
 
   ---
