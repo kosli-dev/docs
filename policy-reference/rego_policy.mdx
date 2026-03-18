@@ -1,0 +1,159 @@
+---
+title: "Rego Policy"
+description: "Reference for Rego policy files used with kosli evaluate trail and kosli evaluate trails."
+---
+
+A Rego policy defines the rules Kosli evaluates trail data against. You pass a `.rego` file to [`kosli evaluate trail`](/client_reference/kosli_evaluate_trail) or [`kosli evaluate trails`](/client_reference/kosli_evaluate_trails) via the `--policy` flag. Kosli has a built-in <Tooltip tip="Rego is the purpose-built declarative policy language used by the Open Policy Agent (OPA) project. It is designed for expressing rules over structured data and is widely used for policy enforcement in cloud-native environments." cta="Learn more" href="https://www.openpolicyagent.org/">Rego</Tooltip> evaluator — no OPA installation required.
+
+## Policy contract
+
+These rules are Kosli-specific conventions, not OPA built-ins. Kosli queries `data.policy.*` to find them.
+
+<ParamField path="package policy" required>
+  Every policy must declare `package policy`. Kosli queries `data.policy.allow` and `data.policy.violations` to read the result.
+</ParamField>
+
+<ParamField path="allow" type="boolean" required>
+  Must evaluate to a boolean. Kosli exits with code `0` when `true`, code `1` when `false`. Typically defined as:
+
+  ```rego
+  default allow = false
+
+  allow if {
+      count(violations) == 0
+  }
+  ```
+</ParamField>
+
+<ParamField path="violations" type="set of strings">
+  Optional but recommended. A set of human-readable strings describing why the policy failed. Kosli displays these when `allow` is `false`. Each message should identify the offending resource and the reason.
+
+  ```rego
+  violations contains msg if {
+      # ... rule body ...
+      msg := sprintf("descriptive message about %v", [resource])
+  }
+  ```
+</ParamField>
+
+## Input data
+
+The data structure passed to the policy as `input` depends on which command you use.
+
+### `kosli evaluate trail` — single trail
+
+The policy receives `input.trail`, a single trail object.
+
+<ParamField path="input.trail" type="object">
+  The trail being evaluated.
+
+  <Expandable title="trail properties">
+    <ParamField path="input.trail.name" type="string">
+      The trail name (git commit SHA or custom name).
+    </ParamField>
+
+    <ParamField path="input.trail.compliance_status" type="object">
+      Compliance data for the trail.
+
+      <Expandable title="compliance_status properties">
+        <ParamField path="input.trail.compliance_status.is_compliant" type="boolean">
+          Whether the trail is compliant against its flow template.
+        </ParamField>
+
+        <ParamField path="input.trail.compliance_status.status" type="string">
+          Compliance status string, e.g. `"COMPLIANT"` or `"INCOMPLIANT"`.
+        </ParamField>
+
+        <ParamField path="input.trail.compliance_status.attestations_statuses" type="object">
+          Map of attestation name → attestation status object. Each object contains the attestation's data, including type-specific fields enriched via `--attestations`. For example, a `pull-request` attestation includes a `pull_requests` array, each with an `approvers` array and a `url` string.
+        </ParamField>
+
+        <ParamField path="input.trail.compliance_status.artifacts_statuses" type="object">
+          Map of artifact name → artifact status object. Each artifact has its own `attestations_statuses` map with the same structure as above.
+        </ParamField>
+      </Expandable>
+    </ParamField>
+  </Expandable>
+</ParamField>
+
+### `kosli evaluate trails` — multiple trails
+
+The policy receives `input.trails`, an array of trail objects with the same structure as `input.trail` above.
+
+<ParamField path="input.trails" type="array">
+  Array of trail objects. Each element has the same structure as `input.trail` described above.
+</ParamField>
+
+<Info>
+Use `--show-input` with `--output json` to print the full input structure for a given trail. Pipe through `jq` to explore specific fields:
+
+```shell
+kosli evaluate trail "$TRAIL_NAME" \
+  --policy my-policy.rego \
+  --org "$ORG" \
+  --flow "$FLOW" \
+  --show-input \
+  --output json 2>/dev/null | jq '.input'
+```
+</Info>
+
+## Exit codes
+
+| Code | Meaning |
+|------|---------|
+| `0`  | Policy allowed (`allow = true`) |
+| `1`  | Policy denied (`allow = false`) **or** command error (network failure, invalid Rego, policy file not found) |
+
+Exit code `1` is used for both denial and failure. To distinguish between them in CI, use `--output json` and read the `allow` field directly from the output rather than relying on the exit code.
+
+## Examples
+
+### Check pull request approvals across multiple trails
+
+```rego
+package policy
+
+import rego.v1
+
+default allow = false
+
+violations contains msg if {
+    some trail in input.trails
+    some pr in trail.compliance_status.attestations_statuses["pull-request"].pull_requests
+    count(pr.approvers) == 0
+    msg := sprintf("trail '%v': pull-request %v has no approvers", [trail.name, pr.url])
+}
+
+allow if {
+    count(violations) == 0
+}
+```
+
+### Check Snyk scan results on a single trail
+
+```rego
+package policy
+
+import rego.v1
+
+default allow = false
+
+violations contains msg if {
+    some name, artifact in input.trail.compliance_status.artifacts_statuses
+    snyk := artifact.attestations_statuses["snyk-container-scan"]
+    some result in snyk.processed_snyk_results.results
+    result.high_count > 0
+    msg := sprintf("artifact '%v': snyk scan found %d high severity vulnerabilities", [name, result.high_count])
+}
+
+allow if {
+    count(violations) == 0
+}
+```
+
+## Further reading
+
+- [Rego Style Guide](https://docs.styra.com/opa/rego-style-guide) — naming, rule structure, and test conventions
+- [OPA Annotations](https://www.openpolicyagent.org/docs/latest/annotations/) — including `entrypoint: true` for use with `opa build`
+- [OPA Best Practices](https://www.openpolicyagent.org/docs/latest/best-practices/)
+- [Tutorial: Evaluate trails with OPA policies](/tutorials/evaluate_trails_with_opa)

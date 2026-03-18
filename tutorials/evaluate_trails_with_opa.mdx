@@ -3,7 +3,7 @@ title: "Evaluate trails with OPA policies"
 description: "Learn how to use kosli evaluate trail and kosli evaluate trails to check your Kosli trails against custom OPA/Rego policies. This tutorial walks through writing a policy that verifies pull requests have been approved."
 ---
 
-The `kosli evaluate` commands let you evaluate Kosli trails against custom policies written in <Tooltip tip="Rego is the purpose-built declarative policy language used by the Open Policy Agent (OPA) project. It is designed for expressing rules over structured data and is widely used for policy enforcement in cloud-native environments." cta="Learn more" href="https://www.openpolicyagent.org/">[Rego](https://www.openpolicyagent.org/docs/latest/policy-language/)</Tooltip>. This is useful for enforcing rules like "every artifact must have an approved pull request" or "all security scans must pass" — and for gating deployments in CI/CD pipelines based on those rules.
+The `kosli evaluate` commands let you evaluate Kosli trails against custom policies written in <Tooltip tip="Rego is the purpose-built declarative policy language used by the Open Policy Agent (OPA) project. It is designed for expressing rules over structured data and is widely used for policy enforcement in cloud-native environments." cta="Learn more" href="https://www.openpolicyagent.org/">[Rego](https://www.openpolicyagent.org/docs/latest/policy-language/)</Tooltip>. This is useful for enforcing rules like "every artifact must have an approved pull request" or "all security scans must pass", and for gating deployments in CI/CD pipelines based on those rules.
 
 In this tutorial, we'll write a policy that checks whether pull requests on a trail have been approved, then evaluate it against real trails in public Kosli orgs.
 
@@ -59,11 +59,7 @@ Let's break down what this policy does:
 * **`allow`** — trails are allowed only when there are no violations.
 
 <Info>
-**Policy contract** — these are Kosli-specific conventions, not OPA built-ins:
-
-* **`package policy`** — required. Kosli queries `data.policy.*` to find your rules.
-* **`allow`** — required. Must evaluate to a **boolean**. Kosli exits with code 0 when `true`, code 1 when `false`.
-* **`violations`** — optional but recommended. Must be a **set of strings**, where each string is a human-readable reason the policy failed. Kosli displays these when `allow` is `false`.
+See the [Rego Policy reference](/policy-reference/rego_policy) for the full policy contract, input data shape, and exit code behaviour.
 </Info>
 
 </Step>
@@ -113,7 +109,7 @@ RESULT:  ALLOWED
 
 <Step title="Evaluate a single trail">
 
-The `kosli evaluate trail` (singular) command evaluates facts within a single trail — a different use case from comparing across multiple trails. For example, you might check that a snyk container scan found no high-severity vulnerabilities.
+The `kosli evaluate trail` (singular) command evaluates facts within a single trail, which is a different use case from comparing across multiple trails. For example, you might check that a snyk container scan found no high-severity vulnerabilities.
 
 Save this as `snyk-no-high-vulns.rego`:
 
@@ -140,7 +136,7 @@ allow if {
 This policy iterates over every artifact in the trail, looks up its `snyk-container-scan` attestation, and checks whether any result has a non-zero `high_count`.
 
 Use `--attestations` to enrich only the snyk data (faster than fetching all attestation details).
-The value uses the format `artifact-name.attestation-type` — here, `dashboard` is the artifact name and `snyk-container-scan` is the attestation name:
+The value uses the format `artifact-name.attestation-type`. Here, `dashboard` is the artifact name and `snyk-container-scan` is the attestation name:
 
 ```shell
 kosli evaluate trail \
@@ -158,7 +154,7 @@ RESULT:  ALLOWED
 The trail has zero high-severity vulnerabilities, so the policy allows it.
 
 <Info>
-When writing a policy for `kosli evaluate trail`, reference `input.trail` (a single object). For `kosli evaluate trails`, reference `input.trails` (an array). The data shapes differ, so use separate policies for each command.
+The `input.trail` / `input.trails` distinction and the full input data shape are documented in the [Rego Policy reference](/policy-reference/rego_policy#input-data).
 </Info>
 
 </Step>
@@ -210,7 +206,9 @@ Use the `--attestations` flag to limit which attestations are enriched with full
 
 <Step title="Use in CI/CD">
 
-The `kosli evaluate` commands exit with code 0 when the policy allows and code 1 when it denies. This makes them straightforward to use as gates in CI/CD pipelines:
+The `kosli evaluate` commands exit with `0` on allow and `1` on deny or error — making them straightforward to use as pipeline gates. See the [Rego Policy reference](/policy-reference/rego_policy#exit-codes) for details on distinguishing denial from command failure.
+
+
 
 ```shell
 # Example: gate a deployment on policy evaluation
@@ -233,7 +231,7 @@ This pattern lets you enforce custom compliance rules as part of your delivery p
 
 <Step title="Record the evaluation">
 
-After evaluating a trail, you can record the result as an attestation — creating an audit record in Kosli that captures the policy, the full evaluation report, and any violations.
+After evaluating a trail, you can record the result as an attestation. This creates an audit record in Kosli that captures the policy, the full evaluation report, and any violations.
 
 This step requires write access to your Kosli org. The examples below use variables you'd set in your CI/CD pipeline. In your own pipeline you'd use your own policy file — here we use `my-policy.rego` as a placeholder:
 
@@ -277,3 +275,12 @@ Use `--compliant=value` (with `=`) not `--compliant value` (with a space). Boole
 </Step>
 
 </Steps>
+
+## What you've accomplished
+
+You have written OPA/Rego policies and evaluated Kosli trails against them, both across multiple trails and within a single trail. You've also recorded evaluation results as attestations, creating a tamper-proof audit record of every policy decision linked to a specific trail.
+
+From here you can:
+* Explore evaluated trails in the [Kosli app](https://app.kosli.com)
+* Gate deployments in CI/CD pipelines using `kosli evaluate trail` exit codes
+* Extend your policies to check other attestation types. See [`kosli evaluate trail`](/client_reference/kosli_evaluate_trail) and [`kosli evaluate trails`](/client_reference/kosli_evaluate_trails) for the full flag reference

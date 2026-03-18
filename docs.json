@@ -422,6 +422,18 @@
             ]
           },
           {
+            "item": "Policy Reference",
+            "icon": "scroll",
+            "groups": [
+              {
+                "group": "Policies",
+                "pages": [
+                  "policy-reference/rego_policy"
+                ]
+              }
+            ]
+          },
+          {
             "item": "API Reference",
             "icon": "code",
             "groups": [
