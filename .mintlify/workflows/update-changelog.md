@@ -5,6 +5,7 @@ on:
 context:
   - repo: "kosli-dev/cli"
   - repo: "kosli-dev/terraform-provider-kosli"
+  - repo: "kosli-dev/server"
 notify:
   slack:
     channels:
@@ -13,12 +14,12 @@ notify:
 
 # Agent Instructions
 
-Review all PRs merged to the kosli-dev/cli and kosli-dev/terraform-provider-kosli repositories since the last changelog update component was added.
+Review all PRs merged to the kosli-dev/cli, kosli-dev/terraform-provider-kosli, and kosli-dev/server repositories since the last changelog update component was added.
 
 Write a changelog post under changelog/index.mdx for this week based on what shipped. If no changelogs exists yet for a given repository, only consider changes for the past week.
 
 Label should be the date the workflow runs, like "March 16, 2026". Description should be the version number of the release, like "v0.3.0".
-Tags should be the product(s) affected by the release, like ["CLI"] or ["Terraform Provider"].
+Tags should be the product(s) affected by the release, like ["CLI"], ["API"], or ["Terraform Provider"].
 
 The changelog is about changes to the product, not changes to the docs.
 
