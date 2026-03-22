@@ -11,7 +11,7 @@ We will query **cyber-dojo**, an open-source project whose Kosli data is public.
 ## Prerequisites
 
 * [Install Kosli CLI](/getting_started/install).
-* [Get a Kosli API token](/getting_started/service-accounts).
+* [Get a Kosli API token](/getting_started/authentication).
 
 ## Setup
 

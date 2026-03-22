@@ -16,7 +16,7 @@ The commit we follow fixed a misconfiguration: `runner` should run with three re
 ## Prerequisites
 
 * [Install Kosli CLI](/getting_started/install).
-* [Get a Kosli API token](/getting_started/service-accounts).
+* [Get a Kosli API token](/getting_started/authentication).
 
 ## Setup
 

@@ -9,7 +9,7 @@ By the end, you will have a reusable `ctrf` attestation type in Kosli that valid
 ## Prerequisites
 
 * [Install Kosli CLI](/getting_started/install).
-* [Get a Kosli API token](/getting_started/service-accounts).
+* [Get a Kosli API token](/getting_started/authentication).
 * A Kosli flow and trail to attest to — follow the [Getting started guide](/getting_started/flows) if you need one.
 
 ## Download the CTRF schema

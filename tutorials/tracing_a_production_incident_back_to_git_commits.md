@@ -12,7 +12,7 @@ By the end of this tutorial, you will have traced a production incident from a 5
 ## Prerequisites
 
 * [Install Kosli CLI](/getting_started/install).
-* [Get a Kosli API token](/getting_started/service-accounts).
+* [Get a Kosli API token](/getting_started/authentication).
 
 ## Setup
 

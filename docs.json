@@ -48,6 +48,10 @@
     {
       "source": "/tutorials/get_familiar_with_kosli",
       "destination": "/tutorials/try_kosli_locally"
+    },
+    {
+      "source": "/getting_started/service-accounts",
+      "destination": "/getting_started/authentication"
     }
   ],
   "navigation": {
@@ -60,7 +64,13 @@
             "icon": "book-open",
             "pages": [
               "understand_kosli/what_is_kosli",
-              "understand_kosli/concepts"
+              "understand_kosli/concepts",
+              {
+                "group": "Release controls",
+                "pages": [
+                  "understand_kosli/vulnerability_scanning_containers"
+                ]
+              }
             ]
           },
           {
@@ -68,7 +78,7 @@
             "icon": "rocket",
             "pages": [
               "getting_started/install",
-              "getting_started/service-accounts",
+              "getting_started/authentication",
               "getting_started/flows",
               "getting_started/trails",
               "getting_started/artifacts",

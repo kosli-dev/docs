@@ -1,7 +1,7 @@
 ---
-title: "Service Accounts"
-description: "Learn how to create and manage Kosli Service Accounts and API keys."
-icon: "user-gear"
+title: "Authentication"
+description: "Learn how to authenticate with Kosli using service accounts and API keys."
+icon: "key"
 ---
 
 Prior to engaging with Kosli, authentication is necessary. There are two methods to achieve this:

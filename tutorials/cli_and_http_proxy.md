@@ -14,7 +14,7 @@ If you already have an HTTP proxy running, skip to [Use the HTTP proxy with Kosl
 
 * [Install Docker](https://docs.docker.com/engine/install/).
 * [Install Kosli CLI](/getting_started/install).
-* [Get a Kosli API token](/getting_started/service-accounts).
+* [Get a Kosli API token](/getting_started/authentication).
 
 ## Start the HTTP proxy
 

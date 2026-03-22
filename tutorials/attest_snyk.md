@@ -14,7 +14,7 @@ To follow the steps in this tutorial, you need to:
 * [Install Docker](https://docs.docker.com/engine/install/) if you want to try Snyk container attestations, otherwise skip.
 * [Create a Kosli account](https://app.kosli.com/) (Skip if you already have one).
 * [Install Kosli CLI](/getting_started/install).
-* [Get a Kosli API token](/getting_started/service-accounts).
+* [Get a Kosli API token](/getting_started/authentication).
 
 ## Setup
 
