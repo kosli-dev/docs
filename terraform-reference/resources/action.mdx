@@ -1,0 +1,65 @@
+---
+title: "kosli_action resource"
+description: "Manages a Kosli action. Actions define webhook notifications triggered by environment compliance events."
+icon: "cube"
+---
+
+Manages a Kosli action. Actions define webhook notifications triggered by environment compliance events.
+
+<Note>
+Actions are identified internally by a server-assigned `number`. The `name` is used during import to look up the number.
+</Note>
+
+Use this resource to configure automated notifications when environments change compliance state. Actions send webhooks to external services such as Slack or Microsoft Teams.
+
+## Example usage
+
+```terraform
+terraform {
+  required_providers {
+    kosli = {
+      source = "kosli-dev/kosli"
+    }
+  }
+}
+
+# Action that fires on non-compliant environment events
+resource "kosli_action" "compliance_alerts" {
+  name         = "compliance-alerts"
+  environments = ["production-k8s"]
+  triggers     = ["ON_NON_COMPLIANT_ENV", "ON_COMPLIANT_ENV"]
+  webhook_url  = "https://hooks.slack.com/services/T00000000/B00000000/XXXXXXXX"
+}
+
+# Action that fires on scaling events
+resource "kosli_action" "scaling_alerts" {
+  name         = "scaling-alerts"
+  environments = ["staging-ecs"]
+  triggers     = ["ON_SCALED_ARTIFACT"]
+  webhook_url  = "https://outlook.office.com/webhook/XXXX"
+}
+```
+
+## Import
+
+Actions can be imported using their name:
+
+```shell
+# Import an existing action by name
+terraform import kosli_action.compliance_alerts compliance-alerts
+```
+
+## Schema
+
+### Required
+
+- `environments` (List of String) List of environment names this action monitors.
+- `name` (String) Name of the action. Must be unique within the organization. Changing this will force recreation of the resource.
+- `triggers` (List of String) List of trigger event types that activate this action (e.g. `ON_NON_COMPLIANT_ENV`, `ON_COMPLIANT_ENV`).
+- `webhook_url` (String, Sensitive) Webhook URL to send notifications to.
+
+### Read-only
+
+- `created_by` (String) User who created the action.
+- `last_modified_at` (Number) Unix timestamp of when the action was last modified.
+- `number` (Number) Server-assigned numeric identifier for the action.
