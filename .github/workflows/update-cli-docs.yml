@@ -27,7 +27,7 @@ jobs:
           fi
 
       - name: Checkout docs repo
-        uses: actions/checkout@v4
+        uses: actions/checkout@v6
 
       - name: Download kosli CLI from release
         run: |
