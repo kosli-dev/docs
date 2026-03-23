@@ -18,6 +18,8 @@ Review all PRs merged to the kosli-dev/cli, kosli-dev/terraform-provider-kosli, 
 
 Write a changelog post under changelog/index.mdx for this week based on what shipped. If no changelogs exists yet for a given repository, only consider changes for the past week.
 
+Make sure to update resources and data sources in `terraform-reference/` to match `kosli-dev/terraform-provider-kosli`. Make sure when copy documentation across to use Mintlify formatting.
+
 Label should be the date the workflow runs, like "March 16, 2026". Description should be the version number of the release, like "v0.3.0".
 Tags should be the product(s) affected by the release, like ["CLI"], ["API"], or ["Terraform Provider"].
 
