@@ -7,7 +7,7 @@ icon: "cube"
 Manages a Kosli environment. Environments represent deployment targets where artifacts are deployed. Supports physical environment types: K8S, ECS, S3, docker, server, and lambda.
 
 <Warning>
-This resource manages the environment configuration only. Environment tags are managed through a separate Kosli API. Environment policies will be available in a future release. For querying environment metadata such as `last_modified_at`, `last_reported_at`, and `archived` status, use the [`kosli_environment` data source](/terraform-reference/data-sources/environment).
+This resource manages the environment configuration only. Environment tags are managed through a separate Kosli API. To attach compliance policies, use the [`kosli_policy_attachment` resource](/terraform-reference/resources/policy_attachment). For querying environment metadata such as `last_modified_at`, `last_reported_at`, and `archived` status, use the [`kosli_environment` data source](/terraform-reference/data-sources/environment).
 </Warning>
 
 Kosli environments track deployments and provide visibility into what's running in your infrastructure. Physical environments represent actual runtime locations such as:
@@ -27,9 +27,9 @@ For aggregating multiple physical environments into logical groups, use the [`ko
 Environment tags are managed through a separate Kosli API and are not included in this Terraform resource.
 </Warning>
 
-<Warning>
-Environment policies will be available in a future release as a separate resource (`kosli_environment_policy`).
-</Warning>
+<Note>
+To attach compliance policies to environments, use the [`kosli_policy_attachment` resource](/terraform-reference/resources/policy_attachment).
+</Note>
 
 ## Example usage
 

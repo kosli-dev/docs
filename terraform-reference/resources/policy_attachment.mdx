@@ -1,0 +1,48 @@
+---
+title: "kosli_policy_attachment resource"
+description: "Attaches a Kosli policy to an environment. When this resource is destroyed, the policy is detached from the environment."
+icon: "cube"
+---
+
+Attaches a Kosli policy to an environment (physical or logical). When this resource is destroyed, the policy is detached from the environment.
+
+Both `environment_name` and `policy_name` are immutable: changing either attribute will destroy the existing attachment and create a new one.
+
+<Note>
+Both the policy and environment must exist before creating an attachment. Use the [`kosli_policy` resource](/terraform-reference/resources/policy) and [`kosli_environment` resource](/terraform-reference/resources/environment) to manage them.
+</Note>
+
+## Example usage
+
+```terraform
+terraform {
+  required_providers {
+    kosli = {
+      source = "kosli-dev/kosli"
+    }
+  }
+}
+
+# Attach a policy to an environment.
+# Both the policy and environment must exist before creating the attachment.
+resource "kosli_policy_attachment" "example" {
+  environment_name = "my-environment"
+  policy_name      = "my-policy"
+}
+```
+
+## Import
+
+Policy attachments can be imported using the composite ID `environment_name/policy_name`:
+
+```shell
+# Import a policy attachment using the composite ID: environment_name/policy_name
+terraform import kosli_policy_attachment.example my-environment/my-policy
+```
+
+## Schema
+
+### Required
+
+- `environment_name` (String) Name of the environment to attach the policy to. Changing this will force recreation of the resource.
+- `policy_name` (String) Name of the policy to attach. Changing this will force recreation of the resource.
