@@ -60,8 +60,7 @@
             "icon": "book-open",
             "pages": [
               "understand_kosli/what_is_kosli",
-              "understand_kosli/concepts",
-              "understand_kosli/linking_trails_across_branches"
+              "understand_kosli/concepts"
             ]
           },
           {
@@ -146,6 +145,12 @@
                 "group": "Evaluation",
                 "pages": [
                   "tutorials/evaluate_trails_with_opa"
+                ]
+              },
+              {
+                "group": "Multi-flow workflows",
+                "pages": [
+                  "tutorials/linking_trails_across_branches"
                 ]
               }
             ]
