@@ -60,7 +60,8 @@
             "icon": "book-open",
             "pages": [
               "understand_kosli/what_is_kosli",
-              "understand_kosli/concepts"
+              "understand_kosli/concepts",
+              "understand_kosli/linking_trails_across_branches"
             ]
           },
           {
