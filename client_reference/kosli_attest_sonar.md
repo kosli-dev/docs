@@ -118,26 +118,24 @@ kosli attest sonar
 
 ```
 </Accordion>
-<Accordion title="report a SonarQube Cloud attestation for a specific branch about a trail using key/revision">
+<Accordion title="report a SonarQube Cloud attestation about a trail using key/revision">
 ```shell
 kosli attest sonar 
 	--name yourAttestationName 
 	--sonar-api-token yourSonarAPIToken 
 	--sonar-project-key yourSonarProjectKey 
 	--sonar-revision yourSonarRevision 
-	--branch-name yourBranchName 
 
 ```
 </Accordion>
-<Accordion title="report a SonarQube Server attestation for a pull-request about a trail using key/revision">
+<Accordion title="report a SonarQube Server attestation about a trail using key/revision">
 ```shell
 kosli attest sonar 
 	--name yourAttestationName 
 	--sonar-api-token yourSonarAPIToken 
-	--sonarqube-url yourSonarQubeURL 
+	--sonar-server-url yourSonarServerURL 
 	--sonar-project-key yourSonarProjectKey 
 	--sonar-revision yourSonarRevision 
-	--pull-request-id yourPullRequestID 
 
 ```
 </Accordion>
