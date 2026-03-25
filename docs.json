@@ -146,6 +146,12 @@
                 "pages": [
                   "tutorials/evaluate_trails_with_opa"
                 ]
+              },
+              {
+                "group": "Multi-flow workflows",
+                "pages": [
+                  "tutorials/linking_trails_across_branches"
+                ]
               }
             ]
           },
