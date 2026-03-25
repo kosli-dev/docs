@@ -159,7 +159,19 @@
             "group": "Troubleshooting",
             "icon": "wrench",
             "pages": [
-              "troubleshooting/what_do_i_do_if_kosli_is_down"
+              "troubleshooting/what_do_i_do_if_kosli_is_down",
+              "troubleshooting/docker_api_version_error",
+              "troubleshooting/zsh_no_such_user",
+              "troubleshooting/github_kosli_api_token",
+              "troubleshooting/subshell_stderr",
+              "troubleshooting/whitespace_path"
+            ]
+          },
+          {
+            "group": "FAQ",
+            "icon": "circle-question",
+            "pages": [
+              "faq/faq"
             ]
           },
           {
