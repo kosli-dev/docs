@@ -168,6 +168,13 @@
             ]
           },
           {
+            "group": "FAQ",
+            "icon": "circle-question",
+            "pages": [
+              "faq/faq"
+            ]
+          },
+          {
             "group": "Integrations",
             "icon": "puzzle-piece",
             "pages": [
