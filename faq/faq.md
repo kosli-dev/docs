@@ -6,8 +6,8 @@ description: "Frequently asked questions"
 <AccordionGroup>
 
 <Accordion title="Where can I find API documentation?">
-Kosli API documentation is available for logged-in Kosli users at [app.kosli.com](https://app.kosli.com).
-You can find the link after clicking your avatar (top-right corner of the page).
+Kosli API documentation is available for logged-in Kosli users at [app.kosli.com/api/v2/doc](https://app.kosli.com/api/v2/doc/).
+You can also find the link at [app.kosli.com](https://app.kosli.com) after clicking your avatar (top-right corner of the page).
 </Accordion>
 
 <Accordion title="Do I have to provide all the flags all the time?">
@@ -15,7 +15,7 @@ A number of flags won't change their values often (or at all) between commands, 
 </Accordion>
 
 <Accordion title="What is dry run and how to use it?">
-You can use dry run to disable writing to app.kosli.com — e.g. if you're just trying things out, or troubleshooting (dry run will print the payload the CLI would send in a non dry run mode).
+You can use dry run to disable writing to `app.kosli.com` — e.g. if you're just trying things out, or troubleshooting (dry run will print the payload the CLI would send in a non dry run mode).
 
 There are three ways to enable a dry run:
 1. Use the `--dry-run` flag (no value needed) to enable it per command
