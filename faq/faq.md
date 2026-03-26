@@ -82,6 +82,12 @@ kosli report evidence artifact generic server:1.0 \
 `--compliant` is set to `true` by default, so to report as compliant simply skip the flag altogether.
 </Accordion>
 
+<Accordion title="Why can't I delete or archive a policy?">
+It's not possible to delete a policy in Kosli. This is by design, because there can be snapshots that were previously evaluated using the policy. Deleting it would compromise the integrity of those historical evaluations.
+
+Archiving policies is not currently supported either.
+</Accordion>
+
 </AccordionGroup>
 
 ## Boolean flags
