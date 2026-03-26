@@ -17,6 +17,11 @@ jobs:
   update-docs:
     runs-on: ubuntu-latest
     steps:
+      - name: Harden Runner
+        uses: step-security/harden-runner@fa2e9d605c4eeb9fcad4c99c224cee0c6c7f3594 # v2.16.0
+        with:
+          egress-policy: audit
+
       - name: Determine CLI tag
         id: tag
         run: |
@@ -27,7 +32,7 @@ jobs:
           fi
 
       - name: Checkout docs repo
-        uses: actions/checkout@v4
+        uses: actions/checkout@v6
 
       - name: Download kosli CLI from release
         run: |
@@ -42,9 +47,9 @@ jobs:
           rm -f kosli
 
       - name: Set up Python
-        uses: actions/setup-python@v5
+        uses: actions/setup-python@v6
         with:
-          python-version: '3.12'
+          python-version: '3.14'
 
       - name: Install Python dependencies
         run: pip install pyyaml

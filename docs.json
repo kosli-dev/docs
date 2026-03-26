@@ -21,7 +21,12 @@
   "styling": {
     "eyebrows": "breadcrumbs",
     "codeblocks": {
-      "theme": "dracula"
+      "theme": "dracula",
+      "languages": {
+        "custom": [
+          "/languages/rego.json"
+        ]
+      }
     }
   },
   "background": {
@@ -157,12 +162,76 @@
                   "integrations/launchdarkly",
                   "integrations/sonar"
                 ]
+              },
+              {
+                "group": "Evaluation",
+                "pages": [
+                  "tutorials/evaluate_trails_with_opa"
+                ]
+              },
+              {
+                "group": "Multi-flow workflows",
+                "pages": [
+                  "tutorials/linking_trails_across_branches"
+                ]
               }
             ]
           },
           {
-            "tab": "Labs",
-            "groups": [
+            "group": "Troubleshooting",
+            "icon": "wrench",
+            "pages": [
+              "troubleshooting/what_do_i_do_if_kosli_is_down",
+              "troubleshooting/docker_api_version_error",
+              "troubleshooting/zsh_no_such_user",
+              "troubleshooting/github_kosli_api_token",
+              "troubleshooting/subshell_stderr",
+              "troubleshooting/whitespace_path"
+            ]
+          },
+          {
+            "group": "FAQ",
+            "icon": "circle-question",
+            "pages": [
+              "faq/faq"
+            ]
+          },
+          {
+            "group": "Integrations",
+            "icon": "puzzle-piece",
+            "pages": [
+              "integrations/actions",
+              "integrations/ci_cd",
+              "integrations/slack",
+              "integrations/launchdarkly",
+              "integrations/sonar"
+            ]
+          }
+        ]
+      },
+      {
+        "tab": "Labs",
+        "groups": [
+          {
+            "group": "Kosli Learning Labs",
+            "pages": [
+              "labs/index",
+              "labs/lab-01-get-ready",
+              "labs/lab-02-flows-and-trails",
+              "labs/lab-03-build-controls",
+              "labs/lab-04-release-controls",
+              "labs/lab-05-runtime-controls"
+            ]
+          }
+        ]
+      },
+      {
+        "tab": "Implementation Guide",
+        "groups": [
+          {
+            "group": "Phase 1: Initial Discovery",
+            "icon": "lightbulb",
+            "pages": [
               {
                 "group": "Kosli Learning Labs",
                 "pages": [
@@ -486,6 +555,20 @@
         "tabs": [
           {
             "tab": "Overview",
+            "item": "Policy Reference",
+            "icon": "scroll",
+            "groups": [
+              {
+                "group": "Policies",
+                "pages": [
+                  "policy-reference/rego_policy"
+                ]
+              }
+            ]
+          },
+          {
+            "item": "API Reference",
+            "icon": "code",
             "groups": [
               {
                 "group": "Introduction",

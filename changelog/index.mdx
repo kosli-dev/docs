@@ -1,7 +1,56 @@
 ---
 title: "Changelog"
 description: "Release notes for Kosli products."
+rss: true
 ---
+
+<Update label="March 23, 2026" description="v0.4.0" tags={["Terraform Provider"]}>
+
+## New features
+
+- **`kosli_action` resource and data source** — manage webhook notification actions as Terraform resources. Create, update, and import actions by name, and read existing actions to reference in your configurations.
+- **`kosli_policy` resource and data source** — manage Kosli policies as Infrastructure-as-Code. The data source exposes the policy name, description, content, and latest version.
+- **`kosli_policy_attachment` resource** — manage the relationship between policies and environments, letting you attach and detach policies declaratively.
+
+[View on GitHub](https://github.com/kosli-dev/terraform-provider-kosli/releases/tag/v0.4.0)
+
+</Update>
+
+<Update label="March 23, 2026" description="v2.13.0" tags={["CLI"]}>
+
+## New features
+
+- **Repository metadata on attestations** — all `kosli attest` commands and `kosli begin trail` now accept `--repo-id`, `--repository`, `--repo-url`, and `--repo-provider` flags to associate attestations and trails with their source repository. These flags are automatically populated from CI environment variables in GitHub Actions, GitLab CI, Bitbucket Pipelines, Azure DevOps, and CircleCI — no manual configuration needed. See the [CI defaults](/integrations/ci_cd) reference.
+- **Helm chart CronJob configuration** — the [k8s-reporter Helm chart](/helm/k8s_reporter) now lets you configure `concurrencyPolicy`, `failedJobsHistoryLimit`, and `successfulJobsHistoryLimit` for the reporter CronJob.
+
+## Updates
+
+- `--repo-url` is now validated as a well-formed URL when explicitly provided.
+- `--repo-provider` is validated against the allowed values: `github`, `gitlab`, `bitbucket`, `azure-devops`.
+- For `kosli attest pullrequest github` and `kosli attest pullrequest azure`, the `--repository` flag now also controls which repository is queried for pull requests.
+
+[View on GitHub](https://github.com/kosli-dev/cli/releases/tag/v2.13.0)
+
+</Update>
+
+<Update label="March 23, 2026" description="v2.13.1" tags={["CLI"]}>
+
+## Bug fixes
+
+- Fixed an issue where artifact names with leading periods were rejected. Leading periods are now trimmed automatically.
+
+[View on GitHub](https://github.com/kosli-dev/cli/releases/tag/v2.13.1)
+
+</Update>
+
+<Update label="March 23, 2026" description="" tags={["API"]}>
+
+## New features
+
+- **Attestation evidence download** — a new API endpoint lets you download evidence files attached to attestations, making it easier to retrieve and audit attestation data programmatically.
+- **Snapshotter role** — a new [Snapshotter role](/administration/managing_users/roles_in_kosli) is available for users who need to create environment snapshots and manage service accounts without full member permissions. Ideal for environment and operations teams.
+
+</Update>
 
 <Update label="March 16, 2026" description="v2.12.1" tags={["CLI"]}>
 

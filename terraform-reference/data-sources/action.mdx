@@ -1,0 +1,50 @@
+---
+title: "kosli_action data source"
+description: "Fetches details of an existing Kosli action."
+icon: "database"
+---
+
+Fetches details of an existing Kosli action.
+
+Use this data source to reference existing actions and access metadata such as the environments being monitored and the trigger types configured.
+
+## Example usage
+
+```terraform
+terraform {
+  required_providers {
+    kosli = {
+      source = "kosli-dev/kosli"
+    }
+  }
+}
+
+# Query an existing action
+data "kosli_action" "compliance_alerts" {
+  name = "compliance-alerts"
+}
+
+output "action_number" {
+  description = "Server-assigned number of the action"
+  value       = data.kosli_action.compliance_alerts.number
+}
+
+output "action_environments" {
+  description = "Environments monitored by this action"
+  value       = data.kosli_action.compliance_alerts.environments
+}
+```
+
+## Schema
+
+### Required
+
+- `name` (String) The name of the action to query.
+
+### Read-only
+
+- `created_by` (String) User who created the action.
+- `environments` (List of String) List of environment names this action monitors.
+- `last_modified_at` (Number) Unix timestamp (with fractional seconds) of when the action was last modified.
+- `number` (Number) Server-assigned numeric identifier for the action.
+- `triggers` (List of String) List of trigger event types that activate this action.
