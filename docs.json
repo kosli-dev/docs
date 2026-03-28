@@ -178,6 +178,7 @@
             "group": "Integrations",
             "icon": "puzzle-piece",
             "pages": [
+              "integrations/kubernetes",
               "integrations/actions",
               "integrations/ci_cd",
               "integrations/slack",
