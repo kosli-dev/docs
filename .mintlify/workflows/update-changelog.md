@@ -21,10 +21,22 @@ Write a changelog post under changelog/index.mdx for this week based on what shi
 Make sure to update resources and data sources in `terraform-reference/` to match `kosli-dev/terraform-provider-kosli`. Make sure when copy documentation across to use Mintlify formatting.
 
 Label should be the date the workflow runs, like "March 16, 2026". Description should be the version number of the release, like "v0.3.0".
-Tags should be the product(s) affected by the release, like ["CLI"], ["API"], or ["Terraform Provider"].
+Tags should be the product(s) affected by the release:
+- kosli-dev/cli → `["CLI"]`
+- kosli-dev/terraform-provider-kosli → `["Terraform Provider"]`
+- kosli-dev/server → `["Platform"]`
 
 The changelog is about changes to the product, not changes to the docs.
 
-Do not include any internal-only information—no private repository file paths, directory structures, code snippets, internal function names, or implementation details. Only include updates that affect end users. Include a description of the change and what it means for users. Organize the changelog with new features first, then updates, then bug fixes. If you're ever unsure about the structure, review recent changelog updates and follow that style and format.
+Only include updates that affect end users. Do not include internal-only information such as:
+- Private repository file paths or directory structures
+- Code snippets, internal function names, or implementation details
+
+For each change, describe what changed and what it means for users. Organize entries in this order:
+1. New features
+2. Updates
+3. Bug fixes
+
+If unsure about the structure, review recent changelog updates and follow that style and format.
 
 Be polite and terse. The changelog must be skimmable and quick to read. Include relevant links to docs pages.
