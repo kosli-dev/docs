@@ -4,6 +4,44 @@ description: "Release notes for Kosli products."
 rss: true
 ---
 
+<Update label="March 30, 2026" description="v2.13.2" tags={["CLI"]}>
+
+## Updates
+
+- **Removed deprecated `kosli expect deployment` command** — deployment expectation is no longer required for compliance. If your pipelines still reference this command, remove or replace it.
+- **CI-ready Docker image** — a new Alpine-based Dockerfile is available for use as a CI runner image (e.g., GitLab CI), providing the Kosli CLI alongside common CI tooling.
+
+## Bug fixes
+
+- Fixed `kosli get attestation-type` displaying `type_schema` as a Go map instead of formatted JSON.
+- The `--debug` flag now shows the HTML response body when a server error occurs, improving troubleshooting.
+
+[View on GitHub](https://github.com/kosli-dev/cli/releases/tag/v2.13.2)
+
+</Update>
+
+<Update label="March 30, 2026" description="v0.4.2" tags={["Terraform Provider"]}>
+
+## Bug fixes
+
+- Fixed `type_schema` handling — the provider now correctly reads JSON objects returned by the API, replacing the previous Python repr string workaround.
+
+[View on GitHub](https://github.com/kosli-dev/terraform-provider-kosli/releases/tag/v0.4.2)
+
+</Update>
+
+<Update label="March 30, 2026" description="" tags={["API"]}>
+
+## New features
+
+- **Deployment frequency statistics** — the repository releases page now shows a deployment frequency bar chart with daily counts, a median line, and summary statistics for each environment.
+
+## Updates
+
+- Removed the deprecated deployments API. This aligns with the CLI removal of `kosli expect deployment`.
+
+</Update>
+
 <Update label="March 23, 2026" description="v0.4.0" tags={["Terraform Provider"]}>
 
 ## New features
