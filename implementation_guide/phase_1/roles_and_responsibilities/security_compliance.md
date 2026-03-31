@@ -78,4 +78,4 @@ Learn more about [Kosli user roles and permissions](/administration/managing_use
 
 ## Where to start
 
-- [**Concepts**](/understand_kosli/concepts): Understand how Flows, Trails, and Attestations fit together.
+- [**How Kosli works**](/understand_kosli/how_kosli_works): Understand how Flows, Trails, and Attestations fit together.

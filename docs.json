@@ -48,6 +48,10 @@
     {
       "source": "/tutorials/get_familiar_with_kosli",
       "destination": "/tutorials/try_kosli_locally"
+    },
+    {
+      "source": "/understand_kosli/concepts",
+      "destination": "/understand_kosli/how_kosli_works"
     }
   ],
   "navigation": {
@@ -60,7 +64,10 @@
             "icon": "book-open",
             "pages": [
               "understand_kosli/what_is_kosli",
-              "understand_kosli/concepts"
+              "understand_kosli/risks",
+              "understand_kosli/controls",
+              "understand_kosli/how_kosli_works",
+              "understand_kosli/glossary"
             ]
           },
           {

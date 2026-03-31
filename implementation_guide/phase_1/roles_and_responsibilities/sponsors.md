@@ -72,5 +72,5 @@ Learn more about [Kosli user roles and permissions](/administration/managing_use
 ## Where to Start
 - [**What is Kosli?**](understand_kosli/what_is_kosli/): Understand the value and core ideas
 - [**Implementing Kosli**](/implementation_guide): A rollout guide aligned to business and technical outcomes
-- [**Concepts**](/understand_kosli/concepts): Understand how Flows, Trails, and Attestations fit together
+- [**How Kosli works**](/understand_kosli/how_kosli_works): Understand how Flows, Trails, and Attestations fit together
 
