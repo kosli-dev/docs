@@ -13,13 +13,13 @@ Controls are organized by the phase of the software delivery lifecycle where the
 
 <CardGroup cols={2}>
   <Card title="Build controls" icon="hammer">
-    Security and quality checks during development: code review, dependency scanning, secret scanning, unit testing, SBOM generation, artifact signing.
+    Securing the build chain: dependency management, secrets scanning, artifact provenance, controlled build environments, infrastructure as code.
   </Card>
   <Card title="Release controls" icon="rocket">
-    Validation before deployment: integration testing, vulnerability scanning, compliance gates, approval workflows, change documentation.
+    Validation before deployment: code review, quality assurance, vulnerability scanning, deployment approvals.
   </Card>
   <Card title="Runtime controls" icon="server">
-    Monitoring and enforcement in production: environment snapshotting, drift detection, policy enforcement, allowlisting, rollback verification.
+    Monitoring and enforcement in production: change records, deployment controls, secrets management, workload monitoring, drift detection.
   </Card>
   <Card title="Lifecycle controls" icon="arrows-spin">
     Human and organizational factors: security training, penetration testing, service ownership.
@@ -36,34 +36,34 @@ The following examples show representative controls from each phase, the risks t
 
 ### <Icon icon="hammer"/> Build
 
-Build controls catch problems at the earliest and cheapest point in the lifecycle. The reason code review is a build control (rather than a release control) is that catching an insider threat or unreviewed change before it reaches a releasable artifact reduces the blast radius significantly. Similarly, scanning dependencies during the build is the first opportunity to detect a supply chain compromise before it propagates further.
+Build controls secure the build chain itself. The reason these controls exist at the build phase (rather than later) is that a compromised dependency, an exposed secret, or an unverifiable artifact is cheapest to catch before it enters the release pipeline. Once a tainted artifact passes the build stage, every downstream control has to work harder to detect it.
+
+| Control | Risk mitigated | Kosli concept |
+|---------|---------------|---------------|
+| Dependency management | Supply chain compromise, Vulnerable software in production | Attestation (`snyk` type) |
+| Secrets scanning | Credential and secret exposure | Attestation (custom type) |
+| Artifact binary provenance | Supply chain compromise | Artifact (SHA256 fingerprint) |
+
+### <Icon icon="rocket"/> Release
+
+Release controls validate that software is ready for production. While build controls secure the ingredients, release controls verify the result: has the code been reviewed, do the tests pass, are there known vulnerabilities, and has someone authorized the deployment? The reason code review sits here (rather than in build) is that it is a validation of the change as a whole, not of the build toolchain.
 
 | Control | Risk mitigated | Kosli concept |
 |---------|---------------|---------------|
 | Code review | Insider threat, Unreviewed changes | Attestation (`pullrequest` type) |
-| Dependency scanning | Supply chain compromise | Attestation (`snyk` type) |
-| Secret scanning | Credential and secret exposure | Attestation (custom type) |
-| Unit testing | Vulnerable software in production | Attestation (`junit` type) |
-
-### <Icon icon="rocket"/> Release
-
-Release controls act as the final gate before software reaches production. While build controls verify individual pieces, release controls verify the whole: does this artifact, taken together with its dependencies and configuration, meet the bar for deployment? Compliance gates and approval workflows exist because some changes carry enough risk that automated checks alone are not sufficient.
-
-| Control | Risk mitigated | Kosli concept |
-|---------|---------------|---------------|
-| Compliance gate | Unauthorized deployment | Flow Template |
-| Approval workflow | Unauthorized deployment | Attestation (`approval` type) |
-| Vulnerability scanning | Vulnerable software in production | Attestation (`snyk` type) |
+| Quality assurance | Vulnerable software in production | Attestation (`junit` type) |
+| Vulnerability scanning | Vulnerable software in production, Supply chain compromise | Attestation (`snyk` type) |
+| Deployment approvals | Unauthorized deployment | Attestation (`approval` type) |
 
 ### <Icon icon="server"/> Runtime
 
-Runtime controls address a different class of problem entirely. Even if every build and release control passes, the production environment can still diverge from expectations. Configuration drift happens gradually as manual fixes accumulate. Shadow changes appear when someone bypasses the pipeline altogether. The reason runtime monitoring matters is that it closes the loop: you verify not just what you intended to deploy, but what is actually running.
+Runtime controls address what happens after deployment. Even if every build and release control passes, the production environment can still diverge from expectations. Configuration drift happens gradually as manual fixes accumulate. Shadow changes appear when someone bypasses the pipeline altogether. The reason runtime monitoring matters is that it closes the loop: you verify not just what you intended to deploy, but what is actually running.
 
 | Control | Risk mitigated | Kosli concept |
 |---------|---------------|---------------|
-| Environment snapshotting | Shadow changes, Configuration drift | Environment Snapshot |
+| Runtime workload monitoring | Shadow changes, Unauthorized deployment | Environment Snapshot |
 | Drift detection | Configuration drift | Environment Snapshot + notifications |
-| Policy enforcement | Unauthorized deployment | Environment Policy |
+| Change records | Lack of auditability | Trail |
 
 ### <Icon icon="arrows-spin"/> Lifecycle
 
