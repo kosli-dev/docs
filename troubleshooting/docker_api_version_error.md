@@ -1,6 +1,6 @@
 ---
 title: "Docker API version error in GitHub Actions"
-description: 'How to fix the "client version is too new" error when running the Kosli CLI with Docker operations.'
+description: 'How to fix the "client version 1.51 is too new" error when running the Kosli CLI with Docker operations.'
 ---
 
 ## Error
