@@ -4,6 +4,51 @@ description: "Release notes for Kosli products."
 rss: true
 ---
 
+<Update label="April 6, 2026" description="v0.5.0" tags={["Terraform Provider"]}>
+
+## New features
+
+- **`kosli_flow` resource and data source** — manage Kosli [flows](/getting_started/flows) as Terraform resources. Define name, description, and YAML template inline or via `file()`. The data source lets you query existing flows and reuse their templates. See the [resource](/terraform-reference/resources/flow) and [data source](/terraform-reference/data-sources/flow) reference.
+- **Tags support for environments** — the [`kosli_environment`](/terraform-reference/resources/environment) and [`kosli_logical_environment`](/terraform-reference/resources/logical_environment) resources and data sources now support a `tags` attribute for applying key-value metadata to your environments.
+
+[View on GitHub](https://github.com/kosli-dev/terraform-provider-kosli/releases/tag/v0.5.0)
+
+</Update>
+
+<Update label="April 6, 2026" description="" tags={["CLI"]}>
+
+## New features
+
+- **`kosli evaluate input`** — evaluate a local JSON file (or stdin) against a Rego policy with no API dependency. Enables local policy development and fast iteration without a running Kosli server. See the [evaluate input](/client_reference/kosli_evaluate_input) reference.
+- **`--params` flag for policy evaluation** — pass configuration data (thresholds, expected counts, etc.) to Rego policies via `--params` on [`kosli evaluate trail`](/client_reference/kosli_evaluate_trail), [`kosli evaluate trails`](/client_reference/kosli_evaluate_trails), and [`kosli evaluate input`](/client_reference/kosli_evaluate_input). Accepts inline JSON or a file reference. Parameters are available as `data.params` in the policy.
+- **npm installation** — the Kosli CLI is now available as an npm package (`@kosli/cli`), making it easy to install in JavaScript/Node.js toolchains.
+
+## Bug fixes
+
+- Fixed Docker API version negotiation — the CLI now automatically negotiates the Docker API version with the host daemon, preventing compatibility errors after SDK upgrades.
+- Fixed AWS API rate limiting — snapshot commands for ECS, S3, and Lambda environments now use adaptive retry with up to 10 attempts, preventing failures under heavy API load.
+- Fixed git HEAD resolution in linked worktrees.
+
+</Update>
+
+<Update label="April 6, 2026" description="" tags={["Platform"]}>
+
+## New features
+
+- **Deployment list** — the repository releases page now includes a deployments tab showing a paginated list of deployments with artifact details, commit links, replaced artifacts, and compliance status.
+- **Filter deployments by environment** — filter the deployment list and metrics by specific environments on the repository releases page.
+- **SCIM provisioning** — Kosli now supports SCIM-based user provisioning, enabling automated user lifecycle management through your identity provider.
+
+## Updates
+
+- Redesigned the repository run page with improved layout, hover states, and rich tooltips showing artifact fingerprints, snapshot references, and commit details.
+
+## Bug fixes
+
+- Fixed an error when viewing deployment details for artifacts with a missing replaced snapshot index.
+
+</Update>
+
 <Update label="March 30, 2026" description="v2.13.2" tags={["CLI"]}>
 
 ## Updates

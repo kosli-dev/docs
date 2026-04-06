@@ -498,6 +498,7 @@
                 "pages": [
                   "terraform-reference/resources/environment",
                   "terraform-reference/resources/logical_environment",
+                  "terraform-reference/resources/flow",
                   "terraform-reference/resources/custom_attestation_type",
                   "terraform-reference/resources/action",
                   "terraform-reference/resources/policy",
@@ -509,6 +510,7 @@
                 "pages": [
                   "terraform-reference/data-sources/environment",
                   "terraform-reference/data-sources/logical_environment",
+                  "terraform-reference/data-sources/flow",
                   "terraform-reference/data-sources/custom_attestation_type",
                   "terraform-reference/data-sources/action",
                   "terraform-reference/data-sources/policy"
