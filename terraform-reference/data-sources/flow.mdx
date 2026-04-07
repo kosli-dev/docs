@@ -1,0 +1,52 @@
+---
+title: "kosli_flow data source"
+description: "Fetches details of an existing Kosli flow. Use this data source to reference flow configurations and templates."
+icon: "database"
+---
+
+Fetches details of an existing Kosli flow. A flow represents a business or software process that requires change tracking.
+
+## Example usage
+
+```terraform
+terraform {
+  required_providers {
+    kosli = {
+      source = "kosli-dev/kosli"
+    }
+  }
+}
+
+# Query an existing flow
+data "kosli_flow" "example" {
+  name = "my-application-flow"
+}
+
+# Create a new flow reusing the template from an existing one
+resource "kosli_flow" "copy" {
+  name        = "my-application-flow-copy"
+  description = data.kosli_flow.example.description
+  template    = data.kosli_flow.example.template
+}
+
+output "flow_name" {
+  description = "The name of the flow"
+  value       = data.kosli_flow.example.name
+}
+
+output "flow_template" {
+  description = "The YAML template of the flow"
+  value       = data.kosli_flow.example.template
+}
+```
+
+## Schema
+
+### Required
+
+- `name` (String) The name of the flow to query.
+
+### Read-only
+
+- `description` (String) The description of the flow.
+- `template` (String) YAML template defining the flow structure (trails, artifacts, attestations).
