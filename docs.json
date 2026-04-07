@@ -11,11 +11,8 @@
     "family": "IBM Plex Sans"
   },
   "api": {
-    "mdx": {
-      "server": "https://app.kosli.com/api/v2/",
-      "auth": {
-        "method": "bearer"
-      }
+    "playground": {
+      "display": "interactive"
     }
   },
   "styling": {
