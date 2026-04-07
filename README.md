@@ -29,7 +29,8 @@ mint update         # Update the CLI
 
 ## Content
 
-- **`docs.json`** — Navigation, theme, and site configuration. Every new page must be added here.
+- **`docs.json`** — Theme and site configuration. Uses `$ref` to compose from files in `config/`.
+- **`config/`** — Split config: `navigation.json` (page routing — every new page must be added here), `redirects.json`, `footer.json`.
 - **Content directories** — `understand_kosli/`, `getting_started/`, `administration/`, `integrations/`, `implementation_guide/`, `client_reference/`, `terraform-reference/`, `api-reference/`
 - **`snippets/`** — Reusable MDX fragments (only for content used in 2+ pages)
 - **`changelog/`** — Product changelog
