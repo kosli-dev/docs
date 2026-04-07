@@ -14,11 +14,11 @@ notify:
 
 # Agent Instructions
 
-Review all PRs merged to the kosli-dev/cli, kosli-dev/terraform-provider-kosli, and kosli-dev/server repositories since the last changelog update component was added.
+Check each repository (kosli-dev/cli, kosli-dev/terraform-provider-kosli, kosli-dev/server) for **new tags/releases** published since the last changelog entry for that product in changelog/index.mdx. Only document changes that are part of a tagged release — do not include unreleased work on `main`.
 
-Write a changelog post under changelog/index.mdx for this week based on what shipped. If no changelogs exists yet for a given repository, only consider changes for the past week.
+For each new release tag found, write a changelog entry in changelog/index.mdx. If no new tags exist for a repository since its last changelog entry, skip it. If there are no new tags across any repository, do not open a PR.
 
-Make sure to update resources and data sources in `terraform-reference/` to match `kosli-dev/terraform-provider-kosli`. Make sure when copy documentation across to use Mintlify formatting.
+This workflow only updates changelog/index.mdx. Do not modify any other files.
 
 Label should be the date the workflow runs, like "March 16, 2026". Description should be the version number of the release, like "v0.3.0".
 Tags should be the product(s) affected by the release:
