@@ -1,6 +1,6 @@
 {
   "$schema": "http://json-schema.org/draft-07/schema#",
-  "$id": "https://kosli-add-policy-reference.mintlify.app/schemas/policy/v1",
+  "$id": "https://kosli.mintlify.app/schemas/policy/v1",
   "title": "Kosli Environment Policy",
   "description": "Schema for Kosli environment policy YAML files used with `kosli create policy`.",
   "type": "object",
