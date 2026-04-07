@@ -90,11 +90,6 @@ output "production_includes_k8s" {
   description = "Whether production aggregates a K8S environment"
   value       = local.includes_k8s
 }
-
-output "production_tags" {
-  description = "Tags on the production logical environment"
-  value       = data.kosli_logical_environment.production.tags
-}
 ```
 
 ## Type validation
@@ -188,5 +183,4 @@ locals {
 - `description` (String) The description of the logical environment.
 - `included_environments` (List of String) List of physical environment names aggregated by this logical environment.
 - `last_modified_at` (Number) Unix timestamp (with fractional seconds) of when the logical environment was last modified.
-- `tags` (Map of String) Key-value pairs tagging the logical environment.
 - `type` (String) The environment type (always `logical` for logical environments).

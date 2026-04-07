@@ -9,13 +9,12 @@ rss: true
 ## New features
 
 - **`kosli_flow` resource and data source** — manage Kosli [flows](/getting_started/flows) as Terraform resources. Define name, description, and YAML template inline or via `file()`. The data source lets you query existing flows and reuse their templates. See the [resource](/terraform-reference/resources/flow) and [data source](/terraform-reference/data-sources/flow) reference.
-- **Tags support for environments** — the [`kosli_environment`](/terraform-reference/resources/environment) and [`kosli_logical_environment`](/terraform-reference/resources/logical_environment) resources and data sources now support a `tags` attribute for applying key-value metadata to your environments.
 
 [View on GitHub](https://github.com/kosli-dev/terraform-provider-kosli/releases/tag/v0.5.0)
 
 </Update>
 
-<Update label="April 6, 2026" description="" tags={["CLI"]}>
+<Update label="April 6, 2026" description="v2.15.1" tags={["CLI"]}>
 
 ## New features
 
@@ -28,6 +27,8 @@ rss: true
 - Fixed Docker API version negotiation — the CLI now automatically negotiates the Docker API version with the host daemon, preventing compatibility errors after SDK upgrades.
 - Fixed AWS API rate limiting — snapshot commands for ECS, S3, and Lambda environments now use adaptive retry with up to 10 attempts, preventing failures under heavy API load.
 - Fixed git HEAD resolution in linked worktrees.
+
+[View on GitHub](https://github.com/kosli-dev/cli/releases/tag/v2.15.1)
 
 </Update>
 
