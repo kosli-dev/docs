@@ -1,6 +1,6 @@
 {
   "$schema": "http://json-schema.org/draft-07/schema#",
-  "$id": "https://kosli.mintlify.app/schemas/policy/v1",
+  "$id": "https://kosli-add-policy-reference.mintlify.app/schemas/policy/v1",
   "title": "Kosli Environment Policy",
   "description": "Schema for Kosli environment policy YAML files used with `kosli create policy`.",
   "type": "object",
@@ -29,7 +29,7 @@
   "definitions": {
     "policyExpression": {
       "description": "Boolean expression evaluated against flow/artifact context. In YAML this is often written as a string wrapped in ${{ ... }}.",
-      "type": "string",
+      "type": "string"
     },
     "conditionalRule": {
       "type": "object",
