@@ -28,6 +28,9 @@ To create a service account:
 - Choose a Time-To-Live (TTL) for the key, add a descriptive label, and then click `Add`.
 - Ensure to copy the generated key as it won't be retrievable later. This key serves as the authentication token.
 
+<Tip>
+Kosli never stores your API token in plain text. Only a cryptographic hash of the token is stored, so the original token cannot be retrieved from our systems.
+</Tip>
 
 ## Personal API Keys
 
