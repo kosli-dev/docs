@@ -83,7 +83,7 @@ The following sections show how to make each of the four attestations defined in
   In this case the Kosli CLI will calculate the fingerprint of the docker image called `my_company/backend:latest` and attest it as the `backend` artifact `name` in the trail.
 
   <Info>
-  In all attestation commands the Kosli CLI automatically gathers the git commit and other information from the current git repository and the [CI environment](https://docs.kosli.com/integrations/ci_cd/). This is how the git commit is used to match attestations to artifacts.
+  In all attestation commands the Kosli CLI automatically gathers the git commit and other information from the current git repository and the [CI environment](https://kosli.mintlify.app/integrations/ci_cd/). This is how the git commit is used to match attestations to artifacts.
   </Info>
   </Step>
   <Step title="Attest a security scan to the backend artifact">
