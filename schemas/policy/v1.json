@@ -10,7 +10,7 @@
     "_schema": {
       "type": "string",
       "format": "uri",
-      "description": "URL of this schema. The path must end with /v{n} where n is the major version (e.g. .../v1). Example: https://kosli.com/schemas/policy/environment/v1"
+      "description": "URL of this schema. The path must end with /v{n} where n is the major version (e.g. .../v1). Example: https://kosli.mintlify.app/schemas/policy/v1"
     },
     "artifacts": {
       "type": "object",

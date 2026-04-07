@@ -20,7 +20,7 @@ You can create a policy via CLI or via the API. Here is a basic policy that requ
 attestations:
 
 ```yaml prod-policy.yaml
-_schema: https://kosli.com/schemas/policy/environment/v1
+_schema: https://kosli.mintlify.app/schemas/policy/v1
 artifacts: # the rules apply to artifacts in an environment snapshot
   provenance:
     required: true # all artifacts must have provenance
@@ -47,35 +47,11 @@ See [kosli create policy](/client_reference/kosli_create_policy/) for usage deta
 Once you create a policy, you will be able to see it in the UI under `policies` in the left navigation menu.
 </Note>
 
-## Declarative Policy Syntax
+## Policy rules
 
-A Policy is declaratively defined according to the following schema:
+A policy consists of rules which are applied to artifacts in an environment snapshot.
 
-```yaml
-_schema: https://kosli.com/schemas/policy/environment/v1
-
-artifacts:
-  provenance:
-    required: true | false (default = false)
-    exceptions: (default [])
-      - if: ${{ expression }}
-
-  trail-compliance:
-    required: true | false (default = false)
-    exceptions: (default [])
-      - if: ${{ expression }}
-
-  attestations: (default [])
-    - if: ${{ expression }} (default = true)
-      name: str (default = "*") # cannot have both name and type as *
-      type: oneOf ['*', 'junit', 'jira', 'pull_request', 'snyk', 'sonar', 'generic', 'custom:<custom-type-name>'] (default = "*") # cannot have both name and type as *
-```
-
-### Policy Rules
-
-A policy consists of `rules` which are applied to artifacts in an environment snapshot.
-
-#### Provenance
+### Provenance
 
 When `provenance` is set to `required: true`, the artifact must be part of a Kosli Flow (i.e., it must have
 provenance information).
@@ -86,7 +62,7 @@ artifacts:
     required: true
 ```
 
-#### Trail Compliance
+### Trail compliance
 
 When `trail-compliance` is set to `required: true`, the artifact must be part of a compliant Trail in its Flow.
 
@@ -96,7 +72,7 @@ artifacts:
     required: true
 ```
 
-#### Specific Attestations
+### Specific attestations
 
 ```yaml
 artifacts:
@@ -111,92 +87,33 @@ artifacts:
       type: custom:my-coverage-metrics # custom attestation type
 ```
 
-### Policy Rules Exceptions
+### Exceptions
 
-You can add exceptions to policy rules using expressions.
+You can add exceptions to policy rules using [policy expressions](/policy-reference/environment_policy#policy-expressions).
 
 ```yaml
-_schema: https://kosli.com/schemas/policy/environment/v1
+_schema: https://kosli.mintlify.app/schemas/policy/v1
 
 artifacts:
   provenance:
     required: true
     exceptions:
       # provenance is required except when one of the expressions evaluates to true
-      - if: ${{ expression1 }}
-      - if: ${{ expression2 }}
+      - if: ${{ matches(artifact.name, "^datadog:.*") }}
 
   trail-compliance:
     required: true
     exceptions:
-      # trail-compliance is required except when one of the expressions evaluates to true
-      - if: ${{ expression1 }}
-      - if: ${{ expression2 }}
+      - if: ${{ matches(artifact.name, "^datadog:.*") }}
 
   attestations:
-    - if: ${{ expression }} # this attestation is only required when expression evaluates to true
+    - if: ${{ flow.tags.risk-level == "high" }} # only required when expression is true
       name: unit-tests
       type: junit
 ```
 
-#### Policy Expressions
+For the complete YAML specification — fields, types, defaults, expression language, and constraints — see the [Environment Policy reference](/policy-reference/environment_policy).
 
-Policy expressions allow you to create conditional rules using a simple and powerful syntax. Expressions are wrapped
-in `${{ }}` and can be used in policy rules to create dynamic conditions. An expression consists of operands
-and operators:
-
-<AccordionGroup>
-  <Accordion title="Operators">
-
-  Expressions support these operators:
-
-  - Comparison: `==, !=, <, >, <=, >=`
-  - Logical: `and, or, not`
-  - List membership: `in`
-  </Accordion>
-  <Accordion title="Operands">
-
-  Operands can be:
-  - Literal string
-  - List
-  - Context variable
-  - Function call
-  </Accordion>
-  <Accordion title="Available Contexts">
-
-  Contexts are built-in objects which are accessible from an expression. Expressions can access two main contexts:
-
-  - `flow` - Information about the Kosli Flow:
-    - `flow.name` - Name of the flow
-    - `flow.tags` - Flow tags (accessed via flow.tags.tag_name)
-  - `artifact` - Information about the artifact:
-    - `artifact.name` - Name of the artifact
-    - `artifact.fingerprint` - SHA256 fingerprint
-  </Accordion>
-  <Accordion title="Functions">
-
-  Functions are helpers that can be used when constructing conditions. They may or may not accept arguments. Arguments
-  can be literals or context variables. Expressions can use following functions:
-
-  - `exists(arg)` : checks whether the value of arg is not None/Null
-  - `matches(input, regex)` : checks if input matches regex
-  </Accordion>
-  <Accordion title="Example Expressions">
-
-  - `${{ exists(flow) }}`
-  - `${{ flow.name in ["runner", 'saver', differ] }}`
-  - `${{ matches(artifact.name, "^datadog:.*") }}`
-  - `${{ flow.name == "runner" and matches(artifact.name, "^runner:.*") }}`
-  - `${{ flow.tags.risk-level == "high" or matches(artifact.name, "^runner:.*") }}`
-  - `${{ not flow.tags.risk-level == "high"}}`
-  - `${{ flow.tags.risk-level != "high"}}`
-  - `${{ flow.tags.key.with.dots == "value"}}`
-  - `${{ flow.tags.risk-level >= 2 }}`
-  - `${{ flow.name == 'prod' and (flow.tags.key_name == "value" or artifact.name == 'critical-service') }}`
-  - `${{ flow.name == 'HIGH-RISK' and artifact.fingerprint == "37193ba1f3da2581e93ff1a9bba523241a7982a6c01dd311494b0aff6d349462" }}`
-
-  </Accordion>
-</AccordionGroup>
 ## Attaching/Detaching Policies to/from Environments
 
 Once you define your policies, you can attach them to environments via CLI or API:
