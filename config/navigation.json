@@ -402,12 +402,194 @@
         {
           "item": "API Reference",
           "icon": "code",
+          "openapi": "api-reference/openapi.json",
           "groups": [
+            {
+              "group": "Actions",
+              "pages": [
+                "GET /actions/{org}",
+                "GET /actions/{org}/{action_number}",
+                "PUT /actions/{org}/environments",
+                "PUT /actions/{org}/flows",
+                "DELETE /actions/{org}/{action_number}"
+              ]
+            },
+            {
+              "group": "Allowlists",
+              "pages": [
+                "GET /allowlists/{org}",
+                "PUT /allowlists/{org}/{env_name}"
+              ]
+            },
+            {
+              "group": "Approvals",
+              "pages": [
+                "GET /approvals/{org}/{flow_name}",
+                "GET /approvals/{org}/{flow_name}/{approval_number}",
+                "GET /approvals/{org}/{flow_name}/artifact-commit/{env_name}",
+                "POST /approvals/{org}/{flow_name}"
+              ]
+            },
+            {
+              "group": "Artifacts",
+              "pages": [
+                "GET /artifacts/{org}",
+                "GET /artifacts/{org}/{flow_name}",
+                "GET /artifacts/{org}/{flow_name}/commit_sha/{commit_sha}",
+                "GET /artifacts/{org}/{flow_name}/fingerprint/{fingerprint}",
+                "GET /artifacts/{org}/{flow_name}/{fingerprint}/approvals",
+                "GET /artifacts/{org}/{flow_name}/{fingerprint}/audit_package",
+                "GET /artifacts/{org}/{flow_name}/{fingerprint}/latest_commit",
+                "POST /artifacts/{org}/{flow_name}"
+              ]
+            },
+            {
+              "group": "Asserts",
+              "pages": [
+                "GET /asserts/{org}/fingerprint/{fingerprint}"
+              ]
+            },
+            {
+              "group": "Attestations",
+              "pages": [
+                "GET /attestations/{org}",
+                "GET /attestations/{org}/list_attestations_for_criteria",
+                "GET /attestations/{org}/{flow_name}",
+                "GET /attestations/{org}/{flow_name}/artifact/{fingerprint}/{attestation_name}",
+                "GET /attestations/{org}/{flow_name}/trail/{trail_name}/{attestation_name}",
+                "GET /attestations/{org}/{flow_name}/trail/{trail_name}/attestation/{attestation_id}/evidence",
+                "POST /attestations/{org}/{flow_name}/trail/{trail_name}/custom",
+                "POST /attestations/{org}/{flow_name}/trail/{trail_name}/generic",
+                "POST /attestations/{org}/{flow_name}/trail/{trail_name}/jira",
+                "POST /attestations/{org}/{flow_name}/trail/{trail_name}/junit",
+                "POST /attestations/{org}/{flow_name}/trail/{trail_name}/override",
+                "POST /attestations/{org}/{flow_name}/trail/{trail_name}/pull_request",
+                "POST /attestations/{org}/{flow_name}/trail/{trail_name}/snyk",
+                "POST /attestations/{org}/{flow_name}/trail/{trail_name}/sonar"
+              ]
+            },
+            {
+              "group": "Builds",
+              "pages": [
+                "GET /builds/{org}"
+              ]
+            },
+            {
+              "group": "Custom Attestation Types",
+              "pages": [
+                "GET /custom-attestation-types/{org}",
+                "GET /custom-attestation-types/{org}/{custom_attestation_type_name}",
+                "POST /custom-attestation-types/{org}",
+                "PUT /custom-attestation-types/{org}/{custom_attestation_type_name}/archive"
+              ]
+            },
+            {
+              "group": "Environment Diff",
+              "pages": [
+                "GET /env-diff/{org}"
+              ]
+            },
             {
               "group": "Environments",
               "pages": [
-                "api-reference/endpoint/list_environments",
-                "api-reference/endpoint/put_environment"
+                "GET /environments/{org}",
+                "GET /environments/{org}/{env_name}",
+                "GET /environments/{org}/{env_name}/auditlog",
+                "GET /environments/{org}/{env_name}/events",
+                "PUT /environments/{org}",
+                "PUT /environments/{org}/{env_name}/archive",
+                "PUT /environments/{org}/{env_name}/join",
+                "PUT /environments/{org}/{env_name}/rename",
+                "PUT /environments/{org}/{env_name}/report/ECS",
+                "PUT /environments/{org}/{env_name}/report/K8S",
+                "PUT /environments/{org}/{env_name}/report/S3",
+                "PUT /environments/{org}/{env_name}/report/azure-apps",
+                "PUT /environments/{org}/{env_name}/report/docker",
+                "PUT /environments/{org}/{env_name}/report/lambda",
+                "PUT /environments/{org}/{env_name}/report/server",
+                "POST /environments/{org}/{env_name}/policies",
+                "DELETE /environments/{org}/{env_name}/policies"
+              ]
+            },
+            {
+              "group": "Flows",
+              "pages": [
+                "GET /flows/{org}",
+                "GET /flows/{org}/{flow_name}",
+                "PUT /flows/{org}",
+                "PUT /flows/{org}/template_file",
+                "PUT /flows/{org}/{flow_name}/archive",
+                "PUT /flows/{org}/{flow_name}/rename"
+              ]
+            },
+            {
+              "group": "Organizations",
+              "pages": [
+                "GET /organizations/{org}",
+                "GET /organizations/{org}/environments_notifications",
+                "GET /organizations/{org}/environments_notifications/{notification_number}",
+                "PUT /organizations/{org}/environments_notifications",
+                "PUT /organizations/{org}/environments_notifications/{notification_number}",
+                "DELETE /organizations/{org}/environments_notifications/{notification_number}",
+                "PUT /organizations/{org}/experimental_features"
+              ]
+            },
+            {
+              "group": "Policies",
+              "pages": [
+                "GET /policies/{org}",
+                "GET /policies/{org}/{policy_name}",
+                "PUT /policies/{org}"
+              ]
+            },
+            {
+              "group": "Repos",
+              "pages": [
+                "GET /repos/{org}",
+                "GET /repos/{org}/live-artifacts/{repo_name}"
+              ]
+            },
+            {
+              "group": "Search",
+              "pages": [
+                "GET /search/{org}/sha/{search_value}"
+              ]
+            },
+            {
+              "group": "Snapshots",
+              "pages": [
+                "GET /snapshots/{org}/{env_name}",
+                "GET /snapshots/{org}/{env_name}/{snapshot_expression}"
+              ]
+            },
+            {
+              "group": "Tags",
+              "pages": [
+                "PATCH /tags/{org}/{resource_type}/{resource_id}"
+              ]
+            },
+            {
+              "group": "Trails",
+              "pages": [
+                "GET /trails/{org}",
+                "GET /trails/{org}/{flow_name}",
+                "GET /trails/{org}/{flow_name}/{trail_name}",
+                "GET /trails/{org}/{flow_name}/{trail_name}/audit_package",
+                "GET /trails/{org}/{flow_name}/{trail_name}/audit_pdf",
+                "PUT /trails/{org}/{flow_name}"
+              ]
+            },
+            {
+              "group": "User",
+              "pages": [
+                "PUT /user/{org}"
+              ]
+            },
+            {
+              "group": "Webhooks",
+              "pages": [
+                "POST /webhooks/launch-darkly/{hook_uid}",
+                "POST /webhooks/sonar/{hook_uid}"
               ]
             }
           ]
