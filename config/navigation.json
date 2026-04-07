@@ -394,6 +394,7 @@
             {
               "group": "Policies",
               "pages": [
+                "policy-reference/environment_policy",
                 "policy-reference/rego_policy"
               ]
             }
