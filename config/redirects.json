@@ -11,4 +11,9 @@
     "source": "/understand_kosli/concepts",
     "destination": "/understand_kosli/how_kosli_works"
   }
+  ,
+  {
+    "source": "/schemas/policy/v1",
+    "destination": "/schemas/policy/v1.json"
+  }
 ]

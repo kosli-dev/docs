@@ -1,0 +1,197 @@
+---
+title: "Environment Policy"
+description: "Reference for the YAML policy files used to define compliance requirements for Kosli environments."
+---
+
+An environment policy is a YAML file that declares compliance requirements for artifacts running in a Kosli environment. You pass the file to [`kosli create policy`](/client_reference/kosli_create_policy) to create or update a policy. For concepts, workflow, and enforcement, see [Environment Policies](/getting_started/policies).
+
+## Specification
+
+<ParamField path="_schema" type="string" required>
+  Version identifier and [JSON Schema](https://kosli.mintlify.app/schemas/policy/v1.json) URL for the policy format. The final path segment must match `/v{n}` where `n` is a supported major version. Currently only `v1` is supported.
+
+  ```yaml
+  # yaml-language-server: $schema=https://kosli.mintlify.app/schemas/policy/v1.json
+  _schema: https://kosli.mintlify.app/schemas/policy/v1
+  ```
+</ParamField>
+
+<ParamField path="artifacts" type="object">
+  Rules applied to artifacts in an environment snapshot. Omitted keys use server defaults.
+
+  <Expandable title="artifacts properties">
+    <ParamField path="artifacts.provenance" type="object">
+      Requires artifacts to have provenance (i.e., be part of a Kosli flow).
+
+      <Expandable title="provenance properties">
+        <ParamField path="artifacts.provenance.required" type="boolean" default="false">
+          When `true`, every artifact in the snapshot must have provenance.
+        </ParamField>
+
+        <ParamField path="artifacts.provenance.exceptions" type="array" default="[]">
+          List of conditions under which the provenance requirement is waived. Each element is an object with a single `if` key containing a [policy expression](#policy-expressions).
+
+          ```yaml
+          exceptions:
+            - if: ${{ matches(artifact.name, "^datadog:.*") }}
+          ```
+        </ParamField>
+      </Expandable>
+    </ParamField>
+
+    <ParamField path="artifacts.trail-compliance" type="object">
+      Requires artifacts to belong to a compliant trail in their flow.
+
+      <Expandable title="trail-compliance properties">
+        <ParamField path="artifacts.trail-compliance.required" type="boolean" default="false">
+          When `true`, every artifact must be part of a compliant trail.
+        </ParamField>
+
+        <ParamField path="artifacts.trail-compliance.exceptions" type="array" default="[]">
+          List of conditions under which the trail-compliance requirement is waived. Same structure as `provenance.exceptions`.
+        </ParamField>
+      </Expandable>
+    </ParamField>
+
+    <ParamField path="artifacts.attestations" type="array" default="[]">
+      List of attestations every artifact must have. Each element is a required-attestation rule.
+
+      <Expandable title="attestation rule properties">
+        <ParamField path="artifacts.attestations[].type" type="string" required>
+          The [attestation type](#attestation-types) to require. Cannot be `*` when `name` is also `*`.
+        </ParamField>
+
+        <ParamField path="artifacts.attestations[].name" type="string" default="*">
+          Attestation name to match. `*` matches any name. Cannot be `*` when `type` is also `*`.
+        </ParamField>
+
+        <ParamField path="artifacts.attestations[].if" type="string">
+          A [policy expression](#policy-expressions). When present, this attestation is only required when the expression evaluates to `true`.
+        </ParamField>
+      </Expandable>
+    </ParamField>
+  </Expandable>
+</ParamField>
+
+## Attestation types
+
+| Value | Description |
+|-------|-------------|
+| `generic` | Generic attestation |
+| `junit` | JUnit test results |
+| `snyk` | Snyk security scan |
+| `pull_request` | Pull request evidence |
+| `jira` | Jira ticket reference |
+| `sonar` | SonarQube analysis |
+| `*` | Matches any built-in or custom type |
+| `custom:<name>` | A [custom attestation type](/client_reference/kosli_create_attestation-type) (e.g., `custom:coverage-metrics`) |
+
+## Policy expressions
+
+Expressions are boolean conditions evaluated against flow and artifact context. They are wrapped in `${{ }}` and can appear in `if` and `exceptions[].if` fields.
+
+```yaml
+if: ${{ flow.tags.risk-level == "high" and matches(artifact.name, "^prod:.*") }}
+```
+
+### Operators
+
+| Operator | Category | Example |
+|----------|----------|---------|
+| `==` | Comparison | `flow.name == "runner"` |
+| `!=` | Comparison | `flow.tags.risk-level != "high"` |
+| `<` | Comparison | `flow.tags.priority < 3` |
+| `>` | Comparison | `flow.tags.priority > 1` |
+| `<=` | Comparison | `flow.tags.risk-level <= 2` |
+| `>=` | Comparison | `flow.tags.risk-level >= 2` |
+| `and` | Logical | `flow.name == "a" and artifact.name == "b"` |
+| `or` | Logical | `flow.name == "a" or flow.name == "b"` |
+| `not` | Logical | `not flow.tags.risk-level == "high"` |
+| `in` | Membership | `flow.name in ["runner", "saver"]` |
+
+Parentheses control precedence: `${{ flow.name == 'prod' and (flow.tags.team == "a" or artifact.name == 'svc') }}`.
+
+### Contexts
+
+<ParamField path="flow" type="object">
+  Information about the Kosli flow the artifact belongs to.
+
+  <Expandable title="flow properties">
+    <ParamField path="flow.name" type="string">
+      Name of the flow.
+    </ParamField>
+
+    <ParamField path="flow.tags" type="object">
+      Flow tags, accessed by key: `flow.tags.risk-level`, `flow.tags.team`. Keys containing dots are supported: `flow.tags.key.with.dots`.
+    </ParamField>
+  </Expandable>
+</ParamField>
+
+<ParamField path="artifact" type="object">
+  Information about the artifact being evaluated.
+
+  <Expandable title="artifact properties">
+    <ParamField path="artifact.name" type="string">
+      Name of the artifact.
+    </ParamField>
+
+    <ParamField path="artifact.fingerprint" type="string">
+      SHA256 fingerprint of the artifact.
+    </ParamField>
+  </Expandable>
+</ParamField>
+
+### Functions
+
+| Function | Description | Example |
+|----------|-------------|---------|
+| `exists(arg)` | Returns `true` if `arg` is not null. | `${{ exists(flow) }}` |
+| `matches(input, regex)` | Returns `true` if `input` matches the regular expression. | `${{ matches(artifact.name, "^datadog:.*") }}` |
+
+## Constraints
+
+- `_schema` is the only required field. All other fields are optional and use server defaults when omitted.
+- An attestation rule must not have both `name` and `type` set to `*`.
+- Expressions must evaluate to a boolean. An invalid expression causes a policy evaluation error.
+
+## Example
+
+```yaml
+# yaml-language-server: $schema=https://kosli.mintlify.app/schemas/policy/v1.json
+_schema: https://kosli.mintlify.app/schemas/policy/v1
+
+artifacts:
+  provenance:
+    required: true
+    exceptions:
+      - if: ${{ matches(artifact.name, "^datadog:.*") }}
+
+  trail-compliance:
+    required: true
+
+  attestations:
+    - name: security-scan
+      type: snyk
+    - name: pull-request
+      type: pull_request
+      if: ${{ flow.tags.risk-level == "high" }}
+    - name: coverage
+      type: custom:coverage-metrics
+```
+
+## Editor validation
+
+The `_schema` URL resolves to a [JSON Schema](https://kosli.mintlify.app/schemas/policy/v1.json) for the environment policy format. To enable inline validation and autocomplete in VS Code (requires the [YAML extension](https://marketplace.visualstudio.com/items?itemName=redhat.vscode-yaml)) and other schema-aware editors, add a `yaml-language-server` directive:
+
+```yaml
+# yaml-language-server: $schema=https://kosli.mintlify.app/schemas/policy/v1.json
+_schema: https://kosli.mintlify.app/schemas/policy/v1
+```
+
+## See also
+
+- [Environment Policies](/getting_started/policies) — concepts, workflow, and enforcement
+- [`kosli create policy`](/client_reference/kosli_create_policy) — create or update a policy
+- [`kosli attach-policy`](/client_reference/kosli_attach-policy) — attach a policy to an environment
+- [`kosli assert artifact`](/client_reference/kosli_assert_artifact) — enforce policies on an artifact
+- [Terraform: kosli_policy](/terraform-reference/resources/policy) — manage policies via Terraform

@@ -1,0 +1,92 @@
+{
+  "$schema": "http://json-schema.org/draft-07/schema#",
+  "$id": "https://kosli.mintlify.app/schemas/policy/v1",
+  "title": "Kosli Environment Policy",
+  "description": "Schema for Kosli environment policy YAML files used with `kosli create policy`.",
+  "type": "object",
+  "additionalProperties": false,
+  "required": ["_schema"],
+  "properties": {
+    "_schema": {
+      "type": "string",
+      "format": "uri",
+      "description": "URL of this schema. The path must end with /v{n} where n is the major version (e.g. .../v1). Example: https://kosli.mintlify.app/schemas/policy/v1"
+    },
+    "artifacts": {
+      "type": "object",
+      "additionalProperties": false,
+      "description": "Rules for artifacts in an environment snapshot. Omitted keys use server defaults (provenance/trail-compliance: required false, empty exceptions; attestations: []).",
+      "properties": {
+        "provenance": { "$ref": "#/definitions/booleanRule" },
+        "trail-compliance": { "$ref": "#/definitions/booleanRule" },
+        "attestations": {
+          "type": "array",
+          "items": { "$ref": "#/definitions/requiredAttestationRule" }
+        }
+      }
+    }
+  },
+  "definitions": {
+    "policyExpression": {
+      "description": "Boolean expression evaluated against flow/artifact context. In YAML this is often written as a string wrapped in ${{ ... }}.",
+      "type": "string"
+    },
+    "conditionalRule": {
+      "type": "object",
+      "additionalProperties": false,
+      "properties": {
+        "if": { "$ref": "#/definitions/policyExpression" }
+      }
+    },
+    "booleanRule": {
+      "type": "object",
+      "additionalProperties": false,
+      "properties": {
+        "required": {
+          "type": "boolean",
+          "default": false
+        },
+        "exceptions": {
+          "type": "array",
+          "items": { "$ref": "#/definitions/conditionalRule" },
+          "default": []
+        }
+      }
+    },
+    "attestationType": {
+      "description": "Built-in attestation type, custom:... reference, or wildcard *.",
+      "oneOf": [
+        {
+          "type": "string",
+          "enum": [
+            "generic",
+            "junit",
+            "snyk",
+            "pull_request",
+            "jira",
+            "sonar",
+            "*"
+          ]
+        },
+        {
+          "type": "string",
+          "pattern": "^custom:.+"
+        }
+      ]
+    },
+    "requiredAttestationRule": {
+      "type": "object",
+      "additionalProperties": false,
+      "properties": {
+        "name": {
+          "type": "string",
+          "default": "*",
+          "description": "Attestation name; default * matches any."
+        },
+        "type": { "$ref": "#/definitions/attestationType" },
+        "if": { "$ref": "#/definitions/policyExpression" }
+      },
+      "required": ["type"]
+    }
+  }
+}
