@@ -10,6 +10,22 @@
   {
     "source": "/understand_kosli/concepts",
     "destination": "/understand_kosli/how_kosli_works"
+  },
+  {
+    "source": "/getting_started/querying",
+    "destination": "/tutorials/querying_kosli"
+  },
+  {
+    "source": "/template_ref",
+    "destination": "/template-reference/flow_template"
+  },
+  {
+    "source": "/tutorials/what_do_i_do_if_kosli_is_down",
+    "destination": "/troubleshooting/what_do_i_do_if_kosli_is_down"
+  },
+  {
+    "source": "/faq",
+    "destination": "/faq/faq"
   }
   ,
   {
