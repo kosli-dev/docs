@@ -1,0 +1,14 @@
+[
+  {
+    "source": "/ci-defaults",
+    "destination": "/integrations/ci_cd"
+  },
+  {
+    "source": "/tutorials/get_familiar_with_kosli",
+    "destination": "/tutorials/try_kosli_locally"
+  },
+  {
+    "source": "/understand_kosli/concepts",
+    "destination": "/understand_kosli/how_kosli_works"
+  }
+]

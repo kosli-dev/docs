@@ -7,7 +7,7 @@ This file governs repo-specific conventions for Claude Code. Skills and system p
 These are non-negotiable — follow them regardless of other instructions:
 
 1. Never commit directly to `main` — always work on a branch and open a PR.
-2. Never create a page file without also adding it to `navigation` in `docs.json`.
+2. Never create a page file without also adding it to `navigation` in `config/navigation.json`.
 3. Never use relative links — always use root-relative paths (e.g., `/getting_started/install`).
 4. Commit messages and PR titles must follow [Conventional Commits](https://www.conventionalcommits.org/): `type: short description` (lowercase, no period). Common types: `feat`, `fix`, `docs`, `style`, `chore`.
 5. Run `mint broken-links` before committing navigation or link changes.
@@ -31,7 +31,8 @@ Requires Node.js v19+.
 
 ## Architecture
 
-- **`docs.json`** — Central config: navigation structure, theme, API settings, logos, footer. All page routing is defined here under `navigation.products[].tabs[].groups`.
+- **`docs.json`** — Central config: theme, API settings, logos. Uses `$ref` to compose from files in `config/`.
+- **`config/`** — Split config files: `navigation.json` (all page routing), `redirects.json`, `footer.json`.
 - **Content directories** — `understand_kosli/`, `getting_started/`, `administration/`, `integrations/`, `implementation_guide/`, `client_reference/`, `api-reference/`
 - **`snippets/`** — Reusable MDX content fragments
 - **`style.css`** — Custom CSS overrides applied on top of the Mintlify theme
@@ -50,7 +51,7 @@ description: One sentence describing the page purpose.
 ```
 
 - **MUST** Use root-relative paths for internal links: `/understand_kosli/what_is_kosli` ✓ — `../what_is_kosli` ✗
-- **MUST** Adding a new page: create the file AND add its path to `navigation` in `docs.json`. Both steps are required.
+- **MUST** Adding a new page: create the file AND add its path to `navigation` in `config/navigation.json`. Both steps are required.
 - **SHOULD** Follow the [Diátaxis](https://diataxis.fr/) framework when choosing page form:
   - **Tutorial** — teaches by doing (e.g., "Get familiar with Kosli")
   - **How-to guide** — step-by-step for a specific goal (e.g., "Report AWS environments")
@@ -80,7 +81,7 @@ description: One sentence describing the page purpose.
 ## Don'ts
 
 - Don't use relative links — they break when pages move.
-- Don't create a page without updating `docs.json` navigation — it won't appear in the site.
+- Don't create a page without updating `config/navigation.json` — it won't appear in the site.
 - Don't edit files in `essentials/` — they are Mintlify's content, not Kosli's.
 - Don't add content to `snippets/` unless it is genuinely reused in 2+ pages.
 - Don't commit image files without placing them in an appropriate subdirectory.

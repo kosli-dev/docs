@@ -1,0 +1,52 @@
+{
+  "socials": {
+    "website": "https://kosli.com",
+    "github": "https://github.com/kosli-dev",
+    "linkedin": "https://linkedin.com/company/kosli-dev"
+  },
+  "links": [
+    {
+      "header": "Resources",
+      "items": [
+        {
+          "label": "Privacy Policy",
+          "href": "https://www.kosli.com/privacy-policy/"
+        },
+        {
+          "label": "Status",
+          "href": "https://status.app.kosli.com/"
+        }
+      ]
+    },
+    {
+      "header": "Learn",
+      "items": [
+        {
+          "label": "Labs",
+          "href": "/labs"
+        },
+        {
+          "label": "Blog",
+          "href": "https://kosli.com/blog/"
+        }
+      ]
+    },
+    {
+      "header": "Company",
+      "items": [
+        {
+          "label": "About Kosli",
+          "href": "https://www.kosli.com/about/"
+        },
+        {
+          "label": "Privacy",
+          "href": "https://www.kosli.com/privacy-policy/"
+        },
+        {
+          "label": "Community",
+          "href": "https://www.kosli.com/community/"
+        }
+      ]
+    }
+  ]
+}
