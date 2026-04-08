@@ -137,19 +137,6 @@ track snapshots, but its compliance cannot be evaluated without policies.
 </Note>
 
 
-## Policy Enforcement Gates
+## Enforcing policies
 
-Environment policies enable you to proactively block deploying a non-compliant artifact into an environment. This
-can be done as a deployment gate in your delivery pipeline or as an admission controller in your environment.
-
-Regardless of where you place your policy enforcement gate, it will be using the `assert artifact` Kosli CLI command
-or its equivalent API call.
-
-```shell
-kosli assert artifact --fingerprint=$SHA256 --environment=aws-production
-```
-
-An artifact can also be asserted directly against one or more policies.
-```shell
-kosli assert artifact --fingerprint=$SHA256 --policy=has-approval,has-been-integration-tested
-```
+Once policies are attached to environments, you can enforce them as deployment gates in your CI/CD pipeline, via the API, or with a Kubernetes admission controller. See [Enforce policies](/getting_started/enforce_policies) for setup instructions.
