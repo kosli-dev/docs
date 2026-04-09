@@ -15,14 +15,17 @@ All methods use the same assertion: checking an artifact's fingerprint against a
 
 ## Assertion scopes
 
-`kosli assert artifact` (and its API equivalent) supports four mutually exclusive scopes:
+`kosli assert artifact` (and its API equivalent) supports three assertion modes:
 
-| Scope | CLI flag | When to use |
-|-------|----------|-------------|
+| Mode | CLI flag | When to use |
+|------|----------|-------------|
 | Environment | `--environment` | Check all policies attached to the target environment. The most common choice for deployment gates. |
 | Specific policies | `--policy` | Check one or more named policies, regardless of environment attachment. Useful for promotion gates between stages. |
-| Flow template | `--flow` | Check the artifact against a flow's template requirements. |
-| All flows | _(no scope flag)_ | Check against the templates of every flow the artifact appears in. |
+| Flow templates | _(no scope flag)_ | Check against the template files of the flows the artifact appears in. |
+
+`--environment` and `--policy` are mutually exclusive.
+
+`--flow` can be combined with any mode to narrow the lookup to a specific flow. Without `--flow`, all flows containing the artifact (by fingerprint) are considered.
 
 See [`kosli assert artifact`](/client_reference/kosli_assert_artifact) for the full flag reference.
 
