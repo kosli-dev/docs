@@ -1,0 +1,164 @@
+---
+title: Organizing Flows and Environments with Spaces
+description: Learn how to use Kosli Spaces to hierarchically organize your Flows and Environments
+---
+
+## Introduction
+
+Spaces addresses a scaling challenge facing large organizations as they attempt to fully automate software delivery governance. Ingesting large amounts of data from hundreds of sources — CI/CD pipelines, security scanners, test frameworks, deployment tools — means that it becomes increasingly difficult for different stakeholders to access the information they need.
+
+Kosli Spaces allows users to:
+
+- Create nested organizational structures
+- Organize flows and environments hierarchically without disrupting artifact traceability
+- Navigate complex resource relationships through an intuitive hierarchical interface
+- Prepare for future enterprise features like hierarchical access control
+
+Spaces work like directories in a file system — they can contain resources and other Spaces, creating a flexible tree structure that reflects how your organization actually works.
+
+## Architectural Overview
+
+### How to Use Spaces in Your Organization
+
+Spaces allow you to model your organizational structure within Kosli. Think of them as containers that can hold:
+
+- **Kosli resources**: Flows and Environments
+- **Other Spaces**: Create nested hierarchies that match your organizational structure
+
+A typical organizational hierarchy might look like this:
+
+```
+Acme Bank
+├── Space: Investment Banking
+│   └── Space: Trading Systems
+│       └── Space: Equity Trading
+│           └── Space: Trade Execution Platform
+│               ├── Flow: trade-execution-ci
+│               └── Environment: equity-prod
+└── Space: Technology Services
+    └── Space: Platform Engineering
+        └── Space: DevOps
+            ├── Flow: infrastructure-ci
+            └── Environment: k8s-prod
+```
+
+In this structure:
+
+- **Acme Bank** is the organisation, also referred to as the "root space"
+- **Investment Banking** and **Technology Services** are major divisions represented by Spaces
+- Each division contains business units (Trading Systems, Platform Engineering), also represented by nested spaces
+- **Trade Execution Platform** and **DevOps** are a project and a team, also nested spaces within the business units
+- Flows and Environments are placed in Spaces that reflect their team ownership
+
+### Who Can Use Spaces?
+
+Currently, the Spaces functionality is available to all users within an organization. All users can:
+
+- Navigate through the Space hierarchy
+- View resources within a Space
+
+Only administrators of an organization have the ability to manage and create spaces.
+
+## Getting Started
+
+To begin using Spaces:
+
+1. Review your current organizational structure
+2. Identify logical groupings for your Flows and Environments and map them to spaces
+3. Enable Spaces in your organization's settings, the Spaces tab will appear in the left navigation
+4. Organize flows and Environments according to the design
+5. New and existing Flows and Environments will be under the organization Root until they are moved to a space
+
+## Using Spaces
+
+### Navigating the Hierarchy
+
+Access the Space hierarchy from the link in the left navigation. The hierarchy displays as an interactive tree structure, similar to a file system, showing all your Spaces and the resources they contain.
+
+To make changes to the spaces, click the manage spaces button. Changes will only be saved when clicking the "Save Changes" button.
+
+**Key navigation features:**
+
+- **Tree view**: See your entire organizational structure at a glance
+- **Resource visibility**: Each Space shows the Flows and Environments it contains
+- **Filter controls**: Use toggle buttons to show or hide Flows and Environments for a cleaner view
+- **Text filtering**: The search filter can help you quickly locate specific Spaces or resources
+- **Collapsing spaces**: Use the caret icon to collapse or expand the contents of specific spaces
+
+### Creating Spaces
+
+To create a new space:
+
+1. Enter edit mode by clicking the "manage spaces" button
+2. Right-click on the three dots icon of the root organization or any existing Space to open the contextual menu
+3. Select "Create nested space"
+4. Enter a name for your new Space
+5. The Space is created and appears in the hierarchy view
+
+You can create Spaces at any level in the hierarchy to match your organizational structure.
+
+### Moving Resources Between Spaces
+
+The Spaces management view supports drag-and-drop operations for reorganizing your Spaces and resources.
+
+**Moving individual items:**
+
+1. Click and drag a Space or resource from its current location
+2. Drop it onto the target Space where you want it to live
+
+**Batch moving multiple items:**
+
+1. Use the checkboxes to select multiple Spaces and/or resources
+2. Drag the selected items onto the target Space
+3. All selected items will move to the new location
+
+**Important notes:**
+
+- Moving a Space moves all of its contents (nested Spaces and resources)
+- You can only move resources and Spaces to valid locations (no circular references)
+
+### Deleting Spaces
+
+Spaces can only be deleted when they are empty — all resources and nested Spaces must be moved out first.
+
+**To delete a Space:**
+
+**Option 1 - Contextual menu:**
+
+1. Right-click on the empty Space
+2. Select "Delete" from the contextual menu
+
+**Option 2 - Checkbox selection:**
+
+1. Select one or more empty Spaces using their checkboxes
+2. Click the bin icon in the toolbar
+
+### Viewing All Resources for a Space
+
+To work with resources in a specific Space:
+
+1. Navigate to the Environments or Flows page from the main navigation
+2. Use the Space dropdown selector to choose which Space you want to view
+3. The page will display only the resources belonging to that Space and its descendant Spaces
+
+## Feature Roadmap
+
+This initial release of Spaces establishes the foundation for hierarchical organization in Kosli. Here is what will be coming next:
+
+1. **Hierarchical Permissions**
+   - Current state: All users can see all Spaces within the organization
+   - Future: Fine-grained access control allowing you to restrict visibility and access based on Space membership
+
+2. **Concurrent Editing Protection**
+   - Current state: Multiple users editing the Space structure simultaneously may overwrite each other's changes
+   - Future: Conflict detection and resolution mechanisms to prevent unintended overwrites
+
+3. **Programmatic management of Spaces**
+   - Current state: Spaces can only be managed via the UI in [https://app.kosli.com](https://app.kosli.com)
+   - Future: CLI commands and APIs will be available to manage spaces programmatically
+
+4. **Space Deletion**
+   - Current state: only empty spaces can be deleted
+   - Future: Users will be prompted to decide what to do with contents of a space before deleting it
+
+For questions or support, please contact the Kosli team.
