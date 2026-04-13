@@ -4,6 +4,21 @@ description: "Release notes for Kosli products."
 rss: true
 ---
 
+<Update label="April 13, 2026" description="v2.15.2" tags={["CLI"]}>
+
+## Updates
+
+- **`kosli assert artifact` flag validation** — the `--environment` and `--policy` flags are now validated as mutually exclusive client-side, giving you a faster error message without a server round-trip. The `--flow` flag can be combined with either mode to narrow the artifact lookup scope. See the [assert artifact](/client_reference/kosli_assert_artifact) reference.
+
+## Bug fixes
+
+- Fixed `kosli list repos` and `kosli get repo` displaying garbled text when the latest activity field was empty.
+- Updated dependencies to resolve security vulnerabilities in Go standard library and OpenTelemetry packages.
+
+[View on GitHub](https://github.com/kosli-dev/cli/releases/tag/v2.15.2)
+
+</Update>
+
 <Update label="April 6, 2026" description="v0.5.0" tags={["Terraform Provider"]}>
 
 ## New features
