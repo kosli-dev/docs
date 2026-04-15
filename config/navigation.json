@@ -105,6 +105,12 @@
               "pages": [
                 "tutorials/linking_trails_across_branches"
               ]
+            },
+            {
+              "group": "Repositories",
+              "pages": [
+                "tutorials/repositories"
+              ]
             }
           ]
         },
