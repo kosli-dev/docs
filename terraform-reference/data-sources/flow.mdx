@@ -38,6 +38,11 @@ output "flow_template" {
   description = "The YAML template of the flow"
   value       = data.kosli_flow.example.template
 }
+
+output "flow_tags" {
+  description = "The tags of the flow"
+  value       = data.kosli_flow.example.tags
+}
 ```
 
 ## Schema
@@ -49,4 +54,5 @@ output "flow_template" {
 ### Read-only
 
 - `description` (String) The description of the flow.
+- `tags` (Map of String) Key-value pairs tagging the flow.
 - `template` (String) YAML template defining the flow structure (trails, artifacts, attestations).

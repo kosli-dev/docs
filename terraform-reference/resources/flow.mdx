@@ -32,6 +32,17 @@ resource "kosli_flow" "with_description" {
   description = "CD pipeline for the API service"
 }
 
+# Flow with tags
+resource "kosli_flow" "tagged" {
+  name        = "api-service-tagged"
+  description = "API service CD pipeline managed by Terraform"
+  tags = {
+    managed-by  = "terraform"
+    team        = "platform"
+    environment = "production"
+  }
+}
+
 # Flow with a YAML template defining trails and attestations
 # The template can also be loaded from a file: template = file("template.yml")
 resource "kosli_flow" "with_template" {
@@ -74,4 +85,5 @@ terraform import kosli_flow.example my-flow-name
 ### Optional
 
 - `description` (String) Description of the flow. Explains the purpose and context of this pipeline.
+- `tags` (Map of String) Key-value pairs to tag the flow. Tags are applied via a diff — only changed tags are sent to the API. An empty map (`tags = {}`) removes all tags.
 - `template` (String) YAML template defining the flow structure (trails, artifacts, attestations). Can be provided as an inline heredoc or loaded from a file using `file()`. If omitted, the flow is created without a template.
