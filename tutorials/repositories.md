@@ -33,14 +33,57 @@ You can also provide repo metadata explicitly using these flags on `kosli attest
 
 | Flag | Description |
 |---|---|
-| `--repository` | Name of the git repo as registered in Kosli (e.g. `my-org/my-repo`) |
-| `--repo-provider` | VCS provider: `github`, `gitlab`, `bitbucket`, or `azure-devops` |
-| `--repo-url` | URL of the repository |
-| `--repo-id` | Unique identifier of the repository in the VCS provider |
+| `--repository` | Name of the git repo as registered in Kosli (e.g. `my-org/my-repo`). |
+| `--repo-provider` | VCS provider: `github`, `gitlab`, `bitbucket`, or `azure-devops`. Must be one of these values if provided. |
+| `--repo-url` | URL of the repository. Must be a valid URL with a scheme and host (see URL format details below). |
+| `--repo-id` | Unique identifier of the repository in the VCS provider (see choosing a repo ID below). |
+
+All four flags are needed to fully populate repository information in Kosli. In [supported CI systems](/integrations/ci_cd), some of these flags are auto-defaulted from environment variables. In unsupported CI systems (e.g. Jenkins), you must provide all flags explicitly.
+
+### `--repo-url` format
+
+The `--repo-url` flag must be a valid URL with a scheme (`https://`) and a host. The CLI validates this when the flag is provided.
+
+- **HTTPS web URLs** (recommended): `https://github.com/my-org/my-repo` or `https://bitbucket.org/my-workspace/my-repo`
+- **HTTPS clone URLs**: `https://bitbucket.org/my-workspace/my-repo.git` — these pass validation and work, but we recommend dropping the `.git` suffix for consistency with how Kosli displays the URL in the app and CLI output.
+- **SSH clone URLs**: `git@github.com:my-org/my-repo.git` — these **do not work** because they lack a URL scheme and fail CLI validation.
+
+<Tip>
+Use the plain web URL without `.git` (e.g. `https://bitbucket.org/my-workspace/my-repo`). This is the canonical format used across Kosli and matches what appears in the UI and CLI output.
+</Tip>
+
+### Choosing a `--repo-id`
+
+The `--repo-id` should be a **stable, unique identifier** for the repository in your VCS provider. Avoid using the repository name, as it can change if the repo is renamed or moved to another provider.
+
+Good choices for `--repo-id`:
+- **GitHub**: The numeric repository ID (available via the GitHub API).
+- **GitLab**: The `CI_PROJECT_ID` environment variable.
+- **Bitbucket**: The `BITBUCKET_REPO_UUID` environment variable (available in Bitbucket Pipelines). If running in Jenkins with a Bitbucket repo, retrieve this value from the Bitbucket API or check a UUID into the repo in a file.
+- **Azure DevOps**: The `Build.Repository.ID` predefined variable.
+
+### Using repo flags in unsupported CI systems
+
+If your CI system is not in the [list of supported CI systems](/integrations/ci_cd) (e.g. Jenkins, Bamboo), the CLI cannot auto-default repo metadata from environment variables. You must provide all four flags explicitly — `--repository`, `--repo-provider`, `--repo-url`, and `--repo-id`.
+
+For example, in a Jenkinsfile for a Bitbucket repository:
+
+```shell
+kosli attest artifact my-app:latest \
+    --name my-app \
+    --flow my-flow \
+    --trail my-trail \
+    --artifact-type oci \
+    --repository my-workspace/my-repo \
+    --repo-provider bitbucket \
+    --repo-url https://bitbucket.org/my-workspace/my-repo \
+    --repo-id "${BITBUCKET_REPO_UUID}" \
+    --commit $(git rev-parse HEAD)
+```
 
 ### Attest an artifact with repo metadata
 
-If you are running outside of CI, provide the repo flags explicitly:
+If you are running outside of CI or in an unsupported CI system, provide the repo flags explicitly:
 
 ```shell
 kosli attest artifact my-app:latest \
@@ -51,6 +94,7 @@ kosli attest artifact my-app:latest \
     --repository my-org/my-repo \
     --repo-provider github \
     --repo-url https://github.com/my-org/my-repo \
+    --repo-id 123456789 \
     --commit $(git rev-parse HEAD)
 ```
 
