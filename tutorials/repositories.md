@@ -64,6 +64,8 @@ kosli list repos
 
 You should also be able to see the repository in the [Kosli app](https://app.kosli.com) by navigating to **Repositories** in the sidebar. Your newly captured repository appears in the list, and you can search by name to find it.
 
+<Frame><img src="/images/repos-list.png" alt="Kosli app showing the repositories list with repos from multiple VCS providers" /></Frame>
+
 ## Tracking builds
 
 A build is recorded in Kosli the first time you attest an artifact. Subsequent attestations for that artifact fingerprint do not create additional build records.
@@ -98,6 +100,10 @@ In the [Kosli app](https://app.kosli.com), navigate to your repository and open 
 - The commit and artifact details.
 - Time period and environment filtering to compare deployment patterns across staging, production, etc.
 
+<Frame><img src="/images/repos-release-metrics.png" alt="Kosli app showing the Release Metrics view with deployment lead time and deployment frequency charts" /></Frame>
+
+<Frame><img src="/images/repos-release-deployments.png" alt="Kosli app showing the Release Deployments view with a list of deployments per environment" /></Frame>
+
 ## Viewing live artifacts
 
 The live artifacts view gives you an at-a-glance picture of what is currently running from a repository across all your environments. This allows you to see the compliance of the artifacts and the commit that each artifact was built from.
@@ -116,6 +122,8 @@ In the [Kosli app](https://app.kosli.com), navigate to your repository and open 
 - **Artifact** — the individual artifacts running in each environment, with their compliance status (compliant or non-compliant) and fingerprint.
 
 Use the environment filter to narrow the view to specific environments.
+
+<Frame><img src="/images/repos-run-tab.png" alt="Kosli app showing the Run tab with live artifacts, their commits, environments, and compliance status" /></Frame>
 
 ## What you've accomplished
 
