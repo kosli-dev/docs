@@ -62,7 +62,8 @@
               "group": "Getting started",
               "pages": [
                 "tutorials/try_kosli_locally",
-                "tutorials/cli_and_http_proxy"
+                "tutorials/cli_and_http_proxy",
+                "tutorials/organizing_with_spaces"
               ]
             },
             {
