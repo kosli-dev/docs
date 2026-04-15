@@ -104,6 +104,15 @@
               "pages": [
                 "tutorials/linking_trails_across_branches"
               ]
+            },
+            {
+              "group": "Repositories",
+              "pages": [
+                "tutorials/repos_creating_a_repo",
+                "tutorials/repos_tracking_builds",
+                "tutorials/repos_tracking_deployments",
+                "tutorials/repos_viewing_live_artifacts"
+              ]
             }
           ]
         },
