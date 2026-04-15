@@ -159,6 +159,86 @@ The `input.trail` / `input.trails` distinction and the full input data shape are
 
 </Step>
 
+<Step title="Pass parameters to a policy">
+
+Policies sometimes need configurable values — for example, a threshold that varies between environments. Instead of hardcoding these, use the `--params` flag to pass data into the policy as `data.params`.
+
+Save this as `check-threshold.rego`:
+
+```rego check-threshold.rego
+package policy
+
+import rego.v1
+
+default allow := false
+
+default threshold := 10
+
+threshold := data.params.threshold if { data.params.threshold }
+
+allow if { input.score >= threshold }
+
+violations contains msg if {
+	input.score < threshold
+	msg := sprintf("score %d is below threshold %d", [input.score, threshold])
+}
+```
+
+This policy:
+
+* Defines a **default threshold** of `10` — used when no `--params` are provided.
+* Overrides the threshold with `data.params.threshold` when present.
+* Allows the input only if `input.score` meets the threshold.
+
+You can test this locally with `kosli evaluate input`. First, create an input file:
+
+```shell
+echo '{"score": 5}' > score-input.json
+```
+
+Evaluate without params (uses the default threshold of `10`):
+
+```shell
+kosli evaluate input \
+  --input-file score-input.json \
+  --policy check-threshold.rego
+```
+
+```plaintext
+RESULT:      DENIED
+VIOLATIONS:  score 5 is below threshold 10
+```
+
+Now pass a lower threshold via `--params`:
+
+```shell
+kosli evaluate input \
+  --input-file score-input.json \
+  --policy check-threshold.rego \
+  --params '{"threshold": 3}'
+```
+
+```plaintext
+RESULT:  ALLOWED
+```
+
+The score of `5` is now above the threshold of `3`, so the policy allows it.
+
+You can also load parameters from a file using the `@` prefix:
+
+```shell
+echo '{"threshold": 3}' > params.json
+
+kosli evaluate input \
+  --input-file score-input.json \
+  --policy check-threshold.rego \
+  --params @params.json
+```
+
+The `--params` flag works the same way on `kosli evaluate trail` and `kosli evaluate trails` — parameters are always available as `data.params` in the policy.
+
+</Step>
+
 <Step title="Explore the policy input with --show-input">
 
 When writing policies, it helps to see exactly what data is available. Use `--show-input` combined with `--output json` to see the full input that gets passed to the policy:
