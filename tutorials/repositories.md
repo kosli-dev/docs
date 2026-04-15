@@ -3,7 +3,7 @@ title: Working with repositories
 description: Learn how repositories are captured in Kosli and how to view builds, deployments, and live artifacts from the Kosli app.
 ---
 
-Repositories in Kosli give you a repo-centric view of your software supply chain. Instead of navigating across flows, trails, and environments separately, you can start from a repository and see everything that matters: what was built, where it was deployed, and what is running right now.
+Repositories in Kosli refer to your version control (VCS) code repositories — such as those hosted on GitHub, GitLab, Bitbucket, or Azure DevOps. They give you a repo-centric view of your software supply chain. Instead of navigating across flows, trails, and environments separately, you can start from a code repository and see everything that matters: what was built, where it was deployed, and what is running right now.
 
 This is useful when you need to:
 
