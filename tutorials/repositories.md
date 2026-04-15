@@ -3,14 +3,17 @@ title: Working with repositories
 description: Learn how repositories are captured in Kosli and how to view builds, deployments, and live artifacts from the Kosli app.
 ---
 
-Repositories in Kosli give you a repo-centric view of your software supply chain. Instead of navigating across flows, trails, and environments separately, you can start from a repository and see everything that matters: what was built, where it was deployed, and what is running right now.
+Kosli already tracks your software supply chain through flows, trails, and environments. Repositories add a code-centric layer on top: starting from a git repo, you can see every artifact that was built, where each one was deployed, and what is running right now — without switching between different Kosli views.
+
+Most teams think about their software in terms of repositories. When an incident happens, the first question is usually "what version of *this repo* is running in production?" When preparing for an audit, you want to show the full history of a specific service. Repositories in Kosli make these workflows natural by organizing builds, deployments, and runtime status around the repos you already work with.
 
 This is useful when you need to:
 
-- **Answer audit questions quickly** — "What version of this repo is running in production?" or "How often do we deploy this service?"
-- **Track DORA-style metrics per repo** — build frequency, deployment frequency, and lead time for changes, broken down by environment.
+- **Answer audit questions quickly** — "What version of this repo is running in production?" or "When was the last deployment of this service?"
+- **Track DORA-style metrics per repo** — deployment frequency and lead time for changes, broken down by environment, so you can measure delivery performance per service.
 - **Verify compliance at a glance** — see which commits are currently running across all environments and whether their artifacts are compliant.
 - **Investigate incidents** — trace a running artifact back to its source commit, build, and full attestation history.
+- **Compare environments** — quickly spot when staging and production are running different versions of the same repo.
 
 ## Prerequisites
 
