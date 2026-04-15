@@ -11,7 +11,7 @@ Logical environments can ONLY contain physical environments (K8S, ECS, S3, docke
 </Warning>
 
 <Warning>
-This resource manages logical environment configuration only. For querying environment metadata such as `last_modified_at` and `archived` status, use the [`kosli_logical_environment` data source](/terraform-reference/data-sources/logical_environment).
+This resource manages logical environment configuration and tags. For querying environment metadata such as `last_modified_at` and `archived` status, use the [`kosli_logical_environment` data source](/terraform-reference/data-sources/logical_environment).
 </Warning>
 
 Logical environments in Kosli aggregate multiple physical environments for organizational purposes, providing:
@@ -84,6 +84,23 @@ resource "kosli_logical_environment" "cloud_services" {
 resource "kosli_logical_environment" "future_environments" {
   name                  = "future-environments"
   included_environments = []
+}
+
+# Logical environment with tags
+resource "kosli_logical_environment" "tagged" {
+  name        = "production-tagged"
+  description = "Tagged production logical environment"
+
+  included_environments = [
+    kosli_environment.production_k8s.name,
+    kosli_environment.production_ecs.name,
+  ]
+
+  tags = {
+    managed-by  = "terraform"
+    environment = "production"
+    team        = "platform"
+  }
 }
 
 # Logical environment without description (optional)
@@ -181,10 +198,6 @@ terraform import kosli_logical_environment.future_environments future-environmen
 
 ## Querying metadata
 
-<Warning>
-This resource manages logical environment configuration only. For querying environment metadata such as `last_modified_at` and `archived` status, use the [`kosli_logical_environment` data source](/terraform-reference/data-sources/logical_environment).
-</Warning>
-
 ## Schema
 
 ### Required
@@ -195,6 +208,7 @@ This resource manages logical environment configuration only. For querying envir
 ### Optional
 
 - `description` (String) Description of the logical environment. Explains the purpose and aggregation strategy.
+- `tags` (Map of String) Key-value pairs to tag the logical environment. Tags are applied via a diff — only changed tags are sent to the API. An empty map (`tags = {}`) removes all tags.
 
 ### Read-only
 
