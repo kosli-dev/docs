@@ -95,12 +95,12 @@ In the [Kosli app](https://app.kosli.com), navigate to your repository and open 
 - **Deployment frequency** — how often deployments happen over a configurable time period.
 - **Lead time for changes** — how long it takes from build to deployment.
 
+<Frame><img src="/images/repos-release-metrics.png" alt="Kosli app showing the Release Metrics view with deployment lead time and deployment frequency charts" /></Frame>
+
 **Deployments** — shows a paginated list of individual deployments with:
 - Which environment received the artifact.
 - The commit and artifact details.
 - Time period and environment filtering to compare deployment patterns across staging, production, etc.
-
-<Frame><img src="/images/repos-release-metrics.png" alt="Kosli app showing the Release Metrics view with deployment lead time and deployment frequency charts" /></Frame>
 
 <Frame><img src="/images/repos-release-deployments.png" alt="Kosli app showing the Release Deployments view with a list of deployments per environment" /></Frame>
 
