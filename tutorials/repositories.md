@@ -81,6 +81,8 @@ In the [Kosli app](https://app.kosli.com), navigate to your repository and open 
 
 Use the time period selector to adjust the range and analyze build trends.
 
+<Frame><img src="/images/repos-build-frequency.png" alt="Kosli app showing the Build tab with build frequency chart and builds list" /></Frame>
+
 ## Tracking deployments
 
 Kosli detects deployments automatically when an artifact appears in an [environment snapshot](/getting_started/environments). If the artifact was attested with repository metadata, the deployment is linked back to the source repository. For details on reporting snapshots, see [reporting Kubernetes environments](/tutorials/report_k8s_envs) or [reporting AWS environments](/tutorials/report_aws_envs).
