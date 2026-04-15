@@ -106,7 +106,7 @@ You should see:
 
 ```plaintext
 COMMIT   ARTIFACT                                                                       FLOW         COMPLIANCE     RUNNING_SINCE  REPLICAS
-d881b2f  Name: tf-state                                                                 tf-tutorial  NON-COMPLIANT  28 minutes ago   1
+d881b2f  Name: tf-state                                                                 tf-tutorial  COMPLIANT      28 minutes ago 1
          Fingerprint: a57667a7b921b91d438631afa1a1fe35300b4da909a19d2b61196580f30f1d0c
 ```
 
@@ -142,7 +142,7 @@ You should see:
 
 ```plaintext
 COMMIT  ARTIFACT                                                                       FLOW  COMPLIANCE     RUNNING_SINCE   REPLICAS
-N/A     Name: tf-state                                                                 N/A   NON-COMPLIANT  8 minutes ago  1
+N/A     Name: tf-state                                                                 N/A   NON-COMPLIANT  8 minutes ago   1
         Fingerprint: edd93dcde27718ed493222ceb218275655555f3f3bfefa95628c599e678ac325
 ```
 
