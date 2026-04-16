@@ -121,30 +121,39 @@ The decision attestation goes on a trail, like any other attestation. It affects
 
 ### Attaching evidence to a decision
 
-Evidence attached to a decision explains _why_ the decision was reached — not just that a control passed or failed, but what information was used to make that judgement. This is what auditors will ask for: the artefact, the report, or the policy output that justified the decision.
+Evidence attached to a decision explains _why_ the decision was reached — not just that a control passed or failed, but what information was used to make that judgement. This is what auditors will ask for: the policy that was applied and the evaluation report that justified the outcome.
 
-Use `--attachments` to attach files (e.g. a scan report, an evaluation output, a signed approval document) and `--user-data` to attach structured JSON metadata (e.g. the policy rule version, the evaluator, or a summary of findings):
+A natural source of evidence is a `kosli evaluate` report. The example below evaluates a trail against a Rego policy, captures the full JSON report, and attaches both the policy file and the report to the decision attestation. See [Evaluate trails with OPA policies](/tutorials/evaluate_trails_with_opa) for a full walkthrough of `kosli evaluate`.
 
 ```bash
+# Run the evaluation and save the full JSON report
+kosli evaluate trail "$TRAIL_NAME" \
+    --policy supply-chain-policy.rego \
+    --org "$KOSLI_ORG" \
+    --flow "$FLOW_NAME" \
+    --output json > eval-report.json 2>/dev/null || true
+
+# Read the allow/deny result from the report
+is_compliant=$(jq -r '.allow' eval-report.json)
+
+# Extract violations as structured user-data
+jq '{violations: .violations}' eval-report.json > eval-violations.json
+
+# Record the decision, attaching the policy and evaluation report as evidence
 kosli attest decision \
-    --flow my-release-flow \
-    --trail my-release-trail \
+    --flow "$FLOW_NAME" \
+    --trail "$TRAIL_NAME" \
     --control RCTL-1866 \
-    --compliant true \
+    --compliant="$is_compliant" \
     --name supply-chain-integrity-decision \
-    --attachments evaluation-report.json \
-    --user-data decision-metadata.json
+    --attachments supply-chain-policy.rego,eval-report.json \
+    --user-data eval-violations.json
 ```
 
-Where `decision-metadata.json` might contain:
-
-```json
-{
-  "evaluator": "opa-policy-runner",
-  "policy_version": "v1.4.2",
-  "findings": "0 violations across 14 commits"
-}
-```
+This creates a decision attestation with:
+- **`--attachments`** containing the Rego policy (for reproducibility) and the full JSON evaluation report
+- **`--user-data`** containing the violations, which appear in the Kosli UI as structured metadata on the attestation
+- **`--compliant`** set directly from the evaluation result
 
 ## Referencing controls in environment policies
 
