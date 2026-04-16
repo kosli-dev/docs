@@ -107,6 +107,12 @@
               ]
             },
             {
+              "group": "Controls",
+              "pages": [
+                "tutorials/working_with_controls"
+              ]
+            },
+            {
               "group": "Repositories",
               "pages": [
                 "tutorials/repositories"
