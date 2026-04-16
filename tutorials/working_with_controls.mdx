@@ -70,11 +70,21 @@ kosli create control \
 
 ### List your controls
 
-Navigate to **Controls** in the [Kosli app](https://app.kosli.com) sidebar to browse your full controls catalog. Each control shows its code, name, current version, status, and last updated date. The version number increments each time you edit a control's name, description, or source URL — decisions already recorded reference the version that was active when they were made.
+Navigate to **Controls** in the [Kosli app](https://app.kosli.com) sidebar to browse your full controls catalog. Each control shows its code, name, current version, lifecycle status, and a **decision coverage indicator** that reflects the health of that control across your pipelines:
+
+| Status | Meaning |
+|--------|---------|
+| **Active** | A passing decision has been recorded against this control recently. |
+| **Stale** | Decisions were recorded in the past but none recently — pipelines may have stopped evidencing this control. |
+| **No decisions** | This control exists in the catalog but no decision has ever been recorded against it. A dark control. |
+
+The coverage status is visible before you click into a control, which is exactly where a governance platform engineer scanning their estate would want to catch dark controls — those controls that are defined and potentially referenced in policies, but for which no evidence is being collected in any pipeline.
 
 <Frame>
-  <img src="/images/tutorials/controls-list.png" alt="Controls listing page showing controls with version badges, Active/Archived status, Edit buttons, and an expanded version history for RCTL-043" />
+  <img src="/images/tutorials/controls-list.png" alt="Controls catalog showing Active, Stale, and No decisions coverage indicators alongside version badges and an expanded version history for RCTL-043" />
 </Frame>
+
+The version number increments each time you edit a control's name, description, or source URL. Decisions already recorded reference the version that was active when they were made, preserving the audit trail even as the control definition evolves.
 
 You can also list controls via the CLI:
 
