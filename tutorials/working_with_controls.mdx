@@ -70,7 +70,13 @@ kosli create control \
 
 ### List your controls
 
-Navigate to **Controls** in the [Kosli app](https://app.kosli.com) sidebar to browse your full controls catalog. You can also list controls via the CLI:
+Navigate to **Controls** in the [Kosli app](https://app.kosli.com) sidebar to browse your full controls catalog. Each control shows its code, name, current version, status, and last updated date. The version number increments each time you edit a control's name, description, or source URL — decisions already recorded reference the version that was active when they were made.
+
+<Frame>
+  <img src="/images/tutorials/controls-list.png" alt="Controls listing page showing controls with version badges, Active/Archived status, Edit buttons, and an expanded version history for RCTL-043" />
+</Frame>
+
+You can also list controls via the CLI:
 
 ```bash
 kosli list controls
