@@ -45,7 +45,9 @@ This separation matters: raw facts exist independently of controls. A JUnit test
 
 ## Creating a control
 
-Create a control by providing a **control code**, a **name**, and optionally a description and a source URL pointing back to the authoritative definition.
+Navigate to **Controls** in the [Kosli app](https://app.kosli.com) sidebar and select **New control**. Provide a **control code**, a **name**, and optionally a description and a source URL pointing back to the authoritative definition in your GRC system or policy document.
+
+You can also create controls via the CLI:
 
 ```bash
 kosli create control \
@@ -68,47 +70,10 @@ kosli create control \
 
 ### List your controls
 
+Navigate to **Controls** in the [Kosli app](https://app.kosli.com) sidebar to browse your full controls catalog. You can also list controls via the CLI:
+
 ```bash
 kosli list controls
-```
-
-You can also navigate to **Controls** in the [Kosli app](https://app.kosli.com) sidebar to browse your controls catalog.
-
-### Define a control library programmatically
-
-For larger catalogs, use the API or CLI in a script to mirror your existing controls from ServiceNow or a spreadsheet:
-
-```bash
-# Example: create several controls in a loop from a CSV
-while IFS=, read -r code name description source_url; do
-    kosli create control \
-        --code "$code" \
-        --name "$name" \
-        --description "$description" \
-        --source-url "$source_url"
-done < controls.csv
-```
-
-The API also supports this natively, making it straightforward to write a sync script or ask an LLM to generate one from your existing catalog.
-
-### Modifying a control
-
-You can update the name, description, and source URL of a control. The control code is immutable.
-
-```bash
-kosli update control RCTL-043 \
-    --name "Source code review (never alone)" \
-    --description "Updated description."
-```
-
-Each modification creates a new version of the control. This means decisions recorded against a control reference the specific version of the definition that was current when the decision was made.
-
-### Archiving a control
-
-Controls can be archived but never deleted. Archived controls retain their audit history and their code cannot be reused.
-
-```bash
-kosli archive control RCTL-043
 ```
 
 ## Recording a decision against a control
@@ -120,7 +85,7 @@ kosli attest decision \
     --flow my-release-flow \
     --trail my-release-trail \
     --control RCTL-043 \
-    --outcome pass \
+    --compliant true \
     --name "source-code-review-decision" \
     --description "All 14 commits in this release have been reviewed by a second developer."
 ```
@@ -128,101 +93,84 @@ kosli attest decision \
 | Flag | Description |
 |------|-------------|
 | `--control` | **Required.** The control code this decision is recorded against. |
-| `--outcome` | **Required.** The outcome of the decision: `pass` or `fail`. |
+| `--compliant` | **Required.** Whether the control is satisfied: `true` or `false`. |
 | `--name` | The attestation slot name on the trail. |
 | `--description` | Optional human-readable context for the decision. |
 | `--attachments` | Optional evidence file(s) to attach (e.g. an evaluation report, a REGO policy output). |
+| `--user-data` | Optional path to a JSON file containing additional structured data to attach to the attestation. |
 
-The decision attestation goes on a trail, like any other attestation. It affects trail compliance: a `fail` decision makes the trail non-compliant. There are no restrictions on which flow or trail a decision can be recorded on — place it wherever makes sense in your process, typically at the point where the decision is actually being made (e.g. during a release preparation or promotion step).
+The decision attestation goes on a trail, like any other attestation. It affects trail compliance: a `--compliant false` decision makes the trail non-compliant. There are no restrictions on which flow or trail a decision can be recorded on — place it wherever makes sense in your process, typically at the point where the decision is actually being made (e.g. during a release preparation or promotion step).
 
 <Info>
   A decision is a recorded judgement. How you arrive at the decision — running `kosli evaluate`, executing a custom script, or using a third-party tool — is up to you. The `attest decision` command records the outcome; it does not make the decision for you. Automated evaluation that makes and records decisions on your behalf is coming in a future release.
 </Info>
 
-### Example: recording a decision in a GitHub Actions pipeline
-
-```yaml
-- name: Record source code review decision
-  run: |
-    kosli attest decision \
-      --flow ${{ env.KOSLI_FLOW }} \
-      --trail ${{ env.KOSLI_TRAIL }} \
-      --control RCTL-043 \
-      --outcome pass \
-      --name source-code-review-decision \
-      --description "Reviewed by ${{ github.actor }} — all commits have approved PRs."
-```
-
 ### Attaching evidence to a decision
 
-For controls where you want to capture the evidence or policy used, attach a file:
+Evidence attached to a decision explains _why_ the decision was reached — not just that a control passed or failed, but what information was used to make that judgement. This is what auditors will ask for: the artefact, the report, or the policy output that justified the decision.
+
+Use `--attachments` to attach files (e.g. a scan report, an evaluation output, a signed approval document) and `--user-data` to attach structured JSON metadata (e.g. the policy rule version, the evaluator, or a summary of findings):
 
 ```bash
 kosli attest decision \
     --flow my-release-flow \
     --trail my-release-trail \
     --control RCTL-1866 \
-    --outcome pass \
+    --compliant true \
     --name supply-chain-integrity-decision \
-    --attachments evaluation-report.json
+    --attachments evaluation-report.json \
+    --user-data decision-metadata.json
+```
+
+Where `decision-metadata.json` might contain:
+
+```json
+{
+  "evaluator": "opa-policy-runner",
+  "policy_version": "v1.4.2",
+  "findings": "0 violations across 14 commits"
+}
 ```
 
 ## Referencing controls in environment policies
 
-Environment policies can require a positive decision outcome for a named control, rather than relying on attestation name or type. This abstracts the policy from the specific tooling your pipelines use: instead of "has an attestation of type `snyk` with zero criticals", you express "control `vuln-scan-production` has been satisfied."
+Environment policies define the requirements an artifact must satisfy before it can run in a given environment. To enforce that artifacts have compliant trails — including decision attestations — require trail compliance in your policy:
 
-Add a `controls` key to your environment policy YAML alongside existing attestation requirements:
-
-```yaml
-allow_list:
-  - artifact_provider: docker
-    require_provenance: true
-    require_trail_attestations:
-      - name: pull-request
-    controls:
-      - RCTL-043
-      - RCTL-1866
+```yaml prod-policy.yaml
+_schema: https://kosli.mintlify.app/schemas/policy/v1
+artifacts:
+  provenance:
+    required: true
+  trail-compliance:
+    required: true
 ```
 
-With this policy in place, an artifact cannot be deployed to this environment unless a `pass` decision has been recorded for each listed control on the artifact's trail.
+With `trail-compliance` required, an artifact cannot be deployed to this environment unless its trail is fully compliant — which includes any decision attestations recorded against controls.
+
+For the complete policy syntax, including attestation requirements and exceptions, see the [Environment Policies](/getting_started/policies) page.
 
 ## Viewing control compliance
 
-### Check which controls have been satisfied for an artifact
+Navigate to **Controls** in the [Kosli app](https://app.kosli.com) and select a control to see its compliance view.
 
-```bash
-kosli get artifact my-app@sha256:abc123 --controls
-```
+<Frame>
+  <img src="/images/tutorials/controls-compliance-placeholder.png" alt="Control compliance view showing deployments with pass/fail status" />
+</Frame>
 
-This shows which controls have decisions recorded for this artifact, whether those decisions are `pass` or `fail`, and which controls have no decision recorded at all (the coverage gap).
+The compliance view shows:
 
-### List decisions recorded for a control
-
-```bash
-kosli list decisions --control RCTL-043
-```
-
-You can also filter by flow, environment, or time range:
-
-```bash
-kosli list decisions \
-    --control RCTL-043 \
-    --environment production \
-    --from 2026-01-01
-```
-
-### View control compliance in the Kosli app
-
-Navigate to **Controls** in the [Kosli app](https://app.kosli.com) and select a control to see its compliance view. This shows:
-
-- **Deployments by control** — a list of deployments where this control was referenced, with pass/fail status, filterable by repository, flow, and environment.
+- **Deployments by control** — a list of deployments where this control was referenced, with compliant/non-compliant status, filterable by repository, flow, and environment.
 - **Coverage** — the ratio of deployments where the control was evidenced vs. those where it was not. This is the key metric: controls without decisions are the blind spots that auditors will ask about.
+
+<Frame>
+  <img src="/images/tutorials/controls-coverage-placeholder.png" alt="Control coverage view showing evidenced vs. unevidenced deployments" />
+</Frame>
 
 Use the environment filter to compare control satisfaction rates across staging and production.
 
 ## What you've accomplished
 
-You have learned how to define controls in Kosli, record decisions against them from pipelines, enforce them in environment policies, and query compliance across deployments.
+You have learned how to define controls in Kosli, record decisions against them from pipelines, enforce them in environment policies, and view compliance across deployments.
 
 Your controls catalog is now the bridge between the evidence Kosli collects and the requirements your auditors, control owners, and regulators care about. For each production change, you can now answer: "which of our controls have been evidenced, and which haven't?"
 
