@@ -140,18 +140,19 @@ Where `decision-metadata.json` might contain:
 
 ## Referencing controls in environment policies
 
-Environment policies define the requirements an artifact must satisfy before it can run in a given environment. To enforce that artifacts have compliant trails — including decision attestations — require trail compliance in your policy:
+Environment policies define the requirements an artifact must satisfy before it can run in a given environment. You can require that specific named controls have a passing decision recorded — not just that the trail is generally compliant. This is the key distinction: rather than relying on trail compliance as a catch-all, you can make individual controls explicit policy gates.
 
 ```yaml prod-policy.yaml
-_schema: https://kosli.mintlify.app/schemas/policy/v1
+_schema: https://kosli.com/schemas/policy/environment/v1
 artifacts:
   provenance:
     required: true
-  trail-compliance:
-    required: true
+  controls:
+    - RCTL-043
+    - RCTL-1866
 ```
 
-With `trail-compliance` required, an artifact cannot be deployed to this environment unless its trail is fully compliant — which includes any decision attestations recorded against controls.
+With this policy in place, an artifact cannot be deployed to this environment unless a passing decision has been recorded for each listed control on the artifact's trail. This abstracts the policy from the specific tooling your pipelines use: instead of "has an attestation of type `snyk` with zero criticals", the policy expresses "control `RCTL-1866` has been satisfied" — and the decision attestation carries the evidence of how that judgement was reached.
 
 For the complete policy syntax, including attestation requirements and exceptions, see the [Environment Policies](/getting_started/policies) page.
 
