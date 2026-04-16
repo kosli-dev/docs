@@ -75,16 +75,14 @@ Navigate to **Controls** in the [Kosli app](https://app.kosli.com) sidebar to br
 | Status | Meaning |
 |--------|---------|
 | **Active** | A passing decision has been recorded against this control recently. |
-| **Stale** | Decisions were recorded in the past but none recently — pipelines may have stopped evidencing this control. |
+| **Stale** | Decisions were recorded in the past but none recently — pipelines may have stopped recording decisions against this control. |
 | **No decisions** | This control exists in the catalog but no decision has ever been recorded against it. A dark control. |
 
 The coverage status is visible before you click into a control, which is exactly where a governance platform engineer scanning their estate would want to catch dark controls — those controls that are defined and potentially referenced in policies, but for which no evidence is being collected in any pipeline.
 
 <Frame>
-  <img src="/images/tutorials/controls-list.png" alt="Controls catalog showing Active, Stale, and No decisions coverage indicators alongside version badges and an expanded version history for RCTL-043" />
+  <img src="/images/tutorials/controls-list.png" alt="Controls catalog showing Active, Stale, and No decisions coverage indicators alongside version badges, a View archived filter, and an expanded version history for RCTL-043" />
 </Frame>
-
-The version number increments each time you edit a control's name, description, or source URL. Decisions already recorded reference the version that was active when they were made, preserving the audit trail even as the control definition evolves.
 
 You can also list controls via the CLI:
 
@@ -162,7 +160,7 @@ artifacts:
     - RCTL-1866
 ```
 
-With this policy in place, an artifact cannot be deployed to this environment unless a passing decision has been recorded for each listed control on the artifact's trail. This abstracts the policy from the specific tooling your pipelines use: instead of "has an attestation of type `snyk` with zero criticals", the policy expresses "control `RCTL-1866` has been satisfied" — and the decision attestation carries the evidence of how that judgement was reached.
+With this policy in place, an artifact deployed to this environment will be marked **non-compliant** if a passing decision has not been recorded for each listed control on its trail. The artifact can still be deployed — Kosli records compliance state but does not block deployments by default. To gate deployments on compliance, use [`kosli assert`](/getting_started/enforce_policies) in your pipeline or configure a Kubernetes admission controller. This abstracts the policy from the specific tooling your pipelines use: instead of "has an attestation of type `snyk` with zero criticals", the policy expresses "control `RCTL-1866` has been satisfied" — and the decision attestation carries the evidence of how that judgement was reached.
 
 For the complete policy syntax, including attestation requirements and exceptions, see the [Environment Policies](/getting_started/policies) page.
 
@@ -180,7 +178,7 @@ The compliance view shows:
 - **Coverage** — the ratio of deployments where the control was evidenced vs. those where it was not. This is the key metric: controls without decisions are the blind spots that auditors will ask about.
 
 <Frame>
-  <img src="/images/tutorials/controls-compliance-coverage.png" alt="Control coverage view showing evidenced vs. unevidenced deployments and 78% coverage rate" />
+  <img src="/images/tutorials/controls-compliance-coverage.png" alt="Control coverage view showing decision recorded vs. no decision recorded deployments and 78% coverage rate" />
 </Frame>
 
 Use the environment filter to compare control satisfaction rates across staging and production.
