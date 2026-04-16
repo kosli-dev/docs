@@ -26,10 +26,25 @@
   {
     "source": "/faq",
     "destination": "/faq/faq"
-  }
-  ,
+  },
   {
     "source": "/schemas/policy/v1",
     "destination": "/schemas/policy/v1.json"
+  },
+  {
+    "source": "/getting_started/part_9_querying",
+    "destination": "/tutorials/querying_kosli"
+  },
+  {
+    "source": "/getting_started/part_5_artifacts",
+    "destination": "/getting_started/artifacts"
+  },
+  {
+    "source": "/getting_started/part_1_overview",
+    "destination": "/getting_started/overview"
+  },
+  {
+    "source": "/kosli_overview/what_is_kosli",
+    "destination": "/understand_kosli/what_is_kosli"
   }
 ]
