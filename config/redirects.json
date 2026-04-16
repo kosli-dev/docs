@@ -40,8 +40,12 @@
     "destination": "/getting_started/artifacts"
   },
   {
+    "source": "/getting_started/overview",
+    "destination": "/getting_started/install"
+  },
+  {
     "source": "/getting_started/part_1_overview",
-    "destination": "/getting_started/overview"
+    "destination": "/getting_started/install"
   },
   {
     "source": "/kosli_overview/what_is_kosli",
