@@ -70,7 +70,9 @@ kosli create control \
 
 ### List your controls
 
-Navigate to **Controls** in the [Kosli app](https://app.kosli.com) sidebar to browse your full controls catalog. Each control shows its code, name, current version, lifecycle status, and a **decision coverage indicator** that reflects the health of that control across your pipelines:
+Navigate to **Controls** in the [Kosli app](https://app.kosli.com) sidebar to browse your full controls catalog. Each control shows its code, name, current version, and a **decision coverage indicator** that reflects the health of that control across your pipelines.
+
+Control definitions are versioned: each time you update a control's name, description, or source URL, a new version is created. This matters for audits — decisions recorded against a control always reference the exact version of the definition that was current when the decision was made, so the audit trail is precise even as controls evolve over time.
 
 | Status | Meaning |
 |--------|---------|
@@ -164,22 +166,31 @@ For the complete policy syntax, including attestation requirements and exception
 
 ## Viewing control compliance
 
-Navigate to **Controls** in the [Kosli app](https://app.kosli.com) and select a control to see its compliance view.
+Navigate to **Controls** in the [Kosli app](https://app.kosli.com) and select a control to see its detail view. Each control has three tabs: **Decisions**, **Deployments**, and **Coverage**.
+
+### Decisions
+
+The Decisions tab is the default view. It lists every decision attestation recorded against this control across all flows and trails, with the artifact, flow, trail, environment, who recorded the decision, when, and whether the outcome was compliant or non-compliant. Each decision also shows which version of the control definition was in effect when it was recorded. Use the flow, environment, and outcome filters to narrow the list.
 
 <Frame>
-  <img src="/images/tutorials/controls-compliance-deployments.png" alt="Control compliance view showing deployments with compliant and non-compliant decisions" />
+  <img src="/images/tutorials/controls-decisions.png" alt="Decisions tab for RCTL-043 showing a list of decision attestations with artifact, flow, trail, environment, recorded-by, date, and compliant/non-compliant outcome" />
 </Frame>
 
-The compliance view shows:
+### Deployments
 
-- **Deployments by control** — a list of deployments where this control was referenced, with compliant/non-compliant status, filterable by repository, flow, and environment.
-- **Coverage** — the ratio of deployments where a decision was recorded vs. those where it was not. This is the key metric: controls without decisions are the blind spots that auditors will ask about.
+The Deployments tab shows where artifacts with decisions against this control have been deployed, with compliant/non-compliant status per deployment, filterable by repository, flow, and environment.
 
 <Frame>
-  <img src="/images/tutorials/controls-compliance-coverage.png" alt="Control coverage view showing decision recorded vs. no decision recorded deployments and 78% coverage rate" />
+  <img src="/images/tutorials/controls-compliance-deployments.png" alt="Deployments tab for RCTL-043 showing deployments with compliant and non-compliant decisions" />
 </Frame>
 
-Use the environment filter to compare control satisfaction rates across staging and production.
+### Coverage
+
+The Coverage tab shows the ratio of deployments where a decision was recorded vs. those where it was not. This is the key metric: controls without decisions are the blind spots that auditors will ask about. Use the environment filter to compare decision recording rates across staging and production.
+
+<Frame>
+  <img src="/images/tutorials/controls-compliance-coverage.png" alt="Coverage tab for RCTL-043 showing decision recorded vs. no decision recorded deployments and 78% coverage rate" />
+</Frame>
 
 ## What you've accomplished
 
