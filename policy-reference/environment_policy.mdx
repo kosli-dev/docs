@@ -8,11 +8,11 @@ An environment policy is a YAML file that declares compliance requirements for a
 ## Specification
 
 <ParamField path="_schema" type="string" required>
-  Version identifier and [JSON Schema](https://kosli.mintlify.app/schemas/policy/v1.json) URL for the policy format. The final path segment must match `/v{n}` where `n` is a supported major version. Currently only `v1` is supported.
+  Version identifier and [JSON Schema](https://docs.kosli.com/schemas/policy/v1.json) URL for the policy format. The final path segment must match `/v{n}` where `n` is a supported major version. Currently only `v1` is supported.
 
   ```yaml
-  # yaml-language-server: $schema=https://kosli.mintlify.app/schemas/policy/v1.json
-  _schema: https://kosli.mintlify.app/schemas/policy/v1
+  # yaml-language-server: $schema=https://docs.kosli.com/schemas/policy/v1.json
+  _schema: https://docs.kosli.com/schemas/policy/v1
   ```
 </ParamField>
 
@@ -157,8 +157,8 @@ Parentheses control precedence: `${{ flow.name == 'prod' and (flow.tags.team == 
 ## Example
 
 ```yaml
-# yaml-language-server: $schema=https://kosli.mintlify.app/schemas/policy/v1.json
-_schema: https://kosli.mintlify.app/schemas/policy/v1
+# yaml-language-server: $schema=https://docs.kosli.com/schemas/policy/v1.json
+_schema: https://docs.kosli.com/schemas/policy/v1
 
 artifacts:
   provenance:
@@ -181,11 +181,11 @@ artifacts:
 
 ## Editor validation
 
-The `_schema` URL resolves to a [JSON Schema](https://kosli.mintlify.app/schemas/policy/v1.json) for the environment policy format. To enable inline validation and autocomplete in VS Code (requires the [YAML extension](https://marketplace.visualstudio.com/items?itemName=redhat.vscode-yaml)) and other schema-aware editors, add a `yaml-language-server` directive:
+The `_schema` URL resolves to a [JSON Schema](https://docs.kosli.com/schemas/policy/v1.json) for the environment policy format. To enable inline validation and autocomplete in VS Code (requires the [YAML extension](https://marketplace.visualstudio.com/items?itemName=redhat.vscode-yaml)) and other schema-aware editors, add a `yaml-language-server` directive:
 
 ```yaml
-# yaml-language-server: $schema=https://kosli.mintlify.app/schemas/policy/v1.json
-_schema: https://kosli.mintlify.app/schemas/policy/v1
+# yaml-language-server: $schema=https://docs.kosli.com/schemas/policy/v1.json
+_schema: https://docs.kosli.com/schemas/policy/v1
 ```
 
 ## See also

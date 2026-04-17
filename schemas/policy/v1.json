@@ -1,6 +1,6 @@
 {
   "$schema": "http://json-schema.org/draft-07/schema#",
-  "$id": "https://kosli.mintlify.app/schemas/policy/v1",
+  "$id": "https://docs.kosli.com/schemas/policy/v1",
   "title": "Kosli Environment Policy",
   "description": "Schema for Kosli environment policy YAML files used with `kosli create policy`.",
   "type": "object",
@@ -10,7 +10,7 @@
     "_schema": {
       "type": "string",
       "format": "uri",
-      "description": "URL of this schema. The path must end with /v{n} where n is the major version (e.g. .../v1). Example: https://kosli.mintlify.app/schemas/policy/v1"
+      "description": "URL of this schema. The path must end with /v{n} where n is the major version (e.g. .../v1). Example: https://docs.kosli.com/schemas/policy/v1"
     },
     "artifacts": {
       "type": "object",

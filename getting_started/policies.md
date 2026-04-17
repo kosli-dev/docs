@@ -20,7 +20,7 @@ You can create a policy via CLI or via the API. Here is a basic policy that requ
 attestations:
 
 ```yaml prod-policy.yaml
-_schema: https://kosli.mintlify.app/schemas/policy/v1
+_schema: https://docs.kosli.com/schemas/policy/v1
 artifacts: # the rules apply to artifacts in an environment snapshot
   provenance:
     required: true # all artifacts must have provenance
@@ -92,7 +92,7 @@ artifacts:
 You can add exceptions to policy rules using [policy expressions](/policy-reference/environment_policy#policy-expressions).
 
 ```yaml
-_schema: https://kosli.mintlify.app/schemas/policy/v1
+_schema: https://docs.kosli.com/schemas/policy/v1
 
 artifacts:
   provenance:
