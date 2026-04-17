@@ -9,7 +9,7 @@ icon: "download"
 <Steps>
   <Step title="Choose your installation method">
 
-    Kosli CLI can be installed from package managers,
+    Kosli CLI can be installed from package managers (including npm),
     by Curling pre-built binaries, or can be used from the distributed Docker images.
     <Tabs>
     <Tab title="Script">
@@ -90,6 +90,20 @@ icon: "download"
     sudo mv kosli /usr/local/bin/kosli
     ```
 
+    </Tab>
+    <Tab title="NPM">
+
+    If you have [Node.js](https://nodejs.org/) (v18 or later), you can install the Kosli CLI globally via npm:
+
+    ```shell {.command}
+    npm install -g @kosli/cli
+    ```
+
+    Or using npx to run it without installing:
+
+    ```shell {.command}
+    npx @kosli/cli version
+    ```
     </Tab>
     <Tab title="From source">
 
