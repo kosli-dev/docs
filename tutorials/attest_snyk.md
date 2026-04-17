@@ -12,7 +12,6 @@ To follow the steps in this tutorial, you need to:
 * [Setup Snyk on your machine](https://docs.snyk.io/snyk-cli/getting-started-with-the-snyk-cli#install-the-snyk-cli-and-authenticate-your-machine).
 * [Install Helm](https://helm.sh/docs/intro/install/) if you want to try Snyk IaC attestations, otherwise skip.
 * [Install Docker](https://docs.docker.com/engine/install/) if you want to try Snyk container attestations, otherwise skip.
-* [Create a Kosli account](https://app.kosli.com/) (Skip if you already have one).
 * [Install Kosli CLI](/getting_started/install).
 * [Get a Kosli API token](/getting_started/service-accounts).
 
