@@ -15,7 +15,6 @@ Follow the section that matches your needs.
 ## Prerequisites
 
 * Have access to AWS.
-* [Create a Kosli account](https://app.kosli.com/sign-up) if you do not have one.
 * [Create an ECS, Lambda, or S3 Kosli environment](/getting_started/environments#create-an-environment) named `aws-env-tutorial`.
 * [Get a Kosli API token](/getting_started/service-accounts).
 

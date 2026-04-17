@@ -8,7 +8,6 @@ By the end of this tutorial, you will have reported a snapshot of your Kubernete
 ## Prerequisites
 
 * Have access to a Kubernetes cluster.
-* [Create a Kosli account](https://app.kosli.com/sign-up) if you do not have one.
 * [Create a Kubernetes Kosli environment](/getting_started/environments#create-an-environment) named `k8s-tutorial`.
 * [Get a Kosli API token](/getting_started/service-accounts).
 
