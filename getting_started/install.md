@@ -91,6 +91,20 @@ icon: "download"
     ```
 
     </Tab>
+    <Tab title="NPM">
+
+    If you have [Node.js](https://nodejs.org/) (v18 or later), you can install the Kosli CLI globally via npm:
+
+    ```shell {.command}
+    npm install -g @kosli/cli
+    ```
+
+    Or using npx to run it without installing:
+
+    ```shell {.command}
+    npx @kosli/cli version
+    ```
+    </Tab>
     <Tab title="From source">
 
     You can build Kosli CLI from source by running:
