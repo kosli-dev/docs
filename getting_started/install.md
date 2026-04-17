@@ -9,7 +9,7 @@ icon: "download"
 <Steps>
   <Step title="Choose your installation method">
 
-    Kosli CLI can be installed from package managers (including npm),
+    Kosli CLI can be installed from package managers,
     by Curling pre-built binaries, or can be used from the distributed Docker images.
     <Tabs>
     <Tab title="Script">
