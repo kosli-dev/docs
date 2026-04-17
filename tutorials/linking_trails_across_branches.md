@@ -111,7 +111,7 @@ Use `kosli evaluate trail` on the main-branch build to evaluate the PR trail aga
     Add `pr-build-compliance` to your main flow's template so that missing evidence is flagged:
 
     ```yaml
-    # yaml-language-server: $schema=https://kosli.mintlify.app/schemas/flow-template.json
+    # yaml-language-server: $schema=https://docs.kosli.com/schemas/flow-template.json
     version: 1
     trail:
       attestations:

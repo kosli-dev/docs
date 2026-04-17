@@ -60,7 +60,7 @@ A flow template defines what attestations are required for a trail and its artif
 Add the `$schema` comment to get editor validation and autocomplete:
 
 ```yaml
-# yaml-language-server: $schema=https://kosli.mintlify.app/schemas/flow-template.json
+# yaml-language-server: $schema=https://docs.kosli.com/schemas/flow-template.json
 version: 1
 trail:
   attestations:
@@ -99,8 +99,8 @@ Once the flow exists, start a trail with [`kosli begin trail`](/client_reference
 
 ## Editor validation
 
-A [JSON Schema](https://kosli.mintlify.app/schemas/flow-template.json) is available for the flow template format. Add the following comment to the top of your template file to enable inline validation and autocomplete in VS Code (requires the [YAML extension](https://marketplace.visualstudio.com/items?itemName=redhat.vscode-yaml)) and other schema-aware editors:
+A [JSON Schema](https://docs.kosli.com/schemas/flow-template.json) is available for the flow template format. Add the following comment to the top of your template file to enable inline validation and autocomplete in VS Code (requires the [YAML extension](https://marketplace.visualstudio.com/items?itemName=redhat.vscode-yaml)) and other schema-aware editors:
 
 ```yaml
-# yaml-language-server: $schema=https://kosli.mintlify.app/schemas/flow-template.json
+# yaml-language-server: $schema=https://docs.kosli.com/schemas/flow-template.json
 ```

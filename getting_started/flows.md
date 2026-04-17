@@ -28,7 +28,7 @@ A Flow template is a YAML file following the syntax outlined in the [flow templa
 Here is an example:
 
 ```yml sw-delivery-template.yml
-# yaml-language-server: $schema=https://kosli.mintlify.app/schemas/flow-template.json
+# yaml-language-server: $schema=https://docs.kosli.com/schemas/flow-template.json
 version: 1
 trail:
   attestations:

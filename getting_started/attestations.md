@@ -17,7 +17,7 @@ Let's take a look at this example to understand how to make attestations to Kosl
 The following compliance template is expecting 4 attestations, each with its own `name`.
 
 ```yml
-# yaml-language-server: $schema=https://kosli.mintlify.app/schemas/flow-template.json
+# yaml-language-server: $schema=https://docs.kosli.com/schemas/flow-template.json
 version: 1
 trail:
   attestations:
