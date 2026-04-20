@@ -574,7 +574,7 @@
           "Attestation"
         ],
         "summary": "List attestations for criteria",
-        "description": "List attestations matching a search criteria within an organization.\n\nThis endpoint returns a dictionary mapping commit SHAs to lists of attestations.\nEach attestation contains metadata about compliance, timing, and type-specific data.\n\n## Usage Examples\n\n### Get all attestations for a specific flow\n```\nGET /attestations/my-org?flow_name=production-flow\n```\n\n### Get security attestations for specific commits\n```\nGET /attestations/my-org?attestation_type=snyk&commit_list=ae08fc6a5c963ae8dfaa0c27d8e5de9980d433b6\n```\n\n### Get a specific attestation by name\n```\nGET /attestations/my-org?attestation_name=manual-test\n```\n\n### Get custom attestations\n```\nGET /attestations/my-org?attestation_type=custom:security-scan\n```",
+        "description": "List attestations matching a search criteria within an organization.\n\nThis endpoint returns a dictionary mapping commit SHAs to lists of attestations.\nEach attestation contains metadata about compliance, timing, and type-specific data.\n\n`commit_list` is required; it scopes the search to a specific set of commits.\n`attestation_type`, `attestation_name`, and `flow_name` further narrow results\nwithin that commit set but cannot be used on their own.\n\n## Usage examples\n\n### Get all attestations for a list of commits\n```\nGET /attestations/my-org/list_attestations_for_criteria?commit_list=ae08fc6a5c963ae8dfaa0c27d8e5de9980d433b6\n```\n\n### Narrow by flow and attestation type\n```\nGET /attestations/my-org/list_attestations_for_criteria?commit_list=ae08fc6a5c963ae8dfaa0c27d8e5de9980d433b6&flow_name=production-flow&attestation_type=snyk\n```\n\n### Narrow by attestation name\n```\nGET /attestations/my-org/list_attestations_for_criteria?commit_list=ae08fc6a5c963ae8dfaa0c27d8e5de9980d433b6&attestation_name=manual-test\n```\n\n### Narrow by custom attestation type\n```\nGET /attestations/my-org/list_attestations_for_criteria?commit_list=ae08fc6a5c963ae8dfaa0c27d8e5de9980d433b6&attestation_type=custom:security-scan\n```",
         "operationId": "list_attestations_for_criteria_attestations__org__list_attestations_for_criteria_get",
         "security": [
           {
@@ -665,10 +665,10 @@
                   "type": "null"
                 }
               ],
-              "description": "The attestation ID to search for",
+              "description": "The attestation ID to search for. Not yet supported on this endpoint — currently ignored.",
               "title": "Attestation Id"
             },
-            "description": "The attestation ID to search for"
+            "description": "The attestation ID to search for. Not yet supported on this endpoint — currently ignored."
           },
           {
             "name": "attestation_type",
@@ -696,6 +696,26 @@
               "application/json": {
                 "schema": {
                   "$ref": "#/components/schemas/AttestationsListForCommitsResponse"
+                }
+              }
+            }
+          },
+          "400": {
+            "description": "Missing required commit_list parameter",
+            "content": {
+              "application/json": {
+                "schema": {
+                  "$ref": "#/components/schemas/MissingCommitListBadRequestResponse"
+                }
+              }
+            }
+          },
+          "422": {
+            "description": "Invalid attestation type",
+            "content": {
+              "application/json": {
+                "schema": {
+                  "$ref": "#/components/schemas/HTTPValidationError"
                 }
               }
             }
@@ -1858,6 +1878,9 @@
           }
         },
         "responses": {
+          "200": {
+            "description": "Successful flow update"
+          },
           "201": {
             "description": "Successful flow creation",
             "content": {
@@ -1865,9 +1888,6 @@
                 "schema": {}
               }
             }
-          },
-          "200": {
-            "description": "Successful flow update"
           },
           "400": {
             "description": "Validation Error",
@@ -1920,6 +1940,9 @@
           }
         },
         "responses": {
+          "200": {
+            "description": "Successful flow update"
+          },
           "201": {
             "description": "Successful flow creation",
             "content": {
@@ -1927,9 +1950,6 @@
                 "schema": {}
               }
             }
-          },
-          "200": {
-            "description": "Successful flow update"
           },
           "400": {
             "description": "Validation Error",
@@ -2230,7 +2250,7 @@
           "Trails"
         ],
         "summary": "Download trail audit package",
-        "description": "Download the full trail audit package (same content as the app \u201cDownload Full Audit Package\u201d).",
+        "description": "Download the full trail audit package (same content as the app “Download Full Audit Package”).",
         "operationId": "download_trail_audit_package_trails__org___flow_name___trail_name__audit_package_get",
         "security": [
           {
@@ -3635,22 +3655,22 @@
           "201": {
             "description": "Snapshot created"
           },
-          "404": {
-            "description": "Environment Not Found",
-            "content": {
-              "application/json": {
-                "schema": {
-                  "$ref": "#/components/schemas/fastapi_app__errors__NotFoundResponse___locals___NotFoundResponseModel__17"
-                }
-              }
-            }
-          },
           "400": {
             "description": "Invalid report data",
             "content": {
               "application/json": {
                 "schema": {
                   "$ref": "#/components/schemas/fastapi_app__errors__ValidationErrorResponse___locals___ValidationErrorResponseModel__3"
+                }
+              }
+            }
+          },
+          "404": {
+            "description": "Environment Not Found",
+            "content": {
+              "application/json": {
+                "schema": {
+                  "$ref": "#/components/schemas/fastapi_app__errors__NotFoundResponse___locals___NotFoundResponseModel__17"
                 }
               }
             }
@@ -3716,22 +3736,22 @@
           "201": {
             "description": "Snapshot created"
           },
-          "404": {
-            "description": "Environment Not Found",
-            "content": {
-              "application/json": {
-                "schema": {
-                  "$ref": "#/components/schemas/fastapi_app__errors__NotFoundResponse___locals___NotFoundResponseModel__18"
-                }
-              }
-            }
-          },
           "400": {
             "description": "Invalid report data",
             "content": {
               "application/json": {
                 "schema": {
                   "$ref": "#/components/schemas/fastapi_app__errors__ValidationErrorResponse___locals___ValidationErrorResponseModel__4"
+                }
+              }
+            }
+          },
+          "404": {
+            "description": "Environment Not Found",
+            "content": {
+              "application/json": {
+                "schema": {
+                  "$ref": "#/components/schemas/fastapi_app__errors__NotFoundResponse___locals___NotFoundResponseModel__18"
                 }
               }
             }
@@ -3797,22 +3817,22 @@
           "201": {
             "description": "Snapshot created"
           },
-          "404": {
-            "description": "Environment Not Found",
-            "content": {
-              "application/json": {
-                "schema": {
-                  "$ref": "#/components/schemas/fastapi_app__errors__NotFoundResponse___locals___NotFoundResponseModel__19"
-                }
-              }
-            }
-          },
           "400": {
             "description": "Invalid report data",
             "content": {
               "application/json": {
                 "schema": {
                   "$ref": "#/components/schemas/fastapi_app__errors__ValidationErrorResponse___locals___ValidationErrorResponseModel__5"
+                }
+              }
+            }
+          },
+          "404": {
+            "description": "Environment Not Found",
+            "content": {
+              "application/json": {
+                "schema": {
+                  "$ref": "#/components/schemas/fastapi_app__errors__NotFoundResponse___locals___NotFoundResponseModel__19"
                 }
               }
             }
@@ -3878,22 +3898,22 @@
           "201": {
             "description": "Snapshot created"
           },
-          "404": {
-            "description": "Environment Not Found",
-            "content": {
-              "application/json": {
-                "schema": {
-                  "$ref": "#/components/schemas/fastapi_app__errors__NotFoundResponse___locals___NotFoundResponseModel__20"
-                }
-              }
-            }
-          },
           "400": {
             "description": "Invalid report data",
             "content": {
               "application/json": {
                 "schema": {
                   "$ref": "#/components/schemas/fastapi_app__errors__ValidationErrorResponse___locals___ValidationErrorResponseModel__6"
+                }
+              }
+            }
+          },
+          "404": {
+            "description": "Environment Not Found",
+            "content": {
+              "application/json": {
+                "schema": {
+                  "$ref": "#/components/schemas/fastapi_app__errors__NotFoundResponse___locals___NotFoundResponseModel__20"
                 }
               }
             }
@@ -3959,22 +3979,22 @@
           "201": {
             "description": "Snapshot created"
           },
-          "404": {
-            "description": "Environment Not Found",
-            "content": {
-              "application/json": {
-                "schema": {
-                  "$ref": "#/components/schemas/fastapi_app__errors__NotFoundResponse___locals___NotFoundResponseModel__21"
-                }
-              }
-            }
-          },
           "400": {
             "description": "Invalid report data",
             "content": {
               "application/json": {
                 "schema": {
                   "$ref": "#/components/schemas/fastapi_app__errors__ValidationErrorResponse___locals___ValidationErrorResponseModel__7"
+                }
+              }
+            }
+          },
+          "404": {
+            "description": "Environment Not Found",
+            "content": {
+              "application/json": {
+                "schema": {
+                  "$ref": "#/components/schemas/fastapi_app__errors__NotFoundResponse___locals___NotFoundResponseModel__21"
                 }
               }
             }
@@ -4040,22 +4060,22 @@
           "201": {
             "description": "Snapshot created"
           },
-          "404": {
-            "description": "Environment Not Found",
-            "content": {
-              "application/json": {
-                "schema": {
-                  "$ref": "#/components/schemas/fastapi_app__errors__NotFoundResponse___locals___NotFoundResponseModel__22"
-                }
-              }
-            }
-          },
           "400": {
             "description": "Invalid report data",
             "content": {
               "application/json": {
                 "schema": {
                   "$ref": "#/components/schemas/fastapi_app__errors__ValidationErrorResponse___locals___ValidationErrorResponseModel__8"
+                }
+              }
+            }
+          },
+          "404": {
+            "description": "Environment Not Found",
+            "content": {
+              "application/json": {
+                "schema": {
+                  "$ref": "#/components/schemas/fastapi_app__errors__NotFoundResponse___locals___NotFoundResponseModel__22"
                 }
               }
             }
@@ -4121,22 +4141,22 @@
           "201": {
             "description": "Snapshot created"
           },
-          "404": {
-            "description": "Environment Not Found",
-            "content": {
-              "application/json": {
-                "schema": {
-                  "$ref": "#/components/schemas/fastapi_app__errors__NotFoundResponse___locals___NotFoundResponseModel__23"
-                }
-              }
-            }
-          },
           "400": {
             "description": "Invalid report data",
             "content": {
               "application/json": {
                 "schema": {
                   "$ref": "#/components/schemas/fastapi_app__errors__ValidationErrorResponse___locals___ValidationErrorResponseModel__9"
+                }
+              }
+            }
+          },
+          "404": {
+            "description": "Environment Not Found",
+            "content": {
+              "application/json": {
+                "schema": {
+                  "$ref": "#/components/schemas/fastapi_app__errors__NotFoundResponse___locals___NotFoundResponseModel__23"
                 }
               }
             }
@@ -4189,22 +4209,22 @@
               }
             }
           },
-          "404": {
-            "description": "Environment not found",
-            "content": {
-              "application/json": {
-                "schema": {
-                  "$ref": "#/components/schemas/fastapi_app__errors__NotFoundResponse___locals___NotFoundResponseModel__24"
-                }
-              }
-            }
-          },
           "403": {
             "description": "User does not have permission to archive environment",
             "content": {
               "application/json": {
                 "schema": {
                   "$ref": "#/components/schemas/fastapi_app__errors__ForbiddenResponse___locals___ForbiddenResponseModel__2"
+                }
+              }
+            }
+          },
+          "404": {
+            "description": "Environment not found",
+            "content": {
+              "application/json": {
+                "schema": {
+                  "$ref": "#/components/schemas/fastapi_app__errors__NotFoundResponse___locals___NotFoundResponseModel__24"
                 }
               }
             }
@@ -4267,22 +4287,22 @@
               }
             }
           },
-          "404": {
-            "description": "Environment Not Found",
-            "content": {
-              "application/json": {
-                "schema": {
-                  "$ref": "#/components/schemas/fastapi_app__errors__NotFoundResponse___locals___NotFoundResponseModel__25"
-                }
-              }
-            }
-          },
           "400": {
             "description": "Bad Request",
             "content": {
               "application/json": {
                 "schema": {
                   "$ref": "#/components/schemas/fastapi_app__errors__BadRequestResponse___locals___BadRequestResponseModel__1"
+                }
+              }
+            }
+          },
+          "404": {
+            "description": "Environment Not Found",
+            "content": {
+              "application/json": {
+                "schema": {
+                  "$ref": "#/components/schemas/fastapi_app__errors__NotFoundResponse___locals___NotFoundResponseModel__25"
                 }
               }
             }
@@ -4570,11 +4590,11 @@
               }
             }
           },
-          "404": {
-            "description": "Environment or policy not found"
-          },
           "403": {
             "description": "User does not have permission to attach policy"
+          },
+          "404": {
+            "description": "Environment or policy not found"
           }
         }
       },
@@ -4632,22 +4652,22 @@
               }
             }
           },
-          "404": {
-            "description": "Environment or policy not found",
-            "content": {
-              "application/json": {
-                "schema": {
-                  "$ref": "#/components/schemas/fastapi_app__errors__NotFoundResponse___locals___NotFoundResponseModel__28"
-                }
-              }
-            }
-          },
           "403": {
             "description": "User does not have permission to detach policy",
             "content": {
               "application/json": {
                 "schema": {
                   "$ref": "#/components/schemas/fastapi_app__errors__ForbiddenResponse___locals___ForbiddenResponseModel__3"
+                }
+              }
+            }
+          },
+          "404": {
+            "description": "Environment or policy not found",
+            "content": {
+              "application/json": {
+                "schema": {
+                  "$ref": "#/components/schemas/fastapi_app__errors__NotFoundResponse___locals___NotFoundResponseModel__28"
                 }
               }
             }
@@ -5332,6 +5352,9 @@
           }
         },
         "responses": {
+          "200": {
+            "description": "Successfully updated environments notification."
+          },
           "201": {
             "description": "Successfully created environments notification.",
             "content": {
@@ -5339,9 +5362,6 @@
                 "schema": {}
               }
             }
-          },
-          "200": {
-            "description": "Successfully updated environments notification."
           },
           "400": {
             "description": "Validation Error",
@@ -5608,22 +5628,22 @@
               }
             }
           },
-          "404": {
-            "description": "Resource Not Found",
-            "content": {
-              "application/json": {
-                "schema": {
-                  "$ref": "#/components/schemas/fastapi_app__errors__NotFoundResponse___locals___NotFoundResponseModel__34"
-                }
-              }
-            }
-          },
           "400": {
             "description": "Invalid Resource Type",
             "content": {
               "application/json": {
                 "schema": {
                   "$ref": "#/components/schemas/fastapi_app__errors__BadRequestResponse___locals___BadRequestResponseModel__2"
+                }
+              }
+            }
+          },
+          "404": {
+            "description": "Resource Not Found",
+            "content": {
+              "application/json": {
+                "schema": {
+                  "$ref": "#/components/schemas/fastapi_app__errors__NotFoundResponse___locals___NotFoundResponseModel__34"
                 }
               }
             }
@@ -6235,6 +6255,9 @@
           }
         },
         "responses": {
+          "200": {
+            "description": "Update Success"
+          },
           "201": {
             "description": "Creation Success",
             "content": {
@@ -6242,9 +6265,6 @@
                 "schema": {}
               }
             }
-          },
-          "200": {
-            "description": "Update Success"
           },
           "400": {
             "description": "Validation Error",
@@ -6297,6 +6317,9 @@
           }
         },
         "responses": {
+          "200": {
+            "description": "Update Success"
+          },
           "201": {
             "description": "Creation Success",
             "content": {
@@ -6304,9 +6327,6 @@
                 "schema": {}
               }
             }
-          },
-          "200": {
-            "description": "Update Success"
           },
           "400": {
             "description": "Validation Error",
@@ -6641,6 +6661,260 @@
           }
         }
       }
+    },
+    "/service-accounts/{org}/{name}/api-keys": {
+      "get": {
+        "tags": [
+          "Service Accounts"
+        ],
+        "summary": "List API keys for a service account",
+        "description": "List all active API keys for a service account.",
+        "operationId": "list_service_account_api_keys",
+        "security": [
+          {
+            "HTTPBearer": []
+          },
+          {
+            "HTTPBasic": []
+          }
+        ],
+        "parameters": [
+          {
+            "name": "org",
+            "in": "path",
+            "required": true,
+            "schema": {
+              "type": "string",
+              "title": "Org"
+            }
+          },
+          {
+            "name": "name",
+            "in": "path",
+            "required": true,
+            "schema": {
+              "type": "string",
+              "title": "Name"
+            },
+            "description": "The name of the service account"
+          }
+        ],
+        "responses": {
+          "200": {
+            "description": "Successful Response",
+            "content": {
+              "application/json": {
+                "schema": {
+                  "type": "array",
+                  "items": {
+                    "$ref": "#/components/schemas/ApiKeyListItemResponse"
+                  }
+                }
+              }
+            }
+          },
+          "403": {
+            "description": "Forbidden",
+            "content": {
+              "application/json": {
+                "schema": {
+                  "$ref": "#/components/schemas/ServiceAccountForbiddenResponse"
+                }
+              }
+            }
+          },
+          "404": {
+            "description": "Service account not found",
+            "content": {
+              "application/json": {
+                "schema": {
+                  "$ref": "#/components/schemas/ServiceAccountNotFoundResponse"
+                }
+              }
+            }
+          }
+        }
+      },
+      "post": {
+        "tags": [
+          "Service Accounts"
+        ],
+        "summary": "Create an API key for a service account",
+        "description": "Create a new API key for a service account. The key value is only returned once.",
+        "operationId": "create_service_account_api_key",
+        "security": [
+          {
+            "HTTPBearer": []
+          },
+          {
+            "HTTPBasic": []
+          }
+        ],
+        "parameters": [
+          {
+            "name": "org",
+            "in": "path",
+            "required": true,
+            "schema": {
+              "type": "string",
+              "title": "Org"
+            }
+          },
+          {
+            "name": "name",
+            "in": "path",
+            "required": true,
+            "schema": {
+              "type": "string",
+              "title": "Name"
+            },
+            "description": "The name of the service account"
+          }
+        ],
+        "requestBody": {
+          "required": true,
+          "content": {
+            "application/json": {
+              "schema": {
+                "$ref": "#/components/schemas/ApiKeyPostInput"
+              }
+            }
+          }
+        },
+        "responses": {
+          "201": {
+            "description": "API key created successfully",
+            "content": {
+              "application/json": {
+                "schema": {
+                  "$ref": "#/components/schemas/ApiKeyCreatedResponse"
+                }
+              }
+            }
+          },
+          "400": {
+            "description": "Invalid expiry date",
+            "content": {
+              "application/json": {
+                "schema": {
+                  "$ref": "#/components/schemas/InvalidExpiryResponse"
+                }
+              }
+            }
+          },
+          "403": {
+            "description": "Forbidden",
+            "content": {
+              "application/json": {
+                "schema": {
+                  "$ref": "#/components/schemas/ServiceAccountForbiddenResponse"
+                }
+              }
+            }
+          },
+          "404": {
+            "description": "Service account not found",
+            "content": {
+              "application/json": {
+                "schema": {
+                  "$ref": "#/components/schemas/ServiceAccountNotFoundResponse"
+                }
+              }
+            }
+          },
+          "422": {
+            "description": "Validation Error",
+            "content": {
+              "application/json": {
+                "schema": {
+                  "$ref": "#/components/schemas/HTTPValidationError"
+                }
+              }
+            }
+          }
+        }
+      }
+    },
+    "/service-accounts/{org}/{name}/api-keys/{key_id}": {
+      "delete": {
+        "tags": [
+          "Service Accounts"
+        ],
+        "summary": "Revoke an API key for a service account",
+        "description": "Revoke an API key for a service account.",
+        "operationId": "delete_service_account_api_key",
+        "security": [
+          {
+            "HTTPBearer": []
+          },
+          {
+            "HTTPBasic": []
+          }
+        ],
+        "parameters": [
+          {
+            "name": "org",
+            "in": "path",
+            "required": true,
+            "schema": {
+              "type": "string",
+              "title": "Org"
+            }
+          },
+          {
+            "name": "name",
+            "in": "path",
+            "required": true,
+            "schema": {
+              "type": "string",
+              "title": "Name"
+            },
+            "description": "The name of the service account"
+          },
+          {
+            "name": "key_id",
+            "in": "path",
+            "required": true,
+            "schema": {
+              "type": "string",
+              "title": "Key Id"
+            },
+            "description": "The ID of the API key to revoke"
+          }
+        ],
+        "responses": {
+          "200": {
+            "description": "API key revoked successfully",
+            "content": {
+              "application/json": {
+                "schema": {
+                  "type": "string"
+                }
+              }
+            }
+          },
+          "403": {
+            "description": "Forbidden",
+            "content": {
+              "application/json": {
+                "schema": {
+                  "$ref": "#/components/schemas/ServiceAccountForbiddenResponse"
+                }
+              }
+            }
+          },
+          "404": {
+            "description": "API key not found",
+            "content": {
+              "application/json": {
+                "schema": {
+                  "$ref": "#/components/schemas/ApiKeyNotFoundResponse"
+                }
+              }
+            }
+          }
+        }
+      }
     }
   },
   "components": {
@@ -6902,7 +7176,7 @@
             "description": "Allowlist for linus-git",
             "environment_name": "production",
             "fingerprint": "fffd6d98c2da601a514797f0db9cc380ffe29a4312bebec5430d6fcb31d5bf4c",
-            "timestamp": 1633123456.0,
+            "timestamp": 1633123456,
             "user_name": "John Doe"
           }
         ]
@@ -8830,7 +9104,7 @@
                 "attestation_id": "1234567890",
                 "attestation_name": "manual-test",
                 "attestation_type": "generic",
-                "created_at": 1750923680.0,
+                "created_at": 1750923680,
                 "description": "this is a glorious attestation",
                 "evidence_archive_fingerprint": "960421eb617fc0ff3183cdc406f4bbc6340f10bc12ac2a83cb9a203dc3be3fc1",
                 "evidence_archive_path": "/path/to/evidence.tar.gz",
@@ -10712,15 +10986,15 @@
         "title": "EnvNotificationsResponse",
         "examples": [
           {
-            "created_at": 1633123456.0,
+            "created_at": 1633123456,
             "created_by": "user@example.com",
             "environments": [
               "production"
             ],
             "is_created_from_slack_app": false,
             "is_failing": false,
-            "last_modified_at": 1633123456.0,
-            "last_success_timestamp": 1633123456.0,
+            "last_modified_at": 1633123456,
+            "last_success_timestamp": 1633123456,
             "name": "production-notification",
             "number": 1,
             "targets": [
@@ -13618,7 +13892,7 @@
             "consuming_envs": [
               "production"
             ],
-            "created_at": 1633123456.0,
+            "created_at": 1633123456,
             "created_by": "John Doe",
             "description": "Production environment policy",
             "events": [
@@ -13626,19 +13900,19 @@
                 "data": {
                   "version": 1
                 },
-                "timestamp": 1633123456.0,
+                "timestamp": 1633123456,
                 "type": "policy_created",
                 "user": "John Doe"
               }
             ],
-            "last_modified_at": 1633123456.0,
+            "last_modified_at": 1633123456,
             "name": "production-policy",
             "versions": [
               {
                 "comment": "Initial version",
                 "created_by": "John Doe",
                 "policy_yaml": "_schema: https://kosli.com/schemas/policy/environment/v1\n\nartifacts:\n  provenance:\n    required: false",
-                "timestamp": 1633123456.0,
+                "timestamp": 1633123456,
                 "version": 1
               }
             ]
@@ -18345,6 +18619,291 @@
             "message": "Invalid report data"
           }
         ]
+      },
+      "ApiKeyListItemResponse": {
+        "type": "object",
+        "required": [
+          "id",
+          "description",
+          "created_at",
+          "expires_at"
+        ],
+        "properties": {
+          "id": {
+            "type": "string",
+            "title": "Id",
+            "description": "Unique identifier for the API key"
+          },
+          "description": {
+            "type": "string",
+            "title": "Description",
+            "description": "Description of the API key"
+          },
+          "created_at": {
+            "type": "number",
+            "title": "Created At",
+            "description": "Unix timestamp when the key was created"
+          },
+          "expires_at": {
+            "type": "integer",
+            "title": "Expires At",
+            "description": "Unix timestamp when the key expires. 0 means no expiry."
+          },
+          "last_used_at": {
+            "anyOf": [
+              {
+                "type": "number"
+              },
+              {
+                "type": "null"
+              }
+            ],
+            "title": "Last Used At",
+            "description": "Unix timestamp when the key was last used. Omitted if never used.",
+            "default": null
+          }
+        },
+        "title": "ApiKeyListItemResponse"
+      },
+      "ApiKeyCreatedResponse": {
+        "type": "object",
+        "required": [
+          "id",
+          "key",
+          "description",
+          "created_at",
+          "expires_at"
+        ],
+        "properties": {
+          "id": {
+            "type": "string",
+            "title": "Id",
+            "description": "Unique identifier for the API key"
+          },
+          "key": {
+            "type": "string",
+            "title": "Key",
+            "description": "The API key value. This is only returned once at creation time."
+          },
+          "description": {
+            "type": "string",
+            "title": "Description",
+            "description": "Description of the API key"
+          },
+          "created_at": {
+            "type": "number",
+            "title": "Created At",
+            "description": "Unix timestamp when the key was created"
+          },
+          "expires_at": {
+            "type": "integer",
+            "title": "Expires At",
+            "description": "Unix timestamp when the key expires. 0 means no expiry."
+          }
+        },
+        "title": "ApiKeyCreatedResponse"
+      },
+      "ApiKeyPostInput": {
+        "type": "object",
+        "required": [
+          "description"
+        ],
+        "properties": {
+          "description": {
+            "type": "string",
+            "minLength": 1,
+            "title": "Description",
+            "description": "Description for the API key"
+          },
+          "expires_at": {
+            "anyOf": [
+              {
+                "type": "integer"
+              },
+              {
+                "type": "null"
+              }
+            ],
+            "title": "Expires At",
+            "description": "Unix timestamp for key expiry. Use 0 or omit for no expiry. Must not be in the past.",
+            "default": null
+          }
+        },
+        "title": "ApiKeyPostInput"
+      },
+      "ServiceAccountNotFoundResponse": {
+        "type": "object",
+        "required": [
+          "message"
+        ],
+        "properties": {
+          "message": {
+            "type": "string",
+            "title": "Message",
+            "description": "Error message"
+          },
+          "errors": {
+            "anyOf": [
+              {
+                "additionalProperties": {
+                  "type": "string"
+                },
+                "type": "object"
+              },
+              {
+                "type": "null"
+              }
+            ],
+            "title": "Errors",
+            "description": "Validation errors by field"
+          }
+        },
+        "title": "ServiceAccountNotFoundResponse",
+        "description": "Service account not found",
+        "examples": [
+          {
+            "message": "Service account not found"
+          }
+        ]
+      },
+      "ApiKeyNotFoundResponse": {
+        "type": "object",
+        "required": [
+          "message"
+        ],
+        "properties": {
+          "message": {
+            "type": "string",
+            "title": "Message",
+            "description": "Error message"
+          },
+          "errors": {
+            "anyOf": [
+              {
+                "additionalProperties": {
+                  "type": "string"
+                },
+                "type": "object"
+              },
+              {
+                "type": "null"
+              }
+            ],
+            "title": "Errors",
+            "description": "Validation errors by field"
+          }
+        },
+        "title": "ApiKeyNotFoundResponse",
+        "description": "API key not found",
+        "examples": [
+          {
+            "message": "API key not found"
+          }
+        ]
+      },
+      "ServiceAccountForbiddenResponse": {
+        "type": "object",
+        "required": [
+          "message"
+        ],
+        "properties": {
+          "message": {
+            "type": "string",
+            "title": "Message",
+            "description": "Error message"
+          },
+          "errors": {
+            "anyOf": [
+              {
+                "additionalProperties": {
+                  "type": "string"
+                },
+                "type": "object"
+              },
+              {
+                "type": "null"
+              }
+            ],
+            "title": "Errors",
+            "description": "Validation errors by field"
+          }
+        },
+        "title": "ServiceAccountForbiddenResponse",
+        "examples": [
+          {
+            "message": "You don't have permission to access this resource"
+          }
+        ]
+      },
+      "InvalidExpiryResponse": {
+        "type": "object",
+        "required": [
+          "message"
+        ],
+        "properties": {
+          "message": {
+            "type": "string",
+            "title": "Message",
+            "description": "Error message"
+          },
+          "errors": {
+            "anyOf": [
+              {
+                "additionalProperties": {
+                  "type": "string"
+                },
+                "type": "object"
+              },
+              {
+                "type": "null"
+              }
+            ],
+            "title": "Errors",
+            "description": "Validation errors by field"
+          }
+        },
+        "title": "InvalidExpiryResponse",
+        "description": "expires_at cannot be in the past",
+        "examples": [
+          {
+            "message": "expires_at cannot be in the past"
+          }
+        ]
+      },
+      "MissingCommitListBadRequestResponse": {
+        "type": "object",
+        "required": [
+          "message"
+        ],
+        "properties": {
+          "message": {
+            "type": "string",
+            "title": "Message",
+            "description": "Error message"
+          },
+          "errors": {
+            "anyOf": [
+              {
+                "additionalProperties": {
+                  "type": "string"
+                },
+                "type": "object"
+              },
+              {
+                "type": "null"
+              }
+            ],
+            "title": "Errors",
+            "description": "Validation errors by field"
+          }
+        },
+        "title": "MissingCommitListBadRequestResponse",
+        "description": "Missing required commit_list parameter",
+        "examples": [
+          {
+            "message": "commit_list is required: provide one or more commit SHAs to search."
+          }
+        ]
       }
     },
     "securitySchemes": {
@@ -18414,6 +18973,10 @@
     },
     {
       "name": "Search"
+    },
+    {
+      "name": "Service Accounts",
+      "description": "Manage API keys for service accounts"
     },
     {
       "name": "Snapshots"
