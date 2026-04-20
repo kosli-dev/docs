@@ -565,6 +565,14 @@
               ]
             },
             {
+              "group": "Service Accounts",
+              "pages": [
+                "GET /service-accounts/{org}/{name}/api-keys",
+                "POST /service-accounts/{org}/{name}/api-keys",
+                "DELETE /service-accounts/{org}/{name}/api-keys/{key_id}"
+              ]
+            },
+            {
               "group": "Snapshots",
               "pages": [
                 "GET /snapshots/{org}/{env_name}",
