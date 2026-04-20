@@ -41,4 +41,4 @@ If unsure about the structure, review recent changelog updates and follow that s
 
 Be polite and terse. The changelog must be skimmable and quick to read. Include relevant links to docs pages.
 
-PR titles and commit messages **must** follow [Conventional Commits](https://www.conventionalcommits.org/) format: `type: short description` (lowercase, no period). Use `docs:` as the type. Example: `docs: add changelog entry for CLI v2.5.0`.
+PR titles and commit messages must follow the conventional commits format described in CLAUDE.md. Use `docs:` as the type.

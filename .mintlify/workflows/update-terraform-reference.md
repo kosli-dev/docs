@@ -29,4 +29,4 @@ When creating or updating pages:
 
 Do not modify changelog/index.mdx — that is handled by the "Update changelog" workflow.
 
-PR titles and commit messages **must** follow [Conventional Commits](https://www.conventionalcommits.org/) format: `type: short description` (lowercase, no period). Use `docs:` as the type. Example: `docs: update Terraform reference for v1.3.0`.
+PR titles and commit messages must follow the conventional commits format described in CLAUDE.md. Use `docs:` as the type.

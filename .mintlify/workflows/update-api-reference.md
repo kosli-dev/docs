@@ -32,4 +32,4 @@ If new endpoint tags (groups) are introduced, add corresponding entries to the A
 - If no API changes were introduced, do nothing.
 - Do not include private repository file paths, directory structures, code snippets, or any other internal implementation details in PR titles, descriptions, or commit messages. The PR body should only describe the user-facing change in terms of the API behavior.
 - Do not modify any files other than `api-reference/openapi.json` and `config/navigation.json`.
-- PR titles and commit messages **must** follow [Conventional Commits](https://www.conventionalcommits.org/) format: `type: short description` (lowercase, no period). Use `docs:` as the type. Example: `docs: update API reference for v2.5.0`.
+- PR titles and commit messages must follow the conventional commits format described in CLAUDE.md. Use `docs:` as the type.
