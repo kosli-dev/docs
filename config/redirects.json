@@ -50,5 +50,9 @@
   {
     "source": "/kosli_overview/what_is_kosli",
     "destination": "/understand_kosli/what_is_kosli"
+  },
+  {
+    "source": "/api_v2",
+    "destination": "/api-reference"
   }
 ]
