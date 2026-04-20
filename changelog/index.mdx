@@ -4,6 +4,42 @@ description: "Release notes for Kosli products."
 rss: true
 ---
 
+<Update label="April 20, 2026" description="" tags={["Platform"]}>
+
+## New features
+
+- **MagicLink sign-in** — you can now sign in to Kosli using a MagicLink email flow, removing the need for a password.
+- **API key management for service accounts** — programmatically create and manage API keys for service accounts, making it easier to automate integrations.
+- **Filter repositories by name** — the repositories list now supports filtering by name for faster navigation.
+
+## Updates
+
+- Significantly improved environment snapshot page performance, including faster artifact loading, lazy loading, and optimized search.
+
+## Bug fixes
+
+- Fixed a 500 error when listing API keys for keys that had never been used.
+- Fixed YAML syntax errors in policies returning a 500 instead of a 400 error.
+- Fixed snapshot rejection when a repository has no provider set.
+
+</Update>
+
+<Update label="April 20, 2026" description="v2.16.0" tags={["CLI"]}>
+
+## New features
+
+- **Custom CA bundle support for k8s-reporter** — the [k8s-reporter Helm chart](/helm/k8s_reporter) now supports `extraVolumes`, `extraVolumeMounts`, `extraEnvVars`, and a `customCA` convenience wrapper for environments behind a TLS-inspecting proxy. See the [Helm chart reference](/helm/k8s_reporter) for details.
+- **SonarQube pull request scan support** — `kosli attest sonar` now retrieves scan results for pull request analyses. Pass `--pull-request` to specify the PR number, or let the CLI detect it automatically from the SonarQube metadata file. See the [attest sonar](/client_reference/kosli_attest_sonar) reference.
+- **`--sonar-ce-task-url` flag** — pass the SonarQube CE task URL directly to `kosli attest sonar`, bypassing the need for the `.scannerwork/report-task.txt` file. Useful in CI environments where the scanner and CLI run in separate containers.
+
+## Updates
+
+- The Helm chart now uses `appVersion` as the default CLI version.
+
+[View on GitHub](https://github.com/kosli-dev/cli/releases/tag/v2.16.0)
+
+</Update>
+
 <Update label="April 15, 2026" description="v0.6.0" tags={["Terraform Provider"]}>
 
 ## New features
