@@ -40,3 +40,5 @@ For each change, describe what changed and what it means for users. Organize ent
 If unsure about the structure, review recent changelog updates and follow that style and format.
 
 Be polite and terse. The changelog must be skimmable and quick to read. Include relevant links to docs pages.
+
+PR titles and commit messages must follow the conventional commits format described in CLAUDE.md. Use `docs:` as the type.

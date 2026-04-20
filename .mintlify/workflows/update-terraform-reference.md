@@ -28,3 +28,5 @@ When creating or updating pages:
 - Include example usage, schema (required/optional/read-only), and import instructions where applicable.
 
 Do not modify changelog/index.mdx — that is handled by the "Update changelog" workflow.
+
+PR titles and commit messages must follow the conventional commits format described in CLAUDE.md. Use `docs:` as the type.
