@@ -176,10 +176,10 @@ If you already run [cert-manager's trust-manager](https://cert-manager.io/docs/t
 | reporterConfig.environments | list | `[]` | List of Kosli environments to report to. Each entry has required 'name' and optional namespace selectors. Use one entry to report a single environment; use multiple entries to report to multiple environments with different selectors. Per entry: name (required), namespaces, namespacesRegex, excludeNamespaces, excludeNamespacesRegex (optional). Leave namespace fields unset for an entry to report the entire cluster to that environment. |
 | reporterConfig.httpProxy | string | `""` | the http proxy url |
 | reporterConfig.kosliOrg | string | `""` | the name of the Kosli org |
-| reporterConfig.securityContext | object | `{"allowPrivilegeEscalation":false,"runAsNonRoot":true,"runAsUser":1000}` | the security context for the reporter cronjob Set to null or {} to disable security context entirely (not recommended) For OpenShift, you can omit runAsUser to let OpenShift assign the UID |
+| reporterConfig.securityContext | object | `{"allowPrivilegeEscalation":false,"runAsNonRoot":true,"runAsUser":1000}` | the security context for the reporter cronjob. Set to null or {} to disable security context entirely (not recommended). For OpenShift with SCC, explicitly set runAsUser to null to let OpenShift assign the UID from the allowed range. Simply omitting runAsUser from your values override will not work because Helm deep-merges with these defaults. Example OpenShift override:   securityContext:     allowPrivilegeEscalation: false     runAsNonRoot: true     runAsUser: null |
 | reporterConfig.securityContext.allowPrivilegeEscalation | bool | `false` | whether to allow privilege escalation |
 | reporterConfig.securityContext.runAsNonRoot | bool | `true` | whether to run as non root |
-| reporterConfig.securityContext.runAsUser | int | `1000` | the user id to run as Omit this field for OpenShift environments to allow automatic UID assignment |
+| reporterConfig.securityContext.runAsUser | int | `1000` | the user id to run as. For OpenShift environments with SCC, set to null (runAsUser: null) to allow automatic UID assignment. Simply omitting this field will not work due to Helm's deep merge with chart defaults. |
 | resources.limits.cpu | string | `"100m"` | the cpu limit |
 | resources.limits.memory | string | `"256Mi"` | the memory limit |
 | resources.requests.memory | string | `"64Mi"` | the memory request |
