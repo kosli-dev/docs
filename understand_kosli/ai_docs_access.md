@@ -1,9 +1,9 @@
 ---
 title: 'AI access to these docs'
-description: 'Use MCP servers and skill.md to let AI tools read and search Kosli documentation.'
+description: 'Use MCP servers, skill.md, and llms.txt to let AI tools read and search Kosli documentation.'
 ---
 
-Kosli documentation supports AI-friendly access through two mechanisms: an **MCP server** for semantic search and a **skill.md** endpoint that teaches AI assistants how to work with the docs. These let you query Kosli documentation directly from AI coding assistants like Cursor, Claude Code, Windsurf, VS Code with Copilot, and others.
+Kosli documentation supports AI-friendly access through three mechanisms: an **MCP server** for semantic search, a **skill.md** endpoint that teaches AI assistants how the docs are organized, and **llms.txt** files that provide full documentation content. These let you query Kosli documentation directly from AI coding assistants like Cursor, Claude Code, Windsurf, VS Code with Copilot, and others.
 
 ## MCP server
 
@@ -31,7 +31,7 @@ The Model Context Protocol (MCP) server lets AI tools search Kosli documentation
     Run the following command:
 
     ```bash
-    claude mcp add kosli-docs https://docs.kosli.com/mcp
+    claude mcp add --transport http kosli-docs https://docs.kosli.com/mcp
     ```
   </Tab>
   <Tab title="Windsurf">
@@ -68,13 +68,13 @@ Once connected, your AI assistant gains a search tool it can use to look up Kosl
 
 ### What you can do with it
 
-- Ask your AI assistant questions about Kosli and it will search the docs automatically.
-- Get accurate, up-to-date answers grounded in the official documentation.
-- Reference Kosli CLI commands, API endpoints, or configuration options while coding.
+- Ask "How do I attest a Snyk scan in a GitHub Actions workflow?" and get an answer grounded in the official docs.
+- Look up Kosli CLI commands, API endpoints, or configuration options while coding.
+- Get accurate, up-to-date answers without leaving your editor.
 
 ### Inline MCP access
 
-You can also connect to the MCP server directly from any documentation page. Look for the AI chat icon in the contextual toolbar on each page to ask questions about that page's content.
+Each documentation page also has a **Copy page** button in the top-right corner. Click it to access options like copying the page as Markdown for LLMs, opening it directly in ChatGPT, Claude, or Perplexity, copying the MCP server URL, or installing the MCP server in Cursor or VS Code.
 
 ## skill.md
 
@@ -90,11 +90,16 @@ This is useful when you want an AI assistant to have a broad understanding of Ko
 
 ### Use skill.md with Claude Code
 
+To register the Kosli docs as a Claude Code skill, create the skill directory and download the file:
+
 ```bash
-claude skills add https://docs.kosli.com/skill.md
+mkdir -p ~/.claude/skills/kosli-docs
+curl -o ~/.claude/skills/kosli-docs/SKILL.md https://docs.kosli.com/skill.md
 ```
 
-This registers the Kosli documentation as a skill that Claude Code can reference during your session.
+Claude Code auto-discovers skills from `~/.claude/skills/` and will reference the Kosli documentation during your sessions.
+
+<Note>The local skills directory (`~/.claude/skills/`) is specific to Claude Code. Other AI tools can consume `skill.md` directly by fetching the URL — for example, by pasting it into a conversation or configuring the tool to read it as context.</Note>
 
 ## llms.txt
 
@@ -103,7 +108,7 @@ Kosli documentation also provides standard `llms.txt` files for AI consumption:
 - **`https://docs.kosli.com/llms.txt`** — An index of all documentation pages with descriptions.
 - **`https://docs.kosli.com/llms-full.txt`** — The full content of all documentation pages in a single file.
 
-These follow the [llms.txt standard](https://llmstxt.org/) and can be used by any AI tool that supports it.
+These follow the [llms.txt standard](https://llmstxt.org/) and can be used by any AI tool that supports it. Pass the URL to a tool that accepts an llms.txt source, or download the file and include it as context in your prompt.
 
 ## When to use each method
 
