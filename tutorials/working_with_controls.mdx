@@ -39,7 +39,7 @@ Before creating controls, it helps to understand how they fit into the Kosli dat
 
 **Decisions** are the recorded outcomes of a Policy Decision Point (PDP) — the step in your process where a judgement is reached about a specific control: "control `RCTL-043` is satisfied for this artifact." A decision is an attestation that references a control, recorded at the point where the judgement is made — typically during a release or promotion step.
 
-**Controls** are the named governance requirements that decisions are recorded against. They have a stable identity (the control code), a human-readable name, and an optional description and source link pointing back to your GRC system or policy document.
+**Controls** are the named governance requirements that decisions are recorded against. They have a stable identity (the control identifier), a human-readable name, and an optional description and source link pointing back to your GRC system or policy document.
 
 This separation matters: raw facts exist independently of controls. A JUnit test report is a fact. Whether that test report satisfies a "test coverage" control is a decision. The decision references the fact; the fact doesn't need to know about the control.
 
@@ -51,13 +51,13 @@ A Policy Enforcement Point (PEP) is where that decision is acted upon. `kosli as
 
 ## Creating a control
 
-Navigate to **Controls** in the [Kosli app](https://app.kosli.com) sidebar and select **New control**. Provide a **control code**, a **name**, and optionally a description and a source URL pointing back to the authoritative definition in your GRC system or policy document.
+Navigate to **Controls** in the [Kosli app](https://app.kosli.com) sidebar and select **New control**. Provide a **control identifier**, a **name**, and optionally a description and a source URL pointing back to the authoritative definition in your GRC system or policy document.
 
 You can also create controls via the CLI:
 
 ```bash
 kosli create control \
-    --code RCTL-043 \
+    --identifier RCTL-043 \
     --name "Source code review" \
     --description "All commits included in a release must have been reviewed by at least one person other than the author." \
     --source-url https://your-grc-system.example.com/controls/RCTL-043
@@ -65,13 +65,13 @@ kosli create control \
 
 | Flag | Description |
 |------|-------------|
-| `--code` | **Required.** The customer-provided control identifier (e.g. `RCTL-043`, `peer-review`, `vuln-scan-production`). Must be unique within your organisation. **Immutable once created** — to change a control code, archive the control and create a new one. |
-| `--name` | **Required.** A human-readable label for the control (e.g. `Source code review`). Mutable — you can rename a control while keeping the same code. |
+| `--identifier` | **Required.** The control identifier (e.g. `RCTL-043`, `peer-review`, `vuln-scan-production`). Must be unique within your organisation. **Immutable once created** — to change a control identifier, archive the control and create a new one. |
+| `--name` | **Required.** A human-readable label for the control (e.g. `Source code review`). Mutable — you can rename a control while keeping the same identifier. |
 | `--description` | Optional. What the control does, in human-readable terms. |
 | `--source-url` | Optional. URL back to the authoritative definition in your GRC system, ServiceNow, or policy document. |
 
 <Tip>
-  Control codes are the stable identity that pipelines, environment policies, and reports reference. Choose codes that match how your organisation already refers to controls — for example, the identifiers in your ServiceNow or GRC system. If you use `RCTL-043` today, use exactly that.
+  Control identifiers are the stable identity that pipelines, environment policies, and reports reference. Choose identifiers that match how your organisation already refers to controls — for example, the identifiers in your ServiceNow or GRC system. If you use `RCTL-043` today, use exactly that.
 </Tip>
 
 ### List your controls
@@ -113,7 +113,7 @@ kosli attest decision \
 
 | Flag | Description |
 |------|-------------|
-| `--control` | **Required.** The control code this decision is recorded against. |
+| `--control` | **Required.** The control identifier this decision is recorded against. |
 | `--compliant` | **Required.** Whether the control is satisfied: `true` or `false`. |
 | `--fingerprint` | The SHA256 fingerprint of the artifact this decision applies to. Scope decisions to an artifact so that assertions and environment policies can check compliance for that artifact specifically. Omit to record a trail-scoped decision instead. |
 | `--artifact-type` | The artifact type (e.g. `docker`, `file`). Provide this with the artifact name/path as the command argument instead of `--fingerprint` to have Kosli calculate the fingerprint. |
