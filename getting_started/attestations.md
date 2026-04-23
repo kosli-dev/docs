@@ -161,42 +161,46 @@ All `kosli attest` commands support flags for attaching additional data. These f
 
 | Flag | Available on | Purpose |
 |------|-------------|---------|
-| `--user-data` | All attest commands | Attach structured JSON metadata that is stored and visible alongside the attestation in the Kosli UI |
-| `--attachments` | All attest commands | Upload files or directories to the Evidence Vault as compressed archives for later download |
+| `--user-data` | All evidence attest commands | Attach structured JSON metadata that is stored and visible alongside the attestation in the Kosli UI |
+| `--attachments` | All evidence attest commands | Upload files or directories to the Evidence Vault as compressed archives for later download |
 | `--attestation-data` | `attest custom` only | Provide the JSON payload that the custom type's jq rules evaluate to determine compliance |
 
 ### When to use which
 
 Use **`--user-data`** when you want to store additional context — such as build metadata, environment
-variables, or tool versions — that should be visible and queryable in the attestation record.
+variables, or tool versions — that is visible alongside the attestation in the Kosli UI.
 
 ```shell
 kosli attest generic \
     --name security-scan \
-    --user-data scan-metadata.json \
-    ...
+    --flow backend-ci \
+    --trail $(git rev-parse HEAD) \
+    --user-data scan-metadata.json
 ```
 
 Use **`--attachments`** when you want to archive files for audit purposes — such as test reports,
-scan output, or policy files — in the Evidence Vault for later retrieval.
+scan output, or policy files — in the Evidence Vault for later retrieval. Provide multiple paths
+as a comma-separated list.
 
 ```shell
 kosli attest generic \
     --name security-scan \
-    --attachments scan-report.html,scan-config.yml \
-    ...
+    --flow backend-ci \
+    --trail $(git rev-parse HEAD) \
+    --attachments scan-report.html,scan-config.yml
 ```
 
 Use **`--attestation-data`** on `kosli attest custom` to provide the JSON data that the custom
 attestation type's jq expression evaluates. This is what determines the compliance status of the
-attestation.
+attestation. See the [Custom](#custom) attestation type below for details.
 
 ```shell
 kosli attest custom \
     --type coverage-metrics \
     --name unit-tests \
-    --attestation-data coverage-results.json \
-    ...
+    --flow backend-ci \
+    --trail $(git rev-parse HEAD) \
+    --attestation-data coverage-results.json
 ```
 
 <Tip>
