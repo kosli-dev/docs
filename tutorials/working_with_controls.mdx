@@ -192,6 +192,43 @@ If a passing decision has been recorded for the control on the trail for the spe
   `kosli attest decision` is the PDP: it records a judgement about a control. `kosli assert control` is the PEP: it enforces that judgement. Keep them in separate pipeline steps — the PDP step is where evidence is evaluated and the outcome is recorded; the PEP step is where the pipeline gates on that recorded outcome.
 </Tip>
 
+## End-to-end pipeline flow
+
+The sequence below shows a single artifact moving through a build trail and a release trail, with the compliance decision made at release time and enforced by the release controller checking the environment policy.
+
+```mermaid
+sequenceDiagram
+    participant P as Pipeline
+    participant K as Kosli
+
+    rect rgb(220,235,255)
+        Note over P,K: Build trail — flow: my-app, trail: build-123
+
+        P->>K: "`kosli begin trail build-123 --flow my-app`"
+        P->>K: "`kosli attest pullrequest github --flow my-app --trail build-123`"
+        P->>K: "`kosli attest artifact artifact-a --artifact-type docker --flow my-app --trail build-123`"
+    end
+
+    rect rgb(255,235,215)
+        Note over P,K: Release trail — flow: my-release, trail: release-456
+
+        P->>K: "`kosli begin trail release-456 --flow my-release`"
+
+        Note over P: 🔵 PDP — evaluate RCTL-043
+        P->>K: "`kosli evaluate trail release-456 --policy rctl-043.rego --flow my-release --output json`"
+        K-->>P: eval-report.json
+        P->>K: "`kosli attest decision --flow my-release --trail release-456 --fingerprint $FP_A --control RCTL-043 --compliant $IS_COMPLIANT --attachments eval-report.json`"
+    end
+
+    rect rgb(220,255,220)
+        Note over P,K: Release Controller
+
+        Note over P: 🔴 PEP — assert artifact against environment policy
+        P->>K: "`kosli assert artifact --fingerprint $FP_A --environment production`"
+        K-->>P: exit 0
+    end
+```
+
 ## Referencing controls in environment policies
 
 Environment policies define the requirements an artifact must satisfy before it can run in a given environment. You can require that specific named controls have a passing decision recorded — not just that the trail is generally compliant. This is the key distinction: rather than relying on trail compliance as a catch-all, you can make individual controls explicit policy gates.
