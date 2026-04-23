@@ -37,11 +37,13 @@ Before creating controls, it helps to understand how they fit into the Kosli dat
 
 **Raw fact attestations** are the evidence you collect in pipelines — test results, vulnerability scans, pull request approvals. These are facts about what happened.
 
-**Decisions** are recorded judgements about a specific control: "control `RCTL-043` is satisfied for this artifact." A decision is an attestation that references a control, recorded at the point where a judgement is made — typically during a release or promotion step.
+**Decisions** are the recorded outcomes of a Policy Decision Point (PDP) — the step in your process where a judgement is reached about a specific control: "control `RCTL-043` is satisfied for this artifact." A decision is an attestation that references a control, recorded at the point where the judgement is made — typically during a release or promotion step.
 
 **Controls** are the named governance requirements that decisions are recorded against. They have a stable identity (the control code), a human-readable name, and an optional description and source link pointing back to your GRC system or policy document.
 
 This separation matters: raw facts exist independently of controls. A JUnit test report is a fact. Whether that test report satisfies a "test coverage" control is a decision. The decision references the fact; the fact doesn't need to know about the control.
+
+A Policy Enforcement Point (PEP) is where that decision is acted upon. `kosli assert control` is the PEP — it checks that a passing decision has been recorded for a named control on a trail, and exits non-zero if it hasn't. Place it at the point in your pipeline where you want to gate progress on control compliance.
 
 <Info>
   Kosli holds a mirror to your existing control definitions — it does not replace your GRC system or ServiceNow instance. The control catalog in Kosli is a lightweight copy that enables querying and coverage visibility.
@@ -120,22 +122,23 @@ kosli attest decision \
 The decision attestation goes on a trail, like any other attestation. It affects trail compliance: a `--compliant false` decision makes the trail non-compliant. There are no restrictions on which flow or trail a decision can be recorded on — place it wherever makes sense in your process, typically at the point where the decision is actually being made (e.g. during a release preparation or promotion step).
 
 <Info>
-  A decision is a recorded judgement. How you arrive at the decision — running `kosli evaluate`, executing a custom script, or using a third-party tool — is up to you. The `attest decision` command records the outcome; it does not make the decision for you.
+  A decision records the outcome of a PDP. How the PDP is implemented — running `kosli evaluate`, executing a custom script, or using a third-party tool — is up to you. `kosli attest decision` records the outcome; it does not make the decision for you.
 </Info>
 
 ### Attaching evidence to a decision
 
 Evidence attached to a decision explains _why_ the decision was reached — not just that a control passed or failed, but what information was used to make that judgement. This is what auditors will ask for: the policy that was applied and the evaluation report that justified the outcome.
 
-A natural source of evidence is a `kosli evaluate` report. The example below evaluates a trail against a Rego policy, captures the full JSON report, and attaches both the policy file and the report to the decision attestation. See [Evaluate trails with OPA policies](/tutorials/evaluate_trails_with_opa) for a full walkthrough of `kosli evaluate`.
+A natural source of evidence is a `kosli evaluate` report. `kosli evaluate` is a PDP: it runs a Rego policy against a trail's evidence and writes the result to its output, but always exits 0 — it has no enforcement logic. The example below evaluates a trail, captures the full JSON report, reads the allow/deny result from that output, and records it as a decision. See [Evaluate trails with OPA policies](/tutorials/evaluate_trails_with_opa) for a full walkthrough of `kosli evaluate`.
 
 ```bash
 # Run the evaluation and save the full JSON report
+# kosli evaluate always exits 0 — the result is in the JSON output
 kosli evaluate trail "$TRAIL_NAME" \
     --policy supply-chain-policy.rego \
     --org "$KOSLI_ORG" \
     --flow "$FLOW_NAME" \
-    --output json > eval-report.json 2>/dev/null || true
+    --output json > eval-report.json
 
 # Read the allow/deny result from the report
 is_compliant=$(jq -r '.allow' eval-report.json)
@@ -158,6 +161,29 @@ This creates a decision attestation with:
 - **`--attachments`** containing the Rego policy (for reproducibility) and the full JSON evaluation report
 - **`--user-data`** containing the violations, which appear in the Kosli UI as structured metadata on the attestation
 - **`--compliant`** set directly from the evaluation result
+
+## Asserting a control
+
+`kosli assert control` is the Policy Enforcement Point (PEP) for a named control. It checks that a passing decision has been recorded for a specific control on a trail, and exits non-zero if it hasn't. Use it as a pipeline gate at the point where you want to enforce control compliance — for example, before promoting an artifact to production.
+
+```bash
+kosli assert control \
+    --control RCTL-043 \
+    --flow my-release-flow \
+    --trail my-release-trail
+```
+
+| Flag | Description |
+|------|-------------|
+| `--control` | **Required.** The control code to assert. |
+| `--flow` | **Required.** The flow the trail belongs to. |
+| `--trail` | **Required.** The trail to check for a passing decision. |
+
+If a passing decision has been recorded for the control on the trail, the command exits 0. If not, the command exits non-zero and prints the reason, failing the pipeline step.
+
+<Tip>
+  `kosli attest decision` is the PDP: it records a judgement about a control. `kosli assert control` is the PEP: it enforces that judgement. Keep them in separate pipeline steps — the PDP step is where evidence is evaluated and the outcome is recorded; the PEP step is where the pipeline gates on that recorded outcome.
+</Tip>
 
 ## Referencing controls in environment policies
 
@@ -207,7 +233,7 @@ The Coverage tab shows the ratio of deployments where a decision was recorded vs
 
 ## What you've accomplished
 
-You have learned how to define controls in Kosli, record decisions against them from pipelines, enforce them in environment policies, and view compliance across deployments.
+You have learned how to define controls in Kosli, record decisions against them from pipelines using `kosli attest decision` as the PDP, assert control compliance in your pipeline using `kosli assert control` as the PEP, enforce controls in environment policies, and view compliance across deployments.
 
 Your controls catalog is now the bridge between the evidence Kosli collects and the requirements your auditors, control owners, and regulators care about. For each production change, you can now answer: "which of our controls have decisions recorded, and which don't?"
 
