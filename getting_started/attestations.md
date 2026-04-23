@@ -209,12 +209,6 @@ These flags can be combined. For example, you can use `--attestation-data` for c
 same attestation.
 </Tip>
 
-<Warning>
-The total request payload — including all data and attachments — is limited to **10 MB** per attestation.
-This applies to `--user-data`, `--attachments`, and `--attestation-data` combined. If you need to
-attach larger files, store them externally and use `--external-url` to link to them.
-</Warning>
-
 ## Attestation types
 
 Currently, we support the following types of evidence:
