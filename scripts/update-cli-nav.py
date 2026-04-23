@@ -1,9 +1,9 @@
 #!/usr/bin/env python3
 """
-Update the CLI Reference navigation in docs.json based on files in client_reference/.
+Update the CLI Reference navigation in config/navigation.json based on files in client_reference/.
 
 Usage:
-    python scripts/update-cli-nav.py --docs-dir client_reference/ --config docs.json
+    python scripts/update-cli-nav.py --docs-dir client_reference/ --nav-file config/navigation.json
 """
 
 import argparse
@@ -159,39 +159,45 @@ def build_nav_groups(docs_dir):
     return nav_groups
 
 
-def update_docs_json(config_path, nav_groups):
-    """Update the CLI Reference section in docs.json."""
-    with open(config_path, 'r', encoding='utf-8') as f:
-        config = json.load(f)
+def update_navigation(nav_path, nav_groups):
+    """Update the CLI Reference section in config/navigation.json."""
+    with open(nav_path, 'r', encoding='utf-8') as f:
+        nav = json.load(f)
 
-    # Find the Reference tab and CLI Reference menu item
-    for product in config.get('navigation', {}).get('products', []):
-        for tab in product.get('tabs', []):
-            if tab.get('tab') == 'Reference':
-                menu = tab.get('menu', [])
-                for item in menu:
-                    if item.get('item') == 'CLI Reference':
-                        item['groups'] = nav_groups
-                        break
-                else:
-                    # CLI Reference not found, add it
-                    menu.insert(0, {
-                        'item': 'CLI Reference',
-                        'icon': 'terminal',
-                        'groups': nav_groups,
-                    })
-                break
+    updated = False
 
-    with open(config_path, 'w', encoding='utf-8') as f:
-        json.dump(config, f, indent=2, ensure_ascii=False)
+    # navigation.json structure: { "tabs": [ { "tab": "Reference", "menu": [...] } ] }
+    for tab in nav.get('tabs', []):
+        if tab.get('tab') == 'Reference':
+            menu = tab.get('menu', [])
+            for item in menu:
+                if item.get('item') == 'CLI Reference':
+                    item['groups'] = nav_groups
+                    updated = True
+                    break
+            else:
+                menu.insert(0, {
+                    'item': 'CLI Reference',
+                    'icon': 'terminal',
+                    'groups': nav_groups,
+                })
+                updated = True
+            break
+
+    if not updated:
+        print(f'Error: Could not find CLI Reference in {nav_path}', file=sys.stderr)
+        sys.exit(1)
+
+    with open(nav_path, 'w', encoding='utf-8') as f:
+        json.dump(nav, f, indent=2, ensure_ascii=False)
         f.write('\n')
 
-    print(f'Updated {config_path} with {len(nav_groups)} CLI groups')
+    print(f'Updated {nav_path} with {len(nav_groups)} CLI groups')
 
 
 def main():
     parser = argparse.ArgumentParser(
-        description='Update CLI Reference navigation in docs.json'
+        description='Update CLI Reference navigation in config/navigation.json'
     )
     parser.add_argument(
         '--docs-dir',
@@ -199,9 +205,9 @@ def main():
         help='Directory containing CLI reference markdown files',
     )
     parser.add_argument(
-        '--config',
+        '--nav-file',
         required=True,
-        help='Path to docs.json config file',
+        help='Path to config/navigation.json',
     )
     args = parser.parse_args()
 
@@ -209,8 +215,8 @@ def main():
         print(f'Error: Directory {args.docs_dir} does not exist')
         sys.exit(1)
 
-    if not os.path.isfile(args.config):
-        print(f'Error: Config file {args.config} does not exist')
+    if not os.path.isfile(args.nav_file):
+        print(f'Error: Navigation file {args.nav_file} does not exist')
         sys.exit(1)
 
     nav_groups = build_nav_groups(args.docs_dir)
@@ -218,7 +224,7 @@ def main():
     for group in nav_groups:
         print(f"  {group['group']}: {len(group['pages'])} pages")
 
-    update_docs_json(args.config, nav_groups)
+    update_navigation(args.nav_file, nav_groups)
 
 
 if __name__ == '__main__':
