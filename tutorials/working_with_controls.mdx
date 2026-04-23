@@ -210,7 +210,7 @@ sequenceDiagram
 
         P->>K: "`kosli begin trail release-456 --flow my-release`"
 
-        Note over P: 🔵 PDP — evaluate RCTL-043
+        Note right of P: 🔵 PDP — evaluate RCTL-043
         P->>K: "`kosli evaluate trail release-456 --policy rctl-043.rego --flow my-release --output json`"
         K-->>P: eval-report.json
         P->>K: "`kosli attest decision --flow my-release --trail release-456 --fingerprint $FP_A --control RCTL-043 --compliant $IS_COMPLIANT --attachments eval-report.json`"
@@ -219,7 +219,7 @@ sequenceDiagram
     rect rgb(220,255,220)
         Note over P,K: Release Controller
 
-        Note over P: 🔴 PEP — assert artifact against environment policy
+        Note right of P: 🔴 PEP — assert artifact against environment policy
         P->>K: "`kosli assert artifact --fingerprint $FP_A --environment production`"
         K-->>P: exit 0
     end
