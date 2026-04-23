@@ -59,8 +59,8 @@ jobs:
           TAG="${{ steps.tag.outputs.cli_tag }}"
           sed -i "s/\*\*v[0-9][0-9.]*\*\*/**${TAG}**/" client_reference/overview.md
 
-      - name: Update CLI navigation in docs.json
-        run: python scripts/update-cli-nav.py --docs-dir client_reference/ --config docs.json
+      - name: Update CLI navigation
+        run: python scripts/update-cli-nav.py --docs-dir client_reference/ --nav-file config/navigation.json
 
       - name: Install helm-docs
         run: |
