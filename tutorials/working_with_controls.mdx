@@ -98,12 +98,13 @@ kosli list controls
 
 ## Recording a decision against a control
 
-A decision is how you record that a control has been satisfied (or not) for a specific artifact or trail. Record a decision using the `kosli attest decision` command, which creates an attestation of the built-in `decision` type and links it to a named control.
+A decision records the outcome of a PDP against a named control, scoped to a specific artifact. Use `--fingerprint` to identify the artifact the decision applies to — this is what allows `kosli assert control` and environment policies to later check compliance for that artifact specifically.
 
 ```bash
 kosli attest decision \
     --flow my-release-flow \
     --trail my-release-trail \
+    --fingerprint "$ARTIFACT_FINGERPRINT" \
     --control RCTL-043 \
     --compliant true \
     --name "source-code-review-decision" \
@@ -114,6 +115,8 @@ kosli attest decision \
 |------|-------------|
 | `--control` | **Required.** The control code this decision is recorded against. |
 | `--compliant` | **Required.** Whether the control is satisfied: `true` or `false`. |
+| `--fingerprint` | The SHA256 fingerprint of the artifact this decision applies to. Scope decisions to an artifact so that assertions and environment policies can check compliance for that artifact specifically. Omit to record a trail-scoped decision instead. |
+| `--artifact-type` | The artifact type (e.g. `docker`, `file`). Provide this with the artifact name/path as the command argument instead of `--fingerprint` to have Kosli calculate the fingerprint. |
 | `--name` | The attestation slot name on the trail. |
 | `--description` | Optional human-readable context for the decision. |
 | `--attachments` | Optional evidence file(s) to attach (e.g. an evaluation report, a REGO policy output). |
@@ -150,6 +153,7 @@ jq '{violations: .violations}' eval-report.json > eval-violations.json
 kosli attest decision \
     --flow "$FLOW_NAME" \
     --trail "$TRAIL_NAME" \
+    --fingerprint "$ARTIFACT_FINGERPRINT" \
     --control RCTL-1866 \
     --compliant="$is_compliant" \
     --name supply-chain-integrity-decision \
@@ -170,7 +174,8 @@ This creates a decision attestation with:
 kosli assert control \
     --control RCTL-043 \
     --flow my-release-flow \
-    --trail my-release-trail
+    --trail my-release-trail \
+    --fingerprint "$ARTIFACT_FINGERPRINT"
 ```
 
 | Flag | Description |
@@ -178,8 +183,10 @@ kosli assert control \
 | `--control` | **Required.** The control code to assert. |
 | `--flow` | **Required.** The flow the trail belongs to. |
 | `--trail` | **Required.** The trail to check for a passing decision. |
+| `--fingerprint` | The SHA256 fingerprint of the artifact to check decisions for. Matches against artifact-scoped decisions recorded with the same fingerprint. |
+| `--artifact-type` | The artifact type (e.g. `docker`, `file`). Provide this with the artifact name/path as the command argument instead of `--fingerprint` to have Kosli calculate the fingerprint. |
 
-If a passing decision has been recorded for the control on the trail, the command exits 0. If not, the command exits non-zero and prints the reason, failing the pipeline step.
+If a passing decision has been recorded for the control on the trail for the specified artifact, the command exits 0. If not, the command exits non-zero and prints the reason, failing the pipeline step.
 
 <Tip>
   `kosli attest decision` is the PDP: it records a judgement about a control. `kosli assert control` is the PEP: it enforces that judgement. Keep them in separate pipeline steps — the PDP step is where evidence is evaluated and the outcome is recorded; the PEP step is where the pipeline gates on that recorded outcome.
