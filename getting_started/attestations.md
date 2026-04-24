@@ -155,6 +155,60 @@ Along with attestations data, you can attach additional supporting evidence file
 For `JUnit` attestations (see below), Kosli automatically stores the JUnit XML results files in the Evidence Vault. You can disable this by setting `--upload-results=false`
 </Note>
 
+## Attaching data to attestations
+
+All `kosli attest` commands support flags for attaching additional data. These flags accept file paths but serve different purposes:
+
+| Flag | Available on | Purpose |
+|------|-------------|---------|
+| `--user-data` | All evidence attest commands | Attach structured JSON metadata that is stored and visible alongside the attestation in the Kosli UI |
+| `--attachments` | All evidence attest commands | Upload files or directories to the Evidence Vault as compressed archives for later download |
+| `--attestation-data` | `attest custom` only | Provide the JSON payload that the custom type's jq rules evaluate to determine compliance |
+
+### When to use which
+
+Use **`--user-data`** when you want to store additional context — such as build metadata, environment
+variables, or tool versions — that is visible alongside the attestation in the Kosli UI.
+
+```shell
+kosli attest generic \
+    --name security-scan \
+    --flow backend-ci \
+    --trail $(git rev-parse HEAD) \
+    --user-data scan-metadata.json
+```
+
+Use **`--attachments`** when you want to archive files for audit purposes — such as test reports,
+scan output, or policy files — in the Evidence Vault for later retrieval. Provide multiple paths
+as a comma-separated list.
+
+```shell
+kosli attest generic \
+    --name security-scan \
+    --flow backend-ci \
+    --trail $(git rev-parse HEAD) \
+    --attachments scan-report.html,scan-config.yml
+```
+
+Use **`--attestation-data`** on `kosli attest custom` to provide the JSON data that the custom
+attestation type's jq expression evaluates. This is what determines the compliance status of the
+attestation. See the [Custom](#custom) attestation type below for details.
+
+```shell
+kosli attest custom \
+    --type coverage-metrics \
+    --name unit-tests \
+    --flow backend-ci \
+    --trail $(git rev-parse HEAD) \
+    --attestation-data coverage-results.json
+```
+
+<Tip>
+These flags can be combined. For example, you can use `--attestation-data` for compliance evaluation,
+`--user-data` to store extra metadata, and `--attachments` to archive the full report — all on the
+same attestation.
+</Tip>
+
 ## Attestation types
 
 Currently, we support the following types of evidence:
