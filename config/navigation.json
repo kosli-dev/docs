@@ -414,7 +414,7 @@
         {
           "item": "API Reference",
           "icon": "code",
-          "openapi": "api-reference/openapi.json",
+          "openapi": "https://app.kosli.com/api/v2/openapi.json",
           "groups": [
             {
               "group": "Actions",
