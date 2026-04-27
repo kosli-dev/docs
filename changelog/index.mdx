@@ -4,6 +4,35 @@ description: "Release notes for Kosli products."
 rss: true
 ---
 
+<Update label="April 27, 2026" description="v2.17.1" tags={["CLI"]}>
+
+## Bug fixes
+
+- **GitHub PR attestation reliability** — `kosli attest pullrequest github` and `kosli assert pullrequest github` now correctly detect pull requests merged seconds before CI runs. The CLI falls back to a REST + per-PR GraphQL lookup when GitHub's GraphQL `associatedPullRequests` returns no results due to eventual consistency, with retries up to 60 seconds.
+
+## Updates
+
+- Improved help text for `kosli attest artifact` to clarify that `--repo-id`, `--repo-url`, and `--repository` must be set together, and which CI systems set them automatically. See the [attest artifact](/client_reference/kosli_attest_artifact) reference.
+
+[View on GitHub](https://github.com/kosli-dev/cli/releases/tag/v2.17.1)
+
+</Update>
+
+<Update label="April 27, 2026" description="v2.17.0" tags={["CLI"]}>
+
+## New features
+
+- **Automatic update notifications** — the CLI now checks for available updates after each command and prints a notice to stderr when a newer version is released. Notices are suppressed in debug mode and for commands with programmatic output (e.g. `--output json`).
+- **`kosli --version` enhancements** — `kosli --version` now prints the full version struct and shows an update notice when a newer version is available.
+
+## Bug fixes
+
+- Attestation `--name` validation now rejects names with a leading dot (e.g. `.foo`), trailing dot, or more than one dot (e.g. `foo.bar.baz`) with a clear error message instead of silently mishandling them.
+
+[View on GitHub](https://github.com/kosli-dev/cli/releases/tag/v2.17.0)
+
+</Update>
+
 <Update label="April 20, 2026" description="" tags={["Platform"]}>
 
 ## New features
