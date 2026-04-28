@@ -44,6 +44,21 @@ The `--artifact-type` flag is used to determine the type of artifact being attes
 - **docker**: for docker images that are pulled on the machine. This option depends on having a running Docker daemon on the machine.
 - **oci**: for container images in docker or OCI format. The fingerprint is fetched directly from the registry.
 
+<Warning>
+**`docker` requires the image to exist in a registry.** Kosli reads the image's repo digest via the local Docker daemon, and a freshly built image (just `docker build`) does not have one until it has been pushed to or pulled from a registry. If you attest an image that has only been built locally, you will see:
+
+```
+Error: repo digest unavailable for the image, has it been pushed to or pulled from a registry?
+```
+
+You have two options:
+
+- Push the image to a registry first, then attest it.
+- Use `--artifact-type=oci` and let Kosli fetch the digest directly from the registry.
+
+See [repo digest unavailable](/troubleshooting/repo_digest_unavailable) for more detail.
+</Warning>
+
 See [kosli attest artifact](/client_reference/kosli_attest_artifact/) for more details.
 
 
