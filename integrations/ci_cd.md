@@ -25,6 +25,9 @@ description: Use Kosli in CI Systems like GitHub Actions, GitLab CI, and more.
   | --commit | `<GITHUB_SHA>` |
   | --git-commit | `<GITHUB_SHA>` |
   | --repository | `<GITHUB_REPOSITORY>` |
+  | --repo-id | `<GITHUB_REPOSITORY_ID>` |
+  | --repo-url | `<GITHUB_SERVER_URL>/<GITHUB_REPOSITORY>` |
+  | --repo-provider | `github` |
   | --github-org | `<GITHUB_REPOSITORY_OWNER>` |
 
   Where `<PLACEHOLDERS>` are Github Actions predefined variables. See [here](https://docs.github.com/en/actions/learn-github-actions/variables#default-environment-variables) for more details.
@@ -72,6 +75,9 @@ description: Use Kosli in CI Systems like GitHub Actions, GitLab CI, and more.
   | --commit | `<CI_COMMIT_SHA>` |
   | --git-commit | `<CI_COMMIT_SHA>` |
   | --repository | `<CI_PROJECT_NAME>` |
+  | --repo-id | `<CI_PROJECT_ID>` |
+  | --repo-url | `<CI_PROJECT_URL>` |
+  | --repo-provider | `gitlab` |
   | --gitlab-org | `<CI_PROJECT_NAMESPACE>` |
 
   Where `<PLACEHOLDERS>` are GitLab predefined variables. See [here](https://docs.gitlab.com/ee/ci/variables/predefined_variables.html) for more details.
@@ -91,6 +97,9 @@ description: Use Kosli in CI Systems like GitHub Actions, GitLab CI, and more.
     | --commit | `<Build.SourceVersion>` |
     | --git-commit | `<Build.SourceVersion>` |
     | --repository | `<Build.Repository.Name>` |
+    | --repo-id | `<Build.Repository.Id>` |
+    | --repo-url | `<Build.Repository.Uri>` |
+    | --repo-provider | `azure-devops` |
     | --project | `<System.TeamProject>` |
     | --azure-org-url | `<System.CollectionUri>` |
 
@@ -106,6 +115,9 @@ description: Use Kosli in CI Systems like GitHub Actions, GitLab CI, and more.
     | --commit | `<BITBUCKET_COMMIT>` |
     | --git-commit | `<BITBUCKET_COMMIT>` |
     | --repository | `<BITBUCKET_REPO_SLUG>` |
+    | --repo-id | `<BITBUCKET_REPO_UUID>` |
+    | --repo-url | `<BITBUCKET_GIT_HTTP_ORIGIN>` |
+    | --repo-provider | `bitbucket` |
     | --bitbucket-workspace |  `<BITBUCKET_WORKSPACE>` |
 
     Where `<PLACEHOLDERS>` are Bitbucket Cloud predefined variables. See [here](https://support.atlassian.com/bitbucket-cloud/docs/variables-in-pipelines/) for more details.
@@ -119,6 +131,7 @@ description: Use Kosli in CI Systems like GitHub Actions, GitLab CI, and more.
     | --commit-url | `<CODEBUILD_SOURCE_REPO_URL>/commit(s)/<CODEBUILD_RESOLVED_SOURCE_VERSION>` |
     | --commit | `<CODEBUILD_RESOLVED_SOURCE_VERSION>` |
     | --git-commit | `<CODEBUILD_RESOLVED_SOURCE_VERSION>` |
+    | --repo-url | `<CODEBUILD_SOURCE_REPO_URL>` |
 
     Where `<PLACEHOLDERS>` are AWS CodeBuild predefined variables. See [here](https://docs.aws.amazon.com/codebuild/latest/userguide/build-env-ref-env-vars.html) for more details.
   </Tab>
@@ -129,7 +142,10 @@ description: Use Kosli in CI Systems like GitHub Actions, GitLab CI, and more.
   | :--- | :--- |
   | --build-url | `<CIRCLE_BUILD_URL>` |
   | --commit-url | `<CIRCLE_REPOSITORY_URL>(converted to https url)/commit(s)/<CIRCLE_SHA1>` |
+  | --commit | `<CIRCLE_SHA1>` |
   | --git-commit | `<CIRCLE_SHA1>` |
+  | --repository | `<CIRCLE_PROJECT_REPONAME>` |
+  | --repo-url | `<CIRCLE_REPOSITORY_URL>` |
 
   Where `<PLACEHOLDERS>` are CircleCI predefined variables. See [here](https://circleci.com/docs/env-vars/#built-in-environment-variables) for more details.
   </Tab>
