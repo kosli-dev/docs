@@ -48,16 +48,6 @@ kosli attest artifact <registry>/<image>:<tag> \
   ...
 ```
 
-### Fingerprint the source directory instead
-
-If you want the attestation to be deterministic from the source rather than dependent on the registry, use `--artifact-type=dir` against the build context:
-
-```bash
-kosli attest artifact ./build-context --artifact-type=dir ...
-```
-
-The fingerprint is then a SHA256 of the directory contents and is identical regardless of where (or whether) the image is pushed.
-
 ### Provide the fingerprint directly
 
-If you have already computed a fingerprint elsewhere in your pipeline, pass it with `--fingerprint` and drop `--artifact-type` entirely.
+If you have already computed a fingerprint elsewhere in your pipeline, pass it with `--fingerprint` and drop `--artifact-type` entirely. The fingerprint must still match what runtime reporters will see for the artifact in your environments, so it should normally be the registry digest.

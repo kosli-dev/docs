@@ -51,12 +51,10 @@ The `--artifact-type` flag is used to determine the type of artifact being attes
 Error: repo digest unavailable for the image, has it been pushed to or pulled from a registry?
 ```
 
-You have a few options:
+You have two options:
 
 - Push the image to a registry first, then attest it.
 - Use `--artifact-type=oci` and let Kosli fetch the digest directly from the registry.
-- Use `--artifact-type=dir` against the build context to fingerprint the source instead.
-- Compute the fingerprint yourself and pass `--fingerprint` directly.
 
 See [repo digest unavailable](/troubleshooting/repo_digest_unavailable) for more detail.
 </Warning>
