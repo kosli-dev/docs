@@ -20,7 +20,7 @@ For each new release tag found, write a changelog entry in changelog/index.mdx. 
 
 This workflow only updates changelog/index.mdx. Do not modify any other files.
 
-Label should be the date the workflow runs, like "March 16, 2026". Description should be the version number of the release, like "v0.3.0".
+Label should be the date of the release not when the workflow runs, like "March 16, 2026". Description should be the version number of the release, like "v0.3.0".
 Tags should be the product(s) affected by the release:
 - kosli-dev/cli → `["CLI"]`
 - kosli-dev/terraform-provider-kosli → `["Terraform Provider"]`
