@@ -86,6 +86,42 @@ description: Use Kosli in CI Systems like GitHub Actions, GitLab CI, and more.
 
   For a complete example of a Gitlab pipeline using Kosli, please check [this cyber-dojo pipeline](https://gitlab.com/cyber-dojo/creator/-/blob/main/.gitlab/workflows/main.yml).
 
+  ### CI runner image (Alpine)
+
+  The Kosli CLI repository ships an Alpine-based [`Dockerfile.alpine`](https://github.com/kosli-dev/cli/blob/main/Dockerfile.alpine) intended for use as a CI runner image. Unlike the default `ghcr.io/kosli-dev/cli` image (which has the `kosli` binary as its entrypoint), the Alpine variant has no entrypoint and bundles `git`, `curl`, and `ca-certificates` alongside the CLI — so it can be used as a general-purpose job image where you also need to clone repos, hit HTTP APIs, or run other shell tooling next to `kosli`.
+
+  Build and push it to your own registry, pinning the CLI version you want:
+
+  ```bash
+  # Clone or copy Dockerfile.alpine from https://github.com/kosli-dev/cli
+  docker build \
+    --build-arg KOSLI_VERSION=2.13.2 \
+    -f Dockerfile.alpine \
+    -t registry.example.com/ci/kosli-runner:2.13.2 .
+  docker push registry.example.com/ci/kosli-runner:2.13.2
+  ```
+
+  Then use it as the job image in `.gitlab-ci.yml`:
+
+  ```yaml
+  variables:
+    KOSLI_ORG: my-org
+    KOSLI_HOST: https://app.kosli.com
+
+  attest:
+    image: registry.example.com/ci/kosli-runner:2.13.2
+    script:
+      - kosli version
+      - kosli attest generic
+          --flow my-flow
+          --trail "$CI_COMMIT_SHA"
+          --name build
+          --compliant=true
+    # KOSLI_API_TOKEN should be set as a masked GitLab CI/CD variable
+  ```
+
+  The image runs as the non-root `kosli` user with `/workspace` as the working directory. `KOSLI_ORG` and `KOSLI_HOST` are exposed as environment variables so they can be overridden in your CI configuration; `KOSLI_API_TOKEN` should be supplied via a masked CI variable rather than baked into the image.
+
   </Tab>
   <Tab title="Azure DevOps">
     View defaulted Kosli command flags in Azure DevOps.
