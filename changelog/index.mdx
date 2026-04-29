@@ -4,6 +4,34 @@ description: "Release notes for Kosli products."
 rss: true
 ---
 
+<Update label="April 29, 2026" description="v0.6.2" tags={["Terraform Provider"]}>
+
+## Bug fixes
+
+- **Clearing environment descriptions** — `kosli_environment` and `kosli_logical_environment` updates now use the `PATCH` endpoint, so setting `description = ""` correctly clears the environment's description. The previous `PUT`-based flow silently ignored empty descriptions. See the [`kosli_environment`](/terraform-reference/resources/environment) and [`kosli_logical_environment`](/terraform-reference/resources/logical_environment) references.
+
+[View on GitHub](https://github.com/kosli-dev/terraform-provider-kosli/releases/tag/v0.6.2)
+
+</Update>
+
+<Update label="April 29, 2026" description="v2.17.2" tags={["CLI"]}>
+
+## New features
+
+- **`--assert` / `--no-assert` for evaluate commands** — `kosli evaluate trail`, `kosli evaluate trails`, and `kosli evaluate input` now accept a mutually-exclusive `--assert` / `--no-assert` flag pair. Pass `--no-assert` to use these commands as a policy decision point: the verdict is printed and the command exits 0, leaving any assertion to a downstream step. Default behaviour is unchanged — a policy deny still exits non-zero. These commands are now marked `[BETA]`. See the [evaluate trail](/client_reference/kosli_evaluate_trail), [evaluate trails](/client_reference/kosli_evaluate_trails), and [evaluate input](/client_reference/kosli_evaluate_input) references.
+
+## Updates
+
+- Help text for `kosli attest artifact` and `kosli fingerprint` now clarifies that `--artifact-type=docker` requires the image to have been pushed to or pulled from a registry, and points to `--artifact-type=oci` as the preferred alternative for registry-resident images. See the [attest artifact](/client_reference/kosli_attest_artifact) reference.
+
+## Bug fixes
+
+- Reduced API request payload sizes by switching to compact JSON marshalling for both multipart (`--attestation-data`, `--user-data`) and non-multipart request bodies. Multipart payloads no longer hit the server's per-part size limit at ~400-500 KB on disk, and non-multipart bodies are 30-55% smaller on the wire. Debug and dry-run output remains pretty-printed.
+
+[View on GitHub](https://github.com/kosli-dev/cli/releases/tag/v2.17.2)
+
+</Update>
+
 <Update label="April 23, 2026" description="v2.17.1" tags={["CLI"]}>
 
 ## Bug fixes
