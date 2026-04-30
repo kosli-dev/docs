@@ -78,6 +78,11 @@
       "vscode"
     ]
   },
+  "integrations": {
+    "mixpanel": {
+      "projectToken": "bf8ac483215f65141ab7ad825b079662"
+    }
+  },
   "footer": {
     "$ref": "./config/footer.json"
   }
