@@ -10,7 +10,9 @@
   window.__kosliTermlyLoaded = true;
 
   window.TERMLY_CUSTOM_BLOCKING_MAP = {
-    "kosli.com": "essential"
+    "kosli.com": "essential",
+    "docs.kosli.com": "essential",
+    "mintlify.app": "essential"
   };
 
   function syncConsent(data) {
