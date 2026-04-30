@@ -15,14 +15,28 @@
     "youtube.com": "essential"
   };
 
+  function syncConsent(data) {
+    if (data.categories && data.categories.includes("analytics")) {
+      localStorage.setItem("kosli_consent", "accepted");
+    } else {
+      localStorage.removeItem("kosli_consent");
+    }
+  }
+
+  // Called when the Termly script finishes loading.
+  window.onTermlyLoaded = function () {
+    if (window.Termly && window.Termly.on) {
+      Termly.on("consent", syncConsent);
+    }
+  };
+
   function init() {
     if (!document.getElementById("kosli-termly-embed")) {
       const s = document.createElement("script");
       s.id = "kosli-termly-embed";
-      s.src = "https://app.termly.io/embed.min.js";
-      s.setAttribute("data-auto-block", "on");
-      s.setAttribute("data-website-uuid", "c98bfcd6-2f30-4f3c-b53c-d6dbd9b8c40c");
+      s.src = "https://app.termly.io/resource-blocker/c98bfcd6-2f30-4f3c-b53c-d6dbd9b8c40c?autoBlock=on";
       s.setAttribute("data-master-consents-origin", "https://www.kosli.com");
+      s.setAttribute("onload", "onTermlyLoaded()");
       document.head.appendChild(s);
     }
 
@@ -36,15 +50,6 @@
       (document.body || document.documentElement).appendChild(f);
     }
   }
-
-  window.addEventListener("termly.consent", function (e) {
-    const analytics = e && e.detail && e.detail.analytics;
-    if (analytics) {
-      localStorage.setItem("kosli_consent", "accepted");
-    } else {
-      localStorage.removeItem("kosli_consent");
-    }
-  });
 
   if (document.readyState === "loading") {
     document.addEventListener("DOMContentLoaded", init, { once: true });
