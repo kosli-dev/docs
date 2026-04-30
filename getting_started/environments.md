@@ -90,6 +90,23 @@ by default. To establish compliance requirements, you need to attach at least on
 If you detach all policies from an environment, its compliance state returns to <Badge color="gray">Unknown</Badge> since there are no longer any defined requirements for artifacts running in it.
 </Note>
 
+## Tagging environments
+
+Tags are custom key-value pairs you attach to environments to categorize, filter, and add metadata. Common patterns include tagging by deployment stage (`tier=prod`), owning team (`team=platform`), or region (`region=eu-west-1`).
+
+You can add tags via the CLI, Terraform, or the API:
+
+```shell
+kosli tag env production-k8s \
+  --set tier=prod \
+  --set team=platform \
+  --set region=eu-west-1
+```
+
+Tags can also be referenced in [Environment Policy](/getting_started/policies) expressions to make attestation requirements conditional — for example, requiring security scans only for flows tagged `risk-level=high`.
+
+For the full guide on managing tags, recommended patterns, and usage in policies, see [Managing Tags](/administration/managing_tags).
+
 ## Logical Environments
 
 Logical environments are a way to group your Kosli environments so you can view all changes happening in your group in the same place. For example, if what you consider to be “Production” is a combination of a Kubernetes cluster, an S3 bucket, and a configuration file, you can combine the reports sent to these Kosli environments into a “Production” logical environment.
