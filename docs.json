@@ -36,6 +36,12 @@
   "metadata": {
     "timestamp": true
   },
+  "integrations": {
+    "cookies": {
+      "key": "kosli_consent",
+      "value": "accepted"
+    }
+  },
   "favicon": "/favicon-32x32.png",
   "redirects": {
     "$ref": "./config/redirects.json"
