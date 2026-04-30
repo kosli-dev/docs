@@ -32,8 +32,7 @@
     if (!document.getElementById("kosli-termly-embed")) {
       const s = document.createElement("script");
       s.id = "kosli-termly-embed";
-      s.src = "https://app.termly.io/resource-blocker/c98bfcd6-2f30-4f3c-b53c-d6dbd9b8c40c?autoBlock=on";
-      s.setAttribute("data-master-consents-origin", "https://www.kosli.com");
+      s.src = "https://app.termly.io/resource-blocker/c98bfcd6-2f30-4f3c-b53c-d6dbd9b8c40c?autoBlock=on&masterConsentsOrigin=https://www.kosli.com";
       s.setAttribute("onload", "onTermlyLoaded()");
       document.head.appendChild(s);
     }
