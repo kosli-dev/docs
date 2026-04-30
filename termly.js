@@ -10,9 +10,7 @@
   window.__kosliTermlyLoaded = true;
 
   window.TERMLY_CUSTOM_BLOCKING_MAP = {
-    "kosli.com": "essential",
-    "unpkg.com": "essential",
-    "youtube.com": "essential"
+    "kosli.com": "essential"
   };
 
   function syncConsent(data) {
