@@ -5,10 +5,10 @@ description: A Helm chart for installing the Kosli K8S reporter as a cronjob.
 
 # k8s-reporter
 
-![Version: 2.2.0](https://img.shields.io/badge/Version-2.2.0-informational?style=flat-square)
+![Version: 2.2.1](https://img.shields.io/badge/Version-2.2.1-informational?style=flat-square)
 
 <Info>
-This reference applies to **chart version 2.2.0**, which uses **CLI version v2.12.0** by default (`image.tag`).
+This reference applies to **chart version 2.2.1**. The default CLI version is the chart's `appVersion`.
 </Info>
 
 A Helm chart for installing the Kosli K8S reporter as a cronjob.
@@ -205,8 +205,8 @@ If you already run [cert-manager's trust-manager](https://cert-manager.io/docs/t
   The kosli reporter image repository.
 </ParamField>
 
-<ParamField path="image.tag" type="string" default="v2.12.0">
-  The kosli reporter image tag, overrides the image tag whose default is the chart appVersion.
+<ParamField path="image.tag" type="string" default="">
+  The kosli reporter image tag. Defaults to the chart `appVersion` when left empty.
 </ParamField>
 
 <ParamField path="image.pullPolicy" type="string" default="IfNotPresent">
@@ -232,7 +232,7 @@ If you already run [cert-manager's trust-manager](https://cert-manager.io/docs/t
 </ParamField>
 
 <ParamField path="reporterConfig.securityContext" type="object">
-  The security context for the reporter cronjob. Set to null or `{}` to disable security context entirely (not recommended). For OpenShift, you can omit `runAsUser` to let OpenShift assign the UID.
+  The security context for the reporter cronjob. Set to null or `{}` to disable security context entirely (not recommended). For OpenShift with SCC, explicitly set `runAsUser: null` to let OpenShift assign the UID from the allowed range. Simply omitting `runAsUser` from your values override will not work because Helm deep-merges with the chart defaults.
 
   Default:
   ```json
@@ -253,7 +253,7 @@ If you already run [cert-manager's trust-manager](https://cert-manager.io/docs/t
 </ParamField>
 
 <ParamField path="reporterConfig.securityContext.runAsUser" type="int" default="1000">
-  The user id to run as. Omit this field for OpenShift environments to allow automatic UID assignment.
+  The user id to run as. For OpenShift environments with SCC, set to `null` (`runAsUser: null`) to allow automatic UID assignment. Simply omitting this field will not work due to Helm's deep merge with chart defaults.
 </ParamField>
 
 ### Kosli API token
