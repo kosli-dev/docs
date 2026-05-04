@@ -77,7 +77,7 @@ jobs:
           cd /tmp/cli-repo/charts/k8s-reporter
           helm-docs --template-files MINTLIFY.md.gotmpl,_templates.gotmpl,_mintlify_templates.gotmpl
           mkdir -p $GITHUB_WORKSPACE/helm
-          cp /tmp/cli-repo/charts/k8s-reporter/README.md $GITHUB_WORKSPACE/helm/k8s_reporter.md
+          cp /tmp/cli-repo/charts/k8s-reporter/README.md $GITHUB_WORKSPACE/helm/k8s_reporter.mdx
 
       - name: Create Pull Request
         uses: peter-evans/create-pull-request@v8
