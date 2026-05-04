@@ -4,6 +4,46 @@ description: "Release notes for Kosli products."
 rss: true
 ---
 
+<Update label="May 4, 2026" description="v2.17.5" tags={["CLI"]}>
+
+## Updates
+
+- **More diagnostic `--debug` output for GitHub calls** — `kosli attest pullrequest github` and other GitHub-backed commands now include the (redacted) `Authorization` header, the resolved proxy URL, and any response body returned alongside transport errors when run with `--debug`. This makes it possible to diagnose corporate proxy and edge filter rejections that previously surfaced only as opaque transport errors.
+
+[View on GitHub](https://github.com/kosli-dev/cli/releases/tag/v2.17.5)
+
+</Update>
+
+<Update label="May 1, 2026" description="v2.17.4" tags={["CLI"]}>
+
+## Updates
+
+- **Removed automatic update notifications** — the CLI no longer checks for new versions on every command. The update notice introduced in v2.17.0 occasionally polluted captured output (for example `FP=$(kosli fingerprint ...)`), so version checks now run only for the `version` subcommand and the `--version` flag.
+
+[View on GitHub](https://github.com/kosli-dev/cli/releases/tag/v2.17.4)
+
+</Update>
+
+<Update label="April 30, 2026" description="v2.17.3" tags={["CLI"]}>
+
+## Updates
+
+- **Debug logging for GitHub PR attestations** — running `kosli attest pullrequest github` with `--debug` now prints every GitHub REST and GraphQL request and response (method, URL, headers, body) to stderr, with the `Authorization` header redacted. Useful for diagnosing 4xx/5xx responses and eventual-consistency issues in CI. See the [attest pullrequest github](/client_reference/kosli_attest_pullrequest_github) reference.
+
+[View on GitHub](https://github.com/kosli-dev/cli/releases/tag/v2.17.3)
+
+</Update>
+
+<Update label="April 29, 2026" description="v0.6.3" tags={["Terraform Provider"]}>
+
+## Bug fixes
+
+- **Race condition on environment rename** — renaming a `kosli_environment` or `kosli_logical_environment` resource label while keeping the same `name` no longer fails with a 404 ("Environment has been archived"). The provider now retries the post-create read with bounded backoff and re-asserts desired state when it observes the parallel destroy + create race. If you are intentionally renaming an environment, use `terraform state mv` as documented in the [`kosli_environment`](/terraform-reference/resources/environment) reference.
+
+[View on GitHub](https://github.com/kosli-dev/terraform-provider-kosli/releases/tag/v0.6.3)
+
+</Update>
+
 <Update label="April 29, 2026" description="v0.6.2" tags={["Terraform Provider"]}>
 
 ## Bug fixes
