@@ -1,8 +1,4 @@
 # Kosli Documentation
-
-> [!WARNING]
-> This documentation is still a work in progress and is not yet the official Kosli documentation.
-
 Source for [docs.kosli.com](https://docs.kosli.com), built with [Mintlify](https://mintlify.com).
 
 ## Development
