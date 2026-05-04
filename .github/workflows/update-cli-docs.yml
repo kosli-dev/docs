@@ -43,7 +43,7 @@ jobs:
       - name: Generate Mintlify CLI docs
         run: |
           rm -f client_reference/kosli*.md
-          DOCS=true ./kosli docs --mintlify --dir client_reference/
+          DOCS=true ./kosli docs --dir client_reference/
           rm -f kosli
 
       - name: Set up Python
