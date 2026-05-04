@@ -75,9 +75,9 @@ jobs:
             https://github.com/kosli-dev/cli.git /tmp/cli-repo
           cd /tmp/cli-repo && git sparse-checkout set charts/k8s-reporter
           cd /tmp/cli-repo/charts/k8s-reporter
-          helm-docs --template-files README.md.gotmpl,_templates.gotmpl
+          helm-docs --template-files MINTLIFY.md.gotmpl,_templates.gotmpl,_mintlify_templates.gotmpl
           mkdir -p $GITHUB_WORKSPACE/helm
-          cp /tmp/cli-repo/charts/k8s-reporter/README.md $GITHUB_WORKSPACE/helm/k8s_reporter.md
+          cp /tmp/cli-repo/charts/k8s-reporter/README.md $GITHUB_WORKSPACE/helm/k8s_reporter.mdx
 
       - name: Create Pull Request
         uses: peter-evans/create-pull-request@v8
