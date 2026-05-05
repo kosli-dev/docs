@@ -1,0 +1,735 @@
+{
+  "name": "a2ffba5a5debbc8f4f199cf5a88e5899c7d6547e",
+  "description": "",
+  "git_commit_info": {
+    "sha1": "a2ffba5a5debbc8f4f199cf5a88e5899c7d6547e",
+    "message": "Merge pull request #227 from cyber-dojo/update-base-image-5412310\n\nMerge update-base-image into main",
+    "author": "Jon Jagger <jon@kosli.com>",
+    "branch": "main",
+    "timestamp": 1777547604.0,
+    "url": "https://github.com/cyber-dojo/runner/commit/a2ffba5a5debbc8f4f199cf5a88e5899c7d6547e"
+  },
+  "origin_url": "https://github.com/cyber-dojo/runner/actions/runs/25162274003",
+  "user_data": {},
+  "repo_ids": [
+    "64195520-e949-4159-8a9e-e3d9e716"
+  ],
+  "last_modified_at": 1777547960.152828,
+  "created_at": 1777547629.6489003,
+  "compliance_status": {
+    "status": "COMPLIANT",
+    "is_compliant": true,
+    "attestations_statuses": [
+      {
+        "attestation_name": "pull-request",
+        "attestation_type": "pull_request",
+        "attestation_id": "54901a94-f922-4d4d-babe-ad4316ff",
+        "overridden_attestation_id": null,
+        "status": "COMPLETE",
+        "is_compliant": true,
+        "unexpected": true
+      }
+    ],
+    "artifacts_statuses": {
+      "runner": {
+        "artifact_fingerprint": "b6df6b1da5f73049085d9e04549f9674f0e54e9f0273467db9d7b46e3e9ad039",
+        "artifact_id": "fe3ed5e5-0ed1-4cb8-8d5a-57d636d7",
+        "status": "COMPLIANT",
+        "is_compliant": true,
+        "attestations_statuses": [
+          {
+            "attestation_name": "rubocop-lint",
+            "attestation_type": "junit",
+            "attestation_id": "d634b663-76b9-4703-b6a6-338f06de",
+            "overridden_attestation_id": null,
+            "status": "COMPLETE",
+            "is_compliant": true,
+            "unexpected": true
+          },
+          {
+            "attestation_name": "provenance-attestation",
+            "attestation_type": "generic",
+            "attestation_id": "53178442-64ed-45aa-92b1-3bfc6023",
+            "overridden_attestation_id": null,
+            "status": "COMPLETE",
+            "is_compliant": true,
+            "unexpected": true
+          },
+          {
+            "attestation_name": "sbom",
+            "attestation_type": "generic",
+            "attestation_id": "8806a8cf-30d4-4cec-a703-47d1f580",
+            "overridden_attestation_id": null,
+            "status": "COMPLETE",
+            "is_compliant": true,
+            "unexpected": true
+          },
+          {
+            "attestation_name": "unit-test",
+            "attestation_type": "junit",
+            "attestation_id": "295f7331-29b3-4152-ad9a-1ff93628",
+            "overridden_attestation_id": null,
+            "status": "COMPLETE",
+            "is_compliant": true,
+            "unexpected": true
+          },
+          {
+            "attestation_name": "unit-test-metrics",
+            "attestation_type": "custom:test-metrics",
+            "attestation_id": "581e7baa-6128-4861-8da3-c87f7454",
+            "overridden_attestation_id": null,
+            "status": "COMPLETE",
+            "is_compliant": true,
+            "unexpected": true
+          },
+          {
+            "attestation_name": "unit-test-coverage-metrics",
+            "attestation_type": "custom:coverage-metrics",
+            "attestation_id": "ba2502c6-9143-4a4f-8c9e-9eec3619",
+            "overridden_attestation_id": null,
+            "status": "COMPLETE",
+            "is_compliant": true,
+            "unexpected": true
+          },
+          {
+            "attestation_name": "integration-test",
+            "attestation_type": "junit",
+            "attestation_id": "d359f683-d26c-4702-9350-03eecee4",
+            "overridden_attestation_id": null,
+            "status": "COMPLETE",
+            "is_compliant": true,
+            "unexpected": true
+          },
+          {
+            "attestation_name": "integration-test-metrics",
+            "attestation_type": "custom:test-metrics",
+            "attestation_id": "87c2fa71-8fe3-4e38-b9a9-215bdc12",
+            "overridden_attestation_id": null,
+            "status": "COMPLETE",
+            "is_compliant": true,
+            "unexpected": true
+          },
+          {
+            "attestation_name": "integration-test-coverage-metrics",
+            "attestation_type": "custom:coverage-metrics",
+            "attestation_id": "a6e93861-0c76-46e3-a87b-e5b92f34",
+            "overridden_attestation_id": null,
+            "status": "COMPLETE",
+            "is_compliant": true,
+            "unexpected": true
+          },
+          {
+            "attestation_name": "snyk-container-scan",
+            "attestation_type": "generic",
+            "attestation_id": "93067716-e6cf-43e8-9baa-e980e903",
+            "overridden_attestation_id": null,
+            "status": "COMPLETE",
+            "is_compliant": true,
+            "unexpected": true
+          }
+        ],
+        "unexpected": true,
+        "evaluated_at": 1777547960.152828,
+        "flow_template_id": "5582e1db-8ee4-4322-b5b5-2af2538f"
+      }
+    },
+    "evaluated_at": 1777547957.850008,
+    "flow_template_id": "5582e1db-8ee4-4322-b5b5-2af2538f"
+  },
+  "template": {
+    "version": 1,
+    "trail": {
+      "attestations": [],
+      "artifacts": []
+    },
+    "content": "version: 1\n"
+  },
+  "compliance_state": "COMPLIANT",
+  "is_compliant": true,
+  "events": [
+    {
+      "org_id": "83acb2bc-2c26-48a7-8b87-90dfcce7",
+      "flow_id": "a81e8c6d-bb00-474f-b986-a6cb9b08",
+      "trail_id": "02f9ea49-3a13-4a58-806a-4b8375a3",
+      "timestamp": 1777547629.6489003,
+      "type": "trail_reported",
+      "git_commit_info": {
+        "sha1": "a2ffba5a5debbc8f4f199cf5a88e5899c7d6547e",
+        "message": "Merge pull request #227 from cyber-dojo/update-base-image-5412310\n\nMerge update-base-image into main",
+        "author": "Jon Jagger <jon@kosli.com>",
+        "author_username": null,
+        "branch": "main",
+        "timestamp": 1777547604.0,
+        "url": "https://github.com/cyber-dojo/runner/commit/a2ffba5a5debbc8f4f199cf5a88e5899c7d6547e",
+        "parents": null
+      },
+      "repo_info": {
+        "inner_id": "64195520-e949-4159-8a9e-e3d9e716",
+        "org_id": "83acb2bc-2c26-48a7-8b87-90dfcce7",
+        "repo_id": "189528148",
+        "name": "cyber-dojo/runner",
+        "url": "https://github.com/cyber-dojo/runner",
+        "provider": "github",
+        "description": null,
+        "created_at": 1768824657.9620016,
+        "last_modified_at": 1777547629.6364944
+      },
+      "setting_user_id": "da5d4ee8-aec0-4264-ab85-c491040c",
+      "trail_data_json": {
+        "org_id": "83acb2bc-2c26-48a7-8b87-90dfcce7",
+        "flow_id": "a81e8c6d-bb00-474f-b986-a6cb9b08",
+        "name": "a2ffba5a5debbc8f4f199cf5a88e5899c7d6547e",
+        "creating_user_id": "da5d4ee8-aec0-4264-ab85-c491040c",
+        "description": "",
+        "git_commit_info": {
+          "sha1": "a2ffba5a5debbc8f4f199cf5a88e5899c7d6547e",
+          "message": "Merge pull request #227 from cyber-dojo/update-base-image-5412310\n\nMerge update-base-image into main",
+          "author": "Jon Jagger <jon@kosli.com>",
+          "branch": "main",
+          "timestamp": 1777547604.0,
+          "url": "https://github.com/cyber-dojo/runner/commit/a2ffba5a5debbc8f4f199cf5a88e5899c7d6547e"
+        },
+        "template_id": "1122ee17-8d3e-4f21-b410-279c9979",
+        "origin_url": "https://github.com/cyber-dojo/runner/actions/runs/25162274003",
+        "user_data": "{}",
+        "repo_ids": [
+          "64195520-e949-4159-8a9e-e3d9e716"
+        ]
+      }
+    },
+    {
+      "org_id": "83acb2bc-2c26-48a7-8b87-90dfcce7",
+      "flow_id": "a81e8c6d-bb00-474f-b986-a6cb9b08",
+      "trail_id": "02f9ea49-3a13-4a58-806a-4b8375a3",
+      "timestamp": 1777547647.5377355,
+      "type": "trail_attestation_reported",
+      "git_commit_info": {
+        "sha1": "a2ffba5a5debbc8f4f199cf5a88e5899c7d6547e",
+        "message": "Merge pull request #227 from cyber-dojo/update-base-image-5412310\n\nMerge update-base-image into main",
+        "author": "Jon Jagger <jon@kosli.com>",
+        "author_username": null,
+        "branch": "main",
+        "timestamp": 1777547604.0,
+        "url": "https://github.com/cyber-dojo/runner/commit/a2ffba5a5debbc8f4f199cf5a88e5899c7d6547e",
+        "parents": null
+      },
+      "repo_info": {
+        "inner_id": "64195520-e949-4159-8a9e-e3d9e716",
+        "org_id": "83acb2bc-2c26-48a7-8b87-90dfcce7",
+        "repo_id": "189528148",
+        "name": "cyber-dojo/runner",
+        "url": "https://github.com/cyber-dojo/runner",
+        "provider": "github",
+        "description": null,
+        "created_at": 1768824657.9620016,
+        "last_modified_at": 1777547647.532189
+      },
+      "attestation_type": "pull_request",
+      "is_compliant": true,
+      "attestation_id": "54901a94-f922-4d4d-babe-ad4316ff",
+      "template_reference_name": "pull-request"
+    },
+    {
+      "org_id": "83acb2bc-2c26-48a7-8b87-90dfcce7",
+      "flow_id": "a81e8c6d-bb00-474f-b986-a6cb9b08",
+      "trail_id": "02f9ea49-3a13-4a58-806a-4b8375a3",
+      "timestamp": 1777547658.502645,
+      "type": "trail_attestation_for_artifact_reported",
+      "git_commit_info": {
+        "sha1": "a2ffba5a5debbc8f4f199cf5a88e5899c7d6547e",
+        "message": "Merge pull request #227 from cyber-dojo/update-base-image-5412310\n\nMerge update-base-image into main",
+        "author": "Jon Jagger <jon@kosli.com>",
+        "author_username": null,
+        "branch": "main",
+        "timestamp": 1777547604.0,
+        "url": "https://github.com/cyber-dojo/runner/commit/a2ffba5a5debbc8f4f199cf5a88e5899c7d6547e",
+        "parents": null
+      },
+      "repo_info": {
+        "inner_id": "64195520-e949-4159-8a9e-e3d9e716",
+        "org_id": "83acb2bc-2c26-48a7-8b87-90dfcce7",
+        "repo_id": "189528148",
+        "name": "cyber-dojo/runner",
+        "url": "https://github.com/cyber-dojo/runner",
+        "provider": "github",
+        "description": null,
+        "created_at": 1768824657.9620016,
+        "last_modified_at": 1777547658.3691914
+      },
+      "attestation_type": "junit",
+      "is_compliant": true,
+      "attestation_id": "d634b663-76b9-4703-b6a6-338f06de",
+      "template_reference_name": "rubocop-lint",
+      "target_artifact": "runner"
+    },
+    {
+      "org_id": "83acb2bc-2c26-48a7-8b87-90dfcce7",
+      "flow_id": "a81e8c6d-bb00-474f-b986-a6cb9b08",
+      "trail_id": "02f9ea49-3a13-4a58-806a-4b8375a3",
+      "timestamp": 1777547734.0809104,
+      "type": "artifact_creation_reported",
+      "git_commit_info": {
+        "sha1": "a2ffba5a5debbc8f4f199cf5a88e5899c7d6547e",
+        "message": "Merge pull request #227 from cyber-dojo/update-base-image-5412310\n\nMerge update-base-image into main",
+        "author": "Jon Jagger <jon@kosli.com>",
+        "author_username": null,
+        "branch": "",
+        "timestamp": 1777547604.0,
+        "url": "https://github.com/cyber-dojo/runner/commit/a2ffba5a5debbc8f4f199cf5a88e5899c7d6547e",
+        "parents": null
+      },
+      "repo_info": {
+        "inner_id": "64195520-e949-4159-8a9e-e3d9e716",
+        "org_id": "83acb2bc-2c26-48a7-8b87-90dfcce7",
+        "repo_id": "189528148",
+        "name": "cyber-dojo/runner",
+        "url": "https://github.com/cyber-dojo/runner",
+        "provider": "github",
+        "description": null,
+        "created_at": 1768824657.9620016,
+        "last_modified_at": 1777547734.0683978
+      },
+      "artifact_fingerprint": "b6df6b1da5f73049085d9e04549f9674f0e54e9f0273467db9d7b46e3e9ad039",
+      "artifact_name": "244531986313.dkr.ecr.eu-central-1.amazonaws.com/runner:a2ffba5",
+      "artifact_id": "a01f1b8a-aa3d-441c-b977-63489294",
+      "template_reference_name": "runner",
+      "git_commit": "a2ffba5a5debbc8f4f199cf5a88e5899c7d6547e"
+    },
+    {
+      "org_id": "83acb2bc-2c26-48a7-8b87-90dfcce7",
+      "flow_id": "a81e8c6d-bb00-474f-b986-a6cb9b08",
+      "trail_id": "02f9ea49-3a13-4a58-806a-4b8375a3",
+      "timestamp": 1777547736.6566045,
+      "type": "artifact_attestation_reported",
+      "git_commit_info": {
+        "sha1": "a2ffba5a5debbc8f4f199cf5a88e5899c7d6547e",
+        "message": "Merge pull request #227 from cyber-dojo/update-base-image-5412310\n\nMerge update-base-image into main",
+        "author": "Jon Jagger <jon@kosli.com>",
+        "author_username": null,
+        "branch": "",
+        "timestamp": 1777547604.0,
+        "url": "https://github.com/cyber-dojo/runner/commit/a2ffba5a5debbc8f4f199cf5a88e5899c7d6547e",
+        "parents": null
+      },
+      "repo_info": {
+        "inner_id": "64195520-e949-4159-8a9e-e3d9e716",
+        "org_id": "83acb2bc-2c26-48a7-8b87-90dfcce7",
+        "repo_id": "189528148",
+        "name": "cyber-dojo/runner",
+        "url": "https://github.com/cyber-dojo/runner",
+        "provider": "github",
+        "description": null,
+        "created_at": 1768824657.9620016,
+        "last_modified_at": 1777547736.5356593
+      },
+      "attestation_type": "generic",
+      "is_compliant": true,
+      "attestation_id": "53178442-64ed-45aa-92b1-3bfc6023",
+      "template_reference_name": "provenance-attestation",
+      "artifact_fingerprint": "b6df6b1da5f73049085d9e04549f9674f0e54e9f0273467db9d7b46e3e9ad039",
+      "artifact_name": "244531986313.dkr.ecr.eu-central-1.amazonaws.com/runner:a2ffba5",
+      "target_artifact": "runner"
+    },
+    {
+      "org_id": "83acb2bc-2c26-48a7-8b87-90dfcce7",
+      "flow_id": "a81e8c6d-bb00-474f-b986-a6cb9b08",
+      "trail_id": "02f9ea49-3a13-4a58-806a-4b8375a3",
+      "timestamp": 1777547740.128177,
+      "type": "artifact_attestation_reported",
+      "git_commit_info": {
+        "sha1": "a2ffba5a5debbc8f4f199cf5a88e5899c7d6547e",
+        "message": "Merge pull request #227 from cyber-dojo/update-base-image-5412310\n\nMerge update-base-image into main",
+        "author": "Jon Jagger <jon@kosli.com>",
+        "author_username": null,
+        "branch": "",
+        "timestamp": 1777547604.0,
+        "url": "https://github.com/cyber-dojo/runner/commit/a2ffba5a5debbc8f4f199cf5a88e5899c7d6547e",
+        "parents": null
+      },
+      "repo_info": {
+        "inner_id": "64195520-e949-4159-8a9e-e3d9e716",
+        "org_id": "83acb2bc-2c26-48a7-8b87-90dfcce7",
+        "repo_id": "189528148",
+        "name": "cyber-dojo/runner",
+        "url": "https://github.com/cyber-dojo/runner",
+        "provider": "github",
+        "description": null,
+        "created_at": 1768824657.9620016,
+        "last_modified_at": 1777547739.9435213
+      },
+      "attestation_type": "generic",
+      "is_compliant": true,
+      "attestation_id": "8806a8cf-30d4-4cec-a703-47d1f580",
+      "template_reference_name": "sbom",
+      "artifact_fingerprint": "b6df6b1da5f73049085d9e04549f9674f0e54e9f0273467db9d7b46e3e9ad039",
+      "artifact_name": "244531986313.dkr.ecr.eu-central-1.amazonaws.com/runner:a2ffba5",
+      "target_artifact": "runner"
+    },
+    {
+      "org_id": "83acb2bc-2c26-48a7-8b87-90dfcce7",
+      "flow_id": "a81e8c6d-bb00-474f-b986-a6cb9b08",
+      "trail_id": "02f9ea49-3a13-4a58-806a-4b8375a3",
+      "timestamp": 1777547848.7757206,
+      "type": "artifact_attestation_reported",
+      "git_commit_info": {
+        "sha1": "a2ffba5a5debbc8f4f199cf5a88e5899c7d6547e",
+        "message": "Merge pull request #227 from cyber-dojo/update-base-image-5412310\n\nMerge update-base-image into main",
+        "author": "Jon Jagger <jon@kosli.com>",
+        "author_username": null,
+        "branch": "main",
+        "timestamp": 1777547604.0,
+        "url": "https://github.com/cyber-dojo/runner/commit/a2ffba5a5debbc8f4f199cf5a88e5899c7d6547e",
+        "parents": null
+      },
+      "repo_info": {
+        "inner_id": "64195520-e949-4159-8a9e-e3d9e716",
+        "org_id": "83acb2bc-2c26-48a7-8b87-90dfcce7",
+        "repo_id": "189528148",
+        "name": "cyber-dojo/runner",
+        "url": "https://github.com/cyber-dojo/runner",
+        "provider": "github",
+        "description": null,
+        "created_at": 1768824657.9620016,
+        "last_modified_at": 1777547848.666686
+      },
+      "attestation_type": "junit",
+      "is_compliant": true,
+      "attestation_id": "295f7331-29b3-4152-ad9a-1ff93628",
+      "template_reference_name": "unit-test",
+      "artifact_fingerprint": "b6df6b1da5f73049085d9e04549f9674f0e54e9f0273467db9d7b46e3e9ad039",
+      "artifact_name": "244531986313.dkr.ecr.eu-central-1.amazonaws.com/runner:a2ffba5",
+      "target_artifact": "runner"
+    },
+    {
+      "org_id": "83acb2bc-2c26-48a7-8b87-90dfcce7",
+      "flow_id": "a81e8c6d-bb00-474f-b986-a6cb9b08",
+      "trail_id": "02f9ea49-3a13-4a58-806a-4b8375a3",
+      "timestamp": 1777547850.5266702,
+      "type": "artifact_attestation_reported",
+      "git_commit_info": {
+        "sha1": "a2ffba5a5debbc8f4f199cf5a88e5899c7d6547e",
+        "message": "Merge pull request #227 from cyber-dojo/update-base-image-5412310\n\nMerge update-base-image into main",
+        "author": "Jon Jagger <jon@kosli.com>",
+        "author_username": null,
+        "branch": "main",
+        "timestamp": 1777547604.0,
+        "url": "https://github.com/cyber-dojo/runner/commit/a2ffba5a5debbc8f4f199cf5a88e5899c7d6547e",
+        "parents": null
+      },
+      "repo_info": {
+        "inner_id": "64195520-e949-4159-8a9e-e3d9e716",
+        "org_id": "83acb2bc-2c26-48a7-8b87-90dfcce7",
+        "repo_id": "189528148",
+        "name": "cyber-dojo/runner",
+        "url": "https://github.com/cyber-dojo/runner",
+        "provider": "github",
+        "description": null,
+        "created_at": 1768824657.9620016,
+        "last_modified_at": 1777547850.455977
+      },
+      "attestation_type": "custom:test-metrics",
+      "is_compliant": true,
+      "attestation_id": "581e7baa-6128-4861-8da3-c87f7454",
+      "template_reference_name": "unit-test-metrics",
+      "artifact_fingerprint": "b6df6b1da5f73049085d9e04549f9674f0e54e9f0273467db9d7b46e3e9ad039",
+      "artifact_name": "244531986313.dkr.ecr.eu-central-1.amazonaws.com/runner:a2ffba5",
+      "target_artifact": "runner"
+    },
+    {
+      "org_id": "83acb2bc-2c26-48a7-8b87-90dfcce7",
+      "flow_id": "a81e8c6d-bb00-474f-b986-a6cb9b08",
+      "trail_id": "02f9ea49-3a13-4a58-806a-4b8375a3",
+      "timestamp": 1777547852.5436196,
+      "type": "artifact_attestation_reported",
+      "git_commit_info": {
+        "sha1": "a2ffba5a5debbc8f4f199cf5a88e5899c7d6547e",
+        "message": "Merge pull request #227 from cyber-dojo/update-base-image-5412310\n\nMerge update-base-image into main",
+        "author": "Jon Jagger <jon@kosli.com>",
+        "author_username": null,
+        "branch": "main",
+        "timestamp": 1777547604.0,
+        "url": "https://github.com/cyber-dojo/runner/commit/a2ffba5a5debbc8f4f199cf5a88e5899c7d6547e",
+        "parents": null
+      },
+      "repo_info": {
+        "inner_id": "64195520-e949-4159-8a9e-e3d9e716",
+        "org_id": "83acb2bc-2c26-48a7-8b87-90dfcce7",
+        "repo_id": "189528148",
+        "name": "cyber-dojo/runner",
+        "url": "https://github.com/cyber-dojo/runner",
+        "provider": "github",
+        "description": null,
+        "created_at": 1768824657.9620016,
+        "last_modified_at": 1777547852.5283678
+      },
+      "attestation_type": "custom:coverage-metrics",
+      "is_compliant": true,
+      "attestation_id": "ba2502c6-9143-4a4f-8c9e-9eec3619",
+      "template_reference_name": "unit-test-coverage-metrics",
+      "artifact_fingerprint": "b6df6b1da5f73049085d9e04549f9674f0e54e9f0273467db9d7b46e3e9ad039",
+      "artifact_name": "244531986313.dkr.ecr.eu-central-1.amazonaws.com/runner:a2ffba5",
+      "target_artifact": "runner"
+    },
+    {
+      "org_id": "83acb2bc-2c26-48a7-8b87-90dfcce7",
+      "flow_id": "a81e8c6d-bb00-474f-b986-a6cb9b08",
+      "trail_id": "02f9ea49-3a13-4a58-806a-4b8375a3",
+      "timestamp": 1777547904.090464,
+      "type": "artifact_attestation_reported",
+      "git_commit_info": {
+        "sha1": "a2ffba5a5debbc8f4f199cf5a88e5899c7d6547e",
+        "message": "Merge pull request #227 from cyber-dojo/update-base-image-5412310\n\nMerge update-base-image into main",
+        "author": "Jon Jagger <jon@kosli.com>",
+        "author_username": null,
+        "branch": "main",
+        "timestamp": 1777547604.0,
+        "url": "https://github.com/cyber-dojo/runner/commit/a2ffba5a5debbc8f4f199cf5a88e5899c7d6547e",
+        "parents": null
+      },
+      "repo_info": {
+        "inner_id": "64195520-e949-4159-8a9e-e3d9e716",
+        "org_id": "83acb2bc-2c26-48a7-8b87-90dfcce7",
+        "repo_id": "189528148",
+        "name": "cyber-dojo/runner",
+        "url": "https://github.com/cyber-dojo/runner",
+        "provider": "github",
+        "description": null,
+        "created_at": 1768824657.9620016,
+        "last_modified_at": 1777547903.9651492
+      },
+      "attestation_type": "junit",
+      "is_compliant": true,
+      "attestation_id": "d359f683-d26c-4702-9350-03eecee4",
+      "template_reference_name": "integration-test",
+      "artifact_fingerprint": "b6df6b1da5f73049085d9e04549f9674f0e54e9f0273467db9d7b46e3e9ad039",
+      "artifact_name": "244531986313.dkr.ecr.eu-central-1.amazonaws.com/runner:a2ffba5",
+      "target_artifact": "runner"
+    },
+    {
+      "org_id": "83acb2bc-2c26-48a7-8b87-90dfcce7",
+      "flow_id": "a81e8c6d-bb00-474f-b986-a6cb9b08",
+      "trail_id": "02f9ea49-3a13-4a58-806a-4b8375a3",
+      "timestamp": 1777547905.8000839,
+      "type": "artifact_attestation_reported",
+      "git_commit_info": {
+        "sha1": "a2ffba5a5debbc8f4f199cf5a88e5899c7d6547e",
+        "message": "Merge pull request #227 from cyber-dojo/update-base-image-5412310\n\nMerge update-base-image into main",
+        "author": "Jon Jagger <jon@kosli.com>",
+        "author_username": null,
+        "branch": "main",
+        "timestamp": 1777547604.0,
+        "url": "https://github.com/cyber-dojo/runner/commit/a2ffba5a5debbc8f4f199cf5a88e5899c7d6547e",
+        "parents": null
+      },
+      "repo_info": {
+        "inner_id": "64195520-e949-4159-8a9e-e3d9e716",
+        "org_id": "83acb2bc-2c26-48a7-8b87-90dfcce7",
+        "repo_id": "189528148",
+        "name": "cyber-dojo/runner",
+        "url": "https://github.com/cyber-dojo/runner",
+        "provider": "github",
+        "description": null,
+        "created_at": 1768824657.9620016,
+        "last_modified_at": 1777547905.7901347
+      },
+      "attestation_type": "custom:test-metrics",
+      "is_compliant": true,
+      "attestation_id": "87c2fa71-8fe3-4e38-b9a9-215bdc12",
+      "template_reference_name": "integration-test-metrics",
+      "artifact_fingerprint": "b6df6b1da5f73049085d9e04549f9674f0e54e9f0273467db9d7b46e3e9ad039",
+      "artifact_name": "244531986313.dkr.ecr.eu-central-1.amazonaws.com/runner:a2ffba5",
+      "target_artifact": "runner"
+    },
+    {
+      "org_id": "83acb2bc-2c26-48a7-8b87-90dfcce7",
+      "flow_id": "a81e8c6d-bb00-474f-b986-a6cb9b08",
+      "trail_id": "02f9ea49-3a13-4a58-806a-4b8375a3",
+      "timestamp": 1777547907.6211314,
+      "type": "artifact_attestation_reported",
+      "git_commit_info": {
+        "sha1": "a2ffba5a5debbc8f4f199cf5a88e5899c7d6547e",
+        "message": "Merge pull request #227 from cyber-dojo/update-base-image-5412310\n\nMerge update-base-image into main",
+        "author": "Jon Jagger <jon@kosli.com>",
+        "author_username": null,
+        "branch": "main",
+        "timestamp": 1777547604.0,
+        "url": "https://github.com/cyber-dojo/runner/commit/a2ffba5a5debbc8f4f199cf5a88e5899c7d6547e",
+        "parents": null
+      },
+      "repo_info": {
+        "inner_id": "64195520-e949-4159-8a9e-e3d9e716",
+        "org_id": "83acb2bc-2c26-48a7-8b87-90dfcce7",
+        "repo_id": "189528148",
+        "name": "cyber-dojo/runner",
+        "url": "https://github.com/cyber-dojo/runner",
+        "provider": "github",
+        "description": null,
+        "created_at": 1768824657.9620016,
+        "last_modified_at": 1777547907.6117835
+      },
+      "attestation_type": "custom:coverage-metrics",
+      "is_compliant": true,
+      "attestation_id": "a6e93861-0c76-46e3-a87b-e5b92f34",
+      "template_reference_name": "integration-test-coverage-metrics",
+      "artifact_fingerprint": "b6df6b1da5f73049085d9e04549f9674f0e54e9f0273467db9d7b46e3e9ad039",
+      "artifact_name": "244531986313.dkr.ecr.eu-central-1.amazonaws.com/runner:a2ffba5",
+      "target_artifact": "runner"
+    },
+    {
+      "org_id": "83acb2bc-2c26-48a7-8b87-90dfcce7",
+      "flow_id": "a81e8c6d-bb00-474f-b986-a6cb9b08",
+      "trail_id": "02f9ea49-3a13-4a58-806a-4b8375a3",
+      "timestamp": 1777547955.590948,
+      "type": "trail_updated",
+      "git_commit_info": {
+        "sha1": "a2ffba5a5debbc8f4f199cf5a88e5899c7d6547e",
+        "message": "Merge pull request #227 from cyber-dojo/update-base-image-5412310\n\nMerge update-base-image into main",
+        "author": "Jon Jagger <jon@kosli.com>",
+        "author_username": null,
+        "branch": "main",
+        "timestamp": 1777547604.0,
+        "url": "https://github.com/cyber-dojo/runner/commit/a2ffba5a5debbc8f4f199cf5a88e5899c7d6547e",
+        "parents": null
+      },
+      "repo_info": {
+        "inner_id": "64195520-e949-4159-8a9e-e3d9e716",
+        "org_id": "83acb2bc-2c26-48a7-8b87-90dfcce7",
+        "repo_id": "189528148",
+        "name": "cyber-dojo/runner",
+        "url": "https://github.com/cyber-dojo/runner",
+        "provider": "github",
+        "description": null,
+        "created_at": 1768824657.9620016,
+        "last_modified_at": 1777547955.5325592
+      },
+      "setting_user_id": "da5d4ee8-aec0-4264-ab85-c491040c",
+      "trail_data_json": {
+        "description": "",
+        "git_commit_info": {
+          "sha1": "a2ffba5a5debbc8f4f199cf5a88e5899c7d6547e",
+          "message": "Merge pull request #227 from cyber-dojo/update-base-image-5412310\n\nMerge update-base-image into main",
+          "author": "Jon Jagger <jon@kosli.com>",
+          "branch": "main",
+          "timestamp": 1777547604.0,
+          "url": "https://github.com/cyber-dojo/runner/commit/a2ffba5a5debbc8f4f199cf5a88e5899c7d6547e"
+        },
+        "user_data": "{}",
+        "template_id": "5582e1db-8ee4-4322-b5b5-2af2538f",
+        "origin_url": "https://github.com/cyber-dojo/runner/actions/runs/25162274003"
+      },
+      "changes": [
+        "git_commit_info",
+        "template"
+      ]
+    },
+    {
+      "org_id": "83acb2bc-2c26-48a7-8b87-90dfcce7",
+      "flow_id": "a81e8c6d-bb00-474f-b986-a6cb9b08",
+      "trail_id": "02f9ea49-3a13-4a58-806a-4b8375a3",
+      "timestamp": 1777547957.850008,
+      "type": "artifact_creation_reported",
+      "git_commit_info": {
+        "sha1": "a2ffba5a5debbc8f4f199cf5a88e5899c7d6547e",
+        "message": "Merge pull request #227 from cyber-dojo/update-base-image-5412310\n\nMerge update-base-image into main",
+        "author": "Jon Jagger <jon@kosli.com>",
+        "author_username": null,
+        "branch": "main",
+        "timestamp": 1777547604.0,
+        "url": "https://github.com/cyber-dojo/runner/commit/a2ffba5a5debbc8f4f199cf5a88e5899c7d6547e",
+        "parents": null
+      },
+      "repo_info": {
+        "inner_id": "64195520-e949-4159-8a9e-e3d9e716",
+        "org_id": "83acb2bc-2c26-48a7-8b87-90dfcce7",
+        "repo_id": "189528148",
+        "name": "cyber-dojo/runner",
+        "url": "https://github.com/cyber-dojo/runner",
+        "provider": "github",
+        "description": null,
+        "created_at": 1768824657.9620016,
+        "last_modified_at": 1777547957.8361285
+      },
+      "artifact_fingerprint": "b6df6b1da5f73049085d9e04549f9674f0e54e9f0273467db9d7b46e3e9ad039",
+      "artifact_name": "244531986313.dkr.ecr.eu-central-1.amazonaws.com/runner:a2ffba5",
+      "artifact_id": "fe3ed5e5-0ed1-4cb8-8d5a-57d636d7",
+      "template_reference_name": "runner",
+      "git_commit": "a2ffba5a5debbc8f4f199cf5a88e5899c7d6547e"
+    },
+    {
+      "org_id": "83acb2bc-2c26-48a7-8b87-90dfcce7",
+      "flow_id": "a81e8c6d-bb00-474f-b986-a6cb9b08",
+      "trail_id": "02f9ea49-3a13-4a58-806a-4b8375a3",
+      "timestamp": 1777547960.152828,
+      "type": "artifact_attestation_reported",
+      "git_commit_info": {
+        "sha1": "a2ffba5a5debbc8f4f199cf5a88e5899c7d6547e",
+        "message": "Merge pull request #227 from cyber-dojo/update-base-image-5412310\n\nMerge update-base-image into main",
+        "author": "Jon Jagger <jon@kosli.com>",
+        "author_username": null,
+        "branch": "main",
+        "timestamp": 1777547604.0,
+        "url": "https://github.com/cyber-dojo/runner/commit/a2ffba5a5debbc8f4f199cf5a88e5899c7d6547e",
+        "parents": null
+      },
+      "repo_info": {
+        "inner_id": "64195520-e949-4159-8a9e-e3d9e716",
+        "org_id": "83acb2bc-2c26-48a7-8b87-90dfcce7",
+        "repo_id": "189528148",
+        "name": "cyber-dojo/runner",
+        "url": "https://github.com/cyber-dojo/runner",
+        "provider": "github",
+        "description": null,
+        "created_at": 1768824657.9620016,
+        "last_modified_at": 1777547960.0247514
+      },
+      "attestation_type": "generic",
+      "is_compliant": true,
+      "attestation_id": "93067716-e6cf-43e8-9baa-e980e903",
+      "template_reference_name": "snyk-container-scan",
+      "artifact_fingerprint": "b6df6b1da5f73049085d9e04549f9674f0e54e9f0273467db9d7b46e3e9ad039",
+      "artifact_name": "244531986313.dkr.ecr.eu-central-1.amazonaws.com/runner:a2ffba5",
+      "target_artifact": "runner"
+    },
+    {
+      "org_id": "83acb2bc-2c26-48a7-8b87-90dfcce7",
+      "flow_id": "a81e8c6d-bb00-474f-b986-a6cb9b08",
+      "trail_id": "02f9ea49-3a13-4a58-806a-4b8375a3",
+      "timestamp": 1777548143.9659677,
+      "type": "artifact_started_running",
+      "git_commit_info": null,
+      "repo_info": null,
+      "artifact_fingerprint": "b6df6b1da5f73049085d9e04549f9674f0e54e9f0273467db9d7b46e3e9ad039",
+      "environment_id": "e44779bb-311d-4bac-9d19-a64a0843",
+      "environment_name": "aws-beta",
+      "snapshot_index": 6586,
+      "replica_number": 3,
+      "template_reference_name": "runner"
+    },
+    {
+      "org_id": "83acb2bc-2c26-48a7-8b87-90dfcce7",
+      "flow_id": "a81e8c6d-bb00-474f-b986-a6cb9b08",
+      "trail_id": "02f9ea49-3a13-4a58-806a-4b8375a3",
+      "timestamp": 1777550818.544773,
+      "type": "artifact_started_running",
+      "git_commit_info": null,
+      "repo_info": null,
+      "artifact_fingerprint": "b6df6b1da5f73049085d9e04549f9674f0e54e9f0273467db9d7b46e3e9ad039",
+      "environment_id": "73965c45-e9a1-4bb9-ad01-dc5a526f",
+      "environment_name": "aws-prod",
+      "snapshot_index": 4341,
+      "replica_number": 3,
+      "template_reference_name": "runner"
+    }
+  ],
+  "created_by": "ci-pipelines",
+  "flow": {
+    "name": "runner-ci",
+    "tags": {
+      "ci": "github",
+      "repo_url": "https://github.com/cyber-dojo/runner",
+      "kind": "build"
+    }
+  },
+  "external_urls": null,
+  "html_url": "https://app.kosli.com/cyber-dojo/flows/runner-ci/trails/a2ffba5a5debbc8f4f199cf5a88e5899c7d6547e"
+}

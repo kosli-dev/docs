@@ -1,0 +1,470 @@
+{
+  "name": "65fd2bfa2478534ea4bc5ccf30f6bfc6aab7550c",
+  "description": "",
+  "git_commit_info": {
+    "sha1": "65fd2bfa2478534ea4bc5ccf30f6bfc6aab7550c",
+    "message": "Merge branch 'fix-multijson-deprecation-warning' into 'main'\n\nBypass MultiJson.encode deprecation warning in Sinatra's json helper\n\nSee merge request cyber-dojo/creator!243",
+    "author": "Jon Jagger <jon@jaggersoft.com>",
+    "branch": "main",
+    "timestamp": 1776252244.0,
+    "url": "https://gitlab.com/cyber-dojo/creator/-/commit/65fd2bfa2478534ea4bc5ccf30f6bfc6aab7550c"
+  },
+  "origin_url": "https://gitlab.com/cyber-dojo/creator/-/jobs/13932530950",
+  "user_data": {},
+  "repo_ids": [
+    "a4bbd22e-cd62-4695-b6ea-437fb8ce"
+  ],
+  "last_modified_at": 1776253126.1594,
+  "created_at": 1776252299.7855096,
+  "compliance_status": {
+    "status": "COMPLIANT",
+    "is_compliant": true,
+    "attestations_statuses": [
+      {
+        "attestation_name": "pull-request",
+        "attestation_type": "pull_request",
+        "attestation_id": "763af9cc-b908-456d-935c-f4deb860",
+        "overridden_attestation_id": null,
+        "status": "COMPLETE",
+        "is_compliant": true,
+        "unexpected": false
+      },
+      {
+        "attestation_name": "branch-protection",
+        "attestation_type": "custom:branch-protection",
+        "attestation_id": "cda3f464-2b3d-4961-a80f-a5c15d70",
+        "overridden_attestation_id": null,
+        "status": "COMPLETE",
+        "is_compliant": true,
+        "unexpected": false
+      },
+      {
+        "attestation_name": "dast-report",
+        "attestation_type": "custom:dast-report",
+        "attestation_id": "fbc2f6ec-1dc4-4762-8781-659a4897",
+        "overridden_attestation_id": null,
+        "status": "COMPLETE",
+        "is_compliant": true,
+        "unexpected": true
+      }
+    ],
+    "artifacts_statuses": {
+      "creator": {
+        "artifact_fingerprint": "ce59db031695ca55deaaacefda233875fe5c32783c69816fcea2bb3642636e4f",
+        "artifact_id": "c5d209a3-9139-4f5b-a553-c6351091",
+        "status": "COMPLIANT",
+        "is_compliant": true,
+        "attestations_statuses": [
+          {
+            "attestation_name": "lint",
+            "attestation_type": "generic",
+            "attestation_id": "3140c88d-083b-4be4-922f-08603d1a",
+            "overridden_attestation_id": null,
+            "status": "COMPLETE",
+            "is_compliant": true,
+            "unexpected": false
+          },
+          {
+            "attestation_name": "unit-test",
+            "attestation_type": "junit",
+            "attestation_id": "7c731680-ff9f-4e22-8147-32e8629f",
+            "overridden_attestation_id": null,
+            "status": "COMPLETE",
+            "is_compliant": true,
+            "unexpected": false
+          },
+          {
+            "attestation_name": "test-branch-coverage",
+            "attestation_type": "generic",
+            "attestation_id": "27c3762e-631f-429d-863a-99a3d404",
+            "overridden_attestation_id": null,
+            "status": "COMPLETE",
+            "is_compliant": true,
+            "unexpected": false
+          }
+        ],
+        "unexpected": false,
+        "evaluated_at": 1776252695.6943574,
+        "flow_template_id": "1d346bb4-169a-4ee0-8e14-d8043498"
+      }
+    },
+    "evaluated_at": 1776252695.6943574,
+    "flow_template_id": "1d346bb4-169a-4ee0-8e14-d8043498"
+  },
+  "template": {
+    "version": 1,
+    "trail": {
+      "attestations": [
+        {
+          "name": "pull-request",
+          "type": "pull_request"
+        },
+        {
+          "name": "branch-protection",
+          "type": "custom:branch-protection"
+        }
+      ],
+      "artifacts": [
+        {
+          "name": "creator",
+          "attestations": [
+            {
+              "name": "lint",
+              "type": "generic"
+            },
+            {
+              "name": "unit-test",
+              "type": "junit"
+            },
+            {
+              "name": "test-branch-coverage",
+              "type": "generic"
+            }
+          ]
+        }
+      ]
+    },
+    "content": "version: 1\n\ntrail:\n  attestations:\n    - name: pull-request\n      type: pull_request\n    - name: branch-protection\n      type: custom:branch-protection\n  artifacts:\n    - name: creator\n      attestations:\n        - name: lint\n          type: generic\n        - name: unit-test\n          type: junit\n        - name: test-branch-coverage\n          type: generic\n"
+  },
+  "compliance_state": "COMPLIANT",
+  "is_compliant": true,
+  "events": [
+    {
+      "org_id": "83acb2bc-2c26-48a7-8b87-90dfcce7",
+      "flow_id": "e4e08b57-e36e-4724-acc8-04e7e437",
+      "trail_id": "43c8ab31-45d7-4250-b07e-eef1e9f8",
+      "timestamp": 1776252299.7855096,
+      "type": "trail_reported",
+      "git_commit_info": {
+        "sha1": "65fd2bfa2478534ea4bc5ccf30f6bfc6aab7550c",
+        "message": "Merge branch 'fix-multijson-deprecation-warning' into 'main'\n\nBypass MultiJson.encode deprecation warning in Sinatra's json helper\n\nSee merge request cyber-dojo/creator!243",
+        "author": "Jon Jagger <jon@jaggersoft.com>",
+        "author_username": null,
+        "branch": "main",
+        "timestamp": 1776252244.0,
+        "url": "https://gitlab.com/cyber-dojo/creator/-/commit/65fd2bfa2478534ea4bc5ccf30f6bfc6aab7550c",
+        "parents": null
+      },
+      "repo_info": {
+        "inner_id": "a4bbd22e-cd62-4695-b6ea-437fb8ce",
+        "org_id": "83acb2bc-2c26-48a7-8b87-90dfcce7",
+        "repo_id": "53419335",
+        "name": "creator",
+        "url": "https://gitlab.com/cyber-dojo/creator",
+        "provider": "gitlab",
+        "description": "The https://cyber-dojo.org UI to configure and create (or re-enter) a group-exercise or an individual-exercise.",
+        "created_at": 1768825460.0531082,
+        "last_modified_at": 1776252299.775839
+      },
+      "setting_user_id": "da5d4ee8-aec0-4264-ab85-c491040c",
+      "trail_data_json": {
+        "org_id": "83acb2bc-2c26-48a7-8b87-90dfcce7",
+        "flow_id": "e4e08b57-e36e-4724-acc8-04e7e437",
+        "name": "65fd2bfa2478534ea4bc5ccf30f6bfc6aab7550c",
+        "creating_user_id": "da5d4ee8-aec0-4264-ab85-c491040c",
+        "description": "",
+        "git_commit_info": {
+          "sha1": "65fd2bfa2478534ea4bc5ccf30f6bfc6aab7550c",
+          "message": "Merge branch 'fix-multijson-deprecation-warning' into 'main'\n\nBypass MultiJson.encode deprecation warning in Sinatra's json helper\n\nSee merge request cyber-dojo/creator!243",
+          "author": "Jon Jagger <jon@jaggersoft.com>",
+          "branch": "main",
+          "timestamp": 1776252244.0,
+          "url": "https://gitlab.com/cyber-dojo/creator/-/commit/65fd2bfa2478534ea4bc5ccf30f6bfc6aab7550c"
+        },
+        "template_id": "1d346bb4-169a-4ee0-8e14-d8043498",
+        "origin_url": "https://gitlab.com/cyber-dojo/creator/-/jobs/13932530950",
+        "user_data": "{}",
+        "repo_ids": [
+          "a4bbd22e-cd62-4695-b6ea-437fb8ce"
+        ]
+      }
+    },
+    {
+      "org_id": "83acb2bc-2c26-48a7-8b87-90dfcce7",
+      "flow_id": "e4e08b57-e36e-4724-acc8-04e7e437",
+      "trail_id": "43c8ab31-45d7-4250-b07e-eef1e9f8",
+      "timestamp": 1776252351.422441,
+      "type": "trail_attestation_reported",
+      "git_commit_info": {
+        "sha1": "65fd2bfa2478534ea4bc5ccf30f6bfc6aab7550c",
+        "message": "Merge branch 'fix-multijson-deprecation-warning' into 'main'\n\nBypass MultiJson.encode deprecation warning in Sinatra's json helper\n\nSee merge request cyber-dojo/creator!243",
+        "author": "Jon Jagger <jon@jaggersoft.com>",
+        "author_username": null,
+        "branch": "main",
+        "timestamp": 1776252244.0,
+        "url": "https://gitlab.com/cyber-dojo/creator/-/commit/65fd2bfa2478534ea4bc5ccf30f6bfc6aab7550c",
+        "parents": null
+      },
+      "repo_info": {
+        "inner_id": "a4bbd22e-cd62-4695-b6ea-437fb8ce",
+        "org_id": "83acb2bc-2c26-48a7-8b87-90dfcce7",
+        "repo_id": "53419335",
+        "name": "creator",
+        "url": "https://gitlab.com/cyber-dojo/creator",
+        "provider": "gitlab",
+        "description": "The https://cyber-dojo.org UI to configure and create (or re-enter) a group-exercise or an individual-exercise.",
+        "created_at": 1768825460.0531082,
+        "last_modified_at": 1776252351.3344343
+      },
+      "attestation_type": "pull_request",
+      "is_compliant": true,
+      "attestation_id": "763af9cc-b908-456d-935c-f4deb860",
+      "template_reference_name": "pull-request"
+    },
+    {
+      "org_id": "83acb2bc-2c26-48a7-8b87-90dfcce7",
+      "flow_id": "e4e08b57-e36e-4724-acc8-04e7e437",
+      "trail_id": "43c8ab31-45d7-4250-b07e-eef1e9f8",
+      "timestamp": 1776252354.1434097,
+      "type": "trail_attestation_for_artifact_reported",
+      "git_commit_info": {
+        "sha1": "65fd2bfa2478534ea4bc5ccf30f6bfc6aab7550c",
+        "message": "Merge branch 'fix-multijson-deprecation-warning' into 'main'\n\nBypass MultiJson.encode deprecation warning in Sinatra's json helper\n\nSee merge request cyber-dojo/creator!243",
+        "author": "Jon Jagger <jon@jaggersoft.com>",
+        "author_username": null,
+        "branch": "main",
+        "timestamp": 1776252244.0,
+        "url": "https://gitlab.com/cyber-dojo/creator/-/commit/65fd2bfa2478534ea4bc5ccf30f6bfc6aab7550c",
+        "parents": null
+      },
+      "repo_info": {
+        "inner_id": "a4bbd22e-cd62-4695-b6ea-437fb8ce",
+        "org_id": "83acb2bc-2c26-48a7-8b87-90dfcce7",
+        "repo_id": "53419335",
+        "name": "creator",
+        "url": "https://gitlab.com/cyber-dojo/creator",
+        "provider": "gitlab",
+        "description": "The https://cyber-dojo.org UI to configure and create (or re-enter) a group-exercise or an individual-exercise.",
+        "created_at": 1768825460.0531082,
+        "last_modified_at": 1776252354.0611956
+      },
+      "attestation_type": "generic",
+      "is_compliant": true,
+      "attestation_id": "3140c88d-083b-4be4-922f-08603d1a",
+      "template_reference_name": "lint",
+      "target_artifact": "creator"
+    },
+    {
+      "org_id": "83acb2bc-2c26-48a7-8b87-90dfcce7",
+      "flow_id": "e4e08b57-e36e-4724-acc8-04e7e437",
+      "trail_id": "43c8ab31-45d7-4250-b07e-eef1e9f8",
+      "timestamp": 1776252362.5431488,
+      "type": "trail_attestation_reported",
+      "git_commit_info": {
+        "sha1": "65fd2bfa2478534ea4bc5ccf30f6bfc6aab7550c",
+        "message": "Merge branch 'fix-multijson-deprecation-warning' into 'main'\n\nBypass MultiJson.encode deprecation warning in Sinatra's json helper\n\nSee merge request cyber-dojo/creator!243",
+        "author": "Jon Jagger <jon@jaggersoft.com>",
+        "author_username": null,
+        "branch": "main",
+        "timestamp": 1776252244.0,
+        "url": "https://gitlab.com/cyber-dojo/creator/-/commit/65fd2bfa2478534ea4bc5ccf30f6bfc6aab7550c",
+        "parents": null
+      },
+      "repo_info": {
+        "inner_id": "a4bbd22e-cd62-4695-b6ea-437fb8ce",
+        "org_id": "83acb2bc-2c26-48a7-8b87-90dfcce7",
+        "repo_id": "53419335",
+        "name": "creator",
+        "url": "https://gitlab.com/cyber-dojo/creator",
+        "provider": "gitlab",
+        "description": "The https://cyber-dojo.org UI to configure and create (or re-enter) a group-exercise or an individual-exercise.",
+        "created_at": 1768825460.0531082,
+        "last_modified_at": 1776252362.4543567
+      },
+      "attestation_type": "custom:branch-protection",
+      "is_compliant": true,
+      "attestation_id": "cda3f464-2b3d-4961-a80f-a5c15d70",
+      "template_reference_name": "branch-protection"
+    },
+    {
+      "org_id": "83acb2bc-2c26-48a7-8b87-90dfcce7",
+      "flow_id": "e4e08b57-e36e-4724-acc8-04e7e437",
+      "trail_id": "43c8ab31-45d7-4250-b07e-eef1e9f8",
+      "timestamp": 1776252403.582429,
+      "type": "artifact_creation_reported",
+      "git_commit_info": {
+        "sha1": "65fd2bfa2478534ea4bc5ccf30f6bfc6aab7550c",
+        "message": "Merge branch 'fix-multijson-deprecation-warning' into 'main'\n\nBypass MultiJson.encode deprecation warning in Sinatra's json helper\n\nSee merge request cyber-dojo/creator!243",
+        "author": "Jon Jagger <jon@jaggersoft.com>",
+        "author_username": null,
+        "branch": "main",
+        "timestamp": 1776252244.0,
+        "url": "https://gitlab.com/cyber-dojo/creator/-/commit/65fd2bfa2478534ea4bc5ccf30f6bfc6aab7550c",
+        "parents": null
+      },
+      "repo_info": {
+        "inner_id": "a4bbd22e-cd62-4695-b6ea-437fb8ce",
+        "org_id": "83acb2bc-2c26-48a7-8b87-90dfcce7",
+        "repo_id": "53419335",
+        "name": "creator",
+        "url": "https://gitlab.com/cyber-dojo/creator",
+        "provider": "gitlab",
+        "description": "The https://cyber-dojo.org UI to configure and create (or re-enter) a group-exercise or an individual-exercise.",
+        "created_at": 1768825460.0531082,
+        "last_modified_at": 1776252403.572518
+      },
+      "artifact_fingerprint": "ce59db031695ca55deaaacefda233875fe5c32783c69816fcea2bb3642636e4f",
+      "artifact_name": "cyberdojo/creator:65fd2bf",
+      "artifact_id": "c5d209a3-9139-4f5b-a553-c6351091",
+      "template_reference_name": "creator",
+      "git_commit": "65fd2bfa2478534ea4bc5ccf30f6bfc6aab7550c"
+    },
+    {
+      "org_id": "83acb2bc-2c26-48a7-8b87-90dfcce7",
+      "flow_id": "e4e08b57-e36e-4724-acc8-04e7e437",
+      "trail_id": "43c8ab31-45d7-4250-b07e-eef1e9f8",
+      "timestamp": 1776252693.482904,
+      "type": "artifact_attestation_reported",
+      "git_commit_info": {
+        "sha1": "65fd2bfa2478534ea4bc5ccf30f6bfc6aab7550c",
+        "message": "Merge branch 'fix-multijson-deprecation-warning' into 'main'\n\nBypass MultiJson.encode deprecation warning in Sinatra's json helper\n\nSee merge request cyber-dojo/creator!243",
+        "author": "Jon Jagger <jon@jaggersoft.com>",
+        "author_username": null,
+        "branch": "main",
+        "timestamp": 1776252244.0,
+        "url": "https://gitlab.com/cyber-dojo/creator/-/commit/65fd2bfa2478534ea4bc5ccf30f6bfc6aab7550c",
+        "parents": null
+      },
+      "repo_info": {
+        "inner_id": "a4bbd22e-cd62-4695-b6ea-437fb8ce",
+        "org_id": "83acb2bc-2c26-48a7-8b87-90dfcce7",
+        "repo_id": "53419335",
+        "name": "creator",
+        "url": "https://gitlab.com/cyber-dojo/creator",
+        "provider": "gitlab",
+        "description": "The https://cyber-dojo.org UI to configure and create (or re-enter) a group-exercise or an individual-exercise.",
+        "created_at": 1768825460.0531082,
+        "last_modified_at": 1776252693.3686984
+      },
+      "attestation_type": "junit",
+      "is_compliant": true,
+      "attestation_id": "7c731680-ff9f-4e22-8147-32e8629f",
+      "template_reference_name": "unit-test",
+      "artifact_fingerprint": "ce59db031695ca55deaaacefda233875fe5c32783c69816fcea2bb3642636e4f",
+      "artifact_name": "cyberdojo/creator:65fd2bf",
+      "target_artifact": "creator"
+    },
+    {
+      "org_id": "83acb2bc-2c26-48a7-8b87-90dfcce7",
+      "flow_id": "e4e08b57-e36e-4724-acc8-04e7e437",
+      "trail_id": "43c8ab31-45d7-4250-b07e-eef1e9f8",
+      "timestamp": 1776252695.6943574,
+      "type": "artifact_attestation_reported",
+      "git_commit_info": {
+        "sha1": "65fd2bfa2478534ea4bc5ccf30f6bfc6aab7550c",
+        "message": "Merge branch 'fix-multijson-deprecation-warning' into 'main'\n\nBypass MultiJson.encode deprecation warning in Sinatra's json helper\n\nSee merge request cyber-dojo/creator!243",
+        "author": "Jon Jagger <jon@jaggersoft.com>",
+        "author_username": null,
+        "branch": "main",
+        "timestamp": 1776252244.0,
+        "url": "https://gitlab.com/cyber-dojo/creator/-/commit/65fd2bfa2478534ea4bc5ccf30f6bfc6aab7550c",
+        "parents": null
+      },
+      "repo_info": {
+        "inner_id": "a4bbd22e-cd62-4695-b6ea-437fb8ce",
+        "org_id": "83acb2bc-2c26-48a7-8b87-90dfcce7",
+        "repo_id": "53419335",
+        "name": "creator",
+        "url": "https://gitlab.com/cyber-dojo/creator",
+        "provider": "gitlab",
+        "description": "The https://cyber-dojo.org UI to configure and create (or re-enter) a group-exercise or an individual-exercise.",
+        "created_at": 1768825460.0531082,
+        "last_modified_at": 1776252695.5762572
+      },
+      "attestation_type": "generic",
+      "is_compliant": true,
+      "attestation_id": "27c3762e-631f-429d-863a-99a3d404",
+      "template_reference_name": "test-branch-coverage",
+      "artifact_fingerprint": "ce59db031695ca55deaaacefda233875fe5c32783c69816fcea2bb3642636e4f",
+      "artifact_name": "cyberdojo/creator:65fd2bf",
+      "target_artifact": "creator"
+    },
+    {
+      "org_id": "83acb2bc-2c26-48a7-8b87-90dfcce7",
+      "flow_id": "e4e08b57-e36e-4724-acc8-04e7e437",
+      "trail_id": "43c8ab31-45d7-4250-b07e-eef1e9f8",
+      "timestamp": 1776252924.2131932,
+      "type": "artifact_started_running",
+      "git_commit_info": null,
+      "repo_info": null,
+      "artifact_fingerprint": "ce59db031695ca55deaaacefda233875fe5c32783c69816fcea2bb3642636e4f",
+      "environment_id": "e44779bb-311d-4bac-9d19-a64a0843",
+      "environment_name": "aws-beta",
+      "snapshot_index": 6415,
+      "replica_number": 1,
+      "template_reference_name": "creator"
+    },
+    {
+      "org_id": "83acb2bc-2c26-48a7-8b87-90dfcce7",
+      "flow_id": "e4e08b57-e36e-4724-acc8-04e7e437",
+      "trail_id": "43c8ab31-45d7-4250-b07e-eef1e9f8",
+      "timestamp": 1776253126.1594,
+      "type": "trail_attestation_reported",
+      "git_commit_info": {
+        "sha1": "65fd2bfa2478534ea4bc5ccf30f6bfc6aab7550c",
+        "message": "Merge branch 'fix-multijson-deprecation-warning' into 'main'\n\nBypass MultiJson.encode deprecation warning in Sinatra's json helper\n\nSee merge request cyber-dojo/creator!243",
+        "author": "Jon Jagger <jon@jaggersoft.com>",
+        "author_username": null,
+        "branch": "main",
+        "timestamp": 1776252244.0,
+        "url": "https://gitlab.com/cyber-dojo/creator/-/commit/65fd2bfa2478534ea4bc5ccf30f6bfc6aab7550c",
+        "parents": null
+      },
+      "repo_info": {
+        "inner_id": "a4bbd22e-cd62-4695-b6ea-437fb8ce",
+        "org_id": "83acb2bc-2c26-48a7-8b87-90dfcce7",
+        "repo_id": "53419335",
+        "name": "creator",
+        "url": "https://gitlab.com/cyber-dojo/creator",
+        "provider": "gitlab",
+        "description": "The https://cyber-dojo.org UI to configure and create (or re-enter) a group-exercise or an individual-exercise.",
+        "created_at": 1768825460.0531082,
+        "last_modified_at": 1776253126.069349
+      },
+      "attestation_type": "custom:dast-report",
+      "is_compliant": true,
+      "attestation_id": "fbc2f6ec-1dc4-4762-8781-659a4897",
+      "template_reference_name": "dast-report"
+    },
+    {
+      "org_id": "83acb2bc-2c26-48a7-8b87-90dfcce7",
+      "flow_id": "e4e08b57-e36e-4724-acc8-04e7e437",
+      "trail_id": "43c8ab31-45d7-4250-b07e-eef1e9f8",
+      "timestamp": 1776256798.610816,
+      "type": "artifact_started_running",
+      "git_commit_info": null,
+      "repo_info": null,
+      "artifact_fingerprint": "ce59db031695ca55deaaacefda233875fe5c32783c69816fcea2bb3642636e4f",
+      "environment_id": "73965c45-e9a1-4bb9-ad01-dc5a526f",
+      "environment_name": "aws-prod",
+      "snapshot_index": 4237,
+      "replica_number": 1,
+      "template_reference_name": "creator"
+    },
+    {
+      "org_id": "83acb2bc-2c26-48a7-8b87-90dfcce7",
+      "flow_id": "e4e08b57-e36e-4724-acc8-04e7e437",
+      "trail_id": "43c8ab31-45d7-4250-b07e-eef1e9f8",
+      "timestamp": 1777883123.9145384,
+      "type": "artifact_stopped_running",
+      "git_commit_info": null,
+      "repo_info": null,
+      "artifact_fingerprint": "ce59db031695ca55deaaacefda233875fe5c32783c69816fcea2bb3642636e4f",
+      "environment_id": "e44779bb-311d-4bac-9d19-a64a0843",
+      "environment_name": "aws-beta",
+      "snapshot_index": 6610,
+      "template_reference_name": "creator"
+    }
+  ],
+  "created_by": "ci-pipelines",
+  "flow": {
+    "name": "creator-ci",
+    "tags": {
+      "ci": "gitlab",
+      "repo_url": "https://gitlab.com/cyber-dojo/creator",
+      "kind": "build"
+    }
+  },
+  "external_urls": null,
+  "html_url": "https://app.kosli.com/cyber-dojo/flows/creator-ci/trails/65fd2bfa2478534ea4bc5ccf30f6bfc6aab7550c"
+}
