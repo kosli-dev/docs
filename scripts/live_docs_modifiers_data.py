@@ -425,6 +425,25 @@ _MODIFIERS = {
             },
         },
     },
+    "kosli evaluate input": {
+        "github": {
+            "yaml": {
+                "repo": "snyk-scanning",
+                "workflow": "tests/test_rego_rules.sh",
+                "backup": {
+                    "commit": "117e18e0cb1eab30b9747ece58327eabfc595b90",
+                    "line": 153,
+                },
+            },
+            "event": {
+                "flow": "",
+                "backup": {
+                    "trail": "",
+                    "attestation_id": "",
+                },
+            },
+        },
+    },
     # Lastly we have commands that DO create events in a Trail.
     "kosli attest custom": {
         "github": {
