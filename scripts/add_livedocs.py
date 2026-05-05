@@ -4,8 +4,8 @@ Strip any existing live-docs sections from client_reference .md files and
 regenerate them with static resolved content, driven by _MODIFIERS and _CLI_COMMANDS data.
 
 Usage:
-    python scripts/resolve_livedocs.py
-    python scripts/resolve_livedocs.py --docs-dir path/to/client_reference/
+    python scripts/add_livedocs.py
+    python scripts/add_livedocs.py --docs-dir path/to/client_reference/
 """
 
 import argparse
