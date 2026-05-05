@@ -15,7 +15,7 @@ import sys
 
 sys.path.insert(0, os.path.dirname(os.path.abspath(__file__)))
 from live_docs_modifiers_data import has_command, cis_for, has_trail_event
-from live_docs import yaml_url as _resolve_yaml_url, event_url as _resolve_event_url
+from live_docs_fetch import yaml_url as _resolve_yaml_url, event_url as _resolve_event_url
 
 
 _CI_ORDER = ["github", "gitlab"]
@@ -42,7 +42,7 @@ def command_from_text(text):
 
 def yaml_url(command, ci):
     """Return the resolved static URL for a YAML live example."""
-    return _resolve_yaml_url(None, command, ci)
+    return _resolve_yaml_url(command, ci)
 
 
 def event_url(command, ci):
