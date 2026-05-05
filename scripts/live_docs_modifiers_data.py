@@ -5,9 +5,14 @@ _MODIFIERS maps CLI commands to per-CI metadata. Each CI entry has:
 - event: flow, and backup (trail and attestation_id for the fallback event URL)
 
 To audit backup commit ages and check which commands are still present at HEAD:
-  python scripts/audit_live_docs_backup_commits.py
+  python3 scripts/audit_live_docs_backup_commits.py
 Calls the GitHub/GitLab APIs unauthenticated (60 req/hour limit).
 If dates show as "?" the rate limit has been hit -- wait an hour and retry.
+
+To update stale backup commit SHAs and line numbers to HEAD, run:
+  python3 scripts/refresh_live_docs_backup_commits.py > update_live_docs_backup_commits.py
+  python3 update_live_docs_backup_commits.py
+Only entries where the command is still present in their workflows at HEAD are updated.
 """
 
 
