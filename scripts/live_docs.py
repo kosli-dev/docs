@@ -60,7 +60,7 @@ import requests
 
 import live_docs_modifiers_data
 import live_docs_queries_data
-from live_docs_cache import (
+from live_docs_fetch import (
     resolve_head_sha,
     fetch_trail,
     flow_in_latest_snapshot,
