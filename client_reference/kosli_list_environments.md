@@ -37,11 +37,14 @@ To view a live example of 'kosli list environments' you can run the command belo
 
 ```shell
 export KOSLI_ORG=cyber-dojo
-export KOSLI_API_TOKEN=Pj_XT2deaVA6V1qrTlthuaWsmjVt4eaHQwqnwqjRO3A  # read-only
+# The API token below is read-only
+export KOSLI_API_TOKEN=Pj_XT2deaVA6V1qrTlthuaWsmjVt4eaHQwqnwqjRO3A
 kosli list environments --output=json
 ```
 
 <Accordion title="View example output">
+<div style={{maxHeight: "50vh", overflowY: "auto"}}>
+
 ```json
 [
   {
@@ -49,8 +52,8 @@ kosli list environments --output=json
     "name": "aws-beta",
     "type": "ECS",
     "description": "The ECS cluster for staging cyber-dojo",
-    "last_modified_at": 1777982784.1051183,
-    "last_reported_at": 1777982784.1051183,
+    "last_modified_at": 1777983324.0257177,
+    "last_reported_at": 1777983324.0257177,
     "state": true,
     "include_scaling": false,
     "tags": {
@@ -67,8 +70,8 @@ kosli list environments --output=json
     "name": "aws-prod",
     "type": "ECS",
     "description": "The ECS cluster for production cyber-dojo",
-    "last_modified_at": 1777982818.589105,
-    "last_reported_at": 1777982818.589105,
+    "last_modified_at": 1777983298.5339797,
+    "last_reported_at": 1777983298.5339797,
     "state": true,
     "include_scaling": false,
     "tags": {
@@ -128,5 +131,7 @@ kosli list environments --output=json
   }
 ]
 ```
+
+</div>
 </Accordion>
 

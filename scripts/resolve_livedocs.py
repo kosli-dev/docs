@@ -89,7 +89,8 @@ def generate_cli_section(command):
         "(for the [cyber-dojo](https://app.kosli.com/cyber-dojo) demo organization).\n\n",
         "```shell\n",
         "export KOSLI_ORG=cyber-dojo\n",
-        f"export KOSLI_API_TOKEN={_KOSLI_API_TOKEN}  # read-only\n",
+        "# The API token below is read-only\n",
+        f"export KOSLI_API_TOKEN={_KOSLI_API_TOKEN}\n",
         f"{full_cmd}\n",
         "```\n\n",
     ]
@@ -97,9 +98,11 @@ def generate_cli_section(command):
     if cli_json:
         parts += [
             '<Accordion title="View example output">\n',
+            '<div style={{maxHeight: "50vh", overflowY: "auto"}}>\n\n',
             "```json\n",
             cli_json,
-            "\n```\n",
+            "\n```\n\n",
+            "</div>\n",
             "</Accordion>\n\n",
         ]
 

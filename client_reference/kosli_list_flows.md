@@ -37,11 +37,14 @@ To view a live example of 'kosli list flows' you can run the command below (for 
 
 ```shell
 export KOSLI_ORG=cyber-dojo
-export KOSLI_API_TOKEN=Pj_XT2deaVA6V1qrTlthuaWsmjVt4eaHQwqnwqjRO3A  # read-only
+# The API token below is read-only
+export KOSLI_API_TOKEN=Pj_XT2deaVA6V1qrTlthuaWsmjVt4eaHQwqnwqjRO3A
 kosli list flows --output=json
 ```
 
 <Accordion title="View example output">
+<div style={{maxHeight: "50vh", overflowY: "auto"}}>
+
 ```json
 [
   {
@@ -264,5 +267,7 @@ kosli list flows --output=json
   }
 ]
 ```
+
+</div>
 </Accordion>
 

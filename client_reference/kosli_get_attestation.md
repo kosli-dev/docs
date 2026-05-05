@@ -53,11 +53,14 @@ To view a live example of 'kosli get attestation' you can run the command below 
 
 ```shell
 export KOSLI_ORG=cyber-dojo
-export KOSLI_API_TOKEN=Pj_XT2deaVA6V1qrTlthuaWsmjVt4eaHQwqnwqjRO3A  # read-only
+# The API token below is read-only
+export KOSLI_API_TOKEN=Pj_XT2deaVA6V1qrTlthuaWsmjVt4eaHQwqnwqjRO3A
 kosli get attestation snyk-container-scan --flow=differ-ci --fingerprint=0cbbe3a6e73e733e8ca4b8813738d68e824badad0508ff20842832b5143b48c0 --output=json
 ```
 
 <Accordion title="View example output">
+<div style={{maxHeight: "50vh", overflowY: "auto"}}>
+
 ```json
 [
   {
@@ -116,6 +119,8 @@ kosli get attestation snyk-container-scan --flow=differ-ci --fingerprint=0cbbe3a
   }
 ]
 ```
+
+</div>
 </Accordion>
 
 ## Examples Use Cases

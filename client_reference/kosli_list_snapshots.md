@@ -54,11 +54,14 @@ To view a live example of 'kosli list snapshots' you can run the command below (
 
 ```shell
 export KOSLI_ORG=cyber-dojo
-export KOSLI_API_TOKEN=Pj_XT2deaVA6V1qrTlthuaWsmjVt4eaHQwqnwqjRO3A  # read-only
+# The API token below is read-only
+export KOSLI_API_TOKEN=Pj_XT2deaVA6V1qrTlthuaWsmjVt4eaHQwqnwqjRO3A
 kosli list snapshots aws-prod --output=json
 ```
 
 <Accordion title="View example output">
+<div style={{maxHeight: "50vh", overflowY: "auto"}}>
+
 ```json
 [
   {
@@ -66,7 +69,7 @@ kosli list snapshots aws-prod --output=json
     "from": 1777956838.5302956,
     "to": 0.0,
     "compliant": true,
-    "duration": 25983.588131427765
+    "duration": 26497.173085689545
   },
   {
     "index": 4356,
@@ -168,6 +171,8 @@ kosli list snapshots aws-prod --output=json
   }
 ]
 ```
+
+</div>
 </Accordion>
 
 ## Examples Use Cases

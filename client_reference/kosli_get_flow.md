@@ -37,11 +37,14 @@ To view a live example of 'kosli get flow' you can run the command below (for th
 
 ```shell
 export KOSLI_ORG=cyber-dojo
-export KOSLI_API_TOKEN=Pj_XT2deaVA6V1qrTlthuaWsmjVt4eaHQwqnwqjRO3A  # read-only
+# The API token below is read-only
+export KOSLI_API_TOKEN=Pj_XT2deaVA6V1qrTlthuaWsmjVt4eaHQwqnwqjRO3A
 kosli get flow dashboard-ci --output=json
 ```
 
 <Accordion title="View example output">
+<div style={{maxHeight: "50vh", overflowY: "auto"}}>
+
 ```json
 {
   "name": "dashboard-ci",
@@ -57,5 +60,7 @@ kosli get flow dashboard-ci --output=json
   }
 }
 ```
+
+</div>
 </Accordion>
 

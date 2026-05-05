@@ -37,19 +37,22 @@ To view a live example of 'kosli get environment' you can run the command below 
 
 ```shell
 export KOSLI_ORG=cyber-dojo
-export KOSLI_API_TOKEN=Pj_XT2deaVA6V1qrTlthuaWsmjVt4eaHQwqnwqjRO3A  # read-only
+# The API token below is read-only
+export KOSLI_API_TOKEN=Pj_XT2deaVA6V1qrTlthuaWsmjVt4eaHQwqnwqjRO3A
 kosli get environment aws-prod --output=json
 ```
 
 <Accordion title="View example output">
+<div style={{maxHeight: "50vh", overflowY: "auto"}}>
+
 ```json
 {
   "org": "cyber-dojo",
   "name": "aws-prod",
   "type": "ECS",
   "description": "The ECS cluster for production cyber-dojo",
-  "last_modified_at": 1777982758.634088,
-  "last_reported_at": 1777982758.634088,
+  "last_modified_at": 1777983298.5339797,
+  "last_reported_at": 1777983298.5339797,
   "state": true,
   "include_scaling": false,
   "tags": {
@@ -62,5 +65,7 @@ kosli get environment aws-prod --output=json
   "included_environments": null
 }
 ```
+
+</div>
 </Accordion>
 
