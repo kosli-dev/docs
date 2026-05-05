@@ -52,7 +52,10 @@ jobs:
           python-version: '3.14'
 
       - name: Install Python dependencies
-        run: pip install pyyaml requests
+        run: pip install pyyaml requests pytest
+
+      - name: Run live-docs tests
+        run: pytest tests/
 
       - name: Stamp CLI version in overview page
         run: |
