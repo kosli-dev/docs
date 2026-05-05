@@ -4,6 +4,32 @@ description: "Release notes for Kosli products."
 rss: true
 ---
 
+<Update label="May 4, 2026" description="" tags={["Platform"]}>
+
+## New features
+
+- **PATCH endpoint for environment updates** — a new `PATCH /environments/{org}/{env_name}` endpoint allows updating individual environment fields without replacing the entire resource. This fixes the issue where setting a description to an empty string was silently ignored, and enables proper support in the [Terraform provider](/terraform-reference/resources/environment).
+
+## Updates
+
+- **Significantly faster environment and snapshot pages** — eliminated thousands of redundant database queries during snapshot reporting and page rendering. For large environments (~800 artifacts), this removes approximately 5,600 unnecessary database round-trips per snapshot report. The environment events page, which previously took ~60 seconds to load for large environments, now loads normally.
+- **Infinite scroll on snapshot events tab** — the snapshot events tab now loads events incrementally via infinite scroll instead of all at once, improving responsiveness for environments with many events.
+- **Improved environment page search** — search and filter on the environment page now returns all matching artifacts in a single request with loading indicators, fixing broken behavior for large environments.
+- **Faster flow filter lookups** — environment pages that filter by flow now use a pre-materialized collection instead of scanning all artifacts, speeding up load times.
+- **Case-insensitive email lookups** — user and invitation email lookups no longer require exact case matching.
+- **Redirect preserved through login** — when a session expires, the original destination URL (e.g., an org invite page) is now preserved through the logout/login cycle.
+- **API documentation improvements** — the OpenAPI spec title is now "Kosli API", endpoints are sorted alphabetically, and server URLs are absolute for [API playground](/api-reference) compatibility.
+
+## Bug fixes
+
+- Fixed the flows filter incorrectly rejecting substring searches starting with hyphens, underscores, dots, or tildes.
+- Fixed the logical environment snapshot events tab raising an error, and the "Running" badge incorrectly counting exited artifacts.
+- Fixed a 500 error when listing API keys with legacy expiration timestamps.
+- Fixed unhandled exceptions during OAuth and SSO sign-in flows.
+- Security: upgraded xz/xz-libs packages to patch CVE-2026-34743.
+
+</Update>
+
 <Update label="May 4, 2026" description="v2.17.5" tags={["CLI"]}>
 
 ## Updates
