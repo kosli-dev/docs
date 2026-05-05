@@ -74,12 +74,12 @@ In other CI systems, set them explicitly to capture repository metadata.
 	<Tab title="GitHub">
 	View an example of the `kosli attest generic` command in GitHub.
 
-	In [this YAML file](https://app.kosli.com/api/v2/livedocs/cyber-dojo/yaml?ci=github&command=kosli%2Battest%2Bgeneric), which created [this Kosli Event](https://app.kosli.com/api/v2/livedocs/cyber-dojo/event?ci=github&command=kosli%2Battest%2Bgeneric).
+	In [this YAML file](https://github.com/cyber-dojo/dashboard/blob/a6ece2b597888f7ab149759daadda08e3afab0c1/.github/workflows/main.yml#L249), which created [this Kosli Event](https://app.kosli.com/cyber-dojo/flows/dashboard-ci/trails/a6ece2b597888f7ab149759daadda08e3afab0c1?attestation_id=4223c865-5232-461e-b065-ea46aa5d).
 	</Tab>
 	<Tab title="GitLab">
 	View an example of the `kosli attest generic` command in GitLab.
 
-	In [this YAML file](https://app.kosli.com/api/v2/livedocs/cyber-dojo/yaml?ci=gitlab&command=kosli%2Battest%2Bgeneric), which created [this Kosli Event](https://app.kosli.com/api/v2/livedocs/cyber-dojo/event?ci=gitlab&command=kosli%2Battest%2Bgeneric).
+	In [this YAML file](https://gitlab.com/cyber-dojo/creator/-/blob/65fd2bfa2478534ea4bc5ccf30f6bfc6aab7550c/.gitlab/workflows/main.yml#L92), which created [this Kosli Event](https://app.kosli.com/cyber-dojo/flows/creator-ci/trails/65fd2bfa2478534ea4bc5ccf30f6bfc6aab7550c?attestation_id=27c3762e-631f-429d-863a-99a3d404).
 	</Tab>
 </Tabs>
 

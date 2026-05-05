@@ -65,12 +65,12 @@ registry without needing a local Docker daemon.
 	<Tab title="GitHub">
 	View an example of the `kosli report approval` command in GitHub.
 
-	In [this YAML file](https://app.kosli.com/api/v2/livedocs/cyber-dojo/yaml?ci=github&command=kosli%2Breport%2Bapproval)
+	In [this YAML file](https://github.com/cyber-dojo/differ/blob/30dffd09c3f896a322c65029247abcea3019c43a/.github/workflows/main.yml#L358)
 	</Tab>
 	<Tab title="GitLab">
 	View an example of the `kosli report approval` command in GitLab.
 
-	In [this YAML file](https://app.kosli.com/api/v2/livedocs/cyber-dojo/yaml?ci=gitlab&command=kosli%2Breport%2Bapproval)
+	In [this YAML file](https://gitlab.com/cyber-dojo/creator/-/blob/48bdbd3b059d45489e8ae5f9f680f48bc6201ad8/.gitlab/workflows/main.yml#L200)
 	</Tab>
 </Tabs>
 

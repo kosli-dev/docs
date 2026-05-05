@@ -61,12 +61,12 @@ In other CI systems, set them explicitly to capture repository metadata.
 	<Tab title="GitHub">
 	View an example of the `kosli begin trail` command in GitHub.
 
-	In [this YAML file](https://app.kosli.com/api/v2/livedocs/cyber-dojo/yaml?ci=github&command=kosli%2Bbegin%2Btrail), which created [this Kosli Event](https://app.kosli.com/api/v2/livedocs/cyber-dojo/event?ci=github&command=kosli%2Bbegin%2Btrail).
+	In [this YAML file](https://github.com/cyber-dojo/runner/blob/a2ffba5a5debbc8f4f199cf5a88e5899c7d6547e/.github/workflows/main.yml#L78), which created [this Kosli Event](https://app.kosli.com/cyber-dojo/flows/runner-ci/trails/a2ffba5a5debbc8f4f199cf5a88e5899c7d6547e?attestation_id=1).
 	</Tab>
 	<Tab title="GitLab">
 	View an example of the `kosli begin trail` command in GitLab.
 
-	In [this YAML file](https://app.kosli.com/api/v2/livedocs/cyber-dojo/yaml?ci=gitlab&command=kosli%2Bbegin%2Btrail), which created [this Kosli Event](https://app.kosli.com/api/v2/livedocs/cyber-dojo/event?ci=gitlab&command=kosli%2Bbegin%2Btrail).
+	In [this YAML file](https://gitlab.com/cyber-dojo/creator/-/blob/65fd2bfa2478534ea4bc5ccf30f6bfc6aab7550c/.gitlab/workflows/main.yml#L55), which created [this Kosli Event](https://app.kosli.com/cyber-dojo/flows/creator-ci/trails/65fd2bfa2478534ea4bc5ccf30f6bfc6aab7550c?attestation_id=1).
 	</Tab>
 </Tabs>
 
