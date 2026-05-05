@@ -49,9 +49,74 @@ or any of the `--flow`, `--trail` or `--fingerprint` flags.
 
 ## Live Example
 
-To view a live example of 'kosli get attestation' you can run the commands below (for the <a href="https://app.kosli.com/cyber-dojo/environments/aws-prod/snapshots/">cyber-dojo</a> demo organization).<br/><a href="https://app.kosli.com/api/v2/livedocs/cyber-dojo/cli?command=kosli%2Bget%2Battestation%2Bsnyk-container-scan%2B--flow%3Ddiffer-ci%2B--fingerprint%3D0cbbe3a6e73e733e8ca4b8813738d68e824badad0508ff20842832b5143b48c0%2B--output%3Djson">Run the commands below and view the output.</a><pre>export KOSLI_ORG=cyber-dojo
+To view a live example of 'kosli get attestation' you can run the command below (for the [cyber-dojo](https://app.kosli.com/cyber-dojo) demo organization).
+
+```shell
+export KOSLI_ORG=cyber-dojo
 export KOSLI_API_TOKEN=Pj_XT2deaVA6V1qrTlthuaWsmjVt4eaHQwqnwqjRO3A  # read-only
-kosli get attestation snyk-container-scan --flow=differ-ci --fingerprint=0cbbe3a6e73e733e8ca4b8813738d68e824badad0508ff20842832b5143b48c0 --output=json</pre>
+kosli get attestation snyk-container-scan --flow=differ-ci --fingerprint=0cbbe3a6e73e733e8ca4b8813738d68e824badad0508ff20842832b5143b48c0 --output=json
+```
+
+<Accordion title="View example output">
+```json
+[
+  {
+    "schema_version": 2,
+    "attestation_type": "snyk",
+    "attestation_name": "snyk-container-scan",
+    "is_compliant": true,
+    "origin_url": "https://github.com/cyber-dojo/differ/actions/runs/14975901658",
+    "artifact_fingerprint": "0cbbe3a6e73e733e8ca4b8813738d68e824badad0508ff20842832b5143b48c0",
+    "target_artifacts": [
+      "differ"
+    ],
+    "git_commit_info": {
+      "sha1": "5ccc5c141fdd1fbd97905b7fe0af87e5a592bfb6",
+      "message": "Dockerfile - Automated base-image update (#317)\n\nCo-authored-by: JonJagger@users.noreply.github.com <{{ github.actor }}>",
+      "author": "Jon Jagger <jon@kosli.com>",
+      "branch": "main",
+      "timestamp": 1747062671.0,
+      "url": "https://github.com/cyber-dojo/differ/commit/5ccc5c141fdd1fbd97905b7fe0af87e5a592bfb6"
+    },
+    "evidence_archive_path": "83acb2bc-2c26-48a7-8b87-90dfcce7/artifact_attestation/05c2fd70-0832-4868-9e56-e268b720/evidence.tgz",
+    "evidence_archive_fingerprint": "8b671e582ee8c9550bb76fb8cef8cb5b4b9f5481737e42f44ad272c931bd82ba",
+    "user_data": {},
+    "created_at": 1747062776.797778,
+    "processed_snyk_results": {
+      "schema_version": 1,
+      "tool": {
+        "name": "Snyk Container",
+        "version": "1.1296.2"
+      },
+      "results": [
+        {
+          "low_count": 0,
+          "medium_count": 0,
+          "high_count": 0
+        },
+        {
+          "low_count": 0,
+          "medium_count": 0,
+          "high_count": 0
+        }
+      ]
+    },
+    "attestation_id": "f7cd9b3a-2738-47e6-be36-689d511d",
+    "html_url": "https://app.kosli.com/cyber-dojo/flows/differ-ci/trails/5ccc5c141fdd1fbd97905b7fe0af87e5a592bfb6?attestation_id=f7cd9b3a-2738-47e6-be36-689d511d",
+    "reported_by": "ci-pipelines",
+    "has_audit_package": true,
+    "_links": {
+      "self": {
+        "href": "https://app.kosli.com/api/v2/attestations/cyber-dojo/differ-ci/artifact/0cbbe3a6e73e733e8ca4b8813738d68e824badad0508ff20842832b5143b48c0/snyk-container-scan"
+      },
+      "evidence": {
+        "href": "https://app.kosli.com/api/v2/attestations/cyber-dojo/differ-ci/trail/5ccc5c141fdd1fbd97905b7fe0af87e5a592bfb6/attestation/f7cd9b3a-2738-47e6-be36-689d511d/evidence"
+      }
+    }
+  }
+]
+```
+</Accordion>
 
 ## Examples Use Cases
 

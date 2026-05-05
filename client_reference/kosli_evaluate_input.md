@@ -54,6 +54,16 @@ This accepts inline JSON or a file reference (`@file.json`).
 |        --org string  |  The Kosli organization.  |
 
 
+## Live Examples in different CI systems
+
+<Tabs>
+	<Tab title="GitHub">
+	View an example of the `kosli evaluate input` command in GitHub.
+
+	In [this YAML file](https://github.com/cyber-dojo/snyk-scanning/blob/117e18e0cb1eab30b9747ece58327eabfc595b90/tests/test_rego_rules.sh#L153)
+	</Tab>
+</Tabs>
+
 ## Examples Use Cases
 
 These examples all assume that the flags  `--api-token`, `--org`, `--host`, (and `--flow`, `--trail` when required), are [set/provided](/getting_started/install/#assigning-flags-via-environment-variables). 

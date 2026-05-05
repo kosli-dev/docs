@@ -2,11 +2,16 @@
 
 Results are memoized in-process to avoid redundant HTTP calls within a single run.
 """
+import json
 import requests
 from functools import lru_cache
 from urllib import parse
 
 import live_docs_modifiers_data
+import live_docs_queries_data
+
+_KOSLI_API_BASE = "https://app.kosli.com/api/v2"
+_KOSLI_API_TOKEN = "Pj_XT2deaVA6V1qrTlthuaWsmjVt4eaHQwqnwqjRO3A"
 
 
 @lru_cache(maxsize=None)
@@ -174,3 +179,15 @@ def _is_attestation_type(event, wanted_type):
         attestation_type = event.get("attestation_type", None)
         return isinstance(attestation_type, str) and attestation_type.startswith("custom:")
     return event.get("attestation_type", None) == wanted_type
+
+
+@lru_cache(maxsize=None)
+def fetch_cli_json(command):
+    """Fetch the Kosli API response for command and return pretty-printed JSON, or None on failure."""
+    full_cmd = live_docs_queries_data.full_command(command)
+    path = live_docs_queries_data.api_path(full_cmd)
+    url = f"{_KOSLI_API_BASE}/{path}"
+    response = requests.get(url, headers={"Authorization": f"Bearer {_KOSLI_API_TOKEN}"})
+    if response.status_code != 200:
+        return None
+    return json.dumps(response.json(), indent=2)

@@ -1,7 +1,7 @@
 #!/usr/bin/env python3
 """
-Strip any existing live-docs section from client_reference .md files and
-regenerate it with static resolved URLs, driven by _MODIFIERS data.
+Strip any existing live-docs sections from client_reference .md files and
+regenerate them with static resolved content, driven by _MODIFIERS and _CLI_COMMANDS data.
 
 Usage:
     python scripts/resolve_livedocs.py
@@ -15,16 +15,27 @@ import sys
 
 sys.path.insert(0, os.path.dirname(os.path.abspath(__file__)))
 from live_docs_modifiers_data import has_command, cis_for, has_trail_event
-from live_docs_fetch import yaml_url as _resolve_yaml_url, event_url as _resolve_event_url
+from live_docs_queries_data import has_cli_command, full_command as cli_full_command
+from live_docs_fetch import (
+    yaml_url as _resolve_yaml_url,
+    event_url as _resolve_event_url,
+    fetch_cli_json,
+)
 
+_KOSLI_API_TOKEN = "Pj_XT2deaVA6V1qrTlthuaWsmjVt4eaHQwqnwqjRO3A"
 
 _CI_ORDER = ["github", "gitlab"]
 _CI_DISPLAY = {"github": "GitHub", "gitlab": "GitLab"}
 
 _FRONTMATTER = re.compile(r'^---\n(.*?)\n---', re.DOTALL)
 _TITLE = re.compile(r'^title:\s*"([^"]+)"', re.MULTILINE)
-_LIVE_SECTION = re.compile(
+
+_LIVE_MODIFIERS_SECTION = re.compile(
     r'## Live Examples in different CI systems\n.*?(?=## |\Z)',
+    re.DOTALL,
+)
+_LIVE_CLI_SECTION = re.compile(
+    r'## Live Example\n.*?(?=## |\Z)',
     re.DOTALL,
 )
 
@@ -50,8 +61,8 @@ def event_url(command, ci):
     return _resolve_event_url(command, ci)
 
 
-def generate_section(command):
-    """Return the full MDX live-docs section string for command."""
+def generate_modifiers_section(command):
+    """Return the full MDX live-docs section string for a modifier command."""
     parts = ["## Live Examples in different CI systems\n\n<Tabs>\n"]
     for ci in (ci for ci in _CI_ORDER if ci in list(cis_for(command))):
         display = _CI_DISPLAY[ci]
@@ -67,8 +78,36 @@ def generate_section(command):
     return ''.join(parts)
 
 
+def generate_cli_section(command):
+    """Return the full MDX live-docs section string for a CLI query command."""
+    full_cmd = cli_full_command(command)
+    cli_json = fetch_cli_json(command)
+
+    parts = [
+        "## Live Example\n\n",
+        f"To view a live example of '{command}' you can run the command below ",
+        "(for the [cyber-dojo](https://app.kosli.com/cyber-dojo) demo organization).\n\n",
+        "```shell\n",
+        "export KOSLI_ORG=cyber-dojo\n",
+        f"export KOSLI_API_TOKEN={_KOSLI_API_TOKEN}  # read-only\n",
+        f"{full_cmd}\n",
+        "```\n\n",
+    ]
+
+    if cli_json:
+        parts += [
+            '<Accordion title="View example output">\n',
+            "```json\n",
+            cli_json,
+            "\n```\n",
+            "</Accordion>\n\n",
+        ]
+
+    return ''.join(parts)
+
+
 def resolve_file(filepath):
-    """Strip and regenerate the live-docs section in one file. Returns True if modified."""
+    """Strip and regenerate the live-docs sections in one file. Returns True if modified."""
     with open(filepath, 'r', encoding='utf-8') as f:
         text = f.read()
 
@@ -76,10 +115,18 @@ def resolve_file(filepath):
     if command is None:
         return False
 
-    new_text = _LIVE_SECTION.sub('', text)
+    new_text = _LIVE_MODIFIERS_SECTION.sub('', text)
+    new_text = _LIVE_CLI_SECTION.sub('', new_text)
 
     if has_command(command):
-        section = generate_section(command)
+        section = generate_modifiers_section(command)
+        if '## Examples Use Cases' in new_text:
+            new_text = new_text.replace('## Examples Use Cases', section + '## Examples Use Cases', 1)
+        else:
+            new_text = new_text.rstrip('\n') + '\n\n' + section
+
+    if has_cli_command(command):
+        section = generate_cli_section(command)
         if '## Examples Use Cases' in new_text:
             new_text = new_text.replace('## Examples Use Cases', section + '## Examples Use Cases', 1)
         else:
