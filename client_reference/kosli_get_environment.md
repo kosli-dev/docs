@@ -31,10 +31,41 @@ Get an environment's metadata.
 |    -r, --max-api-retries int  |  [defaulted] How many times should API calls be retried when the API host is not reachable. (default 3)  |
 |        --org string  |  The Kosli organization.  |
 
-
 ## Live Example
 
-To view a live example of 'kosli get environment' you can run the commands below (for the <a href="https://app.kosli.com/cyber-dojo/environments/aws-prod/snapshots/">cyber-dojo</a> demo organization).<br/><a href="https://app.kosli.com/api/v2/livedocs/cyber-dojo/cli?command=kosli%2Bget%2Benvironment%2Baws-prod%2B--output%3Djson">Run the commands below and view the output.</a><pre>export KOSLI_ORG=cyber-dojo
-export KOSLI_API_TOKEN=Pj_XT2deaVA6V1qrTlthuaWsmjVt4eaHQwqnwqjRO3A  # read-only
-kosli get environment aws-prod --output=json</pre>
+To view a live example of 'kosli get environment' you can run the command below (for the [cyber-dojo](https://app.kosli.com/cyber-dojo) demo organization).
+
+```shell
+export KOSLI_ORG=cyber-dojo
+# The API token below is read-only
+export KOSLI_API_TOKEN=Pj_XT2deaVA6V1qrTlthuaWsmjVt4eaHQwqnwqjRO3A
+kosli get environment aws-prod --output=json
+```
+
+<Accordion title="View example output">
+<div style={{maxHeight: "50vh", overflowY: "auto"}}>
+
+```json
+{
+  "org": "cyber-dojo",
+  "name": "aws-prod",
+  "type": "ECS",
+  "description": "The ECS cluster for production cyber-dojo",
+  "last_modified_at": 1777983298.5339797,
+  "last_reported_at": 1777983298.5339797,
+  "state": true,
+  "include_scaling": false,
+  "tags": {
+    "url": "https://cyber-dojo.org/"
+  },
+  "policies": [
+    "build-process",
+    "snyk-scan-aws-prod"
+  ],
+  "included_environments": null
+}
+```
+
+</div>
+</Accordion>
 

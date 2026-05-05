@@ -52,7 +52,7 @@ jobs:
           python-version: '3.14'
 
       - name: Install Python dependencies
-        run: pip install pyyaml
+        run: pip install pyyaml requests
 
       - name: Stamp CLI version in overview page
         run: |
@@ -61,6 +61,9 @@ jobs:
 
       - name: Update CLI navigation
         run: python scripts/update-cli-nav.py --docs-dir client_reference/ --nav-file config/navigation.json
+
+      - name: Add live-docs sections
+        run: python scripts/add_livedocs.py
 
       - name: Install helm-docs
         run: |

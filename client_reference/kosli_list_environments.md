@@ -31,10 +31,107 @@ List environments for an org.
 |    -r, --max-api-retries int  |  [defaulted] How many times should API calls be retried when the API host is not reachable. (default 3)  |
 |        --org string  |  The Kosli organization.  |
 
-
 ## Live Example
 
-To view a live example of 'kosli list environments' you can run the commands below (for the <a href="https://app.kosli.com/cyber-dojo/environments/aws-prod/snapshots/">cyber-dojo</a> demo organization).<br/><a href="https://app.kosli.com/api/v2/livedocs/cyber-dojo/cli?command=kosli%2Blist%2Benvironments%2B--output%3Djson">Run the commands below and view the output.</a><pre>export KOSLI_ORG=cyber-dojo
-export KOSLI_API_TOKEN=Pj_XT2deaVA6V1qrTlthuaWsmjVt4eaHQwqnwqjRO3A  # read-only
-kosli list environments --output=json</pre>
+To view a live example of 'kosli list environments' you can run the command below (for the [cyber-dojo](https://app.kosli.com/cyber-dojo) demo organization).
+
+```shell
+export KOSLI_ORG=cyber-dojo
+# The API token below is read-only
+export KOSLI_API_TOKEN=Pj_XT2deaVA6V1qrTlthuaWsmjVt4eaHQwqnwqjRO3A
+kosli list environments --output=json
+```
+
+<Accordion title="View example output">
+<div style={{maxHeight: "50vh", overflowY: "auto"}}>
+
+```json
+[
+  {
+    "org": "cyber-dojo",
+    "name": "aws-beta",
+    "type": "ECS",
+    "description": "The ECS cluster for staging cyber-dojo",
+    "last_modified_at": 1777983324.0257177,
+    "last_reported_at": 1777983324.0257177,
+    "state": true,
+    "include_scaling": false,
+    "tags": {
+      "url": "https://beta.cyber-dojo.org/"
+    },
+    "policies": [
+      "build-process",
+      "snyk-scan-aws-beta"
+    ],
+    "included_environments": null
+  },
+  {
+    "org": "cyber-dojo",
+    "name": "aws-prod",
+    "type": "ECS",
+    "description": "The ECS cluster for production cyber-dojo",
+    "last_modified_at": 1777983298.5339797,
+    "last_reported_at": 1777983298.5339797,
+    "state": true,
+    "include_scaling": false,
+    "tags": {
+      "url": "https://cyber-dojo.org/"
+    },
+    "policies": [
+      "build-process",
+      "snyk-scan-aws-prod"
+    ],
+    "included_environments": null
+  },
+  {
+    "org": "cyber-dojo",
+    "name": "production",
+    "type": "logical",
+    "description": "Production environments for cyber-dojo",
+    "last_modified_at": 1723105767.5621033,
+    "last_reported_at": null,
+    "state": true,
+    "include_scaling": false,
+    "tags": {},
+    "policies": null,
+    "included_environments": [
+      "aws-prod",
+      "terraform-state-differ-prod"
+    ]
+  },
+  {
+    "org": "cyber-dojo",
+    "name": "terraform-state-differ-beta",
+    "type": "S3",
+    "description": "Terraform state file of the differ service for staging cyber-dojo",
+    "last_modified_at": 1764591277.5301485,
+    "last_reported_at": 1744010496.9813983,
+    "state": true,
+    "include_scaling": false,
+    "tags": {},
+    "policies": [
+      "auto-generated-no-provenance-required"
+    ],
+    "included_environments": null
+  },
+  {
+    "org": "cyber-dojo",
+    "name": "terraform-state-differ-prod",
+    "type": "S3",
+    "description": "Terraform state file of the differ service for production cyber-dojo",
+    "last_modified_at": 1764591277.811534,
+    "last_reported_at": 1744010523.8133755,
+    "state": true,
+    "include_scaling": false,
+    "tags": {},
+    "policies": [
+      "auto-generated-no-provenance-required"
+    ],
+    "included_environments": null
+  }
+]
+```
+
+</div>
+</Accordion>
 

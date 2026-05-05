@@ -83,12 +83,12 @@ In other CI systems, set them explicitly to capture repository metadata.
 	<Tab title="GitHub">
 	View an example of the `kosli attest snyk` command in GitHub.
 
-	In [this YAML file](https://app.kosli.com/api/v2/livedocs/cyber-dojo/yaml?ci=github&command=kosli%2Battest%2Bsnyk), which created [this Kosli Event](https://app.kosli.com/api/v2/livedocs/cyber-dojo/event?ci=github&command=kosli%2Battest%2Bsnyk).
+	In [this YAML file](https://github.com/cyber-dojo/snyk-container-test/blob/43373102aa2abee72027e2aba050adea9fdb0173/action.yml#L70), which created [this Kosli Event](https://app.kosli.com/cyber-dojo/flows/differ-ci/trails/2e482ef95263c81570a82f0456b026e29203d550?attestation_id=c4d17fb4-05d2-4894-bca7-f21e56ab).
 	</Tab>
 	<Tab title="GitLab">
 	View an example of the `kosli attest snyk` command in GitLab.
 
-	In [this YAML file](https://app.kosli.com/api/v2/livedocs/cyber-dojo/yaml?ci=gitlab&command=kosli%2Battest%2Bsnyk), which created [this Kosli Event](https://app.kosli.com/api/v2/livedocs/cyber-dojo/event?ci=gitlab&command=kosli%2Battest%2Bsnyk).
+	In [this YAML file](https://gitlab.com/cyber-dojo/creator/-/blob/a184b5b7d2053ce2b2f7064bf46f0b6f72f9f393/.gitlab/workflows/main.yml#L146), which created [this Kosli Event](https://app.kosli.com/cyber-dojo/flows/creator-ci/trails/a184b5b7d2053ce2b2f7064bf46f0b6f72f9f393?attestation_id=3e9cd5ee-4fd3-403f-ba59-6d431dec).
 	</Tab>
 </Tabs>
 

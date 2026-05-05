@@ -31,10 +31,36 @@ Get the metadata of a specific flow.
 |    -r, --max-api-retries int  |  [defaulted] How many times should API calls be retried when the API host is not reachable. (default 3)  |
 |        --org string  |  The Kosli organization.  |
 
-
 ## Live Example
 
-To view a live example of 'kosli get flow' you can run the commands below (for the <a href="https://app.kosli.com/cyber-dojo/environments/aws-prod/snapshots/">cyber-dojo</a> demo organization).<br/><a href="https://app.kosli.com/api/v2/livedocs/cyber-dojo/cli?command=kosli%2Bget%2Bflow%2Bdashboard-ci%2B--output%3Djson">Run the commands below and view the output.</a><pre>export KOSLI_ORG=cyber-dojo
-export KOSLI_API_TOKEN=Pj_XT2deaVA6V1qrTlthuaWsmjVt4eaHQwqnwqjRO3A  # read-only
-kosli get flow dashboard-ci --output=json</pre>
+To view a live example of 'kosli get flow' you can run the command below (for the [cyber-dojo](https://app.kosli.com/cyber-dojo) demo organization).
+
+```shell
+export KOSLI_ORG=cyber-dojo
+# The API token below is read-only
+export KOSLI_API_TOKEN=Pj_XT2deaVA6V1qrTlthuaWsmjVt4eaHQwqnwqjRO3A
+kosli get flow dashboard-ci --output=json
+```
+
+<Accordion title="View example output">
+<div style={{maxHeight: "50vh", overflowY: "auto"}}>
+
+```json
+{
+  "name": "dashboard-ci",
+  "description": "UX for a group practice dashboard",
+  "visibility": "private",
+  "org": "cyber-dojo",
+  "template": "version: 1\n\ntrail:\n  attestations:\n    - name: pull-request\n      type: pull_request\n  artifacts:\n    - name: dashboard\n      attestations:\n        - name: rubocop-lint\n          type: junit\n        - name: snyk-container-scan\n          type: generic\n        - name: sonarcloud-scan\n          type: sonar\n        - name: unit-test\n          type: junit\n        - name: unit-test-coverage\n          type: generic\n",
+  "repo_url": "https://github.com/cyber-dojo/dashboard",
+  "tags": {
+    "ci": "github",
+    "repo_url": "https://github.com/cyber-dojo/dashboard",
+    "kind": "build"
+  }
+}
+```
+
+</div>
+</Accordion>
 

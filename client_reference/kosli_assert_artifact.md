@@ -69,12 +69,12 @@ non-zero code if non-compliant status.
 	<Tab title="GitHub">
 	View an example of the `kosli assert artifact` command in GitHub.
 
-	In [this YAML file](https://app.kosli.com/api/v2/livedocs/cyber-dojo/yaml?ci=github&command=kosli%2Bassert%2Bartifact)
+	In [this YAML file](https://github.com/cyber-dojo/differ/blob/30dffd09c3f896a322c65029247abcea3019c43a/.github/workflows/main.yml#L329)
 	</Tab>
 	<Tab title="GitLab">
 	View an example of the `kosli assert artifact` command in GitLab.
 
-	In [this YAML file](https://app.kosli.com/api/v2/livedocs/cyber-dojo/yaml?ci=gitlab&command=kosli%2Bassert%2Bartifact)
+	In [this YAML file](https://gitlab.com/cyber-dojo/creator/-/blob/b3152a10de1f36b7dbe2818c0918af06fd3aca61/.gitlab/workflows/main.yml#L153)
 	</Tab>
 </Tabs>
 
