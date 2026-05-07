@@ -45,7 +45,7 @@ All rules must return `true` for the evaluation to pass and the attestation to b
 |    -c, --config-file string  |  [optional] The Kosli config file path. (default "kosli")  |
 |        --debug  |  [optional] Print debug logs to stdout. A boolean flag [docs](/faq/#boolean-flags) (default false)  |
 |    -H, --host string  |  [defaulted] The Kosli endpoint. (default "https://app.kosli.com")  |
-|        --http-proxy string  |  [optional] The HTTP proxy URL including protocol and port number. e.g. 'http://proxy-server-ip:proxy-port'  |
+|        --http-proxy http://proxy-server-ip:proxy-port  |  [optional] The HTTP proxy URL including protocol and port number. e.g. http://proxy-server-ip:proxy-port  |
 |    -r, --max-api-retries int  |  [defaulted] How many times should API calls be retried when the API host is not reachable. (default 3)  |
 |        --org string  |  The Kosli organization.  |
 
@@ -56,7 +56,7 @@ All rules must return `true` for the evaluation to pass and the attestation to b
 	<Tab title="GitHub">
 	View an example of the `kosli create attestation-type` command in GitHub.
 
-	In [this YAML file](https://github.com/cyber-dojo/kosli-attestation-types/blob/7ad343982d42654fdf4cf123c5e7aec44af8e1a7/.github/workflows/main.yml#L56)
+	In [this YAML file](https://github.com/cyber-dojo/kosli-attestation-types/blob/7ad343982d42654fdf4cf123c5e7aec44af8e1a7/.github/workflows/main.yml#L30)
 	</Tab>
 </Tabs>
 

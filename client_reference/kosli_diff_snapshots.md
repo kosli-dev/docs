@@ -45,7 +45,7 @@ Specify SNAPPISH_1 and SNAPPISH_2 by:
 |    -c, --config-file string  |  [optional] The Kosli config file path. (default "kosli")  |
 |        --debug  |  [optional] Print debug logs to stdout. A boolean flag [docs](/faq/#boolean-flags) (default false)  |
 |    -H, --host string  |  [defaulted] The Kosli endpoint. (default "https://app.kosli.com")  |
-|        --http-proxy string  |  [optional] The HTTP proxy URL including protocol and port number. e.g. 'http://proxy-server-ip:proxy-port'  |
+|        --http-proxy http://proxy-server-ip:proxy-port  |  [optional] The HTTP proxy URL including protocol and port number. e.g. http://proxy-server-ip:proxy-port  |
 |    -r, --max-api-retries int  |  [defaulted] How many times should API calls be retried when the API host is not reachable. (default 3)  |
 |        --org string  |  The Kosli organization.  |
 
@@ -67,7 +67,7 @@ kosli diff snapshots aws-beta aws-prod --output=json
 ```json
 {
   "snappish1": {
-    "snapshot_id": "aws-beta#6625",
+    "snapshot_id": "aws-beta#6636",
     "artifacts": [
       {
         "fingerprint": "4db0e95a793aa0539250f9998bc4fbe10b5d96a339730c20a25b9e763a8a5ff3",
@@ -88,7 +88,7 @@ kosli diff snapshots aws-beta aws-prod --output=json
     ]
   },
   "snappish2": {
-    "snapshot_id": "aws-prod#4357",
+    "snapshot_id": "aws-prod#4366",
     "artifacts": [
       {
         "fingerprint": "541b7d4c1b129eb894ce1dd1713f72ae268e07cf49d178aeda684bbef2bfc180",
@@ -119,14 +119,6 @@ kosli diff snapshots aws-beta aws-prod --output=json
         "most_recent_timestamp": 1776923549,
         "flow": "saver-ci",
         "commit_url": "https://github.com/cyber-dojo/saver/commit/92c0996cd9ae7642eb0769f928abe6cb6c391751",
-        "instance_count": 1
-      },
-      {
-        "fingerprint": "1eea61094353db37c7ef3e9582e63f3427c5e01fe76b8210db985144d10088cf",
-        "name": "244531986313.dkr.ecr.eu-central-1.amazonaws.com/languages-start-points:95ab455@sha256:1eea61094353db37c7ef3e9582e63f3427c5e01fe76b8210db985144d10088cf",
-        "most_recent_timestamp": 1777956787,
-        "flow": "languages-start-points-ci",
-        "commit_url": "https://github.com/cyber-dojo/languages-start-points/commit/95ab455dd7301b20c744f50b1cd015e4396aedce",
         "instance_count": 1
       },
       {
@@ -175,6 +167,14 @@ kosli diff snapshots aws-beta aws-prod --output=json
         "most_recent_timestamp": 1776923539,
         "flow": "custom-start-points-ci",
         "commit_url": "https://github.com/cyber-dojo/custom-start-points/commit/9dd6c657bc443c45c19e81165ff99286e237cfe3",
+        "instance_count": 1
+      },
+      {
+        "fingerprint": "f66cfbbc69bcb75bd3d2df7227d168335a8adbc27a0b59695db259ddde320a98",
+        "name": "244531986313.dkr.ecr.eu-central-1.amazonaws.com/languages-start-points:db53382@sha256:f66cfbbc69bcb75bd3d2df7227d168335a8adbc27a0b59695db259ddde320a98",
+        "most_recent_timestamp": 1778081137,
+        "flow": "languages-start-points-ci",
+        "commit_url": "https://github.com/cyber-dojo/languages-start-points/commit/db53382650db8b7b3f216d0055009b0d77685677",
         "instance_count": 1
       }
     ]

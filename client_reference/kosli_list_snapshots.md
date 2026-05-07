@@ -43,7 +43,7 @@ Either expression can be omitted to default to NOW.
 |    -c, --config-file string  |  [optional] The Kosli config file path. (default "kosli")  |
 |        --debug  |  [optional] Print debug logs to stdout. A boolean flag [docs](/faq/#boolean-flags) (default false)  |
 |    -H, --host string  |  [defaulted] The Kosli endpoint. (default "https://app.kosli.com")  |
-|        --http-proxy string  |  [optional] The HTTP proxy URL including protocol and port number. e.g. 'http://proxy-server-ip:proxy-port'  |
+|        --http-proxy http://proxy-server-ip:proxy-port  |  [optional] The HTTP proxy URL including protocol and port number. e.g. http://proxy-server-ip:proxy-port  |
 |    -r, --max-api-retries int  |  [defaulted] How many times should API calls be retried when the API host is not reachable. (default 3)  |
 |        --org string  |  The Kosli organization.  |
 
@@ -65,11 +65,74 @@ kosli list snapshots aws-prod --output=json
 ```json
 [
   {
-    "index": 4357,
-    "from": 1777956838.5302956,
+    "index": 4366,
+    "from": 1778128438.445219,
     "to": 0.0,
     "compliant": true,
-    "duration": 26497.173085689545
+    "duration": 21556.08734035492
+  },
+  {
+    "index": 4365,
+    "from": 1778128378.4063118,
+    "to": 1778128438.445219,
+    "compliant": true,
+    "duration": 60.038907289505005
+  },
+  {
+    "index": 4364,
+    "from": 1778128318.5241542,
+    "to": 1778128378.4063118,
+    "compliant": true,
+    "duration": 59.88215756416321
+  },
+  {
+    "index": 4363,
+    "from": 1778081218.4564807,
+    "to": 1778128318.5241542,
+    "compliant": true,
+    "duration": 47100.06767344475
+  },
+  {
+    "index": 4362,
+    "from": 1778081158.4271605,
+    "to": 1778081218.4564807,
+    "compliant": true,
+    "duration": 60.02932024002075
+  },
+  {
+    "index": 4361,
+    "from": 1778041978.4476647,
+    "to": 1778081158.4271605,
+    "compliant": true,
+    "duration": 39179.97949576378
+  },
+  {
+    "index": 4360,
+    "from": 1778041918.62214,
+    "to": 1778041978.4476647,
+    "compliant": true,
+    "duration": 59.82552480697632
+  },
+  {
+    "index": 4359,
+    "from": 1778041858.507459,
+    "to": 1778041918.62214,
+    "compliant": true,
+    "duration": 60.114681005477905
+  },
+  {
+    "index": 4358,
+    "from": 1777997458.5117762,
+    "to": 1778041858.507459,
+    "compliant": true,
+    "duration": 44399.99568271637
+  },
+  {
+    "index": 4357,
+    "from": 1777956838.5302956,
+    "to": 1777997458.5117762,
+    "compliant": true,
+    "duration": 40619.98148059845
   },
   {
     "index": 4356,
@@ -105,69 +168,6 @@ kosli list snapshots aws-prod --output=json
     "to": 1777869538.5253296,
     "compliant": true,
     "duration": 60.01687407493591
-  },
-  {
-    "index": 4351,
-    "from": 1777842958.6060224,
-    "to": 1777869478.5084555,
-    "compliant": true,
-    "duration": 26519.902433156967
-  },
-  {
-    "index": 4350,
-    "from": 1777783138.5161338,
-    "to": 1777842958.6060224,
-    "compliant": true,
-    "duration": 59820.08988857269
-  },
-  {
-    "index": 4349,
-    "from": 1777783085.6064026,
-    "to": 1777783138.5161338,
-    "compliant": true,
-    "duration": 52.90973114967346
-  },
-  {
-    "index": 4348,
-    "from": 1777783018.5123496,
-    "to": 1777783085.6064026,
-    "compliant": true,
-    "duration": 67.09405303001404
-  },
-  {
-    "index": 4347,
-    "from": 1777695478.6151357,
-    "to": 1777783018.5123496,
-    "compliant": true,
-    "duration": 87539.89721393585
-  },
-  {
-    "index": 4346,
-    "from": 1777695418.5493166,
-    "to": 1777695478.6151357,
-    "compliant": true,
-    "duration": 60.06581902503967
-  },
-  {
-    "index": 4345,
-    "from": 1777695358.5312326,
-    "to": 1777695418.5493166,
-    "compliant": true,
-    "duration": 60.01808404922485
-  },
-  {
-    "index": 4344,
-    "from": 1777644058.4073718,
-    "to": 1777695358.5312326,
-    "compliant": true,
-    "duration": 51300.12386083603
-  },
-  {
-    "index": 4343,
-    "from": 1777643998.3954618,
-    "to": 1777644058.4073718,
-    "compliant": true,
-    "duration": 60.01190996170044
   }
 ]
 ```
