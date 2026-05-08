@@ -38,31 +38,31 @@ EXPRESSION can be specified as follows:
 |    -c, --config-file string  |  [optional] The Kosli config file path. (default "kosli")  |
 |        --debug  |  [optional] Print debug logs to stdout. A boolean flag [docs](/faq/#boolean-flags) (default false)  |
 |    -H, --host string  |  [defaulted] The Kosli endpoint. (default "https://app.kosli.com")  |
-|        --http-proxy string  |  [optional] The HTTP proxy URL including protocol and port number. e.g. 'http://proxy-server-ip:proxy-port'  |
+|        --http-proxy string  |  [optional] The HTTP proxy URL including protocol and port number. e.g. `http://proxy-server-ip:proxy-port`  |
 |    -r, --max-api-retries int  |  [defaulted] How many times should API calls be retried when the API host is not reachable. (default 3)  |
 |        --org string  |  The Kosli organization.  |
 
 
 ## Examples Use Cases
 
-These examples all assume that the flags  `--api-token`, `--org`, `--host`, (and `--flow`, `--trail` when required), are [set/provided](/getting_started/install/#assigning-flags-via-environment-variables). 
+These examples all assume that the flags  `--api-token`, `--org`, `--host`, (and `--flow`, `--trail` when required), are [set/provided](/getting_started/install/#assigning-flags-via-environment-variables).
 
 <AccordionGroup>
 <Accordion title="get second behind the latest approval from a flow">
 ```shell
-kosli get approval flowName~1 
+kosli get approval flowName~1
 
 ```
 </Accordion>
 <Accordion title="get the 10th approval from a flow">
 ```shell
-kosli get approval flowName#10 
+kosli get approval flowName#10
 
 ```
 </Accordion>
 <Accordion title="get the latest approval from a flow">
 ```shell
-kosli get approval flowName 
+kosli get approval flowName
 ```
 </Accordion>
 </AccordionGroup>

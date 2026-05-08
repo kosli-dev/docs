@@ -11,7 +11,7 @@ description: "Config global Kosli flags values and store them in $HOME/.kosli . 
 kosli config [flags]
 ```
 
-Config global Kosli flags values and store them in $HOME/.kosli .  
+Config global Kosli flags values and store them in $HOME/.kosli .
 
 Flag values are determined in the following order (highest precedence first):
 - command line flags on each executed command.
@@ -20,9 +20,9 @@ Flag values are determined in the following order (highest precedence first):
 - default config file in $HOME/.kosli
 
 You can configure global Kosli flags (the ones that apply to all/most commands) using their dedicated
-convenience flags (e.g. --org). 
+convenience flags (e.g. --org).
 
-API tokens are stored in the suitable credentials manager on your machine. 
+API tokens are stored in the suitable credentials manager on your machine.
 
 Other Kosli flags can be configured using the --set flag which takes a comma-separated list of key=value pairs.
 Keys correspond to the specific flag name, capitalized. For instance: --flow would be set using --set FLOW=value
@@ -43,23 +43,23 @@ Keys correspond to the specific flag name, capitalized. For instance: --flow wou
 |    -c, --config-file string  |  [optional] The Kosli config file path. (default "kosli")  |
 |        --debug  |  [optional] Print debug logs to stdout. A boolean flag [docs](/faq/#boolean-flags) (default false)  |
 |    -H, --host string  |  [defaulted] The Kosli endpoint. (default "https://app.kosli.com")  |
-|        --http-proxy string  |  [optional] The HTTP proxy URL including protocol and port number. e.g. 'http://proxy-server-ip:proxy-port'  |
+|        --http-proxy string  |  [optional] The HTTP proxy URL including protocol and port number. e.g. `http://proxy-server-ip:proxy-port`  |
 |    -r, --max-api-retries int  |  [defaulted] How many times should API calls be retried when the API host is not reachable. (default 3)  |
 |        --org string  |  The Kosli organization.  |
 
 
 ## Examples Use Cases
 
-These examples all assume that the flags  `--api-token`, `--org`, `--host`, (and `--flow`, `--trail` when required), are [set/provided](/getting_started/install/#assigning-flags-via-environment-variables). 
+These examples all assume that the flags  `--api-token`, `--org`, `--host`, (and `--flow`, `--trail` when required), are [set/provided](/getting_started/install/#assigning-flags-via-environment-variables).
 
 <AccordionGroup>
 <Accordion title="configure global flags in your default config file">
 ```shell
-kosli config --org=yourOrg 
-	--api-token=yourAPIToken 
-	--host=https://app.kosli.com 
-	--debug=false 
-	--max-api-retries=3 
+kosli config --org=yourOrg
+	--api-token=yourAPIToken
+	--host=https://app.kosli.com
+	--debug=false
+	--max-api-retries=3
 	--http-proxy=http://192.0.0.1:8080
 
 ```

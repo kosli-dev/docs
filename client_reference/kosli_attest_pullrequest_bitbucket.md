@@ -11,12 +11,12 @@ description: "Report a Bitbucket pull request attestation to an artifact or a tr
 kosli attest pullrequest bitbucket [IMAGE-NAME | FILE-PATH | DIR-PATH] [flags]
 ```
 
-Report a Bitbucket pull request attestation to an artifact or a trail in a Kosli flow.  
+Report a Bitbucket pull request attestation to an artifact or a trail in a Kosli flow.
 It checks if a pull request exists for a given merge commit and reports the pull-request attestation to Kosli.
 Authentication to Bitbucket can be done with access token (recommended) or app passwords. Credentials need to have read access for both repos and pull requests.
 
 
-The attestation can be bound to a *trail* using the trail name.  
+The attestation can be bound to a *trail* using the trail name.
 The attestation can be bound to an *artifact* in two ways:
 - using the artifact's SHA256 fingerprint which is calculated (based on the `--artifact-type` flag and the artifact name/path argument) or can be provided directly (with the `--fingerprint` flag).
 - using the artifact's name in the flow yaml template and the git commit from which the artifact is/will be created. Useful when reporting an attestation before creating/reporting the artifact.
@@ -28,8 +28,8 @@ The attestation can be bound to an *artifact* in two ways:
 |    -t, --artifact-type string  |  The type of the artifact to calculate its SHA256 fingerprint. One of: [oci, docker, file, dir]. Only required if you want Kosli to calculate the fingerprint for you (i.e. when you don't specify '--fingerprint' on commands that allow it).  |
 |        --assert  |  [optional] Exit with non-zero code if no pull requests found for the given commit.  |
 |        --attachments strings  |  [optional] The comma-separated list of paths of attachments for the reported attestation. Attachments can be files or directories. All attachments are compressed and uploaded to Kosli's evidence vault.  |
-|        --bitbucket-access-token string  |  Bitbucket repo/project/workspace access token. See https://developer.atlassian.com/cloud/bitbucket/rest/intro/#access-tokens for more details.  |
-|        --bitbucket-password string  |  Bitbucket App password. See https://developer.atlassian.com/cloud/bitbucket/rest/intro/#authentication for more details.  |
+|        --bitbucket-access-token string  |  Bitbucket repo/project/workspace access token. See [Bitbucket access tokens](https://developer.atlassian.com/cloud/bitbucket/rest/intro/#access-tokens) for more details.  |
+|        --bitbucket-password string  |  Bitbucket App password. See [Bitbucket authentication](https://developer.atlassian.com/cloud/bitbucket/rest/intro/#authentication) for more details.  |
 |        --bitbucket-username string  |  Bitbucket username. Only needed if you use --bitbucket-password  |
 |        --bitbucket-workspace string  |  Bitbucket workspace ID.  |
 |    -g, --commit string  |  the git merge commit to be checked for associated pull requests.  |
@@ -46,11 +46,11 @@ The attestation can be bound to an *artifact* in two ways:
 |        --redact-commit-info strings  |  [optional] The list of commit info to be redacted before sending to Kosli. Allowed values are one or more of [author, message, branch].  |
 |        --registry-password string  |  [conditional] The container registry password or access token. Only required if you want to read container image SHA256 digest from a remote container registry.  |
 |        --registry-username string  |  [conditional] The container registry username. Only required if you want to read container image SHA256 digest from a remote container registry.  |
-|        --repo-id string  |  [conditional] The stable, unique identifier for the repository in your VCS provider (e.g. a numeric ID). Do not use the repository name as it can change if the repo is renamed. All three of --repo-id, --repo-url and --repository must be set to record repository information (defaulted in some CIs: [docs](/ci-defaults) ).  |
-|        --repo-provider string  |  [optional] The source code hosting provider. One of: github, gitlab, bitbucket, azure-devops (defaulted in some CIs: [docs](/ci-defaults) ).  |
+|        --repo-id string  |  [conditional] The stable, unique identifier for the repository in your VCS provider (e.g. a numeric ID). Do not use the repository name as it can change if the repo is renamed. All three of --repo-id, --repo-url and --repository must be set to record repository information (defaulted in some CIs: [docs](/integrations/ci_cd) ).  |
+|        --repo-provider string  |  [optional] The source code hosting provider. One of: github, gitlab, bitbucket, azure-devops (defaulted in some CIs: [docs](/integrations/ci_cd) ).  |
 |        --repo-root string  |  [defaulted] The directory where the source git repository is available. Only used if --commit is used or defaulted in CI, see [docs](/integrations/ci_cd/#defaulted-kosli-command-flags-from-ci-variables) . (default ".")  |
-|        --repo-url string  |  [conditional] The URL of the repository. Must be a valid URL. All three of --repo-id, --repo-url and --repository must be set to record repository information (defaulted in some CIs: [docs](/ci-defaults) ).  |
-|        --repository string  |  [conditional] The name of the repository (e.g. owner/repo-name). All three of --repo-id, --repo-url and --repository must be set to record repository information (defaulted in some CIs: [docs](/ci-defaults) ).  |
+|        --repo-url string  |  [conditional] The URL of the repository. Must be a valid URL. All three of --repo-id, --repo-url and --repository must be set to record repository information (defaulted in some CIs: [docs](/integrations/ci_cd) ).  |
+|        --repository string  |  [conditional] The name of the repository (e.g. owner/repo-name). All three of --repo-id, --repo-url and --repository must be set to record repository information (defaulted in some CIs: [docs](/integrations/ci_cd) ).  |
 |    -T, --trail string  |  The Kosli trail name.  |
 |    -u, --user-data string  |  [optional] The path to a JSON file containing additional data you would like to attach to the attestation.  |
 
@@ -62,82 +62,82 @@ The attestation can be bound to an *artifact* in two ways:
 |    -c, --config-file string  |  [optional] The Kosli config file path. (default "kosli")  |
 |        --debug  |  [optional] Print debug logs to stdout. A boolean flag [docs](/faq/#boolean-flags) (default false)  |
 |    -H, --host string  |  [defaulted] The Kosli endpoint. (default "https://app.kosli.com")  |
-|        --http-proxy string  |  [optional] The HTTP proxy URL including protocol and port number. e.g. 'http://proxy-server-ip:proxy-port'  |
+|        --http-proxy string  |  [optional] The HTTP proxy URL including protocol and port number. e.g. `http://proxy-server-ip:proxy-port`  |
 |    -r, --max-api-retries int  |  [defaulted] How many times should API calls be retried when the API host is not reachable. (default 3)  |
 |        --org string  |  The Kosli organization.  |
 
 
 ## Examples Use Cases
 
-These examples all assume that the flags  `--api-token`, `--org`, `--host`, (and `--flow`, `--trail` when required), are [set/provided](/getting_started/install/#assigning-flags-via-environment-variables). 
+These examples all assume that the flags  `--api-token`, `--org`, `--host`, (and `--flow`, `--trail` when required), are [set/provided](/getting_started/install/#assigning-flags-via-environment-variables).
 
 <AccordionGroup>
 <Accordion title="report a Bitbucket pull request attestation about a pre-built docker artifact (kosli calculates the fingerprint)">
 ```shell
-kosli attest pullrequest bitbucket yourDockerImageName 
-	--artifact-type docker 
-	--name yourAttestationName 
-	--bitbucket-access-token yourBitbucketAccessToken 
-	--bitbucket-workspace yourBitbucketWorkspace 
-	--commit yourArtifactGitCommit 
-	--repository yourBitbucketGitRepository 
+kosli attest pullrequest bitbucket yourDockerImageName
+	--artifact-type docker
+	--name yourAttestationName
+	--bitbucket-access-token yourBitbucketAccessToken
+	--bitbucket-workspace yourBitbucketWorkspace
+	--commit yourArtifactGitCommit
+	--repository yourBitbucketGitRepository
 
 ```
 </Accordion>
 <Accordion title="report a Bitbucket pull request attestation about a pre-built docker artifact (you provide the fingerprint)">
 ```shell
-kosli attest pullrequest bitbucket 
-	--fingerprint yourDockerImageFingerprint 
-	--name yourAttestationName 
-	--bitbucket-access-token yourBitbucketAccessToken 
-	--bitbucket-workspace yourBitbucketWorkspace 
-	--commit yourArtifactGitCommit 
-	--repository yourBitbucketGitRepository 
+kosli attest pullrequest bitbucket
+	--fingerprint yourDockerImageFingerprint
+	--name yourAttestationName
+	--bitbucket-access-token yourBitbucketAccessToken
+	--bitbucket-workspace yourBitbucketWorkspace
+	--commit yourArtifactGitCommit
+	--repository yourBitbucketGitRepository
 
 ```
 </Accordion>
 <Accordion title="report a Bitbucket pull request attestation about a trail">
 ```shell
-kosli attest pullrequest bitbucket 
-	--name yourAttestationName 
-	--bitbucket-access-token yourBitbucketAccessToken 
-	--bitbucket-workspace yourBitbucketWorkspace 
-	--commit yourArtifactGitCommit 
-	--repository yourBitbucketGitRepository 
+kosli attest pullrequest bitbucket
+	--name yourAttestationName
+	--bitbucket-access-token yourBitbucketAccessToken
+	--bitbucket-workspace yourBitbucketWorkspace
+	--commit yourArtifactGitCommit
+	--repository yourBitbucketGitRepository
 
 ```
 </Accordion>
 <Accordion title="report a Bitbucket pull request attestation about an artifact which has not been reported yet in a trail">
 ```shell
-kosli attest pullrequest bitbucket 
-	--name yourTemplateArtifactName.yourAttestationName 
-	--bitbucket-access-token yourBitbucketAccessToken 
-	--bitbucket-workspace yourBitbucketWorkspace 
-	--commit yourArtifactGitCommit 
-	--repository yourBitbucketGitRepository 
+kosli attest pullrequest bitbucket
+	--name yourTemplateArtifactName.yourAttestationName
+	--bitbucket-access-token yourBitbucketAccessToken
+	--bitbucket-workspace yourBitbucketWorkspace
+	--commit yourArtifactGitCommit
+	--repository yourBitbucketGitRepository
 
 ```
 </Accordion>
 <Accordion title="report a Bitbucket pull request attestation about a trail with an attachment">
 ```shell
-kosli attest pullrequest bitbucket 
-	--name yourAttestationName 
-	--bitbucket-access-token yourBitbucketAccessToken 
-	--bitbucket-workspace yourBitbucketWorkspace 
-	--commit yourArtifactGitCommit 
-	--repository yourBitbucketGitRepository 
-	--attachments=yourAttachmentPathName 
+kosli attest pullrequest bitbucket
+	--name yourAttestationName
+	--bitbucket-access-token yourBitbucketAccessToken
+	--bitbucket-workspace yourBitbucketWorkspace
+	--commit yourArtifactGitCommit
+	--repository yourBitbucketGitRepository
+	--attachments=yourAttachmentPathName
 
 ```
 </Accordion>
 <Accordion title="fail if a pull request does not exist for your artifact">
 ```shell
-kosli attest pullrequest bitbucket 
-	--name yourTemplateArtifactName.yourAttestationName 
-	--bitbucket-access-token yourBitbucketAccessToken 
-	--bitbucket-workspace yourBitbucketWorkspace 
-	--commit yourArtifactGitCommit 
-	--repository yourBitbucketGitRepository 
+kosli attest pullrequest bitbucket
+	--name yourTemplateArtifactName.yourAttestationName
+	--bitbucket-access-token yourBitbucketAccessToken
+	--bitbucket-workspace yourBitbucketWorkspace
+	--commit yourArtifactGitCommit
+	--repository yourBitbucketGitRepository
 	--assert
 ```
 </Accordion>

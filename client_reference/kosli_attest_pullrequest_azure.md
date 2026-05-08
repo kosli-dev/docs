@@ -11,11 +11,11 @@ description: "Report an Azure Devops pull request attestation to an artifact or 
 kosli attest pullrequest azure [IMAGE-NAME | FILE-PATH | DIR-PATH] [flags]
 ```
 
-Report an Azure Devops pull request attestation to an artifact or a trail in a Kosli flow.  
+Report an Azure Devops pull request attestation to an artifact or a trail in a Kosli flow.
 It checks if a pull request exists for the artifact (based on its git commit) and reports the pull-request attestation to the artifact in Kosli.
 
 
-The attestation can be bound to a *trail* using the trail name.  
+The attestation can be bound to a *trail* using the trail name.
 The attestation can be bound to an *artifact* in two ways:
 - using the artifact's SHA256 fingerprint which is calculated (based on the `--artifact-type` flag and the artifact name/path argument) or can be provided directly (with the `--fingerprint` flag).
 - using the artifact's name in the flow yaml template and the git commit from which the artifact is/will be created. Useful when reporting an attestation before creating/reporting the artifact.
@@ -27,9 +27,9 @@ The attestation can be bound to an *artifact* in two ways:
 |    -t, --artifact-type string  |  The type of the artifact to calculate its SHA256 fingerprint. One of: [oci, docker, file, dir]. Only required if you want Kosli to calculate the fingerprint for you (i.e. when you don't specify '--fingerprint' on commands that allow it).  |
 |        --assert  |  [optional] Exit with non-zero code if no pull requests found for the given commit.  |
 |        --attachments strings  |  [optional] The comma-separated list of paths of attachments for the reported attestation. Attachments can be files or directories. All attachments are compressed and uploaded to Kosli's evidence vault.  |
-|        --azure-org-url string  |  Azure organization url. E.g. "https://dev.azure.com/myOrg" (defaulted if you are running in Azure Devops pipelines: [docs](/ci-defaults) ).  |
+|        --azure-org-url string  |  Azure organization url. E.g. `https://dev.azure.com/myOrg` (defaulted if you are running in Azure Devops pipelines: [docs](/integrations/ci_cd) ).  |
 |        --azure-token string  |  Azure Personal Access token.  |
-|    -g, --commit string  |  [conditional] The git commit for which the attestation is associated to. Becomes required when reporting an attestation for an artifact before reporting it to Kosli. (defaulted in some CIs: [docs](/ci-defaults) ).  |
+|    -g, --commit string  |  [conditional] The git commit for which the attestation is associated to. Becomes required when reporting an attestation for an artifact before reporting it to Kosli. (defaulted in some CIs: [docs](/integrations/ci_cd) ).  |
 |        --description string  |  [optional] attestation description  |
 |    -D, --dry-run  |  [optional] Run in dry-run mode. When enabled, no data is sent to Kosli and the CLI exits with 0 exit code regardless of any errors.  |
 |    -x, --exclude strings  |  [optional] The comma separated list of directories and files to exclude from fingerprinting. Can take glob patterns. Only applicable for --artifact-type dir.  |
@@ -40,15 +40,15 @@ The attestation can be bound to an *artifact* in two ways:
 |    -h, --help  |  help for azure  |
 |    -n, --name string  |  The name of the attestation as declared in the flow or trail yaml template.  |
 |    -o, --origin-url string  |  [optional] The url pointing to where the attestation came from or is related. (defaulted to the CI url in some CIs: [docs](/integrations/ci_cd/#defaulted-kosli-command-flags-from-ci-variables) ).  |
-|        --project string  |  Azure project.(defaulted if you are running in Azure Devops pipelines: [docs](/ci-defaults) ).  |
+|        --project string  |  Azure project.(defaulted if you are running in Azure Devops pipelines: [docs](/integrations/ci_cd) ).  |
 |        --redact-commit-info strings  |  [optional] The list of commit info to be redacted before sending to Kosli. Allowed values are one or more of [author, message, branch].  |
 |        --registry-password string  |  [conditional] The container registry password or access token. Only required if you want to read container image SHA256 digest from a remote container registry.  |
 |        --registry-username string  |  [conditional] The container registry username. Only required if you want to read container image SHA256 digest from a remote container registry.  |
-|        --repo-id string  |  [conditional] The stable, unique identifier for the repository in your VCS provider (e.g. a numeric ID). Do not use the repository name as it can change if the repo is renamed. All three of --repo-id, --repo-url and --repository must be set to record repository information (defaulted in some CIs: [docs](/ci-defaults) ).  |
-|        --repo-provider string  |  [optional] The source code hosting provider. One of: github, gitlab, bitbucket, azure-devops (defaulted in some CIs: [docs](/ci-defaults) ).  |
+|        --repo-id string  |  [conditional] The stable, unique identifier for the repository in your VCS provider (e.g. a numeric ID). Do not use the repository name as it can change if the repo is renamed. All three of --repo-id, --repo-url and --repository must be set to record repository information (defaulted in some CIs: [docs](/integrations/ci_cd) ).  |
+|        --repo-provider string  |  [optional] The source code hosting provider. One of: github, gitlab, bitbucket, azure-devops (defaulted in some CIs: [docs](/integrations/ci_cd) ).  |
 |        --repo-root string  |  [defaulted] The directory where the source git repository is available. Only used if --commit is used or defaulted in CI, see [docs](/integrations/ci_cd/#defaulted-kosli-command-flags-from-ci-variables) . (default ".")  |
-|        --repo-url string  |  [conditional] The URL of the repository. Must be a valid URL. All three of --repo-id, --repo-url and --repository must be set to record repository information (defaulted in some CIs: [docs](/ci-defaults) ).  |
-|        --repository string  |  [conditional] The name of the repository (e.g. owner/repo-name). All three of --repo-id, --repo-url and --repository must be set to record repository information (defaulted in some CIs: [docs](/ci-defaults) ).  |
+|        --repo-url string  |  [conditional] The URL of the repository. Must be a valid URL. All three of --repo-id, --repo-url and --repository must be set to record repository information (defaulted in some CIs: [docs](/integrations/ci_cd) ).  |
+|        --repository string  |  [conditional] The name of the repository (e.g. owner/repo-name). All three of --repo-id, --repo-url and --repository must be set to record repository information (defaulted in some CIs: [docs](/integrations/ci_cd) ).  |
 |    -T, --trail string  |  The Kosli trail name.  |
 |    -u, --user-data string  |  [optional] The path to a JSON file containing additional data you would like to attach to the attestation.  |
 
@@ -60,88 +60,88 @@ The attestation can be bound to an *artifact* in two ways:
 |    -c, --config-file string  |  [optional] The Kosli config file path. (default "kosli")  |
 |        --debug  |  [optional] Print debug logs to stdout. A boolean flag [docs](/faq/#boolean-flags) (default false)  |
 |    -H, --host string  |  [defaulted] The Kosli endpoint. (default "https://app.kosli.com")  |
-|        --http-proxy string  |  [optional] The HTTP proxy URL including protocol and port number. e.g. 'http://proxy-server-ip:proxy-port'  |
+|        --http-proxy string  |  [optional] The HTTP proxy URL including protocol and port number. e.g. `http://proxy-server-ip:proxy-port`  |
 |    -r, --max-api-retries int  |  [defaulted] How many times should API calls be retried when the API host is not reachable. (default 3)  |
 |        --org string  |  The Kosli organization.  |
 
 
 ## Examples Use Cases
 
-These examples all assume that the flags  `--api-token`, `--org`, `--host`, (and `--flow`, `--trail` when required), are [set/provided](/getting_started/install/#assigning-flags-via-environment-variables). 
+These examples all assume that the flags  `--api-token`, `--org`, `--host`, (and `--flow`, `--trail` when required), are [set/provided](/getting_started/install/#assigning-flags-via-environment-variables).
 
 <AccordionGroup>
 <Accordion title="report an Azure Devops pull request attestation about a pre-built docker artifact (kosli calculates the fingerprint)">
 ```shell
-kosli attest pullrequest azure yourDockerImageName 
-	--artifact-type docker 
-	--name yourAttestationName 
-	--azure-org-url https://dev.azure.com/myOrg 
-	--project yourAzureDevOpsProject 
-	--azure-token yourAzureToken 
-	--commit yourGitCommitSha1 
-	--repository yourAzureGitRepository 
+kosli attest pullrequest azure yourDockerImageName
+	--artifact-type docker
+	--name yourAttestationName
+	--azure-org-url https://dev.azure.com/myOrg
+	--project yourAzureDevOpsProject
+	--azure-token yourAzureToken
+	--commit yourGitCommitSha1
+	--repository yourAzureGitRepository
 
 ```
 </Accordion>
 <Accordion title="report an Azure Devops pull request attestation about a pre-built docker artifact (you provide the fingerprint)">
 ```shell
-kosli attest pullrequest azure 
-	--fingerprint yourDockerImageFingerprint 
-	--name yourAttestationName 
-	--azure-org-url https://dev.azure.com/myOrg 
-	--project yourAzureDevOpsProject 
-	--azure-token yourAzureToken 
-	--commit yourGitCommitSha1 
-	--repository yourAzureGitRepository 
+kosli attest pullrequest azure
+	--fingerprint yourDockerImageFingerprint
+	--name yourAttestationName
+	--azure-org-url https://dev.azure.com/myOrg
+	--project yourAzureDevOpsProject
+	--azure-token yourAzureToken
+	--commit yourGitCommitSha1
+	--repository yourAzureGitRepository
 
 ```
 </Accordion>
 <Accordion title="report an Azure Devops pull request attestation about a trail">
 ```shell
-kosli attest pullrequest azure 
-	--name yourAttestationName 
-	--azure-org-url https://dev.azure.com/myOrg 
-	--project yourAzureDevOpsProject 
-	--azure-token yourAzureToken 
-	--commit yourGitCommitSha1 
-	--repository yourAzureGitRepository 
+kosli attest pullrequest azure
+	--name yourAttestationName
+	--azure-org-url https://dev.azure.com/myOrg
+	--project yourAzureDevOpsProject
+	--azure-token yourAzureToken
+	--commit yourGitCommitSha1
+	--repository yourAzureGitRepository
 
 ```
 </Accordion>
 <Accordion title="report an Azure Devops pull request attestation about an artifact which has not been reported yet in a trail">
 ```shell
-kosli attest pullrequest azure 
-	--name yourTemplateArtifactName.yourAttestationName 
-	--azure-org-url https://dev.azure.com/myOrg 
-	--project yourAzureDevOpsProject 
-	--azure-token yourAzureToken 
-	--commit yourGitCommitSha1 
-	--repository yourAzureGitRepository 
+kosli attest pullrequest azure
+	--name yourTemplateArtifactName.yourAttestationName
+	--azure-org-url https://dev.azure.com/myOrg
+	--project yourAzureDevOpsProject
+	--azure-token yourAzureToken
+	--commit yourGitCommitSha1
+	--repository yourAzureGitRepository
 
 ```
 </Accordion>
 <Accordion title="report an Azure Devops pull request attestation about a trail with an attachment">
 ```shell
-kosli attest pullrequest azure 
-	--name yourAttestationName 
-	--azure-org-url https://dev.azure.com/myOrg 
-	--project yourAzureDevOpsProject 
-	--azure-token yourAzureToken 
-	--commit yourGitCommitSha1 
-	--repository yourAzureGitRepository 
-	--attachments=yourAttachmentPathName 
+kosli attest pullrequest azure
+	--name yourAttestationName
+	--azure-org-url https://dev.azure.com/myOrg
+	--project yourAzureDevOpsProject
+	--azure-token yourAzureToken
+	--commit yourGitCommitSha1
+	--repository yourAzureGitRepository
+	--attachments=yourAttachmentPathName
 
 ```
 </Accordion>
 <Accordion title="fail if a pull request does not exist for your artifact">
 ```shell
-kosli attest pullrequest azure 
-	--name yourTemplateArtifactName.yourAttestationName 
-	--azure-org-url https://dev.azure.com/myOrg 
-	--project yourAzureDevOpsProject 
-	--azure-token yourAzureToken 
-	--commit yourGitCommitSha1 
-	--repository yourAzureGitRepository 
+kosli attest pullrequest azure
+	--name yourTemplateArtifactName.yourAttestationName
+	--azure-org-url https://dev.azure.com/myOrg
+	--project yourAzureDevOpsProject
+	--azure-token yourAzureToken
+	--commit yourGitCommitSha1
+	--repository yourAzureGitRepository
 	--assert
 ```
 </Accordion>

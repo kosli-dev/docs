@@ -49,7 +49,7 @@ This accepts inline JSON or a file reference (`@file.json`).
 |    -c, --config-file string  |  [optional] The Kosli config file path. (default "kosli")  |
 |        --debug  |  [optional] Print debug logs to stdout. A boolean flag [docs](/faq/#boolean-flags) (default false)  |
 |    -H, --host string  |  [defaulted] The Kosli endpoint. (default "https://app.kosli.com")  |
-|        --http-proxy string  |  [optional] The HTTP proxy URL including protocol and port number. e.g. 'http://proxy-server-ip:proxy-port'  |
+|        --http-proxy string  |  [optional] The HTTP proxy URL including protocol and port number. e.g. `http://proxy-server-ip:proxy-port`  |
 |    -r, --max-api-retries int  |  [defaulted] How many times should API calls be retried when the API host is not reachable. (default 3)  |
 |        --org string  |  The Kosli organization.  |
 
@@ -60,71 +60,71 @@ This accepts inline JSON or a file reference (`@file.json`).
 	<Tab title="GitHub">
 	View an example of the `kosli evaluate input` command in GitHub.
 
-	In [this YAML file](https://github.com/cyber-dojo/snyk-scanning/blob/117e18e0cb1eab30b9747ece58327eabfc595b90/tests/test_rego_rules.sh#L153)
+	In [this YAML file](https://github.com/cyber-dojo/snyk-scanning/blob/9508524934b5a7a42caedb42f6675d177f841568/tests/test_rego_rules.sh#L197)
 	</Tab>
 </Tabs>
 
 ## Examples Use Cases
 
-These examples all assume that the flags  `--api-token`, `--org`, `--host`, (and `--flow`, `--trail` when required), are [set/provided](/getting_started/install/#assigning-flags-via-environment-variables). 
+These examples all assume that the flags  `--api-token`, `--org`, `--host`, (and `--flow`, `--trail` when required), are [set/provided](/getting_started/install/#assigning-flags-via-environment-variables).
 
 <AccordionGroup>
 <Accordion title="capture trail data for local policy iteration">
 ```shell
-kosli evaluate trail TRAIL --flow FLOW 
-	--policy allow-all.rego 
+kosli evaluate trail TRAIL --flow FLOW
+	--policy allow-all.rego
 	--show-input --output json | jq '.input' > trail-data.json
 
 ```
 </Accordion>
 <Accordion title="then iterate on your policy locally">
 ```shell
-kosli evaluate input 
-	--input-file trail-data.json 
+kosli evaluate input
+	--input-file trail-data.json
 	--policy policy.rego
 
 ```
 </Accordion>
 <Accordion title="evaluate and show the data passed to the policy">
 ```shell
-kosli evaluate input 
-	--input-file trail-data.json 
-	--policy policy.rego 
-	--show-input 
+kosli evaluate input
+	--input-file trail-data.json
+	--policy policy.rego
+	--show-input
 	--output json
 
 ```
 </Accordion>
 <Accordion title="read input from stdin">
 ```shell
-cat trail-data.json | kosli evaluate input 
+cat trail-data.json | kosli evaluate input
 	--policy policy.rego
 
 ```
 </Accordion>
 <Accordion title="evaluate with policy parameters (inline JSON)">
 ```shell
-kosli evaluate input 
-	--input-file trail-data.json 
-	--policy policy.rego 
+kosli evaluate input
+	--input-file trail-data.json
+	--policy policy.rego
 	--params '{"threshold": 3}'
 
 ```
 </Accordion>
 <Accordion title="evaluate with policy parameters from a file">
 ```shell
-kosli evaluate input 
-	--input-file trail-data.json 
-	--policy policy.rego 
+kosli evaluate input
+	--input-file trail-data.json
+	--policy policy.rego
 	--params @params.json
 
 ```
 </Accordion>
 <Accordion title="evaluate as a decision point (print verdict, never fail the step)">
 ```shell
-kosli evaluate input 
-	--input-file trail-data.json 
-	--policy policy.rego 
+kosli evaluate input
+	--input-file trail-data.json
+	--policy policy.rego
 	--no-assert
 ```
 </Accordion>
