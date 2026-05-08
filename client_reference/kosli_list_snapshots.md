@@ -43,7 +43,7 @@ Either expression can be omitted to default to NOW.
 |    -c, --config-file string  |  [optional] The Kosli config file path. (default "kosli")  |
 |        --debug  |  [optional] Print debug logs to stdout. A boolean flag [docs](/faq/#boolean-flags) (default false)  |
 |    -H, --host string  |  [defaulted] The Kosli endpoint. (default "https://app.kosli.com")  |
-|        --http-proxy string  |  [optional] The HTTP proxy URL including protocol and port number. e.g. 'http://proxy-server-ip:proxy-port'  |
+|        --http-proxy http://proxy-server-ip:proxy-port  |  [optional] The HTTP proxy URL including protocol and port number. e.g. http://proxy-server-ip:proxy-port  |
 |    -r, --max-api-retries int  |  [defaulted] How many times should API calls be retried when the API host is not reachable. (default 3)  |
 |        --org string  |  The Kosli organization.  |
 
@@ -65,109 +65,109 @@ kosli list snapshots aws-prod --output=json
 ```json
 [
   {
-    "index": 4357,
-    "from": 1777956838.5302956,
+    "index": 4382,
+    "from": 1778213818.5191746,
     "to": 0.0,
     "compliant": true,
-    "duration": 26497.173085689545
+    "duration": 5955.0178434848785
   },
   {
-    "index": 4356,
-    "from": 1777954558.5092592,
-    "to": 1777956838.5302956,
+    "index": 4381,
+    "from": 1778213758.4011989,
+    "to": 1778213818.5191746,
     "compliant": true,
-    "duration": 2280.02103638649
+    "duration": 60.11797571182251
   },
   {
-    "index": 4355,
-    "from": 1777954498.4239645,
-    "to": 1777954558.5092592,
+    "index": 4380,
+    "from": 1778178538.4365702,
+    "to": 1778213758.4011989,
     "compliant": true,
-    "duration": 60.08529472351074
+    "duration": 35219.96462869644
   },
   {
-    "index": 4354,
-    "from": 1777954438.5998223,
-    "to": 1777954498.4239645,
+    "index": 4379,
+    "from": 1778158918.5020123,
+    "to": 1778178538.4365702,
     "compliant": true,
-    "duration": 59.82414221763611
+    "duration": 19619.934557914734
   },
   {
-    "index": 4353,
-    "from": 1777869538.5253296,
-    "to": 1777954438.5998223,
+    "index": 4378,
+    "from": 1778158858.590836,
+    "to": 1778158918.5020123,
     "compliant": true,
-    "duration": 84900.07449269295
+    "duration": 59.9111762046814
   },
   {
-    "index": 4352,
-    "from": 1777869478.5084555,
-    "to": 1777869538.5253296,
+    "index": 4377,
+    "from": 1778157598.4368508,
+    "to": 1778158858.590836,
     "compliant": true,
-    "duration": 60.01687407493591
+    "duration": 1260.1539852619171
   },
   {
-    "index": 4351,
-    "from": 1777842958.6060224,
-    "to": 1777869478.5084555,
+    "index": 4376,
+    "from": 1778157538.6015975,
+    "to": 1778157598.4368508,
     "compliant": true,
-    "duration": 26519.902433156967
+    "duration": 59.83525323867798
   },
   {
-    "index": 4350,
-    "from": 1777783138.5161338,
-    "to": 1777842958.6060224,
+    "index": 4375,
+    "from": 1778157478.5209992,
+    "to": 1778157538.6015975,
     "compliant": true,
-    "duration": 59820.08988857269
+    "duration": 60.0805983543396
   },
   {
-    "index": 4349,
-    "from": 1777783085.6064026,
-    "to": 1777783138.5161338,
+    "index": 4374,
+    "from": 1778157118.5120325,
+    "to": 1778157478.5209992,
     "compliant": true,
-    "duration": 52.90973114967346
+    "duration": 360.00896668434143
   },
   {
-    "index": 4348,
-    "from": 1777783018.5123496,
-    "to": 1777783085.6064026,
+    "index": 4373,
+    "from": 1778157058.6630018,
+    "to": 1778157118.5120325,
     "compliant": true,
-    "duration": 67.09405303001404
+    "duration": 59.84903073310852
   },
   {
-    "index": 4347,
-    "from": 1777695478.6151357,
-    "to": 1777783018.5123496,
+    "index": 4372,
+    "from": 1778156278.425921,
+    "to": 1778157058.6630018,
     "compliant": true,
-    "duration": 87539.89721393585
+    "duration": 780.2370808124542
   },
   {
-    "index": 4346,
-    "from": 1777695418.5493166,
-    "to": 1777695478.6151357,
+    "index": 4371,
+    "from": 1778156218.5558252,
+    "to": 1778156278.425921,
     "compliant": true,
-    "duration": 60.06581902503967
+    "duration": 59.87009572982788
   },
   {
-    "index": 4345,
-    "from": 1777695358.5312326,
-    "to": 1777695418.5493166,
+    "index": 4370,
+    "from": 1778155318.5846732,
+    "to": 1778156218.5558252,
     "compliant": true,
-    "duration": 60.01808404922485
+    "duration": 899.9711520671844
   },
   {
-    "index": 4344,
-    "from": 1777644058.4073718,
-    "to": 1777695358.5312326,
+    "index": 4369,
+    "from": 1778154298.3885734,
+    "to": 1778155318.5846732,
     "compliant": true,
-    "duration": 51300.12386083603
+    "duration": 1020.1960997581482
   },
   {
-    "index": 4343,
-    "from": 1777643998.3954618,
-    "to": 1777644058.4073718,
+    "index": 4368,
+    "from": 1778153938.502302,
+    "to": 1778154298.3885734,
     "compliant": true,
-    "duration": 60.01190996170044
+    "duration": 359.8862714767456
   }
 ]
 ```

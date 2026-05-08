@@ -27,7 +27,7 @@ List flows for an org.
 |    -c, --config-file string  |  [optional] The Kosli config file path. (default "kosli")  |
 |        --debug  |  [optional] Print debug logs to stdout. A boolean flag [docs](/faq/#boolean-flags) (default false)  |
 |    -H, --host string  |  [defaulted] The Kosli endpoint. (default "https://app.kosli.com")  |
-|        --http-proxy string  |  [optional] The HTTP proxy URL including protocol and port number. e.g. 'http://proxy-server-ip:proxy-port'  |
+|        --http-proxy http://proxy-server-ip:proxy-port  |  [optional] The HTTP proxy URL including protocol and port number. e.g. http://proxy-server-ip:proxy-port  |
 |    -r, --max-api-retries int  |  [defaulted] How many times should API calls be retried when the API host is not reachable. (default 3)  |
 |        --org string  |  The Kosli organization.  |
 
@@ -215,6 +215,58 @@ kosli list flows --output=json
       "ci": "github",
       "kind": "run",
       "repo_url": "https://github.com/cyber-dojo/secrets"
+    }
+  },
+  {
+    "name": "snyk-aws-beta-per-artifact",
+    "description": "Snyk vulns in aws-beta artifacts",
+    "visibility": "private",
+    "org": "cyber-dojo",
+    "template": "version: 1",
+    "repo_url": "https://github.com/cyber-dojo/snyk-scanning",
+    "tags": {
+      "ci": "github",
+      "kind": "run",
+      "workflow_url": "https://github.com/cyber-dojo/snyk-scanning/blob/main/.github/workflows/aws-beta.yml"
+    }
+  },
+  {
+    "name": "snyk-aws-beta-per-vuln",
+    "description": "Individual Snyk vuln trails for aws-beta artifacts",
+    "visibility": "private",
+    "org": "cyber-dojo",
+    "template": "version: 1\ntrail:\n  attestations: []\n  artifacts:\n  - name: artifact\n    attestations: []\n",
+    "repo_url": "",
+    "tags": {
+      "ci": "github",
+      "kind": "run",
+      "workflow_url": "https://github.com/cyber-dojo/snyk-scanning/blob/main/.github/workflows/artifact_snyk_test.yml"
+    }
+  },
+  {
+    "name": "snyk-aws-prod-per-artifact",
+    "description": "Snyk vulns in aws-prod artifacts",
+    "visibility": "private",
+    "org": "cyber-dojo",
+    "template": "version: 1",
+    "repo_url": "https://github.com/cyber-dojo/snyk-scanning",
+    "tags": {
+      "ci": "github",
+      "kind": "run",
+      "workflow_url": "https://github.com/cyber-dojo/snyk-scanning/blob/main/.github/workflows/aws-prod.yml"
+    }
+  },
+  {
+    "name": "snyk-aws-prod-per-vuln",
+    "description": "Individual Snyk vuln trails for aws-prod artifacts",
+    "visibility": "private",
+    "org": "cyber-dojo",
+    "template": "version: 1\ntrail:\n  attestations: []\n  artifacts:\n  - name: artifact\n    attestations: []\n",
+    "repo_url": "",
+    "tags": {
+      "ci": "github",
+      "kind": "run",
+      "workflow_url": "https://github.com/cyber-dojo/snyk-scanning/blob/main/.github/workflows/artifact_snyk_test.yml"
     }
   },
   {
