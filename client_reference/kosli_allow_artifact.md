@@ -11,7 +11,7 @@ description: "Add an artifact to an environment's allowlist.  "
 kosli allow artifact [IMAGE-NAME | FILE-PATH | DIR-PATH] [flags]
 ```
 
-Add an artifact to an environment's allowlist.  
+Add an artifact to an environment's allowlist.
 
 The artifact fingerprint can be provided directly with the `--fingerprint` flag, or
 calculated based on `--artifact-type` flag.
@@ -48,7 +48,7 @@ registry without needing a local Docker daemon.
 |    -c, --config-file string  |  [optional] The Kosli config file path. (default "kosli")  |
 |        --debug  |  [optional] Print debug logs to stdout. A boolean flag [docs](/faq/#boolean-flags) (default false)  |
 |    -H, --host string  |  [defaulted] The Kosli endpoint. (default "https://app.kosli.com")  |
-|        --http-proxy http://proxy-server-ip:proxy-port  |  [optional] The HTTP proxy URL including protocol and port number. e.g. http://proxy-server-ip:proxy-port  |
+|        --http-proxy string  |  [optional] The HTTP proxy URL including protocol and port number. e.g. `http://proxy-server-ip:proxy-port`  |
 |    -r, --max-api-retries int  |  [defaulted] How many times should API calls be retried when the API host is not reachable. (default 3)  |
 |        --org string  |  The Kosli organization.  |
 

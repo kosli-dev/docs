@@ -14,13 +14,13 @@ kosli assert snapshot ENVIRONMENT-NAME-OR-EXPRESSION [flags]
 Assert the compliance status of an environment in Kosli.
 Exits with non-zero code if the environment has a non-compliant status.
 The expected argument is an expression to specify the specific environment snapshot to assert.
-It has the format `ENVIRONMENT_NAME`[SEPARATOR][SNAPSHOT_REFERENCE] 
+It has the format `ENVIRONMENT_NAME`[SEPARATOR][SNAPSHOT_REFERENCE]
 
 Separators can be:
 - '#' to specify a specific snapshot number for the environment that is being asserted.
 - '~' to get N-th behind the latest snapshot.
 
-Examples of valid expressions are: 
+Examples of valid expressions are:
 - prod (latest snapshot of prod)
 - prod#10 (snapshot number 10 of prod)
 - prod~2 (third latest snapshot of prod)
@@ -40,14 +40,14 @@ Examples of valid expressions are:
 |    -c, --config-file string  |  [optional] The Kosli config file path. (default "kosli")  |
 |        --debug  |  [optional] Print debug logs to stdout. A boolean flag [docs](/faq/#boolean-flags) (default false)  |
 |    -H, --host string  |  [defaulted] The Kosli endpoint. (default "https://app.kosli.com")  |
-|        --http-proxy http://proxy-server-ip:proxy-port  |  [optional] The HTTP proxy URL including protocol and port number. e.g. http://proxy-server-ip:proxy-port  |
+|        --http-proxy string  |  [optional] The HTTP proxy URL including protocol and port number. e.g. `http://proxy-server-ip:proxy-port`  |
 |    -r, --max-api-retries int  |  [defaulted] How many times should API calls be retried when the API host is not reachable. (default 3)  |
 |        --org string  |  The Kosli organization.  |
 
 
 ## Examples Use Cases
 
-These examples all assume that the flags  `--api-token`, `--org`, `--host`, (and `--flow`, `--trail` when required), are [set/provided](/getting_started/install/#assigning-flags-via-environment-variables). 
+These examples all assume that the flags  `--api-token`, `--org`, `--host`, (and `--flow`, `--trail` when required), are [set/provided](/getting_started/install/#assigning-flags-via-environment-variables).
 
 ```shell
 kosli assert snapshot prod#5 \

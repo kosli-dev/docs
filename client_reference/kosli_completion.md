@@ -18,19 +18,19 @@ To load completions:
 ```
   $ source <(kosli completion bash)
 ```
-  To load completions for each session, execute once:  
+  To load completions for each session, execute once:
 
   On Linux:
   ```
   $ kosli completion bash > /etc/bash_completion.d/kosli
-  ``` 
+  ```
   On macOS:
   ```
   $ kosli completion bash > $(brew --prefix)/etc/bash_completion.d/kosli
   ```
   ### Zsh
 
-  If shell completion is not already enabled in your environment,  
+  If shell completion is not already enabled in your environment,
 you will need to enable it.  You can execute the following once:
   ```
   $ echo "autoload -U compinit; compinit" >> ~/.zshrc
@@ -46,7 +46,7 @@ you will need to enable it.  You can execute the following once:
   $ kosli completion fish | source
   ```
   To load completions for each session, execute once:
-  ``` 
+  ```
   $ kosli completion fish > ~/.config/fish/completions/kosli.fish
   ```
   ### PowerShell
@@ -56,7 +56,7 @@ you will need to enable it.  You can execute the following once:
  To load completions for every new session, run:
  ```
  PS> kosli completion powershell > kosli.ps1
- ``` 
+ ```
  and source this file from your PowerShell profile.
 
 
@@ -73,7 +73,7 @@ you will need to enable it.  You can execute the following once:
 |    -c, --config-file string  |  [optional] The Kosli config file path. (default "kosli")  |
 |        --debug  |  [optional] Print debug logs to stdout. A boolean flag [docs](/faq/#boolean-flags) (default false)  |
 |    -H, --host string  |  [defaulted] The Kosli endpoint. (default "https://app.kosli.com")  |
-|        --http-proxy http://proxy-server-ip:proxy-port  |  [optional] The HTTP proxy URL including protocol and port number. e.g. http://proxy-server-ip:proxy-port  |
+|        --http-proxy string  |  [optional] The HTTP proxy URL including protocol and port number. e.g. `http://proxy-server-ip:proxy-port`  |
 |    -r, --max-api-retries int  |  [defaulted] How many times should API calls be retried when the API host is not reachable. (default 3)  |
 |        --org string  |  The Kosli organization.  |
 

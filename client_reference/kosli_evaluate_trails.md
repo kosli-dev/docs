@@ -41,53 +41,53 @@ full data structure available to the policy. Use `--output json` for structured 
 |    -c, --config-file string  |  [optional] The Kosli config file path. (default "kosli")  |
 |        --debug  |  [optional] Print debug logs to stdout. A boolean flag [docs](/faq/#boolean-flags) (default false)  |
 |    -H, --host string  |  [defaulted] The Kosli endpoint. (default "https://app.kosli.com")  |
-|        --http-proxy http://proxy-server-ip:proxy-port  |  [optional] The HTTP proxy URL including protocol and port number. e.g. http://proxy-server-ip:proxy-port  |
+|        --http-proxy string  |  [optional] The HTTP proxy URL including protocol and port number. e.g. `http://proxy-server-ip:proxy-port`  |
 |    -r, --max-api-retries int  |  [defaulted] How many times should API calls be retried when the API host is not reachable. (default 3)  |
 |        --org string  |  The Kosli organization.  |
 
 
 ## Examples Use Cases
 
-These examples all assume that the flags  `--api-token`, `--org`, `--host`, (and `--flow`, `--trail` when required), are [set/provided](/getting_started/install/#assigning-flags-via-environment-variables). 
+These examples all assume that the flags  `--api-token`, `--org`, `--host`, (and `--flow`, `--trail` when required), are [set/provided](/getting_started/install/#assigning-flags-via-environment-variables).
 
 <AccordionGroup>
 <Accordion title="evaluate multiple trails against a policy">
 ```shell
-kosli evaluate trails yourTrailName1 yourTrailName2 
-	--policy yourPolicyFile.rego 
+kosli evaluate trails yourTrailName1 yourTrailName2
+	--policy yourPolicyFile.rego
 
 ```
 </Accordion>
 <Accordion title="evaluate trails with attestation enrichment">
 ```shell
-kosli evaluate trails yourTrailName1 yourTrailName2 
-	--policy yourPolicyFile.rego 
-	--attestations pull-request 
+kosli evaluate trails yourTrailName1 yourTrailName2
+	--policy yourPolicyFile.rego
+	--attestations pull-request
 
 ```
 </Accordion>
 <Accordion title="evaluate trails with JSON output and show the policy input">
 ```shell
-kosli evaluate trails yourTrailName1 yourTrailName2 
-	--policy yourPolicyFile.rego 
-	--show-input 
-	--output json 
+kosli evaluate trails yourTrailName1 yourTrailName2
+	--policy yourPolicyFile.rego
+	--show-input
+	--output json
 
 ```
 </Accordion>
 <Accordion title="evaluate trails with policy parameters">
 ```shell
-kosli evaluate trails yourTrailName1 yourTrailName2 
-	--policy yourPolicyFile.rego 
-	--params '{"min_approvers": 2}' 
+kosli evaluate trails yourTrailName1 yourTrailName2
+	--policy yourPolicyFile.rego
+	--params '{"min_approvers": 2}'
 
 ```
 </Accordion>
 <Accordion title="evaluate trails as a decision point (print verdict, never fail the step)">
 ```shell
-kosli evaluate trails yourTrailName1 yourTrailName2 
-	--policy yourPolicyFile.rego 
-	--no-assert 
+kosli evaluate trails yourTrailName1 yourTrailName2
+	--policy yourPolicyFile.rego
+	--no-assert
 ```
 </Accordion>
 </AccordionGroup>

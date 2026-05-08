@@ -11,15 +11,15 @@ description: "Report a snapshot of artifacts running in specific filesystem path
 kosli snapshot paths ENVIRONMENT-NAME [flags]
 ```
 
-Report a snapshot of artifacts running in specific filesystem paths to Kosli.  
-You can report directory or file artifacts in one or more filesystem paths. 
-Artifacts names and the paths to include and exclude when fingerprinting them can be 
+Report a snapshot of artifacts running in specific filesystem paths to Kosli.
+You can report directory or file artifacts in one or more filesystem paths.
+Artifacts names and the paths to include and exclude when fingerprinting them can be
 defined in a paths file which can be provided using `--paths-file`.
 
 Paths files can be in YAML, JSON or TOML formats.
-They specify a list of artifacts to fingerprint. For each artifact, the file specifies a base path to look for the artifact in 
+They specify a list of artifacts to fingerprint. For each artifact, the file specifies a base path to look for the artifact in
 and (optionally) a list of paths to exclude. Excluded paths are relative to the artifact path(s) and can be literal paths or
-glob patterns.  
+glob patterns.
 The supported glob pattern syntax is documented here: https://pkg.go.dev/path/filepath#Match ,
 plus the ability to use recursive globs "**"
 
@@ -52,20 +52,20 @@ artifacts:
 |    -c, --config-file string  |  [optional] The Kosli config file path. (default "kosli")  |
 |        --debug  |  [optional] Print debug logs to stdout. A boolean flag [docs](/faq/#boolean-flags) (default false)  |
 |    -H, --host string  |  [defaulted] The Kosli endpoint. (default "https://app.kosli.com")  |
-|        --http-proxy http://proxy-server-ip:proxy-port  |  [optional] The HTTP proxy URL including protocol and port number. e.g. http://proxy-server-ip:proxy-port  |
+|        --http-proxy string  |  [optional] The HTTP proxy URL including protocol and port number. e.g. `http://proxy-server-ip:proxy-port`  |
 |    -r, --max-api-retries int  |  [defaulted] How many times should API calls be retried when the API host is not reachable. (default 3)  |
 |        --org string  |  The Kosli organization.  |
 
 
 ## Examples Use Cases
 
-These examples all assume that the flags  `--api-token`, `--org`, `--host`, (and `--flow`, `--trail` when required), are [set/provided](/getting_started/install/#assigning-flags-via-environment-variables). 
+These examples all assume that the flags  `--api-token`, `--org`, `--host`, (and `--flow`, `--trail` when required), are [set/provided](/getting_started/install/#assigning-flags-via-environment-variables).
 
 <AccordionGroup>
 <Accordion title="report one or more artifacts running in a filesystem using a path spec file">
 ```shell
-kosli snapshot paths yourEnvironmentName 
-	--paths-file path/to/your/paths/file 
+kosli snapshot paths yourEnvironmentName
+	--paths-file path/to/your/paths/file
 ```
 </Accordion>
 </AccordionGroup>

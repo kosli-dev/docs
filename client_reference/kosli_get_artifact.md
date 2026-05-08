@@ -16,7 +16,7 @@ You can get an artifact by its fingerprint or by its git commit sha.
 In case of using the git commit, it is possible to get multiple artifacts matching the git commit.
 
 The expected argument is an expression to specify the artifact to get.
-It has the format `FLOW_NAME``SEPARATOR``COMMIT_SHA1|ARTIFACT_FINGERPRINT` 
+It has the format `FLOW_NAME``SEPARATOR``COMMIT_SHA1|ARTIFACT_FINGERPRINT`
 
 Expression can be specified as follows:
 - flowName@`fingerprint`  artifact with a given fingerprint. The fingerprint can be short or complete.
@@ -44,37 +44,37 @@ Examples of valid expressions are:
 |    -c, --config-file string  |  [optional] The Kosli config file path. (default "kosli")  |
 |        --debug  |  [optional] Print debug logs to stdout. A boolean flag [docs](/faq/#boolean-flags) (default false)  |
 |    -H, --host string  |  [defaulted] The Kosli endpoint. (default "https://app.kosli.com")  |
-|        --http-proxy http://proxy-server-ip:proxy-port  |  [optional] The HTTP proxy URL including protocol and port number. e.g. http://proxy-server-ip:proxy-port  |
+|        --http-proxy string  |  [optional] The HTTP proxy URL including protocol and port number. e.g. `http://proxy-server-ip:proxy-port`  |
 |    -r, --max-api-retries int  |  [defaulted] How many times should API calls be retried when the API host is not reachable. (default 3)  |
 |        --org string  |  The Kosli organization.  |
 
 
 ## Examples Use Cases
 
-These examples all assume that the flags  `--api-token`, `--org`, `--host`, (and `--flow`, `--trail` when required), are [set/provided](/getting_started/install/#assigning-flags-via-environment-variables). 
+These examples all assume that the flags  `--api-token`, `--org`, `--host`, (and `--flow`, `--trail` when required), are [set/provided](/getting_started/install/#assigning-flags-via-environment-variables).
 
 <AccordionGroup>
 <Accordion title="get an artifact with a given fingerprint from a flow">
 ```shell
-kosli get artifact flowName@fingerprint 
+kosli get artifact flowName@fingerprint
 
 ```
 </Accordion>
 <Accordion title="get the latest artifact with a given fingerprint from a flow in a specific trail">
 ```shell
-kosli get artifact flowName@fingerprint 
+kosli get artifact flowName@fingerprint
 
 ```
 </Accordion>
 <Accordion title="get an artifact with a given commit SHA from a flow">
 ```shell
-kosli get artifact flowName:commitSHA 
+kosli get artifact flowName:commitSHA
 
 ```
 </Accordion>
 <Accordion title="get a list of artifacts with a given commit SHA from a flow in a particular trail">
 ```shell
-kosli get artifact flowName:commitSHA 
+kosli get artifact flowName:commitSHA
 ```
 </Accordion>
 </AccordionGroup>

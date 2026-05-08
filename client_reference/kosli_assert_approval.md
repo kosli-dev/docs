@@ -11,8 +11,8 @@ description: "Assert an artifact in Kosli has been approved for deployment.  "
 kosli assert approval [IMAGE-NAME | FILE-PATH | DIR-PATH] [flags]
 ```
 
-Assert an artifact in Kosli has been approved for deployment.  
-Exits with non-zero code if the artifact has not been approved.  
+Assert an artifact in Kosli has been approved for deployment.
+Exits with non-zero code if the artifact has not been approved.
 
 The artifact fingerprint can be provided directly with the `--fingerprint` flag, or
 calculated based on `--artifact-type` flag.
@@ -48,27 +48,27 @@ registry without needing a local Docker daemon.
 |    -c, --config-file string  |  [optional] The Kosli config file path. (default "kosli")  |
 |        --debug  |  [optional] Print debug logs to stdout. A boolean flag [docs](/faq/#boolean-flags) (default false)  |
 |    -H, --host string  |  [defaulted] The Kosli endpoint. (default "https://app.kosli.com")  |
-|        --http-proxy http://proxy-server-ip:proxy-port  |  [optional] The HTTP proxy URL including protocol and port number. e.g. http://proxy-server-ip:proxy-port  |
+|        --http-proxy string  |  [optional] The HTTP proxy URL including protocol and port number. e.g. `http://proxy-server-ip:proxy-port`  |
 |    -r, --max-api-retries int  |  [defaulted] How many times should API calls be retried when the API host is not reachable. (default 3)  |
 |        --org string  |  The Kosli organization.  |
 
 
 ## Examples Use Cases
 
-These examples all assume that the flags  `--api-token`, `--org`, `--host`, (and `--flow`, `--trail` when required), are [set/provided](/getting_started/install/#assigning-flags-via-environment-variables). 
+These examples all assume that the flags  `--api-token`, `--org`, `--host`, (and `--flow`, `--trail` when required), are [set/provided](/getting_started/install/#assigning-flags-via-environment-variables).
 
 <AccordionGroup>
 <Accordion title="Assert that a file type artifact has been approved">
 ```shell
-kosli assert approval FILE.tgz 
-	--artifact-type file 
+kosli assert approval FILE.tgz
+	--artifact-type file
 
 
 ```
 </Accordion>
 <Accordion title="Assert that an artifact with a provided fingerprint (sha256) has been approved">
 ```shell
-kosli assert approval 
+kosli assert approval
 	--fingerprint yourArtifactFingerprint
 ```
 </Accordion>

@@ -11,7 +11,7 @@ description: "Diff environment snapshots.  "
 kosli diff snapshots SNAPPISH_1 SNAPPISH_2 [flags]
 ```
 
-Diff environment snapshots.  
+Diff environment snapshots.
 Specify SNAPPISH_1 and SNAPPISH_2 by:
 - environmentName
     - the latest snapshot for environmentName, at the time of the request
@@ -45,7 +45,7 @@ Specify SNAPPISH_1 and SNAPPISH_2 by:
 |    -c, --config-file string  |  [optional] The Kosli config file path. (default "kosli")  |
 |        --debug  |  [optional] Print debug logs to stdout. A boolean flag [docs](/faq/#boolean-flags) (default false)  |
 |    -H, --host string  |  [defaulted] The Kosli endpoint. (default "https://app.kosli.com")  |
-|        --http-proxy http://proxy-server-ip:proxy-port  |  [optional] The HTTP proxy URL including protocol and port number. e.g. http://proxy-server-ip:proxy-port  |
+|        --http-proxy string  |  [optional] The HTTP proxy URL including protocol and port number. e.g. `http://proxy-server-ip:proxy-port`  |
 |    -r, --max-api-retries int  |  [defaulted] How many times should API calls be retried when the API host is not reachable. (default 3)  |
 |        --org string  |  The Kosli organization.  |
 
@@ -67,7 +67,7 @@ kosli diff snapshots aws-beta aws-prod --output=json
 ```json
 {
   "snappish1": {
-    "snapshot_id": "aws-beta#6654",
+    "snapshot_id": "aws-beta#6662",
     "artifacts": [
       {
         "fingerprint": "4db0e95a793aa0539250f9998bc4fbe10b5d96a339730c20a25b9e763a8a5ff3",
@@ -76,6 +76,14 @@ kosli diff snapshots aws-beta aws-prod --output=json
         "flow": "creator-ci",
         "commit_url": "https://gitlab.com/cyber-dojo/creator/-/commit/b3152a10de1f36b7dbe2818c0918af06fd3aca61",
         "instance_count": 1
+      },
+      {
+        "fingerprint": "5a59b16b0975773a0afeebc30426a86cc40fc12b80f9f42fc911c6d7f9285344",
+        "name": "244531986313.dkr.ecr.eu-central-1.amazonaws.com/runner:ad3700e@sha256:5a59b16b0975773a0afeebc30426a86cc40fc12b80f9f42fc911c6d7f9285344",
+        "most_recent_timestamp": 1778237609,
+        "flow": "runner-ci",
+        "commit_url": "https://github.com/cyber-dojo/runner/commit/ad3700ecacd79ea8ebef6689874804f1a2851d4c",
+        "instance_count": 3
       },
       {
         "fingerprint": "e99c33d87e5e6d5098aecf627a89e1408e6ca8394eb2c8923823b74b5bb3567c",
@@ -88,8 +96,16 @@ kosli diff snapshots aws-beta aws-prod --output=json
     ]
   },
   "snappish2": {
-    "snapshot_id": "aws-prod#4382",
+    "snapshot_id": "aws-prod#4386",
     "artifacts": [
+      {
+        "fingerprint": "2509ca654e1f09c19c59813aea76d45e787f487c9c18b3216e0a6d407e6b05e3",
+        "name": "244531986313.dkr.ecr.eu-central-1.amazonaws.com/runner:8768460@sha256:2509ca654e1f09c19c59813aea76d45e787f487c9c18b3216e0a6d407e6b05e3",
+        "most_recent_timestamp": 1778178487,
+        "flow": "runner-ci",
+        "commit_url": "https://github.com/cyber-dojo/runner/commit/8768460dc1c91de5f6485a7d3e36870b683edfc3",
+        "instance_count": 3
+      },
       {
         "fingerprint": "541b7d4c1b129eb894ce1dd1713f72ae268e07cf49d178aeda684bbef2bfc180",
         "name": "244531986313.dkr.ecr.eu-central-1.amazonaws.com/web:1999d13@sha256:541b7d4c1b129eb894ce1dd1713f72ae268e07cf49d178aeda684bbef2bfc180",
@@ -113,14 +129,6 @@ kosli diff snapshots aws-beta aws-prod --output=json
   },
   "not-changed": {
     "artifacts": [
-      {
-        "fingerprint": "2509ca654e1f09c19c59813aea76d45e787f487c9c18b3216e0a6d407e6b05e3",
-        "name": "244531986313.dkr.ecr.eu-central-1.amazonaws.com/runner:8768460@sha256:2509ca654e1f09c19c59813aea76d45e787f487c9c18b3216e0a6d407e6b05e3",
-        "most_recent_timestamp": 1778178487,
-        "flow": "runner-ci",
-        "commit_url": "https://github.com/cyber-dojo/runner/commit/8768460dc1c91de5f6485a7d3e36870b683edfc3",
-        "instance_count": 3
-      },
       {
         "fingerprint": "3f419f93e3cdd7a3a2b358fdee8ee925dc233b5b2fe0eff20d8bce17f7473c8e",
         "name": "244531986313.dkr.ecr.eu-central-1.amazonaws.com/dashboard:a6ece2b@sha256:3f419f93e3cdd7a3a2b358fdee8ee925dc233b5b2fe0eff20d8bce17f7473c8e",
@@ -187,31 +195,31 @@ kosli diff snapshots aws-beta aws-prod --output=json
 
 ## Examples Use Cases
 
-These examples all assume that the flags  `--api-token`, `--org`, `--host`, (and `--flow`, `--trail` when required), are [set/provided](/getting_started/install/#assigning-flags-via-environment-variables). 
+These examples all assume that the flags  `--api-token`, `--org`, `--host`, (and `--flow`, `--trail` when required), are [set/provided](/getting_started/install/#assigning-flags-via-environment-variables).
 
 <AccordionGroup>
 <Accordion title="compare the third latest snapshot in an environment to the latest">
 ```shell
-kosli diff snapshots envName~3 envName 
+kosli diff snapshots envName~3 envName
 
 ```
 </Accordion>
 <Accordion title="compare snapshots of two different environments of the same type">
 ```shell
-kosli diff snapshots envName1 envName2 
+kosli diff snapshots envName1 envName2
 
 ```
 </Accordion>
 <Accordion title="show the not-changed artifacts in both snapshots">
 ```shell
-kosli diff snapshots envName1 envName2 
-	--show-unchanged 
+kosli diff snapshots envName1 envName2
+	--show-unchanged
 
 ```
 </Accordion>
 <Accordion title="compare the snapshot from 2 weeks ago in an environment to the latest">
 ```shell
-kosli diff snapshots envName@{2.weeks.ago} envName 
+kosli diff snapshots envName@{2.weeks.ago} envName
 ```
 </Accordion>
 </AccordionGroup>

@@ -11,25 +11,25 @@ description: "Report a snapshot of running containers in one or more AWS ECS clu
 kosli snapshot ecs ENVIRONMENT-NAME [flags]
 ```
 
-Report a snapshot of running containers in one or more AWS ECS cluster(s) to Kosli.  
-Skip all filtering flags to report everything running in all clusters in a given AWS account. 
+Report a snapshot of running containers in one or more AWS ECS cluster(s) to Kosli.
+Skip all filtering flags to report everything running in all clusters in a given AWS account.
 
 Use `--clusters` and/or `--clusters-regex` OR `--exclude` and/or `--exclude-regex` to filter the clusters to snapshot.
-You can also filter the services within a cluster using `--services` and/or `--services-regex`. Or use `--exclude-services` and/or `--exclude-services-regex` to exclude some services. 
+You can also filter the services within a cluster using `--services` and/or `--services-regex`. Or use `--exclude-services` and/or `--exclude-services-regex` to exclude some services.
 Note that service filtering is applied to all clusters being snapshot.
 
 All filtering options are case-sensitive.
 
 The reported data includes cluster and service names, container image digests and creation timestamps.
 
-To authenticate to AWS, you can either:  
-  1) provide the AWS static credentials via flags or by exporting the equivalent KOSLI env vars (e.g. KOSLI_AWS_KEY_ID)  
-  2) export the AWS env vars (e.g. AWS_ACCESS_KEY_ID).  
-  3) Use a shared config/credentials file under the $HOME/.aws  
-  
-Option 1 takes highest precedence, while option 3 is the lowest.  
+To authenticate to AWS, you can either:
+  1) provide the AWS static credentials via flags or by exporting the equivalent KOSLI env vars (e.g. KOSLI_AWS_KEY_ID)
+  2) export the AWS env vars (e.g. AWS_ACCESS_KEY_ID).
+  3) Use a shared config/credentials file under the $HOME/.aws
+
+Option 1 takes highest precedence, while option 3 is the lowest.
 More details can be found here: https://aws.github.io/aws-sdk-go-v2/docs/configuring-sdk/#specifying-credentials
-	
+
 
 ## Flags
 | Flag | Description |
@@ -56,22 +56,22 @@ More details can be found here: https://aws.github.io/aws-sdk-go-v2/docs/configu
 |    -c, --config-file string  |  [optional] The Kosli config file path. (default "kosli")  |
 |        --debug  |  [optional] Print debug logs to stdout. A boolean flag [docs](/faq/#boolean-flags) (default false)  |
 |    -H, --host string  |  [defaulted] The Kosli endpoint. (default "https://app.kosli.com")  |
-|        --http-proxy http://proxy-server-ip:proxy-port  |  [optional] The HTTP proxy URL including protocol and port number. e.g. http://proxy-server-ip:proxy-port  |
+|        --http-proxy string  |  [optional] The HTTP proxy URL including protocol and port number. e.g. `http://proxy-server-ip:proxy-port`  |
 |    -r, --max-api-retries int  |  [defaulted] How many times should API calls be retried when the API host is not reachable. (default 3)  |
 |        --org string  |  The Kosli organization.  |
 
 
 ## Examples Use Cases
 
-These examples all assume that the flags  `--api-token`, `--org`, `--host`, (and `--flow`, `--trail` when required), are [set/provided](/getting_started/install/#assigning-flags-via-environment-variables). 
+These examples all assume that the flags  `--api-token`, `--org`, `--host`, (and `--flow`, `--trail` when required), are [set/provided](/getting_started/install/#assigning-flags-via-environment-variables).
 
 <AccordionGroup>
 <Accordion title="authentication to AWS using flags">
 ```shell
-kosli snapshot ecs yourEnvironmentName 
-	--aws-key-id yourAWSAccessKeyID 
-	--aws-secret-key yourAWSSecretAccessKey 
-	--aws-region yourAWSRegion 
+kosli snapshot ecs yourEnvironmentName
+	--aws-key-id yourAWSAccessKeyID
+	--aws-secret-key yourAWSSecretAccessKey
+	--aws-region yourAWSRegion
 
 ```
 </Accordion>
@@ -81,13 +81,13 @@ export AWS_ACCESS_KEY_ID=yourAWSAccessKeyID
 export AWS_SECRET_ACCESS_KEY=yourAWSSecretAccessKey
 export AWS_REGION=yourAWSRegion
 
-kosli snapshot ecs yourEnvironmentName 
+kosli snapshot ecs yourEnvironmentName
 
 ```
 </Accordion>
 <Accordion title="reporting everything running in all clusters in a given AWS account">
 ```shell
-kosli snapshot ecs my-env 
+kosli snapshot ecs my-env
 
 ```
 </Accordion>

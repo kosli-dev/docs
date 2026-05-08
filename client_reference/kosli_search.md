@@ -11,7 +11,7 @@ description: "Search for a git commit or an artifact fingerprint in Kosli.  "
 kosli search {GIT-COMMIT | FINGERPRINT} [flags]
 ```
 
-Search for a git commit or an artifact fingerprint in Kosli.   
+Search for a git commit or an artifact fingerprint in Kosli.
 You can use short git commit or artifact fingerprint shas, but you must provide at least 5 characters.
 
 ## Flags
@@ -28,25 +28,25 @@ You can use short git commit or artifact fingerprint shas, but you must provide 
 |    -c, --config-file string  |  [optional] The Kosli config file path. (default "kosli")  |
 |        --debug  |  [optional] Print debug logs to stdout. A boolean flag [docs](/faq/#boolean-flags) (default false)  |
 |    -H, --host string  |  [defaulted] The Kosli endpoint. (default "https://app.kosli.com")  |
-|        --http-proxy http://proxy-server-ip:proxy-port  |  [optional] The HTTP proxy URL including protocol and port number. e.g. http://proxy-server-ip:proxy-port  |
+|        --http-proxy string  |  [optional] The HTTP proxy URL including protocol and port number. e.g. `http://proxy-server-ip:proxy-port`  |
 |    -r, --max-api-retries int  |  [defaulted] How many times should API calls be retried when the API host is not reachable. (default 3)  |
 |        --org string  |  The Kosli organization.  |
 
 
 ## Examples Use Cases
 
-These examples all assume that the flags  `--api-token`, `--org`, `--host`, (and `--flow`, `--trail` when required), are [set/provided](/getting_started/install/#assigning-flags-via-environment-variables). 
+These examples all assume that the flags  `--api-token`, `--org`, `--host`, (and `--flow`, `--trail` when required), are [set/provided](/getting_started/install/#assigning-flags-via-environment-variables).
 
 <AccordionGroup>
 <Accordion title="Search for a git commit in Kosli">
 ```shell
-kosli search YOUR_GIT_COMMIT 
+kosli search YOUR_GIT_COMMIT
 
 ```
 </Accordion>
 <Accordion title="Search for an artifact fingerprint in Kosli">
 ```shell
-kosli search YOUR_ARTIFACT_FINGERPRINT 
+kosli search YOUR_ARTIFACT_FINGERPRINT
 ```
 </Accordion>
 </AccordionGroup>

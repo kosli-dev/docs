@@ -11,11 +11,11 @@ description: "Report a Gitlab merge request attestation to an artifact or a trai
 kosli attest pullrequest gitlab [IMAGE-NAME | FILE-PATH | DIR-PATH] [flags]
 ```
 
-Report a Gitlab merge request attestation to an artifact or a trail in a Kosli flow.  
+Report a Gitlab merge request attestation to an artifact or a trail in a Kosli flow.
 It checks if a merge request exists for a given merge commit and reports the merge request attestation to Kosli.
 
 
-The attestation can be bound to a *trail* using the trail name.  
+The attestation can be bound to a *trail* using the trail name.
 The attestation can be bound to an *artifact* in two ways:
 - using the artifact's SHA256 fingerprint which is calculated (based on the `--artifact-type` flag and the artifact name/path argument) or can be provided directly (with the `--fingerprint` flag).
 - using the artifact's name in the flow yaml template and the git commit from which the artifact is/will be created. Useful when reporting an attestation before creating/reporting the artifact.
@@ -36,7 +36,7 @@ The attestation can be bound to an *artifact* in two ways:
 |    -F, --fingerprint string  |  [conditional] The SHA256 fingerprint of the artifact to attach the attestation to. Only required if the attestation is for an artifact and --artifact-type and artifact name/path are not used.  |
 |    -f, --flow string  |  The Kosli flow name.  |
 |        --gitlab-base-url string  |  [optional] Gitlab base URL (only needed for on-prem Gitlab installations).  |
-|        --gitlab-org string  |  Gitlab organization. (defaulted if you are running in Gitlab Pipelines: [docs](/ci-defaults) ).  |
+|        --gitlab-org string  |  Gitlab organization. (defaulted if you are running in Gitlab Pipelines: [docs](/integrations/ci_cd) ).  |
 |        --gitlab-token string  |  Gitlab token.  |
 |    -h, --help  |  help for gitlab  |
 |    -n, --name string  |  The name of the attestation as declared in the flow or trail yaml template.  |
@@ -44,11 +44,11 @@ The attestation can be bound to an *artifact* in two ways:
 |        --redact-commit-info strings  |  [optional] The list of commit info to be redacted before sending to Kosli. Allowed values are one or more of [author, message, branch].  |
 |        --registry-password string  |  [conditional] The container registry password or access token. Only required if you want to read container image SHA256 digest from a remote container registry.  |
 |        --registry-username string  |  [conditional] The container registry username. Only required if you want to read container image SHA256 digest from a remote container registry.  |
-|        --repo-id string  |  [conditional] The stable, unique identifier for the repository in your VCS provider (e.g. a numeric ID). Do not use the repository name as it can change if the repo is renamed. All three of --repo-id, --repo-url and --repository must be set to record repository information (defaulted in some CIs: [docs](/ci-defaults) ).  |
-|        --repo-provider string  |  [optional] The source code hosting provider. One of: github, gitlab, bitbucket, azure-devops (defaulted in some CIs: [docs](/ci-defaults) ).  |
+|        --repo-id string  |  [conditional] The stable, unique identifier for the repository in your VCS provider (e.g. a numeric ID). Do not use the repository name as it can change if the repo is renamed. All three of --repo-id, --repo-url and --repository must be set to record repository information (defaulted in some CIs: [docs](/integrations/ci_cd) ).  |
+|        --repo-provider string  |  [optional] The source code hosting provider. One of: github, gitlab, bitbucket, azure-devops (defaulted in some CIs: [docs](/integrations/ci_cd) ).  |
 |        --repo-root string  |  [defaulted] The directory where the source git repository is available. Only used if --commit is used or defaulted in CI, see [docs](/integrations/ci_cd/#defaulted-kosli-command-flags-from-ci-variables) . (default ".")  |
-|        --repo-url string  |  [conditional] The URL of the repository. Must be a valid URL. All three of --repo-id, --repo-url and --repository must be set to record repository information (defaulted in some CIs: [docs](/ci-defaults) ).  |
-|        --repository string  |  [conditional] The name of the repository (e.g. owner/repo-name). All three of --repo-id, --repo-url and --repository must be set to record repository information (defaulted in some CIs: [docs](/ci-defaults) ).  |
+|        --repo-url string  |  [conditional] The URL of the repository. Must be a valid URL. All three of --repo-id, --repo-url and --repository must be set to record repository information (defaulted in some CIs: [docs](/integrations/ci_cd) ).  |
+|        --repository string  |  [conditional] The name of the repository (e.g. owner/repo-name). All three of --repo-id, --repo-url and --repository must be set to record repository information (defaulted in some CIs: [docs](/integrations/ci_cd) ).  |
 |    -T, --trail string  |  The Kosli trail name.  |
 |    -u, --user-data string  |  [optional] The path to a JSON file containing additional data you would like to attach to the attestation.  |
 
@@ -60,7 +60,7 @@ The attestation can be bound to an *artifact* in two ways:
 |    -c, --config-file string  |  [optional] The Kosli config file path. (default "kosli")  |
 |        --debug  |  [optional] Print debug logs to stdout. A boolean flag [docs](/faq/#boolean-flags) (default false)  |
 |    -H, --host string  |  [defaulted] The Kosli endpoint. (default "https://app.kosli.com")  |
-|        --http-proxy http://proxy-server-ip:proxy-port  |  [optional] The HTTP proxy URL including protocol and port number. e.g. http://proxy-server-ip:proxy-port  |
+|        --http-proxy string  |  [optional] The HTTP proxy URL including protocol and port number. e.g. `http://proxy-server-ip:proxy-port`  |
 |    -r, --max-api-retries int  |  [defaulted] How many times should API calls be retried when the API host is not reachable. (default 3)  |
 |        --org string  |  The Kosli organization.  |
 
@@ -77,75 +77,75 @@ The attestation can be bound to an *artifact* in two ways:
 
 ## Examples Use Cases
 
-These examples all assume that the flags  `--api-token`, `--org`, `--host`, (and `--flow`, `--trail` when required), are [set/provided](/getting_started/install/#assigning-flags-via-environment-variables). 
+These examples all assume that the flags  `--api-token`, `--org`, `--host`, (and `--flow`, `--trail` when required), are [set/provided](/getting_started/install/#assigning-flags-via-environment-variables).
 
 <AccordionGroup>
 <Accordion title="report a Gitlab merge request attestation about a pre-built docker artifact (kosli calculates the fingerprint)">
 ```shell
-kosli attest pullrequest gitlab yourDockerImageName 
-	--artifact-type docker 
-	--name yourAttestationName 
-	--gitlab-token yourGitlabToken 
-	--gitlab-org yourGitlabOrg 
-	--commit yourArtifactGitCommit 
-	--repository yourGithubGitRepository 
+kosli attest pullrequest gitlab yourDockerImageName
+	--artifact-type docker
+	--name yourAttestationName
+	--gitlab-token yourGitlabToken
+	--gitlab-org yourGitlabOrg
+	--commit yourArtifactGitCommit
+	--repository yourGithubGitRepository
 
 ```
 </Accordion>
 <Accordion title="report a Gitlab merge request attestation about a pre-built docker artifact (you provide the fingerprint)">
 ```shell
-kosli attest pullrequest gitlab 
-	--fingerprint yourDockerImageFingerprint 
-	--name yourAttestationName 
-	--gitlab-token yourGitlabToken 
-	--gitlab-org yourGitlabOrg 
-	--commit yourArtifactGitCommit 
-	--repository yourGithubGitRepository 
+kosli attest pullrequest gitlab
+	--fingerprint yourDockerImageFingerprint
+	--name yourAttestationName
+	--gitlab-token yourGitlabToken
+	--gitlab-org yourGitlabOrg
+	--commit yourArtifactGitCommit
+	--repository yourGithubGitRepository
 
 ```
 </Accordion>
 <Accordion title="report a Gitlab merge request attestation about a trail">
 ```shell
-kosli attest pullrequest gitlab 
-	--name yourAttestationName 
-	--gitlab-token yourGitlabToken 
-	--gitlab-org yourGitlabOrg 
-	--commit yourArtifactGitCommit 
-	--repository yourGithubGitRepository 
+kosli attest pullrequest gitlab
+	--name yourAttestationName
+	--gitlab-token yourGitlabToken
+	--gitlab-org yourGitlabOrg
+	--commit yourArtifactGitCommit
+	--repository yourGithubGitRepository
 
 ```
 </Accordion>
 <Accordion title="report a Gitlab merge request attestation about an artifact which has not been reported yet in a trail">
 ```shell
-kosli attest pullrequest gitlab 
-	--name yourTemplateArtifactName.yourAttestationName 
-	--gitlab-token yourGitlabToken 
-	--gitlab-org yourGitlabOrg 
-	--commit yourArtifactGitCommit 
-	--repository yourGithubGitRepository 
+kosli attest pullrequest gitlab
+	--name yourTemplateArtifactName.yourAttestationName
+	--gitlab-token yourGitlabToken
+	--gitlab-org yourGitlabOrg
+	--commit yourArtifactGitCommit
+	--repository yourGithubGitRepository
 
 ```
 </Accordion>
 <Accordion title="report a Gitlab merge request attestation about a trail with an attachment">
 ```shell
-kosli attest pullrequest gitlab 
-	--name yourAttestationName 
-	--gitlab-token yourGitlabToken 
-	--gitlab-org yourGitlabOrg 
-	--commit yourArtifactGitCommit 
-	--repository yourGithubGitRepository 
-	--attachments=yourAttachmentPathName 
+kosli attest pullrequest gitlab
+	--name yourAttestationName
+	--gitlab-token yourGitlabToken
+	--gitlab-org yourGitlabOrg
+	--commit yourArtifactGitCommit
+	--repository yourGithubGitRepository
+	--attachments=yourAttachmentPathName
 
 ```
 </Accordion>
 <Accordion title="fail if a merge request does not exist for your artifact">
 ```shell
-kosli attest pullrequest gitlab 
-	--name yourTemplateArtifactName.yourAttestationName 
-	--gitlab-token yourGitlabToken 
-	--gitlab-org yourGitlabOrg 
-	--commit yourArtifactGitCommit 
-	--repository yourGithubGitRepository 
+kosli attest pullrequest gitlab
+	--name yourTemplateArtifactName.yourAttestationName
+	--gitlab-token yourGitlabToken
+	--gitlab-org yourGitlabOrg
+	--commit yourArtifactGitCommit
+	--repository yourGithubGitRepository
 	--assert
 ```
 </Accordion>

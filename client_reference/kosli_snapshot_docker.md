@@ -11,8 +11,8 @@ description: "Report a snapshot of running containers from docker host to Kosli.
 kosli snapshot docker ENVIRONMENT-NAME [flags]
 ```
 
-Report a snapshot of running containers from docker host to Kosli.  
-The reported data includes container image digests 
+Report a snapshot of running containers from docker host to Kosli.
+The reported data includes container image digests
 and creation timestamps. Containers running images which have not
 been pushed to or pulled from a registry will be ignored.
 
@@ -30,19 +30,19 @@ been pushed to or pulled from a registry will be ignored.
 |    -c, --config-file string  |  [optional] The Kosli config file path. (default "kosli")  |
 |        --debug  |  [optional] Print debug logs to stdout. A boolean flag [docs](/faq/#boolean-flags) (default false)  |
 |    -H, --host string  |  [defaulted] The Kosli endpoint. (default "https://app.kosli.com")  |
-|        --http-proxy http://proxy-server-ip:proxy-port  |  [optional] The HTTP proxy URL including protocol and port number. e.g. http://proxy-server-ip:proxy-port  |
+|        --http-proxy string  |  [optional] The HTTP proxy URL including protocol and port number. e.g. `http://proxy-server-ip:proxy-port`  |
 |    -r, --max-api-retries int  |  [defaulted] How many times should API calls be retried when the API host is not reachable. (default 3)  |
 |        --org string  |  The Kosli organization.  |
 
 
 ## Examples Use Cases
 
-These examples all assume that the flags  `--api-token`, `--org`, `--host`, (and `--flow`, `--trail` when required), are [set/provided](/getting_started/install/#assigning-flags-via-environment-variables). 
+These examples all assume that the flags  `--api-token`, `--org`, `--host`, (and `--flow`, `--trail` when required), are [set/provided](/getting_started/install/#assigning-flags-via-environment-variables).
 
 <AccordionGroup>
 <Accordion title="report what is running in a docker host">
 ```shell
-kosli snapshot docker yourEnvironmentName 
+kosli snapshot docker yourEnvironmentName
 ```
 </Accordion>
 </AccordionGroup>

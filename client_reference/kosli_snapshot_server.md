@@ -14,15 +14,15 @@ description: "Report a snapshot of artifacts running in a server environment to 
 kosli snapshot server ENVIRONMENT-NAME [flags]
 ```
 
-Report a snapshot of artifacts running in a server environment to Kosli.  
+Report a snapshot of artifacts running in a server environment to Kosli.
 You can report directory or file artifacts in one or more server paths.
 
-When fingerprinting a 'dir' artifact, you can exclude certain paths from fingerprint calculation 
+When fingerprinting a 'dir' artifact, you can exclude certain paths from fingerprint calculation
 using the `--exclude` flag.
 Excluded paths are relative to the DIR-PATH and can be literal paths or glob patterns.
 With a directory structure like this `foo/bar/zam/file.txt` if you are calculating the fingerprint of `foo/bar` you need to
 exclude `zam/file.txt` which is relative to the DIR-PATH.
-The supported glob pattern syntax is what is documented here: https://pkg.go.dev/path/filepath#Match , 
+The supported glob pattern syntax is what is documented here: https://pkg.go.dev/path/filepath#Match ,
 plus the ability to use recursive globs "**"
 
 If the directory structure contains a symbolic link to a *file* (for example, a link 'from/this/file' and a target of 'to/another/file') then:
@@ -59,32 +59,32 @@ The `.kosli_ignore` will be treated as part of the artifact like any other file,
 |    -c, --config-file string  |  [optional] The Kosli config file path. (default "kosli")  |
 |        --debug  |  [optional] Print debug logs to stdout. A boolean flag [docs](/faq/#boolean-flags) (default false)  |
 |    -H, --host string  |  [defaulted] The Kosli endpoint. (default "https://app.kosli.com")  |
-|        --http-proxy http://proxy-server-ip:proxy-port  |  [optional] The HTTP proxy URL including protocol and port number. e.g. http://proxy-server-ip:proxy-port  |
+|        --http-proxy string  |  [optional] The HTTP proxy URL including protocol and port number. e.g. `http://proxy-server-ip:proxy-port`  |
 |    -r, --max-api-retries int  |  [defaulted] How many times should API calls be retried when the API host is not reachable. (default 3)  |
 |        --org string  |  The Kosli organization.  |
 
 
 ## Examples Use Cases
 
-These examples all assume that the flags  `--api-token`, `--org`, `--host`, (and `--flow`, `--trail` when required), are [set/provided](/getting_started/install/#assigning-flags-via-environment-variables). 
+These examples all assume that the flags  `--api-token`, `--org`, `--host`, (and `--flow`, `--trail` when required), are [set/provided](/getting_started/install/#assigning-flags-via-environment-variables).
 
 ```shell
 # report directory artifacts running in a server at a list of paths:
 kosli snapshot server yourEnvironmentName \
 	--paths a/b/c,e/f/g \
 	--api-token yourAPIToken \
-	--org yourOrgName  
-	
-# exclude certain paths when reporting directory artifacts: 
+	--org yourOrgName
+
+# exclude certain paths when reporting directory artifacts:
 # in the example below, any path matching [a/b/c/logs, a/b/c/*/logs, a/b/c/*/*/logs]
 # will be skipped when calculating the fingerprint
 kosli snapshot server yourEnvironmentName \
 	--paths a/b/c \
 	--exclude logs,"*/logs","*/*/logs"
 	--api-token yourAPIToken \
-	--org yourOrgName 
-	
-# use glob pattern to match paths to report them as directory artifacts: 
+	--org yourOrgName
+
+# use glob pattern to match paths to report them as directory artifacts:
 # in the example below, any path matching "*/*/src" under top-dir/ will be reported as a separate artifact.
 kosli snapshot server yourEnvironmentName \
 	--paths "top-dir/*/*/src" \

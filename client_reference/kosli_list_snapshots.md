@@ -15,12 +15,12 @@ List environment snapshots.
 The results are paginated and ordered from latest to oldest.
 By default, the page limit is 15 snapshots per page.
 
-You can optionally specify an INTERVAL between two snapshot expressions with [expression]..[expression]. 
+You can optionally specify an INTERVAL between two snapshot expressions with [expression]..[expression].
 
 Expressions can be:
-* ~N   N'th behind the latest snapshot  
-* N    snapshot number N  
-* NOW  the latest snapshot  
+* ~N   N'th behind the latest snapshot
+* N    snapshot number N
+* NOW  the latest snapshot
 
 Either expression can be omitted to default to NOW.
 
@@ -43,7 +43,7 @@ Either expression can be omitted to default to NOW.
 |    -c, --config-file string  |  [optional] The Kosli config file path. (default "kosli")  |
 |        --debug  |  [optional] Print debug logs to stdout. A boolean flag [docs](/faq/#boolean-flags) (default false)  |
 |    -H, --host string  |  [defaulted] The Kosli endpoint. (default "https://app.kosli.com")  |
-|        --http-proxy http://proxy-server-ip:proxy-port  |  [optional] The HTTP proxy URL including protocol and port number. e.g. http://proxy-server-ip:proxy-port  |
+|        --http-proxy string  |  [optional] The HTTP proxy URL including protocol and port number. e.g. `http://proxy-server-ip:proxy-port`  |
 |    -r, --max-api-retries int  |  [defaulted] How many times should API calls be retried when the API host is not reachable. (default 3)  |
 |        --org string  |  The Kosli organization.  |
 
@@ -65,11 +65,39 @@ kosli list snapshots aws-prod --output=json
 ```json
 [
   {
-    "index": 4382,
-    "from": 1778213818.5191746,
+    "index": 4386,
+    "from": 1778225998.5296352,
     "to": 0.0,
     "compliant": true,
-    "duration": 5955.0178434848785
+    "duration": 16900.322019815445
+  },
+  {
+    "index": 4385,
+    "from": 1778225938.458091,
+    "to": 1778225998.5296352,
+    "compliant": true,
+    "duration": 60.07154417037964
+  },
+  {
+    "index": 4384,
+    "from": 1778223958.5125732,
+    "to": 1778225938.458091,
+    "compliant": true,
+    "duration": 1979.9455177783966
+  },
+  {
+    "index": 4383,
+    "from": 1778223898.548935,
+    "to": 1778223958.5125732,
+    "compliant": true,
+    "duration": 59.96363830566406
+  },
+  {
+    "index": 4382,
+    "from": 1778213818.5191746,
+    "to": 1778223898.548935,
+    "compliant": true,
+    "duration": 10080.029760360718
   },
   {
     "index": 4381,
@@ -140,34 +168,6 @@ kosli list snapshots aws-prod --output=json
     "to": 1778157058.6630018,
     "compliant": true,
     "duration": 780.2370808124542
-  },
-  {
-    "index": 4371,
-    "from": 1778156218.5558252,
-    "to": 1778156278.425921,
-    "compliant": true,
-    "duration": 59.87009572982788
-  },
-  {
-    "index": 4370,
-    "from": 1778155318.5846732,
-    "to": 1778156218.5558252,
-    "compliant": true,
-    "duration": 899.9711520671844
-  },
-  {
-    "index": 4369,
-    "from": 1778154298.3885734,
-    "to": 1778155318.5846732,
-    "compliant": true,
-    "duration": 1020.1960997581482
-  },
-  {
-    "index": 4368,
-    "from": 1778153938.502302,
-    "to": 1778154298.3885734,
-    "compliant": true,
-    "duration": 359.8862714767456
   }
 ]
 ```
@@ -177,26 +177,26 @@ kosli list snapshots aws-prod --output=json
 
 ## Examples Use Cases
 
-These examples all assume that the flags  `--api-token`, `--org`, `--host`, (and `--flow`, `--trail` when required), are [set/provided](/getting_started/install/#assigning-flags-via-environment-variables). 
+These examples all assume that the flags  `--api-token`, `--org`, `--host`, (and `--flow`, `--trail` when required), are [set/provided](/getting_started/install/#assigning-flags-via-environment-variables).
 
 <AccordionGroup>
 <Accordion title="list the last 15 snapshots for an environment">
 ```shell
-kosli list snapshots yourEnvironmentName 
+kosli list snapshots yourEnvironmentName
 
 ```
 </Accordion>
 <Accordion title="list the last 30 snapshots for an environment">
 ```shell
-kosli list snapshots yourEnvironmentName 
-	--page-limit 30 
+kosli list snapshots yourEnvironmentName
+	--page-limit 30
 
 ```
 </Accordion>
 <Accordion title="list the last 30 snapshots for an environment (in JSON)">
 ```shell
-kosli list snapshots yourEnvironmentName 
-	--page-limit 30 
+kosli list snapshots yourEnvironmentName
+	--page-limit 30
 	--output json
 ```
 </Accordion>

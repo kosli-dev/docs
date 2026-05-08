@@ -24,7 +24,7 @@ to include or exclude namespaces.
 |    -x, --exclude-namespaces strings  |  [optional] The comma separated list of namespaces names to exclude from reporting artifacts info from. Requires cluster-wide read permissions for pods and namespaces. Can't be used together with --namespaces or --namespaces-regex.  |
 |        --exclude-namespaces-regex strings  |  [optional] The comma separated list of namespaces regex patterns to exclude from reporting artifacts info from. Requires cluster-wide read permissions for pods and namespaces. Can't be used together with --namespaces or --namespaces-regex.  |
 |    -h, --help  |  help for k8s  |
-|    -k, --kubeconfig string  |  [defaulted] The kubeconfig path for the target cluster. (default "$HOME/.kube/config")  |
+|    -k, --kubeconfig string  |  [defaulted] The kubeconfig path for the target cluster. (default "/Users/dangrondahl/.kube/config")  |
 |    -n, --namespaces strings  |  [optional] The comma separated list of namespaces names to report artifacts info from. Can't be used together with --exclude-namespaces or --exclude-namespaces-regex.  |
 |        --namespaces-regex strings  |  [optional] The comma separated list of namespaces regex patterns to report artifacts info from. Requires cluster-wide read permissions for pods and namespaces. Can't be used together with --exclude-namespaces --exclude-namespaces-regex.  |
 
@@ -35,7 +35,7 @@ to include or exclude namespaces.
 |    -a, --api-token string  |  The Kosli API token.  |
 |        --debug  |  [optional] Print debug logs to stdout. A boolean flag [docs](/faq/#boolean-flags) (default false)  |
 |    -H, --host string  |  [defaulted] The Kosli endpoint. (default "https://app.kosli.com")  |
-|        --http-proxy http://proxy-server-ip:proxy-port  |  [optional] The HTTP proxy URL including protocol and port number. e.g. http://proxy-server-ip:proxy-port  |
+|        --http-proxy string  |  [optional] The HTTP proxy URL including protocol and port number. e.g. `http://proxy-server-ip:proxy-port`  |
 |    -r, --max-api-retries int  |  [defaulted] How many times should API calls be retried when the API host is not reachable. (default 3)  |
 |        --org string  |  The Kosli organization.  |
 
