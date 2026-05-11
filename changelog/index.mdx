@@ -30,6 +30,26 @@ rss: true
 
 </Update>
 
+<Update label="May 8, 2026" description="v2.17.7" tags={["CLI"]}>
+
+## New features
+
+- **Cloud Run Jobs in `snapshot cloud-run`** — `kosli snapshot cloud-run` now reports Cloud Run **jobs** in addition to services, so environments backed by Google Cloud Run can capture both workload types in a single snapshot.
+
+[View on GitHub](https://github.com/kosli-dev/cli/releases/tag/v2.17.7)
+
+</Update>
+
+<Update label="May 7, 2026" description="v2.17.6" tags={["CLI"]}>
+
+## Bug fixes
+
+- **`snapshot docker` handles un-inspectable containers** — `kosli snapshot docker` previously errored out when the Docker daemon could not inspect a container (for example, a container exiting mid-snapshot). The command now handles that case gracefully and continues reporting the remaining containers. See the [snapshot docker](/client_reference/kosli_snapshot_docker) reference.
+
+[View on GitHub](https://github.com/kosli-dev/cli/releases/tag/v2.17.6)
+
+</Update>
+
 <Update label="May 4, 2026" description="v2.17.5" tags={["CLI"]}>
 
 ## Updates
