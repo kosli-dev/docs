@@ -11,7 +11,7 @@ description: "Report a generic attestation to an artifact or a trail in a Kosli 
 kosli attest generic [IMAGE-NAME | FILE-PATH | DIR-PATH] [flags]
 ```
 
-Report a generic attestation to an artifact or a trail in a Kosli flow.
+Report a generic attestation to an artifact or a trail in a Kosli flow.  
 
 The attestation can be bound to a *trail* using the trail name.
 The attestation can be bound to an *artifact* in two ways:
@@ -61,11 +61,12 @@ In other CI systems, set them explicitly to capture repository metadata.
 | :--- | :--- |
 |    -a, --api-token string  |  The Kosli API token.  |
 |    -c, --config-file string  |  [optional] The Kosli config file path. (default "kosli")  |
-|        --debug  |  [optional] Print debug logs to stdout. A boolean flag [docs](/faq/#boolean-flags) (default false)  |
+|        --debug  |  [optional] Print debug logs to stdout.  |
 |    -H, --host string  |  [defaulted] The Kosli endpoint. (default "https://app.kosli.com")  |
 |        --http-proxy string  |  [optional] The HTTP proxy URL including protocol and port number. e.g. `http://proxy-server-ip:proxy-port`  |
 |    -r, --max-api-retries int  |  [defaulted] How many times should API calls be retried when the API host is not reachable. (default 3)  |
 |        --org string  |  The Kosli organization.  |
+|    -q, --quiet  |  [optional] Suppress non-critical warning messages. Errors and normal output are not affected. If both --quiet and --debug are set, --debug wins.  |
 
 
 ## Live Examples in different CI systems
@@ -74,64 +75,64 @@ In other CI systems, set them explicitly to capture repository metadata.
 	<Tab title="GitHub">
 	View an example of the `kosli attest generic` command in GitHub.
 
-	In [this YAML file](https://github.com/cyber-dojo/dashboard/blob/a6ece2b597888f7ab149759daadda08e3afab0c1/.github/workflows/main.yml#L249), which created [this Kosli Event](https://app.kosli.com/cyber-dojo/flows/dashboard-ci/trails/a6ece2b597888f7ab149759daadda08e3afab0c1?attestation_id=4223c865-5232-461e-b065-ea46aa5d).
+	In [this YAML file](https://github.com/cyber-dojo/dashboard/blob/89b113a1531ed1a88cd466d67a8e107ee88672d4/.github/workflows/main.yml#L249), which created [this Kosli Event](https://app.kosli.com/cyber-dojo/flows/dashboard-ci/trails/89b113a1531ed1a88cd466d67a8e107ee88672d4?attestation_id=ae455186-cddc-43da-9309-7d8193f7).
 	</Tab>
 	<Tab title="GitLab">
 	View an example of the `kosli attest generic` command in GitLab.
 
-	In [this YAML file](https://gitlab.com/cyber-dojo/creator/-/blob/65fd2bfa2478534ea4bc5ccf30f6bfc6aab7550c/.gitlab/workflows/main.yml#L92), which created [this Kosli Event](https://app.kosli.com/cyber-dojo/flows/creator-ci/trails/65fd2bfa2478534ea4bc5ccf30f6bfc6aab7550c?attestation_id=27c3762e-631f-429d-863a-99a3d404).
+	In [this YAML file](https://gitlab.com/cyber-dojo/creator/-/blob/b3152a10de1f36b7dbe2818c0918af06fd3aca61/.gitlab/workflows/main.yml#L92), which created [this Kosli Event](https://app.kosli.com/cyber-dojo/flows/creator-ci/trails/b3152a10de1f36b7dbe2818c0918af06fd3aca61?attestation_id=06e0e162-942e-46b6-8200-fb00a9e0).
 	</Tab>
 </Tabs>
 
 ## Examples Use Cases
 
-These examples all assume that the flags  `--api-token`, `--org`, `--host`, (and `--flow`, `--trail` when required), are [set/provided](/getting_started/install/#assigning-flags-via-environment-variables).
+These examples all assume that the flags  `--api-token`, `--org`, `--host`, (and `--flow`, `--trail` when required), are [set/provided](/getting_started/install/#assigning-flags-via-environment-variables). 
 
 <AccordionGroup>
 <Accordion title="report a generic attestation about a pre-built docker artifact (kosli calculates the fingerprint)">
 ```shell
-kosli attest generic yourDockerImageName
-	--artifact-type docker
-	--name yourAttestationName
+kosli attest generic yourDockerImageName 
+	--artifact-type docker 
+	--name yourAttestationName 
 
 ```
 </Accordion>
 <Accordion title="report a generic attestation about a pre-built docker artifact (you provide the fingerprint)">
 ```shell
-kosli attest generic
-	--fingerprint yourDockerImageFingerprint
-	--name yourAttestationName
+kosli attest generic 
+	--fingerprint yourDockerImageFingerprint 
+	--name yourAttestationName 
 
 ```
 </Accordion>
 <Accordion title="report a generic attestation about a trail">
 ```shell
-kosli attest generic
-	--name yourAttestationName
+kosli attest generic 
+	--name yourAttestationName 
 
 ```
 </Accordion>
 <Accordion title="report a generic attestation about an artifact which has not been reported yet in a trail">
 ```shell
-kosli attest generic
-	--name yourTemplateArtifactName.yourAttestationName
-	--commit yourArtifactGitCommit
+kosli attest generic 
+	--name yourTemplateArtifactName.yourAttestationName 
+	--commit yourArtifactGitCommit 
 
 ```
 </Accordion>
 <Accordion title="report a generic attestation about a trail with an attachment">
 ```shell
-kosli attest generic
-	--name yourAttestationName
-	--attachments yourAttachmentPathName
+kosli attest generic 
+	--name yourAttestationName 
+	--attachments yourAttachmentPathName 
 
 ```
 </Accordion>
 <Accordion title="report a non-compliant generic attestation about a trail">
 ```shell
-kosli attest generic
-	--name yourAttestationName
-	--compliant=false
+kosli attest generic 
+	--name yourAttestationName 
+	--compliant=false 
 ```
 </Accordion>
 </AccordionGroup>

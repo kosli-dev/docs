@@ -11,7 +11,7 @@ description: "Report a snapshot of artifacts deployed as one or more AWS Lambda 
 kosli snapshot lambda ENVIRONMENT-NAME [flags]
 ```
 
-Report a snapshot of artifacts deployed as one or more AWS Lambda functions and their digests to Kosli.
+Report a snapshot of artifacts deployed as one or more AWS Lambda functions and their digests to Kosli.  
 Skip `--function-names` and `--function-names-regex` to report all functions in a given AWS account. Or use `--exclude` and/or `--exclude-regex` to report all functions excluding some.
 
 To authenticate to AWS, you can either:
@@ -21,7 +21,7 @@ To authenticate to AWS, you can either:
 
 Option 1 takes highest precedence, while option 3 is the lowest.
 More details can be found here: https://aws.github.io/aws-sdk-go-v2/docs/configuring-sdk/#specifying-credentials
-
+	
 
 ## Flags
 | Flag | Description |
@@ -42,16 +42,17 @@ More details can be found here: https://aws.github.io/aws-sdk-go-v2/docs/configu
 | :--- | :--- |
 |    -a, --api-token string  |  The Kosli API token.  |
 |    -c, --config-file string  |  [optional] The Kosli config file path. (default "kosli")  |
-|        --debug  |  [optional] Print debug logs to stdout. A boolean flag [docs](/faq/#boolean-flags) (default false)  |
+|        --debug  |  [optional] Print debug logs to stdout.  |
 |    -H, --host string  |  [defaulted] The Kosli endpoint. (default "https://app.kosli.com")  |
 |        --http-proxy string  |  [optional] The HTTP proxy URL including protocol and port number. e.g. `http://proxy-server-ip:proxy-port`  |
 |    -r, --max-api-retries int  |  [defaulted] How many times should API calls be retried when the API host is not reachable. (default 3)  |
 |        --org string  |  The Kosli organization.  |
+|    -q, --quiet  |  [optional] Suppress non-critical warning messages. Errors and normal output are not affected. If both --quiet and --debug are set, --debug wins.  |
 
 
 ## Examples Use Cases
 
-These examples all assume that the flags  `--api-token`, `--org`, `--host`, (and `--flow`, `--trail` when required), are [set/provided](/getting_started/install/#assigning-flags-via-environment-variables).
+These examples all assume that the flags  `--api-token`, `--org`, `--host`, (and `--flow`, `--trail` when required), are [set/provided](/getting_started/install/#assigning-flags-via-environment-variables). 
 
 <AccordionGroup>
 <Accordion title="report all Lambda functions running in an AWS account (AWS auth provided in env variables)">
@@ -60,7 +61,7 @@ export AWS_REGION=yourAWSRegion
 export AWS_ACCESS_KEY_ID=yourAWSAccessKeyID
 export AWS_SECRET_ACCESS_KEY=yourAWSSecretAccessKey
 
-kosli snapshot lambda yourEnvironmentName
+kosli snapshot lambda yourEnvironmentName 
 
 ```
 </Accordion>
@@ -70,9 +71,9 @@ export AWS_REGION=yourAWSRegion
 export AWS_ACCESS_KEY_ID=yourAWSAccessKeyID
 export AWS_SECRET_ACCESS_KEY=yourAWSSecretAccessKey
 
-kosli snapshot lambda yourEnvironmentName
-    --exclude function1,function2
-	--exclude-regex "^not-wanted.*"
+kosli snapshot lambda yourEnvironmentName 
+    --exclude function1,function2 
+	--exclude-regex "^not-wanted.*" 
 
 ```
 </Accordion>
@@ -82,8 +83,8 @@ export AWS_REGION=yourAWSRegion
 export AWS_ACCESS_KEY_ID=yourAWSAccessKeyID
 export AWS_SECRET_ACCESS_KEY=yourAWSSecretAccessKey
 
-kosli snapshot lambda yourEnvironmentName
-	--function-names yourFunctionName
+kosli snapshot lambda yourEnvironmentName 
+	--function-names yourFunctionName 
 
 ```
 </Accordion>
@@ -93,8 +94,8 @@ export AWS_REGION=yourAWSRegion
 export AWS_ACCESS_KEY_ID=yourAWSAccessKeyID
 export AWS_SECRET_ACCESS_KEY=yourAWSSecretAccessKey
 
-kosli snapshot lambda yourEnvironmentName
-	--function-names-regex yourFunctionNameRegexPattern
+kosli snapshot lambda yourEnvironmentName 
+	--function-names-regex yourFunctionNameRegexPattern 
 
 ```
 </Accordion>
@@ -104,18 +105,18 @@ export AWS_REGION=yourAWSRegion
 export AWS_ACCESS_KEY_ID=yourAWSAccessKeyID
 export AWS_SECRET_ACCESS_KEY=yourAWSSecretAccessKey
 
-kosli snapshot lambda yourEnvironmentName
-	--function-names yourFirstFunctionName,yourSecondFunctionName
+kosli snapshot lambda yourEnvironmentName 
+	--function-names yourFirstFunctionName,yourSecondFunctionName 
 
 ```
 </Accordion>
 <Accordion title="report what is running in the latest version of an AWS Lambda function (AWS auth provided in flags)">
 ```shell
-kosli snapshot lambda yourEnvironmentName
-	--function-names yourFunctionName
-	--aws-key-id yourAWSAccessKeyID
-	--aws-secret-key yourAWSSecretAccessKey
-	--aws-region yourAWSRegion
+kosli snapshot lambda yourEnvironmentName 
+	--function-names yourFunctionName 
+	--aws-key-id yourAWSAccessKeyID 
+	--aws-secret-key yourAWSSecretAccessKey 
+	--aws-region yourAWSRegion 
 ```
 </Accordion>
 </AccordionGroup>

@@ -11,9 +11,9 @@ description: "Report a jira attestation to an artifact or a trail in a Kosli flo
 kosli attest jira [IMAGE-NAME | FILE-PATH | DIR-PATH] [flags]
 ```
 
-Report a jira attestation to an artifact or a trail in a Kosli flow.
+Report a jira attestation to an artifact or a trail in a Kosli flow.  
 Parses the given commit's message, current branch name or the content of the `--jira-secondary-source`
-argument for Jira issue references of the form:
+argument for Jira issue references of the form:  
 'at least 2 characters long, starting with an uppercase letter project key followed by
 dash and one or more digits'.
 
@@ -24,7 +24,7 @@ If the `--ignore-branch-match` is set, the branch name is not parsed for a match
 
 The found issue references will be checked against Jira to confirm their existence.
 The attestation is reported in all cases, and its compliance status depends on referencing
-existing Jira issues.
+existing Jira issues.  
 If you have wrong Jira credentials or wrong Jira-base-url it will be reported as non existing Jira issue.
 This is because Jira returns same 404 error code in all cases.
 
@@ -90,113 +90,114 @@ In other CI systems, set them explicitly to capture repository metadata.
 | :--- | :--- |
 |    -a, --api-token string  |  The Kosli API token.  |
 |    -c, --config-file string  |  [optional] The Kosli config file path. (default "kosli")  |
-|        --debug  |  [optional] Print debug logs to stdout. A boolean flag [docs](/faq/#boolean-flags) (default false)  |
+|        --debug  |  [optional] Print debug logs to stdout.  |
 |    -H, --host string  |  [defaulted] The Kosli endpoint. (default "https://app.kosli.com")  |
 |        --http-proxy string  |  [optional] The HTTP proxy URL including protocol and port number. e.g. `http://proxy-server-ip:proxy-port`  |
 |    -r, --max-api-retries int  |  [defaulted] How many times should API calls be retried when the API host is not reachable. (default 3)  |
 |        --org string  |  The Kosli organization.  |
+|    -q, --quiet  |  [optional] Suppress non-critical warning messages. Errors and normal output are not affected. If both --quiet and --debug are set, --debug wins.  |
 
 
 ## Examples Use Cases
 
-These examples all assume that the flags  `--api-token`, `--org`, `--host`, (and `--flow`, `--trail` when required), are [set/provided](/getting_started/install/#assigning-flags-via-environment-variables).
+These examples all assume that the flags  `--api-token`, `--org`, `--host`, (and `--flow`, `--trail` when required), are [set/provided](/getting_started/install/#assigning-flags-via-environment-variables). 
 
 <AccordionGroup>
 <Accordion title="report a jira attestation about a pre-built docker artifact (kosli calculates the fingerprint)">
 ```shell
-kosli attest jira yourDockerImageName
-	--artifact-type docker
-	--name yourAttestationName
-	--jira-base-url https://kosli.atlassian.net
-	--jira-username user@domain.com
-	--jira-api-token yourJiraAPIToken
+kosli attest jira yourDockerImageName 
+	--artifact-type docker 
+	--name yourAttestationName 
+	--jira-base-url https://kosli.atlassian.net 
+	--jira-username user@domain.com 
+	--jira-api-token yourJiraAPIToken 
 
 ```
 </Accordion>
 <Accordion title="report a jira attestation about a pre-built docker artifact (you provide the fingerprint)">
 ```shell
-kosli attest jira
-	--fingerprint yourDockerImageFingerprint
-	--name yourAttestationName
-	--jira-base-url https://kosli.atlassian.net
-	--jira-username user@domain.com
-	--jira-api-token yourJiraAPIToken
+kosli attest jira 
+	--fingerprint yourDockerImageFingerprint 
+	--name yourAttestationName 
+	--jira-base-url https://kosli.atlassian.net 
+	--jira-username user@domain.com 
+	--jira-api-token yourJiraAPIToken 
 
 ```
 </Accordion>
 <Accordion title="report a jira attestation about a trail">
 ```shell
-kosli attest jira
-	--name yourAttestationName
-	--jira-base-url https://kosli.atlassian.net
-	--jira-username user@domain.com
-	--jira-api-token yourJiraAPIToken
+kosli attest jira 
+	--name yourAttestationName 
+	--jira-base-url https://kosli.atlassian.net 
+	--jira-username user@domain.com 
+	--jira-api-token yourJiraAPIToken 
 
 ```
 </Accordion>
 <Accordion title="report a jira attestation matching a specific jira project key">
 ```shell
-kosli attest jira
-	--name yourAttestationName
-	--jira-base-url https://kosli.atlassian.net
-	--jira-username user@domain.com
-	--jira-api-token yourJiraAPIToken
-	--jira-project-key ABC
+kosli attest jira 
+	--name yourAttestationName 
+	--jira-base-url https://kosli.atlassian.net 
+	--jira-username user@domain.com 
+	--jira-api-token yourJiraAPIToken 
+	--jira-project-key ABC 
 
 ```
 </Accordion>
 <Accordion title="report a jira attestation about a trail and include jira issue summary, description and creator">
 ```shell
-kosli attest jira
-	--name yourAttestationName
-	--jira-base-url https://kosli.atlassian.net
-	--jira-username user@domain.com
-	--jira-api-token yourJiraAPIToken
+kosli attest jira 
+	--name yourAttestationName 
+	--jira-base-url https://kosli.atlassian.net 
+	--jira-username user@domain.com 
+	--jira-api-token yourJiraAPIToken 
 	--jira-issue-fields "summary,description,creator"
 
 ```
 </Accordion>
 <Accordion title="report a jira attestation about an artifact which has not been reported yet in a trail">
 ```shell
-kosli attest jira
-	--name yourTemplateArtifactName.yourAttestationName
-	--commit yourArtifactGitCommit
-	--jira-base-url https://kosli.atlassian.net
-	--jira-username user@domain.com
-	--jira-api-token yourJiraAPIToken
+kosli attest jira 
+	--name yourTemplateArtifactName.yourAttestationName 
+	--commit yourArtifactGitCommit 
+	--jira-base-url https://kosli.atlassian.net 
+	--jira-username user@domain.com 
+	--jira-api-token yourJiraAPIToken 
 
 ```
 </Accordion>
 <Accordion title="report a jira attestation about a trail with an attachment">
 ```shell
-kosli attest jira
-	--name yourAttestationName
-	--jira-base-url https://kosli.atlassian.net
-	--jira-username user@domain.com
-	--jira-api-token yourJiraAPIToken
-	--attachments yourAttachmentPathName
+kosli attest jira 
+	--name yourAttestationName 
+	--jira-base-url https://kosli.atlassian.net 
+	--jira-username user@domain.com 
+	--jira-api-token yourJiraAPIToken 
+	--attachments yourAttachmentPathName 
 
 ```
 </Accordion>
 <Accordion title="fail if no issue reference is found, or the issue is not found in your jira instance">
 ```shell
-kosli attest jira
-	--name yourAttestationName
-	--jira-base-url https://kosli.atlassian.net
-	--jira-username user@domain.com
-	--jira-api-token yourJiraAPIToken
+kosli attest jira 
+	--name yourAttestationName 
+	--jira-base-url https://kosli.atlassian.net 
+	--jira-username user@domain.com 
+	--jira-api-token yourJiraAPIToken 
 	--assert
 
 ```
 </Accordion>
 <Accordion title="get jira reference from original branch name in a GitHub Pull Request merge job">
 ```shell
-kosli attest jira
-	--name yourAttestationName
-	--jira-secondary-source ${{ github.head_ref }}
-	--jira-base-url https://kosli.atlassian.net
-	--jira-username user@domain.com
-	--jira-api-token yourJiraAPIToken
+kosli attest jira 
+	--name yourAttestationName 
+	--jira-secondary-source ${{ github.head_ref }} 
+	--jira-base-url https://kosli.atlassian.net 
+	--jira-username user@domain.com 
+	--jira-api-token yourJiraAPIToken 
 ```
 </Accordion>
 </AccordionGroup>
