@@ -21,7 +21,7 @@ To authenticate to AWS, you can either:
 Option 1 takes highest precedence, while option 3 is the lowest.
 More details can be found here: https://aws.github.io/aws-sdk-go-v2/docs/configuring-sdk/#specifying-credentials
 
-You can report the entire bucket content, or filter some of the content using `--include` and `--exclude`.
+You can report the entire bucket content, or filter some of the content using `--include`/`--exclude` (literal prefix match) or `--include-regex`/`--exclude-regex` (Go regular expressions matched against the full object key).
 In all cases, the content is reported as one artifact. If you wish to report separate files/dirs within the same bucket as separate artifacts, you need to run the command twice.
 
 To specify paths in a directory artifact that should always be excluded from the SHA256 calculation, you can add a `.kosli_ignore` file to the root of the artifact.
@@ -36,9 +36,11 @@ The `.kosli_ignore` will be treated as part of the artifact like any other file,
 |        --aws-secret-key string  |  The AWS secret access key.  |
 |        --bucket string  |  The name of the S3 bucket.  |
 |    -D, --dry-run  |  [optional] Run in dry-run mode. When enabled, no data is sent to Kosli and the CLI exits with 0 exit code regardless of any errors.  |
-|    -x, --exclude strings  |  [optional] The comma separated list of file and/or directory paths in the S3 bucket to exclude when fingerprinting. Cannot be used together with --include.  |
+|    -x, --exclude strings  |  [optional] The comma separated list of file and/or directory paths in the S3 bucket to exclude when fingerprinting. Paths match by literal prefix. Cannot be used together with --include or --include-regex.  |
+|        --exclude-regex strings  |  [optional] The comma separated list of Go regular expressions matched against object keys in the S3 bucket to exclude when fingerprinting. Cannot be used together with --include or --include-regex.  |
 |    -h, --help  |  help for s3  |
-|    -i, --include strings  |  [optional] The comma separated list of file and/or directory paths in the S3 bucket to include when fingerprinting. Cannot be used together with --exclude.  |
+|    -i, --include strings  |  [optional] The comma separated list of file and/or directory paths in the S3 bucket to include when fingerprinting. Paths match by literal prefix. Cannot be used together with --exclude or --exclude-regex.  |
+|        --include-regex strings  |  [optional] The comma separated list of Go regular expressions matched against object keys in the S3 bucket to include when fingerprinting. Cannot be used together with --exclude or --exclude-regex.  |
 
 
 ## Flags inherited from parent commands
@@ -100,6 +102,13 @@ export AWS_SECRET_ACCESS_KEY=yourAWSSecretAccessKey
 kosli snapshot s3 yourEnvironmentName
 	--bucket yourBucketName
 	--exclude file.txt,path/within/bucket
+```
+</Accordion>
+<Accordion title="exclude all PNG files in an AWS S3 bucket via a regex">
+```shell
+kosli snapshot s3 yourEnvironmentName
+	--bucket yourBucketName
+	--exclude-regex '.*\.png$'
 ```
 </Accordion>
 </AccordionGroup>
