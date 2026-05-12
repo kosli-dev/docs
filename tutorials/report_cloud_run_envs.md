@@ -5,6 +5,8 @@ description: "Learn how to report running artifacts from a Google Cloud Run proj
 
 By the end of this tutorial, you will have reported a snapshot of your Cloud Run environment to Kosli, making its running services and jobs visible and trackable.
 
+`kosli snapshot cloud-run` covers a specific set of GCP deploy methods. See the [`kosli snapshot cloud-run`](/client_reference/kosli_snapshot_cloud-run) reference for the current list of what's supported.
+
 There are two ways to do this:
 
 - **Kosli CLI** — quick to run, suitable for testing only
@@ -131,6 +133,10 @@ gcloud run jobs deploy kosli-reporter \
 <Tip>
 Pin the CLI image to a specific version (for example `ghcr.io/kosli-dev/cli:v2.18.0`) so the reporter behaviour does not change unexpectedly when a new release is published.
 </Tip>
+
+<Note>
+Cloud Run Jobs are created with `deletionProtection=true` by default. You will need to disable it (`gcloud run jobs update kosli-reporter --no-deletion-protection --region=<your-gcp-region>`) before you can delete or replace the Job later.
+</Note>
 
 </Step>
 
