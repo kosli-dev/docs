@@ -80,7 +80,8 @@
               "group": "Reporting environments",
               "pages": [
                 "tutorials/report_aws_envs",
-                "tutorials/report_k8s_envs"
+                "tutorials/report_k8s_envs",
+                "tutorials/report_cloud_run_envs"
               ]
             },
             {
@@ -370,6 +371,7 @@
               "group": "kosli snapshot",
               "pages": [
                 "client_reference/kosli_snapshot_azure",
+                "client_reference/kosli_snapshot_cloud-run",
                 "client_reference/kosli_snapshot_docker",
                 "client_reference/kosli_snapshot_ecs",
                 "client_reference/kosli_snapshot_k8s",
