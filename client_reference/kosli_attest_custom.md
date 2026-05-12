@@ -11,7 +11,7 @@ description: "Report a custom attestation to an artifact or a trail in a Kosli f
 kosli attest custom [IMAGE-NAME | FILE-PATH | DIR-PATH] [flags]
 ```
 
-Report a custom attestation to an artifact or a trail in a Kosli flow.
+Report a custom attestation to an artifact or a trail in a Kosli flow. 
 The name of the custom attestation type is specified using the `--type` flag.
 The path to the JSON file the custom type will evaluate is specified using the `--attestation-data` flag.
 
@@ -65,11 +65,12 @@ In other CI systems, set them explicitly to capture repository metadata.
 | :--- | :--- |
 |    -a, --api-token string  |  The Kosli API token.  |
 |    -c, --config-file string  |  [optional] The Kosli config file path. (default "kosli")  |
-|        --debug  |  [optional] Print debug logs to stdout. A boolean flag [docs](/faq/#boolean-flags) (default false)  |
+|        --debug  |  [optional] Print debug logs to stdout.  |
 |    -H, --host string  |  [defaulted] The Kosli endpoint. (default "https://app.kosli.com")  |
 |        --http-proxy string  |  [optional] The HTTP proxy URL including protocol and port number. e.g. `http://proxy-server-ip:proxy-port`  |
 |    -r, --max-api-retries int  |  [defaulted] How many times should API calls be retried when the API host is not reachable. (default 3)  |
 |        --org string  |  The Kosli organization.  |
+|    -q, --quiet  |  [optional] Suppress non-critical warning messages. Errors and normal output are not affected. If both --quiet and --debug are set, --debug wins.  |
 
 
 ## Live Examples in different CI systems
@@ -84,55 +85,55 @@ In other CI systems, set them explicitly to capture repository metadata.
 
 ## Examples Use Cases
 
-These examples all assume that the flags  `--api-token`, `--org`, `--host`, (and `--flow`, `--trail` when required), are [set/provided](/getting_started/install/#assigning-flags-via-environment-variables).
+These examples all assume that the flags  `--api-token`, `--org`, `--host`, (and `--flow`, `--trail` when required), are [set/provided](/getting_started/install/#assigning-flags-via-environment-variables). 
 
 <AccordionGroup>
 <Accordion title="report a custom attestation about a pre-built container image artifact (kosli finds the fingerprint)">
 ```shell
-kosli attest custom yourDockerImageName
-	--artifact-type oci
-	--type customTypeName
-	--name yourAttestationName
-	--attestation-data yourJsonFilePath
+kosli attest custom yourDockerImageName 
+	--artifact-type oci 
+	--type customTypeName 
+	--name yourAttestationName 
+	--attestation-data yourJsonFilePath 
 
 ```
 </Accordion>
 <Accordion title="report a custom attestation about a pre-built docker artifact (you provide the fingerprint)">
 ```shell
-kosli attest custom
-	--fingerprint yourDockerImageFingerprint
-	--type customTypeName
-	--name yourAttestationName
-	--attestation-data yourJsonFilePath
+kosli attest custom 
+	--fingerprint yourDockerImageFingerprint 
+	--type customTypeName 
+	--name yourAttestationName 
+	--attestation-data yourJsonFilePath 
 
 ```
 </Accordion>
 <Accordion title="report a custom attestation about a trail">
 ```shell
-kosli attest custom
-	--type customTypeName
-	--name yourAttestationName
-	--attestation-data yourJsonFilePath
+kosli attest custom 
+	--type customTypeName 
+	--name yourAttestationName 
+	--attestation-data yourJsonFilePath 
 
 ```
 </Accordion>
 <Accordion title="report a custom attestation about an artifact which has not been reported yet in a trail">
 ```shell
-kosli attest custom
-	--type customTypeName
-	--name yourTemplateArtifactName.yourAttestationName
-	--attestation-data yourJsonFilePath
-	--commit yourArtifactGitCommit
+kosli attest custom 
+	--type customTypeName 
+	--name yourTemplateArtifactName.yourAttestationName 
+	--attestation-data yourJsonFilePath 
+	--commit yourArtifactGitCommit 
 
 ```
 </Accordion>
 <Accordion title="report a custom attestation about a trail with an attachment">
 ```shell
-kosli attest custom
-    --type customTypeName
-	--name yourAttestationName
-	--attestation-data yourJsonFilePath
-	--attachments yourAttachmentPathName
+kosli attest custom 
+    --type customTypeName 
+	--name yourAttestationName 
+	--attestation-data yourJsonFilePath 
+	--attachments yourAttachmentPathName 
 ```
 </Accordion>
 </AccordionGroup>

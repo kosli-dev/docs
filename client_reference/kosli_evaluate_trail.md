@@ -29,7 +29,7 @@ full data structure available to the policy. Use `--output json` for structured 
 |        --no-assert  |  [optional] Print the result and always exit 0, even when the policy denies. Use when this command feeds another tool as a policy decision point.  |
 |    -o, --output string  |  [defaulted] The format of the output. Valid formats are: [table, json]. (default "table")  |
 |        --params string  |  [optional] Policy parameters as inline JSON or @file.json. Available in policies as data.params.  |
-|    -p, --policy string  |  Path to a Rego policy file to evaluate against the trail.  |
+|    -p, --policy string  |  Path or http(s):// URL of a Rego policy to evaluate against the trail.  |
 |        --show-input  |  [optional] Include the policy input data in the output.  |
 
 
@@ -38,11 +38,12 @@ full data structure available to the policy. Use `--output json` for structured 
 | :--- | :--- |
 |    -a, --api-token string  |  The Kosli API token.  |
 |    -c, --config-file string  |  [optional] The Kosli config file path. (default "kosli")  |
-|        --debug  |  [optional] Print debug logs to stdout. A boolean flag [docs](/faq/#boolean-flags) (default false)  |
+|        --debug  |  [optional] Print debug logs to stdout.  |
 |    -H, --host string  |  [defaulted] The Kosli endpoint. (default "https://app.kosli.com")  |
 |        --http-proxy string  |  [optional] The HTTP proxy URL including protocol and port number. e.g. `http://proxy-server-ip:proxy-port`  |
 |    -r, --max-api-retries int  |  [defaulted] How many times should API calls be retried when the API host is not reachable. (default 3)  |
 |        --org string  |  The Kosli organization.  |
+|    -q, --quiet  |  [optional] Suppress non-critical warning messages. Errors and normal output are not affected. If both --quiet and --debug are set, --debug wins.  |
 
 
 ## Live Examples in different CI systems
@@ -51,60 +52,67 @@ full data structure available to the policy. Use `--output json` for structured 
 	<Tab title="GitHub">
 	View an example of the `kosli evaluate trail` command in GitHub.
 
-	In [this YAML file](https://github.com/cyber-dojo/snyk-scanning/blob/9508524934b5a7a42caedb42f6675d177f841568/.github/workflows/artifact_snyk_test.yml#L350)
+	In [this YAML file](https://github.com/cyber-dojo/snyk-scanning/blob/badc2f94f69941514e5abeea74c9bc62f9207d49/.github/workflows/artifact_snyk_test.yml#L327)
 	</Tab>
 </Tabs>
 
 ## Examples Use Cases
 
-These examples all assume that the flags  `--api-token`, `--org`, `--host`, (and `--flow`, `--trail` when required), are [set/provided](/getting_started/install/#assigning-flags-via-environment-variables).
+These examples all assume that the flags  `--api-token`, `--org`, `--host`, (and `--flow`, `--trail` when required), are [set/provided](/getting_started/install/#assigning-flags-via-environment-variables). 
 
 <AccordionGroup>
 <Accordion title="evaluate a trail against a policy">
 ```shell
-kosli evaluate trail yourTrailName
-	--policy yourPolicyFile.rego
+kosli evaluate trail yourTrailName 
+	--policy yourPolicyFile.rego 
 
 ```
 </Accordion>
 <Accordion title="evaluate a trail with attestation enrichment">
 ```shell
-kosli evaluate trail yourTrailName
-	--policy yourPolicyFile.rego
-	--attestations pull-request
+kosli evaluate trail yourTrailName 
+	--policy yourPolicyFile.rego 
+	--attestations pull-request 
 
 ```
 </Accordion>
 <Accordion title="evaluate a trail and show the policy input data">
 ```shell
-kosli evaluate trail yourTrailName
-	--policy yourPolicyFile.rego
-	--show-input
-	--output json
+kosli evaluate trail yourTrailName 
+	--policy yourPolicyFile.rego 
+	--show-input 
+	--output json 
 
 ```
 </Accordion>
 <Accordion title="evaluate a trail with policy parameters (inline JSON)">
 ```shell
-kosli evaluate trail yourTrailName
-	--policy yourPolicyFile.rego
-	--params '{"min_approvers": 2}'
+kosli evaluate trail yourTrailName 
+	--policy yourPolicyFile.rego 
+	--params '{"min_approvers": 2}' 
 
 ```
 </Accordion>
 <Accordion title="evaluate a trail with policy parameters from a file">
 ```shell
-kosli evaluate trail yourTrailName
-	--policy yourPolicyFile.rego
-	--params @params.json
+kosli evaluate trail yourTrailName 
+	--policy yourPolicyFile.rego 
+	--params @params.json 
+
+```
+</Accordion>
+<Accordion title="evaluate a trail using a policy fetched from a remote URL">
+```shell
+kosli evaluate trail yourTrailName 
+	--policy https://policies.example.com/trail.rego 
 
 ```
 </Accordion>
 <Accordion title="evaluate a trail as a decision point (print verdict, never fail the step)">
 ```shell
-kosli evaluate trail yourTrailName
-	--policy yourPolicyFile.rego
-	--no-assert
+kosli evaluate trail yourTrailName 
+	--policy yourPolicyFile.rego 
+	--no-assert 
 ```
 </Accordion>
 </AccordionGroup>

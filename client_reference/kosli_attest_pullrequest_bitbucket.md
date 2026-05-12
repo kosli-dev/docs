@@ -11,7 +11,7 @@ description: "Report a Bitbucket pull request attestation to an artifact or a tr
 kosli attest pullrequest bitbucket [IMAGE-NAME | FILE-PATH | DIR-PATH] [flags]
 ```
 
-Report a Bitbucket pull request attestation to an artifact or a trail in a Kosli flow.
+Report a Bitbucket pull request attestation to an artifact or a trail in a Kosli flow.  
 It checks if a pull request exists for a given merge commit and reports the pull-request attestation to Kosli.
 Authentication to Bitbucket can be done with access token (recommended) or app passwords. Credentials need to have read access for both repos and pull requests.
 
@@ -60,84 +60,85 @@ The attestation can be bound to an *artifact* in two ways:
 | :--- | :--- |
 |    -a, --api-token string  |  The Kosli API token.  |
 |    -c, --config-file string  |  [optional] The Kosli config file path. (default "kosli")  |
-|        --debug  |  [optional] Print debug logs to stdout. A boolean flag [docs](/faq/#boolean-flags) (default false)  |
+|        --debug  |  [optional] Print debug logs to stdout.  |
 |    -H, --host string  |  [defaulted] The Kosli endpoint. (default "https://app.kosli.com")  |
 |        --http-proxy string  |  [optional] The HTTP proxy URL including protocol and port number. e.g. `http://proxy-server-ip:proxy-port`  |
 |    -r, --max-api-retries int  |  [defaulted] How many times should API calls be retried when the API host is not reachable. (default 3)  |
 |        --org string  |  The Kosli organization.  |
+|    -q, --quiet  |  [optional] Suppress non-critical warning messages. Errors and normal output are not affected. If both --quiet and --debug are set, --debug wins.  |
 
 
 ## Examples Use Cases
 
-These examples all assume that the flags  `--api-token`, `--org`, `--host`, (and `--flow`, `--trail` when required), are [set/provided](/getting_started/install/#assigning-flags-via-environment-variables).
+These examples all assume that the flags  `--api-token`, `--org`, `--host`, (and `--flow`, `--trail` when required), are [set/provided](/getting_started/install/#assigning-flags-via-environment-variables). 
 
 <AccordionGroup>
 <Accordion title="report a Bitbucket pull request attestation about a pre-built docker artifact (kosli calculates the fingerprint)">
 ```shell
-kosli attest pullrequest bitbucket yourDockerImageName
-	--artifact-type docker
-	--name yourAttestationName
-	--bitbucket-access-token yourBitbucketAccessToken
-	--bitbucket-workspace yourBitbucketWorkspace
-	--commit yourArtifactGitCommit
-	--repository yourBitbucketGitRepository
+kosli attest pullrequest bitbucket yourDockerImageName 
+	--artifact-type docker 
+	--name yourAttestationName 
+	--bitbucket-access-token yourBitbucketAccessToken 
+	--bitbucket-workspace yourBitbucketWorkspace 
+	--commit yourArtifactGitCommit 
+	--repository yourBitbucketGitRepository 
 
 ```
 </Accordion>
 <Accordion title="report a Bitbucket pull request attestation about a pre-built docker artifact (you provide the fingerprint)">
 ```shell
-kosli attest pullrequest bitbucket
-	--fingerprint yourDockerImageFingerprint
-	--name yourAttestationName
-	--bitbucket-access-token yourBitbucketAccessToken
-	--bitbucket-workspace yourBitbucketWorkspace
-	--commit yourArtifactGitCommit
-	--repository yourBitbucketGitRepository
+kosli attest pullrequest bitbucket 
+	--fingerprint yourDockerImageFingerprint 
+	--name yourAttestationName 
+	--bitbucket-access-token yourBitbucketAccessToken 
+	--bitbucket-workspace yourBitbucketWorkspace 
+	--commit yourArtifactGitCommit 
+	--repository yourBitbucketGitRepository 
 
 ```
 </Accordion>
 <Accordion title="report a Bitbucket pull request attestation about a trail">
 ```shell
-kosli attest pullrequest bitbucket
-	--name yourAttestationName
-	--bitbucket-access-token yourBitbucketAccessToken
-	--bitbucket-workspace yourBitbucketWorkspace
-	--commit yourArtifactGitCommit
-	--repository yourBitbucketGitRepository
+kosli attest pullrequest bitbucket 
+	--name yourAttestationName 
+	--bitbucket-access-token yourBitbucketAccessToken 
+	--bitbucket-workspace yourBitbucketWorkspace 
+	--commit yourArtifactGitCommit 
+	--repository yourBitbucketGitRepository 
 
 ```
 </Accordion>
 <Accordion title="report a Bitbucket pull request attestation about an artifact which has not been reported yet in a trail">
 ```shell
-kosli attest pullrequest bitbucket
-	--name yourTemplateArtifactName.yourAttestationName
-	--bitbucket-access-token yourBitbucketAccessToken
-	--bitbucket-workspace yourBitbucketWorkspace
-	--commit yourArtifactGitCommit
-	--repository yourBitbucketGitRepository
+kosli attest pullrequest bitbucket 
+	--name yourTemplateArtifactName.yourAttestationName 
+	--bitbucket-access-token yourBitbucketAccessToken 
+	--bitbucket-workspace yourBitbucketWorkspace 
+	--commit yourArtifactGitCommit 
+	--repository yourBitbucketGitRepository 
 
 ```
 </Accordion>
 <Accordion title="report a Bitbucket pull request attestation about a trail with an attachment">
 ```shell
-kosli attest pullrequest bitbucket
-	--name yourAttestationName
-	--bitbucket-access-token yourBitbucketAccessToken
-	--bitbucket-workspace yourBitbucketWorkspace
-	--commit yourArtifactGitCommit
-	--repository yourBitbucketGitRepository
-	--attachments=yourAttachmentPathName
+kosli attest pullrequest bitbucket 
+	--name yourAttestationName 
+	--bitbucket-access-token yourBitbucketAccessToken 
+	--bitbucket-workspace yourBitbucketWorkspace 
+	--commit yourArtifactGitCommit 
+	--repository yourBitbucketGitRepository 
+	--attachments=yourAttachmentPathName 
 
 ```
 </Accordion>
 <Accordion title="fail if a pull request does not exist for your artifact">
 ```shell
-kosli attest pullrequest bitbucket
-	--name yourTemplateArtifactName.yourAttestationName
-	--bitbucket-access-token yourBitbucketAccessToken
-	--bitbucket-workspace yourBitbucketWorkspace
-	--commit yourArtifactGitCommit
-	--repository yourBitbucketGitRepository
+kosli attest pullrequest bitbucket 
+	--name yourTemplateArtifactName.yourAttestationName 
+	--bitbucket-access-token yourBitbucketAccessToken 
+	--bitbucket-workspace yourBitbucketWorkspace 
+	--commit yourArtifactGitCommit 
+	--repository yourBitbucketGitRepository 
 	--assert
 ```
 </Accordion>

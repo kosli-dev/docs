@@ -11,7 +11,7 @@ description: "Report a Gitlab merge request attestation to an artifact or a trai
 kosli attest pullrequest gitlab [IMAGE-NAME | FILE-PATH | DIR-PATH] [flags]
 ```
 
-Report a Gitlab merge request attestation to an artifact or a trail in a Kosli flow.
+Report a Gitlab merge request attestation to an artifact or a trail in a Kosli flow.  
 It checks if a merge request exists for a given merge commit and reports the merge request attestation to Kosli.
 
 
@@ -58,11 +58,12 @@ The attestation can be bound to an *artifact* in two ways:
 | :--- | :--- |
 |    -a, --api-token string  |  The Kosli API token.  |
 |    -c, --config-file string  |  [optional] The Kosli config file path. (default "kosli")  |
-|        --debug  |  [optional] Print debug logs to stdout. A boolean flag [docs](/faq/#boolean-flags) (default false)  |
+|        --debug  |  [optional] Print debug logs to stdout.  |
 |    -H, --host string  |  [defaulted] The Kosli endpoint. (default "https://app.kosli.com")  |
 |        --http-proxy string  |  [optional] The HTTP proxy URL including protocol and port number. e.g. `http://proxy-server-ip:proxy-port`  |
 |    -r, --max-api-retries int  |  [defaulted] How many times should API calls be retried when the API host is not reachable. (default 3)  |
 |        --org string  |  The Kosli organization.  |
+|    -q, --quiet  |  [optional] Suppress non-critical warning messages. Errors and normal output are not affected. If both --quiet and --debug are set, --debug wins.  |
 
 
 ## Live Examples in different CI systems
@@ -71,81 +72,81 @@ The attestation can be bound to an *artifact* in two ways:
 	<Tab title="GitLab">
 	View an example of the `kosli attest pullrequest gitlab` command in GitLab.
 
-	In [this YAML file](https://gitlab.com/cyber-dojo/creator/-/blob/65fd2bfa2478534ea4bc5ccf30f6bfc6aab7550c/.gitlab/workflows/main.yml#L75), which created [this Kosli Event](https://app.kosli.com/cyber-dojo/flows/creator-ci/trails/65fd2bfa2478534ea4bc5ccf30f6bfc6aab7550c?attestation_id=763af9cc-b908-456d-935c-f4deb860).
+	In [this YAML file](https://gitlab.com/cyber-dojo/creator/-/blob/b3152a10de1f36b7dbe2818c0918af06fd3aca61/.gitlab/workflows/main.yml#L75), which created [this Kosli Event](https://app.kosli.com/cyber-dojo/flows/creator-ci/trails/b3152a10de1f36b7dbe2818c0918af06fd3aca61?attestation_id=ecd5c014-16d6-4ee5-b427-7b8a3bcd).
 	</Tab>
 </Tabs>
 
 ## Examples Use Cases
 
-These examples all assume that the flags  `--api-token`, `--org`, `--host`, (and `--flow`, `--trail` when required), are [set/provided](/getting_started/install/#assigning-flags-via-environment-variables).
+These examples all assume that the flags  `--api-token`, `--org`, `--host`, (and `--flow`, `--trail` when required), are [set/provided](/getting_started/install/#assigning-flags-via-environment-variables). 
 
 <AccordionGroup>
 <Accordion title="report a Gitlab merge request attestation about a pre-built docker artifact (kosli calculates the fingerprint)">
 ```shell
-kosli attest pullrequest gitlab yourDockerImageName
-	--artifact-type docker
-	--name yourAttestationName
-	--gitlab-token yourGitlabToken
-	--gitlab-org yourGitlabOrg
-	--commit yourArtifactGitCommit
-	--repository yourGithubGitRepository
+kosli attest pullrequest gitlab yourDockerImageName 
+	--artifact-type docker 
+	--name yourAttestationName 
+	--gitlab-token yourGitlabToken 
+	--gitlab-org yourGitlabOrg 
+	--commit yourArtifactGitCommit 
+	--repository yourGithubGitRepository 
 
 ```
 </Accordion>
 <Accordion title="report a Gitlab merge request attestation about a pre-built docker artifact (you provide the fingerprint)">
 ```shell
-kosli attest pullrequest gitlab
-	--fingerprint yourDockerImageFingerprint
-	--name yourAttestationName
-	--gitlab-token yourGitlabToken
-	--gitlab-org yourGitlabOrg
-	--commit yourArtifactGitCommit
-	--repository yourGithubGitRepository
+kosli attest pullrequest gitlab 
+	--fingerprint yourDockerImageFingerprint 
+	--name yourAttestationName 
+	--gitlab-token yourGitlabToken 
+	--gitlab-org yourGitlabOrg 
+	--commit yourArtifactGitCommit 
+	--repository yourGithubGitRepository 
 
 ```
 </Accordion>
 <Accordion title="report a Gitlab merge request attestation about a trail">
 ```shell
-kosli attest pullrequest gitlab
-	--name yourAttestationName
-	--gitlab-token yourGitlabToken
-	--gitlab-org yourGitlabOrg
-	--commit yourArtifactGitCommit
-	--repository yourGithubGitRepository
+kosli attest pullrequest gitlab 
+	--name yourAttestationName 
+	--gitlab-token yourGitlabToken 
+	--gitlab-org yourGitlabOrg 
+	--commit yourArtifactGitCommit 
+	--repository yourGithubGitRepository 
 
 ```
 </Accordion>
 <Accordion title="report a Gitlab merge request attestation about an artifact which has not been reported yet in a trail">
 ```shell
-kosli attest pullrequest gitlab
-	--name yourTemplateArtifactName.yourAttestationName
-	--gitlab-token yourGitlabToken
-	--gitlab-org yourGitlabOrg
-	--commit yourArtifactGitCommit
-	--repository yourGithubGitRepository
+kosli attest pullrequest gitlab 
+	--name yourTemplateArtifactName.yourAttestationName 
+	--gitlab-token yourGitlabToken 
+	--gitlab-org yourGitlabOrg 
+	--commit yourArtifactGitCommit 
+	--repository yourGithubGitRepository 
 
 ```
 </Accordion>
 <Accordion title="report a Gitlab merge request attestation about a trail with an attachment">
 ```shell
-kosli attest pullrequest gitlab
-	--name yourAttestationName
-	--gitlab-token yourGitlabToken
-	--gitlab-org yourGitlabOrg
-	--commit yourArtifactGitCommit
-	--repository yourGithubGitRepository
-	--attachments=yourAttachmentPathName
+kosli attest pullrequest gitlab 
+	--name yourAttestationName 
+	--gitlab-token yourGitlabToken 
+	--gitlab-org yourGitlabOrg 
+	--commit yourArtifactGitCommit 
+	--repository yourGithubGitRepository 
+	--attachments=yourAttachmentPathName 
 
 ```
 </Accordion>
 <Accordion title="fail if a merge request does not exist for your artifact">
 ```shell
-kosli attest pullrequest gitlab
-	--name yourTemplateArtifactName.yourAttestationName
-	--gitlab-token yourGitlabToken
-	--gitlab-org yourGitlabOrg
-	--commit yourArtifactGitCommit
-	--repository yourGithubGitRepository
+kosli attest pullrequest gitlab 
+	--name yourTemplateArtifactName.yourAttestationName 
+	--gitlab-token yourGitlabToken 
+	--gitlab-org yourGitlabOrg 
+	--commit yourArtifactGitCommit 
+	--repository yourGithubGitRepository 
 	--assert
 ```
 </Accordion>

@@ -24,12 +24,12 @@ the image must have been pushed to or pulled from a registry. A freshly built im
 `docker build`) does not have a repo digest. For images already in a registry, prefer
 `--artifact-type=oci` to fetch the digest directly from the registry.
 
-When fingerprinting a 'dir' artifact, you can exclude certain paths from fingerprint calculation
+When fingerprinting a 'dir' artifact, you can exclude certain paths from fingerprint calculation 
 using the `--exclude` flag.
 Excluded paths are relative to the DIR-PATH and can be literal paths or glob patterns.
 With a directory structure like this `foo/bar/zam/file.txt` if you are calculating the fingerprint of `foo/bar` you need to
 exclude `zam/file.txt` which is relative to the DIR-PATH.
-The supported glob pattern syntax is what is documented here: https://pkg.go.dev/path/filepath#Match ,
+The supported glob pattern syntax is what is documented here: https://pkg.go.dev/path/filepath#Match , 
 plus the ability to use recursive globs "**"
 
 If the directory structure contains a symbolic link to a *file* (for example, a link 'from/this/file' and a target of 'to/another/file') then:
@@ -65,11 +65,12 @@ The `.kosli_ignore` will be treated as part of the artifact like any other file,
 | :--- | :--- |
 |    -a, --api-token string  |  The Kosli API token.  |
 |    -c, --config-file string  |  [optional] The Kosli config file path. (default "kosli")  |
-|        --debug  |  [optional] Print debug logs to stdout. A boolean flag [docs](/faq/#boolean-flags) (default false)  |
+|        --debug  |  [optional] Print debug logs to stdout.  |
 |    -H, --host string  |  [defaulted] The Kosli endpoint. (default "https://app.kosli.com")  |
 |        --http-proxy string  |  [optional] The HTTP proxy URL including protocol and port number. e.g. `http://proxy-server-ip:proxy-port`  |
 |    -r, --max-api-retries int  |  [defaulted] How many times should API calls be retried when the API host is not reachable. (default 3)  |
 |        --org string  |  The Kosli organization.  |
+|    -q, --quiet  |  [optional] Suppress non-critical warning messages. Errors and normal output are not affected. If both --quiet and --debug are set, --debug wins.  |
 
 
 ## Live Examples in different CI systems
@@ -78,13 +79,13 @@ The `.kosli_ignore` will be treated as part of the artifact like any other file,
 	<Tab title="GitHub">
 	View an example of the `kosli fingerprint` command in GitHub.
 
-	In [this YAML file](https://github.com/cyber-dojo/snyk-scanning/blob/9508524934b5a7a42caedb42f6675d177f841568/.github/workflows/artifact_snyk_test.yml#L183)
+	In [this YAML file](https://github.com/cyber-dojo/snyk-scanning/blob/badc2f94f69941514e5abeea74c9bc62f9207d49/.github/workflows/artifact_snyk_test.yml#L158)
 	</Tab>
 </Tabs>
 
 ## Examples Use Cases
 
-These examples all assume that the flags  `--api-token`, `--org`, `--host`, (and `--flow`, `--trail` when required), are [set/provided](/getting_started/install/#assigning-flags-via-environment-variables).
+These examples all assume that the flags  `--api-token`, `--org`, `--host`, (and `--flow`, `--trail` when required), are [set/provided](/getting_started/install/#assigning-flags-via-environment-variables). 
 
 <AccordionGroup>
 <Accordion title="fingerprint a file">

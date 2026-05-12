@@ -12,6 +12,21 @@ kosli snapshot cloud-run ENVIRONMENT-NAME [flags]
 ```
 
 Report a snapshot of Cloud Run services and jobs in a Google Cloud project and region to Kosli.  
+Coverage:
+
+| Deploy method | Container? | API | Reported | Notes |
+|---|---|---|---|---|
+| Cloud Run service (image-deployed) | Yes | `run` | ✓ Full | Baseline. |
+| Cloud Run service (source / Buildpacks) | Yes (built for you) | `run` | ✓ Full | Same API surface as image-deployed; same behaviour. |
+| Cloud Run Job | Yes | `run` | ✓ Full | Jobs surface by resource (not per-Execution). Visible whether running or idle. |
+| Cloud Run function (Cloud Functions 2nd gen) | Yes (Buildpacks) | `cloudfunctions` + `run` | ✓ Full | Surfaces as the backing Cloud Run service. Image path uses `gcf-artifacts/...` encoding. |
+| Cloud Functions 1st gen | No (Google packages the source) | `cloudfunctions` only | ✗ | Legacy. Separate API; out of scope for this command. |
+| App Engine Standard | No (gVisor sandbox, not a container) | `appengine` | ✗ | Different API; intentionally out of scope. |
+| App Engine Flexible | Yes (containers on managed VMs) | `appengine` | ✗ | Mostly superseded by Cloud Run; out of scope. |
+| GKE (Standard / Autopilot) | Yes | `container` + Kubernetes API | ✗ | Use `kosli snapshot k8s`. |
+| Cloud Run for Anthos | Yes (knative on GKE) | knative on the GKE cluster | ✗ | Niche; managed Cloud Run replaced this for most users. |
+| Compute Engine + Container-Optimized OS | Yes (Docker on a VM) | `compute` | ✗ | Containers on VMs; out of scope. |
+
 Each Cloud Run service contributes one artifact per revision in its traffic
 configuration. Each Cloud Run Job contributes one artifact, identified by the
 image bound to the Job (Jobs do not have a revision/traffic-split model).
@@ -20,7 +35,14 @@ Idle Jobs (no currently-running Execution) are included.
 GCP authentication uses Application Default Credentials. On a developer
 machine, run `gcloud auth application-default login`; in GCE/GKE/Cloud Run
 the metadata server / Workload Identity is used automatically. The caller
-needs at least `roles/run.viewer` on the target project.
+needs `roles/run.viewer` on the target project, plus
+`roles/artifactregistry.reader` on the Artifact Registry repository (or the
+project) for digest and tag resolution on tag-pinned images. Missing the AR
+role is non-fatal — tag-pinned artifacts then surface with empty digests.
+
+Digest and tag resolution is scoped to Artifact Registry (`*-docker.pkg.dev`)
+and the legacy Container Registry (`*.gcr.io`). Images from other registries
+(Docker Hub, Quay, ECR, etc.) are reported as-is.
 
 Skip all filtering flags to report every service and every job in the given
 project + region. Use `--include` and/or `--include-regex` to snapshot only a
@@ -28,7 +50,9 @@ subset, OR `--exclude` and/or `--exclude-regex` to omit a subset; include and
 exclude are mutually exclusive. Filters apply uniformly to both service and
 job names and are case-sensitive.
 
-Currently a hidden, in-development command. Use --dry-run to inspect the payload without sending it to Kosli.
+Pass `--resolve-names` to rewrite digest-pinned Service artifact names back
+to their deploy-time tags (commit SHA / version) via an Artifact Registry
+reverse-lookup. Only supported for Artifact Registry hosts.
 
 ## Flags
 | Flag | Description |
@@ -41,6 +65,7 @@ Currently a hidden, in-development command. Use --dry-run to inspect the payload
 |        --include-regex strings  |  [optional] The comma-separated list of Cloud Run service or job name regex patterns to snapshot. Can't be used together with --exclude or --exclude-regex.  |
 |        --project string  |  [required] GCP project ID.  |
 |        --region string  |  [required] GCP region (e.g. europe-west1).  |
+|        --resolve-names  |  [optional] When set, resolve digest-pinned artifact names back to their deploy-time tags (commit SHA / version) via an Artifact Registry reverse-lookup. Requires roles/artifactregistry.reader. Default: artifacts keep whatever name the Cloud Run API returned (digest-pinned for Services, deploy-time form for Jobs).  |
 
 
 ## Flags inherited from parent commands
@@ -48,11 +73,12 @@ Currently a hidden, in-development command. Use --dry-run to inspect the payload
 | :--- | :--- |
 |    -a, --api-token string  |  The Kosli API token.  |
 |    -c, --config-file string  |  [optional] The Kosli config file path. (default "kosli")  |
-|        --debug  |  [optional] Print debug logs to stdout. A boolean flag [docs](/faq/#boolean-flags) (default false)  |
+|        --debug  |  [optional] Print debug logs to stdout.  |
 |    -H, --host string  |  [defaulted] The Kosli endpoint. (default "https://app.kosli.com")  |
-|        --http-proxy http://proxy-server-ip:proxy-port  |  [optional] The HTTP proxy URL including protocol and port number. e.g. http://proxy-server-ip:proxy-port  |
+|        --http-proxy string  |  [optional] The HTTP proxy URL including protocol and port number. e.g. `http://proxy-server-ip:proxy-port`  |
 |    -r, --max-api-retries int  |  [defaulted] How many times should API calls be retried when the API host is not reachable. (default 3)  |
 |        --org string  |  The Kosli organization.  |
+|    -q, --quiet  |  [optional] Suppress non-critical warning messages. Errors and normal output are not affected. If both --quiet and --debug are set, --debug wins.  |
 
 
 ## Examples Use Cases

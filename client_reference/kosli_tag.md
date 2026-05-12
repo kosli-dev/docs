@@ -11,7 +11,7 @@ description: "Tag a resource in Kosli with key-value pairs.  "
 kosli tag RESOURCE-TYPE RESOURCE-ID [flags]
 ```
 
-Tag a resource in Kosli with key-value pairs.
+Tag a resource in Kosli with key-value pairs.  
 use --set to add or update tags, and --unset to remove tags.
 
 
@@ -29,11 +29,12 @@ use --set to add or update tags, and --unset to remove tags.
 | :--- | :--- |
 |    -a, --api-token string  |  The Kosli API token.  |
 |    -c, --config-file string  |  [optional] The Kosli config file path. (default "kosli")  |
-|        --debug  |  [optional] Print debug logs to stdout. A boolean flag [docs](/faq/#boolean-flags) (default false)  |
+|        --debug  |  [optional] Print debug logs to stdout.  |
 |    -H, --host string  |  [defaulted] The Kosli endpoint. (default "https://app.kosli.com")  |
 |        --http-proxy string  |  [optional] The HTTP proxy URL including protocol and port number. e.g. `http://proxy-server-ip:proxy-port`  |
 |    -r, --max-api-retries int  |  [defaulted] How many times should API calls be retried when the API host is not reachable. (default 3)  |
 |        --org string  |  The Kosli organization.  |
+|    -q, --quiet  |  [optional] Suppress non-critical warning messages. Errors and normal output are not affected. If both --quiet and --debug are set, --debug wins.  |
 
 
 ## Live Examples in different CI systems
@@ -42,7 +43,7 @@ use --set to add or update tags, and --unset to remove tags.
 	<Tab title="GitHub">
 	View an example of the `kosli tag` command in GitHub.
 
-	In [this YAML file](https://github.com/cyber-dojo/aws-prod-co-promotion/blob/1085da6ce837c6ebc77dda1e23b5de4e3c33380f/.github/workflows/promote_one.yml#L73)
+	In [this YAML file](https://github.com/cyber-dojo/aws-prod-co-promotion/blob/010eb0ade7ba91559181b4b35a85f2fb175e8af8/.github/workflows/promote_one.yml#L73)
 	</Tab>
 	<Tab title="GitLab">
 	View an example of the `kosli tag` command in GitLab.
@@ -53,37 +54,37 @@ use --set to add or update tags, and --unset to remove tags.
 
 ## Examples Use Cases
 
-These examples all assume that the flags  `--api-token`, `--org`, `--host`, (and `--flow`, `--trail` when required), are [set/provided](/getting_started/install/#assigning-flags-via-environment-variables).
+These examples all assume that the flags  `--api-token`, `--org`, `--host`, (and `--flow`, `--trail` when required), are [set/provided](/getting_started/install/#assigning-flags-via-environment-variables). 
 
 <AccordionGroup>
 <Accordion title="add/update tags to a flow">
 ```shell
-kosli tag flow yourFlowName
-	--set key1=value1
-	--set key2=value2
+kosli tag flow yourFlowName 
+	--set key1=value1 
+	--set key2=value2 
 
 ```
 </Accordion>
 <Accordion title="tag an environment">
 ```shell
-kosli tag env yourEnvironmentName
-	--set key1=value1
-	--set key2=value2
+kosli tag env yourEnvironmentName 
+	--set key1=value1 
+	--set key2=value2 
 
 ```
 </Accordion>
 <Accordion title="add/update tags to an environment">
 ```shell
-kosli tag env yourEnvironmentName
-	--set key1=value1
-	--set key2=value2
+kosli tag env yourEnvironmentName 
+	--set key1=value1 
+	--set key2=value2 
 
 ```
 </Accordion>
 <Accordion title="remove tags from an environment">
 ```shell
-kosli tag env yourEnvironmentName
-	--unset key1=value1
+kosli tag env yourEnvironmentName 
+	--unset key1=value1 
 ```
 </Accordion>
 </AccordionGroup>

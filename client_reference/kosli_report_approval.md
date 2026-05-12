@@ -11,7 +11,7 @@ description: "Report an approval of deploying an artifact to an environment to K
 kosli report approval [IMAGE-NAME | FILE-PATH | DIR-PATH] [flags]
 ```
 
-Report an approval of deploying an artifact to an environment to Kosli.
+Report an approval of deploying an artifact to an environment to Kosli.  
 
 The artifact fingerprint can be provided directly with the `--fingerprint` flag, or
 calculated based on `--artifact-type` flag.
@@ -52,11 +52,12 @@ registry without needing a local Docker daemon.
 | :--- | :--- |
 |    -a, --api-token string  |  The Kosli API token.  |
 |    -c, --config-file string  |  [optional] The Kosli config file path. (default "kosli")  |
-|        --debug  |  [optional] Print debug logs to stdout. A boolean flag [docs](/faq/#boolean-flags) (default false)  |
+|        --debug  |  [optional] Print debug logs to stdout.  |
 |    -H, --host string  |  [defaulted] The Kosli endpoint. (default "https://app.kosli.com")  |
 |        --http-proxy string  |  [optional] The HTTP proxy URL including protocol and port number. e.g. `http://proxy-server-ip:proxy-port`  |
 |    -r, --max-api-retries int  |  [defaulted] How many times should API calls be retried when the API host is not reachable. (default 3)  |
 |        --org string  |  The Kosli organization.  |
+|    -q, --quiet  |  [optional] Suppress non-critical warning messages. Errors and normal output are not affected. If both --quiet and --debug are set, --debug wins.  |
 
 
 ## Live Examples in different CI systems
@@ -76,10 +77,10 @@ registry without needing a local Docker daemon.
 
 ## Examples Use Cases
 
-These examples all assume that the flags  `--api-token`, `--org`, `--host`, (and `--flow`, `--trail` when required), are [set/provided](/getting_started/install/#assigning-flags-via-environment-variables).
+These examples all assume that the flags  `--api-token`, `--org`, `--host`, (and `--flow`, `--trail` when required), are [set/provided](/getting_started/install/#assigning-flags-via-environment-variables). 
 
 ```shell
-# Report that an artifact with a provided fingerprint (sha256) has been approved for
+# Report that an artifact with a provided fingerprint (sha256) has been approved for 
 # deployment to environment <yourEnvironmentName>.
 # The approval is for all git commits since the last approval to this environment.
 kosli report approval \
@@ -101,7 +102,7 @@ kosli report approval FILE.tgz \
 	--newest-commit HEAD \
 	--approver username \
 	--org yourOrgName \
-	--flow yourFlowName
+	--flow yourFlowName 
 
 # Report that an artifact with a provided fingerprint (sha256) has been approved for deployment.
 # The approval is for all environments.
