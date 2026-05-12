@@ -77,14 +77,14 @@ The table below shows every external endpoint the CLI may contact and how to pro
 | Destination | Endpoint | Commands | Proxy method |
 |---|---|---|---|
 | Kosli API | `https://app.kosli.com` (configurable via `--host`) | All commands | `--http-proxy` or `HTTPS_PROXY` |
-| GitHub | `https://api.github.com` (configurable via `--github-base-url`) | PR/commit attestations | `HTTPS_PROXY` env |
-| GitLab | `https://gitlab.com` (configurable via `--gitlab-base-url`) | PR attestations | `HTTPS_PROXY` env |
-| Jira | Configured via `--jira-base-url` | Jira attestations | `HTTPS_PROXY` env |
-| SonarCloud/SonarQube | `https://sonarcloud.io` (configurable via `--sonar-server-url`) | Sonar attestations | `HTTPS_PROXY` env |
-| Azure DevOps | Configured via `--azure-org-url` | Azure PR attestations | `HTTPS_PROXY` env |
-| Azure management APIs | Azure ARM/IMDS endpoints | Azure app snapshots | `HTTPS_PROXY` env |
-| AWS APIs | Regional AWS endpoints | ECS / Lambda / S3 snapshots | `HTTPS_PROXY` env |
-| Container registries | OCI registries (ECR, GCR, DockerHub, etc.) | Artifact fingerprinting (`--artifact-type oci`) | `HTTPS_PROXY` env |
+| GitHub | `https://api.github.com` (configurable via `--github-base-url`) | PR/commit attestations | `HTTPS_PROXY` only |
+| GitLab | `https://gitlab.com` (configurable via `--gitlab-base-url`) | PR attestations | `HTTPS_PROXY` only |
+| Jira | Configured via `--jira-base-url` | Jira attestations | `HTTPS_PROXY` only |
+| SonarCloud/SonarQube | `https://sonarcloud.io` (configurable via `--sonar-server-url`) | Sonar attestations | `HTTPS_PROXY` only |
+| Azure DevOps | Configured via `--azure-org-url` | Azure PR attestations | `HTTPS_PROXY` only |
+| Azure management APIs | Azure ARM/IMDS endpoints | Azure app snapshots | `HTTPS_PROXY` only |
+| AWS APIs | Regional AWS endpoints | ECS / Lambda / S3 snapshots | `HTTPS_PROXY` only |
+| Container registries | OCI registries (ECR, GCR, DockerHub, etc.) | Artifact fingerprinting (`--artifact-type oci`) | `HTTPS_PROXY` only |
 | Kubernetes API server | In-cluster or via kubeconfig | `snapshot k8s` | kubeconfig `proxy-url` or `HTTPS_PROXY` |
 
 ### Corporate proxies requiring Kerberos or NTLM
