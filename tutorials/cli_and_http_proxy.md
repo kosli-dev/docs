@@ -70,7 +70,7 @@ All subsequent CLI commands will now route through the proxy automatically.
 
 ## Scope of `--http-proxy`
 
-The `--http-proxy` flag only applies to traffic between the CLI and the Kosli API. Commands that integrate with third-party services (GitHub, GitLab, Jira, SonarCloud/SonarQube, Azure, AWS) use separate HTTP clients that are **not** affected by this flag. To proxy that traffic, set the standard `HTTPS_PROXY` environment variable separately.
+The `--http-proxy` flag only applies to traffic between the CLI and the Kosli API. Commands that integrate with third-party services (GitHub, GitLab, Jira, SonarCloud/SonarQube, Azure, AWS) use separate HTTP clients that are **not** affected by this flag. To proxy that traffic, set the standard `HTTPS_PROXY` / `HTTP_PROXY` / `NO_PROXY` environment variables separately.
 
 The table below shows every external endpoint the CLI may contact and how to proxy each one:
 
@@ -86,6 +86,10 @@ The table below shows every external endpoint the CLI may contact and how to pro
 | AWS APIs | Regional AWS endpoints | ECS / Lambda / S3 snapshots | `HTTPS_PROXY` only |
 | Container registries | OCI registries (ECR, GCR, DockerHub, etc.) | Artifact fingerprinting (`--artifact-type oci`) | `HTTPS_PROXY` only |
 | Kubernetes API server | In-cluster or via kubeconfig | `snapshot k8s` | kubeconfig `proxy-url` or `HTTPS_PROXY` |
+
+### Corporate proxies requiring Kerberos or NTLM
+
+Go's HTTP client only supports Basic authentication for proxies. If your corporate proxy requires Kerberos or NTLM (common in large enterprises), run a local auth-handling proxy such as [cntlm](https://cntlm.sourceforge.net/) or [px](https://github.com/genotrance/px), then point `HTTPS_PROXY` at `http://127.0.0.1:<local-port>`.
 
 ## Kubernetes reporter
 
