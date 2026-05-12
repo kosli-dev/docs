@@ -2,7 +2,7 @@
 title: "kosli assert artifact"
 beta: false
 deprecated: false
-description: "Assert the compliance status of an artifact in Kosli.
+description: "Assert the compliance status of an artifact in Kosli. 
 There are three ways to choose what to assert against:
 
 1. Against an environment. When `--environment` is specified,
@@ -15,7 +15,7 @@ asserts against all poli..."
 kosli assert artifact [IMAGE-NAME | FILE-PATH | DIR-PATH] [flags]
 ```
 
-Assert the compliance status of an artifact in Kosli.
+Assert the compliance status of an artifact in Kosli. 
 There are three ways to choose what to assert against:
 
 1. Against an environment. When `--environment` is specified,
@@ -56,11 +56,12 @@ non-zero code if non-compliant status.
 | :--- | :--- |
 |    -a, --api-token string  |  The Kosli API token.  |
 |    -c, --config-file string  |  [optional] The Kosli config file path. (default "kosli")  |
-|        --debug  |  [optional] Print debug logs to stdout. A boolean flag [docs](/faq/#boolean-flags) (default false)  |
+|        --debug  |  [optional] Print debug logs to stdout.  |
 |    -H, --host string  |  [defaulted] The Kosli endpoint. (default "https://app.kosli.com")  |
 |        --http-proxy string  |  [optional] The HTTP proxy URL including protocol and port number. e.g. `http://proxy-server-ip:proxy-port`  |
 |    -r, --max-api-retries int  |  [defaulted] How many times should API calls be retried when the API host is not reachable. (default 3)  |
 |        --org string  |  The Kosli organization.  |
+|    -q, --quiet  |  [optional] Suppress non-critical warning messages. Errors and normal output are not affected. If both --quiet and --debug are set, --debug wins.  |
 
 
 ## Live Examples in different CI systems
@@ -80,38 +81,38 @@ non-zero code if non-compliant status.
 
 ## Examples Use Cases
 
-These examples all assume that the flags  `--api-token`, `--org`, `--host`, (and `--flow`, `--trail` when required), are [set/provided](/getting_started/install/#assigning-flags-via-environment-variables).
+These examples all assume that the flags  `--api-token`, `--org`, `--host`, (and `--flow`, `--trail` when required), are [set/provided](/getting_started/install/#assigning-flags-via-environment-variables). 
 
 <AccordionGroup>
 <Accordion title="assert that an artifact meets all compliance requirements for an environment">
 ```shell
-kosli assert artifact
-	--fingerprint 184c799cd551dd1d8d5c5f9a5d593b2e931f5e36122ee5c793c1d08a19839cc0
-	--environment prod
+kosli assert artifact 
+	--fingerprint 184c799cd551dd1d8d5c5f9a5d593b2e931f5e36122ee5c793c1d08a19839cc0 
+	--environment prod 
 
 ```
 </Accordion>
 <Accordion title="assert that an artifact meets a set of policies">
 ```shell
-kosli assert artifact
-	--fingerprint 184c799cd551dd1d8d5c5f9a5d593b2e931f5e36122ee5c793c1d08a19839cc0
-	--policy has-approval,has-been-integration-tested
+kosli assert artifact 
+	--fingerprint 184c799cd551dd1d8d5c5f9a5d593b2e931f5e36122ee5c793c1d08a19839cc0 
+	--policy has-approval,has-been-integration-tested 
 
 ```
 </Accordion>
 <Accordion title="fail if an artifact has a non-compliant status in a single flow (using the artifact fingerprint)">
 ```shell
 export KOSLI_FLOW=yourFlowName
-kosli assert artifact
-	--fingerprint 184c799cd551dd1d8d5c5f9a5d593b2e931f5e36122ee5c793c1d08a19839cc0
+kosli assert artifact 
+	--fingerprint 184c799cd551dd1d8d5c5f9a5d593b2e931f5e36122ee5c793c1d08a19839cc0 
 
 ```
 </Accordion>
 <Accordion title="fail if an artifact has a non-compliant status in any flow (using the artifact name and type)">
 ```shell
 unset KOSLI_FLOW
-kosli assert artifact library/nginx:1.21
-	--artifact-type docker
+kosli assert artifact library/nginx:1.21 
+	--artifact-type docker 
 ```
 </Accordion>
 </AccordionGroup>

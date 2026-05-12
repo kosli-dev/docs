@@ -11,7 +11,7 @@ description: "Report a SonarQube attestation to an artifact or a trail in a Kosl
 kosli attest sonar [IMAGE-NAME | FILE-PATH | DIR-PATH] [flags]
 ```
 
-Report a SonarQube attestation to an artifact or a trail in a Kosli flow.
+Report a SonarQube attestation to an artifact or a trail in a Kosli flow.  
 Retrieves results for the specified scan from SonarQube Cloud or SonarQube Server and attests them to Kosli.
 The results are parsed to find the status of the project's quality gate which is used to determine the attestation's compliance status.
 Both branch scans and pull request scans are supported.
@@ -86,11 +86,12 @@ The attestation can be bound to an *artifact* in two ways:
 | :--- | :--- |
 |    -a, --api-token string  |  The Kosli API token.  |
 |    -c, --config-file string  |  [optional] The Kosli config file path. (default "kosli")  |
-|        --debug  |  [optional] Print debug logs to stdout. A boolean flag [docs](/faq/#boolean-flags) (default false)  |
+|        --debug  |  [optional] Print debug logs to stdout.  |
 |    -H, --host string  |  [defaulted] The Kosli endpoint. (default "https://app.kosli.com")  |
 |        --http-proxy string  |  [optional] The HTTP proxy URL including protocol and port number. e.g. `http://proxy-server-ip:proxy-port`  |
 |    -r, --max-api-retries int  |  [defaulted] How many times should API calls be retried when the API host is not reachable. (default 3)  |
 |        --org string  |  The Kosli organization.  |
+|    -q, --quiet  |  [optional] Suppress non-critical warning messages. Errors and normal output are not affected. If both --quiet and --debug are set, --debug wins.  |
 
 
 ## Live Examples in different CI systems
@@ -99,82 +100,82 @@ The attestation can be bound to an *artifact* in two ways:
 	<Tab title="GitHub">
 	View an example of the `kosli attest sonar` command in GitHub.
 
-	In [this YAML file](https://github.com/cyber-dojo/dashboard/blob/a6ece2b597888f7ab149759daadda08e3afab0c1/.github/workflows/main.yml#L166), which created [this Kosli Event](https://app.kosli.com/cyber-dojo/flows/dashboard-ci/trails/a6ece2b597888f7ab149759daadda08e3afab0c1?attestation_id=2377ce1f-f4b4-47c4-8458-8f16de62).
+	In [this YAML file](https://github.com/cyber-dojo/dashboard/blob/89b113a1531ed1a88cd466d67a8e107ee88672d4/.github/workflows/main.yml#L166), which created [this Kosli Event](https://app.kosli.com/cyber-dojo/flows/dashboard-ci/trails/89b113a1531ed1a88cd466d67a8e107ee88672d4?attestation_id=a8fb3cf0-f228-4dd4-8be6-4610d796).
 	</Tab>
 </Tabs>
 
 ## Examples Use Cases
 
-These examples all assume that the flags  `--api-token`, `--org`, `--host`, (and `--flow`, `--trail` when required), are [set/provided](/getting_started/install/#assigning-flags-via-environment-variables).
+These examples all assume that the flags  `--api-token`, `--org`, `--host`, (and `--flow`, `--trail` when required), are [set/provided](/getting_started/install/#assigning-flags-via-environment-variables). 
 
 <AccordionGroup>
 <Accordion title="report a SonarQube Cloud attestation about a trail using SonarQube's metadata, with no retries">
 ```shell
-kosli attest sonar
-	--name yourAttestationName
-	--sonar-api-token yourSonarAPIToken
-	--sonar-working-dir yourSonarWorkingDirPath
+kosli attest sonar 
+	--name yourAttestationName 
+	--sonar-api-token yourSonarAPIToken 
+	--sonar-working-dir yourSonarWorkingDirPath 
 
 ```
 </Accordion>
 <Accordion title="report a SonarQube Server attestation about a trail using SonarQube's metadata, waiting for up to 60 seconds for the results to be available">
 ```shell
-kosli attest sonar
-	--name yourAttestationName
-	--sonar-api-token yourSonarAPIToken
-	--sonar-working-dir yourSonarWorkingDirPath
+kosli attest sonar 
+	--name yourAttestationName 
+	--sonar-api-token yourSonarAPIToken 
+	--sonar-working-dir yourSonarWorkingDirPath 
 	--max-wait 60
 
 ```
 </Accordion>
 <Accordion title="report a SonarQube Cloud attestation about a trail using key/revision">
 ```shell
-kosli attest sonar
-	--name yourAttestationName
-	--sonar-api-token yourSonarAPIToken
-	--sonar-project-key yourSonarProjectKey
-	--sonar-revision yourSonarRevision
+kosli attest sonar 
+	--name yourAttestationName 
+	--sonar-api-token yourSonarAPIToken 
+	--sonar-project-key yourSonarProjectKey 
+	--sonar-revision yourSonarRevision 
 
 ```
 </Accordion>
 <Accordion title="report a SonarQube Server attestation about a trail using key/revision">
 ```shell
-kosli attest sonar
-	--name yourAttestationName
-	--sonar-api-token yourSonarAPIToken
-	--sonar-server-url yourSonarServerURL
-	--sonar-project-key yourSonarProjectKey
-	--sonar-revision yourSonarRevision
+kosli attest sonar 
+	--name yourAttestationName 
+	--sonar-api-token yourSonarAPIToken 
+	--sonar-server-url yourSonarServerURL 
+	--sonar-project-key yourSonarProjectKey 
+	--sonar-revision yourSonarRevision 
 
 ```
 </Accordion>
 <Accordion title="report a SonarQube Cloud attestation about a trail for a pull request scan using key/pull-request">
 ```shell
-kosli attest sonar
-	--name yourAttestationName
-	--sonar-api-token yourSonarAPIToken
-	--sonar-project-key yourSonarProjectKey
-	--pull-request yourPullRequestID
+kosli attest sonar 
+	--name yourAttestationName 
+	--sonar-api-token yourSonarAPIToken 
+	--sonar-project-key yourSonarProjectKey 
+	--pull-request yourPullRequestID 
 
 ```
 </Accordion>
 <Accordion title="report a SonarQube Cloud attestation about a trail with an attachment using SonarQube's metadata, waiting for up to 300 seconds for the results to be available">
 ```shell
-kosli attest sonar
-	--name yourAttestationName
-	--sonar-api-token yourSonarAPIToken
-	--sonar-working-dir yourSonarWorkingDirPath
-	--attachment yourAttachmentPath
+kosli attest sonar 
+	--name yourAttestationName 
+	--sonar-api-token yourSonarAPIToken 
+	--sonar-working-dir yourSonarWorkingDirPath 
+	--attachment yourAttachmentPath 
 	--max-wait 300
 
 ```
 </Accordion>
 <Accordion title="report a SonarQube attestation using the CE task URL directly (useful when report-task.txt is not accessible)">
 ```shell
-kosli attest sonar
-	--name yourAttestationName
-	--sonar-api-token yourSonarAPIToken
-	--sonar-ce-task-url yourCETaskURL
+kosli attest sonar 
+	--name yourAttestationName 
+	--sonar-api-token yourSonarAPIToken 
+	--sonar-ce-task-url yourCETaskURL 
 ```
 </Accordion>
 </AccordionGroup>

@@ -34,11 +34,12 @@ You can specify flow parameters in flags.
 | :--- | :--- |
 |    -a, --api-token string  |  The Kosli API token.  |
 |    -c, --config-file string  |  [optional] The Kosli config file path. (default "kosli")  |
-|        --debug  |  [optional] Print debug logs to stdout. A boolean flag [docs](/faq/#boolean-flags) (default false)  |
+|        --debug  |  [optional] Print debug logs to stdout.  |
 |    -H, --host string  |  [defaulted] The Kosli endpoint. (default "https://app.kosli.com")  |
 |        --http-proxy string  |  [optional] The HTTP proxy URL including protocol and port number. e.g. `http://proxy-server-ip:proxy-port`  |
 |    -r, --max-api-retries int  |  [defaulted] How many times should API calls be retried when the API host is not reachable. (default 3)  |
 |        --org string  |  The Kosli organization.  |
+|    -q, --quiet  |  [optional] Suppress non-critical warning messages. Errors and normal output are not affected. If both --quiet and --debug are set, --debug wins.  |
 
 
 ## Live Examples in different CI systems
@@ -47,35 +48,35 @@ You can specify flow parameters in flags.
 	<Tab title="GitHub">
 	View an example of the `kosli create flow` command in GitHub.
 
-	In [this YAML file](https://github.com/cyber-dojo/runner/blob/8768460dc1c91de5f6485a7d3e36870b683edfc3/.github/workflows/main.yml#L71)
+	In [this YAML file](https://github.com/cyber-dojo/runner/blob/81cfb0d451a3b4bcbf6d948d3f140ae016f5ab5e/.github/workflows/main.yml#L71)
 	</Tab>
 	<Tab title="GitLab">
 	View an example of the `kosli create flow` command in GitLab.
 
-	In [this YAML file](https://gitlab.com/cyber-dojo/creator/-/blob/65fd2bfa2478534ea4bc5ccf30f6bfc6aab7550c/.gitlab/workflows/main.yml#L53)
+	In [this YAML file](https://gitlab.com/cyber-dojo/creator/-/blob/b3152a10de1f36b7dbe2818c0918af06fd3aca61/.gitlab/workflows/main.yml#L53)
 	</Tab>
 </Tabs>
 
 ## Examples Use Cases
 
-These examples all assume that the flags  `--api-token`, `--org`, `--host`, (and `--flow`, `--trail` when required), are [set/provided](/getting_started/install/#assigning-flags-via-environment-variables).
+These examples all assume that the flags  `--api-token`, `--org`, `--host`, (and `--flow`, `--trail` when required), are [set/provided](/getting_started/install/#assigning-flags-via-environment-variables). 
 
 <AccordionGroup>
 <Accordion title="create/update a Kosli flow (with empty template)">
 ```shell
-kosli create flow yourFlowName
-	--description yourFlowDescription
-	--visibility private OR public
-	--use-empty-template
+kosli create flow yourFlowName 
+	--description yourFlowDescription 
+	--visibility private OR public 
+	--use-empty-template 
 
 ```
 </Accordion>
 <Accordion title="create/update a Kosli flow (with template file)">
 ```shell
-kosli create flow yourFlowName
-	--description yourFlowDescription
-	--visibility private OR public
-	--template-file /path/to/your/template/file.yml
+kosli create flow yourFlowName 
+	--description yourFlowDescription 
+	--visibility private OR public 
+	--template-file /path/to/your/template/file.yml 
 ```
 </Accordion>
 </AccordionGroup>

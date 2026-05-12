@@ -11,7 +11,7 @@ description: "Report a snapshot of a single artifact running in a specific files
 kosli snapshot path ENVIRONMENT-NAME [flags]
 ```
 
-Report a snapshot of a single artifact running in a specific filesystem path to Kosli.
+Report a snapshot of a single artifact running in a specific filesystem path to Kosli.  
 You can report a directory or file artifact. For reporting multiple artifacts in one go, use "kosli snapshot paths".
 You can exclude certain paths or patterns from the artifact fingerprint using `--exclude`.
 The supported glob pattern syntax is documented here: https://pkg.go.dev/path/filepath#Match ,
@@ -37,31 +37,32 @@ The `.kosli_ignore` will be treated as part of the artifact like any other file,
 | :--- | :--- |
 |    -a, --api-token string  |  The Kosli API token.  |
 |    -c, --config-file string  |  [optional] The Kosli config file path. (default "kosli")  |
-|        --debug  |  [optional] Print debug logs to stdout. A boolean flag [docs](/faq/#boolean-flags) (default false)  |
+|        --debug  |  [optional] Print debug logs to stdout.  |
 |    -H, --host string  |  [defaulted] The Kosli endpoint. (default "https://app.kosli.com")  |
 |        --http-proxy string  |  [optional] The HTTP proxy URL including protocol and port number. e.g. `http://proxy-server-ip:proxy-port`  |
 |    -r, --max-api-retries int  |  [defaulted] How many times should API calls be retried when the API host is not reachable. (default 3)  |
 |        --org string  |  The Kosli organization.  |
+|    -q, --quiet  |  [optional] Suppress non-critical warning messages. Errors and normal output are not affected. If both --quiet and --debug are set, --debug wins.  |
 
 
 ## Examples Use Cases
 
-These examples all assume that the flags  `--api-token`, `--org`, `--host`, (and `--flow`, `--trail` when required), are [set/provided](/getting_started/install/#assigning-flags-via-environment-variables).
+These examples all assume that the flags  `--api-token`, `--org`, `--host`, (and `--flow`, `--trail` when required), are [set/provided](/getting_started/install/#assigning-flags-via-environment-variables). 
 
 <AccordionGroup>
 <Accordion title="report one artifact running in a specific path in a filesystem">
 ```shell
-kosli snapshot path yourEnvironmentName
-	--path path/to/your/artifact/dir/or/file
-	--name yourArtifactDisplayName
+kosli snapshot path yourEnvironmentName 
+	--path path/to/your/artifact/dir/or/file 
+	--name yourArtifactDisplayName 
 
 ```
 </Accordion>
 <Accordion title="report one artifact running in a specific path in a filesystem AND exclude certain path patterns">
 ```shell
-kosli snapshot path yourEnvironmentName
-	--path path/to/your/artifact/dir
-	--name yourArtifactDisplayName
+kosli snapshot path yourEnvironmentName 
+	--path path/to/your/artifact/dir 
+	--name yourArtifactDisplayName 
 	--exclude **/log,unwanted.txt,path/**/output.txt
 ```
 </Accordion>

@@ -15,12 +15,12 @@ List environment snapshots.
 The results are paginated and ordered from latest to oldest.
 By default, the page limit is 15 snapshots per page.
 
-You can optionally specify an INTERVAL between two snapshot expressions with [expression]..[expression].
+You can optionally specify an INTERVAL between two snapshot expressions with [expression]..[expression]. 
 
 Expressions can be:
-* ~N   N'th behind the latest snapshot
-* N    snapshot number N
-* NOW  the latest snapshot
+* ~N   N'th behind the latest snapshot  
+* N    snapshot number N  
+* NOW  the latest snapshot  
 
 Either expression can be omitted to default to NOW.
 
@@ -41,11 +41,12 @@ Either expression can be omitted to default to NOW.
 | :--- | :--- |
 |    -a, --api-token string  |  The Kosli API token.  |
 |    -c, --config-file string  |  [optional] The Kosli config file path. (default "kosli")  |
-|        --debug  |  [optional] Print debug logs to stdout. A boolean flag [docs](/faq/#boolean-flags) (default false)  |
+|        --debug  |  [optional] Print debug logs to stdout.  |
 |    -H, --host string  |  [defaulted] The Kosli endpoint. (default "https://app.kosli.com")  |
 |        --http-proxy string  |  [optional] The HTTP proxy URL including protocol and port number. e.g. `http://proxy-server-ip:proxy-port`  |
 |    -r, --max-api-retries int  |  [defaulted] How many times should API calls be retried when the API host is not reachable. (default 3)  |
 |        --org string  |  The Kosli organization.  |
+|    -q, --quiet  |  [optional] Suppress non-critical warning messages. Errors and normal output are not affected. If both --quiet and --debug are set, --debug wins.  |
 
 
 ## Live Example
@@ -65,109 +66,109 @@ kosli list snapshots aws-prod --output=json
 ```json
 [
   {
-    "index": 4386,
-    "from": 1778225998.5296352,
+    "index": 4424,
+    "from": 1778576398.7774363,
     "to": 0.0,
     "compliant": true,
-    "duration": 16900.322019815445
+    "duration": 349.05174946784973
   },
   {
-    "index": 4385,
-    "from": 1778225938.458091,
-    "to": 1778225998.5296352,
+    "index": 4423,
+    "from": 1778576338.5502408,
+    "to": 1778576398.7774363,
     "compliant": true,
-    "duration": 60.07154417037964
+    "duration": 60.227195501327515
   },
   {
-    "index": 4384,
-    "from": 1778223958.5125732,
-    "to": 1778225938.458091,
+    "index": 4422,
+    "from": 1778576278.4894078,
+    "to": 1778576338.5502408,
     "compliant": true,
-    "duration": 1979.9455177783966
+    "duration": 60.06083297729492
   },
   {
-    "index": 4383,
-    "from": 1778223898.548935,
-    "to": 1778223958.5125732,
+    "index": 4421,
+    "from": 1778571118.4238982,
+    "to": 1778576278.4894078,
     "compliant": true,
-    "duration": 59.96363830566406
+    "duration": 5160.065509557724
   },
   {
-    "index": 4382,
-    "from": 1778213818.5191746,
-    "to": 1778223898.548935,
+    "index": 4420,
+    "from": 1778571058.4603016,
+    "to": 1778571118.4238982,
     "compliant": true,
-    "duration": 10080.029760360718
+    "duration": 59.96359658241272
   },
   {
-    "index": 4381,
-    "from": 1778213758.4011989,
-    "to": 1778213818.5191746,
+    "index": 4419,
+    "from": 1778565238.3916535,
+    "to": 1778571058.4603016,
     "compliant": true,
-    "duration": 60.11797571182251
+    "duration": 5820.068648099899
   },
   {
-    "index": 4380,
-    "from": 1778178538.4365702,
-    "to": 1778213758.4011989,
+    "index": 4418,
+    "from": 1778565178.5140111,
+    "to": 1778565238.3916535,
     "compliant": true,
-    "duration": 35219.96462869644
+    "duration": 59.87764239311218
   },
   {
-    "index": 4379,
-    "from": 1778158918.5020123,
-    "to": 1778178538.4365702,
+    "index": 4417,
+    "from": 1778564878.5484455,
+    "to": 1778565178.5140111,
     "compliant": true,
-    "duration": 19619.934557914734
+    "duration": 299.9655656814575
   },
   {
-    "index": 4378,
-    "from": 1778158858.590836,
-    "to": 1778158918.5020123,
+    "index": 4416,
+    "from": 1778564818.512333,
+    "to": 1778564878.5484455,
     "compliant": true,
-    "duration": 59.9111762046814
+    "duration": 60.036112546920776
   },
   {
-    "index": 4377,
-    "from": 1778157598.4368508,
-    "to": 1778158858.590836,
+    "index": 4415,
+    "from": 1778563138.549312,
+    "to": 1778564818.512333,
     "compliant": true,
-    "duration": 1260.1539852619171
+    "duration": 1679.9630208015442
   },
   {
-    "index": 4376,
-    "from": 1778157538.6015975,
-    "to": 1778157598.4368508,
+    "index": 4414,
+    "from": 1778563078.4776177,
+    "to": 1778563138.549312,
     "compliant": true,
-    "duration": 59.83525323867798
+    "duration": 60.07169437408447
   },
   {
-    "index": 4375,
-    "from": 1778157478.5209992,
-    "to": 1778157538.6015975,
+    "index": 4413,
+    "from": 1778563018.531188,
+    "to": 1778563078.4776177,
     "compliant": true,
-    "duration": 60.0805983543396
+    "duration": 59.94642972946167
   },
   {
-    "index": 4374,
-    "from": 1778157118.5120325,
-    "to": 1778157478.5209992,
+    "index": 4412,
+    "from": 1778560378.5140462,
+    "to": 1778563018.531188,
     "compliant": true,
-    "duration": 360.00896668434143
+    "duration": 2640.0171418190002
   },
   {
-    "index": 4373,
-    "from": 1778157058.6630018,
-    "to": 1778157118.5120325,
+    "index": 4411,
+    "from": 1778507278.4930491,
+    "to": 1778560378.5140462,
     "compliant": true,
-    "duration": 59.84903073310852
+    "duration": 53100.020997047424
   },
   {
-    "index": 4372,
-    "from": 1778156278.425921,
-    "to": 1778157058.6630018,
+    "index": 4410,
+    "from": 1778507218.4261599,
+    "to": 1778507278.4930491,
     "compliant": true,
-    "duration": 780.2370808124542
+    "duration": 60.06688928604126
   }
 ]
 ```
@@ -177,26 +178,26 @@ kosli list snapshots aws-prod --output=json
 
 ## Examples Use Cases
 
-These examples all assume that the flags  `--api-token`, `--org`, `--host`, (and `--flow`, `--trail` when required), are [set/provided](/getting_started/install/#assigning-flags-via-environment-variables).
+These examples all assume that the flags  `--api-token`, `--org`, `--host`, (and `--flow`, `--trail` when required), are [set/provided](/getting_started/install/#assigning-flags-via-environment-variables). 
 
 <AccordionGroup>
 <Accordion title="list the last 15 snapshots for an environment">
 ```shell
-kosli list snapshots yourEnvironmentName
+kosli list snapshots yourEnvironmentName 
 
 ```
 </Accordion>
 <Accordion title="list the last 30 snapshots for an environment">
 ```shell
-kosli list snapshots yourEnvironmentName
-	--page-limit 30
+kosli list snapshots yourEnvironmentName 
+	--page-limit 30 
 
 ```
 </Accordion>
 <Accordion title="list the last 30 snapshots for an environment (in JSON)">
 ```shell
-kosli list snapshots yourEnvironmentName
-	--page-limit 30
+kosli list snapshots yourEnvironmentName 
+	--page-limit 30 
 	--output json
 ```
 </Accordion>
