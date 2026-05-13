@@ -47,4 +47,4 @@ The CLI fetches the latest analysis for the named project from your SonarQube / 
 
 To pin a version, suffix `@vN` on the type (e.g. `kosli attest system sonar@v1`).
 
-For ad-hoc reference, the legacy `kosli attest sonar` command (which hardcodes the "quality gate must be OK" rule) continues to work — see [`kosli attest sonar`](/client_reference/kosli_attest_sonar). If you want that compliance opinion baked in, it's the simplest path. For everything else, `system:sonar` is the recommended target.
+The legacy [`kosli attest sonar`](/client_reference/kosli_attest_sonar) command is deprecated — teams should migrate to `kosli attest system sonar`.

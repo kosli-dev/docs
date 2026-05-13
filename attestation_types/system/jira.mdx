@@ -45,4 +45,4 @@ The CLI scans the commit history for Jira issue keys (e.g. `PROJ-123`) and check
 
 To pin a version, suffix `@vN` on the type (e.g. `kosli attest system jira@v1`).
 
-For ad-hoc reference, the legacy `kosli attest jira` command (which hardcodes the "all referenced issues exist" compliance rule) continues to work — see [`kosli attest jira`](/client_reference/kosli_attest_jira). If you want that compliance opinion baked in, it's the simplest path. For everything else, `system:jira` is the recommended target.
+The legacy [`kosli attest jira`](/client_reference/kosli_attest_jira) command is deprecated — teams should migrate to `kosli attest system jira`.

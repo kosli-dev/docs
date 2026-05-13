@@ -47,4 +47,4 @@ Point `--results-dir` at the directory containing your JUnit XML reports. The CL
 
 To pin a version, suffix `@vN` on the type (e.g. `kosli attest system junit@v1`).
 
-For ad-hoc reference, the legacy `kosli attest junit` command (which hardcodes the "zero failures, zero errors" compliance rule) continues to work — see [`kosli attest junit`](/client_reference/kosli_attest_junit). If you want that compliance opinion baked in, it's the simplest path. For everything else, `system:junit` is the recommended target.
+The legacy [`kosli attest junit`](/client_reference/kosli_attest_junit) command is deprecated — teams should migrate to `kosli attest system junit`.

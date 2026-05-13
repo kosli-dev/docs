@@ -49,8 +49,8 @@ For the CLI flag reference, see [`kosli attest system sarif`](/client_reference/
 
 ## Migration from the snyk type
 
-If you're using the legacy `kosli attest snyk` command — including with non-Snyk tools whose SARIF output you're attesting via that path — you can keep doing so; the legacy command isn't going away in this release.
+The legacy [`kosli attest snyk`](/client_reference/kosli_attest_snyk) command is deprecated — teams should migrate to `kosli attest system sarif`. The system type works for any SARIF v2.1.0 producer, not just Snyk, and pulls the tool name dynamically from the SARIF file rather than hardcoding "Snyk".
 
-When you're ready, `system:sarif` is the migration target. It provides the same severity-breakdown tile, but with the **tool name pulled from the SARIF file** rather than hardcoded to "Snyk". Compliance becomes structural — for the "any finding fails" rule the legacy `snyk` type uses today, write a small rego policy and record the verdict via `kosli evaluate`.
+Compliance behaviour also changes: `system:sarif` is structural only, where the legacy `snyk` command bakes in an "any finding fails" rule. To replicate that rule on the new path, write a small rego policy and record the verdict via [`kosli evaluate`](/tutorials/evaluate_trails_with_opa).
 
-There is no breaking change: existing snyk attestations continue to render and validate exactly as before.
+Existing snyk attestations continue to render and validate as before — there's no breaking change. The migration is on your timeline; the recommendation is to move when convenient.
