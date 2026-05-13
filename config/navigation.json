@@ -35,6 +35,7 @@
           "group": "Attestation types",
           "pages": [
             "attestation_types/overview",
+            "attestation_types/custom/overview",
             {
               "group": "System attestation types",
               "pages": [

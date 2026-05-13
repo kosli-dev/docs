@@ -7,6 +7,10 @@ The `kosli evaluate` commands let you evaluate Kosli trails against custom polic
 
 In this tutorial, you'll write and evaluate policies against real trails in public Kosli orgs. Along the way, you'll learn three design rules that prevent a Rego policy from granting false-positive compliance results.
 
+<Tip>
+**Working with SARIF security scans?** The [`system:sarif` attestation type](/attestation_types/system/sarif) has a built-in one-step path that runs a rego policy and records the result in a single CLI call — no separate `kosli evaluate` + `kosli attest generic` orchestration needed. See [Attesting SARIF scans](/tutorials/attest_sarif) for the workflow. The general patterns in this tutorial still apply when you want to evaluate whole trails rather than individual scans.
+</Tip>
+
 <Steps>
 
 <Step title="Prerequisites">
@@ -460,6 +464,10 @@ This creates a generic attestation on the trail with:
 <Warning>
 Use `--compliant=value` (with `=`) not `--compliant value` (with a space). Boolean flags in Kosli CLI require the `=` syntax when passing `false` -- otherwise `false` is interpreted as a positional argument.
 </Warning>
+
+<Info>
+**One-step alternative for SARIF data.** The pattern above (run `kosli evaluate` against a file, extract `.allow`, attest with `kosli attest generic`) is the general-purpose route — it works for any input. For SARIF security scans specifically, the `system:sarif` attestation type collapses this into a single CLI call: `kosli attest system sarif --scan-results foo.sarif --policy foo.rego` runs the evaluation inline and records both the scan facts and the verdict on one attestation. See the [Attesting SARIF scans tutorial](/tutorials/attest_sarif) for the workflow.
+</Info>
 
 </Step>
 

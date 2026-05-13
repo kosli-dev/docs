@@ -8,10 +8,10 @@ An **attestation** records a fact (or a verdict) against a trail or artifact in 
 Kosli has three categories of attestation types:
 
 <CardGroup cols={3}>
-  <Card title="Custom" icon="screwdriver-wrench" href="/administration/managing_custom_attestation_types/overview">
+  <Card title="Custom" icon="screwdriver-wrench" href="/attestation_types/custom/overview">
     Defined per-organization. You author the JSON Schema and jq rules; you control compliance.
   </Card>
-  <Card title="Generic" icon="circle">
+  <Card title="Generic" icon="circle" href="/attestation_types/system/generic">
     The catch-all. No type-specific schema; you supply a free-form payload and a `--compliant` flag.
   </Card>
   <Card title="System" icon="cube" href="/attestation_types/system/overview">
@@ -30,7 +30,7 @@ Kosli has three categories of attestation types:
   <Accordion title="Use a custom type for org-specific evidence shapes">
     If you have a unique evidence shape — internal QA reports, deployment manifests, license attestations — define a custom type once and use it across your flows.
 
-    [Managing custom attestation types →](/administration/managing_custom_attestation_types/overview)
+    [Custom attestation types →](/attestation_types/custom/overview)
   </Accordion>
   <Accordion title="Use generic for one-off facts or quick prototypes">
     Generic attestations carry arbitrary JSON and an explicit `--compliant=true|false` flag. Reach for them when no type matches and the data shape isn't worth standardising.
