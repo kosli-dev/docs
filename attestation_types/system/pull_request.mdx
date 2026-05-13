@@ -34,19 +34,106 @@ For compliance opinions like *at least one PR must exist* or *every PR must have
 
 ## How to use it
 
-```shell
-kosli attest system pull_request \
-  --flow my-flow \
-  --trail $(git rev-parse HEAD) \
-  --name pull-request \
-  --git-provider github \
-  --github-token "$GITHUB_TOKEN" \
-  --github-org your-org \
-  --repository your-repo
-```
+The same command shape works for every supported provider — pick the right `--git-provider` value and pass the provider-specific authentication and location flags. The CLI then fetches pull-request data for the current commit and posts it as the attestation.
 
-Pass the right credentials for your provider (`--github-token`, `--gitlab-token`, `--bitbucket-username` + `--bitbucket-password`, or `--azure-token`) and the CLI fetches the pull requests associated with the current commit, populating the `pull_requests` array.
+<Tip>
+In supported CI systems (GitHub Actions, GitLab CI, Bitbucket Pipelines, Azure Pipelines), most of the location flags below are **auto-defaulted from CI environment variables** — you usually only need to supply the authentication flag. The examples in each accordion show the explicit form for clarity. See [CI/CD defaults](/integrations/ci_cd/#defaulted-kosli-command-flags-from-ci-variables) for the auto-default rules.
+</Tip>
+
+<AccordionGroup>
+  <Accordion title="GitHub / GitHub Enterprise" icon="github">
+
+    ```shell
+    kosli attest system pull_request \
+      --flow my-flow \
+      --trail $(git rev-parse HEAD) \
+      --name pull-request \
+      --git-provider github \
+      --github-token "$GITHUB_TOKEN" \
+      --github-org your-org \
+      --repository your-repo
+    ```
+
+    | Flag | Required | Purpose |
+    |---|---|---|
+    | `--github-token` | Yes | Personal access token or `GITHUB_TOKEN` from CI. Used to call the GitHub API; not stored in the attestation. |
+    | `--github-org` | Yes (auto-defaulted in GitHub Actions) | Organization or user that owns the repo. |
+    | `--repository` | Yes (auto-defaulted in GitHub Actions) | Repository name. |
+    | `--github-base-url` | Only for GitHub Enterprise | Override the API base URL when calling a self-hosted GitHub Enterprise instance. |
+  </Accordion>
+  <Accordion title="GitLab / self-hosted GitLab" icon="gitlab">
+
+    ```shell
+    kosli attest system pull_request \
+      --flow my-flow \
+      --trail $(git rev-parse HEAD) \
+      --name pull-request \
+      --git-provider gitlab \
+      --gitlab-token "$GITLAB_TOKEN" \
+      --gitlab-org your-namespace \
+      --repository your-repo
+    ```
+
+    | Flag | Required | Purpose |
+    |---|---|---|
+    | `--gitlab-token` | Yes | Personal or project access token. Used to call the GitLab API; not stored in the attestation. |
+    | `--gitlab-org` | Yes (auto-defaulted in GitLab CI) | GitLab namespace (user or group) that owns the project. |
+    | `--repository` | Yes (auto-defaulted in GitLab CI) | Project (repo) name. |
+    | `--gitlab-base-url` | Only for self-hosted GitLab | Override the API base URL when calling a self-hosted GitLab instance. |
+
+    GitLab calls them *merge requests*, not pull requests — the attestation type still uses the unified `pull_requests` shape; the CLI maps GitLab MRs into it.
+  </Accordion>
+  <Accordion title="Bitbucket Cloud" icon="bitbucket">
+
+    ```shell
+    kosli attest system pull_request \
+      --flow my-flow \
+      --trail $(git rev-parse HEAD) \
+      --name pull-request \
+      --git-provider bitbucket \
+      --bitbucket-access-token "$BITBUCKET_ACCESS_TOKEN" \
+      --bitbucket-workspace your-workspace \
+      --repository your-repo
+    ```
+
+    | Flag | Required | Purpose |
+    |---|---|---|
+    | `--bitbucket-access-token` | One of these auth methods | Workspace access token (recommended). Used to call the Bitbucket API; not stored in the attestation. |
+    | `--bitbucket-username` + `--bitbucket-password` | Alternative auth | App-password-based authentication (legacy). Pass both flags together. |
+    | `--bitbucket-workspace` | Yes (auto-defaulted in Bitbucket Pipelines) | The Bitbucket workspace that owns the repo. |
+    | `--repository` | Yes (auto-defaulted in Bitbucket Pipelines) | Repository name (slug). |
+
+    Pass **either** `--bitbucket-access-token` **or** `--bitbucket-username` + `--bitbucket-password`. The access-token form is preferred for new setups.
+  </Accordion>
+  <Accordion title="Azure DevOps" icon="microsoft">
+
+    ```shell
+    kosli attest system pull_request \
+      --flow my-flow \
+      --trail $(git rev-parse HEAD) \
+      --name pull-request \
+      --git-provider azure \
+      --azure-token "$AZURE_TOKEN" \
+      --azure-org-url https://dev.azure.com/your-org \
+      --project your-project \
+      --repository your-repo
+    ```
+
+    | Flag | Required | Purpose |
+    |---|---|---|
+    | `--azure-token` | Yes | Azure DevOps personal access token. Used to call the Azure DevOps API; not stored in the attestation. |
+    | `--azure-org-url` | Yes (auto-defaulted in Azure Pipelines) | Full URL to your Azure DevOps organisation, e.g. `https://dev.azure.com/your-org`. |
+    | `--project` | Yes (auto-defaulted in Azure Pipelines) | Azure DevOps project that contains the repo. |
+    | `--repository` | Yes (auto-defaulted in Azure Pipelines) | Repository name. |
+  </Accordion>
+</AccordionGroup>
 
 To pin a version, add `--type-version v1` to the CLI command.
 
-The legacy provider-specific commands ([`kosli attest pullrequest_github`](/client_reference/kosli_attest_pullrequest_github), [`kosli attest pullrequest_gitlab`](/client_reference/kosli_attest_pullrequest_gitlab), [`kosli attest pullrequest_bitbucket`](/client_reference/kosli_attest_pullrequest_bitbucket), [`kosli attest pullrequest_azure`](/client_reference/kosli_attest_pullrequest_azure)) are deprecated — teams should migrate to `kosli attest system pull_request` with `--git-provider`.
+### What gets recorded
+
+Across every provider, the attestation payload has the **same shape** — the `pull_requests` array described in [What the attestation accepts](#what-the-attestation-accepts). Authentication tokens are never stored in the attestation; they are used only to call the provider's API at attest time. The `git_provider` value is recorded so downstream consumers (UI tiles, rego policies via [`kosli evaluate`](/tutorials/evaluate_trails_with_opa)) can branch on it if they need to.
+
+### Migrating from the legacy provider-specific commands
+
+The legacy provider-specific commands ([`kosli attest pullrequest_github`](/client_reference/kosli_attest_pullrequest_github), [`kosli attest pullrequest_gitlab`](/client_reference/kosli_attest_pullrequest_gitlab), [`kosli attest pullrequest_bitbucket`](/client_reference/kosli_attest_pullrequest_bitbucket), [`kosli attest pullrequest_azure`](/client_reference/kosli_attest_pullrequest_azure)) are deprecated — teams should migrate to `kosli attest system pull_request` with `--git-provider`. The provider-specific flags above are the same flags the legacy commands accepted, so migration is mechanical: rename the command, add `--git-provider <name>`, keep the rest.
