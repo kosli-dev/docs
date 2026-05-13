@@ -32,6 +32,48 @@ If you want compliance gated on the content — *fail if any high-severity findi
 
 A future phase may add the ability to attach a rego policy directly to a system attestation, so the facts and the verdict live on the same tile. For now, use the two-attestation pattern documented in the OPA tutorial.
 
+## Versioning
+
+Each system type ships one or more versions. Version 1 is the initial release; later versions may change the schema or tile rendering. Old versions are not deleted when newer ones ship — an attestation made against `v1` continues to validate and render against `v1` for the lifetime of the attestation, even if `v2` later becomes the default.
+
+You reference a version using `@vN` notation, both in CLI commands and in flow templates. **Omitting the version means "track the latest"** — Kosli picks up new versions automatically as they ship.
+
+### In a flow template
+
+```yaml
+# yaml-language-server: $schema=https://docs.kosli.com/schemas/flow-template.json
+version: 1
+trail:
+  attestations:
+    - name: jira-ticket
+      type: system:jira          # tracks latest
+    - name: security-scan
+      type: system:sarif@v1      # pinned to v1
+```
+
+The template above lets `system:jira` track whatever the latest version is, but pins `system:sarif` to `v1`. If `system:sarif@v2` ships, attestations against this template's `security-scan` slot continue to validate against `v1` until you bump it.
+
+### On the CLI
+
+```shell
+# Track latest
+kosli attest system sarif --scan-results foo.sarif --name security-scan
+
+# Pin to v1
+kosli attest system sarif@v1 --scan-results foo.sarif --name security-scan
+```
+
+If the data you submit doesn't match the pinned version's schema, the submission is rejected with a clear error naming the expected version. Pinning means pinning.
+
+### When to pin vs. track latest
+
+Two common patterns:
+
+- **Production templates**: pin to a specific version. Predictable behaviour; you upgrade deliberately when a new version ships and you've reviewed the changes.
+- **Dev templates**: track latest. Catches new-version compatibility issues early, before they reach production.
+
+Tracking latest is the recommended default unless you have a specific reason to pin.
+
 ## Discovering available types
 
 <Card title="Available system types" icon="list" href="/attestation_types/system/catalogue">

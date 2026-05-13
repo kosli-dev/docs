@@ -54,7 +54,7 @@ Optionally, scan your Terraform config for security issues and attest the <Toolt
 
 ```shell
 snyk iac test main.tf --sarif-file-output=sarif.json
-kosli attest snyk --name=security --flow=tf-tutorial --trail=authorized-1 --scan-results=sarif.json
+kosli attest system sarif --name=security --flow=tf-tutorial --trail=authorized-1 --scan-results=sarif.json
 ```
 
 Create a Terraform plan, save it to a file, and attest it to Kosli:

@@ -22,15 +22,19 @@ version: 1
 trail:
   attestations:
   - name: jira-ticket
-    type: jira
+    type: system:jira
   artifacts:
   - name: backend
     attestations:
     - name: unit-tests
-      type: junit
+      type: system:junit
     - name: security-scan
-      type: snyk
+      type: system:sarif
 ```
+
+<Tip>
+The `type:` value uses the form `system:<type-name>` to track the latest version of that system type. To pin a specific version, suffix with `@vN` — e.g. `system:sarif@v1`. See [system attestation types](/attestation_types/system/overview#versioning) for more on versioning.
+</Tip>
 
 <Tip>
   See the [Flow Template reference](/template-reference/flow_template) for the full specification, available attestation types, and editor validation with JSON Schema.
@@ -48,7 +52,7 @@ The following sections show how to make each of the four attestations defined in
     The `jira-ticket` attestation belongs to a single trail and is not linked to a specific artifact. In this example, the id of the trail is the git commit.
 
     ```shell
-    kosli attest jira \
+    kosli attest system jira \
         --flow backend-ci \
         --trail $(git rev-parse HEAD) \
         --name jira-ticket
@@ -59,7 +63,7 @@ The following sections show how to make each of the four attestations defined in
   Some attestations are attached to a specific artifact, like the unit tests for the `backend` artifact. Often, evidence like unit tests are created _before_ the artifact is built. To attach the evidence to the artifact before its creation, use `backend` (the artifact's `name` from the template), as well as `unit-tests` (the attestation's `name` from the template).
 
   ```shell
-  kosli attest junit \
+  kosli attest system junit \
       --name backend.unit-tests \
       --flow backend-ci \
       --trail $(git rev-parse HEAD) \
@@ -92,7 +96,7 @@ The following sections show how to make each of the four attestations defined in
   The following attestation will only belong to the artifact `my_company/backend:latest` attested above and its fingerprint, in this case calculated by the Kosli CLI.
 
   ```shell
-  kosli attest snyk \
+  kosli attest system sarif \
       --artifact-type docker my_company/backend:latest \
       --name backend.security-scan \
       --flow backend-ci \
@@ -265,7 +269,7 @@ Currently, we support the following types of evidence:
   <Accordion title="Custom" icon="puzzle-piece">
 
     The above attestations are all "fully typed" - each one knows how to interpret its own particular kind of input.
-    For example, `kosli attest snyk` interprets the sarif file produced by a snyk container scan to determine the `true/false` value.
+    For example, `kosli attest system sarif` interprets the sarif file produced by a snyk container scan to determine the `true/false` value.
     If you're using a tool that does not yet have a corresponding kosli attest command we recommend creating your own custom attestation type.
 
     A custom attestation type specifies one or more arbitrary evaluation rules.

@@ -58,7 +58,7 @@ We can now run Snyk scans and attest them to the trail. After each attestation, 
 ```shell
 snyk test --sarif-file-output=os.json
 
-kosli attest snyk --flow snyk-demo --trail test-1 --name open-source-scan --scan-results os.json --commit HEAD
+kosli attest system sarif --flow snyk-demo --trail test-1 --name open-source-scan --scan-results os.json --commit HEAD
 ```
 
 You should see: `snyk attestation 'open-source-scan' is reported to trail: test-1`.
@@ -70,7 +70,7 @@ You should see: `snyk attestation 'open-source-scan' is reported to trail: test-
 ```shell
 snyk code test --sarif-file-output=code.json
 
-kosli attest snyk --flow snyk-demo --trail test-1 --name code-scan --scan-results code.json --commit HEAD
+kosli attest system sarif --flow snyk-demo --trail test-1 --name code-scan --scan-results code.json --commit HEAD
 ```
 
 You should see: `snyk attestation 'code-scan' is reported to trail: test-1`.
@@ -83,7 +83,7 @@ You should see: `snyk attestation 'code-scan' is reported to trail: test-1`.
 docker pull ghcr.io/kosli-dev/cli:v2.8.3
 snyk container test ghcr.io/kosli-dev/cli:v2.8.3 --file=Dockerfile --sarif-file-output=container.json
 
-kosli attest snyk --flow snyk-demo --trail test-1 --name container-scan --scan-results container.json --commit HEAD
+kosli attest system sarif --flow snyk-demo --trail test-1 --name container-scan --scan-results container.json --commit HEAD
 ```
 
 You should see: `snyk attestation 'container-scan' is reported to trail: test-1`.
@@ -100,7 +100,7 @@ helm template ./charts/k8s-reporter --output-dir helm \
 
 snyk iac test helm --sarif-file-output=helm.json
 
-kosli attest snyk --flow snyk-demo --trail test-1 --name helm-scan --scan-results helm.json --commit HEAD
+kosli attest system sarif --flow snyk-demo --trail test-1 --name helm-scan --scan-results helm.json --commit HEAD
 ```
 
 You should see: `snyk attestation 'helm-scan' is reported to trail: test-1`.
@@ -111,5 +111,5 @@ You have run four types of Snyk scans and attested each result to a Kosli trail.
 
 From here you can:
 - Explore the trail in the [Kosli app](https://app.kosli.com)
-- Attest scans to an artifact in a trail — see [`kosli attest snyk`](/client_reference/kosli_attest_snyk) for details
+- Attest scans to an artifact in a trail — see [`kosli attest system sarif`](/client_reference/kosli_attest_snyk) for details
 - Add Snyk attestations to your CI pipeline using the [GitHub Actions integration](/integrations/actions)
