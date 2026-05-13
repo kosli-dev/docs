@@ -24,7 +24,7 @@ A generic attestation carries:
 
 ## Compliance behaviour
 
-`system:generic` is the one exception to the structural-only compliance other system types use: because the type's whole purpose is to record an explicit compliance verdict, the `is_compliant` flag the caller passes IS the compliance.
+`system:generic` is special: because the type's whole purpose is to record an explicit compliance verdict, the `is_compliant` flag the caller passes IS the compliance. Other system types determine compliance based on the type itself; see the [system types overview](/attestation_types/system/overview#compliance) for the full picture.
 
 If you want a rego policy to compute that verdict, run [`kosli evaluate`](/tutorials/evaluate_trails_with_opa) against your data and use the `allow` result as the value you pass to `is_compliant`.
 

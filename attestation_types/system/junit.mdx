@@ -29,9 +29,9 @@ The CLI extracts these fields from a directory of JUnit XML reports.
 
 ## Compliance behaviour
 
-Structural only: the attestation is compliant when test-suite results are supplied. The contents of those results (whether any tests failed or errored) don't affect compliance.
+The attestation is compliant when **every test suite has zero failures and zero errors**. Any suite reporting a failure or error makes the attestation non-compliant. This matches the compliance behaviour of the legacy `kosli attest junit` command so existing customers can migrate without changes.
 
-For compliance opinions like *fail if any suite has failures or errors*, write a rego policy and record the verdict via [`kosli evaluate`](/tutorials/evaluate_trails_with_opa).
+For different opinions — *allow up to N failures*, *ignore certain suites*, *require a minimum number of suites to run* — write a rego policy and record the verdict via [`kosli evaluate`](/tutorials/evaluate_trails_with_opa) as a separate attestation.
 
 ## How to use it
 

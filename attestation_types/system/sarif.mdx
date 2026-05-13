@@ -23,9 +23,9 @@ A SARIF attestation carries:
 
 ## Compliance behaviour
 
-Structural only: the attestation is compliant when a SARIF file was attached and parses correctly. The contents of the findings don't affect compliance.
+The attestation is compliant when a SARIF file was attached and parses correctly against the schema. The **contents** of the findings — how many highs, mediums, lows — do not affect compliance.
 
-For compliance opinions on the findings — *fail on any high finding*, *allow up to N mediums*, etc. — write a rego policy and use the `kosli evaluate` pattern to record the verdict as a separate attestation on the same trail. See the [OPA tutorial](/tutorials/evaluate_trails_with_opa) for the canonical pattern.
+This is the design for new system types: they record facts. Opinions about whether those facts are acceptable live in a separate attestation, expressed as rego and posted via [`kosli evaluate`](/tutorials/evaluate_trails_with_opa). For example: *fail on any high finding*, *allow up to N mediums*, *fail if a specific rule fires*. The OPA tutorial covers the canonical pattern.
 
 ## How the tile renders
 
@@ -51,6 +51,6 @@ For the CLI flag reference, see [`kosli attest system sarif`](/client_reference/
 
 The legacy [`kosli attest snyk`](/client_reference/kosli_attest_snyk) command is deprecated — teams should migrate to `kosli attest system sarif`. The system type works for any SARIF v2.1.0 producer, not just Snyk, and pulls the tool name dynamically from the SARIF file rather than hardcoding "Snyk".
 
-Compliance behaviour also changes: `system:sarif` is structural only, where the legacy `snyk` command bakes in an "any finding fails" rule. To replicate that rule on the new path, write a small rego policy and record the verdict via [`kosli evaluate`](/tutorials/evaluate_trails_with_opa).
+Compliance behaviour is different by design: `system:sarif` is schema-driven (the attestation records the facts), where the legacy `snyk` command bakes in an "any finding fails" rule. To replicate that rule on the new path, write a small rego policy and record the verdict via [`kosli evaluate`](/tutorials/evaluate_trails_with_opa).
 
 Existing snyk attestations continue to render and validate as before — there's no breaking change. The migration is on your timeline; the recommendation is to move when convenient.

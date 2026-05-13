@@ -28,9 +28,9 @@ A pull-request attestation carries:
 
 ## Compliance behaviour
 
-Structural only: the attestation is compliant when pull-request data is supplied (the array can be empty). The contents — whether any PRs are present, whether they have approvers, what state they're in — don't affect compliance.
+The attestation is compliant when **at least one pull request is found for the commit**. If the CLI finds no PR for the commit, the resulting attestation is non-compliant. This matches the compliance behaviour of the legacy `kosli attest pullrequest_*` commands so existing customers can migrate without changes.
 
-For compliance opinions like *at least one PR must exist* or *every PR must have an approver*, write a rego policy and record the verdict via [`kosli evaluate`](/tutorials/evaluate_trails_with_opa) — the OPA tutorial uses pull-request approval as its worked example.
+For different opinions — *every PR must have an approver*, *require N approvers*, *fail if the PR is still open* — write a rego policy and record the verdict via [`kosli evaluate`](/tutorials/evaluate_trails_with_opa) as a separate attestation. The OPA tutorial uses pull-request approval as its worked example.
 
 ## How to use it
 

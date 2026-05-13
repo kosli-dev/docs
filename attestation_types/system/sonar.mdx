@@ -26,9 +26,9 @@ A Sonar attestation carries:
 
 ## Compliance behaviour
 
-Structural only: the attestation is compliant when Sonar analysis results are supplied. The quality-gate status is recorded as a fact but doesn't itself drive compliance.
+The attestation is compliant when **the quality-gate status is `OK`**. Any other gate status (`ERROR`, `WARN`) makes the attestation non-compliant. This matches the compliance behaviour of the legacy `kosli attest sonar` command so existing customers can migrate without changes.
 
-For compliance opinions like *the quality gate must be OK*, write a rego policy and record the verdict via [`kosli evaluate`](/tutorials/evaluate_trails_with_opa).
+For different opinions — *fail on `WARN` only when a specific condition is the cause*, *ignore the quality gate and gate on individual conditions* — write a rego policy and record the verdict via [`kosli evaluate`](/tutorials/evaluate_trails_with_opa) as a separate attestation.
 
 The Sonar tile renders the quality-gate name, status, and each condition with its threshold and actual value — so reviewers can see exactly what the analysis returned.
 

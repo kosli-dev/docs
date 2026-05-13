@@ -25,9 +25,9 @@ A Jira attestation carries:
 
 ## Compliance behaviour
 
-Structural only: the attestation is compliant when the Jira results array is supplied. The contents (whether the array is empty, whether referenced issues actually exist) don't affect compliance.
+The attestation is compliant when **at least one Jira issue reference is found and every referenced issue exists in Jira** (the CLI verifies each key against your Jira instance). If no Jira key is found in the commit or branch, or if any referenced key doesn't resolve to a real issue, the attestation is non-compliant. This matches the compliance behaviour of the legacy `kosli attest jira` command so existing customers can migrate without changes.
 
-For compliance opinions like *at least one issue must be referenced* or *every referenced issue must exist*, write a rego policy and record the verdict via [`kosli evaluate`](/tutorials/evaluate_trails_with_opa).
+For different opinions — *ignore the issue-exists check*, *require a specific issue type*, *require an issue in a specific status* — write a rego policy and record the verdict via [`kosli evaluate`](/tutorials/evaluate_trails_with_opa) as a separate attestation.
 
 ## How to use it
 
