@@ -11,7 +11,7 @@ description: The JUnit system attestation type — record test results from any 
 |---|---|---|
 | `v1` | Current | Initial release. Compliance is structural — JUnit results must be supplied. |
 
-Pin a version with `@vN` (e.g. `system:junit@v1`); omit it to track latest. See the [versioning section](/attestation_types/system/overview#versioning).
+Pin a version with `--type-version v1` on the CLI or `type_version: v1` in a flow template; omit it to track latest. See the [versioning section](/attestation_types/system/overview#versioning).
 
 ## What the attestation accepts
 
@@ -45,6 +45,6 @@ kosli attest system junit \
 
 Point `--results-dir` at the directory containing your JUnit XML reports. The CLI parses every XML file in the directory into the `junit_results` array.
 
-To pin a version, suffix `@vN` on the type (e.g. `kosli attest system junit@v1`).
+To pin a version, add `--type-version v1` to the CLI command.
 
 The legacy [`kosli attest junit`](/client_reference/kosli_attest_junit) command is deprecated — teams should migrate to `kosli attest system junit`.

@@ -28,14 +28,14 @@ The legacy built-in attestation types (`kosli attest snyk`, `kosli attest junit`
 
 When a system type's schema or default compliance rule changes meaningfully, Kosli ships a new version (`v2`, `v3`, ...). Existing attestations made against `v1` continue to validate against `v1` — you don't lose history when a type evolves. New attestations default to the latest version unless you pin to a specific one.
 
-Use `@vN` notation to pin both on the CLI and in flow templates:
+Pin a version with the `--type-version` flag on the CLI, or the `type_version` field in flow templates. Omitting it tracks the latest.
 
 ```shell
 # Track latest
 kosli attest system sarif --scan-results foo.sarif --name security-scan
 
 # Pin to v1
-kosli attest system sarif@v1 --scan-results foo.sarif --name security-scan
+kosli attest system sarif --type-version v1 --scan-results foo.sarif --name security-scan
 ```
 
 ```yaml
@@ -43,7 +43,8 @@ attestations:
   - name: unit-tests
     type: system:junit         # tracks latest
   - name: security-scan
-    type: system:sarif@v1      # pinned
+    type: system:sarif
+    type_version: v1           # pinned
 ```
 
 See the [versioning section in the overview](/attestation_types/system/overview#versioning) for the full pattern. Each per-type page lists every version that's available, what changed, and which version is the current default.

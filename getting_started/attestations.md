@@ -33,7 +33,7 @@ trail:
 ```
 
 <Tip>
-The `type:` value uses the form `system:<type-name>` to track the latest version of that system type. To pin a specific version, suffix with `@vN` — e.g. `system:sarif@v1`. See [system attestation types](/attestation_types/system/overview#versioning) for more on versioning.
+The `type:` value uses the form `system:<type-name>` to track the latest version of that system type. To pin a specific version, add a sibling `type_version:` field — e.g. `type_version: v1`. See [system attestation types](/attestation_types/system/overview#versioning) for more on versioning.
 </Tip>
 
 <Tip>

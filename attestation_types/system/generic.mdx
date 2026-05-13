@@ -13,7 +13,7 @@ Use this when you have a one-off fact to record and no system type covers your c
 |---|---|---|
 | `v1` | Current | Initial release. Requires `is_compliant: bool`. |
 
-Pin a version with `@vN` (e.g. `system:generic@v1`); omit it to track latest. See the [versioning section](/attestation_types/system/overview#versioning).
+Pin a version with `--type-version v1` on the CLI or `type_version: v1` in a flow template; omit it to track latest. See the [versioning section](/attestation_types/system/overview#versioning).
 
 ## What the attestation accepts
 
@@ -41,6 +41,6 @@ kosli attest system generic \
 
 `--compliant` sets the verdict directly; `--user-data` accepts a JSON file whose contents are stored on the attestation and rendered in the tile.
 
-To pin a version, suffix `@vN` on the type (e.g. `kosli attest system generic@v1`).
+To pin a version, add `--type-version v1` to the CLI command.
 
 The legacy [`kosli attest generic`](/client_reference/kosli_attest_generic) command is deprecated — teams should migrate to `kosli attest system generic`.

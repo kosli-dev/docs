@@ -11,7 +11,7 @@ description: The pull-request system attestation type — record that a change w
 |---|---|---|
 | `v1` | Current | Initial release. Compliance is structural — pull-request data must be supplied. |
 
-Pin a version with `@vN` (e.g. `system:pull_request@v1`); omit it to track latest. See the [versioning section](/attestation_types/system/overview#versioning).
+Pin a version with `--type-version v1` on the CLI or `type_version: v1` in a flow template; omit it to track latest. See the [versioning section](/attestation_types/system/overview#versioning).
 
 ## What the attestation accepts
 
@@ -47,6 +47,6 @@ kosli attest system pull_request \
 
 Pass the right credentials for your provider (`--github-token`, `--gitlab-token`, `--bitbucket-username` + `--bitbucket-password`, or `--azure-token`) and the CLI fetches the pull requests associated with the current commit, populating the `pull_requests` array.
 
-To pin a version, suffix `@vN` on the type (e.g. `kosli attest system pull_request@v1`).
+To pin a version, add `--type-version v1` to the CLI command.
 
 The legacy provider-specific commands ([`kosli attest pullrequest_github`](/client_reference/kosli_attest_pullrequest_github), [`kosli attest pullrequest_gitlab`](/client_reference/kosli_attest_pullrequest_gitlab), [`kosli attest pullrequest_bitbucket`](/client_reference/kosli_attest_pullrequest_bitbucket), [`kosli attest pullrequest_azure`](/client_reference/kosli_attest_pullrequest_azure)) are deprecated — teams should migrate to `kosli attest system pull_request` with `--git-provider`.

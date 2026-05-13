@@ -34,7 +34,7 @@ If you want compliance gated on the content — *fail if any high-severity findi
 
 Each system type ships one or more versions. Version 1 is the initial release; later versions may change the schema or tile rendering. Old versions are not deleted when newer ones ship — an attestation made against `v1` continues to validate and render against `v1` for the lifetime of the attestation, even if `v2` later becomes the default.
 
-You reference a version using `@vN` notation, both in CLI commands and in flow templates. **Omitting the version means "track the latest"** — Kosli picks up new versions automatically as they ship.
+You reference a version using a `type_version` field in flow templates, or the `--type-version` flag on the CLI. **Omitting it means "track the latest"** — Kosli picks up new versions automatically as they ship.
 
 ### In a flow template
 
@@ -46,10 +46,11 @@ trail:
     - name: jira-ticket
       type: system:jira          # tracks latest
     - name: security-scan
-      type: system:sarif@v1      # pinned to v1
+      type: system:sarif
+      type_version: v1           # pinned to v1
 ```
 
-The template above lets `system:jira` track whatever the latest version is, but pins `system:sarif` to `v1`. If `system:sarif@v2` ships, attestations against this template's `security-scan` slot continue to validate against `v1` until you bump it.
+The template above lets `system:jira` track whatever the latest version is, but pins `system:sarif` to `v1`. If `system:sarif` `v2` ships, attestations against this template's `security-scan` slot continue to validate against `v1` until you bump it.
 
 ### On the CLI
 
@@ -58,7 +59,7 @@ The template above lets `system:jira` track whatever the latest version is, but 
 kosli attest system sarif --scan-results foo.sarif --name security-scan
 
 # Pin to v1
-kosli attest system sarif@v1 --scan-results foo.sarif --name security-scan
+kosli attest system sarif --type-version v1 --scan-results foo.sarif --name security-scan
 ```
 
 If the data you submit doesn't match the pinned version's schema, the submission is rejected with a clear error naming the expected version. Pinning means pinning.

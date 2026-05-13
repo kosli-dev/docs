@@ -11,7 +11,7 @@ description: The Jira system attestation type — record that a change is tracke
 |---|---|---|
 | `v1` | Current | Initial release. Compliance is structural — Jira issue references must be supplied. |
 
-Pin a version with `@vN` (e.g. `system:jira@v1`); omit it to track latest. See the [versioning section](/attestation_types/system/overview#versioning).
+Pin a version with `--type-version v1` on the CLI or `type_version: v1` in a flow template; omit it to track latest. See the [versioning section](/attestation_types/system/overview#versioning).
 
 ## What the attestation accepts
 
@@ -43,6 +43,6 @@ kosli attest system jira \
 
 The CLI scans the commit history for Jira issue keys (e.g. `PROJ-123`) and checks each one against your Jira instance via the credentials you provide. Resolved keys populate `jira_results`.
 
-To pin a version, suffix `@vN` on the type (e.g. `kosli attest system jira@v1`).
+To pin a version, add `--type-version v1` to the CLI command.
 
 The legacy [`kosli attest jira`](/client_reference/kosli_attest_jira) command is deprecated — teams should migrate to `kosli attest system jira`.

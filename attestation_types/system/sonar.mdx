@@ -11,7 +11,7 @@ description: The Sonar system attestation type — record a SonarQube / SonarClo
 |---|---|---|
 | `v1` | Current | Initial release. Compliance is structural — Sonar analysis results must be supplied. |
 
-Pin a version with `@vN` (e.g. `system:sonar@v1`); omit it to track latest. See the [versioning section](/attestation_types/system/overview#versioning).
+Pin a version with `--type-version v1` on the CLI or `type_version: v1` in a flow template; omit it to track latest. See the [versioning section](/attestation_types/system/overview#versioning).
 
 ## What the attestation accepts
 
@@ -45,6 +45,6 @@ kosli attest system sonar \
 
 The CLI fetches the latest analysis for the named project from your SonarQube / SonarCloud instance, parses the quality-gate result and conditions, and stores them as `sonar_results`. Alternatively, point at a local task-report file produced by your CI scanner with `--sonar-task-report-file`.
 
-To pin a version, suffix `@vN` on the type (e.g. `kosli attest system sonar@v1`).
+To pin a version, add `--type-version v1` to the CLI command.
 
 The legacy [`kosli attest sonar`](/client_reference/kosli_attest_sonar) command is deprecated — teams should migrate to `kosli attest system sonar`.
