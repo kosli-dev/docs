@@ -1,10 +1,13 @@
 ---
 title: "kosli get approval"
 beta: false
-deprecated: false
+deprecated: true
 description: "Get an approval from a specified flow."
 ---
 
+<Warning>
+**kosli get approval** is deprecated. this command is deprecated and will be removed in a future release.  Deprecated commands will be removed in a future release.
+</Warning>
 ## Synopsis
 
 ```shell

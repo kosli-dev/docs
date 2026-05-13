@@ -61,7 +61,7 @@ This accepts inline JSON or a file reference (`@file.json`).
 	<Tab title="GitHub">
 	View an example of the `kosli evaluate input` command in GitHub.
 
-	In [this YAML file](https://github.com/cyber-dojo/snyk-scanning/blob/badc2f94f69941514e5abeea74c9bc62f9207d49/tests/test_rego_rules.sh#L201)
+	In [this YAML file](https://github.com/cyber-dojo/snyk-scanning/blob/60fd5bffe45bc9618e81fabf8dd6793f92d10817/tests/test_rego_rules.sh#L201)
 	</Tab>
 </Tabs>
 

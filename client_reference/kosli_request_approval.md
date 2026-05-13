@@ -1,10 +1,13 @@
 ---
 title: "kosli request approval"
 beta: false
-deprecated: false
+deprecated: true
 description: "Request an approval of a deployment of an artifact to an environment in Kosli.  "
 ---
 
+<Warning>
+**kosli request approval** is deprecated. this command is deprecated and will be removed in a future release.  Deprecated commands will be removed in a future release.
+</Warning>
 ## Synopsis
 
 ```shell
