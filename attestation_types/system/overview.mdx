@@ -30,8 +30,6 @@ If you want compliance gated on the content — *fail if any high-severity findi
 `system:generic` is the one exception — it carries an explicit `is_compliant` flag in its data, and that flag is the compliance signal (the caller decides). Every other system type is structural only.
 </Note>
 
-A future phase may add the ability to attach a rego policy directly to a system attestation, so the facts and the verdict live on the same tile. For now, use the two-attestation pattern documented in the OPA tutorial.
-
 ## Versioning
 
 Each system type ships one or more versions. Version 1 is the initial release; later versions may change the schema or tile rendering. Old versions are not deleted when newer ones ship — an attestation made against `v1` continues to validate and render against `v1` for the lifetime of the attestation, even if `v2` later becomes the default.
@@ -82,12 +80,6 @@ Tracking latest is the recommended default unless you have a specific reason to 
 
 ## How they relate to other attestation types
 
-System types are the strategic direction for Kosli's built-in attestation types. Today some attestation types (`snyk`, `junit`, `jira`, `sonar`, `pull_request`) are dedicated built-ins with their own CLI commands. Over time, Kosli is moving these to system types so:
-
-- Adding a new type doesn't require new CLI work — just a new YAML definition.
-- Customers see a consistent CLI and tile experience across types.
-- Versioning becomes explicit instead of implicit.
-
-Existing dedicated commands (e.g. `kosli attest snyk`) continue to work; the migration to system-type equivalents is incremental.
+System types are the strategic direction for Kosli's built-in attestation types. Today some attestation types (`snyk`, `junit`, `jira`, `sonar`, `pull_request`) are dedicated built-ins with their own CLI commands. Over time, Kosli is moving these to system types — existing dedicated commands continue to work in the meantime; the migration to system-type equivalents is incremental.
 
 For more context, see the [attestation types overview](/attestation_types/overview).

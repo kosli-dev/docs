@@ -30,4 +30,17 @@ If you want a rego policy to compute that verdict, run [`kosli evaluate`](/tutor
 
 ## How to use it
 
-The data shape is identical to the legacy `kosli attest generic` command. Both [`kosli attest generic`](/client_reference/kosli_attest_generic) and `kosli attest system generic` produce equivalent attestations.
+```shell
+kosli attest system generic \
+  --flow my-flow \
+  --trail $(git rev-parse HEAD) \
+  --name release-notes \
+  --compliant=true \
+  --user-data release-notes.json
+```
+
+`--compliant` sets the verdict directly; `--user-data` accepts a JSON file whose contents are stored on the attestation and rendered in the tile.
+
+To pin a version, suffix `@vN` on the type (e.g. `kosli attest system generic@v1`).
+
+The data shape is identical to the legacy [`kosli attest generic`](/client_reference/kosli_attest_generic) command — both produce equivalent attestations. `system:generic` is the recommended path going forward.

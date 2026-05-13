@@ -34,4 +34,17 @@ The Sonar tile renders the quality-gate name, status, and each condition with it
 
 ## How to use it
 
-The legacy `kosli attest sonar` command (which hardcodes the "quality gate must be OK" rule) continues to work and remains the recommended path for now if you want that opinion baked in — see [`kosli attest sonar`](/client_reference/kosli_attest_sonar). The `system:sonar` route gives you the same data shape and tile but without the built-in compliance opinion.
+```shell
+kosli attest system sonar \
+  --flow my-flow \
+  --trail $(git rev-parse HEAD) \
+  --name code-quality \
+  --sonar-api-token "$SONAR_API_TOKEN" \
+  --sonar-project-key your-project-key
+```
+
+The CLI fetches the latest analysis for the named project from your SonarQube / SonarCloud instance, parses the quality-gate result and conditions, and stores them as `sonar_results`. Alternatively, point at a local task-report file produced by your CI scanner with `--sonar-task-report-file`.
+
+To pin a version, suffix `@vN` on the type (e.g. `kosli attest system sonar@v1`).
+
+For ad-hoc reference, the legacy `kosli attest sonar` command (which hardcodes the "quality gate must be OK" rule) continues to work — see [`kosli attest sonar`](/client_reference/kosli_attest_sonar). If you want that compliance opinion baked in, it's the simplest path. For everything else, `system:sonar` is the recommended target.

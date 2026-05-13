@@ -35,4 +35,16 @@ For compliance opinions like *fail if any suite has failures or errors*, write a
 
 ## How to use it
 
-The legacy `kosli attest junit` command (which hardcodes the "zero failures, zero errors" compliance rule) continues to work and remains the recommended path for now if you want that opinion baked in — see [`kosli attest junit`](/client_reference/kosli_attest_junit). The `system:junit` route gives you the same data shape and tile but without the built-in compliance opinion.
+```shell
+kosli attest system junit \
+  --flow my-flow \
+  --trail $(git rev-parse HEAD) \
+  --name unit-tests \
+  --results-dir build/test-results/
+```
+
+Point `--results-dir` at the directory containing your JUnit XML reports. The CLI parses every XML file in the directory into the `junit_results` array.
+
+To pin a version, suffix `@vN` on the type (e.g. `kosli attest system junit@v1`).
+
+For ad-hoc reference, the legacy `kosli attest junit` command (which hardcodes the "zero failures, zero errors" compliance rule) continues to work — see [`kosli attest junit`](/client_reference/kosli_attest_junit). If you want that compliance opinion baked in, it's the simplest path. For everything else, `system:junit` is the recommended target.

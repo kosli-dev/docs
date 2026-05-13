@@ -34,4 +34,19 @@ For compliance opinions like *at least one PR must exist* or *every PR must have
 
 ## How to use it
 
-The legacy `kosli attest pullrequest_*` commands (one per git provider, each hardcoding the "at least one PR" compliance rule) continue to work and remain the recommended path for now if you want that opinion baked in. See [`kosli attest pullrequest_github`](/client_reference/kosli_attest_pullrequest_github), [`kosli attest pullrequest_gitlab`](/client_reference/kosli_attest_pullrequest_gitlab), [`kosli attest pullrequest_bitbucket`](/client_reference/kosli_attest_pullrequest_bitbucket), and [`kosli attest pullrequest_azure`](/client_reference/kosli_attest_pullrequest_azure). The `system:pull_request` route gives you the same data shape and tile but without the built-in compliance opinion.
+```shell
+kosli attest system pull_request \
+  --flow my-flow \
+  --trail $(git rev-parse HEAD) \
+  --name pull-request \
+  --git-provider github \
+  --github-token "$GITHUB_TOKEN" \
+  --github-org your-org \
+  --repository your-repo
+```
+
+Pass the right credentials for your provider (`--github-token`, `--gitlab-token`, `--bitbucket-username` + `--bitbucket-password`, or `--azure-token`) and the CLI fetches the pull requests associated with the current commit, populating the `pull_requests` array.
+
+To pin a version, suffix `@vN` on the type (e.g. `kosli attest system pull_request@v1`).
+
+For ad-hoc reference, the legacy provider-specific commands (each hardcoding the "at least one PR" compliance rule) continue to work — [`kosli attest pullrequest_github`](/client_reference/kosli_attest_pullrequest_github), [`kosli attest pullrequest_gitlab`](/client_reference/kosli_attest_pullrequest_gitlab), [`kosli attest pullrequest_bitbucket`](/client_reference/kosli_attest_pullrequest_bitbucket), [`kosli attest pullrequest_azure`](/client_reference/kosli_attest_pullrequest_azure). If you want that compliance opinion baked in, those are the simplest paths. For everything else, `system:pull_request` is the recommended target.

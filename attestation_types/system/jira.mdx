@@ -31,4 +31,18 @@ For compliance opinions like *at least one issue must be referenced* or *every r
 
 ## How to use it
 
-The legacy `kosli attest jira` command (which hardcodes the "all issues exist" compliance rule) continues to work and remains the recommended path for now if you want that opinion baked in — see [`kosli attest jira`](/client_reference/kosli_attest_jira). The `system:jira` route gives you the same data shape and tile but without the built-in compliance opinion.
+```shell
+kosli attest system jira \
+  --flow my-flow \
+  --trail $(git rev-parse HEAD) \
+  --name jira-issue \
+  --jira-base-url https://yourorg.atlassian.net \
+  --jira-username your.email@yourorg.com \
+  --jira-api-token "$JIRA_API_TOKEN"
+```
+
+The CLI scans the commit history for Jira issue keys (e.g. `PROJ-123`) and checks each one against your Jira instance via the credentials you provide. Resolved keys populate `jira_results`.
+
+To pin a version, suffix `@vN` on the type (e.g. `kosli attest system jira@v1`).
+
+For ad-hoc reference, the legacy `kosli attest jira` command (which hardcodes the "all referenced issues exist" compliance rule) continues to work — see [`kosli attest jira`](/client_reference/kosli_attest_jira). If you want that compliance opinion baked in, it's the simplest path. For everything else, `system:jira` is the recommended target.
