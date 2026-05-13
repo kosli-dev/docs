@@ -28,7 +28,7 @@ A Sonar attestation carries:
 
 Schema-validated only: the attestation is compliant when Sonar analysis results were supplied and parse correctly. The quality-gate status is recorded as a fact but doesn't drive compliance.
 
-For opinions on the content — *the quality gate must be `OK`*, *gate on specific conditions only* — write a rego policy and record the verdict via [`kosli evaluate`](/tutorials/evaluate_trails_with_opa) as a separate attestation. See [Migrating from `kosli attest sonar`](/attestation_types/system/legacy_migration#kosli-attest-sonar) for a copy-paste rego policy that reproduces the legacy compliance rule.
+For opinions on the content — *the quality gate must be `OK`*, *gate on specific conditions only* — write a rego policy and record the verdict via [`kosli evaluate`](/tutorials/evaluate_trails_with_opa) as a separate attestation. See [Migrating from `kosli attest sonar`](/tutorials/migrating_to_system_types) for a copy-paste rego policy that reproduces the legacy compliance rule.
 
 The Sonar tile renders the quality-gate name, status, and each condition with its threshold and actual value — so reviewers can see exactly what the analysis returned.
 
@@ -47,4 +47,4 @@ The CLI fetches the latest analysis for the named project from your SonarQube / 
 
 To pin a version, add `--type-version v1` to the CLI command.
 
-The legacy [`kosli attest sonar`](/client_reference/kosli_attest_sonar) command is deprecated — teams should migrate to `kosli attest system sonar`. See [Migrating from legacy commands](/attestation_types/system/legacy_migration#kosli-attest-sonar) for the step-by-step, including a rego policy that reproduces the legacy compliance rule.
+The legacy [`kosli attest sonar`](/client_reference/kosli_attest_sonar) command is deprecated — teams should migrate to `kosli attest system sonar`. See [Migrating from legacy commands](/tutorials/migrating_to_system_types) for the step-by-step, including a rego policy that reproduces the legacy compliance rule.

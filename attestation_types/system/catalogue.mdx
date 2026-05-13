@@ -21,7 +21,7 @@ This catalogue is currently hand-maintained. A future iteration will generate it
 | `system:sonar` | `v1` | Record a SonarQube / SonarCloud quality-gate result. | [Sonar →](/attestation_types/system/sonar) |
 
 <Info>
-The legacy built-in attestation types (`kosli attest snyk`, `kosli attest junit`, `kosli attest jira`, `kosli attest sonar`, `kosli attest pullrequest_*`, `kosli attest generic`) are deprecated — the system-type variants above are the recommended path for new flows. Compliance behaviour differs: the legacy commands embedded compliance opinions in the type itself, while system types are schema-validated only and opinions are expressed via [`kosli evaluate`](/tutorials/evaluate_trails_with_opa) + rego. See [Migrating from legacy commands](/attestation_types/system/legacy_migration) for the per-type guide with copy-paste rego policies.
+The legacy built-in attestation types (`kosli attest snyk`, `kosli attest junit`, `kosli attest jira`, `kosli attest sonar`, `kosli attest pullrequest_*`, `kosli attest generic`) are deprecated — the system-type variants above are the recommended path for new flows. Compliance behaviour differs: the legacy commands embedded compliance opinions in the type itself, while system types are schema-validated only and opinions are expressed via [`kosli evaluate`](/tutorials/evaluate_trails_with_opa) + rego. See [Migrating from legacy commands](/tutorials/migrating_to_system_types) for the per-type guide with copy-paste rego policies.
 </Info>
 
 ## How versions work

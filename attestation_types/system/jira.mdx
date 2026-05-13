@@ -27,7 +27,7 @@ A Jira attestation carries:
 
 Schema-validated only: the attestation is compliant when Jira issue references were supplied and parse correctly. The `issue_exists` flag the CLI records is a fact, not a compliance signal.
 
-For opinions on the content — *at least one referenced issue must exist*, *all references must resolve*, *issue must be in a specific status* — write a rego policy and record the verdict via [`kosli evaluate`](/tutorials/evaluate_trails_with_opa) as a separate attestation. See [Migrating from `kosli attest jira`](/attestation_types/system/legacy_migration#kosli-attest-jira) for a copy-paste rego policy that reproduces the legacy compliance rule.
+For opinions on the content — *at least one referenced issue must exist*, *all references must resolve*, *issue must be in a specific status* — write a rego policy and record the verdict via [`kosli evaluate`](/tutorials/evaluate_trails_with_opa) as a separate attestation. See [Migrating from `kosli attest jira`](/tutorials/migrating_to_system_types) for a copy-paste rego policy that reproduces the legacy compliance rule.
 
 ## How to use it
 
@@ -45,4 +45,4 @@ The CLI scans the commit history for Jira issue keys (e.g. `PROJ-123`) and check
 
 To pin a version, add `--type-version v1` to the CLI command.
 
-The legacy [`kosli attest jira`](/client_reference/kosli_attest_jira) command is deprecated — teams should migrate to `kosli attest system jira`. See [Migrating from legacy commands](/attestation_types/system/legacy_migration#kosli-attest-jira) for the step-by-step, including a rego policy that reproduces the legacy compliance rule.
+The legacy [`kosli attest jira`](/client_reference/kosli_attest_jira) command is deprecated — teams should migrate to `kosli attest system jira`. See [Migrating from legacy commands](/tutorials/migrating_to_system_types) for the step-by-step, including a rego policy that reproduces the legacy compliance rule.

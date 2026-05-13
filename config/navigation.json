@@ -46,7 +46,6 @@
               "group": "System attestation types",
               "pages": [
                 "attestation_types/system/overview",
-                "attestation_types/system/legacy_migration",
                 {
                   "group": "Available system types",
                   "pages": [
@@ -98,6 +97,7 @@
               "group": "Attesting",
               "pages": [
                 "tutorials/attest_sarif",
+                "tutorials/migrating_to_system_types",
                 "tutorials/attest_snyk",
                 "tutorials/custom-attestation-ctrf",
                 "tutorials/attest_large_documents"

@@ -31,7 +31,7 @@ The CLI extracts these fields from a directory of JUnit XML reports.
 
 Schema-validated only: the attestation is compliant when JUnit results were supplied and parse correctly. The contents — pass/fail counts per suite — are recorded as facts but don't drive compliance.
 
-For opinions on the content — *fail if any suite has failures or errors*, *allow up to N failures*, *require a minimum number of suites to run* — write a rego policy and record the verdict via [`kosli evaluate`](/tutorials/evaluate_trails_with_opa) as a separate attestation. See [Migrating from `kosli attest junit`](/attestation_types/system/legacy_migration#kosli-attest-junit) for a copy-paste rego policy that reproduces the legacy compliance rule.
+For opinions on the content — *fail if any suite has failures or errors*, *allow up to N failures*, *require a minimum number of suites to run* — write a rego policy and record the verdict via [`kosli evaluate`](/tutorials/evaluate_trails_with_opa) as a separate attestation. See [Migrating from `kosli attest junit`](/tutorials/migrating_to_system_types) for a copy-paste rego policy that reproduces the legacy compliance rule.
 
 ## How to use it
 
@@ -47,4 +47,4 @@ Point `--results-dir` at the directory containing your JUnit XML reports. The CL
 
 To pin a version, add `--type-version v1` to the CLI command.
 
-The legacy [`kosli attest junit`](/client_reference/kosli_attest_junit) command is deprecated — teams should migrate to `kosli attest system junit`. See [Migrating from legacy commands](/attestation_types/system/legacy_migration#kosli-attest-junit) for the step-by-step, including a rego policy that reproduces the legacy compliance rule.
+The legacy [`kosli attest junit`](/client_reference/kosli_attest_junit) command is deprecated — teams should migrate to `kosli attest system junit`. See [Migrating from legacy commands](/tutorials/migrating_to_system_types) for the step-by-step, including a rego policy that reproduces the legacy compliance rule.

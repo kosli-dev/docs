@@ -1,0 +1,430 @@
+---
+title: Migrating from legacy attest commands to system types
+description: How to move from the dedicated kosli attest <type> commands (snyk, junit, sonar, jira, pullrequest_*, generic) to the unified kosli attest system <type> path — and how to reproduce the legacy compliance verdicts via kosli evaluate.
+---
+
+Kosli is moving from individual built-in attest commands (`kosli attest snyk`, `kosli attest junit`, `kosli attest sonar`, `kosli attest jira`, `kosli attest pullrequest_*`, `kosli attest generic`) to the unified system-type pattern (`kosli attest system <type>`). The legacy commands keep working; the system-type variants are the recommended path for new flows.
+
+<Warning>
+**Compliance behaviour does not carry across the migration.** The legacy commands embed compliance opinions in the type itself (e.g. `kosli attest junit` was non-compliant if any test failed). The system-type variants record only the facts; opinions are expressed separately via [`kosli evaluate`](/tutorials/evaluate_trails_with_opa) and rego. **Your verdict may change after migration unless you reproduce the legacy rule via rego.**
+</Warning>
+
+## The general migration workflow
+
+For each legacy command in your pipeline, the migration has four steps. The example below walks through the snyk → sarif migration end-to-end. Every other legacy type follows the same shape — see the per-type accordions further down for the type-specific bits (the rego policy and the field paths).
+
+<Steps>
+  <Step title="Replace the attest call">
+
+  Change `kosli attest <type>` to `kosli attest system <type>`. The flags are the same in most cases.
+
+  ```diff
+  - kosli attest snyk \
+  -   --scan-results checkov.sarif \
+  -   --name security-scan \
+  -   --flow my-flow --trail $(git rev-parse HEAD)
+  + kosli attest system sarif \
+  +   --scan-results checkov.sarif \
+  +   --name security-scan \
+  +   --flow my-flow --trail $(git rev-parse HEAD)
+  ```
+
+  At this point, the attestation records the parsed SARIF facts. It is compliant simply because the data was supplied and parsed — there is no built-in "any finding fails" rule. If that's what you want, you're done. If you want to keep the legacy verdict, continue.
+  </Step>
+
+  <Step title="Write a rego policy that reproduces the legacy verdict">
+
+  Each legacy command's built-in compliance rule can be expressed as a short rego policy. The policies follow the safety pattern from the [OPA tutorial](/tutorials/evaluate_trails_with_opa): `default allow := false`, compliance via positive assertion, `violations` for diagnostic messages only.
+
+  Save the snyk-equivalent policy as `legacy-snyk-equivalent.rego`:
+
+  ```rego
+  package policy
+
+  import rego.v1
+
+  default allow := false
+
+  allow if {
+      every _, artifact in input.trail.compliance_status.artifacts_statuses {
+          every result in artifact.attestations_statuses["security-scan"].sarif_results.results {
+              result.high_count == 0
+              result.medium_count == 0
+              result.low_count == 0
+          }
+      }
+  }
+
+  violations contains msg if {
+      some name, artifact in input.trail.compliance_status.artifacts_statuses
+      sarif := artifact.attestations_statuses["security-scan"]
+      some result in sarif.sarif_results.results
+      result.high_count > 0
+      msg := sprintf("artifact '%v': %d high-severity findings", [name, result.high_count])
+  }
+  ```
+
+  The accordion for each legacy type below contains the equivalent rego for that type.
+
+  <Note>
+  The snippet references an artifact-bound attestation named `security-scan` (the `--name` you set on the system attestation in step 1). For trail-level attestations, adjust the `input.trail.compliance_status.artifacts_statuses` path — see the [Rego policy reference](/policy-reference/rego_policy#input-data) for the full input shape.
+  </Note>
+  </Step>
+
+  <Step title="Run the evaluation and capture the JSON report">
+
+  Use `kosli evaluate trail` with `--output json` to get a structured report — the report contains `.allow` (the verdict) and `.violations` (the human-readable messages). Save it to a file so step 4 can read both fields.
+
+  ```shell
+  # Run the evaluation; don't fail the pipeline yet — we want the JSON for step 4.
+  kosli evaluate trail \
+    --policy legacy-snyk-equivalent.rego \
+    --flow my-flow --trail $(git rev-parse HEAD) \
+    --attestations <artifact-name>.security-scan \
+    --show-input \
+    --output json > eval-report.json 2>/dev/null || true
+  ```
+
+  When the policy denies, the human-readable form of the same output looks like this:
+
+  ```plaintext
+  RESULT:      DENIED
+  VIOLATIONS:  artifact 'backend': 3 high-severity findings
+               artifact 'backend': 7 medium-severity findings
+  ```
+
+  When the policy allows it just says:
+
+  ```plaintext
+  RESULT:  ALLOWED
+  ```
+  </Step>
+
+  <Step title="Record the verdict and violations as an attestation">
+
+  This is the bit that closes the loop — the trail gets a generic attestation whose compliance value is the rego verdict, with the policy and the full evaluation report as evidence-vault attachments and the violations rendered as structured user-data on the tile.
+
+  ```shell
+  # Pull the verdict out of the JSON report
+  is_compliant=$(jq --raw-output '.allow' eval-report.json)
+
+  # Pull the violations into a separate file for --user-data rendering
+  jq '{violations: .violations}' eval-report.json > eval-violations.json
+
+  # Attest the result
+  kosli attest system generic \
+    --name security-scan-policy \
+    --flow my-flow --trail $(git rev-parse HEAD) \
+    --compliant="$is_compliant" \
+    --attachments legacy-snyk-equivalent.rego,eval-report.json \
+    --user-data eval-violations.json
+  ```
+
+  The resulting `system:generic` attestation carries:
+
+  - `--compliant` set from `.allow` in the JSON report (works even under `set -e` in GitHub Actions, where the non-zero exit code from a deny would otherwise abort the script).
+  - `--attachments` containing the rego policy and the full JSON report — so a reviewer can reproduce the exact evaluation later.
+  - `--user-data` containing the violations array — the Kosli UI renders this as structured metadata on the attestation tile, so reviewers see *why* it denied without leaving the trail.
+
+  <Warning>
+  Use `--compliant=value` (with `=`) not `--compliant value` (with a space). Boolean flags in Kosli CLI require the `=` syntax when passing `false` — otherwise `false` is interpreted as a positional argument.
+  </Warning>
+  </Step>
+</Steps>
+
+After steps 1–4 the trail has **two attestations**: the `system:sarif` attestation recording the scan facts (the tile you replaced the legacy `snyk` tile with), and a `system:generic` attestation recording the policy verdict (the closest analogue to the compliance signal the legacy `snyk` attestation carried by itself). Anything looking at the trail's overall compliance reads from both.
+
+If you only want the facts and not the legacy verdict, skip steps 2–4 — most teams who get this far end up writing different (often stricter) rego rather than reproducing the legacy "any finding fails" behaviour. See the [OPA tutorial](/tutorials/evaluate_trails_with_opa) for richer policy patterns with parameters and thresholds.
+
+## Per-type migration recipes
+
+Each accordion gives the diff for the attest call and the rego policy specific to that legacy command's compliance rule. The steps 3 and 4 invocation from the general workflow above is the same shape across every type — only the attestation name and the policy file name change.
+
+<AccordionGroup>
+  <Accordion title="kosli attest snyk → kosli attest system sarif" icon="barcode-read">
+
+    **Legacy behaviour:** non-compliant when any finding was present at any severity (high, medium, or low).
+
+    **Replace the attest call**
+
+    ```diff
+    - kosli attest snyk \
+    -   --scan-results checkov.sarif \
+    -   --name security-scan \
+    -   --flow my-flow --trail $(git rev-parse HEAD)
+    + kosli attest system sarif \
+    +   --scan-results checkov.sarif \
+    +   --name security-scan \
+    +   --flow my-flow --trail $(git rev-parse HEAD)
+    ```
+
+    `system:sarif` accepts SARIF v2.1.0 from any producer (Checkov, Trivy, Semgrep, Snyk, CodeQL, etc.) — see [system type: SARIF](/attestation_types/system/sarif).
+
+    **Rego policy reproducing the legacy verdict**
+
+    Save as `legacy-snyk-equivalent.rego`:
+
+    ```rego
+    package policy
+
+    import rego.v1
+
+    default allow := false
+
+    allow if {
+        every _, artifact in input.trail.compliance_status.artifacts_statuses {
+            every result in artifact.attestations_statuses["security-scan"].sarif_results.results {
+                result.high_count == 0
+                result.medium_count == 0
+                result.low_count == 0
+            }
+        }
+    }
+
+    violations contains msg if {
+        some name, artifact in input.trail.compliance_status.artifacts_statuses
+        sarif := artifact.attestations_statuses["security-scan"]
+        some result in sarif.sarif_results.results
+        result.high_count > 0
+        msg := sprintf("artifact '%v': %d high-severity findings", [name, result.high_count])
+    }
+    ```
+
+    Then run steps 3 and 4 from the general workflow with `--attestations <artifact-name>.security-scan` and `--name security-scan-policy`.
+  </Accordion>
+
+  <Accordion title="kosli attest junit → kosli attest system junit" icon="file-check">
+
+    **Legacy behaviour:** non-compliant when any test suite had failures or errors.
+
+    **Replace the attest call**
+
+    ```diff
+    - kosli attest junit \
+    -   --results-dir build/test-results/ \
+    -   --name unit-tests \
+    -   --flow my-flow --trail $(git rev-parse HEAD)
+    + kosli attest system junit \
+    +   --results-dir build/test-results/ \
+    +   --name unit-tests \
+    +   --flow my-flow --trail $(git rev-parse HEAD)
+    ```
+
+    **Rego policy reproducing the legacy verdict**
+
+    Save as `legacy-junit-equivalent.rego`:
+
+    ```rego
+    package policy
+
+    import rego.v1
+
+    default allow := false
+
+    allow if {
+        every _, artifact in input.trail.compliance_status.artifacts_statuses {
+            every suite in artifact.attestations_statuses["unit-tests"].junit_results {
+                suite.failures == 0
+                suite.errors == 0
+            }
+        }
+    }
+
+    violations contains msg if {
+        some name, artifact in input.trail.compliance_status.artifacts_statuses
+        junit := artifact.attestations_statuses["unit-tests"]
+        some suite in junit.junit_results
+        suite.failures > 0
+        msg := sprintf("artifact '%v', suite '%v': %d failures", [name, suite.name, suite.failures])
+    }
+    ```
+
+    Run steps 3 and 4 from the general workflow with `--attestations <artifact-name>.unit-tests` and `--name unit-tests-policy`.
+  </Accordion>
+
+  <Accordion title="kosli attest sonar → kosli attest system sonar" icon="bug">
+
+    **Legacy behaviour:** non-compliant when the quality-gate status was not `OK`.
+
+    **Replace the attest call**
+
+    ```diff
+    - kosli attest sonar \
+    -   --sonar-api-token "$SONAR_API_TOKEN" \
+    -   --sonar-project-key your-project-key \
+    -   --name code-quality \
+    -   --flow my-flow --trail $(git rev-parse HEAD)
+    + kosli attest system sonar \
+    +   --sonar-api-token "$SONAR_API_TOKEN" \
+    +   --sonar-project-key your-project-key \
+    +   --name code-quality \
+    +   --flow my-flow --trail $(git rev-parse HEAD)
+    ```
+
+    **Rego policy reproducing the legacy verdict**
+
+    Save as `legacy-sonar-equivalent.rego`:
+
+    ```rego
+    package policy
+
+    import rego.v1
+
+    default allow := false
+
+    allow if {
+        every _, artifact in input.trail.compliance_status.artifacts_statuses {
+            artifact.attestations_statuses["code-quality"].sonar_results.quality_gate.status == "OK"
+        }
+    }
+
+    violations contains msg if {
+        some name, artifact in input.trail.compliance_status.artifacts_statuses
+        sonar := artifact.attestations_statuses["code-quality"]
+        sonar.sonar_results.quality_gate.status != "OK"
+        msg := sprintf("artifact '%v': quality gate status is '%v', expected 'OK'", [name, sonar.sonar_results.quality_gate.status])
+    }
+    ```
+
+    Run steps 3 and 4 from the general workflow with `--attestations <artifact-name>.code-quality` and `--name code-quality-policy`.
+  </Accordion>
+
+  <Accordion title="kosli attest jira → kosli attest system jira" icon="clipboard-list-check">
+
+    **Legacy behaviour:** non-compliant when no Jira reference was found in the commit/branch, or when any referenced issue did not exist in Jira.
+
+    **Replace the attest call**
+
+    ```diff
+    - kosli attest jira \
+    -   --jira-base-url https://yourorg.atlassian.net \
+    -   --jira-username your.email@yourorg.com \
+    -   --jira-api-token "$JIRA_API_TOKEN" \
+    -   --name jira-ticket \
+    -   --flow my-flow --trail $(git rev-parse HEAD)
+    + kosli attest system jira \
+    +   --jira-base-url https://yourorg.atlassian.net \
+    +   --jira-username your.email@yourorg.com \
+    +   --jira-api-token "$JIRA_API_TOKEN" \
+    +   --name jira-ticket \
+    +   --flow my-flow --trail $(git rev-parse HEAD)
+    ```
+
+    **Rego policy reproducing the legacy verdict**
+
+    Save as `legacy-jira-equivalent.rego`:
+
+    ```rego
+    package policy
+
+    import rego.v1
+
+    default allow := false
+
+    allow if {
+        every _, artifact in input.trail.compliance_status.artifacts_statuses {
+            jira := artifact.attestations_statuses["jira-ticket"]
+            count(jira.jira_results) > 0
+            every issue in jira.jira_results {
+                issue.issue_exists
+            }
+        }
+    }
+
+    violations contains msg if {
+        some name, artifact in input.trail.compliance_status.artifacts_statuses
+        jira := artifact.attestations_statuses["jira-ticket"]
+        count(jira.jira_results) == 0
+        msg := sprintf("artifact '%v': no Jira issue references found", [name])
+    }
+
+    violations contains msg if {
+        some name, artifact in input.trail.compliance_status.artifacts_statuses
+        jira := artifact.attestations_statuses["jira-ticket"]
+        some issue in jira.jira_results
+        not issue.issue_exists
+        msg := sprintf("artifact '%v': referenced Jira issue '%v' does not exist", [name, issue.issue_id])
+    }
+    ```
+
+    Run steps 3 and 4 from the general workflow with `--attestations <artifact-name>.jira-ticket` and `--name jira-ticket-policy`.
+  </Accordion>
+
+  <Accordion title="kosli attest pullrequest_* → kosli attest system pull_request" icon="code-pull-request">
+
+    **Legacy behaviour:** non-compliant when no pull request was found for the current commit. Each git provider had its own command (`pullrequest_github`, `pullrequest_gitlab`, `pullrequest_bitbucket`, `pullrequest_azure`).
+
+    **Replace the attest call** (GitHub example — see [system type: Pull request](/attestation_types/system/pull_request) for the equivalent flag set per provider)
+
+    ```diff
+    - kosli attest pullrequest_github \
+    -   --github-token "$GITHUB_TOKEN" \
+    -   --github-org your-org --repository your-repo \
+    -   --name pull-request \
+    -   --flow my-flow --trail $(git rev-parse HEAD)
+    + kosli attest system pull_request \
+    +   --git-provider github \
+    +   --github-token "$GITHUB_TOKEN" \
+    +   --github-org your-org --repository your-repo \
+    +   --name pull-request \
+    +   --flow my-flow --trail $(git rev-parse HEAD)
+    ```
+
+    A single system-type command covers all four providers via `--git-provider {github,gitlab,bitbucket,azure}`.
+
+    **Rego policy reproducing the legacy verdict**
+
+    Save as `legacy-pull-request-equivalent.rego`:
+
+    ```rego
+    package policy
+
+    import rego.v1
+
+    default allow := false
+
+    allow if {
+        every _, artifact in input.trail.compliance_status.artifacts_statuses {
+            count(artifact.attestations_statuses["pull-request"].pull_requests) > 0
+        }
+    }
+
+    violations contains msg if {
+        some name, artifact in input.trail.compliance_status.artifacts_statuses
+        pr := artifact.attestations_statuses["pull-request"]
+        count(pr.pull_requests) == 0
+        msg := sprintf("artifact '%v': no pull request found for the commit", [name])
+    }
+    ```
+
+    Run steps 3 and 4 from the general workflow with `--attestations <artifact-name>.pull-request` and `--name pull-request-policy`.
+
+    For richer policies — *every PR must have an approver*, *fail on open PRs* — see the worked example in the [OPA tutorial](/tutorials/evaluate_trails_with_opa).
+  </Accordion>
+
+  <Accordion title="kosli attest generic → kosli attest system generic" icon="certificate">
+
+    **Legacy behaviour:** compliance is whatever the caller passed via `--compliant=true|false`.
+
+    **Replace the attest call**
+
+    ```diff
+    - kosli attest generic \
+    -   --compliant=true \
+    -   --name release-notes \
+    -   --flow my-flow --trail $(git rev-parse HEAD)
+    + kosli attest system generic \
+    +   --compliant=true \
+    +   --name release-notes \
+    +   --flow my-flow --trail $(git rev-parse HEAD)
+    ```
+
+    **No rego needed.** `system:generic` keeps caller-supplied compliance — see [system type: generic](/attestation_types/system/generic). The compliance behaviour is identical to the legacy command, so steps 2–4 of the general workflow don't apply.
+  </Accordion>
+</AccordionGroup>
+
+## See also
+
+- [System attestation types overview](/attestation_types/system/overview) — how system types work, including the schema-only compliance model.
+- [Evaluate trails with OPA](/tutorials/evaluate_trails_with_opa) — the canonical tutorial for writing rego policies, recording verdicts as attestations, and using `kosli evaluate` in CI/CD.
+- [Rego policy reference](/policy-reference/rego_policy) — the full shape of the `input` data your policy sees, including how trail-level attestations differ from artifact-bound ones.

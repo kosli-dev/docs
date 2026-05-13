@@ -30,7 +30,7 @@ A pull-request attestation carries:
 
 Schema-validated only: the attestation is compliant when pull-request data was supplied (the array may be empty). The contents — whether any PRs are present, their state, approvers — are recorded as facts but don't drive compliance.
 
-For opinions on the content — *at least one PR must exist*, *every PR must have an approver*, *require N approvers*, *fail if the PR is still open* — write a rego policy and record the verdict via [`kosli evaluate`](/tutorials/evaluate_trails_with_opa) as a separate attestation. See [Migrating from `kosli attest pullrequest_*`](/attestation_types/system/legacy_migration#kosli-attest-pullrequest) for a copy-paste rego policy that reproduces the legacy compliance rule. The OPA tutorial uses pull-request approval as its worked example.
+For opinions on the content — *at least one PR must exist*, *every PR must have an approver*, *require N approvers*, *fail if the PR is still open* — write a rego policy and record the verdict via [`kosli evaluate`](/tutorials/evaluate_trails_with_opa) as a separate attestation. See [Migrating from `kosli attest pullrequest_*`](/tutorials/migrating_to_system_types) for a copy-paste rego policy that reproduces the legacy compliance rule. The OPA tutorial uses pull-request approval as its worked example.
 
 ## How to use it
 

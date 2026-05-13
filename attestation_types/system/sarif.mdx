@@ -51,6 +51,6 @@ For the CLI flag reference, see [`kosli attest system sarif`](/client_reference/
 
 The legacy [`kosli attest snyk`](/client_reference/kosli_attest_snyk) command is deprecated — teams should migrate to `kosli attest system sarif`. The system type works for any SARIF v2.1.0 producer, not just Snyk, and pulls the tool name dynamically from the SARIF file rather than hardcoding "Snyk".
 
-Compliance behaviour is different by design: `system:sarif` is schema-validated only, where the legacy `snyk` command baked in an "any finding fails" rule. See [Migrating from legacy commands](/attestation_types/system/legacy_migration#kosli-attest-snyk) for the step-by-step, including a rego policy that reproduces the legacy compliance rule.
+Compliance behaviour is different by design: `system:sarif` is schema-validated only, where the legacy `snyk` command baked in an "any finding fails" rule. See [Migrating from legacy commands](/tutorials/migrating_to_system_types) for the step-by-step, including a rego policy that reproduces the legacy compliance rule.
 
 Existing snyk attestations continue to render and validate as before — there's no breaking change. The migration is on your timeline.
