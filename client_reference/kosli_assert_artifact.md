@@ -70,7 +70,7 @@ non-zero code if non-compliant status.
 	<Tab title="GitHub">
 	View an example of the `kosli assert artifact` command in GitHub.
 
-	In [this YAML file](https://github.com/cyber-dojo/differ/blob/30dffd09c3f896a322c65029247abcea3019c43a/.github/workflows/main.yml#L329)
+	In [this YAML file](https://github.com/cyber-dojo/differ/blob/fd71a71146c5f8d0f83f2599b6acc4cd2664753c/.github/workflows/main.yml#L329)
 	</Tab>
 	<Tab title="GitLab">
 	View an example of the `kosli assert artifact` command in GitLab.

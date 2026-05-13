@@ -53,8 +53,8 @@ kosli list environments --output=json
     "name": "aws-beta",
     "type": "ECS",
     "description": "The ECS cluster for staging cyber-dojo",
-    "last_modified_at": 1778599883.9923313,
-    "last_reported_at": 1778599883.9923313,
+    "last_modified_at": 1778664143.9546099,
+    "last_reported_at": 1778664143.9546099,
     "state": true,
     "include_scaling": false,
     "tags": {
@@ -71,8 +71,8 @@ kosli list environments --output=json
     "name": "aws-prod",
     "type": "ECS",
     "description": "The ECS cluster for production cyber-dojo",
-    "last_modified_at": 1778599918.6063936,
-    "last_reported_at": 1778599918.6063936,
+    "last_modified_at": 1778664118.4657319,
+    "last_reported_at": 1778664118.4657319,
     "state": true,
     "include_scaling": false,
     "tags": {

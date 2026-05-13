@@ -258,6 +258,19 @@ kosli list flows --output=json
     }
   },
   {
+    "name": "snyk-aws-prod-per-vuln",
+    "description": "Individual Snyk vuln trails for aws-prod artifacts",
+    "visibility": "private",
+    "org": "cyber-dojo",
+    "template": "version: 1\ntrail:\n  attestations: []\n  artifacts:\n  - name: artifact\n    attestations: []\n",
+    "repo_url": "",
+    "tags": {
+      "ci": "github",
+      "kind": "run",
+      "workflow_url": "https://github.com/cyber-dojo/snyk-scanning/blob/main/.github/workflows/artifact_snyk_test.yml"
+    }
+  },
+  {
     "name": "terraform-base-infra-prs",
     "description": "Kosli flow to track terraform PRs for base infra",
     "visibility": "private",
