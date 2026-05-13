@@ -1,7 +1,6 @@
 ---
 title: "System type: SARIF"
 description: The SARIF system attestation type — for recording the output of any SARIF v2.1.0 security scanner against a Kosli trail.
-icon: shield-halved
 ---
 
 `system:sarif` is for attesting the output of any tool that produces SARIF v2.1.0 — Checkov, Trivy, Semgrep, Snyk, CodeQL, Bandit, and so on. Kosli parses the SARIF file, records the findings, and renders a severity-breakdown tile showing the tool name, version, and a list of findings with their locations.

@@ -33,15 +33,19 @@
         },
         {
           "group": "Attestation types",
-          "icon": "stamp",
           "pages": [
             "attestation_types/overview",
             {
               "group": "System attestation types",
               "pages": [
                 "attestation_types/system/overview",
-                "attestation_types/system/catalogue",
-                "attestation_types/system/sarif"
+                {
+                  "group": "Available system types",
+                  "pages": [
+                    "attestation_types/system/catalogue",
+                    "attestation_types/system/sarif"
+                  ]
+                }
               ]
             }
           ]
