@@ -1,0 +1,39 @@
+---
+title: "System type: Pull request"
+description: The pull-request system attestation type — record that a change was made via a reviewed pull request.
+---
+
+`system:pull_request` is for attesting that a code change came in through a pull request on GitHub, GitLab, Bitbucket, or Azure DevOps. The Kosli CLI fetches pull-request data from your git provider's API and records the URL, state, author, approvers, and commits.
+
+## Versions
+
+| Version | Status | Notes |
+|---|---|---|
+| `v1` | Current | Initial release. Compliance requires at least one pull request to be associated with the change. |
+
+## What the attestation accepts
+
+A pull-request attestation carries:
+
+- **`git_provider`** *(required)* — one of `github`, `gitlab`, `bitbucket`, `azure`
+- **`pull_requests`** *(required)* — an array of pull requests associated with the change. Each entry includes:
+  - `url` — the PR URL
+  - `state` — open, merged, closed
+  - `merge_commit` — the merge commit SHA (where applicable)
+  - `approvers` — list of users who approved
+  - `author`, `title`, `head_ref`, `created_at`, `merged_at` — PR metadata
+  - `commits` — the list of commits the PR carries
+
+## Compliance behaviour
+
+Compliant when `pull_requests` contains at least one entry. An empty list — meaning no pull request was associated with the change — is non-compliant.
+
+<Note>
+The default jq rule does not check approver count. If you require approvals (a common policy), use the existing [evaluate trails with OPA](/tutorials/evaluate_trails_with_opa) approach to layer that check on top.
+</Note>
+
+## How to use it
+
+The data shape matches the legacy `kosli attest pullrequest_*` commands (one per git provider). The system type provides the same data via the new `kosli attest system pull_request` command, with `git_provider` as a flag rather than a provider-specific subcommand.
+
+See [`kosli attest pullrequest_github`](/client_reference/kosli_attest_pullrequest_github), [`kosli attest pullrequest_gitlab`](/client_reference/kosli_attest_pullrequest_gitlab), [`kosli attest pullrequest_bitbucket`](/client_reference/kosli_attest_pullrequest_bitbucket), and [`kosli attest pullrequest_azure`](/client_reference/kosli_attest_pullrequest_azure) for the legacy commands.

@@ -1,0 +1,33 @@
+---
+title: "System type: Sonar"
+description: The Sonar system attestation type — record a SonarQube / SonarCloud quality-gate result.
+---
+
+`system:sonar` is for attesting the result of a SonarQube or SonarCloud analysis. The Kosli CLI fetches the analysis from your Sonar instance (or accepts a pre-fetched JSON) and records the quality-gate status, project details, and conditions.
+
+## Versions
+
+| Version | Status | Notes |
+|---|---|---|
+| `v1` | Current | Initial release. Compliance is driven by the Sonar quality-gate status. |
+
+## What the attestation accepts
+
+A Sonar attestation carries:
+
+- **`sonar_results`** *(required)* — an object describing the analysis:
+  - `analysedAt` — timestamp of the analysis
+  - `revision` — git commit SHA the analysis was run against
+  - `project` — project identifier (e.g. `{ key, url }`)
+  - `qualityGate` — the quality-gate verdict, including `status`, `name`, and the list of evaluated `conditions`
+  - `serverUrl`, `taskId`, `status` *(optional)* — additional Sonar metadata
+
+## Compliance behaviour
+
+Compliant when `sonar_results.qualityGate.status == "OK"`. Any other status (`ERROR`, `WARN`, or missing) is non-compliant.
+
+The Sonar tile renders the quality-gate name, status, and each condition with its threshold and actual value — so you can see exactly which condition failed.
+
+## How to use it
+
+The data shape matches the legacy `kosli attest sonar` command. See [`kosli attest sonar`](/client_reference/kosli_attest_sonar) for the current CLI flags. The system type provides the same compliance behaviour through the new `kosli attest system sonar` command.

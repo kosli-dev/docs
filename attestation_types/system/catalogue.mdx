@@ -13,10 +13,15 @@ This catalogue is currently hand-maintained. A future iteration will generate it
 
 | Type | Versions | What it's for | Details |
 |---|---|---|---|
+| `system:generic` | `v1` | A free-form attestation with an explicit `is_compliant` flag — for facts that don't fit any other type. | [Generic →](/attestation_types/system/generic) |
+| `system:jira` | `v1` | Verify that a change references one or more existing Jira issues. | [Jira →](/attestation_types/system/jira) |
+| `system:junit` | `v1` | Test results parsed from JUnit XML output (pytest, JUnit, Mocha, Jest, Go, ...). | [JUnit →](/attestation_types/system/junit) |
+| `system:pull_request` | `v1` | Record that a change came in through a pull request (GitHub, GitLab, Bitbucket, Azure DevOps). | [Pull request →](/attestation_types/system/pull_request) |
 | `system:sarif` | `v1` | Any tool that produces SARIF v2.1.0 (Checkov, Trivy, Semgrep, Snyk, CodeQL, ...). Records the parsed findings; optionally drives compliance via an attached rego policy. | [SARIF →](/attestation_types/system/sarif) |
+| `system:sonar` | `v1` | Record a SonarQube / SonarCloud quality-gate result. | [Sonar →](/attestation_types/system/sonar) |
 
 <Info>
-**More system types are coming.** Kosli's existing built-in types (`snyk`, `junit`, `jira`, `sonar`, `pull_request`) will migrate to the system-type model over time. When that happens, they'll appear in this catalogue and the existing dedicated commands will continue to work in parallel.
+The legacy built-in attestation types (`kosli attest snyk`, `kosli attest junit`, `kosli attest jira`, `kosli attest sonar`, `kosli attest pullrequest_*`, `kosli attest generic`) continue to work and remain the recommended path for now. The system-type variants ship the same data shapes and compliance rules; over time they will become the default and the legacy dedicated commands will be deprecated.
 </Info>
 
 ## How versions work

@@ -43,7 +43,12 @@
                   "group": "Available system types",
                   "pages": [
                     "attestation_types/system/catalogue",
-                    "attestation_types/system/sarif"
+                    "attestation_types/system/generic",
+                    "attestation_types/system/jira",
+                    "attestation_types/system/junit",
+                    "attestation_types/system/pull_request",
+                    "attestation_types/system/sarif",
+                    "attestation_types/system/sonar"
                   ]
                 }
               ]

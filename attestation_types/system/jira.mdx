@@ -1,0 +1,34 @@
+---
+title: "System type: Jira"
+description: The Jira system attestation type — record that a change is tracked by an existing Jira issue.
+---
+
+`system:jira` is for attesting that a code change references one or more existing Jira issues. The Kosli CLI parses your commit messages (or another source you point it at) for Jira keys, then verifies each key resolves to a real Jira issue.
+
+## Versions
+
+| Version | Status | Notes |
+|---|---|---|
+| `v1` | Current | Initial release. Compliance requires at least one issue reference, and every referenced issue must exist in Jira. |
+
+## What the attestation accepts
+
+A Jira attestation carries:
+
+- **`jira_results`** *(required)* — an array of Jira issue references. Each entry includes:
+  - `issue_id` — the Jira key (e.g. `PROJ-123`)
+  - `issue_url` — the full URL to the issue
+  - `issue_exists` — boolean; whether the CLI successfully confirmed the issue exists when the attestation was made
+  - `issue_fields` *(optional)* — additional fields like summary and description, surfaced in the attestation tile
+
+## Compliance behaviour
+
+Compliant when:
+- `jira_results` contains at least one entry, AND
+- Every entry has `issue_exists: true`.
+
+An empty array — meaning no issue was referenced — is non-compliant. A reference to a non-existent issue is also non-compliant.
+
+## How to use it
+
+The data shape matches the legacy `kosli attest jira` command. See [`kosli attest jira`](/client_reference/kosli_attest_jira) for the current CLI flags. The system type provides the same compliance behaviour through the new `kosli attest system jira` command.

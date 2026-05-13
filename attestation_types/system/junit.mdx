@@ -1,0 +1,34 @@
+---
+title: "System type: JUnit"
+description: The JUnit system attestation type — record test results from any JUnit XML producer.
+---
+
+`system:junit` is for attesting test results parsed from JUnit-format XML. Most test runners (pytest, JUnit itself, Mocha with `mocha-junit-reporter`, Jest with `jest-junit`, Go's test runner via `go-junit-report`, and so on) produce JUnit XML; the Kosli CLI parses it into the structure this attestation accepts.
+
+## Versions
+
+| Version | Status | Notes |
+|---|---|---|
+| `v1` | Current | Initial release. Compliance requires zero failures and zero errors across all reported suites. |
+
+## What the attestation accepts
+
+A JUnit attestation carries:
+
+- **`junit_results`** *(required)* — an array of test-suite results. Each suite includes:
+  - `name` — the suite name (typically the test class or file)
+  - `failures` — count of test failures
+  - `errors` — count of test errors
+  - `skipped` — count of skipped tests
+  - `total` — total tests
+  - `duration` — wall-clock duration in seconds
+
+The CLI extracts these fields from a directory of JUnit XML reports.
+
+## Compliance behaviour
+
+Compliant when every reported suite has `failures == 0` and `errors == 0`. A single failing or erroring suite makes the attestation non-compliant. Skipped tests do not affect compliance.
+
+## How to use it
+
+The data shape matches the legacy `kosli attest junit` command. See [`kosli attest junit`](/client_reference/kosli_attest_junit) for the current CLI flags. The system type provides the same compliance behaviour through the new `kosli attest system junit` command.
