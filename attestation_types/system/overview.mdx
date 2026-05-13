@@ -1,0 +1,55 @@
+---
+title: System attestation types
+description: How system attestation types work — schema validation, default compliance, and tile rendering — and how they relate to custom and generic types.
+icon: cube
+---
+
+System attestation types are Kosli-curated attestation types available to every organization. They ship with:
+
+- A **schema** that validates the shape of the data you submit.
+- A **default compliance rule** so the attestation has a sensible verdict out of the box.
+- A **type-specific tile renderer** in the UI — e.g. a severity breakdown for security scan types — rather than a generic JSON dump.
+- (Where applicable) An option to **attach a rego policy** that overrides the default compliance rule, letting you express your own standards without writing a new attestation type.
+
+Unlike custom attestation types, system types are not authored per-organization — they're maintained by Kosli and shipped as part of the platform. Unlike generic attestations, they understand the shape of your data and can render it meaningfully.
+
+## How a system type is structured
+
+Each system type has:
+
+- **A name** — used in the CLI command (e.g. `system:sarif`) and the type listing.
+- **One or more versions** — older versions remain available so attestations made against `v1` keep validating even after `v2` ships with a different shape.
+- **A schema (per version)** — defines what data the attestation accepts.
+- **Compliance rules (per version)** — jq expressions evaluated server-side at attest time.
+- **A tile template (per version)** — how the attestation renders in the Kosli UI.
+
+## Compliance: structural and (optionally) policy-driven
+
+Every system type runs a **structural check** at attest time: the data you submit must match the schema. Without it, the attestation is rejected.
+
+Some system types (like `system:sarif`) also accept an optional `evaluation_result` field — the output of `kosli evaluate` with a rego policy. When present, the policy's `allow` flag drives compliance. When absent, the structural check alone determines compliance.
+
+This lets you choose how opinionated Kosli is about your data:
+
+- **Just facts** — submit the data, no policy. The attestation records what happened; compliance is structural.
+- **Policy-driven** — submit the data alongside a rego evaluation result. Your policy decides what counts as compliant.
+
+[See SARIF for a concrete example →](/attestation_types/system/sarif)
+
+## Discovering available types
+
+<Card title="Available system types" icon="list" href="/attestation_types/system/catalogue">
+  Browse the full catalogue of system types and the versions each ships with.
+</Card>
+
+## How they relate to other attestation types
+
+System types are the strategic direction for Kosli's built-in attestation types. Today some attestation types (`snyk`, `junit`, `jira`, `sonar`, `pull_request`) are dedicated built-ins with their own CLI commands. Over time, Kosli is moving these to system types so:
+
+- Adding a new type doesn't require new CLI work — just a new YAML definition.
+- Customers see a consistent CLI and tile experience across types.
+- Versioning becomes explicit instead of implicit.
+
+Existing dedicated commands (e.g. `kosli attest snyk`) continue to work; the migration to system-type equivalents is incremental.
+
+For more context, see the [attestation types overview](/attestation_types/overview).

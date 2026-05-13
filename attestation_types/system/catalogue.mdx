@@ -1,0 +1,27 @@
+---
+title: Available system types
+description: The catalogue of system attestation types currently available in Kosli, with their versions and what each is for.
+icon: list
+---
+
+System attestation types ship with the Kosli platform — every organization can use any type listed below without setup.
+
+<Note>
+This catalogue is currently hand-maintained. A future iteration will generate it directly from the system attestation type definitions, so it stays in sync automatically as types are added or versioned.
+</Note>
+
+## Catalogue
+
+| Type | Versions | What it's for | Details |
+|---|---|---|---|
+| `system:sarif` | `v1` | Any tool that produces SARIF v2.1.0 (Checkov, Trivy, Semgrep, Snyk, CodeQL, ...). Records the parsed findings; optionally drives compliance via an attached rego policy. | [SARIF →](/attestation_types/system/sarif) |
+
+<Info>
+**More system types are coming.** Kosli's existing built-in types (`snyk`, `junit`, `jira`, `sonar`, `pull_request`) will migrate to the system-type model over time. When that happens, they'll appear in this catalogue and the existing dedicated commands will continue to work in parallel.
+</Info>
+
+## How versions work
+
+When a system type's schema or default compliance rule changes meaningfully, Kosli ships a new version (`v2`, `v3`, ...). Existing attestations made against `v1` continue to validate against `v1` — you don't lose history when a type evolves. New attestations default to the latest version unless you pin to a specific one in your flow template.
+
+Each per-type page lists every version that's available, what changed, and which version is the current default.

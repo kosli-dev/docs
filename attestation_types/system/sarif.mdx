@@ -1,0 +1,66 @@
+---
+title: "System type: SARIF"
+description: The SARIF system attestation type — for recording the output of any SARIF v2.1.0 security scanner against a Kosli trail.
+icon: shield-halved
+---
+
+`system:sarif` is for attesting the output of any tool that produces SARIF v2.1.0 — Checkov, Trivy, Semgrep, Snyk, CodeQL, Bandit, and so on. Kosli parses the SARIF file, records the findings, and renders a severity-breakdown tile showing the tool name, version, and a list of findings with their locations.
+
+By default, a SARIF attestation is a **fact**: it records that a scan ran and what it found, with no opinion on compliance beyond "the SARIF file was attached". You can attach a rego policy to express your own compliance rules — e.g. "fail if any finding has severity high".
+
+## Versions
+
+| Version | Status | Notes |
+|---|---|---|
+| `v1` | Current | Initial release. Accepts parsed SARIF results and (optionally) a rego evaluation result for compliance. |
+
+## What the attestation accepts
+
+A SARIF attestation carries:
+
+- **`sarif_results`** *(required)* — the parsed SARIF data. The CLI extracts this from the file you pass to `--scan-results`. Includes the tool name + version, severity counts (high / medium / low), and per-finding details (rule id, message, file, line).
+- **`evaluation_result`** *(optional)* — the JSON output of `kosli evaluate` with a rego policy. Shape: `{ "allow": true|false, "violations": ["...", ...] }`. When present, `allow` drives compliance.
+- **`policy file attachment`** *(required when `evaluation_result` is supplied)* — the `.rego` file is uploaded as an attachment so the audit trail records which rules were evaluated.
+
+## Compliance behaviour
+
+| Scenario | Compliance |
+|---|---|
+| Submit a valid SARIF file, no policy | Compliant — facts recorded, no policy applied |
+| Submit a SARIF file + a rego policy that allows | Compliant — policy passed |
+| Submit a SARIF file + a rego policy that denies | Non-compliant — violations rendered in the tile |
+| Submit anything without a SARIF file | Rejected at submission (400) — the attestation requires a SARIF file |
+
+## How the tile renders
+
+The SARIF tile shows:
+
+- The tool name and version, pulled dynamically from the SARIF file (so the same tile design works for Checkov, Trivy, Snyk, etc.).
+- High / medium / low finding counts.
+- An expandable findings table with rule id, message, file, and line for each finding.
+- When a rego policy was evaluated: a verdict badge (allows / denies), the violations list, an inline view of the policy contents, and a download link for the `.rego` file.
+
+<Frame>
+  <img src="/images/attestation_types/system/sarif_tile_placeholder.png" alt="Placeholder: SARIF attestation tile mock-up will appear here before this PR merges. Three states: facts-only, rego allows, rego denies." />
+</Frame>
+
+## Using it
+
+The full tutorial covers all three customer modes (raw fact, two-step with explicit evaluate, one-step with inline evaluate).
+
+<Card title="Tutorial: attest a SARIF scan" icon="play" href="/tutorials/attest_sarif">
+  Step-by-step walkthrough from Checkov scan output to attested SARIF with optional rego policy.
+</Card>
+
+For the CLI flag reference, see [`kosli attest system sarif`](/client_reference/kosli_attest_system_sarif).
+
+## Migration from the snyk type
+
+If you're using the legacy `kosli attest snyk` command — including with non-Snyk tools whose SARIF output you're attesting via that path — you can keep doing so; the legacy command isn't going away in this release.
+
+When you're ready, `system:sarif` is the migration target. It provides:
+
+- The same severity-breakdown tile, but with the **tool name pulled from the SARIF file** rather than hardcoded to "Snyk".
+- The option to attach a rego policy for **configurable compliance** — instead of the hardcoded "any finding fails" rule the `snyk` type uses today.
+
+There is no breaking change: existing snyk attestations continue to render and validate exactly as before.
