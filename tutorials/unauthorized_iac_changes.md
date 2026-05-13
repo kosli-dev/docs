@@ -62,7 +62,7 @@ Create a Terraform plan, save it to a file, and attest it to Kosli:
 ```shell
 terraform init
 terraform plan -out=tf.plan
-kosli attest generic --name=tf-plan --flow=tf-tutorial --trail=authorized-1 --attachments=tf.plan
+kosli attest system generic --name=tf-plan --flow=tf-tutorial --trail=authorized-1 --attachments=tf.plan
 ```
 
 Apply the plan and attest the resulting <Tooltip tip="A JSON file Terraform uses to map your configuration to real-world infrastructure. Its SHA256 fingerprint uniquely identifies the current infrastructure state.">state file</Tooltip> as an artifact. Kosli calculates a fingerprint from the state file contents — this fingerprint is how it later detects unauthorized changes:

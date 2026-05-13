@@ -171,7 +171,7 @@ Use **`--user-data`** when you want to store additional context — such as buil
 variables, or tool versions — that is visible alongside the attestation in the Kosli UI.
 
 ```shell
-kosli attest generic \
+kosli attest system generic \
     --name security-scan \
     --flow backend-ci \
     --trail $(git rev-parse HEAD) \
@@ -183,7 +183,7 @@ scan output, or policy files — in the Evidence Vault for later retrieval. Prov
 as a comma-separated list.
 
 ```shell
-kosli attest generic \
+kosli attest system generic \
     --name security-scan \
     --flow backend-ci \
     --trail $(git rev-parse HEAD) \

@@ -441,7 +441,7 @@ is_compliant=$(jq --raw-output '.allow' eval-report.json)
 jq '{violations: .violations}' eval-report.json > eval-violations.json
 
 # Attest the result
-kosli attest generic \
+kosli attest system generic \
   --name opa-evaluation \
   --flow "$FLOW_NAME" \
   --trail "$TRAIL_NAME" \

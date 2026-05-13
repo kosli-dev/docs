@@ -17,7 +17,7 @@ This catalogue is currently hand-maintained. A future iteration will generate it
 | `system:jira` | `v1` | Verify that a change references one or more existing Jira issues. | [Jira →](/attestation_types/system/jira) |
 | `system:junit` | `v1` | Test results parsed from JUnit XML output (pytest, JUnit, Mocha, Jest, Go, ...). | [JUnit →](/attestation_types/system/junit) |
 | `system:pull_request` | `v1` | Record that a change came in through a pull request (GitHub, GitLab, Bitbucket, Azure DevOps). | [Pull request →](/attestation_types/system/pull_request) |
-| `system:sarif` | `v1` | Any tool that produces SARIF v2.1.0 (Checkov, Trivy, Semgrep, Snyk, CodeQL, ...). Records the parsed findings; optionally drives compliance via an attached rego policy. | [SARIF →](/attestation_types/system/sarif) |
+| `system:sarif` | `v1` | Any tool that produces SARIF v2.1.0 (Checkov, Trivy, Semgrep, Snyk, CodeQL, ...). Records the parsed findings; use [`kosli evaluate`](/tutorials/evaluate_trails_with_opa) for compliance opinions. | [SARIF →](/attestation_types/system/sarif) |
 | `system:sonar` | `v1` | Record a SonarQube / SonarCloud quality-gate result. | [Sonar →](/attestation_types/system/sonar) |
 
 <Info>

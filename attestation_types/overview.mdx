@@ -23,7 +23,7 @@ Kosli has three categories of attestation types:
 
 <AccordionGroup>
   <Accordion title="Use a system type when one exists for your tool">
-    System types are the recommended path when one matches your tool. They ship with a tile renderer, sensible defaults, and (where supported) the option to attach a rego policy for custom compliance rules.
+    System types are the recommended path when one matches your tool. They ship with a tile renderer and structural validation of the data shape. For compliance opinions on top, use the [`kosli evaluate`](/tutorials/evaluate_trails_with_opa) pattern to record the verdict as a separate attestation.
 
     [Browse available system types →](/attestation_types/system/catalogue)
   </Accordion>
@@ -43,7 +43,7 @@ All three categories share the same primitives: a payload, a compliance verdict,
 
 | | Defined by | Compliance comes from | UI tile |
 |---|---|---|---|
-| **System** | Kosli (shipped in code) | Built-in jq rules + optional rego attachment | Type-specific renderer |
+| **System** | Kosli (shipped in code) | Built-in structural check; use [`kosli evaluate`](/tutorials/evaluate_trails_with_opa) for opinions | Type-specific renderer |
 | **Custom** | Your organization | Your jq rules baked into the type | Generic JSON view |
 | **Generic** | You (per attestation) | `--compliant=true\|false` flag | Generic JSON view |
 
