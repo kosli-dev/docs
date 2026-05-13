@@ -9,7 +9,7 @@ description: The JUnit system attestation type — record test results from any 
 
 | Version | Status | Notes |
 |---|---|---|
-| `v1` | Current | Initial release. Default compliance is structural only — attach a rego policy to enforce thresholds like "zero failures". |
+| `v1` | Current | Initial release. Compliance is structural — JUnit results must be supplied. |
 
 ## What the attestation accepts
 
@@ -22,39 +22,15 @@ A JUnit attestation carries:
   - `skipped` — count of skipped tests
   - `total` — total tests
   - `duration` — wall-clock duration in seconds
-- **`evaluation_result`** *(optional)* — the JSON output of `kosli evaluate` with a rego policy. When supplied, drives compliance.
-- **Policy file attachment** *(required when `evaluation_result` is supplied)* — the `.rego` file is uploaded to the audit trail.
 
-The CLI extracts the test-suite fields from a directory of JUnit XML reports.
+The CLI extracts these fields from a directory of JUnit XML reports.
 
 ## Compliance behaviour
 
-Default: **structural only** — the attestation is compliant if `junit_results` is present and well-formed. Kosli does not impose an opinion on what counts as a "passing" test run; you do.
+Structural only: the attestation is compliant when test-suite results are supplied. The contents of those results (whether any tests failed or errored) don't affect compliance.
 
-With a rego policy attached: the policy's `allow` flag drives compliance. A common policy is "fail if any suite has failures or errors":
-
-```rego
-package policy
-
-import rego.v1
-
-default allow = false
-
-violations contains msg if {
-    some suite in input.junit_results
-    suite.failures > 0
-    msg := sprintf("suite '%s' has %d failures", [suite.name, suite.failures])
-}
-
-violations contains msg if {
-    some suite in input.junit_results
-    suite.errors > 0
-    msg := sprintf("suite '%s' has %d errors", [suite.name, suite.errors])
-}
-
-allow if count(violations) == 0
-```
+For compliance opinions like *fail if any suite has failures or errors*, write a rego policy and record the verdict via [`kosli evaluate`](/tutorials/evaluate_trails_with_opa).
 
 ## How to use it
 
-The pattern is identical to SARIF — see the [SARIF tutorial](/tutorials/attest_sarif) for the full walkthrough. The legacy `kosli attest junit` command (which hardcodes the "zero failures" compliance rule) continues to work; see [`kosli attest junit`](/client_reference/kosli_attest_junit) for that path.
+The legacy `kosli attest junit` command (which hardcodes the "zero failures, zero errors" compliance rule) continues to work and remains the recommended path for now if you want that opinion baked in — see [`kosli attest junit`](/client_reference/kosli_attest_junit). The `system:junit` route gives you the same data shape and tile but without the built-in compliance opinion.

@@ -9,7 +9,7 @@ description: The pull-request system attestation type — record that a change w
 
 | Version | Status | Notes |
 |---|---|---|
-| `v1` | Current | Initial release. Default compliance is structural only — attach a rego policy to enforce thresholds like "at least one approver". |
+| `v1` | Current | Initial release. Compliance is structural — pull-request data must be supplied. |
 
 ## What the attestation accepts
 
@@ -23,36 +23,13 @@ A pull-request attestation carries:
   - `approvers` — list of users who approved
   - `author`, `title`, `head_ref`, `created_at`, `merged_at` — PR metadata
   - `commits` — the list of commits the PR carries
-- **`evaluation_result`** *(optional)* — the JSON output of `kosli evaluate` with a rego policy. When supplied, drives compliance.
-- **Policy file attachment** *(required when `evaluation_result` is supplied)* — the `.rego` file is uploaded to the audit trail.
 
 ## Compliance behaviour
 
-Default: **structural only** — the attestation is compliant if `pull_requests` is present (the array can be empty). Kosli records the PRs as a fact; whether "no PR" or "one with no approvers" is acceptable is your call.
+Structural only: the attestation is compliant when pull-request data is supplied (the array can be empty). The contents — whether any PRs are present, whether they have approvers, what state they're in — don't affect compliance.
 
-With a rego policy attached: the policy's `allow` flag drives compliance. A typical policy enforces "at least one PR exists and every PR has at least one approver":
-
-```rego
-package policy
-
-import rego.v1
-
-default allow = false
-
-violations contains msg if {
-    count(input.pull_requests) == 0
-    msg := "no pull request was associated with the change"
-}
-
-violations contains msg if {
-    some pr in input.pull_requests
-    count(pr.approvers) == 0
-    msg := sprintf("pull-request %s has no approvers", [pr.url])
-}
-
-allow if count(violations) == 0
-```
+For compliance opinions like *at least one PR must exist* or *every PR must have an approver*, write a rego policy and record the verdict via [`kosli evaluate`](/tutorials/evaluate_trails_with_opa) — the OPA tutorial uses pull-request approval as its worked example.
 
 ## How to use it
 
-The pattern is identical to SARIF — see the [SARIF tutorial](/tutorials/attest_sarif) for the full walkthrough. The legacy `kosli attest pullrequest_*` commands (one per git provider) continue to work; see [`kosli attest pullrequest_github`](/client_reference/kosli_attest_pullrequest_github), [`kosli attest pullrequest_gitlab`](/client_reference/kosli_attest_pullrequest_gitlab), [`kosli attest pullrequest_bitbucket`](/client_reference/kosli_attest_pullrequest_bitbucket), and [`kosli attest pullrequest_azure`](/client_reference/kosli_attest_pullrequest_azure) for those paths.
+The legacy `kosli attest pullrequest_*` commands (one per git provider, each hardcoding the "at least one PR" compliance rule) continue to work and remain the recommended path for now if you want that opinion baked in. See [`kosli attest pullrequest_github`](/client_reference/kosli_attest_pullrequest_github), [`kosli attest pullrequest_gitlab`](/client_reference/kosli_attest_pullrequest_gitlab), [`kosli attest pullrequest_bitbucket`](/client_reference/kosli_attest_pullrequest_bitbucket), and [`kosli attest pullrequest_azure`](/client_reference/kosli_attest_pullrequest_azure). The `system:pull_request` route gives you the same data shape and tile but without the built-in compliance opinion.

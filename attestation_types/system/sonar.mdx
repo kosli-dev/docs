@@ -9,7 +9,7 @@ description: The Sonar system attestation type — record a SonarQube / SonarClo
 
 | Version | Status | Notes |
 |---|---|---|
-| `v1` | Current | Initial release. Default compliance is structural only — attach a rego policy to enforce the quality-gate status. |
+| `v1` | Current | Initial release. Compliance is structural — Sonar analysis results must be supplied. |
 
 ## What the attestation accepts
 
@@ -21,35 +21,15 @@ A Sonar attestation carries:
   - `project` — project identifier (e.g. `{ key, url }`)
   - `qualityGate` — the quality-gate verdict, including `status`, `name`, and the list of evaluated `conditions`
   - `serverUrl`, `taskId`, `status` *(optional)* — additional Sonar metadata
-- **`evaluation_result`** *(optional)* — the JSON output of `kosli evaluate` with a rego policy. When supplied, drives compliance.
-- **Policy file attachment** *(required when `evaluation_result` is supplied)* — the `.rego` file is uploaded to the audit trail.
 
 ## Compliance behaviour
 
-Default: **structural only** — the attestation is compliant if `sonar_results` is present and well-formed. The quality-gate status is recorded as a fact; Kosli doesn't decide whether `WARN` should block your release — you do.
+Structural only: the attestation is compliant when Sonar analysis results are supplied. The quality-gate status is recorded as a fact but doesn't itself drive compliance.
 
-With a rego policy attached: the policy's `allow` flag drives compliance. The classic Sonar policy is "quality gate must be OK":
+For compliance opinions like *the quality gate must be OK*, write a rego policy and record the verdict via [`kosli evaluate`](/tutorials/evaluate_trails_with_opa).
 
-```rego
-package policy
-
-import rego.v1
-
-default allow = false
-
-violations contains msg if {
-    input.sonar_results.qualityGate.status != "OK"
-    msg := sprintf(
-        "Sonar quality gate is %s (not OK)",
-        [input.sonar_results.qualityGate.status],
-    )
-}
-
-allow if count(violations) == 0
-```
-
-The Sonar tile renders the quality-gate name, status, and each condition with its threshold and actual value — so reviewers can see exactly which condition failed regardless of whether you've attached a policy.
+The Sonar tile renders the quality-gate name, status, and each condition with its threshold and actual value — so reviewers can see exactly what the analysis returned.
 
 ## How to use it
 
-The pattern is identical to SARIF — see the [SARIF tutorial](/tutorials/attest_sarif) for the full walkthrough. The legacy `kosli attest sonar` command (which hardcodes the "quality gate must be OK" rule) continues to work; see [`kosli attest sonar`](/client_reference/kosli_attest_sonar) for that path.
+The legacy `kosli attest sonar` command (which hardcodes the "quality gate must be OK" rule) continues to work and remains the recommended path for now if you want that opinion baked in — see [`kosli attest sonar`](/client_reference/kosli_attest_sonar). The `system:sonar` route gives you the same data shape and tile but without the built-in compliance opinion.

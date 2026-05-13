@@ -6,9 +6,7 @@ description: How system attestation types work — schema validation, default co
 System attestation types are Kosli-curated attestation types available to every organization. They ship with:
 
 - A **schema** that validates the shape of the data you submit.
-- A **default compliance rule** so the attestation has a sensible verdict out of the box.
 - A **type-specific tile renderer** in the UI — e.g. a severity breakdown for security scan types — rather than a generic JSON dump.
-- (Where applicable) An option to **attach a rego policy** that overrides the default compliance rule, letting you express your own standards without writing a new attestation type.
 
 Unlike custom attestation types, system types are not authored per-organization — they're maintained by Kosli and shipped as part of the platform. Unlike generic attestations, they understand the shape of your data and can render it meaningfully.
 
@@ -19,27 +17,20 @@ Each system type has:
 - **A name** — used in the CLI command (e.g. `system:sarif`) and the type listing.
 - **One or more versions** — older versions remain available so attestations made against `v1` keep validating even after `v2` ships with a different shape.
 - **A schema (per version)** — defines what data the attestation accepts.
-- **Compliance rules (per version)** — jq expressions evaluated server-side at attest time.
+- **A structural check (per version)** — a jq rule that verifies the required data was supplied (for example, the SARIF file was attached).
 - **A tile template (per version)** — how the attestation renders in the Kosli UI.
 
-## Compliance: structural by default, policy-driven on request
+## Compliance: structural only for now
 
-System types use the same two-layer compliance model across the board.
+System types focus on **structural validation** — the attestation is compliant if the required data was supplied and parses correctly. They do not impose opinions about whether the *content* of that data is acceptable (e.g. zero test failures, a passing Sonar quality gate, no security findings).
 
-**Layer 1 — Structural check.** Every system type validates the submitted data against its schema. If the required fields are missing or malformed, the attestation is rejected. By default, this is the only compliance check Kosli applies — the attestation records that the data exists and is well-formed, treating it as a fact rather than imposing an opinion about whether the underlying findings are acceptable.
-
-**Layer 2 — Optional rego policy.** Every system type also accepts an optional `evaluation_result` field — the output of `kosli evaluate` with a rego policy. When you supply it, the policy's `allow` flag drives compliance. When you don't, layer 1's structural check alone determines compliance.
-
-This means you choose how opinionated Kosli is about your data:
-
-- **Just facts** — submit the data, no policy. The attestation records what happened; compliance is structural.
-- **Policy-driven** — submit the data alongside a rego evaluation result. Your rules decide what counts as compliant.
+If you want compliance gated on the content — *fail if any high-severity finding exists*, *fail if any test failed*, *fail if the quality gate is not OK* — express those rules as a rego policy and use [`kosli evaluate`](/tutorials/evaluate_trails_with_opa) to record the verdict as a separate attestation. The OPA tutorial covers the canonical pattern.
 
 <Note>
-`system:generic` is the one exception — it carries an explicit `is_compliant` flag in its data, and that flag is the default compliance signal (rather than just structural completeness). A rego policy, when attached, overrides the flag.
+`system:generic` is the one exception — it carries an explicit `is_compliant` flag in its data, and that flag is the compliance signal (the caller decides). Every other system type is structural only.
 </Note>
 
-The pattern is identical across types, so a customer who learns it for one system type can apply it to any other. [See SARIF for a worked example →](/attestation_types/system/sarif)
+A future phase may add the ability to attach a rego policy directly to a system attestation, so the facts and the verdict live on the same tile. For now, use the two-attestation pattern documented in the OPA tutorial.
 
 ## Discovering available types
 

@@ -9,7 +9,7 @@ description: The Jira system attestation type — record that a change is tracke
 
 | Version | Status | Notes |
 |---|---|---|
-| `v1` | Current | Initial release. Default compliance is structural only — attach a rego policy to enforce thresholds like "at least one valid issue reference". |
+| `v1` | Current | Initial release. Compliance is structural — Jira issue references must be supplied. |
 
 ## What the attestation accepts
 
@@ -20,36 +20,13 @@ A Jira attestation carries:
   - `issue_url` — the full URL to the issue
   - `issue_exists` — boolean; whether the CLI successfully confirmed the issue exists when the attestation was made
   - `issue_fields` *(optional)* — additional fields like summary and description, surfaced in the attestation tile
-- **`evaluation_result`** *(optional)* — the JSON output of `kosli evaluate` with a rego policy. When supplied, drives compliance.
-- **Policy file attachment** *(required when `evaluation_result` is supplied)* — the `.rego` file is uploaded to the audit trail.
 
 ## Compliance behaviour
 
-Default: **structural only** — the attestation is compliant if `jira_results` is present and well-formed. Kosli does not impose an opinion on whether an empty issue list or a non-existent issue is acceptable; you do.
+Structural only: the attestation is compliant when the Jira results array is supplied. The contents (whether the array is empty, whether referenced issues actually exist) don't affect compliance.
 
-With a rego policy attached: the policy's `allow` flag drives compliance. A common policy is "every reference must point at a real Jira issue, and there must be at least one":
-
-```rego
-package policy
-
-import rego.v1
-
-default allow = false
-
-violations contains msg if {
-    count(input.jira_results) == 0
-    msg := "no Jira issues were referenced"
-}
-
-violations contains msg if {
-    some issue in input.jira_results
-    not issue.issue_exists
-    msg := sprintf("Jira issue %s does not exist", [issue.issue_id])
-}
-
-allow if count(violations) == 0
-```
+For compliance opinions like *at least one issue must be referenced* or *every referenced issue must exist*, write a rego policy and record the verdict via [`kosli evaluate`](/tutorials/evaluate_trails_with_opa).
 
 ## How to use it
 
-The pattern is identical to SARIF — see the [SARIF tutorial](/tutorials/attest_sarif) for the full walkthrough. The legacy `kosli attest jira` command (which hardcodes the "all issues exist" compliance rule) continues to work; see [`kosli attest jira`](/client_reference/kosli_attest_jira) for that path.
+The legacy `kosli attest jira` command (which hardcodes the "all issues exist" compliance rule) continues to work and remains the recommended path for now if you want that opinion baked in — see [`kosli attest jira`](/client_reference/kosli_attest_jira). The `system:jira` route gives you the same data shape and tile but without the built-in compliance opinion.

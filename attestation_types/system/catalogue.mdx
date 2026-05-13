@@ -3,7 +3,7 @@ title: Available system types
 description: The catalogue of system attestation types currently available in Kosli, with their versions and what each is for.
 ---
 
-System attestation types ship with the Kosli platform — every organization can use any type listed below without setup. Every type follows the same layered compliance model: a structural check by default, with an optional rego policy that drives compliance when attached (see [System attestation types overview](/attestation_types/system/overview) for the pattern).
+System attestation types ship with the Kosli platform — every organization can use any type listed below without setup. Each type validates the shape of its data and renders a type-specific tile in the Kosli UI. For compliance opinions on top of the facts a system type records, use the [`kosli evaluate` pattern](/tutorials/evaluate_trails_with_opa).
 
 <Note>
 This catalogue is currently hand-maintained. A future iteration will generate it directly from the system attestation type definitions, so it stays in sync automatically as types are added or versioned.
