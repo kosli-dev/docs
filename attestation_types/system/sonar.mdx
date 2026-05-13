@@ -1,0 +1,50 @@
+---
+title: "System type: Sonar"
+description: The Sonar system attestation type — record a SonarQube / SonarCloud quality-gate result.
+---
+
+`system:sonar` is for attesting the result of a SonarQube or SonarCloud analysis. The Kosli CLI fetches the analysis from your Sonar instance (or accepts a pre-fetched JSON) and records the quality-gate status, project details, and conditions.
+
+## Versions
+
+| Version | Status | Notes |
+|---|---|---|
+| `v1` | Current | Initial release. Compliance is structural — Sonar analysis results must be supplied. |
+
+Pin a version with `--type-version v1` on the CLI or `type_version: v1` in a flow template; omit it to track latest. See the [versioning section](/attestation_types/system/overview#versioning).
+
+## What the attestation accepts
+
+A Sonar attestation carries:
+
+- **`sonar_results`** *(required)* — an object describing the analysis:
+  - `analysedAt` — timestamp of the analysis
+  - `revision` — git commit SHA the analysis was run against
+  - `project` — project identifier (e.g. `{ key, url }`)
+  - `qualityGate` — the quality-gate verdict, including `status`, `name`, and the list of evaluated `conditions`
+  - `serverUrl`, `taskId`, `status` *(optional)* — additional Sonar metadata
+
+## Compliance behaviour
+
+Structural only: the attestation is compliant when Sonar analysis results are supplied. The quality-gate status is recorded as a fact but doesn't itself drive compliance.
+
+For compliance opinions like *the quality gate must be OK*, write a rego policy and record the verdict via [`kosli evaluate`](/tutorials/evaluate_trails_with_opa).
+
+The Sonar tile renders the quality-gate name, status, and each condition with its threshold and actual value — so reviewers can see exactly what the analysis returned.
+
+## How to use it
+
+```shell
+kosli attest system sonar \
+  --flow my-flow \
+  --trail $(git rev-parse HEAD) \
+  --name code-quality \
+  --sonar-api-token "$SONAR_API_TOKEN" \
+  --sonar-project-key your-project-key
+```
+
+The CLI fetches the latest analysis for the named project from your SonarQube / SonarCloud instance, parses the quality-gate result and conditions, and stores them as `sonar_results`. Alternatively, point at a local task-report file produced by your CI scanner with `--sonar-task-report-file`.
+
+To pin a version, add `--type-version v1` to the CLI command.
+
+The legacy [`kosli attest sonar`](/client_reference/kosli_attest_sonar) command is deprecated — teams should migrate to `kosli attest system sonar`.

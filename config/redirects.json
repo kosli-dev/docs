@@ -54,5 +54,9 @@
   {
     "source": "/api_v2",
     "destination": "/api-reference"
+  },
+  {
+    "source": "/administration/managing_custom_attestation_types/overview",
+    "destination": "/attestation_types/custom/managing"
   }
 ]

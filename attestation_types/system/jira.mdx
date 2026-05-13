@@ -1,0 +1,48 @@
+---
+title: "System type: Jira"
+description: The Jira system attestation type — record that a change is tracked by an existing Jira issue.
+---
+
+`system:jira` is for attesting that a code change references one or more existing Jira issues. The Kosli CLI parses your commit messages (or another source you point it at) for Jira keys, then verifies each key resolves to a real Jira issue.
+
+## Versions
+
+| Version | Status | Notes |
+|---|---|---|
+| `v1` | Current | Initial release. Compliance is structural — Jira issue references must be supplied. |
+
+Pin a version with `--type-version v1` on the CLI or `type_version: v1` in a flow template; omit it to track latest. See the [versioning section](/attestation_types/system/overview#versioning).
+
+## What the attestation accepts
+
+A Jira attestation carries:
+
+- **`jira_results`** *(required)* — an array of Jira issue references. Each entry includes:
+  - `issue_id` — the Jira key (e.g. `PROJ-123`)
+  - `issue_url` — the full URL to the issue
+  - `issue_exists` — boolean; whether the CLI successfully confirmed the issue exists when the attestation was made
+  - `issue_fields` *(optional)* — additional fields like summary and description, surfaced in the attestation tile
+
+## Compliance behaviour
+
+Structural only: the attestation is compliant when the Jira results array is supplied. The contents (whether the array is empty, whether referenced issues actually exist) don't affect compliance.
+
+For compliance opinions like *at least one issue must be referenced* or *every referenced issue must exist*, write a rego policy and record the verdict via [`kosli evaluate`](/tutorials/evaluate_trails_with_opa).
+
+## How to use it
+
+```shell
+kosli attest system jira \
+  --flow my-flow \
+  --trail $(git rev-parse HEAD) \
+  --name jira-issue \
+  --jira-base-url https://yourorg.atlassian.net \
+  --jira-username your.email@yourorg.com \
+  --jira-api-token "$JIRA_API_TOKEN"
+```
+
+The CLI scans the commit history for Jira issue keys (e.g. `PROJ-123`) and checks each one against your Jira instance via the credentials you provide. Resolved keys populate `jira_results`.
+
+To pin a version, add `--type-version v1` to the CLI command.
+
+The legacy [`kosli attest jira`](/client_reference/kosli_attest_jira) command is deprecated — teams should migrate to `kosli attest system jira`.

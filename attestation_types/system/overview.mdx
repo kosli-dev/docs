@@ -1,0 +1,86 @@
+---
+title: System attestation types
+description: How system attestation types work — schema validation, default compliance, and tile rendering — and how they relate to custom and generic types.
+---
+
+System attestation types are Kosli-curated attestation types available to every organization. They ship with:
+
+- A **schema** that validates the shape of the data you submit.
+- A **type-specific tile renderer** in the UI — e.g. a severity breakdown for security scan types — rather than a generic JSON dump.
+
+Unlike custom attestation types, system types are not authored per-organization — they're maintained by Kosli and shipped as part of the platform. Unlike generic attestations, they understand the shape of your data and can render it meaningfully.
+
+## How a system type is structured
+
+Each system type has:
+
+- **A name** — used in the CLI command (e.g. `system:sarif`) and the type listing.
+- **One or more versions** — older versions remain available so attestations made against `v1` keep validating even after `v2` ships with a different shape.
+- **A schema (per version)** — defines what data the attestation accepts.
+- **A structural check (per version)** — a jq rule that verifies the required data was supplied (for example, the SARIF file was attached).
+- **A tile template (per version)** — how the attestation renders in the Kosli UI.
+
+## Compliance: structural only for now
+
+System types focus on **structural validation** — the attestation is compliant if the required data was supplied and parses correctly. They do not impose opinions about whether the *content* of that data is acceptable (e.g. zero test failures, a passing Sonar quality gate, no security findings).
+
+If you want compliance gated on the content — *fail if any high-severity finding exists*, *fail if any test failed*, *fail if the quality gate is not OK* — express those rules as a rego policy and use [`kosli evaluate`](/tutorials/evaluate_trails_with_opa) to record the verdict as a separate attestation. The OPA tutorial covers the canonical pattern.
+
+<Note>
+`system:generic` is the one exception — it carries an explicit `is_compliant` flag in its data, and that flag is the compliance signal (the caller decides). Every other system type is structural only.
+</Note>
+
+## Versioning
+
+Each system type ships one or more versions. Version 1 is the initial release; later versions may change the schema or tile rendering. Old versions are not deleted when newer ones ship — an attestation made against `v1` continues to validate and render against `v1` for the lifetime of the attestation, even if `v2` later becomes the default.
+
+You reference a version using a `type_version` field in flow templates, or the `--type-version` flag on the CLI. **Omitting it means "track the latest"** — Kosli picks up new versions automatically as they ship.
+
+### In a flow template
+
+```yaml
+# yaml-language-server: $schema=https://docs.kosli.com/schemas/flow-template.json
+version: 1
+trail:
+  attestations:
+    - name: jira-ticket
+      type: system:jira          # tracks latest
+    - name: security-scan
+      type: system:sarif
+      type_version: v1           # pinned to v1
+```
+
+The template above lets `system:jira` track whatever the latest version is, but pins `system:sarif` to `v1`. If `system:sarif` `v2` ships, attestations against this template's `security-scan` slot continue to validate against `v1` until you bump it.
+
+### On the CLI
+
+```shell
+# Track latest
+kosli attest system sarif --scan-results foo.sarif --name security-scan
+
+# Pin to v1
+kosli attest system sarif --type-version v1 --scan-results foo.sarif --name security-scan
+```
+
+If the data you submit doesn't match the pinned version's schema, the submission is rejected with a clear error naming the expected version. Pinning means pinning.
+
+### When to pin vs. track latest
+
+Two common patterns:
+
+- **Production templates**: pin to a specific version. Predictable behaviour; you upgrade deliberately when a new version ships and you've reviewed the changes.
+- **Dev templates**: track latest. Catches new-version compatibility issues early, before they reach production.
+
+Tracking latest is the recommended default unless you have a specific reason to pin.
+
+## Discovering available types
+
+<Card title="Available system types" icon="list" href="/attestation_types/system/catalogue">
+  Browse the full catalogue of system types and the versions each ships with.
+</Card>
+
+## How they relate to other attestation types
+
+System types are the strategic direction for Kosli's built-in attestation types. Today some attestation types (`snyk`, `junit`, `jira`, `sonar`, `pull_request`) are dedicated built-ins with their own CLI commands. Over time, Kosli is moving these to system types — existing dedicated commands continue to work in the meantime; the migration to system-type equivalents is incremental.
+
+For more context, see the [attestation types overview](/attestation_types/overview).

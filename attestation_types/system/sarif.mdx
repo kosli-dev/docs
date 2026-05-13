@@ -1,0 +1,56 @@
+---
+title: "System type: SARIF"
+description: The SARIF system attestation type — for recording the output of any SARIF v2.1.0 security scanner against a Kosli trail.
+---
+
+`system:sarif` is for attesting the output of any tool that produces SARIF v2.1.0 — Checkov, Trivy, Semgrep, Snyk, CodeQL, Bandit, and so on. Kosli parses the SARIF file, records the findings, and renders a severity-breakdown tile showing the tool name, version, and a list of findings with their locations.
+
+The attestation records the scan as a **fact**: what the scanner ran, what it found, with no opinion on whether the findings are acceptable. If you want compliance gated on the findings (e.g. *fail on any high-severity result*), express that as a rego policy and record the verdict via [`kosli evaluate`](/tutorials/evaluate_trails_with_opa).
+
+## Versions
+
+| Version | Status | Notes |
+|---|---|---|
+| `v1` | Current | Initial release. Accepts parsed SARIF results. |
+
+Pin a version with `--type-version v1` on the CLI or `type_version: v1` in a flow template. Omitting it tracks the latest — see the [versioning section in the overview](/attestation_types/system/overview#versioning).
+
+## What the attestation accepts
+
+A SARIF attestation carries:
+
+- **`sarif_results`** *(required)* — the parsed SARIF data. The CLI extracts this from the file you pass to `--scan-results`. Includes the tool name + version, severity counts (high / medium / low), and per-finding details (rule id, message, file, line).
+
+## Compliance behaviour
+
+Structural only: the attestation is compliant when a SARIF file was attached and parses correctly. The contents of the findings don't affect compliance.
+
+For compliance opinions on the findings — *fail on any high finding*, *allow up to N mediums*, etc. — write a rego policy and use the `kosli evaluate` pattern to record the verdict as a separate attestation on the same trail. See the [OPA tutorial](/tutorials/evaluate_trails_with_opa) for the canonical pattern.
+
+## How the tile renders
+
+The SARIF tile shows:
+
+- The tool name and version, pulled dynamically from the SARIF file (so the same tile design works for Checkov, Trivy, Snyk, etc.).
+- High / medium / low finding counts.
+- An expandable findings table with rule id, message, file, and line for each finding.
+
+<Frame>
+  <img src="/images/attestation_types/system/sarif_tile_placeholder.png" alt="Placeholder: SARIF attestation tile mock-up will appear here before this PR merges." />
+</Frame>
+
+## Using it
+
+<Card title="Tutorial: attest a SARIF scan" icon="play" href="/tutorials/attest_sarif">
+  Step-by-step walkthrough from Checkov scan output to an attested SARIF tile on a Kosli trail.
+</Card>
+
+For the CLI flag reference, see [`kosli attest system sarif`](/client_reference/kosli_attest_system_sarif).
+
+## Migration from the snyk type
+
+The legacy [`kosli attest snyk`](/client_reference/kosli_attest_snyk) command is deprecated — teams should migrate to `kosli attest system sarif`. The system type works for any SARIF v2.1.0 producer, not just Snyk, and pulls the tool name dynamically from the SARIF file rather than hardcoding "Snyk".
+
+Compliance behaviour also changes: `system:sarif` is structural only, where the legacy `snyk` command bakes in an "any finding fails" rule. To replicate that rule on the new path, write a small rego policy and record the verdict via [`kosli evaluate`](/tutorials/evaluate_trails_with_opa).
+
+Existing snyk attestations continue to render and validate as before — there's no breaking change. The migration is on your timeline; the recommendation is to move when convenient.

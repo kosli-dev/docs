@@ -86,7 +86,7 @@ Use `kosli evaluate trail` on the main-branch build to evaluate the PR trail aga
         Because `kosli evaluate trail` fails the CI step on a non-compliant trail, this attestation only runs when the trail is compliant:
 
         ```bash
-        kosli attest generic \
+        kosli attest system generic \
           --name pr-build-compliance \
           --flow app-main \
           --trail "$(git rev-parse HEAD)" \
@@ -98,7 +98,7 @@ Use `kosli evaluate trail` on the main-branch build to evaluate the PR trail aga
         Pass the `$IS_COMPLIANT` value from the previous step:
 
         ```bash
-        kosli attest generic \
+        kosli attest system generic \
           --name pr-build-compliance \
           --flow app-main \
           --trail "$(git rev-parse HEAD)" \
@@ -207,7 +207,7 @@ Below is a simplified GitHub Actions workflow for a main-branch build that links
                 --flow app-pr \
                 --policy pr-compliant.rego
 
-              kosli attest generic \
+              kosli attest system generic \
                 --name pr-build-compliance \
                 --flow app-main \
                 --trail "$(git rev-parse HEAD)" \
@@ -260,7 +260,7 @@ Below is a simplified GitHub Actions workflow for a main-branch build that links
                 --flow app-pr \
                 --output json | jq -r '.compliance.is_compliant')
 
-              kosli attest generic \
+              kosli attest system generic \
                 --name pr-build-compliance \
                 --flow app-main \
                 --trail "$(git rev-parse HEAD)" \

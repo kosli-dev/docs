@@ -1,0 +1,46 @@
+---
+title: "System type: generic"
+description: The generic system attestation type — record a free-form attestation with an explicit compliance status.
+---
+
+`system:generic` is for attesting facts that don't fit any other type. The attestation carries an explicit `is_compliant` flag (the caller decides) and accepts arbitrary user data via `user_data`. There's no scanner-specific tile renderer — the attestation appears in the generic JSON view.
+
+Use this when you have a one-off fact to record and no system type covers your case. For org-specific evidence shapes you'll reuse, prefer a [custom attestation type](/attestation_types/custom/overview) instead.
+
+## Versions
+
+| Version | Status | Notes |
+|---|---|---|
+| `v1` | Current | Initial release. Requires `is_compliant: bool`. |
+
+Pin a version with `--type-version v1` on the CLI or `type_version: v1` in a flow template; omit it to track latest. See the [versioning section](/attestation_types/system/overview#versioning).
+
+## What the attestation accepts
+
+A generic attestation carries:
+
+- **`is_compliant`** *(required)* — boolean. The caller decides whether the attestation is compliant. Kosli stores whatever the caller passed and uses it as the compliance verdict.
+- **`user_data`** *(optional)* — arbitrary JSON. Surfaces in the attestation tile as a JSON block; useful for context the audit trail should preserve.
+
+## Compliance behaviour
+
+`system:generic` is the one exception to the structural-only compliance other system types use: because the type's whole purpose is to record an explicit compliance verdict, the `is_compliant` flag the caller passes IS the compliance.
+
+If you want a rego policy to compute that verdict, run [`kosli evaluate`](/tutorials/evaluate_trails_with_opa) against your data and use the `allow` result as the value you pass to `is_compliant`.
+
+## How to use it
+
+```shell
+kosli attest system generic \
+  --flow my-flow \
+  --trail $(git rev-parse HEAD) \
+  --name release-notes \
+  --compliant=true \
+  --user-data release-notes.json
+```
+
+`--compliant` sets the verdict directly; `--user-data` accepts a JSON file whose contents are stored on the attestation and rendered in the tile.
+
+To pin a version, add `--type-version v1` to the CLI command.
+
+The legacy [`kosli attest generic`](/client_reference/kosli_attest_generic) command is deprecated — teams should migrate to `kosli attest system generic`.

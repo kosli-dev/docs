@@ -1,0 +1,124 @@
+---
+title: "Attesting SARIF scans"
+description: "Attest the output of any SARIF v2.1.0 security scanner — Checkov, Trivy, Semgrep, Snyk, CodeQL — to a Kosli trail using the system:sarif attestation type."
+---
+
+In this tutorial you'll attest SARIF scan results to a Kosli trail using the `system:sarif` attestation type. The attestation records the scan as a fact — tool name, severity counts, findings table — with no opinion on whether the findings are acceptable. If you want compliance gated on the findings (e.g. *fail on any high-severity result*), you'll layer a rego policy on top using the existing [`kosli evaluate` pattern](/tutorials/evaluate_trails_with_opa) — see the section at the end of this tutorial.
+
+<Note>
+This tutorial uses [Checkov](https://www.checkov.io/) to scan a Terraform file, because Checkov is the most common SARIF-producing scanner customers ask us about. Every command after the scan step is identical for any other SARIF v2.1.0 producer — Trivy, Semgrep, Snyk, CodeQL, Bandit. Swap the scanner; the kosli commands don't change.
+</Note>
+
+<Steps>
+
+<Step title="Prerequisites">
+
+To follow this tutorial you'll need:
+
+* [Install Checkov](https://www.checkov.io/2.Basics/Installing%20Checkov.html) — `pip install checkov`
+* [Install Kosli CLI](/getting_started/install)
+* [Get a Kosli API token](/getting_started/service-accounts)
+
+Set the environment variables:
+
+```shell
+export KOSLI_ORG=<your-personal-kosli-org-name>
+export KOSLI_API_TOKEN=<your-api-token>
+```
+
+</Step>
+
+<Step title="Create a flow and trail">
+
+Create a flow with a `system:sarif` slot in its template:
+
+```yaml flow_template.yml
+version: 1
+trail:
+  attestations:
+    - name: security-scan
+      type: system:sarif
+```
+
+```shell
+kosli create flow sarif-demo \
+  --template-file flow_template.yml \
+  --description "Demo of SARIF attestation"
+```
+
+You should see: `flow 'sarif-demo' was created`.
+
+Begin a trail to attach attestations to:
+
+```shell
+kosli begin trail test-1 --flow sarif-demo
+```
+
+You should see: `trail 'test-1' was begun`.
+
+</Step>
+
+<Step title="Get a SARIF file to attest">
+
+Create a small Terraform file with a known misconfiguration so Checkov has something to find:
+
+```hcl main.tf
+resource "aws_s3_bucket" "example" {
+  bucket = "my-tutorial-bucket"
+  # Intentional findings: no versioning, no encryption, no logging.
+}
+```
+
+Run Checkov to produce a SARIF file:
+
+```shell
+checkov -d . -o sarif --output-file-path . 2>/dev/null
+```
+
+This writes `results_sarif.sarif` in the current directory. Inspect the first few lines if you'd like to see the SARIF structure — Kosli will parse it automatically.
+
+</Step>
+
+<Step title="Attest the SARIF file">
+
+Attest the scan results to the trail:
+
+```shell
+kosli attest system sarif \
+  --flow sarif-demo \
+  --trail test-1 \
+  --name security-scan \
+  --scan-results results_sarif.sarif
+```
+
+You should see: `sarif attestation 'security-scan' is reported to trail: test-1`.
+
+Open the trail in the Kosli app (`https://app.kosli.com/<your-org>/flows/sarif-demo/trails/test-1`). The attestation tile shows:
+
+- Tool name and version — pulled dynamically from the SARIF file (so it reads "Checkov 3.2.x", not "Snyk")
+- High / medium / low finding counts
+- Expandable findings table with rule ID, message, file, and line for each finding
+
+Compliance is structural — the attestation records the scan ran and what it found, with no opinion on whether the findings are acceptable.
+
+</Step>
+
+</Steps>
+
+## What you've accomplished
+
+You have a Kosli trail with an attested SARIF scan, rendered in the severity-breakdown tile.
+
+## Adding a compliance opinion
+
+The attestation above records facts. If you want compliance gated on the findings — *fail on any high-severity result*, *allow up to N mediums*, etc. — express those rules as a rego policy and record the verdict using the [`kosli evaluate` pattern](/tutorials/evaluate_trails_with_opa). That tutorial walks through writing a policy, evaluating it against trail data, and attesting the result as a separate compliance record on the same trail.
+
+In a future phase, the SARIF attestation will be able to carry the policy verdict on the same tile. For now, the two-attestation pattern (facts + verdict) keeps things simple and uses existing CLI commands.
+
+## Next steps
+
+- **Browse other system types** in the [catalogue](/attestation_types/system/catalogue) — system types is the strategic direction; over time more scanners will get first-class attestation tiles.
+- **Read the SARIF type reference** for the full data shape and version history: [System type: SARIF](/attestation_types/system/sarif).
+- **Adapt to your scanner** — replace Checkov with Trivy, Semgrep, Snyk, CodeQL, or any other SARIF v2.1.0 producer. The `kosli attest system sarif` command is unchanged.
+- **Migrate from the snyk type** — if you currently use `kosli attest snyk` (even with non-Snyk SARIF), see the migration note on the [SARIF type page](/attestation_types/system/sarif).
+- **Wire into CI** — add the same command to your GitHub Actions pipeline using the [Kosli GitHub Action](/integrations/actions).

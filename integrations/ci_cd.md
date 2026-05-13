@@ -112,7 +112,7 @@ description: Use Kosli in CI Systems like GitHub Actions, GitLab CI, and more.
     image: registry.example.com/ci/kosli-runner:2.13.2
     script:
       - kosli version
-      - kosli attest generic
+      - kosli attest system generic
           --flow my-flow
           --trail "$CI_COMMIT_SHA"
           --name build

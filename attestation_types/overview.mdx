@@ -1,0 +1,50 @@
+---
+title: Overview
+description: The three categories of attestation types in Kosli — custom, generic, and system — and when to use each.
+---
+
+An **attestation** records a fact (or a verdict) against a trail or artifact in a Kosli flow. An **attestation type** defines the shape of that record: what data it accepts, how Kosli validates it, and how the resulting tile renders in the UI.
+
+Kosli has three categories of attestation types:
+
+<CardGroup cols={3}>
+  <Card title="Custom" icon="screwdriver-wrench" href="/attestation_types/custom/overview">
+    Defined per-organization. You author the JSON Schema and jq rules; you control compliance.
+  </Card>
+  <Card title="Generic" icon="circle" href="/attestation_types/system/generic">
+    The catch-all. No type-specific schema; you supply a free-form payload and a `--compliant` flag.
+  </Card>
+  <Card title="System" icon="cube" href="/attestation_types/system/overview">
+    Kosli-curated types with pre-built schemas, default compliance rules, and rich UI rendering. Available to every organization with no setup.
+  </Card>
+</CardGroup>
+
+## When to use which
+
+<AccordionGroup>
+  <Accordion title="Use a system type when one exists for your tool">
+    System types are the recommended path when one matches your tool. They ship with a tile renderer and structural validation of the data shape. For compliance opinions on top, use the [`kosli evaluate`](/tutorials/evaluate_trails_with_opa) pattern to record the verdict as a separate attestation.
+
+    [Browse available system types →](/attestation_types/system/catalogue)
+  </Accordion>
+  <Accordion title="Use a custom type for org-specific evidence shapes">
+    If you have a unique evidence shape — internal QA reports, deployment manifests, license attestations — define a custom type once and use it across your flows.
+
+    [Custom attestation types →](/attestation_types/custom/overview)
+  </Accordion>
+  <Accordion title="Use generic for one-off facts or quick prototypes">
+    Generic attestations carry arbitrary JSON and an explicit `--compliant=true|false` flag. Reach for them when no type matches and the data shape isn't worth standardising.
+  </Accordion>
+</AccordionGroup>
+
+## Where the categories overlap
+
+All three categories share the same primitives: a payload, a compliance verdict, and a place on a trail. They differ in **who defines the schema** and **who decides compliance**:
+
+| | Defined by | Compliance comes from | UI tile |
+|---|---|---|---|
+| **System** | Kosli (shipped in code) | Built-in structural check; use [`kosli evaluate`](/tutorials/evaluate_trails_with_opa) for opinions | Type-specific renderer |
+| **Custom** | Your organization | Your jq rules baked into the type | Generic JSON view |
+| **Generic** | You (per attestation) | `--compliant=true\|false` flag | Generic JSON view |
+
+System types are the newest category and the strategic direction. Where a system type covers your use case, prefer it.

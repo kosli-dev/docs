@@ -1,0 +1,75 @@
+---
+title: Custom attestation types
+description: Custom attestation types let an organization define its own evidence shapes — schemas and compliance rules — when no system type fits.
+---
+
+A **custom attestation type** is one your organization defines, rather than one Kosli ships. You author the JSON Schema (optional) that describes the data shape and the [jq](https://stedolan.github.io/jq/) rules (optional) that determine compliance. At least one of the two is required.
+
+Use a custom type when you have an evidence shape that's unique to your organization — internal QA reports, deployment manifests, license attestations, custom security tooling — and no [system type](/attestation_types/system/overview) covers your case.
+
+## When to use a custom type
+
+<CardGroup cols={2}>
+  <Card title="✓ Use custom when" icon="check">
+    - The evidence shape is specific to your org
+    - You want the schema + jq compliance rules version-controlled in your own infrastructure
+    - You'll reuse the type across flows or projects
+    - No system type fits the data
+  </Card>
+  <Card title="✗ Reach for something else when" icon="xmark">
+    - A [system type](/attestation_types/system/overview) already covers your case — prefer it
+    - It's a one-off fact — [generic](/attestation_types/system/generic) is enough
+    - The data shape is too volatile to standardise — generic with `user_data` is easier
+  </Card>
+</CardGroup>
+
+## How a custom type works
+
+A custom attestation type definition has three parts:
+
+1. **A name** — used to reference the type when attesting (e.g. `custom:security-scan`).
+2. **A JSON Schema** *(optional)* — defines what data the attestation accepts. Submissions that don't match the schema are rejected at attest time.
+3. **A jq evaluator** *(optional)* — one or more jq expressions evaluated against the attestation data. All rules must return `true` for the attestation to be considered compliant.
+
+At least one of (2) or (3) must be provided. A type with a schema but no jq rules validates structure but doesn't make a compliance claim; a type with jq rules but no schema makes a compliance claim against whatever data the caller submits.
+
+### Example
+
+A type that accepts a security scan summary and requires zero critical and fewer than five high vulnerabilities — described in plain English:
+
+- **Name**: `security-scan`
+- **Schema**: object with three required integer/string fields (`critical_vulnerabilities`, `high_vulnerabilities`, `scan_date`)
+- **jq rules**: `.critical_vulnerabilities == 0` AND `.high_vulnerabilities < 5`
+
+For the concrete Terraform definition of the same type and the full create/import workflow, see [Managing custom types with Terraform](/attestation_types/custom/managing).
+
+## Versioning
+
+Custom types are versioned. When you change a type's schema or jq rules, Kosli creates a new version automatically. Attestations made against `v1` continue to validate against `v1` even after `v2` is published — your history stays meaningful when policies tighten or shapes evolve.
+
+## How custom types compare to system and generic
+
+| | Custom | [System](/attestation_types/system/overview) | [Generic](/attestation_types/system/generic) |
+|---|---|---|---|
+| Defined by | Your organization | Kosli (shipped in code) | Per-attestation (just a flag) |
+| Schema validation | Optional, you author it | Built-in per type | None |
+| Compliance | Your jq rules | Built-in structural check; use [`kosli evaluate`](/tutorials/evaluate_trails_with_opa) for opinions | Caller passes `is_compliant` |
+| Tile renderer | Generic JSON view | Type-specific (where built) | Generic JSON view |
+| Cross-org reuse | No — per-org definition | Yes — every org sees the same types | Yes — universal |
+
+## Creating and managing custom types
+
+Two paths, depending on how you work:
+
+<CardGroup cols={2}>
+  <Card title="Terraform (production)" icon="cube" href="/attestation_types/custom/managing">
+    Keep type definitions version-controlled alongside your other infrastructure. Recommended for production workloads.
+  </Card>
+  <Card title="Kosli CLI (ad-hoc)" icon="terminal" href="/client_reference/kosli_create_attestation-type">
+    `kosli create attestation-type` for quick creation and prototyping. See [getting started attestations](/getting_started/attestations) for an example.
+  </Card>
+</CardGroup>
+
+## Reporting a custom attestation
+
+Once a custom type exists, use `kosli attest custom` to report an attestation against it. See [`kosli attest custom`](/client_reference/kosli_attest_custom) for the full flag reference.

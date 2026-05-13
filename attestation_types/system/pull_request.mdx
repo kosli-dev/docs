@@ -1,0 +1,52 @@
+---
+title: "System type: Pull request"
+description: The pull-request system attestation type — record that a change was made via a reviewed pull request.
+---
+
+`system:pull_request` is for attesting that a code change came in through a pull request on GitHub, GitLab, Bitbucket, or Azure DevOps. The Kosli CLI fetches pull-request data from your git provider's API and records the URL, state, author, approvers, and commits.
+
+## Versions
+
+| Version | Status | Notes |
+|---|---|---|
+| `v1` | Current | Initial release. Compliance is structural — pull-request data must be supplied. |
+
+Pin a version with `--type-version v1` on the CLI or `type_version: v1` in a flow template; omit it to track latest. See the [versioning section](/attestation_types/system/overview#versioning).
+
+## What the attestation accepts
+
+A pull-request attestation carries:
+
+- **`git_provider`** *(required)* — one of `github`, `gitlab`, `bitbucket`, `azure`
+- **`pull_requests`** *(required)* — an array of pull requests associated with the change. Each entry includes:
+  - `url` — the PR URL
+  - `state` — open, merged, closed
+  - `merge_commit` — the merge commit SHA (where applicable)
+  - `approvers` — list of users who approved
+  - `author`, `title`, `head_ref`, `created_at`, `merged_at` — PR metadata
+  - `commits` — the list of commits the PR carries
+
+## Compliance behaviour
+
+Structural only: the attestation is compliant when pull-request data is supplied (the array can be empty). The contents — whether any PRs are present, whether they have approvers, what state they're in — don't affect compliance.
+
+For compliance opinions like *at least one PR must exist* or *every PR must have an approver*, write a rego policy and record the verdict via [`kosli evaluate`](/tutorials/evaluate_trails_with_opa) — the OPA tutorial uses pull-request approval as its worked example.
+
+## How to use it
+
+```shell
+kosli attest system pull_request \
+  --flow my-flow \
+  --trail $(git rev-parse HEAD) \
+  --name pull-request \
+  --git-provider github \
+  --github-token "$GITHUB_TOKEN" \
+  --github-org your-org \
+  --repository your-repo
+```
+
+Pass the right credentials for your provider (`--github-token`, `--gitlab-token`, `--bitbucket-username` + `--bitbucket-password`, or `--azure-token`) and the CLI fetches the pull requests associated with the current commit, populating the `pull_requests` array.
+
+To pin a version, add `--type-version v1` to the CLI command.
+
+The legacy provider-specific commands ([`kosli attest pullrequest_github`](/client_reference/kosli_attest_pullrequest_github), [`kosli attest pullrequest_gitlab`](/client_reference/kosli_attest_pullrequest_gitlab), [`kosli attest pullrequest_bitbucket`](/client_reference/kosli_attest_pullrequest_bitbucket), [`kosli attest pullrequest_azure`](/client_reference/kosli_attest_pullrequest_azure)) are deprecated — teams should migrate to `kosli attest system pull_request` with `--git-provider`.

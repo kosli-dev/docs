@@ -1,0 +1,50 @@
+---
+title: Available system types
+description: The catalogue of system attestation types currently available in Kosli, with their versions and what each is for.
+---
+
+System attestation types ship with the Kosli platform — every organization can use any type listed below without setup. Each type validates the shape of its data and renders a type-specific tile in the Kosli UI. For compliance opinions on top of the facts a system type records, use the [`kosli evaluate` pattern](/tutorials/evaluate_trails_with_opa).
+
+<Note>
+This catalogue is currently hand-maintained. A future iteration will generate it directly from the system attestation type definitions, so it stays in sync automatically as types are added or versioned.
+</Note>
+
+## Catalogue
+
+| Type | Versions | What it's for | Details |
+|---|---|---|---|
+| `system:generic` | `v1` | A free-form attestation with an explicit `is_compliant` flag — for facts that don't fit any other type. | [Generic →](/attestation_types/system/generic) |
+| `system:jira` | `v1` | Verify that a change references one or more existing Jira issues. | [Jira →](/attestation_types/system/jira) |
+| `system:junit` | `v1` | Test results parsed from JUnit XML output (pytest, JUnit, Mocha, Jest, Go, ...). | [JUnit →](/attestation_types/system/junit) |
+| `system:pull_request` | `v1` | Record that a change came in through a pull request (GitHub, GitLab, Bitbucket, Azure DevOps). | [Pull request →](/attestation_types/system/pull_request) |
+| `system:sarif` | `v1` | Any tool that produces SARIF v2.1.0 (Checkov, Trivy, Semgrep, Snyk, CodeQL, ...). Records the parsed findings; use [`kosli evaluate`](/tutorials/evaluate_trails_with_opa) for compliance opinions. | [SARIF →](/attestation_types/system/sarif) |
+| `system:sonar` | `v1` | Record a SonarQube / SonarCloud quality-gate result. | [Sonar →](/attestation_types/system/sonar) |
+
+<Info>
+The legacy built-in attestation types (`kosli attest snyk`, `kosli attest junit`, `kosli attest jira`, `kosli attest sonar`, `kosli attest pullrequest_*`, `kosli attest generic`) continue to work and remain the recommended path for now. The system-type variants ship the same data shapes and compliance rules; over time they will become the default and the legacy dedicated commands will be deprecated.
+</Info>
+
+## How versions work
+
+When a system type's schema or default compliance rule changes meaningfully, Kosli ships a new version (`v2`, `v3`, ...). Existing attestations made against `v1` continue to validate against `v1` — you don't lose history when a type evolves. New attestations default to the latest version unless you pin to a specific one.
+
+Pin a version with the `--type-version` flag on the CLI, or the `type_version` field in flow templates. Omitting it tracks the latest.
+
+```shell
+# Track latest
+kosli attest system sarif --scan-results foo.sarif --name security-scan
+
+# Pin to v1
+kosli attest system sarif --type-version v1 --scan-results foo.sarif --name security-scan
+```
+
+```yaml
+attestations:
+  - name: unit-tests
+    type: system:junit         # tracks latest
+  - name: security-scan
+    type: system:sarif
+    type_version: v1           # pinned
+```
+
+See the [versioning section in the overview](/attestation_types/system/overview#versioning) for the full pattern. Each per-type page lists every version that's available, what changed, and which version is the current default.

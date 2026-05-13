@@ -69,7 +69,7 @@ Kosli identifies artifacts by their **SHA256 fingerprint**. This uniquely identi
     ```yaml
           - name: Attest JUnit test results
             run: |
-              kosli attest junit \
+              kosli attest system junit \
                 --flow ${APP_NAME}-pipeline \
                 --trail ${GIT_COMMIT} \
                 --name application.unit-tests \
@@ -80,7 +80,7 @@ Kosli identifies artifacts by their **SHA256 fingerprint**. This uniquely identi
       The dot notation (`application.unit-tests`) tells Kosli this attestation belongs to the `application` artifact. Attestations without a dot belong to the Trail itself.
     </Tip>
 
-    Kosli automatically parses the JUnit XML to determine pass/fail status. See [`kosli attest junit`](/client_reference/kosli_attest_junit).
+    Kosli automatically parses the JUnit XML to determine pass/fail status. See [`kosli attest system junit`](/client_reference/kosli_attest_junit).
   </Step>
 
   <Step title="Attest the Docker image">
@@ -116,7 +116,7 @@ Kosli identifies artifacts by their **SHA256 fingerprint**. This uniquely identi
         - name: Attest SBOM
           run: |
             IMAGE_NAME="ghcr.io/${IMAGE}:latest"
-            kosli attest generic \
+            kosli attest system generic \
               --flow ${APP_NAME}-pipeline \
               --trail ${GIT_COMMIT} \
               --name docker-image.sbom \
@@ -151,12 +151,12 @@ Kosli identifies artifacts by their **SHA256 fingerprint**. This uniquely identi
 </Steps>
 
 <Accordion title="Optional: attest vulnerability scans">
-  Your workflow already runs Trivy security scans. You can extend this lab by attesting the scan results as a generic attestation:
+  Your workflow already runs Trivy security scans. You can extend this lab by attesting the scan results as a `system:generic` attestation:
 
   ```bash
   export DOCKER_IMAGE="<your-gh-username>/labs"
 
-  kosli attest generic \
+  kosli attest system generic \
     --flow labs-pipeline \
     --trail $(git rev-parse HEAD) \
     --name docker-image.security-scan \

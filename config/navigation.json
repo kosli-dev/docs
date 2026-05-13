@@ -32,6 +32,37 @@
           ]
         },
         {
+          "group": "Attestation types",
+          "pages": [
+            "attestation_types/overview",
+            {
+              "group": "Custom attestation types",
+              "pages": [
+                "attestation_types/custom/overview",
+                "attestation_types/custom/managing"
+              ]
+            },
+            {
+              "group": "System attestation types",
+              "pages": [
+                "attestation_types/system/overview",
+                {
+                  "group": "Available system types",
+                  "pages": [
+                    "attestation_types/system/catalogue",
+                    "attestation_types/system/generic",
+                    "attestation_types/system/jira",
+                    "attestation_types/system/junit",
+                    "attestation_types/system/pull_request",
+                    "attestation_types/system/sarif",
+                    "attestation_types/system/sonar"
+                  ]
+                }
+              ]
+            }
+          ]
+        },
+        {
           "group": "Administration",
           "icon": "cog",
           "pages": [
@@ -45,12 +76,6 @@
               "group": "Managing Environments",
               "pages": [
                 "administration/managing_environments/overview"
-              ]
-            },
-            {
-              "group": "Managing Custom Attestation Types",
-              "pages": [
-                "administration/managing_custom_attestation_types/overview"
               ]
             },
             "administration/managing_tags"
@@ -71,6 +96,7 @@
             {
               "group": "Attesting",
               "pages": [
+                "tutorials/attest_sarif",
                 "tutorials/attest_snyk",
                 "tutorials/custom-attestation-ctrf",
                 "tutorials/attest_large_documents"

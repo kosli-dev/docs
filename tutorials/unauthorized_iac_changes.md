@@ -54,7 +54,7 @@ Optionally, scan your Terraform config for security issues and attest the <Toolt
 
 ```shell
 snyk iac test main.tf --sarif-file-output=sarif.json
-kosli attest snyk --name=security --flow=tf-tutorial --trail=authorized-1 --scan-results=sarif.json
+kosli attest system sarif --name=security --flow=tf-tutorial --trail=authorized-1 --scan-results=sarif.json
 ```
 
 Create a Terraform plan, save it to a file, and attest it to Kosli:
@@ -62,7 +62,7 @@ Create a Terraform plan, save it to a file, and attest it to Kosli:
 ```shell
 terraform init
 terraform plan -out=tf.plan
-kosli attest generic --name=tf-plan --flow=tf-tutorial --trail=authorized-1 --attachments=tf.plan
+kosli attest system generic --name=tf-plan --flow=tf-tutorial --trail=authorized-1 --attachments=tf.plan
 ```
 
 Apply the plan and attest the resulting <Tooltip tip="A JSON file Terraform uses to map your configuration to real-world infrastructure. Its SHA256 fingerprint uniquely identifies the current infrastructure state.">state file</Tooltip> as an artifact. Kosli calculates a fingerprint from the state file contents — this fingerprint is how it later detects unauthorized changes:

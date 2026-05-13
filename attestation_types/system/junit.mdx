@@ -1,0 +1,50 @@
+---
+title: "System type: JUnit"
+description: The JUnit system attestation type — record test results from any JUnit XML producer.
+---
+
+`system:junit` is for attesting test results parsed from JUnit-format XML. Most test runners (pytest, JUnit itself, Mocha with `mocha-junit-reporter`, Jest with `jest-junit`, Go's test runner via `go-junit-report`, and so on) produce JUnit XML; the Kosli CLI parses it into the structure this attestation accepts.
+
+## Versions
+
+| Version | Status | Notes |
+|---|---|---|
+| `v1` | Current | Initial release. Compliance is structural — JUnit results must be supplied. |
+
+Pin a version with `--type-version v1` on the CLI or `type_version: v1` in a flow template; omit it to track latest. See the [versioning section](/attestation_types/system/overview#versioning).
+
+## What the attestation accepts
+
+A JUnit attestation carries:
+
+- **`junit_results`** *(required)* — an array of test-suite results. Each suite includes:
+  - `name` — the suite name (typically the test class or file)
+  - `failures` — count of test failures
+  - `errors` — count of test errors
+  - `skipped` — count of skipped tests
+  - `total` — total tests
+  - `duration` — wall-clock duration in seconds
+
+The CLI extracts these fields from a directory of JUnit XML reports.
+
+## Compliance behaviour
+
+Structural only: the attestation is compliant when test-suite results are supplied. The contents of those results (whether any tests failed or errored) don't affect compliance.
+
+For compliance opinions like *fail if any suite has failures or errors*, write a rego policy and record the verdict via [`kosli evaluate`](/tutorials/evaluate_trails_with_opa).
+
+## How to use it
+
+```shell
+kosli attest system junit \
+  --flow my-flow \
+  --trail $(git rev-parse HEAD) \
+  --name unit-tests \
+  --results-dir build/test-results/
+```
+
+Point `--results-dir` at the directory containing your JUnit XML reports. The CLI parses every XML file in the directory into the `junit_results` array.
+
+To pin a version, add `--type-version v1` to the CLI command.
+
+The legacy [`kosli attest junit`](/client_reference/kosli_attest_junit) command is deprecated — teams should migrate to `kosli attest system junit`.
