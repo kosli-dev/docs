@@ -43,7 +43,7 @@ All three categories share the same primitives: a payload, a compliance verdict,
 
 | | Defined by | Compliance comes from | UI tile |
 |---|---|---|---|
-| **System** | Kosli (shipped in code) | Defined per type — schema-driven for new types, matches the legacy dedicated command for migrated types; use [`kosli evaluate`](/tutorials/evaluate_trails_with_opa) for any other opinion | Type-specific renderer |
+| **System** | Kosli (shipped in code) | Schema-validated only; use [`kosli evaluate`](/tutorials/evaluate_trails_with_opa) for any compliance opinion | Type-specific renderer |
 | **Custom** | Your organization | Your jq rules baked into the type | Generic JSON view |
 | **Generic** | You (per attestation) | `--compliant=true\|false` flag | Generic JSON view |
 

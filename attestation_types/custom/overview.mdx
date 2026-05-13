@@ -53,7 +53,7 @@ Custom types are versioned. When you change a type's schema or jq rules, Kosli c
 |---|---|---|---|
 | Defined by | Your organization | Kosli (shipped in code) | Per-attestation (just a flag) |
 | Schema validation | Optional, you author it | Built-in per type | None |
-| Compliance | Your jq rules | Defined per type — schema-driven for new types, matches the legacy command for migrated types; use [`kosli evaluate`](/tutorials/evaluate_trails_with_opa) for any other opinion | Caller passes `is_compliant` |
+| Compliance | Your jq rules | Schema-validated only; use [`kosli evaluate`](/tutorials/evaluate_trails_with_opa) for any opinion | Caller passes `is_compliant` |
 | Tile renderer | Generic JSON view | Type-specific (where built) | Generic JSON view |
 | Cross-org reuse | No — per-org definition | Yes — every org sees the same types | Yes — universal |
 

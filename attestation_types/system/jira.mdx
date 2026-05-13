@@ -25,9 +25,9 @@ A Jira attestation carries:
 
 ## Compliance behaviour
 
-The attestation is compliant when **at least one Jira issue reference is found and every referenced issue exists in Jira** (the CLI verifies each key against your Jira instance). If no Jira key is found in the commit or branch, or if any referenced key doesn't resolve to a real issue, the attestation is non-compliant. This matches the compliance behaviour of the legacy `kosli attest jira` command so existing customers can migrate without changes.
+Schema-validated only: the attestation is compliant when Jira issue references were supplied and parse correctly. The `issue_exists` flag the CLI records is a fact, not a compliance signal.
 
-For different opinions — *ignore the issue-exists check*, *require a specific issue type*, *require an issue in a specific status* — write a rego policy and record the verdict via [`kosli evaluate`](/tutorials/evaluate_trails_with_opa) as a separate attestation.
+For opinions on the content — *at least one referenced issue must exist*, *all references must resolve*, *issue must be in a specific status* — write a rego policy and record the verdict via [`kosli evaluate`](/tutorials/evaluate_trails_with_opa) as a separate attestation. See [Migrating from `kosli attest jira`](/attestation_types/system/legacy_migration#kosli-attest-jira) for a copy-paste rego policy that reproduces the legacy compliance rule.
 
 ## How to use it
 
@@ -45,4 +45,4 @@ The CLI scans the commit history for Jira issue keys (e.g. `PROJ-123`) and check
 
 To pin a version, add `--type-version v1` to the CLI command.
 
-The legacy [`kosli attest jira`](/client_reference/kosli_attest_jira) command is deprecated — teams should migrate to `kosli attest system jira`.
+The legacy [`kosli attest jira`](/client_reference/kosli_attest_jira) command is deprecated — teams should migrate to `kosli attest system jira`. See [Migrating from legacy commands](/attestation_types/system/legacy_migration#kosli-attest-jira) for the step-by-step, including a rego policy that reproduces the legacy compliance rule.

@@ -24,7 +24,7 @@ A generic attestation carries:
 
 ## Compliance behaviour
 
-`system:generic` is special: because the type's whole purpose is to record an explicit compliance verdict, the `is_compliant` flag the caller passes IS the compliance. Other system types determine compliance based on the type itself; see the [system types overview](/attestation_types/system/overview#compliance) for the full picture.
+`system:generic` is special: because the type's whole purpose is to record an explicit compliance verdict, the `is_compliant` flag the caller passes IS the compliance. Every other system type is schema-validated only — see the [system types overview](/attestation_types/system/overview#compliance) for the full picture.
 
 If you want a rego policy to compute that verdict, run [`kosli evaluate`](/tutorials/evaluate_trails_with_opa) against your data and use the `allow` result as the value you pass to `is_compliant`.
 
@@ -43,4 +43,4 @@ kosli attest system generic \
 
 To pin a version, add `--type-version v1` to the CLI command.
 
-The legacy [`kosli attest generic`](/client_reference/kosli_attest_generic) command is deprecated — teams should migrate to `kosli attest system generic`.
+The legacy [`kosli attest generic`](/client_reference/kosli_attest_generic) command is deprecated — teams should migrate to `kosli attest system generic`. See [Migrating from legacy commands](/attestation_types/system/legacy_migration#kosli-attest-generic) for the step-by-step.

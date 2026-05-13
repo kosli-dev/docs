@@ -21,15 +21,17 @@ Each system type has:
 
 ## Compliance
 
-For **new** system types Kosli ships (starting with `system:sarif`), compliance is **schema-driven**: the attestation is compliant if the data matches the schema and was supplied. New system types do not impose opinions about whether the *content* of that data is acceptable.
+System types are **schema-validated only**. An attestation is compliant when the payload matches the type's schema and was successfully recorded. System types do **not** impose opinions about whether the *content* of that data is acceptable — that's a separate concern.
 
-For **legacy** system types (the system-type equivalents of `kosli attest junit`, `…jira`, `…sonar`, `…pullrequest_*`, `…generic`), compliance preserves the behaviour of the dedicated command that came before — so existing customers can migrate to `kosli attest system <type>` without behaviour changes. Each per-type page documents what its specific compliance check is (for example: `system:junit` is compliant when every test suite has zero failures and zero errors). Over time these built-in compliance opinions will be retired and customers will express opinions via `kosli evaluate` + rego on top of structural attestations.
-
-If you want compliance gated on something other than the per-type default — *fail if any high-severity finding exists*, *allow up to N test failures*, *fail if PR has no approvers* — express it as a rego policy and use [`kosli evaluate`](/tutorials/evaluate_trails_with_opa) to record the verdict as a separate attestation. The OPA tutorial covers the canonical pattern.
+For compliance opinions — *fail if any high-severity finding exists*, *fail if any test failed*, *fail if the quality gate is not OK*, *every PR must have an approver* — express them as a rego policy and use [`kosli evaluate`](/tutorials/evaluate_trails_with_opa) to record the verdict as a separate attestation on the same trail. The OPA tutorial covers the canonical pattern.
 
 <Note>
-`system:generic` is special — it carries an explicit `is_compliant` flag in its data, and that flag is the compliance signal (the caller decides). Every other system type has compliance determined by the type itself, as documented on its per-type page.
+`system:generic` is special — it carries an explicit `is_compliant` flag in its data, and that flag is the compliance signal (the caller decides). Every other system type is schema-validated only.
 </Note>
+
+<Warning>
+**Migrating from a legacy `kosli attest <type>` command?** The legacy commands embed compliance opinions in the type itself (e.g. `kosli attest junit` is non-compliant if any test failed). The system-type variants do not. Your verdict may change after migration unless you reproduce the legacy rule via `kosli evaluate` + rego. See [Migrating from legacy commands](/attestation_types/system/legacy_migration) for a per-type guide with copy-paste rego snippets.
+</Warning>
 
 ## Versioning
 

@@ -46,6 +46,7 @@
               "group": "System attestation types",
               "pages": [
                 "attestation_types/system/overview",
+                "attestation_types/system/legacy_migration",
                 {
                   "group": "Available system types",
                   "pages": [
