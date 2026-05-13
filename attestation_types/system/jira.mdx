@@ -9,7 +9,7 @@ description: The Jira system attestation type — record that a change is tracke
 
 | Version | Status | Notes |
 |---|---|---|
-| `v1` | Current | Initial release. Compliance requires at least one issue reference, and every referenced issue must exist in Jira. |
+| `v1` | Current | Initial release. Default compliance is structural only — attach a rego policy to enforce thresholds like "at least one valid issue reference". |
 
 ## What the attestation accepts
 
@@ -20,15 +20,36 @@ A Jira attestation carries:
   - `issue_url` — the full URL to the issue
   - `issue_exists` — boolean; whether the CLI successfully confirmed the issue exists when the attestation was made
   - `issue_fields` *(optional)* — additional fields like summary and description, surfaced in the attestation tile
+- **`evaluation_result`** *(optional)* — the JSON output of `kosli evaluate` with a rego policy. When supplied, drives compliance.
+- **Policy file attachment** *(required when `evaluation_result` is supplied)* — the `.rego` file is uploaded to the audit trail.
 
 ## Compliance behaviour
 
-Compliant when:
-- `jira_results` contains at least one entry, AND
-- Every entry has `issue_exists: true`.
+Default: **structural only** — the attestation is compliant if `jira_results` is present and well-formed. Kosli does not impose an opinion on whether an empty issue list or a non-existent issue is acceptable; you do.
 
-An empty array — meaning no issue was referenced — is non-compliant. A reference to a non-existent issue is also non-compliant.
+With a rego policy attached: the policy's `allow` flag drives compliance. A common policy is "every reference must point at a real Jira issue, and there must be at least one":
+
+```rego
+package policy
+
+import rego.v1
+
+default allow = false
+
+violations contains msg if {
+    count(input.jira_results) == 0
+    msg := "no Jira issues were referenced"
+}
+
+violations contains msg if {
+    some issue in input.jira_results
+    not issue.issue_exists
+    msg := sprintf("Jira issue %s does not exist", [issue.issue_id])
+}
+
+allow if count(violations) == 0
+```
 
 ## How to use it
 
-The data shape matches the legacy `kosli attest jira` command. See [`kosli attest jira`](/client_reference/kosli_attest_jira) for the current CLI flags. The system type provides the same compliance behaviour through the new `kosli attest system jira` command.
+The pattern is identical to SARIF — see the [SARIF tutorial](/tutorials/attest_sarif) for the full walkthrough. The legacy `kosli attest jira` command (which hardcodes the "all issues exist" compliance rule) continues to work; see [`kosli attest jira`](/client_reference/kosli_attest_jira) for that path.

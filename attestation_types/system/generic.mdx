@@ -11,7 +11,7 @@ Use this when you have a one-off fact to record and no system type covers your c
 
 | Version | Status | Notes |
 |---|---|---|
-| `v1` | Current | Initial release. Requires `is_compliant: bool`. |
+| `v1` | Current | Initial release. Requires `is_compliant: bool`; optionally accepts a rego policy that overrides it. |
 
 ## What the attestation accepts
 
@@ -19,16 +19,23 @@ A generic attestation carries:
 
 - **`is_compliant`** *(required)* — boolean. The caller decides whether the attestation is compliant. There's no schema-based check on findings; Kosli stores whatever the caller passed.
 - **`user_data`** *(optional)* — arbitrary JSON. Surfaces in the attestation tile as a JSON block; useful for context the audit trail should preserve.
+- **`evaluation_result`** *(optional)* — the JSON output of `kosli evaluate` with a rego policy. When supplied, **overrides** the `is_compliant` flag.
+- **Policy file attachment** *(required when `evaluation_result` is supplied)* — the `.rego` file is uploaded to the audit trail.
 
 ## Compliance behaviour
 
-The system type's jq rule is simply `.is_compliant` — the value of the flag drives compliance. If the caller passes `is_compliant: false`, the attestation is non-compliant; `true` is compliant.
+`system:generic` is the one exception to the structural-only default that other system types use. Because `is_compliant` is the type's whole point, that flag is the default compliance signal:
+
+- **No rego attached** — compliance comes from the `is_compliant` flag the caller supplied.
+- **Rego attached** — compliance comes from the policy's `allow` flag. The `is_compliant` value is still stored but no longer drives the verdict; the rego policy wins.
+
+This means you can use generic in two ways: the simple "I'm telling you whether this is compliant" mode, or the layered "here's what I think, but evaluate this rego policy and use its answer if it disagrees" mode.
 
 ## How to use it
 
-The data shape and compliance behaviour are identical to the legacy `kosli attest generic` command. Until system-type CLI flags are everywhere, the easiest path today is:
+The data shape is identical to the legacy `kosli attest generic` command. Until system-type CLI flags are everywhere, the easiest path today is:
 
 - Use [`kosli attest generic`](/client_reference/kosli_attest_generic) for everyday workflows
-- Use the `system:generic` route when you specifically want a system-type-flavoured attestation (e.g. to standardise on one attestation pipeline across types)
+- Use `kosli attest system generic` when you want to attach a rego policy, or to standardise on one attestation pipeline across types
 
-Both paths produce equivalent attestations.
+For the layered rego pattern, see the [SARIF tutorial](/tutorials/attest_sarif) — the same flow applies to any system type.

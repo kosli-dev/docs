@@ -207,6 +207,12 @@ You now have a Kosli trail with three SARIF attestations covering the three cust
 
 You've also seen how the SARIF system type's tile renders in each mode, and where the policy file lives in the audit trail.
 
+## The pattern generalises to every system type
+
+The three modes you walked through — facts only, two-step rego, one-step rego — work identically for any other system type. The CLI flags are the same (`--scan-results` becomes the type-specific data flag, but `--evaluation-result` and `--policy` are universal). If you want to layer a rego policy onto a `system:junit` attestation, a `system:sonar` attestation, or any other system type, the workflow you just learned is the workflow you use.
+
+Each [per-type page](/attestation_types/system/catalogue) includes an example rego policy for the common compliance pattern of that type (e.g. "no test failures" for junit, "quality gate must pass" for sonar).
+
 ## Next steps
 
 - **Browse other system types** in the [catalogue](/attestation_types/system/catalogue) — system types is the strategic direction; over time more scanners will get first-class attestation tiles.

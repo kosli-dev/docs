@@ -22,18 +22,24 @@ Each system type has:
 - **Compliance rules (per version)** — jq expressions evaluated server-side at attest time.
 - **A tile template (per version)** — how the attestation renders in the Kosli UI.
 
-## Compliance: structural and (optionally) policy-driven
+## Compliance: structural by default, policy-driven on request
 
-Every system type runs a **structural check** at attest time: the data you submit must match the schema. Without it, the attestation is rejected.
+System types use the same two-layer compliance model across the board.
 
-Some system types (like `system:sarif`) also accept an optional `evaluation_result` field — the output of `kosli evaluate` with a rego policy. When present, the policy's `allow` flag drives compliance. When absent, the structural check alone determines compliance.
+**Layer 1 — Structural check.** Every system type validates the submitted data against its schema. If the required fields are missing or malformed, the attestation is rejected. By default, this is the only compliance check Kosli applies — the attestation records that the data exists and is well-formed, treating it as a fact rather than imposing an opinion about whether the underlying findings are acceptable.
 
-This lets you choose how opinionated Kosli is about your data:
+**Layer 2 — Optional rego policy.** Every system type also accepts an optional `evaluation_result` field — the output of `kosli evaluate` with a rego policy. When you supply it, the policy's `allow` flag drives compliance. When you don't, layer 1's structural check alone determines compliance.
+
+This means you choose how opinionated Kosli is about your data:
 
 - **Just facts** — submit the data, no policy. The attestation records what happened; compliance is structural.
-- **Policy-driven** — submit the data alongside a rego evaluation result. Your policy decides what counts as compliant.
+- **Policy-driven** — submit the data alongside a rego evaluation result. Your rules decide what counts as compliant.
 
-[See SARIF for a concrete example →](/attestation_types/system/sarif)
+<Note>
+`system:generic` is the one exception — it carries an explicit `is_compliant` flag in its data, and that flag is the default compliance signal (rather than just structural completeness). A rego policy, when attached, overrides the flag.
+</Note>
+
+The pattern is identical across types, so a customer who learns it for one system type can apply it to any other. [See SARIF for a worked example →](/attestation_types/system/sarif)
 
 ## Discovering available types
 

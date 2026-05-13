@@ -9,7 +9,7 @@ description: The Sonar system attestation type — record a SonarQube / SonarClo
 
 | Version | Status | Notes |
 |---|---|---|
-| `v1` | Current | Initial release. Compliance is driven by the Sonar quality-gate status. |
+| `v1` | Current | Initial release. Default compliance is structural only — attach a rego policy to enforce the quality-gate status. |
 
 ## What the attestation accepts
 
@@ -21,13 +21,35 @@ A Sonar attestation carries:
   - `project` — project identifier (e.g. `{ key, url }`)
   - `qualityGate` — the quality-gate verdict, including `status`, `name`, and the list of evaluated `conditions`
   - `serverUrl`, `taskId`, `status` *(optional)* — additional Sonar metadata
+- **`evaluation_result`** *(optional)* — the JSON output of `kosli evaluate` with a rego policy. When supplied, drives compliance.
+- **Policy file attachment** *(required when `evaluation_result` is supplied)* — the `.rego` file is uploaded to the audit trail.
 
 ## Compliance behaviour
 
-Compliant when `sonar_results.qualityGate.status == "OK"`. Any other status (`ERROR`, `WARN`, or missing) is non-compliant.
+Default: **structural only** — the attestation is compliant if `sonar_results` is present and well-formed. The quality-gate status is recorded as a fact; Kosli doesn't decide whether `WARN` should block your release — you do.
 
-The Sonar tile renders the quality-gate name, status, and each condition with its threshold and actual value — so you can see exactly which condition failed.
+With a rego policy attached: the policy's `allow` flag drives compliance. The classic Sonar policy is "quality gate must be OK":
+
+```rego
+package policy
+
+import rego.v1
+
+default allow = false
+
+violations contains msg if {
+    input.sonar_results.qualityGate.status != "OK"
+    msg := sprintf(
+        "Sonar quality gate is %s (not OK)",
+        [input.sonar_results.qualityGate.status],
+    )
+}
+
+allow if count(violations) == 0
+```
+
+The Sonar tile renders the quality-gate name, status, and each condition with its threshold and actual value — so reviewers can see exactly which condition failed regardless of whether you've attached a policy.
 
 ## How to use it
 
-The data shape matches the legacy `kosli attest sonar` command. See [`kosli attest sonar`](/client_reference/kosli_attest_sonar) for the current CLI flags. The system type provides the same compliance behaviour through the new `kosli attest system sonar` command.
+The pattern is identical to SARIF — see the [SARIF tutorial](/tutorials/attest_sarif) for the full walkthrough. The legacy `kosli attest sonar` command (which hardcodes the "quality gate must be OK" rule) continues to work; see [`kosli attest sonar`](/client_reference/kosli_attest_sonar) for that path.
