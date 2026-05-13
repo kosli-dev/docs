@@ -35,7 +35,13 @@
           "group": "Attestation types",
           "pages": [
             "attestation_types/overview",
-            "attestation_types/custom/overview",
+            {
+              "group": "Custom attestation types",
+              "pages": [
+                "attestation_types/custom/overview",
+                "attestation_types/custom/managing"
+              ]
+            },
             {
               "group": "System attestation types",
               "pages": [
@@ -70,12 +76,6 @@
               "group": "Managing Environments",
               "pages": [
                 "administration/managing_environments/overview"
-              ]
-            },
-            {
-              "group": "Managing Custom Attestation Types",
-              "pages": [
-                "administration/managing_custom_attestation_types/overview"
               ]
             },
             "administration/managing_tags"

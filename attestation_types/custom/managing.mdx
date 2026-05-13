@@ -1,20 +1,13 @@
 ---
-title: Managing Custom Attestation Types
-description: Learn how to manage Kosli custom attestation types via Terraform, including creating and importing types with JSON Schema and jq evaluation rules.
+title: Managing custom types with Terraform
+description: Create and manage Kosli custom attestation types using the Kosli Terraform provider — keeps type definitions version-controlled alongside the rest of your infrastructure.
 ---
 
-The preferred way to manage custom attestation types is via the <Tooltip tip="An official HashiCorp-registered Terraform provider that lets you manage Kosli resources (environments, flows, policies, etc.) as infrastructure as code." cta="View on Terraform Registry" href="https://registry.terraform.io/providers/kosli-dev/kosli/latest/docs/">Kosli Terraform provider</Tooltip>, so your Kosli configuration is version-controlled alongside your infrastructure. You can also manage custom attestation types through the Kosli CLI.
+The recommended way to manage custom attestation types in production is via the <Tooltip tip="An official HashiCorp-registered Terraform provider that lets you manage Kosli resources (environments, flows, policies, etc.) as infrastructure as code." cta="View on Terraform Registry" href="https://registry.terraform.io/providers/kosli-dev/kosli/latest/docs/">Kosli Terraform provider</Tooltip>. Type definitions live in your IaC repo alongside the rest of your Kosli configuration, schema and jq-rule changes go through the same review process as the rest of your infrastructure, and the type's version history is tracked by your version control system.
 
 <Info>
-This page covers managing custom attestation types via Terraform. For an introduction to custom attestation types and creating them via the CLI, see [Getting started: Attestations](/getting_started/attestations).
+For the conceptual picture — what a custom attestation type is, when to use one, how the pieces fit together — see [Custom attestation types](/attestation_types/custom/overview). For ad-hoc creation via the CLI, see [`kosli create attestation-type`](/client_reference/kosli_create_attestation-type) and the [getting started attestations guide](/getting_started/attestations).
 </Info>
-
-Custom attestation types define how Kosli validates evidence from tools that don't have a built-in Kosli attestation command. Each type can include:
-
-- A **JSON Schema** (optional) that defines the expected structure of attestation data
-- **jq rules** (optional) that evaluate the data to determine compliance
-
-At least one of the two must be provided.
 
 ## Create a custom attestation type
 

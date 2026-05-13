@@ -35,29 +35,13 @@ At least one of (2) or (3) must be provided. A type with a schema but no jq rule
 
 ### Example
 
-A type that accepts a security scan summary and requires zero critical and fewer than five high vulnerabilities:
+A type that accepts a security scan summary and requires zero critical and fewer than five high vulnerabilities — described in plain English:
 
-```hcl
-resource "kosli_custom_attestation_type" "security_scan" {
-  name        = "security-scan"
-  description = "Validates security scan results"
+- **Name**: `security-scan`
+- **Schema**: object with three required integer/string fields (`critical_vulnerabilities`, `high_vulnerabilities`, `scan_date`)
+- **jq rules**: `.critical_vulnerabilities == 0` AND `.high_vulnerabilities < 5`
 
-  schema = jsonencode({
-    type = "object"
-    properties = {
-      critical_vulnerabilities = { type = "integer" }
-      high_vulnerabilities     = { type = "integer" }
-      scan_date                = { type = "string" }
-    }
-    required = ["critical_vulnerabilities", "high_vulnerabilities", "scan_date"]
-  })
-
-  jq_rules = [
-    ".critical_vulnerabilities == 0",
-    ".high_vulnerabilities < 5"
-  ]
-}
-```
+For the concrete Terraform definition of the same type and the full create/import workflow, see [Managing custom types with Terraform](/attestation_types/custom/managing).
 
 ## Versioning
 
@@ -75,11 +59,17 @@ Custom types are versioned. When you change a type's schema or jq rules, Kosli c
 
 ## Creating and managing custom types
 
-Custom attestation types can be managed via:
+Two paths, depending on how you work:
 
-- **The Kosli Terraform provider** — recommended for production workloads, keeps your type definitions version-controlled alongside the rest of your infrastructure. See [Managing custom attestation types](/administration/managing_custom_attestation_types/overview) for the full guide.
-- **The Kosli CLI** — `kosli create attestation-type` for quick creation and prototyping. See the [getting started attestations guide](/getting_started/attestations) for the basics.
+<CardGroup cols={2}>
+  <Card title="Terraform (production)" icon="cube" href="/attestation_types/custom/managing">
+    Keep type definitions version-controlled alongside your other infrastructure. Recommended for production workloads.
+  </Card>
+  <Card title="Kosli CLI (ad-hoc)" icon="terminal" href="/client_reference/kosli_create_attestation-type">
+    `kosli create attestation-type` for quick creation and prototyping. See [getting started attestations](/getting_started/attestations) for an example.
+  </Card>
+</CardGroup>
 
 ## Reporting a custom attestation
 
-Use `kosli attest custom` to report an attestation against a custom type. See [`kosli attest custom`](/client_reference/kosli_attest_custom) for the full flag reference.
+Once a custom type exists, use `kosli attest custom` to report an attestation against it. See [`kosli attest custom`](/client_reference/kosli_attest_custom) for the full flag reference.
