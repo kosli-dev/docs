@@ -1,0 +1,216 @@
+---
+title: "Attesting SARIF scans"
+description: "Attest the output of any SARIF v2.1.0 security scanner — Checkov, Trivy, Semgrep, Snyk, CodeQL — to a Kosli trail, with optional rego-driven compliance."
+---
+
+In this tutorial you'll attest SARIF scan results to a Kosli trail using the `system:sarif` attestation type. You'll work through three modes, each adding one piece on top of the last:
+
+1. **Raw fact** — attest the SARIF file, no policy. Records what the scan found.
+2. **Rego policy, two-step** — run a [rego](https://www.openpolicyagent.org/docs/latest/policy-language/) policy with `kosli evaluate`, then attest the SARIF file alongside the policy verdict.
+3. **Rego policy, one-step** — pass the `.rego` file directly to `kosli attest`, which runs the policy inline.
+
+By the end you'll have one Kosli trail with three SARIF attestations and a clear sense of which mode fits which situation.
+
+<Note>
+This tutorial uses [Checkov](https://www.checkov.io/) to scan a Terraform file, because Checkov is the most common SARIF-producing scanner customers ask us about. Every command after the scan step is identical for any other SARIF v2.1.0 producer — Trivy, Semgrep, Snyk, CodeQL, Bandit. Swap the scanner; the kosli commands don't change.
+</Note>
+
+<Steps>
+
+<Step title="Prerequisites">
+
+To follow this tutorial you'll need:
+
+* [Install Checkov](https://www.checkov.io/2.Basics/Installing%20Checkov.html) — `pip install checkov`
+* [Install Kosli CLI](/getting_started/install)
+* [Get a Kosli API token](/getting_started/service-accounts)
+
+Set the environment variables:
+
+```shell
+export KOSLI_ORG=<your-personal-kosli-org-name>
+export KOSLI_API_TOKEN=<your-api-token>
+```
+
+</Step>
+
+<Step title="Create a flow and trail">
+
+Create a flow with a `system:sarif` slot in its template:
+
+```yaml flow_template.yml
+version: 1
+trail:
+  attestations:
+    - name: security-scan
+      type: system:sarif
+```
+
+```shell
+kosli create flow sarif-demo \
+  --template-file flow_template.yml \
+  --description "Demo of SARIF attestation"
+```
+
+You should see: `flow 'sarif-demo' was created`.
+
+Begin a trail to attach attestations to:
+
+```shell
+kosli begin trail test-1 --flow sarif-demo
+```
+
+You should see: `trail 'test-1' was begun`.
+
+</Step>
+
+<Step title="Get a SARIF file to attest">
+
+Create a small Terraform file with a known misconfiguration so Checkov has something to find:
+
+```hcl main.tf
+resource "aws_s3_bucket" "example" {
+  bucket = "my-tutorial-bucket"
+  # Intentional findings: no versioning, no encryption, no logging.
+}
+```
+
+Run Checkov to produce a SARIF file:
+
+```shell
+checkov -d . -o sarif --output-file-path . 2>/dev/null
+```
+
+This writes `results_sarif.sarif` in the current directory. Inspect the first few lines if you'd like to see the SARIF structure — Kosli will parse it automatically.
+
+</Step>
+
+<Step title="Mode 1: Attest the SARIF file as a raw fact">
+
+The simplest mode: attest the scan results with no compliance policy. The attestation records what Checkov found; compliance is structural only ("a SARIF file was attached").
+
+```shell
+kosli attest system sarif \
+  --flow sarif-demo \
+  --trail test-1 \
+  --name security-scan \
+  --scan-results results_sarif.sarif
+```
+
+You should see: `sarif attestation 'security-scan' is reported to trail: test-1`.
+
+Open the trail in the Kosli app (`https://app.kosli.com/<your-org>/flows/sarif-demo/trails/test-1`). The attestation tile shows:
+
+- Tool name and version — pulled dynamically from the SARIF file (so it reads "Checkov 3.2.x", not "Snyk")
+- High / medium / low finding counts
+- Expandable findings table with rule ID, message, file, and line for each finding
+- Compliance: ✓ compliant ("no extra policy evaluated — compliance based on system type JQ rules only")
+
+</Step>
+
+<Step title="Mode 2: Layer in a rego policy (two-step)">
+
+The raw-fact mode is useful but customers usually want compliance gated on the findings — e.g. *"fail if any finding has severity 'error'"* (Checkov's word for high). For that we layer a rego policy on top.
+
+Create a policy file:
+
+```rego checkov.rego
+package policy
+
+import rego.v1
+
+default allow = false
+
+violations contains msg if {
+    some result in input.runs[0].results
+    result.level == "error"
+    msg := sprintf("%s in %s:%d", [
+        result.ruleId,
+        result.locations[0].physicalLocation.artifactLocation.uri,
+        result.locations[0].physicalLocation.region.startLine,
+    ])
+}
+
+allow if {
+    count(violations) == 0
+}
+```
+
+The policy denies the attestation if any Checkov finding has severity `error` (high). Otherwise it allows.
+
+Run the policy against the SARIF file with `kosli evaluate input`:
+
+```shell
+kosli evaluate input \
+  --input-file results_sarif.sarif \
+  --policy checkov.rego \
+  --output json > eval.json
+```
+
+This writes a JSON file containing `{ "allow": bool, "violations": [...] }`. Take a look — that's the verdict you're about to attest.
+
+Now attest the SARIF file together with the policy verdict and the policy file itself:
+
+```shell
+kosli attest system sarif \
+  --flow sarif-demo \
+  --trail test-1 \
+  --name security-scan-with-policy \
+  --scan-results results_sarif.sarif \
+  --evaluation-result eval.json \
+  --policy checkov.rego
+```
+
+The `--policy` flag is required whenever you pass `--evaluation-result` — the policy file is uploaded to the audit trail so anyone reading the attestation later can see which rules were applied.
+
+Open the trail again. The new tile now shows:
+
+- The same findings table as mode 1
+- A "Policy evaluation" section: verdict badge (allow / deny), violations as readable bullets
+- An inline view of the rego policy content (always embedded — no extra click needed to see the rules)
+- A download link for the `.rego` file
+
+The compliance verdict now comes from your policy, not from the structural check.
+
+</Step>
+
+<Step title="Mode 3: Same outcome, one command">
+
+Running `kosli evaluate` and `kosli attest system sarif` as two separate commands is fine for CI pipelines that already have an explicit evaluate step. For the common case — "I have a SARIF file and a rego policy, please attest both" — pass the `.rego` file directly to `attest`:
+
+```shell
+kosli attest system sarif \
+  --flow sarif-demo \
+  --trail test-1 \
+  --name security-scan-inline \
+  --scan-results results_sarif.sarif \
+  --policy checkov.rego
+```
+
+The CLI runs `kosli evaluate input` for you, embeds the result, uploads the policy as an attachment, and posts the attestation in one call. The tile in the app looks identical to mode 2.
+
+<Note>
+If the policy fails to compile or rego execution errors, the CLI aborts the whole call — no half-attested state. Fix the policy and re-run.
+</Note>
+
+</Step>
+
+</Steps>
+
+## What you've accomplished
+
+You now have a Kosli trail with three SARIF attestations covering the three customer modes:
+
+- **`security-scan`** — facts only, no compliance policy
+- **`security-scan-with-policy`** — facts plus an explicit rego policy evaluation
+- **`security-scan-inline`** — same as above, posted in one CLI call
+
+You've also seen how the SARIF system type's tile renders in each mode, and where the policy file lives in the audit trail.
+
+## Next steps
+
+- **Browse other system types** in the [catalogue](/attestation_types/system/catalogue) — system types is the strategic direction; over time more scanners will get first-class attestation tiles.
+- **Read the SARIF type reference** for the full data shape and version history: [System type: SARIF](/attestation_types/system/sarif).
+- **Adapt to your scanner** — replace Checkov with Trivy, Semgrep, Snyk, CodeQL, or any other SARIF v2.1.0 producer. The `kosli attest system sarif` commands are unchanged.
+- **Migrate from the snyk type** — if you currently use `kosli attest snyk` (even with non-Snyk SARIF), see the migration note on the [SARIF type page](/attestation_types/system/sarif).
+- **Wire into CI** — add the same commands to your GitHub Actions pipeline using the [Kosli GitHub Action](/integrations/actions).
