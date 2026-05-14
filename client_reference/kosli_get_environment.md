@@ -16,21 +16,20 @@ Get an environment's metadata.
 ## Flags
 | Flag | Description |
 | :--- | :--- |
-|    `-h`, `--help`  |  help for environment  |
-|    `-o`, `--output` string  |  [defaulted] The format of the output. Valid formats are: [table, json]. (default "table")  |
+|    -h, --help  |  help for environment  |
+|    -o, --output string  |  [defaulted] The format of the output. Valid formats are: [table, json]. (default "table")  |
 
 
 ## Flags inherited from parent commands
 | Flag | Description |
 | :--- | :--- |
-|    `-a`, `--api-token` string  |  The Kosli API token.  |
-|    `-c`, `--config-file` string  |  [optional] The Kosli config file path. (default "kosli")  |
-|        `--debug`  |  [optional] Print debug logs to stdout.  |
-|    `-H`, `--host` string  |  [defaulted] The Kosli endpoint. (default "https://app.kosli.com")  |
-|        `--http-proxy` string  |  [optional] The HTTP proxy URL including protocol and port number. e.g. `http://proxy-server-ip:proxy-port`  |
-|    `-r`, `--max-api-retries` int  |  [defaulted] How many times should API calls be retried when the API host is not reachable. (default 3)  |
-|        `--org` string  |  The Kosli organization.  |
-|    `-q`, `--quiet`  |  [optional] Suppress non-critical warning messages. Errors and normal output are not affected. If both `--quiet` and `--debug` are set, `--debug` wins.  |
+|    -a, --api-token string  |  The Kosli API token.  |
+|    -c, --config-file string  |  [optional] The Kosli config file path. (default "kosli")  |
+|        --debug  |  [optional] Print debug logs to stdout. A boolean flag [docs](/faq/#boolean-flags) (default false)  |
+|    -H, --host string  |  [defaulted] The Kosli endpoint. (default "https://app.kosli.com")  |
+|        --http-proxy string  |  [optional] The HTTP proxy URL including protocol and port number. e.g. 'http://proxy-server-ip:proxy-port'  |
+|    -r, --max-api-retries int  |  [defaulted] How many times should API calls be retried when the API host is not reachable. (default 3)  |
+|        --org string  |  The Kosli organization.  |
 
 ## Live Example
 
@@ -52,8 +51,8 @@ kosli get environment aws-prod --output=json
   "name": "aws-prod",
   "type": "ECS",
   "description": "The ECS cluster for production cyber-dojo",
-  "last_modified_at": 1778779798.6120074,
-  "last_reported_at": 1778779798.6120074,
+  "last_modified_at": 1777983298.5339797,
+  "last_reported_at": 1777983298.5339797,
   "state": true,
   "include_scaling": false,
   "tags": {

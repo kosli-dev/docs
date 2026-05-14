@@ -16,21 +16,20 @@ List flows for an org.
 ## Flags
 | Flag | Description |
 | :--- | :--- |
-|    `-h`, `--help`  |  help for flows  |
-|    `-o`, `--output` string  |  [defaulted] The format of the output. Valid formats are: [table, json]. (default "table")  |
+|    -h, --help  |  help for flows  |
+|    -o, --output string  |  [defaulted] The format of the output. Valid formats are: [table, json]. (default "table")  |
 
 
 ## Flags inherited from parent commands
 | Flag | Description |
 | :--- | :--- |
-|    `-a`, `--api-token` string  |  The Kosli API token.  |
-|    `-c`, `--config-file` string  |  [optional] The Kosli config file path. (default "kosli")  |
-|        `--debug`  |  [optional] Print debug logs to stdout.  |
-|    `-H`, `--host` string  |  [defaulted] The Kosli endpoint. (default "https://app.kosli.com")  |
-|        `--http-proxy` string  |  [optional] The HTTP proxy URL including protocol and port number. e.g. `http://proxy-server-ip:proxy-port`  |
-|    `-r`, `--max-api-retries` int  |  [defaulted] How many times should API calls be retried when the API host is not reachable. (default 3)  |
-|        `--org` string  |  The Kosli organization.  |
-|    `-q`, `--quiet`  |  [optional] Suppress non-critical warning messages. Errors and normal output are not affected. If both `--quiet` and `--debug` are set, `--debug` wins.  |
+|    -a, --api-token string  |  The Kosli API token.  |
+|    -c, --config-file string  |  [optional] The Kosli config file path. (default "kosli")  |
+|        --debug  |  [optional] Print debug logs to stdout. A boolean flag [docs](/faq/#boolean-flags) (default false)  |
+|    -H, --host string  |  [defaulted] The Kosli endpoint. (default "https://app.kosli.com")  |
+|        --http-proxy string  |  [optional] The HTTP proxy URL including protocol and port number. e.g. 'http://proxy-server-ip:proxy-port'  |
+|    -r, --max-api-retries int  |  [defaulted] How many times should API calls be retried when the API host is not reachable. (default 3)  |
+|        --org string  |  The Kosli organization.  |
 
 ## Live Example
 
@@ -162,7 +161,7 @@ kosli list flows --output=json
     "description": "Promotes sets of Artifacts from aws-beta to aws-prod",
     "visibility": "private",
     "org": "cyber-dojo",
-    "template": "version: 1\n\ntrail:\n  attestations:\n    - name: all-promotions\n      type: generic\n",
+    "template": "version: 1\n\ntrail:\n  attestations:\n    - name: one-promotion\n      type: generic\n",
     "repo_url": "https://github.com/cyber-dojo/aws-prod-co-promotion",
     "tags": {
       "ci": "github",
@@ -219,11 +218,11 @@ kosli list flows --output=json
     }
   },
   {
-    "name": "snyk-aws-beta-per-artifact",
-    "description": "Snyk vulns in aws-beta artifacts",
+    "name": "snyk-vulns-aws-beta",
+    "description": "",
     "visibility": "private",
     "org": "cyber-dojo",
-    "template": "version: 1",
+    "template": "version: 1\ntrail:\n  attestations: []\n  artifacts:\n  - name: artifact\n    attestations: []\n",
     "repo_url": "https://github.com/cyber-dojo/snyk-scanning",
     "tags": {
       "ci": "github",
@@ -232,42 +231,16 @@ kosli list flows --output=json
     }
   },
   {
-    "name": "snyk-aws-beta-per-vuln",
-    "description": "Individual Snyk vuln trails for aws-beta artifacts",
+    "name": "snyk-vulns-aws-prod",
+    "description": "",
     "visibility": "private",
     "org": "cyber-dojo",
     "template": "version: 1\ntrail:\n  attestations: []\n  artifacts:\n  - name: artifact\n    attestations: []\n",
-    "repo_url": "",
-    "tags": {
-      "ci": "github",
-      "kind": "run",
-      "workflow_url": "https://github.com/cyber-dojo/snyk-scanning/blob/main/.github/workflows/artifact_snyk_test.yml"
-    }
-  },
-  {
-    "name": "snyk-aws-prod-per-artifact",
-    "description": "Snyk vulns in aws-prod artifacts",
-    "visibility": "private",
-    "org": "cyber-dojo",
-    "template": "version: 1",
     "repo_url": "https://github.com/cyber-dojo/snyk-scanning",
     "tags": {
       "ci": "github",
       "kind": "run",
       "workflow_url": "https://github.com/cyber-dojo/snyk-scanning/blob/main/.github/workflows/aws-prod.yml"
-    }
-  },
-  {
-    "name": "snyk-aws-prod-per-vuln",
-    "description": "Individual Snyk vuln trails for aws-prod artifacts",
-    "visibility": "private",
-    "org": "cyber-dojo",
-    "template": "version: 1\ntrail:\n  attestations: []\n  artifacts:\n  - name: artifact\n    attestations: []\n",
-    "repo_url": "",
-    "tags": {
-      "ci": "github",
-      "kind": "run",
-      "workflow_url": "https://github.com/cyber-dojo/snyk-scanning/blob/main/.github/workflows/artifact_snyk_test.yml"
     }
   },
   {

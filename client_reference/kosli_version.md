@@ -25,20 +25,19 @@ version.BuildInfo\{Version:"v0.0.1", GitCommit:"fe51cd1e31e6a202cba7dead9552a6d4
 ## Flags
 | Flag | Description |
 | :--- | :--- |
-|    `-h`, `--help`  |  help for version  |
-|    `-s`, `--short`  |  [optional] Print only the Kosli CLI version number.  |
+|    -h, --help  |  help for version  |
+|    -s, --short  |  [optional] Print only the Kosli CLI version number.  |
 
 
 ## Flags inherited from parent commands
 | Flag | Description |
 | :--- | :--- |
-|    `-a`, `--api-token` string  |  The Kosli API token.  |
-|    `-c`, `--config-file` string  |  [optional] The Kosli config file path. (default "kosli")  |
-|        `--debug`  |  [optional] Print debug logs to stdout.  |
-|    `-H`, `--host` string  |  [defaulted] The Kosli endpoint. (default "https://app.kosli.com")  |
-|        `--http-proxy` string  |  [optional] The HTTP proxy URL including protocol and port number. e.g. `http://proxy-server-ip:proxy-port`  |
-|    `-r`, `--max-api-retries` int  |  [defaulted] How many times should API calls be retried when the API host is not reachable. (default 3)  |
-|        `--org` string  |  The Kosli organization.  |
-|    `-q`, `--quiet`  |  [optional] Suppress non-critical warning messages. Errors and normal output are not affected. If both `--quiet` and `--debug` are set, `--debug` wins.  |
+|    -a, --api-token string  |  The Kosli API token.  |
+|    -c, --config-file string  |  [optional] The Kosli config file path. (default "kosli")  |
+|        --debug  |  [optional] Print debug logs to stdout. A boolean flag [docs](/faq/#boolean-flags) (default false)  |
+|    -H, --host string  |  [defaulted] The Kosli endpoint. (default "https://app.kosli.com")  |
+|        --http-proxy string  |  [optional] The HTTP proxy URL including protocol and port number. e.g. 'http://proxy-server-ip:proxy-port'  |
+|    -r, --max-api-retries int  |  [defaulted] How many times should API calls be retried when the API host is not reachable. (default 3)  |
+|        --org string  |  The Kosli organization.  |
 
 

@@ -18,23 +18,22 @@ use --set to add or update tags, and --unset to remove tags.
 ## Flags
 | Flag | Description |
 | :--- | :--- |
-|    `-D`, `--dry-run`  |  [optional] Run in dry-run mode. When enabled, no data is sent to Kosli and the CLI exits with 0 exit code regardless of any errors.  |
-|    `-h`, `--help`  |  help for tag  |
-|        `--set` stringToString  |  [optional] The key-value pairs to tag the resource with. The format is: key=value  |
-|        `--unset` strings  |  [optional] The list of tag keys to remove from the resource.  |
+|    -D, --dry-run  |  [optional] Run in dry-run mode. When enabled, no data is sent to Kosli and the CLI exits with 0 exit code regardless of any errors.  |
+|    -h, --help  |  help for tag  |
+|        --set stringToString  |  [optional] The key-value pairs to tag the resource with. The format is: key=value  |
+|        --unset strings  |  [optional] The list of tag keys to remove from the resource.  |
 
 
 ## Flags inherited from parent commands
 | Flag | Description |
 | :--- | :--- |
-|    `-a`, `--api-token` string  |  The Kosli API token.  |
-|    `-c`, `--config-file` string  |  [optional] The Kosli config file path. (default "kosli")  |
-|        `--debug`  |  [optional] Print debug logs to stdout.  |
-|    `-H`, `--host` string  |  [defaulted] The Kosli endpoint. (default "https://app.kosli.com")  |
-|        `--http-proxy` string  |  [optional] The HTTP proxy URL including protocol and port number. e.g. `http://proxy-server-ip:proxy-port`  |
-|    `-r`, `--max-api-retries` int  |  [defaulted] How many times should API calls be retried when the API host is not reachable. (default 3)  |
-|        `--org` string  |  The Kosli organization.  |
-|    `-q`, `--quiet`  |  [optional] Suppress non-critical warning messages. Errors and normal output are not affected. If both `--quiet` and `--debug` are set, `--debug` wins.  |
+|    -a, --api-token string  |  The Kosli API token.  |
+|    -c, --config-file string  |  [optional] The Kosli config file path. (default "kosli")  |
+|        --debug  |  [optional] Print debug logs to stdout. A boolean flag [docs](/faq/#boolean-flags) (default false)  |
+|    -H, --host string  |  [defaulted] The Kosli endpoint. (default "https://app.kosli.com")  |
+|        --http-proxy string  |  [optional] The HTTP proxy URL including protocol and port number. e.g. 'http://proxy-server-ip:proxy-port'  |
+|    -r, --max-api-retries int  |  [defaulted] How many times should API calls be retried when the API host is not reachable. (default 3)  |
+|        --org string  |  The Kosli organization.  |
 
 
 ## Live Examples in different CI systems
@@ -43,7 +42,7 @@ use --set to add or update tags, and --unset to remove tags.
 	<Tab title="GitHub">
 	View an example of the `kosli tag` command in GitHub.
 
-	In [this YAML file](https://github.com/cyber-dojo/aws-prod-co-promotion/blob/cd10b07c778a554edf81b7c04d283858b8651769/.github/workflows/promote_one.yml#L73)
+	In [this YAML file](https://github.com/cyber-dojo/aws-prod-co-promotion/blob/87f1f819ee6eaaf1f811259b0778f5e0cff7a0fa/.github/workflows/promote_one.yml#L74)
 	</Tab>
 	<Tab title="GitLab">
 	View an example of the `kosli tag` command in GitLab.
