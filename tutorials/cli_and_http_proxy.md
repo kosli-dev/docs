@@ -58,6 +58,59 @@ If your proxy requires authentication, embed the credentials in the proxy URL:
 kosli list envs --org cyber-dojo --http-proxy http://username:password@proxy-host:8080 --api-token <your-token>
 ```
 
+## More examples
+
+Once the proxy is running, any Kosli CLI command can be routed through it by adding the `--http-proxy` flag. Here are some common examples:
+
+**Report a Docker image artifact through the proxy:**
+
+```shell
+kosli attest artifact my-app:latest \
+  --artifact-type docker \
+  --flow my-flow \
+  --trail $(git rev-parse HEAD) \
+  --name my-app \
+  --http-proxy http://localhost:8888 \
+  --api-token <your-token> \
+  --org <your-org>
+```
+
+**Snapshot a Kubernetes cluster through the proxy:**
+
+```shell
+kosli snapshot k8s my-k8s-env \
+  --kubeconfig ~/.kube/config \
+  --namespaces production \
+  --http-proxy http://localhost:8888 \
+  --api-token <your-token> \
+  --org <your-org>
+```
+
+**Attach a JUnit test attestation through the proxy:**
+
+```shell
+kosli attest junit \
+  --name unit-tests \
+  --flow my-flow \
+  --trail $(git rev-parse HEAD) \
+  --results-dir ./test-results \
+  --http-proxy http://localhost:8888 \
+  --api-token <your-token> \
+  --org <your-org>
+```
+
+**Request an approval through the proxy:**
+
+```shell
+kosli request approval my-app:latest \
+  --artifact-type docker \
+  --flow my-flow \
+  --description "Approve release to production" \
+  --http-proxy http://localhost:8888 \
+  --api-token <your-token> \
+  --org <your-org>
+```
+
 ## Persist the proxy configuration
 
 Rather than passing `--http-proxy` on every command, save it to your Kosli config:
