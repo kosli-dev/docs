@@ -47,51 +47,51 @@ The attestation can be bound to an *artifact* in two ways:
 ## Flags
 | Flag | Description |
 | :--- | :--- |
-|        --annotate stringToString  |  [optional] Annotate the attestation with data using key=value.  |
-|    -t, --artifact-type string  |  The type of the artifact to calculate its SHA256 fingerprint. One of: [oci, docker, file, dir]. Only required if you want Kosli to calculate the fingerprint for you (i.e. when you don't specify '--fingerprint' on commands that allow it).  |
-|        --attachments strings  |  [optional] The comma-separated list of paths of attachments for the reported attestation. Attachments can be files or directories. All attachments are compressed and uploaded to Kosli's evidence vault.  |
-|    -g, --commit string  |  [conditional] The git commit for which the attestation is associated to. Becomes required when reporting an attestation for an artifact before reporting it to Kosli. (defaulted in some CIs: [docs](/integrations/ci_cd) ).  |
-|        --description string  |  [optional] attestation description  |
-|    -D, --dry-run  |  [optional] Run in dry-run mode. When enabled, no data is sent to Kosli and the CLI exits with 0 exit code regardless of any errors.  |
-|    -x, --exclude strings  |  [optional] The comma separated list of directories and files to exclude from fingerprinting. Can take glob patterns. Only applicable for --artifact-type dir.  |
-|        --external-fingerprint stringToString  |  [optional] A SHA256 fingerprint of an external attachment represented by --external-url. The format is label=fingerprint (labels cannot contain '.' or '='). This flag can be set multiple times. There must be an external url with a matching label for each external fingerprint.  |
-|        --external-url stringToString  |  [optional] Add labeled reference URL for an external resource. The format is label=url (labels cannot contain '.' or '='). This flag can be set multiple times. If the resource is a file or dir, you can optionally add its fingerprint via --external-fingerprint  |
-|    -F, --fingerprint string  |  [conditional] The SHA256 fingerprint of the artifact to attach the attestation to. Only required if the attestation is for an artifact and --artifact-type and artifact name/path are not used.  |
-|    -f, --flow string  |  The Kosli flow name.  |
-|    -h, --help  |  help for sonar  |
-|        --max-wait int  |  [optional] Allow the command to wait and retry fetching the scan results from SonarQube, up to the maximum number of seconds provided, with exponential backoff. Useful when using SonarQube's metadata file to retrieve and attest scans that take a long time to process . Defaults to 30 seconds. (default 30)  |
-|    -n, --name string  |  The name of the attestation as declared in the flow or trail yaml template.  |
-|    -o, --origin-url string  |  [optional] The url pointing to where the attestation came from or is related. (defaulted to the CI url in some CIs: [docs](/integrations/ci_cd/#defaulted-kosli-command-flags-from-ci-variables) ).  |
-|        --pull-request string  |  [conditional] The ID of the pull-request. Only required if you want to use the project key/pull-request to get the scan results rather than using Sonar's metadata file. Cannot be used with --sonar-revision.  |
-|        --redact-commit-info strings  |  [optional] The list of commit info to be redacted before sending to Kosli. Allowed values are one or more of [author, message, branch].  |
-|        --registry-password string  |  [conditional] The container registry password or access token. Only required if you want to read container image SHA256 digest from a remote container registry.  |
-|        --registry-username string  |  [conditional] The container registry username. Only required if you want to read container image SHA256 digest from a remote container registry.  |
-|        --repo-id string  |  [conditional] The stable, unique identifier for the repository in your VCS provider (e.g. a numeric ID). Do not use the repository name as it can change if the repo is renamed. All three of --repo-id, --repo-url and --repository must be set to record repository information (defaulted in some CIs: [docs](/integrations/ci_cd) ).  |
-|        --repo-provider string  |  [optional] The source code hosting provider. One of: github, gitlab, bitbucket, azure-devops (defaulted in some CIs: [docs](/integrations/ci_cd) ).  |
-|        --repo-root string  |  [defaulted] The directory where the source git repository is available. Only used if --commit is used or defaulted in CI, see [docs](/integrations/ci_cd/#defaulted-kosli-command-flags-from-ci-variables) . (default ".")  |
-|        --repo-url string  |  [conditional] The URL of the repository. Must be a valid URL. All three of --repo-id, --repo-url and --repository must be set to record repository information (defaulted in some CIs: [docs](/integrations/ci_cd) ).  |
-|        --repository string  |  [conditional] The name of the repository (e.g. owner/repo-name). All three of --repo-id, --repo-url and --repository must be set to record repository information (defaulted in some CIs: [docs](/integrations/ci_cd) ).  |
-|        --sonar-api-token string  |  [required] SonarQube API token.  |
-|        --sonar-ce-task-url string  |  [conditional] The URL of the SonarQube CE task. Can be used instead of --sonar-working-dir when the report-task.txt file is not accessible, e.g. due to container isolation in CI/CD pipelines.  |
-|        --sonar-project-key string  |  [conditional] The project key of the SonarQube project. Only required if you want to use the project key/revision/pull-request to get the scan results rather than using Sonar's metadata file.  |
-|        --sonar-revision string  |  [conditional] The revision of the SonarQube project. Only required if you want to use the project key/revision to get the scan results rather than using Sonar's metadata file and you have overridden the default revision, or you aren't using a CI. Defaults to the value of the git commit flag. Cannot be used with --pull-request.  |
-|        --sonar-server-url string  |  [conditional] The URL of your SonarQube server. Only required if you are using SonarQube Server and not using SonarQube's metadata file to get scan results. (default "https://sonarcloud.io")  |
-|        --sonar-working-dir string  |  [conditional] The base directory of the repo scanned by SonarQube. Only required if you have overriden the default in the sonar scanner or you are running the CLI locally in a separate folder from the repo. (default ".scannerwork")  |
-|    -T, --trail string  |  The Kosli trail name.  |
-|    -u, --user-data string  |  [optional] The path to a JSON file containing additional data you would like to attach to the attestation.  |
+|        `--annotate` stringToString  |  [optional] Annotate the attestation with data using key=value.  |
+|    `-t`, `--artifact-type` string  |  The type of the artifact to calculate its SHA256 fingerprint. One of: [oci, docker, file, dir]. Only required if you want Kosli to calculate the fingerprint for you (i.e. when you don't specify '`--fingerprint`' on commands that allow it).  |
+|        `--attachments` strings  |  [optional] The comma-separated list of paths of attachments for the reported attestation. Attachments can be files or directories. All attachments are compressed and uploaded to Kosli's evidence vault.  |
+|    `-g`, `--commit` string  |  [conditional] The git commit for which the attestation is associated to. Becomes required when reporting an attestation for an artifact before reporting it to Kosli. (defaulted in some CIs: [docs](/integrations/ci_cd) ).  |
+|        `--description` string  |  [optional] attestation description  |
+|    `-D`, `--dry-run`  |  [optional] Run in dry-run mode. When enabled, no data is sent to Kosli and the CLI exits with 0 exit code regardless of any errors.  |
+|    `-x`, `--exclude` strings  |  [optional] The comma separated list of directories and files to exclude from fingerprinting. Can take glob patterns. Only applicable for `--artifact-type` dir.  |
+|        `--external-fingerprint` stringToString  |  [optional] A SHA256 fingerprint of an external attachment represented by `--external-url`. The format is label=fingerprint (labels cannot contain '.' or '='). This flag can be set multiple times. There must be an external url with a matching label for each external fingerprint.  |
+|        `--external-url` stringToString  |  [optional] Add labeled reference URL for an external resource. The format is label=url (labels cannot contain '.' or '='). This flag can be set multiple times. If the resource is a file or dir, you can optionally add its fingerprint via `--external-fingerprint`  |
+|    `-F`, `--fingerprint` string  |  [conditional] The SHA256 fingerprint of the artifact to attach the attestation to. Only required if the attestation is for an artifact and `--artifact-type` and artifact name/path are not used.  |
+|    `-f`, `--flow` string  |  The Kosli flow name.  |
+|    `-h`, `--help`  |  help for sonar  |
+|        `--max-wait` int  |  [optional] Allow the command to wait and retry fetching the scan results from SonarQube, up to the maximum number of seconds provided, with exponential backoff. Useful when using SonarQube's metadata file to retrieve and attest scans that take a long time to process . Defaults to 30 seconds. (default 30)  |
+|    `-n`, `--name` string  |  The name of the attestation as declared in the flow or trail yaml template.  |
+|    `-o`, `--origin-url` string  |  [optional] The url pointing to where the attestation came from or is related. (defaulted to the CI url in some CIs: [docs](/integrations/ci_cd/#defaulted-kosli-command-flags-from-ci-variables) ).  |
+|        `--pull-request` string  |  [conditional] The ID of the pull-request. Only required if you want to use the project key/pull-request to get the scan results rather than using Sonar's metadata file. Cannot be used with `--sonar-revision`.  |
+|        `--redact-commit-info` strings  |  [optional] The list of commit info to be redacted before sending to Kosli. Allowed values are one or more of [author, message, branch].  |
+|        `--registry-password` string  |  [conditional] The container registry password or access token. Only required if you want to read container image SHA256 digest from a remote container registry.  |
+|        `--registry-username` string  |  [conditional] The container registry username. Only required if you want to read container image SHA256 digest from a remote container registry.  |
+|        `--repo-id` string  |  [conditional] The stable, unique identifier for the repository in your VCS provider (e.g. a numeric ID). Do not use the repository name as it can change if the repo is renamed. All three of `--repo-id`, `--repo-url` and `--repository` must be set to record repository information (defaulted in some CIs: [docs](/integrations/ci_cd) ).  |
+|        `--repo-provider` string  |  [optional] The source code hosting provider. One of: github, gitlab, bitbucket, azure-devops (defaulted in some CIs: [docs](/integrations/ci_cd) ).  |
+|        `--repo-root` string  |  [defaulted] The directory where the source git repository is available. Only used if `--commit` is used or defaulted in CI, see [docs](/integrations/ci_cd/#defaulted-kosli-command-flags-from-ci-variables) . (default ".")  |
+|        `--repo-url` string  |  [conditional] The URL of the repository. Must be a valid URL. All three of `--repo-id`, `--repo-url` and `--repository` must be set to record repository information (defaulted in some CIs: [docs](/integrations/ci_cd) ).  |
+|        `--repository` string  |  [conditional] The name of the repository (e.g. owner/repo-name). All three of `--repo-id`, `--repo-url` and `--repository` must be set to record repository information (defaulted in some CIs: [docs](/integrations/ci_cd) ).  |
+|        `--sonar-api-token` string  |  [required] SonarQube API token.  |
+|        `--sonar-ce-task-url` string  |  [conditional] The URL of the SonarQube CE task. Can be used instead of `--sonar-working-dir` when the report-task.txt file is not accessible, e.g. due to container isolation in CI/CD pipelines.  |
+|        `--sonar-project-key` string  |  [conditional] The project key of the SonarQube project. Only required if you want to use the project key/revision/pull-request to get the scan results rather than using Sonar's metadata file.  |
+|        `--sonar-revision` string  |  [conditional] The revision of the SonarQube project. Only required if you want to use the project key/revision to get the scan results rather than using Sonar's metadata file and you have overridden the default revision, or you aren't using a CI. Defaults to the value of the git commit flag. Cannot be used with `--pull-request`.  |
+|        `--sonar-server-url` string  |  [conditional] The URL of your SonarQube server. Only required if you are using SonarQube Server and not using SonarQube's metadata file to get scan results. (default "https://sonarcloud.io")  |
+|        `--sonar-working-dir` string  |  [conditional] The base directory of the repo scanned by SonarQube. Only required if you have overriden the default in the sonar scanner or you are running the CLI locally in a separate folder from the repo. (default ".scannerwork")  |
+|    `-T`, `--trail` string  |  The Kosli trail name.  |
+|    `-u`, `--user-data` string  |  [optional] The path to a JSON file containing additional data you would like to attach to the attestation.  |
 
 
 ## Flags inherited from parent commands
 | Flag | Description |
 | :--- | :--- |
-|    -a, --api-token string  |  The Kosli API token.  |
-|    -c, --config-file string  |  [optional] The Kosli config file path. (default "kosli")  |
-|        --debug  |  [optional] Print debug logs to stdout.  |
-|    -H, --host string  |  [defaulted] The Kosli endpoint. (default "https://app.kosli.com")  |
-|        --http-proxy string  |  [optional] The HTTP proxy URL including protocol and port number. e.g. `http://proxy-server-ip:proxy-port`  |
-|    -r, --max-api-retries int  |  [defaulted] How many times should API calls be retried when the API host is not reachable. (default 3)  |
-|        --org string  |  The Kosli organization.  |
-|    -q, --quiet  |  [optional] Suppress non-critical warning messages. Errors and normal output are not affected. If both --quiet and --debug are set, --debug wins.  |
+|    `-a`, `--api-token` string  |  The Kosli API token.  |
+|    `-c`, `--config-file` string  |  [optional] The Kosli config file path. (default "kosli")  |
+|        `--debug`  |  [optional] Print debug logs to stdout.  |
+|    `-H`, `--host` string  |  [defaulted] The Kosli endpoint. (default "https://app.kosli.com")  |
+|        `--http-proxy` string  |  [optional] The HTTP proxy URL including protocol and port number. e.g. `http://proxy-server-ip:proxy-port`  |
+|    `-r`, `--max-api-retries` int  |  [defaulted] How many times should API calls be retried when the API host is not reachable. (default 3)  |
+|        `--org` string  |  The Kosli organization.  |
+|    `-q`, `--quiet`  |  [optional] Suppress non-critical warning messages. Errors and normal output are not affected. If both `--quiet` and `--debug` are set, `--debug` wins.  |
 
 
 ## Live Examples in different CI systems
@@ -100,7 +100,7 @@ The attestation can be bound to an *artifact* in two ways:
 	<Tab title="GitHub">
 	View an example of the `kosli attest sonar` command in GitHub.
 
-	In [this YAML file](https://github.com/cyber-dojo/dashboard/blob/89b113a1531ed1a88cd466d67a8e107ee88672d4/.github/workflows/main.yml#L166), which created [this Kosli Event](https://app.kosli.com/cyber-dojo/flows/dashboard-ci/trails/89b113a1531ed1a88cd466d67a8e107ee88672d4?attestation_id=a8fb3cf0-f228-4dd4-8be6-4610d796).
+	In [this YAML file](https://github.com/cyber-dojo/dashboard/blob/f5630dab81ccd7e1a06cecdef60d903669964d3b/.github/workflows/main.yml#L166), which created [this Kosli Event](https://app.kosli.com/cyber-dojo/flows/dashboard-ci/trails/f5630dab81ccd7e1a06cecdef60d903669964d3b?attestation_id=2def5f05-5dab-483f-b143-e50eb9e7).
 	</Tab>
 </Tabs>
 
