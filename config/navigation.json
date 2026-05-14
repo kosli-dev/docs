@@ -80,7 +80,8 @@
               "group": "Reporting environments",
               "pages": [
                 "tutorials/report_aws_envs",
-                "tutorials/report_k8s_envs"
+                "tutorials/report_k8s_envs",
+                "tutorials/report_cloud_run_envs"
               ]
             },
             {
@@ -246,7 +247,6 @@
             {
               "group": "kosli assert",
               "pages": [
-                "client_reference/kosli_assert_approval",
                 "client_reference/kosli_assert_artifact",
                 "client_reference/kosli_assert_pullrequest_azure",
                 "client_reference/kosli_assert_pullrequest_bitbucket",
@@ -311,7 +311,6 @@
             {
               "group": "kosli get",
               "pages": [
-                "client_reference/kosli_get_approval",
                 "client_reference/kosli_get_artifact",
                 "client_reference/kosli_get_attestation-type",
                 "client_reference/kosli_get_attestation",
@@ -331,7 +330,6 @@
             {
               "group": "kosli list",
               "pages": [
-                "client_reference/kosli_list_approvals",
                 "client_reference/kosli_list_artifacts",
                 "client_reference/kosli_list_attestation-types",
                 "client_reference/kosli_list_environments",
@@ -355,21 +353,10 @@
               ]
             },
             {
-              "group": "kosli report",
-              "pages": [
-                "client_reference/kosli_report_approval"
-              ]
-            },
-            {
-              "group": "kosli request",
-              "pages": [
-                "client_reference/kosli_request_approval"
-              ]
-            },
-            {
               "group": "kosli snapshot",
               "pages": [
                 "client_reference/kosli_snapshot_azure",
+                "client_reference/kosli_snapshot_cloud-run",
                 "client_reference/kosli_snapshot_docker",
                 "client_reference/kosli_snapshot_ecs",
                 "client_reference/kosli_snapshot_k8s",
@@ -382,7 +369,12 @@
             {
               "group": "Deprecated",
               "pages": [
+                "client_reference/kosli_assert_approval",
+                "client_reference/kosli_get_approval",
+                "client_reference/kosli_list_approvals",
+                "client_reference/kosli_report_approval",
                 "client_reference/kosli_report_artifact",
+                "client_reference/kosli_request_approval",
                 "client_reference/kosli_snapshot_server"
               ]
             }

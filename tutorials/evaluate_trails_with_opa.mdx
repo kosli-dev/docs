@@ -1,11 +1,11 @@
 ---
 title: "Evaluate trails with OPA policies"
-description: "Learn how to use kosli evaluate trail and kosli evaluate trails to check your Kosli trails against custom OPA/Rego policies. This tutorial walks through writing a policy that verifies pull requests have been approved."
+description: "Learn how to write safe OPA/Rego policies for kosli evaluate trail and kosli evaluate trails, including design rules that prevent false-positive compliance results."
 ---
 
 The `kosli evaluate` commands let you evaluate Kosli trails against custom policies written in <Tooltip tip="Rego is the purpose-built declarative policy language used by the Open Policy Agent (OPA) project. It is designed for expressing rules over structured data and is widely used for policy enforcement in cloud-native environments." cta="Learn more" href="https://www.openpolicyagent.org/">[Rego](https://www.openpolicyagent.org/docs/latest/policy-language/)</Tooltip>. This is useful for enforcing rules like "every artifact must have an approved pull request" or "all security scans must pass", and for gating deployments in CI/CD pipelines based on those rules.
 
-In this tutorial, we'll write a policy that checks whether pull requests on a trail have been approved, then evaluate it against real trails in public Kosli orgs.
+In this tutorial, you'll write and evaluate policies against real trails in public Kosli orgs. Along the way, you'll learn three design rules that prevent a Rego policy from granting false-positive compliance results.
 
 <Steps>
 
@@ -22,7 +22,7 @@ To follow this tutorial, you need to:
   ```
 
 <Info>
-You don't need OPA installed — the Kosli CLI has a built-in Rego evaluator. You just need to write a `.rego` policy file.
+You don't need OPA installed -- the Kosli CLI has a built-in Rego evaluator. You just need to write a `.rego` policy file.
 </Info>
 
 </Step>
@@ -36,27 +36,58 @@ package policy
 
 import rego.v1
 
+pr_attestation_name := data.params.pr_attestation_name
+
 default allow = false
 
 violations contains msg if {
     some trail in input.trails
-    some pr in trail.compliance_status.attestations_statuses["pull-request"].pull_requests
+    some pr in trail.compliance_status.attestations_statuses[pr_attestation_name].pull_requests
     count(pr.approvers) == 0
     msg := sprintf("trail '%v': pull-request %v has no approvers", [trail.name, pr.url])
 }
 
+trail_is_approved(trail) if {
+    every pr in trail.compliance_status.attestations_statuses[pr_attestation_name].pull_requests {
+        count(pr.approvers) > 0
+    }
+}
+
+allow if {
+    every trail in input.trails {
+        trail_is_approved(trail)
+    }
+}
+```
+
+This policy applies three design rules that every evaluate policy should follow.
+
+**Rule 1: `default allow = false` -- fail safe**
+
+Trails are denied unless the policy explicitly allows them. Anything the policy cannot positively verify is treated as non-compliant. This matches Kosli's compliance direction: a false non-compliant blocks a good trail (recoverable); a false compliant passes a bad one (not recoverable).
+
+The alias `pr_attestation_name := data.params.pr_attestation_name` reads the attestation name from a params file rather than hardcoding it. Different orgs and flows use different names for their pull-request attestation (for example `"pull-request"` or `"pr"`). If the param is absent, `pr_attestation_name` is undefined, the lookup into `attestations_statuses` fails, `trail_is_approved` does not fire, and `allow` stays `false` -- the correct fail-safe.
+
+**Rule 2: Drive `allow` via a positive assertion, not the absence of violations**
+
+`allow` fires through `trail_is_approved`, which makes a positive claim: every PR has at least one approver. It is never driven by `count(violations) == 0`.
+
+The following pattern looks equivalent but is not safe:
+
+```rego
+# unsafe
 allow if {
     count(violations) == 0
 }
 ```
 
-Let's break down what this policy does:
+If the `violations` rule body references a field that does not exist -- a typo in `pull_requests`, an unexpected schema change, a missing key -- the rule body silently produces no messages. The violations set is empty, `count(violations) == 0` is true, and `allow` fires even though no PRs were actually checked. The trail receives a false-positive compliant result.
 
-* **`package policy`** — every evaluate policy must use the `policy` package.
-* **`import rego.v1`** — use Rego v1 syntax (the `if`/`contains` keywords).
-* **`default allow = false`** — trails are denied unless explicitly allowed.
-* **`violations`** — a set of messages describing why the policy failed. The rule iterates over trails, then over pull requests within the `pull-request` attestation, looking for PRs where `approvers` is empty.
-* **`allow`** — trails are allowed only when there are no violations.
+With the safe pattern, if `pull_requests` is undefined, `every pr in ...` fails to evaluate, `trail_is_approved` does not fire, and `allow` stays `false`.
+
+**Rule 3: Violations provide diagnostics only**
+
+`violations` explains why a policy was denied -- it does not decide whether it was denied. When a `violations` rule body encounters an undefined reference, it silently produces no message. This is the safe failure mode: you lose a diagnostic, not a compliance check.
 
 <Info>
 See the [Rego Policy reference](/policy-reference/rego_policy) for the full policy contract, input data shape, and exit code behaviour.
@@ -71,6 +102,7 @@ Let's evaluate several trails from the public `cyber-dojo` org against our polic
 ```shell
 kosli evaluate trails \
   --policy pr-approved.rego \
+  --params '{"pr_attestation_name": "pull-request"}' \
   --org cyber-dojo \
   --flow dashboard-ci \
   9978a1ca82c273a68afaa85fc37dd60d1e394f84 \
@@ -89,11 +121,12 @@ VIOLATIONS:  trail '5abd63aa1d64af7be5b5900af974dc73ae425bd6': pull-request http
              trail 'cb3ec71f5ce1103779009abaf4e8f8a3ed97d813': pull-request https://github.com/cyber-dojo/dashboard/pull/341 has no approvers
 ```
 
-Now try the `kosli-public` org, where PRs do have approvers:
+Now try the `kosli-public` org, where PRs do have approvers. This org names the attestation `"pr"`:
 
 ```shell
 kosli evaluate trails \
   --policy pr-approved.rego \
+  --params '{"pr_attestation_name": "pr"}' \
   --org kosli-public \
   --flow cli \
   5a0f3c0 \
@@ -109,16 +142,29 @@ RESULT:  ALLOWED
 
 <Step title="Evaluate a single trail">
 
-The `kosli evaluate trail` (singular) command evaluates facts within a single trail, which is a different use case from comparing across multiple trails. For example, you might check that a snyk container scan found no high-severity vulnerabilities.
+The `kosli evaluate trail` (singular) command evaluates facts within a single trail. For example, you might check that a Snyk container scan found no high-severity vulnerabilities.
 
 Save this as `snyk-no-high-vulns.rego`:
 
-```rego
+```rego snyk-no-high-vulns.rego
 package policy
 
 import rego.v1
 
 default allow = false
+
+artifact_scan_is_clean(artifact) if {
+    snyk := artifact.attestations_statuses["snyk-container-scan"]
+    every result in snyk.processed_snyk_results.results {
+        result.high_count == 0
+    }
+}
+
+allow if {
+    every _, artifact in input.trail.compliance_status.artifacts_statuses {
+        artifact_scan_is_clean(artifact)
+    }
+}
 
 violations contains msg if {
     some name, artifact in input.trail.compliance_status.artifacts_statuses
@@ -127,13 +173,9 @@ violations contains msg if {
     result.high_count > 0
     msg := sprintf("artifact '%v': snyk container scan found %d high severity vulnerabilities", [name, result.high_count])
 }
-
-allow if {
-    count(violations) == 0
-}
 ```
 
-This policy iterates over every artifact in the trail, looks up its `snyk-container-scan` attestation, and checks whether any result has a non-zero `high_count`.
+`allow` fires only when `artifact_scan_is_clean` succeeds for every artifact. If `snyk-container-scan` is absent or `processed_snyk_results` is undefined, `artifact_scan_is_clean` fails to fire and `allow` stays `false`.
 
 Use `--attestations` to enrich only the snyk data (faster than fetching all attestation details).
 The value uses the format `artifact-name.attestation-type`. Here, `dashboard` is the artifact name and `snyk-container-scan` is the attestation name:
@@ -161,81 +203,150 @@ The `input.trail` / `input.trails` distinction and the full input data shape are
 
 <Step title="Pass parameters to a policy">
 
-Policies sometimes need configurable values — for example, a threshold that varies between environments. Instead of hardcoding these, use the `--params` flag to pass data into the policy as `data.params`.
+Policies often need thresholds that vary by environment -- stricter in production than in staging. Use the `--params` flag to pass these values as `data.params` rather than hardcoding them in the policy.
 
-Save this as `check-threshold.rego`:
+Save this as `snyk-severity-threshold.rego`:
 
-```rego check-threshold.rego
+```rego snyk-severity-threshold.rego
 package policy
 
 import rego.v1
 
-default allow := false
+max_high   := data.params.max_high
+max_medium := data.params.max_medium
 
-default threshold := 10
+default allow = false
 
-threshold := data.params.threshold if { data.params.threshold }
+artifact_within_threshold(artifact) if {
+    snyk := artifact.attestations_statuses["snyk-container-scan"]
+    every result in snyk.processed_snyk_results.results {
+        result.high_count   <= max_high
+        result.medium_count <= max_medium
+    }
+}
 
-allow if { input.score >= threshold }
+allow if {
+    every _, artifact in input.trail.compliance_status.artifacts_statuses {
+        artifact_within_threshold(artifact)
+    }
+}
 
 violations contains msg if {
-	input.score < threshold
-	msg := sprintf("score %d is below threshold %d", [input.score, threshold])
+    some name, artifact in input.trail.compliance_status.artifacts_statuses
+    snyk := artifact.attestations_statuses["snyk-container-scan"]
+    some result in snyk.processed_snyk_results.results
+    result.high_count > max_high
+    msg := sprintf("artifact '%v': %d high-severity vulnerabilities exceed limit of %d", [name, result.high_count, max_high])
+}
+
+violations contains msg if {
+    some name, artifact in input.trail.compliance_status.artifacts_statuses
+    snyk := artifact.attestations_statuses["snyk-container-scan"]
+    some result in snyk.processed_snyk_results.results
+    result.medium_count > max_medium
+    msg := sprintf("artifact '%v': %d medium-severity vulnerabilities exceed limit of %d", [name, result.medium_count, max_medium])
 }
 ```
 
-This policy:
+**Why the aliases at the top matter**
 
-* Defines a **default threshold** of `10` — used when no `--params` are provided.
-* Overrides the threshold with `data.params.threshold` when present.
-* Allows the input only if `input.score` meets the threshold.
+`max_high := data.params.max_high` is not just shorthand. In the compliance path, `result.high_count <= max_high` is a positive bound check. If `max_high` is absent from the params file, this condition is undefined, `artifact_within_threshold` fails to fire, and `allow` stays `false`. That is the correct fail-safe behaviour.
 
-You can test this locally with `kosli evaluate input`. First, create an input file:
+Compare this to a policy that drives `allow` through the absence of violations:
 
-```shell
-echo '{"score": 5}' > score-input.json
+```rego
+# unsafe
+violations contains msg if {
+    result.high_count > data.params.max_high  # fails silently if max_high is absent
+    msg := ...
+}
+
+allow if { count(violations) == 0 }
 ```
 
-Evaluate without params (uses the default threshold of `10`):
+If `data.params.max_high` is absent, the `violations` rule body fails silently, the set stays empty, and `allow` fires. A misconfigured params file grants compliance rather than denying it.
+
+**Testing with `kosli evaluate input`**
+
+You can test a policy locally without a real trail using `kosli evaluate input`. Create a minimal input file:
+
+```shell
+cat > scan-input.json << 'EOF'
+{
+  "trail": {
+    "compliance_status": {
+      "artifacts_statuses": {
+        "dashboard": {
+          "attestations_statuses": {
+            "snyk-container-scan": {
+              "processed_snyk_results": {
+                "results": [{"high_count": 2, "medium_count": 5}]
+              }
+            }
+          }
+        }
+      }
+    }
+  }
+}
+EOF
+```
+
+Evaluate with permissive staging thresholds:
 
 ```shell
 kosli evaluate input \
-  --input-file score-input.json \
-  --policy check-threshold.rego
-```
-
-```plaintext
-RESULT:      DENIED
-VIOLATIONS:  score 5 is below threshold 10
-```
-
-Now pass a lower threshold via `--params`:
-
-```shell
-kosli evaluate input \
-  --input-file score-input.json \
-  --policy check-threshold.rego \
-  --params '{"threshold": 3}'
+  --input-file scan-input.json \
+  --policy snyk-severity-threshold.rego \
+  --params '{"max_high": 5, "max_medium": 10}'
 ```
 
 ```plaintext
 RESULT:  ALLOWED
 ```
 
-The score of `5` is now above the threshold of `3`, so the policy allows it.
+Apply stricter production thresholds:
+
+```shell
+kosli evaluate input \
+  --input-file scan-input.json \
+  --policy snyk-severity-threshold.rego \
+  --params '{"max_high": 0, "max_medium": 3}'
+```
+
+```plaintext
+RESULT:      DENIED
+VIOLATIONS:  artifact 'dashboard': 2 high-severity vulnerabilities exceed limit of 0
+             artifact 'dashboard': 5 medium-severity vulnerabilities exceed limit of 3
+```
+
+Now verify the fail-safe: omit `max_high` from params entirely:
+
+```shell
+kosli evaluate input \
+  --input-file scan-input.json \
+  --policy snyk-severity-threshold.rego \
+  --params '{"max_medium": 10}'
+```
+
+```plaintext
+RESULT:  DENIED
+```
+
+`allow` is `false` even though no violation message was produced. The missing param causes the compliance check to fail, not to vacuously pass. Always verify this explicitly when writing a policy that relies on params.
 
 You can also load parameters from a file using the `@` prefix:
 
 ```shell
-echo '{"threshold": 3}' > params.json
+echo '{"max_high": 0, "max_medium": 3}' > params-prod.json
 
 kosli evaluate input \
-  --input-file score-input.json \
-  --policy check-threshold.rego \
-  --params @params.json
+  --input-file scan-input.json \
+  --policy snyk-severity-threshold.rego \
+  --params @params-prod.json
 ```
 
-The `--params` flag works the same way on `kosli evaluate trail` and `kosli evaluate trails` — parameters are always available as `data.params` in the policy.
+The `--params` flag works the same way on `kosli evaluate trail` and `kosli evaluate trails` -- parameters are always available as `data.params` in the policy.
 
 </Step>
 
@@ -286,9 +397,7 @@ Use the `--attestations` flag to limit which attestations are enriched with full
 
 <Step title="Use in CI/CD">
 
-The `kosli evaluate` commands exit with `0` on allow and `1` on deny or error — making them straightforward to use as pipeline gates. See the [Rego Policy reference](/policy-reference/rego_policy#exit-codes) for details on distinguishing denial from command failure.
-
-
+The `kosli evaluate` commands exit with `0` on allow and `1` on deny or error -- making them straightforward to use as pipeline gates. See the [Rego Policy reference](/policy-reference/rego_policy#exit-codes) for details on distinguishing denial from command failure.
 
 ```shell
 # Example: gate a deployment on policy evaluation
@@ -297,10 +406,10 @@ if kosli evaluate trail \
   --org "$KOSLI_ORG" \
   --flow "$FLOW_NAME" \
   "$GIT_COMMIT"; then
-  echo "Policy passed — proceeding with deployment"
+  echo "Policy passed -- proceeding with deployment"
   # ... deploy commands ...
 else
-  echo "Policy denied — blocking deployment"
+  echo "Policy denied -- blocking deployment"
   exit 1
 fi
 ```
@@ -313,7 +422,7 @@ This pattern lets you enforce custom compliance rules as part of your delivery p
 
 After evaluating a trail, you can record the result as an attestation. This creates an audit record in Kosli that captures the policy, the full evaluation report, and any violations.
 
-This step requires write access to your Kosli org. The examples below use variables you'd set in your CI/CD pipeline. In your own pipeline you'd use your own policy file — here we use `my-policy.rego` as a placeholder:
+This step requires write access to your Kosli org. The examples below use variables you'd set in your CI/CD pipeline. In your own pipeline you'd use your own policy file -- here we use `my-policy.rego` as a placeholder:
 
 ```shell
 # Run the evaluation and save the full JSON report to a file
@@ -326,7 +435,7 @@ kosli evaluate trail "$TRAIL_NAME" \
   --output json > eval-report.json 2>/dev/null || true
 
 # Read the allow/deny result from the report
-is_compliant=$(jq -r '.allow' eval-report.json)
+is_compliant=$(jq --raw-output '.allow' eval-report.json)
 
 # Extract violations as structured user-data
 jq '{violations: .violations}' eval-report.json > eval-violations.json
@@ -344,12 +453,12 @@ kosli attest generic \
 
 This creates a generic attestation on the trail with:
 
-* **`--compliant`** set based on whether the policy allowed or denied — read directly from the JSON report rather than relying on the exit code, which avoids issues with `set -e` in CI environments like GitHub Actions
+* **`--compliant`** set based on whether the policy allowed or denied -- read directly from the JSON report rather than relying on the exit code, which avoids issues with `set -e` in CI environments like GitHub Actions
 * **`--attachments`** containing the Rego policy (for reproducibility) and the full JSON evaluation report (including the input data the policy evaluated)
 * **`--user-data`** containing the violations, which appear in the Kosli UI as structured metadata on the attestation
 
 <Warning>
-Use `--compliant=value` (with `=`) not `--compliant value` (with a space). Boolean flags in Kosli CLI require the `=` syntax when passing `false` — otherwise `false` is interpreted as a positional argument.
+Use `--compliant=value` (with `=`) not `--compliant value` (with a space). Boolean flags in Kosli CLI require the `=` syntax when passing `false` -- otherwise `false` is interpreted as a positional argument.
 </Warning>
 
 </Step>
@@ -358,9 +467,10 @@ Use `--compliant=value` (with `=`) not `--compliant value` (with a space). Boole
 
 ## What you've accomplished
 
-You have written OPA/Rego policies and evaluated Kosli trails against them, both across multiple trails and within a single trail. You've also recorded evaluation results as attestations, creating a tamper-proof audit record of every policy decision linked to a specific trail.
+You have written OPA/Rego policies using the three design rules that prevent false-positive compliance results: fail-safe default, compliance via positive assertion, and violations as diagnostics only. You've evaluated Kosli trails against those policies, tested safety properties locally with `kosli evaluate input`, and recorded evaluation results as attestations.
 
 From here you can:
 * Explore evaluated trails in the [Kosli app](https://app.kosli.com)
 * Gate deployments in CI/CD pipelines using `kosli evaluate trail` exit codes
+* Use environment-specific params files to enforce different thresholds per environment
 * Extend your policies to check other attestation types. See [`kosli evaluate trail`](/client_reference/kosli_evaluate_trail) and [`kosli evaluate trails`](/client_reference/kosli_evaluate_trails) for the full flag reference
