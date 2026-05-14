@@ -220,17 +220,21 @@ Kosli supports two categories of attestation types: **system types** curated by 
 <AccordionGroup>
   <Accordion title="System types" icon="cube">
 
-    System types are built in to Kosli — Kosli knows the shape of the input, parses it, and renders it in the trail. The current catalogue covers pull requests, JUnit results, SARIF scans, Jira issues, SonarQube analyses, and a generic catch-all.
+    System types are built in to Kosli — and the CLI has first-class support for each one. Point the CLI at the raw output from your tool (a JUnit XML directory, a SARIF file, a Sonar project key, a Jira instance, a git provider's API) and it parses the source, extracts the structured data, posts the attestation, **and uploads the original source file to the Evidence Vault** as an attachment. Kosli then renders the result with a type-specific tile.
 
-    Reach a system type with `kosli attest system <type>` (e.g. `kosli attest system sarif`). Compliance is structural — the attestation records the fact. For opinions on the contents (e.g. *fail on any high finding*), express them as a rego policy and use [`kosli evaluate`](/tutorials/evaluate_trails_with_opa).
+    The current catalogue covers pull requests, JUnit results, SARIF scans, Jira issues, SonarQube analyses, and a generic catch-all.
+
+    Reach a system type with `kosli attest system <type>` (e.g. `kosli attest system sarif`). Compliance is schema-validated — the attestation records the fact. For opinions on the contents (e.g. *fail on any high finding*), express them as a rego policy and use [`kosli evaluate`](/tutorials/evaluate_trails_with_opa).
 
     See [available system types](/attestation_types/system/catalogue) for the full list, or the [system attestation types overview](/attestation_types/system/overview) for how versioning and templates work.
 
-    The legacy dedicated commands (`kosli attest snyk`, `kosli attest junit`, `kosli attest jira`, `kosli attest sonar`, `kosli attest pullrequest_*`, `kosli attest generic`) are deprecated — teams should migrate to `kosli attest system <type>`.
+    The legacy dedicated commands (`kosli attest snyk`, `kosli attest junit`, `kosli attest jira`, `kosli attest sonar`, `kosli attest pullrequest_*`, `kosli attest generic`) are deprecated — teams should migrate to `kosli attest system <type>` ([per-type migration guide](/tutorials/migrating_to_system_types)).
   </Accordion>
   <Accordion title="Custom types" icon="puzzle-piece">
 
     Custom types let you define an attestation shape specific to your org. You write a JSON Schema for the data and one or more jq rules that determine compliance; once created, anyone in the org can attest against the type.
+
+    Unlike system types, the CLI does **not** parse a source file for you — you're responsible for producing the JSON payload that matches your schema (and for uploading any source artefacts to the Evidence Vault yourself via `--attachments`). The trade-off: you get the schema and compliance rules you want, with no Kosli-side dependency on a specific tool format.
 
     For example, to attest coverage metrics from `unit-test-coverage.json`:
 

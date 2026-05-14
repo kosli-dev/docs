@@ -9,13 +9,13 @@ Kosli has three categories of attestation types:
 
 <CardGroup cols={3}>
   <Card title="Custom" icon="screwdriver-wrench" href="/attestation_types/custom/overview">
-    Defined per-organization. You author the JSON Schema and jq rules; you control compliance.
+    Defined per-organization. You author the JSON Schema and jq rules and supply the parsed data; you control the shape and compliance.
   </Card>
   <Card title="Generic" icon="circle" href="/attestation_types/system/generic">
     The catch-all. No type-specific schema; you supply a free-form payload and a `--compliant` flag.
   </Card>
   <Card title="System" icon="cube" href="/attestation_types/system/overview">
-    Kosli-curated types with pre-built schemas, default compliance rules, and rich UI rendering. Available to every organization with no setup.
+    Kosli-curated types with first-class CLI support — the CLI parses your tool's raw output (JUnit XML, SARIF, Sonar, etc.), posts the attestation, and stores the source file in the Evidence Vault. Available to every organization with no setup.
   </Card>
 </CardGroup>
 
@@ -39,13 +39,13 @@ Kosli has three categories of attestation types:
 
 ## Where the categories overlap
 
-All three categories share the same primitives: a payload, a compliance verdict, and a place on a trail. They differ in **who defines the schema** and **who decides compliance**:
+All three categories share the same primitives: a payload, a compliance verdict, and a place on a trail. They differ in **who defines the schema**, **who prepares the data**, and **who decides compliance**:
 
-| | Defined by | Compliance comes from | UI tile |
-|---|---|---|---|
-| **System** | Kosli (shipped in code) | Schema-validated only; use [`kosli evaluate`](/tutorials/evaluate_trails_with_opa) for any compliance opinion | Type-specific renderer |
-| **Custom** | Your organization | Your jq rules baked into the type | Generic JSON view |
-| **Generic** | You (per attestation) | `--compliant=true\|false` flag | Generic JSON view |
+| | Defined by | Data preparation | Compliance comes from | UI tile |
+|---|---|---|---|---|
+| **System** | Kosli (shipped in code) | CLI parses the raw source file (JUnit XML, SARIF, etc.) and uploads it to the Evidence Vault | Schema-validated only; use [`kosli evaluate`](/tutorials/evaluate_trails_with_opa) for any compliance opinion | Type-specific renderer |
+| **Custom** | Your organization | You produce the JSON payload yourself; CLI does not parse a source format | Your jq rules baked into the type | Generic JSON view |
+| **Generic** | You (per attestation) | You supply the JSON payload directly | `--compliant=true\|false` flag | Generic JSON view |
 
 System types are the newest category and the strategic direction. Where a system type covers your use case, prefer it.
 

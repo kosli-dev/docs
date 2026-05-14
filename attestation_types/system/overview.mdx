@@ -5,10 +5,11 @@ description: How system attestation types work — schema validation, default co
 
 System attestation types are Kosli-curated attestation types available to every organization. They ship with:
 
-- A **schema** that validates the shape of the data you submit.
+- **First-class CLI support for the source format.** Point the CLI at the raw output from your tool — a JUnit XML directory, a SARIF file, a SonarQube project key, a Jira instance, a git provider's API — and the CLI parses it, builds the structured attestation payload, **and uploads the original source file to the Evidence Vault** as an attachment. One command, no glue scripting.
+- A **schema** that validates the shape of the extracted data before the attestation is recorded.
 - A **type-specific tile renderer** in the UI — e.g. a severity breakdown for security scan types — rather than a generic JSON dump.
 
-Unlike custom attestation types, system types are not authored per-organization — they're maintained by Kosli and shipped as part of the platform. Unlike generic attestations, they understand the shape of your data and can render it meaningfully.
+Unlike custom attestation types, system types are not authored per-organization — they're maintained by Kosli and shipped as part of the platform. Custom types require you to parse your data into the right JSON shape before attesting; system types do that work for you in the CLI. Unlike generic attestations, system types understand the shape of your data and can render it meaningfully.
 
 ## How a system type is structured
 
