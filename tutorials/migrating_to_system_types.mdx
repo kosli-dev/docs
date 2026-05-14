@@ -77,18 +77,20 @@ For each legacy command in your pipeline, the migration has four steps. The exam
 
   <Step title="Run the evaluation and capture the JSON report">
 
-  Use `kosli evaluate trail` with `--output json` to get a structured report — the report contains `.allow` (the verdict) and `.violations` (the human-readable messages). Pass the attestation name via `--params` so the policy resolves correctly; save the report to a file so step 4 can read both fields.
+  Use `kosli evaluate trail` with `--output json` to get a structured report — the report contains `.allow` (the verdict) and `.violations` (the human-readable messages). Pass the attestation name via `--params` so the policy resolves correctly; save the report to a file so step 4 can read both fields. Use `--no-assert` so a policy deny doesn't terminate the pipeline before step 4 runs.
 
   ```shell
-  # Run the evaluation; don't fail the pipeline yet — we want the JSON for step 4.
   kosli evaluate trail \
     --policy legacy-snyk-equivalent.rego \
     --params '{"attestation_name": "security-scan"}' \
     --flow my-flow --trail $(git rev-parse HEAD) \
     --attestations <artifact-name>.security-scan \
     --show-input \
-    --output json > eval-report.json 2>/dev/null || true
+    --no-assert \
+    --output json > eval-report.json
   ```
+
+  `--no-assert` makes `kosli evaluate trail` exit `0` even when the policy denies — the deny is captured in the JSON report instead of as an exit code, which is what step 4 reads from. Without it the command exits `1` on deny and (under `set -e`) ends the pipeline.
 
   The `--params` value matches the `--name` you set on the system attestation in step 1. To load it from a file instead of inline JSON, use `--params @params.json`.
 
