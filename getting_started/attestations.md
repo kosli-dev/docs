@@ -96,8 +96,8 @@ The following sections show how to make each of the four attestations defined in
   The following attestation will only belong to the artifact `my_company/backend:latest` attested above and its fingerprint, in this case calculated by the Kosli CLI.
 
   ```shell
-  kosli attest system sarif \
-      --artifact-type docker my_company/backend:latest \
+  kosli attest system sarif my_company/backend:latest \
+      --artifact-type docker \
       --name backend.security-scan \
       --flow backend-ci \
       --trail $(git rev-parse HEAD)
