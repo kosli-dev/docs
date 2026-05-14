@@ -19,26 +19,26 @@ to include or exclude namespaces.
 ## Flags
 | Flag | Description |
 | :--- | :--- |
-|        --config-file string  |  [optional] The path to a YAML config file that maps multiple Kosli environments to namespace selectors. Cannot be used with a positional environment name argument or namespace flags.  |
-|    -D, --dry-run  |  [optional] Run in dry-run mode. When enabled, no data is sent to Kosli and the CLI exits with 0 exit code regardless of any errors.  |
-|    -x, --exclude-namespaces strings  |  [optional] The comma separated list of namespaces names to exclude from reporting artifacts info from. Requires cluster-wide read permissions for pods and namespaces. Can't be used together with --namespaces or --namespaces-regex.  |
-|        --exclude-namespaces-regex strings  |  [optional] The comma separated list of namespaces regex patterns to exclude from reporting artifacts info from. Requires cluster-wide read permissions for pods and namespaces. Can't be used together with --namespaces or --namespaces-regex.  |
-|    -h, --help  |  help for k8s  |
-|    -k, --kubeconfig string  |  [defaulted] The kubeconfig path for the target cluster. (default "$HOME/.kube/config")  |
-|    -n, --namespaces strings  |  [optional] The comma separated list of namespaces names to report artifacts info from. Can't be used together with --exclude-namespaces or --exclude-namespaces-regex.  |
-|        --namespaces-regex strings  |  [optional] The comma separated list of namespaces regex patterns to report artifacts info from. Requires cluster-wide read permissions for pods and namespaces. Can't be used together with --exclude-namespaces --exclude-namespaces-regex.  |
+|        `--config-file` string  |  [optional] The path to a YAML config file that maps multiple Kosli environments to namespace selectors. Cannot be used with a positional environment name argument or namespace flags.  |
+|    `-D`, `--dry-run`  |  [optional] Run in dry-run mode. When enabled, no data is sent to Kosli and the CLI exits with 0 exit code regardless of any errors.  |
+|    `-x`, `--exclude-namespaces` strings  |  [optional] The comma separated list of namespaces names to exclude from reporting artifacts info from. Requires cluster-wide read permissions for pods and namespaces. Can't be used together with `--namespaces` or `--namespaces-regex`.  |
+|        `--exclude-namespaces-regex` strings  |  [optional] The comma separated list of namespaces regex patterns to exclude from reporting artifacts info from. Requires cluster-wide read permissions for pods and namespaces. Can't be used together with `--namespaces` or `--namespaces-regex`.  |
+|    `-h`, `--help`  |  help for k8s  |
+|    `-k`, `--kubeconfig` string  |  [defaulted] The kubeconfig path for the target cluster. (default "$HOME/.kube/config")  |
+|    `-n`, `--namespaces` strings  |  [optional] The comma separated list of namespaces names to report artifacts info from. Can't be used together with `--exclude-namespaces` or `--exclude-namespaces-regex`.  |
+|        `--namespaces-regex` strings  |  [optional] The comma separated list of namespaces regex patterns to report artifacts info from. Requires cluster-wide read permissions for pods and namespaces. Can't be used together with `--exclude-namespaces` `--exclude-namespaces-regex`.  |
 
 
 ## Flags inherited from parent commands
 | Flag | Description |
 | :--- | :--- |
-|    -a, --api-token string  |  The Kosli API token.  |
-|        --debug  |  [optional] Print debug logs to stdout.  |
-|    -H, --host string  |  [defaulted] The Kosli endpoint. (default "https://app.kosli.com")  |
-|        --http-proxy string  |  [optional] The HTTP proxy URL including protocol and port number. e.g. `http://proxy-server-ip:proxy-port`  |
-|    -r, --max-api-retries int  |  [defaulted] How many times should API calls be retried when the API host is not reachable. (default 3)  |
-|        --org string  |  The Kosli organization.  |
-|    -q, --quiet  |  [optional] Suppress non-critical warning messages. Errors and normal output are not affected. If both --quiet and --debug are set, --debug wins.  |
+|    `-a`, `--api-token` string  |  The Kosli API token.  |
+|        `--debug`  |  [optional] Print debug logs to stdout.  |
+|    `-H`, `--host` string  |  [defaulted] The Kosli endpoint. (default "https://app.kosli.com")  |
+|        `--http-proxy` string  |  [optional] The HTTP proxy URL including protocol and port number. e.g. `http://proxy-server-ip:proxy-port`  |
+|    `-r`, `--max-api-retries` int  |  [defaulted] How many times should API calls be retried when the API host is not reachable. (default 3)  |
+|        `--org` string  |  The Kosli organization.  |
+|    `-q`, `--quiet`  |  [optional] Suppress non-critical warning messages. Errors and normal output are not affected. If both `--quiet` and `--debug` are set, `--debug` wins.  |
 
 
 ## Examples Use Cases
