@@ -41,6 +41,10 @@ kosli attest system generic \
 
 `--compliant` sets the verdict directly; `--user-data` accepts a JSON file whose contents are stored on the attestation and rendered in the tile.
 
+<Warning>
+`--compliant` **defaults to `true`** if omitted. A `kosli attest system generic` call with no `--compliant` flag produces a *compliant* attestation. Pass `--compliant=false` explicitly when you want a non-compliant verdict — and remember to use `=` (e.g. `--compliant=false`), not a space, because Cobra boolean flags treat a space-separated `false` as a positional argument.
+</Warning>
+
 To pin a version, add `--type-version v1` to the CLI command.
 
 The legacy [`kosli attest generic`](/client_reference/kosli_attest_generic) command is deprecated — teams should migrate to `kosli attest system generic`. See [Migrating from legacy commands](/tutorials/migrating_to_system_types) for the step-by-step.
