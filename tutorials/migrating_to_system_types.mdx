@@ -36,6 +36,8 @@ For each legacy command in your pipeline, the migration has four steps. The exam
 
   Each legacy command's built-in compliance rule can be expressed as a short rego policy. The policies follow the safety pattern from the [OPA tutorial](/tutorials/evaluate_trails_with_opa): `default allow := false`, compliance via positive assertion, `violations` for diagnostic messages only.
 
+  The policy reads the attestation name from `data.params.attestation_name` rather than hardcoding it, so the same file works regardless of what `--name` you set in step 1. If the param is missing the lookup is undefined, `allow` stays `false`, and the policy fails safe.
+
   Save the snyk-equivalent policy as `legacy-snyk-equivalent.rego`:
 
   ```rego
@@ -43,11 +45,13 @@ For each legacy command in your pipeline, the migration has four steps. The exam
 
   import rego.v1
 
+  attestation_name := data.params.attestation_name
+
   default allow := false
 
   allow if {
       every _, artifact in input.trail.compliance_status.artifacts_statuses {
-          every result in artifact.attestations_statuses["security-scan"].sarif_results.results {
+          every result in artifact.attestations_statuses[attestation_name].sarif_results.results {
               result.high_count == 0
               result.medium_count == 0
               result.low_count == 0
@@ -57,33 +61,36 @@ For each legacy command in your pipeline, the migration has four steps. The exam
 
   violations contains msg if {
       some name, artifact in input.trail.compliance_status.artifacts_statuses
-      sarif := artifact.attestations_statuses["security-scan"]
+      sarif := artifact.attestations_statuses[attestation_name]
       some result in sarif.sarif_results.results
       result.high_count > 0
       msg := sprintf("artifact '%v': %d high-severity findings", [name, result.high_count])
   }
   ```
 
-  The accordion for each legacy type below contains the equivalent rego for that type.
+  The accordion for each legacy type below contains the equivalent rego for that type — every one uses the same `data.params.attestation_name` parameter.
 
   <Note>
-  The snippet references an artifact-bound attestation named `security-scan` (the `--name` you set on the system attestation in step 1). For trail-level attestations, adjust the `input.trail.compliance_status.artifacts_statuses` path — see the [Rego policy reference](/policy-reference/rego_policy#input-data) for the full input shape.
+  The snippet assumes an **artifact-bound** attestation (the policy iterates `input.trail.compliance_status.artifacts_statuses`). For trail-level attestations, change the path to `input.trail.compliance_status.attestations_statuses[attestation_name]` — see the [Rego policy reference](/policy-reference/rego_policy#input-data) for the full input shape.
   </Note>
   </Step>
 
   <Step title="Run the evaluation and capture the JSON report">
 
-  Use `kosli evaluate trail` with `--output json` to get a structured report — the report contains `.allow` (the verdict) and `.violations` (the human-readable messages). Save it to a file so step 4 can read both fields.
+  Use `kosli evaluate trail` with `--output json` to get a structured report — the report contains `.allow` (the verdict) and `.violations` (the human-readable messages). Pass the attestation name via `--params` so the policy resolves correctly; save the report to a file so step 4 can read both fields.
 
   ```shell
   # Run the evaluation; don't fail the pipeline yet — we want the JSON for step 4.
   kosli evaluate trail \
     --policy legacy-snyk-equivalent.rego \
+    --params '{"attestation_name": "security-scan"}' \
     --flow my-flow --trail $(git rev-parse HEAD) \
     --attestations <artifact-name>.security-scan \
     --show-input \
     --output json > eval-report.json 2>/dev/null || true
   ```
+
+  The `--params` value matches the `--name` you set on the system attestation in step 1. To load it from a file instead of inline JSON, use `--params @params.json`.
 
   When the policy denies, the human-readable form of the same output looks like this:
 
@@ -138,7 +145,7 @@ If you only want the facts and not the legacy verdict, skip steps 2–4 — most
 
 ## Per-type migration recipes
 
-Each accordion gives the diff for the attest call and the rego policy specific to that legacy command's compliance rule. The steps 3 and 4 invocation from the general workflow above is the same shape across every type — only the attestation name and the policy file name change.
+Each accordion gives the diff for the attest call and the rego policy specific to that legacy command's compliance rule. The steps 3 and 4 invocation from the general workflow above is the same shape across every type — pass the attestation name via `--params '{"attestation_name": "<your-name>"}'` so one rego file works regardless of what you set `--name` to.
 
 <AccordionGroup>
   <Accordion title="kosli attest snyk → kosli attest system sarif" icon="barcode-read">
@@ -169,11 +176,13 @@ Each accordion gives the diff for the attest call and the rego policy specific t
 
     import rego.v1
 
+    attestation_name := data.params.attestation_name
+
     default allow := false
 
     allow if {
         every _, artifact in input.trail.compliance_status.artifacts_statuses {
-            every result in artifact.attestations_statuses["security-scan"].sarif_results.results {
+            every result in artifact.attestations_statuses[attestation_name].sarif_results.results {
                 result.high_count == 0
                 result.medium_count == 0
                 result.low_count == 0
@@ -183,14 +192,14 @@ Each accordion gives the diff for the attest call and the rego policy specific t
 
     violations contains msg if {
         some name, artifact in input.trail.compliance_status.artifacts_statuses
-        sarif := artifact.attestations_statuses["security-scan"]
+        sarif := artifact.attestations_statuses[attestation_name]
         some result in sarif.sarif_results.results
         result.high_count > 0
         msg := sprintf("artifact '%v': %d high-severity findings", [name, result.high_count])
     }
     ```
 
-    Then run steps 3 and 4 from the general workflow with `--attestations <artifact-name>.security-scan` and `--name security-scan-policy`.
+    Run steps 3 and 4 from the general workflow with `--params '{"attestation_name": "security-scan"}'` (matching the `--name` from step 1) and `--name security-scan-policy` on the verdict attestation.
   </Accordion>
 
   <Accordion title="kosli attest junit → kosli attest system junit" icon="file-check">
@@ -219,11 +228,13 @@ Each accordion gives the diff for the attest call and the rego policy specific t
 
     import rego.v1
 
+    attestation_name := data.params.attestation_name
+
     default allow := false
 
     allow if {
         every _, artifact in input.trail.compliance_status.artifacts_statuses {
-            every suite in artifact.attestations_statuses["unit-tests"].junit_results {
+            every suite in artifact.attestations_statuses[attestation_name].junit_results {
                 suite.failures == 0
                 suite.errors == 0
             }
@@ -232,14 +243,14 @@ Each accordion gives the diff for the attest call and the rego policy specific t
 
     violations contains msg if {
         some name, artifact in input.trail.compliance_status.artifacts_statuses
-        junit := artifact.attestations_statuses["unit-tests"]
+        junit := artifact.attestations_statuses[attestation_name]
         some suite in junit.junit_results
         suite.failures > 0
         msg := sprintf("artifact '%v', suite '%v': %d failures", [name, suite.name, suite.failures])
     }
     ```
 
-    Run steps 3 and 4 from the general workflow with `--attestations <artifact-name>.unit-tests` and `--name unit-tests-policy`.
+    Run steps 3 and 4 from the general workflow with `--params '{"attestation_name": "unit-tests"}'` (matching the `--name` from step 1) and `--name unit-tests-policy` on the verdict attestation.
   </Accordion>
 
   <Accordion title="kosli attest sonar → kosli attest system sonar" icon="bug">
@@ -270,23 +281,25 @@ Each accordion gives the diff for the attest call and the rego policy specific t
 
     import rego.v1
 
+    attestation_name := data.params.attestation_name
+
     default allow := false
 
     allow if {
         every _, artifact in input.trail.compliance_status.artifacts_statuses {
-            artifact.attestations_statuses["code-quality"].sonar_results.quality_gate.status == "OK"
+            artifact.attestations_statuses[attestation_name].sonar_results.quality_gate.status == "OK"
         }
     }
 
     violations contains msg if {
         some name, artifact in input.trail.compliance_status.artifacts_statuses
-        sonar := artifact.attestations_statuses["code-quality"]
+        sonar := artifact.attestations_statuses[attestation_name]
         sonar.sonar_results.quality_gate.status != "OK"
         msg := sprintf("artifact '%v': quality gate status is '%v', expected 'OK'", [name, sonar.sonar_results.quality_gate.status])
     }
     ```
 
-    Run steps 3 and 4 from the general workflow with `--attestations <artifact-name>.code-quality` and `--name code-quality-policy`.
+    Run steps 3 and 4 from the general workflow with `--params '{"attestation_name": "code-quality"}'` (matching the `--name` from step 1) and `--name code-quality-policy` on the verdict attestation.
   </Accordion>
 
   <Accordion title="kosli attest jira → kosli attest system jira" icon="clipboard-list-check">
@@ -319,11 +332,13 @@ Each accordion gives the diff for the attest call and the rego policy specific t
 
     import rego.v1
 
+    attestation_name := data.params.attestation_name
+
     default allow := false
 
     allow if {
         every _, artifact in input.trail.compliance_status.artifacts_statuses {
-            jira := artifact.attestations_statuses["jira-ticket"]
+            jira := artifact.attestations_statuses[attestation_name]
             count(jira.jira_results) > 0
             every issue in jira.jira_results {
                 issue.issue_exists
@@ -333,21 +348,21 @@ Each accordion gives the diff for the attest call and the rego policy specific t
 
     violations contains msg if {
         some name, artifact in input.trail.compliance_status.artifacts_statuses
-        jira := artifact.attestations_statuses["jira-ticket"]
+        jira := artifact.attestations_statuses[attestation_name]
         count(jira.jira_results) == 0
         msg := sprintf("artifact '%v': no Jira issue references found", [name])
     }
 
     violations contains msg if {
         some name, artifact in input.trail.compliance_status.artifacts_statuses
-        jira := artifact.attestations_statuses["jira-ticket"]
+        jira := artifact.attestations_statuses[attestation_name]
         some issue in jira.jira_results
         not issue.issue_exists
         msg := sprintf("artifact '%v': referenced Jira issue '%v' does not exist", [name, issue.issue_id])
     }
     ```
 
-    Run steps 3 and 4 from the general workflow with `--attestations <artifact-name>.jira-ticket` and `--name jira-ticket-policy`.
+    Run steps 3 and 4 from the general workflow with `--params '{"attestation_name": "jira-ticket"}'` (matching the `--name` from step 1) and `--name jira-ticket-policy` on the verdict attestation.
   </Accordion>
 
   <Accordion title="kosli attest pullrequest_* → kosli attest system pull_request" icon="code-pull-request">
@@ -381,23 +396,25 @@ Each accordion gives the diff for the attest call and the rego policy specific t
 
     import rego.v1
 
+    attestation_name := data.params.attestation_name
+
     default allow := false
 
     allow if {
         every _, artifact in input.trail.compliance_status.artifacts_statuses {
-            count(artifact.attestations_statuses["pull-request"].pull_requests) > 0
+            count(artifact.attestations_statuses[attestation_name].pull_requests) > 0
         }
     }
 
     violations contains msg if {
         some name, artifact in input.trail.compliance_status.artifacts_statuses
-        pr := artifact.attestations_statuses["pull-request"]
+        pr := artifact.attestations_statuses[attestation_name]
         count(pr.pull_requests) == 0
         msg := sprintf("artifact '%v': no pull request found for the commit", [name])
     }
     ```
 
-    Run steps 3 and 4 from the general workflow with `--attestations <artifact-name>.pull-request` and `--name pull-request-policy`.
+    Run steps 3 and 4 from the general workflow with `--params '{"attestation_name": "pull-request"}'` (matching the `--name` from step 1) and `--name pull-request-policy` on the verdict attestation.
 
     For richer policies — *every PR must have an approver*, *fail on open PRs* — see the worked example in the [OPA tutorial](/tutorials/evaluate_trails_with_opa).
   </Accordion>
