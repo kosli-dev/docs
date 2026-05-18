@@ -4,6 +4,79 @@ description: "Release notes for Kosli products."
 rss: true
 ---
 
+<Update label="May 13, 2026" description="v2.20.0" tags={["CLI"]}>
+
+## Updates
+
+- **`kosli approval` commands deprecated** — the `kosli approval` command tree is now marked as deprecated. Use [attestations](/getting_started/attestations) going forward.
+
+[View on GitHub](https://github.com/kosli-dev/cli/releases/tag/v2.20.0)
+
+</Update>
+
+<Update label="May 12, 2026" description="v2.18.0" tags={["CLI"]}>
+
+## New features
+
+- **`kosli snapshot cloud-run` is now generally available** — the [Cloud Run snapshotter](/client_reference/kosli_snapshot_cloud-run) is no longer hidden and now reports its coverage table alongside the snapshot.
+- **Path filters for `kosli snapshot s3`** — added `--include-regex` and `--exclude-regex` flags to [`kosli snapshot s3`](/client_reference/kosli_snapshot_s3) so you can scope a snapshot to a subset of objects in a bucket.
+
+## Bug fixes
+
+- Fixed `kosli attest snyk` and other SonarQube-backed attestations not forwarding the branch name to SonarQube's `project_analyses/search` endpoint, which previously returned results from the wrong branch.
+
+[View on GitHub](https://github.com/kosli-dev/cli/releases/tag/v2.18.0)
+
+</Update>
+
+<Update label="May 11, 2026" description="v2.17.8" tags={["CLI"]}>
+
+## New features
+
+- **Remote policies for `kosli evaluate`** — `--policy` on [`kosli evaluate`](/client_reference/kosli_evaluate_trail) now accepts remote `http(s)` URLs in addition to local file paths, so you can evaluate against centrally-hosted policy files.
+- **`--quiet` flag** — a new global `--quiet` flag suppresses non-essential output from the CLI, useful for scripting and CI pipelines that only care about exit codes.
+- **Expanded Cloud Run support** — [`kosli snapshot cloud-run`](/client_reference/kosli_snapshot_cloud-run) now reports Cloud Run Jobs in addition to services, and recovers missing image digests via a registry lookup when the runtime does not expose them directly.
+
+## Bug fixes
+
+- Fixed bare URLs in CLI flag descriptions producing broken links in the generated reference docs.
+- Fixed the Helm chart docs templates so they render correctly in [Mintlify](/helm).
+
+[View on GitHub](https://github.com/kosli-dev/cli/releases/tag/v2.17.8)
+
+</Update>
+
+<Update label="May 11, 2026" description="v0.6.4" tags={["Terraform Provider"]}>
+
+## Updates
+
+- **Toolchain update** — the [Terraform provider](/terraform-reference) is now built with Go 1.26. No user-facing behavior changes.
+
+[View on GitHub](https://github.com/kosli-dev/terraform-provider-kosli/releases/tag/v0.6.4)
+
+</Update>
+
+<Update label="May 8, 2026" description="v2.17.7" tags={["CLI"]}>
+
+## New features
+
+- **Cloud Run Jobs support in `kosli snapshot cloud-run`** — the [Cloud Run snapshotter](/client_reference/kosli_snapshot_cloud-run) can now report Cloud Run Jobs alongside services, and its wire format has been cleaned up.
+
+[View on GitHub](https://github.com/kosli-dev/cli/releases/tag/v2.17.7)
+
+</Update>
+
+<Update label="May 7, 2026" description="v2.17.6" tags={["CLI"]}>
+
+## Bug fixes
+
+- Fixed [`kosli snapshot docker`](/client_reference/kosli_snapshot_docker) crashing when it encountered a container that the Docker daemon could not inspect. Such containers are now skipped with a warning and the snapshot continues.
+- Fixed a broken `http-proxy` example link in the CLI reference docs.
+
+[View on GitHub](https://github.com/kosli-dev/cli/releases/tag/v2.17.6)
+
+</Update>
+
 <Update label="May 4, 2026" description="" tags={["Platform"]}>
 
 ## New features
