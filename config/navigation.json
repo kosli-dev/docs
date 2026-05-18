@@ -95,7 +95,8 @@
             {
               "group": "Security",
               "pages": [
-                "tutorials/unauthorized_iac_changes"
+                "tutorials/unauthorized_iac_changes",
+                "tutorials/rotating_api_keys"
               ]
             },
             {
