@@ -4,6 +4,16 @@ description: "Release notes for Kosli products."
 rss: true
 ---
 
+<Update label="May 14, 2026" description="v2.20.1" tags={["CLI"]}>
+
+## Bug fixes
+
+- Fixed CLI flags rendering as em dashes in the generated [CLI reference](/client_reference) pages. Flag names (`--flag`, `-x`) are now wrapped in backticks so Mintlify's smart-typography renderer leaves them intact.
+
+[View on GitHub](https://github.com/kosli-dev/cli/releases/tag/v2.20.1)
+
+</Update>
+
 <Update label="May 13, 2026" description="v2.20.0" tags={["CLI"]}>
 
 ## Updates
@@ -11,6 +21,17 @@ rss: true
 - **`kosli approval` commands deprecated** — the `kosli approval` command tree is now marked as deprecated. Use [attestations](/getting_started/attestations) going forward.
 
 [View on GitHub](https://github.com/kosli-dev/cli/releases/tag/v2.20.0)
+
+</Update>
+
+<Update label="May 12, 2026" description="v2.19.0" tags={["CLI"]}>
+
+## Updates
+
+- Migrated the Docker client dependency from `github.com/docker/docker` to `github.com/moby/moby` and related modular packages (`moby/moby/api`, `moby/moby/client`).
+- Updated `github.com/open-policy-agent/opa` to v1.16.2.
+
+[View on GitHub](https://github.com/kosli-dev/cli/releases/tag/v2.19.0)
 
 </Update>
 
