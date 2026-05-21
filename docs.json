@@ -44,8 +44,8 @@
     "$ref": "./config/navigation.json"
   },
   "logo": {
-    "light": "/logo/kosli-logo-light-main.svg",
-    "dark": "/logo/kosli-logo-dark-main.svg"
+    "light": "/logo/kosli-logo-light-solid.png",
+    "dark": "/logo/kosli-logo-dark-solid.png"
   },
   "navbar": {
     "links": [
