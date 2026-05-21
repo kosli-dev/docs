@@ -15,11 +15,29 @@ Report a custom attestation to an artifact or a trail in a Kosli flow.
 The name of the custom attestation type is specified using the `--type` flag.
 The path to the JSON file the custom type will evaluate is specified using the `--attestation-data` flag.
 
+<Note>
+Before you can report a custom attestation, the referenced custom attestation type
+must already exist in your Kosli organization. Create it first with
+[`kosli create attestation-type`](/client_reference/kosli_create_attestation-type)
+or with the [Kosli Terraform provider](/terraform-reference/resources/custom_attestation_type),
+then pass its name to `--type`.
+</Note>
 
 The attestation can be bound to a *trail* using the trail name.
 The attestation can be bound to an *artifact* in two ways:
 - using the artifact's SHA256 fingerprint which is calculated (based on the `--artifact-type` flag and the artifact name/path argument) or can be provided directly (with the `--fingerprint` flag).
 - using the artifact's name in the flow yaml template and the git commit from which the artifact is/will be created. Useful when reporting an attestation before creating/reporting the artifact.
+
+### Identifying the artifact
+
+When attesting against an artifact (rather than a trail) you can identify it in one of two ways:
+
+- **Let Kosli calculate the fingerprint** — pass the artifact reference as a positional argument together with `--artifact-type`. Kosli supports:
+  - `--artifact-type oci` — a container image reference, e.g. `ghcr.io/acme/web@sha256:...` or `ghcr.io/acme/web:1.2.3` (Kosli pulls the digest from the registry; use `--registry-username`/`--registry-password` for private registries).
+  - `--artifact-type docker` — an image already present in the local Docker daemon, e.g. `acme/web:1.2.3`.
+  - `--artifact-type file` — a path to a single file, e.g. `./dist/app.tar.gz`.
+  - `--artifact-type dir` — a path to a directory, e.g. `./build/` (use `--exclude` to skip files/dirs).
+- **Provide the SHA256 fingerprint directly** — use `--fingerprint <sha256>` and omit both the positional argument and `--artifact-type`. Useful when the fingerprint was computed earlier in the pipeline or returned by another Kosli command.
 
 You can optionally associate the attestation to a git commit using `--commit` (requires access to a git repo).
 You can optionally redact some of the git commit data sent to Kosli using `--redact-commit-info`.
@@ -88,52 +106,88 @@ In other CI systems, set them explicitly to capture repository metadata.
 These examples all assume that the flags  `--api-token`, `--org`, `--host`, (and `--flow`, `--trail` when required), are [set/provided](/getting_started/install/#assigning-flags-via-environment-variables). 
 
 <AccordionGroup>
-<Accordion title="report a custom attestation about a pre-built container image artifact (kosli finds the fingerprint)">
-```shell
-kosli attest custom yourDockerImageName 
-	--artifact-type oci 
-	--type customTypeName 
-	--name yourAttestationName 
-	--attestation-data yourJsonFilePath 
+<Accordion title="container image artifact — Kosli finds the fingerprint (--artifact-type oci)">
+Pass the image reference as the positional argument. Kosli pulls the SHA256 digest from the registry.
 
+```shell
+kosli attest custom ghcr.io/acme/web:1.2.3 \
+	--artifact-type oci \
+	--type customTypeName \
+	--name yourAttestationName \
+	--attestation-data yourJsonFilePath
+```
+
+For a private registry, also pass `--registry-username` and `--registry-password`.
+</Accordion>
+<Accordion title="local Docker image artifact — Kosli finds the fingerprint (--artifact-type docker)">
+Use when the image is already present in the local Docker daemon (e.g. just built in the same CI job).
+
+```shell
+kosli attest custom acme/web:1.2.3 \
+	--artifact-type docker \
+	--type customTypeName \
+	--name yourAttestationName \
+	--attestation-data yourJsonFilePath
 ```
 </Accordion>
-<Accordion title="report a custom attestation about a pre-built docker artifact (you provide the fingerprint)">
+<Accordion title="file artifact — Kosli finds the fingerprint (--artifact-type file)">
 ```shell
-kosli attest custom 
-	--fingerprint yourDockerImageFingerprint 
-	--type customTypeName 
-	--name yourAttestationName 
-	--attestation-data yourJsonFilePath 
+kosli attest custom ./dist/app.tar.gz \
+	--artifact-type file \
+	--type customTypeName \
+	--name yourAttestationName \
+	--attestation-data yourJsonFilePath
+```
+</Accordion>
+<Accordion title="directory artifact — Kosli finds the fingerprint (--artifact-type dir)">
+```shell
+kosli attest custom ./build/ \
+	--artifact-type dir \
+	--exclude '**/*.log,**/node_modules' \
+	--type customTypeName \
+	--name yourAttestationName \
+	--attestation-data yourJsonFilePath
+```
+</Accordion>
+<Accordion title="match the artifact by SHA256 — you provide the fingerprint (--fingerprint)">
+Use when you already have the SHA256 fingerprint (e.g. computed earlier in the pipeline or returned by another Kosli command). Omit the positional argument and `--artifact-type`.
 
+```shell
+kosli attest custom \
+	--fingerprint 9f86d081884c7d659a2feaa0c55ad015a3bf4f1b2b0b822cd15d6c15b0f00a08 \
+	--type customTypeName \
+	--name yourAttestationName \
+	--attestation-data yourJsonFilePath
 ```
 </Accordion>
 <Accordion title="report a custom attestation about a trail">
-```shell
-kosli attest custom 
-	--type customTypeName 
-	--name yourAttestationName 
-	--attestation-data yourJsonFilePath 
+No artifact reference is needed when attesting against the trail itself.
 
+```shell
+kosli attest custom \
+	--type customTypeName \
+	--name yourAttestationName \
+	--attestation-data yourJsonFilePath
 ```
 </Accordion>
 <Accordion title="report a custom attestation about an artifact which has not been reported yet in a trail">
-```shell
-kosli attest custom 
-	--type customTypeName 
-	--name yourTemplateArtifactName.yourAttestationName 
-	--attestation-data yourJsonFilePath 
-	--commit yourArtifactGitCommit 
+Reference the artifact by its template name and pass `--commit` so Kosli can bind the attestation when the artifact is later reported.
 
+```shell
+kosli attest custom \
+	--type customTypeName \
+	--name yourTemplateArtifactName.yourAttestationName \
+	--attestation-data yourJsonFilePath \
+	--commit yourArtifactGitCommit
 ```
 </Accordion>
 <Accordion title="report a custom attestation about a trail with an attachment">
 ```shell
-kosli attest custom 
-    --type customTypeName 
-	--name yourAttestationName 
-	--attestation-data yourJsonFilePath 
-	--attachments yourAttachmentPathName 
+kosli attest custom \
+	--type customTypeName \
+	--name yourAttestationName \
+	--attestation-data yourJsonFilePath \
+	--attachments yourAttachmentPathName
 ```
 </Accordion>
 </AccordionGroup>
