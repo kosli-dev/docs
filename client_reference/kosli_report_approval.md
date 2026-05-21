@@ -69,7 +69,7 @@ registry without needing a local Docker daemon.
 	<Tab title="GitHub">
 	View an example of the `kosli report approval` command in GitHub.
 
-	In [this YAML file](https://github.com/cyber-dojo/differ/blob/fd71a71146c5f8d0f83f2599b6acc4cd2664753c/.github/workflows/main.yml#L358)
+	In [this YAML file](https://github.com/cyber-dojo/differ/blob/30dffd09c3f896a322c65029247abcea3019c43a/.github/workflows/main.yml#L358)
 	</Tab>
 	<Tab title="GitLab">
 	View an example of the `kosli report approval` command in GitLab.

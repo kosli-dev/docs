@@ -80,7 +80,7 @@ In other CI systems, set them explicitly to capture repository metadata.
 	<Tab title="GitHub">
 	View an example of the `kosli attest junit` command in GitHub.
 
-	In [this YAML file](https://github.com/cyber-dojo/differ/blob/fd71a71146c5f8d0f83f2599b6acc4cd2664753c/.github/workflows/main.yml#L126), which created [this Kosli Event](https://app.kosli.com/cyber-dojo/flows/differ-ci/trails/fd71a71146c5f8d0f83f2599b6acc4cd2664753c?attestation_id=38fdc9d9-577f-4999-9024-3a7960ba).
+	In [this YAML file](https://github.com/cyber-dojo/differ/blob/75e174eb5045e8dd5c72079d2e2032a1488c51ef/.github/workflows/main.yml#L126), which created [this Kosli Event](https://app.kosli.com/cyber-dojo/flows/differ-ci/trails/75e174eb5045e8dd5c72079d2e2032a1488c51ef?attestation_id=6214fade-fa1d-415b-b166-ec1da541).
 	</Tab>
 	<Tab title="GitLab">
 	View an example of the `kosli attest junit` command in GitLab.
