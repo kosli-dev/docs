@@ -53,16 +53,19 @@ kosli list environments --output=json
     "name": "aws-beta",
     "type": "ECS",
     "description": "The ECS cluster for staging cyber-dojo",
-    "last_modified_at": 1778779764.0383532,
-    "last_reported_at": 1778779764.0383532,
+    "last_modified_at": 1779370223.9640796,
+    "last_reported_at": 1779370223.9640796,
+    "last_changed_at": 1779364764.3862236,
     "state": true,
     "include_scaling": false,
     "tags": {
       "url": "https://beta.cyber-dojo.org/"
     },
     "policies": [
-      "build-process",
-      "snyk-scan-aws-beta"
+      "provenance",
+      "pull-request",
+      "snyk-scan-aws-beta",
+      "trail-compliance"
     ],
     "included_environments": null
   },
@@ -71,16 +74,20 @@ kosli list environments --output=json
     "name": "aws-prod",
     "type": "ECS",
     "description": "The ECS cluster for production cyber-dojo",
-    "last_modified_at": 1778779798.6120074,
-    "last_reported_at": 1778779798.6120074,
+    "last_modified_at": 1779370198.5612183,
+    "last_reported_at": 1779370198.5612183,
+    "last_changed_at": 1779364918.4839022,
     "state": true,
     "include_scaling": false,
     "tags": {
       "url": "https://cyber-dojo.org/"
     },
     "policies": [
-      "build-process",
-      "snyk-scan-aws-prod"
+      "production-promotion",
+      "provenance",
+      "pull-request",
+      "snyk-scan-aws-prod",
+      "trail-compliance"
     ],
     "included_environments": null
   },
@@ -89,8 +96,9 @@ kosli list environments --output=json
     "name": "production",
     "type": "logical",
     "description": "Production environments for cyber-dojo",
-    "last_modified_at": 1723105767.5621033,
+    "last_modified_at": 1779364918.4839022,
     "last_reported_at": null,
+    "last_changed_at": 1779364918.4839022,
     "state": true,
     "include_scaling": false,
     "tags": {},
@@ -105,8 +113,9 @@ kosli list environments --output=json
     "name": "terraform-state-differ-beta",
     "type": "S3",
     "description": "Terraform state file of the differ service for staging cyber-dojo",
-    "last_modified_at": 1764591277.5301485,
+    "last_modified_at": 1764591277.5828784,
     "last_reported_at": 1744010496.9813983,
+    "last_changed_at": 1764591277.5828784,
     "state": true,
     "include_scaling": false,
     "tags": {},
@@ -120,8 +129,9 @@ kosli list environments --output=json
     "name": "terraform-state-differ-prod",
     "type": "S3",
     "description": "Terraform state file of the differ service for production cyber-dojo",
-    "last_modified_at": 1764591277.811534,
+    "last_modified_at": 1764591277.864438,
     "last_reported_at": 1744010523.8133755,
+    "last_changed_at": 1764591277.864438,
     "state": true,
     "include_scaling": false,
     "tags": {},
