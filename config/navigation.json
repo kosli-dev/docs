@@ -526,30 +526,26 @@
     {
       "product": "Kosli Next",
       "description": "Concepts and preview features we're exploring with customers.",
-      "tabs": [
+      "groups": [
         {
-          "tab": "Concepts",
-          "groups": [
-            {
-              "group": "Concepts",
-              "icon": "lightbulb",
-              "pages": [
-                "kosli_next/index",
-                "kosli_next/concepts/index"
-              ]
-            }
+          "group": "Kosli Next",
+          "icon": "compass",
+          "pages": [
+            "kosli_next/index"
           ]
         },
         {
-          "tab": "Preview",
-          "groups": [
-            {
-              "group": "Preview features",
-              "icon": "flask",
-              "pages": [
-                "kosli_next/preview/index"
-              ]
-            }
+          "group": "Concepts",
+          "icon": "lightbulb",
+          "pages": [
+            "kosli_next/concepts/controls"
+          ]
+        },
+        {
+          "group": "Preview",
+          "icon": "flask",
+          "pages": [
+            "kosli_next/preview/mcp_server"
           ]
         }
       ]
