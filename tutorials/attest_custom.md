@@ -3,7 +3,7 @@ title: "Reporting a custom attestation"
 description: "Walk through reporting a kosli attest custom attestation against a trail or an artifact, using the different ways to identify the artifact."
 ---
 
-In this tutorial, you'll report a <Tooltip tip="A user-defined attestation type in Kosli that validates reported data against a JSON schema and/or a jq compliance rule.">custom attestation</Tooltip> with `kosli attest custom`. You'll see how to:
+In this tutorial, you'll report a <Tooltip tip="A user-defined attestation type in Kosli that validates reported data against a JSON schema and/or a jq compliance rule.">custom attestation</Tooltip> with [`kosli attest custom`](/client_reference/kosli_attest_custom). You'll see how to:
 
 * Bind the attestation to a **trail** or to an **artifact**.
 * Identify an artifact by letting Kosli fingerprint it (container image, file, or directory), or by passing a SHA256 fingerprint directly.
