@@ -71,6 +71,7 @@
             {
               "group": "Attesting",
               "pages": [
+                "tutorials/attest_custom",
                 "tutorials/attest_snyk",
                 "tutorials/custom-attestation-ctrf",
                 "tutorials/attest_large_documents"
