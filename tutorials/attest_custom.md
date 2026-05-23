@@ -5,7 +5,7 @@ description: "Walk through reporting a kosli attest custom attestation against a
 
 In this tutorial, you'll report a <Tooltip tip="A user-defined attestation type in Kosli that validates reported data against a JSON schema and/or a jq compliance rule.">custom attestation</Tooltip> with [`kosli attest custom`](/client_reference/kosli_attest_custom). You'll see how to:
 
-* Bind the attestation to a **trail** or to an **artifact**.
+* Bind the attestation to a **trail** *or* to an **artifact** — two alternative options for the same command.
 * Identify an artifact by letting Kosli fingerprint it (container image, file, or directory), or by passing a SHA256 fingerprint directly.
 * Attest **before** the artifact has been reported, using the artifact's template name and a git commit.
 
@@ -38,9 +38,14 @@ Prepare a JSON file with the data you want to attest. Save it as `coverage.json`
 
 In every example below, this `coverage.json` is the value of `--attestation-data`.
 
-## 2. Attest against a trail
+## 2. Report the attestation
 
-The simplest case — no artifact involved. Useful for trail-wide evidence such as overall test results or release readiness checks.
+A custom attestation can be bound to either a **trail** or an **artifact**. Pick the option that matches what you want to attest about.
+
+<Tabs>
+<Tab title="Against a trail">
+
+Use this when the evidence applies to the trail as a whole (e.g. overall test results, release readiness, change approval) and is not tied to a specific build artifact.
 
 ```shell
 kosli attest custom \
@@ -51,11 +56,12 @@ kosli attest custom \
 
 `--name` must match an attestation declared in the flow or trail YAML template.
 
-## 3. Attest against an artifact
+</Tab>
+<Tab title="Against an artifact">
 
-You can identify the artifact in two ways: let Kosli compute the SHA256 fingerprint for you, or pass the fingerprint directly.
+Use this when the evidence is about a specific build artifact (a container image, a file, or a directory). You can identify the artifact in two ways: let Kosli compute the SHA256 fingerprint for you, or pass the fingerprint directly.
 
-### Option A — Let Kosli fingerprint the artifact
+#### Option A — Let Kosli fingerprint the artifact
 
 Pass the artifact reference as a positional argument together with `--artifact-type`. Supported types:
 
@@ -107,7 +113,7 @@ kosli attest custom ./build/ \
   --attestation-data coverage.json
 ```
 
-### Option B — Match the artifact by SHA256 with `--fingerprint`
+#### Option B — Match the artifact by SHA256 with `--fingerprint`
 
 Use this when you already have the SHA256 (e.g. computed earlier in the pipeline, returned by `kosli fingerprint`, or printed by your build tool). Omit the positional argument and `--artifact-type`.
 
@@ -121,7 +127,10 @@ kosli attest custom \
 
 `--fingerprint` and `--artifact-type` are mutually exclusive — pick one.
 
-## 4. Attest before the artifact exists
+</Tab>
+</Tabs>
+
+## 3. Attest before the artifact exists
 
 You can report an attestation for an artifact that hasn't been reported to Kosli yet. Reference the artifact by its **template name** from the flow YAML and pass `--commit` so Kosli can bind the attestation when the artifact is later reported.
 
@@ -135,7 +144,7 @@ kosli attest custom \
 
 The `--name` uses the dotted form `<artifact-template-name>.<attestation-name>`. `--commit` is required in this case so Kosli knows which future artifact this attestation belongs to.
 
-## 5. Add an attachment (optional)
+## 4. Add an attachment (optional)
 
 You can attach files or directories as evidence. They are compressed and stored in Kosli's evidence vault.
 
