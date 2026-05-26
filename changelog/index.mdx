@@ -8,36 +8,23 @@ rss: true
 
 ## New features
 
-- **Redesigned environments listing page** — the [environments page](/getting_started/environments) is now a paginated React UI with filtering by name, type, and tag, and sorting by last-changed time.
-- **Controls API** — new `POST /api/v2/controls/{org}`, `GET /api/v2/controls/{org}`, and `GET /api/v2/controls/{org}/{identifier}` endpoints for defining, listing, and retrieving controls.
-- **Org deletion** — organisations can now be deleted via a background process, with membership history used in place of an email prompt.
-- **Cloud Run Jobs support** — the `cloud-run` report endpoint is generally available and now covers Cloud Run Jobs alongside services.
+- **Redesigned environments listing page** — the [environments page](/getting_started/environments) is now a paginated UI with filtering by name, type, and tag, and sorting by last-changed time.
 - **Timestamp filtering on environment events** — the env events API accepts `from` and `to` timestamp query parameters.
 - **Service account privilege management** — admins can change the privilege level of existing service accounts.
 - **API key rotation** — rotate API keys without invalidating existing integrations.
-- **SSO mapping domain rename** — operators can rename an SSO mapping's `email_domain` in place via `ssocfg change-sso-domain`.
 
 ## Updates
 
-- **Faster environments listing** — eliminated N+1 snapshot lookups, batched logical-environment sub-environment loads, fixed an O(N) compliance query for logical environments, and added a materialised collection for distinct repo IDs used in filter dropdowns.
-- **Faster trail and snapshot operations** — added pagination validation and N+1 fixes on the trails list API, and reduced flow collection lookups during artifact search and snapshot processing.
-- **Per-route OpenTelemetry traces** — the matched route template is now captured as `http.route` on root spans, enabling per-route latency analysis.
-- **Correlation IDs in request logs** — every request log line now carries a correlation ID, making cross-service debugging easier.
+- **Faster environments listing** — large environments now load and filter noticeably faster.
+- **Faster trail and snapshot operations** — listing trails and processing snapshots is quicker on large orgs.
 - **OpenAPI improvements** — the API spec has been refined for cleaner SDK generation.
-- **Cross-org read access for Kosli staff** — FastAPI auth now grants Kosli members read access across orgs to support investigations.
-- **Tightened session validation** — sessions without session tokens are now invalidated rather than treated as valid, closing a logout edge case.
 - **Magic Link login hardening** — added additional protections to the Magic Link sign-in flow.
 
 ## Bug fixes
 
-- Fixed `empty_digest` reports always creating a new snapshot instead of reusing the existing one.
-- Fixed archive of large environments failing on DocumentDB.
-- Fixed `/review` relay returning 404 by fetching the PR head SHA before switching to an App token.
-- Fixed CSP blocking the FastAPI Swagger and Redoc docs pages.
-- Fixed environments listing not picking up display names when only `login_name` was set.
-- Removed a trailing slash from default Descope URLs that broke some auth flows.
-- Restored the keyboard focus indicator on `.button-*` and `.button-outline-*` elements.
-- Security: upgraded libpng in the server Docker image.
+- Fixed empty-digest reports always creating a new snapshot instead of reusing the existing one.
+- Fixed the environments listing not falling back to a user's login name when no display name was set.
+- Fixed an authentication flow issue caused by a trailing slash in default Descope URLs.
 
 </Update>
 
