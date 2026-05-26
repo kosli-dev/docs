@@ -4,6 +4,41 @@ description: "Release notes for Kosli products."
 rss: true
 ---
 
+<Update label="May 26, 2026" description="" tags={["Platform"]}>
+
+## New features
+
+- **Redesigned environments listing page** — the environments page in the Kosli app is now a paginated view with filtering by name, type, and tag, and sorting by last-changed time.
+- **Timestamp filtering on environment events** — the env events API accepts `from` and `to` timestamp query parameters.
+- **Service account privilege management** — admins can change the privilege level of existing service accounts.
+- **API key rotation** — rotate API keys without invalidating existing integrations.
+
+## Updates
+
+- **Faster environments listing** — large environments now load and filter noticeably faster.
+- **Faster trail and snapshot operations** — listing trails and processing snapshots is quicker on large orgs.
+- **OpenAPI improvements** — the API spec has been refined for cleaner SDK generation.
+- **Magic Link login hardening** — added additional protections to the Magic Link sign-in flow.
+
+## Bug fixes
+
+- Fixed empty-digest reports always creating a new snapshot instead of reusing the existing one.
+- Fixed the environments listing not falling back to a user's login name when no display name was set.
+- Fixed an authentication flow issue caused by a trailing slash in default Descope URLs.
+
+</Update>
+
+<Update label="May 26, 2026" description="v2.21.0" tags={["CLI"]}>
+
+## Bug fixes
+
+- **`kosli attest jira`** — fixed false-positive Jira issue key matches from multi-segment identifiers such as CVE numbers (`CVE-2026-41284` no longer matches as a Jira key). See the [attest jira reference](/client_reference/kosli_attest_jira).
+- **`kosli attest junit`** — JUnit XML ingestion now walks directories recursively, deduplicates file scans, and returns a clearer error message for non-UTF-8 encoded XML files. See the [attest junit reference](/client_reference/kosli_attest_junit).
+
+[View on GitHub](https://github.com/kosli-dev/cli/releases/tag/v2.21.0)
+
+</Update>
+
 <Update label="May 14, 2026" description="v2.20.1" tags={["CLI"]}>
 
 ## Bug fixes
