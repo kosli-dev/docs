@@ -54,13 +54,13 @@ def get_command_group(title):
     cmd = title.replace('kosli ', '').strip()
 
     if cmd == '':
-        return 'General'
+        return 'Top-level commands'
 
     # Top-level commands (no subcommand)
     parts = cmd.split(' ')
     if len(parts) == 1:
         # Single-word commands like 'search', 'version', 'status', etc.
-        return 'General'
+        return 'Top-level commands'
 
     # Group by first word for multi-word commands
     group_word = parts[0]
@@ -72,8 +72,8 @@ def get_command_group(title):
         'attach': 'attach / detach',
         'attest': 'attest',
         'begin': 'begin',
-        'completion': 'General',
-        'config': 'General',
+        'completion': 'Top-level commands',
+        'config': 'Top-level commands',
         'create': 'create',
         'detach': 'attach / detach',
         'diff': 'diff',
@@ -87,9 +87,9 @@ def get_command_group(title):
         'rename': 'rename',
         'report': 'report',
         'request': 'request',
-        'search': 'General',
+        'search': 'Top-level commands',
         'snapshot': 'snapshot',
-        'tag': 'General',
+        'tag': 'Top-level commands',
     }
 
     return group_map.get(group_word, group_word)
@@ -102,9 +102,9 @@ def build_nav_groups(docs_dir):
     for filename in sorted(os.listdir(docs_dir)):
         if not filename.endswith('.md'):
             continue
-        # Skip the overview page — it's manually maintained and always
-        # inserted as the first page in the General group below.
-        if filename == 'overview.md':
+        # Skip manually-maintained intro pages; they are inserted into the
+        # General group below in a fixed order.
+        if filename in ('overview.md', 'output_and_verbosity.md'):
             continue
 
         filepath = os.path.join(docs_dir, filename)
@@ -132,14 +132,24 @@ def build_nav_groups(docs_dir):
             groups_dict[group] = []
         groups_dict[group].append(cmd['page'])
 
-    # Build ordered navigation groups
-    # Put General first, then alphabetical
-    nav_groups = []
-
-    if 'General' in groups_dict:
-        nav_groups.append({
+    # Build ordered navigation groups.
+    # 1. General — manually-maintained intro pages, fixed order.
+    # 2. Top-level commands — auto-generated single-word kosli commands.
+    # 3. Remaining command families in alphabetical order, prefixed 'kosli '.
+    nav_groups = [
+        {
             'group': 'General',
-            'pages': ['client_reference/overview'] + groups_dict.pop('General'),
+            'pages': [
+                'client_reference/overview',
+                'client_reference/output_and_verbosity',
+            ],
+        }
+    ]
+
+    if 'Top-level commands' in groups_dict:
+        nav_groups.append({
+            'group': 'Top-level commands',
+            'pages': groups_dict.pop('Top-level commands'),
         })
 
     for group_name in sorted(groups_dict.keys()):
