@@ -26,3 +26,7 @@ DIGEST="$(kosli fingerprint "${IMAGE_NAME}" --artifact-type=docker --debug=false
 ## Context
 
 The Kosli CLI writes debug information to `stderr` and all other output to `stdout`. In a local terminal, a `$(subshell)` captures only `stdout`. However, in many CI workflows (including GitHub and GitLab), `stdout` and `stderr` are multiplexed together, causing debug output to leak into captured variables.
+
+## See also
+
+- [Output and verbosity](/client_reference/output_and_verbosity) — full reference for the CLI's stdout/stderr behavior, `[warning]` messages, and the `--quiet` and `--debug` flags.

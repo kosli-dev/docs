@@ -219,6 +219,12 @@
               "group": "General",
               "pages": [
                 "client_reference/overview",
+                "client_reference/output_and_verbosity"
+              ]
+            },
+            {
+              "group": "Top-level commands",
+              "pages": [
                 "client_reference/kosli",
                 "client_reference/kosli_attach-policy",
                 "client_reference/kosli_completion",
