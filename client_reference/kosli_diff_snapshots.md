@@ -68,7 +68,7 @@ kosli diff snapshots aws-beta aws-prod --output=json
 ```json
 {
   "snappish1": {
-    "snapshot_id": "aws-beta#7005",
+    "snapshot_id": "aws-beta#7014",
     "artifacts": [
       {
         "fingerprint": "12c8c3b837fc9fef8c25c7c0fc905f8537877f674a93ebd18cf4ff804594a3bc",
@@ -127,25 +127,25 @@ kosli diff snapshots aws-beta aws-prod --output=json
         "instance_count": 3
       },
       {
-        "fingerprint": "a696c3bc94e8b06bcc5c2a049c8c36b5e2f6bb18d60328d73dc9c49d3046515a",
-        "name": "244531986313.dkr.ecr.eu-central-1.amazonaws.com/nginx:7523b4c@sha256:a696c3bc94e8b06bcc5c2a049c8c36b5e2f6bb18d60328d73dc9c49d3046515a",
-        "most_recent_timestamp": 1779957604,
-        "flow": "nginx-ci",
-        "commit_url": "https://github.com/cyber-dojo/nginx/commit/7523b4cf7a004f61c8ee82df0ec4213bedeece68",
-        "instance_count": 1
-      },
-      {
         "fingerprint": "d2c30df1412005c8746cef54c3e3a88ddea23fdc0d96085a8ea66d91c61ac6d9",
         "name": "244531986313.dkr.ecr.eu-central-1.amazonaws.com/differ:43d2a72@sha256:d2c30df1412005c8746cef54c3e3a88ddea23fdc0d96085a8ea66d91c61ac6d9",
         "most_recent_timestamp": 1779961439,
         "flow": "differ-ci",
         "commit_url": "https://github.com/cyber-dojo/differ/commit/43d2a72431124e9fcf47bf866621ba3fd8e7f618",
         "instance_count": 1
+      },
+      {
+        "fingerprint": "fcccadca9efda94134e8dbe8fcac04b960518b2123a0766793352e75a374ec96",
+        "name": "244531986313.dkr.ecr.eu-central-1.amazonaws.com/nginx:fa9da3d@sha256:fcccadca9efda94134e8dbe8fcac04b960518b2123a0766793352e75a374ec96",
+        "most_recent_timestamp": 1780112745,
+        "flow": "nginx-ci",
+        "commit_url": "https://github.com/cyber-dojo/nginx/commit/fa9da3d3ba20d45d76ae8bde857871146cd6ff6f",
+        "instance_count": 1
       }
     ]
   },
   "snappish2": {
-    "snapshot_id": "aws-prod#4655",
+    "snapshot_id": "aws-prod#4661",
     "artifacts": [
       {
         "fingerprint": "2a4818ad632c3625cdc69012aa4671b45dfff0fe62ac1d2fbdd149206e624831",

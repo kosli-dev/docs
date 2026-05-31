@@ -26,7 +26,6 @@ You can specify flow parameters in flags.
 |    `-t`, `--template` strings  |  [defaulted] The comma-separated list of required compliance controls names.  |
 |    `-f`, `--template-file` string  |  [optional] The path to a yaml template file. Cannot be used together with `--use-empty-template`  |
 |        `--use-empty-template`  |  Use an empty template for the flow creation without specifying a file. Cannot be used together with `--template` or `--template-file`  |
-|        `--visibility` string  |  [defaulted] The visibility of the Kosli flow. Valid visibilities are [public, private]. (default "private")  |
 
 
 ## Flags inherited from parent commands
@@ -66,7 +65,6 @@ These examples all assume that the flags  `--api-token`, `--org`, `--host`, (and
 ```shell
 kosli create flow yourFlowName 
 	--description yourFlowDescription 
-	--visibility private OR public 
 	--use-empty-template 
 
 ```
@@ -75,7 +73,6 @@ kosli create flow yourFlowName
 ```shell
 kosli create flow yourFlowName 
 	--description yourFlowDescription 
-	--visibility private OR public 
 	--template-file /path/to/your/template/file.yml 
 ```
 </Accordion>
