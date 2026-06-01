@@ -48,11 +48,9 @@ jobs:
           anthropic_service_account_id: ${{ vars.ANTHROPIC_SERVICE_ACCOUNT_ID }}
           track_progress: true
           use_sticky_comment: true
-          # Install the kosli-plugins marketplace and the mintlify-docs plugin,
-          # which provides the `doc-reviewer` agent used below. Keeps the agent
-          # definition in one place (kosli-plugins) instead of duplicating it.
-          plugin_marketplaces: https://github.com/kosli-dev/kosli-plugins.git
-          plugins: mintlify-docs@kosli-plugins
+          # The `doc-review` skill is defined locally in
+          # `.claude/skills/doc-review/SKILL.md` and is picked up automatically
+          # from the checked-out repo.
           # --allowedTools is a whitelist - the agent can ONLY use these tools
           # plus the implicit Read/Grep/Glob set. Bash is scoped to the minimum
           # gh subcommands needed to read PR context and post comments.
@@ -64,9 +62,9 @@ jobs:
             REPO: ${{ github.repository }}
             PR NUMBER: ${{ github.event.pull_request.number }}
 
-            You are reviewing a pull request to the Kosli docs site. Use the
-            `doc-reviewer` agent (from the mintlify-docs plugin) and the rules
-            in this repo's CLAUDE.md.
+            You are reviewing a pull request to the Kosli docs site. Follow
+            the `doc-review` skill (defined in `.claude/skills/doc-review/SKILL.md`)
+            and the rules in this repo's CLAUDE.md.
 
             Scope: only the docs files (.md, .mdx, config/navigation.json,
             docs.json) changed in this PR. Use `gh pr diff` to discover them.
