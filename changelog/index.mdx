@@ -4,6 +4,54 @@ description: "Release notes for Kosli products."
 rss: true
 ---
 
+<Update label="June 2, 2026" description="" tags={["Platform"]}>
+
+## New features
+
+- **Default organisation on user profile** — pick a default organisation from a dropdown on your [profile settings page](https://app.kosli.com/settings/profile) so the Kosli app opens to it on sign-in.
+
+## Updates
+
+- **`visibility` optional when creating flows** — the create-flow API no longer requires a `visibility` field. New flows default to `private`.
+
+## Bug fixes
+
+- Upgraded `libxml2` in the Kosli app image to address CVE-2026-6732 (high-severity denial-of-service in XSD validation).
+- Fixed orphaned tooltips lingering on the page after HTMX-driven updates.
+
+</Update>
+
+<Update label="June 1, 2026" description="v2.23.2" tags={["CLI"]}>
+
+## Bug fixes
+
+- **`kosli create flow`** — restored the `--visibility` flag as a deprecated (rather than removed) option, so existing scripts that pass it keep working. The flag has no effect on newer Kosli servers and will be removed in a future release. See the [create flow reference](/client_reference/kosli_create_flow).
+
+[View on GitHub](https://github.com/kosli-dev/cli/releases/tag/v2.23.2)
+
+</Update>
+
+<Update label="May 30, 2026" description="v2.23.0" tags={["CLI"]}>
+
+## Updates
+
+- **`kosli create flow`** — the `--visibility` flag is deprecated. Flow visibility now defaults to `private` server-side and the flag is no longer needed.
+- **Deprecation warning for legacy flow creation** — `kosli create flow` now prints a warning when neither `--template-file` nor `--use-empty-template` is supplied. The legacy code path will stop working in a future release; pass a template file or use the empty template instead. See the [create flow reference](/client_reference/kosli_create_flow).
+
+[View on GitHub](https://github.com/kosli-dev/cli/releases/tag/v2.23.0)
+
+</Update>
+
+<Update label="May 29, 2026" description="v2.22.1" tags={["CLI"]}>
+
+## Bug fixes
+
+- Fixed malformed URLs in `kosli list` and `kosli diff` commands when host or path segments contained extra slashes. Requests are now built with proper URL joining.
+
+[View on GitHub](https://github.com/kosli-dev/cli/releases/tag/v2.22.1)
+
+</Update>
+
 <Update label="May 26, 2026" description="" tags={["Platform"]}>
 
 ## New features
