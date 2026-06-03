@@ -3,7 +3,7 @@ title: Tracing a production incident to its git commit
 description: "Learn how to use Kosli to trace a production 500 error in cyber-dojo back to the specific git commit that caused it — without any access to the production environment."
 ---
 
-By the end of this tutorial, you will have traced a production incident from a 500 error all the way back to the git commit that caused it, using only Kosli CLI queries against the public cyber-dojo organisation.
+By the end of this tutorial, you will have traced a production incident from a 500 error all the way back to the git commit that caused it, using only Kosli CLI queries against the public cyber-dojo organization.
 
 <Frame><img src="/images/cyber-dojo-prod-500-large.png" alt="Prod cyber-dojo is down with a 500" /></Frame>
 
@@ -16,7 +16,7 @@ By the end of this tutorial, you will have traced a production incident from a 5
 
 ## Setup
 
-The `cyber-dojo` Kosli organisation is public, so any authenticated user can read its data:
+The `cyber-dojo` Kosli organization is public, so any authenticated user can read its data:
 
 ```shell
 export KOSLI_ORG=cyber-dojo

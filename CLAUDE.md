@@ -86,6 +86,7 @@ description: One sentence describing the page purpose.
 - Use active voice and imperative mood for instructions ("Run `kosli attest`", not "You should run").
 - Refer to the product as **Kosli** — not "the Kosli platform" or "KOSLI".
 - Use "audit trail" not "audit log"; "attest" not "certify".
+- Use American spelling (organization, behavior, color), not British. Enforced by Vale via `styles/Kosli/AmericanSpelling.yml`.
 - Sentence case for all headings.
 
 ## Don'ts

@@ -155,4 +155,4 @@ These two connections must be configured independently.
 
 ## What you've accomplished
 
-You have set up Tinyproxy as an HTTP proxy and configured the Kosli CLI to route all traffic through it. This pattern works with any HTTP proxy — replace `http://localhost:8888` with your organisation's proxy URL and run `kosli config --http-proxy=<your-proxy-url>` to apply it globally.
+You have set up Tinyproxy as an HTTP proxy and configured the Kosli CLI to route all traffic through it. This pattern works with any HTTP proxy — replace `http://localhost:8888` with your organization's proxy URL and run `kosli config --http-proxy=<your-proxy-url>` to apply it globally.
