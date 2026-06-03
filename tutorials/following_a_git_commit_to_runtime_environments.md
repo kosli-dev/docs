@@ -20,7 +20,7 @@ The commit we follow fixed a misconfiguration: `runner` should run with three re
 
 ## Setup
 
-Set your environment variables to use the public `cyber-dojo` Kosli organisation:
+Set your environment variables to use the public `cyber-dojo` Kosli organization:
 
 ```shell
 export KOSLI_ORG=cyber-dojo

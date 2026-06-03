@@ -19,7 +19,7 @@ Other useful commands:
 
 ```bash
 mint broken-links   # Validate all internal links
-mint a11y           # Check colour contrast and accessibility
+mint a11y           # Check color contrast and accessibility
 mint update         # Update the mint CLI tool
 ```
 

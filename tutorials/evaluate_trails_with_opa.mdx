@@ -90,7 +90,7 @@ With the safe pattern, if `pull_requests` is undefined, `every pr in ...` fails 
 `violations` explains why a policy was denied -- it does not decide whether it was denied. When a `violations` rule body encounters an undefined reference, it silently produces no message. This is the safe failure mode: you lose a diagnostic, not a compliance check.
 
 <Info>
-See the [Rego Policy reference](/policy-reference/rego_policy) for the full policy contract, input data shape, and exit code behaviour.
+See the [Rego Policy reference](/policy-reference/rego_policy) for the full policy contract, input data shape, and exit code behavior.
 </Info>
 
 </Step>
@@ -250,7 +250,7 @@ violations contains msg if {
 
 **Why the aliases at the top matter**
 
-`max_high := data.params.max_high` is not just shorthand. In the compliance path, `result.high_count <= max_high` is a positive bound check. If `max_high` is absent from the params file, this condition is undefined, `artifact_within_threshold` fails to fire, and `allow` stays `false`. That is the correct fail-safe behaviour.
+`max_high := data.params.max_high` is not just shorthand. In the compliance path, `result.high_count <= max_high` is a positive bound check. If `max_high` is absent from the params file, this condition is undefined, `artifact_within_threshold` fails to fire, and `allow` stays `false`. That is the correct fail-safe behavior.
 
 Compare this to a policy that drives `allow` through the absence of violations:
 

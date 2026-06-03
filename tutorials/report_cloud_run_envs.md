@@ -131,7 +131,7 @@ gcloud run jobs deploy kosli-reporter \
 ```
 
 <Tip>
-Pin the CLI image to a specific version (for example `ghcr.io/kosli-dev/cli:v2.18.0`) so the reporter behaviour does not change unexpectedly when a new release is published.
+Pin the CLI image to a specific version (for example `ghcr.io/kosli-dev/cli:v2.18.0`) so the reporter behavior does not change unexpectedly when a new release is published.
 </Tip>
 
 <Note>
