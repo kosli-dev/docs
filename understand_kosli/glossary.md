@@ -51,7 +51,7 @@ The compliance definition for a Flow. It specifies the artifacts and attestation
 
 ### Organization
 
-The account that owns Kosli resources (Flows, Environments, Policies). Most teams work within a shared organisation that maps to their company. Members are invited with specific roles that control access.
+The account that owns Kosli resources (Flows, Environments, Policies). Most teams work within a shared organization that maps to their company. Members are invited with specific roles that control access.
 
 ### Risk
 
