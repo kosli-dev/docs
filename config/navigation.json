@@ -35,6 +35,7 @@
           "group": "Administration",
           "icon": "cog",
           "pages": [
+            "administration/managing_organizations",
             {
               "group": "Managing Users",
               "pages": [
