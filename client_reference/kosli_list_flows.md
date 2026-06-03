@@ -236,7 +236,7 @@ kosli list flows --output=json
     "description": "Individual Snyk vuln trails for aws-beta artifacts",
     "visibility": "private",
     "org": "cyber-dojo",
-    "template": "version: 1\ntrail:\n  attestations: []\n  artifacts:\n  - name: artifact\n    attestations: []\n",
+    "template": "version: 1",
     "repo_url": "",
     "tags": {
       "ci": "github",
@@ -262,7 +262,7 @@ kosli list flows --output=json
     "description": "Individual Snyk vuln trails for aws-prod artifacts",
     "visibility": "private",
     "org": "cyber-dojo",
-    "template": "version: 1\ntrail:\n  attestations: []\n  artifacts:\n  - name: artifact\n    attestations: []\n",
+    "template": "version: 1",
     "repo_url": "",
     "tags": {
       "ci": "github",
