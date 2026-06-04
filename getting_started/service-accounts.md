@@ -60,6 +60,8 @@ Once the new key is in place and operational, remove or delete the old key from 
 
 By systematically following these steps, you can ensure a seamless API key rotation without causing any downtime or interruptions in service.
 
+For a detailed walkthrough including API examples, see [Rotating API keys](/tutorials/rotating_api_keys).
+
 
 ## Using API Keys
 
