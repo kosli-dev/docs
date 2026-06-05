@@ -11,7 +11,7 @@ Kosli never stores your API token in plain text. Only a cryptographic hash of th
 
 ## Prerequisites
 
-- A Kosli shared organization with at least one [service account](/getting_started/service-accounts#service-accounts) and an existing API key.
+- A Kosli shared organization with at least one [service account](/administration/authentication/service_accounts) and an existing API key.
 - Administrator access to the organization that owns the service account.
 - An inventory of every system (CI pipelines, runtime reporters, scripts, secrets managers, etc.) that uses the API key you plan to rotate.
 
@@ -106,7 +106,7 @@ Automating rotation from your secrets manager — using the rotate endpoint abov
 
 ## Related
 
-- [Service Accounts](/getting_started/service-accounts)
+- [Service accounts](/administration/authentication/service_accounts)
 - [Rotate an API key for a service account (API reference)](/api-reference/service-accounts/rotate-an-api-key-for-a-service-account)
 - [Revoke an API key for a service account (API reference)](/api-reference/service-accounts/revoke-an-api-key-for-a-service-account)
 - [List API keys for a service account (API reference)](/api-reference/service-accounts/list-api-keys-for-a-service-account)

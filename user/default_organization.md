@@ -1,6 +1,7 @@
 ---
-title: Managing Organizations
-description: Manage your Kosli organization preferences, including which organization the app opens to when you sign in.
+title: Default organization
+description: Pick which Kosli organization the app opens to when you sign in.
+icon: "building"
 ---
 
 If you belong to more than one Kosli organization, you can pick a default. The Kosli app will open to that organization each time you sign in.

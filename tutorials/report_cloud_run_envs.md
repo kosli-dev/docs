@@ -18,7 +18,7 @@ Follow the section that matches your needs.
 
 * Have access to a Google Cloud project and region with Cloud Run resources.
 * [Create a Cloud Run Kosli environment](/getting_started/environments#create-an-environment) named `cloud-run-tutorial`.
-* [Get a Kosli API token](/getting_started/service-accounts).
+* [Get a Kosli API token](/getting_started/authenticating_to_kosli).
 
 ## Report using Kosli CLI
 

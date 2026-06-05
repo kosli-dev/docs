@@ -9,7 +9,7 @@ By the end of this tutorial, you will have reported a snapshot of your Kubernete
 
 * Have access to a Kubernetes cluster.
 * [Create a Kubernetes Kosli environment](/getting_started/environments#create-an-environment) named `k8s-tutorial`.
-* [Get a Kosli API token](/getting_started/service-accounts).
+* [Get a Kosli API token](/getting_started/authenticating_to_kosli).
 
 ## Report a snapshot
 
