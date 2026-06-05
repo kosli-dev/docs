@@ -30,3 +30,7 @@ For CI/CD pipelines and any other automation, use a [service account](/administr
 ## Use the key
 
 The same usage applies as for service account keys — see [Authenticating to Kosli](/getting_started/authenticating_to_kosli#use-the-token).
+
+## Revoke a key
+
+To revoke a personal API key, open **Profile → API keys**, find the key, and click **Revoke**. The key stops working immediately.

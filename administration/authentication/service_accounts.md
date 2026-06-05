@@ -30,7 +30,7 @@ Service accounts are only available in shared organizations.
 
 ## Assign a role
 
-Service accounts have the same role model as users: **Admin**, **Member**, **Snapshotter**, or **Reader**. The role determines what the service account can do in the organization.
+Service accounts have the same role model as users: **Admin**, **Member**, **Snapshotter**, or **Reader**. The role determines what the service account can do in the organization. Pick the least-privileged role that fits the workload.
 
 See [Roles in Kosli](/administration/managing_users/roles_in_kosli) for the full permissions matrix. As a starting point:
 
