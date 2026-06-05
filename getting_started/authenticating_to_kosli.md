@@ -37,16 +37,14 @@ For anything automated, use a service account. Personal API keys inherit your us
 
 ## Use the token
 
-The CLI reads the token from `--api-token`, the `KOSLI_API_TOKEN` environment variable, or a [config file](/getting_started/install#assigning-flags-via-config-files).
-
-When calling the API directly, pass the token as a bearer token:
+Pass the token as a bearer token when calling the API directly:
 
 ```shell
 curl -H "Authorization: Bearer <<your-api-key>>" \
   https://app.kosli.com/api/v2/environments/<<your-org-name>>
 ```
 
-For other authentication methods and full request examples, see [API authentication methods](/administration/authentication/api_authentication_methods).
+For CLI usage, basic auth, and full examples, see [API authentication methods](/administration/authentication/api_authentication_methods).
 
 ## See also
 

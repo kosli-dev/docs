@@ -37,6 +37,7 @@ See [Roles in Kosli](/administration/managing_users/roles_in_kosli) for the full
 - **Member** — CI/CD systems that report attestations, manage flows, and create resources.
 - **Snapshotter** — runtime reporters that only record environment snapshots.
 - **Reader** — read-only systems such as dashboards or query tooling.
+- **Admin** — rarely needed; reserve for automation that manages users, roles, or organization-wide settings (for example, Terraform-driven org bootstrap).
 
 ## Rotate or revoke keys
 
@@ -44,5 +45,3 @@ For zero-downtime rotation and the API-driven flow, see:
 
 - [API key rotation (reference)](/administration/authentication/api_key_rotation)
 - [Rotating API keys (tutorial)](/tutorials/rotating_api_keys)
-
-{/* TODO: expand with screenshots, audit log guidance, and revocation walkthrough */}

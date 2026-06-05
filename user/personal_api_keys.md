@@ -30,5 +30,3 @@ For CI/CD pipelines and any other automation, use a [service account](/administr
 ## Use the key
 
 The same usage applies as for service account keys — see [Authenticating to Kosli](/getting_started/authenticating_to_kosli#use-the-token).
-
-{/* TODO: expand with rotation guidance for personal keys and link to audit-log visibility */}

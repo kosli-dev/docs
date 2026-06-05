@@ -23,5 +23,3 @@ Choose a grace period that fits your deployment cadence — long enough to roll 
 - [Rotate an API key (API reference)](/api-reference/service-accounts/rotate-an-api-key-for-a-service-account)
 - [Revoke an API key (API reference)](/api-reference/service-accounts/revoke-an-api-key-for-a-service-account)
 - [List API keys (API reference)](/api-reference/service-accounts/list-api-keys-for-a-service-account)
-
-{/* TODO: expand with rotation guidance for personal API keys once the personal-key rotation flow is finalized */}
