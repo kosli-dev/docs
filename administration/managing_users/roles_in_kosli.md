@@ -182,7 +182,7 @@ The following sections provide more details about each Kosli user role, includin
   </Accordion>
 
 
-## Assigning Roles
+## Assigning roles
 
 To assign or change a user's role:
 
@@ -198,21 +198,21 @@ Role changes take effect immediately. Users will see their updated permissions t
 
 ---
 
-## Best Practices
+## Best practices
 
-### Follow the Principle of Least Privilege
+### Follow the principle of least privilege
 
 Assign users the minimum role required to perform their job functions. Start with Reader access and increase permissions as needed.
 
-### Use Service Accounts for Automation
+### Use service accounts for automation
 
 For CI/CD pipelines and automated systems, create service accounts with the Member role rather than using personal API keys. This provides better auditability and security.
 
-### Regular Access Reviews
+### Regular access reviews
 
 Periodically review user roles and remove access for team members who no longer need it. This is especially important when people change roles or leave the organization.
 
-### Separate Concerns
+### Separate concerns
 
 - **Admins**: Focus on governance, security, and organization-wide configuration
 - **Members**: Handle day-to-day operations and resource management

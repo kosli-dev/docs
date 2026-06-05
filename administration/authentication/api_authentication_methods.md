@@ -38,9 +38,9 @@ curl -H "Authorization: Bearer <<your-api-key>>" \
 
 ## HTTP basic auth
 
-<Warning>
-HTTP basic auth is a **legacy** authentication method, kept for backwards compatibility with tools that cannot send an `Authorization: Bearer` header. For all new integrations, use bearer tokens instead.
-</Warning>
+<Note>
+HTTP basic auth is a legacy method kept for backwards compatibility with tools that cannot send an `Authorization: Bearer` header. For all new integrations, use bearer tokens instead.
+</Note>
 
 Kosli accepts HTTP basic auth as an alternative to bearer tokens. The API key is sent as the **username**; the password is ignored.
 
