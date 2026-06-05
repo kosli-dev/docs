@@ -14,7 +14,7 @@ This tutorial focuses on detecting changes made by bypassing the approved Terraf
 * [Install Terraform](https://developer.hashicorp.com/terraform/install).
 * [Install Snyk CLI](https://docs.snyk.io/snyk-cli/getting-started-with-the-snyk-cli#install-the-snyk-cli-and-authenticate-your-machine) (optional — needed for the security scan step).
 * [Install Kosli CLI](/getting_started/install).
-* [Get a Kosli API token](/getting_started/service-accounts).
+* [Get a Kosli API token](/getting_started/authenticating_to_kosli).
 
 ## Setup
 

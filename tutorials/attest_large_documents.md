@@ -11,7 +11,7 @@ This two-part approach keeps attestation payloads focused on what compliance rul
 ## Prerequisites
 
 * [Install Kosli CLI](/getting_started/install).
-* [Get a Kosli API token](/getting_started/service-accounts).
+* [Get a Kosli API token](/getting_started/authenticating_to_kosli).
 * A Kosli flow and trail to attest to — follow the [Getting started guide](/getting_started/flows) if you need one.
 * A report file to attest (e.g. an SBOM in JSON format, or a SARIF vulnerability report).
 

@@ -20,7 +20,7 @@
           "icon": "rocket",
           "pages": [
             "getting_started/install",
-            "getting_started/service-accounts",
+            "getting_started/authenticating_to_kosli",
             "getting_started/flows",
             "getting_started/trails",
             "getting_started/artifacts",
@@ -32,14 +32,30 @@
           ]
         },
         {
+          "group": "User",
+          "icon": "user",
+          "pages": [
+            "user/default_organization",
+            "user/personal_api_keys"
+          ]
+        },
+        {
           "group": "Administration",
           "icon": "cog",
           "pages": [
-            "administration/managing_organizations",
             {
-              "group": "Managing Users",
+              "group": "Authentication & access",
               "pages": [
-                "administration/managing_users/roles_in_kosli"
+                "administration/authentication/api_authentication_methods",
+                "administration/authentication/service_accounts",
+                "administration/authentication/api_key_rotation"
+              ]
+            },
+            {
+              "group": "Users & roles",
+              "pages": [
+                "administration/managing_users/roles_in_kosli",
+                "administration/managing_users/mapping_users_to_roles"
               ]
             },
             {

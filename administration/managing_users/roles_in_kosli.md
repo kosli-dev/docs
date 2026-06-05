@@ -1,8 +1,12 @@
 ---
 title: Roles in Kosli
-description: Understand the different user roles in Kosli and their permissions to manage access within your organization.
+description: Understand the roles in Kosli and their permissions to manage access for users and service accounts within your organization.
 ---
-Kosli provides three user roles to help administrators manage access and permissions within their organization. Understanding these roles is essential for assigning the appropriate level of access to your team members.
+Kosli uses a single role model that applies to both **users** and **[service accounts](/administration/authentication/service_accounts)**. Understanding these roles is essential for assigning the appropriate level of access to your team members and to the automated systems that talk to Kosli on their behalf.
+
+<Note>
+Roles apply to service accounts the same way they apply to users. Wherever this page mentions a "user", read it as "user or service account" unless explicitly stated otherwise. The only role-related capability that is user-only is being invited to or removed from the organization.
+</Note>
 
 ## Overview
 
@@ -178,7 +182,7 @@ The following sections provide more details about each Kosli user role, includin
   </Accordion>
 
 
-## Assigning Roles
+## Assigning roles
 
 To assign or change a user's role:
 
@@ -194,21 +198,21 @@ Role changes take effect immediately. Users will see their updated permissions t
 
 ---
 
-## Best Practices
+## Best practices
 
-### Follow the Principle of Least Privilege
+### Follow the principle of least privilege
 
 Assign users the minimum role required to perform their job functions. Start with Reader access and increase permissions as needed.
 
-### Use Service Accounts for Automation
+### Use service accounts for automation
 
 For CI/CD pipelines and automated systems, create service accounts with the Member role rather than using personal API keys. This provides better auditability and security.
 
-### Regular Access Reviews
+### Regular access reviews
 
 Periodically review user roles and remove access for team members who no longer need it. This is especially important when people change roles or leave the organization.
 
-### Separate Concerns
+### Separate concerns
 
 - **Admins**: Focus on governance, security, and organization-wide configuration
 - **Members**: Handle day-to-day operations and resource management
@@ -217,33 +221,7 @@ Periodically review user roles and remove access for team members who no longer 
 
 ---
 
-## Mapping Roles to Your Organization
+## See also
 
-When implementing Kosli, you need to map organizational roles to Kosli user roles. This table provides recommended mappings based on typical responsibilities:
-
-| Organizational Role | Recommended Kosli Role | Alternative | Rationale |
-|---------------------|------------------------|-------------|-----------|
-| **Platform Engineers** | Member | Admin (for leads) | Platform engineers need to set up flows, manage service accounts, configure integrations, and implement Kosli across teams. Member role provides these capabilities. Lead platform engineers managing the overall setup may need Admin access. |
-| **Application Developers** | Member | Reader (for view-only) | Developers typically need to report attestations and manage flows for their applications. Member role enables this. Some developers may only need visibility into deployments and compliance status, making Reader sufficient. |
-| **Security & Compliance** | Admin | N/A | Security and compliance teams need to manage policies, review audit data, control user access, and configure organization-wide settings. Admin role is required for these governance responsibilities. |
-| **Sponsors** | Reader | N/A | Sponsors need visibility into adoption progress, compliance status, and overall system health but don't need to make technical changes. Reader role provides necessary oversight without operational access. |
-
-### Understanding the Mapping
-
-This mapping is a starting point. Your organization's structure and responsibilities may require adjustments:
-
-- **Small teams**: Developers might need Admin access if they handle all aspects
-- **Large enterprises**: Strict separation may require more Readers, fewer Admins
-- **Regulated industries**: Security teams might need dedicated Admin accounts separate from operations
-
-The key principle: Assign the minimum role required for someone to fulfill their responsibilities effectively.
-
-### Learn More About Organizational Roles
-
-For detailed guidance on each organizational role's responsibilities during Kosli implementation, see:
-
-- [Implementation Guide: Roles and Responsibilities](implementation_guide/phase_1/roles_and_responsibilities)
-- [Platform Engineers](implementation_guide/phase_1/roles_and_responsibilities/platform_engineers)
-- [Application Developers](implementation_guide/phase_1/roles_and_responsibilities/app_developers)
-- [Security & Compliance](implementation_guide/phase_1/roles_and_responsibilities/security_compliance)
-- [Sponsors](implementation_guide/phase_1/roles_and_responsibilities/sponsors)
+- [Mapping users to roles](/administration/managing_users/mapping_users_to_roles) — recommended Kosli roles for common organizational roles.
+- [Service accounts](/administration/authentication/service_accounts) — assigning roles to machine users.

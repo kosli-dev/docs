@@ -15,7 +15,7 @@ This is useful when you need to:
 ## Prerequisites
 
 - [Install Kosli CLI](/getting_started/install) (v2.11.35 or higher).
-- [Get a Kosli API token](/getting_started/service-accounts).
+- [Get a Kosli API token](/getting_started/authenticating_to_kosli).
 - Have a [Flow](/getting_started/flows) and [Trail](/getting_started/trails) already created.
 
 ## Setup
