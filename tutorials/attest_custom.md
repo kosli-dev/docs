@@ -134,15 +134,56 @@ kosli attest custom \
 
 You can report an attestation for an artifact that hasn't been reported to Kosli yet. Reference the artifact by its **template name** from the flow YAML and pass `--commit` so Kosli can bind the attestation when the artifact is later reported.
 
-```shell
-kosli attest custom \
-  --type coverage-report \
-  --name myArtifactTemplateName.overall-coverage \
-  --commit $(git rev-parse HEAD) \
-  --attestation-data coverage.json
+When you pass `--commit` without a fingerprint, Kosli does **not** calculate or assume any fingerprint. Instead, it stores the attestation as *pending* against the artifact's **template name + commit**, and binds it to the real fingerprint later — when an `artifact` attestation arrives for that same template name and commit.
+
+### How it works in practice
+
+Say your flow template defines an artifact called `artifact` with an attestation `test`:
+
+```yml
+artifacts:
+  - name: artifact
+    attestations:
+      - name: test
+        type: junit
 ```
 
-The `--name` uses the dotted form `<artifact-template-name>.<attestation-name>`. `--commit` is required in this case so Kosli knows which future artifact this attestation belongs to.
+You can run tests **before** the artifact is built and report:
+
+```shell
+kosli attest junit \
+  --name artifact.test \
+  --commit $(git rev-parse HEAD) \
+  ...
+```
+
+Notice:
+
+* `--name` uses the dotted form `<artifact-template-name>.<attestation-name>`.
+* No fingerprint, no `--artifact-type`, no positional artifact argument.
+* `--commit` is what tells Kosli **which future artifact** this attestation will belong to.
+
+Later, when you build and report the artifact itself:
+
+```shell
+kosli attest artifact ./build/artifact.tar.gz \
+  --artifact-type file \
+  --name artifact \
+  --commit $(git rev-parse HEAD)
+```
+
+Kosli matches the earlier `artifact.test` attestation to this newly-reported artifact because **both share the same template name (`artifact`) and the same git commit**. At that point the attestation is bound to the artifact's actual SHA256 fingerprint.
+
+### Subtleties worth flagging
+
+1. **The match key is `(template artifact name, git commit)`** — not the fingerprint. The fingerprint is only resolved retroactively once the artifact itself is reported.
+2. **The artifact name must match the template.** `artifact.test` only works if your flow YAML declares an artifact named `artifact`. Without a template the dotted form has nothing to bind to.
+3. **Same commit, both sides.** If the pre-artifact attestation uses commit `abc123` but the artifact is later reported with commit `def456`, they will not be linked. The attestation will stay floating, unbound to any artifact.
+4. **The commit must be resolvable in a git repo.** `--commit` requires access to a real git repo so Kosli can pull commit metadata (author, message, branch, PR info). It's not just a string label.
+5. **Multiple artifacts with the same name + commit will all match.** If you report the artifact more than once from the same commit (e.g. rebuilds), every matching artifact picks up the attestation. Attestations are append-only, so this is usually what you want.
+6. **Order doesn't matter.** You can report `artifact.test` before or after `artifact` itself — Kosli binds them whenever both sides exist.
+7. **Without a template (auto-created flow/trail)**, `--commit`-based pre-artifact attestations still work for binding, but there's no template-defined compliance requirement — the artifact's compliance only reflects the attestations actually made against it.
+8. **`--commit` is _only required_ for the pre-artifact case.** If you already have a fingerprint (via `--fingerprint` or `--artifact-type`), `--commit` is optional metadata.
 
 ## 4. Add an attachment (optional)
 
