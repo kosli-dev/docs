@@ -67,6 +67,14 @@ The following sections show how to make each of the four attestations defined in
   ```
 
   This attestation belongs to any artifact attested with the matching `name` from the template (in this example `backend`) and a matching git commit.
+
+  <Info>
+  Notice this command has **no fingerprint**, no `--artifact-type`, and no positional artifact argument. When you pass `--commit` without a fingerprint, Kosli does not calculate or assume any fingerprint — it stores the attestation as *pending* against the artifact's **template name + commit** and binds it to the real fingerprint later, when an `artifact` attestation arrives for that same template name and commit.
+
+  The match key is `(template artifact name, git commit)` — not the fingerprint. The fingerprint is only resolved retroactively once the artifact itself is reported. Order doesn't matter: you can report `backend.unit-tests` before or after `backend` itself.
+
+  See [Reporting a custom attestation → Attest before the artifact exists](/tutorials/attest_custom#3-attest-before-the-artifact-exists) for the full subtleties.
+  </Info>
   </Step>
   <Step title="Attest the backend artifact">
   Once the artifact has been built, it can be attested with the following command.
