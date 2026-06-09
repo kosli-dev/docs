@@ -53,9 +53,9 @@ kosli list environments --output=json
     "name": "aws-beta",
     "type": "ECS",
     "description": "The ECS cluster for staging cyber-dojo",
-    "last_modified_at": 1780507044.099856,
-    "last_reported_at": 1780507044.099856,
-    "last_changed_at": 1780474703.9654791,
+    "last_modified_at": 1781003184.052472,
+    "last_reported_at": 1781003184.052472,
+    "last_changed_at": 1780985363.927948,
     "state": true,
     "include_scaling": false,
     "tags": {
@@ -65,7 +65,7 @@ kosli list environments --output=json
       "provenance",
       "pull-request",
       "snyk-scan-aws-beta",
-      "trail-compliance"
+      "trail-compliance-aws-beta"
     ],
     "included_environments": null
   },
@@ -74,9 +74,9 @@ kosli list environments --output=json
     "name": "aws-prod",
     "type": "ECS",
     "description": "The ECS cluster for production cyber-dojo",
-    "last_modified_at": 1780507018.5470202,
-    "last_reported_at": 1780507018.5470202,
-    "last_changed_at": 1780474738.6666076,
+    "last_modified_at": 1781003158.6309001,
+    "last_reported_at": 1781003158.6309001,
+    "last_changed_at": 1780984438.437869,
     "state": true,
     "include_scaling": false,
     "tags": {
@@ -87,7 +87,7 @@ kosli list environments --output=json
       "provenance",
       "pull-request",
       "snyk-scan-aws-prod",
-      "trail-compliance"
+      "trail-compliance-aws-prod"
     ],
     "included_environments": null
   },
@@ -96,9 +96,9 @@ kosli list environments --output=json
     "name": "production",
     "type": "logical",
     "description": "Production environments for cyber-dojo",
-    "last_modified_at": 1780474738.6666076,
+    "last_modified_at": 1780984438.437869,
     "last_reported_at": null,
-    "last_changed_at": 1780474738.6666076,
+    "last_changed_at": 1780984438.437869,
     "state": true,
     "include_scaling": false,
     "tags": {},
