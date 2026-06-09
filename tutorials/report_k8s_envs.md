@@ -170,7 +170,7 @@ kosli snapshot k8s k8s-tutorial \
 
 If you are considering running more than one reporter against the same cluster, the table below summarizes which setups produce meaningful snapshots and which don't.
 
-| Scenario | Works? | Explanation |
+| Scenario | Supported | Explanation |
 | :--- | :---: | :--- |
 | Two orgs, separate environments, overlapping namespaces | Yes | Different environments → independent snapshots. |
 | One org, two environments, overlapping namespaces | Yes | Same as above. |
