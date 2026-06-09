@@ -180,8 +180,8 @@ If you are considering running more than one reporter against the same cluster, 
 <Warning>
 A single Kosli environment must have exactly one reporter feeding it. Snapshots are never overwritten or deleted, but if two reporters take turns updating the same environment:
 
-- Diffs between consecutive snapshots compare unrelated views of the cluster.
-- The environment history shows artifacts continuously stopping and starting as each report toggles which namespaces are visible.
+* Diffs between consecutive snapshots compare unrelated views of the cluster.
+* The environment history shows artifacts continuously stopping and starting as each report toggles which namespaces are visible.
 </Warning>
 
 ## What you've accomplished
