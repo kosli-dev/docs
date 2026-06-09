@@ -168,16 +168,21 @@ kosli snapshot k8s k8s-tutorial \
 
 ## Running multiple reporters
 
-If you are considering running more than one reporter against the same cluster, the table below summarizes which setups are safe and which will cause data loss.
+If you are considering running more than one reporter against the same cluster, the table below summarizes which setups produce meaningful snapshots and which don't.
 
-| Scenario | Safe? |
-| --- | --- |
-| Two orgs, separate environments, overlapping namespaces | **Safe.** Different environments → separate snapshots. |
-| One org, two environments, overlapping namespaces | **Safe.** Same as above. |
-| One org, **same environment**, two reporters with overlapping namespaces | **Broken.** Snapshots toggle back and forth. Data is lost on each report. |
-| One org, same environment, two reporters with **disjoint** namespaces | **Still broken.** Each report wipes the namespaces the other reporter owns. The reporter must be the sole source for the environment. |
+| Scenario | Supported | Explanation |
+| :--- | :---: | :--- |
+| Two orgs, separate environments, overlapping namespaces | Yes | Different environments → independent snapshots. |
+| One org, two environments, overlapping namespaces | Yes | Same as above. |
+| One org, **same environment**, two reporters with overlapping namespaces | No | Snapshots toggle between each reporter's view. No data is deleted, but diffs between consecutive snapshots become meaningless. |
+| One org, same environment, two reporters with **disjoint** namespaces | No | Each snapshot only reflects one reporter's namespaces, so diffs compare unrelated scopes. |
 
-The rule of thumb: a single Kosli environment must have exactly one reporter feeding it.
+<Warning>
+A single Kosli environment must have exactly one reporter feeding it. Snapshots are never overwritten or deleted, but if two reporters take turns updating the same environment:
+
+* Diffs between consecutive snapshots compare unrelated views of the cluster.
+* The environment history shows artifacts continuously stopping and starting as each report toggles which namespaces are visible.
+</Warning>
 
 ## What you've accomplished
 
