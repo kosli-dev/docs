@@ -172,10 +172,10 @@ If you are considering running more than one reporter against the same cluster, 
 
 | Scenario | Works? | Explanation |
 | :--- | :---: | :--- |
-| Two orgs, separate environments, overlapping namespaces | ✅ | Different environments → independent snapshots. |
-| One org, two environments, overlapping namespaces | ✅ | Same as above. |
-| One org, **same environment**, two reporters with overlapping namespaces | ❌ | Snapshots toggle between each reporter's view. No data is deleted, but diffs between consecutive snapshots become meaningless. |
-| One org, same environment, two reporters with **disjoint** namespaces | ❌ | Each snapshot only reflects one reporter's namespaces, so diffs compare unrelated scopes. The reporter must be the sole source for the environment. |
+| Two orgs, separate environments, overlapping namespaces | Yes | Different environments → independent snapshots. |
+| One org, two environments, overlapping namespaces | Yes | Same as above. |
+| One org, **same environment**, two reporters with overlapping namespaces | No | Snapshots toggle between each reporter's view. No data is deleted, but diffs between consecutive snapshots become meaningless. |
+| One org, same environment, two reporters with **disjoint** namespaces | No | Each snapshot only reflects one reporter's namespaces, so diffs compare unrelated scopes. |
 
 <Warning>
 A single Kosli environment must have exactly one reporter feeding it. Snapshots are never overwritten or deleted, but if two reporters take turns updating the same environment:
