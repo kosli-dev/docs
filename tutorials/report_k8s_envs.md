@@ -166,6 +166,19 @@ kosli snapshot k8s k8s-tutorial \
 </Tab>
 </Tabs>
 
+## Running multiple reporters
+
+If you are considering running more than one reporter against the same cluster, the table below summarizes which setups are safe and which will cause data loss.
+
+| Scenario | Safe? |
+| --- | --- |
+| Two orgs, separate environments, overlapping namespaces | **Safe.** Different environments → separate snapshots. |
+| One org, two environments, overlapping namespaces | **Safe.** Same as above. |
+| One org, **same environment**, two reporters with overlapping namespaces | **Broken.** Snapshots toggle back and forth. Data is lost on each report. |
+| One org, same environment, two reporters with **disjoint** namespaces | **Still broken.** Each report wipes the namespaces the other reporter owns. The reporter must be the sole source for the environment. |
+
+The rule of thumb: a single Kosli environment must have exactly one reporter feeding it.
+
 ## What you've accomplished
 
 You have reported a snapshot of your Kubernetes cluster to Kosli. Kosli now tracks the running artifacts in that environment and will record changes as they happen.
