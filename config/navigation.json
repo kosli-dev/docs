@@ -306,10 +306,17 @@
             {
               "group": "kosli create",
               "pages": [
+                "client_reference/kosli_create_api-key",
                 "client_reference/kosli_create_attestation-type",
                 "client_reference/kosli_create_environment",
                 "client_reference/kosli_create_flow",
                 "client_reference/kosli_create_policy"
+              ]
+            },
+            {
+              "group": "kosli delete",
+              "pages": [
+                "client_reference/kosli_delete_api-key"
               ]
             },
             {
@@ -355,6 +362,7 @@
             {
               "group": "kosli list",
               "pages": [
+                "client_reference/kosli_list_api-keys",
                 "client_reference/kosli_list_artifacts",
                 "client_reference/kosli_list_attestation-types",
                 "client_reference/kosli_list_environments",
@@ -375,6 +383,12 @@
               "pages": [
                 "client_reference/kosli_rename_environment",
                 "client_reference/kosli_rename_flow"
+              ]
+            },
+            {
+              "group": "kosli rotate",
+              "pages": [
+                "client_reference/kosli_rotate_api-key"
               ]
             },
             {

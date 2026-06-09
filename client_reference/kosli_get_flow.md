@@ -57,7 +57,8 @@ kosli get flow dashboard-ci --output=json
   "tags": {
     "ci": "github",
     "repo_url": "https://github.com/cyber-dojo/dashboard",
-    "kind": "build"
+    "kind": "build",
+    "env": "aws-beta"
   }
 }
 ```

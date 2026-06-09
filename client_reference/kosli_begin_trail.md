@@ -62,7 +62,7 @@ In other CI systems, set them explicitly to capture repository metadata.
 	<Tab title="GitHub">
 	View an example of the `kosli begin trail` command in GitHub.
 
-	In [this YAML file](https://github.com/cyber-dojo/runner/blob/bc8fb51346a42e17a4d3669f3ea11908782a43d1/.github/workflows/main.yml#L69), which created [this Kosli Event](https://app.kosli.com/cyber-dojo/flows/runner-ci/trails/bc8fb51346a42e17a4d3669f3ea11908782a43d1?attestation_id=1).
+	In [this YAML file](https://github.com/cyber-dojo/runner/blob/bc5fbc14361ce7a6281b6110049d90a03f69d786/.github/workflows/main.yml#L69), which created [this Kosli Event](https://app.kosli.com/cyber-dojo/flows/runner-ci/trails/bc5fbc14361ce7a6281b6110049d90a03f69d786?attestation_id=1).
 	</Tab>
 	<Tab title="GitLab">
 	View an example of the `kosli begin trail` command in GitLab.

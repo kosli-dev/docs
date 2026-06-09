@@ -1,27 +1,29 @@
 ---
-title: "kosli tag"
+title: "kosli delete api-key"
 beta: false
 deprecated: false
-description: "Tag a resource in Kosli with key-value pairs.  "
+description: "Delete one or more API keys for a service account."
 ---
 
 ## Synopsis
 
 ```shell
-kosli tag RESOURCE-TYPE RESOURCE-ID [flags]
+kosli delete api-key KEY-ID [KEY-ID...] [flags]
 ```
 
-Tag a resource in Kosli with key-value pairs.  
-use --set to add or update tags, and --unset to remove tags.
+Delete one or more API keys for a service account.
 
+This permanently deletes the API key(s) identified by KEY-ID. Deletion is immediate and
+cannot be undone. You are asked to confirm before the key is deleted; use
+`--assume-yes`/`--yes` to skip the confirmation prompt.
 
 ## Flags
 | Flag | Description |
 | :--- | :--- |
+|    `-y`, `--assume-yes`  |  [optional] Skip the confirmation prompt and delete the API key without asking. (alias: `--yes`)  |
 |    `-D`, `--dry-run`  |  [optional] Run in dry-run mode. When enabled, no data is sent to Kosli and the CLI exits with 0 exit code regardless of any errors.  |
-|    `-h`, `--help`  |  help for tag  |
-|        `--set` stringToString  |  [optional] The key-value pairs to tag the resource with. The format is: key=value  |
-|        `--unset` strings  |  [optional] The list of tag keys to remove from the resource.  |
+|    `-h`, `--help`  |  help for api-key  |
+|    `-s`, `--service-account` string  |  The name of the service account whose API keys are managed.  |
 
 
 ## Flags inherited from parent commands
@@ -37,54 +39,30 @@ use --set to add or update tags, and --unset to remove tags.
 |    `-q`, `--quiet`  |  [optional] Suppress non-critical warning messages. Errors and normal output are not affected. If both `--quiet` and `--debug` are set, `--debug` wins.  |
 
 
-## Live Examples in different CI systems
-
-<Tabs>
-	<Tab title="GitHub">
-	View an example of the `kosli tag` command in GitHub.
-
-	In [this YAML file](https://github.com/cyber-dojo/aws-prod-co-promotion/blob/8d5d7b8b19d97204eb0701a813fe53c68c21ccd0/.github/workflows/promote_one.yml#L73)
-	</Tab>
-	<Tab title="GitLab">
-	View an example of the `kosli tag` command in GitLab.
-
-	In [this YAML file](https://gitlab.com/cyber-dojo/creator/-/blob/42876c4da26ee74e4bbfe14c2949cc7cb2d3345e/.gitlab/workflows/main.yml#L55)
-	</Tab>
-</Tabs>
-
 ## Examples Use Cases
 
 These examples all assume that the flags  `--api-token`, `--org`, `--host`, (and `--flow`, `--trail` when required), are [set/provided](/getting_started/install/#assigning-flags-via-environment-variables). 
 
 <AccordionGroup>
-<Accordion title="add/update tags to a flow">
+<Accordion title="delete an API key for a service account (asks for confirmation)">
 ```shell
-kosli tag flow yourFlowName 
-	--set key1=value1 
-	--set key2=value2 
+kosli delete api-key yourApiKeyID 
+	--service-account yourServiceAccountName 
 
 ```
 </Accordion>
-<Accordion title="tag an environment">
+<Accordion title="delete multiple API keys at once">
 ```shell
-kosli tag env yourEnvironmentName 
-	--set key1=value1 
-	--set key2=value2 
+kosli delete api-key keyID1 keyID2 
+	--service-account yourServiceAccountName 
 
 ```
 </Accordion>
-<Accordion title="add/update tags to an environment">
+<Accordion title="delete an API key without confirmation">
 ```shell
-kosli tag env yourEnvironmentName 
-	--set key1=value1 
-	--set key2=value2 
-
-```
-</Accordion>
-<Accordion title="remove tags from an environment">
-```shell
-kosli tag env yourEnvironmentName 
-	--unset key1=value1 
+kosli delete api-key yourApiKeyID 
+	--service-account yourServiceAccountName 
+	--assume-yes 
 ```
 </Accordion>
 </AccordionGroup>

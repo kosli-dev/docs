@@ -752,7 +752,8 @@ kosli get trail dashboard-ci 1159a6f1193150681b8484545150334e89de6c1c --output=j
     "tags": {
       "ci": "github",
       "repo_url": "https://github.com/cyber-dojo/dashboard",
-      "kind": "build"
+      "kind": "build",
+      "env": "aws-beta"
     }
   },
   "external_urls": null,

@@ -58,7 +58,8 @@ kosli list flows --output=json
     "tags": {
       "ci": "gitlab",
       "repo_url": "https://gitlab.com/cyber-dojo/creator",
-      "kind": "build"
+      "kind": "build",
+      "env": "aws-beta"
     }
   },
   {
@@ -71,7 +72,8 @@ kosli list flows --output=json
     "tags": {
       "ci": "github",
       "repo_url": "https://github.com/cyber-dojo/custom-start-points",
-      "kind": "build"
+      "kind": "build",
+      "env": "aws-beta"
     }
   },
   {
@@ -84,7 +86,8 @@ kosli list flows --output=json
     "tags": {
       "ci": "github",
       "repo_url": "https://github.com/cyber-dojo/dashboard",
-      "kind": "build"
+      "kind": "build",
+      "env": "aws-beta"
     }
   },
   {
@@ -97,7 +100,8 @@ kosli list flows --output=json
     "tags": {
       "ci": "github",
       "repo_url": "https://github.com/cyber-dojo/differ",
-      "kind": "build"
+      "kind": "build",
+      "env": "aws-beta"
     }
   },
   {
@@ -128,7 +132,8 @@ kosli list flows --output=json
     "tags": {
       "ci": "github",
       "repo_url": "https://github.com/cyber-dojo/exercises-start-points",
-      "kind": "build"
+      "kind": "build",
+      "env": "aws-beta"
     }
   },
   {
@@ -141,7 +146,8 @@ kosli list flows --output=json
     "tags": {
       "ci": "github",
       "repo_url": "https://github.com/cyber-dojo/languages-start-points",
-      "kind": "build"
+      "kind": "build",
+      "env": "aws-beta"
     }
   },
   {
@@ -154,7 +160,8 @@ kosli list flows --output=json
     "tags": {
       "ci": "github",
       "repo_url": "https://github.com/cyber-dojo/nginx",
-      "kind": "build"
+      "kind": "build",
+      "env": "aws-beta"
     }
   },
   {
@@ -167,7 +174,8 @@ kosli list flows --output=json
     "tags": {
       "ci": "github",
       "repo_url": "https://github.com/cyber-dojo/aws-prod-co-promotion",
-      "kind": "release"
+      "kind": "release",
+      "env": "aws-prod"
     }
   },
   {
@@ -189,7 +197,8 @@ kosli list flows --output=json
     "tags": {
       "ci": "github",
       "repo_url": "https://github.com/cyber-dojo/runner",
-      "kind": "build"
+      "kind": "build",
+      "env": "aws-beta"
     }
   },
   {
@@ -202,7 +211,8 @@ kosli list flows --output=json
     "tags": {
       "ci": "github",
       "repo_url": "https://github.com/cyber-dojo/saver",
-      "kind": "build"
+      "kind": "build",
+      "env": "aws-beta"
     }
   },
   {
@@ -228,7 +238,8 @@ kosli list flows --output=json
     "tags": {
       "ci": "github",
       "kind": "run",
-      "workflow_url": "https://github.com/cyber-dojo/snyk-scanning/blob/main/.github/workflows/aws-beta.yml"
+      "workflow_url": "https://github.com/cyber-dojo/snyk-scanning/blob/main/.github/workflows/aws-beta.yml",
+      "env": "aws-beta"
     }
   },
   {
@@ -241,7 +252,8 @@ kosli list flows --output=json
     "tags": {
       "ci": "github",
       "kind": "run",
-      "workflow_url": "https://github.com/cyber-dojo/snyk-scanning/blob/main/.github/workflows/artifact_snyk_test.yml"
+      "workflow_url": "https://github.com/cyber-dojo/snyk-scanning/blob/main/.github/workflows/artifact_snyk_test.yml",
+      "env": "aws-beta"
     }
   },
   {
@@ -254,7 +266,8 @@ kosli list flows --output=json
     "tags": {
       "ci": "github",
       "kind": "run",
-      "workflow_url": "https://github.com/cyber-dojo/snyk-scanning/blob/main/.github/workflows/aws-prod.yml"
+      "workflow_url": "https://github.com/cyber-dojo/snyk-scanning/blob/main/.github/workflows/aws-prod.yml",
+      "env": "aws-prod"
     }
   },
   {
@@ -267,7 +280,8 @@ kosli list flows --output=json
     "tags": {
       "ci": "github",
       "kind": "run",
-      "workflow_url": "https://github.com/cyber-dojo/snyk-scanning/blob/main/.github/workflows/artifact_snyk_test.yml"
+      "workflow_url": "https://github.com/cyber-dojo/snyk-scanning/blob/main/.github/workflows/artifact_snyk_test.yml",
+      "env": "aws-prod"
     }
   },
   {
@@ -289,7 +303,8 @@ kosli list flows --output=json
     "tags": {
       "ci": "github",
       "repo_url": "https://github.com/cyber-dojo/web",
-      "kind": "build"
+      "kind": "build",
+      "env": "aws-beta"
     }
   }
 ]
