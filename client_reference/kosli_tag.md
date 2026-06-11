@@ -43,7 +43,7 @@ use --set to add or update tags, and --unset to remove tags.
 	<Tab title="GitHub">
 	View an example of the `kosli tag` command in GitHub.
 
-	In [this YAML file](https://github.com/cyber-dojo/aws-prod-co-promotion/blob/8d5d7b8b19d97204eb0701a813fe53c68c21ccd0/.github/workflows/promote_one.yml#L73)
+	In [this YAML file](https://github.com/cyber-dojo/aws-prod-co-promotion/blob/b8cebb868c7b188ca28222ca21a4678524eca206/.github/workflows/promote_one.yml#L73)
 	</Tab>
 	<Tab title="GitLab">
 	View an example of the `kosli tag` command in GitLab.

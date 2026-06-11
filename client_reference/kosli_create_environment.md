@@ -46,7 +46,7 @@ to them.
 |    `-h`, `--help`  |  help for environment  |
 |        `--include-scaling`  |  [optional] Include scaling events for snapshots. Snapshots with scaling changes will result in new environment records.  |
 |        `--included-environments` strings  |  [optional] Comma separated list of environments to include in logical environment  |
-|    `-t`, `--type` string  |  The type of environment. Valid types are: [K8S, ECS, server, S3, lambda, docker, azure-apps, logical].  |
+|    `-t`, `--type` string  |  The type of environment. Valid types are: [K8S, ECS, S3, lambda, server, docker, azure-apps, cloud-run, logical].  |
 
 
 ## Flags inherited from parent commands
