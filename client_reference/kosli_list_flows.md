@@ -17,6 +17,8 @@ List flows for an org.
 | Flag | Description |
 | :--- | :--- |
 |    `-h`, `--help`  |  help for flows  |
+|    `-i`, `--ignore-case`  |  [optional] Perform case-insensitive matching for `--name`. By default matching is case sensitive.  |
+|    `-n`, `--name` string  |  [optional] Only list flows whose name contains this substring. The Kosli API supports alphanumeric characters and '-'.  |
 |    `-o`, `--output` string  |  [defaulted] The format of the output. Valid formats are: [table, json]. (default "table")  |
 
 
@@ -53,11 +55,11 @@ kosli list flows --output=json
     "description": "UX for Group/Kata creation",
     "visibility": "private",
     "org": "cyber-dojo",
-    "template": "version: 1\ntrail:\n  attestations: []\n  artifacts:\n  - name: artifact\n    attestations: []\n",
-    "repo_url": "https://gitlab.com/cyber-dojo/creator",
+    "template": "version: 1\n\ntrail:\n  attestations:\n    - name: pull-request\n      type: pull_request\n  artifacts:\n    - name: creator\n      attestations:\n        - name: lint\n          type: generic\n        - name: unit-test\n          type: junit\n        - name: test-branch-coverage\n          type: generic\n        - name: snyk-container-scan\n          type: generic\n",
+    "repo_url": "https://github.com/cyber-dojo/creator",
     "tags": {
-      "ci": "gitlab",
-      "repo_url": "https://gitlab.com/cyber-dojo/creator",
+      "ci": "github",
+      "repo_url": "https://github.com/cyber-dojo/creator",
       "kind": "build",
       "env": "aws-beta"
     }

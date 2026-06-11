@@ -33,7 +33,7 @@ Either expression can be omitted to default to NOW.
 |    `-o`, `--output` string  |  [defaulted] The format of the output. Valid formats are: [table, json]. (default "table")  |
 |        `--page` int  |  [defaulted] The page number of a response. (default 1)  |
 |    `-n`, `--page-limit` int  |  [defaulted] The number of elements per page. (default 15)  |
-|        `--reverse`  |  [defaulted] Reverse the order of output list.  |
+|        `--reverse`  |  [optional] Reverse the order of output list.  |
 
 
 ## Flags inherited from parent commands
@@ -66,11 +66,46 @@ kosli list snapshots aws-prod --output=json
 ```json
 [
   {
-    "index": 4744,
-    "from": 1780984438.437869,
+    "index": 4749,
+    "from": 1781167678.669744,
     "to": 0.0,
     "compliant": true,
-    "duration": 18761.68947839737
+    "duration": 6018.875128746033
+  },
+  {
+    "index": 4748,
+    "from": 1781159278.7947195,
+    "to": 1781167678.669744,
+    "compliant": true,
+    "duration": 8399.875024557114
+  },
+  {
+    "index": 4747,
+    "from": 1781159218.5704055,
+    "to": 1781159278.7947195,
+    "compliant": true,
+    "duration": 60.22431397438049
+  },
+  {
+    "index": 4746,
+    "from": 1781071618.6346955,
+    "to": 1781159218.5704055,
+    "compliant": true,
+    "duration": 87599.93570995331
+  },
+  {
+    "index": 4745,
+    "from": 1781071558.3442817,
+    "to": 1781071618.6346955,
+    "compliant": true,
+    "duration": 60.29041385650635
+  },
+  {
+    "index": 4744,
+    "from": 1780984438.437869,
+    "to": 1781071558.3442817,
+    "compliant": true,
+    "duration": 87119.90641260147
   },
   {
     "index": 4743,
@@ -134,41 +169,6 @@ kosli list snapshots aws-prod --output=json
     "to": 1780898638.4568684,
     "compliant": true,
     "duration": 59.58342456817627
-  },
-  {
-    "index": 4734,
-    "from": 1780816198.878704,
-    "to": 1780898578.8734438,
-    "compliant": true,
-    "duration": 82379.99473977089
-  },
-  {
-    "index": 4733,
-    "from": 1780815898.5218282,
-    "to": 1780816198.878704,
-    "compliant": true,
-    "duration": 300.35687589645386
-  },
-  {
-    "index": 4732,
-    "from": 1780815838.3792646,
-    "to": 1780815898.5218282,
-    "compliant": true,
-    "duration": 60.142563581466675
-  },
-  {
-    "index": 4731,
-    "from": 1780815778.6067216,
-    "to": 1780815838.3792646,
-    "compliant": true,
-    "duration": 59.77254295349121
-  },
-  {
-    "index": 4730,
-    "from": 1780812598.5177445,
-    "to": 1780815778.6067216,
-    "compliant": true,
-    "duration": 3180.088977098465
   }
 ]
 ```
