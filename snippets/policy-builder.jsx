@@ -31,10 +31,10 @@ export const PolicyBuilder = () => {
 
   const BUILTIN_TYPES = [
     "generic",
-    "junit",
-    "snyk",
-    "pull_request",
     "jira",
+    "junit",
+    "pull_request",
+    "snyk",
     "sonar",
     "*",
   ];
