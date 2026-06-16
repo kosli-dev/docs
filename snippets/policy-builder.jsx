@@ -17,8 +17,10 @@
  *
  * The serialization and expression-building logic mirrors the CLI policy
  * wizard (kosli-dev/cli: internal/policywizard, internal/policy). The YAML
- * output is byte-compatible with the CLI's `policy.ToYAML()` (gopkg.in/yaml.v3,
- * 4-space indent). Keep this file in sync with the v1 policy schema at
+ * body mirrors the CLI's `policy.ToYAML()` (gopkg.in/yaml.v3, 4-space indent),
+ * with a leading `# yaml-language-server` schema directive prepended so the
+ * pasted file gets validation and autocomplete in schema-aware editors. Keep
+ * this file in sync with the v1 policy schema at
  * https://docs.kosli.com/schemas/policy/v1
  */
 
@@ -76,7 +78,10 @@ export const PolicyBuilder = () => {
   // serializePolicy renders the policy state to a YAML string. Blocks are only
   // emitted when meaningful, exactly as the CLI wizard builds the policy object.
   function serializePolicy(state) {
-    const lines = ["_schema: " + SCHEMA_URL];
+    const lines = [
+      "# yaml-language-server: $schema=" + SCHEMA_URL + ".json",
+      "_schema: " + SCHEMA_URL,
+    ];
 
     const provOn = state.provReq;
     const trailOn = state.trailReq;
@@ -190,8 +195,20 @@ export const PolicyBuilder = () => {
   // State factories
   // -------------------------------------------------------------------------
 
+  // uid hands out stable, monotonic ids for React keys on the dynamic term /
+  // exception / attestation lists. Index keys would let React reuse the wrong
+  // DOM node when an item is removed from the middle of a list. idBox lives in
+  // useState's lazy initializer (run once), so it persists across renders
+  // without a ref hook — only useState/useMemo exist in the Mintlify sandbox.
+  const idBox = useState(() => ({ n: 0 }))[0];
+  function uid() {
+    idBox.n += 1;
+    return idBox.n;
+  }
+
   function newTerm() {
     return {
+      id: uid(),
       kind: "flow_name",
       negate: false,
       flowName: "",
@@ -208,11 +225,12 @@ export const PolicyBuilder = () => {
   }
 
   function newExpr() {
-    return { combine: "and", terms: [newTerm()] };
+    return { id: uid(), combine: "and", terms: [newTerm()] };
   }
 
   function newAttestation() {
     return {
+      id: uid(),
       type: "snyk",
       customType: "",
       name: "*",
@@ -495,7 +513,7 @@ export const PolicyBuilder = () => {
         {expr.terms.map((term, i) =>
           termEditor({
             term,
-            keyId: i,
+            keyId: term.id,
             onChange: (t) => setTerm(i, t),
             onRemove: () => removeTerm(i),
             removable: expr.terms.length > 1,
@@ -519,7 +537,7 @@ export const PolicyBuilder = () => {
     return (
       <div>
         {exceptions.map((expr, i) => (
-          <div key={i} style={S.card}>
+          <div key={expr.id} style={S.card}>
             <div style={S.row}>
               <strong style={{ fontSize: "0.85rem" }}>
                 {label} exception {i + 1}
@@ -543,7 +561,7 @@ export const PolicyBuilder = () => {
     const valid = attestationIsValid(att);
     const typeValue = att.type === "custom" ? "custom" : att.type;
     return (
-      <div key={index} style={S.card}>
+      <div key={att.id} style={S.card}>
         <div style={S.row}>
           <strong style={{ fontSize: "0.85rem" }}>
             Attestation {index + 1}
@@ -637,6 +655,13 @@ export const PolicyBuilder = () => {
   function highlightYaml(text) {
     const rows = text.replace(/\n$/, "").split("\n");
     return rows.map((line, i) => {
+      if (/^\s*#/.test(line)) {
+        return (
+          <div key={i} style={{ whiteSpace: "pre", color: YAML.punct }}>
+            {line}
+          </div>
+        );
+      }
       const m = line.match(/^(\s*)(- )?([A-Za-z0-9_.-]+):( ?)(.*)$/);
       let content;
       if (!m) {
