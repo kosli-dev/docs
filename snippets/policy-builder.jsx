@@ -333,6 +333,7 @@ export const PolicyBuilder = () => {
     },
     warn: { color: "#b45309", fontSize: "0.8rem", margin: "0.25rem 0 0.5rem" },
     muted: { fontSize: "0.8rem", opacity: 0.7 },
+    fieldLabel: { fontWeight: 600, fontSize: "0.85rem", minWidth: "3rem" },
   };
 
   // -------------------------------------------------------------------------
@@ -571,7 +572,7 @@ export const PolicyBuilder = () => {
           </button>
         </div>
         <div style={S.row}>
-          <span style={S.muted}>type</span>
+          <strong style={S.fieldLabel}>type</strong>
           <select
             style={S.select}
             value={typeValue}
@@ -592,7 +593,9 @@ export const PolicyBuilder = () => {
               onChange={(e) => set({ customType: e.target.value })}
             />
           )}
-          <span style={S.muted}>name</span>
+        </div>
+        <div style={S.row}>
+          <strong style={S.fieldLabel}>name</strong>
           <input
             style={S.input}
             placeholder="*"
