@@ -254,7 +254,7 @@ export const PolicyBuilder = () => {
   const S = {
     wrap: {
       display: "grid",
-      gridTemplateColumns: "minmax(0, 1fr) minmax(0, 1fr)",
+      gridTemplateColumns: "minmax(0, 1fr) minmax(0, 2fr)",
       gap: "1.25rem",
       alignItems: "start",
     },
