@@ -275,7 +275,8 @@ export const PolicyBuilder = () => {
       marginBottom: "0.5rem",
     },
     label: {
-      display: "flex",
+      display: "inline-flex",
+      flexDirection: "row-reverse",
       alignItems: "center",
       gap: "0.4rem",
       fontSize: "0.9rem",
