@@ -16,12 +16,14 @@
  * (e.g. {termEditor(...)}) rather than JSX elements.
  *
  * The serialization and expression-building logic mirrors the CLI policy
- * wizard (kosli-dev/cli: internal/policywizard, internal/policy). The YAML
- * body mirrors the CLI's `policy.ToYAML()` (gopkg.in/yaml.v3, 4-space indent),
- * with a leading `# yaml-language-server` schema directive prepended so the
- * pasted file gets validation and autocomplete in schema-aware editors. Keep
- * this file in sync with the v1 policy schema at
- * https://docs.kosli.com/schemas/policy/v1
+ * wizard (kosli-dev/cli: internal/policywizard, internal/policy) and conforms
+ * to the v1 policy schema. For readability the YAML uses standard 2-space
+ * indentation (matching the reference-page examples) and prepends a
+ * `# yaml-language-server` schema directive so the pasted file gets validation
+ * and autocomplete in schema-aware editors. Both differ from the CLI's
+ * `policy.ToYAML()` output (gopkg.in/yaml.v3, 4-space, no directive); the
+ * documents are schema-equivalent, not byte-identical. Keep this file in sync
+ * with the v1 policy schema at https://docs.kosli.com/schemas/policy/v1
  */
 
 export const PolicyBuilder = () => {
@@ -94,15 +96,15 @@ export const PolicyBuilder = () => {
     lines.push("artifacts:");
 
     const booleanBlock = (key, required, exceptions) => {
-      lines.push("    " + key + ":");
-      lines.push("        required: " + (required ? "true" : "false"));
+      lines.push("  " + key + ":");
+      lines.push("    required: " + (required ? "true" : "false"));
       const exprs = exceptions
         .map((e) => serializeExpr(e))
         .filter((s) => s !== "");
       if (exprs.length > 0) {
-        lines.push("        exceptions:");
+        lines.push("    exceptions:");
         exprs.forEach((expr) => {
-          lines.push("            - if: " + yamlScalar(expr));
+          lines.push("      - if: " + yamlScalar(expr));
         });
       }
     };
@@ -111,19 +113,19 @@ export const PolicyBuilder = () => {
     if (trailOn) booleanBlock("trail-compliance", true, state.trailExc);
 
     if (validAtts.length > 0) {
-      lines.push("    attestations:");
+      lines.push("  attestations:");
       validAtts.forEach((a) => {
         const type = a.type === "custom" ? "custom:" + a.customType : a.type;
-        lines.push("        - type: " + yamlScalar(type));
+        lines.push("    - type: " + yamlScalar(type));
         // `name` defaults to `*` in the v1 schema, so only emit it when the
         // user requires a specific name.
         const name = (a.name || "").trim();
         if (name !== "" && name !== "*") {
-          lines.push("          name: " + yamlScalar(name));
+          lines.push("      name: " + yamlScalar(name));
         }
         if (a.condEnabled) {
           const expr = serializeExpr(a.cond);
-          if (expr !== "") lines.push("          if: " + yamlScalar(expr));
+          if (expr !== "") lines.push("      if: " + yamlScalar(expr));
         }
       });
     }
@@ -254,7 +256,7 @@ export const PolicyBuilder = () => {
   const S = {
     wrap: {
       display: "grid",
-      gridTemplateColumns: "minmax(0, 1fr) minmax(0, 2fr)",
+      gridTemplateColumns: "minmax(0, 1fr) minmax(0, 1.5fr)",
       gap: "1.25rem",
       alignItems: "start",
     },
@@ -618,7 +620,7 @@ export const PolicyBuilder = () => {
             checked={att.condEnabled}
             onChange={(e) => set({ condEnabled: e.target.checked })}
           />
-          Only require when a condition is met
+          Require only if
         </label>
         {att.condEnabled && (
           <div style={{ marginTop: "0.5rem" }}>
