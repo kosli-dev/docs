@@ -36,7 +36,6 @@ export const PolicyBuilder = () => {
     "pull_request",
     "snyk",
     "sonar",
-    "*",
   ];
 
   const TERM_KINDS = [
@@ -600,6 +599,7 @@ export const PolicyBuilder = () => {
               </option>
             ))}
             <option value="custom">custom:&lt;name&gt;</option>
+            <option value="*">*</option>
           </select>
         </div>
         {att.type === "custom" && (
