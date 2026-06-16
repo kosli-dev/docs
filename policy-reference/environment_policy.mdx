@@ -5,6 +5,10 @@ description: "Reference for the YAML policy files used to define compliance requ
 
 An environment policy is a YAML file that declares compliance requirements for artifacts running in a Kosli environment. You pass the file to [`kosli create policy`](/client_reference/kosli_create_policy) to create or update a policy. For concepts, workflow, and enforcement, see [Environment Policies](/getting_started/policies).
 
+<Tip>
+  Prefer to build a policy interactively? Use the [Policy builder](/policy-reference/policy_builder) to assemble a valid policy file in your browser and copy the YAML.
+</Tip>
+
 ## Specification
 
 <ParamField path="_schema" type="string" required>
@@ -190,6 +194,7 @@ _schema: https://docs.kosli.com/schemas/policy/v1
 
 ## See also
 
+- [Policy builder](/policy-reference/policy_builder) — build a policy file interactively in the browser
 - [Environment Policies](/getting_started/policies) — concepts, workflow, and enforcement
 - [`kosli create policy`](/client_reference/kosli_create_policy) — create or update a policy
 - [`kosli attach-policy`](/client_reference/kosli_attach-policy) — attach a policy to an environment
