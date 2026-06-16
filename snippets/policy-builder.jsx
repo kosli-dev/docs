@@ -387,15 +387,15 @@ export const PolicyBuilder = () => {
 
         {term.kind === "flow_tag" && (
           <div style={S.row}>
-            <span style={S.muted}>flow.tags.</span>
+            <span style={{ ...S.muted, whiteSpace: "nowrap" }}>flow.tags.</span>
             <input
-              style={{ ...S.input, width: "8rem" }}
+              style={{ ...S.input, flex: 1, minWidth: 0 }}
               placeholder="key"
               value={term.tagKey}
               onChange={(e) => set({ tagKey: e.target.value })}
             />
             <select
-              style={S.select}
+              style={{ ...S.select, flexShrink: 0 }}
               value={term.tagOp}
               onChange={(e) => set({ tagOp: e.target.value })}
             >
@@ -406,7 +406,7 @@ export const PolicyBuilder = () => {
               ))}
             </select>
             <input
-              style={S.input}
+              style={{ ...S.input, flex: 1, minWidth: 0 }}
               placeholder="value"
               value={term.tagValue}
               onChange={(e) => set({ tagValue: e.target.value })}
@@ -415,22 +415,24 @@ export const PolicyBuilder = () => {
         )}
 
         {term.kind === "artifact_name" && (
-          <div style={S.row}>
-            <span style={S.muted}>matches(artifact.name,</span>
+          <div style={{ ...S.row, flexWrap: "nowrap" }}>
+            <span style={{ ...S.muted, whiteSpace: "nowrap" }}>
+              matches(artifact.name,
+            </span>
             <input
-              style={S.input}
+              style={{ ...S.input, flex: 1, minWidth: 0 }}
               placeholder="^datadog:.*"
               value={term.artifactRegex}
               onChange={(e) => set({ artifactRegex: e.target.value })}
             />
-            <span style={S.muted}>)</span>
+            <span style={{ ...S.muted, whiteSpace: "nowrap" }}>)</span>
           </div>
         )}
 
         {term.kind === "custom" && (
           <div style={S.row}>
             <select
-              style={S.select}
+              style={{ ...S.select, flexShrink: 0 }}
               value={term.customCtx}
               onChange={(e) => set({ customCtx: e.target.value })}
             >
@@ -442,14 +444,14 @@ export const PolicyBuilder = () => {
             </select>
             {term.customCtx === "flow.tags.<key>" && (
               <input
-                style={{ ...S.input, width: "8rem" }}
+                style={{ ...S.input, flex: 1, minWidth: 0 }}
                 placeholder="tag key"
                 value={term.customTagKey}
                 onChange={(e) => set({ customTagKey: e.target.value })}
               />
             )}
             <select
-              style={S.select}
+              style={{ ...S.select, flexShrink: 0 }}
               value={term.customOp}
               onChange={(e) => set({ customOp: e.target.value })}
             >
@@ -461,7 +463,7 @@ export const PolicyBuilder = () => {
             </select>
             {term.customOp !== "exists" && (
               <input
-                style={S.input}
+                style={{ ...S.input, flex: 1, minWidth: 0 }}
                 placeholder={term.customOp === "matches" ? "regex" : "value"}
                 value={term.customValue}
                 onChange={(e) => set({ customValue: e.target.value })}
