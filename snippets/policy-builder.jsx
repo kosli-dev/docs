@@ -349,7 +349,6 @@ export const PolicyBuilder = () => {
     return (
       <div key={keyId} style={S.card}>
         <div style={{ ...S.row, flexWrap: "nowrap" }}>
-          <strong style={{ ...S.fieldLabel, flexShrink: 0 }}>Term</strong>
           <select
             style={{ ...S.select, flex: 1, minWidth: 0 }}
             value={term.kind}
@@ -595,14 +594,17 @@ export const PolicyBuilder = () => {
             ))}
             <option value="custom">custom:&lt;name&gt;</option>
           </select>
-          {att.type === "custom" && (
+        </div>
+        {att.type === "custom" && (
+          <div style={S.row}>
+            <strong style={S.fieldLabel}>custom type</strong>
             <input
               style={S.input}
               value={att.customType}
               onChange={(e) => set({ customType: e.target.value })}
             />
-          )}
-        </div>
+          </div>
+        )}
         <div style={S.row}>
           <strong style={S.fieldLabel}>name</strong>
           <input
