@@ -80,12 +80,12 @@ In other CI systems, set them explicitly to capture repository metadata.
 	<Tab title="GitHub">
 	View an example of the `kosli attest junit` command in GitHub.
 
-	In [this YAML file](https://github.com/cyber-dojo/differ/blob/43d2a72431124e9fcf47bf866621ba3fd8e7f618/.github/workflows/main.yml#L99), which created [this Kosli Event](https://app.kosli.com/cyber-dojo/flows/differ-ci/trails/43d2a72431124e9fcf47bf866621ba3fd8e7f618?attestation_id=e1ca8f75-824d-4868-b90c-71c9275d).
+	In [this YAML file](https://github.com/cyber-dojo/differ/blob/981dcfc34f584d46afb46b217b47ce68f2f14a08/.github/workflows/main.yml#L101), which created [this Kosli Event](https://app.kosli.com/cyber-dojo/flows/differ-ci/trails/981dcfc34f584d46afb46b217b47ce68f2f14a08?attestation_id=b35c2895-32ae-4a40-8eb8-ddf7eff0).
 	</Tab>
 	<Tab title="GitLab">
 	View an example of the `kosli attest junit` command in GitLab.
 
-	In [this YAML file](https://gitlab.com/cyber-dojo/creator/-/blob/20368865b1ba0532f99f69641bbb96e6334cb545/.gitlab/workflows/main.yml#L126), which created [this Kosli Event](https://app.kosli.com/cyber-dojo/flows/creator-ci/trails/20368865b1ba0532f99f69641bbb96e6334cb545?attestation_id=9c6178c5-6a49-4421-95f7-740f0c87).
+	In [this YAML file](https://gitlab.com/cyber-dojo/creator/-/blob/65fd2bfa2478534ea4bc5ccf30f6bfc6aab7550c/.gitlab/workflows/main.yml#L126), which created [this Kosli Event](https://app.kosli.com/cyber-dojo/flows/creator-ci/trails/34f14b6fc5d87ff95426046716ec8a09141c13a7?attestation_id=001f8458-33f6-492d-8746-9ac8bd1a).
 	</Tab>
 </Tabs>
 
