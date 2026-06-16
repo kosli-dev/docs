@@ -588,7 +588,6 @@ export const PolicyBuilder = () => {
           {att.type === "custom" && (
             <input
               style={S.input}
-              placeholder="coverage-metrics"
               value={att.customType}
               onChange={(e) => set({ customType: e.target.value })}
             />
