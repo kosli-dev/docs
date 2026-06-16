@@ -346,6 +346,7 @@ export const PolicyBuilder = () => {
     return (
       <div key={keyId} style={S.card}>
         <div style={S.row}>
+          <strong style={S.fieldLabel}>Term</strong>
           <select
             style={S.select}
             value={term.kind}
@@ -373,10 +374,10 @@ export const PolicyBuilder = () => {
         </div>
 
         {term.kind === "flow_name" && (
-          <div style={S.row}>
-            <span style={S.muted}>flow.name ==</span>
+          <div style={{ ...S.row, flexWrap: "nowrap" }}>
+            <span style={{ ...S.muted, whiteSpace: "nowrap" }}>flow.name ==</span>
             <input
-              style={S.input}
+              style={{ ...S.input, flex: 1, minWidth: 0 }}
               placeholder="flow name"
               value={term.flowName}
               onChange={(e) => set({ flowName: e.target.value })}
