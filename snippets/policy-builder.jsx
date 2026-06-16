@@ -745,7 +745,7 @@ export const PolicyBuilder = () => {
                 if (!e.target.checked) setProvExc([]);
               }}
             />
-            Require artifact provenance
+            Require
           </label>
           {provReq && (
             <div style={{ marginTop: "0.5rem" }}>
@@ -770,7 +770,7 @@ export const PolicyBuilder = () => {
                 if (!e.target.checked) setTrailExc([]);
               }}
             />
-            Require trail compliance
+            Require
           </label>
           {trailReq && (
             <div style={{ marginTop: "0.5rem" }}>
