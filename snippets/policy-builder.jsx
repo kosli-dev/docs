@@ -348,10 +348,10 @@ export const PolicyBuilder = () => {
     const set = (patch) => onChange({ ...term, ...patch });
     return (
       <div key={keyId} style={S.card}>
-        <div style={S.row}>
-          <strong style={S.fieldLabel}>Term</strong>
+        <div style={{ ...S.row, flexWrap: "nowrap" }}>
+          <strong style={{ ...S.fieldLabel, flexShrink: 0 }}>Term</strong>
           <select
-            style={S.select}
+            style={{ ...S.select, flex: 1, minWidth: 0 }}
             value={term.kind}
             onChange={(e) => set({ kind: e.target.value })}
           >
@@ -361,7 +361,7 @@ export const PolicyBuilder = () => {
               </option>
             ))}
           </select>
-          <label style={S.label}>
+          <label style={{ ...S.label, flexShrink: 0 }}>
             <input
               type="checkbox"
               checked={term.negate}
@@ -370,7 +370,11 @@ export const PolicyBuilder = () => {
             not
           </label>
           {removable && (
-            <button type="button" style={S.btn} onClick={onRemove}>
+            <button
+              type="button"
+              style={{ ...S.btn, flexShrink: 0 }}
+              onClick={onRemove}
+            >
               Remove
             </button>
           )}
