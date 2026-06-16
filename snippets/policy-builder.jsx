@@ -337,6 +337,13 @@ export const PolicyBuilder = () => {
     warn: { color: "#b45309", fontSize: "0.8rem", margin: "0.25rem 0 0.5rem" },
     muted: { fontSize: "0.8rem", opacity: 0.7 },
     fieldLabel: { fontWeight: 600, fontSize: "0.85rem", minWidth: "3rem" },
+    fieldRow: {
+      display: "flex",
+      gap: "0.5rem",
+      alignItems: "center",
+      flexWrap: "wrap",
+      marginBottom: "0.2rem",
+    },
   };
 
   // -------------------------------------------------------------------------
@@ -580,7 +587,7 @@ export const PolicyBuilder = () => {
             Remove
           </button>
         </div>
-        <div style={S.row}>
+        <div style={S.fieldRow}>
           <strong style={S.fieldLabel}>type</strong>
           <select
             style={S.select}
@@ -596,7 +603,7 @@ export const PolicyBuilder = () => {
           </select>
         </div>
         {att.type === "custom" && (
-          <div style={S.row}>
+          <div style={S.fieldRow}>
             <strong style={S.fieldLabel}>custom type</strong>
             <input
               style={S.input}
@@ -605,7 +612,7 @@ export const PolicyBuilder = () => {
             />
           </div>
         )}
-        <div style={S.row}>
+        <div style={S.fieldRow}>
           <strong style={S.fieldLabel}>name</strong>
           <input
             style={S.input}
