@@ -107,7 +107,8 @@
               "pages": [
                 "tutorials/querying_kosli",
                 "tutorials/following_a_git_commit_to_runtime_environments",
-                "tutorials/tracing_a_production_incident_back_to_git_commits"
+                "tutorials/tracing_a_production_incident_back_to_git_commits",
+                "tutorials/trail_summaries_in_ci"
               ]
             },
             {
