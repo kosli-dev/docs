@@ -104,7 +104,7 @@ kosli attest decision \
 | `--attachments` | Optional evidence file(s) to attach (e.g. an evaluation report, a REGO policy output). |
 | `--user-data` | Optional path to a JSON file containing additional structured data to attach to the attestation. |
 
-The decision attestation goes on a trail, like any other attestation. It affects trail compliance: a `--compliant=false` decision makes the trail non-compliant. There are no restrictions on which flow or trail a decision can be recorded on — place it wherever makes sense in your process, typically at the point where the decision is actually being made (e.g. during a release preparation or promotion step). You can record multiple decisions for the same control on a trail; the most recent one is used when evaluating compliance. The control identifier doesn't need to exist in your catalog when you record a decision — it's matched up at compliance-evaluation time.
+The decision attestation goes on a trail, like any other attestation. It affects trail compliance: a `--compliant=false` decision makes the trail non-compliant. There are no restrictions on which flow or trail a decision can be recorded on — place it wherever makes sense in your process, typically at the point where the decision is actually being made (e.g. during a release preparation or promotion step). You can record multiple decisions for the same control on a trail; the most recent one is used when evaluating compliance.
 
 <Info>
   A decision records the outcome of a PDP. How the PDP is implemented — running `kosli evaluate`, executing a custom script, or using a third-party tool — is up to you. `kosli attest decision` records the outcome; it does not make the decision for you.
