@@ -73,7 +73,7 @@ Navigate to **Controls** in the [Kosli app](https://app.kosli.com) sidebar to br
 Control definitions are versioned: each time you update a control's name, description, or links, a new version is created. This matters for audits — decisions recorded against a control always reference the exact version of the definition that was current when the decision was made, so the audit trail is precise even as controls evolve over time. A control's full version history is available on its **Versions** tab.
 
 <Frame>
-  <img src="/images/tutorials/controls-list.png" alt="Controls catalog listing controls with their identifier, description, tags, name, and current version, with search and tag-filter inputs" />
+  <img src="/images/tutorials/controls-list.png" alt="Controls catalog listing controls with their identifier, version, name, description, and tags, with a search box and tag-filter and sort controls" />
 </Frame>
 
 You can also list controls through the controls API (`GET /api/v2/controls/{org}`).
@@ -230,11 +230,11 @@ For the complete policy syntax, including attestation requirements and exception
 
 ## Viewing a control
 
-Navigate to **Controls** in the [Kosli app](https://app.kosli.com) and select a control to see its detail view. The header shows the identifier, current version, name, description, tags, who created it and when, and any links. Below it are two tabs: **Decisions** and **Versions**.
+Navigate to **Controls** in the [Kosli app](https://app.kosli.com) and select a control to see its detail view. The header shows the identifier, current version, name, any links, description, and tags. Below it are two tabs: **Decisions** and **Versions**.
 
 ### Decisions
 
-The Decisions tab is the default view. It lists every decision recorded against this control across all flows and trails, with the timestamp, outcome (compliant or non-compliant), the trail it was recorded on, and the artifact fingerprint. Filter by outcome and date range to narrow the list.
+The Decisions tab is the default view. It lists every decision recorded against this control across all flows and trails, with the timestamp, the trail it was recorded on, the artifact fingerprint, and the outcome (compliant or non-compliant). Filter by outcome and date range to narrow the list.
 
 <Frame>
   <img src="/images/tutorials/controls-decisions.png" alt="Decisions tab for a control showing decisions with timestamp, compliant/non-compliant outcome, trail, and artifact fingerprint" />
