@@ -95,10 +95,10 @@ description: Use Kosli in CI Systems like GitHub Actions, GitLab CI, and more.
   ```bash
   # Clone or copy Dockerfile.alpine from https://github.com/kosli-dev/cli
   docker build \
-    --build-arg KOSLI_VERSION=2.13.2 \
+    --build-arg KOSLI_VERSION=2.28.0 \
     -f Dockerfile.alpine \
-    -t registry.example.com/ci/kosli-runner:2.13.2 .
-  docker push registry.example.com/ci/kosli-runner:2.13.2
+    -t registry.example.com/ci/kosli-runner:2.28.0 .
+  docker push registry.example.com/ci/kosli-runner:2.28.0
   ```
 
   Then use it as the job image in `.gitlab-ci.yml`:
@@ -109,7 +109,7 @@ description: Use Kosli in CI Systems like GitHub Actions, GitLab CI, and more.
     KOSLI_HOST: https://app.kosli.com
 
   attest:
-    image: registry.example.com/ci/kosli-runner:2.13.2
+    image: registry.example.com/ci/kosli-runner:2.28.0
     script:
       - kosli version
       - kosli attest generic
