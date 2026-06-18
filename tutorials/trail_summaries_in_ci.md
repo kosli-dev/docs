@@ -70,7 +70,7 @@ The summary appears on the run's page under the job, with the trail name linking
   </Tab>
   <Tab title="GitLab" icon="gitlab">
 
-GitLab renders [job-level markdown reports](https://docs.gitlab.com/ci/yaml/artifacts_reports/#artifactsreportsannotations) from a `summary.md` artifact. The artifact is shown on the job page and surfaced as a merge request annotation when the pipeline runs against an MR.
+GitLab does not natively render markdown inline on the job page, but [`artifacts:expose_as`](https://docs.gitlab.com/ci/yaml/#artifactsexpose_as) surfaces the `summary.md` artifact as a labeled link in the merge request widget, one click away from the rendered file in the GitLab UI.
 
 Add a job (or a final step in your existing job) that produces that artifact:
 
@@ -85,9 +85,10 @@ kosli-trail-summary:
     - apt-get update && apt-get install -y curl ca-certificates
     - curl -fsSL https://get.kosli.com/install.sh | bash
   script:
-    - kosli get trail "$KOSLI_TRAIL"
-        --flow "$KOSLI_FLOW"
-        --output markdown > summary.md
+    - >
+      kosli get trail "$KOSLI_TRAIL"
+      --flow "$KOSLI_FLOW"
+      --output markdown > summary.md
   artifacts:
     when: always
     paths:
