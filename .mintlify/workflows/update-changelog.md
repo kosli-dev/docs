@@ -44,4 +44,6 @@ If unsure about the structure, review recent changelog updates and follow that s
 
 Be polite and terse. The changelog must be skimmable and quick to read. Include relevant links to docs pages.
 
+Before opening a PR, review all written content against the style rules in `styles/Kosli/`. In particular, `AmericanSpelling.yml` lists British spellings that must be replaced with their American equivalents (e.g., "behaviour" → "behavior", "categorise" → "categorize").
+
 PR titles and commit messages must follow the conventional commits format described in CLAUDE.md. Use `docs:` as the type.
