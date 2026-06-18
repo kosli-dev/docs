@@ -18,7 +18,7 @@ Get the metadata of a specific trail.
 | :--- | :--- |
 |    `-f`, `--flow` string  |  The Kosli flow name.  |
 |    `-h`, `--help`  |  help for trail  |
-|    `-o`, `--output` string  |  [defaulted] The format of the output. Valid formats are: [table, json]. (default "table")  |
+|    `-o`, `--output` string  |  [defaulted] The format of the output. Valid formats are: [table, json, markdown]. (default "table")  |
 
 
 ## Flags inherited from parent commands
