@@ -4,6 +4,67 @@ description: "Release notes for Kosli products."
 rss: true
 ---
 
+<Update label="June 4, 2026" description="" tags={["Platform"]}>
+
+## Updates
+
+- **Consistent "organization" wording** — standardized spelling across user-facing strings in the app.
+- **Simpler invite acceptance** — accepting an invite now requires OTP verification only when the logged-in user's email doesn't match the invitation; matching emails are accepted directly regardless of auth provider.
+
+## Bug fixes
+
+- **Security: service account API keys on public orgs** — fixed a path that could return an arbitrary membership document for unauthenticated callers on public orgs, potentially exposing service account API keys. `is_admin(None)` now always returns `False`.
+- **Flows page** — guarded against a null `space_id` element that could break the flows listing.
+- **Redirects** — all query parameters are now preserved through redirects.
+
+</Update>
+
+<Update label="June 3, 2026" description="" tags={["Platform"]}>
+
+## New features
+
+- **`for_control` policy compliance** — snapshot compliance now evaluates `for_control` policy requirements. When a policy requires a passing decision attestation for a specific control, the snapshot is checked against a matching decision for that control.
+
+## Updates
+
+- **Assert artifact response includes `for_control`** — the assert artifact API now returns the control identifier in the resolution context for `for_control` rule failures, so clients can show which specific control is unsatisfied.
+
+</Update>
+
+<Update label="June 3, 2026" description="v2.24.2" tags={["CLI"]}>
+
+## New features
+
+- **`linux/s390x` builds** — the CLI is now published for `linux/s390x` so it can be installed natively on IBM Z hosts.
+
+## Bug fixes
+
+- Bumped Go to 1.26.4 to address standard-library CVEs.
+
+[View on GitHub](https://github.com/kosli-dev/cli/releases/tag/v2.24.2)
+
+</Update>
+
+<Update label="June 3, 2026" description="v2.24.1" tags={["CLI"]}>
+
+## Updates
+
+- **`kosli assert artifact`** — when a `for_control` policy rule fails, the failure output now names the specific control identifier that is unsatisfied, making it easier to act on policy failures in CI.
+
+[View on GitHub](https://github.com/kosli-dev/cli/releases/tag/v2.24.1)
+
+</Update>
+
+<Update label="June 2, 2026" description="v2.24.0" tags={["CLI"]}>
+
+## Updates
+
+- **SonarQube authentication** — `kosli attest sonar` now falls back to HTTP Basic auth (token as username) on self-hosted SonarQube Server versions earlier than 10.0, which reject `Authorization: Bearer`. The fallback is transparent for self-hosted servers and never applied to SonarCloud. Authentication errors now distinguish 401/403 token or permission problems from 5xx server-availability issues instead of the previous generic "please check your API token" message.
+
+[View on GitHub](https://github.com/kosli-dev/cli/releases/tag/v2.24.0)
+
+</Update>
+
 <Update label="June 2, 2026" description="" tags={["Platform"]}>
 
 ## New features
