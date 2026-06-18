@@ -187,7 +187,9 @@ kosli get trail dashboard-ci 1159a6f1193150681b8484545150334e89de6c1c --output=j
         "branch": "main",
         "timestamp": 1711534976.0,
         "url": "https://github.com/cyber-dojo/dashboard/commit/1159a6f1193150681b8484545150334e89de6c1c",
-        "parents": null
+        "parents": null,
+        "verified": null,
+        "signature_state": null
       },
       "repo_info": null,
       "setting_user_id": "da5d4ee8-aec0-4264-ab85-c491040c",
@@ -224,7 +226,9 @@ kosli get trail dashboard-ci 1159a6f1193150681b8484545150334e89de6c1c --output=j
         "branch": "main",
         "timestamp": 1711534976.0,
         "url": "https://github.com/cyber-dojo/dashboard/commit/1159a6f1193150681b8484545150334e89de6c1c",
-        "parents": null
+        "parents": null,
+        "verified": null,
+        "signature_state": null
       },
       "repo_info": null,
       "attestation_type": "pull_request",
@@ -246,7 +250,9 @@ kosli get trail dashboard-ci 1159a6f1193150681b8484545150334e89de6c1c --output=j
         "branch": "main",
         "timestamp": 1711534976.0,
         "url": "https://github.com/cyber-dojo/dashboard/commit/1159a6f1193150681b8484545150334e89de6c1c",
-        "parents": null
+        "parents": null,
+        "verified": null,
+        "signature_state": null
       },
       "repo_info": null,
       "attestation_type": "generic",
@@ -269,7 +275,9 @@ kosli get trail dashboard-ci 1159a6f1193150681b8484545150334e89de6c1c --output=j
         "branch": "main",
         "timestamp": 1711534976.0,
         "url": "https://github.com/cyber-dojo/dashboard/commit/1159a6f1193150681b8484545150334e89de6c1c",
-        "parents": null
+        "parents": null,
+        "verified": null,
+        "signature_state": null
       },
       "repo_info": null,
       "artifact_fingerprint": "dddd83bf5038e81c228b222f01a0184ce2a8492cb45075b66be5baf5be803ca1",
@@ -292,7 +300,9 @@ kosli get trail dashboard-ci 1159a6f1193150681b8484545150334e89de6c1c --output=j
         "branch": "main",
         "timestamp": 1711534976.0,
         "url": "https://github.com/cyber-dojo/dashboard/commit/1159a6f1193150681b8484545150334e89de6c1c",
-        "parents": null
+        "parents": null,
+        "verified": null,
+        "signature_state": null
       },
       "repo_info": null,
       "attestation_type": "snyk",
@@ -317,7 +327,9 @@ kosli get trail dashboard-ci 1159a6f1193150681b8484545150334e89de6c1c --output=j
         "branch": "main",
         "timestamp": 1711534976.0,
         "url": "https://github.com/cyber-dojo/dashboard/commit/1159a6f1193150681b8484545150334e89de6c1c",
-        "parents": null
+        "parents": null,
+        "verified": null,
+        "signature_state": null
       },
       "repo_info": null,
       "attestation_type": "snyk",
@@ -402,7 +414,9 @@ kosli get trail dashboard-ci 1159a6f1193150681b8484545150334e89de6c1c --output=j
         "branch": "main",
         "timestamp": 1711195944.0,
         "url": "https://github.com/cyber-dojo/live-snyk-scans/commit/cf3896a8bbd2f74c9e36336b69d8ee64eae1ff25",
-        "parents": null
+        "parents": null,
+        "verified": null,
+        "signature_state": null
       },
       "repo_info": null,
       "attestation_type": "snyk",
@@ -427,7 +441,9 @@ kosli get trail dashboard-ci 1159a6f1193150681b8484545150334e89de6c1c --output=j
         "branch": "main",
         "timestamp": 1711195944.0,
         "url": "https://github.com/cyber-dojo/live-snyk-scans/commit/cf3896a8bbd2f74c9e36336b69d8ee64eae1ff25",
-        "parents": null
+        "parents": null,
+        "verified": null,
+        "signature_state": null
       },
       "repo_info": null,
       "attestation_type": "snyk",
@@ -452,7 +468,9 @@ kosli get trail dashboard-ci 1159a6f1193150681b8484545150334e89de6c1c --output=j
         "branch": "main",
         "timestamp": 1711195944.0,
         "url": "https://github.com/cyber-dojo/live-snyk-scans/commit/cf3896a8bbd2f74c9e36336b69d8ee64eae1ff25",
-        "parents": null
+        "parents": null,
+        "verified": null,
+        "signature_state": null
       },
       "repo_info": null,
       "attestation_type": "snyk",
@@ -477,7 +495,9 @@ kosli get trail dashboard-ci 1159a6f1193150681b8484545150334e89de6c1c --output=j
         "branch": "main",
         "timestamp": 1711195944.0,
         "url": "https://github.com/cyber-dojo/live-snyk-scans/commit/cf3896a8bbd2f74c9e36336b69d8ee64eae1ff25",
-        "parents": null
+        "parents": null,
+        "verified": null,
+        "signature_state": null
       },
       "repo_info": null,
       "attestation_type": "snyk",
@@ -502,7 +522,9 @@ kosli get trail dashboard-ci 1159a6f1193150681b8484545150334e89de6c1c --output=j
         "branch": "main",
         "timestamp": 1711195944.0,
         "url": "https://github.com/cyber-dojo/live-snyk-scans/commit/cf3896a8bbd2f74c9e36336b69d8ee64eae1ff25",
-        "parents": null
+        "parents": null,
+        "verified": null,
+        "signature_state": null
       },
       "repo_info": null,
       "attestation_type": "snyk",
@@ -527,7 +549,9 @@ kosli get trail dashboard-ci 1159a6f1193150681b8484545150334e89de6c1c --output=j
         "branch": "main",
         "timestamp": 1711195944.0,
         "url": "https://github.com/cyber-dojo/live-snyk-scans/commit/cf3896a8bbd2f74c9e36336b69d8ee64eae1ff25",
-        "parents": null
+        "parents": null,
+        "verified": null,
+        "signature_state": null
       },
       "repo_info": null,
       "attestation_type": "snyk",
@@ -552,7 +576,9 @@ kosli get trail dashboard-ci 1159a6f1193150681b8484545150334e89de6c1c --output=j
         "branch": "main",
         "timestamp": 1711195944.0,
         "url": "https://github.com/cyber-dojo/live-snyk-scans/commit/cf3896a8bbd2f74c9e36336b69d8ee64eae1ff25",
-        "parents": null
+        "parents": null,
+        "verified": null,
+        "signature_state": null
       },
       "repo_info": null,
       "attestation_type": "snyk",
@@ -577,7 +603,9 @@ kosli get trail dashboard-ci 1159a6f1193150681b8484545150334e89de6c1c --output=j
         "branch": "main",
         "timestamp": 1711195944.0,
         "url": "https://github.com/cyber-dojo/live-snyk-scans/commit/cf3896a8bbd2f74c9e36336b69d8ee64eae1ff25",
-        "parents": null
+        "parents": null,
+        "verified": null,
+        "signature_state": null
       },
       "repo_info": null,
       "attestation_type": "snyk",
@@ -602,7 +630,9 @@ kosli get trail dashboard-ci 1159a6f1193150681b8484545150334e89de6c1c --output=j
         "branch": "main",
         "timestamp": 1711195944.0,
         "url": "https://github.com/cyber-dojo/live-snyk-scans/commit/cf3896a8bbd2f74c9e36336b69d8ee64eae1ff25",
-        "parents": null
+        "parents": null,
+        "verified": null,
+        "signature_state": null
       },
       "repo_info": null,
       "attestation_type": "snyk",
@@ -627,7 +657,9 @@ kosli get trail dashboard-ci 1159a6f1193150681b8484545150334e89de6c1c --output=j
         "branch": "main",
         "timestamp": 1711195944.0,
         "url": "https://github.com/cyber-dojo/live-snyk-scans/commit/cf3896a8bbd2f74c9e36336b69d8ee64eae1ff25",
-        "parents": null
+        "parents": null,
+        "verified": null,
+        "signature_state": null
       },
       "repo_info": null,
       "attestation_type": "snyk",
@@ -681,7 +713,9 @@ kosli get trail dashboard-ci 1159a6f1193150681b8484545150334e89de6c1c --output=j
         "branch": "main",
         "timestamp": 1711195944.0,
         "url": "https://github.com/cyber-dojo/live-snyk-scans/commit/cf3896a8bbd2f74c9e36336b69d8ee64eae1ff25",
-        "parents": null
+        "parents": null,
+        "verified": null,
+        "signature_state": null
       },
       "repo_info": null,
       "attestation_type": "snyk",
@@ -706,7 +740,9 @@ kosli get trail dashboard-ci 1159a6f1193150681b8484545150334e89de6c1c --output=j
         "branch": "main",
         "timestamp": 1711195944.0,
         "url": "https://github.com/cyber-dojo/live-snyk-scans/commit/cf3896a8bbd2f74c9e36336b69d8ee64eae1ff25",
-        "parents": null
+        "parents": null,
+        "verified": null,
+        "signature_state": null
       },
       "repo_info": null,
       "attestation_type": "snyk",

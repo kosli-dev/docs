@@ -153,6 +153,42 @@ kosli list flows --output=json
     }
   },
   {
+    "name": "monorepo-co-deployment",
+    "description": "Bind shared commit deployments",
+    "visibility": "private",
+    "org": "cyber-dojo",
+    "template": "version: 1",
+    "repo_url": "https://github.com/cyber-dojo/monorepo",
+    "tags": {}
+  },
+  {
+    "name": "monorepo-creator",
+    "description": "UX for Group/Kata creation",
+    "visibility": "public",
+    "org": "cyber-dojo",
+    "template": "\nversion: 1\ntrail:\n  attestations:\n    - { name: pull-request, type: pull_request }\n  artifacts:\n    - name: creator\n      attestations:\n        - { name: unit-test, type: junit }\n",
+    "repo_url": "https://github.com/cyber-dojo/monorepo",
+    "tags": {}
+  },
+  {
+    "name": "monorepo-dashboard",
+    "description": "UX for a group practice dashboard",
+    "visibility": "public",
+    "org": "cyber-dojo",
+    "template": "\nversion: 1\ntrail:\n  attestations:\n    - { name: pull-request, type: pull_request }\n  artifacts:\n    - name: dashboard\n      attestations:\n        - { name: rubocop,             type: junit }\n        - { name: snyk-container-scan, type: generic }\n",
+    "repo_url": "https://github.com/cyber-dojo/monorepo",
+    "tags": {}
+  },
+  {
+    "name": "monorepo-web",
+    "description": "UX for practicing TDD",
+    "visibility": "public",
+    "org": "cyber-dojo",
+    "template": "\nversion: 1\ntrail:\n  attestations:\n    - { name: pull-request, type: pull_request }\n  artifacts:\n    - name: web\n      attestations:\n        - { name: lint,      type: generic }\n        - { name: unit-test, type: junit }\n",
+    "repo_url": "https://github.com/cyber-dojo/monorepo",
+    "tags": {}
+  },
+  {
     "name": "nginx-ci",
     "description": "Reverse proxy",
     "visibility": "private",
@@ -253,9 +289,9 @@ kosli list flows --output=json
     "repo_url": "",
     "tags": {
       "ci": "github",
+      "env": "aws-beta",
       "kind": "run",
-      "workflow_url": "https://github.com/cyber-dojo/snyk-scanning/blob/main/.github/workflows/artifact_snyk_test.yml",
-      "env": "aws-beta"
+      "workflow_url": "https://github.com/cyber-dojo/snyk-scanning/blob/main/.github/workflows/artifact_snyk_test.yml"
     }
   },
   {
@@ -281,9 +317,9 @@ kosli list flows --output=json
     "repo_url": "",
     "tags": {
       "ci": "github",
+      "env": "aws-prod",
       "kind": "run",
-      "workflow_url": "https://github.com/cyber-dojo/snyk-scanning/blob/main/.github/workflows/artifact_snyk_test.yml",
-      "env": "aws-prod"
+      "workflow_url": "https://github.com/cyber-dojo/snyk-scanning/blob/main/.github/workflows/artifact_snyk_test.yml"
     }
   },
   {
