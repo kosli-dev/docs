@@ -29,11 +29,9 @@ The output is a markdown document with:
 - An `### Attestations` section with one headerless table per artifact (and one for trail-level attestations), with each attestation linked to its place on the trail page. Statuses are prefixed with ✅ / ❌ / ⏳; attestations reported but not expected by the template are marked with `(+)`.
 - An `### Events` table with timestamps, descriptions, commit links, and compliance state.
 
-<Frame caption="Example trail summary rendered in a CI job summary.">
-  ![Example trail summary rendered in a CI job summary](/images/tutorials/trail-summary-example.png)
+<Frame caption="Example trail summary rendered with markdown output.">
+  ![Example trail summary rendered with markdown output](/images/tutorials/trail-summary-example.png)
 </Frame>
-
-{/* TODO: replace /images/tutorials/trail-summary-example.png with the actual screenshot. */}
 
 ## Publishing the summary
 
