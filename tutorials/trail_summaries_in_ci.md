@@ -77,7 +77,7 @@ Add a job (or a final step in your existing job) that produces that artifact. Us
 ```yaml
 kosli-trail-summary:
   stage: .post
-  image: registry.example.com/ci/kosli-runner:2.13.2
+  image: registry.example.com/ci/kosli-runner:2.28.0
   variables:
     KOSLI_FLOW: my-flow
     KOSLI_TRAIL: $CI_COMMIT_SHA
@@ -93,7 +93,7 @@ kosli-trail-summary:
     expose_as: "Kosli trail summary"
 ```
 
-Replace `registry.example.com/ci/kosli-runner:2.13.2` with whatever tag you pushed when you built the Alpine image — see [CI runner image (Alpine)](/integrations/ci_cd#ci-runner-image-alpine) for the build steps.
+Replace `registry.example.com/ci/kosli-runner:2.28.0` with whatever tag you pushed when you built the Alpine image — see [CI runner image (Alpine)](/integrations/ci_cd#ci-runner-image-alpine) for the build steps.
 
 `KOSLI_API_TOKEN` and `KOSLI_ORG` should be set as [CI/CD variables](https://docs.gitlab.com/ci/variables/) on the project or group, masked, so the job picks them up automatically.
 
