@@ -535,13 +535,6 @@
           ]
         },
         {
-          "group": "Concepts",
-          "icon": "lightbulb",
-          "pages": [
-            "kosli_next/concepts/controls"
-          ]
-        },
-        {
           "group": "Preview",
           "icon": "flask",
           "pages": [
