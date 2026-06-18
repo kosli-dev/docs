@@ -1,0 +1,107 @@
+---
+title: "Kosli MCP Server"
+description: "Expose the Kosli API to LLM clients like Claude Code and Claude Desktop via the Model Context Protocol."
+tag: "Preview"
+---
+
+import { PreviewBanner } from '/snippets/kosli-next-banner.mdx';
+
+<PreviewBanner />
+
+The Kosli MCP Server is a [Model Context Protocol](https://modelcontextprotocol.io) server that exposes the Kosli API to LLM clients. Once installed, you can ask Claude things like _"which artifacts are running in prod-aws and which are non-compliant?"_ and it will call the relevant Kosli endpoints for you.
+
+It is published from [`kosli-dev/mcp-server`](https://github.com/kosli-dev/mcp-server) and distributed as both an npm package (`@kosli/mcp-server`) and a `.mcpb` desktop bundle.
+
+## How it works
+
+Rather than ship a tool per Kosli endpoint, the server generates a catalog from Kosli's OpenAPI spec and exposes three generic tools:
+
+| Tool | Purpose |
+|------|---------|
+| `search_actions` | Fuzzy-search the catalog for relevant actions by natural-language query. |
+| `execute_read_action` | Invoke any GET action by ID. Auto-allowed in MCP clients. |
+| `execute_write_action` | Invoke any POST/PUT/PATCH/DELETE action by ID. Gated behind user approval. |
+
+The typical flow is: the LLM calls `search_actions` to discover the right action ID and its parameter schema, then calls `execute_read_action` or `execute_write_action` with the chosen ID. Both execute tools accept an optional `fields` array to request only specific top-level fields in the response, which keeps token usage down.
+
+## Prerequisites
+
+- Node.js v20 or higher
+- A [Kosli API token](/getting_started/service-accounts)
+- An MCP-capable client (Claude Code, Claude Desktop, or any other)
+
+## Install
+
+<Tabs>
+  <Tab title="Claude Code">
+    Run from your project directory, or add `--scope user` to install globally:
+
+    ```bash
+    claude mcp add kosli \
+      -e KOSLI_API_TOKEN=your-token \
+      -e KOSLI_ORG=your-org \
+      -- npx -y @kosli/mcp-server
+    ```
+  </Tab>
+  <Tab title="Claude Desktop (.mcpb)">
+    Download the latest `.mcpb` file from the [releases page](https://github.com/kosli-dev/mcp-server/releases) and drag it into Claude Desktop (or double-click to install). Claude Desktop will prompt for your API token and organization, and store secrets in the OS keychain.
+
+    <Note>
+      Sideloaded extensions show an "unverified by Anthropic" warning and do not auto-update. These limitations will go away once the extension is listed in Anthropic's Connectors Directory.
+    </Note>
+  </Tab>
+  <Tab title="Claude Desktop (manual)">
+    Edit `claude_desktop_config.json` via **Settings → Developer → Edit Config**:
+
+    ```json
+    {
+      "mcpServers": {
+        "kosli": {
+          "command": "npx",
+          "args": ["-y", "@kosli/mcp-server"],
+          "env": {
+            "KOSLI_API_TOKEN": "your-token",
+            "KOSLI_ORG": "your-org"
+          }
+        }
+      }
+    }
+    ```
+
+    This method auto-updates via `npx` on each restart, but stores secrets in plain text.
+  </Tab>
+  <Tab title="Other MCP clients">
+    The server communicates over stdio. Point any MCP-compatible client at the package via `npx -y @kosli/mcp-server` and set the required environment variables.
+  </Tab>
+</Tabs>
+
+## Configuration
+
+The server reads configuration from environment variables.
+
+| Variable | Required | Default | Notes |
+|----------|----------|---------|-------|
+| `KOSLI_API_TOKEN` | yes | - | Preferred. `KOSLI_API_KEY` is accepted as a fallback. |
+| `KOSLI_ORG` | yes | - | Default org used when a path parameter `org` is not supplied. |
+| `KOSLI_BASE_URL` | no | `https://app.kosli.com` | Use `https://app.us.kosli.com` for US, or your single-tenant endpoint. |
+
+## Example prompts
+
+Once connected, try prompts like:
+
+- "List the environments in my org and tell me which are compliant."
+- "Show me the last 5 deployments to prod-aws."
+- "What attestations are on trail `release-456` in flow `my-release`?"
+- "Create a new flow called `payments-api`."
+
+Read prompts run without confirmation. Write prompts (create, update, delete) require an approval step in the MCP client.
+
+## Limitations
+
+- The catalog is generated from a snapshot of the OpenAPI spec. New endpoints land when the catalog is regenerated and a new package is published.
+- LLM clients may need several `search_actions` calls before settling on the right action ID for ambiguous queries.
+- Response shapes are whatever the Kosli API returns. Use the `fields` parameter on execute calls to trim large responses.
+
+## Feedback
+
+Tell us what you think - email [support@kosli.com](mailto:support@kosli.com) or open an issue at [`kosli-dev/mcp-server`](https://github.com/kosli-dev/mcp-server/issues).

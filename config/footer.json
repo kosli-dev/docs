@@ -26,6 +26,10 @@
           "href": "/labs"
         },
         {
+          "label": "Kosli Next",
+          "href": "/kosli_next/index"
+        },
+        {
           "label": "Blog",
           "href": "https://kosli.com/blog/"
         }

@@ -6,9 +6,9 @@ This file governs repo-specific conventions for Claude Code. Skills, plugins, ag
 
 Apply these unless a skill, plugin, agent, or system prompt explicitly overrides them for its scope:
 
-1. Never commit directly to `main` — always work on a branch and open a PR.
+1. Never commit directly to `main` - always work on a branch and open a PR.
 2. Never create a page file without also adding it to `navigation` in `config/navigation.json`.
-3. Never use relative links — always use root-relative paths (e.g., `/getting_started/install`).
+3. Never use relative links - always use root-relative paths (e.g., `/getting_started/install`).
 4. Commit messages and PR titles must follow [Conventional Commits](https://www.conventionalcommits.org/): `type: short description` (lowercase, no period). Common types: `feat`, `fix`, `docs`, `style`, `chore`.
 5. Run `mint broken-links` before committing navigation or link changes.
 
@@ -60,13 +60,13 @@ description: One sentence describing the page purpose.
 ---
 ```
 
-- **MUST** Use root-relative paths for internal links: `/understand_kosli/what_is_kosli` ✓ — `../what_is_kosli` ✗
+- **MUST** Use root-relative paths for internal links: `/understand_kosli/what_is_kosli` ✓ - `../what_is_kosli` ✗
 - **MUST** Adding a new page: create the file AND add its path to `navigation` in `config/navigation.json`. Both steps are required.
 - **SHOULD** Follow the [Diátaxis](https://diataxis.fr/) framework when choosing page form:
-  - **Tutorial** — teaches by doing (e.g., "Get familiar with Kosli")
-  - **How-to guide** — step-by-step for a specific goal (e.g., "Report AWS environments")
-  - **Reference** — factual, lookup-oriented (e.g., CLI reference pages)
-  - **Explanation** — concepts and background (e.g., "What is Kosli?")
+  - **Tutorial** - teaches by doing (e.g., "Get familiar with Kosli")
+  - **How-to guide** - step-by-step for a specific goal (e.g., "Report AWS environments")
+  - **Reference** - factual, lookup-oriented (e.g., CLI reference pages)
+  - **Explanation** - concepts and background (e.g., "What is Kosli?")
 - **MAY** Add an `icon` field to front matter using [Font Awesome](https://fontawesome.com/icons) names.
 
 ### MDX Components
@@ -77,17 +77,18 @@ description: One sentence describing the page purpose.
 | `<Tabs>` / `<Tab>` | Platform-specific or alternative content |
 | `<Card>` / `<CardGroup>` | Navigational links, feature highlights |
 | `<Accordion>` / `<AccordionGroup>` | Progressive disclosure, FAQs |
-| `<Tip>` / `<Info>` / `<Warning>` / `<Note>` | Callouts — use sparingly |
+| `<Tip>` / `<Info>` / `<Warning>` / `<Note>` | Callouts - use sparingly |
 | `<CodeGroup>` | Same command in multiple languages/tools |
 | `<Frame>` | Wrapping images |
 
 ### Writing style
 
 - Use active voice and imperative mood for instructions ("Run `kosli attest`", not "You should run").
-- Refer to the product as **Kosli** — not "the Kosli platform" or "KOSLI".
+- Refer to the product as **Kosli** - not "the Kosli platform" or "KOSLI".
 - Use "audit trail" not "audit log"; "attest" not "certify".
 - Use American spelling (organization, behavior, color), not British. Enforced by Vale via `styles/Kosli/AmericanSpelling.yml`.
 - Sentence case for all headings.
+- No em-dashes. Use hyphens or rewrite the sentence.
 
 ## Don'ts
 
@@ -95,14 +96,15 @@ description: One sentence describing the page purpose.
 - Don't create a page without updating `config/navigation.json` — it won't appear in the site.
 - Don't add content to `snippets/` unless it is genuinely reused in 2+ pages.
 - Don't commit image files without placing them in an appropriate subdirectory.
-- Don't push to `main` directly — always use a PR.
+- Don't push to `main` directly - always use a PR.
 
 ## Skills
 
 When available, prefer skills over ad-hoc approaches:
 
-- **PR creation** — use the `pr-creator` skill if available.
-- **Changelog entries** — use the `changelog-creator` skill if available. Follow the existing `<Update>` format in `changelog/index.mdx` exactly:
+- **Kosli Next writing** - for any docs work under `kosli_next/` (concepts and preview features), use the `kosli-next-writer` skill in `.claude/skills/kosli-next-writer/`. It covers file locations, the required banner snippet, navigation updates, and tone.
+- **PR creation** - use the `pr-creator` skill if available.
+- **Changelog entries** - use the `changelog-creator` skill if available. Follow the existing `<Update>` format in `changelog/index.mdx` exactly:
   ```mdx
   <Update label="Month Year" description="vX.X.X" tags={["Product Name"]}>
 

@@ -15,3 +15,20 @@
   background-color: #CFD8FF !important;
   color: #111A26 !important;
 }
+
+/* ─── Kosli Next page tags ─────────────────────────────────────────────────── */
+/*
+ * Recolor the sidebar "Concept" and "Preview" tag pills to match the
+ * Kosli Next callout colour, so the future-state signal is consistent
+ * between the sidebar tag and the on-page banner.
+ */
+[data-nav-tag="Concept"] {
+  background-color: #FFB4AA !important;
+  color: #111A26 !important;
+}
+
+[data-nav-tag="Preview"] {
+  background-color: #B4C5FF !important;
+  color: #111A26 !important;
+}
+
