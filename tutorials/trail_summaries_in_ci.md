@@ -1,6 +1,6 @@
 ---
 title: "Adding trail summaries to CI pipeline runs"
-description: "Use `kosli get trail --output markdown` to publish a Kosli trail summary directly to GitHub Actions and GitLab CI pipeline runs."
+description: "Use kosli get trail --output markdown to publish a Kosli trail summary directly to GitHub Actions and GitLab CI pipeline runs."
 ---
 
 `kosli get trail --output markdown` renders a trail as GitHub-Flavored Markdown — compliance state, git commit, attestation statuses, and events, with links back to the Kosli app. Pipe it into your CI's job summary and every pipeline run becomes an information radiator for the trail it produced.
