@@ -68,7 +68,7 @@ kosli diff snapshots aws-beta aws-prod --output=json
 ```json
 {
   "snappish1": {
-    "snapshot_id": "aws-beta#7240",
+    "snapshot_id": "aws-beta#7251",
     "artifacts": [
       {
         "fingerprint": "024abeaf878f55e501869bdfcef2651d04084fa5492a6c515c5146d6a4ebd756",
@@ -76,14 +76,6 @@ kosli diff snapshots aws-beta aws-prod --output=json
         "most_recent_timestamp": 1781439988,
         "flow": "exercises-start-points-ci",
         "commit_url": "https://github.com/cyber-dojo/exercises-start-points/commit/7d472fe23646dcf286e7845258598d9846df636b",
-        "instance_count": 1
-      },
-      {
-        "fingerprint": "4ab912309304956f1b462acd0313170d4eef00fd46ee06921c7a60978001273d",
-        "name": "244531986313.dkr.ecr.eu-central-1.amazonaws.com/saver:b909280@sha256:4ab912309304956f1b462acd0313170d4eef00fd46ee06921c7a60978001273d",
-        "most_recent_timestamp": 1781436253,
-        "flow": "saver-ci",
-        "commit_url": "https://github.com/cyber-dojo/saver/commit/b909280dcfac31d336ec145a90d73e0904dd2bb7",
         "instance_count": 1
       },
       {
@@ -101,6 +93,14 @@ kosli diff snapshots aws-beta aws-prod --output=json
         "flow": "runner-ci",
         "commit_url": "https://github.com/cyber-dojo/runner/commit/c248c8e2175307f6906e4a016d09b21d177923bd",
         "instance_count": 3
+      },
+      {
+        "fingerprint": "b0ac80b4b90e684564fdda70932166d1ccf8033640242bae23aee17e1a5fed6e",
+        "name": "244531986313.dkr.ecr.eu-central-1.amazonaws.com/saver:fbae360@sha256:b0ac80b4b90e684564fdda70932166d1ccf8033640242bae23aee17e1a5fed6e",
+        "most_recent_timestamp": 1781797558,
+        "flow": "saver-ci",
+        "commit_url": "https://github.com/cyber-dojo/saver/commit/fbae360261d949b25a66a927921e757d4d064543",
+        "instance_count": 1
       },
       {
         "fingerprint": "b62ed52cf05c8482962b91ab0ac5334719e692634286723ddcd41f7bf60d9305",
@@ -137,7 +137,7 @@ kosli diff snapshots aws-beta aws-prod --output=json
     ]
   },
   "snappish2": {
-    "snapshot_id": "aws-prod#4781",
+    "snapshot_id": "aws-prod#4789",
     "artifacts": [
       {
         "fingerprint": "29c69c2f30f261a26fff4793fd8ae44b9081def1d4bcaaa27b0fef0501d949e4",
