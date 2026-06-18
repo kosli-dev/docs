@@ -48,10 +48,10 @@ jobs:
       KOSLI_FLOW: my-flow
       KOSLI_TRAIL: ${{ github.sha }}
     steps:
-      - uses: actions/checkout@v4
+      - uses: actions/checkout@v5
 
       - name: Setup Kosli CLI
-        uses: kosli-dev/setup-cli-action@v2
+        uses: kosli-dev/setup-cli-action@v5
 
       # ... your build, attest, and report steps ...
 
