@@ -43,6 +43,7 @@ jobs:
         env:
           GH_TOKEN: ${{ github.token }}
         with:
+          allowed_bots: "mintlify,github-actions"
           anthropic_federation_rule_id: ${{ vars.ANTHROPIC_FEDERATION_RULE_ID }}
           anthropic_organization_id: ${{ vars.ANTHROPIC_ORGANIZATION_ID }}
           anthropic_service_account_id: ${{ vars.ANTHROPIC_SERVICE_ACCOUNT_ID }}
