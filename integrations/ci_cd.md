@@ -59,7 +59,7 @@ description: Use Kosli in CI Systems like GitHub Actions, GitLab CI, and more.
         KOSLI_ORG: my-org
       steps:
         - name: setup kosli
-          uses: kosli-dev/setup-cli-action@v2
+          uses: kosli-dev/setup-cli-action@v5
         - name: create flow
           run: kosli create flow my-flow --template pull-request,artifact,test
   ```

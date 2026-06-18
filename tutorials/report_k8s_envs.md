@@ -98,7 +98,7 @@ jobs:
 
     steps:
       - name: Install Kosli CLI
-        uses: kosli-dev/setup-cli-action@v2
+        uses: kosli-dev/setup-cli-action@v5
 
       # Replace this step with one that connects to your cluster if not using GKE
       - name: Connect to GKE
