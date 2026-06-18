@@ -72,18 +72,15 @@ The summary appears on the run's page under the job, with the trail name linking
 
 GitLab does not natively render markdown inline on the job page, but [`artifacts:expose_as`](https://docs.gitlab.com/ci/yaml/#artifactsexpose_as) surfaces the `summary.md` artifact as a labeled link in the merge request widget, one click away from the rendered file in the GitLab UI.
 
-Add a job (or a final step in your existing job) that produces that artifact:
+Add a job (or a final step in your existing job) that produces that artifact. Use the [Kosli Alpine CI runner image](/integrations/ci_cd#ci-runner-image-alpine) so `kosli`, `git`, and `curl` are preinstalled and no `before_script` setup is needed:
 
 ```yaml
 kosli-trail-summary:
   stage: .post
-  image: ubuntu:24.04
+  image: registry.example.com/ci/kosli-runner:2.13.2
   variables:
     KOSLI_FLOW: my-flow
     KOSLI_TRAIL: $CI_COMMIT_SHA
-  before_script:
-    - apt-get update && apt-get install -y curl ca-certificates
-    - curl -fsSL https://get.kosli.com/install.sh | bash
   script:
     - >
       kosli get trail "$KOSLI_TRAIL"
@@ -95,6 +92,8 @@ kosli-trail-summary:
       - summary.md
     expose_as: "Kosli trail summary"
 ```
+
+Replace `registry.example.com/ci/kosli-runner:2.13.2` with whatever tag you pushed when you built the Alpine image — see [CI runner image (Alpine)](/integrations/ci_cd#ci-runner-image-alpine) for the build steps.
 
 `KOSLI_API_TOKEN` and `KOSLI_ORG` should be set as [CI/CD variables](https://docs.gitlab.com/ci/variables/) on the project or group, masked, so the job picks them up automatically.
 
