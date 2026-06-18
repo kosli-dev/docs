@@ -4,6 +4,55 @@ description: "Release notes for Kosli products."
 rss: true
 ---
 
+<Update label="June 12, 2026" description="" tags={["Platform"]}>
+
+## New features
+
+- **Sign in with SSO** — a redesigned sign-in page makes SSO a first-class option alongside other providers.
+- **Membership history audit log** — organization membership and role changes are now appended to an audit history, capturing who changed what and when.
+- **Short fingerprints on artifact GETs** — artifact GET endpoints once again accept short fingerprint prefixes (5–64 chars), restoring documented CLI behavior like `kosli get artifact flow@<short-fingerprint>`.
+
+## Updates
+
+- **Faster org-scoped queries** — trail moments and recently-modified artifact queries now use org-scoped indexes for better performance on large organizations.
+
+## Bug fixes
+
+- Fixed revoking an already-archived service account API key returning `200 OK` instead of `404 Not Found`.
+- Fixed an order-dependent waiver leak in trail and provenance compliance evaluation where one waived exception could incorrectly carry over to later artifacts.
+
+</Update>
+
+<Update label="June 11, 2026" description="v2.26.0" tags={["CLI"]}>
+
+## New features
+
+- **`kosli list environments` filtering and pagination** — new `--name`, `--type`, `--space-id`, `--tag`, `--page`, and `--page-limit` flags filter and paginate environment listings. See the [list environments reference](/client_reference/kosli_list_environments).
+- **`kosli list flows` name search** — new `--name` and `--ignore-case` flags search flows by name. See the [list flows reference](/client_reference/kosli_list_flows).
+
+## Updates
+
+- **`kosli attest jira`** — clearer help text for CVE and multi-segment identifier filtering behavior. See the [attest jira reference](/client_reference/kosli_attest_jira).
+
+## Bug fixes
+
+- **Service account API key prompts** — the revoke confirmation prompt now reads inline, and cancellation messaging and key ID styling are consistent with other commands.
+
+[View on GitHub](https://github.com/kosli-dev/cli/releases/tag/v2.26.0)
+
+</Update>
+
+<Update label="June 9, 2026" description="v2.25.0" tags={["CLI"]}>
+
+## New features
+
+- **`kosli service-account api-keys`** — new command group (alias `sa ak`) to manage service account API keys from the CLI, with `create`, `revoke`, `rotate`, and `list` subcommands.
+- **Short aliases for top-level verbs** — `get` (`g`), `rename` (`re`), `disable` (`dis`), `enable` (`en`), `log` (`lo`), and `status` (`s`, `st`) now have shorter aliases.
+
+[View on GitHub](https://github.com/kosli-dev/cli/releases/tag/v2.25.0)
+
+</Update>
+
 <Update label="June 4, 2026" description="" tags={["Platform"]}>
 
 ## Updates
