@@ -30,7 +30,7 @@ The output is a markdown document with:
 - An `### Events` table with timestamps, descriptions, commit links, and compliance state.
 
 <Frame caption="Example trail summary rendered with markdown output.">
-  ![Example trail summary rendered with markdown output](/images/tutorials/trail-summary-example.png)
+  ![Trail summary showing compliance status, git commit metadata, per-artifact attestation tables, and event history](/images/tutorials/trail-summary-example.png)
 </Frame>
 
 ## Publishing the summary
