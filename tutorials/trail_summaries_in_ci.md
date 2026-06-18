@@ -29,7 +29,10 @@ The output is a markdown document with:
 - An `### Attestations` section with one headerless table per artifact (and one for trail-level attestations), with each attestation linked to its place on the trail page. Statuses are prefixed with ✅ / ❌ / ⏳; attestations reported but not expected by the template are marked with `(+)`.
 - An `### Events` table with timestamps, descriptions, commit links, and compliance state.
 
-## GitHub Actions
+## Publishing the summary
+
+<Tabs>
+  <Tab title="GitHub" icon="github">
 
 GitHub Actions exposes a per-job markdown summary via the [`$GITHUB_STEP_SUMMARY`](https://docs.github.com/en/actions/using-workflows/workflow-commands-for-github-actions#adding-a-job-summary) environment variable. Anything you append to that file is rendered on the workflow run page.
 
@@ -64,7 +67,8 @@ jobs:
 
 The summary appears on the run's page under the job, with the trail name linking back to the trail in the Kosli app and every attestation linking to its position on the trail.
 
-## GitLab CI
+  </Tab>
+  <Tab title="GitLab" icon="gitlab">
 
 GitLab renders [job-level markdown reports](https://docs.gitlab.com/ci/yaml/artifacts_reports/#artifactsreportsannotations) from a `summary.md` artifact. The artifact is shown on the job page and surfaced as a merge request annotation when the pipeline runs against an MR.
 
@@ -94,6 +98,9 @@ kosli-trail-summary:
 `KOSLI_API_TOKEN` and `KOSLI_ORG` should be set as [CI/CD variables](https://docs.gitlab.com/ci/variables/) on the project or group, masked, so the job picks them up automatically.
 
 `when: always` mirrors the GitHub `if: always()` pattern: the summary is uploaded even if earlier stages fail.
+
+  </Tab>
+</Tabs>
 
 ## Tips
 
