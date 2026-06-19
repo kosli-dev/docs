@@ -75,7 +75,7 @@ In other CI systems, set them explicitly to capture repository metadata.
 	<Tab title="GitHub">
 	View an example of the `kosli attest generic` command in GitHub.
 
-	In [this YAML file](https://github.com/cyber-dojo/dashboard/blob/87f560f87fb2bc242ee5c58d74d0e209d71cd338/.github/workflows/main.yml#L197), which created [this Kosli Event](https://app.kosli.com/cyber-dojo/flows/dashboard-ci/trails/87f560f87fb2bc242ee5c58d74d0e209d71cd338?attestation_id=13c229f8-974c-4f29-afed-5c3a990c).
+	In [this YAML file](https://github.com/cyber-dojo/dashboard/blob/ff89dd9bd1bfc5441854450adcf25d5aad9508f4/.github/workflows/main.yml#L197), which created [this Kosli Event](https://app.kosli.com/cyber-dojo/flows/dashboard-ci/trails/ff89dd9bd1bfc5441854450adcf25d5aad9508f4?attestation_id=13206cf1-58ef-44b2-abd5-7ba7dd52).
 	</Tab>
 	<Tab title="GitLab">
 	View an example of the `kosli attest generic` command in GitLab.
