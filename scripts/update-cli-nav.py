@@ -15,11 +15,10 @@ import yaml
 
 
 def get_command_info(filepath):
-    """Extract command name and deprecated status from a CLI reference file."""
+    """Extract command title and hidden status from a CLI reference file."""
     with open(filepath, 'r', encoding='utf-8') as f:
         content = f.read()
 
-    # Parse front matter
     match = re.match(r'^---\n(.*?)\n---', content, re.DOTALL)
     if not match:
         return None
@@ -32,19 +31,9 @@ def get_command_info(filepath):
     if not fm or 'title' not in fm:
         return None
 
-    title = fm['title']
-    deprecated = fm.get('deprecated', False)
-
-    # Check for deprecated warning in body (for converted files that don't have
-    # the deprecated field but have a Warning about deprecation)
-    if not deprecated:
-        body = content[match.end():]
-        if re.search(r'is deprecated', body[:500], re.IGNORECASE):
-            deprecated = True
-
     return {
-        'title': title,
-        'deprecated': deprecated,
+        'title': fm['title'],
+        'hidden': bool(fm.get('hidden', False)),
     }
 
 
@@ -96,14 +85,18 @@ def get_command_group(title):
 
 
 def build_nav_groups(docs_dir):
-    """Scan CLI reference files and build navigation groups."""
+    """Scan CLI reference files and build navigation groups.
+
+    Hidden pages (hidden: true) are excluded from navigation; they remain
+    reachable by direct URL. Lifecycle tags (BETA/DEPRECATED) render as sidebar
+    pills automatically from each page's front matter, so there is no separate
+    Deprecated group.
+    """
     commands = []
 
     for filename in sorted(os.listdir(docs_dir)):
         if not filename.endswith('.md'):
             continue
-        # Skip manually-maintained intro pages; they are inserted into the
-        # General group below in a fixed order.
         if filename in ('overview.md', 'output_and_verbosity.md'):
             continue
 
@@ -111,31 +104,19 @@ def build_nav_groups(docs_dir):
         info = get_command_info(filepath)
         if info is None:
             continue
+        if info['hidden']:
+            continue
 
-        page_path = f'client_reference/{filename[:-3]}'  # Remove .md
+        page_path = f'client_reference/{filename[:-3]}'
         commands.append({
             'page': page_path,
-            'title': info['title'],
-            'deprecated': info['deprecated'],
             'group': get_command_group(info['title']),
         })
 
-    # Separate active and deprecated commands
-    active = [c for c in commands if not c['deprecated']]
-    deprecated = [c for c in commands if c['deprecated']]
-
-    # Group active commands
     groups_dict = {}
-    for cmd in active:
-        group = cmd['group']
-        if group not in groups_dict:
-            groups_dict[group] = []
-        groups_dict[group].append(cmd['page'])
+    for cmd in commands:
+        groups_dict.setdefault(cmd['group'], []).append(cmd['page'])
 
-    # Build ordered navigation groups.
-    # 1. General — manually-maintained intro pages, fixed order.
-    # 2. Top-level commands — auto-generated single-word kosli commands.
-    # 3. Remaining command families in alphabetical order, prefixed 'kosli '.
     nav_groups = [
         {
             'group': 'General',
@@ -153,17 +134,9 @@ def build_nav_groups(docs_dir):
         })
 
     for group_name in sorted(groups_dict.keys()):
-        display_name = f'kosli {group_name}'
         nav_groups.append({
-            'group': display_name,
+            'group': f'kosli {group_name}',
             'pages': groups_dict[group_name],
-        })
-
-    # Add deprecated group if there are deprecated commands
-    if deprecated:
-        nav_groups.append({
-            'group': 'Deprecated',
-            'pages': [c['page'] for c in deprecated],
         })
 
     return nav_groups
