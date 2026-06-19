@@ -1,0 +1,784 @@
+{
+  "name": "30dffd09c3f896a322c65029247abcea3019c43a",
+  "description": "",
+  "git_commit_info": {
+    "sha1": "30dffd09c3f896a322c65029247abcea3019c43a",
+    "message": "Remove defaulted aws-rolename from snyk-scanning job (#373)",
+    "author": "Jon Jagger <jon@kosli.com>",
+    "branch": "main",
+    "timestamp": 1776922121.0,
+    "url": "https://github.com/cyber-dojo/differ/commit/30dffd09c3f896a322c65029247abcea3019c43a"
+  },
+  "origin_url": "https://github.com/cyber-dojo/differ/actions/runs/24818543745",
+  "user_data": {},
+  "repo_ids": [
+    "09751ccc-0d15-4b83-a4da-8dc5ad32"
+  ],
+  "last_modified_at": 1776922324.9497623,
+  "created_at": 1776922144.5760212,
+  "compliance_status": {
+    "status": "COMPLIANT",
+    "is_compliant": true,
+    "attestations_statuses": [
+      {
+        "attestation_name": "pull-request",
+        "attestation_type": "pull_request",
+        "attestation_id": "a3c84fec-c679-4536-83df-35d25f2d",
+        "overridden_attestation_id": null,
+        "status": "COMPLETE",
+        "is_compliant": true,
+        "unexpected": true
+      }
+    ],
+    "artifacts_statuses": {
+      "differ": {
+        "artifact_fingerprint": "becf55d8a2ed6e43bdd4d26c82dc0e3a69204b92738858ad9cd25329fa513355",
+        "artifact_id": "046919b1-42dd-47f8-8569-912d0259",
+        "status": "COMPLIANT",
+        "is_compliant": true,
+        "attestations_statuses": [
+          {
+            "attestation_name": "rubocop-lint",
+            "attestation_type": "junit",
+            "attestation_id": "80b8e885-6a69-4339-8701-f3dd9797",
+            "overridden_attestation_id": null,
+            "status": "COMPLETE",
+            "is_compliant": true,
+            "unexpected": true
+          },
+          {
+            "attestation_name": "provenance-attestation",
+            "attestation_type": "generic",
+            "attestation_id": "0066b975-15b3-4586-9032-558ba8e7",
+            "overridden_attestation_id": null,
+            "status": "COMPLETE",
+            "is_compliant": true,
+            "unexpected": true
+          },
+          {
+            "attestation_name": "sbom",
+            "attestation_type": "generic",
+            "attestation_id": "e4e309b9-c029-4f6b-9a3a-3891053b",
+            "overridden_attestation_id": null,
+            "status": "COMPLETE",
+            "is_compliant": true,
+            "unexpected": true
+          },
+          {
+            "attestation_name": "sonarcloud-scan",
+            "attestation_type": "sonar",
+            "attestation_id": "a8a92f49-6217-4aec-9e7d-c4bd666c",
+            "overridden_attestation_id": null,
+            "status": "COMPLETE",
+            "is_compliant": true,
+            "unexpected": true
+          },
+          {
+            "attestation_name": "integration-test",
+            "attestation_type": "junit",
+            "attestation_id": "cb400c3a-bd37-4918-ac79-959ba471",
+            "overridden_attestation_id": null,
+            "status": "COMPLETE",
+            "is_compliant": true,
+            "unexpected": true
+          },
+          {
+            "attestation_name": "unit-test",
+            "attestation_type": "junit",
+            "attestation_id": "ac559624-fe12-4d8e-9f20-334c8d0d",
+            "overridden_attestation_id": null,
+            "status": "COMPLETE",
+            "is_compliant": true,
+            "unexpected": true
+          },
+          {
+            "attestation_name": "integration-test-metrics",
+            "attestation_type": "custom:test-metrics",
+            "attestation_id": "369684cb-f1ce-4143-aaf7-776f8631",
+            "overridden_attestation_id": null,
+            "status": "COMPLETE",
+            "is_compliant": true,
+            "unexpected": true
+          },
+          {
+            "attestation_name": "unit-test-metrics",
+            "attestation_type": "custom:test-metrics",
+            "attestation_id": "c3be70be-5673-42c4-8078-dc301dac",
+            "overridden_attestation_id": null,
+            "status": "COMPLETE",
+            "is_compliant": true,
+            "unexpected": true
+          },
+          {
+            "attestation_name": "integration-test-coverage-metrics",
+            "attestation_type": "custom:coverage-metrics",
+            "attestation_id": "c8e0edb5-39e9-45e4-b5af-b2d337c6",
+            "overridden_attestation_id": null,
+            "status": "COMPLETE",
+            "is_compliant": true,
+            "unexpected": true
+          },
+          {
+            "attestation_name": "unit-test-coverage-metrics",
+            "attestation_type": "custom:coverage-metrics",
+            "attestation_id": "8a32a0bb-c995-41d1-8f2f-c78619b3",
+            "overridden_attestation_id": null,
+            "status": "COMPLETE",
+            "is_compliant": true,
+            "unexpected": true
+          },
+          {
+            "attestation_name": "snyk-container-scan",
+            "attestation_type": "generic",
+            "attestation_id": "55638f3a-147b-4683-abb3-a6b22f21",
+            "overridden_attestation_id": null,
+            "status": "COMPLETE",
+            "is_compliant": true,
+            "unexpected": true
+          }
+        ],
+        "unexpected": true,
+        "evaluated_at": 1776922324.9497623,
+        "flow_template_id": "41bcefcf-aa8d-47c7-9b4e-0589bdb2"
+      }
+    },
+    "evaluated_at": 1776922322.9425528,
+    "flow_template_id": "41bcefcf-aa8d-47c7-9b4e-0589bdb2"
+  },
+  "template": {
+    "version": 1,
+    "trail": {
+      "attestations": [],
+      "artifacts": []
+    },
+    "content": "version: 1\n"
+  },
+  "compliance_state": "COMPLIANT",
+  "is_compliant": true,
+  "events": [
+    {
+      "org_id": "83acb2bc-2c26-48a7-8b87-90dfcce7",
+      "flow_id": "d398561b-b0a9-4f0e-95a3-bbb0e347",
+      "trail_id": "a6c5e78c-b9ec-4c95-b8a7-d150336a",
+      "timestamp": 1776922144.5760212,
+      "type": "trail_reported",
+      "git_commit_info": {
+        "sha1": "30dffd09c3f896a322c65029247abcea3019c43a",
+        "message": "Remove defaulted aws-rolename from snyk-scanning job (#373)",
+        "author": "Jon Jagger <jon@kosli.com>",
+        "author_username": null,
+        "branch": "main",
+        "timestamp": 1776922121.0,
+        "url": "https://github.com/cyber-dojo/differ/commit/30dffd09c3f896a322c65029247abcea3019c43a",
+        "parents": null
+      },
+      "repo_info": {
+        "inner_id": "09751ccc-0d15-4b83-a4da-8dc5ad32",
+        "org_id": "83acb2bc-2c26-48a7-8b87-90dfcce7",
+        "repo_id": "68700466",
+        "name": "cyber-dojo/differ",
+        "url": "https://github.com/cyber-dojo/differ",
+        "provider": "github",
+        "description": null,
+        "created_at": 1768825647.5256214,
+        "last_modified_at": 1776922144.5625682
+      },
+      "setting_user_id": "da5d4ee8-aec0-4264-ab85-c491040c",
+      "trail_data_json": {
+        "org_id": "83acb2bc-2c26-48a7-8b87-90dfcce7",
+        "flow_id": "d398561b-b0a9-4f0e-95a3-bbb0e347",
+        "name": "30dffd09c3f896a322c65029247abcea3019c43a",
+        "creating_user_id": "da5d4ee8-aec0-4264-ab85-c491040c",
+        "description": "",
+        "git_commit_info": {
+          "sha1": "30dffd09c3f896a322c65029247abcea3019c43a",
+          "message": "Remove defaulted aws-rolename from snyk-scanning job (#373)",
+          "author": "Jon Jagger <jon@kosli.com>",
+          "branch": "main",
+          "timestamp": 1776922121.0,
+          "url": "https://github.com/cyber-dojo/differ/commit/30dffd09c3f896a322c65029247abcea3019c43a"
+        },
+        "template_id": "db2b50e9-f037-4d2d-9ad4-96cb045c",
+        "origin_url": "https://github.com/cyber-dojo/differ/actions/runs/24818543745",
+        "user_data": "{}",
+        "repo_ids": [
+          "09751ccc-0d15-4b83-a4da-8dc5ad32"
+        ]
+      }
+    },
+    {
+      "org_id": "83acb2bc-2c26-48a7-8b87-90dfcce7",
+      "flow_id": "d398561b-b0a9-4f0e-95a3-bbb0e347",
+      "trail_id": "a6c5e78c-b9ec-4c95-b8a7-d150336a",
+      "timestamp": 1776922169.167209,
+      "type": "trail_attestation_reported",
+      "git_commit_info": {
+        "sha1": "30dffd09c3f896a322c65029247abcea3019c43a",
+        "message": "Remove defaulted aws-rolename from snyk-scanning job (#373)",
+        "author": "Jon Jagger <jon@kosli.com>",
+        "author_username": null,
+        "branch": "main",
+        "timestamp": 1776922121.0,
+        "url": "https://github.com/cyber-dojo/differ/commit/30dffd09c3f896a322c65029247abcea3019c43a",
+        "parents": null
+      },
+      "repo_info": {
+        "inner_id": "09751ccc-0d15-4b83-a4da-8dc5ad32",
+        "org_id": "83acb2bc-2c26-48a7-8b87-90dfcce7",
+        "repo_id": "68700466",
+        "name": "cyber-dojo/differ",
+        "url": "https://github.com/cyber-dojo/differ",
+        "provider": "github",
+        "description": null,
+        "created_at": 1768825647.5256214,
+        "last_modified_at": 1776922169.1593428
+      },
+      "attestation_type": "pull_request",
+      "is_compliant": true,
+      "attestation_id": "a3c84fec-c679-4536-83df-35d25f2d",
+      "template_reference_name": "pull-request"
+    },
+    {
+      "org_id": "83acb2bc-2c26-48a7-8b87-90dfcce7",
+      "flow_id": "d398561b-b0a9-4f0e-95a3-bbb0e347",
+      "trail_id": "a6c5e78c-b9ec-4c95-b8a7-d150336a",
+      "timestamp": 1776922172.284509,
+      "type": "trail_attestation_for_artifact_reported",
+      "git_commit_info": {
+        "sha1": "30dffd09c3f896a322c65029247abcea3019c43a",
+        "message": "Remove defaulted aws-rolename from snyk-scanning job (#373)",
+        "author": "Jon Jagger <jon@kosli.com>",
+        "author_username": null,
+        "branch": "main",
+        "timestamp": 1776922121.0,
+        "url": "https://github.com/cyber-dojo/differ/commit/30dffd09c3f896a322c65029247abcea3019c43a",
+        "parents": null
+      },
+      "repo_info": {
+        "inner_id": "09751ccc-0d15-4b83-a4da-8dc5ad32",
+        "org_id": "83acb2bc-2c26-48a7-8b87-90dfcce7",
+        "repo_id": "68700466",
+        "name": "cyber-dojo/differ",
+        "url": "https://github.com/cyber-dojo/differ",
+        "provider": "github",
+        "description": null,
+        "created_at": 1768825647.5256214,
+        "last_modified_at": 1776922172.0638747
+      },
+      "attestation_type": "junit",
+      "is_compliant": true,
+      "attestation_id": "80b8e885-6a69-4339-8701-f3dd9797",
+      "template_reference_name": "rubocop-lint",
+      "target_artifact": "differ"
+    },
+    {
+      "org_id": "83acb2bc-2c26-48a7-8b87-90dfcce7",
+      "flow_id": "d398561b-b0a9-4f0e-95a3-bbb0e347",
+      "trail_id": "a6c5e78c-b9ec-4c95-b8a7-d150336a",
+      "timestamp": 1776922218.5130024,
+      "type": "artifact_creation_reported",
+      "git_commit_info": {
+        "sha1": "30dffd09c3f896a322c65029247abcea3019c43a",
+        "message": "Remove defaulted aws-rolename from snyk-scanning job (#373)",
+        "author": "Jon Jagger <jon@kosli.com>",
+        "author_username": null,
+        "branch": "",
+        "timestamp": 1776922121.0,
+        "url": "https://github.com/cyber-dojo/differ/commit/30dffd09c3f896a322c65029247abcea3019c43a",
+        "parents": null
+      },
+      "repo_info": {
+        "inner_id": "09751ccc-0d15-4b83-a4da-8dc5ad32",
+        "org_id": "83acb2bc-2c26-48a7-8b87-90dfcce7",
+        "repo_id": "68700466",
+        "name": "cyber-dojo/differ",
+        "url": "https://github.com/cyber-dojo/differ",
+        "provider": "github",
+        "description": null,
+        "created_at": 1768825647.5256214,
+        "last_modified_at": 1776922218.4953458
+      },
+      "artifact_fingerprint": "becf55d8a2ed6e43bdd4d26c82dc0e3a69204b92738858ad9cd25329fa513355",
+      "artifact_name": "244531986313.dkr.ecr.eu-central-1.amazonaws.com/differ:30dffd0",
+      "artifact_id": "fb2cdabc-8ff3-4bf6-924f-81c5edf8",
+      "template_reference_name": "differ",
+      "git_commit": "30dffd09c3f896a322c65029247abcea3019c43a"
+    },
+    {
+      "org_id": "83acb2bc-2c26-48a7-8b87-90dfcce7",
+      "flow_id": "d398561b-b0a9-4f0e-95a3-bbb0e347",
+      "trail_id": "a6c5e78c-b9ec-4c95-b8a7-d150336a",
+      "timestamp": 1776922220.1516378,
+      "type": "artifact_attestation_reported",
+      "git_commit_info": {
+        "sha1": "30dffd09c3f896a322c65029247abcea3019c43a",
+        "message": "Remove defaulted aws-rolename from snyk-scanning job (#373)",
+        "author": "Jon Jagger <jon@kosli.com>",
+        "author_username": null,
+        "branch": "",
+        "timestamp": 1776922121.0,
+        "url": "https://github.com/cyber-dojo/differ/commit/30dffd09c3f896a322c65029247abcea3019c43a",
+        "parents": null
+      },
+      "repo_info": {
+        "inner_id": "09751ccc-0d15-4b83-a4da-8dc5ad32",
+        "org_id": "83acb2bc-2c26-48a7-8b87-90dfcce7",
+        "repo_id": "68700466",
+        "name": "cyber-dojo/differ",
+        "url": "https://github.com/cyber-dojo/differ",
+        "provider": "github",
+        "description": null,
+        "created_at": 1768825647.5256214,
+        "last_modified_at": 1776922220.021401
+      },
+      "attestation_type": "generic",
+      "is_compliant": true,
+      "attestation_id": "0066b975-15b3-4586-9032-558ba8e7",
+      "template_reference_name": "provenance-attestation",
+      "artifact_fingerprint": "becf55d8a2ed6e43bdd4d26c82dc0e3a69204b92738858ad9cd25329fa513355",
+      "artifact_name": "244531986313.dkr.ecr.eu-central-1.amazonaws.com/differ:30dffd0",
+      "target_artifact": "differ"
+    },
+    {
+      "org_id": "83acb2bc-2c26-48a7-8b87-90dfcce7",
+      "flow_id": "d398561b-b0a9-4f0e-95a3-bbb0e347",
+      "trail_id": "a6c5e78c-b9ec-4c95-b8a7-d150336a",
+      "timestamp": 1776922222.2330732,
+      "type": "artifact_attestation_reported",
+      "git_commit_info": {
+        "sha1": "30dffd09c3f896a322c65029247abcea3019c43a",
+        "message": "Remove defaulted aws-rolename from snyk-scanning job (#373)",
+        "author": "Jon Jagger <jon@kosli.com>",
+        "author_username": null,
+        "branch": "",
+        "timestamp": 1776922121.0,
+        "url": "https://github.com/cyber-dojo/differ/commit/30dffd09c3f896a322c65029247abcea3019c43a",
+        "parents": null
+      },
+      "repo_info": {
+        "inner_id": "09751ccc-0d15-4b83-a4da-8dc5ad32",
+        "org_id": "83acb2bc-2c26-48a7-8b87-90dfcce7",
+        "repo_id": "68700466",
+        "name": "cyber-dojo/differ",
+        "url": "https://github.com/cyber-dojo/differ",
+        "provider": "github",
+        "description": null,
+        "created_at": 1768825647.5256214,
+        "last_modified_at": 1776922222.0885787
+      },
+      "attestation_type": "generic",
+      "is_compliant": true,
+      "attestation_id": "e4e309b9-c029-4f6b-9a3a-3891053b",
+      "template_reference_name": "sbom",
+      "artifact_fingerprint": "becf55d8a2ed6e43bdd4d26c82dc0e3a69204b92738858ad9cd25329fa513355",
+      "artifact_name": "244531986313.dkr.ecr.eu-central-1.amazonaws.com/differ:30dffd0",
+      "target_artifact": "differ"
+    },
+    {
+      "org_id": "83acb2bc-2c26-48a7-8b87-90dfcce7",
+      "flow_id": "d398561b-b0a9-4f0e-95a3-bbb0e347",
+      "trail_id": "a6c5e78c-b9ec-4c95-b8a7-d150336a",
+      "timestamp": 1776922271.7472875,
+      "type": "artifact_attestation_reported",
+      "git_commit_info": {
+        "sha1": "30dffd09c3f896a322c65029247abcea3019c43a",
+        "message": null,
+        "author": null,
+        "author_username": null,
+        "branch": null,
+        "timestamp": null,
+        "url": null,
+        "parents": null
+      },
+      "repo_info": null,
+      "attestation_type": "sonar",
+      "is_compliant": true,
+      "attestation_id": "a8a92f49-6217-4aec-9e7d-c4bd666c",
+      "template_reference_name": "sonarcloud-scan",
+      "artifact_fingerprint": "becf55d8a2ed6e43bdd4d26c82dc0e3a69204b92738858ad9cd25329fa513355",
+      "artifact_name": "244531986313.dkr.ecr.eu-central-1.amazonaws.com/differ:30dffd0",
+      "target_artifact": "differ"
+    },
+    {
+      "org_id": "83acb2bc-2c26-48a7-8b87-90dfcce7",
+      "flow_id": "d398561b-b0a9-4f0e-95a3-bbb0e347",
+      "trail_id": "a6c5e78c-b9ec-4c95-b8a7-d150336a",
+      "timestamp": 1776922275.4024353,
+      "type": "artifact_attestation_reported",
+      "git_commit_info": {
+        "sha1": "30dffd09c3f896a322c65029247abcea3019c43a",
+        "message": "Remove defaulted aws-rolename from snyk-scanning job (#373)",
+        "author": "Jon Jagger <jon@kosli.com>",
+        "author_username": null,
+        "branch": "main",
+        "timestamp": 1776922121.0,
+        "url": "https://github.com/cyber-dojo/differ/commit/30dffd09c3f896a322c65029247abcea3019c43a",
+        "parents": null
+      },
+      "repo_info": {
+        "inner_id": "09751ccc-0d15-4b83-a4da-8dc5ad32",
+        "org_id": "83acb2bc-2c26-48a7-8b87-90dfcce7",
+        "repo_id": "68700466",
+        "name": "cyber-dojo/differ",
+        "url": "https://github.com/cyber-dojo/differ",
+        "provider": "github",
+        "description": null,
+        "created_at": 1768825647.5256214,
+        "last_modified_at": 1776922275.3028631
+      },
+      "attestation_type": "junit",
+      "is_compliant": true,
+      "attestation_id": "cb400c3a-bd37-4918-ac79-959ba471",
+      "template_reference_name": "integration-test",
+      "artifact_fingerprint": "becf55d8a2ed6e43bdd4d26c82dc0e3a69204b92738858ad9cd25329fa513355",
+      "artifact_name": "244531986313.dkr.ecr.eu-central-1.amazonaws.com/differ:30dffd0",
+      "target_artifact": "differ"
+    },
+    {
+      "org_id": "83acb2bc-2c26-48a7-8b87-90dfcce7",
+      "flow_id": "d398561b-b0a9-4f0e-95a3-bbb0e347",
+      "trail_id": "a6c5e78c-b9ec-4c95-b8a7-d150336a",
+      "timestamp": 1776922276.0852528,
+      "type": "artifact_attestation_reported",
+      "git_commit_info": {
+        "sha1": "30dffd09c3f896a322c65029247abcea3019c43a",
+        "message": "Remove defaulted aws-rolename from snyk-scanning job (#373)",
+        "author": "Jon Jagger <jon@kosli.com>",
+        "author_username": null,
+        "branch": "main",
+        "timestamp": 1776922121.0,
+        "url": "https://github.com/cyber-dojo/differ/commit/30dffd09c3f896a322c65029247abcea3019c43a",
+        "parents": null
+      },
+      "repo_info": {
+        "inner_id": "09751ccc-0d15-4b83-a4da-8dc5ad32",
+        "org_id": "83acb2bc-2c26-48a7-8b87-90dfcce7",
+        "repo_id": "68700466",
+        "name": "cyber-dojo/differ",
+        "url": "https://github.com/cyber-dojo/differ",
+        "provider": "github",
+        "description": null,
+        "created_at": 1768825647.5256214,
+        "last_modified_at": 1776922275.9567888
+      },
+      "attestation_type": "junit",
+      "is_compliant": true,
+      "attestation_id": "ac559624-fe12-4d8e-9f20-334c8d0d",
+      "template_reference_name": "unit-test",
+      "artifact_fingerprint": "becf55d8a2ed6e43bdd4d26c82dc0e3a69204b92738858ad9cd25329fa513355",
+      "artifact_name": "244531986313.dkr.ecr.eu-central-1.amazonaws.com/differ:30dffd0",
+      "target_artifact": "differ"
+    },
+    {
+      "org_id": "83acb2bc-2c26-48a7-8b87-90dfcce7",
+      "flow_id": "d398561b-b0a9-4f0e-95a3-bbb0e347",
+      "trail_id": "a6c5e78c-b9ec-4c95-b8a7-d150336a",
+      "timestamp": 1776922277.625133,
+      "type": "artifact_attestation_reported",
+      "git_commit_info": {
+        "sha1": "30dffd09c3f896a322c65029247abcea3019c43a",
+        "message": "Remove defaulted aws-rolename from snyk-scanning job (#373)",
+        "author": "Jon Jagger <jon@kosli.com>",
+        "author_username": null,
+        "branch": "main",
+        "timestamp": 1776922121.0,
+        "url": "https://github.com/cyber-dojo/differ/commit/30dffd09c3f896a322c65029247abcea3019c43a",
+        "parents": null
+      },
+      "repo_info": {
+        "inner_id": "09751ccc-0d15-4b83-a4da-8dc5ad32",
+        "org_id": "83acb2bc-2c26-48a7-8b87-90dfcce7",
+        "repo_id": "68700466",
+        "name": "cyber-dojo/differ",
+        "url": "https://github.com/cyber-dojo/differ",
+        "provider": "github",
+        "description": null,
+        "created_at": 1768825647.5256214,
+        "last_modified_at": 1776922277.6164017
+      },
+      "attestation_type": "custom:test-metrics",
+      "is_compliant": true,
+      "attestation_id": "369684cb-f1ce-4143-aaf7-776f8631",
+      "template_reference_name": "integration-test-metrics",
+      "artifact_fingerprint": "becf55d8a2ed6e43bdd4d26c82dc0e3a69204b92738858ad9cd25329fa513355",
+      "artifact_name": "244531986313.dkr.ecr.eu-central-1.amazonaws.com/differ:30dffd0",
+      "target_artifact": "differ"
+    },
+    {
+      "org_id": "83acb2bc-2c26-48a7-8b87-90dfcce7",
+      "flow_id": "d398561b-b0a9-4f0e-95a3-bbb0e347",
+      "trail_id": "a6c5e78c-b9ec-4c95-b8a7-d150336a",
+      "timestamp": 1776922277.7081304,
+      "type": "artifact_attestation_reported",
+      "git_commit_info": {
+        "sha1": "30dffd09c3f896a322c65029247abcea3019c43a",
+        "message": "Remove defaulted aws-rolename from snyk-scanning job (#373)",
+        "author": "Jon Jagger <jon@kosli.com>",
+        "author_username": null,
+        "branch": "main",
+        "timestamp": 1776922121.0,
+        "url": "https://github.com/cyber-dojo/differ/commit/30dffd09c3f896a322c65029247abcea3019c43a",
+        "parents": null
+      },
+      "repo_info": {
+        "inner_id": "09751ccc-0d15-4b83-a4da-8dc5ad32",
+        "org_id": "83acb2bc-2c26-48a7-8b87-90dfcce7",
+        "repo_id": "68700466",
+        "name": "cyber-dojo/differ",
+        "url": "https://github.com/cyber-dojo/differ",
+        "provider": "github",
+        "description": null,
+        "created_at": 1768825647.5256214,
+        "last_modified_at": 1776922277.7003748
+      },
+      "attestation_type": "custom:test-metrics",
+      "is_compliant": true,
+      "attestation_id": "c3be70be-5673-42c4-8078-dc301dac",
+      "template_reference_name": "unit-test-metrics",
+      "artifact_fingerprint": "becf55d8a2ed6e43bdd4d26c82dc0e3a69204b92738858ad9cd25329fa513355",
+      "artifact_name": "244531986313.dkr.ecr.eu-central-1.amazonaws.com/differ:30dffd0",
+      "target_artifact": "differ"
+    },
+    {
+      "org_id": "83acb2bc-2c26-48a7-8b87-90dfcce7",
+      "flow_id": "d398561b-b0a9-4f0e-95a3-bbb0e347",
+      "trail_id": "a6c5e78c-b9ec-4c95-b8a7-d150336a",
+      "timestamp": 1776922279.8122094,
+      "type": "artifact_attestation_reported",
+      "git_commit_info": {
+        "sha1": "30dffd09c3f896a322c65029247abcea3019c43a",
+        "message": "Remove defaulted aws-rolename from snyk-scanning job (#373)",
+        "author": "Jon Jagger <jon@kosli.com>",
+        "author_username": null,
+        "branch": "main",
+        "timestamp": 1776922121.0,
+        "url": "https://github.com/cyber-dojo/differ/commit/30dffd09c3f896a322c65029247abcea3019c43a",
+        "parents": null
+      },
+      "repo_info": {
+        "inner_id": "09751ccc-0d15-4b83-a4da-8dc5ad32",
+        "org_id": "83acb2bc-2c26-48a7-8b87-90dfcce7",
+        "repo_id": "68700466",
+        "name": "cyber-dojo/differ",
+        "url": "https://github.com/cyber-dojo/differ",
+        "provider": "github",
+        "description": null,
+        "created_at": 1768825647.5256214,
+        "last_modified_at": 1776922279.8018804
+      },
+      "attestation_type": "custom:coverage-metrics",
+      "is_compliant": true,
+      "attestation_id": "c8e0edb5-39e9-45e4-b5af-b2d337c6",
+      "template_reference_name": "integration-test-coverage-metrics",
+      "artifact_fingerprint": "becf55d8a2ed6e43bdd4d26c82dc0e3a69204b92738858ad9cd25329fa513355",
+      "artifact_name": "244531986313.dkr.ecr.eu-central-1.amazonaws.com/differ:30dffd0",
+      "target_artifact": "differ"
+    },
+    {
+      "org_id": "83acb2bc-2c26-48a7-8b87-90dfcce7",
+      "flow_id": "d398561b-b0a9-4f0e-95a3-bbb0e347",
+      "trail_id": "a6c5e78c-b9ec-4c95-b8a7-d150336a",
+      "timestamp": 1776922279.9555318,
+      "type": "artifact_attestation_reported",
+      "git_commit_info": {
+        "sha1": "30dffd09c3f896a322c65029247abcea3019c43a",
+        "message": "Remove defaulted aws-rolename from snyk-scanning job (#373)",
+        "author": "Jon Jagger <jon@kosli.com>",
+        "author_username": null,
+        "branch": "main",
+        "timestamp": 1776922121.0,
+        "url": "https://github.com/cyber-dojo/differ/commit/30dffd09c3f896a322c65029247abcea3019c43a",
+        "parents": null
+      },
+      "repo_info": {
+        "inner_id": "09751ccc-0d15-4b83-a4da-8dc5ad32",
+        "org_id": "83acb2bc-2c26-48a7-8b87-90dfcce7",
+        "repo_id": "68700466",
+        "name": "cyber-dojo/differ",
+        "url": "https://github.com/cyber-dojo/differ",
+        "provider": "github",
+        "description": null,
+        "created_at": 1768825647.5256214,
+        "last_modified_at": 1776922279.9481082
+      },
+      "attestation_type": "custom:coverage-metrics",
+      "is_compliant": true,
+      "attestation_id": "8a32a0bb-c995-41d1-8f2f-c78619b3",
+      "template_reference_name": "unit-test-coverage-metrics",
+      "artifact_fingerprint": "becf55d8a2ed6e43bdd4d26c82dc0e3a69204b92738858ad9cd25329fa513355",
+      "artifact_name": "244531986313.dkr.ecr.eu-central-1.amazonaws.com/differ:30dffd0",
+      "target_artifact": "differ"
+    },
+    {
+      "org_id": "83acb2bc-2c26-48a7-8b87-90dfcce7",
+      "flow_id": "d398561b-b0a9-4f0e-95a3-bbb0e347",
+      "trail_id": "a6c5e78c-b9ec-4c95-b8a7-d150336a",
+      "timestamp": 1776922321.0425618,
+      "type": "trail_updated",
+      "git_commit_info": {
+        "sha1": "30dffd09c3f896a322c65029247abcea3019c43a",
+        "message": "Remove defaulted aws-rolename from snyk-scanning job (#373)",
+        "author": "Jon Jagger <jon@kosli.com>",
+        "author_username": null,
+        "branch": "main",
+        "timestamp": 1776922121.0,
+        "url": "https://github.com/cyber-dojo/differ/commit/30dffd09c3f896a322c65029247abcea3019c43a",
+        "parents": null
+      },
+      "repo_info": {
+        "inner_id": "09751ccc-0d15-4b83-a4da-8dc5ad32",
+        "org_id": "83acb2bc-2c26-48a7-8b87-90dfcce7",
+        "repo_id": "68700466",
+        "name": "cyber-dojo/differ",
+        "url": "https://github.com/cyber-dojo/differ",
+        "provider": "github",
+        "description": null,
+        "created_at": 1768825647.5256214,
+        "last_modified_at": 1776922321.0321424
+      },
+      "setting_user_id": "da5d4ee8-aec0-4264-ab85-c491040c",
+      "trail_data_json": {
+        "description": "",
+        "git_commit_info": {
+          "sha1": "30dffd09c3f896a322c65029247abcea3019c43a",
+          "message": "Remove defaulted aws-rolename from snyk-scanning job (#373)",
+          "author": "Jon Jagger <jon@kosli.com>",
+          "branch": "main",
+          "timestamp": 1776922121.0,
+          "url": "https://github.com/cyber-dojo/differ/commit/30dffd09c3f896a322c65029247abcea3019c43a"
+        },
+        "user_data": "{}",
+        "template_id": "41bcefcf-aa8d-47c7-9b4e-0589bdb2",
+        "origin_url": "https://github.com/cyber-dojo/differ/actions/runs/24818543745"
+      },
+      "changes": [
+        "git_commit_info",
+        "template"
+      ]
+    },
+    {
+      "org_id": "83acb2bc-2c26-48a7-8b87-90dfcce7",
+      "flow_id": "d398561b-b0a9-4f0e-95a3-bbb0e347",
+      "trail_id": "a6c5e78c-b9ec-4c95-b8a7-d150336a",
+      "timestamp": 1776922322.9425528,
+      "type": "artifact_creation_reported",
+      "git_commit_info": {
+        "sha1": "30dffd09c3f896a322c65029247abcea3019c43a",
+        "message": "Remove defaulted aws-rolename from snyk-scanning job (#373)",
+        "author": "Jon Jagger <jon@kosli.com>",
+        "author_username": null,
+        "branch": "main",
+        "timestamp": 1776922121.0,
+        "url": "https://github.com/cyber-dojo/differ/commit/30dffd09c3f896a322c65029247abcea3019c43a",
+        "parents": null
+      },
+      "repo_info": {
+        "inner_id": "09751ccc-0d15-4b83-a4da-8dc5ad32",
+        "org_id": "83acb2bc-2c26-48a7-8b87-90dfcce7",
+        "repo_id": "68700466",
+        "name": "cyber-dojo/differ",
+        "url": "https://github.com/cyber-dojo/differ",
+        "provider": "github",
+        "description": null,
+        "created_at": 1768825647.5256214,
+        "last_modified_at": 1776922322.9319677
+      },
+      "artifact_fingerprint": "becf55d8a2ed6e43bdd4d26c82dc0e3a69204b92738858ad9cd25329fa513355",
+      "artifact_name": "244531986313.dkr.ecr.eu-central-1.amazonaws.com/differ:30dffd0",
+      "artifact_id": "046919b1-42dd-47f8-8569-912d0259",
+      "template_reference_name": "differ",
+      "git_commit": "30dffd09c3f896a322c65029247abcea3019c43a"
+    },
+    {
+      "org_id": "83acb2bc-2c26-48a7-8b87-90dfcce7",
+      "flow_id": "d398561b-b0a9-4f0e-95a3-bbb0e347",
+      "trail_id": "a6c5e78c-b9ec-4c95-b8a7-d150336a",
+      "timestamp": 1776922324.9497623,
+      "type": "artifact_attestation_reported",
+      "git_commit_info": {
+        "sha1": "30dffd09c3f896a322c65029247abcea3019c43a",
+        "message": "Remove defaulted aws-rolename from snyk-scanning job (#373)",
+        "author": "Jon Jagger <jon@kosli.com>",
+        "author_username": null,
+        "branch": "main",
+        "timestamp": 1776922121.0,
+        "url": "https://github.com/cyber-dojo/differ/commit/30dffd09c3f896a322c65029247abcea3019c43a",
+        "parents": null
+      },
+      "repo_info": {
+        "inner_id": "09751ccc-0d15-4b83-a4da-8dc5ad32",
+        "org_id": "83acb2bc-2c26-48a7-8b87-90dfcce7",
+        "repo_id": "68700466",
+        "name": "cyber-dojo/differ",
+        "url": "https://github.com/cyber-dojo/differ",
+        "provider": "github",
+        "description": null,
+        "created_at": 1768825647.5256214,
+        "last_modified_at": 1776922324.839236
+      },
+      "attestation_type": "generic",
+      "is_compliant": true,
+      "attestation_id": "55638f3a-147b-4683-abb3-a6b22f21",
+      "template_reference_name": "snyk-container-scan",
+      "artifact_fingerprint": "becf55d8a2ed6e43bdd4d26c82dc0e3a69204b92738858ad9cd25329fa513355",
+      "artifact_name": "244531986313.dkr.ecr.eu-central-1.amazonaws.com/differ:30dffd0",
+      "target_artifact": "differ"
+    },
+    {
+      "org_id": "83acb2bc-2c26-48a7-8b87-90dfcce7",
+      "flow_id": "d398561b-b0a9-4f0e-95a3-bbb0e347",
+      "trail_id": "a6c5e78c-b9ec-4c95-b8a7-d150336a",
+      "timestamp": 1776922370.6097834,
+      "type": "artifact_approval_reported",
+      "git_commit_info": null,
+      "repo_info": null,
+      "artifact_fingerprint": "becf55d8a2ed6e43bdd4d26c82dc0e3a69204b92738858ad9cd25329fa513355",
+      "approval_id": "424dd175-3224-4fc1-aae9-159c0a27",
+      "approval_number": 341,
+      "environment_id": "e44779bb-311d-4bac-9d19-a64a0843",
+      "state": "APPROVED",
+      "reviewer": "external://JonJagger"
+    },
+    {
+      "org_id": "83acb2bc-2c26-48a7-8b87-90dfcce7",
+      "flow_id": "d398561b-b0a9-4f0e-95a3-bbb0e347",
+      "trail_id": "a6c5e78c-b9ec-4c95-b8a7-d150336a",
+      "timestamp": 1776922523.8757324,
+      "type": "artifact_started_running",
+      "git_commit_info": null,
+      "repo_info": null,
+      "artifact_fingerprint": "becf55d8a2ed6e43bdd4d26c82dc0e3a69204b92738858ad9cd25329fa513355",
+      "environment_id": "e44779bb-311d-4bac-9d19-a64a0843",
+      "environment_name": "aws-beta",
+      "snapshot_index": 6559,
+      "replica_number": 1,
+      "template_reference_name": "differ"
+    },
+    {
+      "org_id": "83acb2bc-2c26-48a7-8b87-90dfcce7",
+      "flow_id": "d398561b-b0a9-4f0e-95a3-bbb0e347",
+      "trail_id": "a6c5e78c-b9ec-4c95-b8a7-d150336a",
+      "timestamp": 1776923218.5053248,
+      "type": "artifact_started_running",
+      "git_commit_info": null,
+      "repo_info": null,
+      "artifact_fingerprint": "becf55d8a2ed6e43bdd4d26c82dc0e3a69204b92738858ad9cd25329fa513355",
+      "environment_id": "73965c45-e9a1-4bb9-ad01-dc5a526f",
+      "environment_name": "aws-prod",
+      "snapshot_index": 4308,
+      "replica_number": 1,
+      "template_reference_name": "differ"
+    }
+  ],
+  "created_by": "ci-pipelines",
+  "flow": {
+    "name": "differ-ci",
+    "tags": {
+      "ci": "github",
+      "repo_url": "https://github.com/cyber-dojo/differ",
+      "kind": "build"
+    }
+  },
+  "external_urls": null,
+  "html_url": "https://app.kosli.com/cyber-dojo/flows/differ-ci/trails/30dffd09c3f896a322c65029247abcea3019c43a"
+}

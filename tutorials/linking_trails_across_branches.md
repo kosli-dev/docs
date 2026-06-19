@@ -173,7 +173,7 @@ Below is a simplified GitHub Actions workflow for a main-branch build that links
       build:
         runs-on: ubuntu-latest
         steps:
-          - uses: actions/checkout@v4
+          - uses: actions/checkout@v7
             with:
               fetch-depth: 2
 
@@ -226,7 +226,7 @@ Below is a simplified GitHub Actions workflow for a main-branch build that links
       build:
         runs-on: ubuntu-latest
         steps:
-          - uses: actions/checkout@v4
+          - uses: actions/checkout@v7
             with:
               fetch-depth: 2
 

@@ -15,11 +15,10 @@ import yaml
 
 
 def get_command_info(filepath):
-    """Extract command name and deprecated status from a CLI reference file."""
+    """Extract command title and hidden status from a CLI reference file."""
     with open(filepath, 'r', encoding='utf-8') as f:
         content = f.read()
 
-    # Parse front matter
     match = re.match(r'^---\n(.*?)\n---', content, re.DOTALL)
     if not match:
         return None
@@ -32,19 +31,9 @@ def get_command_info(filepath):
     if not fm or 'title' not in fm:
         return None
 
-    title = fm['title']
-    deprecated = fm.get('deprecated', False)
-
-    # Check for deprecated warning in body (for converted files that don't have
-    # the deprecated field but have a Warning about deprecation)
-    if not deprecated:
-        body = content[match.end():]
-        if re.search(r'is deprecated', body[:500], re.IGNORECASE):
-            deprecated = True
-
     return {
-        'title': title,
-        'deprecated': deprecated,
+        'title': fm['title'],
+        'hidden': bool(fm.get('hidden', False)),
     }
 
 
@@ -54,13 +43,13 @@ def get_command_group(title):
     cmd = title.replace('kosli ', '').strip()
 
     if cmd == '':
-        return 'General'
+        return 'Top-level commands'
 
     # Top-level commands (no subcommand)
     parts = cmd.split(' ')
     if len(parts) == 1:
         # Single-word commands like 'search', 'version', 'status', etc.
-        return 'General'
+        return 'Top-level commands'
 
     # Group by first word for multi-word commands
     group_word = parts[0]
@@ -72,8 +61,8 @@ def get_command_group(title):
         'attach': 'attach / detach',
         'attest': 'attest',
         'begin': 'begin',
-        'completion': 'General',
-        'config': 'General',
+        'completion': 'Top-level commands',
+        'config': 'Top-level commands',
         'create': 'create',
         'detach': 'attach / detach',
         'diff': 'diff',
@@ -87,73 +76,67 @@ def get_command_group(title):
         'rename': 'rename',
         'report': 'report',
         'request': 'request',
-        'search': 'General',
+        'search': 'Top-level commands',
         'snapshot': 'snapshot',
-        'tag': 'General',
+        'tag': 'Top-level commands',
     }
 
     return group_map.get(group_word, group_word)
 
 
 def build_nav_groups(docs_dir):
-    """Scan CLI reference files and build navigation groups."""
+    """Scan CLI reference files and build navigation groups.
+
+    Hidden pages (hidden: true) are excluded from navigation; they remain
+    reachable by direct URL. Lifecycle tags (BETA/DEPRECATED) render as sidebar
+    pills automatically from each page's front matter, so there is no separate
+    Deprecated group.
+    """
     commands = []
 
     for filename in sorted(os.listdir(docs_dir)):
         if not filename.endswith('.md'):
             continue
-        # Skip the overview page — it's manually maintained and always
-        # inserted as the first page in the General group below.
-        if filename == 'overview.md':
+        if filename in ('overview.md', 'output_and_verbosity.md'):
             continue
 
         filepath = os.path.join(docs_dir, filename)
         info = get_command_info(filepath)
         if info is None:
             continue
+        if info['hidden']:
+            continue
 
-        page_path = f'client_reference/{filename[:-3]}'  # Remove .md
+        page_path = f'client_reference/{filename[:-3]}'
         commands.append({
             'page': page_path,
-            'title': info['title'],
-            'deprecated': info['deprecated'],
             'group': get_command_group(info['title']),
         })
 
-    # Separate active and deprecated commands
-    active = [c for c in commands if not c['deprecated']]
-    deprecated = [c for c in commands if c['deprecated']]
-
-    # Group active commands
     groups_dict = {}
-    for cmd in active:
-        group = cmd['group']
-        if group not in groups_dict:
-            groups_dict[group] = []
-        groups_dict[group].append(cmd['page'])
+    for cmd in commands:
+        groups_dict.setdefault(cmd['group'], []).append(cmd['page'])
 
-    # Build ordered navigation groups
-    # Put General first, then alphabetical
-    nav_groups = []
-
-    if 'General' in groups_dict:
-        nav_groups.append({
+    nav_groups = [
+        {
             'group': 'General',
-            'pages': ['client_reference/overview'] + groups_dict.pop('General'),
+            'pages': [
+                'client_reference/overview',
+                'client_reference/output_and_verbosity',
+            ],
+        }
+    ]
+
+    if 'Top-level commands' in groups_dict:
+        nav_groups.append({
+            'group': 'Top-level commands',
+            'pages': groups_dict.pop('Top-level commands'),
         })
 
     for group_name in sorted(groups_dict.keys()):
-        display_name = f'kosli {group_name}'
         nav_groups.append({
-            'group': display_name,
+            'group': f'kosli {group_name}',
             'pages': groups_dict[group_name],
-        })
-
-    # Add deprecated group if there are deprecated commands
-    if deprecated:
-        nav_groups.append({
-            'group': 'Deprecated',
-            'pages': [c['page'] for c in deprecated],
         })
 
     return nav_groups

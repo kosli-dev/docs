@@ -4,6 +4,387 @@ description: "Release notes for Kosli products."
 rss: true
 ---
 
+<Update label="June 12, 2026" description="" tags={["Platform"]}>
+
+## New features
+
+- **Sign in with SSO** — a redesigned sign-in page makes SSO a first-class option alongside other providers.
+- **Membership history audit log** — organization membership and role changes are now appended to an audit history, capturing who changed what and when.
+- **Short fingerprints on artifact GETs** — artifact GET endpoints once again accept short fingerprint prefixes (5–64 chars), restoring documented CLI behavior like `kosli get artifact flow@<short-fingerprint>`.
+
+## Updates
+
+- **Faster org-scoped queries** — trail moments and recently-modified artifact queries now use org-scoped indexes for better performance on large organizations.
+
+## Bug fixes
+
+- Fixed revoking an already-archived service account API key returning `200 OK` instead of `404 Not Found`.
+- Fixed an order-dependent waiver leak in trail and provenance compliance evaluation where one waived exception could incorrectly carry over to later artifacts.
+
+</Update>
+
+<Update label="June 11, 2026" description="v2.26.0" tags={["CLI"]}>
+
+## New features
+
+- **`kosli list environments` filtering and pagination** — new `--name`, `--type`, `--space-id`, `--tag`, `--page`, and `--page-limit` flags filter and paginate environment listings. See the [list environments reference](/client_reference/kosli_list_environments).
+- **`kosli list flows` name search** — new `--name` and `--ignore-case` flags search flows by name. See the [list flows reference](/client_reference/kosli_list_flows).
+
+## Updates
+
+- **`kosli attest jira`** — clearer help text for CVE and multi-segment identifier filtering behavior. See the [attest jira reference](/client_reference/kosli_attest_jira).
+
+## Bug fixes
+
+- **Service account API key prompts** — the revoke confirmation prompt now reads inline, and cancellation messaging and key ID styling are consistent with other commands.
+
+[View on GitHub](https://github.com/kosli-dev/cli/releases/tag/v2.26.0)
+
+</Update>
+
+<Update label="June 9, 2026" description="v2.25.0" tags={["CLI"]}>
+
+## New features
+
+- **`kosli service-account api-keys`** — new command group (alias `sa ak`) to manage service account API keys from the CLI, with `create`, `revoke`, `rotate`, and `list` subcommands.
+- **Short aliases for top-level verbs** — `get` (`g`), `rename` (`re`), `disable` (`dis`), `enable` (`en`), `log` (`lo`), and `status` (`s`, `st`) now have shorter aliases.
+
+[View on GitHub](https://github.com/kosli-dev/cli/releases/tag/v2.25.0)
+
+</Update>
+
+<Update label="June 4, 2026" description="" tags={["Platform"]}>
+
+## Updates
+
+- **Consistent "organization" wording** — standardized spelling across user-facing strings in the app.
+- **Simpler invite acceptance** — accepting an invite now requires OTP verification only when the logged-in user's email doesn't match the invitation; matching emails are accepted directly regardless of auth provider.
+
+## Bug fixes
+
+- **Security: service account API keys on public orgs** — fixed a path that could return an arbitrary membership document for unauthenticated callers on public orgs, potentially exposing service account API keys. `is_admin(None)` now always returns `False`.
+- **Flows page** — guarded against a null `space_id` element that could break the flows listing.
+- **Redirects** — all query parameters are now preserved through redirects.
+
+</Update>
+
+<Update label="June 3, 2026" description="" tags={["Platform"]}>
+
+## New features
+
+- **`for_control` policy compliance** — snapshot compliance now evaluates `for_control` policy requirements. When a policy requires a passing decision attestation for a specific control, the snapshot is checked against a matching decision for that control.
+
+## Updates
+
+- **Assert artifact response includes `for_control`** — the assert artifact API now returns the control identifier in the resolution context for `for_control` rule failures, so clients can show which specific control is unsatisfied.
+
+</Update>
+
+<Update label="June 3, 2026" description="v2.24.2" tags={["CLI"]}>
+
+## New features
+
+- **`linux/s390x` builds** — the CLI is now published for `linux/s390x` so it can be installed natively on IBM Z hosts.
+
+## Bug fixes
+
+- Bumped Go to 1.26.4 to address standard-library CVEs.
+
+[View on GitHub](https://github.com/kosli-dev/cli/releases/tag/v2.24.2)
+
+</Update>
+
+<Update label="June 3, 2026" description="v2.24.1" tags={["CLI"]}>
+
+## Updates
+
+- **`kosli assert artifact`** — when a `for_control` policy rule fails, the failure output now names the specific control identifier that is unsatisfied, making it easier to act on policy failures in CI.
+
+[View on GitHub](https://github.com/kosli-dev/cli/releases/tag/v2.24.1)
+
+</Update>
+
+<Update label="June 2, 2026" description="v2.24.0" tags={["CLI"]}>
+
+## Updates
+
+- **SonarQube authentication** — `kosli attest sonar` now falls back to HTTP Basic auth (token as username) on self-hosted SonarQube Server versions earlier than 10.0, which reject `Authorization: Bearer`. The fallback is transparent for self-hosted servers and never applied to SonarCloud. Authentication errors now distinguish 401/403 token or permission problems from 5xx server-availability issues instead of the previous generic "please check your API token" message.
+
+[View on GitHub](https://github.com/kosli-dev/cli/releases/tag/v2.24.0)
+
+</Update>
+
+<Update label="June 2, 2026" description="" tags={["Platform"]}>
+
+## New features
+
+- **Default organization on user profile** — pick a default organization from a dropdown on your [profile settings page](https://app.kosli.com/settings/profile) so the Kosli app opens to it on sign-in.
+
+## Updates
+
+- **`visibility` optional when creating flows** — the create-flow API no longer requires a `visibility` field. New flows default to `private`.
+
+## Bug fixes
+
+- Upgraded `libxml2` in the Kosli app image to address CVE-2026-6732 (high-severity denial-of-service in XSD validation).
+- Fixed orphaned tooltips lingering on the page after HTMX-driven updates.
+
+</Update>
+
+<Update label="June 1, 2026" description="v2.23.2" tags={["CLI"]}>
+
+## Bug fixes
+
+- **`kosli create flow`** — restored the `--visibility` flag as a deprecated (rather than removed) option, so existing scripts that pass it keep working. The flag has no effect on newer Kosli servers and will be removed in a future release. See the [create flow reference](/client_reference/kosli_create_flow).
+
+[View on GitHub](https://github.com/kosli-dev/cli/releases/tag/v2.23.2)
+
+</Update>
+
+<Update label="May 30, 2026" description="v2.23.0" tags={["CLI"]}>
+
+## Updates
+
+- **`kosli create flow`** — the `--visibility` flag is deprecated. Flow visibility now defaults to `private` server-side and the flag is no longer needed.
+- **Deprecation warning for legacy flow creation** — `kosli create flow` now prints a warning when neither `--template-file` nor `--use-empty-template` is supplied. The legacy code path will stop working in a future release; pass a template file or use the empty template instead. See the [create flow reference](/client_reference/kosli_create_flow).
+
+[View on GitHub](https://github.com/kosli-dev/cli/releases/tag/v2.23.0)
+
+</Update>
+
+<Update label="May 29, 2026" description="v2.22.1" tags={["CLI"]}>
+
+## Bug fixes
+
+- Fixed malformed URLs in `kosli list` and `kosli diff` commands when host or path segments contained extra slashes. Requests are now built with proper URL joining.
+
+[View on GitHub](https://github.com/kosli-dev/cli/releases/tag/v2.22.1)
+
+</Update>
+
+<Update label="May 26, 2026" description="" tags={["Platform"]}>
+
+## New features
+
+- **Redesigned environments listing page** — the environments page in the Kosli app is now a paginated view with filtering by name, type, and tag, and sorting by last-changed time.
+- **Timestamp filtering on environment events** — the env events API accepts `from` and `to` timestamp query parameters.
+- **Service account privilege management** — admins can change the privilege level of existing service accounts.
+- **API key rotation** — rotate API keys without invalidating existing integrations.
+
+## Updates
+
+- **Faster environments listing** — large environments now load and filter noticeably faster.
+- **Faster trail and snapshot operations** — listing trails and processing snapshots is quicker on large orgs.
+- **OpenAPI improvements** — the API spec has been refined for cleaner SDK generation.
+- **Magic Link login hardening** — added additional protections to the Magic Link sign-in flow.
+
+## Bug fixes
+
+- Fixed empty-digest reports always creating a new snapshot instead of reusing the existing one.
+- Fixed the environments listing not falling back to a user's login name when no display name was set.
+- Fixed an authentication flow issue caused by a trailing slash in default Descope URLs.
+
+</Update>
+
+<Update label="May 26, 2026" description="v2.21.0" tags={["CLI"]}>
+
+## Bug fixes
+
+- **`kosli attest jira`** — fixed false-positive Jira issue key matches from multi-segment identifiers such as CVE numbers (`CVE-2026-41284` no longer matches as a Jira key). See the [attest jira reference](/client_reference/kosli_attest_jira).
+- **`kosli attest junit`** — JUnit XML ingestion now walks directories recursively, deduplicates file scans, and returns a clearer error message for non-UTF-8 encoded XML files. See the [attest junit reference](/client_reference/kosli_attest_junit).
+
+[View on GitHub](https://github.com/kosli-dev/cli/releases/tag/v2.21.0)
+
+</Update>
+
+<Update label="May 14, 2026" description="v2.20.1" tags={["CLI"]}>
+
+## Bug fixes
+
+- Fixed CLI flags rendering as em dashes in the generated [CLI reference](/client_reference) pages. Flag names (`--flag`, `-x`) are now wrapped in backticks so Mintlify's smart-typography renderer leaves them intact.
+
+[View on GitHub](https://github.com/kosli-dev/cli/releases/tag/v2.20.1)
+
+</Update>
+
+<Update label="May 13, 2026" description="v2.20.0" tags={["CLI"]}>
+
+## Updates
+
+- **`kosli approval` commands deprecated** — the `kosli approval` command tree is now marked as deprecated. Use [attestations](/getting_started/attestations) going forward.
+
+[View on GitHub](https://github.com/kosli-dev/cli/releases/tag/v2.20.0)
+
+</Update>
+
+<Update label="May 12, 2026" description="v2.19.0" tags={["CLI"]}>
+
+## Updates
+
+- Migrated the Docker client dependency from `github.com/docker/docker` to `github.com/moby/moby` and related modular packages (`moby/moby/api`, `moby/moby/client`).
+- Updated `github.com/open-policy-agent/opa` to v1.16.2.
+
+[View on GitHub](https://github.com/kosli-dev/cli/releases/tag/v2.19.0)
+
+</Update>
+
+<Update label="May 12, 2026" description="v2.18.0" tags={["CLI"]}>
+
+## New features
+
+- **`kosli snapshot cloud-run` is now generally available** — the [Cloud Run snapshotter](/client_reference/kosli_snapshot_cloud-run) is no longer hidden and now reports its coverage table alongside the snapshot.
+- **Path filters for `kosli snapshot s3`** — added `--include-regex` and `--exclude-regex` flags to [`kosli snapshot s3`](/client_reference/kosli_snapshot_s3) so you can scope a snapshot to a subset of objects in a bucket.
+
+## Bug fixes
+
+- Fixed `kosli attest snyk` and other SonarQube-backed attestations not forwarding the branch name to SonarQube's `project_analyses/search` endpoint, which previously returned results from the wrong branch.
+
+[View on GitHub](https://github.com/kosli-dev/cli/releases/tag/v2.18.0)
+
+</Update>
+
+<Update label="May 11, 2026" description="v2.17.8" tags={["CLI"]}>
+
+## New features
+
+- **Remote policies for `kosli evaluate`** — `--policy` on [`kosli evaluate`](/client_reference/kosli_evaluate_trail) now accepts remote `http(s)` URLs in addition to local file paths, so you can evaluate against centrally-hosted policy files.
+- **`--quiet` flag** — a new global `--quiet` flag suppresses non-essential output from the CLI, useful for scripting and CI pipelines that only care about exit codes.
+- **Expanded Cloud Run support** — [`kosli snapshot cloud-run`](/client_reference/kosli_snapshot_cloud-run) now reports Cloud Run Jobs in addition to services, and recovers missing image digests via a registry lookup when the runtime does not expose them directly.
+
+## Bug fixes
+
+- Fixed bare URLs in CLI flag descriptions producing broken links in the generated reference docs.
+- Fixed the Helm chart docs templates so they render correctly in [Mintlify](/helm).
+
+[View on GitHub](https://github.com/kosli-dev/cli/releases/tag/v2.17.8)
+
+</Update>
+
+<Update label="May 11, 2026" description="v0.6.4" tags={["Terraform Provider"]}>
+
+## Updates
+
+- **Toolchain update** — the [Terraform provider](/terraform-reference) is now built with Go 1.26. No user-facing behavior changes.
+
+[View on GitHub](https://github.com/kosli-dev/terraform-provider-kosli/releases/tag/v0.6.4)
+
+</Update>
+
+<Update label="May 8, 2026" description="v2.17.7" tags={["CLI"]}>
+
+## New features
+
+- **Cloud Run Jobs support in `kosli snapshot cloud-run`** — the [Cloud Run snapshotter](/client_reference/kosli_snapshot_cloud-run) can now report Cloud Run Jobs alongside services, and its wire format has been cleaned up.
+
+[View on GitHub](https://github.com/kosli-dev/cli/releases/tag/v2.17.7)
+
+</Update>
+
+<Update label="May 7, 2026" description="v2.17.6" tags={["CLI"]}>
+
+## Bug fixes
+
+- Fixed [`kosli snapshot docker`](/client_reference/kosli_snapshot_docker) crashing when it encountered a container that the Docker daemon could not inspect. Such containers are now skipped with a warning and the snapshot continues.
+- Fixed a broken `http-proxy` example link in the CLI reference docs.
+
+[View on GitHub](https://github.com/kosli-dev/cli/releases/tag/v2.17.6)
+
+</Update>
+
+<Update label="May 4, 2026" description="" tags={["Platform"]}>
+
+## New features
+
+- **PATCH endpoint for environment updates** — a new `PATCH /environments/{org}/{env_name}` endpoint allows updating individual environment fields without replacing the entire resource. This fixes the issue where setting a description to an empty string was silently ignored, and enables proper support in the [Terraform provider](/terraform-reference/resources/environment).
+
+## Updates
+
+- **Significantly faster environment and snapshot pages** — eliminated thousands of redundant database queries during snapshot reporting and page rendering. For large environments (~800 artifacts), this removes approximately 5,600 unnecessary database round-trips per snapshot report. The environment events page, which previously took ~60 seconds to load for large environments, now loads normally.
+- **Infinite scroll on snapshot events tab** — the snapshot events tab now loads events incrementally via infinite scroll instead of all at once, improving responsiveness for environments with many events.
+- **Improved environment page search** — search and filter on the environment page now returns all matching artifacts in a single request with loading indicators, fixing broken behavior for large environments.
+- **Faster flow filter lookups** — environment pages that filter by flow now use a pre-materialized collection instead of scanning all artifacts, speeding up load times.
+- **Case-insensitive email lookups** — user and invitation email lookups no longer require exact case matching.
+- **Redirect preserved through login** — when a session expires, the original destination URL (e.g., an org invite page) is now preserved through the logout/login cycle.
+- **API documentation improvements** — the OpenAPI spec title is now "Kosli API", endpoints are sorted alphabetically, and server URLs are absolute for [API playground](/api-reference/actions/list-actions) compatibility.
+
+## Bug fixes
+
+- Fixed the flows filter incorrectly rejecting substring searches starting with hyphens, underscores, dots, or tildes.
+- Fixed the logical environment snapshot events tab raising an error, and the "Running" badge incorrectly counting exited artifacts.
+- Fixed a 500 error when listing API keys with legacy expiration timestamps.
+- Fixed unhandled exceptions during OAuth and SSO sign-in flows.
+- Security: upgraded xz/xz-libs packages to patch CVE-2026-34743.
+
+</Update>
+
+<Update label="May 4, 2026" description="v2.17.5" tags={["CLI"]}>
+
+## Updates
+
+- **More diagnostic `--debug` output for GitHub calls** — `kosli attest pullrequest github` and other GitHub-backed commands now include the (redacted) `Authorization` header, the resolved proxy URL, and any response body returned alongside transport errors when run with `--debug`. This makes it possible to diagnose corporate proxy and edge filter rejections that previously surfaced only as opaque transport errors.
+
+[View on GitHub](https://github.com/kosli-dev/cli/releases/tag/v2.17.5)
+
+</Update>
+
+<Update label="May 1, 2026" description="v2.17.4" tags={["CLI"]}>
+
+## Updates
+
+- **Removed automatic update notifications** — the CLI no longer checks for new versions on every command. The update notice introduced in v2.17.0 occasionally polluted captured output (for example `FP=$(kosli fingerprint ...)`), so version checks now run only for the `version` subcommand and the `--version` flag.
+
+[View on GitHub](https://github.com/kosli-dev/cli/releases/tag/v2.17.4)
+
+</Update>
+
+<Update label="April 30, 2026" description="v2.17.3" tags={["CLI"]}>
+
+## Updates
+
+- **Debug logging for GitHub PR attestations** — running `kosli attest pullrequest github` with `--debug` now prints every GitHub REST and GraphQL request and response (method, URL, headers, body) to stderr, with the `Authorization` header redacted. Useful for diagnosing 4xx/5xx responses and eventual-consistency issues in CI. See the [attest pullrequest github](/client_reference/kosli_attest_pullrequest_github) reference.
+
+[View on GitHub](https://github.com/kosli-dev/cli/releases/tag/v2.17.3)
+
+</Update>
+
+<Update label="April 29, 2026" description="v0.6.3" tags={["Terraform Provider"]}>
+
+## Bug fixes
+
+- **Race condition on environment rename** — renaming a `kosli_environment` or `kosli_logical_environment` resource label while keeping the same `name` no longer fails with a 404 ("Environment has been archived"). The provider now retries the post-create read with bounded backoff and re-asserts desired state when it observes the parallel destroy + create race. If you are intentionally renaming an environment, use `terraform state mv` as documented in the [`kosli_environment`](/terraform-reference/resources/environment) reference.
+
+[View on GitHub](https://github.com/kosli-dev/terraform-provider-kosli/releases/tag/v0.6.3)
+
+</Update>
+
+<Update label="April 29, 2026" description="v0.6.2" tags={["Terraform Provider"]}>
+
+## Bug fixes
+
+- **Clearing environment descriptions** — `kosli_environment` and `kosli_logical_environment` updates now use the `PATCH` endpoint, so setting `description = ""` correctly clears the environment's description. The previous `PUT`-based flow silently ignored empty descriptions. See the [`kosli_environment`](/terraform-reference/resources/environment) and [`kosli_logical_environment`](/terraform-reference/resources/logical_environment) references.
+
+[View on GitHub](https://github.com/kosli-dev/terraform-provider-kosli/releases/tag/v0.6.2)
+
+</Update>
+
+<Update label="April 29, 2026" description="v2.17.2" tags={["CLI"]}>
+
+## New features
+
+- **`--assert` / `--no-assert` for evaluate commands** — `kosli evaluate trail`, `kosli evaluate trails`, and `kosli evaluate input` now accept a mutually-exclusive `--assert` / `--no-assert` flag pair. Pass `--no-assert` to use these commands as a policy decision point: the verdict is printed and the command exits 0, leaving any assertion to a downstream step. Default behavior is unchanged — a policy deny still exits non-zero. These commands are now marked `[BETA]`. See the [evaluate trail](/client_reference/kosli_evaluate_trail), [evaluate trails](/client_reference/kosli_evaluate_trails), and [evaluate input](/client_reference/kosli_evaluate_input) references.
+
+## Updates
+
+- Help text for `kosli attest artifact` and `kosli fingerprint` now clarifies that `--artifact-type=docker` requires the image to have been pushed to or pulled from a registry, and points to `--artifact-type=oci` as the preferred alternative for registry-resident images. See the [attest artifact](/client_reference/kosli_attest_artifact) reference.
+
+## Bug fixes
+
+- Reduced API request payload sizes by switching to compact JSON marshalling for both multipart (`--attestation-data`, `--user-data`) and non-multipart request bodies. Multipart payloads no longer hit the server's per-part size limit at ~400-500 KB on disk, and non-multipart bodies are 30-55% smaller on the wire. Debug and dry-run output remains pretty-printed.
+
+[View on GitHub](https://github.com/kosli-dev/cli/releases/tag/v2.17.2)
+
+</Update>
+
 <Update label="April 23, 2026" description="v2.17.1" tags={["CLI"]}>
 
 ## Bug fixes

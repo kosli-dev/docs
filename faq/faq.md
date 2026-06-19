@@ -82,6 +82,12 @@ kosli report evidence artifact generic server:1.0 \
 `--compliant` is set to `true` by default, so to report as compliant simply skip the flag altogether.
 </Accordion>
 
+<Accordion title="Why is my GitHub login failing?">
+If you sign in to Kosli with GitHub, you must have a verified email address on your GitHub account — otherwise login will fail.
+
+You can check the status of your email addresses at [github.com/settings/emails](https://github.com/settings/emails).
+</Accordion>
+
 <Accordion title="Why can't I delete or archive a policy?">
 It's not possible to delete a policy in Kosli. This is by design, because there can be snapshots that were previously evaluated using the policy. Deleting it would compromise the integrity of those historical evaluations.
 

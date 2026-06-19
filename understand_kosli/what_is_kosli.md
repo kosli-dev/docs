@@ -9,7 +9,7 @@ Proving compliance in fast-moving software delivery is hard. Evidence is scatter
 
 Think of Kosli as a flight recorder for your software delivery lifecycle (SDLC). Like a flight recorder, Kosli does not control the plane. It records what happened so that after the fact you can reconstruct the sequence of events. The reason this matters in software is that incidents and audit questions are inevitable, but the ability to answer "what was running, how did it get there, and did it pass all required checks?" should not depend on someone's memory or a manual audit trail.
 
-You report events of interest (builds, test results, deployments, environment state) through the [CLI](/client_reference) or [API](/api-reference). Kosli stores each record as an immutable entry and evaluates it against the [controls](/understand_kosli/controls) defined in your policies. Change sources include build systems (CI pipelines), runtime environments (Kubernetes clusters, AWS ECS, Lambda), and business processes (onboarding, access management).
+You report events of interest (builds, test results, deployments, environment state) through the [CLI](/client_reference) or [API](/api-reference/actions/list-actions). Kosli stores each record as an immutable entry and evaluates it against the [controls](/understand_kosli/controls) defined in your policies. Change sources include build systems (CI pipelines), runtime environments (Kubernetes clusters, AWS ECS, Lambda), and business processes (onboarding, access management).
 
 <Frame>
   <img

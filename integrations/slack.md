@@ -3,8 +3,7 @@ title: Slack
 description: Integrate Kosli with Slack using the Kosli Slack App to receive notifications and query your environments and artifacts directly from Slack.
 ---
 
-[Kosli Slack App](#kosli-slack-app) allows you to configure and receive notifications about changes in your environments
-and query Kosli about your environments and artifacts without leaving Slack window.
+Allows you to configure and receive notifications about changes in your environments and query Kosli about your environments and artifacts without leaving Slack window.
 
 <Steps>
   <Step title="Installation">

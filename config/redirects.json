@@ -53,6 +53,14 @@
   },
   {
     "source": "/api_v2",
-    "destination": "/api-reference"
+    "destination": "/api-reference/actions/list-actions"
+  },
+  {
+    "source": "/getting_started/service-accounts",
+    "destination": "/getting_started/authenticating_to_kosli"
+  },
+  {
+    "source": "/administration/managing_organizations",
+    "destination": "/user/default_organization"
   }
 ]

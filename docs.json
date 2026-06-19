@@ -72,6 +72,17 @@
       "vscode"
     ]
   },
+  "integrations": {
+    "cookies": {
+      "key": "kosli_consent",
+      "value": "accepted"
+    },
+    "posthog": {
+      "apiKey": "phc_vKbCGJq5rzV4apArUzYDRwh6azCmgCPcLz8jTa9CgmGR",
+      "apiHost": "https://eu.posthog.com",
+      "sessionRecording": false
+    }
+  },
   "footer": {
     "$ref": "./config/footer.json"
   }

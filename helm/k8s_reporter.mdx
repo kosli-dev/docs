@@ -5,13 +5,11 @@ description: A Helm chart for installing the Kosli K8S reporter as a cronjob.
 
 # k8s-reporter
 
-![Version: 2.2.0](https://img.shields.io/badge/Version-2.2.0-informational?style=flat-square)
-
 <Info>
-This reference applies to **chart version 2.2.0**, which uses **CLI version v2.12.0** by default (`image.tag`).
+This reference applies to **chart version 2.2.1**, which defaults to CLI **v2.12.0** via `appVersion`. Override with `image.tag`.
 </Info>
 
-A Helm chart for installing the Kosli K8S reporter as a cronjob.
+A Helm chart for installing the Kosli K8S reporter as a CronJob.
 The chart allows you to create a Kubernetes cronjob and all its necessary RBAC to report running images to Kosli at a given cron schedule.
 
 Configuration is done via **reporterConfig.environments**: a list of Kosli environments to report to. Each entry has a required `name` and optional namespace selectors. Use one entry for a single environment, or multiple entries to report to different environments with different selectors.
@@ -33,65 +31,61 @@ To install this chart via the Helm chart repository:
 
 <Steps>
   <Step title="Add the Kosli helm repo">
-    ```shell
-    helm repo add kosli https://charts.kosli.com/ && helm repo update
-    ```
+  ```shell
+  helm repo add kosli https://charts.kosli.com/ && helm repo update
+  ```
   </Step>
   <Step title="Create a secret for the Kosli API token">
-    ```shell
-    kubectl create secret generic kosli-api-token --from-literal=key=<your-api-key>
-    ```
+  ```shell
+  kubectl create secret generic kosli-api-token --from-literal=key=<your-api-key>
+  ```
   </Step>
   <Step title="Install the helm chart">
-    Configure **reporterConfig.environments** (required). Each entry has required `name` and optional `namespaces`, `namespacesRegex`, `excludeNamespaces`, `excludeNamespacesRegex`. Omit namespace fields for an entry to report the entire cluster to that environment.
+  Configure **reporterConfig.environments** (required). Each entry has required `name` and optional `namespaces`, `namespacesRegex`, `excludeNamespaces`, `excludeNamespacesRegex`. Omit namespace fields for an entry to report the entire cluster to that environment.
 
-    **One environment, entire cluster:**
+  **One environment, entire cluster:**
 
-    ```yaml
-    # values.yaml
-    reporterConfig:
-      kosliOrg: <your-org>
-      environments:
-        - name: <your-env-name>
-    ```
+  ```yaml
+  # values.yaml
+  reporterConfig:
+    kosliOrg: <your-org>
+    environments:
+      - name: <your-env-name>
+  ```
 
-    **One environment, specific namespaces:**
+  **One environment, specific namespaces:**
 
-    ```yaml
-    reporterConfig:
-      kosliOrg: <your-org>
-      environments:
-        - name: <your-env-name>
-          namespaces: [namespace1, namespace2]
-    ```
+  ```yaml
+  reporterConfig:
+    kosliOrg: <your-org>
+    environments:
+      - name: <your-env-name>
+        namespaces: [namespace1, namespace2]
+  ```
 
-    **Multiple environments with different selectors:**
+  **Multiple environments with different selectors:**
 
-    ```yaml
-    reporterConfig:
-      kosliOrg: <your-org>
-      environments:
-        - name: prod-env
-          namespaces: [prod-ns1, prod-ns2]
-        - name: staging-env
-          namespacesRegex: ["^staging-.*"]
-        - name: infra-env
-          excludeNamespaces: [prod-ns1, prod-ns2, default]
-    ```
+  ```yaml
+  reporterConfig:
+    kosliOrg: <your-org>
+    environments:
+      - name: prod-env
+        namespaces: [prod-ns1, prod-ns2]
+      - name: staging-env
+        namespacesRegex: ["^staging-.*"]
+      - name: infra-env
+        excludeNamespaces: [prod-ns1, prod-ns2, default]
+  ```
 
-    ```shell
-    helm install kosli-reporter kosli/k8s-reporter -f values.yaml
-    ```
+  ```shell
+  helm install kosli-reporter kosli/k8s-reporter -f values.yaml
+  ```
   </Step>
 </Steps>
 
-<Note>
-Chart source can be found at [GitHub](https://github.com/kosli-dev/cli/tree/main/charts/k8s-reporter).
-</Note>
+<Note>Chart source can be found at [GitHub](https://github.com/kosli-dev/cli/tree/main/charts/k8s-reporter).</Note>
 
-<Info>
-See all available [configuration options](#configurations) below.
-</Info>
+<Info>See all available [configuration options](#configurations) below.</Info>
 
 ## Upgrading the chart
 
@@ -116,24 +110,26 @@ The chart offers two ways to do this. Use whichever fits your deployment flow.
 ### Option 1 — customCA convenience wrapper (recommended for the common case)
 
 <Steps>
-  <Step title="Create a Secret containing the corporate CA certificate (PEM format, single cert or bundle)">
-    ```shell
-    kubectl create secret generic corporate-ca-bundle --from-file=ca.crt=/path/to/corporate-ca.crt
-    ```
+  <Step title="Create a Secret containing the corporate CA certificate">
+  PEM format, single cert or bundle:
+
+  ```shell
+  kubectl create secret generic corporate-ca-bundle --from-file=ca.crt=/path/to/corporate-ca.crt
+  ```
   </Step>
   <Step title="Enable the wrapper in values.yaml">
-    ```yaml
-    customCA:
-      enabled: true
-      secretName: corporate-ca-bundle
-      key: ca.crt
-    ```
-
-    The chart mounts the certificate as a single file at `/etc/ssl/certs/kosli-custom-ca.crt` using `subPath`. Go's standard library on Linux loads CA roots in two independent passes — it reads the system bundle file (e.g. `/etc/ssl/certs/ca-certificates.crt`) and **also** scans `/etc/ssl/certs/` for additional certificate files. The mounted file is picked up by the directory scan and added to the trust store alongside the system roots, so no `SSL_CERT_FILE` env var is needed.
-
-    The wrapper deliberately does **not** set `SSL_CERT_FILE`. Setting it would replace the system bundle entirely with the customer's file, breaking trust for any public CAs the bundle does not include.
+  ```yaml
+  customCA:
+    enabled: true
+    secretName: corporate-ca-bundle
+    key: ca.crt
+  ```
   </Step>
 </Steps>
+
+The chart mounts the certificate as a single file at `/etc/ssl/certs/kosli-custom-ca.crt` using `subPath`. Go's standard library on Linux loads CA roots in two independent passes — it reads the system bundle file (e.g. `/etc/ssl/certs/ca-certificates.crt`) and **also** scans `/etc/ssl/certs/` for additional certificate files. The mounted file is picked up by the directory scan and added to the trust store alongside the system roots, so no `SSL_CERT_FILE` env var is needed.
+
+The wrapper deliberately does **not** set `SSL_CERT_FILE`. Setting it would replace the system bundle entirely with the customer's file, breaking trust for any public CAs the bundle does not include.
 
 ### Option 2 — generic extraVolumes / extraVolumeMounts / extraEnvVars
 
@@ -167,28 +163,24 @@ If you already run [cert-manager's trust-manager](https://cert-manager.io/docs/t
 
 ### General
 
-<ParamField path="cronSchedule" type="string" default="*/5 * * * *">
-  The cron schedule at which the reporter is triggered to report to Kosli.
-</ParamField>
-
 <ParamField path="concurrencyPolicy" type="string" default="Replace">
   Specifies how to treat concurrent executions of a Job that is created by this CronJob.
+</ParamField>
+
+<ParamField path="cronSchedule" type="string" default="*/5 * * * *">
+  The cron schedule at which the reporter is triggered to report to Kosli.
 </ParamField>
 
 <ParamField path="failedJobsHistoryLimit" type="int" default="1">
   Specifies the number of failed finished jobs to keep.
 </ParamField>
 
-<ParamField path="successfulJobsHistoryLimit" type="int" default="3">
-  Specifies the number of successful finished jobs to keep.
+<ParamField path="fullnameOverride" type="string" default="">
+  Overrides the fullname used for the created k8s resources. It has higher precedence than `nameOverride`.
 </ParamField>
 
 <ParamField path="nameOverride" type="string" default="">
   Overrides the name used for the created k8s resources. If `fullnameOverride` is provided, it has higher precedence than this one.
-</ParamField>
-
-<ParamField path="fullnameOverride" type="string" default="">
-  Overrides the fullname used for the created k8s resources. It has higher precedence than `nameOverride`.
 </ParamField>
 
 <ParamField path="podAnnotations" type="object" default="{}">
@@ -199,49 +191,44 @@ If you already run [cert-manager's trust-manager](https://cert-manager.io/docs/t
   Custom labels to add to pods.
 </ParamField>
 
+<ParamField path="successfulJobsHistoryLimit" type="int" default="3">
+  Specifies the number of successful finished jobs to keep.
+</ParamField>
+
 ### Image
-
-<ParamField path="image.repository" type="string" default="ghcr.io/kosli-dev/cli">
-  The kosli reporter image repository.
-</ParamField>
-
-<ParamField path="image.tag" type="string" default="v2.12.0">
-  The kosli reporter image tag, overrides the image tag whose default is the chart appVersion.
-</ParamField>
 
 <ParamField path="image.pullPolicy" type="string" default="IfNotPresent">
   The kosli reporter image pull policy.
 </ParamField>
 
+<ParamField path="image.repository" type="string" default="ghcr.io/kosli-dev/cli">
+  The kosli reporter image repository.
+</ParamField>
+
+<ParamField path="image.tag" type="string" default="">
+  The kosli reporter image tag, overrides the image tag whose default is the chart appVersion.
+</ParamField>
+
 ### Reporter configuration
 
-<ParamField path="reporterConfig.kosliOrg" type="string" default="">
-  The name of the Kosli org.
+<ParamField path="reporterConfig.dryRun" type="bool" default="false">
+  Whether the dry run mode is enabled or not. In dry run mode, the reporter logs the reports to stdout and does not send them to kosli.
 </ParamField>
 
 <ParamField path="reporterConfig.environments" type="list" default="[]">
-  List of Kosli environments to report to. Each entry has required `name` and optional namespace selectors. Use one entry to report a single environment; use multiple entries to report to multiple environments with different selectors. Per entry: `name` (required), `namespaces`, `namespacesRegex`, `excludeNamespaces`, `excludeNamespacesRegex` (optional). Leave namespace fields unset for an entry to report the entire cluster to that environment.
-</ParamField>
-
-<ParamField path="reporterConfig.dryRun" type="bool" default="false">
-  Whether the dry run mode is enabled or not. In dry run mode, the reporter logs the reports to stdout and does not send them to Kosli.
+  List of Kosli environments to report to. Each entry has required 'name' and optional namespace selectors. Use one entry to report a single environment; use multiple entries to report to multiple environments with different selectors. Per entry: name (required), namespaces, namespacesRegex, excludeNamespaces, excludeNamespacesRegex (optional). Leave namespace fields unset for an entry to report the entire cluster to that environment.
 </ParamField>
 
 <ParamField path="reporterConfig.httpProxy" type="string" default="">
   The http proxy url.
 </ParamField>
 
-<ParamField path="reporterConfig.securityContext" type="object">
-  The security context for the reporter cronjob. Set to null or `{}` to disable security context entirely (not recommended). For OpenShift, you can omit `runAsUser` to let OpenShift assign the UID.
+<ParamField path="reporterConfig.kosliOrg" type="string" default="">
+  The name of the Kosli org.
+</ParamField>
 
-  Default:
-  ```json
-  {
-    "allowPrivilegeEscalation": false,
-    "runAsNonRoot": true,
-    "runAsUser": 1000
-  }
-  ```
+<ParamField path="reporterConfig.securityContext" type="object">
+  The security context for the reporter cronjob. Set to null or {} to disable security context entirely (not recommended). For OpenShift with SCC, explicitly set runAsUser to null to let OpenShift assign the UID from the allowed range. Simply omitting runAsUser from your values override will not work because Helm deep-merges with these defaults. Example OpenShift override:   securityContext:     allowPrivilegeEscalation: false     runAsNonRoot: true     runAsUser: null.
 </ParamField>
 
 <ParamField path="reporterConfig.securityContext.allowPrivilegeEscalation" type="bool" default="false">
@@ -253,64 +240,55 @@ If you already run [cert-manager's trust-manager](https://cert-manager.io/docs/t
 </ParamField>
 
 <ParamField path="reporterConfig.securityContext.runAsUser" type="int" default="1000">
-  The user id to run as. Omit this field for OpenShift environments to allow automatic UID assignment.
+  The user id to run as. For OpenShift environments with SCC, set to null (runAsUser: null) to allow automatic UID assignment. Simply omitting this field will not work due to Helm's deep merge with chart defaults.
 </ParamField>
 
 ### Kosli API token
-
-<ParamField path="kosliApiToken.secretName" type="string" default="kosli-api-token">
-  The name of the secret containing the Kosli API token.
-</ParamField>
 
 <ParamField path="kosliApiToken.secretKey" type="string" default="key">
   The name of the key in the secret data which contains the Kosli API token.
 </ParamField>
 
+<ParamField path="kosliApiToken.secretName" type="string" default="kosli-api-token">
+  The name of the secret containing the kosli API token.
+</ParamField>
+
 ### Environment variables
 
 <ParamField path="env" type="object" default="{}">
-  Map of plain environment variables to inject into the reporter container. For a single-tenant Kosli instance, set `KOSLI_HOST` to `https://<instance_name>.kosli.com`.
+  Map of plain environment variables to inject into the reporter container. For a single-tenant Kosli instance, set `KOSLI_HOST` to `https://INSTANCE_NAME.kosli.com`.
 </ParamField>
 
 <ParamField path="extraEnvVars" type="list" default="[]">
-  Additional environment variables to inject into the reporter container. List of name/value or name/valueFrom entries, rendered verbatim into the container env. Supports plain values and valueFrom (secretKeyRef / configMapKeyRef). Entries here are appended after the chart's own env entries; on duplicate names the later entry wins.
+  Additional environment variables to inject into the reporter container. List of `{name, value}` or `{name, valueFrom}` entries, rendered verbatim into the container env. Supports plain values and valueFrom (`secretKeyRef` / `configMapKeyRef`). Note: entries here are appended after the chart's own env entries; on duplicate names the later entry wins.
 </ParamField>
 
 ### Volumes
-
-<ParamField path="extraVolumes" type="list" default="[]">
-  Additional Pod-level volumes to attach to the reporter pod. Rendered verbatim into the Pod spec alongside the chart's own volumes. Use together with `extraVolumeMounts` to mount Secrets, ConfigMaps, or other volumes into the container.
-</ParamField>
 
 <ParamField path="extraVolumeMounts" type="list" default="[]">
   Additional container-level volumeMounts for the reporter container. Rendered verbatim into the container spec alongside the chart's own mounts.
 </ParamField>
 
+<ParamField path="extraVolumes" type="list" default="[]">
+  Additional Pod-level volumes to attach to the reporter pod. Rendered verbatim into the Pod spec alongside the chart's own volumes. Use together with `extraVolumeMounts` to mount Secrets, ConfigMaps, or other volumes into the container.
+</ParamField>
+
 ### Custom CA
 
 <ParamField path="customCA" type="object">
-  Convenience wrapper for mounting a corporate / custom CA bundle. See the [Running behind a TLS-inspecting proxy](#running-behind-a-tls-inspecting-proxy-corporate--custom-ca-bundle) section for usage.
-
-  Default:
-  ```json
-  {
-    "enabled": false,
-    "key": "ca.crt",
-    "secretName": ""
-  }
-  ```
+  Convenience wrapper for mounting a corporate / custom CA bundle. See the "Running behind a TLS-inspecting proxy" section of the README for usage.
 </ParamField>
 
 <ParamField path="customCA.enabled" type="bool" default="false">
   Enable mounting a corporate/custom CA bundle into the trust store.
 </ParamField>
 
-<ParamField path="customCA.secretName" type="string" default="">
-  Name of an existing Secret in the same namespace containing the CA bundle.
-</ParamField>
-
 <ParamField path="customCA.key" type="string" default="ca.crt">
   Key within the Secret that holds the PEM-formatted CA certificate (single cert or multi-cert PEM bundle).
+</ParamField>
+
+<ParamField path="customCA.secretName" type="string" default="">
+  Name of an existing Secret in the same namespace containing the CA bundle.
 </ParamField>
 
 ### Resources
@@ -329,12 +307,12 @@ If you already run [cert-manager's trust-manager](https://cert-manager.io/docs/t
 
 ### Service account
 
-<ParamField path="serviceAccount.create" type="bool" default="true">
-  Specifies whether a service account should be created.
-</ParamField>
-
 <ParamField path="serviceAccount.annotations" type="object" default="{}">
   Annotations to add to the service account.
+</ParamField>
+
+<ParamField path="serviceAccount.create" type="bool" default="true">
+  Specifies whether a service account should be created.
 </ParamField>
 
 <ParamField path="serviceAccount.name" type="string" default="">
@@ -342,9 +320,11 @@ If you already run [cert-manager's trust-manager](https://cert-manager.io/docs/t
 </ParamField>
 
 <ParamField path="serviceAccount.permissionScope" type="string" default="cluster">
-  Specifies whether to create a cluster-wide permissions for the service account or namespace-scoped permissions. Allowed values are: `cluster`, `namespace`.
+  Specifies whether to create a cluster-wide permissions for the service account or namespace-scoped permissions. allowed values are: [cluster, namespace].
 </ParamField>
 
 ---
 
+----------------------------------------------
 Autogenerated from chart metadata using [helm-docs v1.14.2](https://github.com/norwoodj/helm-docs/releases/v1.14.2)
+

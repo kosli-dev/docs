@@ -1,0 +1,112 @@
+---
+title: Rotating API keys
+description: Learn how to rotate Kosli service account API keys with zero downtime.
+---
+
+Rotating API keys regularly is a security best practice that limits the blast radius of a leaked or compromised credential. This tutorial walks you through rotating a Kosli service account API key with zero downtime, using either the Kosli web app or the API directly.
+
+<Tip>
+Kosli never stores your API token in plain text. Only a cryptographic hash of the token is stored, so the original token cannot be retrieved from our systems — make sure to copy a new key immediately after creating or rotating it.
+</Tip>
+
+## Prerequisites
+
+- A Kosli shared organization with at least one [service account](/administration/authentication/service_accounts) and an existing API key.
+- Administrator access to the organization that owns the service account.
+- An inventory of every system (CI pipelines, runtime reporters, scripts, secrets managers, etc.) that uses the API key you plan to rotate.
+
+## How rotation works
+
+When you rotate a service account API key, Kosli:
+
+1. Generates a **new** API key immediately and returns its value **once**.
+2. Keeps the **old** key valid for a configurable grace period (default: **24 hours**).
+3. Automatically revokes the old key when the grace period expires.
+
+The grace period lets you roll the new key out to all consumers without an interruption in service. Choose a window that matches your deployment cadence — short enough to limit exposure, long enough to update every dependent system.
+
+## Rotate a key from the Kosli web app
+
+1. Log in to Kosli and select the organization that owns the service account.
+2. Go to **Settings** → **Service accounts** in the left navigation.
+3. Open the service account whose key you want to rotate.
+4. Find the key in the **API Keys** list and click **Regenerate**.
+5. Choose a grace period for the old key, then confirm.
+6. Copy the new key value immediately and store it in your secrets manager — it will not be shown again.
+
+## Rotate a key via the API
+
+You can also rotate keys programmatically, which is useful for automating periodic rotation from your CI or a secrets manager.
+
+```shell
+curl -X POST \
+  -H "Authorization: Bearer <<your-admin-api-key>>" \
+  -H "Content-Type: application/json" \
+  -d '{"grace_period_hours": 24}' \
+  https://app.kosli.com/api/v2/service-accounts/<<your-org>>/<<service-account-name>>/api-keys/<<key-id>>/rotate
+```
+
+The response contains the new API key value. Capture it directly into your secrets store:
+
+```shell
+NEW_KEY=$(curl -s -X POST \
+  -H "Authorization: Bearer $KOSLI_ADMIN_TOKEN" \
+  -H "Content-Type: application/json" \
+  -d '{"grace_period_hours": 24}' \
+  https://app.kosli.com/api/v2/service-accounts/$ORG/$SA_NAME/api-keys/$KEY_ID/rotate \
+  | jq -r '.api_key')
+```
+
+<Tip>
+You can list a service account's keys (including the rotation status of the old key) with `GET /service-accounts/{org}/{name}/api-keys`. See the [API reference](/api-reference/service-accounts/list-api-keys-for-a-service-account) for details.
+</Tip>
+
+## Roll the new key out
+
+While the old key is still valid, update every consumer to use the new key:
+
+- **CI/CD pipelines**: Update the `KOSLI_API_TOKEN` secret in GitHub Actions, GitLab CI, Jenkins, CircleCI, etc.
+- **Runtime reporters**: Update Kubernetes secrets used by the [Kosli Kubernetes reporter](/helm/k8s_reporter), and roll the relevant pods.
+- **Local config files**: Update any [Kosli CLI config files](/getting_started/install#assigning-flags-via-config-files) that hard-code the token.
+- **Secrets managers**: Update the value in AWS Secrets Manager, HashiCorp Vault, GCP Secret Manager, Azure Key Vault, or wherever you store the token.
+
+Verify the rollout by triggering a job (or running a Kosli CLI command) that uses the new key and confirming it succeeds:
+
+```shell
+kosli list environments --api-token "$NEW_KEY" --org "$ORG"
+```
+
+## Verify the old key is decommissioned
+
+Once every consumer is on the new key, you can either wait for the grace period to elapse or revoke the old key immediately:
+
+```shell
+curl -X DELETE \
+  -H "Authorization: Bearer <<your-admin-api-key>>" \
+  https://app.kosli.com/api/v2/service-accounts/<<your-org>>/<<service-account-name>>/api-keys/<<old-key-id>>
+```
+
+See [Revoke an API key for a service account](/api-reference/service-accounts/revoke-an-api-key-for-a-service-account) for details.
+
+After revocation (or grace-period expiry), confirm the old key no longer works:
+
+```shell
+curl -i -H "Authorization: Bearer $OLD_KEY" \
+  https://app.kosli.com/api/v2/environments/$ORG
+# Expect: HTTP/1.1 401 Unauthorized
+```
+
+## Recommended rotation cadence
+
+- **Service accounts**: rotate at least every 90 days, and immediately if you suspect a leak.
+- **After offboarding**: rotate any key an offboarded user could have accessed.
+- **After incidents**: rotate any key potentially exposed by a security incident, regardless of cadence.
+
+Automating rotation from your secrets manager — using the rotate endpoint above — is the most reliable way to keep within your target cadence.
+
+## Related
+
+- [Service accounts](/administration/authentication/service_accounts)
+- [Rotate an API key for a service account (API reference)](/api-reference/service-accounts/rotate-an-api-key-for-a-service-account)
+- [Revoke an API key for a service account (API reference)](/api-reference/service-accounts/revoke-an-api-key-for-a-service-account)
+- [List API keys for a service account (API reference)](/api-reference/service-accounts/list-api-keys-for-a-service-account)

@@ -3,7 +3,7 @@ title: "Rego Policy"
 description: "Reference for Rego policy files used with kosli evaluate trail and kosli evaluate trails."
 ---
 
-A Rego policy defines the rules Kosli evaluates trail data against. You pass a `.rego` file to [`kosli evaluate trail`](/client_reference/kosli_evaluate_trail) or [`kosli evaluate trails`](/client_reference/kosli_evaluate_trails) via the `--policy` flag. Kosli has a built-in <Tooltip tip="Rego is the purpose-built declarative policy language used by the Open Policy Agent (OPA) project. It is designed for expressing rules over structured data and is widely used for policy enforcement in cloud-native environments." cta="Learn more" href="https://www.openpolicyagent.org/">Rego</Tooltip> evaluator — no OPA installation required.
+A Rego policy defines the rules Kosli evaluates trail data against. You pass a `.rego` file to [`kosli evaluate trail`](/client_reference/kosli_evaluate_trail) or [`kosli evaluate trails`](/client_reference/kosli_evaluate_trails) via the `--policy` flag. Kosli includes a built-in <Tooltip tip="Rego is the purpose-built declarative policy language used by the Open Policy Agent (OPA) project. It is designed for expressing rules over structured data and is widely used for policy enforcement in cloud-native environments." cta="Learn more" href="https://www.openpolicyagent.org/">Rego</Tooltip> evaluator with no OPA installation required.
 
 ## Policy contract
 
@@ -14,19 +14,21 @@ These rules are Kosli-specific conventions, not OPA built-ins. Kosli queries `da
 </ParamField>
 
 <ParamField path="allow" type="boolean" required>
-  Must evaluate to a boolean. Kosli exits with code `0` when `true`, code `1` when `false`. Typically defined as:
+  Must evaluate to a boolean. Kosli exits with code `0` when `true`, code `1` when `false`.
+
+  Always define `allow` with a fail-safe default and drive it through a positive assertion, not through the absence of violations. See [Safe policy design](#safe-policy-design).
 
   ```rego
-  default allow = false
+  default allow := false
 
-  allow if {
-      count(violations) == 0
-  }
+  allow if trail_is_compliant(input.trail)
   ```
 </ParamField>
 
 <ParamField path="violations" type="set of strings">
-  Optional but recommended. A set of human-readable strings describing why the policy failed. Kosli displays these when `allow` is `false`. Each message should identify the offending resource and the reason.
+  Optional but recommended. A set of human-readable strings explaining why the policy denied. Kosli displays these when `allow` is `false`. Each message should identify the offending resource and the reason.
+
+  Violations are diagnostics only. They must not drive the `allow` decision. See [Safe policy design](#safe-policy-design).
 
   ```rego
   violations contains msg if {
@@ -36,11 +38,86 @@ These rules are Kosli-specific conventions, not OPA built-ins. Kosli queries `da
   ```
 </ParamField>
 
+## Safe policy design
+
+Three rules prevent a policy from incorrectly reporting a non-compliant trail as compliant.
+
+### Rule 1: use a fail-safe default
+
+Always start with `default allow := false`. A trail must be explicitly approved rather than allowed by the absence of evidence against it.
+
+Use parameter aliases at the top of the policy file rather than hardcoding threshold values. If a required param is absent from the params file, any rule that references its alias will fail to evaluate, and `allow` will correctly remain `false`.
+
+```rego
+max_days_by_severity   := data.params.max_days_by_severity
+max_ignore_expiry_days := data.params.max_ignore_expiry_days
+```
+
+See [Evaluate trails with OPA policies](/tutorials/evaluate_trails_with_opa) for a detailed walkthrough.
+
+### Rule 2: drive `allow` through positive assertions
+
+Drive the `allow` decision through a condition that must be true for the trail to be compliant. Do not write:
+
+```rego
+# Unsafe: allow depends on the absence of violations
+allow if {
+    count(violations) == 0
+}
+```
+
+When a `violations` rule body encounters an undefined reference, such as a missing param or an absent attestation field, OPA silently skips that rule body and adds no message to the set. The set is then empty, `count(violations) == 0` evaluates to `true`, and `allow` fires even though the policy never verified compliance. This produces a false-positive compliant result.
+
+The safe pattern makes compliance explicit:
+
+```rego
+# Safe: allow fires only when trail_is_compliant is positively true
+allow if trail_is_compliant(input.trail)
+```
+
+If any field referenced inside `trail_is_compliant` is undefined, the rule body fails to evaluate and `allow` remains `false`.
+
+See [Evaluate trails with OPA policies](/tutorials/evaluate_trails_with_opa) for a detailed walkthrough.
+
+### Rule 3: violations are diagnostics only
+
+In a `violations` rule, an undefined reference causes the rule body to fail silently: no message is added. This is the safe failure mode for diagnostics. Violations explain a denial determined by the `allow` rule and must not determine it themselves.
+
+See [Evaluate trails with OPA policies](/tutorials/evaluate_trails_with_opa) for a detailed walkthrough.
+
+## Params
+
+Policies can read external configuration via the `--params` flag. Params are available in the policy as `data.params.*`. This separates policy logic from the thresholds it enforces, so one `.rego` file can cover multiple environments with different params files.
+
+```shell
+# Inline JSON
+kosli evaluate trail "$TRAIL_NAME" \
+  --policy my-policy.rego \
+  --params '{"max_high": 0}' \
+  --org "$ORG" \
+  --flow "$FLOW"
+
+# JSON file
+kosli evaluate trail "$TRAIL_NAME" \
+  --policy my-policy.rego \
+  --params @rego.params.prod.json \
+  --org "$ORG" \
+  --flow "$FLOW"
+```
+
+Alias params at the top of the policy file so that missing values cause rules to fail rather than silently proceeding:
+
+```rego
+max_high := data.params.max_high
+```
+
+If `max_high` is absent, `max_high` is undefined and any rule that references it fails to evaluate, leaving `allow` at its `false` default.
+
 ## Input data
 
 The data structure passed to the policy as `input` depends on which command you use.
 
-### `kosli evaluate trail` — single trail
+### Single trail (`kosli evaluate trail`)
 
 The policy receives `input.trail`, a single trail object.
 
@@ -65,18 +142,18 @@ The policy receives `input.trail`, a single trail object.
         </ParamField>
 
         <ParamField path="input.trail.compliance_status.attestations_statuses" type="object">
-          Map of attestation name → attestation status object. Each object contains the attestation's data, including type-specific fields enriched via `--attestations`. For example, a `pull-request` attestation includes a `pull_requests` array, each with an `approvers` array and a `url` string.
+          Map of attestation name to attestation status object. Each object contains the attestation's data, including type-specific fields enriched via `--attestations`. For example, a `pull-request` attestation includes a `pull_requests` array, each with an `approvers` array and a `url` string.
         </ParamField>
 
         <ParamField path="input.trail.compliance_status.artifacts_statuses" type="object">
-          Map of artifact name → artifact status object. Each artifact has its own `attestations_statuses` map with the same structure as above.
+          Map of artifact name to artifact status object. Each artifact has its own `attestations_statuses` map with the same structure as above.
         </ParamField>
       </Expandable>
     </ParamField>
   </Expandable>
 </ParamField>
 
-### `kosli evaluate trails` — multiple trails
+### Multiple trails (`kosli evaluate trails`)
 
 The policy receives `input.trails`, an array of trail objects with the same structure as `input.trail` above.
 
@@ -97,6 +174,23 @@ kosli evaluate trail "$TRAIL_NAME" \
 ```
 </Info>
 
+## Local testing
+
+Use [`kosli evaluate input`](/client_reference/kosli_evaluate_input) to test a policy against captured trail data without making live Kosli API calls:
+
+```shell
+# Capture trail data once
+kosli evaluate trail "$TRAIL_NAME" \
+  --policy allow-all.rego \
+  --show-input --output json | jq '.input' > trail-data.json
+
+# Iterate on the policy locally
+kosli evaluate input \
+  --input-file trail-data.json \
+  --policy my-policy.rego \
+  --params '{"max_high": 0}'
+```
+
 ## Exit codes
 
 | Code | Meaning |
@@ -110,50 +204,76 @@ Exit code `1` is used for both denial and failure. To distinguish between them i
 
 ### Check pull request approvals across multiple trails
 
+Allows only when every trail in `input.trails` has at least one pull request with at least one approver. The attestation name is read from params so the same policy works across orgs that use different naming conventions.
+
 ```rego
 package policy
 
 import rego.v1
 
-default allow = false
+pr_attestation_name := data.params.pr_attestation_name
 
-violations contains msg if {
-    some trail in input.trails
-    some pr in trail.compliance_status.attestations_statuses["pull-request"].pull_requests
-    count(pr.approvers) == 0
-    msg := sprintf("trail '%v': pull-request %v has no approvers", [trail.name, pr.url])
+default allow := false
+
+trail_has_approved_pr(trail) if {
+    some pr in trail.compliance_status.attestations_statuses[pr_attestation_name].pull_requests
+    count(pr.approvers) > 0
 }
 
 allow if {
-    count(violations) == 0
+    every trail in input.trails {
+        trail_has_approved_pr(trail)
+    }
+}
+
+violations contains msg if {
+    some trail in input.trails
+    some pr in trail.compliance_status.attestations_statuses[pr_attestation_name].pull_requests
+    count(pr.approvers) == 0
+    msg := sprintf("trail '%v': pull-request %v has no approvers", [trail.name, pr.url])
 }
 ```
 
 ### Check Snyk scan results on a single trail
 
+Allows only when every artifact in the trail has a Snyk scan where the high-severity vulnerability count does not exceed `max_high`. Both the attestation name and the threshold are read from params.
+
 ```rego
 package policy
 
 import rego.v1
 
-default allow = false
+snyk_attestation_name := data.params.snyk_attestation_name
+max_high              := data.params.max_high
+
+default allow := false
+
+artifact_within_threshold(artifact) if {
+    snyk := artifact.attestations_statuses[snyk_attestation_name]
+    every result in snyk.processed_snyk_results.results {
+        result.high_count <= max_high
+    }
+}
+
+trail_is_compliant(trail) if {
+    every name, artifact in trail.compliance_status.artifacts_statuses {
+        artifact_within_threshold(artifact)
+    }
+}
+
+allow if trail_is_compliant(input.trail)
 
 violations contains msg if {
     some name, artifact in input.trail.compliance_status.artifacts_statuses
-    snyk := artifact.attestations_statuses["snyk-container-scan"]
+    snyk := artifact.attestations_statuses[snyk_attestation_name]
     some result in snyk.processed_snyk_results.results
-    result.high_count > 0
-    msg := sprintf("artifact '%v': snyk scan found %d high severity vulnerabilities", [name, result.high_count])
-}
-
-allow if {
-    count(violations) == 0
+    result.high_count > max_high
+    msg := sprintf("artifact '%v': snyk scan found %d high severity vulnerabilities (limit: %d)", [name, result.high_count, max_high])
 }
 ```
 
 ## Further reading
 
-- [Rego Style Guide](https://docs.styra.com/opa/rego-style-guide) — naming, rule structure, and test conventions
-- [OPA Annotations](https://www.openpolicyagent.org/docs/latest/annotations/) — including `entrypoint: true` for use with `opa build`
-- [OPA Best Practices](https://www.openpolicyagent.org/docs/latest/best-practices/)
+- [Rego Style Guide](https://www.openpolicyagent.org/docs/style-guide): naming, rule structure, and test conventions
+- [OPA Annotations](https://www.openpolicyagent.org/docs/policy-language#annotations): including `entrypoint: true` for use with `opa build`
 - [Tutorial: Evaluate trails with OPA policies](/tutorials/evaluate_trails_with_opa)

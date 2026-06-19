@@ -67,6 +67,14 @@ The following sections show how to make each of the four attestations defined in
   ```
 
   This attestation belongs to any artifact attested with the matching `name` from the template (in this example `backend`) and a matching git commit.
+
+  <Info>
+  Notice this command has **no fingerprint**, no `--artifact-type`, and no positional artifact argument. When you pass `--commit` without a fingerprint, Kosli does not calculate or assume any fingerprint — it stores the attestation as *pending* against the artifact's **template name + commit** and binds it to the real fingerprint later, when an `artifact` attestation arrives for that same template name and commit.
+
+  The match key is `(template artifact name, git commit)` — not the fingerprint. The fingerprint is only resolved retroactively once the artifact itself is reported. Order doesn't matter: you can report `backend.unit-tests` before or after `backend` itself.
+
+  See [Reporting a custom attestation → Attest before the artifact exists](/tutorials/attest_custom#3-attest-before-the-artifact-exists) for the full subtleties.
+  </Info>
   </Step>
   <Step title="Attest the backend artifact">
   Once the artifact has been built, it can be attested with the following command.
@@ -164,6 +172,7 @@ All `kosli attest` commands support flags for attaching additional data. These f
 | `--user-data` | All evidence attest commands | Attach structured JSON metadata that is stored and visible alongside the attestation in the Kosli UI |
 | `--attachments` | All evidence attest commands | Upload files or directories to the Evidence Vault as compressed archives for later download |
 | `--attestation-data` | `attest custom` only | Provide the JSON payload that the custom type's jq rules evaluate to determine compliance |
+| `--annotate` | All evidence attest commands | Attach `key=value` annotations that are displayed as a label/value pair on the attestation in the Kosli UI |
 
 ### When to use which
 
@@ -208,6 +217,38 @@ These flags can be combined. For example, you can use `--attestation-data` for c
 `--user-data` to store extra metadata, and `--attachments` to archive the full report — all on the
 same attestation.
 </Tip>
+
+### Annotating attestations
+
+Use **`--annotate`** to attach lightweight `key=value` pairs to an attestation. Annotations are
+intended for short, human-readable context (links, ticket IDs, build numbers, environment names,
+etc.) that should appear directly on the attestation in the Kosli UI. For larger structured
+metadata, prefer `--user-data`.
+
+```shell
+kosli attest generic \
+    --name security-scan \
+    --flow backend-ci \
+    --trail $(git rev-parse HEAD) \
+    --annotate scan_tool=trivy \
+    --annotate report_url=https://ci.example.com/runs/42
+```
+
+Keys may only contain `[A-Za-z0-9_]` (letters, digits, and underscores). You can pass `--annotate`
+multiple times to add several annotations to the same attestation.
+
+<Note>
+**How annotations appear in the Kosli UI**
+
+Annotation **keys** are automatically humanized for display: underscores become spaces and the
+first letter is capitalized. For example, the key `something_key` is rendered as `Something key`.
+
+Annotation **values** are displayed as-is, except that values that are valid URLs are
+automatically rendered as clickable links.
+
+Choose your annotation keys with this transformation in mind — e.g. use `report_url`
+(displayed as `Report url`) rather than mixed-case or camelCase keys.
+</Note>
 
 ## Attestation types
 

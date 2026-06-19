@@ -9,7 +9,7 @@ By the end of this tutorial, you will have reported a snapshot of your Kubernete
 
 * Have access to a Kubernetes cluster.
 * [Create a Kubernetes Kosli environment](/getting_started/environments#create-an-environment) named `k8s-tutorial`.
-* [Get a Kosli API token](/getting_started/service-accounts).
+* [Get a Kosli API token](/getting_started/authenticating_to_kosli).
 
 ## Report a snapshot
 
@@ -98,7 +98,7 @@ jobs:
 
     steps:
       - name: Install Kosli CLI
-        uses: kosli-dev/setup-cli-action@v2
+        uses: kosli-dev/setup-cli-action@v5
 
       # Replace this step with one that connects to your cluster if not using GKE
       - name: Connect to GKE
@@ -165,6 +165,24 @@ kosli snapshot k8s k8s-tutorial \
 
 </Tab>
 </Tabs>
+
+## Running multiple reporters
+
+If you are considering running more than one reporter against the same cluster, the table below summarizes which setups produce meaningful snapshots and which don't.
+
+| Scenario | Supported | Explanation |
+| :--- | :---: | :--- |
+| Two orgs, separate environments, overlapping namespaces | Yes | Different environments → independent snapshots. |
+| One org, two environments, overlapping namespaces | Yes | Same as above. |
+| One org, **same environment**, two reporters with overlapping namespaces | No | Snapshots toggle between each reporter's view. No data is deleted, but diffs between consecutive snapshots become meaningless. |
+| One org, same environment, two reporters with **disjoint** namespaces | No | Each snapshot only reflects one reporter's namespaces, so diffs compare unrelated scopes. |
+
+<Warning>
+A single Kosli environment must have exactly one reporter feeding it. Snapshots are never overwritten or deleted, but if two reporters take turns updating the same environment:
+
+* Diffs between consecutive snapshots compare unrelated views of the cluster.
+* The environment history shows artifacts continuously stopping and starting as each report toggles which namespaces are visible.
+</Warning>
 
 ## What you've accomplished
 

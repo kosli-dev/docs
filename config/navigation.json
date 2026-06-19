@@ -20,7 +20,7 @@
           "icon": "rocket",
           "pages": [
             "getting_started/install",
-            "getting_started/service-accounts",
+            "getting_started/authenticating_to_kosli",
             "getting_started/flows",
             "getting_started/trails",
             "getting_started/artifacts",
@@ -32,13 +32,30 @@
           ]
         },
         {
+          "group": "User",
+          "icon": "user",
+          "pages": [
+            "user/default_organization",
+            "user/personal_api_keys"
+          ]
+        },
+        {
           "group": "Administration",
           "icon": "cog",
           "pages": [
             {
-              "group": "Managing Users",
+              "group": "Authentication & access",
               "pages": [
-                "administration/managing_users/roles_in_kosli"
+                "administration/authentication/api_authentication_methods",
+                "administration/authentication/service_accounts",
+                "administration/authentication/api_key_rotation"
+              ]
+            },
+            {
+              "group": "Users & roles",
+              "pages": [
+                "administration/managing_users/roles_in_kosli",
+                "administration/managing_users/mapping_users_to_roles"
               ]
             },
             {
@@ -52,7 +69,8 @@
               "pages": [
                 "administration/managing_custom_attestation_types/overview"
               ]
-            }
+            },
+            "administration/managing_tags"
           ]
         },
         {
@@ -70,6 +88,7 @@
             {
               "group": "Attesting",
               "pages": [
+                "tutorials/attest_custom",
                 "tutorials/attest_snyk",
                 "tutorials/custom-attestation-ctrf",
                 "tutorials/attest_large_documents"
@@ -79,7 +98,8 @@
               "group": "Reporting environments",
               "pages": [
                 "tutorials/report_aws_envs",
-                "tutorials/report_k8s_envs"
+                "tutorials/report_k8s_envs",
+                "tutorials/report_cloud_run_envs"
               ]
             },
             {
@@ -87,13 +107,15 @@
               "pages": [
                 "tutorials/querying_kosli",
                 "tutorials/following_a_git_commit_to_runtime_environments",
-                "tutorials/tracing_a_production_incident_back_to_git_commits"
+                "tutorials/tracing_a_production_incident_back_to_git_commits",
+                "tutorials/trail_summaries_in_ci"
               ]
             },
             {
               "group": "Security",
               "pages": [
-                "tutorials/unauthorized_iac_changes"
+                "tutorials/unauthorized_iac_changes",
+                "tutorials/rotating_api_keys"
               ]
             },
             {
@@ -106,6 +128,12 @@
               "group": "Multi-flow workflows",
               "pages": [
                 "tutorials/linking_trails_across_branches"
+              ]
+            },
+            {
+              "group": "Controls",
+              "pages": [
+                "tutorials/working_with_controls"
               ]
             },
             {
@@ -216,6 +244,12 @@
               "group": "General",
               "pages": [
                 "client_reference/overview",
+                "client_reference/output_and_verbosity"
+              ]
+            },
+            {
+              "group": "Top-level commands",
+              "pages": [
                 "client_reference/kosli",
                 "client_reference/kosli_attach-policy",
                 "client_reference/kosli_completion",
@@ -245,7 +279,6 @@
             {
               "group": "kosli assert",
               "pages": [
-                "client_reference/kosli_assert_approval",
                 "client_reference/kosli_assert_artifact",
                 "client_reference/kosli_assert_pullrequest_azure",
                 "client_reference/kosli_assert_pullrequest_bitbucket",
@@ -280,10 +313,17 @@
             {
               "group": "kosli create",
               "pages": [
+                "client_reference/kosli_create_api-key",
                 "client_reference/kosli_create_attestation-type",
                 "client_reference/kosli_create_environment",
                 "client_reference/kosli_create_flow",
                 "client_reference/kosli_create_policy"
+              ]
+            },
+            {
+              "group": "kosli delete",
+              "pages": [
+                "client_reference/kosli_delete_api-key"
               ]
             },
             {
@@ -310,7 +350,6 @@
             {
               "group": "kosli get",
               "pages": [
-                "client_reference/kosli_get_approval",
                 "client_reference/kosli_get_artifact",
                 "client_reference/kosli_get_attestation-type",
                 "client_reference/kosli_get_attestation",
@@ -330,7 +369,7 @@
             {
               "group": "kosli list",
               "pages": [
-                "client_reference/kosli_list_approvals",
+                "client_reference/kosli_list_api-keys",
                 "client_reference/kosli_list_artifacts",
                 "client_reference/kosli_list_attestation-types",
                 "client_reference/kosli_list_environments",
@@ -354,21 +393,16 @@
               ]
             },
             {
-              "group": "kosli report",
+              "group": "kosli rotate",
               "pages": [
-                "client_reference/kosli_report_approval"
-              ]
-            },
-            {
-              "group": "kosli request",
-              "pages": [
-                "client_reference/kosli_request_approval"
+                "client_reference/kosli_rotate_api-key"
               ]
             },
             {
               "group": "kosli snapshot",
               "pages": [
                 "client_reference/kosli_snapshot_azure",
+                "client_reference/kosli_snapshot_cloud-run",
                 "client_reference/kosli_snapshot_docker",
                 "client_reference/kosli_snapshot_ecs",
                 "client_reference/kosli_snapshot_k8s",
@@ -381,7 +415,12 @@
             {
               "group": "Deprecated",
               "pages": [
+                "client_reference/kosli_assert_approval",
+                "client_reference/kosli_get_approval",
+                "client_reference/kosli_list_approvals",
+                "client_reference/kosli_report_approval",
                 "client_reference/kosli_report_artifact",
+                "client_reference/kosli_request_approval",
                 "client_reference/kosli_snapshot_server"
               ]
             }
@@ -407,6 +446,7 @@
               "group": "Policies",
               "pages": [
                 "policy-reference/environment_policy",
+                "policy-reference/policy_builder",
                 "policy-reference/rego_policy"
               ]
             }

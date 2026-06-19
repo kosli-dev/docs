@@ -1,0 +1,24 @@
+---
+title: "Environment Policy Builder"
+description: "Build a Kosli environment policy YAML interactively in the browser and copy the result into your repo."
+mode: "wide"
+---
+
+import { PolicyBuilder } from "/snippets/policy-builder.jsx";
+
+Use this builder to assemble an [environment policy](/policy-reference/environment_policy). Toggle the requirements you need, add attestation rules and exceptions, then copy the generated YAML into a file in your repo.
+
+The output conforms to the [v1 policy schema](https://docs.kosli.com/schemas/policy/v1.json) and runs entirely in your browser — nothing is sent to Kosli.
+
+<PolicyBuilder />
+
+## Next steps
+
+- Save the YAML as a file (e.g. `policy.yaml`) in your repo.
+- Create or update the policy with [`kosli create policy`](/client_reference/kosli_create_policy).
+- Attach it to an environment with [`kosli attach-policy`](/client_reference/kosli_attach-policy).
+
+## See also
+
+- [Environment Policy](/policy-reference/environment_policy) — full schema reference and field descriptions
+- [Environment Policies](/getting_started/policies) — concepts, workflow, and enforcement

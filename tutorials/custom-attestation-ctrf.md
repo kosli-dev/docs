@@ -3,13 +3,13 @@ title: "Creating custom CTRF attestation type"
 description: "In this tutorial, we will create a custom attestation type with schema and evaluation for Common Test Report Format"
 ---
 
-In this tutorial, we will create a <Tooltip tip="A user-defined attestation type in Kosli that validates reported data against a JSON schema and evaluates it against a jq compliance rule.">custom attestation type</Tooltip> for <Tooltip tip="Common Test Report Format — a standardised JSON schema for test execution reports that works across testing frameworks such as Jest, Pytest, and Mocha." cta="Learn more" href="https://ctrf.io/">CTRF</Tooltip>.
+In this tutorial, we will create a <Tooltip tip="A user-defined attestation type in Kosli that validates reported data against a JSON schema and evaluates it against a jq compliance rule.">custom attestation type</Tooltip> for <Tooltip tip="Common Test Report Format — a standardized JSON schema for test execution reports that works across testing frameworks such as Jest, Pytest, and Mocha." cta="Learn more" href="https://ctrf.io/">CTRF</Tooltip>.
 By the end, you will have a reusable `ctrf` attestation type in Kosli that validates test reports and enforces a zero-failures compliance rule.
 
 ## Prerequisites
 
 * [Install Kosli CLI](/getting_started/install).
-* [Get a Kosli API token](/getting_started/service-accounts).
+* [Get a Kosli API token](/getting_started/authenticating_to_kosli).
 * A Kosli flow and trail to attest to — follow the [Getting started guide](/getting_started/flows) if you need one.
 
 ## Download the CTRF schema
@@ -56,7 +56,7 @@ Kosli will validate `ctrf-report.json` against the schema and evaluate the jq ru
 
 ## What you've accomplished
 
-You have created a reusable `ctrf` custom attestation type and used it to report a test result to Kosli. Any team in your organisation can now use this same type to uniformly enforce a zero-failures quality gate across all projects, regardless of which testing framework they use.
+You have created a reusable `ctrf` custom attestation type and used it to report a test result to Kosli. Any team in your organization can now use this same type to uniformly enforce a zero-failures quality gate across all projects, regardless of which testing framework they use.
 
 From here you can:
 * Read the [`kosli create attestation-type`](/client_reference/kosli_create_attestation-type) reference for all available options

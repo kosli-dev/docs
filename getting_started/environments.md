@@ -53,12 +53,14 @@ Currently, the following environment types are supported:
 - AWS Lambda
 - AWS Elastic Container Service (ECS)
 - Azure Web Apps and Function Apps
+- Google Cloud Run (services and jobs)
 
 You can report environment snapshots manually using the `kosli snapshot [...]` commands for testing. For production use, however,  you would configure the reporting to happen automatically on regular intervals, e.g. via a cron job or scheduled CI job, or on certain events.
 
 You can follow one of the tutorials below to setup automatic snapshot reporting for your environment:
 - [Kubernetes environment reporting](/tutorials/report_k8s_envs)
 - [AWS ECS/S3/Lambda environment reporting](/tutorials/report_aws_envs)
+- [Cloud Run environment reporting](/tutorials/report_cloud_run_envs)
 
 ### Snapshotting scopes
 
@@ -72,6 +74,7 @@ Depending on the type of your environment, you can scope what to snapshot from t
 | docker (containers)        |       √       |                    |                    |                  |                  |
 | k8s (namespaces)           |       √       |          √         |          √         |         √        |         √        |
 | azure (functions and apps) |       √       |                    |                    |                  |                  |
+| cloud-run (services and jobs) |    √       |          √         |          √         |         √        |         √        |
 
 
 ## Environment Compliance
@@ -89,6 +92,23 @@ by default. To establish compliance requirements, you need to attach at least on
 <Note>
 If you detach all policies from an environment, its compliance state returns to <Badge color="gray">Unknown</Badge> since there are no longer any defined requirements for artifacts running in it.
 </Note>
+
+## Tagging environments
+
+Tags are custom key-value pairs you attach to environments to categorize, filter, and add metadata. Common patterns include tagging by deployment stage (`tier=prod`), owning team (`team=platform`), or region (`region=eu-west-1`).
+
+You can add tags via the CLI, Terraform, or the API:
+
+```shell
+kosli tag env production-k8s \
+  --set tier=prod \
+  --set team=platform \
+  --set region=eu-west-1
+```
+
+Tags can also be referenced in [Environment Policy](/getting_started/policies) expressions to make attestation requirements conditional — for example, requiring security scans only for flows tagged `risk-level=high`.
+
+For the full guide on managing tags, recommended patterns, and usage in policies, see [Managing Tags](/administration/managing_tags).
 
 ## Logical Environments
 

@@ -1,8 +1,4 @@
 # Kosli Documentation
-
-> [!WARNING]
-> This documentation is still a work in progress and is not yet the official Kosli documentation.
-
 Source for [docs.kosli.com](https://docs.kosli.com), built with [Mintlify](https://mintlify.com).
 
 ## Development
@@ -23,8 +19,8 @@ Other useful commands:
 
 ```bash
 mint broken-links   # Validate all internal links
-mint a11y           # Check colour contrast and accessibility
-mint update         # Update the CLI
+mint a11y           # Check color contrast and accessibility
+mint update         # Update the mint CLI tool
 ```
 
 ## Content

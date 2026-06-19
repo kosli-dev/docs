@@ -3,7 +3,7 @@ title: Tracing a production incident to its git commit
 description: "Learn how to use Kosli to trace a production 500 error in cyber-dojo back to the specific git commit that caused it — without any access to the production environment."
 ---
 
-By the end of this tutorial, you will have traced a production incident from a 500 error all the way back to the git commit that caused it, using only Kosli CLI queries against the public cyber-dojo organisation.
+By the end of this tutorial, you will have traced a production incident from a 500 error all the way back to the git commit that caused it, using only Kosli CLI queries against the public cyber-dojo organization.
 
 <Frame><img src="/images/cyber-dojo-prod-500-large.png" alt="Prod cyber-dojo is down with a 500" /></Frame>
 
@@ -12,11 +12,11 @@ By the end of this tutorial, you will have traced a production incident from a 5
 ## Prerequisites
 
 * [Install Kosli CLI](/getting_started/install).
-* [Get a Kosli API token](/getting_started/service-accounts).
+* [Get a Kosli API token](/getting_started/authenticating_to_kosli).
 
 ## Setup
 
-The `cyber-dojo` Kosli organisation is public, so any authenticated user can read its data:
+The `cyber-dojo` Kosli organization is public, so any authenticated user can read its data:
 
 ```shell
 export KOSLI_ORG=cyber-dojo
@@ -40,48 +40,56 @@ kosli log env aws-prod --interval 176..177
 You should see:
 
 ```plaintext
-SNAPSHOT  EVENT                                                                          FLOW      DEPLOYMENTS
-#177      Artifact: 274425519734.dkr.ecr.eu-central-1.amazonaws.com/creator:31dee35      creator   #87
+SNAPSHOT  EVENT                                                                          FLOW
+#177      Artifact: 274425519734.dkr.ecr.eu-central-1.amazonaws.com/creator:31dee35      creator-archived-at-1707630496
           Fingerprint: 5d1c926530213dadd5c9fcbf59c8822da56e32a04b0f9c774d7cdde3cf6ba66d
-          Description: 1 instance stopped running (from 1 to 0).
+          Description: 1 instance stopped running (from 1 to 0)
           Reported at: Tue, 06 Sep 2022 16:53:28 CEST
 
-#176      Artifact: 274425519734.dkr.ecr.eu-central-1.amazonaws.com/creator:b7a5908      creator   #89
+#176      Artifact: 274425519734.dkr.ecr.eu-central-1.amazonaws.com/creator:b7a5908      creator-archived-at-1707630496
           Fingerprint: 860ad172ace5aee03e6a1e3492a88b3315ecac2a899d4f159f43ca7314290d5a
-          Description: 1 instance started running (from 0 to 1).
+          Description: 1 instance started running (from 0 to 1)
           Reported at: Tue, 06 Sep 2022 16:52:28 CEST
 ```
+
+<Info>
+When this incident happened the flow was simply named `creator`. The flow has since been archived, and archiving a flow currently renames it by appending `-archived-at-<timestamp>`. The historical evidence is unchanged; only the displayed name is longer.
+</Info>
 
 These two snapshots are part of the same <Tooltip tip="A deployment strategy where the new version starts running alongside the old version. Once the new version is up, the old one is stopped — resulting in two consecutive snapshots.">blue-green deployment</Tooltip>: `creator:b7a5908` started in snapshot #176, and `creator:31dee35` stopped in snapshot #177. The new artifact arrived just before the 500 error — that is the one to investigate.
 
 ## Dig into the artifact
 
-Get the full history of `creator:b7a5908`, using the fingerprint prefix from snapshot #176:
+Get the full history of `creator:b7a5908` with `kosli search`, using the fingerprint prefix from snapshot #176:
 
 ```shell
-kosli get artifact creator@860ad17
+kosli search 860ad17
 ```
 
 You should see:
 
 ```plaintext
-Name:        cyberdojo/creator:b7a5908
-Flow:        creator
-Fingerprint: 860ad172ace5aee03e6a1e3492a88b3315ecac2a899d4f159f43ca7314290d5a
-Created on:  Tue, 06 Sep 2022 16:48:07 CEST • 21 hours ago
-Git commit:  b7a590836cf140e17da3f01eadd5eca17d9efc65
-Commit URL:  https://github.com/cyber-dojo/creator/commit/b7a590836cf140e17da3f01eadd5eca17d9efc65
-Build URL:   https://github.com/cyber-dojo/creator/actions/runs/3001102984
-State:       COMPLIANT
+Search result resolved to artifact with fingerprint 860ad172ace5aee03e6a1e3492a88b3315ecac2a899d4f159f43ca7314290d5a
+Name:              cyberdojo/creator:b7a5908
+Fingerprint:       860ad172ace5aee03e6a1e3492a88b3315ecac2a899d4f159f43ca7314290d5a
+Has provenance:    true
+Flow:              creator-archived-at-1707630496
+Git commit:        b7a590836cf140e17da3f01eadd5eca17d9efc65
+Commit URL:        https://github.com/cyber-dojo/creator/commit/b7a590836cf140e17da3f01eadd5eca17d9efc65
+Build URL:         https://github.com/cyber-dojo/creator/actions/runs/3001102984
+Artifact URL:      https://app.kosli.com/cyber-dojo/flows/creator-archived-at-1707630496/artifacts/860ad172ace5aee03e6a1e3492a88b3315ecac2a899d4f159f43ca7314290d5a
+Compliance state:  COMPLIANT
+Running in:        [  ]
+Exited from:       [ aws-beta, aws-prod ]
 History:
     Artifact created                               Tue, 06 Sep 2022 16:48:07 CEST
-    Deployment #88 to aws-beta environment         Tue, 06 Sep 2022 16:49:59 CEST
-    Deployment #89 to aws-prod environment         Tue, 06 Sep 2022 16:51:12 CEST
     Started running in aws-beta#196 environment    Tue, 06 Sep 2022 16:51:42 CEST
     Started running in aws-prod#176 environment    Tue, 06 Sep 2022 16:52:28 CEST
+    No longer running in aws-beta#199 environment  Tue, 06 Sep 2022 21:28:42 CEST
+    No longer running in aws-prod#179 environment  Tue, 06 Sep 2022 21:30:28 CEST
 ```
 
-The artifact was deployed to `aws-prod` at 16:51 — right when the incident began. The output includes a direct link to the git commit.
+The artifact started running in `aws-prod` at 16:52 — right when the incident began. The output includes a direct link to the git commit. (You can also see the artifact exiting both environments later that evening, once the incident was fixed by a newer commit.)
 
 ## Follow to the commit
 
