@@ -1,7 +1,5 @@
 ---
 title: "kosli fingerprint"
-beta: false
-deprecated: false
 description: "Calculate the SHA256 fingerprint of an artifact."
 ---
 

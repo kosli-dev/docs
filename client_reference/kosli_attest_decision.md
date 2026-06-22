@@ -1,15 +1,25 @@
 ---
-title: "kosli attest generic"
-description: "Report a generic attestation to an artifact or a trail in a Kosli flow.  "
+title: "kosli attest decision"
+tag: "BETA"
+hidden: true
+description: "Record a compliance decision against a control in a Kosli trail.  "
 ---
+
+import CliBetaNotice from "/snippets/cli-beta-notice.mdx";
+
+<CliBetaNotice />
 
 ## Synopsis
 
 ```shell
-kosli attest generic [IMAGE-NAME | FILE-PATH | DIR-PATH] [flags]
+kosli attest decision [IMAGE-NAME | FILE-PATH | DIR-PATH] [flags]
 ```
 
-Report a generic attestation to an artifact or a trail in a Kosli flow.  
+Record a compliance decision against a control in a Kosli trail.  
+Use this command to record the outcome of evaluating a control as part of your delivery
+pipeline — whether it was satisfied or not — attached to a specific trail with an optional artifact.
+This decision is the evidence that a governance requirement was assessed.
+
 
 The attestation can be bound to a *trail* using the trail name.
 The attestation can be bound to an *artifact* in two ways:
@@ -31,7 +41,8 @@ In other CI systems, set them explicitly to capture repository metadata.
 |    `-t`, `--artifact-type` string  |  The type of the artifact to calculate its SHA256 fingerprint. One of: [oci, docker, file, dir]. Only required if you want Kosli to calculate the fingerprint for you (i.e. when you don't specify '`--fingerprint`' on commands that allow it).  |
 |        `--attachments` strings  |  [optional] The comma-separated list of paths of attachments for the reported attestation. Attachments can be files or directories. All attachments are compressed and uploaded to Kosli's evidence vault.  |
 |    `-g`, `--commit` string  |  [conditional] The git commit for which the attestation is associated to. Becomes required when reporting an attestation for an artifact before reporting it to Kosli. (defaulted in some CIs: [docs](/integrations/ci_cd) ).  |
-|    `-C`, `--compliant`  |  [defaulted] Whether the attestation is compliant or not. A boolean flag [docs](/faq/#boolean-flags) (default true)  |
+|    `-C`, `--compliant`  |  [defaulted] Whether the attestation is compliant or not. A boolean flag [docs](/faq/#boolean-flags)  |
+|        `--control` string  |  The control identifier being evaluated (e.g. RCTL-043).  |
 |        `--description` string  |  [optional] attestation description  |
 |    `-D`, `--dry-run`  |  [optional] Run in dry-run mode. When enabled, no data is sent to Kosli and the CLI exits with 0 exit code regardless of any errors.  |
 |    `-x`, `--exclude` strings  |  [optional] The comma separated list of directories and files to exclude from fingerprinting. Can take glob patterns. Only applicable for `--artifact-type` dir.  |
@@ -39,7 +50,7 @@ In other CI systems, set them explicitly to capture repository metadata.
 |        `--external-url` stringToString  |  [optional] Add labeled reference URL for an external resource. The format is label=url (labels cannot contain '.' or '='). This flag can be set multiple times. If the resource is a file or dir, you can optionally add its fingerprint via `--external-fingerprint`  |
 |    `-F`, `--fingerprint` string  |  [conditional] The SHA256 fingerprint of the artifact to attach the attestation to. Only required if the attestation is for an artifact and `--artifact-type` and artifact name/path are not used.  |
 |    `-f`, `--flow` string  |  The Kosli flow name.  |
-|    `-h`, `--help`  |  help for generic  |
+|    `-h`, `--help`  |  help for decision  |
 |    `-n`, `--name` string  |  The name of the attestation as declared in the flow or trail yaml template.  |
 |    `-o`, `--origin-url` string  |  [optional] The url pointing to where the attestation came from or is related. (defaulted to the CI url in some CIs: [docs](/integrations/ci_cd/#defaulted-kosli-command-flags-from-ci-variables) ).  |
 |        `--redact-commit-info` strings  |  [optional] The list of commit info to be redacted before sending to Kosli. Allowed values are one or more of [author, message, branch].  |
@@ -67,70 +78,46 @@ In other CI systems, set them explicitly to capture repository metadata.
 |    `-q`, `--quiet`  |  [optional] Suppress non-critical warning messages. Errors and normal output are not affected. If both `--quiet` and `--debug` are set, `--debug` wins.  |
 
 
-## Live Examples in different CI systems
-
-<Tabs>
-	<Tab title="GitHub">
-	View an example of the `kosli attest generic` command in GitHub.
-
-	In [this YAML file](https://github.com/cyber-dojo/dashboard/blob/ff89dd9bd1bfc5441854450adcf25d5aad9508f4/.github/workflows/main.yml#L197), which created [this Kosli Event](https://app.kosli.com/cyber-dojo/flows/dashboard-ci/trails/ff89dd9bd1bfc5441854450adcf25d5aad9508f4?attestation_id=13206cf1-58ef-44b2-abd5-7ba7dd52).
-	</Tab>
-	<Tab title="GitLab">
-	View an example of the `kosli attest generic` command in GitLab.
-
-	In [this YAML file](https://gitlab.com/cyber-dojo/creator/-/blob/65fd2bfa2478534ea4bc5ccf30f6bfc6aab7550c/.gitlab/workflows/main.yml#L131), which created [this Kosli Event](https://app.kosli.com/cyber-dojo/flows/creator-ci/trails/34f14b6fc5d87ff95426046716ec8a09141c13a7?attestation_id=07c7d103-c75a-4390-8c4b-56e7e3fa).
-	</Tab>
-</Tabs>
-
 ## Examples Use Cases
 
 These examples all assume that the flags  `--api-token`, `--org`, `--host`, (and `--flow`, `--trail` when required), are [set/provided](/getting_started/install/#assigning-flags-via-environment-variables). 
 
 <AccordionGroup>
-<Accordion title="report a generic attestation about a pre-built docker artifact (kosli calculates the fingerprint)">
+<Accordion title="record a compliant decision against a trail">
 ```shell
-kosli attest generic yourDockerImageName 
-	--artifact-type docker 
+kosli attest decision 
 	--name yourAttestationName 
+	--control RCTL-043 
+	--compliant=true 
 
 ```
 </Accordion>
-<Accordion title="report a generic attestation about a pre-built docker artifact (you provide the fingerprint)">
+<Accordion title="record a non-compliant decision against a trail">
 ```shell
-kosli attest generic 
-	--fingerprint yourDockerImageFingerprint 
+kosli attest decision 
 	--name yourAttestationName 
-
-```
-</Accordion>
-<Accordion title="report a generic attestation about a trail">
-```shell
-kosli attest generic 
-	--name yourAttestationName 
-
-```
-</Accordion>
-<Accordion title="report a generic attestation about an artifact which has not been reported yet in a trail">
-```shell
-kosli attest generic 
-	--name yourTemplateArtifactName.yourAttestationName 
-	--commit yourArtifactGitCommit 
-
-```
-</Accordion>
-<Accordion title="report a generic attestation about a trail with an attachment">
-```shell
-kosli attest generic 
-	--name yourAttestationName 
-	--attachments yourAttachmentPathName 
-
-```
-</Accordion>
-<Accordion title="report a non-compliant generic attestation about a trail">
-```shell
-kosli attest generic 
-	--name yourAttestationName 
+	--control RCTL-043 
 	--compliant=false 
+
+```
+</Accordion>
+<Accordion title="record a decision linked to a specific artifact (by fingerprint)">
+```shell
+kosli attest decision 
+	--name yourAttestationName 
+	--control RCTL-043 
+	--compliant=true 
+	--fingerprint yourArtifactFingerprint 
+
+```
+</Accordion>
+<Accordion title="record a decision with an evidence attachment">
+```shell
+kosli attest decision 
+	--name yourAttestationName 
+	--control RCTL-043 
+	--compliant=true 
+	--attachments eval-report.json 
 ```
 </Accordion>
 </AccordionGroup>

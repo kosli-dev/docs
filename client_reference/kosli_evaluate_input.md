@@ -1,9 +1,12 @@
 ---
 title: "kosli evaluate input"
-beta: false
-deprecated: false
-description: "[BETA] Evaluate a local JSON input against a Rego policy."
+tag: "BETA"
+description: "Evaluate a local JSON input against a Rego policy."
 ---
+
+import CliBetaNotice from "/snippets/cli-beta-notice.mdx";
+
+<CliBetaNotice />
 
 ## Synopsis
 
@@ -11,7 +14,7 @@ description: "[BETA] Evaluate a local JSON input against a Rego policy."
 kosli evaluate input [flags]
 ```
 
-[BETA] Evaluate a local JSON input against a Rego policy.
+Evaluate a local JSON input against a Rego policy.
 Read JSON from a file or stdin and evaluate it against a Rego policy.
 The input file should contain the raw JSON object your policy expects —
 not the wrapper produced by `--show-input`. Use `jq '.input'` to extract

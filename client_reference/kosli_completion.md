@@ -1,7 +1,5 @@
 ---
 title: "kosli completion"
-beta: false
-deprecated: false
 description: "Generate completion script"
 ---
 

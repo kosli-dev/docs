@@ -1,7 +1,5 @@
 ---
 title: "kosli create attestation-type"
-beta: false
-deprecated: false
 description: "Create or update a Kosli custom attestation type."
 ---
 

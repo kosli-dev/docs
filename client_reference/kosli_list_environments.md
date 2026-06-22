@@ -1,7 +1,5 @@
 ---
 title: "kosli list environments"
-beta: false
-deprecated: false
 description: "List environments for an org."
 ---
 
@@ -65,9 +63,9 @@ kosli list environments --output=json
     "name": "aws-beta",
     "type": "ECS",
     "description": "The ECS cluster for staging cyber-dojo",
-    "last_modified_at": 1781802504.1128178,
-    "last_reported_at": 1781802504.1128178,
-    "last_changed_at": 1781797644.0009706,
+    "last_modified_at": 1782125363.8645833,
+    "last_reported_at": 1782125363.8645833,
+    "last_changed_at": 1782112044.1988242,
     "state": true,
     "include_scaling": false,
     "tags": {
@@ -86,9 +84,9 @@ kosli list environments --output=json
     "name": "aws-prod",
     "type": "ECS",
     "description": "The ECS cluster for production cyber-dojo",
-    "last_modified_at": 1781802478.7047107,
-    "last_reported_at": 1781802478.7047107,
-    "last_changed_at": 1781764378.5891397,
+    "last_modified_at": 1782125338.5887742,
+    "last_reported_at": 1782125338.5887742,
+    "last_changed_at": 1782112078.6734855,
     "state": true,
     "include_scaling": false,
     "tags": {
@@ -108,9 +106,9 @@ kosli list environments --output=json
     "name": "production",
     "type": "logical",
     "description": "Production environments for cyber-dojo",
-    "last_modified_at": 1781764378.5891397,
+    "last_modified_at": 1782112078.6734855,
     "last_reported_at": null,
-    "last_changed_at": 1781764378.5891397,
+    "last_changed_at": 1782112078.6734855,
     "state": true,
     "include_scaling": false,
     "tags": {},

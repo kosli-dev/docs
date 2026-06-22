@@ -1,7 +1,5 @@
 ---
 title: "kosli get artifact"
-beta: false
-deprecated: false
 description: "Get artifact from a specified flow"
 ---
 

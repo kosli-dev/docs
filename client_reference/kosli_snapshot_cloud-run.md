@@ -1,7 +1,5 @@
 ---
 title: "kosli snapshot cloud-run"
-beta: false
-deprecated: false
 description: "Report a snapshot of Cloud Run services and jobs in a Google Cloud project and region to Kosli.  "
 ---
 

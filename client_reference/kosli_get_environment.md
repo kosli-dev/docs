@@ -1,7 +1,5 @@
 ---
 title: "kosli get environment"
-beta: false
-deprecated: false
 description: "Get an environment's metadata."
 ---
 
@@ -52,9 +50,9 @@ kosli get environment aws-prod --output=json
   "name": "aws-prod",
   "type": "ECS",
   "description": "The ECS cluster for production cyber-dojo",
-  "last_modified_at": 1781802478.7047107,
-  "last_reported_at": 1781802478.7047107,
-  "last_changed_at": 1781764378.5891397,
+  "last_modified_at": 1782125338.5887742,
+  "last_reported_at": 1782125338.5887742,
+  "last_changed_at": 1782112078.6734855,
   "state": true,
   "include_scaling": false,
   "tags": {

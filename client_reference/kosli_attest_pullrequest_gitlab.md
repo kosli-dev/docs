@@ -1,7 +1,5 @@
 ---
 title: "kosli attest pullrequest gitlab"
-beta: false
-deprecated: false
 description: "Report a Gitlab merge request attestation to an artifact or a trail in a Kosli flow.  "
 ---
 

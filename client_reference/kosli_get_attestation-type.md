@@ -1,7 +1,5 @@
 ---
 title: "kosli get attestation-type"
-beta: false
-deprecated: false
 description: "Get a custom Kosli attestation type.  "
 ---
 

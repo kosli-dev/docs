@@ -1,7 +1,5 @@
 ---
 title: "kosli snapshot s3"
-beta: false
-deprecated: false
 description: "Report a snapshot of the content of an AWS S3 bucket to Kosli."
 ---
 

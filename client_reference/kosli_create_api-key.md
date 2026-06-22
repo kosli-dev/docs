@@ -1,7 +1,5 @@
 ---
 title: "kosli create api-key"
-beta: false
-deprecated: false
 description: "Create an API key for a service account."
 ---
 

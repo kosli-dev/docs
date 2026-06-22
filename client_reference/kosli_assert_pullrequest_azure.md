@@ -1,7 +1,5 @@
 ---
 title: "kosli assert pullrequest azure"
-beta: false
-deprecated: false
 description: "Assert an Azure DevOps pull request for a git commit exists.  "
 ---
 

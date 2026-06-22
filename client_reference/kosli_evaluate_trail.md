@@ -1,9 +1,12 @@
 ---
 title: "kosli evaluate trail"
-beta: false
-deprecated: false
-description: "[BETA] Evaluate a trail against a policy."
+tag: "BETA"
+description: "Evaluate a trail against a policy."
 ---
+
+import CliBetaNotice from "/snippets/cli-beta-notice.mdx";
+
+<CliBetaNotice />
 
 ## Synopsis
 
@@ -11,7 +14,7 @@ description: "[BETA] Evaluate a trail against a policy."
 kosli evaluate trail TRAIL-NAME [flags]
 ```
 
-[BETA] Evaluate a trail against a policy.
+Evaluate a trail against a policy.
 Fetch a single trail from Kosli and evaluate it against a Rego policy.
 The trail data is passed to the policy as `input.trail`.
 

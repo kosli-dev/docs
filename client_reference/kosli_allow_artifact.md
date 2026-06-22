@@ -1,7 +1,5 @@
 ---
 title: "kosli allow artifact"
-beta: false
-deprecated: false
 description: "Add an artifact to an environment's allowlist.  "
 ---
 

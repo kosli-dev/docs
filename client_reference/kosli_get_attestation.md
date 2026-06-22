@@ -1,7 +1,5 @@
 ---
 title: "kosli get attestation"
-beta: false
-deprecated: false
 description: "Get an attestation using its name or id.  "
 ---
 

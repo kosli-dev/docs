@@ -1,7 +1,5 @@
 ---
 title: "kosli list api-keys"
-beta: false
-deprecated: false
 description: "List API keys for a service account."
 ---
 

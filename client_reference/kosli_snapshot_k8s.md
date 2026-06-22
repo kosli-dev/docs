@@ -1,7 +1,5 @@
 ---
 title: "kosli snapshot k8s"
-beta: false
-deprecated: false
 description: "Report a snapshot of running pods in a K8S cluster or namespace(s) to Kosli.  "
 ---
 

@@ -1,7 +1,5 @@
 ---
 title: "kosli rotate api-key"
-beta: false
-deprecated: false
 description: "Rotate one or more API keys for a service account."
 ---
 

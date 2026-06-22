@@ -1,7 +1,5 @@
 ---
 title: "kosli snapshot ecs"
-beta: false
-deprecated: false
 description: "Report a snapshot of running containers in one or more AWS ECS cluster(s) to Kosli.  "
 ---
 

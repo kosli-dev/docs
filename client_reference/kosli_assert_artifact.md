@@ -1,7 +1,5 @@
 ---
 title: "kosli assert artifact"
-beta: false
-deprecated: false
 description: "Assert the compliance status of an artifact in Kosli. 
 There are three ways to choose what to assert against:
 

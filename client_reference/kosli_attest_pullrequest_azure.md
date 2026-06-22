@@ -1,7 +1,5 @@
 ---
 title: "kosli attest pullrequest azure"
-beta: false
-deprecated: false
 description: "Report an Azure Devops pull request attestation to an artifact or a trail in a Kosli flow.  "
 ---
 

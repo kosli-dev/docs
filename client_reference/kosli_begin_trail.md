@@ -1,7 +1,5 @@
 ---
 title: "kosli begin trail"
-beta: false
-deprecated: false
 description: "Begin or update a Kosli flow trail."
 ---
 
@@ -62,7 +60,7 @@ In other CI systems, set them explicitly to capture repository metadata.
 	<Tab title="GitHub">
 	View an example of the `kosli begin trail` command in GitHub.
 
-	In [this YAML file](https://github.com/cyber-dojo/runner/blob/9cc2a80e1306376b88039715dfdcfc161a0e3904/.github/workflows/main.yml#L78), which created [this Kosli Event](https://app.kosli.com/cyber-dojo/flows/runner-ci/trails/9cc2a80e1306376b88039715dfdcfc161a0e3904?attestation_id=1).
+	In [this YAML file](https://github.com/cyber-dojo/runner/blob/c248c8e2175307f6906e4a016d09b21d177923bd/.github/workflows/main.yml#L78), which created [this Kosli Event](https://app.kosli.com/cyber-dojo/flows/runner-ci/trails/c248c8e2175307f6906e4a016d09b21d177923bd?attestation_id=1).
 	</Tab>
 	<Tab title="GitLab">
 	View an example of the `kosli begin trail` command in GitLab.
