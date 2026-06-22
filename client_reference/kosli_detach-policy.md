@@ -1,7 +1,5 @@
 ---
 title: "kosli detach-policy"
-beta: false
-deprecated: false
 description: "Detach a policy from one or more Kosli environments.  "
 ---
 

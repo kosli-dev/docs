@@ -1,7 +1,5 @@
 ---
 title: "kosli assert pullrequest gitlab"
-beta: false
-deprecated: false
 description: "Assert a Gitlab merge request for a git commit exists.  "
 ---
 

@@ -1,7 +1,5 @@
 ---
 title: "kosli rename environment"
-beta: false
-deprecated: false
 description: "Rename a Kosli environment."
 ---
 

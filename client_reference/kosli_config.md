@@ -1,7 +1,5 @@
 ---
 title: "kosli config"
-beta: false
-deprecated: false
 description: "Config global Kosli flags values and store them in $HOME/.kosli .  "
 ---
 

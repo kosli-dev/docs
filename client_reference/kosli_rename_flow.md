@@ -1,7 +1,5 @@
 ---
 title: "kosli rename flow"
-beta: false
-deprecated: false
 description: "Rename a Kosli flow."
 ---
 

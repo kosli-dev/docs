@@ -1,7 +1,5 @@
 ---
 title: "kosli attest pullrequest bitbucket"
-beta: false
-deprecated: false
 description: "Report a Bitbucket pull request attestation to an artifact or a trail in a Kosli flow.  "
 ---
 

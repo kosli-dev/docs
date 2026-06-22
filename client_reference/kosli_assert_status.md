@@ -1,7 +1,5 @@
 ---
 title: "kosli assert status"
-beta: false
-deprecated: false
 description: "Assert the status of a Kosli server."
 ---
 

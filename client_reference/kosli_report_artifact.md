@@ -1,13 +1,15 @@
 ---
 title: "kosli report artifact"
-beta: false
-deprecated: true
+tag: "DEPRECATED"
 description: "Report an artifact creation to a Kosli flow.  "
 ---
 
-<Warning>
-**kosli report artifact** is deprecated. see kosli attest commands  Deprecated commands will be removed in a future release.
-</Warning>
+import CliDeprecatedNotice from "/snippets/cli-deprecated-notice.mdx";
+
+<CliDeprecatedNotice />
+
+see kosli attest commands
+
 ## Synopsis
 
 ```shell

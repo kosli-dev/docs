@@ -1,7 +1,5 @@
 ---
 title: "kosli snapshot paths"
-beta: false
-deprecated: false
 description: "Report a snapshot of artifacts running in specific filesystem paths to Kosli.  "
 ---
 

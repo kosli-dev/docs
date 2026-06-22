@@ -1,7 +1,5 @@
 ---
 title: "kosli attach-policy"
-beta: false
-deprecated: false
 description: "Attach a policy to one or more Kosli environments.  "
 ---
 

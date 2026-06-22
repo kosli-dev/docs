@@ -1,7 +1,5 @@
 ---
 title: "kosli version"
-beta: false
-deprecated: false
 description: "Print the version of a Kosli CLI.  "
 ---
 

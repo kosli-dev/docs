@@ -1,7 +1,5 @@
 ---
 title: "kosli enable beta"
-beta: false
-deprecated: false
 description: "Enable beta features for an organization."
 ---
 

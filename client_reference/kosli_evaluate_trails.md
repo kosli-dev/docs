@@ -1,9 +1,12 @@
 ---
 title: "kosli evaluate trails"
-beta: false
-deprecated: false
-description: "[BETA] Evaluate multiple trails against a policy."
+tag: "BETA"
+description: "Evaluate multiple trails against a policy."
 ---
+
+import CliBetaNotice from "/snippets/cli-beta-notice.mdx";
+
+<CliBetaNotice />
 
 ## Synopsis
 
@@ -11,7 +14,7 @@ description: "[BETA] Evaluate multiple trails against a policy."
 kosli evaluate trails TRAIL-NAME [TRAIL-NAME...] [flags]
 ```
 
-[BETA] Evaluate multiple trails against a policy.
+Evaluate multiple trails against a policy.
 Fetch multiple trails from Kosli and evaluate them together against a Rego policy.
 The trail data is passed to the policy as `input.trails` (an array), unlike
 `evaluate trail` which passes `input.trail` (a single object).

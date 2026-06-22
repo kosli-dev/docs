@@ -1,7 +1,5 @@
 ---
 title: "kosli list attestation-types"
-beta: false
-deprecated: false
 description: "List all Kosli attestation types for an org."
 ---
 

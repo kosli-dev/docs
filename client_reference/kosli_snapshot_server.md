@@ -1,13 +1,15 @@
 ---
 title: "kosli snapshot server"
-beta: false
-deprecated: true
+tag: "DEPRECATED"
 description: "Report a snapshot of artifacts running in a server environment to Kosli.  "
 ---
 
-<Warning>
-**kosli snapshot server** is deprecated. use 'kosli snapshot paths' instead  Deprecated commands will be removed in a future release.
-</Warning>
+import CliDeprecatedNotice from "/snippets/cli-deprecated-notice.mdx";
+
+<CliDeprecatedNotice />
+
+use 'kosli snapshot paths' instead
+
 ## Synopsis
 
 ```shell

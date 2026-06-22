@@ -1,13 +1,13 @@
 ---
 title: "kosli list approvals"
-beta: false
-deprecated: true
+tag: "DEPRECATED"
 description: "List approvals in a flow."
 ---
 
-<Warning>
-**kosli list approvals** is deprecated. this command is deprecated and will be removed in a future release.  Deprecated commands will be removed in a future release.
-</Warning>
+import CliDeprecatedNotice from "/snippets/cli-deprecated-notice.mdx";
+
+<CliDeprecatedNotice />
+
 ## Synopsis
 
 ```shell

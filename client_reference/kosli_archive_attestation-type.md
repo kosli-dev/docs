@@ -1,7 +1,5 @@
 ---
 title: "kosli archive attestation-type"
-beta: false
-deprecated: false
 description: "Archive a custom Kosli attestation type."
 ---
 

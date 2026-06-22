@@ -1,7 +1,5 @@
 ---
 title: "kosli create flow"
-beta: false
-deprecated: false
 description: "Create or update a Kosli flow."
 ---
 
@@ -47,7 +45,7 @@ You can specify flow parameters in flags.
 	<Tab title="GitHub">
 	View an example of the `kosli create flow` command in GitHub.
 
-	In [this YAML file](https://github.com/cyber-dojo/runner/blob/9cc2a80e1306376b88039715dfdcfc161a0e3904/.github/workflows/main.yml#L62)
+	In [this YAML file](https://github.com/cyber-dojo/runner/blob/c248c8e2175307f6906e4a016d09b21d177923bd/.github/workflows/main.yml#L62)
 	</Tab>
 	<Tab title="GitLab">
 	View an example of the `kosli create flow` command in GitLab.

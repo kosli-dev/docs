@@ -1,7 +1,5 @@
 ---
 title: "kosli list artifacts"
-beta: false
-deprecated: false
 description: "List artifacts in a flow or repo. "
 ---
 

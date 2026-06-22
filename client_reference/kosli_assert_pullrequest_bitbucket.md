@@ -1,7 +1,5 @@
 ---
 title: "kosli assert pullrequest bitbucket"
-beta: false
-deprecated: false
 description: "Assert a Bitbucket pull request for a git commit exists.  "
 ---
 

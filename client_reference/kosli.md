@@ -1,7 +1,5 @@
 ---
 title: "kosli"
-beta: false
-deprecated: false
 description: "The Kosli CLI."
 ---
 

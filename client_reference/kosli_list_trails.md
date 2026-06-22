@@ -1,7 +1,5 @@
 ---
 title: "kosli list trails"
-beta: false
-deprecated: false
 description: "List Trails of an org."
 ---
 

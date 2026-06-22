@@ -1,7 +1,5 @@
 ---
 title: "kosli attest jira"
-beta: false
-deprecated: false
 description: "Report a jira attestation to an artifact or a trail in a Kosli flow.  "
 ---
 

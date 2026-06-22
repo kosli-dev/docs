@@ -1,7 +1,5 @@
 ---
 title: "kosli archive flow"
-beta: false
-deprecated: false
 description: "Archive a Kosli flow."
 ---
 

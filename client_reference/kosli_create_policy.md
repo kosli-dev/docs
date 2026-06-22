@@ -1,7 +1,5 @@
 ---
 title: "kosli create policy"
-beta: false
-deprecated: false
 description: "Create or update a Kosli policy."
 ---
 

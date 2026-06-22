@@ -1,7 +1,5 @@
 ---
 title: "kosli get policy"
-beta: false
-deprecated: false
 description: "Get a policy's metadata."
 ---
 

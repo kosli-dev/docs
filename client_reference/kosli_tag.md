@@ -1,7 +1,5 @@
 ---
 title: "kosli tag"
-beta: false
-deprecated: false
 description: "Tag a resource in Kosli with key-value pairs.  "
 ---
 

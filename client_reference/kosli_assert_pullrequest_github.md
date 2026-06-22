@@ -1,7 +1,5 @@
 ---
 title: "kosli assert pullrequest github"
-beta: false
-deprecated: false
 description: "Assert a Github pull request for a git commit exists.  "
 ---
 

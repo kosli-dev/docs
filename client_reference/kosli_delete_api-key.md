@@ -1,7 +1,5 @@
 ---
 title: "kosli delete api-key"
-beta: false
-deprecated: false
 description: "Delete one or more API keys for a service account."
 ---
 

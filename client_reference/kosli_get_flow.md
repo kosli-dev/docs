@@ -1,7 +1,5 @@
 ---
 title: "kosli get flow"
-beta: false
-deprecated: false
 description: "Get the metadata of a specific flow."
 ---
 

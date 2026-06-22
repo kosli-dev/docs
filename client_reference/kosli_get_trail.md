@@ -1,7 +1,5 @@
 ---
 title: "kosli get trail"
-beta: false
-deprecated: false
 description: "Get the metadata of a specific trail."
 ---
 

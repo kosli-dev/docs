@@ -1,7 +1,5 @@
 ---
 title: "kosli list flows"
-beta: false
-deprecated: false
 description: "List flows for an org."
 ---
 

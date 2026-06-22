@@ -1,13 +1,13 @@
 ---
 title: "kosli assert approval"
-beta: false
-deprecated: true
+tag: "DEPRECATED"
 description: "Assert an artifact in Kosli has been approved for deployment.  "
 ---
 
-<Warning>
-**kosli assert approval** is deprecated. this command is deprecated and will be removed in a future release.  Deprecated commands will be removed in a future release.
-</Warning>
+import CliDeprecatedNotice from "/snippets/cli-deprecated-notice.mdx";
+
+<CliDeprecatedNotice />
+
 ## Synopsis
 
 ```shell

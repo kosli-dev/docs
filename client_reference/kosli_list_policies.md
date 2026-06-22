@@ -1,7 +1,5 @@
 ---
 title: "kosli list policies"
-beta: false
-deprecated: false
 description: "List environment policies for an org."
 ---
 

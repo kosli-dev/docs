@@ -1,13 +1,13 @@
 ---
 title: "kosli report approval"
-beta: false
-deprecated: true
+tag: "DEPRECATED"
 description: "Report an approval of deploying an artifact to an environment to Kosli.  "
 ---
 
-<Warning>
-**kosli report approval** is deprecated. this command is deprecated and will be removed in a future release.  Deprecated commands will be removed in a future release.
-</Warning>
+import CliDeprecatedNotice from "/snippets/cli-deprecated-notice.mdx";
+
+<CliDeprecatedNotice />
+
 ## Synopsis
 
 ```shell

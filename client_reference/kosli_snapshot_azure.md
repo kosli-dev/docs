@@ -1,7 +1,5 @@
 ---
 title: "kosli snapshot azure"
-beta: false
-deprecated: false
 description: "Report a snapshot of running Azure web apps and function apps in an Azure resource group to Kosli.  "
 ---
 
