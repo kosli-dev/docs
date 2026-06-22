@@ -1,0 +1,178 @@
+---
+title: Overview
+description: Use the Kosli TypeScript SDK to interact with the Kosli API from Node.js, Bun, Deno, and browser environments.
+---
+
+<Warning>
+**Early access.** The TypeScript SDK is an unsupported work in progress and may change or be removed without notice. It is provided for evaluation only - do not use it in production.
+</Warning>
+
+The `@kosli/sdk` package provides a type-safe TypeScript client for the Kosli API. It supports Node.js, Bun, Deno, and all modern browsers.
+
+## Installation
+
+Install using your preferred package manager:
+
+<CodeGroup>
+```bash npm
+npm add @kosli/sdk
+```
+
+```bash pnpm
+pnpm add @kosli/sdk
+```
+
+```bash bun
+bun add @kosli/sdk
+```
+
+```bash yarn
+yarn add @kosli/sdk
+```
+</CodeGroup>
+
+<Note>
+The package is published as an ES Module (ESM) only. CommonJS projects must use dynamic import:
+
+```typescript
+const { Kosli } = await import("@kosli/sdk");
+```
+</Note>
+
+## Quick start
+
+```typescript
+import { Kosli } from "@kosli/sdk";
+
+const kosli = new Kosli({
+  httpBearer: process.env["KOSLI_API_KEY"] ?? "",
+});
+
+const trails = await kosli.trails.list({}, {
+  org: "my-org",
+  flowName: "my-flow",
+});
+
+console.log(trails);
+```
+
+## Authentication
+
+Set your API key when constructing the client. This applies it to all requests:
+
+```typescript
+import { Kosli } from "@kosli/sdk";
+
+const kosli = new Kosli({
+  httpBearer: process.env["KOSLI_API_KEY"] ?? "",
+});
+```
+
+Some operations accept the API key at the call site instead. Use this when you need per-request credentials:
+
+```typescript
+const result = await kosli.trails.list(
+  { httpBearer: process.env["KOSLI_API_KEY"] ?? "" }, // security
+  { org: "my-org", flowName: "my-flow" },             // request params
+);
+```
+
+See [personal API keys](/user/personal_api_keys) and [service accounts](/administration/authentication/service_accounts) for how to create API keys.
+
+## Server selection
+
+By default the SDK targets the EU region. Pass `server: "us"` to use the US region:
+
+```typescript
+const kosli = new Kosli({
+  httpBearer: process.env["KOSLI_API_KEY"] ?? "",
+  server: "us",
+});
+```
+
+| Name | URL | Region |
+|------|-----|--------|
+| `"eu"` | `https://app.kosli.com/api/v2` | EU (default) |
+| `"us"` | `https://app.us.kosli.com/api/v2` | US |
+
+To point at a custom URL (e.g. a proxy or local instance), use `serverURL` instead:
+
+```typescript
+const kosli = new Kosli({
+  httpBearer: process.env["KOSLI_API_KEY"] ?? "",
+  serverURL: "https://app.kosli.com/api/v2",
+});
+```
+
+## Available resources
+
+The client exposes the following resource groups:
+
+| Resource | Description |
+|----------|-------------|
+| `kosli.actions` | Environment and flow actions |
+| `kosli.allowlists` | Artifact allowlists |
+| `kosli.approvals` | Approvals |
+| `kosli.artifacts` | Artifact reporting and lookup |
+| `kosli.attestations` | Attestations (custom, JUnit, Jira, Snyk, Sonar, pull request) |
+| `kosli.builds` | Builds |
+| `kosli.customAttestationTypes` | Custom attestation type management |
+| `kosli.deployments` | Deployments |
+| `kosli.environments` | Environment management and reporting |
+| `kosli.flows` | Flow management |
+| `kosli.organizations` | Organization settings and notifications |
+| `kosli.policies` | Policy management |
+| `kosli.repos` | Repository live artifact lookup |
+| `kosli.schemas` | Policy and template schemas |
+| `kosli.search` | Artifact search by SHA or fingerprint |
+| `kosli.serviceAccounts` | Service account API key management |
+| `kosli.snapshots` | Environment snapshots |
+| `kosli.tags` | Tag management |
+| `kosli.trails` | Trail management |
+| `kosli.user` | User settings |
+
+## Standalone functions
+
+All methods are also available as individually importable functions, which allows bundlers to tree-shake unused code:
+
+```typescript
+import { KosliCore } from "@kosli/sdk/core.js";
+import { trailsList } from "@kosli/sdk/funcs/trails-list.js";
+
+const kosli = new KosliCore({
+  httpBearer: process.env["KOSLI_API_KEY"] ?? "",
+});
+
+const result = await trailsList(kosli, {}, {
+  org: "my-org",
+  flowName: "my-flow",
+});
+```
+
+## Supported runtimes
+
+The SDK requires ECMAScript 2020 or later and the Web Fetch API. Supported environments:
+
+- **Browsers**: Chrome, Safari, Edge, Firefox (evergreen)
+- **Node.js**: active and maintenance LTS releases (v18, v20+)
+- **Bun**: v1 and above
+- **Deno**: v1.39+
+
+For TypeScript projects, add `"lib": ["es2020", "dom", "dom.iterable"]` to your `tsconfig.json` to get full type support for async iterables, streams, and fetch-related APIs.
+
+## Debugging
+
+Pass a logger to emit debug output for all requests and responses:
+
+```typescript
+const kosli = new Kosli({
+  httpBearer: process.env["KOSLI_API_KEY"] ?? "",
+  debugLogger: console,
+});
+```
+
+Alternatively, set the environment variable `KOSLI_DEBUG=true`.
+
+<Warning>
+Debug logging prints headers including your API key in plain text. Use it only during local development.
+</Warning>
