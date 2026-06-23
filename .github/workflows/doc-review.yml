@@ -39,7 +39,7 @@ jobs:
           fetch-depth: 0
 
       - name: Run Claude doc review
-        uses: anthropics/claude-code-action@806af32823ef69c8ef357086c573a902af641307 # v1.0.151
+        uses: anthropics/claude-code-action@30544b674398ee15c84819bd87caf8a87e8c7b55 # v1.0.154
         env:
           GH_TOKEN: ${{ github.token }}
         with:
