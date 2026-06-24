@@ -63,9 +63,9 @@ kosli list environments --output=json
     "name": "aws-beta",
     "type": "ECS",
     "description": "The ECS cluster for staging cyber-dojo",
-    "last_modified_at": 1782125363.8645833,
-    "last_reported_at": 1782125363.8645833,
-    "last_changed_at": 1782112044.1988242,
+    "last_modified_at": 1782296364.0559509,
+    "last_reported_at": 1782296364.0559509,
+    "last_changed_at": 1782295043.9717822,
     "state": true,
     "include_scaling": false,
     "tags": {
@@ -84,9 +84,9 @@ kosli list environments --output=json
     "name": "aws-prod",
     "type": "ECS",
     "description": "The ECS cluster for production cyber-dojo",
-    "last_modified_at": 1782125338.5887742,
-    "last_reported_at": 1782125338.5887742,
-    "last_changed_at": 1782112078.6734855,
+    "last_modified_at": 1782296338.5634644,
+    "last_reported_at": 1782296338.5634644,
+    "last_changed_at": 1782295018.5650613,
     "state": true,
     "include_scaling": false,
     "tags": {
@@ -106,9 +106,9 @@ kosli list environments --output=json
     "name": "production",
     "type": "logical",
     "description": "Production environments for cyber-dojo",
-    "last_modified_at": 1782112078.6734855,
+    "last_modified_at": 1782295018.5650613,
     "last_reported_at": null,
-    "last_changed_at": 1782112078.6734855,
+    "last_changed_at": 1782295018.5650613,
     "state": true,
     "include_scaling": false,
     "tags": {},
@@ -117,6 +117,20 @@ kosli list environments --output=json
       "aws-prod",
       "terraform-state-differ-prod"
     ]
+  },
+  {
+    "org": "cyber-dojo",
+    "name": "terraform-drift-detection-staging",
+    "type": "server",
+    "description": "For the detection of drift of the Infrastructure-as-code components",
+    "last_modified_at": 1782296082.4653108,
+    "last_reported_at": null,
+    "last_changed_at": null,
+    "state": null,
+    "include_scaling": false,
+    "tags": {},
+    "policies": [],
+    "included_environments": null
   },
   {
     "org": "cyber-dojo",
