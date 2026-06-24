@@ -204,7 +204,7 @@ If you need to act on Kosli data programmatically — for example, to fail a pip
 * **Exit codes.** Commands like `kosli assert` exit non-zero when the assertion fails, so you can branch on `$?` directly without parsing any output.
 * **Structured output.** Pass `--output json` to any `get`, `list`, `search`, or `diff` command and read the documented JSON fields (e.g. `compliant`) rather than grepping the text rendering.
 
-As a rule of thumb: if you're tempted to `grep COMPLIANT` or `grep NON-COMPLIANT` in a script (or `INCOMPLIANT` — yes, the label has changed), switch to an exit-code check or a JSON field — it will keep working across CLI upgrades.
+As a rule of thumb: if you're tempted to `grep COMPLIANT` or `grep NON-COMPLIANT` in a script, switch to the exit-code check or JSON field - it will keep working across CLI upgrades.
 
 ## What you've accomplished
 
