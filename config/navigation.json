@@ -27,8 +27,7 @@
             "getting_started/attestations",
             "getting_started/environments",
             "getting_started/policies",
-            "getting_started/enforce_policies",
-            "getting_started/approvals"
+            "getting_started/enforce_policies"
           ]
         },
         {

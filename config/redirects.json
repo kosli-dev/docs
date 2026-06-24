@@ -1,5 +1,9 @@
 [
   {
+    "source": "/getting_started/approvals",
+    "destination": "/getting_started/attestations"
+  },
+  {
     "source": "/ci-defaults",
     "destination": "/integrations/ci_cd"
   },
