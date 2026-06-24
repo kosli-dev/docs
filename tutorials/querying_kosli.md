@@ -195,6 +195,17 @@ You can also diff two different environments to see what's running in one but no
 kosli diff snapshots aws-beta~3 aws-prod
 ```
 
+## Don't parse the raw CLI output
+
+The human-readable output you see above (tables, `COMPLIANT`/`NON-COMPLIANT` labels, history lines, etc.) is intended for people, not scripts. The exact wording, casing, and field labels may change between CLI versions to improve clarity or to stay aligned with the UI, and parsing this text in scripts or CI gates will silently break when it does.
+
+If you need to act on Kosli data programmatically — for example, to fail a pipeline when an artifact is non-compliant — use one of the stable interfaces instead:
+
+* **Exit codes.** Commands like `kosli assert` exit non-zero when the assertion fails, so you can branch on `$?` directly without parsing any output.
+* **Structured output.** Pass `--output json` to any `get`, `list`, `search`, or `diff` command and read the documented JSON fields (e.g. `compliant`) rather than grepping the text rendering.
+
+As a rule of thumb: if you're tempted to `grep COMPLIANT` or `grep INCOMPLIANT` in a script, switch to an exit-code check or a JSON field — it will keep working across CLI upgrades.
+
 ## What you've accomplished
 
 You have searched for an artifact by commit SHA, inspected a flow's artifact list, fetched an artifact's full history, browsed environment snapshots, and diffed two snapshots to see exactly what changed.
