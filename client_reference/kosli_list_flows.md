@@ -67,7 +67,7 @@ kosli list flows --output=json
     "description": "Custom exercises choices",
     "visibility": "private",
     "org": "cyber-dojo",
-    "template": "version: 1\n\ntrail:\n  attestations:\n    - name: pull-request\n      type: pull_request\n  artifacts:\n    - name: custom-start-points\n      attestations:\n        - name: snyk-container-scan\n          type: generic\n",
+    "template": "version: 1\n\ntrail:\n  attestations:\n    - name: pull-request\n      type: pull_request\n  artifacts:\n    - name: custom-start-points\n      attestations:\n        - name: snyk-container-scan\n          type: decision\n",
     "repo_url": "https://github.com/cyber-dojo/custom-start-points",
     "tags": {
       "ci": "github",
@@ -81,7 +81,7 @@ kosli list flows --output=json
     "description": "UX for a group practice dashboard",
     "visibility": "private",
     "org": "cyber-dojo",
-    "template": "version: 1\n\ntrail:\n  attestations:\n    - name: pull-request\n      type: pull_request\n  artifacts:\n    - name: dashboard\n      attestations:\n        - name: rubocop-lint\n          type: junit\n        - name: snyk-container-scan\n          type: generic\n        - name: sonarcloud-scan\n          type: sonar\n        - name: unit-test\n          type: junit\n        - name: unit-test-coverage\n          type: generic\n",
+    "template": "version: 1\n\ntrail:\n  attestations:\n    - name: pull-request\n      type: pull_request\n  artifacts:\n    - name: dashboard\n      attestations:\n        - name: rubocop-lint\n          type: junit\n        - name: snyk-container-scan\n          type: decision\n        - name: sonarcloud-scan\n          type: sonar\n        - name: unit-test\n          type: junit\n        - name: unit-test-coverage\n          type: generic\n",
     "repo_url": "https://github.com/cyber-dojo/dashboard",
     "tags": {
       "ci": "github",
@@ -95,7 +95,7 @@ kosli list flows --output=json
     "description": "Diff files from two traffic-lights",
     "visibility": "private",
     "org": "cyber-dojo",
-    "template": "version: 1\n\ntrail:\n  attestations:\n    - name: pull-request\n      type: pull_request\n  artifacts:\n    - name: differ\n      attestations:\n        - name: rubocop-lint\n          type: junit\n        - name: unit-test\n          type: junit\n        - name: unit-test-metrics\n          type: custom:test-metrics\n        - name: unit-test-coverage-metrics\n          type: custom:coverage-metrics\n        - name: integration-test\n          type: junit\n        - name: integration-test-metrics\n          type: custom:test-metrics\n        - name: integration-test-coverage-metrics\n          type: custom:coverage-metrics\n        - name: sonarcloud-scan\n          type: sonar\n        - name: snyk-container-scan\n          type: generic\n",
+    "template": "version: 1\n\ntrail:\n  attestations:\n    - name: pull-request\n      type: pull_request\n  artifacts:\n    - name: differ\n      attestations:\n        - name: rubocop-lint\n          type: junit\n        - name: unit-test\n          type: junit\n        - name: unit-test-metrics\n          type: custom:test-metrics\n        - name: unit-test-coverage-metrics\n          type: custom:coverage-metrics\n        - name: integration-test\n          type: junit\n        - name: integration-test-metrics\n          type: custom:test-metrics\n        - name: integration-test-coverage-metrics\n          type: custom:coverage-metrics\n        - name: sonarcloud-scan\n          type: sonar\n        - name: snyk-container-scan\n          type: decision\n",
     "repo_url": "https://github.com/cyber-dojo/differ",
     "tags": {
       "ci": "github",
@@ -127,7 +127,7 @@ kosli list flows --output=json
     "description": "Exercises choices",
     "visibility": "private",
     "org": "cyber-dojo",
-    "template": "version: 1\n\ntrail:\n  attestations:\n    - name: pull-request\n      type: pull_request\n  artifacts:\n    - name: exercises-start-points\n      attestations:\n        - name: snyk-container-scan\n          type: generic\n",
+    "template": "version: 1\n\ntrail:\n  attestations:\n    - name: pull-request\n      type: pull_request\n  artifacts:\n    - name: exercises-start-points\n      attestations:\n        - name: snyk-container-scan\n          type: decision\n",
     "repo_url": "https://github.com/cyber-dojo/exercises-start-points",
     "tags": {
       "ci": "github",
@@ -141,7 +141,7 @@ kosli list flows --output=json
     "description": "Language+TestFramework choices",
     "visibility": "private",
     "org": "cyber-dojo",
-    "template": "version: 1\n\ntrail:\n  attestations:\n    - name: pull-request\n      type: pull_request\n  artifacts:\n    - name: languages-start-points\n      attestations:\n        - name: snyk-container-scan\n          type: generic\n",
+    "template": "version: 1\n\ntrail:\n  attestations:\n    - name: pull-request\n      type: pull_request\n  artifacts:\n    - name: languages-start-points\n      attestations:\n        - name: snyk-container-scan\n          type: decision\n",
     "repo_url": "https://github.com/cyber-dojo/languages-start-points",
     "tags": {
       "ci": "github",
@@ -191,7 +191,7 @@ kosli list flows --output=json
     "description": "Reverse proxy",
     "visibility": "private",
     "org": "cyber-dojo",
-    "template": "version: 1\n\ntrail:\n  attestations:\n    - name: pull-request\n      type: pull_request\n  artifacts:\n    - name: nginx\n      attestations:\n        - name: snyk-container-scan\n          type: generic\n",
+    "template": "version: 1\n\ntrail:\n  attestations:\n    - name: pull-request\n      type: pull_request\n  artifacts:\n    - name: nginx\n      attestations:\n        - name: snyk-container-scan\n          type: decision\n",
     "repo_url": "https://github.com/cyber-dojo/nginx",
     "tags": {
       "ci": "github",
@@ -205,7 +205,7 @@ kosli list flows --output=json
     "description": "Promotes sets of Artifacts from aws-beta to aws-prod",
     "visibility": "private",
     "org": "cyber-dojo",
-    "template": "version: 1\n\ntrail:\n  attestations:\n    - name: one-promotion\n      type: generic\n",
+    "template": "version: 1\n\ntrail:\n  attestations:\n    - name: all-promotions\n      type: generic\n",
     "repo_url": "https://github.com/cyber-dojo/aws-prod-co-promotion",
     "tags": {
       "ci": "github",
@@ -228,7 +228,7 @@ kosli list flows --output=json
     "description": "Test runner",
     "visibility": "private",
     "org": "cyber-dojo",
-    "template": "version: 1\n\ntrail:\n  attestations:\n    - name: pull-request\n      type: pull_request\n  artifacts:\n    - name: runner\n      attestations:\n        - name: rubocop-lint\n          type: junit\n\n        - name: snyk-container-scan\n          type: generic\n\n        - name: unit-test\n          type: junit\n        - name: unit-test-metrics\n          type: custom:test-metrics\n        - name: unit-test-coverage-metrics\n          type: custom:coverage-metrics\n\n        - name: integration-test\n          type: junit\n        - name: integration-test-metrics\n          type: custom:test-metrics\n        - name: integration-test-coverage-metrics\n          type: custom:coverage-metrics\n",
+    "template": "version: 1\n\ntrail:\n  attestations:\n    - name: pull-request\n      type: pull_request\n  artifacts:\n    - name: runner\n      attestations:\n        - name: rubocop-lint\n          type: junit\n\n        - name: snyk-container-scan\n          type: decision\n\n        - name: unit-test\n          type: junit\n        - name: unit-test-metrics\n          type: custom:test-metrics\n        - name: unit-test-coverage-metrics\n          type: custom:coverage-metrics\n\n        - name: integration-test\n          type: junit\n        - name: integration-test-metrics\n          type: custom:test-metrics\n        - name: integration-test-coverage-metrics\n          type: custom:coverage-metrics\n",
     "repo_url": "https://github.com/cyber-dojo/runner",
     "tags": {
       "ci": "github",
@@ -242,7 +242,7 @@ kosli list flows --output=json
     "description": "Group/Kata model+persistence",
     "visibility": "private",
     "org": "cyber-dojo",
-    "template": "version: 1\n\ntrail:\n  attestations:\n    - name: pull-request\n      type: pull_request\n  artifacts:\n    - name: saver\n      attestations:\n        - name: snyk-container-scan\n          type: generic\n\n        - name: unit-test\n          type: junit\n        - name: unit-test-metrics\n          type: custom:test-metrics\n        - name: unit-test-coverage-metrics\n          type: custom:coverage-metrics\n        - name: integration-test\n          type: junit\n        - name: integration-test-metrics\n          type: custom:test-metrics\n        - name: integration-test-coverage-metrics\n          type: custom:coverage-metrics\n\n",
+    "template": "version: 1\n\ntrail:\n  attestations:\n    - name: pull-request\n      type: pull_request\n  artifacts:\n    - name: saver\n      attestations:\n        - name: snyk-container-scan\n          type: decision\n\n        - name: unit-test\n          type: junit\n        - name: unit-test-metrics\n          type: custom:test-metrics\n        - name: unit-test-coverage-metrics\n          type: custom:coverage-metrics\n        - name: integration-test\n          type: junit\n        - name: integration-test-metrics\n          type: custom:test-metrics\n        - name: integration-test-coverage-metrics\n          type: custom:coverage-metrics\n\n",
     "repo_url": "https://github.com/cyber-dojo/saver",
     "tags": {
       "ci": "github",
@@ -321,12 +321,12 @@ kosli list flows --output=json
     }
   },
   {
-    "name": "terraform-base-infra-prs",
-    "description": "Kosli flow to track terraform PRs for base infra",
+    "name": "terraform-apply-prod-terraform-base-infra",
+    "description": "Kosli flow to track terraform apply being run on the base infra",
     "visibility": "private",
     "org": "cyber-dojo",
-    "template": "version: 1\ntrail:\n  attestations:\n  - name: tf-plan\n    type: generic\n  - name: tf-apply-plan\n    type: generic\n  - name: pull-request\n    type: pull_request\n  - name: tf-validation\n    type: generic",
-    "repo_url": "",
+    "template": "version: 1\r\ntrail:\r\n  attestations:\r\n    - name: terraform-plan\r\n      type: generic\r\n    - name: terraform-apply\r\n      type: generic\r\n    - name: pull-request\r\n      type: pull_request\r\n  artifacts:\r\n    - name: terraform-state\r\n    - name: drift-plan\r\n",
+    "repo_url": "https://github.com/cyber-dojo/terraform-base-infra",
     "tags": {}
   },
   {
@@ -334,7 +334,7 @@ kosli list flows --output=json
     "description": "UX for practicing TDD",
     "visibility": "private",
     "org": "cyber-dojo",
-    "template": "version: 1\n\ntrail:\n  attestations:\n    - name: pull-request\n      type: pull_request\n\n  artifacts:\n    - name: web\n      attestations:\n        - name: snyk-container-scan\n          type: generic\n        - name: provenance-attestation\n          type: generic\n        - name: sbom\n          type: generic\n",
+    "template": "version: 1\n\ntrail:\n  attestations:\n    - name: pull-request\n      type: pull_request\n\n  artifacts:\n    - name: web\n      attestations:\n        - name: snyk-container-scan\n          type: decision\n        - name: provenance-attestation\n          type: generic\n        - name: sbom\n          type: generic\n",
     "repo_url": "https://github.com/cyber-dojo/web",
     "tags": {
       "ci": "github",

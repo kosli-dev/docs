@@ -70,7 +70,7 @@ The attestation can be bound to an *artifact* in two ways:
 	<Tab title="GitHub">
 	View an example of the `kosli attest pullrequest github` command in GitHub.
 
-	In [this YAML file](https://github.com/cyber-dojo/differ/blob/3ab1ef84cb2243f184502ddb7f491e24d4ced1c1/.github/workflows/main.yml#L81), which created [this Kosli Event](https://app.kosli.com/cyber-dojo/flows/differ-ci/trails/3ab1ef84cb2243f184502ddb7f491e24d4ced1c1?attestation_id=8f8068e0-2e48-4f20-b5a2-3869516e).
+	In [this YAML file](https://github.com/cyber-dojo/differ/blob/3e563eacf76b48caaf2f19f29472544199df8a00/.github/workflows/main.yml#L81), which created [this Kosli Event](https://app.kosli.com/cyber-dojo/flows/differ-ci/trails/3e563eacf76b48caaf2f19f29472544199df8a00?attestation_id=8ce50c5d-b210-4e3c-b93f-1bc22f01).
 	</Tab>
 </Tabs>
 
