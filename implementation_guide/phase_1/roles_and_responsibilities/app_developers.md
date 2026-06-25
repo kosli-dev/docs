@@ -73,7 +73,7 @@ To perform the responsibilities described above, users in this role typically ne
 
 Developers typically need to report attestations and manage flows for their applications. The Member role enables this. Some developers may only need visibility into deployments and compliance status, making the Reader role sufficient.
 
-Learn more about [Kosli user roles and permissions]().
+Learn more about [Kosli user roles and permissions](/administration/managing_users/roles_in_kosli).
 
 ## Where to start
 - [**Getting Started**](): Follow this if you're curious about how Kosli works behind the scenes

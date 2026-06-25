@@ -80,7 +80,7 @@ To perform the responsibilities described above, users in this role typically ne
 
 Platform engineers need to set up flows, manage service accounts, configure integrations, and implement Kosli across teams. The Member role provides these capabilities. Lead platform engineers who manage the overall organizational setup may require Admin access to manage users and organization settings.
 
-Learn more about [Kosli user roles and permissions]().
+Learn more about [Kosli user roles and permissions](/administration/managing_users/roles_in_kosli).
 
 ## Where to start
 
