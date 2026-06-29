@@ -9,7 +9,6 @@ rss: true
 ## New features
 
 - **Membership audit log page** — the membership/role-change history now has a dedicated **Audit Log** page under Settings → User Management, with search, filters (event type, role, source), date range, and sortable columns.
-- **Stronger code-review control (SDLC-CTRL-0007)** — now requires every commit in the merged PR to be signed (`verified == true`) and the PR to merge into the protected branch, building on the new `verified`, `signature_state`, and `base_ref` fields in `pull_request` attestations.
 - **`pull_request` attestation fields** — V2 `pull_request` attestations now carry per-commit `verified` / `signature_state` and a PR `base_ref` (populated by CLI v2.27.0+), enabling Rego policies for signed commits and "merged into main".
 - **Service account CRUD API** — new JSON endpoints under `/service-accounts/{org}` to create, list, get, update, and delete service accounts, complementing the existing API-key endpoints.
 
@@ -18,7 +17,6 @@ rss: true
 - **Artifact name on control decisions** — the decisions list and decision tray now show a human-readable artifact name alongside the fingerprint.
 - **Decision list columns** — added **control version** and **attestation name** columns to the decisions list.
 - **Auto-run deletability check** — initiating an org-deletion plan now runs the deletability check automatically, with an approval-blocker warning banner on each plan card when checks fail; the manual button is renamed **Re-check deletability**.
-- **Archived date for shared orgs** — the Archived tab on `/organizations/shared` now shows an **Archived on** column.
 - **Controls UI refresh** — the controls list, control detail, control edit/new form, and version list pages have been restyled with new layouts, filtering, and interaction improvements.
 - **Faster environment snapshot listing** — `GET /api/v2/snapshots/{org}/{env_name}` (and `kosli list snapshots`) is significantly faster on large/long-lived environments by eliminating per-snapshot ordinal seeks and discarded counts.
 - **Display name fallback** — audit log, controls, and trail views now fall back to `login_name` when a user has no display name set.
