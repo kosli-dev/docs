@@ -317,13 +317,15 @@
                 "client_reference/kosli_create_attestation-type",
                 "client_reference/kosli_create_environment",
                 "client_reference/kosli_create_flow",
-                "client_reference/kosli_create_policy"
+                "client_reference/kosli_create_policy",
+                "client_reference/kosli_create_service-account"
               ]
             },
             {
               "group": "kosli delete",
               "pages": [
-                "client_reference/kosli_delete_api-key"
+                "client_reference/kosli_delete_api-key",
+                "client_reference/kosli_delete_service-account"
               ]
             },
             {
@@ -354,9 +356,11 @@
                 "client_reference/kosli_get_artifact",
                 "client_reference/kosli_get_attestation-type",
                 "client_reference/kosli_get_attestation",
+                "client_reference/kosli_get_default-org",
                 "client_reference/kosli_get_environment",
                 "client_reference/kosli_get_flow",
                 "client_reference/kosli_get_policy",
+                "client_reference/kosli_get_service-account",
                 "client_reference/kosli_get_snapshot",
                 "client_reference/kosli_get_trail"
               ]
@@ -377,6 +381,7 @@
                 "client_reference/kosli_list_environments",
                 "client_reference/kosli_list_flows",
                 "client_reference/kosli_list_policies",
+                "client_reference/kosli_list_service-accounts",
                 "client_reference/kosli_list_snapshots",
                 "client_reference/kosli_list_trails"
               ]
@@ -426,6 +431,13 @@
                 "client_reference/kosli_snapshot_paths",
                 "client_reference/kosli_snapshot_s3",
                 "client_reference/kosli_snapshot_server"
+              ]
+            },
+            {
+              "group": "kosli update",
+              "pages": [
+                "client_reference/kosli_update_default-org",
+                "client_reference/kosli_update_service-account"
               ]
             }
           ]
