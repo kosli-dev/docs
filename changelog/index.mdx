@@ -4,6 +4,88 @@ description: "Release notes for Kosli products."
 rss: true
 ---
 
+<Update label="June 26, 2026" description="" tags={["Platform"]}>
+
+## Updates
+
+- **Faster organization deletion** — initiating an org deletion is now noticeably quicker, with a "building plan" card replacing the spinning button so it's clear work is in progress.
+- **Lifecycle status on control version list** — each entry in a control's Version List now shows whether it represents a **Created**, **Edited**, **Archived**, or **Unarchived** event, making history easier to scan.
+- **Consistent Controls list UI** — the Controls Decision List and Version List now use the same card-list layout as the main Controls listing.
+
+</Update>
+
+<Update label="June 25, 2026" description="" tags={["Platform"]}>
+
+## New features
+
+- **Deployment lead time** — `list` and `get` deployment endpoints now expose `lead_time_seconds`.
+- **Require archived shared orgs before delete** — deleting an org now requires all of its shared orgs to be archived first.
+
+## Updates
+
+- **Faster shared-orgs page** — `/organizations/shared` now uses bulk count queries instead of per-org round-trips, dramatically speeding up the page for admins.
+
+</Update>
+
+<Update label="June 24, 2026" description="v2.28.2" tags={["CLI"]}>
+
+## Updates
+
+- Dependency updates (AWS SDK, Moby Docker client/API, Google API).
+
+[View on GitHub](https://github.com/kosli-dev/cli/releases/tag/v2.28.2)
+
+</Update>
+
+<Update label="June 24, 2026" description="" tags={["Platform"]}>
+
+## New features
+
+- **Archive and unarchive controls** — retired controls can now be archived (and later unarchived) instead of deleted, preserving history while removing them from the active catalogue. New `POST /api/v2/controls/{org}/{identifier}/archive` and `unarchive` endpoints, plus UI support.
+- **Controls coverage report** — a new Coverage tab and API show which environments enforce a given control (via a policy whose latest version references it through `for_control`) and which don't.
+- **Filter control decisions by flow** — a control's decisions list can now be filtered by one or more flows.
+- **Controls API in OpenAPI schema (beta)** — the `/api/v2/controls/...` endpoints are now published in the OpenAPI schema, marked beta and gated per-request by the `is-controls-enabled` flag. This unblocks downstream tooling like the Terraform provider.
+
+## Updates
+
+- **Swagger docs can call mutating endpoints again** — requests carrying an `Authorization` header now skip session-CSRF enforcement, so authorized API-key calls from `/api/v2/doc/` no longer fail with `403 CSRF token missing`.
+- **Better flow-template error handling** — invalid flow template YAML now catches a wider range of parser errors instead of returning a 500.
+- **Experimental features opt-in removed** — the unused per-org "experimental features" setting and its API endpoint have been removed.
+
+## Bug fixes
+
+- **Security: SSRF in environment-action webhooks** — webhook and Slack action targets are now validated and re-resolved immediately before each outbound POST, blocking requests to internal infrastructure (loopback, RFC 1918, cloud metadata endpoints, internal Kubernetes services).
+- **Control links with dots in names** — control link names containing `.` are now sanitized for MongoDB storage instead of being rejected.
+
+</Update>
+
+<Update label="June 23, 2026" description="" tags={["Platform"]}>
+
+## New features
+
+- **`decision` attestation in flow templates** — the `decision` attestation type introduced by Controls is now a first-class option in the flow template system and UI.
+
+## Updates
+
+- **"+ Add tag" affordance on controls with no tags** — the view-control page now shows a clear add-tag button when a control has no tags, instead of a lone kebab menu.
+- **Security update** — upgraded expat in the base image to address Snyk-reported vulnerabilities.
+
+</Update>
+
+<Update label="June 22, 2026" description="v2.28.1" tags={["CLI"]}>
+
+## Updates
+
+- **Beta status moved to annotations** — `evaluate`, `attest decision`, and related subcommands no longer prefix their short description with `[BETA]`; beta status is now conveyed via annotations and sidebar tags.
+
+## Bug fixes
+
+- **`kosli snapshot ecs` with empty clusters** — fixed a failure (`InvalidParameterException: Services cannot be empty`) when a scanned ECS cluster had no services.
+
+[View on GitHub](https://github.com/kosli-dev/cli/releases/tag/v2.28.1)
+
+</Update>
+
 <Update label="June 12, 2026" description="" tags={["Platform"]}>
 
 ## New features
