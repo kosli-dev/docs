@@ -46,11 +46,12 @@ kosli get flow dashboard-ci --output=json
 
 ```json
 {
+  "id": "f60c8f3f-67cd-4496-8e17-ed6fdb1e",
   "name": "dashboard-ci",
   "description": "UX for a group practice dashboard",
   "visibility": "private",
   "org": "cyber-dojo",
-  "template": "version: 1\n\ntrail:\n  attestations:\n    - name: pull-request\n      type: pull_request\n  artifacts:\n    - name: dashboard\n      attestations:\n        - name: rubocop-lint\n          type: junit\n        - name: snyk-container-scan\n          type: decision\n        - name: sonarcloud-scan\n          type: sonar\n        - name: unit-test\n          type: junit\n        - name: unit-test-coverage\n          type: generic\n",
+  "template": "version: 1\n\ntrail:\n  attestations:\n    - name: pull-request\n      type: pull_request\n  artifacts:\n    - name: dashboard\n      attestations:\n        - name: provenance\n          type: decision\n\n        - name: sbom\n          type: decision\n\n        - name: snyk-container-scan\n          type: decision\n\n        - name: rubocop-lint\n          type: junit\n        - name: sonarcloud-scan\n          type: sonar\n        - name: unit-test\n          type: junit\n        - name: unit-test-coverage\n          type: generic\n",
   "repo_url": "https://github.com/cyber-dojo/dashboard",
   "tags": {
     "ci": "github",
