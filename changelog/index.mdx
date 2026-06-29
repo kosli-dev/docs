@@ -8,7 +8,6 @@ rss: true
 
 ## Updates
 
-- **Faster organization deletion** — initiating an org deletion is now noticeably quicker, with a "building plan" card replacing the spinning button so it's clear work is in progress.
 - **Lifecycle status on control version list** — each entry in a control's Version List now shows whether it represents a **Created**, **Edited**, **Archived**, or **Unarchived** event, making history easier to scan.
 - **Consistent Controls list UI** — the Controls Decision List and Version List now use the same card-list layout as the main Controls listing.
 
@@ -19,11 +18,6 @@ rss: true
 ## New features
 
 - **Deployment lead time** — `list` and `get` deployment endpoints now expose `lead_time_seconds`.
-- **Require archived shared orgs before delete** — deleting an org now requires all of its shared orgs to be archived first.
-
-## Updates
-
-- **Faster shared-orgs page** — `/organizations/shared` now uses bulk count queries instead of per-org round-trips, dramatically speeding up the page for admins.
 
 </Update>
 
@@ -41,7 +35,7 @@ rss: true
 
 ## New features
 
-- **Archive and unarchive controls** — retired controls can now be archived (and later unarchived) instead of deleted, preserving history while removing them from the active catalogue. New `POST /api/v2/controls/{org}/{identifier}/archive` and `unarchive` endpoints, plus UI support.
+- **Archive and unarchive controls** — retired controls can now be archived (and later unarchived) instead of deleted, preserving history while removing them from the active catalog. New `POST /api/v2/controls/{org}/{identifier}/archive` and `unarchive` endpoints, plus UI support.
 - **Controls coverage report** — a new Coverage tab and API show which environments enforce a given control (via a policy whose latest version references it through `for_control`) and which don't.
 - **Filter control decisions by flow** — a control's decisions list can now be filtered by one or more flows.
 - **Controls API in OpenAPI schema (beta)** — the `/api/v2/controls/...` endpoints are now published in the OpenAPI schema, marked beta and gated per-request by the `is-controls-enabled` flag. This unblocks downstream tooling like the Terraform provider.
@@ -68,7 +62,6 @@ rss: true
 ## Updates
 
 - **"+ Add tag" affordance on controls with no tags** — the view-control page now shows a clear add-tag button when a control has no tags, instead of a lone kebab menu.
-- **Security update** — upgraded expat in the base image to address Snyk-reported vulnerabilities.
 
 </Update>
 
