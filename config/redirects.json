@@ -36,6 +36,14 @@
     "destination": "/schemas/policy/v1.json"
   },
   {
+    "source": "/schemas/flow-template/v1",
+    "destination": "/schemas/flow-template/v1.json"
+  },
+  {
+    "source": "/schemas/flow-template.json",
+    "destination": "/schemas/flow-template/v1.json"
+  },
+  {
     "source": "/getting_started/part_9_querying",
     "destination": "/tutorials/querying_kosli"
   },

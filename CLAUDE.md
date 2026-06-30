@@ -38,7 +38,8 @@ Requires Node.js v19+.
 - **`style.css`** — Custom CSS overrides applied on top of the Mintlify theme
 - **`scripts/`** — Python scripts that generate "live docs" (mostly under `client_reference/`) and update navigation. See [Live docs](#live-docs) below.
 - **`tests/`** — pytest suite for the live-docs scripts.
-- **`.github/workflows/`** — `doc-review.yml` (Claude-powered PR review), `pr-quality.yml` (link/title checks), `update-cli-docs.yml`.
+- **`.github/workflows/`** — `doc-review.yml` (Claude-powered PR review), `pr-quality.yml` (link/title checks), `update-cli-docs.yml`, `update-schemas.yml`.
+- **`schemas/`** — Generated JSON Schema assets. See [Schemas](#schemas) below.
 
 ## Live docs
 
@@ -48,6 +49,22 @@ Run `scripts/dev_live_docs.sh` to regenerate locally; it restores
 source script first.
 
 Tests for the generators live in `tests/` and run with `pytest`.
+
+## Schemas
+
+`schemas/flow-template/v1.json` and `schemas/policy/v1.json` are the static
+JSON Schema assets served from `https://docs.kosli.com/schemas/...`. They are
+**generated from the Kosli API** (the source of truth in `kosli-dev/server`),
+not hand-edited:
+
+```bash
+python scripts/update_schemas.py          # regenerate from the API
+python scripts/update_schemas.py --check   # exit non-zero if they have drifted
+```
+
+The `update-schemas.yml` workflow runs the script on a schedule and opens a PR
+when the committed files drift from the API. Don't hand-edit these files — fix
+the Pydantic models in `kosli-dev/server` instead.
 
 ## Content Conventions
 
