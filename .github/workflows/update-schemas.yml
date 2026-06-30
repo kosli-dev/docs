@@ -1,0 +1,54 @@
+name: Update JSON Schemas
+
+# Regenerates the static JSON Schema files from the Kosli API (the source of
+# truth in kosli-dev/server) and opens a PR when they drift. See issue #293.
+
+on:
+  schedule:
+    # Daily at 06:00 UTC
+    - cron: '0 6 * * *'
+  workflow_dispatch:
+
+permissions:
+  contents: write
+  pull-requests: write
+
+jobs:
+  update-schemas:
+    runs-on: ubuntu-latest
+    steps:
+      - name: Harden Runner
+        uses: step-security/harden-runner@9af89fc71515a100421586dfdb3dc9c984fbf411 # v2.19.4
+        with:
+          egress-policy: audit
+
+      - name: Checkout docs repo
+        uses: actions/checkout@v7
+
+      - name: Set up Python
+        uses: actions/setup-python@v6
+        with:
+          python-version: '3.14'
+
+      - name: Install Python dependencies
+        run: pip install requests
+
+      - name: Regenerate schemas from the API
+        run: python scripts/update_schemas.py
+
+      - name: Create Pull Request
+        uses: peter-evans/create-pull-request@v8
+        with:
+          commit-message: "docs: regenerate JSON schemas from the API"
+          title: "docs: regenerate JSON schemas from the API"
+          body: |
+            Automated regeneration of the static JSON Schema files from the Kosli
+            API (source of truth in `kosli-dev/server`).
+
+            - `schemas/flow-template/v1.json` ← `GET /api/v2/schemas/flow-template/v1`
+            - `schemas/policy/v1.json` ← `GET /api/v2/schemas/environment-policy/v1`
+
+            This PR only appears when the committed files have drifted from the API.
+          branch: schemas/regenerate
+          delete-branch: true
+          sign-commits: true

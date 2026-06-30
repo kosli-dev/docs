@@ -1,0 +1,131 @@
+{
+  "$defs": {
+    "Artifact": {
+      "additionalProperties": false,
+      "description": "A Pydantic model for an Artifact in a yaml template",
+      "properties": {
+        "name": {
+          "description": "A reference name for the artifact (e.g. `frontend-app`, `backend`).",
+          "title": "Name",
+          "type": "string"
+        },
+        "attestations": {
+          "default": [],
+          "description": "Attestations required for this artifact to be compliant.",
+          "items": {
+            "$ref": "#/$defs/Attestation"
+          },
+          "title": "Attestations",
+          "type": "array"
+        }
+      },
+      "required": [
+        "name"
+      ],
+      "title": "Artifact",
+      "type": "object"
+    },
+    "Attestation": {
+      "additionalProperties": false,
+      "description": "A Pydantic model for an Attestation in a yaml template with a custom validator",
+      "properties": {
+        "name": {
+          "description": "A unique name for the attestation.",
+          "title": "Name",
+          "type": "string"
+        },
+        "type": {
+          "anyOf": [
+            {
+              "enum": [
+                "generic",
+                "junit",
+                "snyk",
+                "pull_request",
+                "jira",
+                "sonar"
+              ],
+              "type": "string"
+            },
+            {
+              "pattern": "^custom:.*$",
+              "type": "string"
+            },
+            {
+              "const": "decision",
+              "type": "string"
+            },
+            {
+              "const": "*",
+              "type": "string"
+            }
+          ],
+          "description": "The attestation type. Use `custom:<type-name>` for custom attestation types.",
+          "title": "Type"
+        }
+      },
+      "required": [
+        "name",
+        "type"
+      ],
+      "title": "Attestation",
+      "type": "object"
+    },
+    "Trail": {
+      "additionalProperties": false,
+      "description": "A Pydantic model for the Trail in a yaml template",
+      "properties": {
+        "attestations": {
+          "default": [],
+          "description": "Attestations required at the trail level for it to be compliant.",
+          "items": {
+            "$ref": "#/$defs/Attestation"
+          },
+          "title": "Attestations",
+          "type": "array"
+        },
+        "artifacts": {
+          "default": [],
+          "description": "Artifacts expected to be produced in the trail.",
+          "items": {
+            "$ref": "#/$defs/Artifact"
+          },
+          "title": "Artifacts",
+          "type": "array"
+        }
+      },
+      "title": "Trail",
+      "type": "object"
+    }
+  },
+  "additionalProperties": false,
+  "description": "Schema for Kosli flow template YAML files used with `kosli create flow`.",
+  "properties": {
+    "version": {
+      "const": 1,
+      "default": 1,
+      "description": "The version of the specification schema.",
+      "title": "Version",
+      "type": "integer"
+    },
+    "trail": {
+      "anyOf": [
+        {
+          "$ref": "#/$defs/Trail"
+        },
+        {
+          "type": "null"
+        }
+      ],
+      "default": {
+        "attestations": [],
+        "artifacts": []
+      },
+      "description": "The trail specification."
+    }
+  },
+  "title": "Kosli Flow Template",
+  "type": "object",
+  "$schema": "https://json-schema.org/draft/2020-12/schema",
+  "$id": "https://docs.kosli.com/schemas/flow-template/v1"
+}

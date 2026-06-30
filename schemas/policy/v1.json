@@ -1,92 +1,190 @@
 {
-  "$schema": "http://json-schema.org/draft-07/schema#",
-  "$id": "https://docs.kosli.com/schemas/policy/v1",
-  "title": "Kosli Environment Policy",
-  "description": "Schema for Kosli environment policy YAML files used with `kosli create policy`.",
-  "type": "object",
+  "$defs": {
+    "BooleanRule": {
+      "additionalProperties": false,
+      "properties": {
+        "required": {
+          "default": false,
+          "title": "Required",
+          "type": "boolean"
+        },
+        "exceptions": {
+          "default": [],
+          "items": {
+            "$ref": "#/$defs/ConditionalRule"
+          },
+          "title": "Exceptions",
+          "type": "array"
+        }
+      },
+      "title": "BooleanRule",
+      "type": "object"
+    },
+    "ConditionalRule": {
+      "additionalProperties": false,
+      "properties": {
+        "if": {
+          "anyOf": [
+            {
+              "$ref": "#/$defs/PolicyExpression"
+            },
+            {
+              "type": "null"
+            }
+          ],
+          "default": null
+        }
+      },
+      "title": "ConditionalRule",
+      "type": "object"
+    },
+    "PolicyArtifacts": {
+      "additionalProperties": false,
+      "description": "Rules for artifacts in an environment snapshot. Omitted keys use server defaults (provenance/trail-compliance: required false, empty exceptions; attestations: []).",
+      "properties": {
+        "provenance": {
+          "$ref": "#/$defs/BooleanRule",
+          "default": {
+            "required": false,
+            "exceptions": []
+          }
+        },
+        "trail-compliance": {
+          "$ref": "#/$defs/BooleanRule",
+          "default": {
+            "required": false,
+            "exceptions": []
+          }
+        },
+        "attestations": {
+          "default": [],
+          "items": {
+            "$ref": "#/$defs/RequiredAttestationRule"
+          },
+          "title": "Attestations",
+          "type": "array"
+        }
+      },
+      "title": "PolicyArtifacts",
+      "type": "object"
+    },
+    "PolicyExpression": {
+      "description": "Boolean expression evaluated against flow/artifact context. In YAML this is often written as a string wrapped in ${{ ... }}.",
+      "properties": {
+        "text": {
+          "title": "Text",
+          "type": "string"
+        }
+      },
+      "required": [
+        "text"
+      ],
+      "title": "PolicyExpression",
+      "type": "object"
+    },
+    "RequiredAttestationRule": {
+      "additionalProperties": false,
+      "properties": {
+        "if": {
+          "anyOf": [
+            {
+              "$ref": "#/$defs/PolicyExpression"
+            },
+            {
+              "type": "null"
+            }
+          ],
+          "default": null
+        },
+        "name": {
+          "default": "*",
+          "description": "Attestation name; default * matches any.",
+          "title": "Name",
+          "type": "string"
+        },
+        "type": {
+          "anyOf": [
+            {
+              "enum": [
+                "generic",
+                "junit",
+                "snyk",
+                "pull_request",
+                "jira",
+                "sonar"
+              ],
+              "type": "string"
+            },
+            {
+              "pattern": "^custom:.*$",
+              "type": "string"
+            },
+            {
+              "const": "decision",
+              "type": "string"
+            },
+            {
+              "const": "*",
+              "type": "string"
+            }
+          ],
+          "description": "Built-in attestation type, custom:... reference, or wildcard *.",
+          "title": "Type"
+        },
+        "must_be_compliant": {
+          "default": true,
+          "title": "Must Be Compliant",
+          "type": "boolean"
+        },
+        "for_control": {
+          "anyOf": [
+            {
+              "type": "string"
+            },
+            {
+              "type": "null"
+            }
+          ],
+          "default": null,
+          "description": "Control identifier this decision attestation must satisfy. Only valid when type is 'decision'.",
+          "title": "For Control"
+        }
+      },
+      "required": [
+        "type"
+      ],
+      "title": "RequiredAttestationRule",
+      "type": "object"
+    }
+  },
   "additionalProperties": false,
-  "required": ["_schema"],
   "properties": {
+    "artifacts": {
+      "$ref": "#/$defs/PolicyArtifacts",
+      "default": {
+        "provenance": {
+          "exceptions": [],
+          "required": false
+        },
+        "trail-compliance": {
+          "exceptions": [],
+          "required": false
+        },
+        "attestations": []
+      }
+    },
     "_schema": {
       "type": "string",
       "format": "uri",
       "description": "URL of this schema. The path must end with /v{n} where n is the major version (e.g. .../v1). Example: https://docs.kosli.com/schemas/policy/v1"
-    },
-    "artifacts": {
-      "type": "object",
-      "additionalProperties": false,
-      "description": "Rules for artifacts in an environment snapshot. Omitted keys use server defaults (provenance/trail-compliance: required false, empty exceptions; attestations: []).",
-      "properties": {
-        "provenance": { "$ref": "#/definitions/booleanRule" },
-        "trail-compliance": { "$ref": "#/definitions/booleanRule" },
-        "attestations": {
-          "type": "array",
-          "items": { "$ref": "#/definitions/requiredAttestationRule" }
-        }
-      }
     }
   },
-  "definitions": {
-    "policyExpression": {
-      "description": "Boolean expression evaluated against flow/artifact context. In YAML this is often written as a string wrapped in ${{ ... }}.",
-      "type": "string"
-    },
-    "conditionalRule": {
-      "type": "object",
-      "additionalProperties": false,
-      "properties": {
-        "if": { "$ref": "#/definitions/policyExpression" }
-      }
-    },
-    "booleanRule": {
-      "type": "object",
-      "additionalProperties": false,
-      "properties": {
-        "required": {
-          "type": "boolean",
-          "default": false
-        },
-        "exceptions": {
-          "type": "array",
-          "items": { "$ref": "#/definitions/conditionalRule" },
-          "default": []
-        }
-      }
-    },
-    "attestationType": {
-      "description": "Built-in attestation type, custom:... reference, or wildcard *.",
-      "oneOf": [
-        {
-          "type": "string",
-          "enum": [
-            "generic",
-            "junit",
-            "snyk",
-            "pull_request",
-            "jira",
-            "sonar",
-            "*"
-          ]
-        },
-        {
-          "type": "string",
-          "pattern": "^custom:.+"
-        }
-      ]
-    },
-    "requiredAttestationRule": {
-      "type": "object",
-      "additionalProperties": false,
-      "properties": {
-        "name": {
-          "type": "string",
-          "default": "*",
-          "description": "Attestation name; default * matches any."
-        },
-        "type": { "$ref": "#/definitions/attestationType" },
-        "if": { "$ref": "#/definitions/policyExpression" }
-      },
-      "required": ["type"]
-    }
-  }
+  "required": [
+    "_schema"
+  ],
+  "title": "Kosli Environment Policy",
+  "type": "object",
+  "$schema": "https://json-schema.org/draft/2020-12/schema",
+  "$id": "https://docs.kosli.com/schemas/policy/v1",
+  "description": "Schema for Kosli environment policy YAML files used with `kosli create policy`."
 }
