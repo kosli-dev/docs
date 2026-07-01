@@ -114,6 +114,7 @@
               "group": "Security",
               "pages": [
                 "tutorials/unauthorized_iac_changes",
+                "tutorials/terraform_drift_detection",
                 "tutorials/rotating_api_keys"
               ]
             },
