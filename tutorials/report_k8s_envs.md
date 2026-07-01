@@ -45,11 +45,12 @@ kosliApiToken:
 reporterConfig:
   # the name of the Kosli org
   kosliOrg: "<your-kosli-org-name>"
-  # the name of the Kosli environment to report to
-  kosliEnvironmentName: "k8s-tutorial"
-  # comma-separated list of namespace name regex patterns to report
-  # leave empty to report the entire cluster
-  namespaces: ""
+  # the Kosli environment(s) to report to
+  environments:
+    # omit the namespace fields to report the entire cluster
+    - name: "k8s-tutorial"
+      # optionally restrict to specific namespaces:
+      # namespaces: [namespace1, namespace2]
 ```
 
 3. Install the chart:
@@ -67,6 +68,10 @@ kubectl get cronjobs
 ```
 
 The CronJob will now run every 5 minutes and report what is running in the cluster to Kosli.
+
+<Note>
+Running on EKS with Karpenter, or another node autoscaler? A reporter pod arriving every 5 minutes can stop nodes being consolidated. Pin the reporter to a stable node group, widen `cronSchedule`, or run it out of cluster. See [Running on EKS with Karpenter](/helm/k8s_reporter#running-on-eks-with-karpenter-or-another-node-autoscaler).
+</Note>
 
 </Tab>
 <Tab title="Externally scheduled cron">

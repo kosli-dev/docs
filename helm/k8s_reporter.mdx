@@ -6,7 +6,7 @@ description: A Helm chart for installing the Kosli K8S reporter as a cronjob.
 # k8s-reporter
 
 <Info>
-This reference applies to **chart version 2.2.1**, which defaults to CLI **v2.12.0** via `appVersion`. Override with `image.tag`.
+This reference applies to **chart version 2.3.0**, which defaults to CLI **v2.12.0** via `appVersion`. Override with `image.tag`.
 </Info>
 
 A Helm chart for installing the Kosli K8S reporter as a CronJob.
@@ -159,9 +159,64 @@ Both options use `secret`-backed volumes, which are permitted under the Pod Secu
 
 If you already run [cert-manager's trust-manager](https://cert-manager.io/docs/trust/trust-manager/) to distribute a corporate CA bundle into a well-known ConfigMap in every namespace, point `extraVolumes` / `extraVolumeMounts` at that ConfigMap instead of creating a per-namespace Secret.
 
+## Running on EKS with Karpenter (or another node autoscaler)
+
+By default the reporter runs as a CronJob every 5 minutes. On clusters that use [Karpenter](https://karpenter.sh) for node autoscaling, this frequent scheduling can prevent nodes from being **consolidated** (scaled down).
+
+The cause is Karpenter's `consolidateAfter` timer: Karpenter only consolidates a node once it has seen no pod scheduling activity on it for the configured window. A reporter pod arriving every 5 minutes keeps resetting that timer, so any node whose `consolidateAfter` is longer than the reporter interval never becomes eligible for consolidation (see [karpenter#1921](https://github.com/kubernetes-sigs/karpenter/issues/1921)). This is Karpenter working as designed, not a reporter bug.
+
+There are three good ways to avoid it, in order of preference.
+
+### 1. Widen the report interval
+
+The simplest fix. Set `cronSchedule` longer than your NodePool's `consolidateAfter` so nodes get quiet windows long enough to consolidate. Environment snapshots rarely need 5-minute freshness.
+
+```yaml
+cronSchedule: "*/15 * * * *"
+```
+
+### 2. Pin the reporter to a stable node group
+
+If you run a stable managed node group that Karpenter does not manage, schedule the reporter there so it never disturbs Karpenter-managed nodes. Use `nodeSelector`, and `tolerations` if that node group is tainted:
+
+```yaml
+nodeSelector:
+  eks.amazonaws.com/nodegroup: system   # your managed node group
+
+tolerations:
+  - key: dedicated
+    operator: Equal
+    value: system
+    effect: NoSchedule
+```
+
+To steer the reporter away from Karpenter-managed nodes instead, use `affinity` (a plain `nodeSelector` cannot express "not on these nodes"):
+
+```yaml
+affinity:
+  nodeAffinity:
+    requiredDuringSchedulingIgnoredDuringExecution:
+      nodeSelectorTerms:
+        - matchExpressions:
+            - key: karpenter.sh/nodepool
+              operator: DoesNotExist
+```
+
+### 3. Run the reporter out of the cluster
+
+For zero footprint on cluster nodes, run `kosli snapshot k8s` on a schedule outside the cluster (for example a CI cron job) with kubeconfig access. See the [Kubernetes environment reporting tutorial](/tutorials/report_k8s_envs).
+
+<Warning>
+`karpenter.sh/do-not-disrupt: "true"` is **not** a fix here. It prevents Karpenter from disrupting the pod, which protects a mid-run report from interruption but makes consolidation of that node *less* likely, not more. Likewise `cluster-autoscaler.kubernetes.io/safe-to-evict` only affects the Kubernetes Cluster Autoscaler and is ignored by Karpenter.
+</Warning>
+
 ## Configurations
 
 ### General
+
+<ParamField path="affinity" type="object" default="{}">
+  Affinity rules for scheduling the reporter pod. Supports nodeAffinity, podAffinity and podAntiAffinity.
+</ParamField>
 
 <ParamField path="concurrencyPolicy" type="string" default="Replace">
   Specifies how to treat concurrent executions of a Job that is created by this CronJob.
@@ -183,16 +238,28 @@ If you already run [cert-manager's trust-manager](https://cert-manager.io/docs/t
   Overrides the name used for the created k8s resources. If `fullnameOverride` is provided, it has higher precedence than this one.
 </ParamField>
 
+<ParamField path="nodeSelector" type="object" default="{}">
+  Node labels for scheduling the reporter pod. On EKS with Karpenter, use this to pin the reporter to a stable managed node group (e.g. `eks.amazonaws.com/nodegroup: <name>`) so it does not interfere with node consolidation. See the "Running on EKS with Karpenter" section of the README.
+</ParamField>
+
 <ParamField path="podAnnotations" type="object" default="{}">
-  Any custom annotations to be added to the cronjob.
+  Annotations to add to the CronJob object itself. For pod-level annotations (added to each reporter pod), use `podTemplateAnnotations` instead.
 </ParamField>
 
 <ParamField path="podLabels" type="object" default="{}">
   Custom labels to add to pods.
 </ParamField>
 
+<ParamField path="podTemplateAnnotations" type="object" default="{}">
+  Annotations to add to the reporter pod template (applied to each Job pod that the CronJob creates).
+</ParamField>
+
 <ParamField path="successfulJobsHistoryLimit" type="int" default="3">
   Specifies the number of successful finished jobs to keep.
+</ParamField>
+
+<ParamField path="tolerations" type="list" default="[]">
+  Tolerations for scheduling the reporter pod, e.g. to run on a dedicated or tainted node group.
 </ParamField>
 
 ### Image
