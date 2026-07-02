@@ -1,0 +1,101 @@
+---
+title: Error handling
+description: How to catch and inspect errors thrown by the Kosli TypeScript SDK.
+---
+
+All HTTP errors from the SDK are instances of `KosliError` or one of its subclasses. Network-level failures throw one of the client error classes listed below.
+
+## KosliError
+
+`KosliError` is the base class for any non-2xx HTTP response. It exposes:
+
+| Property | Type | Description |
+|----------|------|-------------|
+| `message` | `string` | Error message |
+| `statusCode` | `number` | HTTP status code (e.g. `404`, `403`) |
+| `headers` | `Headers` | Response headers |
+| `body` | `string` | Raw response body (may be empty) |
+| `rawResponse` | `Response` | The full HTTP response object |
+| `data$` | varies | Structured error data for specific error types (see below) |
+
+## HTTP error classes
+
+These named subclasses cover the most common API errors:
+
+| Class | Status | Description |
+|-------|--------|-------------|
+| `BadRequestError` | `400` | Invalid request |
+| `UnauthorizedError` | `401` | Permission denied or not authenticated |
+| `NotFoundError` | `404` | Resource not found |
+| `RateLimitedError` | `429` | Rate limit exceeded |
+
+```typescript
+import { Kosli } from "@kosli/sdk";
+import * as errors from "@kosli/sdk/models/errors";
+
+const kosli = new Kosli({
+  httpBearer: process.env["KOSLI_API_KEY"] ?? "",
+});
+
+try {
+  const trail = await kosli.trails.get({}, {
+    org: "my-org",
+    flowName: "my-flow",
+    trailName: "my-trail",
+  });
+} catch (error) {
+  if (error instanceof errors.NotFoundError) {
+    console.error("Trail not found");
+  } else if (error instanceof errors.UnauthorizedError) {
+    console.error("Access denied:", error.data$.message);
+  } else if (error instanceof errors.RateLimitedError) {
+    console.error("Rate limit hit - back off and retry");
+  } else if (error instanceof errors.KosliError) {
+    console.error(`HTTP ${error.statusCode}: ${error.message}`);
+  }
+}
+```
+
+## Network errors
+
+These errors are thrown when the request cannot be completed at the transport level:
+
+| Class | Description |
+|-------|-------------|
+| `ConnectionError` | The HTTP client could not reach the server |
+| `RequestTimeoutError` | The request was aborted by an `AbortSignal` timeout |
+| `RequestAbortedError` | The request was cancelled by the caller |
+| `InvalidRequestError` | The request could not be constructed (invalid input) |
+| `UnexpectedClientError` | An unrecognised error occurred in the HTTP client |
+
+Network errors do not have a `statusCode` - handle them separately from `KosliError`:
+
+```typescript
+import * as errors from "@kosli/sdk/models/errors";
+
+try {
+  const result = await kosli.trails.list({}, { org: "my-org", flowName: "my-flow" });
+} catch (error) {
+  if (error instanceof errors.ConnectionError) {
+    console.error("Could not connect to Kosli - check your network");
+  } else if (error instanceof errors.RequestTimeoutError) {
+    console.error("Request timed out");
+  } else if (error instanceof errors.KosliError) {
+    console.error(`API error ${error.statusCode}: ${error.message}`);
+  } else {
+    throw error;
+  }
+}
+```
+
+## Other errors
+
+A small number of operations can throw additional error types for specific conditions:
+
+| Class | Status | Description |
+|-------|--------|-------------|
+| `ConflictResponseModelError` | `409` | Conflict (e.g. resource already exists) |
+| `RequestEntityTooLargeResponseModelError` | `413` | Request body too large |
+| `ResponseValidationError` | - | Response from server did not match the expected schema; inspect `error.rawValue` or call `error.pretty()` |
+
+Check the method's documentation to see which errors apply to a specific operation.

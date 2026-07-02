@@ -1,0 +1,106 @@
+---
+title: Pagination
+description: How to work with paginated responses in the Kosli TypeScript SDK.
+---
+
+List operations in the Kosli API return results in pages. The SDK exposes the underlying page controls directly - there is no automatic iterator; you request each page explicitly.
+
+## Request parameters
+
+Paginated operations accept `page` and `perPage` query parameters:
+
+| Parameter | Type | Description |
+|-----------|------|-------------|
+| `page` | `number` | Page number, starting at `1` |
+| `perPage` | `number` | Number of results per page |
+
+```typescript
+import { Kosli } from "@kosli/sdk";
+
+const kosli = new Kosli({
+  httpBearer: process.env["KOSLI_API_KEY"] ?? "",
+});
+
+const result = await kosli.trails.list({}, {
+  org: "my-org",
+  flowName: "my-flow",
+  page: 1,
+  perPage: 20,
+});
+```
+
+## Response formats
+
+Different endpoints return pagination metadata in different ways.
+
+### Pagination object in the response body
+
+Some operations return a `pagination` field alongside the results. It is omitted when all results fit on one page.
+
+```typescript
+const result = await kosli.trails.list({}, {
+  org: "my-org",
+  flowName: "my-flow",
+  page: 1,
+  perPage: 20,
+});
+
+if (result.pagination) {
+  console.log(`Page ${result.pagination.page} of ${result.pagination.pageCount}`);
+  console.log(`${result.pagination.total} total trails`);
+}
+```
+
+The `pagination` object contains:
+
+| Field | Type | Description |
+|-------|------|-------------|
+| `total` | `number` | Total number of results across all pages |
+| `page` | `number` | Current page number |
+| `perPage` | `number` | Results per page |
+| `pageCount` | `number` | Total number of pages |
+
+### Link header
+
+Some operations return pagination links as a `Link` response header. Parse these to navigate to the next page without constructing URLs manually.
+
+```
+<https://app.kosli.com/api/v2/...?page=1&per_page=15>; rel="first",
+<https://app.kosli.com/api/v2/...?page=2&per_page=15>; rel="prev",
+<https://app.kosli.com/api/v2/...?page=4&per_page=15>; rel="next",
+<https://app.kosli.com/api/v2/...?page=10&per_page=15>; rel="last"
+```
+
+The `Link` header is only present when there are multiple pages. The SDK does not parse this header automatically - access it via the raw response if needed.
+
+## Iterating all pages
+
+Fetch pages in a loop until there are no more results:
+
+```typescript
+import { Kosli } from "@kosli/sdk";
+
+const kosli = new Kosli({
+  httpBearer: process.env["KOSLI_API_KEY"] ?? "",
+});
+
+async function fetchAllTrails(org: string, flowName: string) {
+  const allTrails = [];
+  let page = 1;
+  const perPage = 50;
+
+  while (true) {
+    const result = await kosli.trails.list({}, { org, flowName, page, perPage });
+
+    const trails = Array.isArray(result) ? result : result.data ?? [];
+    allTrails.push(...trails);
+
+    if (!result.pagination || page >= result.pagination.pageCount) {
+      break;
+    }
+    page++;
+  }
+
+  return allTrails;
+}
+```

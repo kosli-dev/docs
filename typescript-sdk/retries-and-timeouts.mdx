@@ -1,0 +1,100 @@
+---
+title: Retries and timeouts
+description: How the Kosli TypeScript SDK handles automatic retries and request timeouts.
+---
+
+## Retries
+
+Many SDK operations retry automatically on transient failures. The default policy retries on:
+
+- HTTP `5XX` responses (server errors)
+- HTTP `429` responses (rate limiting)
+- HTTP `409` responses (lock conflict)
+- Network connection errors
+
+Retries use an exponential backoff: 1s initial interval, 10s maximum interval, approximately 30s total budget.
+
+### Override retries for a single call
+
+Pass a `retries` object in the call options to change the retry behavior for one request:
+
+```typescript
+import { Kosli } from "@kosli/sdk";
+
+const kosli = new Kosli({
+  httpBearer: process.env["KOSLI_API_KEY"] ?? "",
+});
+
+const result = await kosli.trails.list({}, { org: "my-org", flowName: "my-flow" }, {
+  retries: {
+    strategy: "backoff",
+    backoff: {
+      initialInterval: 500,   // ms before first retry
+      maxInterval: 30_000,    // ms cap per interval
+      exponent: 1.5,
+      maxElapsedTime: 60_000, // ms total budget
+    },
+    retryConnectionErrors: true,
+  },
+});
+```
+
+### Override retries for all calls
+
+Set `retryConfig` in the constructor to apply a retry policy to all requests:
+
+```typescript
+import { Kosli } from "@kosli/sdk";
+
+const kosli = new Kosli({
+  httpBearer: process.env["KOSLI_API_KEY"] ?? "",
+  retryConfig: {
+    strategy: "backoff",
+    backoff: {
+      initialInterval: 500,
+      maxInterval: 30_000,
+      exponent: 1.5,
+      maxElapsedTime: 60_000,
+    },
+    retryConnectionErrors: true,
+  },
+});
+```
+
+### Disable retries
+
+Set `strategy: "none"` to disable retries entirely:
+
+```typescript
+const result = await kosli.trails.list({}, { org: "my-org", flowName: "my-flow" }, {
+  retries: { strategy: "none" },
+});
+```
+
+## Timeouts
+
+The SDK does not have a built-in timeout parameter. Set timeouts via the `AbortSignal` API when constructing a custom HTTP client.
+
+```typescript
+import { Kosli } from "@kosli/sdk";
+import { HTTPClient } from "@kosli/sdk/lib/http";
+
+const httpClient = new HTTPClient();
+
+httpClient.addHook("beforeRequest", (request) => {
+  return new Request(request, {
+    signal: request.signal ?? AbortSignal.timeout(10_000), // 10s timeout
+  });
+});
+
+const kosli = new Kosli({
+  httpBearer: process.env["KOSLI_API_KEY"] ?? "",
+  httpClient,
+});
+```
+
+A timed-out request throws a `RequestTimeoutError`. See [error handling](/typescript-sdk/error-handling) for details.
+
+<Note>
+`AbortSignal.timeout()` is available in Node.js v17.3+, Bun v1+, and modern browsers. For older Node.js, use `AbortController` with `setTimeout` instead.
+</Note>

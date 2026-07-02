@@ -455,6 +455,27 @@
           ]
         },
         {
+          "item": "API Reference",
+          "icon": "code",
+          "openapi": "https://app.kosli.com/api/v2/openapi.json"
+        },
+        {
+          "item": "SDKs",
+          "icon": "puzzle-piece",
+          "groups": [
+            {
+              "group": "TypeScript",
+              "icon": "js",
+              "pages": [
+                "typescript-sdk/index",
+                "typescript-sdk/retries-and-timeouts",
+                "typescript-sdk/pagination",
+                "typescript-sdk/error-handling"
+              ]
+            }
+          ]
+        },
+        {
           "item": "Template Reference",
           "icon": "file-code",
           "groups": [
@@ -479,11 +500,6 @@
               ]
             }
           ]
-        },
-        {
-          "item": "API Reference",
-          "icon": "code",
-          "openapi": "https://app.kosli.com/api/v2/openapi.json"
         },
         {
           "item": "Helm Reference",
