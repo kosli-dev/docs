@@ -271,6 +271,7 @@
               "group": "kosli archive",
               "pages": [
                 "client_reference/kosli_archive_attestation-type",
+                "client_reference/kosli_archive_control",
                 "client_reference/kosli_archive_environment",
                 "client_reference/kosli_archive_flow"
               ]
@@ -293,6 +294,7 @@
               "pages": [
                 "client_reference/kosli_attest_artifact",
                 "client_reference/kosli_attest_custom",
+                "client_reference/kosli_attest_decision",
                 "client_reference/kosli_attest_generic",
                 "client_reference/kosli_attest_jira",
                 "client_reference/kosli_attest_junit",
@@ -315,6 +317,7 @@
               "pages": [
                 "client_reference/kosli_create_api-key",
                 "client_reference/kosli_create_attestation-type",
+                "client_reference/kosli_create_control",
                 "client_reference/kosli_create_environment",
                 "client_reference/kosli_create_flow",
                 "client_reference/kosli_create_policy",
@@ -356,6 +359,7 @@
                 "client_reference/kosli_get_artifact",
                 "client_reference/kosli_get_attestation-type",
                 "client_reference/kosli_get_attestation",
+                "client_reference/kosli_get_control",
                 "client_reference/kosli_get_default-org",
                 "client_reference/kosli_get_environment",
                 "client_reference/kosli_get_flow",
@@ -378,6 +382,7 @@
                 "client_reference/kosli_list_approvals",
                 "client_reference/kosli_list_artifacts",
                 "client_reference/kosli_list_attestation-types",
+                "client_reference/kosli_list_controls",
                 "client_reference/kosli_list_environments",
                 "client_reference/kosli_list_flows",
                 "client_reference/kosli_list_policies",
@@ -434,8 +439,15 @@
               ]
             },
             {
+              "group": "kosli unarchive",
+              "pages": [
+                "client_reference/kosli_unarchive_control"
+              ]
+            },
+            {
               "group": "kosli update",
               "pages": [
+                "client_reference/kosli_update_control",
                 "client_reference/kosli_update_default-org",
                 "client_reference/kosli_update_service-account"
               ]
