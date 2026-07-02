@@ -1,6 +1,6 @@
 ---
 title: "kosli list flows"
-description: "List flows for an org."
+description: "List flows for an org. "
 ---
 
 ## Synopsis
@@ -9,15 +9,20 @@ description: "List flows for an org."
 kosli list flows [flags]
 ```
 
-List flows for an org.
+List flows for an org. By default, all flows for the org are returned.
+Pass --page-limit and/or --page to paginate the results; when pagination is requested the output
+includes pagination metadata and a page footer (table) or a "data"/"pagination" envelope (JSON).
+The list can be filtered by name with --name (and --ignore-case for case-insensitive matching).
 
 ## Flags
 | Flag | Description |
 | :--- | :--- |
 |    `-h`, `--help`  |  help for flows  |
 |    `-i`, `--ignore-case`  |  [optional] Perform case-insensitive matching for `--name`. By default matching is case sensitive.  |
-|    `-n`, `--name` string  |  [optional] Only list flows whose name contains this substring. The Kosli API supports alphanumeric characters and '-'.  |
+|    `-N`, `--name` string  |  [optional] Only list flows whose name contains this substring. The Kosli API supports alphanumeric characters and '-'.  |
 |    `-o`, `--output` string  |  [defaulted] The format of the output. Valid formats are: [table, json]. (default "table")  |
+|        `--page` int  |  [defaulted] The page number of a response. (default 1)  |
+|    `-n`, `--page-limit` int  |  [defaulted] The number of elements per page. (default 20)  |
 
 
 ## Flags inherited from parent commands
@@ -31,6 +36,7 @@ List flows for an org.
 |    `-r`, `--max-api-retries` int  |  [defaulted] How many times should API calls be retried when the API host is not reachable. (default 3)  |
 |        `--org` string  |  The Kosli organization.  |
 |    `-q`, `--quiet`  |  [optional] Suppress non-critical warning messages. Errors and normal output are not affected. If both `--quiet` and `--debug` are set, `--debug` wins.  |
+
 
 ## Live Example
 
@@ -124,7 +130,7 @@ kosli list flows --output=json
     "description": "Build cyber-dojo/docker-base image",
     "visibility": "private",
     "org": "cyber-dojo",
-    "template": "version: 1\n\ntrail:\n  artifacts:\n    - name: docker-base\n      attestations:\n        - name: snyk-container-scan\n          type: generic\n",
+    "template": "version: 1\n\ntrail:\n  artifacts:\n    - name: docker-base\n      attestations:\n        - name: snyk-container-scan\n          type: decision\n",
     "repo_url": "https://github.com/cyber-dojo/docker-base",
     "tags": {}
   },
@@ -373,6 +379,16 @@ kosli list flows --output=json
     "tags": {}
   },
   {
+    "id": "92d8c902-3dc1-4db5-ad07-6ceabc1e",
+    "name": "terraform-apply-beta-differ",
+    "description": "",
+    "visibility": "private",
+    "org": "cyber-dojo",
+    "template": "version: 1\ntrail:\n  attestations:\n    - name: terraform-plan\n      type: generic\n    - name: terraform-apply\n      type: generic\n  artifacts:\n    - name: terraform-state\n    - name: drift-plan\n",
+    "repo_url": "https://github.com/cyber-dojo/differ",
+    "tags": {}
+  },
+  {
     "id": "3a0768fb-33b4-47f6-ba63-5c69df8e",
     "name": "terraform-apply-beta-exercises-start-points",
     "description": "",
@@ -449,7 +465,7 @@ kosli list flows --output=json
     "visibility": "private",
     "org": "cyber-dojo",
     "template": "version: 1\ntrail:\n  attestations:\n    - name: terraform-plan\n      type: generic\n    - name: terraform-apply\n      type: generic\n  artifacts:\n    - name: terraform-state\n    - name: drift-plan\n",
-    "repo_url": "https://github.com/cyber-dojo/nginx",
+    "repo_url": "https://github.com/cyber-dojo/differ",
     "tags": {}
   },
   {
@@ -502,4 +518,39 @@ kosli list flows --output=json
 
 </div>
 </Accordion>
+
+## Examples Use Cases
+
+These examples all assume that the flags  `--api-token`, `--org`, `--host`, (and `--flow`, `--trail` when required), are [set/provided](/getting_started/install/#assigning-flags-via-environment-variables). 
+
+<AccordionGroup>
+<Accordion title="list all flows for an org">
+```shell
+kosli list flows 
+
+```
+</Accordion>
+<Accordion title="list the first 30 flows (paginated)">
+```shell
+kosli list flows 
+	--page-limit 30 
+
+```
+</Accordion>
+<Accordion title="show the second page of flows (30 per page)">
+```shell
+kosli list flows 
+	--page-limit 30 
+	--page 2 
+
+```
+</Accordion>
+<Accordion title="list flows whose name contains "backend" (in JSON)">
+```shell
+kosli list flows 
+	--name backend 
+	--output json
+```
+</Accordion>
+</AccordionGroup>
 
