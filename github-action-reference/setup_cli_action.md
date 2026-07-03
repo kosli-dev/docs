@@ -94,12 +94,14 @@ jobs:
       KOSLI_ORG: my-org
       KOSLI_FLOW: my-flow
       KOSLI_TRAIL: ${{ github.sha }}
+      IMAGE_NAME: my-registry/my-image:latest
     steps:
       - name: Build and push Docker image
         id: build
         uses: docker/build-push-action@v5
         with:
           push: true
+          tags: ${{ env.IMAGE_NAME }}
 
       - name: Setup Kosli CLI
         uses: kosli-dev/setup-cli-action@v5
