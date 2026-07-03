@@ -13,13 +13,13 @@ The chart offers two ways to do this. Use whichever fits your deployment flow.
   <Step title="Create a Secret containing the corporate CA certificate">
     PEM format, single cert or bundle:
 
-    ```shell theme={"theme":"dracula","languages":{"custom":["/languages/rego.json"]}}
+    ```shell
     kubectl create secret generic corporate-ca-bundle --from-file=ca.crt=/path/to/corporate-ca.crt
     ```
   </Step>
 
   <Step title="Enable the wrapper in values.yaml">
-    ```yaml theme={"theme":"dracula","languages":{"custom":["/languages/rego.json"]}}
+    ```yaml
     customCA:
       enabled: true
       secretName: corporate-ca-bundle
@@ -36,7 +36,7 @@ The wrapper deliberately does **not** set `SSL_CERT_FILE`. Setting it would repl
 
 Use these when you need a non-default mount path, a ConfigMap instead of a Secret, multiple volumes, or any other shape the wrapper does not cover:
 
-```yaml theme={"theme":"dracula","languages":{"custom":["/languages/rego.json"]}}
+```yaml
 extraVolumes:
   - name: corporate-ca
     secret:

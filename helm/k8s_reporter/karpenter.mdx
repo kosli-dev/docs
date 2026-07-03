@@ -13,7 +13,7 @@ Frequent snapshots are what let Kosli surface drift or an unauthorized change qu
 
 If you run a stable managed node group that Karpenter does not manage, schedule the reporter there so it never disturbs Karpenter-managed nodes. Use `nodeSelector`, and `tolerations` if that node group is tainted:
 
-```yaml theme={"theme":"dracula","languages":{"custom":["/languages/rego.json"]}}
+```yaml
 nodeSelector:
   eks.amazonaws.com/nodegroup: system   # your managed node group
 
@@ -26,7 +26,7 @@ tolerations:
 
 To steer the reporter away from Karpenter-managed nodes instead, use `affinity` (a plain `nodeSelector` cannot express "not on these nodes"):
 
-```yaml theme={"theme":"dracula","languages":{"custom":["/languages/rego.json"]}}
+```yaml
 affinity:
   nodeAffinity:
     requiredDuringSchedulingIgnoredDuringExecution:
@@ -44,7 +44,7 @@ For zero footprint on cluster nodes, run `kosli snapshot k8s` on a schedule outs
 
 Only if you cannot pin the reporter or move it out of cluster: set `cronSchedule` longer than your NodePool's `consolidateAfter` so nodes get quiet windows long enough to consolidate. This works, but a longer interval widens the window in which a change can go unreported, so prefer the options above.
 
-```yaml theme={"theme":"dracula","languages":{"custom":["/languages/rego.json"]}}
+```yaml
 cronSchedule: "*/15 * * * *"
 ```
 

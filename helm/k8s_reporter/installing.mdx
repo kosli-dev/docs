@@ -7,13 +7,13 @@ To install this chart via the Helm chart repository:
 
 <Steps>
   <Step title="Add the Kosli helm repo">
-    ```shell theme={"theme":"dracula","languages":{"custom":["/languages/rego.json"]}}
+    ```shell
     helm repo add kosli https://charts.kosli.com/ && helm repo update
     ```
   </Step>
 
   <Step title="Create a secret for the Kosli API token">
-    ```shell theme={"theme":"dracula","languages":{"custom":["/languages/rego.json"]}}
+    ```shell
     kubectl create secret generic kosli-api-token --from-literal=key=<your-api-key>
     ```
   </Step>
@@ -23,7 +23,7 @@ To install this chart via the Helm chart repository:
 
     **One environment, entire cluster:**
 
-    ```yaml theme={"theme":"dracula","languages":{"custom":["/languages/rego.json"]}}
+    ```yaml
     # values.yaml
     reporterConfig:
       kosliOrg: <your-org>
@@ -33,7 +33,7 @@ To install this chart via the Helm chart repository:
 
     **One environment, specific namespaces:**
 
-    ```yaml theme={"theme":"dracula","languages":{"custom":["/languages/rego.json"]}}
+    ```yaml
     reporterConfig:
       kosliOrg: <your-org>
       environments:
@@ -43,7 +43,7 @@ To install this chart via the Helm chart repository:
 
     **Multiple environments with different selectors:**
 
-    ```yaml theme={"theme":"dracula","languages":{"custom":["/languages/rego.json"]}}
+    ```yaml
     reporterConfig:
       kosliOrg: <your-org>
       environments:
@@ -55,7 +55,7 @@ To install this chart via the Helm chart repository:
           excludeNamespaces: [prod-ns1, prod-ns2, default]
     ```
 
-    ```shell theme={"theme":"dracula","languages":{"custom":["/languages/rego.json"]}}
+    ```shell
     helm install kosli-reporter kosli/k8s-reporter -f values.yaml
     ```
   </Step>
