@@ -1,5 +1,13 @@
 [
   {
+    "source": "/tutorials/unauthorized_iac_changes",
+    "destination": "/tutorials/terraform_drift_detection_kosli"
+  },
+  {
+    "source": "/tutorials/terraform_drift_detection",
+    "destination": "/tutorials/terraform_drift_detection_kosli"
+  },
+  {
     "source": "/getting_started/approvals",
     "destination": "/getting_started/attestations"
   },

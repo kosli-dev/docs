@@ -113,8 +113,8 @@
             {
               "group": "Security",
               "pages": [
-                "tutorials/unauthorized_iac_changes",
-                "tutorials/terraform_drift_detection",
+                "tutorials/terraform_drift_detection_diy",
+                "tutorials/terraform_drift_detection_kosli",
                 "tutorials/rotating_api_keys"
               ]
             },
