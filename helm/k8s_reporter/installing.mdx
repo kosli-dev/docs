@@ -1,0 +1,64 @@
+---
+title: Installing the chart
+description: Install the Kosli k8s-reporter Helm chart via the Kosli Helm repository.
+---
+
+To install this chart via the Helm chart repository:
+
+<Steps>
+  <Step title="Add the Kosli helm repo">
+    ```shell theme={"theme":"dracula","languages":{"custom":["/languages/rego.json"]}}
+    helm repo add kosli https://charts.kosli.com/ && helm repo update
+    ```
+  </Step>
+
+  <Step title="Create a secret for the Kosli API token">
+    ```shell theme={"theme":"dracula","languages":{"custom":["/languages/rego.json"]}}
+    kubectl create secret generic kosli-api-token --from-literal=key=<your-api-key>
+    ```
+  </Step>
+
+  <Step title="Install the helm chart">
+    Configure **reporterConfig.environments** (required). Each entry has required `name` and optional `namespaces`, `namespacesRegex`, `excludeNamespaces`, `excludeNamespacesRegex`. Omit namespace fields for an entry to report the entire cluster to that environment.
+
+    **One environment, entire cluster:**
+
+    ```yaml theme={"theme":"dracula","languages":{"custom":["/languages/rego.json"]}}
+    # values.yaml
+    reporterConfig:
+      kosliOrg: <your-org>
+      environments:
+        - name: <your-env-name>
+    ```
+
+    **One environment, specific namespaces:**
+
+    ```yaml theme={"theme":"dracula","languages":{"custom":["/languages/rego.json"]}}
+    reporterConfig:
+      kosliOrg: <your-org>
+      environments:
+        - name: <your-env-name>
+          namespaces: [namespace1, namespace2]
+    ```
+
+    **Multiple environments with different selectors:**
+
+    ```yaml theme={"theme":"dracula","languages":{"custom":["/languages/rego.json"]}}
+    reporterConfig:
+      kosliOrg: <your-org>
+      environments:
+        - name: prod-env
+          namespaces: [prod-ns1, prod-ns2]
+        - name: staging-env
+          namespacesRegex: ["^staging-.*"]
+        - name: infra-env
+          excludeNamespaces: [prod-ns1, prod-ns2, default]
+    ```
+
+    ```shell theme={"theme":"dracula","languages":{"custom":["/languages/rego.json"]}}
+    helm install kosli-reporter kosli/k8s-reporter -f values.yaml
+    ```
+  </Step>
+</Steps>
+
+<Info>See all available options in the [configuration reference](/helm/k8s_reporter/configuration).</Info>

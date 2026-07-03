@@ -1,0 +1,10 @@
+---
+title: Upgrading the chart
+description: Upgrade an existing Kosli k8s-reporter release, including migration notes for v2.0.0.
+---
+
+If upgrading from v1.x to v2.0.0, migrate your values to the **environments** list format (see [Installing the chart](/helm/k8s_reporter/installing)). Then:
+
+```shell theme={"theme":"dracula","languages":{"custom":["/languages/rego.json"]}}
+helm upgrade kosli-reporter kosli/k8s-reporter -f values.yaml
+```
