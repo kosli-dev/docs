@@ -4,7 +4,7 @@ description: Reference for the setup-kosli-cli GitHub Action that installs the K
 icon: github
 ---
 
-The [`kosli-dev/setup-cli-action`](https://github.com/kosli-dev/setup-cli-action) GitHub Action (`setup-kosli-cli`) installs the [Kosli CLI](/client_reference) on GitHub Actions runners. After the action runs, every [CLI command](/client_reference) is available in later steps of the job.
+The [`kosli-dev/setup-cli-action`](https://github.com/kosli-dev/setup-cli-action) GitHub Action (`setup-kosli-cli`) installs the [Kosli CLI](/client_reference) on GitHub Actions runners. After the action runs, every CLI command is available in later steps of the job.
 
 The action runs on `ubuntu-latest`, `windows-latest`, and `macos-latest` runners.
 
