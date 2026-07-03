@@ -1,5 +1,5 @@
 ---
-title: Actions
+title: Kosli Actions
 description: Automate if-this-then-that workflows with Kosli Actions.
 ---
 
