@@ -16,7 +16,7 @@ Check kosli-dev/setup-cli-action for **new tags/releases** published since the l
 
 If no new releases exist since the last update, do not open a PR.
 
-Keep the GitHub Action reference in `integrations/github_action.md` in sync with the action's [`README.md`](https://github.com/kosli-dev/setup-cli-action/blob/main/README.md) and [`action.yml`](https://github.com/kosli-dev/setup-cli-action/blob/main/action.yml), which are the source of truth. Update the page when any of the following change:
+Keep the GitHub Action reference in `github-action-reference/setup_cli_action.md` in sync with the action's [`README.md`](https://github.com/kosli-dev/setup-cli-action/blob/main/README.md) and [`action.yml`](https://github.com/kosli-dev/setup-cli-action/blob/main/action.yml), which are the source of truth. Update the page when any of the following change:
 
 1. **Inputs** — an input is added, removed, renamed, or its accepted values or default change (e.g., `version`, `github-token`).
 2. **Outputs** — an output is added, removed, or its meaning changes (e.g., `version`).
@@ -27,7 +27,7 @@ Keep the GitHub Action reference in `integrations/github_action.md` in sync with
 Most releases of this action are Dependabot or internal chore bumps. Those do not change the documented interface — if a release does not affect inputs, outputs, behavior, supported runners, or usage, do not open a PR for it.
 
 When updating the page:
-- Follow Mintlify formatting conventions. Review the existing `integrations/github_action.md` and other pages in `integrations/` for style reference.
+- Follow Mintlify formatting conventions. Review the existing `github-action-reference/setup_cli_action.md` and other reference pages for style reference.
 - Use root-relative links (e.g., `/integrations/ci_cd`, `/client_reference`).
 - Keep the page a terse reference: inputs/outputs tables, version-selection rules, and usage examples.
 

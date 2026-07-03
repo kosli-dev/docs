@@ -170,7 +170,6 @@
           "pages": [
             "integrations/kosli_actions",
             "integrations/ci_cd",
-            "integrations/github_action",
             "integrations/slack",
             "integrations/launchdarkly",
             "integrations/sonar"
@@ -457,44 +456,18 @@
           ]
         },
         {
-          "item": "Template Reference",
-          "icon": "file-code",
-          "groups": [
-            {
-              "group": "Templates",
-              "pages": [
-                "template-reference/flow_template"
-              ]
-            }
-          ]
-        },
-        {
-          "item": "Policy Reference",
-          "icon": "scroll",
-          "groups": [
-            {
-              "group": "Policies",
-              "pages": [
-                "policy-reference/environment_policy",
-                "policy-reference/policy_builder",
-                "policy-reference/rego_policy"
-              ]
-            }
-          ]
-        },
-        {
           "item": "API Reference",
           "icon": "code",
           "openapi": "https://app.kosli.com/api/v2/openapi.json"
         },
         {
-          "item": "Helm Reference",
-          "icon": "layer-group",
+          "item": "GitHub Action Reference",
+          "icon": "github",
           "groups": [
             {
-              "group": "Helm Charts",
+              "group": "GitHub Action",
               "pages": [
-                "helm/k8s_reporter"
+                "github-action-reference/setup_cli_action"
               ]
             }
           ]
@@ -530,6 +503,44 @@
                 "terraform-reference/data-sources/custom_attestation_type",
                 "terraform-reference/data-sources/action",
                 "terraform-reference/data-sources/policy"
+              ]
+            }
+          ]
+        },
+        {
+          "item": "Helm Reference",
+          "icon": "layer-group",
+          "groups": [
+            {
+              "group": "Helm Charts",
+              "pages": [
+                "helm/k8s_reporter"
+              ]
+            }
+          ]
+        },
+        {
+          "item": "Template Reference",
+          "icon": "file-code",
+          "groups": [
+            {
+              "group": "Templates",
+              "pages": [
+                "template-reference/flow_template"
+              ]
+            }
+          ]
+        },
+        {
+          "item": "Policy Reference",
+          "icon": "scroll",
+          "groups": [
+            {
+              "group": "Policies",
+              "pages": [
+                "policy-reference/environment_policy",
+                "policy-reference/policy_builder",
+                "policy-reference/rego_policy"
               ]
             }
           ]
