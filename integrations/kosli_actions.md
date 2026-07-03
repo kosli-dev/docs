@@ -31,7 +31,7 @@ To receive Kosli notifications in Slack, you have two options. You can either us
 </Card>
 <Card title="Slack Incoming Webhooks" icon="webhook">
     - Create a [Slack incoming webhook](https://api.slack.com/messaging/webhooks#create_a_webhook).
-    - Use this webhook to [create a notification settings in the Kosli UI](/integrations/actions/#manage-actions-in-the-ui).
+    - Use this webhook to [create a notification settings in the Kosli UI](/integrations/kosli_actions/#manage-actions-in-the-ui).
 </Card>
 
 ## Custom Webhook Notifications

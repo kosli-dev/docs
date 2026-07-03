@@ -168,8 +168,9 @@
           "group": "Integrations",
           "icon": "puzzle-piece",
           "pages": [
-            "integrations/actions",
+            "integrations/kosli_actions",
             "integrations/ci_cd",
+            "integrations/github_action",
             "integrations/slack",
             "integrations/launchdarkly",
             "integrations/sonar"
