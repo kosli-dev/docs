@@ -8,6 +8,10 @@
     "destination": "/tutorials/detecting_non_terraform_changes"
   },
   {
+    "source": "/integrations/actions",
+    "destination": "/integrations/kosli_actions"
+  },
+  {
     "source": "/getting_started/approvals",
     "destination": "/getting_started/attestations"
   },

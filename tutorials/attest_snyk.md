@@ -112,4 +112,4 @@ You have run four types of Snyk scans and attested each result to a Kosli trail.
 From here you can:
 - Explore the trail in the [Kosli app](https://app.kosli.com)
 - Attest scans to an artifact in a trail — see [`kosli attest snyk`](/client_reference/kosli_attest_snyk) for details
-- Add Snyk attestations to your CI pipeline using the [GitHub Actions integration](/integrations/actions)
+- Add Snyk attestations to your CI pipeline using the [GitHub Action](/github-action-reference/setup_cli_action)

@@ -34,8 +34,8 @@ description: Use Kosli in CI Systems like GitHub Actions, GitLab CI, and more.
 
   ## Use Kosli in Github Actions
 
-  To use Kosli in [Github Actions](https://docs.github.com/en/actions) workflows, you can use the kosli [CLI setup action](https://github.com/marketplace/actions/setup-kosli-cli) to install the CLI on your Github Actions Runner.
-  Then, you can use all the [CLI commands](/client_reference) in your workflows.
+  To use Kosli in [Github Actions](https://docs.github.com/en/actions) workflows, you can use the [`setup-kosli-cli` GitHub Action](/github-action-reference/setup_cli_action) to install the CLI on your Github Actions Runner.
+  Then, you can use all the [CLI commands](/client_reference) in your workflows. See the GitHub Action reference for its inputs, outputs, and version-pinning options.
 
   ### GitHub Secrets
 
