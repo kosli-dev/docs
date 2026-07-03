@@ -8,6 +8,8 @@ description: Detect Terraform applies that bypass CI by attesting statefile prov
 1. **Unexpected statefile changes** — someone runs `terraform apply` outside your pipeline. A laptop apply updates the statefile and the world *together*, so they still agree and a scheduled `terraform plan` comes back empty. This page covers detecting this type.
 2. **Non-Terraform changes** — someone edits the world directly via the cloud console, API, or CLI, so reality no longer matches the statefile. See [Detecting non-Terraform changes](/tutorials/detecting_non_terraform_changes).
 
+Both pages implement Kosli's [Drift Detection](https://sdlc.kosli.com/controls/runtime/drift_detection/) control (SDLC-CTRL-0018), a detective control that mitigates configuration drift risk under our secure SDLC framework.
+
 ## Why a plan can never catch this
 
 `terraform plan` compares the statefile to the world. An out-of-CI apply changes both in lockstep, so the comparison stays clean — the plan is structurally blind to it. What *has* changed is the statefile itself: it is now a file your pipeline never produced. Detecting that requires a record of where every statefile came from — a provenance system.
@@ -123,6 +125,7 @@ Someone runs `terraform apply` from a laptop. The statefile in S3 is rewritten w
 
 ## Related
 
+- [Drift Detection (SDLC-CTRL-0018)](https://sdlc.kosli.com/controls/runtime/drift_detection/) — the control both drift-detection tutorials implement.
 - [Detecting non-Terraform changes](/tutorials/detecting_non_terraform_changes) — the other drift type: console and API edits a plan *can* catch.
 - [`kosli-dev/tf`](https://github.com/kosli-dev/tf) — the reference wrapper and reusable workflows.
 - [Environments](/getting_started/environments) — the Kosli primitive that carries the compliance signal.
