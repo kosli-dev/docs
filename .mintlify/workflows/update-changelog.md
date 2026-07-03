@@ -5,6 +5,7 @@ on:
 context:
   - repo: "kosli-dev/cli"
   - repo: "kosli-dev/terraform-provider-kosli"
+  - repo: "kosli-dev/setup-cli-action"
   - repo: "kosli-dev/server"
 notify:
   slack:
@@ -17,6 +18,7 @@ notify:
 Check each repository for **new tags** published since the last changelog entry for that product in changelog/index.mdx. Only document changes that are part of a tagged release — do not include unreleased work on `main`.
 
 - **kosli-dev/cli** and **kosli-dev/terraform-provider-kosli** use semver GitHub Releases (e.g., `v2.17.5`, `v0.6.3`). Check the Releases list for new versions.
+- **kosli-dev/setup-cli-action** uses semver GitHub Releases (e.g., `v5.2.1`) with moving major/minor tags (`v5`, `v5.2`). Check the Releases list for new versions. **Most releases of this action are Dependabot or internal chore bumps** — only write a changelog entry when a release changes something user-facing: the action's inputs or outputs, its version-selection behavior, the supported runners, a breaking change (e.g., a changed default), or a bumped default Kosli CLI version worth calling out. Skip releases that are purely dependency bumps or internal chores. If several releases have accumulated since the last entry, consolidate their user-facing changes into a single entry keyed to the newest release.
 - **kosli-dev/server** does **not** use GitHub Releases. It uses timestamp-based git tags (e.g., `release-2026-04-30-10-56-05`). You must check git **tags** (not Releases) and look at the commits between the last covered tag and the most recent tag to identify user-facing changes. Consolidate all server changes since the last Platform changelog entry into a single entry.
 
 For each new release found, write a changelog entry in changelog/index.mdx. If no new tags exist for a repository since its last changelog entry, skip it. If there are no new tags across any repository, do not open a PR.
@@ -27,6 +29,7 @@ Label should be the date the workflow runs, like "March 16, 2026". Description s
 Tags should be the product(s) affected by the release:
 - kosli-dev/cli → `["CLI"]`
 - kosli-dev/terraform-provider-kosli → `["Terraform Provider"]`
+- kosli-dev/setup-cli-action → `["GitHub Action"]`
 - kosli-dev/server → `["Platform"]`
 
 The changelog is about changes to the product, not changes to the docs.
