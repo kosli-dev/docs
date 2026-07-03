@@ -113,8 +113,8 @@
             {
               "group": "Security",
               "pages": [
-                "tutorials/terraform_drift_detection_diy",
-                "tutorials/terraform_drift_detection_kosli",
+                "tutorials/detecting_unexpected_statefile_changes",
+                "tutorials/detecting_non_terraform_changes",
                 "tutorials/rotating_api_keys"
               ]
             },
