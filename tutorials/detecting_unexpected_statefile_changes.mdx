@@ -56,6 +56,12 @@ region  = <region>          encrypt = true       # native S3 lockfile by default
 The reusable `apply.yml` workflow runs the plan steps plus `tf apply`, then attests the plan, the apply log, and the statefile into your Kosli Environment. A caller workflow that applies on merge:
 
 ```yaml
+name: Apply
+
+on:
+  push:
+    branches: [main]
+
 jobs:
   apply:
     uses: kosli-dev/tf/.github/workflows/apply.yml@main
