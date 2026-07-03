@@ -1,7 +1,6 @@
 ---
 title: "kosli attest decision"
 tag: "BETA"
-hidden: true
 description: "Record a compliance decision against a control in a Kosli trail.  "
 ---
 

@@ -63,9 +63,9 @@ kosli list environments --output=json
     "name": "aws-beta",
     "type": "ECS",
     "description": "The ECS cluster for staging cyber-dojo",
-    "last_modified_at": 1782749364.0926113,
-    "last_reported_at": 1782749364.0926113,
-    "last_changed_at": 1782714563.9463253,
+    "last_modified_at": 1782982284.4062893,
+    "last_reported_at": 1782982284.4062893,
+    "last_changed_at": 1782982284.4062893,
     "state": true,
     "include_scaling": false,
     "tags": {
@@ -84,13 +84,15 @@ kosli list environments --output=json
     "name": "aws-beta-terraform-drift-detection",
     "type": "server",
     "description": "Detection of drift of the Infrastructure-as-code components of aws-beta",
-    "last_modified_at": 1782456667.0766,
-    "last_reported_at": 1782381999.1062598,
-    "last_changed_at": 1782380199.1311765,
-    "state": null,
+    "last_modified_at": 1782982210.654061,
+    "last_reported_at": 1782982210.654061,
+    "last_changed_at": 1782982210.654061,
+    "state": false,
     "include_scaling": false,
     "tags": {},
-    "policies": [],
+    "policies": [
+      "provenance"
+    ],
     "included_environments": null
   },
   {
@@ -98,9 +100,9 @@ kosli list environments --output=json
     "name": "aws-prod",
     "type": "ECS",
     "description": "The ECS cluster for production cyber-dojo",
-    "last_modified_at": 1782749338.6784437,
-    "last_reported_at": 1782749338.6784437,
-    "last_changed_at": 1782714538.5522528,
+    "last_modified_at": 1782982318.5424266,
+    "last_reported_at": 1782982318.5424266,
+    "last_changed_at": 1782973678.4485867,
     "state": true,
     "include_scaling": false,
     "tags": {
@@ -120,13 +122,15 @@ kosli list environments --output=json
     "name": "aws-prod-terraform-drift-detection",
     "type": "server",
     "description": "Detection of drift of the Infrastructure-as-code components of aws-prod",
-    "last_modified_at": 1782749219.7762353,
-    "last_reported_at": 1782749219.7762353,
-    "last_changed_at": 1782736019.0135748,
-    "state": null,
+    "last_modified_at": 1782982113.8928382,
+    "last_reported_at": 1782982113.8928382,
+    "last_changed_at": 1782973713.7514162,
+    "state": false,
     "include_scaling": false,
     "tags": {},
-    "policies": [],
+    "policies": [
+      "provenance"
+    ],
     "included_environments": null
   },
   {
@@ -134,49 +138,34 @@ kosli list environments --output=json
     "name": "production",
     "type": "logical",
     "description": "Production environments for cyber-dojo",
-    "last_modified_at": 1782714538.5522528,
+    "last_modified_at": 1782973713.7514162,
     "last_reported_at": null,
-    "last_changed_at": 1782714538.5522528,
-    "state": true,
+    "last_changed_at": 1782973713.7514162,
+    "state": false,
     "include_scaling": false,
     "tags": {},
     "policies": null,
     "included_environments": [
       "aws-prod",
-      "terraform-state-differ-prod"
+      "aws-prod-terraform-drift-detection"
     ]
   },
   {
     "org": "cyber-dojo",
-    "name": "terraform-state-differ-beta",
-    "type": "S3",
-    "description": "Terraform state file of the differ service for staging cyber-dojo",
-    "last_modified_at": 1764591277.5828784,
-    "last_reported_at": 1744010496.9813983,
-    "last_changed_at": 1764591277.5828784,
-    "state": true,
+    "name": "staging",
+    "type": "logical",
+    "description": "",
+    "last_modified_at": 1782982284.4062893,
+    "last_reported_at": null,
+    "last_changed_at": 1782982284.4062893,
+    "state": false,
     "include_scaling": false,
     "tags": {},
-    "policies": [
-      "auto-generated-no-provenance-required"
-    ],
-    "included_environments": null
-  },
-  {
-    "org": "cyber-dojo",
-    "name": "terraform-state-differ-prod",
-    "type": "S3",
-    "description": "Terraform state file of the differ service for production cyber-dojo",
-    "last_modified_at": 1764591277.864438,
-    "last_reported_at": 1744010523.8133755,
-    "last_changed_at": 1764591277.864438,
-    "state": true,
-    "include_scaling": false,
-    "tags": {},
-    "policies": [
-      "auto-generated-no-provenance-required"
-    ],
-    "included_environments": null
+    "policies": [],
+    "included_environments": [
+      "aws-beta",
+      "aws-beta-terraform-drift-detection"
+    ]
   }
 ]
 ```

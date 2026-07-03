@@ -41,7 +41,7 @@ use --set to add or update tags, and --unset to remove tags.
 	<Tab title="GitHub">
 	View an example of the `kosli tag` command in GitHub.
 
-	In [this YAML file](https://github.com/cyber-dojo/aws-prod-co-promotion/blob/87f1f819ee6eaaf1f811259b0778f5e0cff7a0fa/.github/workflows/promote_one.yml#L74)
+	In [this YAML file](https://github.com/cyber-dojo/aws-prod-co-promotion/blob/d7e31ce0207b766140ae689f38625da4374acf87/.github/workflows/promote_one.yml#L73)
 	</Tab>
 	<Tab title="GitLab">
 	View an example of the `kosli tag` command in GitLab.
@@ -83,6 +83,13 @@ kosli tag env yourEnvironmentName
 ```shell
 kosli tag env yourEnvironmentName 
 	--unset key1=value1 
+
+```
+</Accordion>
+<Accordion title="tag a control">
+```shell
+kosli tag control yourControlIdentifier 
+	--set key1=value1 
 ```
 </Accordion>
 </AccordionGroup>

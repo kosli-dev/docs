@@ -4,7 +4,7 @@ description: "Learn how to define controls in Kosli, record decisions against th
 ---
 
 <Info>
-**This feature is in beta.** Controls, decisions, the `kosli attest decision` command, and the `for_control` policy requirement are all available in Kosli but in beta — the UI, CLI flags, and policy YAML schema may still change. It is rolled out per organization, so reach out to the Kosli team to enable it for yours, or with any questions and comments.
+**This feature is in beta.** Controls, decisions, the controls CLI commands (`kosli create control`, `kosli attest decision`, and related), and the `for_control` policy requirement are all available in Kosli but in beta — the UI, CLI flags, and policy YAML schema may still change. It is rolled out per organization, so reach out to the Kosli team to enable it for yours, or with any questions and comments.
 </Info>
 
 Controls in Kosli represent the named, identifiable governance requirements that your organization enforces across software delivery — things like "source code review", "no hard-coded credentials", or "vulnerability scan passed". They are the things auditors ask about, the things compliance teams track, and the things governance platform engineers build automation around.
@@ -15,8 +15,8 @@ This tutorial covers how to:
 
 - Define a control library in Kosli that mirrors your existing controls catalog
 - Record decision outcomes against controls from your pipelines
-- Reference controls in environment policies
-- Review the decisions and version history of each control
+- Require decisions in flow templates and reference controls in environment policies
+- Review the decisions, coverage, and version history of each control
 
 ## Prerequisites
 
@@ -60,7 +60,22 @@ Navigate to **Controls** in the [Kosli app](https://app.kosli.com) sidebar and s
 | **Description** | Optional. What the control does, in human-readable terms. |
 | **Links** | Optional. One or more named URLs pointing back to the authoritative definition in your GRC system, ServiceNow, or policy document. |
 
-Only org admins can create or edit controls. **Tags** are added separately, from a control's detail page after it exists — they're not part of the create form and don't create a new version. Controls can also be managed programmatically through the controls API (`POST /api/v2/controls/{org}`).
+Only org admins can create or edit controls. **Tags** are added separately — from a control's detail page after it exists, or from the CLI with `kosli tag control CONTROL-IDENTIFIER --set key=value`. They're not part of the create form and don't create a new version.
+
+Controls can also be managed from the command line, or programmatically through the controls API (`POST /api/v2/controls/{org}`). Create a control with `kosli create control` — `--name` is required and `--description` is optional:
+
+```bash
+kosli create control RCTL-043 \
+    --name "Source code review" \
+    --description "All changes are reviewed by a second developer before release."
+```
+
+Set or change a control's name, description, or links with `kosli update control`. Each update creates a new version:
+
+```bash
+kosli update control RCTL-043 \
+    --description "All commits are reviewed by a second developer before release."
+```
 
 <Tip>
   Control identifiers are the stable identity that decisions and environment policies reference. Choose identifiers that match how your organization already refers to controls — for example, the identifiers in your ServiceNow or GRC system. If you use `RCTL-043` today, use exactly that.
@@ -76,7 +91,13 @@ Control definitions are versioned: each time you update a control's name, descri
   <img src="/images/tutorials/controls-list.png" alt="Controls catalog listing controls with their identifier, version, name, description, and tags, with a search box and tag-filter and sort controls" />
 </Frame>
 
-You can also list controls through the controls API (`GET /api/v2/controls/{org}`).
+You can also list controls from the CLI with `kosli list controls`, fetch a single control with `kosli get control CONTROL-IDENTIFIER`, or use the controls API (`GET /api/v2/controls/{org}`).
+
+### Archiving a control
+
+When a control is retired, archive it rather than deleting it. Archiving moves the control out of the main catalog into its **Archived** view but preserves its full history — past decisions and every version of the definition remain intact for audit — and an archived control can be unarchived later if it comes back into use.
+
+Archive or unarchive a control from its detail page (org admins only), from the CLI with `kosli archive control CONTROL-IDENTIFIER` and `kosli unarchive control CONTROL-IDENTIFIER`, or through the controls API (`POST /api/v2/controls/{org}/{identifier}/archive` and `.../unarchive`). Both actions appear as events in the control's **Versions** tab, alongside Created and Edited events, so the full lifecycle is auditable.
 
 ## Recording a decision against a control
 
@@ -148,6 +169,23 @@ This creates a decision attestation with:
 - **`--attachments`** containing the Rego policy (for reproducibility) and the full JSON evaluation report
 - **`--user-data`** containing the violations, which appear in the Kosli UI as structured metadata on the attestation
 - **`--compliant`** set directly from the evaluation result
+
+## Requiring decisions in flow templates
+
+A [flow template](/template-reference/flow_template) defines which attestations a trail must have to be compliant. Because a decision is an attestation, you can make one a required part of a trail by adding an attestation of `type: decision`. The `name` must match the `--name` you record the decision under.
+
+```yaml release-template.yml
+# yaml-language-server: $schema=https://docs.kosli.com/schemas/flow-template/v1.json
+version: 1
+trail:
+  attestations:
+  - name: source-code-review-decision
+    type: decision
+```
+
+With this template, a trail is only compliant once a decision attestation named `source-code-review-decision` has been recorded on it. Use this when the decision is part of the trail's own definition of done — for example, a release trail that must carry a recorded judgment before it is considered complete.
+
+Flow templates require _that a decision was recorded_; they do not tie it to a specific control identifier. To require a decision for a **named control**, use `for_control` in an [environment policy](#referencing-controls-in-environment-policies) instead. The two mechanisms complement each other: the flow template gates trail compliance, the environment policy gates what may run in an environment.
 
 ## Asserting artifact compliance
 
@@ -230,11 +268,11 @@ For the complete policy syntax, including attestation requirements and exception
 
 ## Viewing a control
 
-Navigate to **Controls** in the [Kosli app](https://app.kosli.com) and select a control to see its detail view. The header shows the identifier, current version, name, any links, description, and tags. Below it are two tabs: **Decisions** and **Versions**.
+Navigate to **Controls** in the [Kosli app](https://app.kosli.com) and select a control to see its detail view. The header shows the identifier, current version, name, any links, description, and tags. Below it are three tabs: **Decisions**, **Coverage**, and **Versions**.
 
 ### Decisions
 
-The Decisions tab is the default view. It lists every decision recorded against this control across all flows and trails, with the timestamp, the trail it was recorded on, the artifact fingerprint, and the outcome (compliant or non-compliant). Filter by outcome and date range to narrow the list.
+The Decisions tab is the default view. It lists every decision recorded against this control across all flows and trails, with the timestamp, the trail it was recorded on, the artifact fingerprint, and the outcome (compliant or non-compliant). Filter by outcome and flow, and sort by timestamp, to narrow the list.
 
 <Frame>
   <img src="/images/tutorials/controls-decisions.png" alt="Decisions tab for a control showing decisions with timestamp, compliant/non-compliant outcome, trail, and artifact fingerprint" />
@@ -243,8 +281,24 @@ The Decisions tab is the default view. It lists every decision recorded against 
 Select a decision to open its detail, showing the trail and artifact it applies to, the origin URL, the user-data behind the judgment (such as the Rego evaluation result and the parameters it was run with), and any attached evidence files (such as the Rego policy).
 
 <Frame>
-  <img src="/images/tutorials/controls-decision-detail.png" alt="Decision detail tray showing the trail, artifact, origin URL, user-data, and attached evidence file for a compliant decision" />
+  <img src="/images/tutorials/controls-decision-detail.png" alt="Decision detail tray showing the trail, artifact, origin URL, user-data, and attached evidence file for a decision" />
 </Frame>
+
+### Coverage
+
+The Coverage tab shows how widely this control is enforced across your environments. A control is **covered** in an environment when that environment has an active [policy](/getting_started/policies) whose latest version references this control through a `for_control` requirement — regardless of whether the policy is currently passing. Coverage measures _enforcement reach_, not compliance: an environment whose policy references the control but is currently failing still counts as covered, and the policy name is shown so you can investigate.
+
+At the top, a progress bar summarizes coverage as a percentage and as `N of M environments`. Below it, each environment is listed with the policy that covers it and a **Covered** or **Not covered** badge. Filter the list by environment name, and use the **Status** filter to show all environments, only covered, or only not covered — handy for focusing on enforcement gaps.
+
+<Frame>
+  <img src="/images/tutorials/controls-coverage.png" alt="Coverage tab for a control showing a coverage progress bar, a Status filter, and a list of environments each with the policy that covers it and a covered or not-covered badge" />
+</Frame>
+
+<Info>
+  **Archived environments are excluded** from the coverage list and from the totals — they are not counted in `N of M`. Only active policies contribute to coverage: if a policy is archived or detached from an environment, that environment is no longer covered by it.
+</Info>
+
+Coverage is also available through the controls API: `GET /api/v2/controls/{org}/{identifier}/coverage` returns the summary (`total`, `covered`, `coverage_percent`) and a paginated list of environments, with name search and filtering by coverage state (`?covered=true` / `?covered=false`).
 
 ### Versions
 
@@ -252,7 +306,7 @@ The Versions tab lists every version of the control definition — the name, des
 
 ## What you've accomplished
 
-You have learned how to define controls in Kosli, record decisions against them from pipelines using `kosli attest decision` as the PDP, require controls in environment policies with `for_control`, assert artifact compliance using `kosli assert artifact --environment` as the PEP, and review the decisions and version history of each control.
+You have learned how to define controls in Kosli, record decisions against them from pipelines using `kosli attest decision` as the PDP, require controls in environment policies with `for_control`, assert artifact compliance using `kosli assert artifact --environment` as the PEP, and review the decisions, coverage, and version history of each control.
 
 Your controls catalog is now the bridge between the evidence Kosli collects and the requirements your auditors, control owners, and regulators care about. For each production change, you can now answer: "which of our controls have a compliant decision recorded, and which don't?"
 
