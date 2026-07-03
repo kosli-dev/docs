@@ -1,0 +1,134 @@
+---
+title: Detecting unexpected statefile changes
+description: Detect Terraform applies that bypass CI by attesting statefile provenance into a Kosli Environment — the class of drift a scheduled plan can never see.
+---
+
+<Tooltip tip="Drift occurs when infrastructure diverges from the desired state defined in your version-controlled Terraform config.">Terraform drift</Tooltip> comes in two distinct types, and each is invisible to a detector built for the other:
+
+1. **Unexpected statefile changes** — someone runs `terraform apply` outside your pipeline. A laptop apply updates the statefile and the world *together*, so they still agree and a scheduled `terraform plan` comes back empty. This page covers detecting this type.
+2. **Non-Terraform changes** — someone edits the world directly via the cloud console, API, or CLI, so reality no longer matches the statefile. See [Detecting non-Terraform changes](/tutorials/detecting_non_terraform_changes).
+
+Both pages implement Kosli's [Drift Detection](https://sdlc.kosli.com/controls/runtime/drift_detection/) control (SDLC-CTRL-0018), a detective control that mitigates configuration drift risk under our secure SDLC framework.
+
+## Why a plan can never catch this
+
+`terraform plan` compares the statefile to the world. An out-of-CI apply changes both in lockstep, so the comparison stays clean — the plan is structurally blind to it. What *has* changed is the statefile itself: it is now a file your pipeline never produced. Detecting that requires a record of where every statefile came from — a provenance system.
+
+## How Kosli detects it
+
+The mechanism is **attestation plus continuous reporting** against a [Kosli Environment](/getting_started/environments):
+
+- **At apply time**, the pipeline attests the Terraform statefile as an artifact into the Kosli Environment. Attestation fingerprints the file and records that your pipeline produced it, linked to the git SHA — establishing its provenance.
+- **Continuously**, a scheduled Kosli reporter Lambda snapshots the live statefile from S3 into the same Environment. The Environment's policy requires every artifact to have known provenance.
+
+The moment the statefile in S3 no longer matches an attestation — because an apply outside CI rewrote it — the next snapshot sees an unrecognized artifact and the Environment reports itself as **non-compliant**. No scheduled plan is involved; the reporter Lambda detects this entirely on its own.
+
+<Tip>
+  "The plan was clean yesterday" is not evidence that the environment is clean today. A green dashboard can be stale (the job stopped running) or unverifiable (who can prove the statefile wasn't swapped?). Only a **current, verifiable** signal counts as evidence — which is why the signal here is a Kosli Environment's compliance state, backed by attested artifacts. That is exactly the kind of evidence an auditor wants for SOC 2 (CC7.2, CC8.1) and NIST SP 800-53 (CM-2, CM-3, SI-7).
+</Tip>
+
+## Prerequisites
+
+- Terraform is applied through CI/CD, not from laptops, as the normal path — with remote, locked state (for example, an S3 backend with the native S3 lockfile or DynamoDB).
+- Keyless CI authentication to your cloud (for example, GitHub OIDC).
+- A [Kosli account and API token](/getting_started/authenticating_to_kosli).
+- A Kosli [Environment](/getting_started/environments) for each Terraform environment you want to protect.
+- The Kosli reporter Lambda deployed to snapshot the statefile into that Environment on a schedule.
+
+## Setting it up with `kosli-dev/tf`
+
+Everything above is implemented at [github.com/kosli-dev/tf](https://github.com/kosli-dev/tf): a thin Terraform wrapper (`tf`) and a set of reusable GitHub Actions workflows, both open source under the MIT license. You can call the workflows directly, or borrow their shape for your own CI.
+
+### The wrapper
+
+`tf` is a drop-in replacement for `terraform` that removes the manual bookkeeping. It selects the correct `-var-file` for your active AWS profile and region, and injects the S3 backend config so you never hand-manage it. The backend is derived deterministically:
+
+```text
+bucket  = terraform-state-<sha1(account_id-region)>
+key     = terraform/<repo>/<state_file_name>     # default: main.tfstate
+region  = <region>          encrypt = true       # native S3 lockfile by default
+```
+
+`tf plan` saves a binary plan for later inspection; `tf apply` appends `-auto-approve` (the plan has already been reviewed, and CI has no interactive prompt). Locally you wrap it in your credential helper, for example `aws-vault exec staging -- tf plan`.
+
+### The apply workflow
+
+The reusable `apply.yml` workflow runs the plan steps plus `tf apply`, then attests the plan, the apply log, and the statefile into your Kosli Environment. A caller workflow that applies on merge:
+
+```yaml
+name: Apply
+
+on:
+  push:
+    branches: [main]
+
+jobs:
+  apply:
+    uses: kosli-dev/tf/.github/workflows/apply.yml@main
+    permissions:
+      id-token: write
+      contents: write
+      pull-requests: read          # needed by the PR-attestation step
+    with:
+      aws_region:   eu-west-1
+      aws_role_arn: arn:aws:iam::111122223333:role/my-role
+      environment:  production
+      tf_version:   v1.14.6
+      kosli_template_file: kosli-apply-template.yml
+    secrets:
+      kosli_api_token:    ${{ secrets.KOSLI_API_TOKEN }}
+      kosli_github_token: ${{ secrets.GITHUB_TOKEN }}
+```
+
+The Kosli [flow template](/template-reference/flow_template) declares every attestation and artifact the workflow emits:
+
+```yaml
+# kosli-apply-template.yml
+version: 1
+trail:
+  attestations:
+    - name: terraform-plan
+      type: generic
+    - name: terraform-apply
+      type: generic
+  artifacts:
+    - name: terraform-state
+    - name: drift-plan
+```
+
+<Info>
+  The `drift-plan` artifact belongs to the second drift type — the marker file used by the scheduled plan loop in [Detecting non-Terraform changes](/tutorials/detecting_non_terraform_changes). The same apply workflow attests both, so one setup covers both types.
+</Info>
+
+## What a detection looks like
+
+Someone runs `terraform apply` from a laptop. The statefile in S3 is rewritten with content your pipeline never attested. On its next snapshot the Kosli reporter Lambda finds an artifact with no known provenance, and the Environment turns non-compliant. The Environment's snapshot history shows exactly when the unrecognized statefile appeared and what its fingerprint is — a concrete starting point for the investigation, and a durable record for the audit trail.
+
+## Hardening
+
+<AccordionGroup>
+  <Accordion title="Monitor the monitor" icon="heart-pulse">
+    This is the most dangerous failure mode. If the reporter Lambda silently stops running, no new evidence arrives to contradict the last snapshot — so the Environment looks green forever, even as unattested statefiles accumulate. Treating "the dashboard is green" as proof of cleanliness, without also verifying the Lambda is running on schedule, is a misuse of the control. Add a heartbeat or alert on "no snapshot in N intervals".
+  </Accordion>
+
+  <Accordion title="Least privilege" icon="lock">
+    The reporter Lambda needs read access to the state bucket and the ability to report snapshots to Kosli — nothing more. It must never hold apply permissions.
+  </Accordion>
+</AccordionGroup>
+
+## Implementation checklist
+
+- [ ] Terraform is applied through CI/CD, with remote, locked state.
+- [ ] Each apply attests the statefile (plus plan and apply log) into a Kosli Environment.
+- [ ] The Kosli reporter Lambda snapshots the live statefile from S3 into the Environment on a schedule.
+- [ ] The Environment's policy requires known provenance for every artifact.
+- [ ] The reporter Lambda is monitored for silent failure (heartbeat / not-run alert).
+- [ ] Snapshot cadence is tuned per environment.
+
+## Related
+
+- [Drift Detection (SDLC-CTRL-0018)](https://sdlc.kosli.com/controls/runtime/drift_detection/) — the control both drift-detection tutorials implement.
+- [Detecting non-Terraform changes](/tutorials/detecting_non_terraform_changes) — the other drift type: console and API edits a plan *can* catch.
+- [`kosli-dev/tf`](https://github.com/kosli-dev/tf) — the reference wrapper and reusable workflows.
+- [Environments](/getting_started/environments) — the Kosli primitive that carries the compliance signal.
+- [Flow template reference](/template-reference/flow_template) — declaring attestations and artifacts.

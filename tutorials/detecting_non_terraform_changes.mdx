@@ -1,0 +1,130 @@
+---
+title: Detecting non-Terraform changes
+description: Detect infrastructure changes made outside Terraform — console, API, or CLI edits — with a scheduled plan whose result is attested into a Kosli Environment.
+---
+
+<Tooltip tip="Drift occurs when infrastructure diverges from the desired state defined in your version-controlled Terraform config.">Terraform drift</Tooltip> comes in two distinct types, and each is invisible to a detector built for the other:
+
+1. **Unexpected statefile changes** — someone runs `terraform apply` outside your pipeline, so the statefile and the world still agree and a plan comes back empty. See [Detecting unexpected statefile changes](/tutorials/detecting_unexpected_statefile_changes).
+2. **Non-Terraform changes** — someone edits the world directly via the cloud console, API, or CLI: a hotfix in the console, a partial apply failure, an out-of-band automation. Reality no longer matches the statefile, so a `terraform plan` catches it. This page covers detecting this type.
+
+Both pages implement Kosli's [Drift Detection](https://sdlc.kosli.com/controls/runtime/drift_detection/) control (SDLC-CTRL-0018), a detective control that mitigates configuration drift risk under our secure SDLC framework.
+
+## How the detection works
+
+The detector is a scheduled `terraform plan` against the last-applied git SHA, with the result recorded in a small marker file that Kosli watches for tampering:
+
+- **At apply time**, the pipeline writes a fresh marker — `drift.plan.json`, stored next to the statefile — recording the applied SHA with `drift: false`, and attests it into your [Kosli Environment](/getting_started/environments):
+
+  ```json
+  {
+    "sha": "abc123def456...",
+    "drift": false
+  }
+  ```
+
+- **On a schedule**, the detector reads the marker, checks out the recorded SHA, and runs a read-only plan. The cleanest machine-readable signal is the plan exit code:
+
+  ```shell
+  terraform plan -input=false -lock=false -detailed-exitcode -no-color -out=tfplan
+  # exit 0  -> no changes  (no drift)
+  # exit 2  -> changes present  (DRIFT)
+  # exit 1  -> error
+  ```
+
+  `-lock=false` means the read-only drift plan never contends with a real apply; `-input=false` means it can never hang waiting for a prompt.
+
+- **When drift is found**, the detector overwrites the marker in S3 with `{sha, drift: <timestamp>}` — fresh, un-attested content. On its next snapshot, the Kosli reporter Lambda sees a marker that no longer matches its attestation, and the Environment reports itself as **non-compliant**.
+
+<Tip>
+  The detector never calls the Kosli API. It just rewrites the marker in S3; the reporter Lambda does the detection on its next snapshot. Detection and evidence stay decoupled — fewer moving parts, one less credential in the detector, and a single place (the Environment) that tells you whether the world still matches what was approved. The Environment's compliance state, backed by attested artifacts linked to the git SHA that produced them, is exactly the kind of evidence an auditor wants for SOC 2 (CC7.2, CC8.1) and NIST SP 800-53 (CM-2, CM-3, SI-7).
+</Tip>
+
+## Plan against the applied SHA, not against `main`
+
+This is the single most common false-positive source. If changes are merged to `main` but not yet applied — because the apply is gated behind a manual approval, or batched into a release — then planning against `main` shows a non-empty plan that reflects pending intentional changes, not drift. The marker exists precisely to record the *applied* SHA, and the detector always checks out that commit before planning.
+
+## Latch, don't spam
+
+Once drift is flagged, you usually don't want to re-plan and re-alert every cycle until someone acts. The marker doubles as a latch: the detector only plans while `drift` is `false`, and the next successful apply writes a fresh `{sha, drift: false}` marker to reset it.
+
+## Prerequisites
+
+- Terraform is applied through CI/CD, not from laptops, as the normal path — with remote, locked state (for example, an S3 backend with the native S3 lockfile or DynamoDB).
+- Keyless CI authentication to your cloud (for example, GitHub OIDC) with a dedicated, read-capable role for the detector. The detector never needs apply permissions.
+- A [Kosli account and API token](/getting_started/authenticating_to_kosli).
+- A Kosli [Environment](/getting_started/environments) for each Terraform environment you want to protect.
+- The Kosli reporter Lambda deployed to snapshot the drift marker (and statefile) into that Environment on a schedule.
+
+<Warning>
+  Drift detection on top of an undisciplined apply process produces mostly noise. Fix the pipeline first.
+</Warning>
+
+## Setting it up with `kosli-dev/tf`
+
+Everything above is implemented at [github.com/kosli-dev/tf](https://github.com/kosli-dev/tf): a thin Terraform wrapper (`tf`) and a set of reusable GitHub Actions workflows, both open source under the MIT license. Two of the workflows carry this control:
+
+- **`apply.yml`** — the plan steps plus `tf apply`, then a reset-drift-detection job that writes a fresh `{sha, drift: false}` marker to S3 (the known-good baseline for the next drift run) and attests it, along with the plan, apply log, and statefile, into your Kosli Environment. See [Detecting unexpected statefile changes](/tutorials/detecting_unexpected_statefile_changes) for the caller workflow and flow template — the same apply setup covers both drift types.
+- **`detect-drift.yml`** — the detector. Reads the baseline marker, and only if `drift == false` runs a plan against the baseline SHA. A non-empty plan overwrites the marker with `{sha, drift: <timestamp>}`; otherwise it records a no-drift summary.
+
+A scheduled caller that runs the detector (use a matrix to fan out across environments):
+
+```yaml
+name: Drift
+on:
+  schedule:
+    - cron: "*/15 * * * *"
+  workflow_dispatch:
+
+jobs:
+  drift:
+    uses: kosli-dev/tf/.github/workflows/detect-drift.yml@main
+    permissions:
+      id-token: write
+      contents: write
+    with:
+      aws_region:   eu-west-1
+      aws_role_arn: arn:aws:iam::111122223333:role/my-role
+      environment:  production
+```
+
+## Hardening
+
+A detector that runs once and alerts once is easy. A detector you can depend on for an audit needs to handle the failure modes below.
+
+<AccordionGroup>
+  <Accordion title="Monitor the monitor" icon="heart-pulse">
+    This is the most dangerous failure mode. If the scheduled job silently stops running, no new evidence arrives to contradict the last result — so the environment looks green forever, even as drift accumulates. Treating "the dashboard is green" as proof of cleanliness, without also verifying the underlying job is running on schedule, is a misuse of the control. Add a heartbeat or alert on "job has not run in N intervals" for both the detector workflow and the reporter Lambda.
+  </Accordion>
+
+  <Accordion title="Terraform-managed resources only" icon="filter">
+    `terraform plan` can only see resources Terraform manages. A resource created entirely outside Terraform — say, an IAM user added by hand in the console with no corresponding Terraform resource — is invisible to this control. Closing that gap is the job of an Infrastructure-as-Code coverage policy (everything in production must be defined as code in the first place); drift detection assumes that policy holds and does not substitute for it.
+  </Accordion>
+
+  <Accordion title="Tune cadence per environment" icon="gauge">
+    Worst-case detection latency is the check interval **plus the reporter Lambda's snapshot interval**. A ten-minute check with a five-minute reporter Lambda surfaces drift within fifteen minutes. Set the schedule from each environment's rate-of-change and blast radius rather than using one global value.
+  </Accordion>
+
+  <Accordion title="Concurrency and least privilege" icon="lock">
+    Guard against overlapping runs for the same environment with a concurrency group. Scope the detector's cloud role tightly: it needs to read state and plan, plus write the marker file — nothing more. It must never hold apply permissions.
+  </Accordion>
+</AccordionGroup>
+
+## Implementation checklist
+
+- [ ] Terraform is applied through CI/CD, with remote, locked state.
+- [ ] Each apply writes a fresh `{sha, drift: false}` marker and attests it into a Kosli Environment.
+- [ ] A scheduled job plans against the applied SHA — not against `main` — using a read-only, lock-free plan.
+- [ ] A non-empty plan overwrites the marker; the result latches until the next apply resets it.
+- [ ] The Kosli reporter Lambda snapshots the marker from S3 into the Environment on a schedule.
+- [ ] Both the detector workflow and the reporter Lambda are monitored for silent failure.
+- [ ] The detector's cloud role can read and plan only — never apply.
+- [ ] Cadence and concurrency are tuned per environment.
+
+## Related
+
+- [Drift Detection (SDLC-CTRL-0018)](https://sdlc.kosli.com/controls/runtime/drift_detection/) — the control both drift-detection tutorials implement.
+- [Detecting unexpected statefile changes](/tutorials/detecting_unexpected_statefile_changes) — the other drift type: out-of-CI applies a plan can *never* catch.
+- [`kosli-dev/tf`](https://github.com/kosli-dev/tf) — the reference wrapper and reusable workflows.
+- [Environments](/getting_started/environments) — the Kosli primitive that carries the compliance signal.
+- [Terraform `-detailed-exitcode`](https://developer.hashicorp.com/terraform/cli/commands/plan#detailed-exitcode) and [remote/locked S3 backends](https://developer.hashicorp.com/terraform/language/backend/s3).

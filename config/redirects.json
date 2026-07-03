@@ -1,5 +1,13 @@
 [
   {
+    "source": "/tutorials/unauthorized_iac_changes",
+    "destination": "/tutorials/detecting_unexpected_statefile_changes"
+  },
+  {
+    "source": "/tutorials/terraform_drift_detection",
+    "destination": "/tutorials/detecting_non_terraform_changes"
+  },
+  {
     "source": "/getting_started/approvals",
     "destination": "/getting_started/attestations"
   },
