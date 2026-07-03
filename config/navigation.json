@@ -514,7 +514,19 @@
             {
               "group": "Helm Charts",
               "pages": [
-                "helm/k8s_reporter"
+                {
+                  "group": "Kubernetes Reporter",
+                  "pages": [
+                    "helm/k8s_reporter/overview",
+                    "helm/k8s_reporter/prerequisites",
+                    "helm/k8s_reporter/installing",
+                    "helm/k8s_reporter/upgrading",
+                    "helm/k8s_reporter/uninstalling",
+                    "helm/k8s_reporter/tls-proxy",
+                    "helm/k8s_reporter/karpenter",
+                    "helm/k8s_reporter/configuration"
+                  ]
+                }
               ]
             }
           ]

@@ -1,5 +1,9 @@
 [
   {
+    "source": "/helm/k8s_reporter",
+    "destination": "/helm/k8s_reporter/overview"
+  },
+  {
     "source": "/tutorials/unauthorized_iac_changes",
     "destination": "/tutorials/detecting_unexpected_statefile_changes"
   },

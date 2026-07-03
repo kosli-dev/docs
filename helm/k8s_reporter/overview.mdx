@@ -1,0 +1,27 @@
+---
+title: Kubernetes Reporter Helm Chart
+description: A Helm chart for installing the Kosli K8S reporter as a cronjob.
+---
+
+<Info>
+  This reference applies to **chart version 2.3.1**, which defaults to CLI **v2.12.0** via `appVersion`. Override with `image.tag`.
+</Info>
+
+A Helm chart for installing the Kosli K8S reporter as a CronJob.
+The chart allows you to create a Kubernetes cronjob and all its necessary RBAC to report running images to Kosli at a given cron schedule.
+
+Configuration is done via **reporterConfig.environments**: a list of Kosli environments to report to. Each entry has a required `name` and optional namespace selectors. Use one entry for a single environment, or multiple entries to report to different environments with different selectors.
+
+<Note>Chart source can be found at [GitHub](https://github.com/kosli-dev/cli/tree/main/charts/k8s-reporter).</Note>
+
+## In this section
+
+<CardGroup cols={2}>
+  <Card title="Prerequisites" icon="clipboard-check" href="/helm/k8s_reporter/prerequisites" />
+  <Card title="Installing the chart" icon="download" href="/helm/k8s_reporter/installing" />
+  <Card title="Upgrading the chart" icon="arrow-up" href="/helm/k8s_reporter/upgrading" />
+  <Card title="Uninstalling the chart" icon="trash" href="/helm/k8s_reporter/uninstalling" />
+  <Card title="Running behind a TLS-inspecting proxy" icon="shield" href="/helm/k8s_reporter/tls-proxy" />
+  <Card title="Running on EKS with Karpenter" icon="server" href="/helm/k8s_reporter/karpenter" />
+  <Card title="Configuration reference" icon="gear" href="/helm/k8s_reporter/configuration" />
+</CardGroup>

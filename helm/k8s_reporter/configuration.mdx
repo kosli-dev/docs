@@ -1,0 +1,186 @@
+---
+title: Configuration reference
+description: All values.yaml options for the Kosli k8s-reporter Helm chart.
+---
+
+## General
+
+<ParamField path="affinity" type="object" default="{}">
+  Affinity rules for scheduling the reporter pod. Supports nodeAffinity, podAffinity and podAntiAffinity.
+</ParamField>
+
+<ParamField path="concurrencyPolicy" type="string" default="Replace">
+  Specifies how to treat concurrent executions of a Job that is created by this CronJob.
+</ParamField>
+
+<ParamField path="cronSchedule" type="string" default="*/5 * * * *">
+  The cron schedule at which the reporter is triggered to report to Kosli.
+</ParamField>
+
+<ParamField path="failedJobsHistoryLimit" type="int" default="1">
+  Specifies the number of failed finished jobs to keep.
+</ParamField>
+
+<ParamField path="fullnameOverride" type="string" default="">
+  Overrides the fullname used for the created k8s resources. It has higher precedence than `nameOverride`.
+</ParamField>
+
+<ParamField path="nameOverride" type="string" default="">
+  Overrides the name used for the created k8s resources. If `fullnameOverride` is provided, it has higher precedence than this one.
+</ParamField>
+
+<ParamField path="nodeSelector" type="object" default="{}">
+  Node labels for scheduling the reporter pod. On EKS with Karpenter, use this to pin the reporter to a stable managed node group (e.g. `eks.amazonaws.com/nodegroup: <name>`) so it does not interfere with node consolidation. See [Running on EKS with Karpenter](/helm/k8s_reporter/karpenter).
+</ParamField>
+
+<ParamField path="podAnnotations" type="object" default="{}">
+  Annotations to add to the CronJob object itself. For pod-level annotations (added to each reporter pod), use `podTemplateAnnotations` instead.
+</ParamField>
+
+<ParamField path="podLabels" type="object" default="{}">
+  Custom labels to add to pods.
+</ParamField>
+
+<ParamField path="podTemplateAnnotations" type="object" default="{}">
+  Annotations to add to the reporter pod template (applied to each Job pod that the CronJob creates).
+</ParamField>
+
+<ParamField path="successfulJobsHistoryLimit" type="int" default="3">
+  Specifies the number of successful finished jobs to keep.
+</ParamField>
+
+<ParamField path="tolerations" type="list" default="[]">
+  Tolerations for scheduling the reporter pod, e.g. to run on a dedicated or tainted node group.
+</ParamField>
+
+## Image
+
+<ParamField path="image.pullPolicy" type="string" default="IfNotPresent">
+  The kosli reporter image pull policy.
+</ParamField>
+
+<ParamField path="image.repository" type="string" default="ghcr.io/kosli-dev/cli">
+  The kosli reporter image repository.
+</ParamField>
+
+<ParamField path="image.tag" type="string" default="">
+  The kosli reporter image tag, overrides the image tag whose default is the chart appVersion.
+</ParamField>
+
+## Reporter configuration
+
+<ParamField path="reporterConfig.dryRun" type="bool" default="false">
+  Whether the dry run mode is enabled or not. In dry run mode, the reporter logs the reports to stdout and does not send them to kosli.
+</ParamField>
+
+<ParamField path="reporterConfig.environments" type="list" default="[]">
+  List of Kosli environments to report to. Each entry has required 'name' and optional namespace selectors. Use one entry to report a single environment; use multiple entries to report to multiple environments with different selectors. Per entry: name (required), namespaces, namespacesRegex, excludeNamespaces, excludeNamespacesRegex (optional). Leave namespace fields unset for an entry to report the entire cluster to that environment.
+</ParamField>
+
+<ParamField path="reporterConfig.httpProxy" type="string" default="">
+  The http proxy url.
+</ParamField>
+
+<ParamField path="reporterConfig.kosliOrg" type="string" default="">
+  The name of the Kosli org.
+</ParamField>
+
+<ParamField path="reporterConfig.securityContext" type="object">
+  The security context for the reporter cronjob. Set to null or {} to disable security context entirely (not recommended). For OpenShift with SCC, explicitly set runAsUser to null to let OpenShift assign the UID from the allowed range. Simply omitting runAsUser from your values override will not work because Helm deep-merges with these defaults. Example OpenShift override:   securityContext:     allowPrivilegeEscalation: false     runAsNonRoot: true     runAsUser: null.
+</ParamField>
+
+<ParamField path="reporterConfig.securityContext.allowPrivilegeEscalation" type="bool" default="false">
+  Whether to allow privilege escalation.
+</ParamField>
+
+<ParamField path="reporterConfig.securityContext.runAsNonRoot" type="bool" default="true">
+  Whether to run as non root.
+</ParamField>
+
+<ParamField path="reporterConfig.securityContext.runAsUser" type="int" default="1000">
+  The user id to run as. For OpenShift environments with SCC, set to null (runAsUser: null) to allow automatic UID assignment. Simply omitting this field will not work due to Helm's deep merge with chart defaults.
+</ParamField>
+
+## Kosli API token
+
+<ParamField path="kosliApiToken.secretKey" type="string" default="key">
+  The name of the key in the secret data which contains the Kosli API token.
+</ParamField>
+
+<ParamField path="kosliApiToken.secretName" type="string" default="kosli-api-token">
+  The name of the secret containing the kosli API token.
+</ParamField>
+
+## Environment variables
+
+<ParamField path="env" type="object" default="{}">
+  Map of plain environment variables to inject into the reporter container. For a single-tenant Kosli instance, set `KOSLI_HOST` to `https://INSTANCE_NAME.kosli.com`.
+</ParamField>
+
+<ParamField path="extraEnvVars" type="list" default="[]">
+  Additional environment variables to inject into the reporter container. List of `{name, value}` or `{name, valueFrom}` entries, rendered verbatim into the container env. Supports plain values and valueFrom (`secretKeyRef` / `configMapKeyRef`). Note: entries here are appended after the chart's own env entries; on duplicate names the later entry wins.
+</ParamField>
+
+## Volumes
+
+<ParamField path="extraVolumeMounts" type="list" default="[]">
+  Additional container-level volumeMounts for the reporter container. Rendered verbatim into the container spec alongside the chart's own mounts.
+</ParamField>
+
+<ParamField path="extraVolumes" type="list" default="[]">
+  Additional Pod-level volumes to attach to the reporter pod. Rendered verbatim into the Pod spec alongside the chart's own volumes. Use together with `extraVolumeMounts` to mount Secrets, ConfigMaps, or other volumes into the container.
+</ParamField>
+
+## Custom CA
+
+<ParamField path="customCA" type="object">
+  Convenience wrapper for mounting a corporate / custom CA bundle. See [Running behind a TLS-inspecting proxy](/helm/k8s_reporter/tls-proxy) for usage.
+</ParamField>
+
+<ParamField path="customCA.enabled" type="bool" default="false">
+  Enable mounting a corporate/custom CA bundle into the trust store.
+</ParamField>
+
+<ParamField path="customCA.key" type="string" default="ca.crt">
+  Key within the Secret that holds the PEM-formatted CA certificate (single cert or multi-cert PEM bundle).
+</ParamField>
+
+<ParamField path="customCA.secretName" type="string" default="">
+  Name of an existing Secret in the same namespace containing the CA bundle.
+</ParamField>
+
+## Resources
+
+<ParamField path="resources.limits.cpu" type="string" default="100m">
+  The cpu limit.
+</ParamField>
+
+<ParamField path="resources.limits.memory" type="string" default="256Mi">
+  The memory limit.
+</ParamField>
+
+<ParamField path="resources.requests.memory" type="string" default="64Mi">
+  The memory request.
+</ParamField>
+
+## Service account
+
+<ParamField path="serviceAccount.annotations" type="object" default="{}">
+  Annotations to add to the service account.
+</ParamField>
+
+<ParamField path="serviceAccount.create" type="bool" default="true">
+  Specifies whether a service account should be created.
+</ParamField>
+
+<ParamField path="serviceAccount.name" type="string" default="">
+  The name of the service account to use. If not set and create is true, a name is generated using the fullname template.
+</ParamField>
+
+<ParamField path="serviceAccount.permissionScope" type="string" default="cluster">
+  Specifies whether to create a cluster-wide permissions for the service account or namespace-scoped permissions. allowed values are: \[cluster, namespace].
+</ParamField>
+
+***
+
+Autogenerated from chart metadata using [helm-docs v1.14.2](https://github.com/norwoodj/helm-docs/releases/v1.14.2).

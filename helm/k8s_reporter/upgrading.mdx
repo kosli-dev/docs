@@ -1,0 +1,16 @@
+---
+title: Upgrading the chart
+description: Upgrade an existing Kosli k8s-reporter release, including migration notes for v2.0.0.
+---
+
+## Breaking change in v2.0.0
+
+Version 2.0.0 removes the previous single-environment mode (`kosliEnvironmentName` and the `namespaces` / `namespacesRegex` / `excludeNamespaces` / `excludeNamespacesRegex` flags). You now configure one or more environments only via **reporterConfig.environments**. To report a single environment, use a list with one entry.
+
+If upgrading from v1.x to v2.0.0, migrate your values to the **environments** list format (see [Installing the chart](/helm/k8s_reporter/installing)).
+
+## Upgrade command
+
+```shell
+helm upgrade kosli-reporter kosli/k8s-reporter -f values.yaml
+```
