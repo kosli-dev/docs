@@ -111,10 +111,6 @@ Someone runs `terraform apply` from a laptop. The statefile in S3 is rewritten w
     This is the most dangerous failure mode. If the reporter Lambda silently stops running, no new evidence arrives to contradict the last snapshot — so the Environment looks green forever, even as unattested statefiles accumulate. Treating "the dashboard is green" as proof of cleanliness, without also verifying the Lambda is running on schedule, is a misuse of the control. Add a heartbeat or alert on "no snapshot in N intervals".
   </Accordion>
 
-  <Accordion title="Race conditions are bounded, not eliminated" icon="clock">
-    In theory, between an apply finishing and the statefile being attested, a concurrent unauthorized change could slip in. In practice the Terraform lock prevents a concurrent apply from starting until the lock is released, which keeps this theoretical. Detection latency is bounded by the reporter Lambda's snapshot interval — tune it per environment.
-  </Accordion>
-
   <Accordion title="Least privilege" icon="lock">
     The reporter Lambda needs read access to the state bucket and the ability to report snapshots to Kosli — nothing more. It must never hold apply permissions.
   </Accordion>

@@ -101,10 +101,6 @@ A detector that runs once and alerts once is easy. A detector you can depend on 
     `terraform plan` can only see resources Terraform manages. A resource created entirely outside Terraform — say, an IAM user added by hand in the console with no corresponding Terraform resource — is invisible to this control. Closing that gap is the job of an Infrastructure-as-Code coverage policy (everything in production must be defined as code in the first place); drift detection assumes that policy holds and does not substitute for it.
   </Accordion>
 
-  <Accordion title="Race conditions are bounded, not eliminated" icon="clock">
-    Two timing windows exist in theory. First, between an apply finishing and the baseline marker being written, a concurrent unauthorized change could slip in. In practice the Terraform lock prevents a concurrent apply from starting until the lock is released, which keeps this theoretical. Second, if the world changes between one drift cycle and the next, the alert may be delayed by one interval. Understand both; rely on locking and ordering to keep them harmless.
-  </Accordion>
-
   <Accordion title="Tune cadence per environment" icon="gauge">
     Worst-case detection latency is the check interval **plus the reporter Lambda's snapshot interval**. A ten-minute check with a five-minute reporter Lambda surfaces drift within fifteen minutes. Set the schedule from each environment's rate-of-change and blast radius rather than using one global value.
   </Accordion>
