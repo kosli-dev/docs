@@ -105,6 +105,8 @@ kosli get attestation snyk-container-scan --flow=differ-ci --fingerprint=0cbbe3a
     },
     "attestation_id": "f7cd9b3a-2738-47e6-be36-689d511d",
     "html_url": "https://app.kosli.com/cyber-dojo/flows/differ-ci/trails/5ccc5c141fdd1fbd97905b7fe0af87e5a592bfb6?attestation_id=f7cd9b3a-2738-47e6-be36-689d511d",
+    "flow_name": "differ-ci",
+    "trail_name": "5ccc5c141fdd1fbd97905b7fe0af87e5a592bfb6",
     "reported_by": "ci-pipelines",
     "has_audit_package": true,
     "_links": {

@@ -465,7 +465,7 @@ kosli list flows --output=json
     "visibility": "private",
     "org": "cyber-dojo",
     "template": "version: 1\ntrail:\n  attestations:\n    - name: terraform-plan\n      type: generic\n    - name: terraform-apply\n      type: generic\n  artifacts:\n    - name: terraform-state\n    - name: drift-plan\n",
-    "repo_url": "https://github.com/cyber-dojo/differ",
+    "repo_url": "https://github.com/cyber-dojo/nginx",
     "tags": {}
   },
   {
