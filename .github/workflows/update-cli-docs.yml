@@ -78,12 +78,12 @@ jobs:
             https://github.com/kosli-dev/cli.git /tmp/cli-repo
           cd /tmp/cli-repo && git sparse-checkout set charts/k8s-reporter
           cd /tmp/cli-repo/charts/k8s-reporter
-
-          rm -f "$GITHUB_WORKSPACE"/helm/k8s_reporter/*.mdx
+          mkdir -p $GITHUB_WORKSPACE/helm/k8s_reporter
+          rm -f $GITHUB_WORKSPACE/helm/k8s_reporter/*.mdx
           for tmpl in mintlify/*.md.gotmpl; do
             page=$(basename "$tmpl" .md.gotmpl)
             helm-docs \
-              --template-files "${tmpl},_mintlify_templates.gotmpl" \
+              --template-files "${tmpl},_templates.gotmpl,_mintlify_templates.gotmpl" \
               --output-file "${page}.generated.md"
             # helm-docs leaves a trailing blank line; normalize to a single final newline
             printf '%s\n' "$(cat "${page}.generated.md")" \
