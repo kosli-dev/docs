@@ -361,6 +361,7 @@
             {
               "group": "kosli get",
               "pages": [
+                "client_reference/kosli_get_api-key",
                 "client_reference/kosli_get_approval",
                 "client_reference/kosli_get_artifact",
                 "client_reference/kosli_get_attestation-type",
