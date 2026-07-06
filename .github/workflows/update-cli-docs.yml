@@ -4,7 +4,7 @@ on:
   workflow_dispatch:
     inputs:
       kosli_cli_tag:
-        description: 'CLI release tag (e.g. v2.11.2)'
+        description: 'CLI release tag (vX.Y.Z)'
         required: true
   repository_dispatch:
     types: [cli-release]
@@ -78,9 +78,18 @@ jobs:
             https://github.com/kosli-dev/cli.git /tmp/cli-repo
           cd /tmp/cli-repo && git sparse-checkout set charts/k8s-reporter
           cd /tmp/cli-repo/charts/k8s-reporter
-          helm-docs --template-files MINTLIFY.md.gotmpl,_templates.gotmpl,_mintlify_templates.gotmpl
-          mkdir -p $GITHUB_WORKSPACE/helm
-          cp /tmp/cli-repo/charts/k8s-reporter/README.md $GITHUB_WORKSPACE/helm/k8s_reporter.mdx
+
+          rm -f "$GITHUB_WORKSPACE"/helm/k8s_reporter/*.mdx
+          for tmpl in mintlify/*.md.gotmpl; do
+            page=$(basename "$tmpl" .md.gotmpl)
+            helm-docs \
+              --template-files "${tmpl},_mintlify_templates.gotmpl" \
+              --output-file "${page}.generated.md"
+            # helm-docs leaves a trailing blank line; normalize to a single final newline
+            printf '%s\n' "$(cat "${page}.generated.md")" \
+              > "$GITHUB_WORKSPACE/helm/k8s_reporter/${page}.mdx"
+            rm "${page}.generated.md"
+          done
 
       - name: Create Pull Request
         uses: peter-evans/create-pull-request@v8
