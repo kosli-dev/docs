@@ -4,6 +4,82 @@ description: "Release notes for Kosli products."
 rss: true
 ---
 
+<Update label="July 3, 2026" description="v2.30.1" tags={["CLI"]}>
+
+## Updates
+
+- Dependency updates (AWS SDK, OPA, gRPC, Google API, and others).
+
+[View on GitHub](https://github.com/kosli-dev/cli/releases/tag/v2.30.1)
+
+</Update>
+
+<Update label="July 3, 2026" description="" tags={["Platform"]}>
+
+## New features
+
+- **Attestation filters** — the org attestations list now supports filters, including a new **decision** entry in the Types filter for control decision attestations.
+- **Single service-account API key endpoint** — new `GET` endpoint to retrieve a specific service-account API key by identifier.
+
+## Updates
+
+- **Faster org trail listings** — flows are now batch-loaded when listing org trails, removing an N+1 query.
+- **Cleaner control decision display** — the internal `system:` prefix is hidden from control decision attestations in the UI.
+- **Org deletion moved to a dedicated task** — long-running org deletion now runs in its own ECS task triggered via EventBridge, improving reliability.
+
+</Update>
+
+<Update label="July 2, 2026" description="v2.30.0" tags={["CLI"]}>
+
+## New features
+
+- **Controls management (beta)** — new commands to `get`, `list`, `create`, `update`, and `archive` Kosli controls.
+
+[View on GitHub](https://github.com/kosli-dev/cli/releases/tag/v2.30.0)
+
+</Update>
+
+<Update label="July 2, 2026" description="" tags={["Platform"]}>
+
+## Updates
+
+- **Filtering and pagination on org attestations API** — the `list_org_attestations` endpoint now accepts filters and paginates results.
+
+</Update>
+
+<Update label="July 1, 2026" description="" tags={["Platform"]}>
+
+## Updates
+
+- **Approval API endpoints deprecated** — the approval endpoints are now marked deprecated in the API and OpenAPI schema. Existing integrations continue to work, but new work should move off them.
+- **Remembered space selection** — the UI now remembers your selected space(s) between pages using local storage.
+
+</Update>
+
+<Update label="June 29, 2026" description="v2.29.0" tags={["CLI"]}>
+
+## New features
+
+- **Service account management** — new commands to `create`, `get`, `list`, `update`, and `delete` service accounts: `kosli create service-account`, `kosli get service-account`, `kosli list service-accounts`, `kosli update service-account`, and `kosli delete service-account` (with a confirmation prompt, skippable via `--assume-yes`/`-y`).
+- **Default organization commands** — `kosli update default-org` sets the default organization for the current user, and `kosli get default-org` retrieves it.
+- **New top-level `kosli update` command group** (aliases: `u`, `up`).
+
+## Updates
+
+- `kosli assert snapshot` and `kosli get environment` now report non-compliant environments as `NON-COMPLIANT` (previously `INCOMPLIANT`).
+
+[View on GitHub](https://github.com/kosli-dev/cli/releases/tag/v2.29.0)
+
+</Update>
+
+<Update label="June 29, 2026" description="" tags={["Platform"]}>
+
+## Updates
+
+- **Resume stalled org deletion** — the UI now offers a **Resume** action on a stalled org deletion, so operators can pick up where the previous run left off.
+
+</Update>
+
 <Update label="June 26, 2026" description="" tags={["Platform"]}>
 
 ## Updates
