@@ -66,7 +66,7 @@ kosli diff snapshots aws-beta aws-prod --output=json
 ```json
 {
   "snappish1": {
-    "snapshot_id": "aws-beta#7609",
+    "snapshot_id": "aws-beta#7619",
     "artifacts": [
       {
         "fingerprint": "1a699e33bfd10607ba32dfd4189c4a3a33b552575ae7907554a7066add925ead",
@@ -85,17 +85,17 @@ kosli diff snapshots aws-beta aws-prod --output=json
         "instance_count": 1
       },
       {
-        "fingerprint": "9cd4a6c3fb096cf92e1c50c6b6f37e412830918594f9aca5c49030798345ac08",
-        "name": "244531986313.dkr.ecr.eu-central-1.amazonaws.com/differ:ce4cbdd@sha256:9cd4a6c3fb096cf92e1c50c6b6f37e412830918594f9aca5c49030798345ac08",
-        "most_recent_timestamp": 1783329537,
+        "fingerprint": "aca3fd625101b9d14b879e7ef0612b82d69bf1c1f7626e4d9074b2ac2d2f3c0e",
+        "name": "244531986313.dkr.ecr.eu-central-1.amazonaws.com/differ:a9cdf63@sha256:aca3fd625101b9d14b879e7ef0612b82d69bf1c1f7626e4d9074b2ac2d2f3c0e",
+        "most_recent_timestamp": 1783417896,
         "flow": "differ-ci",
-        "commit_url": "https://github.com/cyber-dojo/differ/commit/ce4cbdd20524e0cd53e25098435bc5d30b8190b7",
+        "commit_url": "https://github.com/cyber-dojo/differ/commit/a9cdf63c5ed2288935a77a46ccd4a35b2bfb2300",
         "instance_count": 1
       }
     ]
   },
   "snappish2": {
-    "snapshot_id": "aws-prod#4960",
+    "snapshot_id": "aws-prod#4969",
     "artifacts": [
       {
         "fingerprint": "4d1ba1622515a86443d2ec4b76df41daa7b98daabeb557a134607f6e200e8ebc",

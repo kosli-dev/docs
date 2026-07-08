@@ -55,7 +55,7 @@ All rules must return `true` for the evaluation to pass and the attestation to b
 	<Tab title="GitHub">
 	View an example of the `kosli create attestation-type` command in GitHub.
 
-	In [this YAML file](https://github.com/cyber-dojo/kosli-attestation-types/blob/88584f3616dd7f6250cd36a8430e8c9235bfcb6f/.github/workflows/main.yml#L30)
+	In [this YAML file](https://github.com/cyber-dojo/kosli-attestation-types/blob/e64e96a8bdac8490c348742d83f15bff4ffa435c/.github/workflows/main.yml#L30)
 	</Tab>
 </Tabs>
 
