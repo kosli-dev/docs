@@ -6,11 +6,20 @@ description: "Tag a resource in Kosli with key-value pairs.  "
 ## Synopsis
 
 ```shell
-kosli tag RESOURCE-TYPE RESOURCE-ID [flags]
+kosli tag RESOURCE-TYPE [RESOURCE-ID] [flags]
 ```
 
 Tag a resource in Kosli with key-value pairs.  
 use --set to add or update tags, and --unset to remove tags.
+
+Valid resource types are: flow, flows, env, environment, environments, control, controls, repo, repos.
+
+Repos are identified by their name. If multiple repos share the same name
+across VCS providers, use --provider to disambiguate, or tag the repo
+unambiguously by its internal ID with --repo-id (see: kosli get repo).
+Note: in dry-run mode the repo name is not resolved to its internal ID
+(no request is made to Kosli), so the previewed request URL contains the
+name as-is, whereas a real run sends the resolved ID.
 
 
 ## Flags
@@ -18,8 +27,10 @@ use --set to add or update tags, and --unset to remove tags.
 | :--- | :--- |
 |    `-D`, `--dry-run`  |  [optional] Run in dry-run mode. When enabled, no data is sent to Kosli and the CLI exits with 0 exit code regardless of any errors.  |
 |    `-h`, `--help`  |  help for tag  |
-|        `--set` stringToString  |  [optional] The key-value pairs to tag the resource with. The format is: key=value  |
-|        `--unset` strings  |  [optional] The list of tag keys to remove from the resource.  |
+|        `--provider` string  |  [optional] The VCS provider of the repo (e.g. github, gitlab). Only valid when tagging repos; required when multiple repos share the same name across providers.  |
+|        `--repo-id` string  |  [optional] The repo's internal ID (see: kosli get repo). Only valid when tagging repos; replaces the RESOURCE-ID argument and identifies the repo unambiguously.  |
+|    `-s`, `--set` stringToString  |  [optional] The key-value pairs to tag the resource with. The format is: key=value  |
+|    `-u`, `--unset` strings  |  [optional] The list of tag keys to remove from the resource.  |
 
 
 ## Flags inherited from parent commands
@@ -89,6 +100,28 @@ kosli tag env yourEnvironmentName
 <Accordion title="tag a control">
 ```shell
 kosli tag control yourControlIdentifier 
+	--set key1=value1 
+
+```
+</Accordion>
+<Accordion title="tag a repo">
+```shell
+kosli tag repo yourOrg/yourRepoName 
+	--set key1=value1 
+
+```
+</Accordion>
+<Accordion title="tag a repo whose name exists across multiple VCS providers">
+```shell
+kosli tag repo yourOrg/yourRepoName 
+	--provider github 
+	--set key1=value1 
+
+```
+</Accordion>
+<Accordion title="tag a repo by its internal ID (see: kosli get repo)">
+```shell
+kosli tag repo --repo-id yourRepoID 
 	--set key1=value1 
 ```
 </Accordion>
