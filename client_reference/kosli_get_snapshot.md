@@ -64,7 +64,7 @@ kosli get snapshot aws-prod --output=json
 
 ```json
 {
-  "index": 4969,
+  "index": 4972,
   "is_latest": true,
   "next_snapshot_timestamp": null,
   "artifact_compliance_count": {
@@ -72,10 +72,10 @@ kosli get snapshot aws-prod --output=json
     "false": 0,
     "null": 0
   },
-  "timestamp": 1783486618.5418699,
+  "timestamp": 1783576438.7264173,
   "type": "ECS",
   "compliant": true,
-  "html_url": "https://app.kosli.com/cyber-dojo/environments/aws-prod/snapshots/4969",
+  "html_url": "https://app.kosli.com/cyber-dojo/environments/aws-prod/snapshots/4972",
   "artifacts": [
     {
       "name": "244531986313.dkr.ecr.eu-central-1.amazonaws.com/runner:28fc01e@sha256:579d2668834cf42f3004e005c295d340dfd3da5b33f394d3151c016dc9f074a4",
@@ -116,7 +116,7 @@ kosli get snapshot aws-prod --output=json
                 {
                   "type": "rule_not_applicable",
                   "context": {
-                    "flow_name": "snyk-aws-prod-per-artifact",
+                    "flow_name": "snyk-aws-beta-per-artifact",
                     "trail_name": "runner-579d2668834cf42f3004e005c295d340dfd3da5b33f394d3151c016dc9f074a4",
                     "artifact_status": null
                   }
@@ -124,7 +124,7 @@ kosli get snapshot aws-prod --output=json
                 {
                   "type": "rule_not_applicable",
                   "context": {
-                    "flow_name": "snyk-aws-beta-per-artifact",
+                    "flow_name": "snyk-aws-prod-per-artifact",
                     "trail_name": "runner-579d2668834cf42f3004e005c295d340dfd3da5b33f394d3151c016dc9f074a4",
                     "artifact_status": null
                   }
@@ -161,7 +161,7 @@ kosli get snapshot aws-prod --output=json
                 {
                   "type": "rule_not_applicable",
                   "context": {
-                    "flow_name": "snyk-aws-prod-per-artifact",
+                    "flow_name": "snyk-aws-beta-per-artifact",
                     "trail_name": "runner-579d2668834cf42f3004e005c295d340dfd3da5b33f394d3151c016dc9f074a4",
                     "artifact_status": "COMPLIANT"
                   }
@@ -169,7 +169,7 @@ kosli get snapshot aws-prod --output=json
                 {
                   "type": "rule_not_applicable",
                   "context": {
-                    "flow_name": "snyk-aws-beta-per-artifact",
+                    "flow_name": "snyk-aws-prod-per-artifact",
                     "trail_name": "runner-579d2668834cf42f3004e005c295d340dfd3da5b33f394d3151c016dc9f074a4",
                     "artifact_status": "COMPLIANT"
                   }
@@ -211,7 +211,7 @@ kosli get snapshot aws-prod --output=json
                 {
                   "type": "rule_not_applicable",
                   "context": {
-                    "flow_name": "snyk-aws-prod-per-artifact",
+                    "flow_name": "snyk-aws-beta-per-artifact",
                     "trail_name": "runner-579d2668834cf42f3004e005c295d340dfd3da5b33f394d3151c016dc9f074a4",
                     "artifact_status": null
                   }
@@ -219,7 +219,7 @@ kosli get snapshot aws-prod --output=json
                 {
                   "type": "rule_not_applicable",
                   "context": {
-                    "flow_name": "snyk-aws-beta-per-artifact",
+                    "flow_name": "snyk-aws-prod-per-artifact",
                     "trail_name": "runner-579d2668834cf42f3004e005c295d340dfd3da5b33f394d3151c016dc9f074a4",
                     "artifact_status": null
                   }
@@ -263,7 +263,7 @@ kosli get snapshot aws-prod --output=json
                 {
                   "type": "rule_satisfied",
                   "context": {
-                    "flow_name": "snyk-aws-prod-per-artifact",
+                    "flow_name": "snyk-aws-beta-per-artifact",
                     "trail_name": "runner-579d2668834cf42f3004e005c295d340dfd3da5b33f394d3151c016dc9f074a4",
                     "artifact_status": null
                   }
@@ -271,7 +271,7 @@ kosli get snapshot aws-prod --output=json
                 {
                   "type": "rule_satisfied",
                   "context": {
-                    "flow_name": "snyk-aws-beta-per-artifact",
+                    "flow_name": "snyk-aws-prod-per-artifact",
                     "trail_name": "runner-579d2668834cf42f3004e005c295d340dfd3da5b33f394d3151c016dc9f074a4",
                     "artifact_status": null
                   }
@@ -308,7 +308,7 @@ kosli get snapshot aws-prod --output=json
                 {
                   "type": "rule_not_applicable",
                   "context": {
-                    "flow_name": "snyk-aws-prod-per-artifact",
+                    "flow_name": "snyk-aws-beta-per-artifact",
                     "trail_name": "runner-579d2668834cf42f3004e005c295d340dfd3da5b33f394d3151c016dc9f074a4",
                     "artifact_status": "COMPLIANT"
                   }
@@ -316,7 +316,7 @@ kosli get snapshot aws-prod --output=json
                 {
                   "type": "rule_not_applicable",
                   "context": {
-                    "flow_name": "snyk-aws-beta-per-artifact",
+                    "flow_name": "snyk-aws-prod-per-artifact",
                     "trail_name": "runner-579d2668834cf42f3004e005c295d340dfd3da5b33f394d3151c016dc9f074a4",
                     "artifact_status": "COMPLIANT"
                   }
@@ -360,7 +360,7 @@ kosli get snapshot aws-prod --output=json
                 {
                   "type": "rule_not_applicable",
                   "context": {
-                    "flow_name": "snyk-aws-prod-per-artifact",
+                    "flow_name": "snyk-aws-beta-per-artifact",
                     "trail_name": "runner-579d2668834cf42f3004e005c295d340dfd3da5b33f394d3151c016dc9f074a4",
                     "artifact_status": null,
                     "for_control": "SDLC-CTRL-0002"
@@ -369,7 +369,7 @@ kosli get snapshot aws-prod --output=json
                 {
                   "type": "rule_not_applicable",
                   "context": {
-                    "flow_name": "snyk-aws-beta-per-artifact",
+                    "flow_name": "snyk-aws-prod-per-artifact",
                     "trail_name": "runner-579d2668834cf42f3004e005c295d340dfd3da5b33f394d3151c016dc9f074a4",
                     "artifact_status": null,
                     "for_control": "SDLC-CTRL-0002"
@@ -414,7 +414,7 @@ kosli get snapshot aws-prod --output=json
                 {
                   "type": "rule_not_applicable",
                   "context": {
-                    "flow_name": "snyk-aws-prod-per-artifact",
+                    "flow_name": "snyk-aws-beta-per-artifact",
                     "trail_name": "runner-579d2668834cf42f3004e005c295d340dfd3da5b33f394d3151c016dc9f074a4",
                     "artifact_status": null
                   }
@@ -422,7 +422,7 @@ kosli get snapshot aws-prod --output=json
                 {
                   "type": "rule_not_applicable",
                   "context": {
-                    "flow_name": "snyk-aws-beta-per-artifact",
+                    "flow_name": "snyk-aws-prod-per-artifact",
                     "trail_name": "runner-579d2668834cf42f3004e005c295d340dfd3da5b33f394d3151c016dc9f074a4",
                     "artifact_status": null
                   }
@@ -459,7 +459,7 @@ kosli get snapshot aws-prod --output=json
                 {
                   "type": "rule_not_applicable",
                   "context": {
-                    "flow_name": "snyk-aws-prod-per-artifact",
+                    "flow_name": "snyk-aws-beta-per-artifact",
                     "trail_name": "runner-579d2668834cf42f3004e005c295d340dfd3da5b33f394d3151c016dc9f074a4",
                     "artifact_status": "COMPLIANT"
                   }
@@ -467,7 +467,7 @@ kosli get snapshot aws-prod --output=json
                 {
                   "type": "rule_not_applicable",
                   "context": {
-                    "flow_name": "snyk-aws-beta-per-artifact",
+                    "flow_name": "snyk-aws-prod-per-artifact",
                     "trail_name": "runner-579d2668834cf42f3004e005c295d340dfd3da5b33f394d3151c016dc9f074a4",
                     "artifact_status": "COMPLIANT"
                   }
@@ -509,18 +509,18 @@ kosli get snapshot aws-prod --output=json
                   }
                 },
                 {
-                  "type": "rule_satisfied",
+                  "type": "rule_not_applicable",
                   "context": {
-                    "flow_name": "snyk-aws-prod-per-artifact",
+                    "flow_name": "snyk-aws-beta-per-artifact",
                     "trail_name": "runner-579d2668834cf42f3004e005c295d340dfd3da5b33f394d3151c016dc9f074a4",
                     "artifact_status": null,
                     "for_control": "SDLC-CTRL-0022"
                   }
                 },
                 {
-                  "type": "rule_not_applicable",
+                  "type": "rule_satisfied",
                   "context": {
-                    "flow_name": "snyk-aws-beta-per-artifact",
+                    "flow_name": "snyk-aws-prod-per-artifact",
                     "trail_name": "runner-579d2668834cf42f3004e005c295d340dfd3da5b33f394d3151c016dc9f074a4",
                     "artifact_status": null,
                     "for_control": "SDLC-CTRL-0022"
@@ -565,7 +565,7 @@ kosli get snapshot aws-prod --output=json
                 {
                   "type": "rule_not_applicable",
                   "context": {
-                    "flow_name": "snyk-aws-prod-per-artifact",
+                    "flow_name": "snyk-aws-beta-per-artifact",
                     "trail_name": "runner-579d2668834cf42f3004e005c295d340dfd3da5b33f394d3151c016dc9f074a4",
                     "artifact_status": null
                   }
@@ -573,7 +573,7 @@ kosli get snapshot aws-prod --output=json
                 {
                   "type": "rule_not_applicable",
                   "context": {
-                    "flow_name": "snyk-aws-beta-per-artifact",
+                    "flow_name": "snyk-aws-prod-per-artifact",
                     "trail_name": "runner-579d2668834cf42f3004e005c295d340dfd3da5b33f394d3151c016dc9f074a4",
                     "artifact_status": null
                   }
@@ -610,7 +610,7 @@ kosli get snapshot aws-prod --output=json
                 {
                   "type": "rule_not_applicable",
                   "context": {
-                    "flow_name": "snyk-aws-prod-per-artifact",
+                    "flow_name": "snyk-aws-beta-per-artifact",
                     "trail_name": "runner-579d2668834cf42f3004e005c295d340dfd3da5b33f394d3151c016dc9f074a4",
                     "artifact_status": "COMPLIANT"
                   }
@@ -618,7 +618,7 @@ kosli get snapshot aws-prod --output=json
                 {
                   "type": "rule_not_applicable",
                   "context": {
-                    "flow_name": "snyk-aws-beta-per-artifact",
+                    "flow_name": "snyk-aws-prod-per-artifact",
                     "trail_name": "runner-579d2668834cf42f3004e005c295d340dfd3da5b33f394d3151c016dc9f074a4",
                     "artifact_status": "COMPLIANT"
                   }
@@ -660,7 +660,7 @@ kosli get snapshot aws-prod --output=json
                 {
                   "type": "rule_not_applicable",
                   "context": {
-                    "flow_name": "snyk-aws-prod-per-artifact",
+                    "flow_name": "snyk-aws-beta-per-artifact",
                     "trail_name": "runner-579d2668834cf42f3004e005c295d340dfd3da5b33f394d3151c016dc9f074a4",
                     "artifact_status": null
                   }
@@ -668,7 +668,7 @@ kosli get snapshot aws-prod --output=json
                 {
                   "type": "rule_not_applicable",
                   "context": {
-                    "flow_name": "snyk-aws-beta-per-artifact",
+                    "flow_name": "snyk-aws-prod-per-artifact",
                     "trail_name": "runner-579d2668834cf42f3004e005c295d340dfd3da5b33f394d3151c016dc9f074a4",
                     "artifact_status": null
                   }
@@ -712,7 +712,7 @@ kosli get snapshot aws-prod --output=json
                 {
                   "type": "rule_not_applicable",
                   "context": {
-                    "flow_name": "snyk-aws-prod-per-artifact",
+                    "flow_name": "snyk-aws-beta-per-artifact",
                     "trail_name": "runner-579d2668834cf42f3004e005c295d340dfd3da5b33f394d3151c016dc9f074a4",
                     "artifact_status": null
                   }
@@ -720,7 +720,7 @@ kosli get snapshot aws-prod --output=json
                 {
                   "type": "rule_not_applicable",
                   "context": {
-                    "flow_name": "snyk-aws-beta-per-artifact",
+                    "flow_name": "snyk-aws-prod-per-artifact",
                     "trail_name": "runner-579d2668834cf42f3004e005c295d340dfd3da5b33f394d3151c016dc9f074a4",
                     "artifact_status": null
                   }
@@ -761,17 +761,17 @@ kosli get snapshot aws-prod --output=json
                   }
                 },
                 {
-                  "type": "rule_satisfied",
+                  "type": "rule_not_applicable",
                   "context": {
-                    "flow_name": "snyk-aws-prod-per-artifact",
+                    "flow_name": "snyk-aws-beta-per-artifact",
                     "trail_name": "runner-579d2668834cf42f3004e005c295d340dfd3da5b33f394d3151c016dc9f074a4",
                     "artifact_status": "COMPLIANT"
                   }
                 },
                 {
-                  "type": "rule_not_applicable",
+                  "type": "rule_satisfied",
                   "context": {
-                    "flow_name": "snyk-aws-beta-per-artifact",
+                    "flow_name": "snyk-aws-prod-per-artifact",
                     "trail_name": "runner-579d2668834cf42f3004e005c295d340dfd3da5b33f394d3151c016dc9f074a4",
                     "artifact_status": "COMPLIANT"
                   }
@@ -876,37 +876,6 @@ kosli get snapshot aws-prod --output=json
           "flow_reasons_for_non_compliance": []
         },
         {
-          "flow_name": "snyk-aws-prod-per-artifact",
-          "trail_name": "runner-579d2668834cf42f3004e005c295d340dfd3da5b33f394d3151c016dc9f074a4",
-          "template_reference_name": "runner",
-          "git_commit": "a517304f4e9013e2e9ea67e90c7342f7e56653f0",
-          "commit_url": "https://github.com/cyber-dojo/snyk-scanning/commit/a517304f4e9013e2e9ea67e90c7342f7e56653f0",
-          "git_commit_info": {
-            "sha1": "a517304f4e9013e2e9ea67e90c7342f7e56653f0",
-            "message": "Remove unneeded provenance decision attestation - this is not a build flow",
-            "author": "JonJagger <jon@kosli.com>",
-            "branch": "main",
-            "timestamp": 1782799303.0,
-            "url": "https://github.com/cyber-dojo/snyk-scanning/commit/a517304f4e9013e2e9ea67e90c7342f7e56653f0"
-          },
-          "html_url": "https://app.kosli.com/cyber-dojo/flows/snyk-aws-prod-per-artifact/artifacts/579d2668834cf42f3004e005c295d340dfd3da5b33f394d3151c016dc9f074a4?artifact_id=cabf2f03-3fde-4824-9407-2490dddd",
-          "flow_html_url": "https://app.kosli.com/cyber-dojo/flows/snyk-aws-prod-per-artifact",
-          "deployment_diff": {
-            "diff_url": "https://github.com/cyber-dojo/snyk-scanning/compare/00c479764cb9eca038fdaaaef108672d0bb0ed26...a517304f4e9013e2e9ea67e90c7342f7e56653f0",
-            "previous_git_commit": "00c479764cb9eca038fdaaaef108672d0bb0ed26",
-            "previous_fingerprint": "414a07a72fbd04444ba4d2e19b6c7102095d5aeb469211f99166538626c08d06",
-            "previous_artifact_name": "244531986313.dkr.ecr.eu-central-1.amazonaws.com/runner:9cc2a80@sha256:414a07a72fbd04444ba4d2e19b6c7102095d5aeb469211f99166538626c08d06",
-            "previous_artifact_compliance_state": "COMPLIANT",
-            "previous_running": false,
-            "previous_git_commit_url": "https://github.com/cyber-dojo/snyk-scanning/commit/00c479764cb9eca038fdaaaef108672d0bb0ed26",
-            "previous_trail_name": "runner-414a07a72fbd04444ba4d2e19b6c7102095d5aeb469211f99166538626c08d06",
-            "previous_template_reference_name": "runner"
-          },
-          "commit_lead_time": 525984.0,
-          "artifact_compliance_in_flow": true,
-          "flow_reasons_for_non_compliance": []
-        },
-        {
           "flow_name": "snyk-aws-beta-per-artifact",
           "trail_name": "runner-579d2668834cf42f3004e005c295d340dfd3da5b33f394d3151c016dc9f074a4",
           "template_reference_name": "runner",
@@ -931,6 +900,37 @@ kosli get snapshot aws-prod --output=json
             "previous_running": false,
             "previous_git_commit_url": "https://github.com/cyber-dojo/snyk-scanning/commit/a517304f4e9013e2e9ea67e90c7342f7e56653f0",
             "previous_trail_name": "runner-3f1c9f2a39bd7fa31e3cb453e5937e0c0e1cf43ba58e66423e459dfec74aa966",
+            "previous_template_reference_name": "runner"
+          },
+          "commit_lead_time": 525984.0,
+          "artifact_compliance_in_flow": true,
+          "flow_reasons_for_non_compliance": []
+        },
+        {
+          "flow_name": "snyk-aws-prod-per-artifact",
+          "trail_name": "runner-579d2668834cf42f3004e005c295d340dfd3da5b33f394d3151c016dc9f074a4",
+          "template_reference_name": "runner",
+          "git_commit": "a517304f4e9013e2e9ea67e90c7342f7e56653f0",
+          "commit_url": "https://github.com/cyber-dojo/snyk-scanning/commit/a517304f4e9013e2e9ea67e90c7342f7e56653f0",
+          "git_commit_info": {
+            "sha1": "a517304f4e9013e2e9ea67e90c7342f7e56653f0",
+            "message": "Remove unneeded provenance decision attestation - this is not a build flow",
+            "author": "JonJagger <jon@kosli.com>",
+            "branch": "main",
+            "timestamp": 1782799303.0,
+            "url": "https://github.com/cyber-dojo/snyk-scanning/commit/a517304f4e9013e2e9ea67e90c7342f7e56653f0"
+          },
+          "html_url": "https://app.kosli.com/cyber-dojo/flows/snyk-aws-prod-per-artifact/artifacts/579d2668834cf42f3004e005c295d340dfd3da5b33f394d3151c016dc9f074a4?artifact_id=cd8b9fa2-7a66-45ea-bb69-05e4c5e3",
+          "flow_html_url": "https://app.kosli.com/cyber-dojo/flows/snyk-aws-prod-per-artifact",
+          "deployment_diff": {
+            "diff_url": "https://github.com/cyber-dojo/snyk-scanning/compare/00c479764cb9eca038fdaaaef108672d0bb0ed26...a517304f4e9013e2e9ea67e90c7342f7e56653f0",
+            "previous_git_commit": "00c479764cb9eca038fdaaaef108672d0bb0ed26",
+            "previous_fingerprint": "414a07a72fbd04444ba4d2e19b6c7102095d5aeb469211f99166538626c08d06",
+            "previous_artifact_name": "244531986313.dkr.ecr.eu-central-1.amazonaws.com/runner:9cc2a80@sha256:414a07a72fbd04444ba4d2e19b6c7102095d5aeb469211f99166538626c08d06",
+            "previous_artifact_compliance_state": "COMPLIANT",
+            "previous_running": false,
+            "previous_git_commit_url": "https://github.com/cyber-dojo/snyk-scanning/commit/00c479764cb9eca038fdaaaef108672d0bb0ed26",
+            "previous_trail_name": "runner-414a07a72fbd04444ba4d2e19b6c7102095d5aeb469211f99166538626c08d06",
             "previous_template_reference_name": "runner"
           },
           "commit_lead_time": 525984.0,
@@ -983,7 +983,7 @@ kosli get snapshot aws-prod --output=json
                 {
                   "type": "rule_not_applicable",
                   "context": {
-                    "flow_name": "snyk-aws-prod-per-artifact",
+                    "flow_name": "snyk-aws-beta-per-artifact",
                     "trail_name": "nginx-c2ec29a9c6cce9948227159bc97dbb689cdc5803e77c4cff5573a6f257c8182c",
                     "artifact_status": null
                   }
@@ -991,7 +991,7 @@ kosli get snapshot aws-prod --output=json
                 {
                   "type": "rule_not_applicable",
                   "context": {
-                    "flow_name": "snyk-aws-beta-per-artifact",
+                    "flow_name": "snyk-aws-prod-per-artifact",
                     "trail_name": "nginx-c2ec29a9c6cce9948227159bc97dbb689cdc5803e77c4cff5573a6f257c8182c",
                     "artifact_status": null
                   }
@@ -1028,7 +1028,7 @@ kosli get snapshot aws-prod --output=json
                 {
                   "type": "rule_not_applicable",
                   "context": {
-                    "flow_name": "snyk-aws-prod-per-artifact",
+                    "flow_name": "snyk-aws-beta-per-artifact",
                     "trail_name": "nginx-c2ec29a9c6cce9948227159bc97dbb689cdc5803e77c4cff5573a6f257c8182c",
                     "artifact_status": "COMPLIANT"
                   }
@@ -1036,7 +1036,7 @@ kosli get snapshot aws-prod --output=json
                 {
                   "type": "rule_not_applicable",
                   "context": {
-                    "flow_name": "snyk-aws-beta-per-artifact",
+                    "flow_name": "snyk-aws-prod-per-artifact",
                     "trail_name": "nginx-c2ec29a9c6cce9948227159bc97dbb689cdc5803e77c4cff5573a6f257c8182c",
                     "artifact_status": "COMPLIANT"
                   }
@@ -1078,7 +1078,7 @@ kosli get snapshot aws-prod --output=json
                 {
                   "type": "rule_not_applicable",
                   "context": {
-                    "flow_name": "snyk-aws-prod-per-artifact",
+                    "flow_name": "snyk-aws-beta-per-artifact",
                     "trail_name": "nginx-c2ec29a9c6cce9948227159bc97dbb689cdc5803e77c4cff5573a6f257c8182c",
                     "artifact_status": null
                   }
@@ -1086,7 +1086,7 @@ kosli get snapshot aws-prod --output=json
                 {
                   "type": "rule_not_applicable",
                   "context": {
-                    "flow_name": "snyk-aws-beta-per-artifact",
+                    "flow_name": "snyk-aws-prod-per-artifact",
                     "trail_name": "nginx-c2ec29a9c6cce9948227159bc97dbb689cdc5803e77c4cff5573a6f257c8182c",
                     "artifact_status": null
                   }
@@ -1130,7 +1130,7 @@ kosli get snapshot aws-prod --output=json
                 {
                   "type": "rule_satisfied",
                   "context": {
-                    "flow_name": "snyk-aws-prod-per-artifact",
+                    "flow_name": "snyk-aws-beta-per-artifact",
                     "trail_name": "nginx-c2ec29a9c6cce9948227159bc97dbb689cdc5803e77c4cff5573a6f257c8182c",
                     "artifact_status": null
                   }
@@ -1138,7 +1138,7 @@ kosli get snapshot aws-prod --output=json
                 {
                   "type": "rule_satisfied",
                   "context": {
-                    "flow_name": "snyk-aws-beta-per-artifact",
+                    "flow_name": "snyk-aws-prod-per-artifact",
                     "trail_name": "nginx-c2ec29a9c6cce9948227159bc97dbb689cdc5803e77c4cff5573a6f257c8182c",
                     "artifact_status": null
                   }
@@ -1175,7 +1175,7 @@ kosli get snapshot aws-prod --output=json
                 {
                   "type": "rule_not_applicable",
                   "context": {
-                    "flow_name": "snyk-aws-prod-per-artifact",
+                    "flow_name": "snyk-aws-beta-per-artifact",
                     "trail_name": "nginx-c2ec29a9c6cce9948227159bc97dbb689cdc5803e77c4cff5573a6f257c8182c",
                     "artifact_status": "COMPLIANT"
                   }
@@ -1183,7 +1183,7 @@ kosli get snapshot aws-prod --output=json
                 {
                   "type": "rule_not_applicable",
                   "context": {
-                    "flow_name": "snyk-aws-beta-per-artifact",
+                    "flow_name": "snyk-aws-prod-per-artifact",
                     "trail_name": "nginx-c2ec29a9c6cce9948227159bc97dbb689cdc5803e77c4cff5573a6f257c8182c",
                     "artifact_status": "COMPLIANT"
                   }
@@ -1227,7 +1227,7 @@ kosli get snapshot aws-prod --output=json
                 {
                   "type": "rule_not_applicable",
                   "context": {
-                    "flow_name": "snyk-aws-prod-per-artifact",
+                    "flow_name": "snyk-aws-beta-per-artifact",
                     "trail_name": "nginx-c2ec29a9c6cce9948227159bc97dbb689cdc5803e77c4cff5573a6f257c8182c",
                     "artifact_status": null,
                     "for_control": "SDLC-CTRL-0002"
@@ -1236,7 +1236,7 @@ kosli get snapshot aws-prod --output=json
                 {
                   "type": "rule_not_applicable",
                   "context": {
-                    "flow_name": "snyk-aws-beta-per-artifact",
+                    "flow_name": "snyk-aws-prod-per-artifact",
                     "trail_name": "nginx-c2ec29a9c6cce9948227159bc97dbb689cdc5803e77c4cff5573a6f257c8182c",
                     "artifact_status": null,
                     "for_control": "SDLC-CTRL-0002"
@@ -1281,7 +1281,7 @@ kosli get snapshot aws-prod --output=json
                 {
                   "type": "rule_not_applicable",
                   "context": {
-                    "flow_name": "snyk-aws-prod-per-artifact",
+                    "flow_name": "snyk-aws-beta-per-artifact",
                     "trail_name": "nginx-c2ec29a9c6cce9948227159bc97dbb689cdc5803e77c4cff5573a6f257c8182c",
                     "artifact_status": null
                   }
@@ -1289,7 +1289,7 @@ kosli get snapshot aws-prod --output=json
                 {
                   "type": "rule_not_applicable",
                   "context": {
-                    "flow_name": "snyk-aws-beta-per-artifact",
+                    "flow_name": "snyk-aws-prod-per-artifact",
                     "trail_name": "nginx-c2ec29a9c6cce9948227159bc97dbb689cdc5803e77c4cff5573a6f257c8182c",
                     "artifact_status": null
                   }
@@ -1326,7 +1326,7 @@ kosli get snapshot aws-prod --output=json
                 {
                   "type": "rule_not_applicable",
                   "context": {
-                    "flow_name": "snyk-aws-prod-per-artifact",
+                    "flow_name": "snyk-aws-beta-per-artifact",
                     "trail_name": "nginx-c2ec29a9c6cce9948227159bc97dbb689cdc5803e77c4cff5573a6f257c8182c",
                     "artifact_status": "COMPLIANT"
                   }
@@ -1334,7 +1334,7 @@ kosli get snapshot aws-prod --output=json
                 {
                   "type": "rule_not_applicable",
                   "context": {
-                    "flow_name": "snyk-aws-beta-per-artifact",
+                    "flow_name": "snyk-aws-prod-per-artifact",
                     "trail_name": "nginx-c2ec29a9c6cce9948227159bc97dbb689cdc5803e77c4cff5573a6f257c8182c",
                     "artifact_status": "COMPLIANT"
                   }
@@ -1376,18 +1376,18 @@ kosli get snapshot aws-prod --output=json
                   }
                 },
                 {
-                  "type": "rule_satisfied",
+                  "type": "rule_not_applicable",
                   "context": {
-                    "flow_name": "snyk-aws-prod-per-artifact",
+                    "flow_name": "snyk-aws-beta-per-artifact",
                     "trail_name": "nginx-c2ec29a9c6cce9948227159bc97dbb689cdc5803e77c4cff5573a6f257c8182c",
                     "artifact_status": null,
                     "for_control": "SDLC-CTRL-0022"
                   }
                 },
                 {
-                  "type": "rule_not_applicable",
+                  "type": "rule_satisfied",
                   "context": {
-                    "flow_name": "snyk-aws-beta-per-artifact",
+                    "flow_name": "snyk-aws-prod-per-artifact",
                     "trail_name": "nginx-c2ec29a9c6cce9948227159bc97dbb689cdc5803e77c4cff5573a6f257c8182c",
                     "artifact_status": null,
                     "for_control": "SDLC-CTRL-0022"
@@ -1432,7 +1432,7 @@ kosli get snapshot aws-prod --output=json
                 {
                   "type": "rule_not_applicable",
                   "context": {
-                    "flow_name": "snyk-aws-prod-per-artifact",
+                    "flow_name": "snyk-aws-beta-per-artifact",
                     "trail_name": "nginx-c2ec29a9c6cce9948227159bc97dbb689cdc5803e77c4cff5573a6f257c8182c",
                     "artifact_status": null
                   }
@@ -1440,7 +1440,7 @@ kosli get snapshot aws-prod --output=json
                 {
                   "type": "rule_not_applicable",
                   "context": {
-                    "flow_name": "snyk-aws-beta-per-artifact",
+                    "flow_name": "snyk-aws-prod-per-artifact",
                     "trail_name": "nginx-c2ec29a9c6cce9948227159bc97dbb689cdc5803e77c4cff5573a6f257c8182c",
                     "artifact_status": null
                   }
@@ -1477,7 +1477,7 @@ kosli get snapshot aws-prod --output=json
                 {
                   "type": "rule_not_applicable",
                   "context": {
-                    "flow_name": "snyk-aws-prod-per-artifact",
+                    "flow_name": "snyk-aws-beta-per-artifact",
                     "trail_name": "nginx-c2ec29a9c6cce9948227159bc97dbb689cdc5803e77c4cff5573a6f257c8182c",
                     "artifact_status": "COMPLIANT"
                   }
@@ -1485,7 +1485,7 @@ kosli get snapshot aws-prod --output=json
                 {
                   "type": "rule_not_applicable",
                   "context": {
-                    "flow_name": "snyk-aws-beta-per-artifact",
+                    "flow_name": "snyk-aws-prod-per-artifact",
                     "trail_name": "nginx-c2ec29a9c6cce9948227159bc97dbb689cdc5803e77c4cff5573a6f257c8182c",
                     "artifact_status": "COMPLIANT"
                   }
@@ -1527,7 +1527,7 @@ kosli get snapshot aws-prod --output=json
                 {
                   "type": "rule_not_applicable",
                   "context": {
-                    "flow_name": "snyk-aws-prod-per-artifact",
+                    "flow_name": "snyk-aws-beta-per-artifact",
                     "trail_name": "nginx-c2ec29a9c6cce9948227159bc97dbb689cdc5803e77c4cff5573a6f257c8182c",
                     "artifact_status": null
                   }
@@ -1535,7 +1535,7 @@ kosli get snapshot aws-prod --output=json
                 {
                   "type": "rule_not_applicable",
                   "context": {
-                    "flow_name": "snyk-aws-beta-per-artifact",
+                    "flow_name": "snyk-aws-prod-per-artifact",
                     "trail_name": "nginx-c2ec29a9c6cce9948227159bc97dbb689cdc5803e77c4cff5573a6f257c8182c",
                     "artifact_status": null
                   }
@@ -1579,7 +1579,7 @@ kosli get snapshot aws-prod --output=json
                 {
                   "type": "rule_not_applicable",
                   "context": {
-                    "flow_name": "snyk-aws-prod-per-artifact",
+                    "flow_name": "snyk-aws-beta-per-artifact",
                     "trail_name": "nginx-c2ec29a9c6cce9948227159bc97dbb689cdc5803e77c4cff5573a6f257c8182c",
                     "artifact_status": null
                   }
@@ -1587,7 +1587,7 @@ kosli get snapshot aws-prod --output=json
                 {
                   "type": "rule_not_applicable",
                   "context": {
-                    "flow_name": "snyk-aws-beta-per-artifact",
+                    "flow_name": "snyk-aws-prod-per-artifact",
                     "trail_name": "nginx-c2ec29a9c6cce9948227159bc97dbb689cdc5803e77c4cff5573a6f257c8182c",
                     "artifact_status": null
                   }
@@ -1628,17 +1628,17 @@ kosli get snapshot aws-prod --output=json
                   }
                 },
                 {
-                  "type": "rule_satisfied",
+                  "type": "rule_not_applicable",
                   "context": {
-                    "flow_name": "snyk-aws-prod-per-artifact",
+                    "flow_name": "snyk-aws-beta-per-artifact",
                     "trail_name": "nginx-c2ec29a9c6cce9948227159bc97dbb689cdc5803e77c4cff5573a6f257c8182c",
                     "artifact_status": "COMPLIANT"
                   }
                 },
                 {
-                  "type": "rule_not_applicable",
+                  "type": "rule_satisfied",
                   "context": {
-                    "flow_name": "snyk-aws-beta-per-artifact",
+                    "flow_name": "snyk-aws-prod-per-artifact",
                     "trail_name": "nginx-c2ec29a9c6cce9948227159bc97dbb689cdc5803e77c4cff5573a6f257c8182c",
                     "artifact_status": "COMPLIANT"
                   }
@@ -1741,37 +1741,6 @@ kosli get snapshot aws-prod --output=json
           "flow_reasons_for_non_compliance": []
         },
         {
-          "flow_name": "snyk-aws-prod-per-artifact",
-          "trail_name": "nginx-c2ec29a9c6cce9948227159bc97dbb689cdc5803e77c4cff5573a6f257c8182c",
-          "template_reference_name": "nginx",
-          "git_commit": "a517304f4e9013e2e9ea67e90c7342f7e56653f0",
-          "commit_url": "https://github.com/cyber-dojo/snyk-scanning/commit/a517304f4e9013e2e9ea67e90c7342f7e56653f0",
-          "git_commit_info": {
-            "sha1": "a517304f4e9013e2e9ea67e90c7342f7e56653f0",
-            "message": "Remove unneeded provenance decision attestation - this is not a build flow",
-            "author": "JonJagger <jon@kosli.com>",
-            "branch": "main",
-            "timestamp": 1782799303.0,
-            "url": "https://github.com/cyber-dojo/snyk-scanning/commit/a517304f4e9013e2e9ea67e90c7342f7e56653f0"
-          },
-          "html_url": "https://app.kosli.com/cyber-dojo/flows/snyk-aws-prod-per-artifact/artifacts/c2ec29a9c6cce9948227159bc97dbb689cdc5803e77c4cff5573a6f257c8182c?artifact_id=d1b81a4b-95c4-44f2-a121-4ee17fdc",
-          "flow_html_url": "https://app.kosli.com/cyber-dojo/flows/snyk-aws-prod-per-artifact",
-          "deployment_diff": {
-            "diff_url": "https://github.com/cyber-dojo/snyk-scanning/compare/00c479764cb9eca038fdaaaef108672d0bb0ed26...a517304f4e9013e2e9ea67e90c7342f7e56653f0",
-            "previous_git_commit": "00c479764cb9eca038fdaaaef108672d0bb0ed26",
-            "previous_fingerprint": "b7ff2cf22c934716a4280f0450ae52fe822cda7fce7fc5488bf62853860cddc8",
-            "previous_artifact_name": "244531986313.dkr.ecr.eu-central-1.amazonaws.com/nginx:7065268@sha256:b7ff2cf22c934716a4280f0450ae52fe822cda7fce7fc5488bf62853860cddc8",
-            "previous_artifact_compliance_state": "COMPLIANT",
-            "previous_running": false,
-            "previous_git_commit_url": "https://github.com/cyber-dojo/snyk-scanning/commit/00c479764cb9eca038fdaaaef108672d0bb0ed26",
-            "previous_trail_name": "nginx-b7ff2cf22c934716a4280f0450ae52fe822cda7fce7fc5488bf62853860cddc8",
-            "previous_template_reference_name": "nginx"
-          },
-          "commit_lead_time": 530565.0,
-          "artifact_compliance_in_flow": true,
-          "flow_reasons_for_non_compliance": []
-        },
-        {
           "flow_name": "snyk-aws-beta-per-artifact",
           "trail_name": "nginx-c2ec29a9c6cce9948227159bc97dbb689cdc5803e77c4cff5573a6f257c8182c",
           "template_reference_name": "nginx",
@@ -1796,6 +1765,37 @@ kosli get snapshot aws-prod --output=json
             "previous_running": false,
             "previous_git_commit_url": "https://github.com/cyber-dojo/snyk-scanning/commit/d07d841723e4e524e4ea4d7dc8a7e60f0fc3349e",
             "previous_trail_name": "nginx-8bc44a90894de99aa76cd931ea42e2544b0727c5e3842ea57e4f08cace175ca9",
+            "previous_template_reference_name": "nginx"
+          },
+          "commit_lead_time": 530565.0,
+          "artifact_compliance_in_flow": true,
+          "flow_reasons_for_non_compliance": []
+        },
+        {
+          "flow_name": "snyk-aws-prod-per-artifact",
+          "trail_name": "nginx-c2ec29a9c6cce9948227159bc97dbb689cdc5803e77c4cff5573a6f257c8182c",
+          "template_reference_name": "nginx",
+          "git_commit": "a517304f4e9013e2e9ea67e90c7342f7e56653f0",
+          "commit_url": "https://github.com/cyber-dojo/snyk-scanning/commit/a517304f4e9013e2e9ea67e90c7342f7e56653f0",
+          "git_commit_info": {
+            "sha1": "a517304f4e9013e2e9ea67e90c7342f7e56653f0",
+            "message": "Remove unneeded provenance decision attestation - this is not a build flow",
+            "author": "JonJagger <jon@kosli.com>",
+            "branch": "main",
+            "timestamp": 1782799303.0,
+            "url": "https://github.com/cyber-dojo/snyk-scanning/commit/a517304f4e9013e2e9ea67e90c7342f7e56653f0"
+          },
+          "html_url": "https://app.kosli.com/cyber-dojo/flows/snyk-aws-prod-per-artifact/artifacts/c2ec29a9c6cce9948227159bc97dbb689cdc5803e77c4cff5573a6f257c8182c?artifact_id=737ed425-1fc4-49ff-8724-f777694b",
+          "flow_html_url": "https://app.kosli.com/cyber-dojo/flows/snyk-aws-prod-per-artifact",
+          "deployment_diff": {
+            "diff_url": "https://github.com/cyber-dojo/snyk-scanning/compare/00c479764cb9eca038fdaaaef108672d0bb0ed26...a517304f4e9013e2e9ea67e90c7342f7e56653f0",
+            "previous_git_commit": "00c479764cb9eca038fdaaaef108672d0bb0ed26",
+            "previous_fingerprint": "b7ff2cf22c934716a4280f0450ae52fe822cda7fce7fc5488bf62853860cddc8",
+            "previous_artifact_name": "244531986313.dkr.ecr.eu-central-1.amazonaws.com/nginx:7065268@sha256:b7ff2cf22c934716a4280f0450ae52fe822cda7fce7fc5488bf62853860cddc8",
+            "previous_artifact_compliance_state": "COMPLIANT",
+            "previous_running": false,
+            "previous_git_commit_url": "https://github.com/cyber-dojo/snyk-scanning/commit/00c479764cb9eca038fdaaaef108672d0bb0ed26",
+            "previous_trail_name": "nginx-b7ff2cf22c934716a4280f0450ae52fe822cda7fce7fc5488bf62853860cddc8",
             "previous_template_reference_name": "nginx"
           },
           "commit_lead_time": 530565.0,
@@ -2650,7 +2650,7 @@ kosli get snapshot aws-prod --output=json
             "timestamp": 1782799303.0,
             "url": "https://github.com/cyber-dojo/snyk-scanning/commit/a517304f4e9013e2e9ea67e90c7342f7e56653f0"
           },
-          "html_url": "https://app.kosli.com/cyber-dojo/flows/snyk-aws-prod-per-artifact/artifacts/a523828dc47cd4f31aecf2d5ef1dea569944a1abcd214e4b2cda50676b2c4dc8?artifact_id=87c22b23-5f4c-4206-9193-5bfc2203",
+          "html_url": "https://app.kosli.com/cyber-dojo/flows/snyk-aws-prod-per-artifact/artifacts/a523828dc47cd4f31aecf2d5ef1dea569944a1abcd214e4b2cda50676b2c4dc8?artifact_id=e3ad8f8f-461d-4861-9ac8-a37bd7cf",
           "flow_html_url": "https://app.kosli.com/cyber-dojo/flows/snyk-aws-prod-per-artifact",
           "deployment_diff": {
             "diff_url": "https://github.com/cyber-dojo/snyk-scanning/compare/7172cc22125f480a9f12127edb481a4d84aabea3...a517304f4e9013e2e9ea67e90c7342f7e56653f0",
@@ -2713,7 +2713,7 @@ kosli get snapshot aws-prod --output=json
                 {
                   "type": "rule_not_applicable",
                   "context": {
-                    "flow_name": "snyk-aws-prod-per-artifact",
+                    "flow_name": "snyk-aws-beta-per-artifact",
                     "trail_name": "web-929748bb88b31863da9cd8d62a5039c274ff3c669f2ef05bc025e6989d2c1eab",
                     "artifact_status": null
                   }
@@ -2721,7 +2721,7 @@ kosli get snapshot aws-prod --output=json
                 {
                   "type": "rule_not_applicable",
                   "context": {
-                    "flow_name": "snyk-aws-beta-per-artifact",
+                    "flow_name": "snyk-aws-prod-per-artifact",
                     "trail_name": "web-929748bb88b31863da9cd8d62a5039c274ff3c669f2ef05bc025e6989d2c1eab",
                     "artifact_status": null
                   }
@@ -2758,7 +2758,7 @@ kosli get snapshot aws-prod --output=json
                 {
                   "type": "rule_not_applicable",
                   "context": {
-                    "flow_name": "snyk-aws-prod-per-artifact",
+                    "flow_name": "snyk-aws-beta-per-artifact",
                     "trail_name": "web-929748bb88b31863da9cd8d62a5039c274ff3c669f2ef05bc025e6989d2c1eab",
                     "artifact_status": "COMPLIANT"
                   }
@@ -2766,7 +2766,7 @@ kosli get snapshot aws-prod --output=json
                 {
                   "type": "rule_not_applicable",
                   "context": {
-                    "flow_name": "snyk-aws-beta-per-artifact",
+                    "flow_name": "snyk-aws-prod-per-artifact",
                     "trail_name": "web-929748bb88b31863da9cd8d62a5039c274ff3c669f2ef05bc025e6989d2c1eab",
                     "artifact_status": "COMPLIANT"
                   }
@@ -2808,7 +2808,7 @@ kosli get snapshot aws-prod --output=json
                 {
                   "type": "rule_not_applicable",
                   "context": {
-                    "flow_name": "snyk-aws-prod-per-artifact",
+                    "flow_name": "snyk-aws-beta-per-artifact",
                     "trail_name": "web-929748bb88b31863da9cd8d62a5039c274ff3c669f2ef05bc025e6989d2c1eab",
                     "artifact_status": null
                   }
@@ -2816,7 +2816,7 @@ kosli get snapshot aws-prod --output=json
                 {
                   "type": "rule_not_applicable",
                   "context": {
-                    "flow_name": "snyk-aws-beta-per-artifact",
+                    "flow_name": "snyk-aws-prod-per-artifact",
                     "trail_name": "web-929748bb88b31863da9cd8d62a5039c274ff3c669f2ef05bc025e6989d2c1eab",
                     "artifact_status": null
                   }
@@ -2860,7 +2860,7 @@ kosli get snapshot aws-prod --output=json
                 {
                   "type": "rule_satisfied",
                   "context": {
-                    "flow_name": "snyk-aws-prod-per-artifact",
+                    "flow_name": "snyk-aws-beta-per-artifact",
                     "trail_name": "web-929748bb88b31863da9cd8d62a5039c274ff3c669f2ef05bc025e6989d2c1eab",
                     "artifact_status": null
                   }
@@ -2868,7 +2868,7 @@ kosli get snapshot aws-prod --output=json
                 {
                   "type": "rule_satisfied",
                   "context": {
-                    "flow_name": "snyk-aws-beta-per-artifact",
+                    "flow_name": "snyk-aws-prod-per-artifact",
                     "trail_name": "web-929748bb88b31863da9cd8d62a5039c274ff3c669f2ef05bc025e6989d2c1eab",
                     "artifact_status": null
                   }
@@ -2905,7 +2905,7 @@ kosli get snapshot aws-prod --output=json
                 {
                   "type": "rule_not_applicable",
                   "context": {
-                    "flow_name": "snyk-aws-prod-per-artifact",
+                    "flow_name": "snyk-aws-beta-per-artifact",
                     "trail_name": "web-929748bb88b31863da9cd8d62a5039c274ff3c669f2ef05bc025e6989d2c1eab",
                     "artifact_status": "COMPLIANT"
                   }
@@ -2913,7 +2913,7 @@ kosli get snapshot aws-prod --output=json
                 {
                   "type": "rule_not_applicable",
                   "context": {
-                    "flow_name": "snyk-aws-beta-per-artifact",
+                    "flow_name": "snyk-aws-prod-per-artifact",
                     "trail_name": "web-929748bb88b31863da9cd8d62a5039c274ff3c669f2ef05bc025e6989d2c1eab",
                     "artifact_status": "COMPLIANT"
                   }
@@ -2957,7 +2957,7 @@ kosli get snapshot aws-prod --output=json
                 {
                   "type": "rule_not_applicable",
                   "context": {
-                    "flow_name": "snyk-aws-prod-per-artifact",
+                    "flow_name": "snyk-aws-beta-per-artifact",
                     "trail_name": "web-929748bb88b31863da9cd8d62a5039c274ff3c669f2ef05bc025e6989d2c1eab",
                     "artifact_status": null,
                     "for_control": "SDLC-CTRL-0002"
@@ -2966,7 +2966,7 @@ kosli get snapshot aws-prod --output=json
                 {
                   "type": "rule_not_applicable",
                   "context": {
-                    "flow_name": "snyk-aws-beta-per-artifact",
+                    "flow_name": "snyk-aws-prod-per-artifact",
                     "trail_name": "web-929748bb88b31863da9cd8d62a5039c274ff3c669f2ef05bc025e6989d2c1eab",
                     "artifact_status": null,
                     "for_control": "SDLC-CTRL-0002"
@@ -3011,7 +3011,7 @@ kosli get snapshot aws-prod --output=json
                 {
                   "type": "rule_not_applicable",
                   "context": {
-                    "flow_name": "snyk-aws-prod-per-artifact",
+                    "flow_name": "snyk-aws-beta-per-artifact",
                     "trail_name": "web-929748bb88b31863da9cd8d62a5039c274ff3c669f2ef05bc025e6989d2c1eab",
                     "artifact_status": null
                   }
@@ -3019,7 +3019,7 @@ kosli get snapshot aws-prod --output=json
                 {
                   "type": "rule_not_applicable",
                   "context": {
-                    "flow_name": "snyk-aws-beta-per-artifact",
+                    "flow_name": "snyk-aws-prod-per-artifact",
                     "trail_name": "web-929748bb88b31863da9cd8d62a5039c274ff3c669f2ef05bc025e6989d2c1eab",
                     "artifact_status": null
                   }
@@ -3056,7 +3056,7 @@ kosli get snapshot aws-prod --output=json
                 {
                   "type": "rule_not_applicable",
                   "context": {
-                    "flow_name": "snyk-aws-prod-per-artifact",
+                    "flow_name": "snyk-aws-beta-per-artifact",
                     "trail_name": "web-929748bb88b31863da9cd8d62a5039c274ff3c669f2ef05bc025e6989d2c1eab",
                     "artifact_status": "COMPLIANT"
                   }
@@ -3064,7 +3064,7 @@ kosli get snapshot aws-prod --output=json
                 {
                   "type": "rule_not_applicable",
                   "context": {
-                    "flow_name": "snyk-aws-beta-per-artifact",
+                    "flow_name": "snyk-aws-prod-per-artifact",
                     "trail_name": "web-929748bb88b31863da9cd8d62a5039c274ff3c669f2ef05bc025e6989d2c1eab",
                     "artifact_status": "COMPLIANT"
                   }
@@ -3106,18 +3106,18 @@ kosli get snapshot aws-prod --output=json
                   }
                 },
                 {
-                  "type": "rule_satisfied",
+                  "type": "rule_not_applicable",
                   "context": {
-                    "flow_name": "snyk-aws-prod-per-artifact",
+                    "flow_name": "snyk-aws-beta-per-artifact",
                     "trail_name": "web-929748bb88b31863da9cd8d62a5039c274ff3c669f2ef05bc025e6989d2c1eab",
                     "artifact_status": null,
                     "for_control": "SDLC-CTRL-0022"
                   }
                 },
                 {
-                  "type": "rule_not_applicable",
+                  "type": "rule_satisfied",
                   "context": {
-                    "flow_name": "snyk-aws-beta-per-artifact",
+                    "flow_name": "snyk-aws-prod-per-artifact",
                     "trail_name": "web-929748bb88b31863da9cd8d62a5039c274ff3c669f2ef05bc025e6989d2c1eab",
                     "artifact_status": null,
                     "for_control": "SDLC-CTRL-0022"
@@ -3162,7 +3162,7 @@ kosli get snapshot aws-prod --output=json
                 {
                   "type": "rule_not_applicable",
                   "context": {
-                    "flow_name": "snyk-aws-prod-per-artifact",
+                    "flow_name": "snyk-aws-beta-per-artifact",
                     "trail_name": "web-929748bb88b31863da9cd8d62a5039c274ff3c669f2ef05bc025e6989d2c1eab",
                     "artifact_status": null
                   }
@@ -3170,7 +3170,7 @@ kosli get snapshot aws-prod --output=json
                 {
                   "type": "rule_not_applicable",
                   "context": {
-                    "flow_name": "snyk-aws-beta-per-artifact",
+                    "flow_name": "snyk-aws-prod-per-artifact",
                     "trail_name": "web-929748bb88b31863da9cd8d62a5039c274ff3c669f2ef05bc025e6989d2c1eab",
                     "artifact_status": null
                   }
@@ -3207,7 +3207,7 @@ kosli get snapshot aws-prod --output=json
                 {
                   "type": "rule_not_applicable",
                   "context": {
-                    "flow_name": "snyk-aws-prod-per-artifact",
+                    "flow_name": "snyk-aws-beta-per-artifact",
                     "trail_name": "web-929748bb88b31863da9cd8d62a5039c274ff3c669f2ef05bc025e6989d2c1eab",
                     "artifact_status": "COMPLIANT"
                   }
@@ -3215,7 +3215,7 @@ kosli get snapshot aws-prod --output=json
                 {
                   "type": "rule_not_applicable",
                   "context": {
-                    "flow_name": "snyk-aws-beta-per-artifact",
+                    "flow_name": "snyk-aws-prod-per-artifact",
                     "trail_name": "web-929748bb88b31863da9cd8d62a5039c274ff3c669f2ef05bc025e6989d2c1eab",
                     "artifact_status": "COMPLIANT"
                   }
@@ -3257,7 +3257,7 @@ kosli get snapshot aws-prod --output=json
                 {
                   "type": "rule_not_applicable",
                   "context": {
-                    "flow_name": "snyk-aws-prod-per-artifact",
+                    "flow_name": "snyk-aws-beta-per-artifact",
                     "trail_name": "web-929748bb88b31863da9cd8d62a5039c274ff3c669f2ef05bc025e6989d2c1eab",
                     "artifact_status": null
                   }
@@ -3265,7 +3265,7 @@ kosli get snapshot aws-prod --output=json
                 {
                   "type": "rule_not_applicable",
                   "context": {
-                    "flow_name": "snyk-aws-beta-per-artifact",
+                    "flow_name": "snyk-aws-prod-per-artifact",
                     "trail_name": "web-929748bb88b31863da9cd8d62a5039c274ff3c669f2ef05bc025e6989d2c1eab",
                     "artifact_status": null
                   }
@@ -3309,7 +3309,7 @@ kosli get snapshot aws-prod --output=json
                 {
                   "type": "rule_not_applicable",
                   "context": {
-                    "flow_name": "snyk-aws-prod-per-artifact",
+                    "flow_name": "snyk-aws-beta-per-artifact",
                     "trail_name": "web-929748bb88b31863da9cd8d62a5039c274ff3c669f2ef05bc025e6989d2c1eab",
                     "artifact_status": null
                   }
@@ -3317,7 +3317,7 @@ kosli get snapshot aws-prod --output=json
                 {
                   "type": "rule_not_applicable",
                   "context": {
-                    "flow_name": "snyk-aws-beta-per-artifact",
+                    "flow_name": "snyk-aws-prod-per-artifact",
                     "trail_name": "web-929748bb88b31863da9cd8d62a5039c274ff3c669f2ef05bc025e6989d2c1eab",
                     "artifact_status": null
                   }
@@ -3358,17 +3358,17 @@ kosli get snapshot aws-prod --output=json
                   }
                 },
                 {
-                  "type": "rule_satisfied",
+                  "type": "rule_not_applicable",
                   "context": {
-                    "flow_name": "snyk-aws-prod-per-artifact",
+                    "flow_name": "snyk-aws-beta-per-artifact",
                     "trail_name": "web-929748bb88b31863da9cd8d62a5039c274ff3c669f2ef05bc025e6989d2c1eab",
                     "artifact_status": "COMPLIANT"
                   }
                 },
                 {
-                  "type": "rule_not_applicable",
+                  "type": "rule_satisfied",
                   "context": {
-                    "flow_name": "snyk-aws-beta-per-artifact",
+                    "flow_name": "snyk-aws-prod-per-artifact",
                     "trail_name": "web-929748bb88b31863da9cd8d62a5039c274ff3c669f2ef05bc025e6989d2c1eab",
                     "artifact_status": "COMPLIANT"
                   }
@@ -3473,37 +3473,6 @@ kosli get snapshot aws-prod --output=json
           "flow_reasons_for_non_compliance": []
         },
         {
-          "flow_name": "snyk-aws-prod-per-artifact",
-          "trail_name": "web-929748bb88b31863da9cd8d62a5039c274ff3c669f2ef05bc025e6989d2c1eab",
-          "template_reference_name": "web",
-          "git_commit": "a517304f4e9013e2e9ea67e90c7342f7e56653f0",
-          "commit_url": "https://github.com/cyber-dojo/snyk-scanning/commit/a517304f4e9013e2e9ea67e90c7342f7e56653f0",
-          "git_commit_info": {
-            "sha1": "a517304f4e9013e2e9ea67e90c7342f7e56653f0",
-            "message": "Remove unneeded provenance decision attestation - this is not a build flow",
-            "author": "JonJagger <jon@kosli.com>",
-            "branch": "main",
-            "timestamp": 1782799303.0,
-            "url": "https://github.com/cyber-dojo/snyk-scanning/commit/a517304f4e9013e2e9ea67e90c7342f7e56653f0"
-          },
-          "html_url": "https://app.kosli.com/cyber-dojo/flows/snyk-aws-prod-per-artifact/artifacts/929748bb88b31863da9cd8d62a5039c274ff3c669f2ef05bc025e6989d2c1eab?artifact_id=1889f9dd-d195-4820-b3f1-69b5a062",
-          "flow_html_url": "https://app.kosli.com/cyber-dojo/flows/snyk-aws-prod-per-artifact",
-          "deployment_diff": {
-            "diff_url": "https://github.com/cyber-dojo/snyk-scanning/compare/00c479764cb9eca038fdaaaef108672d0bb0ed26...a517304f4e9013e2e9ea67e90c7342f7e56653f0",
-            "previous_git_commit": "00c479764cb9eca038fdaaaef108672d0bb0ed26",
-            "previous_fingerprint": "29c69c2f30f261a26fff4793fd8ae44b9081def1d4bcaaa27b0fef0501d949e4",
-            "previous_artifact_name": "244531986313.dkr.ecr.eu-central-1.amazonaws.com/web:f66cc5c@sha256:29c69c2f30f261a26fff4793fd8ae44b9081def1d4bcaaa27b0fef0501d949e4",
-            "previous_artifact_compliance_state": "COMPLIANT",
-            "previous_running": false,
-            "previous_git_commit_url": "https://github.com/cyber-dojo/snyk-scanning/commit/00c479764cb9eca038fdaaaef108672d0bb0ed26",
-            "previous_trail_name": "web-29c69c2f30f261a26fff4793fd8ae44b9081def1d4bcaaa27b0fef0501d949e4",
-            "previous_template_reference_name": "web"
-          },
-          "commit_lead_time": 276232.0,
-          "artifact_compliance_in_flow": true,
-          "flow_reasons_for_non_compliance": []
-        },
-        {
           "flow_name": "snyk-aws-beta-per-artifact",
           "trail_name": "web-929748bb88b31863da9cd8d62a5039c274ff3c669f2ef05bc025e6989d2c1eab",
           "template_reference_name": "web",
@@ -3528,6 +3497,37 @@ kosli get snapshot aws-prod --output=json
             "previous_running": false,
             "previous_git_commit_url": "https://github.com/cyber-dojo/snyk-scanning/commit/c17bb3ed8862de03c1a491dfe790fd8734fc7071",
             "previous_trail_name": "web-d7112bc0d70f56933b10c90b29e3d47abeaff64b9c95f2b53882f7d3ec819685",
+            "previous_template_reference_name": "web"
+          },
+          "commit_lead_time": 276232.0,
+          "artifact_compliance_in_flow": true,
+          "flow_reasons_for_non_compliance": []
+        },
+        {
+          "flow_name": "snyk-aws-prod-per-artifact",
+          "trail_name": "web-929748bb88b31863da9cd8d62a5039c274ff3c669f2ef05bc025e6989d2c1eab",
+          "template_reference_name": "web",
+          "git_commit": "a517304f4e9013e2e9ea67e90c7342f7e56653f0",
+          "commit_url": "https://github.com/cyber-dojo/snyk-scanning/commit/a517304f4e9013e2e9ea67e90c7342f7e56653f0",
+          "git_commit_info": {
+            "sha1": "a517304f4e9013e2e9ea67e90c7342f7e56653f0",
+            "message": "Remove unneeded provenance decision attestation - this is not a build flow",
+            "author": "JonJagger <jon@kosli.com>",
+            "branch": "main",
+            "timestamp": 1782799303.0,
+            "url": "https://github.com/cyber-dojo/snyk-scanning/commit/a517304f4e9013e2e9ea67e90c7342f7e56653f0"
+          },
+          "html_url": "https://app.kosli.com/cyber-dojo/flows/snyk-aws-prod-per-artifact/artifacts/929748bb88b31863da9cd8d62a5039c274ff3c669f2ef05bc025e6989d2c1eab?artifact_id=52160d71-469a-444d-8da4-7acc6afa",
+          "flow_html_url": "https://app.kosli.com/cyber-dojo/flows/snyk-aws-prod-per-artifact",
+          "deployment_diff": {
+            "diff_url": "https://github.com/cyber-dojo/snyk-scanning/compare/00c479764cb9eca038fdaaaef108672d0bb0ed26...a517304f4e9013e2e9ea67e90c7342f7e56653f0",
+            "previous_git_commit": "00c479764cb9eca038fdaaaef108672d0bb0ed26",
+            "previous_fingerprint": "29c69c2f30f261a26fff4793fd8ae44b9081def1d4bcaaa27b0fef0501d949e4",
+            "previous_artifact_name": "244531986313.dkr.ecr.eu-central-1.amazonaws.com/web:f66cc5c@sha256:29c69c2f30f261a26fff4793fd8ae44b9081def1d4bcaaa27b0fef0501d949e4",
+            "previous_artifact_compliance_state": "COMPLIANT",
+            "previous_running": false,
+            "previous_git_commit_url": "https://github.com/cyber-dojo/snyk-scanning/commit/00c479764cb9eca038fdaaaef108672d0bb0ed26",
+            "previous_trail_name": "web-29c69c2f30f261a26fff4793fd8ae44b9081def1d4bcaaa27b0fef0501d949e4",
             "previous_template_reference_name": "web"
           },
           "commit_lead_time": 276232.0,
@@ -4382,7 +4382,7 @@ kosli get snapshot aws-prod --output=json
             "timestamp": 1782799303.0,
             "url": "https://github.com/cyber-dojo/snyk-scanning/commit/a517304f4e9013e2e9ea67e90c7342f7e56653f0"
           },
-          "html_url": "https://app.kosli.com/cyber-dojo/flows/snyk-aws-prod-per-artifact/artifacts/4d1ba1622515a86443d2ec4b76df41daa7b98daabeb557a134607f6e200e8ebc?artifact_id=cb35a7dd-8912-41dd-a37a-d28fa247",
+          "html_url": "https://app.kosli.com/cyber-dojo/flows/snyk-aws-prod-per-artifact/artifacts/4d1ba1622515a86443d2ec4b76df41daa7b98daabeb557a134607f6e200e8ebc?artifact_id=b6e1ce03-9e3c-4e7b-99d1-d00697a7",
           "flow_html_url": "https://app.kosli.com/cyber-dojo/flows/snyk-aws-prod-per-artifact",
           "deployment_diff": {
             "diff_url": "https://github.com/cyber-dojo/snyk-scanning/compare/00c479764cb9eca038fdaaaef108672d0bb0ed26...a517304f4e9013e2e9ea67e90c7342f7e56653f0",
@@ -4445,7 +4445,7 @@ kosli get snapshot aws-prod --output=json
                 {
                   "type": "rule_not_applicable",
                   "context": {
-                    "flow_name": "snyk-aws-prod-per-artifact",
+                    "flow_name": "snyk-aws-beta-per-artifact",
                     "trail_name": "languages-start-points-a89642efb4e686ea38d597e20c2c3f256649d8bca02e2d923767844a6897667c",
                     "artifact_status": null
                   }
@@ -4453,7 +4453,7 @@ kosli get snapshot aws-prod --output=json
                 {
                   "type": "rule_not_applicable",
                   "context": {
-                    "flow_name": "snyk-aws-beta-per-artifact",
+                    "flow_name": "snyk-aws-prod-per-artifact",
                     "trail_name": "languages-start-points-a89642efb4e686ea38d597e20c2c3f256649d8bca02e2d923767844a6897667c",
                     "artifact_status": null
                   }
@@ -4490,7 +4490,7 @@ kosli get snapshot aws-prod --output=json
                 {
                   "type": "rule_not_applicable",
                   "context": {
-                    "flow_name": "snyk-aws-prod-per-artifact",
+                    "flow_name": "snyk-aws-beta-per-artifact",
                     "trail_name": "languages-start-points-a89642efb4e686ea38d597e20c2c3f256649d8bca02e2d923767844a6897667c",
                     "artifact_status": "COMPLIANT"
                   }
@@ -4498,7 +4498,7 @@ kosli get snapshot aws-prod --output=json
                 {
                   "type": "rule_not_applicable",
                   "context": {
-                    "flow_name": "snyk-aws-beta-per-artifact",
+                    "flow_name": "snyk-aws-prod-per-artifact",
                     "trail_name": "languages-start-points-a89642efb4e686ea38d597e20c2c3f256649d8bca02e2d923767844a6897667c",
                     "artifact_status": "COMPLIANT"
                   }
@@ -4540,7 +4540,7 @@ kosli get snapshot aws-prod --output=json
                 {
                   "type": "rule_not_applicable",
                   "context": {
-                    "flow_name": "snyk-aws-prod-per-artifact",
+                    "flow_name": "snyk-aws-beta-per-artifact",
                     "trail_name": "languages-start-points-a89642efb4e686ea38d597e20c2c3f256649d8bca02e2d923767844a6897667c",
                     "artifact_status": null
                   }
@@ -4548,7 +4548,7 @@ kosli get snapshot aws-prod --output=json
                 {
                   "type": "rule_not_applicable",
                   "context": {
-                    "flow_name": "snyk-aws-beta-per-artifact",
+                    "flow_name": "snyk-aws-prod-per-artifact",
                     "trail_name": "languages-start-points-a89642efb4e686ea38d597e20c2c3f256649d8bca02e2d923767844a6897667c",
                     "artifact_status": null
                   }
@@ -4592,7 +4592,7 @@ kosli get snapshot aws-prod --output=json
                 {
                   "type": "rule_satisfied",
                   "context": {
-                    "flow_name": "snyk-aws-prod-per-artifact",
+                    "flow_name": "snyk-aws-beta-per-artifact",
                     "trail_name": "languages-start-points-a89642efb4e686ea38d597e20c2c3f256649d8bca02e2d923767844a6897667c",
                     "artifact_status": null
                   }
@@ -4600,7 +4600,7 @@ kosli get snapshot aws-prod --output=json
                 {
                   "type": "rule_satisfied",
                   "context": {
-                    "flow_name": "snyk-aws-beta-per-artifact",
+                    "flow_name": "snyk-aws-prod-per-artifact",
                     "trail_name": "languages-start-points-a89642efb4e686ea38d597e20c2c3f256649d8bca02e2d923767844a6897667c",
                     "artifact_status": null
                   }
@@ -4637,7 +4637,7 @@ kosli get snapshot aws-prod --output=json
                 {
                   "type": "rule_not_applicable",
                   "context": {
-                    "flow_name": "snyk-aws-prod-per-artifact",
+                    "flow_name": "snyk-aws-beta-per-artifact",
                     "trail_name": "languages-start-points-a89642efb4e686ea38d597e20c2c3f256649d8bca02e2d923767844a6897667c",
                     "artifact_status": "COMPLIANT"
                   }
@@ -4645,7 +4645,7 @@ kosli get snapshot aws-prod --output=json
                 {
                   "type": "rule_not_applicable",
                   "context": {
-                    "flow_name": "snyk-aws-beta-per-artifact",
+                    "flow_name": "snyk-aws-prod-per-artifact",
                     "trail_name": "languages-start-points-a89642efb4e686ea38d597e20c2c3f256649d8bca02e2d923767844a6897667c",
                     "artifact_status": "COMPLIANT"
                   }
@@ -4689,7 +4689,7 @@ kosli get snapshot aws-prod --output=json
                 {
                   "type": "rule_not_applicable",
                   "context": {
-                    "flow_name": "snyk-aws-prod-per-artifact",
+                    "flow_name": "snyk-aws-beta-per-artifact",
                     "trail_name": "languages-start-points-a89642efb4e686ea38d597e20c2c3f256649d8bca02e2d923767844a6897667c",
                     "artifact_status": null,
                     "for_control": "SDLC-CTRL-0002"
@@ -4698,7 +4698,7 @@ kosli get snapshot aws-prod --output=json
                 {
                   "type": "rule_not_applicable",
                   "context": {
-                    "flow_name": "snyk-aws-beta-per-artifact",
+                    "flow_name": "snyk-aws-prod-per-artifact",
                     "trail_name": "languages-start-points-a89642efb4e686ea38d597e20c2c3f256649d8bca02e2d923767844a6897667c",
                     "artifact_status": null,
                     "for_control": "SDLC-CTRL-0002"
@@ -4743,7 +4743,7 @@ kosli get snapshot aws-prod --output=json
                 {
                   "type": "rule_not_applicable",
                   "context": {
-                    "flow_name": "snyk-aws-prod-per-artifact",
+                    "flow_name": "snyk-aws-beta-per-artifact",
                     "trail_name": "languages-start-points-a89642efb4e686ea38d597e20c2c3f256649d8bca02e2d923767844a6897667c",
                     "artifact_status": null
                   }
@@ -4751,7 +4751,7 @@ kosli get snapshot aws-prod --output=json
                 {
                   "type": "rule_not_applicable",
                   "context": {
-                    "flow_name": "snyk-aws-beta-per-artifact",
+                    "flow_name": "snyk-aws-prod-per-artifact",
                     "trail_name": "languages-start-points-a89642efb4e686ea38d597e20c2c3f256649d8bca02e2d923767844a6897667c",
                     "artifact_status": null
                   }
@@ -4788,7 +4788,7 @@ kosli get snapshot aws-prod --output=json
                 {
                   "type": "rule_not_applicable",
                   "context": {
-                    "flow_name": "snyk-aws-prod-per-artifact",
+                    "flow_name": "snyk-aws-beta-per-artifact",
                     "trail_name": "languages-start-points-a89642efb4e686ea38d597e20c2c3f256649d8bca02e2d923767844a6897667c",
                     "artifact_status": "COMPLIANT"
                   }
@@ -4796,7 +4796,7 @@ kosli get snapshot aws-prod --output=json
                 {
                   "type": "rule_not_applicable",
                   "context": {
-                    "flow_name": "snyk-aws-beta-per-artifact",
+                    "flow_name": "snyk-aws-prod-per-artifact",
                     "trail_name": "languages-start-points-a89642efb4e686ea38d597e20c2c3f256649d8bca02e2d923767844a6897667c",
                     "artifact_status": "COMPLIANT"
                   }
@@ -4838,18 +4838,18 @@ kosli get snapshot aws-prod --output=json
                   }
                 },
                 {
-                  "type": "rule_satisfied",
+                  "type": "rule_not_applicable",
                   "context": {
-                    "flow_name": "snyk-aws-prod-per-artifact",
+                    "flow_name": "snyk-aws-beta-per-artifact",
                     "trail_name": "languages-start-points-a89642efb4e686ea38d597e20c2c3f256649d8bca02e2d923767844a6897667c",
                     "artifact_status": null,
                     "for_control": "SDLC-CTRL-0022"
                   }
                 },
                 {
-                  "type": "rule_not_applicable",
+                  "type": "rule_satisfied",
                   "context": {
-                    "flow_name": "snyk-aws-beta-per-artifact",
+                    "flow_name": "snyk-aws-prod-per-artifact",
                     "trail_name": "languages-start-points-a89642efb4e686ea38d597e20c2c3f256649d8bca02e2d923767844a6897667c",
                     "artifact_status": null,
                     "for_control": "SDLC-CTRL-0022"
@@ -4894,7 +4894,7 @@ kosli get snapshot aws-prod --output=json
                 {
                   "type": "rule_not_applicable",
                   "context": {
-                    "flow_name": "snyk-aws-prod-per-artifact",
+                    "flow_name": "snyk-aws-beta-per-artifact",
                     "trail_name": "languages-start-points-a89642efb4e686ea38d597e20c2c3f256649d8bca02e2d923767844a6897667c",
                     "artifact_status": null
                   }
@@ -4902,7 +4902,7 @@ kosli get snapshot aws-prod --output=json
                 {
                   "type": "rule_not_applicable",
                   "context": {
-                    "flow_name": "snyk-aws-beta-per-artifact",
+                    "flow_name": "snyk-aws-prod-per-artifact",
                     "trail_name": "languages-start-points-a89642efb4e686ea38d597e20c2c3f256649d8bca02e2d923767844a6897667c",
                     "artifact_status": null
                   }
@@ -4939,7 +4939,7 @@ kosli get snapshot aws-prod --output=json
                 {
                   "type": "rule_not_applicable",
                   "context": {
-                    "flow_name": "snyk-aws-prod-per-artifact",
+                    "flow_name": "snyk-aws-beta-per-artifact",
                     "trail_name": "languages-start-points-a89642efb4e686ea38d597e20c2c3f256649d8bca02e2d923767844a6897667c",
                     "artifact_status": "COMPLIANT"
                   }
@@ -4947,7 +4947,7 @@ kosli get snapshot aws-prod --output=json
                 {
                   "type": "rule_not_applicable",
                   "context": {
-                    "flow_name": "snyk-aws-beta-per-artifact",
+                    "flow_name": "snyk-aws-prod-per-artifact",
                     "trail_name": "languages-start-points-a89642efb4e686ea38d597e20c2c3f256649d8bca02e2d923767844a6897667c",
                     "artifact_status": "COMPLIANT"
                   }
@@ -4989,7 +4989,7 @@ kosli get snapshot aws-prod --output=json
                 {
                   "type": "rule_not_applicable",
                   "context": {
-                    "flow_name": "snyk-aws-prod-per-artifact",
+                    "flow_name": "snyk-aws-beta-per-artifact",
                     "trail_name": "languages-start-points-a89642efb4e686ea38d597e20c2c3f256649d8bca02e2d923767844a6897667c",
                     "artifact_status": null
                   }
@@ -4997,7 +4997,7 @@ kosli get snapshot aws-prod --output=json
                 {
                   "type": "rule_not_applicable",
                   "context": {
-                    "flow_name": "snyk-aws-beta-per-artifact",
+                    "flow_name": "snyk-aws-prod-per-artifact",
                     "trail_name": "languages-start-points-a89642efb4e686ea38d597e20c2c3f256649d8bca02e2d923767844a6897667c",
                     "artifact_status": null
                   }
@@ -5041,7 +5041,7 @@ kosli get snapshot aws-prod --output=json
                 {
                   "type": "rule_not_applicable",
                   "context": {
-                    "flow_name": "snyk-aws-prod-per-artifact",
+                    "flow_name": "snyk-aws-beta-per-artifact",
                     "trail_name": "languages-start-points-a89642efb4e686ea38d597e20c2c3f256649d8bca02e2d923767844a6897667c",
                     "artifact_status": null
                   }
@@ -5049,7 +5049,7 @@ kosli get snapshot aws-prod --output=json
                 {
                   "type": "rule_not_applicable",
                   "context": {
-                    "flow_name": "snyk-aws-beta-per-artifact",
+                    "flow_name": "snyk-aws-prod-per-artifact",
                     "trail_name": "languages-start-points-a89642efb4e686ea38d597e20c2c3f256649d8bca02e2d923767844a6897667c",
                     "artifact_status": null
                   }
@@ -5090,17 +5090,17 @@ kosli get snapshot aws-prod --output=json
                   }
                 },
                 {
-                  "type": "rule_satisfied",
+                  "type": "rule_not_applicable",
                   "context": {
-                    "flow_name": "snyk-aws-prod-per-artifact",
+                    "flow_name": "snyk-aws-beta-per-artifact",
                     "trail_name": "languages-start-points-a89642efb4e686ea38d597e20c2c3f256649d8bca02e2d923767844a6897667c",
                     "artifact_status": "COMPLIANT"
                   }
                 },
                 {
-                  "type": "rule_not_applicable",
+                  "type": "rule_satisfied",
                   "context": {
-                    "flow_name": "snyk-aws-beta-per-artifact",
+                    "flow_name": "snyk-aws-prod-per-artifact",
                     "trail_name": "languages-start-points-a89642efb4e686ea38d597e20c2c3f256649d8bca02e2d923767844a6897667c",
                     "artifact_status": "COMPLIANT"
                   }
@@ -5203,37 +5203,6 @@ kosli get snapshot aws-prod --output=json
           "flow_reasons_for_non_compliance": []
         },
         {
-          "flow_name": "snyk-aws-prod-per-artifact",
-          "trail_name": "languages-start-points-a89642efb4e686ea38d597e20c2c3f256649d8bca02e2d923767844a6897667c",
-          "template_reference_name": "languages-start-points",
-          "git_commit": "a517304f4e9013e2e9ea67e90c7342f7e56653f0",
-          "commit_url": "https://github.com/cyber-dojo/snyk-scanning/commit/a517304f4e9013e2e9ea67e90c7342f7e56653f0",
-          "git_commit_info": {
-            "sha1": "a517304f4e9013e2e9ea67e90c7342f7e56653f0",
-            "message": "Remove unneeded provenance decision attestation - this is not a build flow",
-            "author": "JonJagger <jon@kosli.com>",
-            "branch": "main",
-            "timestamp": 1782799303.0,
-            "url": "https://github.com/cyber-dojo/snyk-scanning/commit/a517304f4e9013e2e9ea67e90c7342f7e56653f0"
-          },
-          "html_url": "https://app.kosli.com/cyber-dojo/flows/snyk-aws-prod-per-artifact/artifacts/a89642efb4e686ea38d597e20c2c3f256649d8bca02e2d923767844a6897667c?artifact_id=d281b2bf-4246-431d-af6e-f5cfe152",
-          "flow_html_url": "https://app.kosli.com/cyber-dojo/flows/snyk-aws-prod-per-artifact",
-          "deployment_diff": {
-            "diff_url": "https://github.com/cyber-dojo/snyk-scanning/compare/00c479764cb9eca038fdaaaef108672d0bb0ed26...a517304f4e9013e2e9ea67e90c7342f7e56653f0",
-            "previous_git_commit": "00c479764cb9eca038fdaaaef108672d0bb0ed26",
-            "previous_fingerprint": "b2f51324efc1528e4dda57d235bdbc68d966e1ea23722d5d296f98eefbfc2676",
-            "previous_artifact_name": "244531986313.dkr.ecr.eu-central-1.amazonaws.com/languages-start-points:7e86fed@sha256:b2f51324efc1528e4dda57d235bdbc68d966e1ea23722d5d296f98eefbfc2676",
-            "previous_artifact_compliance_state": "COMPLIANT",
-            "previous_running": false,
-            "previous_git_commit_url": "https://github.com/cyber-dojo/snyk-scanning/commit/00c479764cb9eca038fdaaaef108672d0bb0ed26",
-            "previous_trail_name": "languages-start-points-b2f51324efc1528e4dda57d235bdbc68d966e1ea23722d5d296f98eefbfc2676",
-            "previous_template_reference_name": "languages-start-points"
-          },
-          "commit_lead_time": 276302.0,
-          "artifact_compliance_in_flow": true,
-          "flow_reasons_for_non_compliance": []
-        },
-        {
           "flow_name": "snyk-aws-beta-per-artifact",
           "trail_name": "languages-start-points-a89642efb4e686ea38d597e20c2c3f256649d8bca02e2d923767844a6897667c",
           "template_reference_name": "languages-start-points",
@@ -5258,6 +5227,37 @@ kosli get snapshot aws-prod --output=json
             "previous_running": false,
             "previous_git_commit_url": "https://github.com/cyber-dojo/snyk-scanning/commit/c17bb3ed8862de03c1a491dfe790fd8734fc7071",
             "previous_trail_name": "languages-start-points-5bc686a6794d6a180f3a70f815348627578982e951f16e7462b1b6f533a97f38",
+            "previous_template_reference_name": "languages-start-points"
+          },
+          "commit_lead_time": 276302.0,
+          "artifact_compliance_in_flow": true,
+          "flow_reasons_for_non_compliance": []
+        },
+        {
+          "flow_name": "snyk-aws-prod-per-artifact",
+          "trail_name": "languages-start-points-a89642efb4e686ea38d597e20c2c3f256649d8bca02e2d923767844a6897667c",
+          "template_reference_name": "languages-start-points",
+          "git_commit": "a517304f4e9013e2e9ea67e90c7342f7e56653f0",
+          "commit_url": "https://github.com/cyber-dojo/snyk-scanning/commit/a517304f4e9013e2e9ea67e90c7342f7e56653f0",
+          "git_commit_info": {
+            "sha1": "a517304f4e9013e2e9ea67e90c7342f7e56653f0",
+            "message": "Remove unneeded provenance decision attestation - this is not a build flow",
+            "author": "JonJagger <jon@kosli.com>",
+            "branch": "main",
+            "timestamp": 1782799303.0,
+            "url": "https://github.com/cyber-dojo/snyk-scanning/commit/a517304f4e9013e2e9ea67e90c7342f7e56653f0"
+          },
+          "html_url": "https://app.kosli.com/cyber-dojo/flows/snyk-aws-prod-per-artifact/artifacts/a89642efb4e686ea38d597e20c2c3f256649d8bca02e2d923767844a6897667c?artifact_id=92a3adb1-1f24-402d-8010-45b78e84",
+          "flow_html_url": "https://app.kosli.com/cyber-dojo/flows/snyk-aws-prod-per-artifact",
+          "deployment_diff": {
+            "diff_url": "https://github.com/cyber-dojo/snyk-scanning/compare/00c479764cb9eca038fdaaaef108672d0bb0ed26...a517304f4e9013e2e9ea67e90c7342f7e56653f0",
+            "previous_git_commit": "00c479764cb9eca038fdaaaef108672d0bb0ed26",
+            "previous_fingerprint": "b2f51324efc1528e4dda57d235bdbc68d966e1ea23722d5d296f98eefbfc2676",
+            "previous_artifact_name": "244531986313.dkr.ecr.eu-central-1.amazonaws.com/languages-start-points:7e86fed@sha256:b2f51324efc1528e4dda57d235bdbc68d966e1ea23722d5d296f98eefbfc2676",
+            "previous_artifact_compliance_state": "COMPLIANT",
+            "previous_running": false,
+            "previous_git_commit_url": "https://github.com/cyber-dojo/snyk-scanning/commit/00c479764cb9eca038fdaaaef108672d0bb0ed26",
+            "previous_trail_name": "languages-start-points-b2f51324efc1528e4dda57d235bdbc68d966e1ea23722d5d296f98eefbfc2676",
             "previous_template_reference_name": "languages-start-points"
           },
           "commit_lead_time": 276302.0,
@@ -6112,7 +6112,7 @@ kosli get snapshot aws-prod --output=json
             "timestamp": 1782799303.0,
             "url": "https://github.com/cyber-dojo/snyk-scanning/commit/a517304f4e9013e2e9ea67e90c7342f7e56653f0"
           },
-          "html_url": "https://app.kosli.com/cyber-dojo/flows/snyk-aws-prod-per-artifact/artifacts/8f01c6f92f1226465177b079c360d26898315356b172042f8dedb593c95d2dd7?artifact_id=9c54a130-a31d-4e73-b249-3b3a91f1",
+          "html_url": "https://app.kosli.com/cyber-dojo/flows/snyk-aws-prod-per-artifact/artifacts/8f01c6f92f1226465177b079c360d26898315356b172042f8dedb593c95d2dd7?artifact_id=e37be1de-1b29-4cfa-8823-5159eed0",
           "flow_html_url": "https://app.kosli.com/cyber-dojo/flows/snyk-aws-prod-per-artifact",
           "deployment_diff": {
             "diff_url": "https://github.com/cyber-dojo/snyk-scanning/compare/00c479764cb9eca038fdaaaef108672d0bb0ed26...a517304f4e9013e2e9ea67e90c7342f7e56653f0",
@@ -6175,7 +6175,7 @@ kosli get snapshot aws-prod --output=json
                 {
                   "type": "rule_not_applicable",
                   "context": {
-                    "flow_name": "snyk-aws-prod-per-artifact",
+                    "flow_name": "snyk-aws-beta-per-artifact",
                     "trail_name": "saver-1912e229b2a9e288d099af648ebcb993c16976284f61578a3730d35c33329b59",
                     "artifact_status": null
                   }
@@ -6183,7 +6183,7 @@ kosli get snapshot aws-prod --output=json
                 {
                   "type": "rule_not_applicable",
                   "context": {
-                    "flow_name": "snyk-aws-beta-per-artifact",
+                    "flow_name": "snyk-aws-prod-per-artifact",
                     "trail_name": "saver-1912e229b2a9e288d099af648ebcb993c16976284f61578a3730d35c33329b59",
                     "artifact_status": null
                   }
@@ -6220,7 +6220,7 @@ kosli get snapshot aws-prod --output=json
                 {
                   "type": "rule_not_applicable",
                   "context": {
-                    "flow_name": "snyk-aws-prod-per-artifact",
+                    "flow_name": "snyk-aws-beta-per-artifact",
                     "trail_name": "saver-1912e229b2a9e288d099af648ebcb993c16976284f61578a3730d35c33329b59",
                     "artifact_status": "COMPLIANT"
                   }
@@ -6228,7 +6228,7 @@ kosli get snapshot aws-prod --output=json
                 {
                   "type": "rule_not_applicable",
                   "context": {
-                    "flow_name": "snyk-aws-beta-per-artifact",
+                    "flow_name": "snyk-aws-prod-per-artifact",
                     "trail_name": "saver-1912e229b2a9e288d099af648ebcb993c16976284f61578a3730d35c33329b59",
                     "artifact_status": "COMPLIANT"
                   }
@@ -6270,7 +6270,7 @@ kosli get snapshot aws-prod --output=json
                 {
                   "type": "rule_not_applicable",
                   "context": {
-                    "flow_name": "snyk-aws-prod-per-artifact",
+                    "flow_name": "snyk-aws-beta-per-artifact",
                     "trail_name": "saver-1912e229b2a9e288d099af648ebcb993c16976284f61578a3730d35c33329b59",
                     "artifact_status": null
                   }
@@ -6278,7 +6278,7 @@ kosli get snapshot aws-prod --output=json
                 {
                   "type": "rule_not_applicable",
                   "context": {
-                    "flow_name": "snyk-aws-beta-per-artifact",
+                    "flow_name": "snyk-aws-prod-per-artifact",
                     "trail_name": "saver-1912e229b2a9e288d099af648ebcb993c16976284f61578a3730d35c33329b59",
                     "artifact_status": null
                   }
@@ -6322,7 +6322,7 @@ kosli get snapshot aws-prod --output=json
                 {
                   "type": "rule_satisfied",
                   "context": {
-                    "flow_name": "snyk-aws-prod-per-artifact",
+                    "flow_name": "snyk-aws-beta-per-artifact",
                     "trail_name": "saver-1912e229b2a9e288d099af648ebcb993c16976284f61578a3730d35c33329b59",
                     "artifact_status": null
                   }
@@ -6330,7 +6330,7 @@ kosli get snapshot aws-prod --output=json
                 {
                   "type": "rule_satisfied",
                   "context": {
-                    "flow_name": "snyk-aws-beta-per-artifact",
+                    "flow_name": "snyk-aws-prod-per-artifact",
                     "trail_name": "saver-1912e229b2a9e288d099af648ebcb993c16976284f61578a3730d35c33329b59",
                     "artifact_status": null
                   }
@@ -6367,7 +6367,7 @@ kosli get snapshot aws-prod --output=json
                 {
                   "type": "rule_not_applicable",
                   "context": {
-                    "flow_name": "snyk-aws-prod-per-artifact",
+                    "flow_name": "snyk-aws-beta-per-artifact",
                     "trail_name": "saver-1912e229b2a9e288d099af648ebcb993c16976284f61578a3730d35c33329b59",
                     "artifact_status": "COMPLIANT"
                   }
@@ -6375,7 +6375,7 @@ kosli get snapshot aws-prod --output=json
                 {
                   "type": "rule_not_applicable",
                   "context": {
-                    "flow_name": "snyk-aws-beta-per-artifact",
+                    "flow_name": "snyk-aws-prod-per-artifact",
                     "trail_name": "saver-1912e229b2a9e288d099af648ebcb993c16976284f61578a3730d35c33329b59",
                     "artifact_status": "COMPLIANT"
                   }
@@ -6419,7 +6419,7 @@ kosli get snapshot aws-prod --output=json
                 {
                   "type": "rule_not_applicable",
                   "context": {
-                    "flow_name": "snyk-aws-prod-per-artifact",
+                    "flow_name": "snyk-aws-beta-per-artifact",
                     "trail_name": "saver-1912e229b2a9e288d099af648ebcb993c16976284f61578a3730d35c33329b59",
                     "artifact_status": null,
                     "for_control": "SDLC-CTRL-0002"
@@ -6428,7 +6428,7 @@ kosli get snapshot aws-prod --output=json
                 {
                   "type": "rule_not_applicable",
                   "context": {
-                    "flow_name": "snyk-aws-beta-per-artifact",
+                    "flow_name": "snyk-aws-prod-per-artifact",
                     "trail_name": "saver-1912e229b2a9e288d099af648ebcb993c16976284f61578a3730d35c33329b59",
                     "artifact_status": null,
                     "for_control": "SDLC-CTRL-0002"
@@ -6473,7 +6473,7 @@ kosli get snapshot aws-prod --output=json
                 {
                   "type": "rule_not_applicable",
                   "context": {
-                    "flow_name": "snyk-aws-prod-per-artifact",
+                    "flow_name": "snyk-aws-beta-per-artifact",
                     "trail_name": "saver-1912e229b2a9e288d099af648ebcb993c16976284f61578a3730d35c33329b59",
                     "artifact_status": null
                   }
@@ -6481,7 +6481,7 @@ kosli get snapshot aws-prod --output=json
                 {
                   "type": "rule_not_applicable",
                   "context": {
-                    "flow_name": "snyk-aws-beta-per-artifact",
+                    "flow_name": "snyk-aws-prod-per-artifact",
                     "trail_name": "saver-1912e229b2a9e288d099af648ebcb993c16976284f61578a3730d35c33329b59",
                     "artifact_status": null
                   }
@@ -6518,7 +6518,7 @@ kosli get snapshot aws-prod --output=json
                 {
                   "type": "rule_not_applicable",
                   "context": {
-                    "flow_name": "snyk-aws-prod-per-artifact",
+                    "flow_name": "snyk-aws-beta-per-artifact",
                     "trail_name": "saver-1912e229b2a9e288d099af648ebcb993c16976284f61578a3730d35c33329b59",
                     "artifact_status": "COMPLIANT"
                   }
@@ -6526,7 +6526,7 @@ kosli get snapshot aws-prod --output=json
                 {
                   "type": "rule_not_applicable",
                   "context": {
-                    "flow_name": "snyk-aws-beta-per-artifact",
+                    "flow_name": "snyk-aws-prod-per-artifact",
                     "trail_name": "saver-1912e229b2a9e288d099af648ebcb993c16976284f61578a3730d35c33329b59",
                     "artifact_status": "COMPLIANT"
                   }
@@ -6568,18 +6568,18 @@ kosli get snapshot aws-prod --output=json
                   }
                 },
                 {
-                  "type": "rule_satisfied",
+                  "type": "rule_not_applicable",
                   "context": {
-                    "flow_name": "snyk-aws-prod-per-artifact",
+                    "flow_name": "snyk-aws-beta-per-artifact",
                     "trail_name": "saver-1912e229b2a9e288d099af648ebcb993c16976284f61578a3730d35c33329b59",
                     "artifact_status": null,
                     "for_control": "SDLC-CTRL-0022"
                   }
                 },
                 {
-                  "type": "rule_not_applicable",
+                  "type": "rule_satisfied",
                   "context": {
-                    "flow_name": "snyk-aws-beta-per-artifact",
+                    "flow_name": "snyk-aws-prod-per-artifact",
                     "trail_name": "saver-1912e229b2a9e288d099af648ebcb993c16976284f61578a3730d35c33329b59",
                     "artifact_status": null,
                     "for_control": "SDLC-CTRL-0022"
@@ -6624,7 +6624,7 @@ kosli get snapshot aws-prod --output=json
                 {
                   "type": "rule_not_applicable",
                   "context": {
-                    "flow_name": "snyk-aws-prod-per-artifact",
+                    "flow_name": "snyk-aws-beta-per-artifact",
                     "trail_name": "saver-1912e229b2a9e288d099af648ebcb993c16976284f61578a3730d35c33329b59",
                     "artifact_status": null
                   }
@@ -6632,7 +6632,7 @@ kosli get snapshot aws-prod --output=json
                 {
                   "type": "rule_not_applicable",
                   "context": {
-                    "flow_name": "snyk-aws-beta-per-artifact",
+                    "flow_name": "snyk-aws-prod-per-artifact",
                     "trail_name": "saver-1912e229b2a9e288d099af648ebcb993c16976284f61578a3730d35c33329b59",
                     "artifact_status": null
                   }
@@ -6669,7 +6669,7 @@ kosli get snapshot aws-prod --output=json
                 {
                   "type": "rule_not_applicable",
                   "context": {
-                    "flow_name": "snyk-aws-prod-per-artifact",
+                    "flow_name": "snyk-aws-beta-per-artifact",
                     "trail_name": "saver-1912e229b2a9e288d099af648ebcb993c16976284f61578a3730d35c33329b59",
                     "artifact_status": "COMPLIANT"
                   }
@@ -6677,7 +6677,7 @@ kosli get snapshot aws-prod --output=json
                 {
                   "type": "rule_not_applicable",
                   "context": {
-                    "flow_name": "snyk-aws-beta-per-artifact",
+                    "flow_name": "snyk-aws-prod-per-artifact",
                     "trail_name": "saver-1912e229b2a9e288d099af648ebcb993c16976284f61578a3730d35c33329b59",
                     "artifact_status": "COMPLIANT"
                   }
@@ -6719,7 +6719,7 @@ kosli get snapshot aws-prod --output=json
                 {
                   "type": "rule_not_applicable",
                   "context": {
-                    "flow_name": "snyk-aws-prod-per-artifact",
+                    "flow_name": "snyk-aws-beta-per-artifact",
                     "trail_name": "saver-1912e229b2a9e288d099af648ebcb993c16976284f61578a3730d35c33329b59",
                     "artifact_status": null
                   }
@@ -6727,7 +6727,7 @@ kosli get snapshot aws-prod --output=json
                 {
                   "type": "rule_not_applicable",
                   "context": {
-                    "flow_name": "snyk-aws-beta-per-artifact",
+                    "flow_name": "snyk-aws-prod-per-artifact",
                     "trail_name": "saver-1912e229b2a9e288d099af648ebcb993c16976284f61578a3730d35c33329b59",
                     "artifact_status": null
                   }
@@ -6771,7 +6771,7 @@ kosli get snapshot aws-prod --output=json
                 {
                   "type": "rule_not_applicable",
                   "context": {
-                    "flow_name": "snyk-aws-prod-per-artifact",
+                    "flow_name": "snyk-aws-beta-per-artifact",
                     "trail_name": "saver-1912e229b2a9e288d099af648ebcb993c16976284f61578a3730d35c33329b59",
                     "artifact_status": null
                   }
@@ -6779,7 +6779,7 @@ kosli get snapshot aws-prod --output=json
                 {
                   "type": "rule_not_applicable",
                   "context": {
-                    "flow_name": "snyk-aws-beta-per-artifact",
+                    "flow_name": "snyk-aws-prod-per-artifact",
                     "trail_name": "saver-1912e229b2a9e288d099af648ebcb993c16976284f61578a3730d35c33329b59",
                     "artifact_status": null
                   }
@@ -6820,17 +6820,17 @@ kosli get snapshot aws-prod --output=json
                   }
                 },
                 {
-                  "type": "rule_satisfied",
+                  "type": "rule_not_applicable",
                   "context": {
-                    "flow_name": "snyk-aws-prod-per-artifact",
+                    "flow_name": "snyk-aws-beta-per-artifact",
                     "trail_name": "saver-1912e229b2a9e288d099af648ebcb993c16976284f61578a3730d35c33329b59",
                     "artifact_status": "COMPLIANT"
                   }
                 },
                 {
-                  "type": "rule_not_applicable",
+                  "type": "rule_satisfied",
                   "context": {
-                    "flow_name": "snyk-aws-beta-per-artifact",
+                    "flow_name": "snyk-aws-prod-per-artifact",
                     "trail_name": "saver-1912e229b2a9e288d099af648ebcb993c16976284f61578a3730d35c33329b59",
                     "artifact_status": "COMPLIANT"
                   }
@@ -6933,37 +6933,6 @@ kosli get snapshot aws-prod --output=json
           "flow_reasons_for_non_compliance": []
         },
         {
-          "flow_name": "snyk-aws-prod-per-artifact",
-          "trail_name": "saver-1912e229b2a9e288d099af648ebcb993c16976284f61578a3730d35c33329b59",
-          "template_reference_name": "saver",
-          "git_commit": "a517304f4e9013e2e9ea67e90c7342f7e56653f0",
-          "commit_url": "https://github.com/cyber-dojo/snyk-scanning/commit/a517304f4e9013e2e9ea67e90c7342f7e56653f0",
-          "git_commit_info": {
-            "sha1": "a517304f4e9013e2e9ea67e90c7342f7e56653f0",
-            "message": "Remove unneeded provenance decision attestation - this is not a build flow",
-            "author": "JonJagger <jon@kosli.com>",
-            "branch": "main",
-            "timestamp": 1782799303.0,
-            "url": "https://github.com/cyber-dojo/snyk-scanning/commit/a517304f4e9013e2e9ea67e90c7342f7e56653f0"
-          },
-          "html_url": "https://app.kosli.com/cyber-dojo/flows/snyk-aws-prod-per-artifact/artifacts/1912e229b2a9e288d099af648ebcb993c16976284f61578a3730d35c33329b59?artifact_id=995a6210-214c-418a-ba90-2fe7ad1c",
-          "flow_html_url": "https://app.kosli.com/cyber-dojo/flows/snyk-aws-prod-per-artifact",
-          "deployment_diff": {
-            "diff_url": "https://github.com/cyber-dojo/snyk-scanning/compare/00c479764cb9eca038fdaaaef108672d0bb0ed26...a517304f4e9013e2e9ea67e90c7342f7e56653f0",
-            "previous_git_commit": "00c479764cb9eca038fdaaaef108672d0bb0ed26",
-            "previous_fingerprint": "f5909cc8dd53b2105953d1a72cd5d6181367d3588964aa01a04c056205a5d419",
-            "previous_artifact_name": "244531986313.dkr.ecr.eu-central-1.amazonaws.com/saver:8c84fac@sha256:f5909cc8dd53b2105953d1a72cd5d6181367d3588964aa01a04c056205a5d419",
-            "previous_artifact_compliance_state": "COMPLIANT",
-            "previous_running": false,
-            "previous_git_commit_url": "https://github.com/cyber-dojo/snyk-scanning/commit/00c479764cb9eca038fdaaaef108672d0bb0ed26",
-            "previous_trail_name": "saver-f5909cc8dd53b2105953d1a72cd5d6181367d3588964aa01a04c056205a5d419",
-            "previous_template_reference_name": "saver"
-          },
-          "commit_lead_time": 276228.0,
-          "artifact_compliance_in_flow": true,
-          "flow_reasons_for_non_compliance": []
-        },
-        {
           "flow_name": "snyk-aws-beta-per-artifact",
           "trail_name": "saver-1912e229b2a9e288d099af648ebcb993c16976284f61578a3730d35c33329b59",
           "template_reference_name": "saver",
@@ -6988,6 +6957,37 @@ kosli get snapshot aws-prod --output=json
             "previous_running": false,
             "previous_git_commit_url": "https://github.com/cyber-dojo/snyk-scanning/commit/c17bb3ed8862de03c1a491dfe790fd8734fc7071",
             "previous_trail_name": "saver-5153955367bbc753a61648d385a73f0e391d2a7410e3d55e095da7d69b418b7e",
+            "previous_template_reference_name": "saver"
+          },
+          "commit_lead_time": 276228.0,
+          "artifact_compliance_in_flow": true,
+          "flow_reasons_for_non_compliance": []
+        },
+        {
+          "flow_name": "snyk-aws-prod-per-artifact",
+          "trail_name": "saver-1912e229b2a9e288d099af648ebcb993c16976284f61578a3730d35c33329b59",
+          "template_reference_name": "saver",
+          "git_commit": "a517304f4e9013e2e9ea67e90c7342f7e56653f0",
+          "commit_url": "https://github.com/cyber-dojo/snyk-scanning/commit/a517304f4e9013e2e9ea67e90c7342f7e56653f0",
+          "git_commit_info": {
+            "sha1": "a517304f4e9013e2e9ea67e90c7342f7e56653f0",
+            "message": "Remove unneeded provenance decision attestation - this is not a build flow",
+            "author": "JonJagger <jon@kosli.com>",
+            "branch": "main",
+            "timestamp": 1782799303.0,
+            "url": "https://github.com/cyber-dojo/snyk-scanning/commit/a517304f4e9013e2e9ea67e90c7342f7e56653f0"
+          },
+          "html_url": "https://app.kosli.com/cyber-dojo/flows/snyk-aws-prod-per-artifact/artifacts/1912e229b2a9e288d099af648ebcb993c16976284f61578a3730d35c33329b59?artifact_id=c19577cd-942c-4c9e-9a82-589ea6ec",
+          "flow_html_url": "https://app.kosli.com/cyber-dojo/flows/snyk-aws-prod-per-artifact",
+          "deployment_diff": {
+            "diff_url": "https://github.com/cyber-dojo/snyk-scanning/compare/00c479764cb9eca038fdaaaef108672d0bb0ed26...a517304f4e9013e2e9ea67e90c7342f7e56653f0",
+            "previous_git_commit": "00c479764cb9eca038fdaaaef108672d0bb0ed26",
+            "previous_fingerprint": "f5909cc8dd53b2105953d1a72cd5d6181367d3588964aa01a04c056205a5d419",
+            "previous_artifact_name": "244531986313.dkr.ecr.eu-central-1.amazonaws.com/saver:8c84fac@sha256:f5909cc8dd53b2105953d1a72cd5d6181367d3588964aa01a04c056205a5d419",
+            "previous_artifact_compliance_state": "COMPLIANT",
+            "previous_running": false,
+            "previous_git_commit_url": "https://github.com/cyber-dojo/snyk-scanning/commit/00c479764cb9eca038fdaaaef108672d0bb0ed26",
+            "previous_trail_name": "saver-f5909cc8dd53b2105953d1a72cd5d6181367d3588964aa01a04c056205a5d419",
             "previous_template_reference_name": "saver"
           },
           "commit_lead_time": 276228.0,
@@ -7040,7 +7040,7 @@ kosli get snapshot aws-prod --output=json
                 {
                   "type": "rule_not_applicable",
                   "context": {
-                    "flow_name": "snyk-aws-prod-per-artifact",
+                    "flow_name": "snyk-aws-beta-per-artifact",
                     "trail_name": "custom-start-points-1dbac604d2f08378e085032c135be4f4910559a7d7723c26372724d6fb8010d1",
                     "artifact_status": null
                   }
@@ -7048,7 +7048,7 @@ kosli get snapshot aws-prod --output=json
                 {
                   "type": "rule_not_applicable",
                   "context": {
-                    "flow_name": "snyk-aws-beta-per-artifact",
+                    "flow_name": "snyk-aws-prod-per-artifact",
                     "trail_name": "custom-start-points-1dbac604d2f08378e085032c135be4f4910559a7d7723c26372724d6fb8010d1",
                     "artifact_status": null
                   }
@@ -7085,7 +7085,7 @@ kosli get snapshot aws-prod --output=json
                 {
                   "type": "rule_not_applicable",
                   "context": {
-                    "flow_name": "snyk-aws-prod-per-artifact",
+                    "flow_name": "snyk-aws-beta-per-artifact",
                     "trail_name": "custom-start-points-1dbac604d2f08378e085032c135be4f4910559a7d7723c26372724d6fb8010d1",
                     "artifact_status": "COMPLIANT"
                   }
@@ -7093,7 +7093,7 @@ kosli get snapshot aws-prod --output=json
                 {
                   "type": "rule_not_applicable",
                   "context": {
-                    "flow_name": "snyk-aws-beta-per-artifact",
+                    "flow_name": "snyk-aws-prod-per-artifact",
                     "trail_name": "custom-start-points-1dbac604d2f08378e085032c135be4f4910559a7d7723c26372724d6fb8010d1",
                     "artifact_status": "COMPLIANT"
                   }
@@ -7135,7 +7135,7 @@ kosli get snapshot aws-prod --output=json
                 {
                   "type": "rule_not_applicable",
                   "context": {
-                    "flow_name": "snyk-aws-prod-per-artifact",
+                    "flow_name": "snyk-aws-beta-per-artifact",
                     "trail_name": "custom-start-points-1dbac604d2f08378e085032c135be4f4910559a7d7723c26372724d6fb8010d1",
                     "artifact_status": null
                   }
@@ -7143,7 +7143,7 @@ kosli get snapshot aws-prod --output=json
                 {
                   "type": "rule_not_applicable",
                   "context": {
-                    "flow_name": "snyk-aws-beta-per-artifact",
+                    "flow_name": "snyk-aws-prod-per-artifact",
                     "trail_name": "custom-start-points-1dbac604d2f08378e085032c135be4f4910559a7d7723c26372724d6fb8010d1",
                     "artifact_status": null
                   }
@@ -7187,7 +7187,7 @@ kosli get snapshot aws-prod --output=json
                 {
                   "type": "rule_satisfied",
                   "context": {
-                    "flow_name": "snyk-aws-prod-per-artifact",
+                    "flow_name": "snyk-aws-beta-per-artifact",
                     "trail_name": "custom-start-points-1dbac604d2f08378e085032c135be4f4910559a7d7723c26372724d6fb8010d1",
                     "artifact_status": null
                   }
@@ -7195,7 +7195,7 @@ kosli get snapshot aws-prod --output=json
                 {
                   "type": "rule_satisfied",
                   "context": {
-                    "flow_name": "snyk-aws-beta-per-artifact",
+                    "flow_name": "snyk-aws-prod-per-artifact",
                     "trail_name": "custom-start-points-1dbac604d2f08378e085032c135be4f4910559a7d7723c26372724d6fb8010d1",
                     "artifact_status": null
                   }
@@ -7232,7 +7232,7 @@ kosli get snapshot aws-prod --output=json
                 {
                   "type": "rule_not_applicable",
                   "context": {
-                    "flow_name": "snyk-aws-prod-per-artifact",
+                    "flow_name": "snyk-aws-beta-per-artifact",
                     "trail_name": "custom-start-points-1dbac604d2f08378e085032c135be4f4910559a7d7723c26372724d6fb8010d1",
                     "artifact_status": "COMPLIANT"
                   }
@@ -7240,7 +7240,7 @@ kosli get snapshot aws-prod --output=json
                 {
                   "type": "rule_not_applicable",
                   "context": {
-                    "flow_name": "snyk-aws-beta-per-artifact",
+                    "flow_name": "snyk-aws-prod-per-artifact",
                     "trail_name": "custom-start-points-1dbac604d2f08378e085032c135be4f4910559a7d7723c26372724d6fb8010d1",
                     "artifact_status": "COMPLIANT"
                   }
@@ -7284,7 +7284,7 @@ kosli get snapshot aws-prod --output=json
                 {
                   "type": "rule_not_applicable",
                   "context": {
-                    "flow_name": "snyk-aws-prod-per-artifact",
+                    "flow_name": "snyk-aws-beta-per-artifact",
                     "trail_name": "custom-start-points-1dbac604d2f08378e085032c135be4f4910559a7d7723c26372724d6fb8010d1",
                     "artifact_status": null,
                     "for_control": "SDLC-CTRL-0002"
@@ -7293,7 +7293,7 @@ kosli get snapshot aws-prod --output=json
                 {
                   "type": "rule_not_applicable",
                   "context": {
-                    "flow_name": "snyk-aws-beta-per-artifact",
+                    "flow_name": "snyk-aws-prod-per-artifact",
                     "trail_name": "custom-start-points-1dbac604d2f08378e085032c135be4f4910559a7d7723c26372724d6fb8010d1",
                     "artifact_status": null,
                     "for_control": "SDLC-CTRL-0002"
@@ -7338,7 +7338,7 @@ kosli get snapshot aws-prod --output=json
                 {
                   "type": "rule_not_applicable",
                   "context": {
-                    "flow_name": "snyk-aws-prod-per-artifact",
+                    "flow_name": "snyk-aws-beta-per-artifact",
                     "trail_name": "custom-start-points-1dbac604d2f08378e085032c135be4f4910559a7d7723c26372724d6fb8010d1",
                     "artifact_status": null
                   }
@@ -7346,7 +7346,7 @@ kosli get snapshot aws-prod --output=json
                 {
                   "type": "rule_not_applicable",
                   "context": {
-                    "flow_name": "snyk-aws-beta-per-artifact",
+                    "flow_name": "snyk-aws-prod-per-artifact",
                     "trail_name": "custom-start-points-1dbac604d2f08378e085032c135be4f4910559a7d7723c26372724d6fb8010d1",
                     "artifact_status": null
                   }
@@ -7383,7 +7383,7 @@ kosli get snapshot aws-prod --output=json
                 {
                   "type": "rule_not_applicable",
                   "context": {
-                    "flow_name": "snyk-aws-prod-per-artifact",
+                    "flow_name": "snyk-aws-beta-per-artifact",
                     "trail_name": "custom-start-points-1dbac604d2f08378e085032c135be4f4910559a7d7723c26372724d6fb8010d1",
                     "artifact_status": "COMPLIANT"
                   }
@@ -7391,7 +7391,7 @@ kosli get snapshot aws-prod --output=json
                 {
                   "type": "rule_not_applicable",
                   "context": {
-                    "flow_name": "snyk-aws-beta-per-artifact",
+                    "flow_name": "snyk-aws-prod-per-artifact",
                     "trail_name": "custom-start-points-1dbac604d2f08378e085032c135be4f4910559a7d7723c26372724d6fb8010d1",
                     "artifact_status": "COMPLIANT"
                   }
@@ -7433,18 +7433,18 @@ kosli get snapshot aws-prod --output=json
                   }
                 },
                 {
-                  "type": "rule_satisfied",
+                  "type": "rule_not_applicable",
                   "context": {
-                    "flow_name": "snyk-aws-prod-per-artifact",
+                    "flow_name": "snyk-aws-beta-per-artifact",
                     "trail_name": "custom-start-points-1dbac604d2f08378e085032c135be4f4910559a7d7723c26372724d6fb8010d1",
                     "artifact_status": null,
                     "for_control": "SDLC-CTRL-0022"
                   }
                 },
                 {
-                  "type": "rule_not_applicable",
+                  "type": "rule_satisfied",
                   "context": {
-                    "flow_name": "snyk-aws-beta-per-artifact",
+                    "flow_name": "snyk-aws-prod-per-artifact",
                     "trail_name": "custom-start-points-1dbac604d2f08378e085032c135be4f4910559a7d7723c26372724d6fb8010d1",
                     "artifact_status": null,
                     "for_control": "SDLC-CTRL-0022"
@@ -7489,7 +7489,7 @@ kosli get snapshot aws-prod --output=json
                 {
                   "type": "rule_not_applicable",
                   "context": {
-                    "flow_name": "snyk-aws-prod-per-artifact",
+                    "flow_name": "snyk-aws-beta-per-artifact",
                     "trail_name": "custom-start-points-1dbac604d2f08378e085032c135be4f4910559a7d7723c26372724d6fb8010d1",
                     "artifact_status": null
                   }
@@ -7497,7 +7497,7 @@ kosli get snapshot aws-prod --output=json
                 {
                   "type": "rule_not_applicable",
                   "context": {
-                    "flow_name": "snyk-aws-beta-per-artifact",
+                    "flow_name": "snyk-aws-prod-per-artifact",
                     "trail_name": "custom-start-points-1dbac604d2f08378e085032c135be4f4910559a7d7723c26372724d6fb8010d1",
                     "artifact_status": null
                   }
@@ -7534,7 +7534,7 @@ kosli get snapshot aws-prod --output=json
                 {
                   "type": "rule_not_applicable",
                   "context": {
-                    "flow_name": "snyk-aws-prod-per-artifact",
+                    "flow_name": "snyk-aws-beta-per-artifact",
                     "trail_name": "custom-start-points-1dbac604d2f08378e085032c135be4f4910559a7d7723c26372724d6fb8010d1",
                     "artifact_status": "COMPLIANT"
                   }
@@ -7542,7 +7542,7 @@ kosli get snapshot aws-prod --output=json
                 {
                   "type": "rule_not_applicable",
                   "context": {
-                    "flow_name": "snyk-aws-beta-per-artifact",
+                    "flow_name": "snyk-aws-prod-per-artifact",
                     "trail_name": "custom-start-points-1dbac604d2f08378e085032c135be4f4910559a7d7723c26372724d6fb8010d1",
                     "artifact_status": "COMPLIANT"
                   }
@@ -7584,7 +7584,7 @@ kosli get snapshot aws-prod --output=json
                 {
                   "type": "rule_not_applicable",
                   "context": {
-                    "flow_name": "snyk-aws-prod-per-artifact",
+                    "flow_name": "snyk-aws-beta-per-artifact",
                     "trail_name": "custom-start-points-1dbac604d2f08378e085032c135be4f4910559a7d7723c26372724d6fb8010d1",
                     "artifact_status": null
                   }
@@ -7592,7 +7592,7 @@ kosli get snapshot aws-prod --output=json
                 {
                   "type": "rule_not_applicable",
                   "context": {
-                    "flow_name": "snyk-aws-beta-per-artifact",
+                    "flow_name": "snyk-aws-prod-per-artifact",
                     "trail_name": "custom-start-points-1dbac604d2f08378e085032c135be4f4910559a7d7723c26372724d6fb8010d1",
                     "artifact_status": null
                   }
@@ -7636,7 +7636,7 @@ kosli get snapshot aws-prod --output=json
                 {
                   "type": "rule_not_applicable",
                   "context": {
-                    "flow_name": "snyk-aws-prod-per-artifact",
+                    "flow_name": "snyk-aws-beta-per-artifact",
                     "trail_name": "custom-start-points-1dbac604d2f08378e085032c135be4f4910559a7d7723c26372724d6fb8010d1",
                     "artifact_status": null
                   }
@@ -7644,7 +7644,7 @@ kosli get snapshot aws-prod --output=json
                 {
                   "type": "rule_not_applicable",
                   "context": {
-                    "flow_name": "snyk-aws-beta-per-artifact",
+                    "flow_name": "snyk-aws-prod-per-artifact",
                     "trail_name": "custom-start-points-1dbac604d2f08378e085032c135be4f4910559a7d7723c26372724d6fb8010d1",
                     "artifact_status": null
                   }
@@ -7685,17 +7685,17 @@ kosli get snapshot aws-prod --output=json
                   }
                 },
                 {
-                  "type": "rule_satisfied",
+                  "type": "rule_not_applicable",
                   "context": {
-                    "flow_name": "snyk-aws-prod-per-artifact",
+                    "flow_name": "snyk-aws-beta-per-artifact",
                     "trail_name": "custom-start-points-1dbac604d2f08378e085032c135be4f4910559a7d7723c26372724d6fb8010d1",
                     "artifact_status": "COMPLIANT"
                   }
                 },
                 {
-                  "type": "rule_not_applicable",
+                  "type": "rule_satisfied",
                   "context": {
-                    "flow_name": "snyk-aws-beta-per-artifact",
+                    "flow_name": "snyk-aws-prod-per-artifact",
                     "trail_name": "custom-start-points-1dbac604d2f08378e085032c135be4f4910559a7d7723c26372724d6fb8010d1",
                     "artifact_status": "COMPLIANT"
                   }
@@ -7798,37 +7798,6 @@ kosli get snapshot aws-prod --output=json
           "flow_reasons_for_non_compliance": []
         },
         {
-          "flow_name": "snyk-aws-prod-per-artifact",
-          "trail_name": "custom-start-points-1dbac604d2f08378e085032c135be4f4910559a7d7723c26372724d6fb8010d1",
-          "template_reference_name": "custom-start-points",
-          "git_commit": "a517304f4e9013e2e9ea67e90c7342f7e56653f0",
-          "commit_url": "https://github.com/cyber-dojo/snyk-scanning/commit/a517304f4e9013e2e9ea67e90c7342f7e56653f0",
-          "git_commit_info": {
-            "sha1": "a517304f4e9013e2e9ea67e90c7342f7e56653f0",
-            "message": "Remove unneeded provenance decision attestation - this is not a build flow",
-            "author": "JonJagger <jon@kosli.com>",
-            "branch": "main",
-            "timestamp": 1782799303.0,
-            "url": "https://github.com/cyber-dojo/snyk-scanning/commit/a517304f4e9013e2e9ea67e90c7342f7e56653f0"
-          },
-          "html_url": "https://app.kosli.com/cyber-dojo/flows/snyk-aws-prod-per-artifact/artifacts/1dbac604d2f08378e085032c135be4f4910559a7d7723c26372724d6fb8010d1?artifact_id=849714bd-1ce9-4cff-8735-96196362",
-          "flow_html_url": "https://app.kosli.com/cyber-dojo/flows/snyk-aws-prod-per-artifact",
-          "deployment_diff": {
-            "diff_url": "https://github.com/cyber-dojo/snyk-scanning/compare/00c479764cb9eca038fdaaaef108672d0bb0ed26...a517304f4e9013e2e9ea67e90c7342f7e56653f0",
-            "previous_git_commit": "00c479764cb9eca038fdaaaef108672d0bb0ed26",
-            "previous_fingerprint": "b4448ca68a0926e4a7a800f5b101b63e9c2f38e1caaebb7e929d992763570928",
-            "previous_artifact_name": "244531986313.dkr.ecr.eu-central-1.amazonaws.com/custom-start-points:6b5c159@sha256:b4448ca68a0926e4a7a800f5b101b63e9c2f38e1caaebb7e929d992763570928",
-            "previous_artifact_compliance_state": "COMPLIANT",
-            "previous_running": false,
-            "previous_git_commit_url": "https://github.com/cyber-dojo/snyk-scanning/commit/00c479764cb9eca038fdaaaef108672d0bb0ed26",
-            "previous_trail_name": "custom-start-points-b4448ca68a0926e4a7a800f5b101b63e9c2f38e1caaebb7e929d992763570928",
-            "previous_template_reference_name": "custom-start-points"
-          },
-          "commit_lead_time": 276223.0,
-          "artifact_compliance_in_flow": true,
-          "flow_reasons_for_non_compliance": []
-        },
-        {
           "flow_name": "snyk-aws-beta-per-artifact",
           "trail_name": "custom-start-points-1dbac604d2f08378e085032c135be4f4910559a7d7723c26372724d6fb8010d1",
           "template_reference_name": "custom-start-points",
@@ -7853,6 +7822,37 @@ kosli get snapshot aws-prod --output=json
             "previous_running": false,
             "previous_git_commit_url": "https://github.com/cyber-dojo/snyk-scanning/commit/c17bb3ed8862de03c1a491dfe790fd8734fc7071",
             "previous_trail_name": "custom-start-points-311da8e95c74716bf3953de67a6dc3fe514c88d805a08a55ab17c677d75cf797",
+            "previous_template_reference_name": "custom-start-points"
+          },
+          "commit_lead_time": 276223.0,
+          "artifact_compliance_in_flow": true,
+          "flow_reasons_for_non_compliance": []
+        },
+        {
+          "flow_name": "snyk-aws-prod-per-artifact",
+          "trail_name": "custom-start-points-1dbac604d2f08378e085032c135be4f4910559a7d7723c26372724d6fb8010d1",
+          "template_reference_name": "custom-start-points",
+          "git_commit": "a517304f4e9013e2e9ea67e90c7342f7e56653f0",
+          "commit_url": "https://github.com/cyber-dojo/snyk-scanning/commit/a517304f4e9013e2e9ea67e90c7342f7e56653f0",
+          "git_commit_info": {
+            "sha1": "a517304f4e9013e2e9ea67e90c7342f7e56653f0",
+            "message": "Remove unneeded provenance decision attestation - this is not a build flow",
+            "author": "JonJagger <jon@kosli.com>",
+            "branch": "main",
+            "timestamp": 1782799303.0,
+            "url": "https://github.com/cyber-dojo/snyk-scanning/commit/a517304f4e9013e2e9ea67e90c7342f7e56653f0"
+          },
+          "html_url": "https://app.kosli.com/cyber-dojo/flows/snyk-aws-prod-per-artifact/artifacts/1dbac604d2f08378e085032c135be4f4910559a7d7723c26372724d6fb8010d1?artifact_id=22f396e9-003a-4f27-bfa9-f324a75e",
+          "flow_html_url": "https://app.kosli.com/cyber-dojo/flows/snyk-aws-prod-per-artifact",
+          "deployment_diff": {
+            "diff_url": "https://github.com/cyber-dojo/snyk-scanning/compare/00c479764cb9eca038fdaaaef108672d0bb0ed26...a517304f4e9013e2e9ea67e90c7342f7e56653f0",
+            "previous_git_commit": "00c479764cb9eca038fdaaaef108672d0bb0ed26",
+            "previous_fingerprint": "b4448ca68a0926e4a7a800f5b101b63e9c2f38e1caaebb7e929d992763570928",
+            "previous_artifact_name": "244531986313.dkr.ecr.eu-central-1.amazonaws.com/custom-start-points:6b5c159@sha256:b4448ca68a0926e4a7a800f5b101b63e9c2f38e1caaebb7e929d992763570928",
+            "previous_artifact_compliance_state": "COMPLIANT",
+            "previous_running": false,
+            "previous_git_commit_url": "https://github.com/cyber-dojo/snyk-scanning/commit/00c479764cb9eca038fdaaaef108672d0bb0ed26",
+            "previous_trail_name": "custom-start-points-b4448ca68a0926e4a7a800f5b101b63e9c2f38e1caaebb7e929d992763570928",
             "previous_template_reference_name": "custom-start-points"
           },
           "commit_lead_time": 276223.0,
@@ -7905,7 +7905,7 @@ kosli get snapshot aws-prod --output=json
                 {
                   "type": "rule_not_applicable",
                   "context": {
-                    "flow_name": "snyk-aws-prod-per-artifact",
+                    "flow_name": "snyk-aws-beta-per-artifact",
                     "trail_name": "exercises-start-points-748c413e0f6e45c3652fa4ee47ff2d7371da0bade41c027711296216b53db39b",
                     "artifact_status": null
                   }
@@ -7913,7 +7913,7 @@ kosli get snapshot aws-prod --output=json
                 {
                   "type": "rule_not_applicable",
                   "context": {
-                    "flow_name": "snyk-aws-beta-per-artifact",
+                    "flow_name": "snyk-aws-prod-per-artifact",
                     "trail_name": "exercises-start-points-748c413e0f6e45c3652fa4ee47ff2d7371da0bade41c027711296216b53db39b",
                     "artifact_status": null
                   }
@@ -7950,7 +7950,7 @@ kosli get snapshot aws-prod --output=json
                 {
                   "type": "rule_not_applicable",
                   "context": {
-                    "flow_name": "snyk-aws-prod-per-artifact",
+                    "flow_name": "snyk-aws-beta-per-artifact",
                     "trail_name": "exercises-start-points-748c413e0f6e45c3652fa4ee47ff2d7371da0bade41c027711296216b53db39b",
                     "artifact_status": "COMPLIANT"
                   }
@@ -7958,7 +7958,7 @@ kosli get snapshot aws-prod --output=json
                 {
                   "type": "rule_not_applicable",
                   "context": {
-                    "flow_name": "snyk-aws-beta-per-artifact",
+                    "flow_name": "snyk-aws-prod-per-artifact",
                     "trail_name": "exercises-start-points-748c413e0f6e45c3652fa4ee47ff2d7371da0bade41c027711296216b53db39b",
                     "artifact_status": "COMPLIANT"
                   }
@@ -8000,7 +8000,7 @@ kosli get snapshot aws-prod --output=json
                 {
                   "type": "rule_not_applicable",
                   "context": {
-                    "flow_name": "snyk-aws-prod-per-artifact",
+                    "flow_name": "snyk-aws-beta-per-artifact",
                     "trail_name": "exercises-start-points-748c413e0f6e45c3652fa4ee47ff2d7371da0bade41c027711296216b53db39b",
                     "artifact_status": null
                   }
@@ -8008,7 +8008,7 @@ kosli get snapshot aws-prod --output=json
                 {
                   "type": "rule_not_applicable",
                   "context": {
-                    "flow_name": "snyk-aws-beta-per-artifact",
+                    "flow_name": "snyk-aws-prod-per-artifact",
                     "trail_name": "exercises-start-points-748c413e0f6e45c3652fa4ee47ff2d7371da0bade41c027711296216b53db39b",
                     "artifact_status": null
                   }
@@ -8052,7 +8052,7 @@ kosli get snapshot aws-prod --output=json
                 {
                   "type": "rule_satisfied",
                   "context": {
-                    "flow_name": "snyk-aws-prod-per-artifact",
+                    "flow_name": "snyk-aws-beta-per-artifact",
                     "trail_name": "exercises-start-points-748c413e0f6e45c3652fa4ee47ff2d7371da0bade41c027711296216b53db39b",
                     "artifact_status": null
                   }
@@ -8060,7 +8060,7 @@ kosli get snapshot aws-prod --output=json
                 {
                   "type": "rule_satisfied",
                   "context": {
-                    "flow_name": "snyk-aws-beta-per-artifact",
+                    "flow_name": "snyk-aws-prod-per-artifact",
                     "trail_name": "exercises-start-points-748c413e0f6e45c3652fa4ee47ff2d7371da0bade41c027711296216b53db39b",
                     "artifact_status": null
                   }
@@ -8097,7 +8097,7 @@ kosli get snapshot aws-prod --output=json
                 {
                   "type": "rule_not_applicable",
                   "context": {
-                    "flow_name": "snyk-aws-prod-per-artifact",
+                    "flow_name": "snyk-aws-beta-per-artifact",
                     "trail_name": "exercises-start-points-748c413e0f6e45c3652fa4ee47ff2d7371da0bade41c027711296216b53db39b",
                     "artifact_status": "COMPLIANT"
                   }
@@ -8105,7 +8105,7 @@ kosli get snapshot aws-prod --output=json
                 {
                   "type": "rule_not_applicable",
                   "context": {
-                    "flow_name": "snyk-aws-beta-per-artifact",
+                    "flow_name": "snyk-aws-prod-per-artifact",
                     "trail_name": "exercises-start-points-748c413e0f6e45c3652fa4ee47ff2d7371da0bade41c027711296216b53db39b",
                     "artifact_status": "COMPLIANT"
                   }
@@ -8149,7 +8149,7 @@ kosli get snapshot aws-prod --output=json
                 {
                   "type": "rule_not_applicable",
                   "context": {
-                    "flow_name": "snyk-aws-prod-per-artifact",
+                    "flow_name": "snyk-aws-beta-per-artifact",
                     "trail_name": "exercises-start-points-748c413e0f6e45c3652fa4ee47ff2d7371da0bade41c027711296216b53db39b",
                     "artifact_status": null,
                     "for_control": "SDLC-CTRL-0002"
@@ -8158,7 +8158,7 @@ kosli get snapshot aws-prod --output=json
                 {
                   "type": "rule_not_applicable",
                   "context": {
-                    "flow_name": "snyk-aws-beta-per-artifact",
+                    "flow_name": "snyk-aws-prod-per-artifact",
                     "trail_name": "exercises-start-points-748c413e0f6e45c3652fa4ee47ff2d7371da0bade41c027711296216b53db39b",
                     "artifact_status": null,
                     "for_control": "SDLC-CTRL-0002"
@@ -8203,7 +8203,7 @@ kosli get snapshot aws-prod --output=json
                 {
                   "type": "rule_not_applicable",
                   "context": {
-                    "flow_name": "snyk-aws-prod-per-artifact",
+                    "flow_name": "snyk-aws-beta-per-artifact",
                     "trail_name": "exercises-start-points-748c413e0f6e45c3652fa4ee47ff2d7371da0bade41c027711296216b53db39b",
                     "artifact_status": null
                   }
@@ -8211,7 +8211,7 @@ kosli get snapshot aws-prod --output=json
                 {
                   "type": "rule_not_applicable",
                   "context": {
-                    "flow_name": "snyk-aws-beta-per-artifact",
+                    "flow_name": "snyk-aws-prod-per-artifact",
                     "trail_name": "exercises-start-points-748c413e0f6e45c3652fa4ee47ff2d7371da0bade41c027711296216b53db39b",
                     "artifact_status": null
                   }
@@ -8248,7 +8248,7 @@ kosli get snapshot aws-prod --output=json
                 {
                   "type": "rule_not_applicable",
                   "context": {
-                    "flow_name": "snyk-aws-prod-per-artifact",
+                    "flow_name": "snyk-aws-beta-per-artifact",
                     "trail_name": "exercises-start-points-748c413e0f6e45c3652fa4ee47ff2d7371da0bade41c027711296216b53db39b",
                     "artifact_status": "COMPLIANT"
                   }
@@ -8256,7 +8256,7 @@ kosli get snapshot aws-prod --output=json
                 {
                   "type": "rule_not_applicable",
                   "context": {
-                    "flow_name": "snyk-aws-beta-per-artifact",
+                    "flow_name": "snyk-aws-prod-per-artifact",
                     "trail_name": "exercises-start-points-748c413e0f6e45c3652fa4ee47ff2d7371da0bade41c027711296216b53db39b",
                     "artifact_status": "COMPLIANT"
                   }
@@ -8298,18 +8298,18 @@ kosli get snapshot aws-prod --output=json
                   }
                 },
                 {
-                  "type": "rule_satisfied",
+                  "type": "rule_not_applicable",
                   "context": {
-                    "flow_name": "snyk-aws-prod-per-artifact",
+                    "flow_name": "snyk-aws-beta-per-artifact",
                     "trail_name": "exercises-start-points-748c413e0f6e45c3652fa4ee47ff2d7371da0bade41c027711296216b53db39b",
                     "artifact_status": null,
                     "for_control": "SDLC-CTRL-0022"
                   }
                 },
                 {
-                  "type": "rule_not_applicable",
+                  "type": "rule_satisfied",
                   "context": {
-                    "flow_name": "snyk-aws-beta-per-artifact",
+                    "flow_name": "snyk-aws-prod-per-artifact",
                     "trail_name": "exercises-start-points-748c413e0f6e45c3652fa4ee47ff2d7371da0bade41c027711296216b53db39b",
                     "artifact_status": null,
                     "for_control": "SDLC-CTRL-0022"
@@ -8354,7 +8354,7 @@ kosli get snapshot aws-prod --output=json
                 {
                   "type": "rule_not_applicable",
                   "context": {
-                    "flow_name": "snyk-aws-prod-per-artifact",
+                    "flow_name": "snyk-aws-beta-per-artifact",
                     "trail_name": "exercises-start-points-748c413e0f6e45c3652fa4ee47ff2d7371da0bade41c027711296216b53db39b",
                     "artifact_status": null
                   }
@@ -8362,7 +8362,7 @@ kosli get snapshot aws-prod --output=json
                 {
                   "type": "rule_not_applicable",
                   "context": {
-                    "flow_name": "snyk-aws-beta-per-artifact",
+                    "flow_name": "snyk-aws-prod-per-artifact",
                     "trail_name": "exercises-start-points-748c413e0f6e45c3652fa4ee47ff2d7371da0bade41c027711296216b53db39b",
                     "artifact_status": null
                   }
@@ -8399,7 +8399,7 @@ kosli get snapshot aws-prod --output=json
                 {
                   "type": "rule_not_applicable",
                   "context": {
-                    "flow_name": "snyk-aws-prod-per-artifact",
+                    "flow_name": "snyk-aws-beta-per-artifact",
                     "trail_name": "exercises-start-points-748c413e0f6e45c3652fa4ee47ff2d7371da0bade41c027711296216b53db39b",
                     "artifact_status": "COMPLIANT"
                   }
@@ -8407,7 +8407,7 @@ kosli get snapshot aws-prod --output=json
                 {
                   "type": "rule_not_applicable",
                   "context": {
-                    "flow_name": "snyk-aws-beta-per-artifact",
+                    "flow_name": "snyk-aws-prod-per-artifact",
                     "trail_name": "exercises-start-points-748c413e0f6e45c3652fa4ee47ff2d7371da0bade41c027711296216b53db39b",
                     "artifact_status": "COMPLIANT"
                   }
@@ -8449,7 +8449,7 @@ kosli get snapshot aws-prod --output=json
                 {
                   "type": "rule_not_applicable",
                   "context": {
-                    "flow_name": "snyk-aws-prod-per-artifact",
+                    "flow_name": "snyk-aws-beta-per-artifact",
                     "trail_name": "exercises-start-points-748c413e0f6e45c3652fa4ee47ff2d7371da0bade41c027711296216b53db39b",
                     "artifact_status": null
                   }
@@ -8457,7 +8457,7 @@ kosli get snapshot aws-prod --output=json
                 {
                   "type": "rule_not_applicable",
                   "context": {
-                    "flow_name": "snyk-aws-beta-per-artifact",
+                    "flow_name": "snyk-aws-prod-per-artifact",
                     "trail_name": "exercises-start-points-748c413e0f6e45c3652fa4ee47ff2d7371da0bade41c027711296216b53db39b",
                     "artifact_status": null
                   }
@@ -8501,7 +8501,7 @@ kosli get snapshot aws-prod --output=json
                 {
                   "type": "rule_not_applicable",
                   "context": {
-                    "flow_name": "snyk-aws-prod-per-artifact",
+                    "flow_name": "snyk-aws-beta-per-artifact",
                     "trail_name": "exercises-start-points-748c413e0f6e45c3652fa4ee47ff2d7371da0bade41c027711296216b53db39b",
                     "artifact_status": null
                   }
@@ -8509,7 +8509,7 @@ kosli get snapshot aws-prod --output=json
                 {
                   "type": "rule_not_applicable",
                   "context": {
-                    "flow_name": "snyk-aws-beta-per-artifact",
+                    "flow_name": "snyk-aws-prod-per-artifact",
                     "trail_name": "exercises-start-points-748c413e0f6e45c3652fa4ee47ff2d7371da0bade41c027711296216b53db39b",
                     "artifact_status": null
                   }
@@ -8550,17 +8550,17 @@ kosli get snapshot aws-prod --output=json
                   }
                 },
                 {
-                  "type": "rule_satisfied",
+                  "type": "rule_not_applicable",
                   "context": {
-                    "flow_name": "snyk-aws-prod-per-artifact",
+                    "flow_name": "snyk-aws-beta-per-artifact",
                     "trail_name": "exercises-start-points-748c413e0f6e45c3652fa4ee47ff2d7371da0bade41c027711296216b53db39b",
                     "artifact_status": "COMPLIANT"
                   }
                 },
                 {
-                  "type": "rule_not_applicable",
+                  "type": "rule_satisfied",
                   "context": {
-                    "flow_name": "snyk-aws-beta-per-artifact",
+                    "flow_name": "snyk-aws-prod-per-artifact",
                     "trail_name": "exercises-start-points-748c413e0f6e45c3652fa4ee47ff2d7371da0bade41c027711296216b53db39b",
                     "artifact_status": "COMPLIANT"
                   }
@@ -8663,37 +8663,6 @@ kosli get snapshot aws-prod --output=json
           "flow_reasons_for_non_compliance": []
         },
         {
-          "flow_name": "snyk-aws-prod-per-artifact",
-          "trail_name": "exercises-start-points-748c413e0f6e45c3652fa4ee47ff2d7371da0bade41c027711296216b53db39b",
-          "template_reference_name": "exercises-start-points",
-          "git_commit": "a517304f4e9013e2e9ea67e90c7342f7e56653f0",
-          "commit_url": "https://github.com/cyber-dojo/snyk-scanning/commit/a517304f4e9013e2e9ea67e90c7342f7e56653f0",
-          "git_commit_info": {
-            "sha1": "a517304f4e9013e2e9ea67e90c7342f7e56653f0",
-            "message": "Remove unneeded provenance decision attestation - this is not a build flow",
-            "author": "JonJagger <jon@kosli.com>",
-            "branch": "main",
-            "timestamp": 1782799303.0,
-            "url": "https://github.com/cyber-dojo/snyk-scanning/commit/a517304f4e9013e2e9ea67e90c7342f7e56653f0"
-          },
-          "html_url": "https://app.kosli.com/cyber-dojo/flows/snyk-aws-prod-per-artifact/artifacts/748c413e0f6e45c3652fa4ee47ff2d7371da0bade41c027711296216b53db39b?artifact_id=6bd8fe52-270c-41ce-a1b6-d58c08ab",
-          "flow_html_url": "https://app.kosli.com/cyber-dojo/flows/snyk-aws-prod-per-artifact",
-          "deployment_diff": {
-            "diff_url": "https://github.com/cyber-dojo/snyk-scanning/compare/00c479764cb9eca038fdaaaef108672d0bb0ed26...a517304f4e9013e2e9ea67e90c7342f7e56653f0",
-            "previous_git_commit": "00c479764cb9eca038fdaaaef108672d0bb0ed26",
-            "previous_fingerprint": "f00aa234bebafb1980dced29626750f84a6fe6c9c50f6a90167e4d8e6511a8a8",
-            "previous_artifact_name": "244531986313.dkr.ecr.eu-central-1.amazonaws.com/exercises-start-points:b8e5cbf@sha256:f00aa234bebafb1980dced29626750f84a6fe6c9c50f6a90167e4d8e6511a8a8",
-            "previous_artifact_compliance_state": "COMPLIANT",
-            "previous_running": false,
-            "previous_git_commit_url": "https://github.com/cyber-dojo/snyk-scanning/commit/00c479764cb9eca038fdaaaef108672d0bb0ed26",
-            "previous_trail_name": "exercises-start-points-f00aa234bebafb1980dced29626750f84a6fe6c9c50f6a90167e4d8e6511a8a8",
-            "previous_template_reference_name": "exercises-start-points"
-          },
-          "commit_lead_time": 276218.0,
-          "artifact_compliance_in_flow": true,
-          "flow_reasons_for_non_compliance": []
-        },
-        {
           "flow_name": "snyk-aws-beta-per-artifact",
           "trail_name": "exercises-start-points-748c413e0f6e45c3652fa4ee47ff2d7371da0bade41c027711296216b53db39b",
           "template_reference_name": "exercises-start-points",
@@ -8718,6 +8687,37 @@ kosli get snapshot aws-prod --output=json
             "previous_running": false,
             "previous_git_commit_url": "https://github.com/cyber-dojo/snyk-scanning/commit/c17bb3ed8862de03c1a491dfe790fd8734fc7071",
             "previous_trail_name": "exercises-start-points-fe536dd19b159d9cb43aaa09236d26c916906bd915c648991aa824fb2f69af58",
+            "previous_template_reference_name": "exercises-start-points"
+          },
+          "commit_lead_time": 276218.0,
+          "artifact_compliance_in_flow": true,
+          "flow_reasons_for_non_compliance": []
+        },
+        {
+          "flow_name": "snyk-aws-prod-per-artifact",
+          "trail_name": "exercises-start-points-748c413e0f6e45c3652fa4ee47ff2d7371da0bade41c027711296216b53db39b",
+          "template_reference_name": "exercises-start-points",
+          "git_commit": "a517304f4e9013e2e9ea67e90c7342f7e56653f0",
+          "commit_url": "https://github.com/cyber-dojo/snyk-scanning/commit/a517304f4e9013e2e9ea67e90c7342f7e56653f0",
+          "git_commit_info": {
+            "sha1": "a517304f4e9013e2e9ea67e90c7342f7e56653f0",
+            "message": "Remove unneeded provenance decision attestation - this is not a build flow",
+            "author": "JonJagger <jon@kosli.com>",
+            "branch": "main",
+            "timestamp": 1782799303.0,
+            "url": "https://github.com/cyber-dojo/snyk-scanning/commit/a517304f4e9013e2e9ea67e90c7342f7e56653f0"
+          },
+          "html_url": "https://app.kosli.com/cyber-dojo/flows/snyk-aws-prod-per-artifact/artifacts/748c413e0f6e45c3652fa4ee47ff2d7371da0bade41c027711296216b53db39b?artifact_id=2eb6accf-bfed-4297-bbdc-e2ad18c9",
+          "flow_html_url": "https://app.kosli.com/cyber-dojo/flows/snyk-aws-prod-per-artifact",
+          "deployment_diff": {
+            "diff_url": "https://github.com/cyber-dojo/snyk-scanning/compare/00c479764cb9eca038fdaaaef108672d0bb0ed26...a517304f4e9013e2e9ea67e90c7342f7e56653f0",
+            "previous_git_commit": "00c479764cb9eca038fdaaaef108672d0bb0ed26",
+            "previous_fingerprint": "f00aa234bebafb1980dced29626750f84a6fe6c9c50f6a90167e4d8e6511a8a8",
+            "previous_artifact_name": "244531986313.dkr.ecr.eu-central-1.amazonaws.com/exercises-start-points:b8e5cbf@sha256:f00aa234bebafb1980dced29626750f84a6fe6c9c50f6a90167e4d8e6511a8a8",
+            "previous_artifact_compliance_state": "COMPLIANT",
+            "previous_running": false,
+            "previous_git_commit_url": "https://github.com/cyber-dojo/snyk-scanning/commit/00c479764cb9eca038fdaaaef108672d0bb0ed26",
+            "previous_trail_name": "exercises-start-points-f00aa234bebafb1980dced29626750f84a6fe6c9c50f6a90167e4d8e6511a8a8",
             "previous_template_reference_name": "exercises-start-points"
           },
           "commit_lead_time": 276218.0,

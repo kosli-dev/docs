@@ -60,7 +60,7 @@ kosli list flows --output=json
     "description": "UX for Group/Kata creation",
     "visibility": "private",
     "org": "cyber-dojo",
-    "template": "version: 1\n\ntrail:\n  attestations:\n    - name: pull-request\n      type: pull_request\n  artifacts:\n    - name: creator\n      attestations:\n        - name: provenance\n          type: decision\n\n        - name: sbom\n          type: decision\n\n        - name: snyk-container-scan\n          type: decision\n\n        - name: lint\n          type: generic\n        - name: unit-test\n          type: junit\n        - name: test-branch-coverage\n          type: generic\n",
+    "template": "version: 1\n\ntrail:\n  attestations:\n    - name: pull-request\n      type: pull_request\n  artifacts:\n    - name: creator\n      attestations:\n        - name: provenance-facts\n          type: custom:provenance-facts\n        - name: provenance-decision\n          type: decision\n\n        - name: sbom-facts\n          type: custom:sbom-facts\n        - name: sbom-decision\n          type: decision\n\n        - name: snyk-container-scan\n          type: decision\n\n        - name: lint\n          type: generic\n        - name: unit-test\n          type: junit\n        - name: test-branch-coverage\n          type: generic\n",
     "repo_url": "https://github.com/cyber-dojo/creator",
     "tags": {
       "ci": "github",
@@ -75,7 +75,7 @@ kosli list flows --output=json
     "description": "Custom exercises choices",
     "visibility": "private",
     "org": "cyber-dojo",
-    "template": "version: 1\n\ntrail:\n  attestations:\n    - name: pull-request\n      type: pull_request\n  artifacts:\n    - name: custom-start-points\n      attestations:\n        - name: provenance\n          type: decision\n\n        - name: snyk-container-scan\n          type: decision\n",
+    "template": "version: 1\n\ntrail:\n  attestations:\n    - name: pull-request\n      type: pull_request\n  artifacts:\n    - name: custom-start-points\n      attestations:\n        - name: provenance-facts\n          type: custom:provenance-facts\n        - name: provenance-decision\n          type: decision\n\n        - name: sbom-facts\n          type: custom:sbom-facts\n        - name: sbom-decision\n          type: decision\n\n        - name: snyk-container-scan\n          type: decision\n",
     "repo_url": "https://github.com/cyber-dojo/custom-start-points",
     "tags": {
       "ci": "github",
@@ -90,7 +90,7 @@ kosli list flows --output=json
     "description": "UX for a group practice dashboard",
     "visibility": "private",
     "org": "cyber-dojo",
-    "template": "version: 1\n\ntrail:\n  attestations:\n    - name: pull-request\n      type: pull_request\n  artifacts:\n    - name: dashboard\n      attestations:\n        - name: provenance\n          type: decision\n\n        - name: sbom\n          type: decision\n\n        - name: snyk-container-scan\n          type: decision\n\n        - name: rubocop-lint\n          type: junit\n        - name: sonarcloud-scan\n          type: sonar\n        - name: unit-test\n          type: junit\n        - name: unit-test-coverage\n          type: generic\n",
+    "template": "version: 1\n\ntrail:\n  attestations:\n    - name: pull-request\n      type: pull_request\n  artifacts:\n    - name: dashboard\n      attestations:\n        - name: provenance-facts\n          type: custom:provenance-facts\n        - name: provenance-decision\n          type: decision\n\n        - name: sbom-facts\n          type: custom:sbom-facts\n        - name: sbom-decision\n          type: decision\n\n        - name: snyk-container-scan\n          type: decision\n\n        - name: rubocop-lint\n          type: junit\n        - name: sonarcloud-scan\n          type: sonar\n        - name: unit-test\n          type: junit\n        - name: unit-test-coverage\n          type: generic\n",
     "repo_url": "https://github.com/cyber-dojo/dashboard",
     "tags": {
       "ci": "github",
@@ -105,7 +105,7 @@ kosli list flows --output=json
     "description": "Diff files from two traffic-lights",
     "visibility": "private",
     "org": "cyber-dojo",
-    "template": "version: 1\n\ntrail:\n  attestations:\n    - name: pull-request\n      type: pull_request\n  artifacts:\n    - name: differ\n      attestations:\n        - name: provenance\n          type: decision\n\n        - name: sbom\n          type: decision\n\n        - name: snyk-container-scan\n          type: decision\n\n        - name: rubocop-lint\n          type: junit\n        - name: unit-test\n          type: junit\n        - name: unit-test-metrics\n          type: custom:test-metrics\n        - name: unit-test-coverage-metrics\n          type: custom:coverage-metrics\n        - name: integration-test\n          type: junit\n        - name: integration-test-metrics\n          type: custom:test-metrics\n        - name: integration-test-coverage-metrics\n          type: custom:coverage-metrics\n        - name: sonarcloud-scan\n          type: sonar\n",
+    "template": "version: 1\n\ntrail:\n  attestations:\n    - name: pull-request\n      type: pull_request\n  artifacts:\n    - name: differ\n      attestations:\n        - name: provenance-facts\n          type: custom:provenance-facts\n        - name: provenance-decision\n          type: decision\n\n        - name: sbom-facts\n          type: custom:sbom-facts\n        - name: sbom-decision\n          type: decision\n\n        - name: snyk-container-scan\n          type: decision\n\n        - name: rubocop-lint\n          type: junit\n        - name: unit-test\n          type: junit\n        - name: unit-test-metrics\n          type: custom:test-metrics\n        - name: unit-test-coverage-metrics\n          type: custom:coverage-metrics\n        - name: integration-test\n          type: junit\n        - name: integration-test-metrics\n          type: custom:test-metrics\n        - name: integration-test-coverage-metrics\n          type: custom:coverage-metrics\n        - name: sonarcloud-scan\n          type: sonar\n",
     "repo_url": "https://github.com/cyber-dojo/differ",
     "tags": {
       "ci": "github",
@@ -140,7 +140,7 @@ kosli list flows --output=json
     "description": "Exercises choices",
     "visibility": "private",
     "org": "cyber-dojo",
-    "template": "version: 1\n\ntrail:\n  attestations:\n    - name: pull-request\n      type: pull_request\n  artifacts:\n    - name: exercises-start-points\n      attestations:\n        - name: provenance\n          type: decision\n\n        - name: snyk-container-scan\n          type: decision\n",
+    "template": "version: 1\n\ntrail:\n  attestations:\n    - name: pull-request\n      type: pull_request\n  artifacts:\n    - name: exercises-start-points\n      attestations:\n        - name: provenance-facts\n          type: custom:provenance-facts\n        - name: provenance-decision\n          type: decision\n\n        - name: sbom-facts\n          type: custom:sbom-facts\n        - name: sbom-decision\n          type: decision\n\n        - name: snyk-container-scan\n          type: decision\n",
     "repo_url": "https://github.com/cyber-dojo/exercises-start-points",
     "tags": {
       "ci": "github",
@@ -155,7 +155,7 @@ kosli list flows --output=json
     "description": "Language+TestFramework choices",
     "visibility": "private",
     "org": "cyber-dojo",
-    "template": "version: 1\n\ntrail:\n  attestations:\n    - name: pull-request\n      type: pull_request\n  artifacts:\n    - name: languages-start-points\n      attestations:\n        - name: provenance\n          type: decision\n\n        - name: snyk-container-scan\n          type: decision\n",
+    "template": "version: 1\n\ntrail:\n  attestations:\n    - name: pull-request\n      type: pull_request\n  artifacts:\n    - name: languages-start-points\n      attestations:\n        - name: provenance-facts\n          type: custom:provenance-facts\n        - name: provenance-decision\n          type: decision\n\n        - name: sbom-facts\n          type: custom:sbom-facts\n        - name: sbom-decision\n          type: decision\n\n        - name: snyk-container-scan\n          type: decision\n",
     "repo_url": "https://github.com/cyber-dojo/languages-start-points",
     "tags": {
       "ci": "github",
@@ -210,7 +210,7 @@ kosli list flows --output=json
     "description": "Reverse proxy",
     "visibility": "private",
     "org": "cyber-dojo",
-    "template": "version: 1\n\ntrail:\n  attestations:\n    - name: pull-request\n      type: pull_request\n  artifacts:\n    - name: nginx\n      attestations:\n        - name: provenance\n          type: decision\n\n        - name: sbom\n          type: decision\n\n        - name: snyk-container-scan\n          type: decision\n",
+    "template": "version: 1\n\ntrail:\n  attestations:\n    - name: pull-request\n      type: pull_request\n  artifacts:\n    - name: nginx\n      attestations:\n        - name: provenance-facts\n          type: custom:provenance-facts\n        - name: provenance-decision\n          type: decision\n\n        - name: sbom-facts\n          type: custom:sbom-facts\n        - name: sbom-decision\n          type: decision\n\n        - name: snyk-container-scan\n          type: decision\n",
     "repo_url": "https://github.com/cyber-dojo/nginx",
     "tags": {
       "ci": "github",
@@ -250,7 +250,7 @@ kosli list flows --output=json
     "description": "Test runner",
     "visibility": "private",
     "org": "cyber-dojo",
-    "template": "version: 1\n\ntrail:\n  attestations:\n    - name: pull-request\n      type: pull_request\n  artifacts:\n    - name: runner\n      attestations:\n        - name: provenance\n          type: decision\n\n        - name: sbom\n          type: decision\n\n        - name: snyk-container-scan\n          type: decision\n\n        - name: rubocop-lint\n          type: junit\n\n        - name: unit-test\n          type: junit\n        - name: unit-test-metrics\n          type: custom:test-metrics\n        - name: unit-test-coverage-metrics\n          type: custom:coverage-metrics\n\n        - name: integration-test\n          type: junit\n        - name: integration-test-metrics\n          type: custom:test-metrics\n        - name: integration-test-coverage-metrics\n          type: custom:coverage-metrics\n",
+    "template": "version: 1\n\ntrail:\n  attestations:\n    - name: pull-request\n      type: pull_request\n  artifacts:\n    - name: runner\n      attestations:\n        - name: provenance-facts\n          type: custom:provenance-facts\n        - name: provenance-decision\n          type: decision\n\n        - name: sbom-facts\n          type: custom:sbom-facts\n        - name: sbom-decision\n          type: decision\n\n        - name: snyk-container-scan\n          type: decision\n\n        - name: rubocop-lint\n          type: junit\n\n        - name: unit-test\n          type: junit\n        - name: unit-test-metrics\n          type: custom:test-metrics\n        - name: unit-test-coverage-metrics\n          type: custom:coverage-metrics\n\n        - name: integration-test\n          type: junit\n        - name: integration-test-metrics\n          type: custom:test-metrics\n        - name: integration-test-coverage-metrics\n          type: custom:coverage-metrics\n",
     "repo_url": "https://github.com/cyber-dojo/runner",
     "tags": {
       "ci": "github",
@@ -265,7 +265,7 @@ kosli list flows --output=json
     "description": "Group/Kata model+persistence",
     "visibility": "private",
     "org": "cyber-dojo",
-    "template": "version: 1\n\ntrail:\n  attestations:\n    - name: pull-request\n      type: pull_request\n  artifacts:\n    - name: saver\n      attestations:\n        - name: provenance\n          type: decision\n\n        - name: sbom\n          type: decision\n\n        - name: snyk-container-scan\n          type: decision\n\n        - name: unit-test\n          type: junit\n        - name: unit-test-metrics\n          type: custom:test-metrics\n        - name: unit-test-coverage-metrics\n          type: custom:coverage-metrics\n        - name: integration-test\n          type: junit\n        - name: integration-test-metrics\n          type: custom:test-metrics\n        - name: integration-test-coverage-metrics\n          type: custom:coverage-metrics\n\n",
+    "template": "version: 1\n\ntrail:\n  attestations:\n    - name: pull-request\n      type: pull_request\n  artifacts:\n    - name: saver\n      attestations:\n        - name: provenance-facts\n          type: custom:provenance-facts\n        - name: provenance-decision\n          type: decision\n\n        - name: sbom-facts\n          type: custom:sbom-facts\n        - name: sbom-decision\n          type: decision\n\n        - name: snyk-container-scan\n          type: decision\n\n        - name: unit-test\n          type: junit\n        - name: unit-test-metrics\n          type: custom:test-metrics\n        - name: unit-test-coverage-metrics\n          type: custom:coverage-metrics\n        - name: integration-test\n          type: junit\n        - name: integration-test-metrics\n          type: custom:test-metrics\n        - name: integration-test-coverage-metrics\n          type: custom:coverage-metrics\n\n",
     "repo_url": "https://github.com/cyber-dojo/saver",
     "tags": {
       "ci": "github",
@@ -504,7 +504,7 @@ kosli list flows --output=json
     "description": "UX for practicing TDD",
     "visibility": "private",
     "org": "cyber-dojo",
-    "template": "version: 1\n\ntrail:\n  attestations:\n    - name: pull-request\n      type: pull_request\n\n  artifacts:\n    - name: web\n      attestations:\n        - name: provenance\n          type: decision\n\n        - name: sbom\n          type: decision\n\n        - name: snyk-container-scan\n          type: decision\n",
+    "template": "version: 1\n\ntrail:\n  attestations:\n    - name: pull-request\n      type: pull_request\n\n  artifacts:\n    - name: web\n      attestations:\n        - name: provenance-facts\n          type: custom:provenance-facts\n        - name: provenance-decision\n          type: decision\n\n        - name: sbom-facts\n          type: custom:sbom-facts\n        - name: sbom-decision\n          type: decision\n\n        - name: snyk-container-scan\n          type: decision\n",
     "repo_url": "https://github.com/cyber-dojo/web",
     "tags": {
       "ci": "github",
