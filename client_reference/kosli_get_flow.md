@@ -51,7 +51,7 @@ kosli get flow dashboard-ci --output=json
   "description": "UX for a group practice dashboard",
   "visibility": "private",
   "org": "cyber-dojo",
-  "template": "version: 1\n\ntrail:\n  attestations:\n    - name: pull-request\n      type: pull_request\n  artifacts:\n    - name: dashboard\n      attestations:\n        - name: provenance\n          type: decision\n\n        - name: sbom\n          type: decision\n\n        - name: snyk-container-scan\n          type: decision\n\n        - name: rubocop-lint\n          type: junit\n        - name: sonarcloud-scan\n          type: sonar\n        - name: unit-test\n          type: junit\n        - name: unit-test-coverage\n          type: generic\n",
+  "template": "version: 1\n\ntrail:\n  attestations:\n    - name: pull-request\n      type: pull_request\n  artifacts:\n    - name: dashboard\n      attestations:\n        - name: provenance-facts\n          type: custom:provenance-facts\n        - name: provenance-decision\n          type: decision\n\n        - name: sbom-facts\n          type: custom:sbom-facts\n        - name: sbom-decision\n          type: decision\n\n        - name: snyk-container-scan\n          type: decision\n\n        - name: rubocop-lint\n          type: junit\n        - name: sonarcloud-scan\n          type: sonar\n        - name: unit-test\n          type: junit\n        - name: unit-test-coverage\n          type: generic\n",
   "repo_url": "https://github.com/cyber-dojo/dashboard",
   "tags": {
     "ci": "github",
