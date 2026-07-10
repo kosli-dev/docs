@@ -1,6 +1,6 @@
 ---
 title: "kosli list repos"
-description: "List repos for an org. "
+description: "List repos for an org."
 ---
 
 ## Synopsis
@@ -12,8 +12,10 @@ kosli list repos [flags]
 List repos for an org. The results are always paginated:
 by default the first page is returned with 15 repos per page. Use --page to select
 a page and --page-limit to change the page size (maximum 50).
-The list can be filtered by name with --name (exact match), by VCS provider with
---provider, and by external repo ID with --repo-id.
+The list can be filtered by name with --name (exact match), by name substring with
+--search (case-insensitive, mutually exclusive with --name), by VCS provider with
+--provider, by external repo ID with --repo-id, and by tags with --tag.
+Results are sorted by repo name; use --sort-direction to choose asc or desc.
 
 ## Flags
 | Flag | Description |
@@ -25,6 +27,9 @@ The list can be filtered by name with --name (exact match), by VCS provider with
 |    `-n`, `--page-limit` int  |  [defaulted] The number of elements per page. (default 15)  |
 |        `--provider` string  |  [optional] The VCS provider to filter repos by (e.g. github, gitlab).  |
 |        `--repo-id` string  |  [optional] The external repo ID to filter repos by.  |
+|        `--search` string  |  [optional] Filter repos whose name contains this substring (case-insensitive). Mutually exclusive with `--name`.  |
+|        `--sort-direction` string  |  [optional] The direction to sort repos by name. Valid values are: [asc, desc]. (defaults to asc)  |
+|        `--tag` stringArray  |  [optional] Only list repos that have this tag, given as 'key' or 'key:value'. Can be repeated to match more than one tag.  |
 
 
 ## Flags inherited from parent commands
@@ -58,11 +63,32 @@ kosli list repos
 
 ```
 </Accordion>
+<Accordion title="list repos whose name contains a substring (case-insensitive)">
+```shell
+kosli list repos 
+	--search cli 
+
+```
+</Accordion>
 <Accordion title="list repos filtered by VCS provider (in JSON)">
 ```shell
 kosli list repos 
 	--provider github 
 	--output json
+
+```
+</Accordion>
+<Accordion title="list repos tagged with team=platform">
+```shell
+kosli list repos 
+	--tag team:platform 
+
+```
+</Accordion>
+<Accordion title="list repos sorted by name, Z–A">
+```shell
+kosli list repos 
+	--sort-direction desc 
 
 ```
 </Accordion>

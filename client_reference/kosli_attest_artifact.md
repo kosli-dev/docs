@@ -23,6 +23,19 @@ a freshly built image (just `docker build`) will not have one. If the image is a
 a registry, prefer `--artifact-type=oci`, which fetches the digest directly from the
 registry without needing a local Docker daemon.
 
+For `--artifact-type=oci` (and for `--artifact-type=docker` when `--registry-username`
+is set), registry credentials are resolved as follows:
+  1) If `--registry-username` (and optionally `--registry-password`) is set, it is used directly.
+  2) Otherwise, credentials are discovered automatically from:
+     - the Docker config file (`~/.docker/config.json`, populated by `docker login`)
+     - the Podman/containers auth file (`~/.config/containers/auth.json`, or `$REGISTRY_AUTH_FILE`)
+     - any Docker credential helper configured in that config (e.g. `docker-credential-ecr-login`
+       for AWS ECR, `docker-credential-gcloud` for GCR/Artifact Registry, an ACR helper for Azure,
+       or a local keychain helper), invoked as an external binary on `$PATH`
+     - if none of the above yield credentials, the registry is accessed anonymously, which works
+       for public images
+  `--registry-provider` is deprecated and no longer used.
+
 To specify paths in a directory artifact that should always be excluded from the SHA256 calculation, you can add a `.kosli_ignore` file to the root of the artifact.
 Each line should specify a relative path or path glob to be ignored. You can include comments in this file, using `#`.
 The `.kosli_ignore` will be treated as part of the artifact like any other file, unless it is explicitly ignored itself.
@@ -50,8 +63,8 @@ In other CI systems, set them explicitly to capture repository metadata.
 |    `-h`, `--help`  |  help for artifact  |
 |    `-n`, `--name` string  |  The name of the artifact in the yml template file.  |
 |        `--redact-commit-info` strings  |  [optional] The list of commit info to be redacted before sending to Kosli. Allowed values are one or more of [author, message, branch].  |
-|        `--registry-password` string  |  [conditional] The container registry password or access token. Only required if you want to read container image SHA256 digest from a remote container registry.  |
-|        `--registry-username` string  |  [conditional] The container registry username. Only required if you want to read container image SHA256 digest from a remote container registry.  |
+|        `--registry-password` string  |  [conditional] The container registry password or access token. Only required if you want to read container image SHA256 digest from a remote container registry and it is not already accessible via Docker/Podman auth files or a credential helper.  |
+|        `--registry-username` string  |  [conditional] The container registry username. Only required if you want to read container image SHA256 digest from a remote container registry and it is not already accessible via Docker/Podman auth files or a credential helper.  |
 |        `--repo-id` string  |  [conditional] The stable, unique identifier for the repository in your VCS provider (e.g. a numeric ID). Do not use the repository name as it can change if the repo is renamed. All three of `--repo-id`, `--repo-url` and `--repository` must be set to record repository information (defaulted in some CIs: [docs](/integrations/ci_cd) ).  |
 |        `--repo-provider` string  |  [optional] The source code hosting provider. One of: github, gitlab, bitbucket, azure-devops (defaulted in some CIs: [docs](/integrations/ci_cd) ).  |
 |        `--repo-root` string  |  [defaulted] The directory where the source git repository is available. (default ".")  |
@@ -79,12 +92,12 @@ In other CI systems, set them explicitly to capture repository metadata.
 	<Tab title="GitHub">
 	View an example of the `kosli attest artifact` command in GitHub.
 
-	In [this YAML file](https://github.com/cyber-dojo/reusable-actions-workflows/blob/25f0b797c18403de1c8490a9a71bbe9789c809a9/.github/workflows/secure-docker-build.yml#L210), which created [this Kosli Event](https://app.kosli.com/cyber-dojo/flows/differ-ci/trails/26dcd06257a4bb00d594dbb5de05eefbb7b20379?attestation_id=494ad51d-feff-4795-9fec-f2a8b953).
+	In [this YAML file](https://github.com/cyber-dojo/reusable-actions-workflows/blob/25f0b797c18403de1c8490a9a71bbe9789c809a9/.github/workflows/secure-docker-build.yml#L210), which created [this Kosli Event](https://app.kosli.com/cyber-dojo/flows/differ-ci/trails/8beff9901ac67acb7afcab3408106208571a1124?attestation_id=ece4f8ca-6c19-4ca5-a482-dd4af708).
 	</Tab>
 	<Tab title="GitLab">
 	View an example of the `kosli attest artifact` command in GitLab.
 
-	In [this YAML file](https://gitlab.com/cyber-dojo/creator/-/blob/65fd2bfa2478534ea4bc5ccf30f6bfc6aab7550c/.gitlab/workflows/main.yml#L111), which created [this Kosli Event](https://app.kosli.com/cyber-dojo/flows/creator-ci/trails/6ff6b4c71ab218d39065654bef32839b9226d21f?attestation_id=26dd06bd-0d63-4775-a3d1-db332cf0).
+	In [this YAML file](https://gitlab.com/cyber-dojo/creator/-/blob/65fd2bfa2478534ea4bc5ccf30f6bfc6aab7550c/.gitlab/workflows/main.yml#L111), which created [this Kosli Event](https://app.kosli.com/cyber-dojo/flows/creator-ci/trails/7e00b70f8911edf1c480ba9a8b9c2a280260cb08?attestation_id=aeec9b85-1a23-4579-b4a8-dbc98a05).
 	</Tab>
 </Tabs>
 
