@@ -43,8 +43,8 @@ In other CI systems, set them explicitly to capture repository metadata.
 |    `-n`, `--name` string  |  The name of the attestation as declared in the flow or trail yaml template.  |
 |    `-o`, `--origin-url` string  |  [optional] The url pointing to where the attestation came from or is related. (defaulted to the CI url in some CIs: [docs](/integrations/ci_cd/#defaulted-kosli-command-flags-from-ci-variables) ).  |
 |        `--redact-commit-info` strings  |  [optional] The list of commit info to be redacted before sending to Kosli. Allowed values are one or more of [author, message, branch].  |
-|        `--registry-password` string  |  [conditional] The container registry password or access token. Only required if you want to read container image SHA256 digest from a remote container registry.  |
-|        `--registry-username` string  |  [conditional] The container registry username. Only required if you want to read container image SHA256 digest from a remote container registry.  |
+|        `--registry-password` string  |  [conditional] The container registry password or access token. Only required if you want to read container image SHA256 digest from a remote container registry and it is not already accessible via Docker/Podman auth files or a credential helper.  |
+|        `--registry-username` string  |  [conditional] The container registry username. Only required if you want to read container image SHA256 digest from a remote container registry and it is not already accessible via Docker/Podman auth files or a credential helper.  |
 |        `--repo-id` string  |  [conditional] The stable, unique identifier for the repository in your VCS provider (e.g. a numeric ID). Do not use the repository name as it can change if the repo is renamed. All three of `--repo-id`, `--repo-url` and `--repository` must be set to record repository information (defaulted in some CIs: [docs](/integrations/ci_cd) ).  |
 |        `--repo-provider` string  |  [optional] The source code hosting provider. One of: github, gitlab, bitbucket, azure-devops (defaulted in some CIs: [docs](/integrations/ci_cd) ).  |
 |        `--repo-root` string  |  [defaulted] The directory where the source git repository is available. Only used if `--commit` is used or defaulted in CI, see [docs](/integrations/ci_cd/#defaulted-kosli-command-flags-from-ci-variables) . (default ".")  |
@@ -73,12 +73,12 @@ In other CI systems, set them explicitly to capture repository metadata.
 	<Tab title="GitHub">
 	View an example of the `kosli attest generic` command in GitHub.
 
-	In [this YAML file](https://github.com/cyber-dojo/dashboard/blob/6d203a85ffda1513db4d86d4e48b1f969bd2f510/.github/workflows/main.yml#L197), which created [this Kosli Event](https://app.kosli.com/cyber-dojo/flows/dashboard-ci/trails/6d203a85ffda1513db4d86d4e48b1f969bd2f510?attestation_id=5fbb6a0d-6e1c-46f8-af65-1177184f).
+	In [this YAML file](https://github.com/cyber-dojo/dashboard/blob/e4757683b74df7033c95aa544a7824b395c2f8bb/.github/workflows/main.yml#L197), which created [this Kosli Event](https://app.kosli.com/cyber-dojo/flows/dashboard-ci/trails/e4757683b74df7033c95aa544a7824b395c2f8bb?attestation_id=ede0b52b-d56e-474f-b04c-03e6be01).
 	</Tab>
 	<Tab title="GitLab">
 	View an example of the `kosli attest generic` command in GitLab.
 
-	In [this YAML file](https://gitlab.com/cyber-dojo/creator/-/blob/65fd2bfa2478534ea4bc5ccf30f6bfc6aab7550c/.gitlab/workflows/main.yml#L131), which created [this Kosli Event](https://app.kosli.com/cyber-dojo/flows/creator-ci/trails/6ff6b4c71ab218d39065654bef32839b9226d21f?attestation_id=b046ca73-879e-4f47-af59-c55d712c).
+	In [this YAML file](https://gitlab.com/cyber-dojo/creator/-/blob/65fd2bfa2478534ea4bc5ccf30f6bfc6aab7550c/.gitlab/workflows/main.yml#L131), which created [this Kosli Event](https://app.kosli.com/cyber-dojo/flows/creator-ci/trails/7e00b70f8911edf1c480ba9a8b9c2a280260cb08?attestation_id=4d3fc190-0a39-416a-9d54-e3d83a1e).
 	</Tab>
 </Tabs>
 

@@ -26,7 +26,8 @@ The results are paginated; use --page and --page-limit to navigate the pages.
 |        `--page` int  |  [defaulted] The page number of a response. (default 1)  |
 |    `-n`, `--page-limit` int  |  [defaulted] The number of elements per page. (default 15)  |
 |        `--search` string  |  [optional] Only list controls whose name or identifier contains this substring (case-insensitive).  |
-|        `--tag` stringArray  |  [optional] Filter by tag, given as 'key' or 'key:value'. Can be repeated.  |
+|        `--sort-direction` string  |  [optional] The direction to sort controls in. Valid values are: [asc, desc]. (defaults to asc)  |
+|        `--tag` stringArray  |  [optional] Filter by tag, given as 'key' or 'key:value'. Can be repeated to match more than one tag.  |
 
 
 ## Flags inherited from parent commands
@@ -62,7 +63,7 @@ kosli list controls
 
 ```
 </Accordion>
-<Accordion title="list controls whose name or identifier contains "sdlc"">
+<Accordion title="list controls whose name or identifier contains 'sdlc'">
 ```shell
 kosli list controls 
 	--search sdlc 
@@ -80,6 +81,13 @@ kosli list controls
 ```shell
 kosli list controls 
 	--archived 
+
+```
+</Accordion>
+<Accordion title="list controls sorted in descending name order">
+```shell
+kosli list controls 
+	--sort-direction desc 
 ```
 </Accordion>
 </AccordionGroup>

@@ -54,8 +54,8 @@ The `.kosli_ignore` will be treated as part of the artifact like any other file,
 |    `-t`, `--artifact-type` string  |  The type of the artifact to calculate its SHA256 fingerprint. One of: [oci, docker, file, dir]. Only required if you want Kosli to calculate the fingerprint for you (i.e. when you don't specify '`--fingerprint`' on commands that allow it).  |
 |    `-x`, `--exclude` strings  |  [optional] The comma separated list of directories and files to exclude from fingerprinting. Can take glob patterns. Only applicable for `--artifact-type` dir.  |
 |    `-h`, `--help`  |  help for fingerprint  |
-|        `--registry-password` string  |  [conditional] The container registry password or access token. Only required if you want to read container image SHA256 digest from a remote container registry.  |
-|        `--registry-username` string  |  [conditional] The container registry username. Only required if you want to read container image SHA256 digest from a remote container registry.  |
+|        `--registry-password` string  |  [conditional] The container registry password or access token. Only required if you want to read container image SHA256 digest from a remote container registry and it is not already accessible via Docker/Podman auth files or a credential helper.  |
+|        `--registry-username` string  |  [conditional] The container registry username. Only required if you want to read container image SHA256 digest from a remote container registry and it is not already accessible via Docker/Podman auth files or a credential helper.  |
 
 
 ## Flags inherited from parent commands

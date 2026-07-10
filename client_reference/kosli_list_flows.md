@@ -225,7 +225,7 @@ kosli list flows --output=json
     "description": "Promotes sets of Artifacts from aws-beta to aws-prod",
     "visibility": "private",
     "org": "cyber-dojo",
-    "template": "version: 1\n\ntrail:\n  attestations:\n    - name: one-promotion\n      type: generic\n",
+    "template": "version: 1\n\ntrail:\n  attestations:\n    - name: all-promotions\n      type: generic\n",
     "repo_url": "https://github.com/cyber-dojo/aws-prod-co-promotion",
     "tags": {
       "ci": "github",
@@ -465,7 +465,7 @@ kosli list flows --output=json
     "visibility": "private",
     "org": "cyber-dojo",
     "template": "version: 1\ntrail:\n  attestations:\n    - name: terraform-plan\n      type: generic\n    - name: terraform-apply\n      type: generic\n  artifacts:\n    - name: terraform-state\n    - name: drift-plan\n",
-    "repo_url": "https://github.com/cyber-dojo/nginx",
+    "repo_url": "https://github.com/cyber-dojo/saver",
     "tags": {}
   },
   {
@@ -545,7 +545,7 @@ kosli list flows
 
 ```
 </Accordion>
-<Accordion title="list flows whose name contains "backend" (in JSON)">
+<Accordion title="list flows whose name contains 'backend' (in JSON)">
 ```shell
 kosli list flows 
 	--name backend 

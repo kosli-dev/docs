@@ -25,7 +25,7 @@ The list can be filtered by name, type, space and tags, and sorted with --sort a
 |        `--sort` string  |  [optional] The field to sort environments by. Valid values are: [name, last_modified_at, last_changed_at]. (defaults to name)  |
 |        `--sort-direction` string  |  [optional] The direction to sort environments in. Valid values are: [asc, desc]. (defaults to asc)  |
 |        `--space-id` strings  |  [optional] Only list environments in the space with this ID. Can be repeated to match more than one space.  |
-|        `--tag` strings  |  [optional] Only list environments that have this tag, given as 'key' or 'key:value'. Can be repeated to match more than one tag.  |
+|        `--tag` stringArray  |  [optional] Only list environments that have this tag, given as 'key' or 'key:value'. Can be repeated to match more than one tag.  |
 |        `--type` strings  |  [optional] Only list environments of this type. Valid types are: [K8S, ECS, S3, lambda, server, docker, azure-apps, cloud-run, logical]. Can be repeated to match more than one type.  |
 
 
@@ -63,9 +63,9 @@ kosli list environments --output=json
     "name": "aws-beta",
     "type": "ECS",
     "description": "The ECS cluster for staging cyber-dojo",
-    "last_modified_at": 1783614084.0761755,
-    "last_reported_at": 1783614084.0761755,
-    "last_changed_at": 1783606224.1848514,
+    "last_modified_at": 1783697603.9590213,
+    "last_reported_at": 1783697603.9590213,
+    "last_changed_at": 1783674503.986987,
     "state": true,
     "include_scaling": false,
     "tags": {
@@ -84,9 +84,9 @@ kosli list environments --output=json
     "name": "aws-beta-terraform-drift-detection",
     "type": "server",
     "description": "Detection of drift of the Infrastructure-as-code components of aws-beta",
-    "last_modified_at": 1783614008.8194437,
-    "last_reported_at": 1783614008.8194437,
-    "last_changed_at": 1783606508.851869,
+    "last_modified_at": 1783697408.6420157,
+    "last_reported_at": 1783697408.6420157,
+    "last_changed_at": 1783674608.7786345,
     "state": true,
     "include_scaling": false,
     "tags": {},
@@ -100,9 +100,9 @@ kosli list environments --output=json
     "name": "aws-prod",
     "type": "ECS",
     "description": "The ECS cluster for production cyber-dojo",
-    "last_modified_at": 1783614058.5372138,
-    "last_reported_at": 1783614058.5372138,
-    "last_changed_at": 1783576438.7264173,
+    "last_modified_at": 1783697638.5296633,
+    "last_reported_at": 1783697638.5296633,
+    "last_changed_at": 1783662598.552843,
     "state": true,
     "include_scaling": false,
     "tags": {
@@ -122,9 +122,9 @@ kosli list environments --output=json
     "name": "aws-prod-terraform-drift-detection",
     "type": "server",
     "description": "Detection of drift of the Infrastructure-as-code components of aws-prod",
-    "last_modified_at": 1783613912.534261,
-    "last_reported_at": 1783613912.534261,
-    "last_changed_at": 1783354711.992566,
+    "last_modified_at": 1783697612.1636705,
+    "last_reported_at": 1783697612.1636705,
+    "last_changed_at": 1783619011.9710433,
     "state": true,
     "include_scaling": false,
     "tags": {},
@@ -138,9 +138,9 @@ kosli list environments --output=json
     "name": "production",
     "type": "logical",
     "description": "Production environments for cyber-dojo",
-    "last_modified_at": 1783576438.7264173,
+    "last_modified_at": 1783662598.552843,
     "last_reported_at": null,
-    "last_changed_at": 1783576438.7264173,
+    "last_changed_at": 1783662598.552843,
     "state": true,
     "include_scaling": false,
     "tags": {},
@@ -155,9 +155,9 @@ kosli list environments --output=json
     "name": "staging",
     "type": "logical",
     "description": "Staging environments for cyber-dojo",
-    "last_modified_at": 1783606508.851869,
+    "last_modified_at": 1783674608.7786345,
     "last_reported_at": null,
-    "last_changed_at": 1783606508.851869,
+    "last_changed_at": 1783674608.7786345,
     "state": true,
     "include_scaling": false,
     "tags": {},
