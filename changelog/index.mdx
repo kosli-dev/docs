@@ -4,6 +4,109 @@ description: "Release notes for Kosli products."
 rss: true
 ---
 
+<Update label="July 9, 2026" description="v2.32.1" tags={["CLI"]}>
+
+## Updates
+
+- `kosli list repos` table output now shows a pagination footer (`Showing page 1 of N, total N repos`) and includes expanded help and usage examples.
+- `kosli list repos` `--name` flag description now clarifies that it performs an exact match.
+
+[View on GitHub](https://github.com/kosli-dev/cli/releases/tag/v2.32.1)
+
+</Update>
+
+<Update label="July 8, 2026" description="v2.32.0" tags={["CLI"]}>
+
+## New features
+
+- **Repo commands are GA** — `kosli get repo` and `kosli list repos` are no longer hidden and are now generally available.
+- **Fetch a repo by internal ID** — `kosli get repo` now supports `--repo-id` (mutually exclusive with the `REPO-NAME` argument).
+- **Repo tagging** — `kosli tag` now supports tagging repos (`repo`/`repos` resource types), with disambiguation via `--provider` or `--repo-id`. `--set` and `--unset` gain short aliases `-s` and `-u`.
+
+## Updates
+
+- `kosli get repo` and `kosli list repos` table output now include a `Tags` column showing key=value pairs.
+- `kosli get repo` now returns an error (instead of a "not found" message) when a repo does not exist or when multiple repos match the given name, and suggests using `--provider` to disambiguate.
+
+[View on GitHub](https://github.com/kosli-dev/cli/releases/tag/v2.32.0)
+
+</Update>
+
+<Update label="July 8, 2026" description="v0.8.0" tags={["Terraform Provider"]}>
+
+## New features
+
+- **`kosli_control` resource and data source (beta)** — manage Kosli controls as Terraform resources. The resource supports `identifier` (immutable), `name`, `description`, and `links`, plus computed `version`, `created_at`, `created_by`, `tags`, and `policies_referencing`, and can be imported by `identifier`. Archived controls are treated as deleted for drift detection.
+
+[View on GitHub](https://github.com/kosli-dev/terraform-provider-kosli/releases/tag/v0.8.0)
+
+</Update>
+
+<Update label="July 8, 2026" description="" tags={["Platform"]}>
+
+## New features
+
+- **Repo tags** — repos can now be tagged, and tags appear in repo listings.
+
+## Updates
+
+- **Faster customer usage metrics** — internal usage metrics are computed with chunked org counts, avoiding timeouts on large tenants.
+- **Cleaner environment deployments table** — artifact names are simplified and column widths are adjusted for readability.
+
+</Update>
+
+<Update label="July 7, 2026" description="v0.7.0" tags={["Terraform Provider"]}>
+
+## New features
+
+- **Service account resources** — new `kosli_service_account` and `kosli_service_account_api_key` resources let you manage service accounts and their API keys in Terraform. Service accounts support `name`, `description`, and `privilege` with import by `name`. API keys are minted as write-once sensitive values; all arguments force replacement since keys are immutable.
+- **`kosli_service_account` data source** — look up existing service accounts by `name`.
+
+[View on GitHub](https://github.com/kosli-dev/terraform-provider-kosli/releases/tag/v0.7.0)
+
+</Update>
+
+<Update label="July 7, 2026" description="" tags={["Platform"]}>
+
+## New features
+
+- **Environment deployments report** — new deployments report for environments, gated behind a feature flag during rollout.
+
+## Updates
+
+- **Space resources link to their pages** — flow and environment names in space views now link directly to their flow/environment pages.
+
+## Bug fixes
+
+- **Duplicate environment create** — fixed an unhandled error when two clients concurrently created the same environment.
+
+</Update>
+
+<Update label="July 6, 2026" description="v2.31.0" tags={["CLI"]}>
+
+## New features
+
+- **`kosli get api-key`** — new command (alias: `ak`) to retrieve metadata for a specific API key belonging to a service account. Supports `--output table` (default) and `--output json`.
+
+[View on GitHub](https://github.com/kosli-dev/cli/releases/tag/v2.31.0)
+
+</Update>
+
+<Update label="July 6, 2026" description="" tags={["Platform"]}>
+
+## Updates
+
+- **Faster logical environment pages** — logical environment page loads are noticeably quicker.
+- **More reliable org deletion** — org deletion now waits longer for HubSpot opt-out and resumes from the first unfinished step on retry.
+- **Automatic Descope role provisioning** — Descope roles are now created for orgs and assigned automatically during SCIM sync.
+
+## Bug fixes
+
+- **Login form Enter key** — pressing Enter now submits the login form even when a password-manager browser extension is active.
+- **Logical environment description** — clearing or updating a logical environment description from the settings form now saves correctly.
+
+</Update>
+
 <Update label="July 3, 2026" description="v2.30.1" tags={["CLI"]}>
 
 ## Updates
