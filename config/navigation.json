@@ -499,7 +499,10 @@
                 "terraform-reference/resources/custom_attestation_type",
                 "terraform-reference/resources/action",
                 "terraform-reference/resources/policy",
-                "terraform-reference/resources/policy_attachment"
+                "terraform-reference/resources/policy_attachment",
+                "terraform-reference/resources/service_account",
+                "terraform-reference/resources/service_account_api_key",
+                "terraform-reference/resources/control"
               ]
             },
             {
@@ -510,7 +513,9 @@
                 "terraform-reference/data-sources/flow",
                 "terraform-reference/data-sources/custom_attestation_type",
                 "terraform-reference/data-sources/action",
-                "terraform-reference/data-sources/policy"
+                "terraform-reference/data-sources/policy",
+                "terraform-reference/data-sources/service_account",
+                "terraform-reference/data-sources/control"
               ]
             }
           ]
