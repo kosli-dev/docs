@@ -1,0 +1,55 @@
+---
+title: "kosli_control list resource"
+description: "Lists Kosli controls in the organization for use with terraform query, so existing controls can be discovered and brought under Terraform management without hand-writing one import block per control."
+icon: "list"
+---
+
+Lists Kosli controls in the organization for use with `terraform query` (requires Terraform >= 1.14), so existing controls can be discovered and brought under Terraform management without hand-writing one `import` block per control.
+
+<Warning>
+Controls is a **beta** feature and must be enabled for your organization; API requests return `403 Forbidden` otherwise.
+</Warning>
+
+<Note>
+The Kosli list endpoint does not return `policies_referencing`, so when resource data is included in query results that attribute is always reported as an empty list. Archived controls are only returned when `archived = true` is set.
+</Note>
+
+## Example usage
+
+Place `list` blocks in a `.tfquery.hcl` file and run `terraform query` (requires Terraform >= 1.14):
+
+```terraform
+# List all active controls in the organization
+list "kosli_control" "all" {
+  provider = kosli
+}
+
+# List controls matching a search string, including full resource data
+# (e.g. for `terraform query -generate-config-out=generated.tf`)
+list "kosli_control" "sdlc" {
+  provider         = kosli
+  include_resource = true
+
+  config {
+    search = "SDLC"
+  }
+}
+
+# Include archived controls in the results
+list "kosli_control" "archived" {
+  provider = kosli
+
+  config {
+    archived = true
+  }
+}
+```
+
+Use `terraform query -generate-config-out=generated.tf` to generate `import` blocks and resource configuration for the discovered controls. To manage the resulting controls, see the [`kosli_control` resource](/terraform-reference/resources/control).
+
+## Schema
+
+### Optional
+
+- `archived` (Boolean) Include archived controls in the results. Defaults to `false`.
+- `search` (String) Case-insensitive substring to match against control names and identifiers.
