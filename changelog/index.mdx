@@ -4,6 +4,42 @@ description: "Release notes for Kosli products."
 rss: true
 ---
 
+<Update label="July 10, 2026" description="v0.8.1" tags={["Terraform Provider"]}>
+
+## New features
+
+- **`kosli_control` list resource** — the provider now ships a list resource for `kosli_control`, so you can discover existing (unmanaged) controls with `terraform query` and generate import and configuration blocks for them. Supports the API's `search` and `archived` filters. Requires Terraform 1.14+ (the managed resource still works on Terraform 1.10+).
+
+[View on GitHub](https://github.com/kosli-dev/terraform-provider-kosli/releases/tag/v0.8.1)
+
+</Update>
+
+<Update label="July 10, 2026" description="v2.33.0" tags={["CLI"]}>
+
+## New features
+
+- **`kosli list repos` filtering and sorting** — new `--search` flag filters repos by case-insensitive name substring (mutually exclusive with `--name`), `--tag` filters by tag key or `key:value`, and `--sort-direction` sorts results ascending or descending by name.
+- **`kosli list controls` sorting** — new `--sort-direction` flag sorts results ascending or descending by name.
+
+## Updates
+
+- **Clearer registry credential help** — `--registry-username` and `--registry-password` descriptions and root help now document that these are only needed when credentials aren't already available via Docker/Podman auth files or a credential helper, and spell out the automatic credential resolution order for `--artifact-type=oci` and `--artifact-type=docker`.
+- **`kosli list environments --tag`** — the `--tag` flag now accepts repeated values consistently with other list commands.
+- **Clarified `--tag` help for controls** — the flag description now states that repeating it matches more than one tag.
+
+[View on GitHub](https://github.com/kosli-dev/cli/releases/tag/v2.33.0)
+
+</Update>
+
+<Update label="July 10, 2026" description="" tags={["Platform"]}>
+
+## Updates
+
+- **Refreshed repo pages** — repo pages now share a single header (name, provider badge, VCS id, repo URL) above the Build, Release, and Run tabs, and switching between tabs happens client-side without a full page reload. Deep links and Release sub-tabs continue to work.
+- **Repo tag management from the header** — manage repo tags directly from the new repo header via the kebab menu.
+
+</Update>
+
 <Update label="July 9, 2026" description="v2.32.1" tags={["CLI"]}>
 
 ## Updates
