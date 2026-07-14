@@ -66,7 +66,7 @@ kosli diff snapshots aws-beta aws-prod --output=json
 ```json
 {
   "snappish1": {
-    "snapshot_id": "aws-beta#7668",
+    "snapshot_id": "aws-beta#7702",
     "artifacts": [
       {
         "fingerprint": "6677d3b6cd162d7888981232e9fcbb6fca2c04307fa1838eaaece489a393de39",
@@ -77,25 +77,25 @@ kosli diff snapshots aws-beta aws-prod --output=json
         "instance_count": 1
       },
       {
-        "fingerprint": "79abecc3fd3780433938403e3c1de3c8a53e475dd59d68e2f6cc749b65976f43",
-        "name": "244531986313.dkr.ecr.eu-central-1.amazonaws.com/web:87db5af@sha256:79abecc3fd3780433938403e3c1de3c8a53e475dd59d68e2f6cc749b65976f43",
-        "most_recent_timestamp": 1783661860,
-        "flow": "web-ci",
-        "commit_url": "https://github.com/cyber-dojo/web/commit/87db5afce1f292dfd2376b046ecbe1abcbf26d04",
-        "instance_count": 3
-      },
-      {
         "fingerprint": "add714273f53b1fca369e9ce43b59b28b2e38e6fc283ae1ff2056ebb13c6a792",
         "name": "244531986313.dkr.ecr.eu-central-1.amazonaws.com/dashboard:80473e8@sha256:add714273f53b1fca369e9ce43b59b28b2e38e6fc283ae1ff2056ebb13c6a792",
         "most_recent_timestamp": 1783672438,
         "flow": "dashboard-ci",
         "commit_url": "https://github.com/cyber-dojo/dashboard/commit/80473e87329962dd1924b51d541620c15d68658b",
         "instance_count": 1
+      },
+      {
+        "fingerprint": "c2a404127f3114a7b82a8c0633f85bad599dd54d9c97cf1bc872ae9eab2bbe5f",
+        "name": "244531986313.dkr.ecr.eu-central-1.amazonaws.com/differ:335ddfa@sha256:c2a404127f3114a7b82a8c0633f85bad599dd54d9c97cf1bc872ae9eab2bbe5f",
+        "most_recent_timestamp": 1783761398,
+        "flow": "differ-ci",
+        "commit_url": "https://github.com/cyber-dojo/differ/commit/335ddfa139708c37908dd594a0502bc6d88f8615",
+        "instance_count": 1
       }
     ]
   },
   "snappish2": {
-    "snapshot_id": "aws-prod#4981",
+    "snapshot_id": "aws-prod#5007",
     "artifacts": [
       {
         "fingerprint": "0744a611723cb72a3f24b33c2d56fcbb1bfbedf0637a962f259fada8e3dbbe50",
@@ -114,12 +114,12 @@ kosli diff snapshots aws-beta aws-prod --output=json
         "instance_count": 1
       },
       {
-        "fingerprint": "99da6bff005f90bf23d728dc2c7cfd65f0e251772b246766955fd3dc209dbb6f",
-        "name": "244531986313.dkr.ecr.eu-central-1.amazonaws.com/web:8d34585@sha256:99da6bff005f90bf23d728dc2c7cfd65f0e251772b246766955fd3dc209dbb6f",
-        "most_recent_timestamp": 1783618209,
-        "flow": "web-ci",
-        "commit_url": "https://github.com/cyber-dojo/web/commit/8d345854efbb1063d7546ef988dd771ed5445116",
-        "instance_count": 3
+        "fingerprint": "7e2d411aedcf779dc4be7da47957f698696df954a7f557688d0052e9a18218fc",
+        "name": "244531986313.dkr.ecr.eu-central-1.amazonaws.com/differ:8beff99@sha256:7e2d411aedcf779dc4be7da47957f698696df954a7f557688d0052e9a18218fc",
+        "most_recent_timestamp": 1783618126,
+        "flow": "differ-ci",
+        "commit_url": "https://github.com/cyber-dojo/differ/commit/8beff9901ac67acb7afcab3408106208571a1124",
+        "instance_count": 1
       }
     ]
   },
@@ -145,11 +145,11 @@ kosli diff snapshots aws-beta aws-prod --output=json
         "instance_count": 1
       },
       {
-        "fingerprint": "7e2d411aedcf779dc4be7da47957f698696df954a7f557688d0052e9a18218fc",
-        "name": "244531986313.dkr.ecr.eu-central-1.amazonaws.com/differ:8beff99@sha256:7e2d411aedcf779dc4be7da47957f698696df954a7f557688d0052e9a18218fc",
-        "most_recent_timestamp": 1783618126,
-        "flow": "differ-ci",
-        "commit_url": "https://github.com/cyber-dojo/differ/commit/8beff9901ac67acb7afcab3408106208571a1124",
+        "fingerprint": "48f4e8dcbb47c68acb1ed199ab915f69fa81d8dc052b04eae26617e9a9b1599c",
+        "name": "244531986313.dkr.ecr.eu-central-1.amazonaws.com/saver:e59370c@sha256:48f4e8dcbb47c68acb1ed199ab915f69fa81d8dc052b04eae26617e9a9b1599c",
+        "most_recent_timestamp": 1783853016,
+        "flow": "saver-ci",
+        "commit_url": "https://github.com/cyber-dojo/saver/commit/e59370cc9a235dec909ef1f8467d4cd6fb923ae8",
         "instance_count": 1
       },
       {
@@ -161,20 +161,20 @@ kosli diff snapshots aws-beta aws-prod --output=json
         "instance_count": 1
       },
       {
-        "fingerprint": "b65f224d822ea1b3702a1154c1bd088f27906393755b73c570aefa054ef4211b",
-        "name": "244531986313.dkr.ecr.eu-central-1.amazonaws.com/runner:627315a@sha256:b65f224d822ea1b3702a1154c1bd088f27906393755b73c570aefa054ef4211b",
-        "most_recent_timestamp": 1783618119,
+        "fingerprint": "cf3f94bb0d1130ca799b94450614109a917d8c53ea99fc20bd04c51141873fcf",
+        "name": "244531986313.dkr.ecr.eu-central-1.amazonaws.com/runner:88b7eea@sha256:cf3f94bb0d1130ca799b94450614109a917d8c53ea99fc20bd04c51141873fcf",
+        "most_recent_timestamp": 1783757716,
         "flow": "runner-ci",
-        "commit_url": "https://github.com/cyber-dojo/runner/commit/627315ab66d5250fec7ec574b073f1095879a8a4",
+        "commit_url": "https://github.com/cyber-dojo/runner/commit/88b7eeacb488a5117ac568408363ac59a146f41a",
         "instance_count": 3
       },
       {
-        "fingerprint": "e930c316594afc43877740e30d7ac95cdadcf753a2b8a51935652c9531def452",
-        "name": "244531986313.dkr.ecr.eu-central-1.amazonaws.com/saver:b8e6c03@sha256:e930c316594afc43877740e30d7ac95cdadcf753a2b8a51935652c9531def452",
-        "most_recent_timestamp": 1783618492,
-        "flow": "saver-ci",
-        "commit_url": "https://github.com/cyber-dojo/saver/commit/b8e6c03975a5701e3e8d198549f463989f1a00f4",
-        "instance_count": 1
+        "fingerprint": "f1b2a1723fee8d534e5a50f2ec83854b23e770aa57dea0479870dc308a948459",
+        "name": "244531986313.dkr.ecr.eu-central-1.amazonaws.com/web:5195398@sha256:f1b2a1723fee8d534e5a50f2ec83854b23e770aa57dea0479870dc308a948459",
+        "most_recent_timestamp": 1784014184,
+        "flow": "web-ci",
+        "commit_url": "https://github.com/cyber-dojo/web/commit/51953982aab0dae2f7ff684ebb4a76e5c132e777",
+        "instance_count": 3
       },
       {
         "fingerprint": "f4ed92af30318fe8230648a2fc1f482970ad0ef821eeaaeac76759cd8fe03418",
