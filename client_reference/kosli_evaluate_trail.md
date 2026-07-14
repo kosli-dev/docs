@@ -55,7 +55,7 @@ full data structure available to the policy. Use `--output json` for structured 
 	<Tab title="GitHub">
 	View an example of the `kosli evaluate trail` command in GitHub.
 
-	In [this YAML file](https://github.com/cyber-dojo/snyk-scanning/blob/a517304f4e9013e2e9ea67e90c7342f7e56653f0/.github/workflows/artifact_snyk_test.yml#L323)
+	In [this YAML file](https://github.com/cyber-dojo/snyk-scanning/blob/35a09b2d283bafd6bbc12c29eba3306d5b36a5f7/.github/workflows/artifact_snyk_test.yml#L323)
 	</Tab>
 </Tabs>
 
