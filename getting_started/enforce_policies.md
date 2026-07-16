@@ -148,7 +148,7 @@ The flow is:
 </Steps>
 
 <Note>
-  **Experimental example:** [`kosli-dev/kosli-admission-webhook`](https://github.com/kosli-dev/kosli-admission-webhook) is a reference implementation of a Kubernetes admission webhook that asserts container image compliance in Kosli before scheduling. It is provided as an example to get you started — not a supported product — and feedback is welcome.
+  **Experimental example:** [`kosli-dev/kosli-admission-webhook`](https://github.com/kosli-dev/kosli-admission-webhook) is a reference implementation of a Kubernetes admission webhook that asserts container image compliance in Kosli before scheduling. It is provided as an example to get you started and not a supported product — feedback is welcome!
 </Note>
 
 <Tip>
