@@ -147,6 +147,10 @@ The flow is:
   </Step>
 </Steps>
 
+<Note>
+  **Experimental example:** [`kosli-dev/kosli-admission-webhook`](https://github.com/kosli-dev/kosli-admission-webhook) is a reference implementation of a Kubernetes admission webhook that asserts container image compliance in Kosli before scheduling. It is provided as an example to get you started and not a supported product — feedback is welcome!
+</Note>
+
 <Tip>
 The [Kosli K8S Reporter](/helm/k8s_reporter) reports what is running in your Kubernetes environments to Kosli. Pair it with an admission controller to both enforce and monitor compliance.
 </Tip>
