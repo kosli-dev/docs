@@ -4,6 +4,33 @@ description: "Release notes for Kosli products."
 rss: true
 ---
 
+<Update label="July 15, 2026" description="" tags={["Platform"]}>
+
+## New features
+
+- **Per-domain MagicLink login** — MagicLink login can now be enabled for individual customer email domains on shared multi-tenant instances, instead of only per-deployment.
+
+</Update>
+
+<Update label="July 14, 2026" description="" tags={["Platform"]}>
+
+## Bug fixes
+
+- **MagicLink double email** — fixed a form-submission race where password-manager extensions could trigger two MagicLink emails for a single login attempt.
+- **Concurrent create races** — concurrent duplicate creates on flows and other unique-indexed resources now return a retryable `409` instead of surfacing as a `500`.
+
+</Update>
+
+<Update label="July 14, 2026" description="v2.33.1" tags={["CLI"]}>
+
+## Bug fixes
+
+- **`--repository` no longer overrides CI-detected repo names** — the flag's default value could overwrite a fuller CI-detected repository name (for example GitLab's `CI_PROJECT_PATH`) in the reported repo info. It now only overrides the CI-detected name when set explicitly.
+
+[View on GitHub](https://github.com/kosli-dev/cli/releases/tag/v2.33.1)
+
+</Update>
+
 <Update label="July 10, 2026" description="v0.8.1" tags={["Terraform Provider"]}>
 
 ## New features
