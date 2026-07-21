@@ -43,7 +43,7 @@ The attestation can be bound to an *artifact* in two ways:
 |        `--registry-password` string  |  [conditional] The container registry password or access token. Only required if you want to read container image SHA256 digest from a remote container registry and it is not already accessible via Docker/Podman auth files or a credential helper.  |
 |        `--registry-username` string  |  [conditional] The container registry username. Only required if you want to read container image SHA256 digest from a remote container registry and it is not already accessible via Docker/Podman auth files or a credential helper.  |
 |        `--repo-id` string  |  [conditional] The stable, unique identifier for the repository in your VCS provider (e.g. a numeric ID). Do not use the repository name as it can change if the repo is renamed. All three of `--repo-id`, `--repo-url` and `--repository` must be set to record repository information (defaulted in some CIs: [docs](/integrations/ci_cd) ).  |
-|        `--repo-provider` string  |  [optional] The source code hosting provider. One of: github, gitlab, bitbucket, azure-devops (defaulted in some CIs: [docs](/integrations/ci_cd) ).  |
+|        `--repo-provider` string  |  [optional] The source code hosting provider. One of: github, gitlab, bitbucket, bitbucket_cloud, bitbucket_dc, azure-devops, azure_devops_services, azure_devops_server, git, subversion (defaulted in some CIs: [docs](/integrations/ci_cd) ).  |
 |        `--repo-root` string  |  [defaulted] The directory where the source git repository is available. Only used if `--commit` is used or defaulted in CI, see [docs](/integrations/ci_cd/#defaulted-kosli-command-flags-from-ci-variables) . (default ".")  |
 |        `--repo-url` string  |  [conditional] The URL of the repository. Must be a valid URL. All three of `--repo-id`, `--repo-url` and `--repository` must be set to record repository information (defaulted in some CIs: [docs](/integrations/ci_cd) ).  |
 |        `--repository` string  |  [conditional] The name of the repository (e.g. owner/repo-name). All three of `--repo-id`, `--repo-url` and `--repository` must be set to record repository information (defaulted in some CIs: [docs](/integrations/ci_cd) ).  |
@@ -70,7 +70,7 @@ The attestation can be bound to an *artifact* in two ways:
 	<Tab title="GitLab">
 	View an example of the `kosli attest pullrequest gitlab` command in GitLab.
 
-	In [this YAML file](https://gitlab.com/cyber-dojo/creator/-/blob/65fd2bfa2478534ea4bc5ccf30f6bfc6aab7550c/.gitlab/workflows/main.yml#L75), which created [this Kosli Event](https://app.kosli.com/cyber-dojo/flows/creator-ci/trails/7e00b70f8911edf1c480ba9a8b9c2a280260cb08?attestation_id=d08ab062-2089-4c08-be94-b006fb70).
+	In [this YAML file](https://gitlab.com/cyber-dojo/creator/-/blob/65fd2bfa2478534ea4bc5ccf30f6bfc6aab7550c/.gitlab/workflows/main.yml#L75), which created [this Kosli Event](https://app.kosli.com/cyber-dojo/flows/creator-ci/trails/76672a8b247049c3ce8c3140852e17be8f47d995?attestation_id=9443b713-5f01-4baf-9f0b-7802a1c3).
 	</Tab>
 </Tabs>
 

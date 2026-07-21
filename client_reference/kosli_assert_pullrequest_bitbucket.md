@@ -11,14 +11,15 @@ kosli assert pullrequest bitbucket [flags]
 
 Assert a Bitbucket pull request for a git commit exists.  
 The command exits with non-zero exit code if no pull requests were found for the commit.
-Authentication to Bitbucket can be done with access token (recommended) or app passwords. Credentials need to have read access for both repos and pull requests.
+Authentication to Bitbucket can be done with an access token (recommended) or an Atlassian API token, passed via --bitbucket-username (your Atlassian account email) and --bitbucket-password.
+Bitbucket app passwords are no longer supported as of 28 July 2026; replace any app passwords with API tokens. Credentials need to have read access for both repos and pull requests.
 
 ## Flags
 | Flag | Description |
 | :--- | :--- |
 |        `--bitbucket-access-token` string  |  Bitbucket repo/project/workspace access token. See [Bitbucket access tokens](https://developer.atlassian.com/cloud/bitbucket/rest/intro/#access-tokens) for more details.  |
-|        `--bitbucket-password` string  |  Bitbucket App password. See [Bitbucket authentication](https://developer.atlassian.com/cloud/bitbucket/rest/intro/#authentication) for more details.  |
-|        `--bitbucket-username` string  |  Bitbucket username. Only needed if you use `--bitbucket-password`  |
+|        `--bitbucket-password` string  |  Bitbucket API token. Bitbucket app passwords are no longer supported as of 28 July 2026. See [Bitbucket authentication](https://developer.atlassian.com/cloud/bitbucket/rest/intro/#authentication) for more details.  |
+|        `--bitbucket-username` string  |  Bitbucket username (your Atlassian account email when using an API token). Only needed if you use `--bitbucket-password`  |
 |        `--bitbucket-workspace` string  |  Bitbucket workspace ID.  |
 |        `--commit` string  |  Git commit for which to find pull request evidence. (defaulted in some CIs: [docs](/integrations/ci_cd) ). (default "HEAD")  |
 |    `-D`, `--dry-run`  |  [optional] Run in dry-run mode. When enabled, no data is sent to Kosli and the CLI exits with 0 exit code regardless of any errors.  |

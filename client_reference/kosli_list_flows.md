@@ -115,16 +115,6 @@ kosli list flows --output=json
     }
   },
   {
-    "id": "9e752042-5c9d-4b7c-9250-403e7c5b",
-    "name": "differ-ci-tf",
-    "description": "Terraform human-readable plan and state file fingerprint",
-    "visibility": "private",
-    "org": "cyber-dojo",
-    "template": "version: 1\n\ntrail:\n  attestations:\n    - name: tf-plan\n      type: generic\n  artifacts:\n    - name: tf-state\n",
-    "repo_url": "https://github.com/cyber-dojo/differ",
-    "tags": {}
-  },
-  {
     "id": "7f0ddaf2-32be-4cae-9512-161dc24c",
     "name": "docker-base-ci",
     "description": "Build cyber-dojo/docker-base image",
@@ -349,6 +339,18 @@ kosli list flows --output=json
     }
   },
   {
+    "id": "6d59cdf1-0d6b-412a-bd81-ecdc8767",
+    "name": "spooler-ci",
+    "description": "Async write spooler: durable, ordered forwarding to saver",
+    "visibility": "private",
+    "org": "cyber-dojo",
+    "template": "version: 1\n\ntrail:\n  attestations:\n    - name: pull-request\n      type: pull_request\n  artifacts:\n    - name: spooler\n      attestations:\n        - name: provenance-facts\n          type: custom:provenance-facts\n        - name: provenance-decision\n          type: decision\n\n        - name: sbom-facts\n          type: custom:sbom-facts\n        - name: sbom-decision\n          type: decision\n\n        - name: snyk-container-scan\n          type: decision\n\n        - name: unit-test\n          type: junit\n        - name: unit-test-metrics\n          type: custom:test-metrics\n        - name: unit-test-coverage-metrics\n          type: custom:coverage-metrics\n        - name: integration-test\n          type: junit\n        - name: integration-test-metrics\n          type: custom:test-metrics\n        - name: integration-test-coverage-metrics\n          type: custom:coverage-metrics\n",
+    "repo_url": "https://github.com/cyber-dojo/spooler",
+    "tags": {
+      "env": "aws-beta"
+    }
+  },
+  {
     "id": "57de7461-f687-4b93-a1d7-d4268e44",
     "name": "terraform-apply-beta-creator",
     "description": "",
@@ -439,6 +441,16 @@ kosli list flows --output=json
     "tags": {}
   },
   {
+    "id": "418dcba5-0f85-44c1-9bfa-73fe61a2",
+    "name": "terraform-apply-beta-spooler",
+    "description": "",
+    "visibility": "private",
+    "org": "cyber-dojo",
+    "template": "version: 1\ntrail:\n  attestations:\n    - name: terraform-plan\n      type: generic\n    - name: terraform-apply\n      type: generic\n  artifacts:\n    - name: terraform-state\n    - name: drift-plan\n",
+    "repo_url": "https://github.com/cyber-dojo/spooler",
+    "tags": {}
+  },
+  {
     "id": "0408259b-db9a-47b4-bd5d-2cafb533",
     "name": "terraform-apply-beta-terraform-base-infra",
     "description": "",
@@ -465,7 +477,7 @@ kosli list flows --output=json
     "visibility": "private",
     "org": "cyber-dojo",
     "template": "version: 1\ntrail:\n  attestations:\n    - name: terraform-plan\n      type: generic\n    - name: terraform-apply\n      type: generic\n  artifacts:\n    - name: terraform-state\n    - name: drift-plan\n",
-    "repo_url": "https://github.com/cyber-dojo/web",
+    "repo_url": "https://github.com/cyber-dojo/saver",
     "tags": {}
   },
   {

@@ -33,7 +33,7 @@ In other CI systems, set them explicitly to capture repository metadata.
 |    `-o`, `--origin-url` string  |  [optional] The url pointing to where the attestation came from or is related. (defaulted to the CI url in some CIs: [docs](/integrations/ci_cd/#defaulted-kosli-command-flags-from-ci-variables) ).  |
 |        `--redact-commit-info` strings  |  [optional] The list of commit info to be redacted before sending to Kosli. Allowed values are one or more of [author, message, branch].  |
 |        `--repo-id` string  |  [conditional] The stable, unique identifier for the repository in your VCS provider (e.g. a numeric ID). Do not use the repository name as it can change if the repo is renamed. All three of `--repo-id`, `--repo-url` and `--repository` must be set to record repository information (defaulted in some CIs: [docs](/integrations/ci_cd) ).  |
-|        `--repo-provider` string  |  [optional] The source code hosting provider. One of: github, gitlab, bitbucket, azure-devops (defaulted in some CIs: [docs](/integrations/ci_cd) ).  |
+|        `--repo-provider` string  |  [optional] The source code hosting provider. One of: github, gitlab, bitbucket, bitbucket_cloud, bitbucket_dc, azure-devops, azure_devops_services, azure_devops_server, git, subversion (defaulted in some CIs: [docs](/integrations/ci_cd) ).  |
 |        `--repo-root` string  |  [defaulted] The directory where the source git repository is available. Only used if `--commit` is used or defaulted in CI, see [docs](/integrations/ci_cd/#defaulted-kosli-command-flags-from-ci-variables) . (default ".")  |
 |        `--repo-url` string  |  [conditional] The URL of the repository. Must be a valid URL. All three of `--repo-id`, `--repo-url` and `--repository` must be set to record repository information (defaulted in some CIs: [docs](/integrations/ci_cd) ).  |
 |        `--repository` string  |  [conditional] The name of the repository (e.g. owner/repo-name). All three of `--repo-id`, `--repo-url` and `--repository` must be set to record repository information (defaulted in some CIs: [docs](/integrations/ci_cd) ).  |
@@ -65,7 +65,7 @@ In other CI systems, set them explicitly to capture repository metadata.
 	<Tab title="GitLab">
 	View an example of the `kosli begin trail` command in GitLab.
 
-	In [this YAML file](https://gitlab.com/cyber-dojo/creator/-/blob/65fd2bfa2478534ea4bc5ccf30f6bfc6aab7550c/.gitlab/workflows/main.yml#L55), which created [this Kosli Event](https://app.kosli.com/cyber-dojo/flows/creator-ci/trails/7e00b70f8911edf1c480ba9a8b9c2a280260cb08?attestation_id=1).
+	In [this YAML file](https://gitlab.com/cyber-dojo/creator/-/blob/65fd2bfa2478534ea4bc5ccf30f6bfc6aab7550c/.gitlab/workflows/main.yml#L55), which created [this Kosli Event](https://app.kosli.com/cyber-dojo/flows/creator-ci/trails/76672a8b247049c3ce8c3140852e17be8f47d995?attestation_id=1).
 	</Tab>
 </Tabs>
 

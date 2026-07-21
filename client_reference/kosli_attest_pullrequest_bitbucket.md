@@ -11,7 +11,8 @@ kosli attest pullrequest bitbucket [IMAGE-NAME | FILE-PATH | DIR-PATH] [flags]
 
 Report a Bitbucket pull request attestation to an artifact or a trail in a Kosli flow.  
 It checks if a pull request exists for a given merge commit and reports the pull-request attestation to Kosli.
-Authentication to Bitbucket can be done with access token (recommended) or app passwords. Credentials need to have read access for both repos and pull requests.
+Authentication to Bitbucket can be done with an access token (recommended) or an Atlassian API token, passed via --bitbucket-username (your Atlassian account email) and --bitbucket-password.
+Bitbucket app passwords are no longer supported as of 28 July 2026; replace any app passwords with API tokens. Credentials need to have read access for both repos and pull requests.
 
 
 The attestation can be bound to a *trail* using the trail name.
@@ -27,8 +28,8 @@ The attestation can be bound to an *artifact* in two ways:
 |        `--assert`  |  [optional] Exit with non-zero code if no pull requests found for the given commit.  |
 |        `--attachments` strings  |  [optional] The comma-separated list of paths of attachments for the reported attestation. Attachments can be files or directories. All attachments are compressed and uploaded to Kosli's evidence vault.  |
 |        `--bitbucket-access-token` string  |  Bitbucket repo/project/workspace access token. See [Bitbucket access tokens](https://developer.atlassian.com/cloud/bitbucket/rest/intro/#access-tokens) for more details.  |
-|        `--bitbucket-password` string  |  Bitbucket App password. See [Bitbucket authentication](https://developer.atlassian.com/cloud/bitbucket/rest/intro/#authentication) for more details.  |
-|        `--bitbucket-username` string  |  Bitbucket username. Only needed if you use `--bitbucket-password`  |
+|        `--bitbucket-password` string  |  Bitbucket API token. Bitbucket app passwords are no longer supported as of 28 July 2026. See [Bitbucket authentication](https://developer.atlassian.com/cloud/bitbucket/rest/intro/#authentication) for more details.  |
+|        `--bitbucket-username` string  |  Bitbucket username (your Atlassian account email when using an API token). Only needed if you use `--bitbucket-password`  |
 |        `--bitbucket-workspace` string  |  Bitbucket workspace ID.  |
 |    `-g`, `--commit` string  |  the git merge commit to be checked for associated pull requests.  |
 |        `--description` string  |  [optional] attestation description  |
@@ -45,7 +46,7 @@ The attestation can be bound to an *artifact* in two ways:
 |        `--registry-password` string  |  [conditional] The container registry password or access token. Only required if you want to read container image SHA256 digest from a remote container registry and it is not already accessible via Docker/Podman auth files or a credential helper.  |
 |        `--registry-username` string  |  [conditional] The container registry username. Only required if you want to read container image SHA256 digest from a remote container registry and it is not already accessible via Docker/Podman auth files or a credential helper.  |
 |        `--repo-id` string  |  [conditional] The stable, unique identifier for the repository in your VCS provider (e.g. a numeric ID). Do not use the repository name as it can change if the repo is renamed. All three of `--repo-id`, `--repo-url` and `--repository` must be set to record repository information (defaulted in some CIs: [docs](/integrations/ci_cd) ).  |
-|        `--repo-provider` string  |  [optional] The source code hosting provider. One of: github, gitlab, bitbucket, azure-devops (defaulted in some CIs: [docs](/integrations/ci_cd) ).  |
+|        `--repo-provider` string  |  [optional] The source code hosting provider. One of: github, gitlab, bitbucket, bitbucket_cloud, bitbucket_dc, azure-devops, azure_devops_services, azure_devops_server, git, subversion (defaulted in some CIs: [docs](/integrations/ci_cd) ).  |
 |        `--repo-root` string  |  [defaulted] The directory where the source git repository is available. Only used if `--commit` is used or defaulted in CI, see [docs](/integrations/ci_cd/#defaulted-kosli-command-flags-from-ci-variables) . (default ".")  |
 |        `--repo-url` string  |  [conditional] The URL of the repository. Must be a valid URL. All three of `--repo-id`, `--repo-url` and `--repository` must be set to record repository information (defaulted in some CIs: [docs](/integrations/ci_cd) ).  |
 |        `--repository` string  |  [conditional] The name of the repository (e.g. owner/repo-name). All three of `--repo-id`, `--repo-url` and `--repository` must be set to record repository information (defaulted in some CIs: [docs](/integrations/ci_cd) ).  |
