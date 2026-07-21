@@ -98,7 +98,8 @@
               "pages": [
                 "tutorials/report_aws_envs",
                 "tutorials/report_k8s_envs",
-                "tutorials/report_cloud_run_envs"
+                "tutorials/report_cloud_run_envs",
+                "tutorials/snapshotting_with_kosli_capture"
               ]
             },
             {
