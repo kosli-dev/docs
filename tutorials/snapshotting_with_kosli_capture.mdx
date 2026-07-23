@@ -91,7 +91,7 @@ Once the first run completes (every two minutes by default), Kosli environments 
 
 ## Configure what gets snapshotted
 
-`config.yaml` at the repo root defines the policy Kosli Capture applies. It has three parts: **naming**, **scope**, and **types**. `make` converts it to `config.json` at build time (stdlib JSON at runtime, no PyYAML), and a malformed file fails the conversion so bad config never ships.
+`config.yaml` at the repo root defines the policy Kosli Capture applies. It has three parts: **naming**, **scope**, and **types**. `make` validates and converts the file at build time, so a malformed config fails the deploy rather than shipping.
 
 ### Naming
 
