@@ -37,7 +37,7 @@ Kosli Capture is a scheduled Lambda that runs every two minutes (default) inside
 resource discovered ──tag filter──▶ env name from template ──▶ ensure env ──▶ snapshot
 ```
 
-The Lambda uses the `kosli` CLI from Kosli's **public `kosli-cli` Lambda layer** (`/opt/kosli`) to talk to Kosli, so there is nothing to install into your resources themselves and no CLI binary to vendor into the deploy artefact.
+The Lambda uses the `kosli` CLI from Kosli's **public `kosli-cli` Lambda layer** (`/opt/kosli`) to talk to Kosli, so there is nothing to install into your resources themselves.
 
 | Type   | Discovery              | Env granularity                              | Kosli type |
 |--------|------------------------|----------------------------------------------|------------|
