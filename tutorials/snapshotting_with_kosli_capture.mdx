@@ -205,7 +205,7 @@ Kosli Capture can read its policy from three places, controlled by the CloudForm
 
 All three deliver the **same** `config.json` produced from `config.yaml`; the only difference is where it lands. `make seed-config` picks the right target from `CONFIG_SOURCE` (and is a no-op for `baked`).
 
-Runtime sources **fail closed**: a failed fetch reuses the warm sandbox's last-known-good config or fails the run — Kosli Capture never silently falls back to the baked copy, because stale policy could re-include resources you meant to exclude.
+Runtime sources **fail closed**: if a config fetch fails, Kosli Capture reuses the last-known-good config (when the Lambda sandbox is warm) or fails the run. It does not fall back to the baked copy, so a stale policy can never re-include resources you have excluded.
 
 <Tip>
 Keep the authoritative `config.yaml` in the repo and push versions via `make seed-config` (or CI) rather than hand-editing the SSM parameter or S3 object.
