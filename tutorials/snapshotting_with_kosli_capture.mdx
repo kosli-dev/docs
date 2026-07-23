@@ -81,7 +81,7 @@ Then build the function zip, upload it, and deploy the CloudFormation stack:
 make deploy REGION=eu-west-1 KOSLI_ORG=<your-org>
 ```
 
-`make deploy` runs `aws cloudformation package` + `deploy`, so **CloudFormation owns the code** — no drift, and rollback reverts the code too. State is server-side (no Terraform, no state bucket).
+`make deploy` runs `aws cloudformation package` + `deploy`, so CloudFormation manages both the infrastructure and the function code — a rollback reverts the code too, and there is no separate deployment state for you to manage.
 
 <Tip>
 Opt into faster deploys with `make deploy DEPLOY_MODE=EXPRESS` (AWS CLI >= 2.35.13; rollback stays on). Run `make help` for the rest of the targets (`clean`, `prune-artefacts`, `destroy-artefacts`, `layer-arn`, `destroy`).
