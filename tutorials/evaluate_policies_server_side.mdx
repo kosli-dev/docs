@@ -143,7 +143,7 @@ time.
 kosli create policy pr-approved \
     --policy pr-approved.rego \
     --description "Every pull request on the trail has at least one approver." \
-    --evaluation-context trail
+    --context-schema trail
 ```
 
 ```plaintext
@@ -187,11 +187,12 @@ POLICY:    pr-approved @ version 1
 
 | Flag | Description |
 |------|-------------|
-| `--flow` | The flow that owns the trail(s) being evaluated and where the decision is recorded. |
+| `--flow` | The flow the decision is recorded on (the **destination** flow). |
+| `--trail` | The trail the decision is recorded on. Defaults to the single evaluation trail; required when evaluating multiple trails or a different flow. |
 | `--policy` | The policy to evaluate — a Kosli policy **identifier** (uses its current version) or a **local** `.rego` file (see [Evaluate a local policy file](#evaluate-a-local-policy-file)). |
 | `--control` | The control identifier the resulting decision is recorded against. |
-| `--evaluation-context` | The trail (or trails) whose facts are evaluated. |
-| `--trail` | Where the decision is recorded. Defaults to the evaluation trail; required when evaluating multiple trails. |
+| `--evaluation-context` | The trail (or trails) whose facts are evaluated (the **source**). Defaults to the decision trail; combine with `--evaluation-flow` to evaluate trails in another flow. |
+| `--evaluation-flow` | The flow that owns the trails in `--evaluation-context`, when the facts you evaluate live in a different flow than the decision is recorded on. Defaults to `--flow`. |
 | `--fingerprint` / `--artifact-type` | The artifact the decision applies to. Pass `--fingerprint` directly, or `--artifact-type` with the artifact name/path so Kosli calculates the fingerprint. |
 | `--name` | The attestation slot name the decision is recorded under on the trail. |
 | `--params` | Parameters passed to the policy as `data.params`. Every evaluation records the params it used. |
@@ -206,6 +207,24 @@ recorded when the evaluation completes. Add `--sync` to wait for the outcome, or
 both wait and fail the step when the policy denies — use `--assert` as a pipeline gate. Once
 recorded, a decision appears against the policy — see
 [View the decisions for a policy](#view-the-decisions-for-a-policy).
+
+**Evaluating facts from another flow.** By default the decision is recorded on the same trail
+whose facts you evaluate. When the evidence lives in a *different* flow — for example, evaluating a
+build flow's trail but recording the decision on a release flow's trail — set `--evaluation-flow`
+for the source and `--flow` / `--trail` for the destination:
+
+```shell
+kosli evaluate policy \
+    --policy pr-approved \
+    --control RCTL-043 \
+    --evaluation-flow build-ci \
+    --evaluation-context build-42 \
+    --flow release \
+    --trail release-99 \
+    --fingerprint "$ARTIFACT_FINGERPRINT" \
+    --name pr-approval-decision \
+    --sync
+```
 
 <Info>
 **The server captures the evidence for you.** Because Kosli runs the evaluation, the decision
@@ -266,7 +285,7 @@ confirms that:
 ```shell
 kosli validate policy \
     --policy pr-approved.rego \
-    --evaluation-context trail
+    --context-schema trail
 ```
 
 ```plaintext
