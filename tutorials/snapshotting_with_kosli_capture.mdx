@@ -1,7 +1,7 @@
 ---
 title: "Snapshotting AWS runtimes with Kosli Capture"
 description: "Drop a single CloudFormation stack into an AWS account and have Kosli Capture discover ECS, EKS, Lambda, and tagged S3 buckets, auto-create Kosli environments, and snapshot them on a schedule."
----
+description: "Deploy Kosli Capture into an AWS account to auto-discover and snapshot ECS, EKS, Lambda, and S3 resources into Kosli."
 
 <Info>
 **Kosli Capture is experimental.** The Lambda, CloudFormation template, configuration format, and CLI flags may still change between releases. Contact the Kosli team before running it in production — and we'd love to hear your feedback.
@@ -87,7 +87,7 @@ make deploy REGION=eu-west-1 KOSLI_ORG=<your-org>
 Opt into faster deploys with `make deploy DEPLOY_MODE=EXPRESS` (AWS CLI >= 2.35.13; rollback stays on). Run `make help` for the rest of the targets (`clean`, `prune-artefacts`, `destroy-artefacts`, `layer-arn`, `destroy`).
 </Tip>
 
-Once the first run completes (every two minutes by default), Kosli environments appear in the [Kosli app](https://app.kosli.com) under **Environments**, named according to the template in `config.yaml`.
+Once the first run completes (every two minutes by default), check the [Kosli app](https://app.kosli.com) under **Environments** — you will see environments named according to the template in `config.yaml`.
 
 ## Configure what gets snapshotted
 
@@ -211,7 +211,7 @@ Runtime sources **fail closed**: if a config fetch fails, Kosli Capture reuses t
 Keep the authoritative `config.yaml` in the repo and push versions via `make seed-config` (or CI) rather than hand-editing the SSM parameter or S3 object.
 </Tip>
 
-## EKS caveats — the honest part
+## EKS caveats
 
 EKS is the one resource type that may need extra setup on your side. Two things to be aware of:
 
