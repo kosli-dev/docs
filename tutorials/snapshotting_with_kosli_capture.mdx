@@ -9,7 +9,7 @@ description: "Drop a single CloudFormation stack into an AWS account and have Ko
 
 [Kosli Capture](https://github.com/kosli-dev/kosli-capture) is a **single CloudFormation stack** that sits inside your AWS account, discovers the resources you already run, and reports them to Kosli as environment snapshots — with no per-cluster reporter to install, no environments to pre-create, and no inventory list to maintain in config.
 
-It exists to shorten the runtime-side onboarding story. Getting build and release evidence into Kosli is usually straightforward — you own the pipeline. The runtime side is where most of the friction lives: reporters to deploy into every cluster, environments to create by hand, networking approvals for each workload. Kosli Capture flips that: one stack per account, tags decide what is in scope, and Kosli environments are created on first sight.
+Reporting build and release evidence to Kosli is usually straightforward — you own the pipeline. Reporting your runtime environments takes more work: a reporter to deploy into every cluster, environments to create by hand, and networking approvals for each workload. Kosli Capture removes those steps: you deploy one stack per account, tags decide what is in scope, and Kosli environments are created automatically on first sight.
 
 This tutorial covers how to:
 
