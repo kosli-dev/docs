@@ -86,9 +86,10 @@ decisions they produce.
 
 <Step title="Author a policy locally">
 
-Author your policy as code in your own repository, which stays the source of truth. A policy
-carries a **name**, a **purpose**, the **policy-as-code** (Rego), and an **input-context
-schema** declaring whether it evaluates a single trail or multiple trails.
+Author your policy as code in your own repository, which stays the source of truth. A policy is
+its **policy-as-code** (Rego), a short **description** of its purpose, and an **input-context
+schema** declaring whether it evaluates a single trail or multiple trails. You give it a stable
+**identifier** when you publish it to Kosli (next step).
 
 The output schema requires an `allow` rule; you can return richer output alongside it. Follow
 the same fail-safe design rules as client-side policies — see
@@ -198,6 +199,7 @@ POLICY:    pr-approved @ version 1
 | `--annotate` | Optional `key=value` annotations stored with the decision. |
 | `--sync` | Wait for the evaluation to finish and return the outcome. Off by default — evaluation runs asynchronously. |
 | `--assert` | Exit non-zero when the policy denies, for use as a pipeline gate. Implies `--sync`, since asserting requires the outcome. |
+| `--dry-run` | Evaluate and return the outcome **without recording a decision** — for testing (see [Run an ad-hoc evaluation](#run-an-ad-hoc-evaluation)). |
 
 By default the command queues the evaluation and returns without waiting; the decision is
 recorded when the evaluation completes. Add `--sync` to wait for the outcome, or `--assert` to
@@ -217,8 +219,10 @@ attest a client-side result yourself. Likewise, `--compliant` is **derived** fro
 <Info>
 The decision this records is the same kind of decision described in
 [Working with controls](/tutorials/working_with_controls) — the difference is that Kosli
-computed it server-side rather than you attesting the outcome yourself. You can require it
-in a flow template or reference the control in an environment policy exactly as before.
+computed it server-side rather than you attesting the outcome yourself. **Enforcement is
+unchanged:** require the control via `for_control` in an [environment policy](/getting_started/policies)
+and gate promotion with [`kosli assert artifact --environment`](/getting_started/enforce_policies),
+exactly as before. Recording the decision is the PDP; asserting it is the PEP.
 </Info>
 
 </Step>
@@ -371,9 +375,10 @@ kosli list policies --tag team=platform
 
 ## View the decisions for a policy
 
-Every decision a policy produces is listed against that policy, across **all versions** of the
-policy. In the [Kosli app](https://app.kosli.com), select **Policies**, choose a policy, and open
-its **Decisions** tab. Each row shows the timestamp, the trail and artifact the decision applies
+This is where **auditors and control owners** review what a policy has decided. Every decision a
+policy produces is listed against that policy, across **all versions** of the policy. In the
+[Kosli app](https://app.kosli.com), select **Policies**, choose a policy, and open its
+**Decisions** tab. Each row shows the timestamp, the trail and artifact the decision applies
 to, the policy version that produced it, and the outcome (compliant or non-compliant). Filter by
 outcome, version, or time range, and page through the results to sample them.
 
@@ -406,9 +411,10 @@ kosli list decisions \
 
 ## Inspect a failing evaluation
 
-When a policy denies, the decision records **why** through its `violations`. Whether the policy's
-rules weren't met (for example, a pull request with no approver) or an expected attestation was
-missing from the trail, both surface as violations on the decision.
+When a policy denies, an **application team** needs to know why — and the decision records it
+through its `violations`. Whether the policy's rules weren't met (for example, a pull request with
+no approver) or an expected attestation was missing from the trail, both surface as violations on
+the decision.
 
 A policy can return **more than `allow` and `violations`** — any additional fields in its output
 are captured on the decision, so you can surface richer, human-readable context beyond a bare
@@ -449,6 +455,13 @@ The following are explicitly **not included** in the beta and may be addressed l
 - **Associating policies to controls** — a stored policy-to-control link that lets Kosli infer
   which policy closes which control. In the beta you name the control per evaluation with
   `--control`; there is no stored mapping.
+
+## Next steps
+
+- [Working with controls](/tutorials/working_with_controls) — define controls and enforce them with `for_control` and `kosli assert`.
+- [Environment policies](/getting_started/policies) — require controls before an artifact runs in an environment.
+- [Enforce policies](/getting_started/enforce_policies) — gate promotion on compliance in your pipeline.
+- [Evaluate trails with OPA policies](/tutorials/evaluate_trails_with_opa) — the client-side `kosli evaluate` this builds on.
 
 ## Feedback
 
