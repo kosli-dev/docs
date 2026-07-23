@@ -213,7 +213,7 @@ Keep the authoritative `config.yaml` in the repo and push versions via `make see
 
 ## EKS caveats — the honest part
 
-EKS is the one type where a drop-in cannot do everything for you. Two things to be aware of:
+EKS is the one resource type that may need extra setup on your side. Two things to be aware of:
 
 **Authorization.** A newly discovered cluster has no access entry for the Kosli Capture role, so its snapshot fails with `Unauthorized`. You have two options:
 
