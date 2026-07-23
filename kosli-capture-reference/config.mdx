@@ -165,7 +165,7 @@ Rules:
 - Grouping takes precedence — matched resources go to the named env.
 - Unmatched resources fall through unchanged (Lambda's `granularity`, ECS's per-cluster env).
 - If a resource matches more than one entry, the first entry wins.
-- An entry with no tag pairs never matches anything, so a typo cannot sweep in everything.
+- An entry with no tag pairs never matches anything.
 
 Grouping is available for Lambda and ECS only. S3 buckets and EKS clusters are always reported to their own environments.
 
