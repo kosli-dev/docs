@@ -1,0 +1,160 @@
+---
+title: "Snapshotting AWS runtimes with Kosli Capture"
+description: "Deploy Kosli Capture into an AWS account to auto-discover and snapshot ECS, EKS, Lambda, and S3 resources into Kosli."
+---
+
+<Info>
+**Kosli Capture is experimental.** The Lambda, CloudFormation template, configuration format, and CLI flags may still change between releases. Contact the Kosli team before running it in production — and we'd love to hear your feedback.
+</Info>
+
+[Kosli Capture](https://github.com/kosli-dev/kosli-capture) is a **single CloudFormation stack** that sits inside your AWS account, discovers the resources you already run, and reports them to Kosli as environment snapshots — with no per-cluster reporter to install, no environments to pre-create, and no inventory list to maintain in config.
+
+Reporting build and release evidence to Kosli is usually straightforward — you own the pipeline. Reporting your runtime environments takes more work: a reporter to deploy into every cluster, environments to create by hand, and networking approvals for each workload. Kosli Capture removes those steps: you deploy one stack per account, tags decide what is in scope, and Kosli environments are created automatically on first sight.
+
+By the end of this tutorial you will have Kosli Capture running in an AWS account and reporting snapshots for its ECS clusters, EKS clusters, Lambda functions, and tagged S3 buckets into Kosli.
+
+## Prerequisites
+
+- Access to an AWS account and permissions to create an IAM role, Lambda function, EventBridge rule, and log group.
+- `make`, `python3`, `zip`, and the AWS CLI on the machine you deploy from. **No Docker, no ECR** — the Kosli CLI ships as a public [Lambda layer](https://docs.aws.amazon.com/lambda/latest/dg/chapter-layers.html) that the stack attaches to the function.
+- [A Kosli API token](/administration/authentication/service_accounts) with permission to **create environments**.
+- Your [Kosli organization name](/administration/authentication/service_accounts).
+- **A supported AWS region.** The Kosli CLI Lambda layer is published in nine regions today: `eu-central-1`, `eu-west-1`, `eu-west-2`, `eu-west-3`, `eu-north-1`, `us-east-1`, `us-east-2`, `us-west-1`, `us-west-2`. Deploy the stack into one of these.
+
+You do **not** need to pre-create Kosli environments — Kosli Capture creates them on first sight from the naming template.
+
+## How Kosli Capture works
+
+Kosli Capture is a scheduled Lambda that runs every two minutes (default) inside your AWS account. Each tick it re-derives the full picture from scratch — no state is carried between runs — so a dropped or throttled tick is simply superseded by the next one.
+
+```
+resource discovered ──tag filter──▶ env name from template ──▶ ensure env ──▶ snapshot
+```
+
+The Lambda uses the `kosli` CLI from Kosli's **public `kosli-cli` Lambda layer** (`/opt/kosli`) to talk to Kosli, so there is nothing to install into your resources themselves.
+
+| Type   | Discovery              | Env granularity                              | Kosli type |
+|--------|------------------------|----------------------------------------------|------------|
+| ECS    | `ListClusters` + tags  | per cluster (or tag-grouped)                 | `ecs`      |
+| EKS    | `ListClusters` + tags  | per cluster, or per namespace                | `k8s`      |
+| Lambda | `ListFunctions` + tags | per account/region, per function, or grouped | `lambda`   |
+| S3     | `ListBuckets` + tags   | per bucket, **opt-in tag only**              | `s3`       |
+
+Two things follow from this design:
+
+- **Config is policy, not inventory.** `config.yaml` never names individual resources. It sets tag filters, naming templates, and per-type toggles. Adding a new cluster does not need a config change. The full schema is documented in the [Kosli Capture config reference](/kosli-capture-reference/config).
+- **Failures are localized.** A single failing resource never stops the rest of the run — the failure is logged and reported as a `gap`, and the other snapshots complete.
+
+## 1. Store the API token in SSM
+
+Kosli Capture reads the API token from SSM Parameter Store as a SecureString. The default parameter name is `/kosli/api-token`:
+
+```bash
+aws ssm put-parameter \
+    --name /kosli/api-token \
+    --type SecureString \
+    --value "$KOSLI_API_TOKEN"
+```
+
+## 2. Clone the repo
+
+Everything runs from the repo root:
+
+```bash
+git clone https://github.com/kosli-dev/kosli-capture.git
+cd kosli-capture
+```
+
+The default `config.yaml` snapshots ECS, EKS, and Lambda in the deploy region, and picks up any S3 bucket tagged `kosli:track=true`. That is enough for a first run — return to `config.yaml` once you have snapshots flowing to shape naming and filtering with the [config reference](/kosli-capture-reference/config).
+
+## 3. Bootstrap the artefacts bucket
+
+The first time you deploy into an account/region, run `make bootstrap` to create the S3 bucket used to upload the Lambda zip:
+
+```bash
+make bootstrap REGION=eu-west-1 KOSLI_ORG=<your-org>
+```
+
+This is a one-time step per account/region.
+
+## 4. Deploy the stack
+
+Build the function zip, upload it, and deploy the CloudFormation stack:
+
+```bash
+make deploy REGION=eu-west-1 KOSLI_ORG=<your-org>
+```
+
+`make deploy` runs `aws cloudformation package` + `deploy`, so CloudFormation manages both the infrastructure and the function code — a rollback reverts the code too, and there is no separate deployment state for you to manage.
+
+<Tip>
+Opt into faster deploys with `make deploy DEPLOY_MODE=EXPRESS` (AWS CLI >= 2.35.13; rollback stays on). Run `make help` for the rest of the targets (`clean`, `prune-artefacts`, `destroy-artefacts`, `layer-arn`, `destroy`).
+</Tip>
+
+## 5. Verify snapshots are flowing
+
+Once the first run completes (within about two minutes), three places tell you Kosli Capture is doing its job:
+
+1. **CloudWatch Logs** for the Lambda function — each run logs the scan start, the resources it discovered vs. put in scope, the env names it derived, any gaps, and any errors. Bump verbosity at runtime (no rebuild) with the CloudFormation parameter `DebugLevel=debug` or `DebugLevel=trace`. `trace` also passes `--debug` into the underlying `kosli` CLI. The API token is never logged.
+2. **[Kosli Environments](https://app.kosli.com)** — new environments appear under **Environments** with names from your template. Each snapshot shows the running artifacts and their fingerprints, exactly as if you had reported them by hand.
+3. **[`kosli list snapshots`](/client_reference/kosli_list_snapshots)** and [`kosli get snapshot`](/client_reference/kosli_get_snapshot) — query environments from the CLI.
+
+## 6. (Optional) EKS: authorize and network your clusters
+
+EKS is the one resource type that may need extra setup on your side. Skip this step if you are not snapshotting EKS.
+
+**Authorization.** A newly discovered cluster has no access entry for the Kosli Capture role, so its snapshot fails with `Unauthorized`. You have two options:
+
+- **`eks_onboarding.mode: none`** — your cluster-creation pipeline is responsible for adding an access entry for the Kosli Capture role. The stack outputs `RoleArn` so you have a stable principal to grant. Recommended when clusters are already provisioned by an existing IaC platform team.
+- **`eks_onboarding.mode: self`** (deploy with the CloudFormation parameter `EnableEksSelfOnboarding=true`) — Kosli Capture grants **itself** `AmazonEKSViewPolicy` on each newly discovered cluster. The IAM permission for this is fenced with `eks:principalArn` / `eks:policyArn` conditions so Kosli Capture can only grant that one policy to its own role, and to nothing else.
+
+Clusters must have authentication mode `API` or `API_AND_CONFIG_MAP` for either option to work.
+
+**Networking.** Clusters with a private-only API endpoint are unreachable from a Lambda outside their VPC. Kosli Capture detects this via `DescribeCluster` and reports it as a `gap` instead of failing the whole run. To cover private clusters, deploy Kosli Capture **inside the VPC** with `VpcSubnetIds` and `VpcSecurityGroupIds` — one deployment per isolated VPC.
+
+## 7. (Optional) Shape the snapshots
+
+The default `config.yaml` is a starting point. Common next steps, all documented in the [config reference](/kosli-capture-reference/config):
+
+- Set a global `naming.prefix` so env names read as `aws-prod-…` instead of `aws-{account_id}-…`.
+- Exclude noisy resources with `scope.exclude_tags` (or opt in a specific subset with `scope.include_tags`).
+- Group related Lambdas or ECS clusters into one env with per-type [`grouping`](/kosli-capture-reference/config#grouping-lambda-and-ecs).
+- Slice a shared EKS cluster into per-namespace envs with [`types.eks.namespaces`](/kosli-capture-reference/config#eks-namespaces).
+- Fan out across regions with `scope.regions` and `{region}` in `naming.template`.
+
+When you edit `config.yaml`, deliver the change to the running Lambda in one of three ways:
+
+| `ConfigSource`    | Change flow                                                  |
+|-------------------|--------------------------------------------------------------|
+| `baked` (default) | Edit `config.yaml` → `make deploy`                           |
+| `ssm`             | Edit `config.yaml` → `make seed-config` → next scheduled run |
+| `s3`              | Edit `config.yaml` → `make seed-config` → next scheduled run |
+
+See [Config sources at runtime](/kosli-capture-reference/config#config-sources-at-runtime) for how each source behaves. Runtime sources **fail closed** — a failed fetch reuses the last-known-good config or fails the run, never silently falling back to the baked copy.
+
+## Good to know
+
+A few behaviors to be aware of:
+
+- **One region per deploy by default.** List `scope.regions` to fan out across regions, and add `{region}` to your naming template so each region gets its own env.
+- **Kosli Capture excludes itself** from Lambda discovery, so its own Lambda never shows up in your Kosli environments.
+- **EventBridge triggers are not enabled by default.** Kosli Capture relies on its two-minute schedule because it covers every resource type — EKS pod changes do not emit AWS events. For lower-latency updates on ECS, Lambda, and S3, you can additionally invoke the same function from EventBridge rules (for example ECS task state change, or CloudTrail `CreateCluster` / `CreateBucket`); each run rescans everything, so the rules need no payload handling.
+- **Scaling events are off by default.** Kosli does not create a new snapshot for a change in replica count only — the workload's provenance has not changed. Turn on `include_scaling: true` (globally or per type) if you want scaling to produce new snapshots.
+- **Renaming an env-name tag creates a new env, not a rename.** Kosli Capture cannot see the previous value; it just derives the new name and creates the env on first sight. The old env remains until you archive it.
+
+## Constraints
+
+- **Deploy in a supported region and keep the function `x86_64`.** The Kosli CLI layer is published only in the nine regions listed under [Prerequisites](#prerequisites), and the function architecture has to match the layer's.
+- **Private-only EKS endpoints require in-VPC deployment.** See [step 6](#6-optional-eks-authorize-and-network-your-clusters).
+
+## What you've accomplished
+
+You have dropped a single CloudFormation stack into an AWS account and are now snapshotting ECS clusters, EKS clusters, Lambda functions, and tagged S3 buckets into Kosli — without deploying a reporter into each resource, without pre-creating environments, and without maintaining an inventory list in config.
+
+From here you can:
+
+- Explore the [Kosli Capture config reference](/kosli-capture-reference/config) to shape naming, filters, grouping, and EKS namespaces.
+- [Query your environments](/client_reference/kosli_list_snapshots) and [diff snapshots](/client_reference/kosli_diff_snapshots) to see what changed.
+- [Trace a running artifact back to its git commit](/tutorials/following_a_git_commit_to_runtime_environments).
+- [Attach environment policies](/getting_started/policies) so Kosli evaluates each snapshot against your compliance requirements.
+- Compare against the more traditional per-resource reporter approach in [Report AWS environments to Kosli](/tutorials/report_aws_envs).

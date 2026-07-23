@@ -98,7 +98,8 @@
               "pages": [
                 "tutorials/report_aws_envs",
                 "tutorials/report_k8s_envs",
-                "tutorials/report_cloud_run_envs"
+                "tutorials/report_cloud_run_envs",
+                "tutorials/snapshotting_with_kosli_capture"
               ]
             },
             {
@@ -572,6 +573,18 @@
                 "policy-reference/environment_policy",
                 "policy-reference/policy_builder",
                 "policy-reference/rego_policy"
+              ]
+            }
+          ]
+        },
+        {
+          "item": "Kosli Capture Reference",
+          "icon": "camera",
+          "groups": [
+            {
+              "group": "Kosli Capture",
+              "pages": [
+                "kosli-capture-reference/config"
               ]
             }
           ]
