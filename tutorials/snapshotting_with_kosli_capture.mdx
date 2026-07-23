@@ -171,7 +171,7 @@ types:
 
 Resources matching **all** pairs of an entry are reported together in one snapshot call (`snapshot lambda --function-names a,b,c` / `snapshot ecs --clusters a,b,c`). Unmatched resources fall through to the default behavior — Lambda's `granularity`, ECS's per-cluster env — unchanged. If a resource matches more than one entry, the first entry wins; an entry with no tag pairs never matches anything.
 
-Grouping is only offered where the snapshot command reports a set in one call. S3 (`--bucket` is a single bucket) and per-cluster EKS have no such flag, so grouping does not apply to them — pointing several of those at one env name would just overwrite it each run.
+Grouping is available for Lambda and ECS only. S3 buckets and EKS clusters are always reported to their own environments.
 
 ### EKS: whole-cluster or per-namespace
 
