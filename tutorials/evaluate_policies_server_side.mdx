@@ -17,17 +17,20 @@ Decision Point (PDP) **into Kosli**. You ship a versioned policy to Kosli, Kosli
 against facts it already holds, and Kosli **records the decision itself** — one it can vouch for,
 connected to the exact policy version and inputs used.
 
-This tutorial walks a **governance platform engineer** through the beta flow:
+This tutorial walks a **governance platform engineer** through the beta flow. Each part below
+links to its section:
 
-- **Author and ship a policy** — write Rego locally, then publish a versioned policy into Kosli.
-- **Evaluate and record a decision** — run `kosli evaluate policy` so Kosli computes the outcome
-  server-side and records a decision against a control.
-- **Trace and replicate** — see how a decision captures the facts and policy version it used, so
-  the same inputs always yield the same decision.
-- **Validate, test, and manage policies** — check a policy before shipping it, and version, tag,
-  and archive policies over time.
-- **Report and inspect** — review the decisions a policy has produced and understand why an
-  evaluation failed.
+1. **[Author, ship, and evaluate a policy](#author-ship-and-evaluate-a-policy)** — the core loop:
+   write Rego locally, publish a versioned policy into Kosli, evaluate it server-side to record a
+   decision against a control, then view and trace that decision in Kosli.
+2. **[Validate and test a policy](#validate-and-test-a-policy)** — check a policy holds up before
+   you ship it or gate a pipeline on it.
+3. **[Manage policies](#manage-policies)** — update (creating a new version), tag, and archive
+   policies over time.
+4. **[View the decisions for a policy](#view-the-decisions-for-a-policy)** — review and export the
+   decisions a policy has produced.
+5. **[Inspect a failing evaluation](#inspect-a-failing-evaluation)** — understand why an
+   evaluation was denied.
 
 <Info>
 This is distinct from the existing client-side
@@ -72,6 +75,13 @@ export KOSLI_ORG=<your-org>
 export KOSLI_API_TOKEN=<your-api-token>
 ```
 
+## Author, ship, and evaluate a policy
+
+The core loop takes a policy from local Rego to a recorded decision. The later sections build on
+it — [validating](#validate-and-test-a-policy) and [managing](#manage-policies) policies, and
+[viewing](#view-the-decisions-for-a-policy) and [inspecting](#inspect-a-failing-evaluation) the
+decisions they produce.
+
 <Steps>
 
 <Step title="Author a policy locally">
@@ -107,6 +117,9 @@ violations contains msg if {
 }
 ```
 
+Before you ship it, you can [validate and test the policy](#validate-and-test-a-policy) against
+real trail data.
+
 <Info>
 In the beta, a policy evaluates the facts on the trail(s) you point it at — attestations on
 `trail` / `trails`. Evaluating other targets (snapshots, artifacts, generic input) and
@@ -117,9 +130,13 @@ composing multiple policies into one are **not included** (see [What's out of sc
 
 <Step title="Ship a versioned policy into Kosli">
 
-Publish the policy into Kosli via the CLI (or API). Kosli assigns it a stable **identifier** and
-records the first **version**. Every later change creates a new version and records who made it,
-so a decision can always point back to the exact policy that produced it.
+Publish the policy into Kosli via the CLI (or API). You give the policy a **stable identifier**
+(`pr-approved` here) — this is the identifier decisions and evaluations use to refer to the
+policy, so it is **immutable once created**; choose one that matches how your organization names
+its policies. Kosli records the first **version** on publish. Every later change creates a new
+version and records who made it, so a decision can always point back to the exact policy that
+produced it — see [Manage policies](#manage-policies) for updating, tagging, and archiving over
+time.
 
 ```shell
 kosli create policy pr-approved \
@@ -130,7 +147,7 @@ kosli create policy pr-approved \
 
 ```plaintext
 Policy 'pr-approved' created
-  identifier:  0f8c2a1e-...
+  identifier:  pr-approved
   version:     1
 ```
 
@@ -170,7 +187,7 @@ POLICY:    pr-approved @ version 1
 | Flag | Description |
 |------|-------------|
 | `--flow` | The flow that owns the trail(s) being evaluated and where the decision is recorded. |
-| `--policy` | The policy to evaluate — a Kosli policy **identifier** (uses its current version) or a **local** `.rego` file (shown in the final step). |
+| `--policy` | The policy to evaluate — a Kosli policy **identifier** (uses its current version) or a **local** `.rego` file (see [Evaluate a local policy file](#evaluate-a-local-policy-file)). |
 | `--control` | The control identifier the resulting decision is recorded against. |
 | `--evaluation-context` | The trail (or trails) whose facts are evaluated. |
 | `--trail` | Where the decision is recorded. Defaults to the evaluation trail; required when evaluating multiple trails. |
@@ -184,7 +201,9 @@ POLICY:    pr-approved @ version 1
 
 By default the command queues the evaluation and returns without waiting; the decision is
 recorded when the evaluation completes. Add `--sync` to wait for the outcome, or `--assert` to
-both wait and fail the step when the policy denies — use `--assert` as a pipeline gate.
+both wait and fail the step when the policy denies — use `--assert` as a pipeline gate. Once
+recorded, a decision appears against the policy — see
+[View the decisions for a policy](#view-the-decisions-for-a-policy).
 
 <Info>
 **The server captures the evidence for you.** Because Kosli runs the evaluation, the decision
@@ -204,34 +223,17 @@ in a flow template or reference the control in an environment policy exactly as 
 
 </Step>
 
-<Step title="Trace and replicate the decision">
+<Step title="View and trace the decision">
 
-Every decision captures its **evaluation context**: references to the trail *moments* that were
-in scope — and, through them, the attestations that were evaluated — the policy version that ran,
-the parameters used, and a timestamp. Because these inputs are pinned, re-running from the stored
+As soon as the evaluation completes, the decision appears in Kosli against the control and the
+policy that produced it. Open it in the [Kosli app](https://app.kosli.com) to see the outcome and
+its **evaluation context** — the policy version that ran, the parameters used, the trail *moments*
+that were in scope (and, through them, the attestations that were evaluated), and a timestamp.
+
+Because those inputs are pinned, the decision is fully traceable, and re-running from the stored
 context yields the **same decision** — this is what makes a server-side decision replicable for
-audit.
-
-</Step>
-
-<Step title="Evaluate a local policy file">
-
-During development you can evaluate a **local, unpublished** policy file — the decision is still
-recorded server-side. This lets you iterate on a policy before shipping a version of it.
-
-```shell
-kosli evaluate policy \
-    --flow "$FLOW_NAME" \
-    --policy ./pr-approved.rego \
-    --control RCTL-043 \
-    --evaluation-context "$TRAIL_NAME" \
-    --fingerprint "$ARTIFACT_FINGERPRINT" \
-    --name pr-approval-decision \
-    --params '{"pr_attestation_name": "pull-request"}'
-```
-
-Because there is no stored policy version to cite, the decision records the exact policy source
-that was evaluated instead.
+audit. To review and filter every decision a policy has produced, see
+[View the decisions for a policy](#view-the-decisions-for-a-policy).
 
 </Step>
 
@@ -240,6 +242,13 @@ that was evaluated instead.
 ## Validate and test a policy
 
 Before you ship a policy — or wire it into a pipeline gate — check that it holds up.
+
+<Tip>
+Your policy repository is the source of truth for your policies, so treat it like code: keep
+**Rego tests alongside each policy** that assert it allows and denies the cases you expect. Rego's
+built-in [test framework](https://www.openpolicyagent.org/docs/latest/policy-testing/) runs these
+locally and in CI, catching regressions before you publish a new version.
+</Tip>
 
 ### Validate
 
@@ -282,6 +291,27 @@ RESULT:  ALLOWED  (dry-run — no decision recorded)
 
 This is the fastest way to iterate: point a candidate policy at a trail you know should pass (or
 fail) and confirm the outcome before publishing a version or gating a pipeline on it.
+
+### Evaluate a local policy file
+
+You don't have to publish a policy before it can record a decision. Point `--policy` at a local,
+unpublished `.rego` file and Kosli evaluates it server-side and records the decision, just as it
+would for a stored policy — useful while you're still iterating on a policy you haven't shipped:
+
+```shell
+kosli evaluate policy \
+    --flow "$FLOW_NAME" \
+    --policy ./pr-approved.rego \
+    --control RCTL-043 \
+    --evaluation-context "$TRAIL_NAME" \
+    --fingerprint "$ARTIFACT_FINGERPRINT" \
+    --name pr-approval-decision \
+    --params '{"pr_attestation_name": "pull-request"}'
+```
+
+Because there is no stored policy version to cite, the decision records the exact policy source
+that was evaluated instead. Unlike the ad-hoc evaluation above, this **records** a decision — add
+`--dry-run` if you only want the outcome without recording one.
 
 ## Manage policies
 
@@ -376,14 +406,9 @@ kosli list decisions \
 
 ## Inspect a failing evaluation
 
-When a policy denies, the decision records **why** — and distinguishes two cases an application
-team needs to tell apart:
-
-- **Non-compliance** — the evidence was present but the policy's rules were not met (for example, a
-  pull request with no approver). The `violations` explain what failed.
-- **Missing evidence** — an expected attestation wasn't on the trail, so the policy could not
-  positively verify compliance. Following the fail-safe design rules, this is reported as
-  non-compliant rather than passing silently.
+When a policy denies, the decision records **why** through its `violations`. Whether the policy's
+rules weren't met (for example, a pull request with no approver) or an expected attestation was
+missing from the trail, both surface as violations on the decision.
 
 A policy can return **more than `allow` and `violations`** — any additional fields in its output
 are captured on the decision, so you can surface richer, human-readable context beyond a bare
