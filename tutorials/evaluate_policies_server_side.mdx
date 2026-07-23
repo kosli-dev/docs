@@ -140,10 +140,10 @@ produced it — see [Manage policies](#manage-policies) for updating, tagging, a
 time.
 
 ```shell
-kosli create policy pr-approved \
-    --policy pr-approved.rego \
-    --description "Every pull request on the trail has at least one approver." \
-    --context-schema trail
+kosli create policy pr-approved pr-approved.rego \
+    --type rego \
+    --context-schema trail \
+    --description "Every pull request on the trail has at least one approver."
 ```
 
 ```plaintext
@@ -153,9 +153,9 @@ Policy 'pr-approved' created
 ```
 
 <Info>
-In the beta, authoring is **CLI/API only** — the Kosli UI is read/tag-only. The exact publish
-command surface (and how it relates to existing environment-policy commands) is part of what
-we want feedback on.
+`kosli create policy` is the same command used for [environment policies](/getting_started/policies):
+`--type rego` selects an evaluation policy, while the default `--type env` creates an environment
+policy. In the beta, authoring is **CLI/API only** — the Kosli UI is read/tag-only.
 </Info>
 
 </Step>
@@ -338,14 +338,17 @@ that was evaluated instead. Unlike the ad-hoc evaluation above, this **records**
 
 ### Update a policy
 
-Change a policy's name, description, or Rego with `kosli update policy`. Every update creates a
-**new version** and records who made it, so a decision always points back to the exact version
-that produced it.
+Publishing a change is the same command as the initial publish: re-run `kosli create policy` with
+the updated Rego or description. Each publish creates a **new version** and records who made it —
+add `--comment` to note what changed — so a decision always points back to the exact version that
+produced it.
 
 ```shell
-kosli update policy pr-approved \
-    --policy pr-approved.rego \
-    --description "Every pull request on the trail has an approver from a code owner."
+kosli create policy pr-approved pr-approved.rego \
+    --type rego \
+    --context-schema trail \
+    --description "Every pull request on the trail has an approver from a code owner." \
+    --comment "Require approval from a code owner"
 ```
 
 An evaluation that references a policy by identifier uses its **current version**. Decisions
@@ -383,11 +386,11 @@ list. Each policy shows its identifier, current version, and tags.
   <img src="/images/tutorials/policy-list.png" alt="Policies catalog listing policies with their identifier, current version, and tags, with a search box and a tag filter" />
 </Frame>
 
-You can also list policies from the CLI, filtering by name or tag — each entry shows the
-identifier and current version:
+You can also list policies from the CLI. Filter to evaluation policies with `--type rego`, and by
+name or tag — each entry shows the identifier and current version:
 
 ```shell
-kosli list policies --tag team=platform
+kosli list policies --type rego --tag team=platform
 ```
 
 ## View the decisions for a policy
