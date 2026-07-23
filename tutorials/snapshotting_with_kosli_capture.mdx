@@ -238,7 +238,7 @@ A few behaviors to be aware of:
 
 - **One region per deploy by default.** List `scope.regions` to fan out across regions, and add `{region}` to your naming template so each region gets its own env.
 - **Kosli Capture excludes itself** from Lambda discovery, so its own Lambda never shows up in your Kosli environments.
-- **EventBridge triggers are not enabled by default.** The two-minute schedule is the backbone — EKS pods do not emit AWS events, so schedule-driven scanning is the common denominator. You can additionally invoke the same function from EventBridge rules (ECS task state change, CloudTrail `CreateCluster` / `CreateBucket`) for lower-latency updates on the AWS-native types; every run re-derives truth, so no payload handling is needed on the trigger.
+- **EventBridge triggers are not enabled by default.** Kosli Capture relies on its two-minute schedule because it covers every resource type — EKS pod changes do not emit AWS events. For lower-latency updates on ECS, Lambda, and S3, you can additionally invoke the same function from EventBridge rules (for example ECS task state change, or CloudTrail `CreateCluster` / `CreateBucket`); each run rescans everything, so the rules need no payload handling.
 - **Scaling events are off by default.** Kosli does not create a new snapshot for a change in replica count only — the workload's provenance has not changed. Turn on `include_scaling: true` (globally or per type) if you want scaling to produce new snapshots.
 - **Renaming an env-name tag creates a new env, not a rename.** Kosli Capture cannot see the previous value; it just derives the new name and creates the env on first sight. The old env remains until you archive it.
 
