@@ -169,7 +169,7 @@ types:
       aws-prod-platform: { team: platform }
 ```
 
-Resources matching **all** pairs of an entry are reported together in one snapshot call (`snapshot lambda --function-names a,b,c` / `snapshot ecs --clusters a,b,c`). Unmatched resources fall through to the default behavior — Lambda's `granularity`, ECS's per-cluster env — unchanged. The first matching entry wins, and an entry with no tags never matches, so a typo cannot sweep in everything.
+Resources matching **all** pairs of an entry are reported together in one snapshot call (`snapshot lambda --function-names a,b,c` / `snapshot ecs --clusters a,b,c`). Unmatched resources fall through to the default behavior — Lambda's `granularity`, ECS's per-cluster env — unchanged. If a resource matches more than one entry, the first entry wins; an entry with no tag pairs never matches anything.
 
 Grouping is only offered where the snapshot command reports a set in one call. S3 (`--bucket` is a single bucket) and per-cluster EKS have no such flag, so grouping does not apply to them — pointing several of those at one env name would just overwrite it each run.
 
