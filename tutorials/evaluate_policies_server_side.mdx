@@ -172,7 +172,7 @@ kosli evaluate policy \
     --flow "$FLOW_NAME" \
     --policy pr-approved \
     --control RCTL-043 \
-    --evaluation-context "$TRAIL_NAME" \
+    --evaluation-context trail="$TRAIL_NAME" \
     --fingerprint "$ARTIFACT_FINGERPRINT" \
     --name pr-approval-decision \
     --params '{"pr_attestation_name": "pull-request"}' \
@@ -188,11 +188,10 @@ POLICY:    pr-approved @ version 1
 | Flag | Description |
 |------|-------------|
 | `--flow` | The flow the decision is recorded on (the **destination** flow). |
-| `--trail` | The trail the decision is recorded on. Defaults to the single evaluation trail; required when evaluating multiple trails or a different flow. |
+| `--trail` | The trail the decision is recorded on. Defaults to the evaluation trail when a single one is evaluated; required otherwise. |
 | `--policy` | The policy to evaluate — a Kosli policy **identifier** (uses its current version) or a **local** `.rego` file (see [Evaluate a local policy file](#evaluate-a-local-policy-file)). |
 | `--control` | The control identifier the resulting decision is recorded against. |
-| `--evaluation-context` | The trail (or trails) whose facts are evaluated (the **source**). Defaults to the decision trail; combine with `--evaluation-flow` to evaluate trails in another flow. |
-| `--evaluation-flow` | The flow that owns the trails in `--evaluation-context`, when the facts you evaluate live in a different flow than the decision is recorded on. Defaults to `--flow`. |
+| `--evaluation-context` | One or more **typed references** to the facts to evaluate (the **source**), repeatable. In the beta the only type is a trail: `trail=<trail_id>` (in `--flow`), or `trail=<flow_id>:<trail_id>` to name a trail in another flow. Defaults to the decision trail. The typed form leaves room for other context types (snapshots, artifacts, …) later without new flags. |
 | `--fingerprint` / `--artifact-type` | The artifact the decision applies to. Pass `--fingerprint` directly, or `--artifact-type` with the artifact name/path so Kosli calculates the fingerprint. |
 | `--name` | The attestation slot name the decision is recorded under on the trail. |
 | `--params` | Parameters passed to the policy as `data.params`. Every evaluation records the params it used. |
@@ -209,16 +208,15 @@ recorded, a decision appears against the policy — see
 [View the decisions for a policy](#view-the-decisions-for-a-policy).
 
 **Evaluating facts from another flow.** By default the decision is recorded on the same trail
-whose facts you evaluate. When the evidence lives in a *different* flow — for example, evaluating a
-build flow's trail but recording the decision on a release flow's trail — set `--evaluation-flow`
-for the source and `--flow` / `--trail` for the destination:
+whose facts you evaluate. Because each `--evaluation-context` reference carries its own flow
+(`trail=<flow_id>:<trail_id>`), you can evaluate a trail in a *different* flow — for example,
+evaluating a build flow's trail but recording the decision on a release flow's trail:
 
 ```shell
 kosli evaluate policy \
     --policy pr-approved \
     --control RCTL-043 \
-    --evaluation-flow build-ci \
-    --evaluation-context build-42 \
+    --evaluation-context trail=build-ci:build-42 \
     --flow release \
     --trail release-99 \
     --fingerprint "$ARTIFACT_FINGERPRINT" \
@@ -302,7 +300,7 @@ but no decision is stored — so `--control` and `--name` aren't needed:
 kosli evaluate policy \
     --flow "$FLOW_NAME" \
     --policy pr-approved.rego \
-    --evaluation-context "$TRAIL_NAME" \
+    --evaluation-context trail="$TRAIL_NAME" \
     --params '{"pr_attestation_name": "pull-request"}' \
     --sync \
     --dry-run
@@ -326,7 +324,7 @@ kosli evaluate policy \
     --flow "$FLOW_NAME" \
     --policy ./pr-approved.rego \
     --control RCTL-043 \
-    --evaluation-context "$TRAIL_NAME" \
+    --evaluation-context trail="$TRAIL_NAME" \
     --fingerprint "$ARTIFACT_FINGERPRINT" \
     --name pr-approval-decision \
     --params '{"pr_attestation_name": "pull-request"}'
@@ -447,7 +445,7 @@ kosli evaluate policy \
     --flow "$FLOW_NAME" \
     --policy pr-approved \
     --control RCTL-043 \
-    --evaluation-context "$TRAIL_NAME" \
+    --evaluation-context trail="$TRAIL_NAME" \
     --fingerprint "$ARTIFACT_FINGERPRINT" \
     --name pr-approval-decision \
     --params '{"pr_attestation_name": "pull-request"}' \
