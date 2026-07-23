@@ -17,13 +17,17 @@ Decision Point (PDP) **into Kosli**. You ship a versioned policy to Kosli, Kosli
 against facts it already holds, and Kosli **records the decision itself** — one it can vouch for,
 connected to the exact policy version and inputs used.
 
-This tutorial walks a **governance platform engineer** through the core beta flow:
+This tutorial walks a **governance platform engineer** through the beta flow:
 
 - **Author and ship a policy** — write Rego locally, then publish a versioned policy into Kosli.
 - **Evaluate and record a decision** — run `kosli evaluate policy` so Kosli computes the outcome
   server-side and records a decision against a control.
 - **Trace and replicate** — see how a decision captures the facts and policy version it used, so
   the same inputs always yield the same decision.
+- **Validate, test, and manage policies** — check a policy before shipping it, and version, tag,
+  and archive policies over time.
+- **Report and inspect** — review the decisions a policy has produced and understand why an
+  evaluation failed.
 
 <Info>
 This is distinct from the existing client-side
@@ -233,6 +237,161 @@ that was evaluated instead.
 
 </Steps>
 
+## Validate and test a policy
+
+Before you ship a policy — or wire it into a pipeline gate — check that it holds up.
+
+### Validate
+
+`kosli validate policy` checks that a policy is well-formed without recording anything. It
+confirms that:
+
+- the Rego **compiles**;
+- it matches its declared **input-context schema** (`trail` / `trails`);
+- it satisfies the **output schema** — an `allow` rule is mandatory.
+
+```shell
+kosli validate policy \
+    --policy pr-approved.rego \
+    --evaluation-context trail
+```
+
+```plaintext
+RESULT:  VALID
+```
+
+### Run an ad-hoc evaluation
+
+To see how a policy behaves against real trail data *without* recording a decision, add
+`--dry-run` to `kosli evaluate policy`. Kosli runs the policy server-side and returns the outcome,
+but no decision is stored — so `--control` and `--name` aren't needed:
+
+```shell
+kosli evaluate policy \
+    --flow "$FLOW_NAME" \
+    --policy pr-approved.rego \
+    --evaluation-context "$TRAIL_NAME" \
+    --params '{"pr_attestation_name": "pull-request"}' \
+    --sync \
+    --dry-run
+```
+
+```plaintext
+RESULT:  ALLOWED  (dry-run — no decision recorded)
+```
+
+This is the fastest way to iterate: point a candidate policy at a trail you know should pass (or
+fail) and confirm the outcome before publishing a version or gating a pipeline on it.
+
+## Manage policies
+
+### Update a policy
+
+Change a policy's name, description, or Rego with `kosli update policy`. Every update creates a
+**new version** and records who made it, so a decision always points back to the exact version
+that produced it.
+
+```shell
+kosli update policy pr-approved \
+    --policy pr-approved.rego \
+    --description "Every pull request on the trail has an approver from a code owner."
+```
+
+An evaluation that references a policy by identifier uses its **current version**. Decisions
+recorded earlier keep pointing at the version that was current when they were made.
+
+### Tag a policy
+
+Tags are versionless labels for organizing and filtering policies — grouping by team, framework,
+or control area. Tagging does **not** create a new version.
+
+```shell
+kosli tag policy pr-approved --set team=platform --set framework=soc2
+```
+
+### Archive and unarchive
+
+When a policy is retired, archive it rather than deleting it. Archiving is light-touch: the policy
+is removed from the main list in the UI but **remains evaluable**, and its versions and past
+decisions are preserved. Archiving records who archived it and when, and does not create a new
+version. Unarchive it if it comes back into use.
+
+```shell
+kosli archive policy pr-approved
+kosli unarchive policy pr-approved
+```
+
+### List and filter policies
+
+List your policies with `kosli list policies`, filtering by name or tag. Each entry shows the
+identifier and current version.
+
+```shell
+kosli list policies --tag team=platform
+```
+
+## Report on decisions
+
+Every decision a policy produces is listed against that policy — across **all versions** of the
+policy. List them from the CLI with `kosli list decisions`, filtered by compliance, policy
+version, or time range:
+
+```shell
+kosli list decisions \
+    --policy pr-approved \
+    --compliant=false \
+    --since 30d
+```
+
+The filters let you focus a review — for example, `--compliant=false` surfaces every
+non-compliant evaluation for follow-up. Export the filtered set as CSV for an audit or an offline
+review:
+
+```shell
+kosli list decisions --policy pr-approved --output csv > decisions.csv
+```
+
+Decisions are also available in the Kosli UI on the policy's detail page, where you can filter and
+page through them and open any decision to see the evaluation report behind it.
+
+## Inspect a failing evaluation
+
+When a policy denies, the decision records **why** — and distinguishes two cases an application
+team needs to tell apart:
+
+- **Non-compliance** — the evidence was present but the policy's rules were not met (for example, a
+  pull request with no approver). The `violations` explain what failed.
+- **Missing evidence** — an expected attestation wasn't on the trail, so the policy could not
+  positively verify compliance. Following the fail-safe design rules, this is reported as
+  non-compliant rather than passing silently.
+
+A policy can return **more than `allow` and `violations`** — any additional fields in its output
+are captured on the decision, so you can surface richer, human-readable context beyond a bare
+pass/fail.
+
+When you gate a pipeline with `--assert`, Kosli prints the violations as markdown so failures are
+readable directly in CI logs:
+
+```shell
+kosli evaluate policy \
+    --flow "$FLOW_NAME" \
+    --policy pr-approved \
+    --control RCTL-043 \
+    --evaluation-context "$TRAIL_NAME" \
+    --fingerprint "$ARTIFACT_FINGERPRINT" \
+    --name pr-approval-decision \
+    --params '{"pr_attestation_name": "pull-request"}' \
+    --assert
+```
+
+```plaintext
+RESULT:      DENIED
+VIOLATIONS:  pull-request https://github.com/acme/app/pull/42 has no approvers
+```
+
+In the Kosli UI, the violations are parsed out of the decision and rendered on the decision
+detail, so an application team can see exactly what to fix.
+
 ## What's out of scope for the beta
 
 The following are explicitly **not included** in the beta and may be addressed later:
@@ -244,10 +403,6 @@ The following are explicitly **not included** in the beta and may be addressed l
 - **Associating policies to controls** — a stored policy-to-control link that lets Kosli infer
   which policy closes which control. In the beta you name the control per evaluation with
   `--control`; there is no stored mapping.
-
-Other parts of the beta flow — managing policies (versioning, tagging, archive/unarchive),
-validating and testing policies, reporting and filtering decisions, and inspecting failing
-evaluations — are in scope and will be added to this tutorial as the design firms up.
 
 ## Feedback
 
