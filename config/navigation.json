@@ -576,6 +576,18 @@
               ]
             }
           ]
+        },
+        {
+          "item": "Kosli Capture Reference",
+          "icon": "camera",
+          "groups": [
+            {
+              "group": "Kosli Capture",
+              "pages": [
+                "kosli-capture-reference/config"
+              ]
+            }
+          ]
         }
       ]
     },

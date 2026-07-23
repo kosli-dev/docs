@@ -1,0 +1,268 @@
+---
+title: "Kosli Capture config reference"
+description: "Reference for config.yaml in Kosli Capture: naming, scope, per-type toggles, tag grouping, EKS namespaces, and runtime config sources."
+---
+
+<Info>
+**Kosli Capture is experimental.** The configuration format may still change between releases. See the [tutorial](/tutorials/snapshotting_with_kosli_capture) to get started.
+</Info>
+
+[Kosli Capture](https://github.com/kosli-dev/kosli-capture) reads its policy from a single `config.yaml` at the repo root. `make` validates and converts the file to `config.json` at build time (stdlib JSON at runtime — no PyYAML dependency), and a malformed file fails the conversion so bad config never ships.
+
+The file has three top-level sections — `naming`, `scope`, and `types` — plus `eks_onboarding` and a global `include_scaling` toggle.
+
+## `naming`
+
+Controls how Kosli environment names are derived for each discovered resource.
+
+```yaml
+naming:
+  prefix: aws-prod                    # global default; omitted -> aws-{account_id}
+  template: "{prefix}-{type}-{name}"  # placeholders: {prefix} {account_id} {region} {type} {name}
+  prefix_tag: "kosli:prefix"          # resource tag overriding {prefix} for that resource
+  name_tag: "kosli:env-name"          # resource tag overriding the ENTIRE env name (escape hatch)
+```
+
+| Field        | Type   | Default                  | Description                                                                                     |
+|--------------|--------|--------------------------|-------------------------------------------------------------------------------------------------|
+| `prefix`     | string | `aws-{account_id}`       | Global default `{prefix}` in the template.                                                     |
+| `template`   | string | `{prefix}-{type}-{name}` | Env-name template. Placeholders: `{prefix}`, `{account_id}`, `{region}`, `{type}`, `{name}`.  |
+| `prefix_tag` | string | `kosli:prefix`           | Resource tag key that overrides `{prefix}` for a single resource.                              |
+| `name_tag`   | string | `kosli:env-name`         | Resource tag key that overrides the entire derived env name.                                   |
+
+### Env-name precedence
+
+Env names are resolved through a single precedence chain, used for whole resources and namespace slices alike:
+
+| Precedence | Where                                              | Behavior                                                              |
+|------------|----------------------------------------------------|-----------------------------------------------------------------------|
+| 1          | Explicit env name (config, EKS `namespaces` map)   | Wins outright                                                         |
+| 2          | `kosli:env-name` tag on the resource               | Whole resource → that name; sliced cluster → `<value>-<ns>`           |
+| 3          | Template                                           | `{prefix}-{type}-{name}`; slices append `-<ns>` to `{name}`           |
+
+Within the template, `{prefix}` itself resolves in this order:
+
+1. `kosli:prefix` tag on the resource
+2. `types.<type>.prefix`
+3. `naming.prefix`
+4. `aws-{account_id}`
+
+Keep `{type}` in the template — env names are unique per Kosli org, and a bucket could otherwise share a name with a cluster.
+
+## `scope`
+
+Global filters applied to every type, combined with the per-type filters.
+
+```yaml
+scope:
+  regions: []                     # empty = the Lambda's own region only
+  include_tags: {}                # empty = opt-out mode (everything unless excluded)
+  exclude_tags:
+    kosli:ignore: "true"
+```
+
+| Field          | Type          | Default                    | Description                                                                                     |
+|----------------|---------------|----------------------------|-------------------------------------------------------------------------------------------------|
+| `regions`      | list\<string\> | `[]` (Lambda's own region) | Regions to scan. When set to multiple regions, add `{region}` to `naming.template`.            |
+| `include_tags` | map           | `{}`                       | Tag pairs required on a resource. Empty = opt-out mode (everything unless excluded).           |
+| `exclude_tags` | map           | `{ kosli:ignore: "true" }` | Tag pairs that exclude a resource if **any** matches.                                          |
+
+**How filters combine with per-type blocks:**
+
+- **include** = global `∪` per-type pairs; a resource must match **all** of them (empty = opt-out mode).
+- **exclude** = global `∪` per-type pairs; matching **any** pair excludes the resource.
+
+## `include_scaling`
+
+```yaml
+include_scaling: false
+```
+
+Global default for whether replica-count-only changes produce a new snapshot. Per-type blocks can override this. Default `false` — Kosli only snapshots on actual software change, not scaling.
+
+## `types`
+
+Every type block accepts the same fields, plus a few type-specific ones. Shorthand `<type>: true` = enabled with no extra filters.
+
+| Field             | Type    | Applies to             | Description                                                          |
+|-------------------|---------|------------------------|----------------------------------------------------------------------|
+| `enabled`         | bool    | all                    | Turn the type on or off.                                             |
+| `include_tags`    | map     | all                    | ANDed with `scope.include_tags`.                                    |
+| `exclude_tags`    | map     | all                    | Unioned with `scope.exclude_tags`.                                  |
+| `prefix`          | string  | all                    | Per-type `{prefix}` override.                                        |
+| `include_scaling` | bool    | all                    | Per-type override of the global `include_scaling`.                   |
+| `granularity`     | enum    | `lambda`               | `account` (default) or `function`.                                   |
+| `grouping`        | map     | `lambda`, `ecs`        | Tag-based grouping into named envs. See below.                       |
+| `namespaces`      | map     | `eks`                  | Whole-cluster vs. per-namespace scoping. See below.                  |
+
+### `ecs`
+
+```yaml
+types:
+  ecs:
+    enabled: true
+```
+
+Per-cluster env by default. Optional `grouping` for tag-based aggregation (see [Grouping](#grouping-lambda-and-ecs)).
+
+### `eks`
+
+```yaml
+types:
+  eks:
+    enabled: true
+    include_scaling: true
+```
+
+Per-cluster env by default. Optional `namespaces` for per-namespace scoping (see [EKS namespaces](#eks-namespaces)).
+
+### `lambda`
+
+```yaml
+types:
+  lambda:
+    enabled: true
+    granularity: account    # account = one env per resolved prefix; function = env per function
+```
+
+| `granularity` | Behavior                                                                                             |
+|---------------|-------------------------------------------------------------------------------------------------------|
+| `account`     | All Lambdas group into one env per resolved `{prefix}`. Tag functions with `kosli:prefix` to shard.  |
+| `function`    | One env per function.                                                                                 |
+
+Optional `grouping` overrides both (see [Grouping](#grouping-lambda-and-ecs)).
+
+### `s3`
+
+```yaml
+types:
+  s3:
+    enabled: true
+    include_tags:
+      kosli:track: "true"
+```
+
+**S3 is intentionally opt-in.** A Kosli `s3` environment fingerprints bucket **content** (for deployment tracking), not a bucket inventory. `types.s3.include_tags` must be non-empty; otherwise Kosli Capture records a gap and skips S3.
+
+## Grouping (Lambda and ECS)
+
+`types.lambda.grouping` and `types.ecs.grouping` map an **exact env name** to a set of tag pairs. Resources matching **all** pairs of an entry are reported together in one snapshot call — `snapshot lambda --function-names a,b,c` or `snapshot ecs --clusters a,b,c` — to that env.
+
+```yaml
+types:
+  lambda:
+    grouping:
+      aws-prod-payments: { team: payments }
+      aws-prod-checkout: { team: checkout, tier: prod }   # multiple pairs = AND
+
+  ecs:
+    grouping:
+      aws-prod-platform: { team: platform }
+```
+
+Rules:
+
+- Grouping takes precedence — matched resources go to the named env.
+- Unmatched resources fall through unchanged (Lambda's `granularity`, ECS's per-cluster env).
+- If a resource matches more than one entry, the first entry wins.
+- An entry with no tag pairs never matches anything, so a typo cannot sweep in everything.
+
+Grouping is available for Lambda and ECS only. S3 buckets and EKS clusters are always reported to their own environments.
+
+## EKS namespaces
+
+By default each discovered EKS cluster gets one Kosli environment. Clusters listed under `types.eks.namespaces` (still subject to tag filters) are reported **per namespace**. `"*"` sets a default for every cluster; exact cluster names override it.
+
+```yaml
+types:
+  eks:
+    namespaces:
+      "*": ["^prod-.*"]                    # default: all prod-* namespaces, per cluster
+      prod-cluster-a:                      # override for one cluster
+        default: aws-prod-eks-a-default
+        payments: aws-prod-eks-a-payments
+      prod-cluster-b: [default, backend]   # derived names
+```
+
+Value forms:
+
+- **List** → derived env names (`{name}` becomes `<cluster>-<ns>`). Entries may be regex patterns (`kosli --namespaces` supports them), which are sanitized for the derived name.
+- **Map** → explicit `namespace: env-name` pairs. Preferred for regex patterns because the derived name would otherwise be sanitized. Explicit map entries are precedence level 1 — they beat every tag override.
+
+Derived namespace env names follow `{prefix}-eks-<cluster>-<ns>`.
+
+## `eks_onboarding`
+
+```yaml
+eks_onboarding:
+  mode: self         # none | self
+```
+
+| Mode   | Behavior                                                                                                                                  |
+|--------|-------------------------------------------------------------------------------------------------------------------------------------------|
+| `none` | Your cluster-creation pipeline is responsible for adding an access entry for the Kosli Capture role. The stack outputs `RoleArn`.        |
+| `self` | Kosli Capture grants **itself** `AmazonEKSViewPolicy` on each newly discovered cluster. Requires `EnableEksSelfOnboarding=true` at deploy. |
+
+Self-onboarding is IAM-fenced with `eks:principalArn` / `eks:policyArn` conditions so Kosli Capture can only grant that one policy to its own role. Clusters must have authentication mode `API` or `API_AND_CONFIG_MAP`.
+
+## Config sources at runtime
+
+`ConfigSource` (CloudFormation parameter) decides where the Lambda reads its policy on each run:
+
+| Source            | Change flow                                                  | Notes                                                          |
+|-------------------|--------------------------------------------------------------|----------------------------------------------------------------|
+| `baked` (default) | Edit `config.yaml` → `make deploy`                           | `config.json` is bundled into the Lambda package.             |
+| `ssm`             | Edit `config.yaml` → `make seed-config` → next scheduled run | Pushed to the `<name>-config` SSM parameter.                  |
+| `s3`              | Edit `config.yaml` → `make seed-config` → next scheduled run | Uploaded to your `CONFIG_S3_URI` (bring your own bucket).     |
+
+All three deliver the **same** `config.json` produced from `config.yaml`; the only difference is where it lands. `make seed-config` picks the right target from `CONFIG_SOURCE` and is a no-op for `baked`.
+
+Runtime sources **fail closed**: if a config fetch fails, Kosli Capture reuses the last-known-good config (when the Lambda sandbox is warm) or fails the run. It does not fall back to the baked copy, so a stale policy can never re-include resources you have excluded.
+
+<Tip>
+Keep the authoritative `config.yaml` in the repo and push versions via `make seed-config` (or CI) rather than hand-editing the SSM parameter or S3 object.
+</Tip>
+
+## Complete example
+
+```yaml
+naming:
+  prefix: aws-prod
+  template: "{prefix}-{type}-{name}"
+  prefix_tag: "kosli:prefix"
+  name_tag: "kosli:env-name"
+
+scope:
+  regions: []
+  include_tags: {}
+  exclude_tags:
+    kosli:ignore: "true"
+
+include_scaling: false
+
+types:
+  ecs:
+    enabled: true
+    grouping:
+      aws-prod-platform: { team: platform }
+
+  eks:
+    enabled: true
+    include_scaling: true
+    namespaces:
+      "*": ["^prod-.*"]
+
+  lambda:
+    enabled: true
+    granularity: account
+    grouping:
+      aws-prod-payments: { team: payments }
+
+  s3:
+    enabled: true
+    include_tags:
+      kosli:track: "true"
+
+eks_onboarding:
+  mode: self
+```
