@@ -191,7 +191,7 @@ POLICY:    pr-approved @ version 1
 | `--trail` | The trail the decision is recorded on. Defaults to the evaluation trail when a single one is evaluated; required otherwise. |
 | `--policy` | The policy to evaluate — a Kosli policy **identifier** (uses its current version) or a **local** `.rego` file (see [Evaluate a local policy file](#evaluate-a-local-policy-file)). |
 | `--control` | The control identifier the resulting decision is recorded against. |
-| `--evaluation-context` | One or more **typed references** to the facts to evaluate (the **source**), repeatable. In the beta the only type is a trail: `trail=<trail_id>` (in `--flow`), or `trail=<flow_id>:<trail_id>` to name a trail in another flow. Defaults to the decision trail. The typed form leaves room for other context types (snapshots, artifacts, …) later without new flags. |
+| `--evaluation-context` | One or more **typed references** to the facts to evaluate (the **source**), repeatable. In the beta the only type is a trail: `trail=<trail_id>` (in `--flow`), or `trail=<flow_id>/<trail_id>` to name a trail in another flow. Defaults to the decision trail. The typed form leaves room for other context types (snapshots, artifacts, …) later without new flags. |
 | `--fingerprint` / `--artifact-type` | The artifact the decision applies to. Pass `--fingerprint` directly, or `--artifact-type` with the artifact name/path so Kosli calculates the fingerprint. |
 | `--name` | The attestation slot name the decision is recorded under on the trail. |
 | `--params` | Parameters passed to the policy as `data.params`. Every evaluation records the params it used. |
@@ -209,14 +209,14 @@ recorded, a decision appears against the policy — see
 
 **Evaluating facts from another flow.** By default the decision is recorded on the same trail
 whose facts you evaluate. Because each `--evaluation-context` reference carries its own flow
-(`trail=<flow_id>:<trail_id>`), you can evaluate a trail in a *different* flow — for example,
+(`trail=<flow_id>/<trail_id>`), you can evaluate a trail in a *different* flow — for example,
 evaluating a build flow's trail but recording the decision on a release flow's trail:
 
 ```shell
 kosli evaluate policy \
     --policy pr-approved \
     --control RCTL-043 \
-    --evaluation-context trail=build-ci:build-42 \
+    --evaluation-context trail=build-ci/build-42 \
     --flow release \
     --trail release-99 \
     --fingerprint "$ARTIFACT_FINGERPRINT" \
