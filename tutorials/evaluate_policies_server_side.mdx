@@ -1,0 +1,257 @@
+---
+title: "Evaluate policies server-side"
+description: "Proposed V1 design for server-side policy evaluation in Kosli: author and ship a versioned policy, then evaluate it to record a trustworthy, replicable decision."
+---
+
+<Warning>
+**Proposed design — not yet available.** This page describes planned V1 behavior for
+server-side policy evaluation and is published to gather feedback *before* the feature is
+built. The commands, flags, and output shown are illustrative and will change as the design
+firms up. Nothing here can be run against Kosli today. Share comments with the Kosli team.
+</Warning>
+
+Today, `kosli evaluate` runs **client-side**: the policy lives in your repository, the check
+runs on your CI runner, and Kosli stores a **self-reported** result. Server-side policy
+evaluation moves the Policy Decision Point (PDP) **into Kosli**. You ship a versioned policy to
+Kosli, Kosli executes it against facts it already holds, and Kosli records a **decision it can
+vouch for** — connected to the exact policy version and inputs used.
+
+This tutorial walks a **governance platform engineer** through the core V1 loop:
+
+- **Author and ship a policy** — write Rego locally, then publish a versioned policy into Kosli.
+- **Evaluate and record a decision** — run `kosli evaluate policy` so Kosli computes the outcome
+  server-side and records a decision against a control.
+- **Trace and replicate** — see how a decision captures the facts and policy version it used, so
+  the same inputs always yield the same decision.
+
+<Info>
+This is distinct from the existing client-side
+[Evaluate trails with OPA policies](/tutorials/evaluate_trails_with_opa) tutorial, where the
+CLI runs the policy locally. Here, Kosli stores the policy and performs the evaluation.
+</Info>
+
+## Why server-side
+
+Running evaluation inside Kosli changes what a decision means:
+
+| | Client-side `kosli evaluate trail` (today) | Server-side `kosli evaluate policy` (proposed) |
+|---|---|---|
+| **Where the policy lives** | Your repository | Stored and versioned in Kosli |
+| **Where it runs** | Your CI runner | Kosli (isolated from the API) |
+| **What Kosli stores** | A self-reported result | A decision Kosli computed and can vouch for |
+| **Replicability** | Depends on your pipeline | Decision cites its exact policy version and inputs |
+
+Because Kosli both stores the policy and runs it, a decision points at *exactly* what ran —
+the policy version, its parameters, and the trail facts that were in scope — which is what
+makes the decision trustworthy and replicable for audit.
+
+## Prerequisites
+
+<Info>
+These prerequisites describe the proposed V1 experience — they are not runnable today.
+</Info>
+
+- [Install Kosli CLI](/getting_started/install).
+- [Get a Kosli API token](/getting_started/authenticating_to_kosli).
+- Have at least one [Control](/tutorials/working_with_controls) defined, and a
+  [Flow](/getting_started/flows) with a [Trail](/getting_started/trails) carrying the
+  attestations you want to evaluate.
+
+```shell
+export KOSLI_ORG=<your-org>
+export KOSLI_API_TOKEN=<your-api-token>
+```
+
+<Steps>
+
+<Step title="Author a policy locally">
+
+Author your policy as code in your own repository, which stays the source of truth. A V1 policy
+carries a **name**, a **purpose**, the **policy-as-code** (Rego), and an **input-context
+schema** declaring whether it evaluates a single trail or multiple trails.
+
+The output schema requires an `allow` rule; you can return richer output alongside it. Follow
+the same fail-safe design rules as client-side policies — see
+[Evaluate trails with OPA policies](/tutorials/evaluate_trails_with_opa) for the
+reasoning behind them.
+
+```rego pr-approved.rego
+package policy
+
+import rego.v1
+
+pr_attestation_name := data.params.pr_attestation_name
+
+default allow = false
+
+allow if {
+    every pr in input.trail.compliance_status.attestations_statuses[pr_attestation_name].pull_requests {
+        count(pr.approvers) > 0
+    }
+}
+
+violations contains msg if {
+    some pr in input.trail.compliance_status.attestations_statuses[pr_attestation_name].pull_requests
+    count(pr.approvers) == 0
+    msg := sprintf("pull-request %v has no approvers", [pr.url])
+}
+```
+
+<Info>
+In V1, a policy evaluates the facts on the trail(s) you point it at — attestations on
+`trail` / `trails`. Evaluating other targets (snapshots, artifacts, generic input) and
+composing multiple policies into one are **out of scope for V1** (see [What's out of scope](#whats-out-of-scope-for-v1)).
+</Info>
+
+</Step>
+
+<Step title="Ship a versioned policy into Kosli">
+
+Publish the policy into Kosli via the CLI (or API). Kosli assigns it a stable **identifier** and
+records the first **version**. Every later change creates a new version and records who made it,
+so a decision can always point back to the exact policy that produced it.
+
+```shell
+kosli create policy pr-approved \
+    --policy pr-approved.rego \
+    --description "Every pull request on the trail has at least one approver." \
+    --evaluation-context trail
+```
+
+```plaintext
+Policy 'pr-approved' created
+  identifier:  0f8c2a1e-...
+  version:     1
+```
+
+<Info>
+V1 is **CLI/API only** for authoring — the Kosli UI is read/tag-only. The exact publish
+command surface (and how it relates to existing environment-policy commands) is part of what
+we want feedback on.
+</Info>
+
+</Step>
+
+<Step title="Evaluate and record a decision">
+
+`kosli evaluate policy` is the core V1 command. Kosli fetches the in-scope facts, runs the
+policy **server-side**, and records a **decision** against a control. The command is
+**synchronous** — it waits for the outcome and returns it.
+
+```shell
+kosli evaluate policy \
+    --flow "$FLOW_NAME" \
+    --policy pr-approved \
+    --control RCTL-043 \
+    --evaluation-context "$TRAIL_NAME" \
+    --fingerprint "$ARTIFACT_FINGERPRINT" \
+    --name pr-approval-decision \
+    --params '{"pr_attestation_name": "pull-request"}'
+```
+
+```plaintext
+RESULT:    ALLOWED
+DECISION:  recorded against control RCTL-043
+POLICY:    pr-approved @ version 1
+```
+
+| Flag | Description |
+|------|-------------|
+| `--flow` | The flow that owns the trail(s) being evaluated and where the decision is recorded. |
+| `--policy` | The policy to evaluate — a Kosli policy **identifier** (uses its current version) or a **local** `.rego` file (shown in the final step). |
+| `--control` | The control identifier the resulting decision is recorded against. |
+| `--evaluation-context` | The trail (or trails) whose facts are evaluated. |
+| `--trail` | Where the decision is recorded. Defaults to the evaluation trail; required when evaluating multiple trails. |
+| `--fingerprint` / `--artifact-type` | The artifact the decision applies to. Pass `--fingerprint` directly, or `--artifact-type` with the artifact name/path so Kosli calculates the fingerprint. |
+| `--name` | The attestation slot name the decision is recorded under on the trail. |
+| `--params` | Parameters passed to the policy as `data.params`. Every evaluation records the params it used. |
+| `--description` | Optional human-readable context for the decision. |
+| `--annotate` | Optional `key=value` annotations stored with the decision. |
+| `--assert` | Exit non-zero when the policy denies, for use as a pipeline gate. |
+
+By default `kosli evaluate policy` records the decision without failing the step. Add `--assert`
+to make it a gate that fails your pipeline when the policy denies.
+
+<Info>
+**The server captures the evidence for you.** Because Kosli runs the evaluation, the decision
+automatically records the policy (and its version), the evaluation report, and any violations —
+you don't attach them by hand with `--attachments` / `--user-data` as you would when recording a
+self-reported decision. Likewise, `--compliant` is **derived** from the policy's `allow` result
+rather than passed in. This is the core difference from
+[recording a decision yourself](/tutorials/working_with_controls#recording-a-decision-against-a-control).
+</Info>
+
+<Info>
+The decision this records is the same kind of decision described in
+[Working with controls](/tutorials/working_with_controls) — the difference is that Kosli
+computed it server-side rather than you recording a self-reported outcome. You can require it
+in a flow template or reference the control in an environment policy exactly as before.
+</Info>
+
+</Step>
+
+<Step title="Trace and replicate the decision">
+
+Every decision captures its **evaluation context**: references to the trail *moments* and the
+actual `attestation_id`s that were in scope, the policy version that ran, the parameters used,
+and a timestamp. Because the inputs are pinned, re-running from the stored context yields the
+**same decision** — this is what makes a server-side decision replicable for audit.
+
+The timestamp matters for temporal correctness. Consider this sequence:
+
+- **T** — an evaluation is requested; Kosli reconstructs the trail's facts as of **T**.
+- **T+1** — a new attestation arrives on the trail.
+- **T+2** — the decision is recorded.
+
+The decision is valid **as of T**: it reflects the facts that existed when the evaluation was
+requested, not the ones that arrived afterward. The evaluation context records the exact
+moments used, so an auditor can reconstruct precisely what Kosli saw.
+
+</Step>
+
+<Step title="Evaluate a local policy file">
+
+During development you can evaluate a **local, unpublished** policy file — the decision is still
+recorded server-side. This lets you iterate on a policy before shipping a version of it.
+
+```shell
+kosli evaluate policy \
+    --flow "$FLOW_NAME" \
+    --policy ./pr-approved.rego \
+    --control RCTL-043 \
+    --evaluation-context "$TRAIL_NAME" \
+    --fingerprint "$ARTIFACT_FINGERPRINT" \
+    --name pr-approval-decision \
+    --params '{"pr_attestation_name": "pull-request"}'
+```
+
+Because there is no stored policy version to cite, the decision records the exact policy source
+that was evaluated instead.
+
+</Step>
+
+</Steps>
+
+## What's out of scope for V1
+
+To keep feedback focused on the core loop, the following are explicitly **out of scope for the
+first version** and will be addressed later:
+
+- **Managing policies in depth** — versioning, tagging, and archive/unarchive semantics.
+- **Validation and ad-hoc testing** — validating Rego against the input-context and output
+  schemas, and running an evaluation that returns an outcome *without* recording a decision.
+- **Reporting and audit views** — listing and filtering decisions for a policy, CSV export, and
+  the non-compliant view.
+- **Inspecting failing evaluations** — distinguishing *missing evidence* from *non-compliance*,
+  richer Rego output, and violation rendering in the UI.
+- **Evidence-attachment content evaluation** — evaluating the contents of attached files.
+- **Composable policies** — composing many authored policies into one versioned policy.
+- **Non-trail evaluate targets** — snapshots, artifacts, and generic input.
+- **Scheduled evaluations** and **risk measurement**.
+
+## Feedback
+
+This is a design preview. If you are reviewing the proposed V1 flow, the most useful feedback is
+on the command surface (`kosli evaluate policy` and how policies are published), the decision and
+audit model, and anything in [What's out of scope](#whats-out-of-scope-for-v1) that you would
+expect in V1. Share comments with the Kosli team.
