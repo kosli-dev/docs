@@ -323,36 +323,56 @@ kosli unarchive policy pr-approved
 
 ### List and filter policies
 
-List your policies with `kosli list policies`, filtering by name or tag. Each entry shows the
-identifier and current version.
+Browse your policies in the [Kosli app](https://app.kosli.com) — select **Policies** in the
+sidebar to see the full catalog. Search by name or identifier, and filter by tag to narrow the
+list. Each policy shows its identifier, current version, and tags.
+
+<Frame>
+  {/* TODO: replace placeholder with a mockup of the Policies catalog */}
+  <img src="/images/tutorials/policy-list.png" alt="Policies catalog listing policies with their identifier, current version, and tags, with a search box and a tag filter" />
+</Frame>
+
+You can also list policies from the CLI, filtering by name or tag — each entry shows the
+identifier and current version:
 
 ```shell
 kosli list policies --tag team=platform
 ```
 
-## Report on decisions
+## View the decisions for a policy
 
-Every decision a policy produces is listed against that policy — across **all versions** of the
-policy. List them from the CLI with `kosli list decisions`, filtered by compliance, policy
-version, or time range:
+Every decision a policy produces is listed against that policy, across **all versions** of the
+policy. In the [Kosli app](https://app.kosli.com), select **Policies**, choose a policy, and open
+its **Decisions** tab. Each row shows the timestamp, the trail and artifact the decision applies
+to, the policy version that produced it, and the outcome (compliant or non-compliant). Filter by
+outcome, version, or time range, and page through the results to sample them.
+
+<Frame>
+  {/* TODO: replace placeholder with a mockup of a policy's Decisions tab */}
+  <img src="/images/tutorials/policy-decisions.png" alt="Decisions tab for a policy showing decisions with timestamp, compliant or non-compliant outcome, trail, artifact fingerprint, and policy version, with outcome and version filters" />
+</Frame>
+
+Select a decision to open its detail, showing the trail and artifact it applies to, the policy
+version and parameters that were used, the evaluation report, and any violations.
+
+<Frame>
+  {/* TODO: replace placeholder with a mockup of the decision detail */}
+  <img src="/images/tutorials/policy-decision-detail.png" alt="Decision detail showing the trail, artifact, policy version and parameters, the evaluation report, and the list of violations" />
+</Frame>
+
+For an audit or an offline review, export the filtered set as CSV — from the Decisions view in the
+UI, or from the CLI:
 
 ```shell
 kosli list decisions \
     --policy pr-approved \
     --compliant=false \
-    --since 30d
+    --since 30d \
+    --output csv > decisions.csv
 ```
 
-The filters let you focus a review — for example, `--compliant=false` surfaces every
-non-compliant evaluation for follow-up. Export the filtered set as CSV for an audit or an offline
-review:
-
-```shell
-kosli list decisions --policy pr-approved --output csv > decisions.csv
-```
-
-Decisions are also available in the Kosli UI on the policy's detail page, where you can filter and
-page through them and open any decision to see the evaluation report behind it.
+`--compliant=false` surfaces every non-compliant evaluation for follow-up; combine it with
+`--since` or a version filter to scope the export.
 
 ## Inspect a failing evaluation
 
@@ -389,8 +409,9 @@ RESULT:      DENIED
 VIOLATIONS:  pull-request https://github.com/acme/app/pull/42 has no approvers
 ```
 
-In the Kosli UI, the violations are parsed out of the decision and rendered on the decision
-detail, so an application team can see exactly what to fix.
+In the Kosli UI, the violations are parsed out of the decision and rendered on the decision detail
+(shown above under [View the decisions for a policy](#view-the-decisions-for-a-policy)), so an
+application team can see exactly what to fix.
 
 ## What's out of scope for the beta
 
