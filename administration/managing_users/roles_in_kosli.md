@@ -33,9 +33,8 @@ Roles apply to service accounts the same way they apply to users. Wherever this 
 | **Resource Management** | | | |
 | Create flows | ✅ | ✅ | ❌ | ❌ |
 | Update/delete flows | ✅ | ✅ | ❌ | ❌ |
-| Create environments | ✅ | ✅ | ✅ | ❌ |
+| Create environments (and re-create) | ✅ | ✅ | ✅ | ❌ |
 | Update environments (PATCH, archive, rename, attach/detach policies) | ✅ | ✅ | ❌ | ❌ |
-| Modify an existing environment by re-PUT (description, scaling, policies, included environments) | ✅ | ✅ | ✅ | ❌ |
 | Delete environments | ✅ | ❌ | ❌ | ❌ |
 | Create/update policies | ✅ | ✅ | ❌ | ❌ |
 | Delete policies | ❌ | ❌ | ❌ | ❌ |
