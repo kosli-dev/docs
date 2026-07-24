@@ -29,7 +29,7 @@ Roles apply to service accounts the same way they apply to users. Wherever this 
 | Configure integrations (Slack, LaunchDarkly) | ✅ | ✅ | ❌ | ❌ |
 | **Service Accounts** | | | |
 | Create and manage service accounts | ✅ | ✅ | ✅ | ❌ |
-| Manage API keys on service accounts | ✅ (any) | Own only | Own only | ❌ |
+| Generate service account API keys | ✅ (any) | ✅ Own only | ✅ Own only | ❌ |
 | **Resource Management** | | | |
 | Create flows | ✅ | ✅ | ❌ | ❌ |
 | Update/delete flows | ✅ | ✅ | ❌ | ❌ |
