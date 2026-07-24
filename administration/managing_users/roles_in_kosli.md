@@ -121,7 +121,7 @@ The following sections provide more details about each Kosli user role, includin
   <Accordion title="Snapshotter" icon="camera">
 
 
-  Snapshotters can create environments, report environment snapshots, and manage service accounts, but cannot modify other resources, manage users, configure integrations, or change organization-wide settings.
+  Snapshotters can create environments, report environment snapshots, and manage its own service accounts, but cannot modify other resources, manage users, configure integrations, or change organization-wide settings.
 
   ### Permissions
 
