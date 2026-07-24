@@ -29,12 +29,13 @@ Roles apply to service accounts the same way they apply to users. Wherever this 
 | Configure integrations (Slack, LaunchDarkly) | ✅ | ✅ | ❌ | ❌ |
 | **Service Accounts** | | | |
 | Create and manage service accounts | ✅ | ✅ | ✅ | ❌ |
-| Generate service account API keys | ✅ | ✅ | ✅ | ❌ |
+| Manage API keys on service accounts | ✅ (any) | Own only | Own only | ❌ |
 | **Resource Management** | | | |
 | Create flows | ✅ | ✅ | ❌ | ❌ |
 | Update/delete flows | ✅ | ✅ | ❌ | ❌ |
 | Create environments | ✅ | ✅ | ✅ | ❌ |
-| Update environments | ✅ | ✅ | ❌ | ❌ |
+| Update environments (PATCH, archive, rename, attach/detach policies) | ✅ | ✅ | ❌ | ❌ |
+| Modify an existing environment by re-PUT (description, scaling, policies, included environments) | ✅ | ✅ | ✅ | ❌ |
 | Delete environments | ✅ | ❌ | ❌ | ❌ |
 | Create/update policies | ✅ | ✅ | ❌ | ❌ |
 | Delete policies | ❌ | ❌ | ❌ | ❌ |
@@ -127,22 +128,26 @@ The following sections provide more details about each Kosli user role, includin
 
   Snapshotters can:
 
-  - **Service Accounts**: Create and manage service accounts and their API keys
-  - **Environments**: Create new environments (needed so CLI flows like `--auto-environment` work with a snapshotter token)
-  - **Snapshots**: Report environment snapshots
-  - **View Data**: Access trails, artifacts, attestations, and snapshots
-  - **Query Information**: Search and filter data across flows and environments
-  - **Generate Reports**: Export and analyze compliance data
-  - **View Configurations**: See flow definitions, policies, attestation types, and actions (but cannot modify them)
+  - **Service Accounts**: Create service accounts. They can manage the API keys of service accounts they created themselves — API keys on other service accounts can only be managed by the account's creator or an org Admin.
+  - **Environments**: Create new environments (needed so CLI flows like `--auto-environment` work with a snapshotter token).
+  - **Snapshots**: Report environment snapshots.
+  - **View Data**: Access trails, artifacts, attestations, and snapshots.
+  - **Query Information**: Search and filter data across flows and environments.
+  - **Generate Reports**: Export and analyze compliance data.
+  - **View Configurations**: See flow definitions, policies, attestation types, and actions (but cannot modify them).
 
   Snapshotters cannot:
-  - Update, archive, rename, or delete environments, or attach/detach policies
-  - Create, update, or delete flows, policies, attestation types, or other resources
-  - Report attestations
-  - Manage approvals
-  - Create or manage actions
-  - Configure integrations
-  - Invite users or change settings
+  - Use the dedicated update paths on an environment (PATCH, archive, rename, attach/detach policies).
+  - Create, update, or delete flows, policies, attestation types, or other resources.
+  - Report attestations.
+  - Manage approvals.
+  - Create or manage actions.
+  - Configure integrations.
+  - Invite users or change settings.
+
+  <Warning>
+  Because the environment create endpoint (`PUT /api/v2/environments/{org}`) is idempotent — a re-PUT of an existing environment updates it — a snapshotter token can modify an existing environment's description, scaling, policies, and included environments by re-PUTting a full payload. Only the dedicated update paths (PATCH, archive, rename, policy attach/detach) are blocked. Keep this in mind when scoping snapshotter tokens for environments you don't want them to change.
+  </Warning>
 
   ### When to assign
 
