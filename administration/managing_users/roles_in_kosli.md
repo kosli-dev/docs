@@ -14,7 +14,7 @@ Roles apply to service accounts the same way they apply to users. Wherever this 
 |------|-------------|----------|
 | **Admin** | Full control over the organization | Organization owners, security leads, platform engineering leads |
 | **Member** | Can create and modify resources | Developers, platform engineers, CI/CD systems |
-| **Snapshotter** | Can create snapshots, environments, and manage its own service accounts | Environment and operations teams |
+| **Snapshotter** | Can create snapshots, environments, and manage their own service accounts | Environment and operations teams |
 | **Reader** | Read-only access to view data | Auditors, compliance officers, stakeholders, reporting systems |
 
 ## Permissions Matrix
