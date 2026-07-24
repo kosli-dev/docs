@@ -14,7 +14,7 @@ Roles apply to service accounts the same way they apply to users. Wherever this 
 |------|-------------|----------|
 | **Admin** | Full control over the organization | Organization owners, security leads, platform engineering leads |
 | **Member** | Can create and modify resources | Developers, platform engineers, CI/CD systems |
-| **Snapshotter** | Can create snapshots and modify service accounts | Environment and operations teams |
+| **Snapshotter** | Can create environments and snapshots, and manage service accounts | Environment and operations teams |
 | **Reader** | Read-only access to view data | Auditors, compliance officers, stakeholders, reporting systems |
 
 ## Permissions Matrix
@@ -33,7 +33,8 @@ Roles apply to service accounts the same way they apply to users. Wherever this 
 | **Resource Management** | | | |
 | Create flows | ✅ | ✅ | ❌ | ❌ |
 | Update/delete flows | ✅ | ✅ | ❌ | ❌ |
-| Create/update environments | ✅ | ✅ | ❌ | ❌ |
+| Create environments | ✅ | ✅ | ✅ | ❌ |
+| Update environments | ✅ | ✅ | ❌ | ❌ |
 | Delete environments | ✅ | ❌ | ❌ | ❌ |
 | Create/update policies | ✅ | ✅ | ❌ | ❌ |
 | Delete policies | ❌ | ❌ | ❌ | ❌ |
@@ -120,13 +121,14 @@ The following sections provide more details about each Kosli user role, includin
   <Accordion title="Snapshotter" icon="camera">
 
 
-  Snapshotters can create environment snapshots and manage service accounts, but cannot manage users, resources or integrations or organization-wide settings.
+  Snapshotters can create environments, report environment snapshots, and manage service accounts, but cannot modify other resources, manage users, configure integrations, or change organization-wide settings.
 
   ### Permissions
 
   Snapshotters can:
 
   - **Service Accounts**: Create and manage service accounts and their API keys
+  - **Environments**: Create new environments (needed so CLI flows like `--auto-environment` work with a snapshotter token)
   - **Snapshots**: Report environment snapshots
   - **View Data**: Access trails, artifacts, attestations, and snapshots
   - **Query Information**: Search and filter data across flows and environments
@@ -134,7 +136,8 @@ The following sections provide more details about each Kosli user role, includin
   - **View Configurations**: See flow definitions, policies, attestation types, and actions (but cannot modify them)
 
   Snapshotters cannot:
-  - Create, update, or delete any resources
+  - Update, archive, rename, or delete environments, or attach/detach policies
+  - Create, update, or delete flows, policies, attestation types, or other resources
   - Report attestations
   - Manage approvals
   - Create or manage actions
