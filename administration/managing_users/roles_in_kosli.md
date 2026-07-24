@@ -14,7 +14,7 @@ Roles apply to service accounts the same way they apply to users. Wherever this 
 |------|-------------|----------|
 | **Admin** | Full control over the organization | Organization owners, security leads, platform engineering leads |
 | **Member** | Can create and modify resources | Developers, platform engineers, CI/CD systems |
-| **Snapshotter** | Can create snapshots and modify service accounts | Environment and operations teams |
+| **Snapshotter** | Can create snapshots, environments, and manage their own service accounts | Environment and operations teams |
 | **Reader** | Read-only access to view data | Auditors, compliance officers, stakeholders, reporting systems |
 
 ## Permissions Matrix
@@ -33,7 +33,8 @@ Roles apply to service accounts the same way they apply to users. Wherever this 
 | **Resource Management** | | | |
 | Create flows | ✅ | ✅ | ❌ | ❌ |
 | Update/delete flows | ✅ | ✅ | ❌ | ❌ |
-| Create/update environments | ✅ | ✅ | ❌ | ❌ |
+| Create environments (and re-create) | ✅ | ✅ | ✅ | ❌ |
+| Update environments (PATCH, archive, rename, attach/detach policies) | ✅ | ✅ | ❌ | ❌ |
 | Delete environments | ✅ | ❌ | ❌ | ❌ |
 | Create/update policies | ✅ | ✅ | ❌ | ❌ |
 | Delete policies | ❌ | ❌ | ❌ | ❌ |
@@ -120,26 +121,32 @@ The following sections provide more details about each Kosli user role, includin
   <Accordion title="Snapshotter" icon="camera">
 
 
-  Snapshotters can create environment snapshots and manage service accounts, but cannot manage users, resources or integrations or organization-wide settings.
+  Snapshotters can create environments, report environment snapshots, and manage their own service accounts, but cannot modify other resources, manage users, configure integrations, or change organization-wide settings.
 
   ### Permissions
 
   Snapshotters can:
 
-  - **Service Accounts**: Create and manage service accounts and their API keys
-  - **Snapshots**: Report environment snapshots
-  - **View Data**: Access trails, artifacts, attestations, and snapshots
-  - **Query Information**: Search and filter data across flows and environments
-  - **Generate Reports**: Export and analyze compliance data
-  - **View Configurations**: See flow definitions, policies, attestation types, and actions (but cannot modify them)
+  - **Service Accounts**: Create service accounts. They can manage the API keys of service accounts they created themselves — API keys on other service accounts can only be managed by the account's creator or an org Admin.
+  - **Environments**: Create new environments (needed so CLI flows like `--auto-environment` work with a snapshotter token).
+  - **Snapshots**: Report environment snapshots.
+  - **View Data**: Access trails, artifacts, attestations, and snapshots.
+  - **Query Information**: Search and filter data across flows and environments.
+  - **Generate Reports**: Export and analyze compliance data.
+  - **View Configurations**: See flow definitions, policies, attestation types, and actions (but cannot modify them).
 
   Snapshotters cannot:
-  - Create, update, or delete any resources
-  - Report attestations
-  - Manage approvals
-  - Create or manage actions
-  - Configure integrations
-  - Invite users or change settings
+  - Use the dedicated update paths on an environment (PATCH, archive, rename, attach/detach policies).
+  - Create, update, or delete flows, policies, attestation types, or other resources.
+  - Report attestations.
+  - Manage approvals.
+  - Create or manage actions.
+  - Configure integrations.
+  - Invite users or change settings.
+
+  <Warning>
+  Because the environment create endpoint (`PUT /api/v2/environments/{org}`) is idempotent — a re-PUT of an existing environment updates it — a snapshotter token can modify an existing environment's description, scaling, policies, and included environments by re-PUTting a full payload. Only the dedicated update paths (PATCH, archive, rename, policy attach/detach) are blocked. Keep this in mind when scoping snapshotter tokens for environments you don't want them to change.
+  </Warning>
 
   ### When to assign
 

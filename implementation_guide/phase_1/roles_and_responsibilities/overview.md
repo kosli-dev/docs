@@ -73,7 +73,7 @@ The RACI matrix above describes responsibilities during Kosli implementation. To
 Kosli user roles control what actions someone can perform in the Kosli system:
 - **Admin**: Full control, including user management and organization settings
 - **Member**: Can create and modify resources, manage service accounts, and configure integrations
-- **Snapshotter**: Can report environment snapshots and manage service accounts, with read-only access to other resources
+- **Snapshotter**: Can report environment snapshots, create environments, and manage service accounts, with read-only access to other resources
 - **Reader**: Read-only access to view data and compliance status
 
 For guidance on which Kosli user role to assign based on organizational responsibilities, see [Roles in Kosli](/administration/managing_users/roles_in_kosli) and [Mapping users to roles](/administration/managing_users/mapping_users_to_roles).

@@ -35,7 +35,7 @@ Service accounts have the same role model as users: **Admin**, **Member**, **Sna
 See [Roles in Kosli](/administration/managing_users/roles_in_kosli) for the full permissions matrix. As a starting point:
 
 - **Member** — CI/CD systems that report attestations, manage flows, and create resources.
-- **Snapshotter** — runtime reporters that only record environment snapshots.
+- **Snapshotter** — runtime reporters that record environment snapshots and create environments (for example, CLI callers using `--auto-environment`).
 - **Reader** — read-only systems such as dashboards or query tooling.
 - **Admin** — rarely needed; reserve for automation that manages users, roles, or organization-wide settings (for example, Terraform-driven org bootstrap).
 
