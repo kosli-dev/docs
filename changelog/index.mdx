@@ -4,6 +4,40 @@ description: "Release notes for Kosli products."
 rss: true
 ---
 
+<Update label="July 26, 2026" description="v2.34.0" tags={["CLI"]}>
+
+## New features
+
+- **Auto-create environments from `kosli snapshot`** — new `--auto-environment` flag (alias `--auto-env`, shorthand `-A`) on all `kosli snapshot` subcommands creates the target environment (with the type inferred from the subcommand) if it doesn't already exist. Pair with `--environment-description` to set a description, and `--include-scaling` / `--exclude-scaling` (mutually exclusive) to control scaling-event behaviour on auto-created environments.
+
+## Updates
+
+- **More informative error messages** — command errors now include the command path, and the `--flow` / `--trail` values when set, making it easier to spot which invocation failed when running multiple similar commands in a script.
+
+[View on GitHub](https://github.com/kosli-dev/cli/releases/tag/v2.34.0)
+
+</Update>
+
+<Update label="July 23, 2026" description="v2.33.3" tags={["CLI"]}>
+
+## Bug fixes
+
+- **PR evidence for deleted GitHub accounts** — PR evidence reports now always include the `author` field (as an empty string when unknown), so pull requests whose creator's GitHub account has been deleted no longer fail server-side validation.
+
+[View on GitHub](https://github.com/kosli-dev/cli/releases/tag/v2.33.3)
+
+</Update>
+
+<Update label="July 21, 2026" description="v2.33.2" tags={["CLI"]}>
+
+## Updates
+
+- **Bitbucket API tokens in help text** — Bitbucket Cloud is removing app password authentication on 28 July 2026. CLI help and generated command reference now point to Atlassian API tokens instead: pass your Atlassian account email to `--bitbucket-username` and the API token to `--bitbucket-password`. `--bitbucket-access-token` is unaffected.
+
+[View on GitHub](https://github.com/kosli-dev/cli/releases/tag/v2.33.2)
+
+</Update>
+
 <Update label="July 15, 2026" description="" tags={["Platform"]}>
 
 ## New features
