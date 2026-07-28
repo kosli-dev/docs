@@ -43,7 +43,6 @@ Roles apply to service accounts the same way they apply to users. Wherever this 
 | **Attestations & Snapshots** | | | |
 | Report attestations | ✅ | ✅ | ❌ | ❌ |
 | Report environment snapshots | ✅ | ✅ | ✅ | ❌ |
-| Create and manage approvals | ✅ | ✅ | ❌ | ❌ |
 | **Actions** | | | |
 | Create, update, and delete actions | ✅ | ✅ | ❌ | ❌ |
 | View actions | ✅ | ✅ | ✅ | ✅ |
@@ -74,7 +73,7 @@ The following sections provide more details about each Kosli user role, includin
   - **Service Accounts**: Create and manage service accounts and their API keys
   - **Integrations**: Configure integrations with external systems (Slack, LaunchDarkly, etc.)
   - **Resource Management**: Create, update, and delete flows, environments, policies, and attestation types
-  - **Attestations & Snapshots**: Report attestations, environment snapshots, and manage approvals
+  - **Attestations & Snapshots**: Report attestations and environment snapshots
   - **Actions**: Create, update, and delete actions for automated workflows and notifications
   - **Data Access**: View all trails, artifacts, attestations, and snapshots
 
@@ -101,7 +100,7 @@ The following sections provide more details about each Kosli user role, includin
   - **Service Accounts**: Create and manage service accounts and their API keys
   - **Integrations**: Configure integrations with external systems (Slack, LaunchDarkly, etc.)
   - **Resource Management**: Create, update, and delete flows, environments, policies, and attestation types
-  - **Attestations & Snapshots**: Report attestations, environment snapshots, and manage approvals
+  - **Attestations & Snapshots**: Report attestations and environment snapshots
   - **Actions**: Create, update, and delete actions for automated workflows and notifications
   - **Data Access**: View all trails, artifacts, attestations, and snapshots
 
@@ -139,7 +138,6 @@ The following sections provide more details about each Kosli user role, includin
   - Use the dedicated update paths on an environment (PATCH, archive, rename, attach/detach policies).
   - Create, update, or delete flows, policies, attestation types, or other resources.
   - Report attestations.
-  - Manage approvals.
   - Create or manage actions.
   - Configure integrations.
   - Invite users or change settings.
@@ -173,7 +171,6 @@ The following sections provide more details about each Kosli user role, includin
   Readers cannot:
   - Create, update, or delete any resources
   - Report attestations or snapshots
-  - Manage approvals
   - Create or manage actions
   - Create or manage service accounts
   - Configure integrations

@@ -4,6 +4,28 @@ description: "Release notes for Kosli products."
 rss: true
 ---
 
+<Update label="July 28, 2026" description="v2.35.0" tags={["CLI"]}>
+
+## Breaking changes
+
+- **Approval commands removed** — `kosli assert approval`, `kosli get approval`, `kosli list approvals`, `kosli report approval`, and `kosli request approval` are gone, along with the `kosli request` parent command, since `request approval` was its only subcommand. They were deprecated in v2.20.0. Use [attestations](/getting_started/attestations) to record approval evidence instead.
+
+## Updates
+
+- **k8s-reporter Helm chart (2.6.0)** — the `--auto-environment` flag and its companions (`--environment-description`, `--include-scaling`, `--exclude-scaling`) are now exposed as `reporterConfig.*` values, so the reporter CronJob can auto-create a K8S environment on first run without editing the chart.
+
+[View on GitHub](https://github.com/kosli-dev/cli/releases/tag/v2.35.0)
+
+</Update>
+
+<Update label="July 28, 2026" description="" tags={["Platform"]}>
+
+## Breaking changes
+
+- **Approval API removed** — the deprecated approval endpoints under `/api/v2/approvals/` no longer exist. Approvals are also gone from custom webhook notification payloads and from artifact responses. Use [attestations](/getting_started/attestations) to record approval evidence instead.
+
+</Update>
+
 <Update label="July 26, 2026" description="v2.34.0" tags={["CLI"]}>
 
 ## New features

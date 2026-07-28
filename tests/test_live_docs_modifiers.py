@@ -98,7 +98,7 @@ def test_aefa1410(monkeypatch):
     yaml_url returns backup-yaml-url when the GitLab HEAD SHA API returns non-200.
     """
     ci = "gitlab"
-    command = "kosli report approval"
+    command = "kosli assert artifact"
     stub_http_get(monkeypatch, [StubResponseStatusCode(400)])
     actual_yaml_url = yaml_url(command, ci)
     assert actual_yaml_url == live_docs_modifiers_data.backup_yaml_url(command, ci)
@@ -149,7 +149,7 @@ def test_aefa1419(monkeypatch):
     event_url returns backup-event-url when the command has no associated Trail event.
     """
     ci = "github"
-    command = "kosli report approval"
+    command = "kosli fingerprint"
     actual_event_url = event_url(command, ci)
     assert actual_event_url == live_docs_modifiers_data.backup_event_url(command, ci)
 

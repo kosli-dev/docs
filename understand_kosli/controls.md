@@ -53,7 +53,7 @@ Release controls validate that software is ready for production. While build con
 | Code review | Insider threat, Unreviewed changes | Attestation (`pullrequest` type) |
 | Quality assurance | Vulnerable software in production | Attestation (`junit` type) |
 | Vulnerability scanning | Vulnerable software in production, Supply chain compromise | Attestation (`snyk` type) |
-| Deployment approvals | Unauthorized deployment | Attestation (`approval` type) |
+| Deployment approvals | Unauthorized deployment | Attestation (`generic` or custom type) |
 
 ### <Icon icon="server"/> Runtime
 

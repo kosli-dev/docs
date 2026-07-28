@@ -15,7 +15,7 @@ _QUERIES = {
     "kosli list flows --output=json": "flows/cyber-dojo",
     "kosli get flow dashboard-ci --output=json": "flows/cyber-dojo/dashboard-ci",
     "kosli list trails dashboard-ci --output=json": "trails/cyber-dojo/dashboard-ci",
-    "kosli get trail dashboard-ci 1159a6f1193150681b8484545150334e89de6c1c --output=json": "trails/cyber-dojo/dashboard-ci/1159a6f1193150681b8484545150334e89de6c1c",
+    "kosli get trail dashboard-ci e4757683b74df7033c95aa544a7824b395c2f8bb --output=json": "trails/cyber-dojo/dashboard-ci/e4757683b74df7033c95aa544a7824b395c2f8bb",
     "kosli get attestation snyk-container-scan --flow=differ-ci --fingerprint=0cbbe3a6e73e733e8ca4b8813738d68e824badad0508ff20842832b5143b48c0 --output=json": "attestations/cyber-dojo/differ-ci/artifact/0cbbe3a6e73e733e8ca4b8813738d68e824badad0508ff20842832b5143b48c0/snyk-container-scan",
     "kosli list artifacts --flow=differ-ci --output=json": "artifacts/cyber-dojo/differ-ci",
     "kosli get artifact differ-ci@0cbbe3a6e73e733e8ca4b8813738d68e824badad0508ff20842832b5143b48c0 --output=json": "artifacts/cyber-dojo/differ-ci/fingerprint/0cbbe3a6e73e733e8ca4b8813738d68e824badad0508ff20842832b5143b48c0",
@@ -34,7 +34,7 @@ _CLI_COMMANDS = {
     "kosli diff snapshots":    "kosli diff snapshots aws-beta aws-prod --output=json",
     "kosli list flows":        "kosli list flows --output=json",
     "kosli get flow":          "kosli get flow dashboard-ci --output=json",
-    "kosli get trail":         "kosli get trail dashboard-ci 1159a6f1193150681b8484545150334e89de6c1c --output=json",
+    "kosli get trail":         "kosli get trail dashboard-ci e4757683b74df7033c95aa544a7824b395c2f8bb --output=json",
     "kosli get attestation":   "kosli get attestation snyk-container-scan --flow=differ-ci --fingerprint=0cbbe3a6e73e733e8ca4b8813738d68e824badad0508ff20842832b5143b48c0 --output=json",
 }
 
