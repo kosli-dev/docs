@@ -190,6 +190,10 @@ the policy, so it is **immutable once created**; choose one that matches how you
 names its policies. `--name` and `--description` are the human-readable label and purpose, and
 both can be changed later without changing the identifier.
 
+Pass a single `.rego` file, as here, or a directory of them when a policy is split into packages —
+Kosli stores the whole set as one versioned bundle with one digest, so a decision still points at
+one unambiguous thing. Tests are stored with the bundle but never executed server-side.
+
 Kosli records the first **version** on publish. Every later change creates a new version and
 records who made it, so a decision can always point back to the exact policy that produced it —
 see [Manage policies](#manage-policies) for updating, tagging, and archiving over time.
@@ -759,7 +763,6 @@ sidebar to see the full catalog. Search by name or identifier, and filter by tag
 list. Each policy shows its identifier, current version, and tags.
 
 <Frame>
-  {/* TODO: replace placeholder with a mockup of the Policies catalog */}
   <img src="/images/tutorials/policy-list.png" alt="Policies catalog listing policies with their identifier, current version, and tags, with a search box and a tag filter" />
 </Frame>
 
@@ -769,6 +772,33 @@ name or tag — each entry shows the identifier and current version:
 ```shell
 kosli list policies --type rego --tag team=platform
 ```
+
+### View a policy
+
+Select a policy to open it. The **Policy** tab is the default view: it shows the policy-as-code
+that Kosli actually runs, read-only, for the version you choose. This is what answers the question
+a control owner has to answer — *does this policy meet the control objective?* — which a name and
+description can only claim.
+
+<Frame>
+  <img src="/images/tutorials/policy-source.png" alt="Policy tab for a policy showing the bundle digest, roots, entrypoint and context schema, a file list, and the read-only Rego source of the selected file with line numbers" />
+</Frame>
+
+A policy can be a single `.rego` file or several, so the tab lists the files in the version and
+shows the one you select. Alongside them it shows what an auditor needs to check the record: the
+**bundle digest** a decision cites, the **entrypoint** that Kosli evaluates, the declared
+**context schema**, and the **parameters** the policy reads. Tests shipped with the policy are
+listed and marked *not executed* — Kosli stores them as evidence the policy was tested, but only
+the entrypoint runs.
+
+<Tip>
+When you open a policy from a decision, the tab shows the version **that decision used**, not the
+current one — so the source in front of you is the source that produced the outcome you are looking
+at.
+</Tip>
+
+Policies are read-only in the Kosli UI. Edit them in your repository and publish a new version with
+`kosli create policy`.
 
 ## View the decisions for a policy
 
@@ -780,7 +810,6 @@ to, the policy version that produced it, and the outcome (compliant or non-compl
 outcome, version, or time range, and page through the results to sample them.
 
 <Frame>
-  {/* TODO: replace placeholder with a mockup of a policy's Decisions tab */}
   <img src="/images/tutorials/policy-decisions.png" alt="Decisions tab for a policy showing decisions with timestamp, compliant or non-compliant outcome, trail, artifact fingerprint, and policy version, with outcome and version filters" />
 </Frame>
 
@@ -788,7 +817,6 @@ Select a decision to open its detail, showing the trail and artifact it applies 
 version and parameters that were used, the evaluation report, and any violations.
 
 <Frame>
-  {/* TODO: replace placeholder with a mockup of the decision detail */}
   <img src="/images/tutorials/policy-decision-detail.png" alt="Decision detail showing the trail, artifact, policy version and parameters, the evaluation report, and the list of violations" />
 </Frame>
 
