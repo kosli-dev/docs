@@ -90,5 +90,25 @@
   {
     "source": "/administration/managing_organizations",
     "destination": "/user/default_organization"
+  },
+  {
+    "source": "/client_reference/kosli_assert_approval",
+    "destination": "/client_reference/overview"
+  },
+  {
+    "source": "/client_reference/kosli_get_approval",
+    "destination": "/client_reference/overview"
+  },
+  {
+    "source": "/client_reference/kosli_list_approvals",
+    "destination": "/client_reference/overview"
+  },
+  {
+    "source": "/client_reference/kosli_report_approval",
+    "destination": "/client_reference/overview"
+  },
+  {
+    "source": "/client_reference/kosli_request_approval",
+    "destination": "/client_reference/overview"
   }
 ]

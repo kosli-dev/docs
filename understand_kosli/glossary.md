@@ -11,7 +11,7 @@ A software deliverable (binary, container image, archive) reported to Kosli and 
 
 ### Attestation
 
-A record that a specific control or check was performed on an Artifact or Trail, along with its result. Built-in types include `snyk`, `junit`, `sonar`, `pullrequest`, and `approval`. Custom types support jq-based compliance evaluation.
+A record that a specific control or check was performed on an Artifact or Trail, along with its result. Built-in types include `snyk`, `junit`, `sonar`, `pullrequest`, and `generic`. Custom types support jq-based compliance evaluation.
 
 ### Audit Package
 

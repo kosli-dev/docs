@@ -370,42 +370,6 @@ _MODIFIERS = {
             },
         },
     },
-    "kosli report approval": {
-        "github": {
-            "yaml": {
-                "repo": "differ",
-                "workflow": ".github/workflows/main.yml",
-                "backup": {
-                    "commit": "30dffd09c3f896a322c65029247abcea3019c43a",
-                    "line": 358,
-                },
-            },
-            "event": {
-                "flow": "",
-                "backup": {
-                    "trail": "",
-                    "attestation_id": "",
-                },
-            },
-        },
-        "gitlab": {
-            "yaml": {
-                "repo": "creator",
-                "workflow": ".gitlab/workflows/main.yml",
-                "backup": {
-                    "commit": "48bdbd3b059d45489e8ae5f9f680f48bc6201ad8",
-                    "line": 200,
-                },
-            },
-            "event": {
-                "flow": "",
-                "backup": {
-                    "trail": "",
-                    "attestation_id": "",
-                },
-            },
-        },
-    },
     "kosli evaluate trail": {
         "github": {
             "yaml": {

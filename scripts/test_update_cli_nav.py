@@ -16,8 +16,8 @@ def test_nav_skips_hidden_and_has_no_deprecated_group():
         _write(os.path.join(docs_dir, "overview.md"), 'title: "Overview"')
         _write(os.path.join(docs_dir, "output_and_verbosity.md"), 'title: "Output"')
         _write(os.path.join(docs_dir, "kosli_attest_generic.md"), 'title: "kosli attest generic"')
-        _write(os.path.join(docs_dir, "kosli_report_approval.md"),
-               'title: "kosli report approval"\ntag: "DEPRECATED"')
+        _write(os.path.join(docs_dir, "kosli_report_artifact.md"),
+               'title: "kosli report artifact"\ntag: "DEPRECATED"')
         _write(os.path.join(docs_dir, "kosli_attest_decision.md"),
                'title: "kosli attest decision"\ntag: "BETA"\nhidden: true')
 
@@ -40,7 +40,7 @@ def test_nav_skips_hidden_and_has_no_deprecated_group():
 
         assert "client_reference/kosli_attest_decision" not in all_pages, "hidden page must be skipped"
         assert "client_reference/kosli_attest_generic" in all_pages
-        assert "client_reference/kosli_report_approval" in all_pages, "deprecated page stays in its family group"
+        assert "client_reference/kosli_report_artifact" in all_pages, "deprecated page stays in its family group"
         assert "Deprecated" not in group_names, "separate Deprecated group must be removed"
 
 

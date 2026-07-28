@@ -99,18 +99,6 @@ kosli attest junit \
   --org <your-org>
 ```
 
-**Request an approval through the proxy:**
-
-```shell
-kosli request approval my-app:latest \
-  --artifact-type docker \
-  --flow my-flow \
-  --description "Approve release to production" \
-  --http-proxy http://localhost:8888 \
-  --api-token <your-token> \
-  --org <your-org>
-```
-
 ## Persist the proxy configuration
 
 Rather than passing `--http-proxy` on every command, save it to your Kosli config:
