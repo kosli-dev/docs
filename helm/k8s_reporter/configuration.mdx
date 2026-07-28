@@ -69,8 +69,16 @@ description: All values.yaml options for the Kosli k8s-reporter Helm chart.
 
 ## Reporter configuration
 
+<ParamField path="reporterConfig.autoEnvironment" type="bool" default="false">
+  Create each Kosli environment (type K8S) if it does not already exist, before reporting the snapshot.
+</ParamField>
+
 <ParamField path="reporterConfig.dryRun" type="bool" default="false">
   Whether the dry run mode is enabled or not. In dry run mode, the reporter logs the reports to stdout and does not send them to kosli.
+</ParamField>
+
+<ParamField path="reporterConfig.environmentDescription" type="string" default="">
+  Description applied to every environment auto-created in this run. Only used when `autoEnvironment` is true; existing environments are never modified. Note: a single value is shared by all environments created during the run.
 </ParamField>
 
 <ParamField path="reporterConfig.environments" type="list" default="[]">
@@ -79,6 +87,10 @@ description: All values.yaml options for the Kosli k8s-reporter Helm chart.
 
 <ParamField path="reporterConfig.httpProxy" type="string" default="">
   The http proxy url.
+</ParamField>
+
+<ParamField path="reporterConfig.includeScaling" type="string" default="">
+  Whether to record scaling (replica count) changes for every environment auto-created in this run. Leave unset to use the Kosli server default; set to `true` to pass `--include-scaling` or `false` to pass `--exclude-scaling`. Only used when `autoEnvironment` is true; existing environments are never modified.
 </ParamField>
 
 <ParamField path="reporterConfig.kosliOrg" type="string" default="">
