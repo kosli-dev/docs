@@ -40,7 +40,7 @@ In other CI systems, set them explicitly to capture repository metadata.
 |    `-t`, `--artifact-type` string  |  The type of the artifact to calculate its SHA256 fingerprint. One of: [oci, docker, file, dir]. Only required if you want Kosli to calculate the fingerprint for you (i.e. when you don't specify '`--fingerprint`' on commands that allow it).  |
 |        `--attachments` strings  |  [optional] The comma-separated list of paths of attachments for the reported attestation. Attachments can be files or directories. All attachments are compressed and uploaded to Kosli's evidence vault.  |
 |    `-g`, `--commit` string  |  [conditional] The git commit for which the attestation is associated to. Becomes required when reporting an attestation for an artifact before reporting it to Kosli. (defaulted in some CIs: [docs](/integrations/ci_cd) ).  |
-|    `-C`, `--compliant`  |  [defaulted] Whether the attestation is compliant or not. A boolean flag [docs](/faq/#boolean-flags)  |
+|    `-C`, `--compliant`  |  [defaulted] Whether the attestation is compliant or not.  |
 |        `--control` string  |  The control identifier being evaluated (e.g. RCTL-043).  |
 |        `--description` string  |  [optional] attestation description  |
 |    `-D`, `--dry-run`  |  [optional] Run in dry-run mode. When enabled, no data is sent to Kosli and the CLI exits with 0 exit code regardless of any errors.  |
