@@ -682,6 +682,30 @@ kosli create policy pr-approved pr-approved.rego \
 An evaluation that references a policy by identifier uses its **current version**. Decisions
 recorded earlier keep pointing at the version that was current when they were made.
 
+**Publishing an unchanged policy is a no-op.** If what you publish is identical to the current
+version, Kosli creates no new version, says so, and exits `0`:
+
+```plaintext
+Policy 'pr-approved' unchanged — still at version 4
+```
+
+This is what makes publishing safe to run on every merge, or from `terraform apply`: the command is
+idempotent, so a pipeline that republishes an untouched policy leaves the history alone instead of
+filling it with identical versions.
+
+What counts as a change:
+
+| Publish | Result |
+|---|---|
+| Same policy source, same name, description, and context schema | **No-op.** No version created. |
+| Any change to the policy source | New version. The digest is over the bytes, so reformatting counts. |
+| Same source, changed name, description, or context schema | New version — the description is part of what an auditor reads off a version. |
+| Only `--comment` differs | **No-op.** A comment describes a change; with no change there is nothing to describe. |
+
+Comparison is against the **current** version, not the whole history. So republishing the bundle
+from an earlier version is a real change and does create a new version — that is how you roll back,
+and the history records that the rollback happened rather than hiding it.
+
 ### Review a policy change
 
 A policy is the code that decides whether a control passes, so a change to it is a change to your
@@ -709,6 +733,10 @@ the policy is claiming to enforce.
 Because [only org admins can publish](#author-ship-and-evaluate-a-policy), publish from a CI job
 running with an admin credential on merge, rather than by hand from a laptop. The reviewed commit
 then becomes the published version, and the two cannot drift.
+
+You can publish every policy on every merge without thinking about which ones changed —
+[publishing an unchanged policy is a no-op](#update-a-policy), so only the policies you actually
+edited get a new version.
 </Step>
 
 <Step title="Point the version back at its review">
