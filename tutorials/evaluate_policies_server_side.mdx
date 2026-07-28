@@ -88,10 +88,15 @@ decisions they produce.
 
 <Step title="Author a policy locally">
 
-Author your policy as code in your own repository, which stays the source of truth. A policy is
-its **policy-as-code** (Rego), a short **description** of its purpose, and an **input-context
-schema** declaring whether it evaluates a single trail or multiple trails. You give it a stable
+Author your policy as code in your own repository. A policy is its **policy-as-code** (Rego), a
+human-readable **name**, a short **description** of its purpose, and an **input-context schema**
+declaring whether it evaluates a single trail or multiple trails. You give it a stable
 **identifier** when you publish it to Kosli (next step).
+
+Your repository stays authoritative for **authoring** a policy — it is where the Rego is written,
+reviewed, and tested. Kosli is authoritative for **what executed**: once a version is published,
+that stored version is what runs and what a decision cites, so the audit record never depends on
+your repository still being reachable or unchanged.
 
 The output schema requires an `allow` rule; you can return richer output alongside it. Follow
 the same fail-safe design rules as client-side policies — see
@@ -135,31 +140,37 @@ composing multiple policies into one are **not included** (see [What's out of sc
 
 <Step title="Ship a versioned policy into Kosli">
 
-Publish the policy into Kosli via the CLI (or API). You give the policy a **stable identifier**
-(`pr-approved` here) — this is the identifier decisions and evaluations use to refer to the
-policy, so it is **immutable once created**; choose one that matches how your organization names
-its policies. Kosli records the first **version** on publish. Every later change creates a new
-version and records who made it, so a decision can always point back to the exact policy that
-produced it — see [Manage policies](#manage-policies) for updating, tagging, and archiving over
-time.
+Publish the policy into Kosli via the CLI (or API). The positional argument is the policy's
+**stable identifier** (`pr-approved` here) — this is what decisions and evaluations use to refer to
+the policy, so it is **immutable once created**; choose one that matches how your organization
+names its policies. `--name` and `--description` are the human-readable label and purpose, and
+both can be changed later without changing the identifier.
+
+Kosli records the first **version** on publish. Every later change creates a new version and
+records who made it, so a decision can always point back to the exact policy that produced it —
+see [Manage policies](#manage-policies) for updating, tagging, and archiving over time.
 
 ```shell
 kosli create policy pr-approved pr-approved.rego \
     --type rego \
     --context-schema trail \
+    --name "Pull request approved" \
     --description "Every pull request on the trail has at least one approver."
 ```
 
 ```plaintext
 Policy 'pr-approved' created
   identifier:  pr-approved
+  name:        Pull request approved
   version:     1
 ```
 
 <Info>
 `kosli create policy` is the same command used for [environment policies](/getting_started/policies):
 `--type rego` selects an evaluation policy, while the default `--type env` creates an environment
-policy. In the beta, authoring is **CLI/API only** — the Kosli UI is read/tag-only.
+policy. Note that the positional argument differs between the two — for `--type env` it is the
+policy **name**, while for `--type rego` it is the immutable **identifier** described above. In the
+beta, authoring is **CLI/API only** — the Kosli UI is read/tag-only.
 </Info>
 
 </Step>
@@ -195,9 +206,9 @@ POLICY:    pr-approved @ version 1
 | `--trail` | The trail the decision is recorded on. Defaults to the evaluation trail when a single one is evaluated; required otherwise. |
 | `--policy` | The policy to evaluate — a Kosli policy **identifier** (uses its current version) or a **local** `.rego` file (see [Evaluate a local policy file](#evaluate-a-local-policy-file)). |
 | `--control` | The control identifier the resulting decision is recorded against. |
-| `--evaluation-context` | One or more **typed references** to the facts to evaluate (the **source**), repeatable. In the beta the only type is a trail: `trail=<trail_id>` (in `--flow`), or `trail=<flow_id>/<trail_id>` to name a trail in another flow. Defaults to the decision trail. The typed form leaves room for other context types (snapshots, artifacts, …) later without new flags. |
+| `--evaluation-context` | One or more **typed references** to the facts to evaluate (the **source**), repeatable. In the beta the only reference *type* is a trail: `trail=<trail_id>` (in `--flow`), or `trail=<flow_id>/<trail_id>` to name a trail in another flow. Repeat the flag to evaluate several trails — see [Evaluating multiple trails](#evaluating-multiple-trails). Defaults to the decision trail. The typed form leaves room for other context types (snapshots, artifacts, …) later without new flags. |
 | `--fingerprint` / `--artifact-type` | The artifact the decision applies to. Pass `--fingerprint` directly, or `--artifact-type` with the artifact name/path so Kosli calculates the fingerprint. |
-| `--name` | The attestation slot name the decision is recorded under on the trail. |
+| `--name` | The attestation slot name the decision is recorded under on the trail. A decision recorded here satisfies a `type: decision` attestation in the trail's [flow template](/template-reference/flow_template) when the names match — see [Requiring decisions in flow templates](/tutorials/working_with_controls#requiring-decisions-in-flow-templates). |
 | `--params` | Parameters passed to the policy as `data.params`. Every evaluation records the params it used. |
 | `--description` | Optional human-readable context for the decision. |
 | `--annotate` | Optional `key=value` annotations stored with the decision. |
@@ -252,17 +263,50 @@ exactly as before. Recording the decision is the PDP; asserting it is the PEP.
 
 As soon as the evaluation completes, the decision appears in Kosli against the control and the
 policy that produced it. Open it in the [Kosli app](https://app.kosli.com) to see the outcome and
-its **evaluation context** — the policy version that ran, the parameters used, the trail *moments*
-that were in scope (and, through them, the attestations that were evaluated), and a timestamp.
+its **evaluation context** — the policy version that ran, the parameters used, and the trail
+*moments* that were in scope (and, through them, the attestations that were evaluated).
 
-Because those inputs are pinned, the decision is fully traceable, and re-running from the stored
-context yields the **same decision** — this is what makes a server-side decision replicable for
-audit. To review and filter every decision a policy has produced, see
+**A decision carries two timestamps.** The **requested** time is when the evaluation was asked
+for; the **recorded** time is when the decision was written, once the evaluation came off the
+queue. A decision is **valid as of the requested time**, even though it was recorded later — the
+same distinction as a trade executed at one time and booked at another. Kosli records both and
+never backdates the record.
+
+This matters when facts arrive mid-flight: an attestation added between the two timestamps is
+*not* part of the decision, because the trail moment is anchored to the requested time. If that
+new fact changes the answer, it takes a new evaluation to say so.
+
+Because the policy version, parameters, and trail moments are all pinned to that requested time,
+the decision states exactly what was evaluated and when it applied. To review and filter every
+decision a policy has produced, see
 [View the decisions for a policy](#view-the-decisions-for-a-policy).
 
 </Step>
 
 </Steps>
+
+### Evaluating multiple trails
+
+A policy published with `--context-schema trails` evaluates several trails at once and receives
+them as `input.trails`. Repeat `--evaluation-context` to name each one:
+
+```shell
+kosli evaluate policy \
+    --flow release \
+    --trail release-99 \
+    --policy pr-approved-across-builds \
+    --control RCTL-043 \
+    --evaluation-context trail=build-ci/build-41 \
+    --evaluation-context trail=build-ci/build-42 \
+    --fingerprint "$ARTIFACT_FINGERPRINT" \
+    --name pr-approval-decision \
+    --sync
+```
+
+The context schema and the number of references have to agree: passing several references to a
+`trail`-schema policy is rejected before the evaluation is queued, as is passing one reference to a
+`trails`-schema policy. Because there is no single evaluation trail to default to, `--trail` is
+required to say where the decision is recorded.
 
 ## The Rego authoring contract
 
@@ -428,10 +472,10 @@ should be discarded or captured on the evaluation report.
 Before you ship a policy — or wire it into a pipeline gate — check that it holds up.
 
 <Tip>
-Your policy repository is the source of truth for your policies, so treat it like code: keep
-**Rego tests alongside each policy** that assert it allows and denies the cases you expect. Rego's
-built-in [test framework](https://www.openpolicyagent.org/docs/latest/policy-testing/) runs these
-locally and in CI, catching regressions before you publish a new version.
+A policy is code, so treat it like code: keep **Rego tests alongside each policy** that assert it
+allows and denies the cases you expect. Rego's built-in
+[test framework](https://www.openpolicyagent.org/docs/policy-testing) runs these locally and in CI,
+catching regressions before you publish a new version.
 </Tip>
 
 ### Validate
@@ -502,14 +546,15 @@ that was evaluated instead. Unlike the ad-hoc evaluation above, this **records**
 ### Update a policy
 
 Publishing a change is the same command as the initial publish: re-run `kosli create policy` with
-the updated Rego or description. Each publish creates a **new version** and records who made it —
-add `--comment` to note what changed — so a decision always points back to the exact version that
-produced it.
+the updated Rego, name, or description. Each publish creates a **new version** and records who made
+it — add `--comment` to note what changed — so a decision always points back to the exact version
+that produced it. The identifier never changes.
 
 ```shell
 kosli create policy pr-approved pr-approved.rego \
     --type rego \
     --context-schema trail \
+    --name "Pull request approved by a code owner" \
     --description "Every pull request on the trail has an approver from a code owner." \
     --comment "Require approval from a code owner"
 ```
@@ -592,6 +637,15 @@ kosli list decisions \
 `--compliant=false` surfaces every non-compliant evaluation for follow-up; combine it with
 `--since` or a version filter to scope the export.
 
+Each row shows the requested and recorded timestamps, so an export is enough to sample decisions
+by when they applied rather than only by when they were written.
+
+<Note>
+The same filtered sampling and CSV export are proposed for a **control's** Decisions tab, so an
+auditor can sample by control as well as by policy. That is not part of the
+[controls](/tutorials/working_with_controls) feature today.
+</Note>
+
 ## Inspect a failing evaluation
 
 When a policy denies, an **application team** needs to know why — and the decision records it
@@ -629,7 +683,9 @@ application team can see exactly what to fix.
 
 ## What's out of scope for the beta
 
-The following are explicitly **not included** in the beta and may be addressed later:
+The following are explicitly **not included** in the beta and may be addressed later. They are
+listed so you can tell what has been deferred from what has not been considered — if something here
+blocks you, that is worth telling us.
 
 - **Evidence-attachment content evaluation** — evaluating the contents of attached files.
 - **Composable policies** — composing many authored policies into one versioned policy.
@@ -638,6 +694,16 @@ The following are explicitly **not included** in the beta and may be addressed l
 - **Associating policies to controls** — a stored policy-to-control link that lets Kosli infer
   which policy closes which control. In the beta you name the control per evaluation with
   `--control`; there is no stored mapping.
+- **Pinning an evaluation to a policy version** — an evaluation always uses the policy's current
+  version. There is no way to hold a pipeline on version 3 while version 4 is rolled out.
+- **Re-running a past decision against a new policy** — you cannot replay a stored evaluation
+  context through a different policy or version to compare outcomes.
+- **Advisory outcomes** — a decision is compliant or non-compliant. There is no advisory or
+  warn-only mode that records a concern without failing the control.
+- **Verbose evaluation tracing** — beyond `violations` and any custom output the policy returns,
+  there is no rule-by-rule trace of why a policy reached its result.
+- **Filtering decisions by branch or environment** — decisions can be filtered by outcome, policy
+  version, and time, but not by where the change came from or where it was heading.
 
 ## Next steps
 
