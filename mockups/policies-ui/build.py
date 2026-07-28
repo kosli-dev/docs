@@ -345,6 +345,8 @@ tray = f"""<div class="scrim"></div>
       <span class="mock" style="margin-left:auto">Mockup &bull; proposed design</span></div>
   </div>
   <dl class="kv">
+    <div><dt>Evaluation context</dt><dd class="mono">evc_7f31a92c
+      <span style="font-weight:400;color:#1e55cd">&nbsp;view</span></dd></div>
     <div><dt>Control</dt><dd>RCTL-043 <span style="font-weight:400;color:#4b5563">
       &mdash; Source code review</span></dd></div>
     <div><dt>Trail</dt><dd>my-release-flow / release-97</dd></div>

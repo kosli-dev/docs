@@ -242,7 +242,7 @@ kosli evaluate policy \
     --flow "$FLOW_NAME" \
     --policy pr-approved \
     --control RCTL-043 \
-    --evaluation-context trail="$TRAIL_NAME" \
+    --context trail="$TRAIL_NAME" \
     --fingerprint "$ARTIFACT_FINGERPRINT" \
     --name pr-approval-decision \
     --params '{"pr_attestation_name": "pull-request"}' \
@@ -259,13 +259,13 @@ The four flags that carry the meaning:
 
 | Flag | Description |
 |------|-------------|
-| `--policy` | What to evaluate — a Kosli policy **identifier** (uses its current version) or a local `.rego` file. |
+| `--policy` | The policy to run — a Kosli policy **identifier** (uses its current version) or a local `.rego` file. |
 | `--control` | The control identifier the resulting decision is recorded against. |
-| `--evaluation-context` | The facts to evaluate — the **source**. Defaults to the decision trail. |
+| `--context` | What it runs against — the **source**. Defaults to the decision trail. |
 | `--flow` / `--trail` | Where the decision is recorded — the **destination**. |
 
 <Warning>
-Read `--flow`/`--trail` and `--evaluation-context` carefully: the first pair says where the decision
+Read `--flow`/`--trail` and `--context` carefully: the first pair says where the decision
 is **written**, the second says which facts are **read**. They are usually the same trail, and when
 they differ it is deliberate — see *Evaluating facts from another flow*, below.
 </Warning>
@@ -284,7 +284,7 @@ recorded, a decision appears against the policy — see
 | `--trail` | The trail the decision is recorded on. Defaults to the evaluation trail when a single one is evaluated; required otherwise. |
 | `--policy` | The policy to evaluate — a Kosli policy **identifier** (uses its current version) or a **local** `.rego` file (see [Evaluate a local policy file](#evaluate-a-local-policy-file)). |
 | `--control` | The control identifier the resulting decision is recorded against. |
-| `--evaluation-context` | One or more **typed references** to the facts to evaluate (the **source**), repeatable. In the beta the only reference *type* is a trail: `trail=<trail_id>` (in `--flow`), or `trail=<flow_id>/<trail_id>` to name a trail in another flow. Repeat the flag to evaluate several trails — see [Evaluating multiple trails](#evaluating-multiple-trails). Defaults to the decision trail. The typed form leaves room for other context types (snapshots, artifacts, …) later without new flags. |
+| `--context` | One or more **typed references** to what should be evaluated (the **source**), repeatable. This is what Kosli resolves into the [evaluation context](#re-run-a-decision-offline) a decision cites — not a cluster or account selector. In the beta the only reference *type* is a trail: `trail=<trail_id>` (in `--flow`), or `trail=<flow_id>/<trail_id>` to name a trail in another flow. Repeat the flag to evaluate several trails — see [Evaluating multiple trails](#evaluating-multiple-trails). Defaults to the decision trail. The typed form leaves room for other context types — snapshots and reported workloads, for example — later, without new flags. |
 | `--fingerprint` / `--artifact-type` | The artifact the decision applies to. Pass `--fingerprint` directly, or `--artifact-type` with the artifact name/path so Kosli calculates the fingerprint. |
 | `--name` | The attestation slot name the decision is recorded under on the trail. A decision recorded here satisfies a `type: decision` attestation in the trail's [flow template](/template-reference/flow_template) when the names match — see [Requiring decisions in flow templates](/tutorials/working_with_controls#requiring-decisions-in-flow-templates). |
 | `--params` | Parameters passed to the policy as `data.params`. Validated against the parameters the policy reads before the evaluation is queued — an unknown or missing name is an error. Every evaluation records the params it used. |
@@ -297,7 +297,7 @@ recorded, a decision appears against the policy — see
 </Accordion>
 
 **Evaluating facts from another flow.** By default the decision is recorded on the same trail
-whose facts you evaluate. Because each `--evaluation-context` reference carries its own flow
+whose facts you evaluate. Because each `--context` reference carries its own flow
 (`trail=<flow_id>/<trail_id>`), you can evaluate a trail in a *different* flow — for example,
 evaluating a build flow's trail but recording the decision on a release flow's trail:
 
@@ -305,7 +305,7 @@ evaluating a build flow's trail but recording the decision on a release flow's t
 kosli evaluate policy \
     --policy pr-approved \
     --control RCTL-043 \
-    --evaluation-context trail=build-ci/build-42 \
+    --context trail=build-ci/build-42 \
     --flow release \
     --trail release-99 \
     --fingerprint "$ARTIFACT_FINGERPRINT" \
@@ -348,14 +348,15 @@ exactly as before. Recording the decision is the PDP; asserting it is the PEP.
 <Step title="View and trace the decision">
 
 As soon as the evaluation completes, the decision appears in Kosli against the control and the
-policy that produced it. Open it in the [Kosli app](https://app.kosli.com) to see the outcome and
-its **evaluation context**:
+policy that produced it. Open it in the [Kosli app](https://app.kosli.com) to see the outcome, and
+the **evaluation context** it was reached from:
 
-| Recorded on the decision | Why it is there |
+| Recorded | Why it is there |
 |---|---|
+| The **evaluation context** the decision came from | The context holds what the evaluation was given. Naming it is what makes the decision traceable — and [re-runnable](#re-run-a-decision-offline). |
 | The policy **version**, and a **digest** of the exact policy source that ran | A version number says which release; a digest proves the bytes. Together they mean nobody has to trust that version 3 is still what version 3 was. |
 | The **parameters** used | Parameters are the only outside input, so a decision is not interpretable without them. |
-| The trail **moments** in scope, and the **attestation IDs** actually used | A policy may ignore half a trail, so the decision names the facts it actually relied on. |
+| The trail **moments** in scope, and the **attestation IDs** actually used | A policy may ignore half a trail, so the context names the facts it actually relied on. |
 | The **evaluation engine version** | The same policy on a different engine is not guaranteed to be the same evaluation. |
 | The **requested** and **recorded** times | See below. |
 
@@ -381,7 +382,7 @@ produced, see [View the decisions for a policy](#view-the-decisions-for-a-policy
 ### Evaluating multiple trails
 
 A policy published with `--context-schema trails` evaluates several trails at once and receives
-them as `input.trails`. Repeat `--evaluation-context` to name each one:
+them as `input.trails`. Repeat `--context` to name each one:
 
 ```shell
 kosli evaluate policy \
@@ -389,8 +390,8 @@ kosli evaluate policy \
     --trail release-99 \
     --policy pr-approved-across-builds \
     --control RCTL-043 \
-    --evaluation-context trail=build-ci/build-41 \
-    --evaluation-context trail=build-ci/build-42 \
+    --context trail=build-ci/build-41 \
+    --context trail=build-ci/build-42 \
     --fingerprint "$ARTIFACT_FINGERPRINT" \
     --name pr-approval-decision \
     --sync
@@ -617,7 +618,7 @@ but no decision is stored — so `--control` and `--name` aren't needed:
 kosli evaluate policy \
     --flow "$FLOW_NAME" \
     --policy pr-approved.rego \
-    --evaluation-context trail="$TRAIL_NAME" \
+    --context trail="$TRAIL_NAME" \
     --params '{"pr_attestation_name": "pull-request"}' \
     --sync \
     --dry-run
@@ -641,7 +642,7 @@ kosli evaluate policy \
     --flow "$FLOW_NAME" \
     --policy ./pr-approved.rego \
     --control RCTL-043 \
-    --evaluation-context trail="$TRAIL_NAME" \
+    --context trail="$TRAIL_NAME" \
     --fingerprint "$ARTIFACT_FINGERPRINT" \
     --name pr-approval-decision \
     --params '{"pr_attestation_name": "pull-request"}'
@@ -845,13 +846,16 @@ auditor can sample by control as well as by policy. That is not part of the
 
 ### Re-run a decision offline
 
-Sampling a decision usually raises the question of whether it was *right*. Because a decision
-records everything it was given, you can export that and evaluate the policy again yourself, with
-stock OPA, on your own machine:
+Sampling a decision usually raises the question of whether it was *right*. Everything the
+evaluation was given is held on its **evaluation context**, which the decision names — so you can
+export that context and evaluate the policy again yourself, with stock OPA, on your own machine:
 
 ```shell
-kosli get decision DECISION-ID --output fixture --dir ./replay
+kosli get evaluation-context CONTEXT-ID --output fixture --dir ./replay
 ```
+
+Every decision shows the evaluation context it came from, in the UI and in
+`kosli get decision`, so the context ID is one hop from the decision you are looking at.
 
 The export contains what the evaluation was given, as ordinary OPA inputs:
 
@@ -860,6 +864,12 @@ The export contains what the evaluation was given, as ordinary OPA inputs:
 | `input.json` | The trail moment that was evaluated — `input.trail` or `input.trails`. |
 | `data.json` | `params` as supplied, and the `kosli.evaluation_time` that was injected. |
 | `policy.rego` | The exact policy source that ran, matching the digest on the decision. |
+
+<Tip>
+A context exists from the moment an evaluation is queued, so this also works when there is **no
+decision to look at** — an evaluation still in the queue, or one that failed. That is usually the
+case you most want to inspect.
+</Tip>
 
 Evaluate it with OPA directly:
 
@@ -905,7 +915,7 @@ kosli evaluate policy \
     --flow "$FLOW_NAME" \
     --policy pr-approved \
     --control RCTL-043 \
-    --evaluation-context trail="$TRAIL_NAME" \
+    --context trail="$TRAIL_NAME" \
     --fingerprint "$ARTIFACT_FINGERPRINT" \
     --name pr-approval-decision \
     --params '{"pr_attestation_name": "pull-request"}' \
