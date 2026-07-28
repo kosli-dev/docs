@@ -89,7 +89,7 @@ description: All values.yaml options for the Kosli k8s-reporter Helm chart.
   The http proxy url.
 </ParamField>
 
-<ParamField path="reporterConfig.includeScaling" type="string" default="">
+<ParamField path="reporterConfig.includeScaling" type="boolean" default="">
   Whether to record scaling (replica count) changes for every environment auto-created in this run. Leave unset to use the Kosli server default; set to `true` to pass `--include-scaling` or `false` to pass `--exclude-scaling`. Only used when `autoEnvironment` is true; existing environments are never modified.
 </ParamField>
 

@@ -31,7 +31,7 @@ In other CI systems, set them explicitly to capture repository metadata.
 |    `-t`, `--artifact-type` string  |  The type of the artifact to calculate its SHA256 fingerprint. One of: [oci, docker, file, dir]. Only required if you want Kosli to calculate the fingerprint for you (i.e. when you don't specify '`--fingerprint`' on commands that allow it).  |
 |        `--attachments` strings  |  [optional] The comma-separated list of paths of attachments for the reported attestation. Attachments can be files or directories. All attachments are compressed and uploaded to Kosli's evidence vault.  |
 |    `-g`, `--commit` string  |  [conditional] The git commit for which the attestation is associated to. Becomes required when reporting an attestation for an artifact before reporting it to Kosli. (defaulted in some CIs: [docs](/integrations/ci_cd) ).  |
-|    `-C`, `--compliant`  |  [defaulted] Whether the attestation is compliant or not. A boolean flag [docs](/faq/#boolean-flags) (default true)  |
+|    `-C`, `--compliant`  |  [defaulted] Whether the attestation is compliant or not. (default true)  |
 |        `--description` string  |  [optional] attestation description  |
 |    `-D`, `--dry-run`  |  [optional] Run in dry-run mode. When enabled, no data is sent to Kosli and the CLI exits with 0 exit code regardless of any errors.  |
 |    `-x`, `--exclude` strings  |  [optional] The comma separated list of directories and files to exclude from fingerprinting. Can take glob patterns. Only applicable for `--artifact-type` dir.  |
@@ -73,7 +73,7 @@ In other CI systems, set them explicitly to capture repository metadata.
 	<Tab title="GitHub">
 	View an example of the `kosli attest generic` command in GitHub.
 
-	In [this YAML file](https://github.com/cyber-dojo/dashboard/blob/5407827a19ff32c8d0e7ff2e8f18665e86e64f01/.github/workflows/main.yml#L197), which created [this Kosli Event](https://app.kosli.com/cyber-dojo/flows/dashboard-ci/trails/5407827a19ff32c8d0e7ff2e8f18665e86e64f01?attestation_id=97d16b29-608f-4a1c-a1ff-ac1da975).
+	In [this YAML file](https://github.com/cyber-dojo/dashboard/blob/0fb0be439480821efb926a5079e39ce5941eaa48/.github/workflows/main.yml#L197), which created [this Kosli Event](https://app.kosli.com/cyber-dojo/flows/dashboard-ci/trails/0fb0be439480821efb926a5079e39ce5941eaa48?attestation_id=c12ffdfa-3c59-4d52-ab07-4e6dae54).
 	</Tab>
 	<Tab title="GitLab">
 	View an example of the `kosli attest generic` command in GitLab.
