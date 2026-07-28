@@ -23,13 +23,15 @@ links to its section:
 1. **[Author, ship, and evaluate a policy](#author-ship-and-evaluate-a-policy)** — the core loop:
    write Rego locally, publish a versioned policy into Kosli, evaluate it server-side to record a
    decision against a control, then view and trace that decision in Kosli.
-2. **[Validate and test a policy](#validate-and-test-a-policy)** — check a policy holds up before
+2. **[The Rego authoring contract](#the-rego-authoring-contract)** — the entry point Kosli
+   evaluates, what a policy can see, which built-ins it can call, and the output Kosli reads back.
+3. **[Validate and test a policy](#validate-and-test-a-policy)** — check a policy holds up before
    you ship it or gate a pipeline on it.
-3. **[Manage policies](#manage-policies)** — update (creating a new version), tag, and archive
+4. **[Manage policies](#manage-policies)** — update (creating a new version), tag, and archive
    policies over time.
-4. **[View the decisions for a policy](#view-the-decisions-for-a-policy)** — review and export the
+5. **[View the decisions for a policy](#view-the-decisions-for-a-policy)** — review and export the
    decisions a policy has produced.
-5. **[Inspect a failing evaluation](#inspect-a-failing-evaluation)** — understand why an
+6. **[Inspect a failing evaluation](#inspect-a-failing-evaluation)** — understand why an
    evaluation was denied.
 
 <Info>
@@ -94,7 +96,9 @@ schema** declaring whether it evaluates a single trail or multiple trails. You g
 The output schema requires an `allow` rule; you can return richer output alongside it. Follow
 the same fail-safe design rules as client-side policies — see
 [Evaluate trails with OPA policies](/tutorials/evaluate_trails_with_opa) for the
-reasoning behind them.
+reasoning behind them. The full contract a policy is written against — entry point, `input`,
+parameters, available built-ins, and output — is in
+[The Rego authoring contract](#the-rego-authoring-contract).
 
 ```rego pr-approved.rego
 package policy
@@ -259,6 +263,165 @@ audit. To review and filter every decision a policy has produced, see
 </Step>
 
 </Steps>
+
+## The Rego authoring contract
+
+Kosli evaluates your policy with OPA, so the tooling you already use locally — `opa fmt`,
+`opa check`, `opa test` — works on these policies unchanged. What Kosli fixes is the contract
+around the policy: the entry point it evaluates, the shape of `input`, the parameters and
+built-ins a policy may use, and the output Kosli reads back.
+
+<Info>
+Everything in this section is **proposed and open for comment**. If a constraint here would stop
+you shipping a control you need, that is the most useful feedback you can give us.
+</Info>
+
+### Entry point
+
+A policy declares `package policy`, and Kosli evaluates `data.policy.allow`. Keeping the package
+fixed means the CLI, the server, and your own `opa test` cases all agree on where the entry point
+is, and it is what lets your tests import the policy under test as `policy.allow`.
+
+### What the policy sees in `input`
+
+A policy evaluates the **attestations in the slots on the trail** — nothing else. Trail events
+(`trail started`, `trail updated`) are not attestations and are not in `input`, and neither are
+attestations from earlier moments of the same trail. Slots are matched **by name**, not by
+attestation type.
+
+The `--context-schema` you declare when you publish the policy selects the shape of `input`:
+
+| `--context-schema` | `input` contains | Reference schema |
+|---|---|---|
+| `trail` | `input.trail` — a single trail object | `https://docs.kosli.com/schemas/evaluation-input/trail/v1.json` |
+| `trails` | `input.trails` — an array of trail objects | `https://docs.kosli.com/schemas/evaluation-input/trails/v1.json` |
+
+Those schemas are published as JSON Schema so you can type-check a policy against `input` before
+you ship it. Associate one with your rules using an OPA
+[metadata annotation](https://www.openpolicyagent.org/docs/policy-language#metadata):
+
+```rego pr-approved.rego
+package policy
+
+import rego.v1
+
+# METADATA
+# scope: document
+# schemas:
+#   - input: schema["trail-v1"]
+default allow := false
+```
+
+Then check the policy against it. `opa check` resolves `schema["trail-v1"]` to `trail-v1.json` in
+the directory you pass to `--schema`:
+
+```shell
+mkdir -p schemas
+curl -so schemas/trail-v1.json https://docs.kosli.com/schemas/evaluation-input/trail/v1.json
+
+opa check --strict --schema schemas pr-approved.rego
+```
+
+This turns a misspelled field into a compile error naming the fields that do exist, rather than an
+undefined reference that silently leaves `allow` at its `false` default. `--strict` additionally
+rejects unused imports and unused local assignments.
+
+<Note>
+Schemas give you **type checking while authoring**; they are not how Kosli validates a policy on
+publish. Kosli performs its own validation — see
+[Validate and test a policy](#validate-and-test-a-policy).
+</Note>
+
+### Parameters
+
+Parameters are the only input to a policy from outside the trail. They arrive as `data.params`,
+and every evaluation records the parameters it used, so a decision always shows what the policy
+was run with.
+
+```rego
+pr_attestation_name := data.params.pr_attestation_name
+```
+
+Alias parameters at the top of the policy, as above, so a missing parameter leaves the alias
+undefined and any rule referencing it fails to evaluate — rather than the policy proceeding with a
+silently absent value.
+
+<Warning>
+Parameters are recorded on every decision and are visible to anyone who can read that decision.
+Pass thresholds, names, and flags — never secrets or personal data.
+</Warning>
+
+### Output
+
+| Field | Required | Purpose |
+|---|---|---|
+| `allow` | **Yes** | Boolean. The decision outcome — this is what `--compliant` is derived from. |
+| `violations` | No | A list of strings, each naming one thing that failed. Rendered on the decision in the Kosli UI and as markdown under `--assert`. |
+| Any other field | No | Captured on the decision as-is, for richer human-readable context. |
+
+Give `allow` a `default allow := false` and drive it through positive assertions, so an
+evaluation that goes wrong denies rather than allows.
+
+### Available built-ins
+
+Because Kosli executes the policy, evaluation runs with **no network access** and must produce the
+same decision every time it is re-evaluated. Both constraints are expressed as an OPA
+[capabilities](https://www.openpolicyagent.org/docs/cli#capabilities) file, which you can check a
+policy against locally before publishing:
+
+```shell
+curl -so kosli-capabilities.json https://docs.kosli.com/rego/capabilities/v1.json
+opa check --capabilities kosli-capabilities.json pr-approved.rego
+```
+
+| Built-ins | Status | Reason |
+|---|---|---|
+| `http.send`, `net.lookup_ip_addr` | Not available | Evaluation has no network access. |
+| `time.now_ns`, `rand.intn`, `opa.runtime` | Not available | Non-deterministic — see [Evaluation time](#evaluation-time) for time windows. |
+| `io.jwt.verify_*`, `io.jwt.encode_sign*` | Not available | Require key material. `io.jwt.decode` is available. |
+| `crypto.sha256`, `crypto.hmac.*`, and the other pure functions | Available | Deterministic, no host access. |
+| Everything else | Available | The rest of the OPA built-in set. |
+
+### Evaluation time
+
+A policy cannot read the clock, because a decision that depends on when it happened to run is not
+replicable. Instead, Kosli injects the evaluation context's request timestamp — the moment the
+decision is **valid as of** — as `data.kosli.evaluation_time`, in nanoseconds since the Unix
+epoch, so it can be compared directly against a parsed attestation timestamp:
+
+```rego
+# 30 days before the moment this evaluation was requested.
+cutoff := data.kosli.evaluation_time - time.parse_duration_ns("720h")
+
+approval_is_current if {
+    time.parse_rfc3339_ns(approval_timestamp) > cutoff
+}
+```
+
+Here `approval_timestamp` is whichever timestamp the attestation you are evaluating carries — the
+field depends on the attestation type. Time windows work as normal, they are anchored to the moment
+the decision applies to, and re-evaluating the stored context produces the same answer.
+
+### Engine and Rego version
+
+Kosli pins the OPA version it evaluates with and records it on every decision alongside the policy
+version, so a decision states exactly what ran. Author against that version locally and check with
+`opa check --v1-compatible` to avoid a policy that compiles on your machine but not in Kosli.
+
+{/* TODO: state the pinned OPA version once the evaluation runtime is chosen. */}
+
+### When evaluation itself fails
+
+A policy that times out, exhausts its memory budget, or hits a runtime error is a *broken policy*,
+not a non-compliant artifact, and Kosli reports the two differently — a failed evaluation records
+a typed error rather than a `--compliant=false` decision, and `--assert` exits with a distinct
+code so a pipeline can tell "this change is not compliant" from "this policy is broken".
+
+{/* TODO: confirm the exit codes and whether a failed evaluation records a decision at all. */}
+
+Open questions we would particularly like feedback on: whether a built-in error should abort the
+evaluation or evaluate to undefined (and therefore deny), and whether `print` and `trace` output
+should be discarded or captured on the evaluation report.
 
 ## Validate and test a policy
 
@@ -486,6 +649,8 @@ The following are explicitly **not included** in the beta and may be addressed l
 ## Feedback
 
 This is a design preview. If you are reviewing the proposed beta flow, the most useful feedback
-is on the command surface (`kosli evaluate policy` and how policies are published), the decision
-and audit model, and anything in [What's out of scope](#whats-out-of-scope-for-the-beta) that you
-would expect in the beta. Share comments with the Kosli team.
+is on the command surface (`kosli evaluate policy` and how policies are published),
+[the Rego authoring contract](#the-rego-authoring-contract) — particularly any constraint there
+that would stop you shipping a control you need — the decision and audit model, and anything in
+[What's out of scope](#whats-out-of-scope-for-the-beta) that you would expect in the beta. Share
+comments with the Kosli team.
