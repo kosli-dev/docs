@@ -216,7 +216,7 @@ POLICY:    pr-approved @ version 1
 | `--evaluation-context` | One or more **typed references** to the facts to evaluate (the **source**), repeatable. In the beta the only reference *type* is a trail: `trail=<trail_id>` (in `--flow`), or `trail=<flow_id>/<trail_id>` to name a trail in another flow. Repeat the flag to evaluate several trails — see [Evaluating multiple trails](#evaluating-multiple-trails). Defaults to the decision trail. The typed form leaves room for other context types (snapshots, artifacts, …) later without new flags. |
 | `--fingerprint` / `--artifact-type` | The artifact the decision applies to. Pass `--fingerprint` directly, or `--artifact-type` with the artifact name/path so Kosli calculates the fingerprint. |
 | `--name` | The attestation slot name the decision is recorded under on the trail. A decision recorded here satisfies a `type: decision` attestation in the trail's [flow template](/template-reference/flow_template) when the names match — see [Requiring decisions in flow templates](/tutorials/working_with_controls#requiring-decisions-in-flow-templates). |
-| `--params` | Parameters passed to the policy as `data.params`. Every evaluation records the params it used. |
+| `--params` | Parameters passed to the policy as `data.params`. Validated against the parameters the policy reads before the evaluation is queued — an unknown or missing name is an error. Every evaluation records the params it used. |
 | `--description` | Optional human-readable context for the decision. |
 | `--annotate` | Optional `key=value` annotations stored with the decision. |
 | `--sync` | Wait for the evaluation to finish and return the outcome. Off by default — evaluation runs asynchronously. |
@@ -396,6 +396,23 @@ pr_attestation_name := data.params.pr_attestation_name
 Alias parameters at the top of the policy, as above, so a missing parameter leaves the alias
 undefined and any rule referencing it fails to evaluate — rather than the policy proceeding with a
 silently absent value.
+
+You don't declare the parameters a policy takes. Kosli **derives** them from the policy itself, by
+reading which `data.params` paths the Rego depends on, and **validates the parameters you supply at
+evaluation time** — an unknown parameter name or a missing one is rejected before the evaluation is
+queued, by the CLI where it can be caught locally and by the server as the actual gate.
+
+This closes off a failure that is otherwise very hard to spot. Supplying `maxHigh` to a policy that
+reads `max_high` leaves the alias undefined, so `allow` falls back to `false` *and* the `violations`
+rules that reference the same alias don't fire either — the result is a recorded non-compliant
+decision with no violations explaining it, and a failed pipeline with nothing to fix. Rejecting the
+parameters up front turns that into an immediate, obvious error.
+
+<Note>
+Derivation reads parameter paths statically, so a policy that computes parameter names at
+evaluation time — `data.params[key]` for some derived `key` — cannot be checked this way, and Kosli
+falls back to accepting whatever you supply. Prefer literal parameter names.
+</Note>
 
 <Warning>
 Parameters are recorded on every decision and are visible to anyone who can read that decision.
