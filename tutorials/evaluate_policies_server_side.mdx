@@ -265,9 +265,10 @@ The four flags that carry the meaning:
 | `--flow` / `--trail` | Where the decision is recorded — the **destination**. |
 
 <Warning>
-Read `--flow`/`--trail` and `--context` carefully: the first pair says where the decision
-is **written**, the second says which facts are **read**. They are usually the same trail, and when
-they differ it is deliberate — see *Evaluating facts from another flow*, below.
+These flags pull in opposite directions, so it is worth reading them slowly. `--context` chooses
+the trail whose facts are **read**. `--flow` and `--trail` choose the trail the decision is
+**written** to. Most of the time all three name the same trail; when they don't, that is a
+deliberate choice — see the *Evaluating facts from another flow* example below.
 </Warning>
 
 By default the command queues the evaluation and returns without waiting; the decision is
