@@ -13,7 +13,7 @@ profile stripped, so they blend with the CSS colors.
 ## Regenerate
 
 ```bash
-python3 build.py
+python3 build.py   # also writes kosli-mock.css (gitignored)
 for p in policy-list policy-source policy-decisions policy-decision-detail; do
   "/Applications/Google Chrome.app/Contents/MacOS/Google Chrome" \
     --headless=new --disable-gpu --hide-scrollbars --force-device-scale-factor=1 \
