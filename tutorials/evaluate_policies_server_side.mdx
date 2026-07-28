@@ -150,6 +150,13 @@ Kosli records the first **version** on publish. Every later change creates a new
 records who made it, so a decision can always point back to the exact policy that produced it —
 see [Manage policies](#manage-policies) for updating, tagging, and archiving over time.
 
+**Only org admins can publish a policy.** Creating, updating, and archiving a policy all require
+org admin, the same as [controls](/tutorials/working_with_controls#creating-a-control). Running an
+evaluation and recording a decision does not — an ordinary API token or service account is enough,
+so pipelines can invoke a policy without being able to change one. That split is what makes a
+server-side decision worth more than a self-reported one: the team being audited can *run* the
+control, but only an admin can decide what the control checks.
+
 ```shell
 kosli create policy pr-approved pr-approved.rego \
     --type rego \
@@ -540,6 +547,14 @@ kosli evaluate policy \
 Because there is no stored policy version to cite, the decision records the exact policy source
 that was evaluated instead. Unlike the ad-hoc evaluation above, this **records** a decision — add
 `--dry-run` if you only want the outcome without recording one.
+
+<Warning>
+A decision made this way did **not** go through the org-admin gate on
+[publishing a policy](#author-ship-and-evaluate-a-policy) — anyone who can record a decision can
+supply the Rego that produced it. Treat these as decisions for iterating on a policy, not as
+audit evidence, and publish a version before a control depends on the outcome. We would like
+feedback on whether the beta should mark such decisions distinctly, or restrict them entirely.
+</Warning>
 
 ## Manage policies
 
