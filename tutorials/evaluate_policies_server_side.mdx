@@ -52,9 +52,11 @@ Running evaluation inside Kosli changes what a decision means — and where the 
 | **Data movement** | Full trail evidence is fetched to the runner | Evaluated in place — nothing shipped to the client |
 | **Replicability** | Depends on your pipeline | Decision cites its exact policy version and inputs |
 
-Because Kosli both stores the policy and runs it, a decision points at *exactly* what ran —
-the policy version, its parameters, and the trail facts that were in scope — which is what
-makes the decision trustworthy and replicable for audit.
+Because Kosli both stores the policy and runs it, a decision points at *exactly* what ran — the
+policy version and its content digest, its parameters, and the trail facts that were in scope. The
+record is complete enough to **reconstruct the evaluation**, which is what makes the decision
+trustworthy for audit: you can take a decision, export what it was given, and run the policy again
+yourself — see [Re-run a decision offline](#re-run-a-decision-offline).
 
 Running evaluation next to the data is also faster and scales further: Kosli doesn't have to
 ship a trail's full evidence out to your runner before evaluating, so evaluations can cover much
@@ -246,6 +248,18 @@ kosli evaluate policy \
     --sync
 ```
 
+The decision records which flow and trail the facts came from, so a reviewer can always see that a
+release decision was reached from a build flow's evidence rather than from the release trail itself.
+
+<Warning>
+**Be deliberate about which flows may satisfy a production control.** Any flow you can write to can
+supply the facts for a decision on any other flow, and the beta does not check that a given policy
+or source flow is acceptable for a given control. That makes it possible for evidence from a
+low-assurance flow — a sandbox or an experiment — to close a control that gates production. Until
+Kosli can constrain this, treat the set of flows that feed production controls as something to
+decide and review, not something to leave open.
+</Warning>
+
 <Info>
 **The server captures the evidence for you.** Because Kosli runs the evaluation, the decision
 automatically records the policy (and its version), the evaluation report, and any violations —
@@ -270,8 +284,15 @@ exactly as before. Recording the decision is the PDP; asserting it is the PEP.
 
 As soon as the evaluation completes, the decision appears in Kosli against the control and the
 policy that produced it. Open it in the [Kosli app](https://app.kosli.com) to see the outcome and
-its **evaluation context** — the policy version that ran, the parameters used, and the trail
-*moments* that were in scope (and, through them, the attestations that were evaluated).
+its **evaluation context**:
+
+| Recorded on the decision | Why it is there |
+|---|---|
+| The policy **version**, and a **digest** of the exact policy source that ran | A version number says which release; a digest proves the bytes. Together they mean nobody has to trust that version 3 is still what version 3 was. |
+| The **parameters** used | Parameters are the only outside input, so a decision is not interpretable without them. |
+| The trail **moments** in scope, and the **attestation IDs** actually used | A policy may ignore half a trail, so the decision names the facts it actually relied on. |
+| The **evaluation engine version** | The same policy on a different engine is not guaranteed to be the same evaluation. |
+| The **requested** and **recorded** times | See below. |
 
 **A decision carries two timestamps.** The **requested** time is when the evaluation was asked
 for; the **recorded** time is when the decision was written, once the evaluation came off the
@@ -284,9 +305,9 @@ This matters when facts arrive mid-flight: an attestation added between the two 
 new fact changes the answer, it takes a new evaluation to say so.
 
 Because the policy version, parameters, and trail moments are all pinned to that requested time,
-the decision states exactly what was evaluated and when it applied. To review and filter every
-decision a policy has produced, see
-[View the decisions for a policy](#view-the-decisions-for-a-policy).
+the decision states exactly what was evaluated and when it applied — enough to
+[re-run it offline](#re-run-a-decision-offline). To review and filter every decision a policy has
+produced, see [View the decisions for a policy](#view-the-decisions-for-a-policy).
 
 </Step>
 
@@ -594,6 +615,61 @@ kosli create policy pr-approved pr-approved.rego \
 An evaluation that references a policy by identifier uses its **current version**. Decisions
 recorded earlier keep pointing at the version that was current when they were made.
 
+### Review a policy change
+
+A policy is the code that decides whether a control passes, so a change to it is a change to your
+control environment. Reviewing that change is part of the lifecycle — author, test, version,
+**review**, ship — and in the beta the review happens in your policy repository, not in Kosli.
+
+The practice we recommend, and the one Kosli's records are designed to corroborate:
+
+<Steps>
+
+<Step title="Keep policies in a protected repository">
+Require pull requests, and require review from the people accountable for the control — a
+`CODEOWNERS` entry per policy is the simplest way to make sure the right control owner sees a change
+to *their* control. Restrict who can push directly.
+</Step>
+
+<Step title="Make the control owner's question answerable at review time">
+The question a control owner has to answer is not "is this valid Rego?" but "does this policy
+actually meet the control objective?" Reviewing the change alongside its
+[tests](#validate-and-test-a-policy) is what makes that answerable — the tests state, in cases, what
+the policy is claiming to enforce.
+</Step>
+
+<Step title="Publish only from CI, after review">
+Because [only org admins can publish](#author-ship-and-evaluate-a-policy), publish from a CI job
+running with an admin credential on merge, rather than by hand from a laptop. The reviewed commit
+then becomes the published version, and the two cannot drift.
+</Step>
+
+<Step title="Point the version back at its review">
+Use `--comment` to reference the change record, so Kosli's version history and your review history
+join up:
+
+```shell
+kosli create policy pr-approved pr-approved.rego \
+    --type rego \
+    --context-schema trail \
+    --comment "Require approval from a code owner (acme/policies#214)"
+```
+</Step>
+
+</Steps>
+
+Kosli records who published each version, when, what they said changed, and the digest of the source
+that was published. Combined with the review in your repository, that is a complete change-control
+trail for the policy itself — which is what an auditor asking "who decided this is what the control
+means?" is looking for.
+
+<Info>
+There is **no review or approval step inside Kosli** in the beta: a policy version is live as soon as
+it is published, and there is no draft state or second-approver requirement. If your control
+environment needs approval to be enforced by Kosli rather than by your repository, tell us — it
+affects how much of this belongs in the product.
+</Info>
+
 ### Tag a policy
 
 Tags are versionless labels for organizing and filtering policies — grouping by team, framework,
@@ -677,6 +753,49 @@ The same filtered sampling and CSV export are proposed for a **control's** Decis
 auditor can sample by control as well as by policy. That is not part of the
 [controls](/tutorials/working_with_controls) feature today.
 </Note>
+
+### Re-run a decision offline
+
+Sampling a decision usually raises the question of whether it was *right*. Because a decision
+records everything it was given, you can export that and evaluate the policy again yourself, with
+stock OPA, on your own machine:
+
+```shell
+kosli get decision DECISION-ID --output fixture --dir ./replay
+```
+
+The export contains what the evaluation was given, as ordinary OPA inputs:
+
+| File | Contents |
+|---|---|
+| `input.json` | The trail moment that was evaluated — `input.trail` or `input.trails`. |
+| `data.json` | `params` as supplied, and the `kosli.evaluation_time` that was injected. |
+| `policy.rego` | The exact policy source that ran, matching the digest on the decision. |
+
+Evaluate it with OPA directly:
+
+```shell
+opa eval --input replay/input.json \
+    --data replay/data.json \
+    --data replay/policy.rego \
+    'data.policy.allow'
+```
+
+Because the evaluation sandbox excludes anything non-deterministic — no clock, no network, no
+randomness, with time supplied as data — this returns the outcome the decision recorded. If it
+doesn't, that is a finding in itself.
+
+<Tip>
+This is the strongest form of the audit story, because it doesn't ask anyone to trust Kosli to check
+Kosli. An auditor can reach the same conclusion independently, with a tool Kosli doesn't control.
+The same export doubles as a **regression fixture**: commit `input.json` and `data.json` beside your
+policy and assert against them with `opa test`, and a real past decision becomes a permanent test
+case.
+</Tip>
+
+Re-running a stored decision through a *different* policy or version — to ask "what would the new
+policy have said?" — is [out of scope for the beta](#whats-out-of-scope-for-the-beta). Exporting the
+fixture and running it locally is the way to answer that question today.
 
 ## Inspect a failing evaluation
 
