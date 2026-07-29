@@ -64,7 +64,7 @@ kosli get snapshot aws-prod --output=json
 
 ```json
 {
-  "index": 5126,
+  "index": 5134,
   "is_latest": true,
   "next_snapshot_timestamp": null,
   "artifact_compliance_count": {
@@ -72,11 +72,586 @@ kosli get snapshot aws-prod --output=json
     "false": 0,
     "null": 0
   },
-  "timestamp": 1785243478.598589,
+  "timestamp": 1785310558.4611607,
   "type": "ECS",
   "compliant": true,
-  "html_url": "https://app.kosli.com/cyber-dojo/environments/aws-prod/snapshots/5126",
+  "html_url": "https://app.kosli.com/cyber-dojo/environments/aws-prod/snapshots/5134",
   "artifacts": [
+    {
+      "name": "244531986313.dkr.ecr.eu-central-1.amazonaws.com/spooler:c81791f@sha256:6ca8f8d96e1fe8c360fce64b81c330c4ac05d3f128461be4034d36b37147eeac",
+      "compliant": true,
+      "deployments": [],
+      "policy_decisions": [
+        {
+          "policy_version": 3,
+          "status": "COMPLIANT",
+          "rule_evaluations": [
+            {
+              "rule": {
+                "type": "provenance",
+                "definition": {
+                  "required": false,
+                  "exceptions": []
+                }
+              },
+              "satisfied": null,
+              "ignored": true,
+              "resolutions": [
+                {
+                  "type": "rule_not_applicable",
+                  "context": {
+                    "flow_name": "spooler-ci",
+                    "trail_name": "c81791fd10558a59f83876137fb021abcd89f262",
+                    "artifact_status": null
+                  }
+                },
+                {
+                  "type": "rule_not_applicable",
+                  "context": {
+                    "flow_name": "production-promotion",
+                    "trail_name": "promotion-one-145",
+                    "artifact_status": null
+                  }
+                }
+              ]
+            },
+            {
+              "rule": {
+                "type": "trail-compliance",
+                "definition": {
+                  "required": false,
+                  "exceptions": []
+                }
+              },
+              "satisfied": null,
+              "ignored": true,
+              "resolutions": [
+                {
+                  "type": "rule_not_applicable",
+                  "context": {
+                    "flow_name": "spooler-ci",
+                    "trail_name": "c81791fd10558a59f83876137fb021abcd89f262",
+                    "artifact_status": "COMPLIANT"
+                  }
+                },
+                {
+                  "type": "rule_not_applicable",
+                  "context": {
+                    "flow_name": "production-promotion",
+                    "trail_name": "promotion-one-145",
+                    "artifact_status": "COMPLIANT"
+                  }
+                }
+              ]
+            },
+            {
+              "rule": {
+                "type": "attestation",
+                "definition": {
+                  "if": {
+                    "text": "flow.tags.kind == \"build\""
+                  },
+                  "name": "*",
+                  "type": "pull_request",
+                  "must_be_compliant": true,
+                  "for_control": null
+                }
+              },
+              "satisfied": null,
+              "ignored": true,
+              "resolutions": [
+                {
+                  "type": "rule_not_applicable",
+                  "context": {
+                    "flow_name": "spooler-ci",
+                    "trail_name": "c81791fd10558a59f83876137fb021abcd89f262",
+                    "artifact_status": null
+                  }
+                },
+                {
+                  "type": "rule_not_applicable",
+                  "context": {
+                    "flow_name": "production-promotion",
+                    "trail_name": "promotion-one-145",
+                    "artifact_status": null
+                  }
+                }
+              ]
+            }
+          ],
+          "policy_name": "pull-request"
+        },
+        {
+          "policy_version": 3,
+          "status": "COMPLIANT",
+          "rule_evaluations": [
+            {
+              "rule": {
+                "type": "provenance",
+                "definition": {
+                  "required": true,
+                  "exceptions": []
+                }
+              },
+              "satisfied": true,
+              "ignored": false,
+              "resolutions": [
+                {
+                  "type": "rule_satisfied",
+                  "context": {
+                    "flow_name": "spooler-ci",
+                    "trail_name": "c81791fd10558a59f83876137fb021abcd89f262",
+                    "artifact_status": null
+                  }
+                },
+                {
+                  "type": "rule_satisfied",
+                  "context": {
+                    "flow_name": "production-promotion",
+                    "trail_name": "promotion-one-145",
+                    "artifact_status": null
+                  }
+                }
+              ]
+            },
+            {
+              "rule": {
+                "type": "trail-compliance",
+                "definition": {
+                  "required": false,
+                  "exceptions": []
+                }
+              },
+              "satisfied": null,
+              "ignored": true,
+              "resolutions": [
+                {
+                  "type": "rule_not_applicable",
+                  "context": {
+                    "flow_name": "spooler-ci",
+                    "trail_name": "c81791fd10558a59f83876137fb021abcd89f262",
+                    "artifact_status": "COMPLIANT"
+                  }
+                },
+                {
+                  "type": "rule_not_applicable",
+                  "context": {
+                    "flow_name": "production-promotion",
+                    "trail_name": "promotion-one-145",
+                    "artifact_status": "COMPLIANT"
+                  }
+                }
+              ]
+            },
+            {
+              "rule": {
+                "type": "attestation",
+                "definition": {
+                  "if": {
+                    "text": "flow.tags.kind == \"build\""
+                  },
+                  "name": "*",
+                  "type": "decision",
+                  "must_be_compliant": true,
+                  "for_control": "SDLC-CTRL-0002"
+                }
+              },
+              "satisfied": null,
+              "ignored": true,
+              "resolutions": [
+                {
+                  "type": "rule_not_applicable",
+                  "context": {
+                    "flow_name": "spooler-ci",
+                    "trail_name": "c81791fd10558a59f83876137fb021abcd89f262",
+                    "artifact_status": null,
+                    "for_control": "SDLC-CTRL-0002"
+                  }
+                },
+                {
+                  "type": "rule_not_applicable",
+                  "context": {
+                    "flow_name": "production-promotion",
+                    "trail_name": "promotion-one-145",
+                    "artifact_status": null,
+                    "for_control": "SDLC-CTRL-0002"
+                  }
+                }
+              ]
+            }
+          ],
+          "policy_name": "provenance"
+        },
+        {
+          "policy_version": 4,
+          "status": "COMPLIANT",
+          "rule_evaluations": [
+            {
+              "rule": {
+                "type": "provenance",
+                "definition": {
+                  "required": false,
+                  "exceptions": []
+                }
+              },
+              "satisfied": null,
+              "ignored": true,
+              "resolutions": [
+                {
+                  "type": "rule_not_applicable",
+                  "context": {
+                    "flow_name": "spooler-ci",
+                    "trail_name": "c81791fd10558a59f83876137fb021abcd89f262",
+                    "artifact_status": null
+                  }
+                },
+                {
+                  "type": "rule_not_applicable",
+                  "context": {
+                    "flow_name": "production-promotion",
+                    "trail_name": "promotion-one-145",
+                    "artifact_status": null
+                  }
+                }
+              ]
+            },
+            {
+              "rule": {
+                "type": "trail-compliance",
+                "definition": {
+                  "required": false,
+                  "exceptions": []
+                }
+              },
+              "satisfied": null,
+              "ignored": true,
+              "resolutions": [
+                {
+                  "type": "rule_not_applicable",
+                  "context": {
+                    "flow_name": "spooler-ci",
+                    "trail_name": "c81791fd10558a59f83876137fb021abcd89f262",
+                    "artifact_status": "COMPLIANT"
+                  }
+                },
+                {
+                  "type": "rule_not_applicable",
+                  "context": {
+                    "flow_name": "production-promotion",
+                    "trail_name": "promotion-one-145",
+                    "artifact_status": "COMPLIANT"
+                  }
+                }
+              ]
+            },
+            {
+              "rule": {
+                "type": "attestation",
+                "definition": {
+                  "if": {
+                    "text": "flow.name == \"snyk-aws-prod-per-artifact\""
+                  },
+                  "name": "snyk-container-scan",
+                  "type": "decision",
+                  "must_be_compliant": true,
+                  "for_control": "SDLC-CTRL-0022"
+                }
+              },
+              "satisfied": null,
+              "ignored": true,
+              "resolutions": [
+                {
+                  "type": "rule_not_applicable",
+                  "context": {
+                    "flow_name": "spooler-ci",
+                    "trail_name": "c81791fd10558a59f83876137fb021abcd89f262",
+                    "artifact_status": null,
+                    "for_control": "SDLC-CTRL-0022"
+                  }
+                },
+                {
+                  "type": "rule_not_applicable",
+                  "context": {
+                    "flow_name": "production-promotion",
+                    "trail_name": "promotion-one-145",
+                    "artifact_status": null,
+                    "for_control": "SDLC-CTRL-0022"
+                  }
+                }
+              ]
+            }
+          ],
+          "policy_name": "snyk-scan-aws-prod"
+        },
+        {
+          "policy_version": 2,
+          "status": "COMPLIANT",
+          "rule_evaluations": [
+            {
+              "rule": {
+                "type": "provenance",
+                "definition": {
+                  "required": false,
+                  "exceptions": []
+                }
+              },
+              "satisfied": null,
+              "ignored": true,
+              "resolutions": [
+                {
+                  "type": "rule_not_applicable",
+                  "context": {
+                    "flow_name": "spooler-ci",
+                    "trail_name": "c81791fd10558a59f83876137fb021abcd89f262",
+                    "artifact_status": null
+                  }
+                },
+                {
+                  "type": "rule_not_applicable",
+                  "context": {
+                    "flow_name": "production-promotion",
+                    "trail_name": "promotion-one-145",
+                    "artifact_status": null
+                  }
+                }
+              ]
+            },
+            {
+              "rule": {
+                "type": "trail-compliance",
+                "definition": {
+                  "required": false,
+                  "exceptions": []
+                }
+              },
+              "satisfied": null,
+              "ignored": true,
+              "resolutions": [
+                {
+                  "type": "rule_not_applicable",
+                  "context": {
+                    "flow_name": "spooler-ci",
+                    "trail_name": "c81791fd10558a59f83876137fb021abcd89f262",
+                    "artifact_status": "COMPLIANT"
+                  }
+                },
+                {
+                  "type": "rule_not_applicable",
+                  "context": {
+                    "flow_name": "production-promotion",
+                    "trail_name": "promotion-one-145",
+                    "artifact_status": "COMPLIANT"
+                  }
+                }
+              ]
+            },
+            {
+              "rule": {
+                "type": "attestation",
+                "definition": {
+                  "if": {
+                    "text": "flow.name == \"production-promotion\""
+                  },
+                  "name": "snyk-scan",
+                  "type": "decision",
+                  "must_be_compliant": true,
+                  "for_control": null
+                }
+              },
+              "satisfied": true,
+              "ignored": false,
+              "resolutions": [
+                {
+                  "type": "rule_not_applicable",
+                  "context": {
+                    "flow_name": "spooler-ci",
+                    "trail_name": "c81791fd10558a59f83876137fb021abcd89f262",
+                    "artifact_status": null
+                  }
+                },
+                {
+                  "type": "rule_satisfied",
+                  "context": {
+                    "flow_name": "production-promotion",
+                    "trail_name": "promotion-one-145",
+                    "artifact_status": null
+                  }
+                }
+              ]
+            }
+          ],
+          "policy_name": "production-promotion"
+        },
+        {
+          "policy_version": 2,
+          "status": "COMPLIANT",
+          "rule_evaluations": [
+            {
+              "rule": {
+                "type": "provenance",
+                "definition": {
+                  "required": false,
+                  "exceptions": []
+                }
+              },
+              "satisfied": null,
+              "ignored": true,
+              "resolutions": [
+                {
+                  "type": "rule_not_applicable",
+                  "context": {
+                    "flow_name": "spooler-ci",
+                    "trail_name": "c81791fd10558a59f83876137fb021abcd89f262",
+                    "artifact_status": null
+                  }
+                },
+                {
+                  "type": "rule_not_applicable",
+                  "context": {
+                    "flow_name": "production-promotion",
+                    "trail_name": "promotion-one-145",
+                    "artifact_status": null
+                  }
+                }
+              ]
+            },
+            {
+              "rule": {
+                "type": "trail-compliance",
+                "definition": {
+                  "required": true,
+                  "exceptions": [
+                    {
+                      "if": {
+                        "text": "exists(flow.tags.env) and flow.tags.env != \"aws-prod\""
+                      }
+                    }
+                  ]
+                }
+              },
+              "satisfied": true,
+              "ignored": false,
+              "resolutions": [
+                {
+                  "type": "rule_not_applicable",
+                  "context": {
+                    "flow_name": "spooler-ci",
+                    "trail_name": "c81791fd10558a59f83876137fb021abcd89f262",
+                    "artifact_status": "COMPLIANT"
+                  }
+                },
+                {
+                  "type": "rule_satisfied",
+                  "context": {
+                    "flow_name": "production-promotion",
+                    "trail_name": "promotion-one-145",
+                    "artifact_status": "COMPLIANT"
+                  }
+                }
+              ]
+            }
+          ],
+          "policy_name": "trail-compliance-aws-prod"
+        }
+      ],
+      "reasons_for_incompliance": [],
+      "fingerprint": "6ca8f8d96e1fe8c360fce64b81c330c4ac05d3f128461be4034d36b37147eeac",
+      "creationTimestamp": [
+        1785310509
+      ],
+      "pods": null,
+      "annotation": {
+        "type": "started-compliant",
+        "was": 0,
+        "now": 1
+      },
+      "flow_name": "spooler-ci",
+      "git_commit": "c81791fd10558a59f83876137fb021abcd89f262",
+      "commit_url": "https://github.com/cyber-dojo/spooler/commit/c81791fd10558a59f83876137fb021abcd89f262",
+      "html_url": "https://app.kosli.com/cyber-dojo/flows/spooler-ci/artifacts/6ca8f8d96e1fe8c360fce64b81c330c4ac05d3f128461be4034d36b37147eeac?artifact_id=28274720-dc6e-4b52-b48e-4418ecaa",
+      "flow_html_url": "https://app.kosli.com/cyber-dojo/flows/spooler-ci",
+      "deployment_diff": {
+        "diff_url": "https://github.com/cyber-dojo/spooler/compare/e4d9d0868e299522b207696e19c07966a09bf08a...c81791fd10558a59f83876137fb021abcd89f262",
+        "previous_git_commit": "e4d9d0868e299522b207696e19c07966a09bf08a",
+        "previous_fingerprint": "2d13ace2ba9449bcabeaef32f8cdc9255eff976ddf7a4ce5bd70e46bac11b204",
+        "previous_artifact_name": "244531986313.dkr.ecr.eu-central-1.amazonaws.com/spooler:e4d9d08@sha256:2d13ace2ba9449bcabeaef32f8cdc9255eff976ddf7a4ce5bd70e46bac11b204",
+        "previous_artifact_compliance_state": "COMPLIANT",
+        "previous_running": false,
+        "previous_git_commit_url": "https://github.com/cyber-dojo/spooler/commit/e4d9d0868e299522b207696e19c07966a09bf08a",
+        "previous_trail_name": "e4d9d0868e299522b207696e19c07966a09bf08a",
+        "previous_template_reference_name": "spooler"
+      },
+      "commit_lead_time": 791.0,
+      "flows": [
+        {
+          "flow_name": "spooler-ci",
+          "trail_name": "c81791fd10558a59f83876137fb021abcd89f262",
+          "template_reference_name": "spooler",
+          "git_commit": "c81791fd10558a59f83876137fb021abcd89f262",
+          "commit_url": "https://github.com/cyber-dojo/spooler/commit/c81791fd10558a59f83876137fb021abcd89f262",
+          "git_commit_info": {
+            "sha1": "c81791fd10558a59f83876137fb021abcd89f262",
+            "message": "Merge pull request #13 from cyber-dojo/unsequenced-writes-no-longer-wedge-drainer\n\nKeep a shard draining when a write has no tab_seq",
+            "author": "Jon Jagger <jon@kosli.com>",
+            "branch": "",
+            "timestamp": 1785309718.0,
+            "url": "https://github.com/cyber-dojo/spooler/commit/c81791fd10558a59f83876137fb021abcd89f262"
+          },
+          "html_url": "https://app.kosli.com/cyber-dojo/flows/spooler-ci/artifacts/6ca8f8d96e1fe8c360fce64b81c330c4ac05d3f128461be4034d36b37147eeac?artifact_id=28274720-dc6e-4b52-b48e-4418ecaa",
+          "flow_html_url": "https://app.kosli.com/cyber-dojo/flows/spooler-ci",
+          "deployment_diff": {
+            "diff_url": "https://github.com/cyber-dojo/spooler/compare/e4d9d0868e299522b207696e19c07966a09bf08a...c81791fd10558a59f83876137fb021abcd89f262",
+            "previous_git_commit": "e4d9d0868e299522b207696e19c07966a09bf08a",
+            "previous_fingerprint": "2d13ace2ba9449bcabeaef32f8cdc9255eff976ddf7a4ce5bd70e46bac11b204",
+            "previous_artifact_name": "244531986313.dkr.ecr.eu-central-1.amazonaws.com/spooler:e4d9d08@sha256:2d13ace2ba9449bcabeaef32f8cdc9255eff976ddf7a4ce5bd70e46bac11b204",
+            "previous_artifact_compliance_state": "COMPLIANT",
+            "previous_running": false,
+            "previous_git_commit_url": "https://github.com/cyber-dojo/spooler/commit/e4d9d0868e299522b207696e19c07966a09bf08a",
+            "previous_trail_name": "e4d9d0868e299522b207696e19c07966a09bf08a",
+            "previous_template_reference_name": "spooler"
+          },
+          "commit_lead_time": 791.0,
+          "artifact_compliance_in_flow": true,
+          "flow_reasons_for_non_compliance": []
+        },
+        {
+          "flow_name": "production-promotion",
+          "trail_name": "promotion-one-145",
+          "template_reference_name": "spooler",
+          "git_commit": "81c216a55b2cb1787645e699ceaceca868cad253",
+          "commit_url": "https://github.com/cyber-dojo/aws-prod-co-promotion/commit/81c216a55b2cb1787645e699ceaceca868cad253",
+          "git_commit_info": {
+            "sha1": "81c216a55b2cb1787645e699ceaceca868cad253",
+            "message": "Add spooler service name to promote_one.yml",
+            "author": "JonJagger <jon@kosli.com>",
+            "branch": "main",
+            "timestamp": 1785143054.0,
+            "url": "https://github.com/cyber-dojo/aws-prod-co-promotion/commit/81c216a55b2cb1787645e699ceaceca868cad253"
+          },
+          "html_url": "https://app.kosli.com/cyber-dojo/flows/production-promotion/artifacts/6ca8f8d96e1fe8c360fce64b81c330c4ac05d3f128461be4034d36b37147eeac?artifact_id=6154dd8b-8a89-49c6-be10-9c36fd71",
+          "flow_html_url": "https://app.kosli.com/cyber-dojo/flows/production-promotion",
+          "deployment_diff": {
+            "diff_url": "https://github.com/cyber-dojo/aws-prod-co-promotion/compare/81c216a55b2cb1787645e699ceaceca868cad253...81c216a55b2cb1787645e699ceaceca868cad253",
+            "previous_git_commit": "81c216a55b2cb1787645e699ceaceca868cad253",
+            "previous_fingerprint": "2d13ace2ba9449bcabeaef32f8cdc9255eff976ddf7a4ce5bd70e46bac11b204",
+            "previous_artifact_name": "244531986313.dkr.ecr.eu-central-1.amazonaws.com/spooler:e4d9d08@sha256:2d13ace2ba9449bcabeaef32f8cdc9255eff976ddf7a4ce5bd70e46bac11b204",
+            "previous_artifact_compliance_state": "COMPLIANT",
+            "previous_running": false,
+            "previous_git_commit_url": "https://github.com/cyber-dojo/aws-prod-co-promotion/commit/81c216a55b2cb1787645e699ceaceca868cad253",
+            "previous_trail_name": "promotion-one-144",
+            "previous_template_reference_name": "spooler"
+          },
+          "commit_lead_time": 167455.0,
+          "artifact_compliance_in_flow": true,
+          "flow_reasons_for_non_compliance": []
+        }
+      ],
+      "ecs_context": {
+        "task_arn": "arn:aws:ecs:eu-central-1:274425519734:task/app/f33363aadf854b71b715ff4961e94b82",
+        "cluster_name": null,
+        "service_name": null
+      }
+    },
     {
       "name": "244531986313.dkr.ecr.eu-central-1.amazonaws.com/web:2779354@sha256:af5870236f643273d1f26a7f842fd2b616b0f766cc2ac177c6d8f9882b90851e",
       "compliant": true,
@@ -112,6 +687,22 @@ kosli get snapshot aws-prod --output=json
                     "trail_name": "promotion-one-143",
                     "artifact_status": null
                   }
+                },
+                {
+                  "type": "rule_not_applicable",
+                  "context": {
+                    "flow_name": "snyk-aws-prod-per-artifact",
+                    "trail_name": "web-af5870236f643273d1f26a7f842fd2b616b0f766cc2ac177c6d8f9882b90851e",
+                    "artifact_status": null
+                  }
+                },
+                {
+                  "type": "rule_not_applicable",
+                  "context": {
+                    "flow_name": "snyk-aws-beta-per-artifact",
+                    "trail_name": "web-af5870236f643273d1f26a7f842fd2b616b0f766cc2ac177c6d8f9882b90851e",
+                    "artifact_status": null
+                  }
                 }
               ]
             },
@@ -139,6 +730,22 @@ kosli get snapshot aws-prod --output=json
                   "context": {
                     "flow_name": "production-promotion",
                     "trail_name": "promotion-one-143",
+                    "artifact_status": "COMPLIANT"
+                  }
+                },
+                {
+                  "type": "rule_not_applicable",
+                  "context": {
+                    "flow_name": "snyk-aws-prod-per-artifact",
+                    "trail_name": "web-af5870236f643273d1f26a7f842fd2b616b0f766cc2ac177c6d8f9882b90851e",
+                    "artifact_status": "COMPLIANT"
+                  }
+                },
+                {
+                  "type": "rule_not_applicable",
+                  "context": {
+                    "flow_name": "snyk-aws-beta-per-artifact",
+                    "trail_name": "web-af5870236f643273d1f26a7f842fd2b616b0f766cc2ac177c6d8f9882b90851e",
                     "artifact_status": "COMPLIANT"
                   }
                 }
@@ -173,6 +780,22 @@ kosli get snapshot aws-prod --output=json
                   "context": {
                     "flow_name": "production-promotion",
                     "trail_name": "promotion-one-143",
+                    "artifact_status": null
+                  }
+                },
+                {
+                  "type": "rule_not_applicable",
+                  "context": {
+                    "flow_name": "snyk-aws-prod-per-artifact",
+                    "trail_name": "web-af5870236f643273d1f26a7f842fd2b616b0f766cc2ac177c6d8f9882b90851e",
+                    "artifact_status": null
+                  }
+                },
+                {
+                  "type": "rule_not_applicable",
+                  "context": {
+                    "flow_name": "snyk-aws-beta-per-artifact",
+                    "trail_name": "web-af5870236f643273d1f26a7f842fd2b616b0f766cc2ac177c6d8f9882b90851e",
                     "artifact_status": null
                   }
                 }
@@ -211,6 +834,22 @@ kosli get snapshot aws-prod --output=json
                     "trail_name": "promotion-one-143",
                     "artifact_status": null
                   }
+                },
+                {
+                  "type": "rule_satisfied",
+                  "context": {
+                    "flow_name": "snyk-aws-prod-per-artifact",
+                    "trail_name": "web-af5870236f643273d1f26a7f842fd2b616b0f766cc2ac177c6d8f9882b90851e",
+                    "artifact_status": null
+                  }
+                },
+                {
+                  "type": "rule_satisfied",
+                  "context": {
+                    "flow_name": "snyk-aws-beta-per-artifact",
+                    "trail_name": "web-af5870236f643273d1f26a7f842fd2b616b0f766cc2ac177c6d8f9882b90851e",
+                    "artifact_status": null
+                  }
                 }
               ]
             },
@@ -238,6 +877,22 @@ kosli get snapshot aws-prod --output=json
                   "context": {
                     "flow_name": "production-promotion",
                     "trail_name": "promotion-one-143",
+                    "artifact_status": "COMPLIANT"
+                  }
+                },
+                {
+                  "type": "rule_not_applicable",
+                  "context": {
+                    "flow_name": "snyk-aws-prod-per-artifact",
+                    "trail_name": "web-af5870236f643273d1f26a7f842fd2b616b0f766cc2ac177c6d8f9882b90851e",
+                    "artifact_status": "COMPLIANT"
+                  }
+                },
+                {
+                  "type": "rule_not_applicable",
+                  "context": {
+                    "flow_name": "snyk-aws-beta-per-artifact",
+                    "trail_name": "web-af5870236f643273d1f26a7f842fd2b616b0f766cc2ac177c6d8f9882b90851e",
                     "artifact_status": "COMPLIANT"
                   }
                 }
@@ -273,6 +928,24 @@ kosli get snapshot aws-prod --output=json
                   "context": {
                     "flow_name": "production-promotion",
                     "trail_name": "promotion-one-143",
+                    "artifact_status": null,
+                    "for_control": "SDLC-CTRL-0002"
+                  }
+                },
+                {
+                  "type": "rule_not_applicable",
+                  "context": {
+                    "flow_name": "snyk-aws-prod-per-artifact",
+                    "trail_name": "web-af5870236f643273d1f26a7f842fd2b616b0f766cc2ac177c6d8f9882b90851e",
+                    "artifact_status": null,
+                    "for_control": "SDLC-CTRL-0002"
+                  }
+                },
+                {
+                  "type": "rule_not_applicable",
+                  "context": {
+                    "flow_name": "snyk-aws-beta-per-artifact",
+                    "trail_name": "web-af5870236f643273d1f26a7f842fd2b616b0f766cc2ac177c6d8f9882b90851e",
                     "artifact_status": null,
                     "for_control": "SDLC-CTRL-0002"
                   }
@@ -312,6 +985,22 @@ kosli get snapshot aws-prod --output=json
                     "trail_name": "promotion-one-143",
                     "artifact_status": null
                   }
+                },
+                {
+                  "type": "rule_not_applicable",
+                  "context": {
+                    "flow_name": "snyk-aws-prod-per-artifact",
+                    "trail_name": "web-af5870236f643273d1f26a7f842fd2b616b0f766cc2ac177c6d8f9882b90851e",
+                    "artifact_status": null
+                  }
+                },
+                {
+                  "type": "rule_not_applicable",
+                  "context": {
+                    "flow_name": "snyk-aws-beta-per-artifact",
+                    "trail_name": "web-af5870236f643273d1f26a7f842fd2b616b0f766cc2ac177c6d8f9882b90851e",
+                    "artifact_status": null
+                  }
                 }
               ]
             },
@@ -341,6 +1030,22 @@ kosli get snapshot aws-prod --output=json
                     "trail_name": "promotion-one-143",
                     "artifact_status": "COMPLIANT"
                   }
+                },
+                {
+                  "type": "rule_not_applicable",
+                  "context": {
+                    "flow_name": "snyk-aws-prod-per-artifact",
+                    "trail_name": "web-af5870236f643273d1f26a7f842fd2b616b0f766cc2ac177c6d8f9882b90851e",
+                    "artifact_status": "COMPLIANT"
+                  }
+                },
+                {
+                  "type": "rule_not_applicable",
+                  "context": {
+                    "flow_name": "snyk-aws-beta-per-artifact",
+                    "trail_name": "web-af5870236f643273d1f26a7f842fd2b616b0f766cc2ac177c6d8f9882b90851e",
+                    "artifact_status": "COMPLIANT"
+                  }
                 }
               ]
             },
@@ -357,8 +1062,8 @@ kosli get snapshot aws-prod --output=json
                   "for_control": "SDLC-CTRL-0022"
                 }
               },
-              "satisfied": null,
-              "ignored": true,
+              "satisfied": true,
+              "ignored": false,
               "resolutions": [
                 {
                   "type": "rule_not_applicable",
@@ -374,6 +1079,24 @@ kosli get snapshot aws-prod --output=json
                   "context": {
                     "flow_name": "production-promotion",
                     "trail_name": "promotion-one-143",
+                    "artifact_status": null,
+                    "for_control": "SDLC-CTRL-0022"
+                  }
+                },
+                {
+                  "type": "rule_satisfied",
+                  "context": {
+                    "flow_name": "snyk-aws-prod-per-artifact",
+                    "trail_name": "web-af5870236f643273d1f26a7f842fd2b616b0f766cc2ac177c6d8f9882b90851e",
+                    "artifact_status": null,
+                    "for_control": "SDLC-CTRL-0022"
+                  }
+                },
+                {
+                  "type": "rule_not_applicable",
+                  "context": {
+                    "flow_name": "snyk-aws-beta-per-artifact",
+                    "trail_name": "web-af5870236f643273d1f26a7f842fd2b616b0f766cc2ac177c6d8f9882b90851e",
                     "artifact_status": null,
                     "for_control": "SDLC-CTRL-0022"
                   }
@@ -413,6 +1136,22 @@ kosli get snapshot aws-prod --output=json
                     "trail_name": "promotion-one-143",
                     "artifact_status": null
                   }
+                },
+                {
+                  "type": "rule_not_applicable",
+                  "context": {
+                    "flow_name": "snyk-aws-prod-per-artifact",
+                    "trail_name": "web-af5870236f643273d1f26a7f842fd2b616b0f766cc2ac177c6d8f9882b90851e",
+                    "artifact_status": null
+                  }
+                },
+                {
+                  "type": "rule_not_applicable",
+                  "context": {
+                    "flow_name": "snyk-aws-beta-per-artifact",
+                    "trail_name": "web-af5870236f643273d1f26a7f842fd2b616b0f766cc2ac177c6d8f9882b90851e",
+                    "artifact_status": null
+                  }
                 }
               ]
             },
@@ -440,6 +1179,22 @@ kosli get snapshot aws-prod --output=json
                   "context": {
                     "flow_name": "production-promotion",
                     "trail_name": "promotion-one-143",
+                    "artifact_status": "COMPLIANT"
+                  }
+                },
+                {
+                  "type": "rule_not_applicable",
+                  "context": {
+                    "flow_name": "snyk-aws-prod-per-artifact",
+                    "trail_name": "web-af5870236f643273d1f26a7f842fd2b616b0f766cc2ac177c6d8f9882b90851e",
+                    "artifact_status": "COMPLIANT"
+                  }
+                },
+                {
+                  "type": "rule_not_applicable",
+                  "context": {
+                    "flow_name": "snyk-aws-beta-per-artifact",
+                    "trail_name": "web-af5870236f643273d1f26a7f842fd2b616b0f766cc2ac177c6d8f9882b90851e",
                     "artifact_status": "COMPLIANT"
                   }
                 }
@@ -474,6 +1229,22 @@ kosli get snapshot aws-prod --output=json
                   "context": {
                     "flow_name": "production-promotion",
                     "trail_name": "promotion-one-143",
+                    "artifact_status": null
+                  }
+                },
+                {
+                  "type": "rule_not_applicable",
+                  "context": {
+                    "flow_name": "snyk-aws-prod-per-artifact",
+                    "trail_name": "web-af5870236f643273d1f26a7f842fd2b616b0f766cc2ac177c6d8f9882b90851e",
+                    "artifact_status": null
+                  }
+                },
+                {
+                  "type": "rule_not_applicable",
+                  "context": {
+                    "flow_name": "snyk-aws-beta-per-artifact",
+                    "trail_name": "web-af5870236f643273d1f26a7f842fd2b616b0f766cc2ac177c6d8f9882b90851e",
                     "artifact_status": null
                   }
                 }
@@ -512,6 +1283,22 @@ kosli get snapshot aws-prod --output=json
                     "trail_name": "promotion-one-143",
                     "artifact_status": null
                   }
+                },
+                {
+                  "type": "rule_not_applicable",
+                  "context": {
+                    "flow_name": "snyk-aws-prod-per-artifact",
+                    "trail_name": "web-af5870236f643273d1f26a7f842fd2b616b0f766cc2ac177c6d8f9882b90851e",
+                    "artifact_status": null
+                  }
+                },
+                {
+                  "type": "rule_not_applicable",
+                  "context": {
+                    "flow_name": "snyk-aws-beta-per-artifact",
+                    "trail_name": "web-af5870236f643273d1f26a7f842fd2b616b0f766cc2ac177c6d8f9882b90851e",
+                    "artifact_status": null
+                  }
                 }
               ]
             },
@@ -545,6 +1332,22 @@ kosli get snapshot aws-prod --output=json
                   "context": {
                     "flow_name": "production-promotion",
                     "trail_name": "promotion-one-143",
+                    "artifact_status": "COMPLIANT"
+                  }
+                },
+                {
+                  "type": "rule_satisfied",
+                  "context": {
+                    "flow_name": "snyk-aws-prod-per-artifact",
+                    "trail_name": "web-af5870236f643273d1f26a7f842fd2b616b0f766cc2ac177c6d8f9882b90851e",
+                    "artifact_status": "COMPLIANT"
+                  }
+                },
+                {
+                  "type": "rule_not_applicable",
+                  "context": {
+                    "flow_name": "snyk-aws-beta-per-artifact",
+                    "trail_name": "web-af5870236f643273d1f26a7f842fd2b616b0f766cc2ac177c6d8f9882b90851e",
                     "artifact_status": "COMPLIANT"
                   }
                 }
@@ -646,6 +1449,68 @@ kosli get snapshot aws-prod --output=json
           "commit_lead_time": 100353.0,
           "artifact_compliance_in_flow": true,
           "flow_reasons_for_non_compliance": []
+        },
+        {
+          "flow_name": "snyk-aws-prod-per-artifact",
+          "trail_name": "web-af5870236f643273d1f26a7f842fd2b616b0f766cc2ac177c6d8f9882b90851e",
+          "template_reference_name": "web",
+          "git_commit": "35a09b2d283bafd6bbc12c29eba3306d5b36a5f7",
+          "commit_url": "https://github.com/cyber-dojo/snyk-scanning/commit/35a09b2d283bafd6bbc12c29eba3306d5b36a5f7",
+          "git_commit_info": {
+            "sha1": "35a09b2d283bafd6bbc12c29eba3306d5b36a5f7",
+            "message": "Add emoji prefixes to workflow names\n\n  Match the visual convention already used in the kosli-demo/stochastic-committer\n  repo, where the Actions sidebar distinguishes workflow roles at a glance.\n\n  The two aws-* files are the top-level entry points, triggered by dispatch and\n  schedule, so they get the play emoji. The three reusable workflow_call\n  sub-workflows get the package emoji to mark them as callable building blocks.",
+            "author": "JonJagger <jon@kosli.com>",
+            "branch": "main",
+            "timestamp": 1783850974.0,
+            "url": "https://github.com/cyber-dojo/snyk-scanning/commit/35a09b2d283bafd6bbc12c29eba3306d5b36a5f7"
+          },
+          "html_url": "https://app.kosli.com/cyber-dojo/flows/snyk-aws-prod-per-artifact/artifacts/af5870236f643273d1f26a7f842fd2b616b0f766cc2ac177c6d8f9882b90851e?artifact_id=83c5644d-1b5c-4f05-992f-49d05fdc",
+          "flow_html_url": "https://app.kosli.com/cyber-dojo/flows/snyk-aws-prod-per-artifact",
+          "deployment_diff": {
+            "diff_url": "https://github.com/cyber-dojo/snyk-scanning/compare/00c479764cb9eca038fdaaaef108672d0bb0ed26...35a09b2d283bafd6bbc12c29eba3306d5b36a5f7",
+            "previous_git_commit": "00c479764cb9eca038fdaaaef108672d0bb0ed26",
+            "previous_fingerprint": "29c69c2f30f261a26fff4793fd8ae44b9081def1d4bcaaa27b0fef0501d949e4",
+            "previous_artifact_name": "244531986313.dkr.ecr.eu-central-1.amazonaws.com/web:f66cc5c@sha256:29c69c2f30f261a26fff4793fd8ae44b9081def1d4bcaaa27b0fef0501d949e4",
+            "previous_artifact_compliance_state": "COMPLIANT",
+            "previous_running": false,
+            "previous_git_commit_url": "https://github.com/cyber-dojo/snyk-scanning/commit/00c479764cb9eca038fdaaaef108672d0bb0ed26",
+            "previous_trail_name": "web-29c69c2f30f261a26fff4793fd8ae44b9081def1d4bcaaa27b0fef0501d949e4",
+            "previous_template_reference_name": "web"
+          },
+          "commit_lead_time": 1392433.0,
+          "artifact_compliance_in_flow": true,
+          "flow_reasons_for_non_compliance": []
+        },
+        {
+          "flow_name": "snyk-aws-beta-per-artifact",
+          "trail_name": "web-af5870236f643273d1f26a7f842fd2b616b0f766cc2ac177c6d8f9882b90851e",
+          "template_reference_name": "web",
+          "git_commit": "35a09b2d283bafd6bbc12c29eba3306d5b36a5f7",
+          "commit_url": "https://github.com/cyber-dojo/snyk-scanning/commit/35a09b2d283bafd6bbc12c29eba3306d5b36a5f7",
+          "git_commit_info": {
+            "sha1": "35a09b2d283bafd6bbc12c29eba3306d5b36a5f7",
+            "message": "Add emoji prefixes to workflow names\n\n  Match the visual convention already used in the kosli-demo/stochastic-committer\n  repo, where the Actions sidebar distinguishes workflow roles at a glance.\n\n  The two aws-* files are the top-level entry points, triggered by dispatch and\n  schedule, so they get the play emoji. The three reusable workflow_call\n  sub-workflows get the package emoji to mark them as callable building blocks.",
+            "author": "JonJagger <jon@kosli.com>",
+            "branch": "main",
+            "timestamp": 1783850974.0,
+            "url": "https://github.com/cyber-dojo/snyk-scanning/commit/35a09b2d283bafd6bbc12c29eba3306d5b36a5f7"
+          },
+          "html_url": "https://app.kosli.com/cyber-dojo/flows/snyk-aws-beta-per-artifact/artifacts/af5870236f643273d1f26a7f842fd2b616b0f766cc2ac177c6d8f9882b90851e?artifact_id=2839b032-94fd-484c-91fa-37aaecfc",
+          "flow_html_url": "https://app.kosli.com/cyber-dojo/flows/snyk-aws-beta-per-artifact",
+          "deployment_diff": {
+            "diff_url": "https://github.com/cyber-dojo/snyk-scanning/compare/35a09b2d283bafd6bbc12c29eba3306d5b36a5f7...35a09b2d283bafd6bbc12c29eba3306d5b36a5f7",
+            "previous_git_commit": "35a09b2d283bafd6bbc12c29eba3306d5b36a5f7",
+            "previous_fingerprint": "0eaa303537220d95ba656b829c1d9c85e2865c986c4736962b85f4df5adb8972",
+            "previous_artifact_name": "244531986313.dkr.ecr.eu-central-1.amazonaws.com/web:3f0b997@sha256:0eaa303537220d95ba656b829c1d9c85e2865c986c4736962b85f4df5adb8972",
+            "previous_artifact_compliance_state": "COMPLIANT",
+            "previous_running": false,
+            "previous_git_commit_url": "https://github.com/cyber-dojo/snyk-scanning/commit/35a09b2d283bafd6bbc12c29eba3306d5b36a5f7",
+            "previous_trail_name": "web-0eaa303537220d95ba656b829c1d9c85e2865c986c4736962b85f4df5adb8972",
+            "previous_template_reference_name": "web"
+          },
+          "commit_lead_time": 1392433.0,
+          "artifact_compliance_in_flow": true,
+          "flow_reasons_for_non_compliance": []
         }
       ],
       "ecs_context": {
@@ -685,7 +1550,15 @@ kosli get snapshot aws-prod --output=json
                 {
                   "type": "rule_not_applicable",
                   "context": {
-                    "flow_name": "snyk-aws-beta-per-artifact",
+                    "flow_name": "production-promotion",
+                    "trail_name": "promote-all-31",
+                    "artifact_status": null
+                  }
+                },
+                {
+                  "type": "rule_not_applicable",
+                  "context": {
+                    "flow_name": "snyk-aws-prod-per-artifact",
                     "trail_name": "differ-c6c87ec582111b0e0da745ca18867d57fd042c4ce961c8494e4d6a89b4543d12",
                     "artifact_status": null
                   }
@@ -693,8 +1566,8 @@ kosli get snapshot aws-prod --output=json
                 {
                   "type": "rule_not_applicable",
                   "context": {
-                    "flow_name": "production-promotion",
-                    "trail_name": "promote-all-31",
+                    "flow_name": "snyk-aws-beta-per-artifact",
+                    "trail_name": "differ-c6c87ec582111b0e0da745ca18867d57fd042c4ce961c8494e4d6a89b4543d12",
                     "artifact_status": null
                   }
                 }
@@ -722,7 +1595,15 @@ kosli get snapshot aws-prod --output=json
                 {
                   "type": "rule_not_applicable",
                   "context": {
-                    "flow_name": "snyk-aws-beta-per-artifact",
+                    "flow_name": "production-promotion",
+                    "trail_name": "promote-all-31",
+                    "artifact_status": "COMPLIANT"
+                  }
+                },
+                {
+                  "type": "rule_not_applicable",
+                  "context": {
+                    "flow_name": "snyk-aws-prod-per-artifact",
                     "trail_name": "differ-c6c87ec582111b0e0da745ca18867d57fd042c4ce961c8494e4d6a89b4543d12",
                     "artifact_status": "COMPLIANT"
                   }
@@ -730,8 +1611,8 @@ kosli get snapshot aws-prod --output=json
                 {
                   "type": "rule_not_applicable",
                   "context": {
-                    "flow_name": "production-promotion",
-                    "trail_name": "promote-all-31",
+                    "flow_name": "snyk-aws-beta-per-artifact",
+                    "trail_name": "differ-c6c87ec582111b0e0da745ca18867d57fd042c4ce961c8494e4d6a89b4543d12",
                     "artifact_status": "COMPLIANT"
                   }
                 }
@@ -764,7 +1645,15 @@ kosli get snapshot aws-prod --output=json
                 {
                   "type": "rule_not_applicable",
                   "context": {
-                    "flow_name": "snyk-aws-beta-per-artifact",
+                    "flow_name": "production-promotion",
+                    "trail_name": "promote-all-31",
+                    "artifact_status": null
+                  }
+                },
+                {
+                  "type": "rule_not_applicable",
+                  "context": {
+                    "flow_name": "snyk-aws-prod-per-artifact",
                     "trail_name": "differ-c6c87ec582111b0e0da745ca18867d57fd042c4ce961c8494e4d6a89b4543d12",
                     "artifact_status": null
                   }
@@ -772,8 +1661,8 @@ kosli get snapshot aws-prod --output=json
                 {
                   "type": "rule_not_applicable",
                   "context": {
-                    "flow_name": "production-promotion",
-                    "trail_name": "promote-all-31",
+                    "flow_name": "snyk-aws-beta-per-artifact",
+                    "trail_name": "differ-c6c87ec582111b0e0da745ca18867d57fd042c4ce961c8494e4d6a89b4543d12",
                     "artifact_status": null
                   }
                 }
@@ -808,7 +1697,15 @@ kosli get snapshot aws-prod --output=json
                 {
                   "type": "rule_satisfied",
                   "context": {
-                    "flow_name": "snyk-aws-beta-per-artifact",
+                    "flow_name": "production-promotion",
+                    "trail_name": "promote-all-31",
+                    "artifact_status": null
+                  }
+                },
+                {
+                  "type": "rule_satisfied",
+                  "context": {
+                    "flow_name": "snyk-aws-prod-per-artifact",
                     "trail_name": "differ-c6c87ec582111b0e0da745ca18867d57fd042c4ce961c8494e4d6a89b4543d12",
                     "artifact_status": null
                   }
@@ -816,8 +1713,8 @@ kosli get snapshot aws-prod --output=json
                 {
                   "type": "rule_satisfied",
                   "context": {
-                    "flow_name": "production-promotion",
-                    "trail_name": "promote-all-31",
+                    "flow_name": "snyk-aws-beta-per-artifact",
+                    "trail_name": "differ-c6c87ec582111b0e0da745ca18867d57fd042c4ce961c8494e4d6a89b4543d12",
                     "artifact_status": null
                   }
                 }
@@ -845,7 +1742,15 @@ kosli get snapshot aws-prod --output=json
                 {
                   "type": "rule_not_applicable",
                   "context": {
-                    "flow_name": "snyk-aws-beta-per-artifact",
+                    "flow_name": "production-promotion",
+                    "trail_name": "promote-all-31",
+                    "artifact_status": "COMPLIANT"
+                  }
+                },
+                {
+                  "type": "rule_not_applicable",
+                  "context": {
+                    "flow_name": "snyk-aws-prod-per-artifact",
                     "trail_name": "differ-c6c87ec582111b0e0da745ca18867d57fd042c4ce961c8494e4d6a89b4543d12",
                     "artifact_status": "COMPLIANT"
                   }
@@ -853,8 +1758,8 @@ kosli get snapshot aws-prod --output=json
                 {
                   "type": "rule_not_applicable",
                   "context": {
-                    "flow_name": "production-promotion",
-                    "trail_name": "promote-all-31",
+                    "flow_name": "snyk-aws-beta-per-artifact",
+                    "trail_name": "differ-c6c87ec582111b0e0da745ca18867d57fd042c4ce961c8494e4d6a89b4543d12",
                     "artifact_status": "COMPLIANT"
                   }
                 }
@@ -888,7 +1793,16 @@ kosli get snapshot aws-prod --output=json
                 {
                   "type": "rule_not_applicable",
                   "context": {
-                    "flow_name": "snyk-aws-beta-per-artifact",
+                    "flow_name": "production-promotion",
+                    "trail_name": "promote-all-31",
+                    "artifact_status": null,
+                    "for_control": "SDLC-CTRL-0002"
+                  }
+                },
+                {
+                  "type": "rule_not_applicable",
+                  "context": {
+                    "flow_name": "snyk-aws-prod-per-artifact",
                     "trail_name": "differ-c6c87ec582111b0e0da745ca18867d57fd042c4ce961c8494e4d6a89b4543d12",
                     "artifact_status": null,
                     "for_control": "SDLC-CTRL-0002"
@@ -897,8 +1811,8 @@ kosli get snapshot aws-prod --output=json
                 {
                   "type": "rule_not_applicable",
                   "context": {
-                    "flow_name": "production-promotion",
-                    "trail_name": "promote-all-31",
+                    "flow_name": "snyk-aws-beta-per-artifact",
+                    "trail_name": "differ-c6c87ec582111b0e0da745ca18867d57fd042c4ce961c8494e4d6a89b4543d12",
                     "artifact_status": null,
                     "for_control": "SDLC-CTRL-0002"
                   }
@@ -934,7 +1848,15 @@ kosli get snapshot aws-prod --output=json
                 {
                   "type": "rule_not_applicable",
                   "context": {
-                    "flow_name": "snyk-aws-beta-per-artifact",
+                    "flow_name": "production-promotion",
+                    "trail_name": "promote-all-31",
+                    "artifact_status": null
+                  }
+                },
+                {
+                  "type": "rule_not_applicable",
+                  "context": {
+                    "flow_name": "snyk-aws-prod-per-artifact",
                     "trail_name": "differ-c6c87ec582111b0e0da745ca18867d57fd042c4ce961c8494e4d6a89b4543d12",
                     "artifact_status": null
                   }
@@ -942,8 +1864,8 @@ kosli get snapshot aws-prod --output=json
                 {
                   "type": "rule_not_applicable",
                   "context": {
-                    "flow_name": "production-promotion",
-                    "trail_name": "promote-all-31",
+                    "flow_name": "snyk-aws-beta-per-artifact",
+                    "trail_name": "differ-c6c87ec582111b0e0da745ca18867d57fd042c4ce961c8494e4d6a89b4543d12",
                     "artifact_status": null
                   }
                 }
@@ -971,7 +1893,15 @@ kosli get snapshot aws-prod --output=json
                 {
                   "type": "rule_not_applicable",
                   "context": {
-                    "flow_name": "snyk-aws-beta-per-artifact",
+                    "flow_name": "production-promotion",
+                    "trail_name": "promote-all-31",
+                    "artifact_status": "COMPLIANT"
+                  }
+                },
+                {
+                  "type": "rule_not_applicable",
+                  "context": {
+                    "flow_name": "snyk-aws-prod-per-artifact",
                     "trail_name": "differ-c6c87ec582111b0e0da745ca18867d57fd042c4ce961c8494e4d6a89b4543d12",
                     "artifact_status": "COMPLIANT"
                   }
@@ -979,8 +1909,8 @@ kosli get snapshot aws-prod --output=json
                 {
                   "type": "rule_not_applicable",
                   "context": {
-                    "flow_name": "production-promotion",
-                    "trail_name": "promote-all-31",
+                    "flow_name": "snyk-aws-beta-per-artifact",
+                    "trail_name": "differ-c6c87ec582111b0e0da745ca18867d57fd042c4ce961c8494e4d6a89b4543d12",
                     "artifact_status": "COMPLIANT"
                   }
                 }
@@ -999,8 +1929,8 @@ kosli get snapshot aws-prod --output=json
                   "for_control": "SDLC-CTRL-0022"
                 }
               },
-              "satisfied": null,
-              "ignored": true,
+              "satisfied": true,
+              "ignored": false,
               "resolutions": [
                 {
                   "type": "rule_not_applicable",
@@ -1014,7 +1944,16 @@ kosli get snapshot aws-prod --output=json
                 {
                   "type": "rule_not_applicable",
                   "context": {
-                    "flow_name": "snyk-aws-beta-per-artifact",
+                    "flow_name": "production-promotion",
+                    "trail_name": "promote-all-31",
+                    "artifact_status": null,
+                    "for_control": "SDLC-CTRL-0022"
+                  }
+                },
+                {
+                  "type": "rule_satisfied",
+                  "context": {
+                    "flow_name": "snyk-aws-prod-per-artifact",
                     "trail_name": "differ-c6c87ec582111b0e0da745ca18867d57fd042c4ce961c8494e4d6a89b4543d12",
                     "artifact_status": null,
                     "for_control": "SDLC-CTRL-0022"
@@ -1023,8 +1962,8 @@ kosli get snapshot aws-prod --output=json
                 {
                   "type": "rule_not_applicable",
                   "context": {
-                    "flow_name": "production-promotion",
-                    "trail_name": "promote-all-31",
+                    "flow_name": "snyk-aws-beta-per-artifact",
+                    "trail_name": "differ-c6c87ec582111b0e0da745ca18867d57fd042c4ce961c8494e4d6a89b4543d12",
                     "artifact_status": null,
                     "for_control": "SDLC-CTRL-0022"
                   }
@@ -1060,7 +1999,15 @@ kosli get snapshot aws-prod --output=json
                 {
                   "type": "rule_not_applicable",
                   "context": {
-                    "flow_name": "snyk-aws-beta-per-artifact",
+                    "flow_name": "production-promotion",
+                    "trail_name": "promote-all-31",
+                    "artifact_status": null
+                  }
+                },
+                {
+                  "type": "rule_not_applicable",
+                  "context": {
+                    "flow_name": "snyk-aws-prod-per-artifact",
                     "trail_name": "differ-c6c87ec582111b0e0da745ca18867d57fd042c4ce961c8494e4d6a89b4543d12",
                     "artifact_status": null
                   }
@@ -1068,8 +2015,8 @@ kosli get snapshot aws-prod --output=json
                 {
                   "type": "rule_not_applicable",
                   "context": {
-                    "flow_name": "production-promotion",
-                    "trail_name": "promote-all-31",
+                    "flow_name": "snyk-aws-beta-per-artifact",
+                    "trail_name": "differ-c6c87ec582111b0e0da745ca18867d57fd042c4ce961c8494e4d6a89b4543d12",
                     "artifact_status": null
                   }
                 }
@@ -1097,7 +2044,15 @@ kosli get snapshot aws-prod --output=json
                 {
                   "type": "rule_not_applicable",
                   "context": {
-                    "flow_name": "snyk-aws-beta-per-artifact",
+                    "flow_name": "production-promotion",
+                    "trail_name": "promote-all-31",
+                    "artifact_status": "COMPLIANT"
+                  }
+                },
+                {
+                  "type": "rule_not_applicable",
+                  "context": {
+                    "flow_name": "snyk-aws-prod-per-artifact",
                     "trail_name": "differ-c6c87ec582111b0e0da745ca18867d57fd042c4ce961c8494e4d6a89b4543d12",
                     "artifact_status": "COMPLIANT"
                   }
@@ -1105,8 +2060,8 @@ kosli get snapshot aws-prod --output=json
                 {
                   "type": "rule_not_applicable",
                   "context": {
-                    "flow_name": "production-promotion",
-                    "trail_name": "promote-all-31",
+                    "flow_name": "snyk-aws-beta-per-artifact",
+                    "trail_name": "differ-c6c87ec582111b0e0da745ca18867d57fd042c4ce961c8494e4d6a89b4543d12",
                     "artifact_status": "COMPLIANT"
                   }
                 }
@@ -1137,18 +2092,26 @@ kosli get snapshot aws-prod --output=json
                   }
                 },
                 {
+                  "type": "rule_satisfied",
+                  "context": {
+                    "flow_name": "production-promotion",
+                    "trail_name": "promote-all-31",
+                    "artifact_status": null
+                  }
+                },
+                {
                   "type": "rule_not_applicable",
                   "context": {
-                    "flow_name": "snyk-aws-beta-per-artifact",
+                    "flow_name": "snyk-aws-prod-per-artifact",
                     "trail_name": "differ-c6c87ec582111b0e0da745ca18867d57fd042c4ce961c8494e4d6a89b4543d12",
                     "artifact_status": null
                   }
                 },
                 {
-                  "type": "rule_satisfied",
+                  "type": "rule_not_applicable",
                   "context": {
-                    "flow_name": "production-promotion",
-                    "trail_name": "promote-all-31",
+                    "flow_name": "snyk-aws-beta-per-artifact",
+                    "trail_name": "differ-c6c87ec582111b0e0da745ca18867d57fd042c4ce961c8494e4d6a89b4543d12",
                     "artifact_status": null
                   }
                 }
@@ -1183,7 +2146,15 @@ kosli get snapshot aws-prod --output=json
                 {
                   "type": "rule_not_applicable",
                   "context": {
-                    "flow_name": "snyk-aws-beta-per-artifact",
+                    "flow_name": "production-promotion",
+                    "trail_name": "promote-all-31",
+                    "artifact_status": null
+                  }
+                },
+                {
+                  "type": "rule_not_applicable",
+                  "context": {
+                    "flow_name": "snyk-aws-prod-per-artifact",
                     "trail_name": "differ-c6c87ec582111b0e0da745ca18867d57fd042c4ce961c8494e4d6a89b4543d12",
                     "artifact_status": null
                   }
@@ -1191,8 +2162,8 @@ kosli get snapshot aws-prod --output=json
                 {
                   "type": "rule_not_applicable",
                   "context": {
-                    "flow_name": "production-promotion",
-                    "trail_name": "promote-all-31",
+                    "flow_name": "snyk-aws-beta-per-artifact",
+                    "trail_name": "differ-c6c87ec582111b0e0da745ca18867d57fd042c4ce961c8494e4d6a89b4543d12",
                     "artifact_status": null
                   }
                 }
@@ -1224,18 +2195,26 @@ kosli get snapshot aws-prod --output=json
                   }
                 },
                 {
-                  "type": "rule_not_applicable",
+                  "type": "rule_satisfied",
                   "context": {
-                    "flow_name": "snyk-aws-beta-per-artifact",
-                    "trail_name": "differ-c6c87ec582111b0e0da745ca18867d57fd042c4ce961c8494e4d6a89b4543d12",
+                    "flow_name": "production-promotion",
+                    "trail_name": "promote-all-31",
                     "artifact_status": "COMPLIANT"
                   }
                 },
                 {
                   "type": "rule_satisfied",
                   "context": {
-                    "flow_name": "production-promotion",
-                    "trail_name": "promote-all-31",
+                    "flow_name": "snyk-aws-prod-per-artifact",
+                    "trail_name": "differ-c6c87ec582111b0e0da745ca18867d57fd042c4ce961c8494e4d6a89b4543d12",
+                    "artifact_status": "COMPLIANT"
+                  }
+                },
+                {
+                  "type": "rule_not_applicable",
+                  "context": {
+                    "flow_name": "snyk-aws-beta-per-artifact",
+                    "trail_name": "differ-c6c87ec582111b0e0da745ca18867d57fd042c4ce961c8494e4d6a89b4543d12",
                     "artifact_status": "COMPLIANT"
                   }
                 }
@@ -1306,37 +2285,6 @@ kosli get snapshot aws-prod --output=json
           "flow_reasons_for_non_compliance": []
         },
         {
-          "flow_name": "snyk-aws-beta-per-artifact",
-          "trail_name": "differ-c6c87ec582111b0e0da745ca18867d57fd042c4ce961c8494e4d6a89b4543d12",
-          "template_reference_name": "differ",
-          "git_commit": "35a09b2d283bafd6bbc12c29eba3306d5b36a5f7",
-          "commit_url": "https://github.com/cyber-dojo/snyk-scanning/commit/35a09b2d283bafd6bbc12c29eba3306d5b36a5f7",
-          "git_commit_info": {
-            "sha1": "35a09b2d283bafd6bbc12c29eba3306d5b36a5f7",
-            "message": "Add emoji prefixes to workflow names\n\n  Match the visual convention already used in the kosli-demo/stochastic-committer\n  repo, where the Actions sidebar distinguishes workflow roles at a glance.\n\n  The two aws-* files are the top-level entry points, triggered by dispatch and\n  schedule, so they get the play emoji. The three reusable workflow_call\n  sub-workflows get the package emoji to mark them as callable building blocks.",
-            "author": "JonJagger <jon@kosli.com>",
-            "branch": "main",
-            "timestamp": 1783850974.0,
-            "url": "https://github.com/cyber-dojo/snyk-scanning/commit/35a09b2d283bafd6bbc12c29eba3306d5b36a5f7"
-          },
-          "html_url": "https://app.kosli.com/cyber-dojo/flows/snyk-aws-beta-per-artifact/artifacts/c6c87ec582111b0e0da745ca18867d57fd042c4ce961c8494e4d6a89b4543d12?artifact_id=eee71ae0-2bdd-4d9b-90b0-572bb946",
-          "flow_html_url": "https://app.kosli.com/cyber-dojo/flows/snyk-aws-beta-per-artifact",
-          "deployment_diff": {
-            "diff_url": "https://github.com/cyber-dojo/snyk-scanning/compare/35a09b2d283bafd6bbc12c29eba3306d5b36a5f7...35a09b2d283bafd6bbc12c29eba3306d5b36a5f7",
-            "previous_git_commit": "35a09b2d283bafd6bbc12c29eba3306d5b36a5f7",
-            "previous_fingerprint": "c2a404127f3114a7b82a8c0633f85bad599dd54d9c97cf1bc872ae9eab2bbe5f",
-            "previous_artifact_name": "244531986313.dkr.ecr.eu-central-1.amazonaws.com/differ:335ddfa@sha256:c2a404127f3114a7b82a8c0633f85bad599dd54d9c97cf1bc872ae9eab2bbe5f",
-            "previous_artifact_compliance_state": "COMPLIANT",
-            "previous_running": false,
-            "previous_git_commit_url": "https://github.com/cyber-dojo/snyk-scanning/commit/35a09b2d283bafd6bbc12c29eba3306d5b36a5f7",
-            "previous_trail_name": "differ-c2a404127f3114a7b82a8c0633f85bad599dd54d9c97cf1bc872ae9eab2bbe5f",
-            "previous_template_reference_name": "differ"
-          },
-          "commit_lead_time": 1390619.0,
-          "artifact_compliance_in_flow": true,
-          "flow_reasons_for_non_compliance": []
-        },
-        {
           "flow_name": "production-promotion",
           "trail_name": "promote-all-31",
           "template_reference_name": "differ",
@@ -1364,6 +2312,68 @@ kosli get snapshot aws-prod --output=json
             "previous_template_reference_name": "differ"
           },
           "commit_lead_time": 98539.0,
+          "artifact_compliance_in_flow": true,
+          "flow_reasons_for_non_compliance": []
+        },
+        {
+          "flow_name": "snyk-aws-prod-per-artifact",
+          "trail_name": "differ-c6c87ec582111b0e0da745ca18867d57fd042c4ce961c8494e4d6a89b4543d12",
+          "template_reference_name": "differ",
+          "git_commit": "35a09b2d283bafd6bbc12c29eba3306d5b36a5f7",
+          "commit_url": "https://github.com/cyber-dojo/snyk-scanning/commit/35a09b2d283bafd6bbc12c29eba3306d5b36a5f7",
+          "git_commit_info": {
+            "sha1": "35a09b2d283bafd6bbc12c29eba3306d5b36a5f7",
+            "message": "Add emoji prefixes to workflow names\n\n  Match the visual convention already used in the kosli-demo/stochastic-committer\n  repo, where the Actions sidebar distinguishes workflow roles at a glance.\n\n  The two aws-* files are the top-level entry points, triggered by dispatch and\n  schedule, so they get the play emoji. The three reusable workflow_call\n  sub-workflows get the package emoji to mark them as callable building blocks.",
+            "author": "JonJagger <jon@kosli.com>",
+            "branch": "main",
+            "timestamp": 1783850974.0,
+            "url": "https://github.com/cyber-dojo/snyk-scanning/commit/35a09b2d283bafd6bbc12c29eba3306d5b36a5f7"
+          },
+          "html_url": "https://app.kosli.com/cyber-dojo/flows/snyk-aws-prod-per-artifact/artifacts/c6c87ec582111b0e0da745ca18867d57fd042c4ce961c8494e4d6a89b4543d12?artifact_id=47c9bbdc-a20e-4cbc-9e22-0290f20a",
+          "flow_html_url": "https://app.kosli.com/cyber-dojo/flows/snyk-aws-prod-per-artifact",
+          "deployment_diff": {
+            "diff_url": "https://github.com/cyber-dojo/snyk-scanning/compare/00c479764cb9eca038fdaaaef108672d0bb0ed26...35a09b2d283bafd6bbc12c29eba3306d5b36a5f7",
+            "previous_git_commit": "00c479764cb9eca038fdaaaef108672d0bb0ed26",
+            "previous_fingerprint": "902ec7af03407049ac6e5ef713146d518bbffd9d99cd28715fa0df973e809b7b",
+            "previous_artifact_name": "244531986313.dkr.ecr.eu-central-1.amazonaws.com/differ:981dcfc@sha256:902ec7af03407049ac6e5ef713146d518bbffd9d99cd28715fa0df973e809b7b",
+            "previous_artifact_compliance_state": "COMPLIANT",
+            "previous_running": false,
+            "previous_git_commit_url": "https://github.com/cyber-dojo/snyk-scanning/commit/00c479764cb9eca038fdaaaef108672d0bb0ed26",
+            "previous_trail_name": "differ-902ec7af03407049ac6e5ef713146d518bbffd9d99cd28715fa0df973e809b7b",
+            "previous_template_reference_name": "differ"
+          },
+          "commit_lead_time": 1390619.0,
+          "artifact_compliance_in_flow": true,
+          "flow_reasons_for_non_compliance": []
+        },
+        {
+          "flow_name": "snyk-aws-beta-per-artifact",
+          "trail_name": "differ-c6c87ec582111b0e0da745ca18867d57fd042c4ce961c8494e4d6a89b4543d12",
+          "template_reference_name": "differ",
+          "git_commit": "35a09b2d283bafd6bbc12c29eba3306d5b36a5f7",
+          "commit_url": "https://github.com/cyber-dojo/snyk-scanning/commit/35a09b2d283bafd6bbc12c29eba3306d5b36a5f7",
+          "git_commit_info": {
+            "sha1": "35a09b2d283bafd6bbc12c29eba3306d5b36a5f7",
+            "message": "Add emoji prefixes to workflow names\n\n  Match the visual convention already used in the kosli-demo/stochastic-committer\n  repo, where the Actions sidebar distinguishes workflow roles at a glance.\n\n  The two aws-* files are the top-level entry points, triggered by dispatch and\n  schedule, so they get the play emoji. The three reusable workflow_call\n  sub-workflows get the package emoji to mark them as callable building blocks.",
+            "author": "JonJagger <jon@kosli.com>",
+            "branch": "main",
+            "timestamp": 1783850974.0,
+            "url": "https://github.com/cyber-dojo/snyk-scanning/commit/35a09b2d283bafd6bbc12c29eba3306d5b36a5f7"
+          },
+          "html_url": "https://app.kosli.com/cyber-dojo/flows/snyk-aws-beta-per-artifact/artifacts/c6c87ec582111b0e0da745ca18867d57fd042c4ce961c8494e4d6a89b4543d12?artifact_id=98d3f3c7-50cd-40a9-9735-497bed4c",
+          "flow_html_url": "https://app.kosli.com/cyber-dojo/flows/snyk-aws-beta-per-artifact",
+          "deployment_diff": {
+            "diff_url": "https://github.com/cyber-dojo/snyk-scanning/compare/35a09b2d283bafd6bbc12c29eba3306d5b36a5f7...35a09b2d283bafd6bbc12c29eba3306d5b36a5f7",
+            "previous_git_commit": "35a09b2d283bafd6bbc12c29eba3306d5b36a5f7",
+            "previous_fingerprint": "c2a404127f3114a7b82a8c0633f85bad599dd54d9c97cf1bc872ae9eab2bbe5f",
+            "previous_artifact_name": "244531986313.dkr.ecr.eu-central-1.amazonaws.com/differ:335ddfa@sha256:c2a404127f3114a7b82a8c0633f85bad599dd54d9c97cf1bc872ae9eab2bbe5f",
+            "previous_artifact_compliance_state": "COMPLIANT",
+            "previous_running": false,
+            "previous_git_commit_url": "https://github.com/cyber-dojo/snyk-scanning/commit/35a09b2d283bafd6bbc12c29eba3306d5b36a5f7",
+            "previous_trail_name": "differ-c2a404127f3114a7b82a8c0633f85bad599dd54d9c97cf1bc872ae9eab2bbe5f",
+            "previous_template_reference_name": "differ"
+          },
+          "commit_lead_time": 1390619.0,
           "artifact_compliance_in_flow": true,
           "flow_reasons_for_non_compliance": []
         }
@@ -1405,7 +2415,15 @@ kosli get snapshot aws-prod --output=json
                 {
                   "type": "rule_not_applicable",
                   "context": {
-                    "flow_name": "snyk-aws-beta-per-artifact",
+                    "flow_name": "production-promotion",
+                    "trail_name": "promote-all-31",
+                    "artifact_status": null
+                  }
+                },
+                {
+                  "type": "rule_not_applicable",
+                  "context": {
+                    "flow_name": "snyk-aws-prod-per-artifact",
                     "trail_name": "languages-start-points-b1ee961719fe5dabc18f85450c26719c67a4f9ac3959ba836465ceb14bc67e7b",
                     "artifact_status": null
                   }
@@ -1413,8 +2431,8 @@ kosli get snapshot aws-prod --output=json
                 {
                   "type": "rule_not_applicable",
                   "context": {
-                    "flow_name": "production-promotion",
-                    "trail_name": "promote-all-31",
+                    "flow_name": "snyk-aws-beta-per-artifact",
+                    "trail_name": "languages-start-points-b1ee961719fe5dabc18f85450c26719c67a4f9ac3959ba836465ceb14bc67e7b",
                     "artifact_status": null
                   }
                 }
@@ -1442,7 +2460,15 @@ kosli get snapshot aws-prod --output=json
                 {
                   "type": "rule_not_applicable",
                   "context": {
-                    "flow_name": "snyk-aws-beta-per-artifact",
+                    "flow_name": "production-promotion",
+                    "trail_name": "promote-all-31",
+                    "artifact_status": "COMPLIANT"
+                  }
+                },
+                {
+                  "type": "rule_not_applicable",
+                  "context": {
+                    "flow_name": "snyk-aws-prod-per-artifact",
                     "trail_name": "languages-start-points-b1ee961719fe5dabc18f85450c26719c67a4f9ac3959ba836465ceb14bc67e7b",
                     "artifact_status": "COMPLIANT"
                   }
@@ -1450,8 +2476,8 @@ kosli get snapshot aws-prod --output=json
                 {
                   "type": "rule_not_applicable",
                   "context": {
-                    "flow_name": "production-promotion",
-                    "trail_name": "promote-all-31",
+                    "flow_name": "snyk-aws-beta-per-artifact",
+                    "trail_name": "languages-start-points-b1ee961719fe5dabc18f85450c26719c67a4f9ac3959ba836465ceb14bc67e7b",
                     "artifact_status": "COMPLIANT"
                   }
                 }
@@ -1484,7 +2510,15 @@ kosli get snapshot aws-prod --output=json
                 {
                   "type": "rule_not_applicable",
                   "context": {
-                    "flow_name": "snyk-aws-beta-per-artifact",
+                    "flow_name": "production-promotion",
+                    "trail_name": "promote-all-31",
+                    "artifact_status": null
+                  }
+                },
+                {
+                  "type": "rule_not_applicable",
+                  "context": {
+                    "flow_name": "snyk-aws-prod-per-artifact",
                     "trail_name": "languages-start-points-b1ee961719fe5dabc18f85450c26719c67a4f9ac3959ba836465ceb14bc67e7b",
                     "artifact_status": null
                   }
@@ -1492,8 +2526,8 @@ kosli get snapshot aws-prod --output=json
                 {
                   "type": "rule_not_applicable",
                   "context": {
-                    "flow_name": "production-promotion",
-                    "trail_name": "promote-all-31",
+                    "flow_name": "snyk-aws-beta-per-artifact",
+                    "trail_name": "languages-start-points-b1ee961719fe5dabc18f85450c26719c67a4f9ac3959ba836465ceb14bc67e7b",
                     "artifact_status": null
                   }
                 }
@@ -1528,7 +2562,15 @@ kosli get snapshot aws-prod --output=json
                 {
                   "type": "rule_satisfied",
                   "context": {
-                    "flow_name": "snyk-aws-beta-per-artifact",
+                    "flow_name": "production-promotion",
+                    "trail_name": "promote-all-31",
+                    "artifact_status": null
+                  }
+                },
+                {
+                  "type": "rule_satisfied",
+                  "context": {
+                    "flow_name": "snyk-aws-prod-per-artifact",
                     "trail_name": "languages-start-points-b1ee961719fe5dabc18f85450c26719c67a4f9ac3959ba836465ceb14bc67e7b",
                     "artifact_status": null
                   }
@@ -1536,8 +2578,8 @@ kosli get snapshot aws-prod --output=json
                 {
                   "type": "rule_satisfied",
                   "context": {
-                    "flow_name": "production-promotion",
-                    "trail_name": "promote-all-31",
+                    "flow_name": "snyk-aws-beta-per-artifact",
+                    "trail_name": "languages-start-points-b1ee961719fe5dabc18f85450c26719c67a4f9ac3959ba836465ceb14bc67e7b",
                     "artifact_status": null
                   }
                 }
@@ -1565,7 +2607,15 @@ kosli get snapshot aws-prod --output=json
                 {
                   "type": "rule_not_applicable",
                   "context": {
-                    "flow_name": "snyk-aws-beta-per-artifact",
+                    "flow_name": "production-promotion",
+                    "trail_name": "promote-all-31",
+                    "artifact_status": "COMPLIANT"
+                  }
+                },
+                {
+                  "type": "rule_not_applicable",
+                  "context": {
+                    "flow_name": "snyk-aws-prod-per-artifact",
                     "trail_name": "languages-start-points-b1ee961719fe5dabc18f85450c26719c67a4f9ac3959ba836465ceb14bc67e7b",
                     "artifact_status": "COMPLIANT"
                   }
@@ -1573,8 +2623,8 @@ kosli get snapshot aws-prod --output=json
                 {
                   "type": "rule_not_applicable",
                   "context": {
-                    "flow_name": "production-promotion",
-                    "trail_name": "promote-all-31",
+                    "flow_name": "snyk-aws-beta-per-artifact",
+                    "trail_name": "languages-start-points-b1ee961719fe5dabc18f85450c26719c67a4f9ac3959ba836465ceb14bc67e7b",
                     "artifact_status": "COMPLIANT"
                   }
                 }
@@ -1608,7 +2658,16 @@ kosli get snapshot aws-prod --output=json
                 {
                   "type": "rule_not_applicable",
                   "context": {
-                    "flow_name": "snyk-aws-beta-per-artifact",
+                    "flow_name": "production-promotion",
+                    "trail_name": "promote-all-31",
+                    "artifact_status": null,
+                    "for_control": "SDLC-CTRL-0002"
+                  }
+                },
+                {
+                  "type": "rule_not_applicable",
+                  "context": {
+                    "flow_name": "snyk-aws-prod-per-artifact",
                     "trail_name": "languages-start-points-b1ee961719fe5dabc18f85450c26719c67a4f9ac3959ba836465ceb14bc67e7b",
                     "artifact_status": null,
                     "for_control": "SDLC-CTRL-0002"
@@ -1617,8 +2676,8 @@ kosli get snapshot aws-prod --output=json
                 {
                   "type": "rule_not_applicable",
                   "context": {
-                    "flow_name": "production-promotion",
-                    "trail_name": "promote-all-31",
+                    "flow_name": "snyk-aws-beta-per-artifact",
+                    "trail_name": "languages-start-points-b1ee961719fe5dabc18f85450c26719c67a4f9ac3959ba836465ceb14bc67e7b",
                     "artifact_status": null,
                     "for_control": "SDLC-CTRL-0002"
                   }
@@ -1654,7 +2713,15 @@ kosli get snapshot aws-prod --output=json
                 {
                   "type": "rule_not_applicable",
                   "context": {
-                    "flow_name": "snyk-aws-beta-per-artifact",
+                    "flow_name": "production-promotion",
+                    "trail_name": "promote-all-31",
+                    "artifact_status": null
+                  }
+                },
+                {
+                  "type": "rule_not_applicable",
+                  "context": {
+                    "flow_name": "snyk-aws-prod-per-artifact",
                     "trail_name": "languages-start-points-b1ee961719fe5dabc18f85450c26719c67a4f9ac3959ba836465ceb14bc67e7b",
                     "artifact_status": null
                   }
@@ -1662,8 +2729,8 @@ kosli get snapshot aws-prod --output=json
                 {
                   "type": "rule_not_applicable",
                   "context": {
-                    "flow_name": "production-promotion",
-                    "trail_name": "promote-all-31",
+                    "flow_name": "snyk-aws-beta-per-artifact",
+                    "trail_name": "languages-start-points-b1ee961719fe5dabc18f85450c26719c67a4f9ac3959ba836465ceb14bc67e7b",
                     "artifact_status": null
                   }
                 }
@@ -1691,7 +2758,15 @@ kosli get snapshot aws-prod --output=json
                 {
                   "type": "rule_not_applicable",
                   "context": {
-                    "flow_name": "snyk-aws-beta-per-artifact",
+                    "flow_name": "production-promotion",
+                    "trail_name": "promote-all-31",
+                    "artifact_status": "COMPLIANT"
+                  }
+                },
+                {
+                  "type": "rule_not_applicable",
+                  "context": {
+                    "flow_name": "snyk-aws-prod-per-artifact",
                     "trail_name": "languages-start-points-b1ee961719fe5dabc18f85450c26719c67a4f9ac3959ba836465ceb14bc67e7b",
                     "artifact_status": "COMPLIANT"
                   }
@@ -1699,8 +2774,8 @@ kosli get snapshot aws-prod --output=json
                 {
                   "type": "rule_not_applicable",
                   "context": {
-                    "flow_name": "production-promotion",
-                    "trail_name": "promote-all-31",
+                    "flow_name": "snyk-aws-beta-per-artifact",
+                    "trail_name": "languages-start-points-b1ee961719fe5dabc18f85450c26719c67a4f9ac3959ba836465ceb14bc67e7b",
                     "artifact_status": "COMPLIANT"
                   }
                 }
@@ -1719,8 +2794,8 @@ kosli get snapshot aws-prod --output=json
                   "for_control": "SDLC-CTRL-0022"
                 }
               },
-              "satisfied": null,
-              "ignored": true,
+              "satisfied": true,
+              "ignored": false,
               "resolutions": [
                 {
                   "type": "rule_not_applicable",
@@ -1734,7 +2809,16 @@ kosli get snapshot aws-prod --output=json
                 {
                   "type": "rule_not_applicable",
                   "context": {
-                    "flow_name": "snyk-aws-beta-per-artifact",
+                    "flow_name": "production-promotion",
+                    "trail_name": "promote-all-31",
+                    "artifact_status": null,
+                    "for_control": "SDLC-CTRL-0022"
+                  }
+                },
+                {
+                  "type": "rule_satisfied",
+                  "context": {
+                    "flow_name": "snyk-aws-prod-per-artifact",
                     "trail_name": "languages-start-points-b1ee961719fe5dabc18f85450c26719c67a4f9ac3959ba836465ceb14bc67e7b",
                     "artifact_status": null,
                     "for_control": "SDLC-CTRL-0022"
@@ -1743,8 +2827,8 @@ kosli get snapshot aws-prod --output=json
                 {
                   "type": "rule_not_applicable",
                   "context": {
-                    "flow_name": "production-promotion",
-                    "trail_name": "promote-all-31",
+                    "flow_name": "snyk-aws-beta-per-artifact",
+                    "trail_name": "languages-start-points-b1ee961719fe5dabc18f85450c26719c67a4f9ac3959ba836465ceb14bc67e7b",
                     "artifact_status": null,
                     "for_control": "SDLC-CTRL-0022"
                   }
@@ -1780,7 +2864,15 @@ kosli get snapshot aws-prod --output=json
                 {
                   "type": "rule_not_applicable",
                   "context": {
-                    "flow_name": "snyk-aws-beta-per-artifact",
+                    "flow_name": "production-promotion",
+                    "trail_name": "promote-all-31",
+                    "artifact_status": null
+                  }
+                },
+                {
+                  "type": "rule_not_applicable",
+                  "context": {
+                    "flow_name": "snyk-aws-prod-per-artifact",
                     "trail_name": "languages-start-points-b1ee961719fe5dabc18f85450c26719c67a4f9ac3959ba836465ceb14bc67e7b",
                     "artifact_status": null
                   }
@@ -1788,8 +2880,8 @@ kosli get snapshot aws-prod --output=json
                 {
                   "type": "rule_not_applicable",
                   "context": {
-                    "flow_name": "production-promotion",
-                    "trail_name": "promote-all-31",
+                    "flow_name": "snyk-aws-beta-per-artifact",
+                    "trail_name": "languages-start-points-b1ee961719fe5dabc18f85450c26719c67a4f9ac3959ba836465ceb14bc67e7b",
                     "artifact_status": null
                   }
                 }
@@ -1817,7 +2909,15 @@ kosli get snapshot aws-prod --output=json
                 {
                   "type": "rule_not_applicable",
                   "context": {
-                    "flow_name": "snyk-aws-beta-per-artifact",
+                    "flow_name": "production-promotion",
+                    "trail_name": "promote-all-31",
+                    "artifact_status": "COMPLIANT"
+                  }
+                },
+                {
+                  "type": "rule_not_applicable",
+                  "context": {
+                    "flow_name": "snyk-aws-prod-per-artifact",
                     "trail_name": "languages-start-points-b1ee961719fe5dabc18f85450c26719c67a4f9ac3959ba836465ceb14bc67e7b",
                     "artifact_status": "COMPLIANT"
                   }
@@ -1825,8 +2925,8 @@ kosli get snapshot aws-prod --output=json
                 {
                   "type": "rule_not_applicable",
                   "context": {
-                    "flow_name": "production-promotion",
-                    "trail_name": "promote-all-31",
+                    "flow_name": "snyk-aws-beta-per-artifact",
+                    "trail_name": "languages-start-points-b1ee961719fe5dabc18f85450c26719c67a4f9ac3959ba836465ceb14bc67e7b",
                     "artifact_status": "COMPLIANT"
                   }
                 }
@@ -1857,18 +2957,26 @@ kosli get snapshot aws-prod --output=json
                   }
                 },
                 {
+                  "type": "rule_satisfied",
+                  "context": {
+                    "flow_name": "production-promotion",
+                    "trail_name": "promote-all-31",
+                    "artifact_status": null
+                  }
+                },
+                {
                   "type": "rule_not_applicable",
                   "context": {
-                    "flow_name": "snyk-aws-beta-per-artifact",
+                    "flow_name": "snyk-aws-prod-per-artifact",
                     "trail_name": "languages-start-points-b1ee961719fe5dabc18f85450c26719c67a4f9ac3959ba836465ceb14bc67e7b",
                     "artifact_status": null
                   }
                 },
                 {
-                  "type": "rule_satisfied",
+                  "type": "rule_not_applicable",
                   "context": {
-                    "flow_name": "production-promotion",
-                    "trail_name": "promote-all-31",
+                    "flow_name": "snyk-aws-beta-per-artifact",
+                    "trail_name": "languages-start-points-b1ee961719fe5dabc18f85450c26719c67a4f9ac3959ba836465ceb14bc67e7b",
                     "artifact_status": null
                   }
                 }
@@ -1903,7 +3011,15 @@ kosli get snapshot aws-prod --output=json
                 {
                   "type": "rule_not_applicable",
                   "context": {
-                    "flow_name": "snyk-aws-beta-per-artifact",
+                    "flow_name": "production-promotion",
+                    "trail_name": "promote-all-31",
+                    "artifact_status": null
+                  }
+                },
+                {
+                  "type": "rule_not_applicable",
+                  "context": {
+                    "flow_name": "snyk-aws-prod-per-artifact",
                     "trail_name": "languages-start-points-b1ee961719fe5dabc18f85450c26719c67a4f9ac3959ba836465ceb14bc67e7b",
                     "artifact_status": null
                   }
@@ -1911,8 +3027,8 @@ kosli get snapshot aws-prod --output=json
                 {
                   "type": "rule_not_applicable",
                   "context": {
-                    "flow_name": "production-promotion",
-                    "trail_name": "promote-all-31",
+                    "flow_name": "snyk-aws-beta-per-artifact",
+                    "trail_name": "languages-start-points-b1ee961719fe5dabc18f85450c26719c67a4f9ac3959ba836465ceb14bc67e7b",
                     "artifact_status": null
                   }
                 }
@@ -1944,18 +3060,26 @@ kosli get snapshot aws-prod --output=json
                   }
                 },
                 {
-                  "type": "rule_not_applicable",
+                  "type": "rule_satisfied",
                   "context": {
-                    "flow_name": "snyk-aws-beta-per-artifact",
-                    "trail_name": "languages-start-points-b1ee961719fe5dabc18f85450c26719c67a4f9ac3959ba836465ceb14bc67e7b",
+                    "flow_name": "production-promotion",
+                    "trail_name": "promote-all-31",
                     "artifact_status": "COMPLIANT"
                   }
                 },
                 {
                   "type": "rule_satisfied",
                   "context": {
-                    "flow_name": "production-promotion",
-                    "trail_name": "promote-all-31",
+                    "flow_name": "snyk-aws-prod-per-artifact",
+                    "trail_name": "languages-start-points-b1ee961719fe5dabc18f85450c26719c67a4f9ac3959ba836465ceb14bc67e7b",
+                    "artifact_status": "COMPLIANT"
+                  }
+                },
+                {
+                  "type": "rule_not_applicable",
+                  "context": {
+                    "flow_name": "snyk-aws-beta-per-artifact",
+                    "trail_name": "languages-start-points-b1ee961719fe5dabc18f85450c26719c67a4f9ac3959ba836465ceb14bc67e7b",
                     "artifact_status": "COMPLIANT"
                   }
                 }
@@ -2026,37 +3150,6 @@ kosli get snapshot aws-prod --output=json
           "flow_reasons_for_non_compliance": []
         },
         {
-          "flow_name": "snyk-aws-beta-per-artifact",
-          "trail_name": "languages-start-points-b1ee961719fe5dabc18f85450c26719c67a4f9ac3959ba836465ceb14bc67e7b",
-          "template_reference_name": "languages-start-points",
-          "git_commit": "35a09b2d283bafd6bbc12c29eba3306d5b36a5f7",
-          "commit_url": "https://github.com/cyber-dojo/snyk-scanning/commit/35a09b2d283bafd6bbc12c29eba3306d5b36a5f7",
-          "git_commit_info": {
-            "sha1": "35a09b2d283bafd6bbc12c29eba3306d5b36a5f7",
-            "message": "Add emoji prefixes to workflow names\n\n  Match the visual convention already used in the kosli-demo/stochastic-committer\n  repo, where the Actions sidebar distinguishes workflow roles at a glance.\n\n  The two aws-* files are the top-level entry points, triggered by dispatch and\n  schedule, so they get the play emoji. The three reusable workflow_call\n  sub-workflows get the package emoji to mark them as callable building blocks.",
-            "author": "JonJagger <jon@kosli.com>",
-            "branch": "main",
-            "timestamp": 1783850974.0,
-            "url": "https://github.com/cyber-dojo/snyk-scanning/commit/35a09b2d283bafd6bbc12c29eba3306d5b36a5f7"
-          },
-          "html_url": "https://app.kosli.com/cyber-dojo/flows/snyk-aws-beta-per-artifact/artifacts/b1ee961719fe5dabc18f85450c26719c67a4f9ac3959ba836465ceb14bc67e7b?artifact_id=e1aab4c4-4a40-4b9f-948e-43ba5489",
-          "flow_html_url": "https://app.kosli.com/cyber-dojo/flows/snyk-aws-beta-per-artifact",
-          "deployment_diff": {
-            "diff_url": "https://github.com/cyber-dojo/snyk-scanning/compare/35a09b2d283bafd6bbc12c29eba3306d5b36a5f7...35a09b2d283bafd6bbc12c29eba3306d5b36a5f7",
-            "previous_git_commit": "35a09b2d283bafd6bbc12c29eba3306d5b36a5f7",
-            "previous_fingerprint": "f4ed92af30318fe8230648a2fc1f482970ad0ef821eeaaeac76759cd8fe03418",
-            "previous_artifact_name": "244531986313.dkr.ecr.eu-central-1.amazonaws.com/languages-start-points:c6db342@sha256:f4ed92af30318fe8230648a2fc1f482970ad0ef821eeaaeac76759cd8fe03418",
-            "previous_artifact_compliance_state": "COMPLIANT",
-            "previous_running": false,
-            "previous_git_commit_url": "https://github.com/cyber-dojo/snyk-scanning/commit/35a09b2d283bafd6bbc12c29eba3306d5b36a5f7",
-            "previous_trail_name": "languages-start-points-f4ed92af30318fe8230648a2fc1f482970ad0ef821eeaaeac76759cd8fe03418",
-            "previous_template_reference_name": "languages-start-points"
-          },
-          "commit_lead_time": 1390289.0,
-          "artifact_compliance_in_flow": true,
-          "flow_reasons_for_non_compliance": []
-        },
-        {
           "flow_name": "production-promotion",
           "trail_name": "promote-all-31",
           "template_reference_name": "languages-start-points",
@@ -2084,6 +3177,68 @@ kosli get snapshot aws-prod --output=json
             "previous_template_reference_name": "languages-start-points"
           },
           "commit_lead_time": 98209.0,
+          "artifact_compliance_in_flow": true,
+          "flow_reasons_for_non_compliance": []
+        },
+        {
+          "flow_name": "snyk-aws-prod-per-artifact",
+          "trail_name": "languages-start-points-b1ee961719fe5dabc18f85450c26719c67a4f9ac3959ba836465ceb14bc67e7b",
+          "template_reference_name": "languages-start-points",
+          "git_commit": "35a09b2d283bafd6bbc12c29eba3306d5b36a5f7",
+          "commit_url": "https://github.com/cyber-dojo/snyk-scanning/commit/35a09b2d283bafd6bbc12c29eba3306d5b36a5f7",
+          "git_commit_info": {
+            "sha1": "35a09b2d283bafd6bbc12c29eba3306d5b36a5f7",
+            "message": "Add emoji prefixes to workflow names\n\n  Match the visual convention already used in the kosli-demo/stochastic-committer\n  repo, where the Actions sidebar distinguishes workflow roles at a glance.\n\n  The two aws-* files are the top-level entry points, triggered by dispatch and\n  schedule, so they get the play emoji. The three reusable workflow_call\n  sub-workflows get the package emoji to mark them as callable building blocks.",
+            "author": "JonJagger <jon@kosli.com>",
+            "branch": "main",
+            "timestamp": 1783850974.0,
+            "url": "https://github.com/cyber-dojo/snyk-scanning/commit/35a09b2d283bafd6bbc12c29eba3306d5b36a5f7"
+          },
+          "html_url": "https://app.kosli.com/cyber-dojo/flows/snyk-aws-prod-per-artifact/artifacts/b1ee961719fe5dabc18f85450c26719c67a4f9ac3959ba836465ceb14bc67e7b?artifact_id=a99c6980-a83f-4bbd-84c5-133f25e6",
+          "flow_html_url": "https://app.kosli.com/cyber-dojo/flows/snyk-aws-prod-per-artifact",
+          "deployment_diff": {
+            "diff_url": "https://github.com/cyber-dojo/snyk-scanning/compare/00c479764cb9eca038fdaaaef108672d0bb0ed26...35a09b2d283bafd6bbc12c29eba3306d5b36a5f7",
+            "previous_git_commit": "00c479764cb9eca038fdaaaef108672d0bb0ed26",
+            "previous_fingerprint": "b2f51324efc1528e4dda57d235bdbc68d966e1ea23722d5d296f98eefbfc2676",
+            "previous_artifact_name": "244531986313.dkr.ecr.eu-central-1.amazonaws.com/languages-start-points:7e86fed@sha256:b2f51324efc1528e4dda57d235bdbc68d966e1ea23722d5d296f98eefbfc2676",
+            "previous_artifact_compliance_state": "COMPLIANT",
+            "previous_running": false,
+            "previous_git_commit_url": "https://github.com/cyber-dojo/snyk-scanning/commit/00c479764cb9eca038fdaaaef108672d0bb0ed26",
+            "previous_trail_name": "languages-start-points-b2f51324efc1528e4dda57d235bdbc68d966e1ea23722d5d296f98eefbfc2676",
+            "previous_template_reference_name": "languages-start-points"
+          },
+          "commit_lead_time": 1390289.0,
+          "artifact_compliance_in_flow": true,
+          "flow_reasons_for_non_compliance": []
+        },
+        {
+          "flow_name": "snyk-aws-beta-per-artifact",
+          "trail_name": "languages-start-points-b1ee961719fe5dabc18f85450c26719c67a4f9ac3959ba836465ceb14bc67e7b",
+          "template_reference_name": "languages-start-points",
+          "git_commit": "35a09b2d283bafd6bbc12c29eba3306d5b36a5f7",
+          "commit_url": "https://github.com/cyber-dojo/snyk-scanning/commit/35a09b2d283bafd6bbc12c29eba3306d5b36a5f7",
+          "git_commit_info": {
+            "sha1": "35a09b2d283bafd6bbc12c29eba3306d5b36a5f7",
+            "message": "Add emoji prefixes to workflow names\n\n  Match the visual convention already used in the kosli-demo/stochastic-committer\n  repo, where the Actions sidebar distinguishes workflow roles at a glance.\n\n  The two aws-* files are the top-level entry points, triggered by dispatch and\n  schedule, so they get the play emoji. The three reusable workflow_call\n  sub-workflows get the package emoji to mark them as callable building blocks.",
+            "author": "JonJagger <jon@kosli.com>",
+            "branch": "main",
+            "timestamp": 1783850974.0,
+            "url": "https://github.com/cyber-dojo/snyk-scanning/commit/35a09b2d283bafd6bbc12c29eba3306d5b36a5f7"
+          },
+          "html_url": "https://app.kosli.com/cyber-dojo/flows/snyk-aws-beta-per-artifact/artifacts/b1ee961719fe5dabc18f85450c26719c67a4f9ac3959ba836465ceb14bc67e7b?artifact_id=22ae48bf-b72d-4142-bdd0-46739166",
+          "flow_html_url": "https://app.kosli.com/cyber-dojo/flows/snyk-aws-beta-per-artifact",
+          "deployment_diff": {
+            "diff_url": "https://github.com/cyber-dojo/snyk-scanning/compare/35a09b2d283bafd6bbc12c29eba3306d5b36a5f7...35a09b2d283bafd6bbc12c29eba3306d5b36a5f7",
+            "previous_git_commit": "35a09b2d283bafd6bbc12c29eba3306d5b36a5f7",
+            "previous_fingerprint": "f4ed92af30318fe8230648a2fc1f482970ad0ef821eeaaeac76759cd8fe03418",
+            "previous_artifact_name": "244531986313.dkr.ecr.eu-central-1.amazonaws.com/languages-start-points:c6db342@sha256:f4ed92af30318fe8230648a2fc1f482970ad0ef821eeaaeac76759cd8fe03418",
+            "previous_artifact_compliance_state": "COMPLIANT",
+            "previous_running": false,
+            "previous_git_commit_url": "https://github.com/cyber-dojo/snyk-scanning/commit/35a09b2d283bafd6bbc12c29eba3306d5b36a5f7",
+            "previous_trail_name": "languages-start-points-f4ed92af30318fe8230648a2fc1f482970ad0ef821eeaaeac76759cd8fe03418",
+            "previous_template_reference_name": "languages-start-points"
+          },
+          "commit_lead_time": 1390289.0,
           "artifact_compliance_in_flow": true,
           "flow_reasons_for_non_compliance": []
         }
@@ -2125,7 +3280,15 @@ kosli get snapshot aws-prod --output=json
                 {
                   "type": "rule_not_applicable",
                   "context": {
-                    "flow_name": "snyk-aws-beta-per-artifact",
+                    "flow_name": "production-promotion",
+                    "trail_name": "promote-all-31",
+                    "artifact_status": null
+                  }
+                },
+                {
+                  "type": "rule_not_applicable",
+                  "context": {
+                    "flow_name": "snyk-aws-prod-per-artifact",
                     "trail_name": "nginx-c4b92203ca7a794dc2a1e30b3f4f611e6ce22d60dfdfb7684e2c0e276cf36053",
                     "artifact_status": null
                   }
@@ -2133,8 +3296,8 @@ kosli get snapshot aws-prod --output=json
                 {
                   "type": "rule_not_applicable",
                   "context": {
-                    "flow_name": "production-promotion",
-                    "trail_name": "promote-all-31",
+                    "flow_name": "snyk-aws-beta-per-artifact",
+                    "trail_name": "nginx-c4b92203ca7a794dc2a1e30b3f4f611e6ce22d60dfdfb7684e2c0e276cf36053",
                     "artifact_status": null
                   }
                 }
@@ -2162,7 +3325,15 @@ kosli get snapshot aws-prod --output=json
                 {
                   "type": "rule_not_applicable",
                   "context": {
-                    "flow_name": "snyk-aws-beta-per-artifact",
+                    "flow_name": "production-promotion",
+                    "trail_name": "promote-all-31",
+                    "artifact_status": "COMPLIANT"
+                  }
+                },
+                {
+                  "type": "rule_not_applicable",
+                  "context": {
+                    "flow_name": "snyk-aws-prod-per-artifact",
                     "trail_name": "nginx-c4b92203ca7a794dc2a1e30b3f4f611e6ce22d60dfdfb7684e2c0e276cf36053",
                     "artifact_status": "COMPLIANT"
                   }
@@ -2170,8 +3341,8 @@ kosli get snapshot aws-prod --output=json
                 {
                   "type": "rule_not_applicable",
                   "context": {
-                    "flow_name": "production-promotion",
-                    "trail_name": "promote-all-31",
+                    "flow_name": "snyk-aws-beta-per-artifact",
+                    "trail_name": "nginx-c4b92203ca7a794dc2a1e30b3f4f611e6ce22d60dfdfb7684e2c0e276cf36053",
                     "artifact_status": "COMPLIANT"
                   }
                 }
@@ -2204,7 +3375,15 @@ kosli get snapshot aws-prod --output=json
                 {
                   "type": "rule_not_applicable",
                   "context": {
-                    "flow_name": "snyk-aws-beta-per-artifact",
+                    "flow_name": "production-promotion",
+                    "trail_name": "promote-all-31",
+                    "artifact_status": null
+                  }
+                },
+                {
+                  "type": "rule_not_applicable",
+                  "context": {
+                    "flow_name": "snyk-aws-prod-per-artifact",
                     "trail_name": "nginx-c4b92203ca7a794dc2a1e30b3f4f611e6ce22d60dfdfb7684e2c0e276cf36053",
                     "artifact_status": null
                   }
@@ -2212,8 +3391,8 @@ kosli get snapshot aws-prod --output=json
                 {
                   "type": "rule_not_applicable",
                   "context": {
-                    "flow_name": "production-promotion",
-                    "trail_name": "promote-all-31",
+                    "flow_name": "snyk-aws-beta-per-artifact",
+                    "trail_name": "nginx-c4b92203ca7a794dc2a1e30b3f4f611e6ce22d60dfdfb7684e2c0e276cf36053",
                     "artifact_status": null
                   }
                 }
@@ -2248,7 +3427,15 @@ kosli get snapshot aws-prod --output=json
                 {
                   "type": "rule_satisfied",
                   "context": {
-                    "flow_name": "snyk-aws-beta-per-artifact",
+                    "flow_name": "production-promotion",
+                    "trail_name": "promote-all-31",
+                    "artifact_status": null
+                  }
+                },
+                {
+                  "type": "rule_satisfied",
+                  "context": {
+                    "flow_name": "snyk-aws-prod-per-artifact",
                     "trail_name": "nginx-c4b92203ca7a794dc2a1e30b3f4f611e6ce22d60dfdfb7684e2c0e276cf36053",
                     "artifact_status": null
                   }
@@ -2256,8 +3443,8 @@ kosli get snapshot aws-prod --output=json
                 {
                   "type": "rule_satisfied",
                   "context": {
-                    "flow_name": "production-promotion",
-                    "trail_name": "promote-all-31",
+                    "flow_name": "snyk-aws-beta-per-artifact",
+                    "trail_name": "nginx-c4b92203ca7a794dc2a1e30b3f4f611e6ce22d60dfdfb7684e2c0e276cf36053",
                     "artifact_status": null
                   }
                 }
@@ -2285,7 +3472,15 @@ kosli get snapshot aws-prod --output=json
                 {
                   "type": "rule_not_applicable",
                   "context": {
-                    "flow_name": "snyk-aws-beta-per-artifact",
+                    "flow_name": "production-promotion",
+                    "trail_name": "promote-all-31",
+                    "artifact_status": "COMPLIANT"
+                  }
+                },
+                {
+                  "type": "rule_not_applicable",
+                  "context": {
+                    "flow_name": "snyk-aws-prod-per-artifact",
                     "trail_name": "nginx-c4b92203ca7a794dc2a1e30b3f4f611e6ce22d60dfdfb7684e2c0e276cf36053",
                     "artifact_status": "COMPLIANT"
                   }
@@ -2293,8 +3488,8 @@ kosli get snapshot aws-prod --output=json
                 {
                   "type": "rule_not_applicable",
                   "context": {
-                    "flow_name": "production-promotion",
-                    "trail_name": "promote-all-31",
+                    "flow_name": "snyk-aws-beta-per-artifact",
+                    "trail_name": "nginx-c4b92203ca7a794dc2a1e30b3f4f611e6ce22d60dfdfb7684e2c0e276cf36053",
                     "artifact_status": "COMPLIANT"
                   }
                 }
@@ -2328,7 +3523,16 @@ kosli get snapshot aws-prod --output=json
                 {
                   "type": "rule_not_applicable",
                   "context": {
-                    "flow_name": "snyk-aws-beta-per-artifact",
+                    "flow_name": "production-promotion",
+                    "trail_name": "promote-all-31",
+                    "artifact_status": null,
+                    "for_control": "SDLC-CTRL-0002"
+                  }
+                },
+                {
+                  "type": "rule_not_applicable",
+                  "context": {
+                    "flow_name": "snyk-aws-prod-per-artifact",
                     "trail_name": "nginx-c4b92203ca7a794dc2a1e30b3f4f611e6ce22d60dfdfb7684e2c0e276cf36053",
                     "artifact_status": null,
                     "for_control": "SDLC-CTRL-0002"
@@ -2337,8 +3541,8 @@ kosli get snapshot aws-prod --output=json
                 {
                   "type": "rule_not_applicable",
                   "context": {
-                    "flow_name": "production-promotion",
-                    "trail_name": "promote-all-31",
+                    "flow_name": "snyk-aws-beta-per-artifact",
+                    "trail_name": "nginx-c4b92203ca7a794dc2a1e30b3f4f611e6ce22d60dfdfb7684e2c0e276cf36053",
                     "artifact_status": null,
                     "for_control": "SDLC-CTRL-0002"
                   }
@@ -2374,7 +3578,15 @@ kosli get snapshot aws-prod --output=json
                 {
                   "type": "rule_not_applicable",
                   "context": {
-                    "flow_name": "snyk-aws-beta-per-artifact",
+                    "flow_name": "production-promotion",
+                    "trail_name": "promote-all-31",
+                    "artifact_status": null
+                  }
+                },
+                {
+                  "type": "rule_not_applicable",
+                  "context": {
+                    "flow_name": "snyk-aws-prod-per-artifact",
                     "trail_name": "nginx-c4b92203ca7a794dc2a1e30b3f4f611e6ce22d60dfdfb7684e2c0e276cf36053",
                     "artifact_status": null
                   }
@@ -2382,8 +3594,8 @@ kosli get snapshot aws-prod --output=json
                 {
                   "type": "rule_not_applicable",
                   "context": {
-                    "flow_name": "production-promotion",
-                    "trail_name": "promote-all-31",
+                    "flow_name": "snyk-aws-beta-per-artifact",
+                    "trail_name": "nginx-c4b92203ca7a794dc2a1e30b3f4f611e6ce22d60dfdfb7684e2c0e276cf36053",
                     "artifact_status": null
                   }
                 }
@@ -2411,7 +3623,15 @@ kosli get snapshot aws-prod --output=json
                 {
                   "type": "rule_not_applicable",
                   "context": {
-                    "flow_name": "snyk-aws-beta-per-artifact",
+                    "flow_name": "production-promotion",
+                    "trail_name": "promote-all-31",
+                    "artifact_status": "COMPLIANT"
+                  }
+                },
+                {
+                  "type": "rule_not_applicable",
+                  "context": {
+                    "flow_name": "snyk-aws-prod-per-artifact",
                     "trail_name": "nginx-c4b92203ca7a794dc2a1e30b3f4f611e6ce22d60dfdfb7684e2c0e276cf36053",
                     "artifact_status": "COMPLIANT"
                   }
@@ -2419,8 +3639,8 @@ kosli get snapshot aws-prod --output=json
                 {
                   "type": "rule_not_applicable",
                   "context": {
-                    "flow_name": "production-promotion",
-                    "trail_name": "promote-all-31",
+                    "flow_name": "snyk-aws-beta-per-artifact",
+                    "trail_name": "nginx-c4b92203ca7a794dc2a1e30b3f4f611e6ce22d60dfdfb7684e2c0e276cf36053",
                     "artifact_status": "COMPLIANT"
                   }
                 }
@@ -2439,8 +3659,8 @@ kosli get snapshot aws-prod --output=json
                   "for_control": "SDLC-CTRL-0022"
                 }
               },
-              "satisfied": null,
-              "ignored": true,
+              "satisfied": true,
+              "ignored": false,
               "resolutions": [
                 {
                   "type": "rule_not_applicable",
@@ -2454,7 +3674,16 @@ kosli get snapshot aws-prod --output=json
                 {
                   "type": "rule_not_applicable",
                   "context": {
-                    "flow_name": "snyk-aws-beta-per-artifact",
+                    "flow_name": "production-promotion",
+                    "trail_name": "promote-all-31",
+                    "artifact_status": null,
+                    "for_control": "SDLC-CTRL-0022"
+                  }
+                },
+                {
+                  "type": "rule_satisfied",
+                  "context": {
+                    "flow_name": "snyk-aws-prod-per-artifact",
                     "trail_name": "nginx-c4b92203ca7a794dc2a1e30b3f4f611e6ce22d60dfdfb7684e2c0e276cf36053",
                     "artifact_status": null,
                     "for_control": "SDLC-CTRL-0022"
@@ -2463,8 +3692,8 @@ kosli get snapshot aws-prod --output=json
                 {
                   "type": "rule_not_applicable",
                   "context": {
-                    "flow_name": "production-promotion",
-                    "trail_name": "promote-all-31",
+                    "flow_name": "snyk-aws-beta-per-artifact",
+                    "trail_name": "nginx-c4b92203ca7a794dc2a1e30b3f4f611e6ce22d60dfdfb7684e2c0e276cf36053",
                     "artifact_status": null,
                     "for_control": "SDLC-CTRL-0022"
                   }
@@ -2500,7 +3729,15 @@ kosli get snapshot aws-prod --output=json
                 {
                   "type": "rule_not_applicable",
                   "context": {
-                    "flow_name": "snyk-aws-beta-per-artifact",
+                    "flow_name": "production-promotion",
+                    "trail_name": "promote-all-31",
+                    "artifact_status": null
+                  }
+                },
+                {
+                  "type": "rule_not_applicable",
+                  "context": {
+                    "flow_name": "snyk-aws-prod-per-artifact",
                     "trail_name": "nginx-c4b92203ca7a794dc2a1e30b3f4f611e6ce22d60dfdfb7684e2c0e276cf36053",
                     "artifact_status": null
                   }
@@ -2508,8 +3745,8 @@ kosli get snapshot aws-prod --output=json
                 {
                   "type": "rule_not_applicable",
                   "context": {
-                    "flow_name": "production-promotion",
-                    "trail_name": "promote-all-31",
+                    "flow_name": "snyk-aws-beta-per-artifact",
+                    "trail_name": "nginx-c4b92203ca7a794dc2a1e30b3f4f611e6ce22d60dfdfb7684e2c0e276cf36053",
                     "artifact_status": null
                   }
                 }
@@ -2537,7 +3774,15 @@ kosli get snapshot aws-prod --output=json
                 {
                   "type": "rule_not_applicable",
                   "context": {
-                    "flow_name": "snyk-aws-beta-per-artifact",
+                    "flow_name": "production-promotion",
+                    "trail_name": "promote-all-31",
+                    "artifact_status": "COMPLIANT"
+                  }
+                },
+                {
+                  "type": "rule_not_applicable",
+                  "context": {
+                    "flow_name": "snyk-aws-prod-per-artifact",
                     "trail_name": "nginx-c4b92203ca7a794dc2a1e30b3f4f611e6ce22d60dfdfb7684e2c0e276cf36053",
                     "artifact_status": "COMPLIANT"
                   }
@@ -2545,8 +3790,8 @@ kosli get snapshot aws-prod --output=json
                 {
                   "type": "rule_not_applicable",
                   "context": {
-                    "flow_name": "production-promotion",
-                    "trail_name": "promote-all-31",
+                    "flow_name": "snyk-aws-beta-per-artifact",
+                    "trail_name": "nginx-c4b92203ca7a794dc2a1e30b3f4f611e6ce22d60dfdfb7684e2c0e276cf36053",
                     "artifact_status": "COMPLIANT"
                   }
                 }
@@ -2577,18 +3822,26 @@ kosli get snapshot aws-prod --output=json
                   }
                 },
                 {
+                  "type": "rule_satisfied",
+                  "context": {
+                    "flow_name": "production-promotion",
+                    "trail_name": "promote-all-31",
+                    "artifact_status": null
+                  }
+                },
+                {
                   "type": "rule_not_applicable",
                   "context": {
-                    "flow_name": "snyk-aws-beta-per-artifact",
+                    "flow_name": "snyk-aws-prod-per-artifact",
                     "trail_name": "nginx-c4b92203ca7a794dc2a1e30b3f4f611e6ce22d60dfdfb7684e2c0e276cf36053",
                     "artifact_status": null
                   }
                 },
                 {
-                  "type": "rule_satisfied",
+                  "type": "rule_not_applicable",
                   "context": {
-                    "flow_name": "production-promotion",
-                    "trail_name": "promote-all-31",
+                    "flow_name": "snyk-aws-beta-per-artifact",
+                    "trail_name": "nginx-c4b92203ca7a794dc2a1e30b3f4f611e6ce22d60dfdfb7684e2c0e276cf36053",
                     "artifact_status": null
                   }
                 }
@@ -2623,7 +3876,15 @@ kosli get snapshot aws-prod --output=json
                 {
                   "type": "rule_not_applicable",
                   "context": {
-                    "flow_name": "snyk-aws-beta-per-artifact",
+                    "flow_name": "production-promotion",
+                    "trail_name": "promote-all-31",
+                    "artifact_status": null
+                  }
+                },
+                {
+                  "type": "rule_not_applicable",
+                  "context": {
+                    "flow_name": "snyk-aws-prod-per-artifact",
                     "trail_name": "nginx-c4b92203ca7a794dc2a1e30b3f4f611e6ce22d60dfdfb7684e2c0e276cf36053",
                     "artifact_status": null
                   }
@@ -2631,8 +3892,8 @@ kosli get snapshot aws-prod --output=json
                 {
                   "type": "rule_not_applicable",
                   "context": {
-                    "flow_name": "production-promotion",
-                    "trail_name": "promote-all-31",
+                    "flow_name": "snyk-aws-beta-per-artifact",
+                    "trail_name": "nginx-c4b92203ca7a794dc2a1e30b3f4f611e6ce22d60dfdfb7684e2c0e276cf36053",
                     "artifact_status": null
                   }
                 }
@@ -2664,18 +3925,26 @@ kosli get snapshot aws-prod --output=json
                   }
                 },
                 {
-                  "type": "rule_not_applicable",
+                  "type": "rule_satisfied",
                   "context": {
-                    "flow_name": "snyk-aws-beta-per-artifact",
-                    "trail_name": "nginx-c4b92203ca7a794dc2a1e30b3f4f611e6ce22d60dfdfb7684e2c0e276cf36053",
+                    "flow_name": "production-promotion",
+                    "trail_name": "promote-all-31",
                     "artifact_status": "COMPLIANT"
                   }
                 },
                 {
                   "type": "rule_satisfied",
                   "context": {
-                    "flow_name": "production-promotion",
-                    "trail_name": "promote-all-31",
+                    "flow_name": "snyk-aws-prod-per-artifact",
+                    "trail_name": "nginx-c4b92203ca7a794dc2a1e30b3f4f611e6ce22d60dfdfb7684e2c0e276cf36053",
+                    "artifact_status": "COMPLIANT"
+                  }
+                },
+                {
+                  "type": "rule_not_applicable",
+                  "context": {
+                    "flow_name": "snyk-aws-beta-per-artifact",
+                    "trail_name": "nginx-c4b92203ca7a794dc2a1e30b3f4f611e6ce22d60dfdfb7684e2c0e276cf36053",
                     "artifact_status": "COMPLIANT"
                   }
                 }
@@ -2746,37 +4015,6 @@ kosli get snapshot aws-prod --output=json
           "flow_reasons_for_non_compliance": []
         },
         {
-          "flow_name": "snyk-aws-beta-per-artifact",
-          "trail_name": "nginx-c4b92203ca7a794dc2a1e30b3f4f611e6ce22d60dfdfb7684e2c0e276cf36053",
-          "template_reference_name": "nginx",
-          "git_commit": "35a09b2d283bafd6bbc12c29eba3306d5b36a5f7",
-          "commit_url": "https://github.com/cyber-dojo/snyk-scanning/commit/35a09b2d283bafd6bbc12c29eba3306d5b36a5f7",
-          "git_commit_info": {
-            "sha1": "35a09b2d283bafd6bbc12c29eba3306d5b36a5f7",
-            "message": "Add emoji prefixes to workflow names\n\n  Match the visual convention already used in the kosli-demo/stochastic-committer\n  repo, where the Actions sidebar distinguishes workflow roles at a glance.\n\n  The two aws-* files are the top-level entry points, triggered by dispatch and\n  schedule, so they get the play emoji. The three reusable workflow_call\n  sub-workflows get the package emoji to mark them as callable building blocks.",
-            "author": "JonJagger <jon@kosli.com>",
-            "branch": "main",
-            "timestamp": 1783850974.0,
-            "url": "https://github.com/cyber-dojo/snyk-scanning/commit/35a09b2d283bafd6bbc12c29eba3306d5b36a5f7"
-          },
-          "html_url": "https://app.kosli.com/cyber-dojo/flows/snyk-aws-beta-per-artifact/artifacts/c4b92203ca7a794dc2a1e30b3f4f611e6ce22d60dfdfb7684e2c0e276cf36053?artifact_id=3290f392-c29b-4eda-a459-c588f680",
-          "flow_html_url": "https://app.kosli.com/cyber-dojo/flows/snyk-aws-beta-per-artifact",
-          "deployment_diff": {
-            "diff_url": "https://github.com/cyber-dojo/snyk-scanning/compare/35a09b2d283bafd6bbc12c29eba3306d5b36a5f7...35a09b2d283bafd6bbc12c29eba3306d5b36a5f7",
-            "previous_git_commit": "35a09b2d283bafd6bbc12c29eba3306d5b36a5f7",
-            "previous_fingerprint": "3fe0f4dede834e7315a340526c9719446a7537a4e4e42c6802c3c5ac86db3ec5",
-            "previous_artifact_name": "244531986313.dkr.ecr.eu-central-1.amazonaws.com/nginx:7ba8029@sha256:3fe0f4dede834e7315a340526c9719446a7537a4e4e42c6802c3c5ac86db3ec5",
-            "previous_artifact_compliance_state": "COMPLIANT",
-            "previous_running": false,
-            "previous_git_commit_url": "https://github.com/cyber-dojo/snyk-scanning/commit/35a09b2d283bafd6bbc12c29eba3306d5b36a5f7",
-            "previous_trail_name": "nginx-3fe0f4dede834e7315a340526c9719446a7537a4e4e42c6802c3c5ac86db3ec5",
-            "previous_template_reference_name": "nginx"
-          },
-          "commit_lead_time": 1390285.0,
-          "artifact_compliance_in_flow": true,
-          "flow_reasons_for_non_compliance": []
-        },
-        {
           "flow_name": "production-promotion",
           "trail_name": "promote-all-31",
           "template_reference_name": "nginx",
@@ -2804,6 +4042,68 @@ kosli get snapshot aws-prod --output=json
             "previous_template_reference_name": "nginx"
           },
           "commit_lead_time": 98205.0,
+          "artifact_compliance_in_flow": true,
+          "flow_reasons_for_non_compliance": []
+        },
+        {
+          "flow_name": "snyk-aws-prod-per-artifact",
+          "trail_name": "nginx-c4b92203ca7a794dc2a1e30b3f4f611e6ce22d60dfdfb7684e2c0e276cf36053",
+          "template_reference_name": "nginx",
+          "git_commit": "35a09b2d283bafd6bbc12c29eba3306d5b36a5f7",
+          "commit_url": "https://github.com/cyber-dojo/snyk-scanning/commit/35a09b2d283bafd6bbc12c29eba3306d5b36a5f7",
+          "git_commit_info": {
+            "sha1": "35a09b2d283bafd6bbc12c29eba3306d5b36a5f7",
+            "message": "Add emoji prefixes to workflow names\n\n  Match the visual convention already used in the kosli-demo/stochastic-committer\n  repo, where the Actions sidebar distinguishes workflow roles at a glance.\n\n  The two aws-* files are the top-level entry points, triggered by dispatch and\n  schedule, so they get the play emoji. The three reusable workflow_call\n  sub-workflows get the package emoji to mark them as callable building blocks.",
+            "author": "JonJagger <jon@kosli.com>",
+            "branch": "main",
+            "timestamp": 1783850974.0,
+            "url": "https://github.com/cyber-dojo/snyk-scanning/commit/35a09b2d283bafd6bbc12c29eba3306d5b36a5f7"
+          },
+          "html_url": "https://app.kosli.com/cyber-dojo/flows/snyk-aws-prod-per-artifact/artifacts/c4b92203ca7a794dc2a1e30b3f4f611e6ce22d60dfdfb7684e2c0e276cf36053?artifact_id=e05b691d-e31d-4d54-831f-2e0eaba9",
+          "flow_html_url": "https://app.kosli.com/cyber-dojo/flows/snyk-aws-prod-per-artifact",
+          "deployment_diff": {
+            "diff_url": "https://github.com/cyber-dojo/snyk-scanning/compare/00c479764cb9eca038fdaaaef108672d0bb0ed26...35a09b2d283bafd6bbc12c29eba3306d5b36a5f7",
+            "previous_git_commit": "00c479764cb9eca038fdaaaef108672d0bb0ed26",
+            "previous_fingerprint": "b7ff2cf22c934716a4280f0450ae52fe822cda7fce7fc5488bf62853860cddc8",
+            "previous_artifact_name": "244531986313.dkr.ecr.eu-central-1.amazonaws.com/nginx:7065268@sha256:b7ff2cf22c934716a4280f0450ae52fe822cda7fce7fc5488bf62853860cddc8",
+            "previous_artifact_compliance_state": "COMPLIANT",
+            "previous_running": false,
+            "previous_git_commit_url": "https://github.com/cyber-dojo/snyk-scanning/commit/00c479764cb9eca038fdaaaef108672d0bb0ed26",
+            "previous_trail_name": "nginx-b7ff2cf22c934716a4280f0450ae52fe822cda7fce7fc5488bf62853860cddc8",
+            "previous_template_reference_name": "nginx"
+          },
+          "commit_lead_time": 1390285.0,
+          "artifact_compliance_in_flow": true,
+          "flow_reasons_for_non_compliance": []
+        },
+        {
+          "flow_name": "snyk-aws-beta-per-artifact",
+          "trail_name": "nginx-c4b92203ca7a794dc2a1e30b3f4f611e6ce22d60dfdfb7684e2c0e276cf36053",
+          "template_reference_name": "nginx",
+          "git_commit": "35a09b2d283bafd6bbc12c29eba3306d5b36a5f7",
+          "commit_url": "https://github.com/cyber-dojo/snyk-scanning/commit/35a09b2d283bafd6bbc12c29eba3306d5b36a5f7",
+          "git_commit_info": {
+            "sha1": "35a09b2d283bafd6bbc12c29eba3306d5b36a5f7",
+            "message": "Add emoji prefixes to workflow names\n\n  Match the visual convention already used in the kosli-demo/stochastic-committer\n  repo, where the Actions sidebar distinguishes workflow roles at a glance.\n\n  The two aws-* files are the top-level entry points, triggered by dispatch and\n  schedule, so they get the play emoji. The three reusable workflow_call\n  sub-workflows get the package emoji to mark them as callable building blocks.",
+            "author": "JonJagger <jon@kosli.com>",
+            "branch": "main",
+            "timestamp": 1783850974.0,
+            "url": "https://github.com/cyber-dojo/snyk-scanning/commit/35a09b2d283bafd6bbc12c29eba3306d5b36a5f7"
+          },
+          "html_url": "https://app.kosli.com/cyber-dojo/flows/snyk-aws-beta-per-artifact/artifacts/c4b92203ca7a794dc2a1e30b3f4f611e6ce22d60dfdfb7684e2c0e276cf36053?artifact_id=911766a1-d4e4-4bf5-8576-4407166a",
+          "flow_html_url": "https://app.kosli.com/cyber-dojo/flows/snyk-aws-beta-per-artifact",
+          "deployment_diff": {
+            "diff_url": "https://github.com/cyber-dojo/snyk-scanning/compare/35a09b2d283bafd6bbc12c29eba3306d5b36a5f7...35a09b2d283bafd6bbc12c29eba3306d5b36a5f7",
+            "previous_git_commit": "35a09b2d283bafd6bbc12c29eba3306d5b36a5f7",
+            "previous_fingerprint": "3fe0f4dede834e7315a340526c9719446a7537a4e4e42c6802c3c5ac86db3ec5",
+            "previous_artifact_name": "244531986313.dkr.ecr.eu-central-1.amazonaws.com/nginx:7ba8029@sha256:3fe0f4dede834e7315a340526c9719446a7537a4e4e42c6802c3c5ac86db3ec5",
+            "previous_artifact_compliance_state": "COMPLIANT",
+            "previous_running": false,
+            "previous_git_commit_url": "https://github.com/cyber-dojo/snyk-scanning/commit/35a09b2d283bafd6bbc12c29eba3306d5b36a5f7",
+            "previous_trail_name": "nginx-3fe0f4dede834e7315a340526c9719446a7537a4e4e42c6802c3c5ac86db3ec5",
+            "previous_template_reference_name": "nginx"
+          },
+          "commit_lead_time": 1390285.0,
           "artifact_compliance_in_flow": true,
           "flow_reasons_for_non_compliance": []
         }
@@ -2845,7 +4145,15 @@ kosli get snapshot aws-prod --output=json
                 {
                   "type": "rule_not_applicable",
                   "context": {
-                    "flow_name": "snyk-aws-beta-per-artifact",
+                    "flow_name": "production-promotion",
+                    "trail_name": "promote-all-31",
+                    "artifact_status": null
+                  }
+                },
+                {
+                  "type": "rule_not_applicable",
+                  "context": {
+                    "flow_name": "snyk-aws-prod-per-artifact",
                     "trail_name": "dashboard-c7481eac72e01e25aa4f1dda5e8fa1f8c89215d32c32891762e3fc0b99fbfe98",
                     "artifact_status": null
                   }
@@ -2853,8 +4161,8 @@ kosli get snapshot aws-prod --output=json
                 {
                   "type": "rule_not_applicable",
                   "context": {
-                    "flow_name": "production-promotion",
-                    "trail_name": "promote-all-31",
+                    "flow_name": "snyk-aws-beta-per-artifact",
+                    "trail_name": "dashboard-c7481eac72e01e25aa4f1dda5e8fa1f8c89215d32c32891762e3fc0b99fbfe98",
                     "artifact_status": null
                   }
                 }
@@ -2882,7 +4190,15 @@ kosli get snapshot aws-prod --output=json
                 {
                   "type": "rule_not_applicable",
                   "context": {
-                    "flow_name": "snyk-aws-beta-per-artifact",
+                    "flow_name": "production-promotion",
+                    "trail_name": "promote-all-31",
+                    "artifact_status": "COMPLIANT"
+                  }
+                },
+                {
+                  "type": "rule_not_applicable",
+                  "context": {
+                    "flow_name": "snyk-aws-prod-per-artifact",
                     "trail_name": "dashboard-c7481eac72e01e25aa4f1dda5e8fa1f8c89215d32c32891762e3fc0b99fbfe98",
                     "artifact_status": "COMPLIANT"
                   }
@@ -2890,8 +4206,8 @@ kosli get snapshot aws-prod --output=json
                 {
                   "type": "rule_not_applicable",
                   "context": {
-                    "flow_name": "production-promotion",
-                    "trail_name": "promote-all-31",
+                    "flow_name": "snyk-aws-beta-per-artifact",
+                    "trail_name": "dashboard-c7481eac72e01e25aa4f1dda5e8fa1f8c89215d32c32891762e3fc0b99fbfe98",
                     "artifact_status": "COMPLIANT"
                   }
                 }
@@ -2924,7 +4240,15 @@ kosli get snapshot aws-prod --output=json
                 {
                   "type": "rule_not_applicable",
                   "context": {
-                    "flow_name": "snyk-aws-beta-per-artifact",
+                    "flow_name": "production-promotion",
+                    "trail_name": "promote-all-31",
+                    "artifact_status": null
+                  }
+                },
+                {
+                  "type": "rule_not_applicable",
+                  "context": {
+                    "flow_name": "snyk-aws-prod-per-artifact",
                     "trail_name": "dashboard-c7481eac72e01e25aa4f1dda5e8fa1f8c89215d32c32891762e3fc0b99fbfe98",
                     "artifact_status": null
                   }
@@ -2932,8 +4256,8 @@ kosli get snapshot aws-prod --output=json
                 {
                   "type": "rule_not_applicable",
                   "context": {
-                    "flow_name": "production-promotion",
-                    "trail_name": "promote-all-31",
+                    "flow_name": "snyk-aws-beta-per-artifact",
+                    "trail_name": "dashboard-c7481eac72e01e25aa4f1dda5e8fa1f8c89215d32c32891762e3fc0b99fbfe98",
                     "artifact_status": null
                   }
                 }
@@ -2968,7 +4292,15 @@ kosli get snapshot aws-prod --output=json
                 {
                   "type": "rule_satisfied",
                   "context": {
-                    "flow_name": "snyk-aws-beta-per-artifact",
+                    "flow_name": "production-promotion",
+                    "trail_name": "promote-all-31",
+                    "artifact_status": null
+                  }
+                },
+                {
+                  "type": "rule_satisfied",
+                  "context": {
+                    "flow_name": "snyk-aws-prod-per-artifact",
                     "trail_name": "dashboard-c7481eac72e01e25aa4f1dda5e8fa1f8c89215d32c32891762e3fc0b99fbfe98",
                     "artifact_status": null
                   }
@@ -2976,8 +4308,8 @@ kosli get snapshot aws-prod --output=json
                 {
                   "type": "rule_satisfied",
                   "context": {
-                    "flow_name": "production-promotion",
-                    "trail_name": "promote-all-31",
+                    "flow_name": "snyk-aws-beta-per-artifact",
+                    "trail_name": "dashboard-c7481eac72e01e25aa4f1dda5e8fa1f8c89215d32c32891762e3fc0b99fbfe98",
                     "artifact_status": null
                   }
                 }
@@ -3005,7 +4337,15 @@ kosli get snapshot aws-prod --output=json
                 {
                   "type": "rule_not_applicable",
                   "context": {
-                    "flow_name": "snyk-aws-beta-per-artifact",
+                    "flow_name": "production-promotion",
+                    "trail_name": "promote-all-31",
+                    "artifact_status": "COMPLIANT"
+                  }
+                },
+                {
+                  "type": "rule_not_applicable",
+                  "context": {
+                    "flow_name": "snyk-aws-prod-per-artifact",
                     "trail_name": "dashboard-c7481eac72e01e25aa4f1dda5e8fa1f8c89215d32c32891762e3fc0b99fbfe98",
                     "artifact_status": "COMPLIANT"
                   }
@@ -3013,8 +4353,8 @@ kosli get snapshot aws-prod --output=json
                 {
                   "type": "rule_not_applicable",
                   "context": {
-                    "flow_name": "production-promotion",
-                    "trail_name": "promote-all-31",
+                    "flow_name": "snyk-aws-beta-per-artifact",
+                    "trail_name": "dashboard-c7481eac72e01e25aa4f1dda5e8fa1f8c89215d32c32891762e3fc0b99fbfe98",
                     "artifact_status": "COMPLIANT"
                   }
                 }
@@ -3048,7 +4388,16 @@ kosli get snapshot aws-prod --output=json
                 {
                   "type": "rule_not_applicable",
                   "context": {
-                    "flow_name": "snyk-aws-beta-per-artifact",
+                    "flow_name": "production-promotion",
+                    "trail_name": "promote-all-31",
+                    "artifact_status": null,
+                    "for_control": "SDLC-CTRL-0002"
+                  }
+                },
+                {
+                  "type": "rule_not_applicable",
+                  "context": {
+                    "flow_name": "snyk-aws-prod-per-artifact",
                     "trail_name": "dashboard-c7481eac72e01e25aa4f1dda5e8fa1f8c89215d32c32891762e3fc0b99fbfe98",
                     "artifact_status": null,
                     "for_control": "SDLC-CTRL-0002"
@@ -3057,8 +4406,8 @@ kosli get snapshot aws-prod --output=json
                 {
                   "type": "rule_not_applicable",
                   "context": {
-                    "flow_name": "production-promotion",
-                    "trail_name": "promote-all-31",
+                    "flow_name": "snyk-aws-beta-per-artifact",
+                    "trail_name": "dashboard-c7481eac72e01e25aa4f1dda5e8fa1f8c89215d32c32891762e3fc0b99fbfe98",
                     "artifact_status": null,
                     "for_control": "SDLC-CTRL-0002"
                   }
@@ -3094,7 +4443,15 @@ kosli get snapshot aws-prod --output=json
                 {
                   "type": "rule_not_applicable",
                   "context": {
-                    "flow_name": "snyk-aws-beta-per-artifact",
+                    "flow_name": "production-promotion",
+                    "trail_name": "promote-all-31",
+                    "artifact_status": null
+                  }
+                },
+                {
+                  "type": "rule_not_applicable",
+                  "context": {
+                    "flow_name": "snyk-aws-prod-per-artifact",
                     "trail_name": "dashboard-c7481eac72e01e25aa4f1dda5e8fa1f8c89215d32c32891762e3fc0b99fbfe98",
                     "artifact_status": null
                   }
@@ -3102,8 +4459,8 @@ kosli get snapshot aws-prod --output=json
                 {
                   "type": "rule_not_applicable",
                   "context": {
-                    "flow_name": "production-promotion",
-                    "trail_name": "promote-all-31",
+                    "flow_name": "snyk-aws-beta-per-artifact",
+                    "trail_name": "dashboard-c7481eac72e01e25aa4f1dda5e8fa1f8c89215d32c32891762e3fc0b99fbfe98",
                     "artifact_status": null
                   }
                 }
@@ -3131,7 +4488,15 @@ kosli get snapshot aws-prod --output=json
                 {
                   "type": "rule_not_applicable",
                   "context": {
-                    "flow_name": "snyk-aws-beta-per-artifact",
+                    "flow_name": "production-promotion",
+                    "trail_name": "promote-all-31",
+                    "artifact_status": "COMPLIANT"
+                  }
+                },
+                {
+                  "type": "rule_not_applicable",
+                  "context": {
+                    "flow_name": "snyk-aws-prod-per-artifact",
                     "trail_name": "dashboard-c7481eac72e01e25aa4f1dda5e8fa1f8c89215d32c32891762e3fc0b99fbfe98",
                     "artifact_status": "COMPLIANT"
                   }
@@ -3139,8 +4504,8 @@ kosli get snapshot aws-prod --output=json
                 {
                   "type": "rule_not_applicable",
                   "context": {
-                    "flow_name": "production-promotion",
-                    "trail_name": "promote-all-31",
+                    "flow_name": "snyk-aws-beta-per-artifact",
+                    "trail_name": "dashboard-c7481eac72e01e25aa4f1dda5e8fa1f8c89215d32c32891762e3fc0b99fbfe98",
                     "artifact_status": "COMPLIANT"
                   }
                 }
@@ -3159,8 +4524,8 @@ kosli get snapshot aws-prod --output=json
                   "for_control": "SDLC-CTRL-0022"
                 }
               },
-              "satisfied": null,
-              "ignored": true,
+              "satisfied": true,
+              "ignored": false,
               "resolutions": [
                 {
                   "type": "rule_not_applicable",
@@ -3174,7 +4539,16 @@ kosli get snapshot aws-prod --output=json
                 {
                   "type": "rule_not_applicable",
                   "context": {
-                    "flow_name": "snyk-aws-beta-per-artifact",
+                    "flow_name": "production-promotion",
+                    "trail_name": "promote-all-31",
+                    "artifact_status": null,
+                    "for_control": "SDLC-CTRL-0022"
+                  }
+                },
+                {
+                  "type": "rule_satisfied",
+                  "context": {
+                    "flow_name": "snyk-aws-prod-per-artifact",
                     "trail_name": "dashboard-c7481eac72e01e25aa4f1dda5e8fa1f8c89215d32c32891762e3fc0b99fbfe98",
                     "artifact_status": null,
                     "for_control": "SDLC-CTRL-0022"
@@ -3183,8 +4557,8 @@ kosli get snapshot aws-prod --output=json
                 {
                   "type": "rule_not_applicable",
                   "context": {
-                    "flow_name": "production-promotion",
-                    "trail_name": "promote-all-31",
+                    "flow_name": "snyk-aws-beta-per-artifact",
+                    "trail_name": "dashboard-c7481eac72e01e25aa4f1dda5e8fa1f8c89215d32c32891762e3fc0b99fbfe98",
                     "artifact_status": null,
                     "for_control": "SDLC-CTRL-0022"
                   }
@@ -3220,7 +4594,15 @@ kosli get snapshot aws-prod --output=json
                 {
                   "type": "rule_not_applicable",
                   "context": {
-                    "flow_name": "snyk-aws-beta-per-artifact",
+                    "flow_name": "production-promotion",
+                    "trail_name": "promote-all-31",
+                    "artifact_status": null
+                  }
+                },
+                {
+                  "type": "rule_not_applicable",
+                  "context": {
+                    "flow_name": "snyk-aws-prod-per-artifact",
                     "trail_name": "dashboard-c7481eac72e01e25aa4f1dda5e8fa1f8c89215d32c32891762e3fc0b99fbfe98",
                     "artifact_status": null
                   }
@@ -3228,8 +4610,8 @@ kosli get snapshot aws-prod --output=json
                 {
                   "type": "rule_not_applicable",
                   "context": {
-                    "flow_name": "production-promotion",
-                    "trail_name": "promote-all-31",
+                    "flow_name": "snyk-aws-beta-per-artifact",
+                    "trail_name": "dashboard-c7481eac72e01e25aa4f1dda5e8fa1f8c89215d32c32891762e3fc0b99fbfe98",
                     "artifact_status": null
                   }
                 }
@@ -3257,7 +4639,15 @@ kosli get snapshot aws-prod --output=json
                 {
                   "type": "rule_not_applicable",
                   "context": {
-                    "flow_name": "snyk-aws-beta-per-artifact",
+                    "flow_name": "production-promotion",
+                    "trail_name": "promote-all-31",
+                    "artifact_status": "COMPLIANT"
+                  }
+                },
+                {
+                  "type": "rule_not_applicable",
+                  "context": {
+                    "flow_name": "snyk-aws-prod-per-artifact",
                     "trail_name": "dashboard-c7481eac72e01e25aa4f1dda5e8fa1f8c89215d32c32891762e3fc0b99fbfe98",
                     "artifact_status": "COMPLIANT"
                   }
@@ -3265,8 +4655,8 @@ kosli get snapshot aws-prod --output=json
                 {
                   "type": "rule_not_applicable",
                   "context": {
-                    "flow_name": "production-promotion",
-                    "trail_name": "promote-all-31",
+                    "flow_name": "snyk-aws-beta-per-artifact",
+                    "trail_name": "dashboard-c7481eac72e01e25aa4f1dda5e8fa1f8c89215d32c32891762e3fc0b99fbfe98",
                     "artifact_status": "COMPLIANT"
                   }
                 }
@@ -3297,18 +4687,26 @@ kosli get snapshot aws-prod --output=json
                   }
                 },
                 {
+                  "type": "rule_satisfied",
+                  "context": {
+                    "flow_name": "production-promotion",
+                    "trail_name": "promote-all-31",
+                    "artifact_status": null
+                  }
+                },
+                {
                   "type": "rule_not_applicable",
                   "context": {
-                    "flow_name": "snyk-aws-beta-per-artifact",
+                    "flow_name": "snyk-aws-prod-per-artifact",
                     "trail_name": "dashboard-c7481eac72e01e25aa4f1dda5e8fa1f8c89215d32c32891762e3fc0b99fbfe98",
                     "artifact_status": null
                   }
                 },
                 {
-                  "type": "rule_satisfied",
+                  "type": "rule_not_applicable",
                   "context": {
-                    "flow_name": "production-promotion",
-                    "trail_name": "promote-all-31",
+                    "flow_name": "snyk-aws-beta-per-artifact",
+                    "trail_name": "dashboard-c7481eac72e01e25aa4f1dda5e8fa1f8c89215d32c32891762e3fc0b99fbfe98",
                     "artifact_status": null
                   }
                 }
@@ -3343,7 +4741,15 @@ kosli get snapshot aws-prod --output=json
                 {
                   "type": "rule_not_applicable",
                   "context": {
-                    "flow_name": "snyk-aws-beta-per-artifact",
+                    "flow_name": "production-promotion",
+                    "trail_name": "promote-all-31",
+                    "artifact_status": null
+                  }
+                },
+                {
+                  "type": "rule_not_applicable",
+                  "context": {
+                    "flow_name": "snyk-aws-prod-per-artifact",
                     "trail_name": "dashboard-c7481eac72e01e25aa4f1dda5e8fa1f8c89215d32c32891762e3fc0b99fbfe98",
                     "artifact_status": null
                   }
@@ -3351,8 +4757,8 @@ kosli get snapshot aws-prod --output=json
                 {
                   "type": "rule_not_applicable",
                   "context": {
-                    "flow_name": "production-promotion",
-                    "trail_name": "promote-all-31",
+                    "flow_name": "snyk-aws-beta-per-artifact",
+                    "trail_name": "dashboard-c7481eac72e01e25aa4f1dda5e8fa1f8c89215d32c32891762e3fc0b99fbfe98",
                     "artifact_status": null
                   }
                 }
@@ -3384,18 +4790,26 @@ kosli get snapshot aws-prod --output=json
                   }
                 },
                 {
-                  "type": "rule_not_applicable",
+                  "type": "rule_satisfied",
                   "context": {
-                    "flow_name": "snyk-aws-beta-per-artifact",
-                    "trail_name": "dashboard-c7481eac72e01e25aa4f1dda5e8fa1f8c89215d32c32891762e3fc0b99fbfe98",
+                    "flow_name": "production-promotion",
+                    "trail_name": "promote-all-31",
                     "artifact_status": "COMPLIANT"
                   }
                 },
                 {
                   "type": "rule_satisfied",
                   "context": {
-                    "flow_name": "production-promotion",
-                    "trail_name": "promote-all-31",
+                    "flow_name": "snyk-aws-prod-per-artifact",
+                    "trail_name": "dashboard-c7481eac72e01e25aa4f1dda5e8fa1f8c89215d32c32891762e3fc0b99fbfe98",
+                    "artifact_status": "COMPLIANT"
+                  }
+                },
+                {
+                  "type": "rule_not_applicable",
+                  "context": {
+                    "flow_name": "snyk-aws-beta-per-artifact",
+                    "trail_name": "dashboard-c7481eac72e01e25aa4f1dda5e8fa1f8c89215d32c32891762e3fc0b99fbfe98",
                     "artifact_status": "COMPLIANT"
                   }
                 }
@@ -3466,37 +4880,6 @@ kosli get snapshot aws-prod --output=json
           "flow_reasons_for_non_compliance": []
         },
         {
-          "flow_name": "snyk-aws-beta-per-artifact",
-          "trail_name": "dashboard-c7481eac72e01e25aa4f1dda5e8fa1f8c89215d32c32891762e3fc0b99fbfe98",
-          "template_reference_name": "dashboard",
-          "git_commit": "35a09b2d283bafd6bbc12c29eba3306d5b36a5f7",
-          "commit_url": "https://github.com/cyber-dojo/snyk-scanning/commit/35a09b2d283bafd6bbc12c29eba3306d5b36a5f7",
-          "git_commit_info": {
-            "sha1": "35a09b2d283bafd6bbc12c29eba3306d5b36a5f7",
-            "message": "Add emoji prefixes to workflow names\n\n  Match the visual convention already used in the kosli-demo/stochastic-committer\n  repo, where the Actions sidebar distinguishes workflow roles at a glance.\n\n  The two aws-* files are the top-level entry points, triggered by dispatch and\n  schedule, so they get the play emoji. The three reusable workflow_call\n  sub-workflows get the package emoji to mark them as callable building blocks.",
-            "author": "JonJagger <jon@kosli.com>",
-            "branch": "main",
-            "timestamp": 1783850974.0,
-            "url": "https://github.com/cyber-dojo/snyk-scanning/commit/35a09b2d283bafd6bbc12c29eba3306d5b36a5f7"
-          },
-          "html_url": "https://app.kosli.com/cyber-dojo/flows/snyk-aws-beta-per-artifact/artifacts/c7481eac72e01e25aa4f1dda5e8fa1f8c89215d32c32891762e3fc0b99fbfe98?artifact_id=8b47f45d-e66d-4b83-b593-ffb56e5a",
-          "flow_html_url": "https://app.kosli.com/cyber-dojo/flows/snyk-aws-beta-per-artifact",
-          "deployment_diff": {
-            "diff_url": "https://github.com/cyber-dojo/snyk-scanning/compare/35a09b2d283bafd6bbc12c29eba3306d5b36a5f7...35a09b2d283bafd6bbc12c29eba3306d5b36a5f7",
-            "previous_git_commit": "35a09b2d283bafd6bbc12c29eba3306d5b36a5f7",
-            "previous_fingerprint": "d5e2c2da34f74c61721f620d410e6ae9299f15e1f928aeb903cefdd72a1e815e",
-            "previous_artifact_name": "244531986313.dkr.ecr.eu-central-1.amazonaws.com/dashboard:5407827@sha256:d5e2c2da34f74c61721f620d410e6ae9299f15e1f928aeb903cefdd72a1e815e",
-            "previous_artifact_compliance_state": "COMPLIANT",
-            "previous_running": false,
-            "previous_git_commit_url": "https://github.com/cyber-dojo/snyk-scanning/commit/35a09b2d283bafd6bbc12c29eba3306d5b36a5f7",
-            "previous_trail_name": "dashboard-d5e2c2da34f74c61721f620d410e6ae9299f15e1f928aeb903cefdd72a1e815e",
-            "previous_template_reference_name": "dashboard"
-          },
-          "commit_lead_time": 1390281.0,
-          "artifact_compliance_in_flow": true,
-          "flow_reasons_for_non_compliance": []
-        },
-        {
           "flow_name": "production-promotion",
           "trail_name": "promote-all-31",
           "template_reference_name": "dashboard",
@@ -3524,6 +4907,68 @@ kosli get snapshot aws-prod --output=json
             "previous_template_reference_name": "dashboard"
           },
           "commit_lead_time": 98201.0,
+          "artifact_compliance_in_flow": true,
+          "flow_reasons_for_non_compliance": []
+        },
+        {
+          "flow_name": "snyk-aws-prod-per-artifact",
+          "trail_name": "dashboard-c7481eac72e01e25aa4f1dda5e8fa1f8c89215d32c32891762e3fc0b99fbfe98",
+          "template_reference_name": "dashboard",
+          "git_commit": "35a09b2d283bafd6bbc12c29eba3306d5b36a5f7",
+          "commit_url": "https://github.com/cyber-dojo/snyk-scanning/commit/35a09b2d283bafd6bbc12c29eba3306d5b36a5f7",
+          "git_commit_info": {
+            "sha1": "35a09b2d283bafd6bbc12c29eba3306d5b36a5f7",
+            "message": "Add emoji prefixes to workflow names\n\n  Match the visual convention already used in the kosli-demo/stochastic-committer\n  repo, where the Actions sidebar distinguishes workflow roles at a glance.\n\n  The two aws-* files are the top-level entry points, triggered by dispatch and\n  schedule, so they get the play emoji. The three reusable workflow_call\n  sub-workflows get the package emoji to mark them as callable building blocks.",
+            "author": "JonJagger <jon@kosli.com>",
+            "branch": "main",
+            "timestamp": 1783850974.0,
+            "url": "https://github.com/cyber-dojo/snyk-scanning/commit/35a09b2d283bafd6bbc12c29eba3306d5b36a5f7"
+          },
+          "html_url": "https://app.kosli.com/cyber-dojo/flows/snyk-aws-prod-per-artifact/artifacts/c7481eac72e01e25aa4f1dda5e8fa1f8c89215d32c32891762e3fc0b99fbfe98?artifact_id=af7e18b8-ccc2-4807-8ef1-8d572a29",
+          "flow_html_url": "https://app.kosli.com/cyber-dojo/flows/snyk-aws-prod-per-artifact",
+          "deployment_diff": {
+            "diff_url": "https://github.com/cyber-dojo/snyk-scanning/compare/00c479764cb9eca038fdaaaef108672d0bb0ed26...35a09b2d283bafd6bbc12c29eba3306d5b36a5f7",
+            "previous_git_commit": "00c479764cb9eca038fdaaaef108672d0bb0ed26",
+            "previous_fingerprint": "45513c642ba191052bde056d56eeba8b06b0346eb444ec0008bd59bc0581bb8c",
+            "previous_artifact_name": "244531986313.dkr.ecr.eu-central-1.amazonaws.com/dashboard:87f560f@sha256:45513c642ba191052bde056d56eeba8b06b0346eb444ec0008bd59bc0581bb8c",
+            "previous_artifact_compliance_state": "COMPLIANT",
+            "previous_running": false,
+            "previous_git_commit_url": "https://github.com/cyber-dojo/snyk-scanning/commit/00c479764cb9eca038fdaaaef108672d0bb0ed26",
+            "previous_trail_name": "dashboard-45513c642ba191052bde056d56eeba8b06b0346eb444ec0008bd59bc0581bb8c",
+            "previous_template_reference_name": "dashboard"
+          },
+          "commit_lead_time": 1390281.0,
+          "artifact_compliance_in_flow": true,
+          "flow_reasons_for_non_compliance": []
+        },
+        {
+          "flow_name": "snyk-aws-beta-per-artifact",
+          "trail_name": "dashboard-c7481eac72e01e25aa4f1dda5e8fa1f8c89215d32c32891762e3fc0b99fbfe98",
+          "template_reference_name": "dashboard",
+          "git_commit": "35a09b2d283bafd6bbc12c29eba3306d5b36a5f7",
+          "commit_url": "https://github.com/cyber-dojo/snyk-scanning/commit/35a09b2d283bafd6bbc12c29eba3306d5b36a5f7",
+          "git_commit_info": {
+            "sha1": "35a09b2d283bafd6bbc12c29eba3306d5b36a5f7",
+            "message": "Add emoji prefixes to workflow names\n\n  Match the visual convention already used in the kosli-demo/stochastic-committer\n  repo, where the Actions sidebar distinguishes workflow roles at a glance.\n\n  The two aws-* files are the top-level entry points, triggered by dispatch and\n  schedule, so they get the play emoji. The three reusable workflow_call\n  sub-workflows get the package emoji to mark them as callable building blocks.",
+            "author": "JonJagger <jon@kosli.com>",
+            "branch": "main",
+            "timestamp": 1783850974.0,
+            "url": "https://github.com/cyber-dojo/snyk-scanning/commit/35a09b2d283bafd6bbc12c29eba3306d5b36a5f7"
+          },
+          "html_url": "https://app.kosli.com/cyber-dojo/flows/snyk-aws-beta-per-artifact/artifacts/c7481eac72e01e25aa4f1dda5e8fa1f8c89215d32c32891762e3fc0b99fbfe98?artifact_id=9ace06e0-2d46-41d9-a908-85b143a1",
+          "flow_html_url": "https://app.kosli.com/cyber-dojo/flows/snyk-aws-beta-per-artifact",
+          "deployment_diff": {
+            "diff_url": "https://github.com/cyber-dojo/snyk-scanning/compare/35a09b2d283bafd6bbc12c29eba3306d5b36a5f7...35a09b2d283bafd6bbc12c29eba3306d5b36a5f7",
+            "previous_git_commit": "35a09b2d283bafd6bbc12c29eba3306d5b36a5f7",
+            "previous_fingerprint": "d5e2c2da34f74c61721f620d410e6ae9299f15e1f928aeb903cefdd72a1e815e",
+            "previous_artifact_name": "244531986313.dkr.ecr.eu-central-1.amazonaws.com/dashboard:5407827@sha256:d5e2c2da34f74c61721f620d410e6ae9299f15e1f928aeb903cefdd72a1e815e",
+            "previous_artifact_compliance_state": "COMPLIANT",
+            "previous_running": false,
+            "previous_git_commit_url": "https://github.com/cyber-dojo/snyk-scanning/commit/35a09b2d283bafd6bbc12c29eba3306d5b36a5f7",
+            "previous_trail_name": "dashboard-d5e2c2da34f74c61721f620d410e6ae9299f15e1f928aeb903cefdd72a1e815e",
+            "previous_template_reference_name": "dashboard"
+          },
+          "commit_lead_time": 1390281.0,
           "artifact_compliance_in_flow": true,
           "flow_reasons_for_non_compliance": []
         }
@@ -3565,7 +5010,15 @@ kosli get snapshot aws-prod --output=json
                 {
                   "type": "rule_not_applicable",
                   "context": {
-                    "flow_name": "snyk-aws-beta-per-artifact",
+                    "flow_name": "production-promotion",
+                    "trail_name": "promote-all-31",
+                    "artifact_status": null
+                  }
+                },
+                {
+                  "type": "rule_not_applicable",
+                  "context": {
+                    "flow_name": "snyk-aws-prod-per-artifact",
                     "trail_name": "exercises-start-points-c7b7fd69d904329f9264e111bd3dc63cf98724cce567bae719e79a171e6925ea",
                     "artifact_status": null
                   }
@@ -3573,8 +5026,8 @@ kosli get snapshot aws-prod --output=json
                 {
                   "type": "rule_not_applicable",
                   "context": {
-                    "flow_name": "production-promotion",
-                    "trail_name": "promote-all-31",
+                    "flow_name": "snyk-aws-beta-per-artifact",
+                    "trail_name": "exercises-start-points-c7b7fd69d904329f9264e111bd3dc63cf98724cce567bae719e79a171e6925ea",
                     "artifact_status": null
                   }
                 }
@@ -3602,7 +5055,15 @@ kosli get snapshot aws-prod --output=json
                 {
                   "type": "rule_not_applicable",
                   "context": {
-                    "flow_name": "snyk-aws-beta-per-artifact",
+                    "flow_name": "production-promotion",
+                    "trail_name": "promote-all-31",
+                    "artifact_status": "COMPLIANT"
+                  }
+                },
+                {
+                  "type": "rule_not_applicable",
+                  "context": {
+                    "flow_name": "snyk-aws-prod-per-artifact",
                     "trail_name": "exercises-start-points-c7b7fd69d904329f9264e111bd3dc63cf98724cce567bae719e79a171e6925ea",
                     "artifact_status": "COMPLIANT"
                   }
@@ -3610,8 +5071,8 @@ kosli get snapshot aws-prod --output=json
                 {
                   "type": "rule_not_applicable",
                   "context": {
-                    "flow_name": "production-promotion",
-                    "trail_name": "promote-all-31",
+                    "flow_name": "snyk-aws-beta-per-artifact",
+                    "trail_name": "exercises-start-points-c7b7fd69d904329f9264e111bd3dc63cf98724cce567bae719e79a171e6925ea",
                     "artifact_status": "COMPLIANT"
                   }
                 }
@@ -3644,7 +5105,15 @@ kosli get snapshot aws-prod --output=json
                 {
                   "type": "rule_not_applicable",
                   "context": {
-                    "flow_name": "snyk-aws-beta-per-artifact",
+                    "flow_name": "production-promotion",
+                    "trail_name": "promote-all-31",
+                    "artifact_status": null
+                  }
+                },
+                {
+                  "type": "rule_not_applicable",
+                  "context": {
+                    "flow_name": "snyk-aws-prod-per-artifact",
                     "trail_name": "exercises-start-points-c7b7fd69d904329f9264e111bd3dc63cf98724cce567bae719e79a171e6925ea",
                     "artifact_status": null
                   }
@@ -3652,8 +5121,8 @@ kosli get snapshot aws-prod --output=json
                 {
                   "type": "rule_not_applicable",
                   "context": {
-                    "flow_name": "production-promotion",
-                    "trail_name": "promote-all-31",
+                    "flow_name": "snyk-aws-beta-per-artifact",
+                    "trail_name": "exercises-start-points-c7b7fd69d904329f9264e111bd3dc63cf98724cce567bae719e79a171e6925ea",
                     "artifact_status": null
                   }
                 }
@@ -3688,7 +5157,15 @@ kosli get snapshot aws-prod --output=json
                 {
                   "type": "rule_satisfied",
                   "context": {
-                    "flow_name": "snyk-aws-beta-per-artifact",
+                    "flow_name": "production-promotion",
+                    "trail_name": "promote-all-31",
+                    "artifact_status": null
+                  }
+                },
+                {
+                  "type": "rule_satisfied",
+                  "context": {
+                    "flow_name": "snyk-aws-prod-per-artifact",
                     "trail_name": "exercises-start-points-c7b7fd69d904329f9264e111bd3dc63cf98724cce567bae719e79a171e6925ea",
                     "artifact_status": null
                   }
@@ -3696,8 +5173,8 @@ kosli get snapshot aws-prod --output=json
                 {
                   "type": "rule_satisfied",
                   "context": {
-                    "flow_name": "production-promotion",
-                    "trail_name": "promote-all-31",
+                    "flow_name": "snyk-aws-beta-per-artifact",
+                    "trail_name": "exercises-start-points-c7b7fd69d904329f9264e111bd3dc63cf98724cce567bae719e79a171e6925ea",
                     "artifact_status": null
                   }
                 }
@@ -3725,7 +5202,15 @@ kosli get snapshot aws-prod --output=json
                 {
                   "type": "rule_not_applicable",
                   "context": {
-                    "flow_name": "snyk-aws-beta-per-artifact",
+                    "flow_name": "production-promotion",
+                    "trail_name": "promote-all-31",
+                    "artifact_status": "COMPLIANT"
+                  }
+                },
+                {
+                  "type": "rule_not_applicable",
+                  "context": {
+                    "flow_name": "snyk-aws-prod-per-artifact",
                     "trail_name": "exercises-start-points-c7b7fd69d904329f9264e111bd3dc63cf98724cce567bae719e79a171e6925ea",
                     "artifact_status": "COMPLIANT"
                   }
@@ -3733,8 +5218,8 @@ kosli get snapshot aws-prod --output=json
                 {
                   "type": "rule_not_applicable",
                   "context": {
-                    "flow_name": "production-promotion",
-                    "trail_name": "promote-all-31",
+                    "flow_name": "snyk-aws-beta-per-artifact",
+                    "trail_name": "exercises-start-points-c7b7fd69d904329f9264e111bd3dc63cf98724cce567bae719e79a171e6925ea",
                     "artifact_status": "COMPLIANT"
                   }
                 }
@@ -3768,7 +5253,16 @@ kosli get snapshot aws-prod --output=json
                 {
                   "type": "rule_not_applicable",
                   "context": {
-                    "flow_name": "snyk-aws-beta-per-artifact",
+                    "flow_name": "production-promotion",
+                    "trail_name": "promote-all-31",
+                    "artifact_status": null,
+                    "for_control": "SDLC-CTRL-0002"
+                  }
+                },
+                {
+                  "type": "rule_not_applicable",
+                  "context": {
+                    "flow_name": "snyk-aws-prod-per-artifact",
                     "trail_name": "exercises-start-points-c7b7fd69d904329f9264e111bd3dc63cf98724cce567bae719e79a171e6925ea",
                     "artifact_status": null,
                     "for_control": "SDLC-CTRL-0002"
@@ -3777,8 +5271,8 @@ kosli get snapshot aws-prod --output=json
                 {
                   "type": "rule_not_applicable",
                   "context": {
-                    "flow_name": "production-promotion",
-                    "trail_name": "promote-all-31",
+                    "flow_name": "snyk-aws-beta-per-artifact",
+                    "trail_name": "exercises-start-points-c7b7fd69d904329f9264e111bd3dc63cf98724cce567bae719e79a171e6925ea",
                     "artifact_status": null,
                     "for_control": "SDLC-CTRL-0002"
                   }
@@ -3814,7 +5308,15 @@ kosli get snapshot aws-prod --output=json
                 {
                   "type": "rule_not_applicable",
                   "context": {
-                    "flow_name": "snyk-aws-beta-per-artifact",
+                    "flow_name": "production-promotion",
+                    "trail_name": "promote-all-31",
+                    "artifact_status": null
+                  }
+                },
+                {
+                  "type": "rule_not_applicable",
+                  "context": {
+                    "flow_name": "snyk-aws-prod-per-artifact",
                     "trail_name": "exercises-start-points-c7b7fd69d904329f9264e111bd3dc63cf98724cce567bae719e79a171e6925ea",
                     "artifact_status": null
                   }
@@ -3822,8 +5324,8 @@ kosli get snapshot aws-prod --output=json
                 {
                   "type": "rule_not_applicable",
                   "context": {
-                    "flow_name": "production-promotion",
-                    "trail_name": "promote-all-31",
+                    "flow_name": "snyk-aws-beta-per-artifact",
+                    "trail_name": "exercises-start-points-c7b7fd69d904329f9264e111bd3dc63cf98724cce567bae719e79a171e6925ea",
                     "artifact_status": null
                   }
                 }
@@ -3851,7 +5353,15 @@ kosli get snapshot aws-prod --output=json
                 {
                   "type": "rule_not_applicable",
                   "context": {
-                    "flow_name": "snyk-aws-beta-per-artifact",
+                    "flow_name": "production-promotion",
+                    "trail_name": "promote-all-31",
+                    "artifact_status": "COMPLIANT"
+                  }
+                },
+                {
+                  "type": "rule_not_applicable",
+                  "context": {
+                    "flow_name": "snyk-aws-prod-per-artifact",
                     "trail_name": "exercises-start-points-c7b7fd69d904329f9264e111bd3dc63cf98724cce567bae719e79a171e6925ea",
                     "artifact_status": "COMPLIANT"
                   }
@@ -3859,8 +5369,8 @@ kosli get snapshot aws-prod --output=json
                 {
                   "type": "rule_not_applicable",
                   "context": {
-                    "flow_name": "production-promotion",
-                    "trail_name": "promote-all-31",
+                    "flow_name": "snyk-aws-beta-per-artifact",
+                    "trail_name": "exercises-start-points-c7b7fd69d904329f9264e111bd3dc63cf98724cce567bae719e79a171e6925ea",
                     "artifact_status": "COMPLIANT"
                   }
                 }
@@ -3879,8 +5389,8 @@ kosli get snapshot aws-prod --output=json
                   "for_control": "SDLC-CTRL-0022"
                 }
               },
-              "satisfied": null,
-              "ignored": true,
+              "satisfied": true,
+              "ignored": false,
               "resolutions": [
                 {
                   "type": "rule_not_applicable",
@@ -3894,7 +5404,16 @@ kosli get snapshot aws-prod --output=json
                 {
                   "type": "rule_not_applicable",
                   "context": {
-                    "flow_name": "snyk-aws-beta-per-artifact",
+                    "flow_name": "production-promotion",
+                    "trail_name": "promote-all-31",
+                    "artifact_status": null,
+                    "for_control": "SDLC-CTRL-0022"
+                  }
+                },
+                {
+                  "type": "rule_satisfied",
+                  "context": {
+                    "flow_name": "snyk-aws-prod-per-artifact",
                     "trail_name": "exercises-start-points-c7b7fd69d904329f9264e111bd3dc63cf98724cce567bae719e79a171e6925ea",
                     "artifact_status": null,
                     "for_control": "SDLC-CTRL-0022"
@@ -3903,8 +5422,8 @@ kosli get snapshot aws-prod --output=json
                 {
                   "type": "rule_not_applicable",
                   "context": {
-                    "flow_name": "production-promotion",
-                    "trail_name": "promote-all-31",
+                    "flow_name": "snyk-aws-beta-per-artifact",
+                    "trail_name": "exercises-start-points-c7b7fd69d904329f9264e111bd3dc63cf98724cce567bae719e79a171e6925ea",
                     "artifact_status": null,
                     "for_control": "SDLC-CTRL-0022"
                   }
@@ -3940,7 +5459,15 @@ kosli get snapshot aws-prod --output=json
                 {
                   "type": "rule_not_applicable",
                   "context": {
-                    "flow_name": "snyk-aws-beta-per-artifact",
+                    "flow_name": "production-promotion",
+                    "trail_name": "promote-all-31",
+                    "artifact_status": null
+                  }
+                },
+                {
+                  "type": "rule_not_applicable",
+                  "context": {
+                    "flow_name": "snyk-aws-prod-per-artifact",
                     "trail_name": "exercises-start-points-c7b7fd69d904329f9264e111bd3dc63cf98724cce567bae719e79a171e6925ea",
                     "artifact_status": null
                   }
@@ -3948,8 +5475,8 @@ kosli get snapshot aws-prod --output=json
                 {
                   "type": "rule_not_applicable",
                   "context": {
-                    "flow_name": "production-promotion",
-                    "trail_name": "promote-all-31",
+                    "flow_name": "snyk-aws-beta-per-artifact",
+                    "trail_name": "exercises-start-points-c7b7fd69d904329f9264e111bd3dc63cf98724cce567bae719e79a171e6925ea",
                     "artifact_status": null
                   }
                 }
@@ -3977,7 +5504,15 @@ kosli get snapshot aws-prod --output=json
                 {
                   "type": "rule_not_applicable",
                   "context": {
-                    "flow_name": "snyk-aws-beta-per-artifact",
+                    "flow_name": "production-promotion",
+                    "trail_name": "promote-all-31",
+                    "artifact_status": "COMPLIANT"
+                  }
+                },
+                {
+                  "type": "rule_not_applicable",
+                  "context": {
+                    "flow_name": "snyk-aws-prod-per-artifact",
                     "trail_name": "exercises-start-points-c7b7fd69d904329f9264e111bd3dc63cf98724cce567bae719e79a171e6925ea",
                     "artifact_status": "COMPLIANT"
                   }
@@ -3985,8 +5520,8 @@ kosli get snapshot aws-prod --output=json
                 {
                   "type": "rule_not_applicable",
                   "context": {
-                    "flow_name": "production-promotion",
-                    "trail_name": "promote-all-31",
+                    "flow_name": "snyk-aws-beta-per-artifact",
+                    "trail_name": "exercises-start-points-c7b7fd69d904329f9264e111bd3dc63cf98724cce567bae719e79a171e6925ea",
                     "artifact_status": "COMPLIANT"
                   }
                 }
@@ -4017,18 +5552,26 @@ kosli get snapshot aws-prod --output=json
                   }
                 },
                 {
+                  "type": "rule_satisfied",
+                  "context": {
+                    "flow_name": "production-promotion",
+                    "trail_name": "promote-all-31",
+                    "artifact_status": null
+                  }
+                },
+                {
                   "type": "rule_not_applicable",
                   "context": {
-                    "flow_name": "snyk-aws-beta-per-artifact",
+                    "flow_name": "snyk-aws-prod-per-artifact",
                     "trail_name": "exercises-start-points-c7b7fd69d904329f9264e111bd3dc63cf98724cce567bae719e79a171e6925ea",
                     "artifact_status": null
                   }
                 },
                 {
-                  "type": "rule_satisfied",
+                  "type": "rule_not_applicable",
                   "context": {
-                    "flow_name": "production-promotion",
-                    "trail_name": "promote-all-31",
+                    "flow_name": "snyk-aws-beta-per-artifact",
+                    "trail_name": "exercises-start-points-c7b7fd69d904329f9264e111bd3dc63cf98724cce567bae719e79a171e6925ea",
                     "artifact_status": null
                   }
                 }
@@ -4063,7 +5606,15 @@ kosli get snapshot aws-prod --output=json
                 {
                   "type": "rule_not_applicable",
                   "context": {
-                    "flow_name": "snyk-aws-beta-per-artifact",
+                    "flow_name": "production-promotion",
+                    "trail_name": "promote-all-31",
+                    "artifact_status": null
+                  }
+                },
+                {
+                  "type": "rule_not_applicable",
+                  "context": {
+                    "flow_name": "snyk-aws-prod-per-artifact",
                     "trail_name": "exercises-start-points-c7b7fd69d904329f9264e111bd3dc63cf98724cce567bae719e79a171e6925ea",
                     "artifact_status": null
                   }
@@ -4071,8 +5622,8 @@ kosli get snapshot aws-prod --output=json
                 {
                   "type": "rule_not_applicable",
                   "context": {
-                    "flow_name": "production-promotion",
-                    "trail_name": "promote-all-31",
+                    "flow_name": "snyk-aws-beta-per-artifact",
+                    "trail_name": "exercises-start-points-c7b7fd69d904329f9264e111bd3dc63cf98724cce567bae719e79a171e6925ea",
                     "artifact_status": null
                   }
                 }
@@ -4104,18 +5655,26 @@ kosli get snapshot aws-prod --output=json
                   }
                 },
                 {
-                  "type": "rule_not_applicable",
+                  "type": "rule_satisfied",
                   "context": {
-                    "flow_name": "snyk-aws-beta-per-artifact",
-                    "trail_name": "exercises-start-points-c7b7fd69d904329f9264e111bd3dc63cf98724cce567bae719e79a171e6925ea",
+                    "flow_name": "production-promotion",
+                    "trail_name": "promote-all-31",
                     "artifact_status": "COMPLIANT"
                   }
                 },
                 {
                   "type": "rule_satisfied",
                   "context": {
-                    "flow_name": "production-promotion",
-                    "trail_name": "promote-all-31",
+                    "flow_name": "snyk-aws-prod-per-artifact",
+                    "trail_name": "exercises-start-points-c7b7fd69d904329f9264e111bd3dc63cf98724cce567bae719e79a171e6925ea",
+                    "artifact_status": "COMPLIANT"
+                  }
+                },
+                {
+                  "type": "rule_not_applicable",
+                  "context": {
+                    "flow_name": "snyk-aws-beta-per-artifact",
+                    "trail_name": "exercises-start-points-c7b7fd69d904329f9264e111bd3dc63cf98724cce567bae719e79a171e6925ea",
                     "artifact_status": "COMPLIANT"
                   }
                 }
@@ -4186,37 +5745,6 @@ kosli get snapshot aws-prod --output=json
           "flow_reasons_for_non_compliance": []
         },
         {
-          "flow_name": "snyk-aws-beta-per-artifact",
-          "trail_name": "exercises-start-points-c7b7fd69d904329f9264e111bd3dc63cf98724cce567bae719e79a171e6925ea",
-          "template_reference_name": "exercises-start-points",
-          "git_commit": "35a09b2d283bafd6bbc12c29eba3306d5b36a5f7",
-          "commit_url": "https://github.com/cyber-dojo/snyk-scanning/commit/35a09b2d283bafd6bbc12c29eba3306d5b36a5f7",
-          "git_commit_info": {
-            "sha1": "35a09b2d283bafd6bbc12c29eba3306d5b36a5f7",
-            "message": "Add emoji prefixes to workflow names\n\n  Match the visual convention already used in the kosli-demo/stochastic-committer\n  repo, where the Actions sidebar distinguishes workflow roles at a glance.\n\n  The two aws-* files are the top-level entry points, triggered by dispatch and\n  schedule, so they get the play emoji. The three reusable workflow_call\n  sub-workflows get the package emoji to mark them as callable building blocks.",
-            "author": "JonJagger <jon@kosli.com>",
-            "branch": "main",
-            "timestamp": 1783850974.0,
-            "url": "https://github.com/cyber-dojo/snyk-scanning/commit/35a09b2d283bafd6bbc12c29eba3306d5b36a5f7"
-          },
-          "html_url": "https://app.kosli.com/cyber-dojo/flows/snyk-aws-beta-per-artifact/artifacts/c7b7fd69d904329f9264e111bd3dc63cf98724cce567bae719e79a171e6925ea?artifact_id=09bcaf35-ebb8-437f-bb7d-16f994e4",
-          "flow_html_url": "https://app.kosli.com/cyber-dojo/flows/snyk-aws-beta-per-artifact",
-          "deployment_diff": {
-            "diff_url": "https://github.com/cyber-dojo/snyk-scanning/compare/35a09b2d283bafd6bbc12c29eba3306d5b36a5f7...35a09b2d283bafd6bbc12c29eba3306d5b36a5f7",
-            "previous_git_commit": "35a09b2d283bafd6bbc12c29eba3306d5b36a5f7",
-            "previous_fingerprint": "a07b93ce0975df90f08f0dc171105a4f6e61e5b91aaf5ca9874d372084e1b613",
-            "previous_artifact_name": "244531986313.dkr.ecr.eu-central-1.amazonaws.com/exercises-start-points:804f248@sha256:a07b93ce0975df90f08f0dc171105a4f6e61e5b91aaf5ca9874d372084e1b613",
-            "previous_artifact_compliance_state": "COMPLIANT",
-            "previous_running": false,
-            "previous_git_commit_url": "https://github.com/cyber-dojo/snyk-scanning/commit/35a09b2d283bafd6bbc12c29eba3306d5b36a5f7",
-            "previous_trail_name": "exercises-start-points-a07b93ce0975df90f08f0dc171105a4f6e61e5b91aaf5ca9874d372084e1b613",
-            "previous_template_reference_name": "exercises-start-points"
-          },
-          "commit_lead_time": 1390281.0,
-          "artifact_compliance_in_flow": true,
-          "flow_reasons_for_non_compliance": []
-        },
-        {
           "flow_name": "production-promotion",
           "trail_name": "promote-all-31",
           "template_reference_name": "exercises-start-points",
@@ -4244,6 +5772,68 @@ kosli get snapshot aws-prod --output=json
             "previous_template_reference_name": "exercises-start-points"
           },
           "commit_lead_time": 98201.0,
+          "artifact_compliance_in_flow": true,
+          "flow_reasons_for_non_compliance": []
+        },
+        {
+          "flow_name": "snyk-aws-prod-per-artifact",
+          "trail_name": "exercises-start-points-c7b7fd69d904329f9264e111bd3dc63cf98724cce567bae719e79a171e6925ea",
+          "template_reference_name": "exercises-start-points",
+          "git_commit": "35a09b2d283bafd6bbc12c29eba3306d5b36a5f7",
+          "commit_url": "https://github.com/cyber-dojo/snyk-scanning/commit/35a09b2d283bafd6bbc12c29eba3306d5b36a5f7",
+          "git_commit_info": {
+            "sha1": "35a09b2d283bafd6bbc12c29eba3306d5b36a5f7",
+            "message": "Add emoji prefixes to workflow names\n\n  Match the visual convention already used in the kosli-demo/stochastic-committer\n  repo, where the Actions sidebar distinguishes workflow roles at a glance.\n\n  The two aws-* files are the top-level entry points, triggered by dispatch and\n  schedule, so they get the play emoji. The three reusable workflow_call\n  sub-workflows get the package emoji to mark them as callable building blocks.",
+            "author": "JonJagger <jon@kosli.com>",
+            "branch": "main",
+            "timestamp": 1783850974.0,
+            "url": "https://github.com/cyber-dojo/snyk-scanning/commit/35a09b2d283bafd6bbc12c29eba3306d5b36a5f7"
+          },
+          "html_url": "https://app.kosli.com/cyber-dojo/flows/snyk-aws-prod-per-artifact/artifacts/c7b7fd69d904329f9264e111bd3dc63cf98724cce567bae719e79a171e6925ea?artifact_id=310fe7e0-a7b2-4051-9dea-f470022c",
+          "flow_html_url": "https://app.kosli.com/cyber-dojo/flows/snyk-aws-prod-per-artifact",
+          "deployment_diff": {
+            "diff_url": "https://github.com/cyber-dojo/snyk-scanning/compare/00c479764cb9eca038fdaaaef108672d0bb0ed26...35a09b2d283bafd6bbc12c29eba3306d5b36a5f7",
+            "previous_git_commit": "00c479764cb9eca038fdaaaef108672d0bb0ed26",
+            "previous_fingerprint": "f00aa234bebafb1980dced29626750f84a6fe6c9c50f6a90167e4d8e6511a8a8",
+            "previous_artifact_name": "244531986313.dkr.ecr.eu-central-1.amazonaws.com/exercises-start-points:b8e5cbf@sha256:f00aa234bebafb1980dced29626750f84a6fe6c9c50f6a90167e4d8e6511a8a8",
+            "previous_artifact_compliance_state": "COMPLIANT",
+            "previous_running": false,
+            "previous_git_commit_url": "https://github.com/cyber-dojo/snyk-scanning/commit/00c479764cb9eca038fdaaaef108672d0bb0ed26",
+            "previous_trail_name": "exercises-start-points-f00aa234bebafb1980dced29626750f84a6fe6c9c50f6a90167e4d8e6511a8a8",
+            "previous_template_reference_name": "exercises-start-points"
+          },
+          "commit_lead_time": 1390281.0,
+          "artifact_compliance_in_flow": true,
+          "flow_reasons_for_non_compliance": []
+        },
+        {
+          "flow_name": "snyk-aws-beta-per-artifact",
+          "trail_name": "exercises-start-points-c7b7fd69d904329f9264e111bd3dc63cf98724cce567bae719e79a171e6925ea",
+          "template_reference_name": "exercises-start-points",
+          "git_commit": "35a09b2d283bafd6bbc12c29eba3306d5b36a5f7",
+          "commit_url": "https://github.com/cyber-dojo/snyk-scanning/commit/35a09b2d283bafd6bbc12c29eba3306d5b36a5f7",
+          "git_commit_info": {
+            "sha1": "35a09b2d283bafd6bbc12c29eba3306d5b36a5f7",
+            "message": "Add emoji prefixes to workflow names\n\n  Match the visual convention already used in the kosli-demo/stochastic-committer\n  repo, where the Actions sidebar distinguishes workflow roles at a glance.\n\n  The two aws-* files are the top-level entry points, triggered by dispatch and\n  schedule, so they get the play emoji. The three reusable workflow_call\n  sub-workflows get the package emoji to mark them as callable building blocks.",
+            "author": "JonJagger <jon@kosli.com>",
+            "branch": "main",
+            "timestamp": 1783850974.0,
+            "url": "https://github.com/cyber-dojo/snyk-scanning/commit/35a09b2d283bafd6bbc12c29eba3306d5b36a5f7"
+          },
+          "html_url": "https://app.kosli.com/cyber-dojo/flows/snyk-aws-beta-per-artifact/artifacts/c7b7fd69d904329f9264e111bd3dc63cf98724cce567bae719e79a171e6925ea?artifact_id=1e751756-2547-4296-acd6-2a711f50",
+          "flow_html_url": "https://app.kosli.com/cyber-dojo/flows/snyk-aws-beta-per-artifact",
+          "deployment_diff": {
+            "diff_url": "https://github.com/cyber-dojo/snyk-scanning/compare/35a09b2d283bafd6bbc12c29eba3306d5b36a5f7...35a09b2d283bafd6bbc12c29eba3306d5b36a5f7",
+            "previous_git_commit": "35a09b2d283bafd6bbc12c29eba3306d5b36a5f7",
+            "previous_fingerprint": "a07b93ce0975df90f08f0dc171105a4f6e61e5b91aaf5ca9874d372084e1b613",
+            "previous_artifact_name": "244531986313.dkr.ecr.eu-central-1.amazonaws.com/exercises-start-points:804f248@sha256:a07b93ce0975df90f08f0dc171105a4f6e61e5b91aaf5ca9874d372084e1b613",
+            "previous_artifact_compliance_state": "COMPLIANT",
+            "previous_running": false,
+            "previous_git_commit_url": "https://github.com/cyber-dojo/snyk-scanning/commit/35a09b2d283bafd6bbc12c29eba3306d5b36a5f7",
+            "previous_trail_name": "exercises-start-points-a07b93ce0975df90f08f0dc171105a4f6e61e5b91aaf5ca9874d372084e1b613",
+            "previous_template_reference_name": "exercises-start-points"
+          },
+          "commit_lead_time": 1390281.0,
           "artifact_compliance_in_flow": true,
           "flow_reasons_for_non_compliance": []
         }
@@ -4285,7 +5875,15 @@ kosli get snapshot aws-prod --output=json
                 {
                   "type": "rule_not_applicable",
                   "context": {
-                    "flow_name": "snyk-aws-beta-per-artifact",
+                    "flow_name": "production-promotion",
+                    "trail_name": "promote-all-31",
+                    "artifact_status": null
+                  }
+                },
+                {
+                  "type": "rule_not_applicable",
+                  "context": {
+                    "flow_name": "snyk-aws-prod-per-artifact",
                     "trail_name": "custom-start-points-8e965dda26af2d2e68032c25d68e792c85e0c7bd9814862de231bc4c6e935b81",
                     "artifact_status": null
                   }
@@ -4293,8 +5891,8 @@ kosli get snapshot aws-prod --output=json
                 {
                   "type": "rule_not_applicable",
                   "context": {
-                    "flow_name": "production-promotion",
-                    "trail_name": "promote-all-31",
+                    "flow_name": "snyk-aws-beta-per-artifact",
+                    "trail_name": "custom-start-points-8e965dda26af2d2e68032c25d68e792c85e0c7bd9814862de231bc4c6e935b81",
                     "artifact_status": null
                   }
                 }
@@ -4322,7 +5920,15 @@ kosli get snapshot aws-prod --output=json
                 {
                   "type": "rule_not_applicable",
                   "context": {
-                    "flow_name": "snyk-aws-beta-per-artifact",
+                    "flow_name": "production-promotion",
+                    "trail_name": "promote-all-31",
+                    "artifact_status": "COMPLIANT"
+                  }
+                },
+                {
+                  "type": "rule_not_applicable",
+                  "context": {
+                    "flow_name": "snyk-aws-prod-per-artifact",
                     "trail_name": "custom-start-points-8e965dda26af2d2e68032c25d68e792c85e0c7bd9814862de231bc4c6e935b81",
                     "artifact_status": "COMPLIANT"
                   }
@@ -4330,8 +5936,8 @@ kosli get snapshot aws-prod --output=json
                 {
                   "type": "rule_not_applicable",
                   "context": {
-                    "flow_name": "production-promotion",
-                    "trail_name": "promote-all-31",
+                    "flow_name": "snyk-aws-beta-per-artifact",
+                    "trail_name": "custom-start-points-8e965dda26af2d2e68032c25d68e792c85e0c7bd9814862de231bc4c6e935b81",
                     "artifact_status": "COMPLIANT"
                   }
                 }
@@ -4364,7 +5970,15 @@ kosli get snapshot aws-prod --output=json
                 {
                   "type": "rule_not_applicable",
                   "context": {
-                    "flow_name": "snyk-aws-beta-per-artifact",
+                    "flow_name": "production-promotion",
+                    "trail_name": "promote-all-31",
+                    "artifact_status": null
+                  }
+                },
+                {
+                  "type": "rule_not_applicable",
+                  "context": {
+                    "flow_name": "snyk-aws-prod-per-artifact",
                     "trail_name": "custom-start-points-8e965dda26af2d2e68032c25d68e792c85e0c7bd9814862de231bc4c6e935b81",
                     "artifact_status": null
                   }
@@ -4372,8 +5986,8 @@ kosli get snapshot aws-prod --output=json
                 {
                   "type": "rule_not_applicable",
                   "context": {
-                    "flow_name": "production-promotion",
-                    "trail_name": "promote-all-31",
+                    "flow_name": "snyk-aws-beta-per-artifact",
+                    "trail_name": "custom-start-points-8e965dda26af2d2e68032c25d68e792c85e0c7bd9814862de231bc4c6e935b81",
                     "artifact_status": null
                   }
                 }
@@ -4408,7 +6022,15 @@ kosli get snapshot aws-prod --output=json
                 {
                   "type": "rule_satisfied",
                   "context": {
-                    "flow_name": "snyk-aws-beta-per-artifact",
+                    "flow_name": "production-promotion",
+                    "trail_name": "promote-all-31",
+                    "artifact_status": null
+                  }
+                },
+                {
+                  "type": "rule_satisfied",
+                  "context": {
+                    "flow_name": "snyk-aws-prod-per-artifact",
                     "trail_name": "custom-start-points-8e965dda26af2d2e68032c25d68e792c85e0c7bd9814862de231bc4c6e935b81",
                     "artifact_status": null
                   }
@@ -4416,8 +6038,8 @@ kosli get snapshot aws-prod --output=json
                 {
                   "type": "rule_satisfied",
                   "context": {
-                    "flow_name": "production-promotion",
-                    "trail_name": "promote-all-31",
+                    "flow_name": "snyk-aws-beta-per-artifact",
+                    "trail_name": "custom-start-points-8e965dda26af2d2e68032c25d68e792c85e0c7bd9814862de231bc4c6e935b81",
                     "artifact_status": null
                   }
                 }
@@ -4445,7 +6067,15 @@ kosli get snapshot aws-prod --output=json
                 {
                   "type": "rule_not_applicable",
                   "context": {
-                    "flow_name": "snyk-aws-beta-per-artifact",
+                    "flow_name": "production-promotion",
+                    "trail_name": "promote-all-31",
+                    "artifact_status": "COMPLIANT"
+                  }
+                },
+                {
+                  "type": "rule_not_applicable",
+                  "context": {
+                    "flow_name": "snyk-aws-prod-per-artifact",
                     "trail_name": "custom-start-points-8e965dda26af2d2e68032c25d68e792c85e0c7bd9814862de231bc4c6e935b81",
                     "artifact_status": "COMPLIANT"
                   }
@@ -4453,8 +6083,8 @@ kosli get snapshot aws-prod --output=json
                 {
                   "type": "rule_not_applicable",
                   "context": {
-                    "flow_name": "production-promotion",
-                    "trail_name": "promote-all-31",
+                    "flow_name": "snyk-aws-beta-per-artifact",
+                    "trail_name": "custom-start-points-8e965dda26af2d2e68032c25d68e792c85e0c7bd9814862de231bc4c6e935b81",
                     "artifact_status": "COMPLIANT"
                   }
                 }
@@ -4488,7 +6118,16 @@ kosli get snapshot aws-prod --output=json
                 {
                   "type": "rule_not_applicable",
                   "context": {
-                    "flow_name": "snyk-aws-beta-per-artifact",
+                    "flow_name": "production-promotion",
+                    "trail_name": "promote-all-31",
+                    "artifact_status": null,
+                    "for_control": "SDLC-CTRL-0002"
+                  }
+                },
+                {
+                  "type": "rule_not_applicable",
+                  "context": {
+                    "flow_name": "snyk-aws-prod-per-artifact",
                     "trail_name": "custom-start-points-8e965dda26af2d2e68032c25d68e792c85e0c7bd9814862de231bc4c6e935b81",
                     "artifact_status": null,
                     "for_control": "SDLC-CTRL-0002"
@@ -4497,8 +6136,8 @@ kosli get snapshot aws-prod --output=json
                 {
                   "type": "rule_not_applicable",
                   "context": {
-                    "flow_name": "production-promotion",
-                    "trail_name": "promote-all-31",
+                    "flow_name": "snyk-aws-beta-per-artifact",
+                    "trail_name": "custom-start-points-8e965dda26af2d2e68032c25d68e792c85e0c7bd9814862de231bc4c6e935b81",
                     "artifact_status": null,
                     "for_control": "SDLC-CTRL-0002"
                   }
@@ -4534,7 +6173,15 @@ kosli get snapshot aws-prod --output=json
                 {
                   "type": "rule_not_applicable",
                   "context": {
-                    "flow_name": "snyk-aws-beta-per-artifact",
+                    "flow_name": "production-promotion",
+                    "trail_name": "promote-all-31",
+                    "artifact_status": null
+                  }
+                },
+                {
+                  "type": "rule_not_applicable",
+                  "context": {
+                    "flow_name": "snyk-aws-prod-per-artifact",
                     "trail_name": "custom-start-points-8e965dda26af2d2e68032c25d68e792c85e0c7bd9814862de231bc4c6e935b81",
                     "artifact_status": null
                   }
@@ -4542,8 +6189,8 @@ kosli get snapshot aws-prod --output=json
                 {
                   "type": "rule_not_applicable",
                   "context": {
-                    "flow_name": "production-promotion",
-                    "trail_name": "promote-all-31",
+                    "flow_name": "snyk-aws-beta-per-artifact",
+                    "trail_name": "custom-start-points-8e965dda26af2d2e68032c25d68e792c85e0c7bd9814862de231bc4c6e935b81",
                     "artifact_status": null
                   }
                 }
@@ -4571,7 +6218,15 @@ kosli get snapshot aws-prod --output=json
                 {
                   "type": "rule_not_applicable",
                   "context": {
-                    "flow_name": "snyk-aws-beta-per-artifact",
+                    "flow_name": "production-promotion",
+                    "trail_name": "promote-all-31",
+                    "artifact_status": "COMPLIANT"
+                  }
+                },
+                {
+                  "type": "rule_not_applicable",
+                  "context": {
+                    "flow_name": "snyk-aws-prod-per-artifact",
                     "trail_name": "custom-start-points-8e965dda26af2d2e68032c25d68e792c85e0c7bd9814862de231bc4c6e935b81",
                     "artifact_status": "COMPLIANT"
                   }
@@ -4579,8 +6234,8 @@ kosli get snapshot aws-prod --output=json
                 {
                   "type": "rule_not_applicable",
                   "context": {
-                    "flow_name": "production-promotion",
-                    "trail_name": "promote-all-31",
+                    "flow_name": "snyk-aws-beta-per-artifact",
+                    "trail_name": "custom-start-points-8e965dda26af2d2e68032c25d68e792c85e0c7bd9814862de231bc4c6e935b81",
                     "artifact_status": "COMPLIANT"
                   }
                 }
@@ -4599,8 +6254,8 @@ kosli get snapshot aws-prod --output=json
                   "for_control": "SDLC-CTRL-0022"
                 }
               },
-              "satisfied": null,
-              "ignored": true,
+              "satisfied": true,
+              "ignored": false,
               "resolutions": [
                 {
                   "type": "rule_not_applicable",
@@ -4614,7 +6269,16 @@ kosli get snapshot aws-prod --output=json
                 {
                   "type": "rule_not_applicable",
                   "context": {
-                    "flow_name": "snyk-aws-beta-per-artifact",
+                    "flow_name": "production-promotion",
+                    "trail_name": "promote-all-31",
+                    "artifact_status": null,
+                    "for_control": "SDLC-CTRL-0022"
+                  }
+                },
+                {
+                  "type": "rule_satisfied",
+                  "context": {
+                    "flow_name": "snyk-aws-prod-per-artifact",
                     "trail_name": "custom-start-points-8e965dda26af2d2e68032c25d68e792c85e0c7bd9814862de231bc4c6e935b81",
                     "artifact_status": null,
                     "for_control": "SDLC-CTRL-0022"
@@ -4623,8 +6287,8 @@ kosli get snapshot aws-prod --output=json
                 {
                   "type": "rule_not_applicable",
                   "context": {
-                    "flow_name": "production-promotion",
-                    "trail_name": "promote-all-31",
+                    "flow_name": "snyk-aws-beta-per-artifact",
+                    "trail_name": "custom-start-points-8e965dda26af2d2e68032c25d68e792c85e0c7bd9814862de231bc4c6e935b81",
                     "artifact_status": null,
                     "for_control": "SDLC-CTRL-0022"
                   }
@@ -4660,7 +6324,15 @@ kosli get snapshot aws-prod --output=json
                 {
                   "type": "rule_not_applicable",
                   "context": {
-                    "flow_name": "snyk-aws-beta-per-artifact",
+                    "flow_name": "production-promotion",
+                    "trail_name": "promote-all-31",
+                    "artifact_status": null
+                  }
+                },
+                {
+                  "type": "rule_not_applicable",
+                  "context": {
+                    "flow_name": "snyk-aws-prod-per-artifact",
                     "trail_name": "custom-start-points-8e965dda26af2d2e68032c25d68e792c85e0c7bd9814862de231bc4c6e935b81",
                     "artifact_status": null
                   }
@@ -4668,8 +6340,8 @@ kosli get snapshot aws-prod --output=json
                 {
                   "type": "rule_not_applicable",
                   "context": {
-                    "flow_name": "production-promotion",
-                    "trail_name": "promote-all-31",
+                    "flow_name": "snyk-aws-beta-per-artifact",
+                    "trail_name": "custom-start-points-8e965dda26af2d2e68032c25d68e792c85e0c7bd9814862de231bc4c6e935b81",
                     "artifact_status": null
                   }
                 }
@@ -4697,7 +6369,15 @@ kosli get snapshot aws-prod --output=json
                 {
                   "type": "rule_not_applicable",
                   "context": {
-                    "flow_name": "snyk-aws-beta-per-artifact",
+                    "flow_name": "production-promotion",
+                    "trail_name": "promote-all-31",
+                    "artifact_status": "COMPLIANT"
+                  }
+                },
+                {
+                  "type": "rule_not_applicable",
+                  "context": {
+                    "flow_name": "snyk-aws-prod-per-artifact",
                     "trail_name": "custom-start-points-8e965dda26af2d2e68032c25d68e792c85e0c7bd9814862de231bc4c6e935b81",
                     "artifact_status": "COMPLIANT"
                   }
@@ -4705,8 +6385,8 @@ kosli get snapshot aws-prod --output=json
                 {
                   "type": "rule_not_applicable",
                   "context": {
-                    "flow_name": "production-promotion",
-                    "trail_name": "promote-all-31",
+                    "flow_name": "snyk-aws-beta-per-artifact",
+                    "trail_name": "custom-start-points-8e965dda26af2d2e68032c25d68e792c85e0c7bd9814862de231bc4c6e935b81",
                     "artifact_status": "COMPLIANT"
                   }
                 }
@@ -4737,18 +6417,26 @@ kosli get snapshot aws-prod --output=json
                   }
                 },
                 {
+                  "type": "rule_satisfied",
+                  "context": {
+                    "flow_name": "production-promotion",
+                    "trail_name": "promote-all-31",
+                    "artifact_status": null
+                  }
+                },
+                {
                   "type": "rule_not_applicable",
                   "context": {
-                    "flow_name": "snyk-aws-beta-per-artifact",
+                    "flow_name": "snyk-aws-prod-per-artifact",
                     "trail_name": "custom-start-points-8e965dda26af2d2e68032c25d68e792c85e0c7bd9814862de231bc4c6e935b81",
                     "artifact_status": null
                   }
                 },
                 {
-                  "type": "rule_satisfied",
+                  "type": "rule_not_applicable",
                   "context": {
-                    "flow_name": "production-promotion",
-                    "trail_name": "promote-all-31",
+                    "flow_name": "snyk-aws-beta-per-artifact",
+                    "trail_name": "custom-start-points-8e965dda26af2d2e68032c25d68e792c85e0c7bd9814862de231bc4c6e935b81",
                     "artifact_status": null
                   }
                 }
@@ -4783,7 +6471,15 @@ kosli get snapshot aws-prod --output=json
                 {
                   "type": "rule_not_applicable",
                   "context": {
-                    "flow_name": "snyk-aws-beta-per-artifact",
+                    "flow_name": "production-promotion",
+                    "trail_name": "promote-all-31",
+                    "artifact_status": null
+                  }
+                },
+                {
+                  "type": "rule_not_applicable",
+                  "context": {
+                    "flow_name": "snyk-aws-prod-per-artifact",
                     "trail_name": "custom-start-points-8e965dda26af2d2e68032c25d68e792c85e0c7bd9814862de231bc4c6e935b81",
                     "artifact_status": null
                   }
@@ -4791,8 +6487,8 @@ kosli get snapshot aws-prod --output=json
                 {
                   "type": "rule_not_applicable",
                   "context": {
-                    "flow_name": "production-promotion",
-                    "trail_name": "promote-all-31",
+                    "flow_name": "snyk-aws-beta-per-artifact",
+                    "trail_name": "custom-start-points-8e965dda26af2d2e68032c25d68e792c85e0c7bd9814862de231bc4c6e935b81",
                     "artifact_status": null
                   }
                 }
@@ -4824,18 +6520,26 @@ kosli get snapshot aws-prod --output=json
                   }
                 },
                 {
-                  "type": "rule_not_applicable",
+                  "type": "rule_satisfied",
                   "context": {
-                    "flow_name": "snyk-aws-beta-per-artifact",
-                    "trail_name": "custom-start-points-8e965dda26af2d2e68032c25d68e792c85e0c7bd9814862de231bc4c6e935b81",
+                    "flow_name": "production-promotion",
+                    "trail_name": "promote-all-31",
                     "artifact_status": "COMPLIANT"
                   }
                 },
                 {
                   "type": "rule_satisfied",
                   "context": {
-                    "flow_name": "production-promotion",
-                    "trail_name": "promote-all-31",
+                    "flow_name": "snyk-aws-prod-per-artifact",
+                    "trail_name": "custom-start-points-8e965dda26af2d2e68032c25d68e792c85e0c7bd9814862de231bc4c6e935b81",
+                    "artifact_status": "COMPLIANT"
+                  }
+                },
+                {
+                  "type": "rule_not_applicable",
+                  "context": {
+                    "flow_name": "snyk-aws-beta-per-artifact",
+                    "trail_name": "custom-start-points-8e965dda26af2d2e68032c25d68e792c85e0c7bd9814862de231bc4c6e935b81",
                     "artifact_status": "COMPLIANT"
                   }
                 }
@@ -4906,37 +6610,6 @@ kosli get snapshot aws-prod --output=json
           "flow_reasons_for_non_compliance": []
         },
         {
-          "flow_name": "snyk-aws-beta-per-artifact",
-          "trail_name": "custom-start-points-8e965dda26af2d2e68032c25d68e792c85e0c7bd9814862de231bc4c6e935b81",
-          "template_reference_name": "custom-start-points",
-          "git_commit": "35a09b2d283bafd6bbc12c29eba3306d5b36a5f7",
-          "commit_url": "https://github.com/cyber-dojo/snyk-scanning/commit/35a09b2d283bafd6bbc12c29eba3306d5b36a5f7",
-          "git_commit_info": {
-            "sha1": "35a09b2d283bafd6bbc12c29eba3306d5b36a5f7",
-            "message": "Add emoji prefixes to workflow names\n\n  Match the visual convention already used in the kosli-demo/stochastic-committer\n  repo, where the Actions sidebar distinguishes workflow roles at a glance.\n\n  The two aws-* files are the top-level entry points, triggered by dispatch and\n  schedule, so they get the play emoji. The three reusable workflow_call\n  sub-workflows get the package emoji to mark them as callable building blocks.",
-            "author": "JonJagger <jon@kosli.com>",
-            "branch": "main",
-            "timestamp": 1783850974.0,
-            "url": "https://github.com/cyber-dojo/snyk-scanning/commit/35a09b2d283bafd6bbc12c29eba3306d5b36a5f7"
-          },
-          "html_url": "https://app.kosli.com/cyber-dojo/flows/snyk-aws-beta-per-artifact/artifacts/8e965dda26af2d2e68032c25d68e792c85e0c7bd9814862de231bc4c6e935b81?artifact_id=ca358cf6-f605-4ae6-8d93-1296ece8",
-          "flow_html_url": "https://app.kosli.com/cyber-dojo/flows/snyk-aws-beta-per-artifact",
-          "deployment_diff": {
-            "diff_url": "https://github.com/cyber-dojo/snyk-scanning/compare/c17bb3ed8862de03c1a491dfe790fd8734fc7071...35a09b2d283bafd6bbc12c29eba3306d5b36a5f7",
-            "previous_git_commit": "c17bb3ed8862de03c1a491dfe790fd8734fc7071",
-            "previous_fingerprint": "311da8e95c74716bf3953de67a6dc3fe514c88d805a08a55ab17c677d75cf797",
-            "previous_artifact_name": "244531986313.dkr.ecr.eu-central-1.amazonaws.com/custom-start-points:514f79a@sha256:311da8e95c74716bf3953de67a6dc3fe514c88d805a08a55ab17c677d75cf797",
-            "previous_artifact_compliance_state": "COMPLIANT",
-            "previous_running": false,
-            "previous_git_commit_url": "https://github.com/cyber-dojo/snyk-scanning/commit/c17bb3ed8862de03c1a491dfe790fd8734fc7071",
-            "previous_trail_name": "custom-start-points-311da8e95c74716bf3953de67a6dc3fe514c88d805a08a55ab17c677d75cf797",
-            "previous_template_reference_name": "custom-start-points"
-          },
-          "commit_lead_time": 1390270.0,
-          "artifact_compliance_in_flow": true,
-          "flow_reasons_for_non_compliance": []
-        },
-        {
           "flow_name": "production-promotion",
           "trail_name": "promote-all-31",
           "template_reference_name": "custom-start-points",
@@ -4964,6 +6637,68 @@ kosli get snapshot aws-prod --output=json
             "previous_template_reference_name": "custom-start-points"
           },
           "commit_lead_time": 98190.0,
+          "artifact_compliance_in_flow": true,
+          "flow_reasons_for_non_compliance": []
+        },
+        {
+          "flow_name": "snyk-aws-prod-per-artifact",
+          "trail_name": "custom-start-points-8e965dda26af2d2e68032c25d68e792c85e0c7bd9814862de231bc4c6e935b81",
+          "template_reference_name": "custom-start-points",
+          "git_commit": "35a09b2d283bafd6bbc12c29eba3306d5b36a5f7",
+          "commit_url": "https://github.com/cyber-dojo/snyk-scanning/commit/35a09b2d283bafd6bbc12c29eba3306d5b36a5f7",
+          "git_commit_info": {
+            "sha1": "35a09b2d283bafd6bbc12c29eba3306d5b36a5f7",
+            "message": "Add emoji prefixes to workflow names\n\n  Match the visual convention already used in the kosli-demo/stochastic-committer\n  repo, where the Actions sidebar distinguishes workflow roles at a glance.\n\n  The two aws-* files are the top-level entry points, triggered by dispatch and\n  schedule, so they get the play emoji. The three reusable workflow_call\n  sub-workflows get the package emoji to mark them as callable building blocks.",
+            "author": "JonJagger <jon@kosli.com>",
+            "branch": "main",
+            "timestamp": 1783850974.0,
+            "url": "https://github.com/cyber-dojo/snyk-scanning/commit/35a09b2d283bafd6bbc12c29eba3306d5b36a5f7"
+          },
+          "html_url": "https://app.kosli.com/cyber-dojo/flows/snyk-aws-prod-per-artifact/artifacts/8e965dda26af2d2e68032c25d68e792c85e0c7bd9814862de231bc4c6e935b81?artifact_id=385baa2d-73b5-443d-ac93-fbac4ae4",
+          "flow_html_url": "https://app.kosli.com/cyber-dojo/flows/snyk-aws-prod-per-artifact",
+          "deployment_diff": {
+            "diff_url": "https://github.com/cyber-dojo/snyk-scanning/compare/00c479764cb9eca038fdaaaef108672d0bb0ed26...35a09b2d283bafd6bbc12c29eba3306d5b36a5f7",
+            "previous_git_commit": "00c479764cb9eca038fdaaaef108672d0bb0ed26",
+            "previous_fingerprint": "b4448ca68a0926e4a7a800f5b101b63e9c2f38e1caaebb7e929d992763570928",
+            "previous_artifact_name": "244531986313.dkr.ecr.eu-central-1.amazonaws.com/custom-start-points:6b5c159@sha256:b4448ca68a0926e4a7a800f5b101b63e9c2f38e1caaebb7e929d992763570928",
+            "previous_artifact_compliance_state": "COMPLIANT",
+            "previous_running": false,
+            "previous_git_commit_url": "https://github.com/cyber-dojo/snyk-scanning/commit/00c479764cb9eca038fdaaaef108672d0bb0ed26",
+            "previous_trail_name": "custom-start-points-b4448ca68a0926e4a7a800f5b101b63e9c2f38e1caaebb7e929d992763570928",
+            "previous_template_reference_name": "custom-start-points"
+          },
+          "commit_lead_time": 1390270.0,
+          "artifact_compliance_in_flow": true,
+          "flow_reasons_for_non_compliance": []
+        },
+        {
+          "flow_name": "snyk-aws-beta-per-artifact",
+          "trail_name": "custom-start-points-8e965dda26af2d2e68032c25d68e792c85e0c7bd9814862de231bc4c6e935b81",
+          "template_reference_name": "custom-start-points",
+          "git_commit": "35a09b2d283bafd6bbc12c29eba3306d5b36a5f7",
+          "commit_url": "https://github.com/cyber-dojo/snyk-scanning/commit/35a09b2d283bafd6bbc12c29eba3306d5b36a5f7",
+          "git_commit_info": {
+            "sha1": "35a09b2d283bafd6bbc12c29eba3306d5b36a5f7",
+            "message": "Add emoji prefixes to workflow names\n\n  Match the visual convention already used in the kosli-demo/stochastic-committer\n  repo, where the Actions sidebar distinguishes workflow roles at a glance.\n\n  The two aws-* files are the top-level entry points, triggered by dispatch and\n  schedule, so they get the play emoji. The three reusable workflow_call\n  sub-workflows get the package emoji to mark them as callable building blocks.",
+            "author": "JonJagger <jon@kosli.com>",
+            "branch": "main",
+            "timestamp": 1783850974.0,
+            "url": "https://github.com/cyber-dojo/snyk-scanning/commit/35a09b2d283bafd6bbc12c29eba3306d5b36a5f7"
+          },
+          "html_url": "https://app.kosli.com/cyber-dojo/flows/snyk-aws-beta-per-artifact/artifacts/8e965dda26af2d2e68032c25d68e792c85e0c7bd9814862de231bc4c6e935b81?artifact_id=1024cb78-94dd-4b21-934f-40c22203",
+          "flow_html_url": "https://app.kosli.com/cyber-dojo/flows/snyk-aws-beta-per-artifact",
+          "deployment_diff": {
+            "diff_url": "https://github.com/cyber-dojo/snyk-scanning/compare/c17bb3ed8862de03c1a491dfe790fd8734fc7071...35a09b2d283bafd6bbc12c29eba3306d5b36a5f7",
+            "previous_git_commit": "c17bb3ed8862de03c1a491dfe790fd8734fc7071",
+            "previous_fingerprint": "311da8e95c74716bf3953de67a6dc3fe514c88d805a08a55ab17c677d75cf797",
+            "previous_artifact_name": "244531986313.dkr.ecr.eu-central-1.amazonaws.com/custom-start-points:514f79a@sha256:311da8e95c74716bf3953de67a6dc3fe514c88d805a08a55ab17c677d75cf797",
+            "previous_artifact_compliance_state": "COMPLIANT",
+            "previous_running": false,
+            "previous_git_commit_url": "https://github.com/cyber-dojo/snyk-scanning/commit/c17bb3ed8862de03c1a491dfe790fd8734fc7071",
+            "previous_trail_name": "custom-start-points-311da8e95c74716bf3953de67a6dc3fe514c88d805a08a55ab17c677d75cf797",
+            "previous_template_reference_name": "custom-start-points"
+          },
+          "commit_lead_time": 1390270.0,
           "artifact_compliance_in_flow": true,
           "flow_reasons_for_non_compliance": []
         }
@@ -5009,6 +6744,22 @@ kosli get snapshot aws-prod --output=json
                     "trail_name": "promotion-one-141",
                     "artifact_status": null
                   }
+                },
+                {
+                  "type": "rule_not_applicable",
+                  "context": {
+                    "flow_name": "snyk-aws-prod-per-artifact",
+                    "trail_name": "saver-680e9bb851165e8a6e3bc52c1be106286fa910b57c17d844ee052fd3e104e9b4",
+                    "artifact_status": null
+                  }
+                },
+                {
+                  "type": "rule_not_applicable",
+                  "context": {
+                    "flow_name": "snyk-aws-beta-per-artifact",
+                    "trail_name": "saver-680e9bb851165e8a6e3bc52c1be106286fa910b57c17d844ee052fd3e104e9b4",
+                    "artifact_status": null
+                  }
                 }
               ]
             },
@@ -5036,6 +6787,22 @@ kosli get snapshot aws-prod --output=json
                   "context": {
                     "flow_name": "production-promotion",
                     "trail_name": "promotion-one-141",
+                    "artifact_status": "COMPLIANT"
+                  }
+                },
+                {
+                  "type": "rule_not_applicable",
+                  "context": {
+                    "flow_name": "snyk-aws-prod-per-artifact",
+                    "trail_name": "saver-680e9bb851165e8a6e3bc52c1be106286fa910b57c17d844ee052fd3e104e9b4",
+                    "artifact_status": "COMPLIANT"
+                  }
+                },
+                {
+                  "type": "rule_not_applicable",
+                  "context": {
+                    "flow_name": "snyk-aws-beta-per-artifact",
+                    "trail_name": "saver-680e9bb851165e8a6e3bc52c1be106286fa910b57c17d844ee052fd3e104e9b4",
                     "artifact_status": "COMPLIANT"
                   }
                 }
@@ -5070,6 +6837,22 @@ kosli get snapshot aws-prod --output=json
                   "context": {
                     "flow_name": "production-promotion",
                     "trail_name": "promotion-one-141",
+                    "artifact_status": null
+                  }
+                },
+                {
+                  "type": "rule_not_applicable",
+                  "context": {
+                    "flow_name": "snyk-aws-prod-per-artifact",
+                    "trail_name": "saver-680e9bb851165e8a6e3bc52c1be106286fa910b57c17d844ee052fd3e104e9b4",
+                    "artifact_status": null
+                  }
+                },
+                {
+                  "type": "rule_not_applicable",
+                  "context": {
+                    "flow_name": "snyk-aws-beta-per-artifact",
+                    "trail_name": "saver-680e9bb851165e8a6e3bc52c1be106286fa910b57c17d844ee052fd3e104e9b4",
                     "artifact_status": null
                   }
                 }
@@ -5108,6 +6891,22 @@ kosli get snapshot aws-prod --output=json
                     "trail_name": "promotion-one-141",
                     "artifact_status": null
                   }
+                },
+                {
+                  "type": "rule_satisfied",
+                  "context": {
+                    "flow_name": "snyk-aws-prod-per-artifact",
+                    "trail_name": "saver-680e9bb851165e8a6e3bc52c1be106286fa910b57c17d844ee052fd3e104e9b4",
+                    "artifact_status": null
+                  }
+                },
+                {
+                  "type": "rule_satisfied",
+                  "context": {
+                    "flow_name": "snyk-aws-beta-per-artifact",
+                    "trail_name": "saver-680e9bb851165e8a6e3bc52c1be106286fa910b57c17d844ee052fd3e104e9b4",
+                    "artifact_status": null
+                  }
                 }
               ]
             },
@@ -5135,6 +6934,22 @@ kosli get snapshot aws-prod --output=json
                   "context": {
                     "flow_name": "production-promotion",
                     "trail_name": "promotion-one-141",
+                    "artifact_status": "COMPLIANT"
+                  }
+                },
+                {
+                  "type": "rule_not_applicable",
+                  "context": {
+                    "flow_name": "snyk-aws-prod-per-artifact",
+                    "trail_name": "saver-680e9bb851165e8a6e3bc52c1be106286fa910b57c17d844ee052fd3e104e9b4",
+                    "artifact_status": "COMPLIANT"
+                  }
+                },
+                {
+                  "type": "rule_not_applicable",
+                  "context": {
+                    "flow_name": "snyk-aws-beta-per-artifact",
+                    "trail_name": "saver-680e9bb851165e8a6e3bc52c1be106286fa910b57c17d844ee052fd3e104e9b4",
                     "artifact_status": "COMPLIANT"
                   }
                 }
@@ -5170,6 +6985,24 @@ kosli get snapshot aws-prod --output=json
                   "context": {
                     "flow_name": "production-promotion",
                     "trail_name": "promotion-one-141",
+                    "artifact_status": null,
+                    "for_control": "SDLC-CTRL-0002"
+                  }
+                },
+                {
+                  "type": "rule_not_applicable",
+                  "context": {
+                    "flow_name": "snyk-aws-prod-per-artifact",
+                    "trail_name": "saver-680e9bb851165e8a6e3bc52c1be106286fa910b57c17d844ee052fd3e104e9b4",
+                    "artifact_status": null,
+                    "for_control": "SDLC-CTRL-0002"
+                  }
+                },
+                {
+                  "type": "rule_not_applicable",
+                  "context": {
+                    "flow_name": "snyk-aws-beta-per-artifact",
+                    "trail_name": "saver-680e9bb851165e8a6e3bc52c1be106286fa910b57c17d844ee052fd3e104e9b4",
                     "artifact_status": null,
                     "for_control": "SDLC-CTRL-0002"
                   }
@@ -5209,6 +7042,22 @@ kosli get snapshot aws-prod --output=json
                     "trail_name": "promotion-one-141",
                     "artifact_status": null
                   }
+                },
+                {
+                  "type": "rule_not_applicable",
+                  "context": {
+                    "flow_name": "snyk-aws-prod-per-artifact",
+                    "trail_name": "saver-680e9bb851165e8a6e3bc52c1be106286fa910b57c17d844ee052fd3e104e9b4",
+                    "artifact_status": null
+                  }
+                },
+                {
+                  "type": "rule_not_applicable",
+                  "context": {
+                    "flow_name": "snyk-aws-beta-per-artifact",
+                    "trail_name": "saver-680e9bb851165e8a6e3bc52c1be106286fa910b57c17d844ee052fd3e104e9b4",
+                    "artifact_status": null
+                  }
                 }
               ]
             },
@@ -5238,6 +7087,22 @@ kosli get snapshot aws-prod --output=json
                     "trail_name": "promotion-one-141",
                     "artifact_status": "COMPLIANT"
                   }
+                },
+                {
+                  "type": "rule_not_applicable",
+                  "context": {
+                    "flow_name": "snyk-aws-prod-per-artifact",
+                    "trail_name": "saver-680e9bb851165e8a6e3bc52c1be106286fa910b57c17d844ee052fd3e104e9b4",
+                    "artifact_status": "COMPLIANT"
+                  }
+                },
+                {
+                  "type": "rule_not_applicable",
+                  "context": {
+                    "flow_name": "snyk-aws-beta-per-artifact",
+                    "trail_name": "saver-680e9bb851165e8a6e3bc52c1be106286fa910b57c17d844ee052fd3e104e9b4",
+                    "artifact_status": "COMPLIANT"
+                  }
                 }
               ]
             },
@@ -5254,8 +7119,8 @@ kosli get snapshot aws-prod --output=json
                   "for_control": "SDLC-CTRL-0022"
                 }
               },
-              "satisfied": null,
-              "ignored": true,
+              "satisfied": true,
+              "ignored": false,
               "resolutions": [
                 {
                   "type": "rule_not_applicable",
@@ -5271,6 +7136,24 @@ kosli get snapshot aws-prod --output=json
                   "context": {
                     "flow_name": "production-promotion",
                     "trail_name": "promotion-one-141",
+                    "artifact_status": null,
+                    "for_control": "SDLC-CTRL-0022"
+                  }
+                },
+                {
+                  "type": "rule_satisfied",
+                  "context": {
+                    "flow_name": "snyk-aws-prod-per-artifact",
+                    "trail_name": "saver-680e9bb851165e8a6e3bc52c1be106286fa910b57c17d844ee052fd3e104e9b4",
+                    "artifact_status": null,
+                    "for_control": "SDLC-CTRL-0022"
+                  }
+                },
+                {
+                  "type": "rule_not_applicable",
+                  "context": {
+                    "flow_name": "snyk-aws-beta-per-artifact",
+                    "trail_name": "saver-680e9bb851165e8a6e3bc52c1be106286fa910b57c17d844ee052fd3e104e9b4",
                     "artifact_status": null,
                     "for_control": "SDLC-CTRL-0022"
                   }
@@ -5310,6 +7193,22 @@ kosli get snapshot aws-prod --output=json
                     "trail_name": "promotion-one-141",
                     "artifact_status": null
                   }
+                },
+                {
+                  "type": "rule_not_applicable",
+                  "context": {
+                    "flow_name": "snyk-aws-prod-per-artifact",
+                    "trail_name": "saver-680e9bb851165e8a6e3bc52c1be106286fa910b57c17d844ee052fd3e104e9b4",
+                    "artifact_status": null
+                  }
+                },
+                {
+                  "type": "rule_not_applicable",
+                  "context": {
+                    "flow_name": "snyk-aws-beta-per-artifact",
+                    "trail_name": "saver-680e9bb851165e8a6e3bc52c1be106286fa910b57c17d844ee052fd3e104e9b4",
+                    "artifact_status": null
+                  }
                 }
               ]
             },
@@ -5337,6 +7236,22 @@ kosli get snapshot aws-prod --output=json
                   "context": {
                     "flow_name": "production-promotion",
                     "trail_name": "promotion-one-141",
+                    "artifact_status": "COMPLIANT"
+                  }
+                },
+                {
+                  "type": "rule_not_applicable",
+                  "context": {
+                    "flow_name": "snyk-aws-prod-per-artifact",
+                    "trail_name": "saver-680e9bb851165e8a6e3bc52c1be106286fa910b57c17d844ee052fd3e104e9b4",
+                    "artifact_status": "COMPLIANT"
+                  }
+                },
+                {
+                  "type": "rule_not_applicable",
+                  "context": {
+                    "flow_name": "snyk-aws-beta-per-artifact",
+                    "trail_name": "saver-680e9bb851165e8a6e3bc52c1be106286fa910b57c17d844ee052fd3e104e9b4",
                     "artifact_status": "COMPLIANT"
                   }
                 }
@@ -5371,6 +7286,22 @@ kosli get snapshot aws-prod --output=json
                   "context": {
                     "flow_name": "production-promotion",
                     "trail_name": "promotion-one-141",
+                    "artifact_status": null
+                  }
+                },
+                {
+                  "type": "rule_not_applicable",
+                  "context": {
+                    "flow_name": "snyk-aws-prod-per-artifact",
+                    "trail_name": "saver-680e9bb851165e8a6e3bc52c1be106286fa910b57c17d844ee052fd3e104e9b4",
+                    "artifact_status": null
+                  }
+                },
+                {
+                  "type": "rule_not_applicable",
+                  "context": {
+                    "flow_name": "snyk-aws-beta-per-artifact",
+                    "trail_name": "saver-680e9bb851165e8a6e3bc52c1be106286fa910b57c17d844ee052fd3e104e9b4",
                     "artifact_status": null
                   }
                 }
@@ -5409,6 +7340,22 @@ kosli get snapshot aws-prod --output=json
                     "trail_name": "promotion-one-141",
                     "artifact_status": null
                   }
+                },
+                {
+                  "type": "rule_not_applicable",
+                  "context": {
+                    "flow_name": "snyk-aws-prod-per-artifact",
+                    "trail_name": "saver-680e9bb851165e8a6e3bc52c1be106286fa910b57c17d844ee052fd3e104e9b4",
+                    "artifact_status": null
+                  }
+                },
+                {
+                  "type": "rule_not_applicable",
+                  "context": {
+                    "flow_name": "snyk-aws-beta-per-artifact",
+                    "trail_name": "saver-680e9bb851165e8a6e3bc52c1be106286fa910b57c17d844ee052fd3e104e9b4",
+                    "artifact_status": null
+                  }
                 }
               ]
             },
@@ -5442,6 +7389,22 @@ kosli get snapshot aws-prod --output=json
                   "context": {
                     "flow_name": "production-promotion",
                     "trail_name": "promotion-one-141",
+                    "artifact_status": "COMPLIANT"
+                  }
+                },
+                {
+                  "type": "rule_satisfied",
+                  "context": {
+                    "flow_name": "snyk-aws-prod-per-artifact",
+                    "trail_name": "saver-680e9bb851165e8a6e3bc52c1be106286fa910b57c17d844ee052fd3e104e9b4",
+                    "artifact_status": "COMPLIANT"
+                  }
+                },
+                {
+                  "type": "rule_not_applicable",
+                  "context": {
+                    "flow_name": "snyk-aws-beta-per-artifact",
+                    "trail_name": "saver-680e9bb851165e8a6e3bc52c1be106286fa910b57c17d844ee052fd3e104e9b4",
                     "artifact_status": "COMPLIANT"
                   }
                 }
@@ -5541,585 +7504,72 @@ kosli get snapshot aws-prod --output=json
           "commit_lead_time": 93485.0,
           "artifact_compliance_in_flow": true,
           "flow_reasons_for_non_compliance": []
+        },
+        {
+          "flow_name": "snyk-aws-prod-per-artifact",
+          "trail_name": "saver-680e9bb851165e8a6e3bc52c1be106286fa910b57c17d844ee052fd3e104e9b4",
+          "template_reference_name": "saver",
+          "git_commit": "35a09b2d283bafd6bbc12c29eba3306d5b36a5f7",
+          "commit_url": "https://github.com/cyber-dojo/snyk-scanning/commit/35a09b2d283bafd6bbc12c29eba3306d5b36a5f7",
+          "git_commit_info": {
+            "sha1": "35a09b2d283bafd6bbc12c29eba3306d5b36a5f7",
+            "message": "Add emoji prefixes to workflow names\n\n  Match the visual convention already used in the kosli-demo/stochastic-committer\n  repo, where the Actions sidebar distinguishes workflow roles at a glance.\n\n  The two aws-* files are the top-level entry points, triggered by dispatch and\n  schedule, so they get the play emoji. The three reusable workflow_call\n  sub-workflows get the package emoji to mark them as callable building blocks.",
+            "author": "JonJagger <jon@kosli.com>",
+            "branch": "main",
+            "timestamp": 1783850974.0,
+            "url": "https://github.com/cyber-dojo/snyk-scanning/commit/35a09b2d283bafd6bbc12c29eba3306d5b36a5f7"
+          },
+          "html_url": "https://app.kosli.com/cyber-dojo/flows/snyk-aws-prod-per-artifact/artifacts/680e9bb851165e8a6e3bc52c1be106286fa910b57c17d844ee052fd3e104e9b4?artifact_id=ddf9ede9-71dc-43c0-ac96-8fd584b2",
+          "flow_html_url": "https://app.kosli.com/cyber-dojo/flows/snyk-aws-prod-per-artifact",
+          "deployment_diff": {
+            "diff_url": "https://github.com/cyber-dojo/snyk-scanning/compare/00c479764cb9eca038fdaaaef108672d0bb0ed26...35a09b2d283bafd6bbc12c29eba3306d5b36a5f7",
+            "previous_git_commit": "00c479764cb9eca038fdaaaef108672d0bb0ed26",
+            "previous_fingerprint": "f5909cc8dd53b2105953d1a72cd5d6181367d3588964aa01a04c056205a5d419",
+            "previous_artifact_name": "244531986313.dkr.ecr.eu-central-1.amazonaws.com/saver:8c84fac@sha256:f5909cc8dd53b2105953d1a72cd5d6181367d3588964aa01a04c056205a5d419",
+            "previous_artifact_compliance_state": "COMPLIANT",
+            "previous_running": false,
+            "previous_git_commit_url": "https://github.com/cyber-dojo/snyk-scanning/commit/00c479764cb9eca038fdaaaef108672d0bb0ed26",
+            "previous_trail_name": "saver-f5909cc8dd53b2105953d1a72cd5d6181367d3588964aa01a04c056205a5d419",
+            "previous_template_reference_name": "saver"
+          },
+          "commit_lead_time": 1385565.0,
+          "artifact_compliance_in_flow": true,
+          "flow_reasons_for_non_compliance": []
+        },
+        {
+          "flow_name": "snyk-aws-beta-per-artifact",
+          "trail_name": "saver-680e9bb851165e8a6e3bc52c1be106286fa910b57c17d844ee052fd3e104e9b4",
+          "template_reference_name": "saver",
+          "git_commit": "35a09b2d283bafd6bbc12c29eba3306d5b36a5f7",
+          "commit_url": "https://github.com/cyber-dojo/snyk-scanning/commit/35a09b2d283bafd6bbc12c29eba3306d5b36a5f7",
+          "git_commit_info": {
+            "sha1": "35a09b2d283bafd6bbc12c29eba3306d5b36a5f7",
+            "message": "Add emoji prefixes to workflow names\n\n  Match the visual convention already used in the kosli-demo/stochastic-committer\n  repo, where the Actions sidebar distinguishes workflow roles at a glance.\n\n  The two aws-* files are the top-level entry points, triggered by dispatch and\n  schedule, so they get the play emoji. The three reusable workflow_call\n  sub-workflows get the package emoji to mark them as callable building blocks.",
+            "author": "JonJagger <jon@kosli.com>",
+            "branch": "main",
+            "timestamp": 1783850974.0,
+            "url": "https://github.com/cyber-dojo/snyk-scanning/commit/35a09b2d283bafd6bbc12c29eba3306d5b36a5f7"
+          },
+          "html_url": "https://app.kosli.com/cyber-dojo/flows/snyk-aws-beta-per-artifact/artifacts/680e9bb851165e8a6e3bc52c1be106286fa910b57c17d844ee052fd3e104e9b4?artifact_id=c55f6071-1b01-403f-af19-98c5b776",
+          "flow_html_url": "https://app.kosli.com/cyber-dojo/flows/snyk-aws-beta-per-artifact",
+          "deployment_diff": {
+            "diff_url": "https://github.com/cyber-dojo/snyk-scanning/compare/35a09b2d283bafd6bbc12c29eba3306d5b36a5f7...35a09b2d283bafd6bbc12c29eba3306d5b36a5f7",
+            "previous_git_commit": "35a09b2d283bafd6bbc12c29eba3306d5b36a5f7",
+            "previous_fingerprint": "b0c07ba3f67f16c2a1b6f0096f1474df6600ed3556e0e82b78d24acabc9b2bab",
+            "previous_artifact_name": "244531986313.dkr.ecr.eu-central-1.amazonaws.com/saver:55561dc@sha256:b0c07ba3f67f16c2a1b6f0096f1474df6600ed3556e0e82b78d24acabc9b2bab",
+            "previous_artifact_compliance_state": "COMPLIANT",
+            "previous_running": false,
+            "previous_git_commit_url": "https://github.com/cyber-dojo/snyk-scanning/commit/35a09b2d283bafd6bbc12c29eba3306d5b36a5f7",
+            "previous_trail_name": "saver-b0c07ba3f67f16c2a1b6f0096f1474df6600ed3556e0e82b78d24acabc9b2bab",
+            "previous_template_reference_name": "saver"
+          },
+          "commit_lead_time": 1385565.0,
+          "artifact_compliance_in_flow": true,
+          "flow_reasons_for_non_compliance": []
         }
       ],
       "ecs_context": {
         "task_arn": "arn:aws:ecs:eu-central-1:274425519734:task/app/77b4502f86ca4337a17e8ddfe0e8177b",
-        "cluster_name": null,
-        "service_name": null
-      }
-    },
-    {
-      "name": "244531986313.dkr.ecr.eu-central-1.amazonaws.com/spooler:92c624e@sha256:a20359795934beb03d992ba5a8f8b95ca637e609284e5a84781bdcbb1b861975",
-      "compliant": true,
-      "deployments": [],
-      "policy_decisions": [
-        {
-          "policy_version": 3,
-          "status": "COMPLIANT",
-          "rule_evaluations": [
-            {
-              "rule": {
-                "type": "provenance",
-                "definition": {
-                  "required": false,
-                  "exceptions": []
-                }
-              },
-              "satisfied": null,
-              "ignored": true,
-              "resolutions": [
-                {
-                  "type": "rule_not_applicable",
-                  "context": {
-                    "flow_name": "spooler-ci",
-                    "trail_name": "92c624eabb024729fb2af6cdbe354db11ee3882f",
-                    "artifact_status": null
-                  }
-                },
-                {
-                  "type": "rule_not_applicable",
-                  "context": {
-                    "flow_name": "production-promotion",
-                    "trail_name": "promotion-one-140",
-                    "artifact_status": null
-                  }
-                }
-              ]
-            },
-            {
-              "rule": {
-                "type": "trail-compliance",
-                "definition": {
-                  "required": false,
-                  "exceptions": []
-                }
-              },
-              "satisfied": null,
-              "ignored": true,
-              "resolutions": [
-                {
-                  "type": "rule_not_applicable",
-                  "context": {
-                    "flow_name": "spooler-ci",
-                    "trail_name": "92c624eabb024729fb2af6cdbe354db11ee3882f",
-                    "artifact_status": "COMPLIANT"
-                  }
-                },
-                {
-                  "type": "rule_not_applicable",
-                  "context": {
-                    "flow_name": "production-promotion",
-                    "trail_name": "promotion-one-140",
-                    "artifact_status": "COMPLIANT"
-                  }
-                }
-              ]
-            },
-            {
-              "rule": {
-                "type": "attestation",
-                "definition": {
-                  "if": {
-                    "text": "flow.tags.kind == \"build\""
-                  },
-                  "name": "*",
-                  "type": "pull_request",
-                  "must_be_compliant": true,
-                  "for_control": null
-                }
-              },
-              "satisfied": null,
-              "ignored": true,
-              "resolutions": [
-                {
-                  "type": "rule_not_applicable",
-                  "context": {
-                    "flow_name": "spooler-ci",
-                    "trail_name": "92c624eabb024729fb2af6cdbe354db11ee3882f",
-                    "artifact_status": null
-                  }
-                },
-                {
-                  "type": "rule_not_applicable",
-                  "context": {
-                    "flow_name": "production-promotion",
-                    "trail_name": "promotion-one-140",
-                    "artifact_status": null
-                  }
-                }
-              ]
-            }
-          ],
-          "policy_name": "pull-request"
-        },
-        {
-          "policy_version": 3,
-          "status": "COMPLIANT",
-          "rule_evaluations": [
-            {
-              "rule": {
-                "type": "provenance",
-                "definition": {
-                  "required": true,
-                  "exceptions": []
-                }
-              },
-              "satisfied": true,
-              "ignored": false,
-              "resolutions": [
-                {
-                  "type": "rule_satisfied",
-                  "context": {
-                    "flow_name": "spooler-ci",
-                    "trail_name": "92c624eabb024729fb2af6cdbe354db11ee3882f",
-                    "artifact_status": null
-                  }
-                },
-                {
-                  "type": "rule_satisfied",
-                  "context": {
-                    "flow_name": "production-promotion",
-                    "trail_name": "promotion-one-140",
-                    "artifact_status": null
-                  }
-                }
-              ]
-            },
-            {
-              "rule": {
-                "type": "trail-compliance",
-                "definition": {
-                  "required": false,
-                  "exceptions": []
-                }
-              },
-              "satisfied": null,
-              "ignored": true,
-              "resolutions": [
-                {
-                  "type": "rule_not_applicable",
-                  "context": {
-                    "flow_name": "spooler-ci",
-                    "trail_name": "92c624eabb024729fb2af6cdbe354db11ee3882f",
-                    "artifact_status": "COMPLIANT"
-                  }
-                },
-                {
-                  "type": "rule_not_applicable",
-                  "context": {
-                    "flow_name": "production-promotion",
-                    "trail_name": "promotion-one-140",
-                    "artifact_status": "COMPLIANT"
-                  }
-                }
-              ]
-            },
-            {
-              "rule": {
-                "type": "attestation",
-                "definition": {
-                  "if": {
-                    "text": "flow.tags.kind == \"build\""
-                  },
-                  "name": "*",
-                  "type": "decision",
-                  "must_be_compliant": true,
-                  "for_control": "SDLC-CTRL-0002"
-                }
-              },
-              "satisfied": null,
-              "ignored": true,
-              "resolutions": [
-                {
-                  "type": "rule_not_applicable",
-                  "context": {
-                    "flow_name": "spooler-ci",
-                    "trail_name": "92c624eabb024729fb2af6cdbe354db11ee3882f",
-                    "artifact_status": null,
-                    "for_control": "SDLC-CTRL-0002"
-                  }
-                },
-                {
-                  "type": "rule_not_applicable",
-                  "context": {
-                    "flow_name": "production-promotion",
-                    "trail_name": "promotion-one-140",
-                    "artifact_status": null,
-                    "for_control": "SDLC-CTRL-0002"
-                  }
-                }
-              ]
-            }
-          ],
-          "policy_name": "provenance"
-        },
-        {
-          "policy_version": 4,
-          "status": "COMPLIANT",
-          "rule_evaluations": [
-            {
-              "rule": {
-                "type": "provenance",
-                "definition": {
-                  "required": false,
-                  "exceptions": []
-                }
-              },
-              "satisfied": null,
-              "ignored": true,
-              "resolutions": [
-                {
-                  "type": "rule_not_applicable",
-                  "context": {
-                    "flow_name": "spooler-ci",
-                    "trail_name": "92c624eabb024729fb2af6cdbe354db11ee3882f",
-                    "artifact_status": null
-                  }
-                },
-                {
-                  "type": "rule_not_applicable",
-                  "context": {
-                    "flow_name": "production-promotion",
-                    "trail_name": "promotion-one-140",
-                    "artifact_status": null
-                  }
-                }
-              ]
-            },
-            {
-              "rule": {
-                "type": "trail-compliance",
-                "definition": {
-                  "required": false,
-                  "exceptions": []
-                }
-              },
-              "satisfied": null,
-              "ignored": true,
-              "resolutions": [
-                {
-                  "type": "rule_not_applicable",
-                  "context": {
-                    "flow_name": "spooler-ci",
-                    "trail_name": "92c624eabb024729fb2af6cdbe354db11ee3882f",
-                    "artifact_status": "COMPLIANT"
-                  }
-                },
-                {
-                  "type": "rule_not_applicable",
-                  "context": {
-                    "flow_name": "production-promotion",
-                    "trail_name": "promotion-one-140",
-                    "artifact_status": "COMPLIANT"
-                  }
-                }
-              ]
-            },
-            {
-              "rule": {
-                "type": "attestation",
-                "definition": {
-                  "if": {
-                    "text": "flow.name == \"snyk-aws-prod-per-artifact\""
-                  },
-                  "name": "snyk-container-scan",
-                  "type": "decision",
-                  "must_be_compliant": true,
-                  "for_control": "SDLC-CTRL-0022"
-                }
-              },
-              "satisfied": null,
-              "ignored": true,
-              "resolutions": [
-                {
-                  "type": "rule_not_applicable",
-                  "context": {
-                    "flow_name": "spooler-ci",
-                    "trail_name": "92c624eabb024729fb2af6cdbe354db11ee3882f",
-                    "artifact_status": null,
-                    "for_control": "SDLC-CTRL-0022"
-                  }
-                },
-                {
-                  "type": "rule_not_applicable",
-                  "context": {
-                    "flow_name": "production-promotion",
-                    "trail_name": "promotion-one-140",
-                    "artifact_status": null,
-                    "for_control": "SDLC-CTRL-0022"
-                  }
-                }
-              ]
-            }
-          ],
-          "policy_name": "snyk-scan-aws-prod"
-        },
-        {
-          "policy_version": 2,
-          "status": "COMPLIANT",
-          "rule_evaluations": [
-            {
-              "rule": {
-                "type": "provenance",
-                "definition": {
-                  "required": false,
-                  "exceptions": []
-                }
-              },
-              "satisfied": null,
-              "ignored": true,
-              "resolutions": [
-                {
-                  "type": "rule_not_applicable",
-                  "context": {
-                    "flow_name": "spooler-ci",
-                    "trail_name": "92c624eabb024729fb2af6cdbe354db11ee3882f",
-                    "artifact_status": null
-                  }
-                },
-                {
-                  "type": "rule_not_applicable",
-                  "context": {
-                    "flow_name": "production-promotion",
-                    "trail_name": "promotion-one-140",
-                    "artifact_status": null
-                  }
-                }
-              ]
-            },
-            {
-              "rule": {
-                "type": "trail-compliance",
-                "definition": {
-                  "required": false,
-                  "exceptions": []
-                }
-              },
-              "satisfied": null,
-              "ignored": true,
-              "resolutions": [
-                {
-                  "type": "rule_not_applicable",
-                  "context": {
-                    "flow_name": "spooler-ci",
-                    "trail_name": "92c624eabb024729fb2af6cdbe354db11ee3882f",
-                    "artifact_status": "COMPLIANT"
-                  }
-                },
-                {
-                  "type": "rule_not_applicable",
-                  "context": {
-                    "flow_name": "production-promotion",
-                    "trail_name": "promotion-one-140",
-                    "artifact_status": "COMPLIANT"
-                  }
-                }
-              ]
-            },
-            {
-              "rule": {
-                "type": "attestation",
-                "definition": {
-                  "if": {
-                    "text": "flow.name == \"production-promotion\""
-                  },
-                  "name": "snyk-scan",
-                  "type": "decision",
-                  "must_be_compliant": true,
-                  "for_control": null
-                }
-              },
-              "satisfied": true,
-              "ignored": false,
-              "resolutions": [
-                {
-                  "type": "rule_not_applicable",
-                  "context": {
-                    "flow_name": "spooler-ci",
-                    "trail_name": "92c624eabb024729fb2af6cdbe354db11ee3882f",
-                    "artifact_status": null
-                  }
-                },
-                {
-                  "type": "rule_satisfied",
-                  "context": {
-                    "flow_name": "production-promotion",
-                    "trail_name": "promotion-one-140",
-                    "artifact_status": null
-                  }
-                }
-              ]
-            }
-          ],
-          "policy_name": "production-promotion"
-        },
-        {
-          "policy_version": 2,
-          "status": "COMPLIANT",
-          "rule_evaluations": [
-            {
-              "rule": {
-                "type": "provenance",
-                "definition": {
-                  "required": false,
-                  "exceptions": []
-                }
-              },
-              "satisfied": null,
-              "ignored": true,
-              "resolutions": [
-                {
-                  "type": "rule_not_applicable",
-                  "context": {
-                    "flow_name": "spooler-ci",
-                    "trail_name": "92c624eabb024729fb2af6cdbe354db11ee3882f",
-                    "artifact_status": null
-                  }
-                },
-                {
-                  "type": "rule_not_applicable",
-                  "context": {
-                    "flow_name": "production-promotion",
-                    "trail_name": "promotion-one-140",
-                    "artifact_status": null
-                  }
-                }
-              ]
-            },
-            {
-              "rule": {
-                "type": "trail-compliance",
-                "definition": {
-                  "required": true,
-                  "exceptions": [
-                    {
-                      "if": {
-                        "text": "exists(flow.tags.env) and flow.tags.env != \"aws-prod\""
-                      }
-                    }
-                  ]
-                }
-              },
-              "satisfied": true,
-              "ignored": false,
-              "resolutions": [
-                {
-                  "type": "rule_not_applicable",
-                  "context": {
-                    "flow_name": "spooler-ci",
-                    "trail_name": "92c624eabb024729fb2af6cdbe354db11ee3882f",
-                    "artifact_status": "COMPLIANT"
-                  }
-                },
-                {
-                  "type": "rule_satisfied",
-                  "context": {
-                    "flow_name": "production-promotion",
-                    "trail_name": "promotion-one-140",
-                    "artifact_status": "COMPLIANT"
-                  }
-                }
-              ]
-            }
-          ],
-          "policy_name": "trail-compliance-aws-prod"
-        }
-      ],
-      "reasons_for_incompliance": [],
-      "fingerprint": "a20359795934beb03d992ba5a8f8b95ca637e609284e5a84781bdcbb1b861975",
-      "creationTimestamp": [
-        1785224823
-      ],
-      "pods": null,
-      "annotation": {
-        "type": "unchanged",
-        "was": 1,
-        "now": 1
-      },
-      "flow_name": "spooler-ci",
-      "git_commit": "92c624eabb024729fb2af6cdbe354db11ee3882f",
-      "commit_url": "https://github.com/cyber-dojo/spooler/commit/92c624eabb024729fb2af6cdbe354db11ee3882f",
-      "html_url": "https://app.kosli.com/cyber-dojo/flows/spooler-ci/artifacts/a20359795934beb03d992ba5a8f8b95ca637e609284e5a84781bdcbb1b861975?artifact_id=42025c9c-2608-4ef0-b140-84548282",
-      "flow_html_url": "https://app.kosli.com/cyber-dojo/flows/spooler-ci",
-      "deployment_diff": {
-        "diff_url": "https://github.com/cyber-dojo/spooler/compare/b592c3af03e9530c1d224686a1745e4a12e1df00...92c624eabb024729fb2af6cdbe354db11ee3882f",
-        "previous_git_commit": "b592c3af03e9530c1d224686a1745e4a12e1df00",
-        "previous_fingerprint": "5cd2a591370f45e0156411a484182215a0c403992b9aef2cfaacbeadb3ac2b3e",
-        "previous_artifact_name": "244531986313.dkr.ecr.eu-central-1.amazonaws.com/spooler:b592c3a@sha256:5cd2a591370f45e0156411a484182215a0c403992b9aef2cfaacbeadb3ac2b3e",
-        "previous_artifact_compliance_state": "COMPLIANT",
-        "previous_running": false,
-        "previous_git_commit_url": "https://github.com/cyber-dojo/spooler/commit/b592c3af03e9530c1d224686a1745e4a12e1df00",
-        "previous_trail_name": "b592c3af03e9530c1d224686a1745e4a12e1df00",
-        "previous_template_reference_name": "spooler"
-      },
-      "commit_lead_time": 1217.0,
-      "flows": [
-        {
-          "flow_name": "spooler-ci",
-          "trail_name": "92c624eabb024729fb2af6cdbe354db11ee3882f",
-          "template_reference_name": "spooler",
-          "git_commit": "92c624eabb024729fb2af6cdbe354db11ee3882f",
-          "commit_url": "https://github.com/cyber-dojo/spooler/commit/92c624eabb024729fb2af6cdbe354db11ee3882f",
-          "git_commit_info": {
-            "sha1": "92c624eabb024729fb2af6cdbe354db11ee3882f",
-            "message": "Merge pull request #11 from cyber-dojo/run-ci-workflow-3\n\nRun ci workflow to check deployment",
-            "author": "Jon Jagger <jon@kosli.com>",
-            "branch": "",
-            "timestamp": 1785223606.0,
-            "url": "https://github.com/cyber-dojo/spooler/commit/92c624eabb024729fb2af6cdbe354db11ee3882f"
-          },
-          "html_url": "https://app.kosli.com/cyber-dojo/flows/spooler-ci/artifacts/a20359795934beb03d992ba5a8f8b95ca637e609284e5a84781bdcbb1b861975?artifact_id=42025c9c-2608-4ef0-b140-84548282",
-          "flow_html_url": "https://app.kosli.com/cyber-dojo/flows/spooler-ci",
-          "deployment_diff": {
-            "diff_url": "https://github.com/cyber-dojo/spooler/compare/b592c3af03e9530c1d224686a1745e4a12e1df00...92c624eabb024729fb2af6cdbe354db11ee3882f",
-            "previous_git_commit": "b592c3af03e9530c1d224686a1745e4a12e1df00",
-            "previous_fingerprint": "5cd2a591370f45e0156411a484182215a0c403992b9aef2cfaacbeadb3ac2b3e",
-            "previous_artifact_name": "244531986313.dkr.ecr.eu-central-1.amazonaws.com/spooler:b592c3a@sha256:5cd2a591370f45e0156411a484182215a0c403992b9aef2cfaacbeadb3ac2b3e",
-            "previous_artifact_compliance_state": "COMPLIANT",
-            "previous_running": false,
-            "previous_git_commit_url": "https://github.com/cyber-dojo/spooler/commit/b592c3af03e9530c1d224686a1745e4a12e1df00",
-            "previous_trail_name": "b592c3af03e9530c1d224686a1745e4a12e1df00",
-            "previous_template_reference_name": "spooler"
-          },
-          "commit_lead_time": 1217.0,
-          "artifact_compliance_in_flow": true,
-          "flow_reasons_for_non_compliance": []
-        },
-        {
-          "flow_name": "production-promotion",
-          "trail_name": "promotion-one-140",
-          "template_reference_name": "spooler",
-          "git_commit": "81c216a55b2cb1787645e699ceaceca868cad253",
-          "commit_url": "https://github.com/cyber-dojo/aws-prod-co-promotion/commit/81c216a55b2cb1787645e699ceaceca868cad253",
-          "git_commit_info": {
-            "sha1": "81c216a55b2cb1787645e699ceaceca868cad253",
-            "message": "Add spooler service name to promote_one.yml",
-            "author": "JonJagger <jon@kosli.com>",
-            "branch": "main",
-            "timestamp": 1785143054.0,
-            "url": "https://github.com/cyber-dojo/aws-prod-co-promotion/commit/81c216a55b2cb1787645e699ceaceca868cad253"
-          },
-          "html_url": "https://app.kosli.com/cyber-dojo/flows/production-promotion/artifacts/a20359795934beb03d992ba5a8f8b95ca637e609284e5a84781bdcbb1b861975?artifact_id=fcfeda3a-8a41-444b-af27-4d97a807",
-          "flow_html_url": "https://app.kosli.com/cyber-dojo/flows/production-promotion",
-          "deployment_diff": {
-            "diff_url": "https://github.com/cyber-dojo/aws-prod-co-promotion/compare/81c216a55b2cb1787645e699ceaceca868cad253...81c216a55b2cb1787645e699ceaceca868cad253",
-            "previous_git_commit": "81c216a55b2cb1787645e699ceaceca868cad253",
-            "previous_fingerprint": "5cd2a591370f45e0156411a484182215a0c403992b9aef2cfaacbeadb3ac2b3e",
-            "previous_artifact_name": "244531986313.dkr.ecr.eu-central-1.amazonaws.com/spooler:b592c3a@sha256:5cd2a591370f45e0156411a484182215a0c403992b9aef2cfaacbeadb3ac2b3e",
-            "previous_artifact_compliance_state": "COMPLIANT",
-            "previous_running": false,
-            "previous_git_commit_url": "https://github.com/cyber-dojo/aws-prod-co-promotion/commit/81c216a55b2cb1787645e699ceaceca868cad253",
-            "previous_trail_name": "promotion-one-139",
-            "previous_template_reference_name": "spooler"
-          },
-          "commit_lead_time": 81769.0,
-          "artifact_compliance_in_flow": true,
-          "flow_reasons_for_non_compliance": []
-        }
-      ],
-      "ecs_context": {
-        "task_arn": "arn:aws:ecs:eu-central-1:274425519734:task/app/ca0246c31f1e4a9d9819a606b9cd6715",
         "cluster_name": null,
         "service_name": null
       }
@@ -6936,7 +8386,7 @@ kosli get snapshot aws-prod --output=json
             "timestamp": 1783850974.0,
             "url": "https://github.com/cyber-dojo/snyk-scanning/commit/35a09b2d283bafd6bbc12c29eba3306d5b36a5f7"
           },
-          "html_url": "https://app.kosli.com/cyber-dojo/flows/snyk-aws-prod-per-artifact/artifacts/8c604f9f203a21ad88bd4c9610ef323242874410f0ce796ccdc884d101117b67?artifact_id=eb363a63-17e1-4ec2-8c13-7cd210d5",
+          "html_url": "https://app.kosli.com/cyber-dojo/flows/snyk-aws-prod-per-artifact/artifacts/8c604f9f203a21ad88bd4c9610ef323242874410f0ce796ccdc884d101117b67?artifact_id=cd00f766-4f8b-4bb4-a097-657eaf90",
           "flow_html_url": "https://app.kosli.com/cyber-dojo/flows/snyk-aws-prod-per-artifact",
           "deployment_diff": {
             "diff_url": "https://github.com/cyber-dojo/snyk-scanning/compare/00c479764cb9eca038fdaaaef108672d0bb0ed26...35a09b2d283bafd6bbc12c29eba3306d5b36a5f7",
@@ -6967,7 +8417,7 @@ kosli get snapshot aws-prod --output=json
             "timestamp": 1783850974.0,
             "url": "https://github.com/cyber-dojo/snyk-scanning/commit/35a09b2d283bafd6bbc12c29eba3306d5b36a5f7"
           },
-          "html_url": "https://app.kosli.com/cyber-dojo/flows/snyk-aws-beta-per-artifact/artifacts/8c604f9f203a21ad88bd4c9610ef323242874410f0ce796ccdc884d101117b67?artifact_id=e2c38ae9-2d66-41b8-a06f-14c1b5c3",
+          "html_url": "https://app.kosli.com/cyber-dojo/flows/snyk-aws-beta-per-artifact/artifacts/8c604f9f203a21ad88bd4c9610ef323242874410f0ce796ccdc884d101117b67?artifact_id=d615c9d4-25ad-47f2-989c-5a89db32",
           "flow_html_url": "https://app.kosli.com/cyber-dojo/flows/snyk-aws-beta-per-artifact",
           "deployment_diff": {
             "diff_url": "https://github.com/cyber-dojo/snyk-scanning/compare/35a09b2d283bafd6bbc12c29eba3306d5b36a5f7...35a09b2d283bafd6bbc12c29eba3306d5b36a5f7",
@@ -7801,7 +9251,7 @@ kosli get snapshot aws-prod --output=json
             "timestamp": 1783850974.0,
             "url": "https://github.com/cyber-dojo/snyk-scanning/commit/35a09b2d283bafd6bbc12c29eba3306d5b36a5f7"
           },
-          "html_url": "https://app.kosli.com/cyber-dojo/flows/snyk-aws-prod-per-artifact/artifacts/aaf68b01cfe75f9012155d59cc7421dac140457ea7f5eb1e508e12b7f1e58aa6?artifact_id=fb202b8b-8f7b-4759-b011-db542952",
+          "html_url": "https://app.kosli.com/cyber-dojo/flows/snyk-aws-prod-per-artifact/artifacts/aaf68b01cfe75f9012155d59cc7421dac140457ea7f5eb1e508e12b7f1e58aa6?artifact_id=867a63ce-d8a5-4a06-85c7-fcccdd49",
           "flow_html_url": "https://app.kosli.com/cyber-dojo/flows/snyk-aws-prod-per-artifact",
           "deployment_diff": {
             "diff_url": "https://github.com/cyber-dojo/snyk-scanning/compare/7172cc22125f480a9f12127edb481a4d84aabea3...35a09b2d283bafd6bbc12c29eba3306d5b36a5f7",
@@ -7832,7 +9282,7 @@ kosli get snapshot aws-prod --output=json
             "timestamp": 1783850974.0,
             "url": "https://github.com/cyber-dojo/snyk-scanning/commit/35a09b2d283bafd6bbc12c29eba3306d5b36a5f7"
           },
-          "html_url": "https://app.kosli.com/cyber-dojo/flows/snyk-aws-beta-per-artifact/artifacts/aaf68b01cfe75f9012155d59cc7421dac140457ea7f5eb1e508e12b7f1e58aa6?artifact_id=1a969b49-ddc3-4eda-becf-1fb6c837",
+          "html_url": "https://app.kosli.com/cyber-dojo/flows/snyk-aws-beta-per-artifact/artifacts/aaf68b01cfe75f9012155d59cc7421dac140457ea7f5eb1e508e12b7f1e58aa6?artifact_id=acb0214b-3bc9-4b83-8971-0751b1fb",
           "flow_html_url": "https://app.kosli.com/cyber-dojo/flows/snyk-aws-beta-per-artifact",
           "deployment_diff": {
             "diff_url": "https://github.com/cyber-dojo/snyk-scanning/compare/a517304f4e9013e2e9ea67e90c7342f7e56653f0...35a09b2d283bafd6bbc12c29eba3306d5b36a5f7",
@@ -7857,7 +9307,7 @@ kosli get snapshot aws-prod --output=json
       }
     },
     {
-      "name": "244531986313.dkr.ecr.eu-central-1.amazonaws.com/web:aaf06ae@sha256:30658abf51aa2b17e4edfa8636cc14aa9725432c2665ed3fcb2ee99ecae03889",
+      "name": "244531986313.dkr.ecr.eu-central-1.amazonaws.com/spooler:e4d9d08@sha256:2d13ace2ba9449bcabeaef32f8cdc9255eff976ddf7a4ce5bd70e46bac11b204",
       "compliant": true,
       "deployments": [],
       "policy_decisions": [
@@ -7879,8 +9329,8 @@ kosli get snapshot aws-prod --output=json
                 {
                   "type": "rule_not_applicable",
                   "context": {
-                    "flow_name": "web-ci",
-                    "trail_name": "aaf06aec0e096d2de9c58152d1ee8d75c8f2a31f",
+                    "flow_name": "spooler-ci",
+                    "trail_name": "e4d9d0868e299522b207696e19c07966a09bf08a",
                     "artifact_status": null
                   }
                 },
@@ -7888,7 +9338,7 @@ kosli get snapshot aws-prod --output=json
                   "type": "rule_not_applicable",
                   "context": {
                     "flow_name": "production-promotion",
-                    "trail_name": "promotion-one-142",
+                    "trail_name": "promotion-one-144",
                     "artifact_status": null
                   }
                 }
@@ -7908,8 +9358,8 @@ kosli get snapshot aws-prod --output=json
                 {
                   "type": "rule_not_applicable",
                   "context": {
-                    "flow_name": "web-ci",
-                    "trail_name": "aaf06aec0e096d2de9c58152d1ee8d75c8f2a31f",
+                    "flow_name": "spooler-ci",
+                    "trail_name": "e4d9d0868e299522b207696e19c07966a09bf08a",
                     "artifact_status": "COMPLIANT"
                   }
                 },
@@ -7917,7 +9367,7 @@ kosli get snapshot aws-prod --output=json
                   "type": "rule_not_applicable",
                   "context": {
                     "flow_name": "production-promotion",
-                    "trail_name": "promotion-one-142",
+                    "trail_name": "promotion-one-144",
                     "artifact_status": "COMPLIANT"
                   }
                 }
@@ -7936,14 +9386,14 @@ kosli get snapshot aws-prod --output=json
                   "for_control": null
                 }
               },
-              "satisfied": true,
-              "ignored": false,
+              "satisfied": null,
+              "ignored": true,
               "resolutions": [
                 {
-                  "type": "rule_satisfied",
+                  "type": "rule_not_applicable",
                   "context": {
-                    "flow_name": "web-ci",
-                    "trail_name": "aaf06aec0e096d2de9c58152d1ee8d75c8f2a31f",
+                    "flow_name": "spooler-ci",
+                    "trail_name": "e4d9d0868e299522b207696e19c07966a09bf08a",
                     "artifact_status": null
                   }
                 },
@@ -7951,7 +9401,7 @@ kosli get snapshot aws-prod --output=json
                   "type": "rule_not_applicable",
                   "context": {
                     "flow_name": "production-promotion",
-                    "trail_name": "promotion-one-142",
+                    "trail_name": "promotion-one-144",
                     "artifact_status": null
                   }
                 }
@@ -7978,8 +9428,8 @@ kosli get snapshot aws-prod --output=json
                 {
                   "type": "rule_satisfied",
                   "context": {
-                    "flow_name": "web-ci",
-                    "trail_name": "aaf06aec0e096d2de9c58152d1ee8d75c8f2a31f",
+                    "flow_name": "spooler-ci",
+                    "trail_name": "e4d9d0868e299522b207696e19c07966a09bf08a",
                     "artifact_status": null
                   }
                 },
@@ -7987,7 +9437,7 @@ kosli get snapshot aws-prod --output=json
                   "type": "rule_satisfied",
                   "context": {
                     "flow_name": "production-promotion",
-                    "trail_name": "promotion-one-142",
+                    "trail_name": "promotion-one-144",
                     "artifact_status": null
                   }
                 }
@@ -8007,8 +9457,8 @@ kosli get snapshot aws-prod --output=json
                 {
                   "type": "rule_not_applicable",
                   "context": {
-                    "flow_name": "web-ci",
-                    "trail_name": "aaf06aec0e096d2de9c58152d1ee8d75c8f2a31f",
+                    "flow_name": "spooler-ci",
+                    "trail_name": "e4d9d0868e299522b207696e19c07966a09bf08a",
                     "artifact_status": "COMPLIANT"
                   }
                 },
@@ -8016,7 +9466,7 @@ kosli get snapshot aws-prod --output=json
                   "type": "rule_not_applicable",
                   "context": {
                     "flow_name": "production-promotion",
-                    "trail_name": "promotion-one-142",
+                    "trail_name": "promotion-one-144",
                     "artifact_status": "COMPLIANT"
                   }
                 }
@@ -8035,14 +9485,14 @@ kosli get snapshot aws-prod --output=json
                   "for_control": "SDLC-CTRL-0002"
                 }
               },
-              "satisfied": true,
-              "ignored": false,
+              "satisfied": null,
+              "ignored": true,
               "resolutions": [
                 {
-                  "type": "rule_satisfied",
+                  "type": "rule_not_applicable",
                   "context": {
-                    "flow_name": "web-ci",
-                    "trail_name": "aaf06aec0e096d2de9c58152d1ee8d75c8f2a31f",
+                    "flow_name": "spooler-ci",
+                    "trail_name": "e4d9d0868e299522b207696e19c07966a09bf08a",
                     "artifact_status": null,
                     "for_control": "SDLC-CTRL-0002"
                   }
@@ -8051,7 +9501,7 @@ kosli get snapshot aws-prod --output=json
                   "type": "rule_not_applicable",
                   "context": {
                     "flow_name": "production-promotion",
-                    "trail_name": "promotion-one-142",
+                    "trail_name": "promotion-one-144",
                     "artifact_status": null,
                     "for_control": "SDLC-CTRL-0002"
                   }
@@ -8079,8 +9529,8 @@ kosli get snapshot aws-prod --output=json
                 {
                   "type": "rule_not_applicable",
                   "context": {
-                    "flow_name": "web-ci",
-                    "trail_name": "aaf06aec0e096d2de9c58152d1ee8d75c8f2a31f",
+                    "flow_name": "spooler-ci",
+                    "trail_name": "e4d9d0868e299522b207696e19c07966a09bf08a",
                     "artifact_status": null
                   }
                 },
@@ -8088,7 +9538,7 @@ kosli get snapshot aws-prod --output=json
                   "type": "rule_not_applicable",
                   "context": {
                     "flow_name": "production-promotion",
-                    "trail_name": "promotion-one-142",
+                    "trail_name": "promotion-one-144",
                     "artifact_status": null
                   }
                 }
@@ -8108,8 +9558,8 @@ kosli get snapshot aws-prod --output=json
                 {
                   "type": "rule_not_applicable",
                   "context": {
-                    "flow_name": "web-ci",
-                    "trail_name": "aaf06aec0e096d2de9c58152d1ee8d75c8f2a31f",
+                    "flow_name": "spooler-ci",
+                    "trail_name": "e4d9d0868e299522b207696e19c07966a09bf08a",
                     "artifact_status": "COMPLIANT"
                   }
                 },
@@ -8117,7 +9567,7 @@ kosli get snapshot aws-prod --output=json
                   "type": "rule_not_applicable",
                   "context": {
                     "flow_name": "production-promotion",
-                    "trail_name": "promotion-one-142",
+                    "trail_name": "promotion-one-144",
                     "artifact_status": "COMPLIANT"
                   }
                 }
@@ -8142,8 +9592,8 @@ kosli get snapshot aws-prod --output=json
                 {
                   "type": "rule_not_applicable",
                   "context": {
-                    "flow_name": "web-ci",
-                    "trail_name": "aaf06aec0e096d2de9c58152d1ee8d75c8f2a31f",
+                    "flow_name": "spooler-ci",
+                    "trail_name": "e4d9d0868e299522b207696e19c07966a09bf08a",
                     "artifact_status": null,
                     "for_control": "SDLC-CTRL-0022"
                   }
@@ -8152,7 +9602,7 @@ kosli get snapshot aws-prod --output=json
                   "type": "rule_not_applicable",
                   "context": {
                     "flow_name": "production-promotion",
-                    "trail_name": "promotion-one-142",
+                    "trail_name": "promotion-one-144",
                     "artifact_status": null,
                     "for_control": "SDLC-CTRL-0022"
                   }
@@ -8180,8 +9630,8 @@ kosli get snapshot aws-prod --output=json
                 {
                   "type": "rule_not_applicable",
                   "context": {
-                    "flow_name": "web-ci",
-                    "trail_name": "aaf06aec0e096d2de9c58152d1ee8d75c8f2a31f",
+                    "flow_name": "spooler-ci",
+                    "trail_name": "e4d9d0868e299522b207696e19c07966a09bf08a",
                     "artifact_status": null
                   }
                 },
@@ -8189,7 +9639,7 @@ kosli get snapshot aws-prod --output=json
                   "type": "rule_not_applicable",
                   "context": {
                     "flow_name": "production-promotion",
-                    "trail_name": "promotion-one-142",
+                    "trail_name": "promotion-one-144",
                     "artifact_status": null
                   }
                 }
@@ -8209,8 +9659,8 @@ kosli get snapshot aws-prod --output=json
                 {
                   "type": "rule_not_applicable",
                   "context": {
-                    "flow_name": "web-ci",
-                    "trail_name": "aaf06aec0e096d2de9c58152d1ee8d75c8f2a31f",
+                    "flow_name": "spooler-ci",
+                    "trail_name": "e4d9d0868e299522b207696e19c07966a09bf08a",
                     "artifact_status": "COMPLIANT"
                   }
                 },
@@ -8218,7 +9668,7 @@ kosli get snapshot aws-prod --output=json
                   "type": "rule_not_applicable",
                   "context": {
                     "flow_name": "production-promotion",
-                    "trail_name": "promotion-one-142",
+                    "trail_name": "promotion-one-144",
                     "artifact_status": "COMPLIANT"
                   }
                 }
@@ -8243,8 +9693,8 @@ kosli get snapshot aws-prod --output=json
                 {
                   "type": "rule_not_applicable",
                   "context": {
-                    "flow_name": "web-ci",
-                    "trail_name": "aaf06aec0e096d2de9c58152d1ee8d75c8f2a31f",
+                    "flow_name": "spooler-ci",
+                    "trail_name": "e4d9d0868e299522b207696e19c07966a09bf08a",
                     "artifact_status": null
                   }
                 },
@@ -8252,7 +9702,7 @@ kosli get snapshot aws-prod --output=json
                   "type": "rule_satisfied",
                   "context": {
                     "flow_name": "production-promotion",
-                    "trail_name": "promotion-one-142",
+                    "trail_name": "promotion-one-144",
                     "artifact_status": null
                   }
                 }
@@ -8279,8 +9729,8 @@ kosli get snapshot aws-prod --output=json
                 {
                   "type": "rule_not_applicable",
                   "context": {
-                    "flow_name": "web-ci",
-                    "trail_name": "aaf06aec0e096d2de9c58152d1ee8d75c8f2a31f",
+                    "flow_name": "spooler-ci",
+                    "trail_name": "e4d9d0868e299522b207696e19c07966a09bf08a",
                     "artifact_status": null
                   }
                 },
@@ -8288,7 +9738,7 @@ kosli get snapshot aws-prod --output=json
                   "type": "rule_not_applicable",
                   "context": {
                     "flow_name": "production-promotion",
-                    "trail_name": "promotion-one-142",
+                    "trail_name": "promotion-one-144",
                     "artifact_status": null
                   }
                 }
@@ -8314,8 +9764,8 @@ kosli get snapshot aws-prod --output=json
                 {
                   "type": "rule_not_applicable",
                   "context": {
-                    "flow_name": "web-ci",
-                    "trail_name": "aaf06aec0e096d2de9c58152d1ee8d75c8f2a31f",
+                    "flow_name": "spooler-ci",
+                    "trail_name": "e4d9d0868e299522b207696e19c07966a09bf08a",
                     "artifact_status": "COMPLIANT"
                   }
                 },
@@ -8323,7 +9773,7 @@ kosli get snapshot aws-prod --output=json
                   "type": "rule_satisfied",
                   "context": {
                     "flow_name": "production-promotion",
-                    "trail_name": "promotion-one-142",
+                    "trail_name": "promotion-one-144",
                     "artifact_status": "COMPLIANT"
                   }
                 }
@@ -8334,71 +9784,69 @@ kosli get snapshot aws-prod --output=json
         }
       ],
       "reasons_for_incompliance": [],
-      "fingerprint": "30658abf51aa2b17e4edfa8636cc14aa9725432c2665ed3fcb2ee99ecae03889",
+      "fingerprint": "2d13ace2ba9449bcabeaef32f8cdc9255eff976ddf7a4ce5bd70e46bac11b204",
       "creationTimestamp": [
-        1785240630,
-        1785240630,
-        1785240631
+        1785305285
       ],
       "pods": null,
       "annotation": {
         "type": "exited",
-        "was": 3,
+        "was": 1,
         "now": 0
       },
-      "flow_name": "web-ci",
-      "git_commit": "aaf06aec0e096d2de9c58152d1ee8d75c8f2a31f",
-      "commit_url": "https://github.com/cyber-dojo/web/commit/aaf06aec0e096d2de9c58152d1ee8d75c8f2a31f",
-      "html_url": "https://app.kosli.com/cyber-dojo/flows/web-ci/artifacts/30658abf51aa2b17e4edfa8636cc14aa9725432c2665ed3fcb2ee99ecae03889?artifact_id=494b49a5-f26f-4602-8fce-8903d99d",
-      "flow_html_url": "https://app.kosli.com/cyber-dojo/flows/web-ci",
+      "flow_name": "spooler-ci",
+      "git_commit": "e4d9d0868e299522b207696e19c07966a09bf08a",
+      "commit_url": "https://github.com/cyber-dojo/spooler/commit/e4d9d0868e299522b207696e19c07966a09bf08a",
+      "html_url": "https://app.kosli.com/cyber-dojo/flows/spooler-ci/artifacts/2d13ace2ba9449bcabeaef32f8cdc9255eff976ddf7a4ce5bd70e46bac11b204?artifact_id=d2a91db5-76a8-43df-988c-d57fda6c",
+      "flow_html_url": "https://app.kosli.com/cyber-dojo/flows/spooler-ci",
       "deployment_diff": {
-        "diff_url": "https://github.com/cyber-dojo/web/compare/3f0b9975f96b7f4e4aae0b4409cebda3209be164...aaf06aec0e096d2de9c58152d1ee8d75c8f2a31f",
-        "previous_git_commit": "3f0b9975f96b7f4e4aae0b4409cebda3209be164",
-        "previous_fingerprint": "0eaa303537220d95ba656b829c1d9c85e2865c986c4736962b85f4df5adb8972",
-        "previous_artifact_name": "244531986313.dkr.ecr.eu-central-1.amazonaws.com/web:3f0b997@sha256:0eaa303537220d95ba656b829c1d9c85e2865c986c4736962b85f4df5adb8972",
+        "diff_url": "https://github.com/cyber-dojo/spooler/compare/92c624eabb024729fb2af6cdbe354db11ee3882f...e4d9d0868e299522b207696e19c07966a09bf08a",
+        "previous_git_commit": "92c624eabb024729fb2af6cdbe354db11ee3882f",
+        "previous_fingerprint": "a20359795934beb03d992ba5a8f8b95ca637e609284e5a84781bdcbb1b861975",
+        "previous_artifact_name": "244531986313.dkr.ecr.eu-central-1.amazonaws.com/spooler:92c624e@sha256:a20359795934beb03d992ba5a8f8b95ca637e609284e5a84781bdcbb1b861975",
         "previous_artifact_compliance_state": "COMPLIANT",
         "previous_running": false,
-        "previous_git_commit_url": "https://github.com/cyber-dojo/web/commit/3f0b9975f96b7f4e4aae0b4409cebda3209be164",
-        "previous_trail_name": "3f0b9975f96b7f4e4aae0b4409cebda3209be164",
-        "previous_template_reference_name": "web"
+        "previous_git_commit_url": "https://github.com/cyber-dojo/spooler/commit/92c624eabb024729fb2af6cdbe354db11ee3882f",
+        "previous_trail_name": "92c624eabb024729fb2af6cdbe354db11ee3882f",
+        "previous_template_reference_name": "spooler"
       },
-      "commit_lead_time": 2124.0,
+      "commit_lead_time": 788.0,
       "flows": [
         {
-          "flow_name": "web-ci",
-          "trail_name": "aaf06aec0e096d2de9c58152d1ee8d75c8f2a31f",
-          "template_reference_name": "web",
-          "git_commit": "aaf06aec0e096d2de9c58152d1ee8d75c8f2a31f",
-          "commit_url": "https://github.com/cyber-dojo/web/commit/aaf06aec0e096d2de9c58152d1ee8d75c8f2a31f",
+          "flow_name": "spooler-ci",
+          "trail_name": "e4d9d0868e299522b207696e19c07966a09bf08a",
+          "template_reference_name": "spooler",
+          "git_commit": "e4d9d0868e299522b207696e19c07966a09bf08a",
+          "commit_url": "https://github.com/cyber-dojo/spooler/commit/e4d9d0868e299522b207696e19c07966a09bf08a",
           "git_commit_info": {
-            "sha1": "aaf06aec0e096d2de9c58152d1ee8d75c8f2a31f",
-            "message": "Spike async writes via spooler (#388)\n\n* Route web's nine event writes through the new spooler\n\n  Spike of ADR step B1 (docs/adr-async-writes-via-spooler.md): make web's\n  writes to saver asynchronous by inserting the spooler as a durable,\n  ordered store-and-forward buffer in front of saver. The traffic-light is\n  a runner fact and must not be gated on a saver git commit, so the write\n  path moves off the browser's critical path.\n\n  web now POSTs the nine event writes (kata_file_create .. kata_checked_out)\n  to the spooler, which acks immediately and drains to saver asynchronously\n  in tab_seq order. Reads and non-event writes (kata_create, forks,\n  kata_option_set, group ops, diff) stay direct web->saver.\n\n  - SpoolerService: a new write client copying the SaverService construction\n    pattern, targeting CYBER_DOJO_SPOOLER_HOSTNAME/PORT.\n  - Externals#spooler + CYBER_DOJO_SPOOLER_CLASS in up.sh, mirroring saver.\n  - app.rb: the nine callers now use spooler; the run_tests rescue catches\n    SpoolerService::Error so the light still shows if the spooler is down.\n  - SaverService: the nine event writes removed (they now live in the\n    spooler); it keeps reads and non-event writes.\n  - docker-compose: a spooler service (own /sqlite volume, forwards to\n    saver), web depends_on it, and containers_up starts it.\n\n* Make inter-test-event writes fire-and-forget\n\n  Now the spooler orders writes by (tab_id, tab_seq) (ADR B3), the browser no\n  longer needs to serialise ITEs or wait on their network round-trip - that\n  serialisation only existed to dodge saver's CAS-loser drop before the spooler\n  existed. So the inter-test events (file create/delete/rename/edit) become\n  fire-and-forget: dispatch and let the UI continue immediately.\n\n  - _file_inter_test_events.erb: fireAndForgetITE dispatches and returns; removed\n    waitForITE and the _interTestEventInProgress serialisation.\n  - Dropped the now-pointless callback parameter from the four ITE senders; their\n    callers do their local editor update inline after the call (order preserved -\n    the POST body is serialised before the editor mutates).\n  - app.rb: the four ITE controllers reply 204 No Content (the browser\n    fire-and-forgets the response), and the dead @saved flag / saved: response\n    field are removed (the browser never read them).\n\n  Also (ancillary):\n  - show_events.sh: read events via saver's kata_events API through nginx, as the\n    browser does, not the working-tree events.json - saver commits via\n    git update-ref with no checkout, so that file is stale (reads-via-git).\n  - echo_env_vars.sh: pin saver SHA/TAG for the local demo loop.\n\n* Make web tests drain-aware for the async spooler write path\n\n  Writes now go to the spooler and drain to saver asynchronously, so tests\n  that write-then-read committed state must wait for the drain, and the\n  client index is gone from the write path. Also fixes a real tab_seq bug\n  surfaced while doing this.\n\n  Production (app.rb):\n  - tab_seq is coerced to an integer (it arrives as a form-field string).\n    The spooler orders its buffer by tab_seq numerically, so a string breaks\n    ordering ('10' < '2'); blank stays nil, not 0 (''.to_i), which is a real\n    seq value.\n\n  Tests:\n  - TestExternalHelpers: seed helpers (kata_ran_tests/kata_revert write via\n    the spooler, then wait_until_drained polls saver until the write's light\n    lands) + wait_until_committed; run.sh/run_browser.sh export\n    CYBER_DOJO_SPOOLER_CLASS.\n  - app_controllers: post_json/post_run_tests stamp a caller tab_seq and wait\n    for it to drain (run_tests waits for the light's colour, so the\n    file_edit+light double-commit is not read half-done).\n  - Move the nine write smoke tests to a new spooler_service_test (drain-aware)\n    and the forwards_* tests to spooler_service_forwards_*; saver_service_test\n    keeps reads and non-event writes.\n  - Remove the dead client index: no index in write bodies, no @index tracking\n    (forks keep index; checkout keeps src_index).\n  - Delete/ retarget removed-behavior tests: drop mobbing_self_lag (index\n    self-lag), and the run_tests raises-stub is now a SpoolerService stub.\n  - ITE controllers reply 204, so their tests assert successful?, not ok?.\n\n* Drive web's v2-kata demo through the new saver write protocol\n\n  The saver's kata-write endpoints now key each write on (laptop_id,\n  tab_seq) and no longer take the old index arg. Bring web's demo seeding\n  in line so it keeps working once the saver drops the laptop_id/tab_seq\n  defaults:\n\n  - bin/create_v2_kata.rb, source/script/create_v2_kata.rb: model each\n    avatar as one Writer (a fixed laptop_id plus a monotonic tab_seq) and\n    send that key on every write, dropping the removed index. The monotonic\n    tab_seq is required because an avatar fires many same-colour runs that\n    would otherwise collide on the saver's (laptop_id, tab_seq, colour)\n    dedup key. demo.sh seeds live, so there is no fixture to rebake.\n  - bin/echo_env_vars.sh: pin the saver and spooler images that implement\n    the async-write-via-spooler path this demo now exercises.\n\n  Co-Authored-By: Claude Opus 4.8 (1M context) <noreply@anthropic.com>\n\n* Adopt spooler write-loss fix, restore coverage, add /status endpoint\n\n  D1EQJ6 (kata_checked_out smoke test) failed intermittently because the\n  spooler's drainer ran several shard threads that shared one memoized\n  Net::HTTP connection. Net::HTTP is not safe for concurrent requests on one\n  instance, so two shards forwarding at once crossed their requests and\n  responses: a kata_checked_out POST came back tagged kata_ran_tests, the\n  write was lost, and wait_until_drained timed out. Fixed in spooler ebc7b92\n  (each drainer shard owns its own connection); bump the pinned spooler\n  SHA/tag to adopt it.\n\n  That investigation also showed app/services had dropped below 100%:\n  SpoolerService#ready? and SpoolerService::Error were never exercised. Add a\n  ready? smoke test and a not-JSON-maps-to-Error test (mirroring SaverService)\n  to restore full coverage.\n\n  Separately, add GET /status so the readiness of each dependency (runner,\n  saver, spooler) is visible from outside the process, giving their ready?\n  client methods a real caller. It probes each dependency (rescuing the\n  raising clients so one down service reports false rather than failing the\n  whole endpoint), returns 200 when all are ready and 503 otherwise, with a\n  body naming each. It is deliberately kept off the load balancer probe:\n  coupling that to shared backends would let one downstream blip deschedule\n  every web task at once and stall deploys. RunnerStub gains the ready? it was\n  missing so it faithfully stands in for RunnerService.\n\n* Explain why /ready is not dependency-coupled\n\n  Record the reasoning at the point of temptation: a future reader will\n  naturally wonder why /ready is a static true rather than runner.ready? &&\n  saver.ready? && spooler.ready?. The comment explains that /ready is the load\n  balancer's probe, that the three are shared backends, and that coupling\n  readiness to them turns one dependency blip into a fleet-wide 503 and blocks\n  deploys. Dependency health belongs in graceful per-action errors and /status,\n  not here.\n\n* Remove wip entries in echo_env_vars.sh",
+            "sha1": "e4d9d0868e299522b207696e19c07966a09bf08a",
+            "message": "Merge pull request #12 from cyber-dojo/run-ci-workflow-4\n\nRun ci workflow to force a deployment",
             "author": "Jon Jagger <jon@kosli.com>",
             "branch": "",
-            "timestamp": 1785238506.0,
-            "url": "https://github.com/cyber-dojo/web/commit/aaf06aec0e096d2de9c58152d1ee8d75c8f2a31f"
+            "timestamp": 1785304497.0,
+            "url": "https://github.com/cyber-dojo/spooler/commit/e4d9d0868e299522b207696e19c07966a09bf08a"
           },
-          "html_url": "https://app.kosli.com/cyber-dojo/flows/web-ci/artifacts/30658abf51aa2b17e4edfa8636cc14aa9725432c2665ed3fcb2ee99ecae03889?artifact_id=494b49a5-f26f-4602-8fce-8903d99d",
-          "flow_html_url": "https://app.kosli.com/cyber-dojo/flows/web-ci",
+          "html_url": "https://app.kosli.com/cyber-dojo/flows/spooler-ci/artifacts/2d13ace2ba9449bcabeaef32f8cdc9255eff976ddf7a4ce5bd70e46bac11b204?artifact_id=d2a91db5-76a8-43df-988c-d57fda6c",
+          "flow_html_url": "https://app.kosli.com/cyber-dojo/flows/spooler-ci",
           "deployment_diff": {
-            "diff_url": "https://github.com/cyber-dojo/web/compare/3f0b9975f96b7f4e4aae0b4409cebda3209be164...aaf06aec0e096d2de9c58152d1ee8d75c8f2a31f",
-            "previous_git_commit": "3f0b9975f96b7f4e4aae0b4409cebda3209be164",
-            "previous_fingerprint": "0eaa303537220d95ba656b829c1d9c85e2865c986c4736962b85f4df5adb8972",
-            "previous_artifact_name": "244531986313.dkr.ecr.eu-central-1.amazonaws.com/web:3f0b997@sha256:0eaa303537220d95ba656b829c1d9c85e2865c986c4736962b85f4df5adb8972",
+            "diff_url": "https://github.com/cyber-dojo/spooler/compare/92c624eabb024729fb2af6cdbe354db11ee3882f...e4d9d0868e299522b207696e19c07966a09bf08a",
+            "previous_git_commit": "92c624eabb024729fb2af6cdbe354db11ee3882f",
+            "previous_fingerprint": "a20359795934beb03d992ba5a8f8b95ca637e609284e5a84781bdcbb1b861975",
+            "previous_artifact_name": "244531986313.dkr.ecr.eu-central-1.amazonaws.com/spooler:92c624e@sha256:a20359795934beb03d992ba5a8f8b95ca637e609284e5a84781bdcbb1b861975",
             "previous_artifact_compliance_state": "COMPLIANT",
             "previous_running": false,
-            "previous_git_commit_url": "https://github.com/cyber-dojo/web/commit/3f0b9975f96b7f4e4aae0b4409cebda3209be164",
-            "previous_trail_name": "3f0b9975f96b7f4e4aae0b4409cebda3209be164",
-            "previous_template_reference_name": "web"
+            "previous_git_commit_url": "https://github.com/cyber-dojo/spooler/commit/92c624eabb024729fb2af6cdbe354db11ee3882f",
+            "previous_trail_name": "92c624eabb024729fb2af6cdbe354db11ee3882f",
+            "previous_template_reference_name": "spooler"
           },
-          "commit_lead_time": 2124.0,
+          "commit_lead_time": 788.0,
           "artifact_compliance_in_flow": true,
           "flow_reasons_for_non_compliance": []
         },
         {
           "flow_name": "production-promotion",
-          "trail_name": "promotion-one-142",
-          "template_reference_name": "web",
+          "trail_name": "promotion-one-144",
+          "template_reference_name": "spooler",
           "git_commit": "81c216a55b2cb1787645e699ceaceca868cad253",
           "commit_url": "https://github.com/cyber-dojo/aws-prod-co-promotion/commit/81c216a55b2cb1787645e699ceaceca868cad253",
           "git_commit_info": {
@@ -8409,26 +9857,26 @@ kosli get snapshot aws-prod --output=json
             "timestamp": 1785143054.0,
             "url": "https://github.com/cyber-dojo/aws-prod-co-promotion/commit/81c216a55b2cb1787645e699ceaceca868cad253"
           },
-          "html_url": "https://app.kosli.com/cyber-dojo/flows/production-promotion/artifacts/30658abf51aa2b17e4edfa8636cc14aa9725432c2665ed3fcb2ee99ecae03889?artifact_id=49687d93-45f9-492f-a122-a91b7959",
+          "html_url": "https://app.kosli.com/cyber-dojo/flows/production-promotion/artifacts/2d13ace2ba9449bcabeaef32f8cdc9255eff976ddf7a4ce5bd70e46bac11b204?artifact_id=52a4e142-1fbf-43ff-aa0f-77be3722",
           "flow_html_url": "https://app.kosli.com/cyber-dojo/flows/production-promotion",
           "deployment_diff": {
-            "diff_url": "https://github.com/cyber-dojo/aws-prod-co-promotion/compare/76325d840dc66e1c84743725e17de05a16616419...81c216a55b2cb1787645e699ceaceca868cad253",
-            "previous_git_commit": "76325d840dc66e1c84743725e17de05a16616419",
-            "previous_fingerprint": "0eaa303537220d95ba656b829c1d9c85e2865c986c4736962b85f4df5adb8972",
-            "previous_artifact_name": "244531986313.dkr.ecr.eu-central-1.amazonaws.com/web:3f0b997@sha256:0eaa303537220d95ba656b829c1d9c85e2865c986c4736962b85f4df5adb8972",
+            "diff_url": "https://github.com/cyber-dojo/aws-prod-co-promotion/compare/81c216a55b2cb1787645e699ceaceca868cad253...81c216a55b2cb1787645e699ceaceca868cad253",
+            "previous_git_commit": "81c216a55b2cb1787645e699ceaceca868cad253",
+            "previous_fingerprint": "a20359795934beb03d992ba5a8f8b95ca637e609284e5a84781bdcbb1b861975",
+            "previous_artifact_name": "244531986313.dkr.ecr.eu-central-1.amazonaws.com/spooler:92c624e@sha256:a20359795934beb03d992ba5a8f8b95ca637e609284e5a84781bdcbb1b861975",
             "previous_artifact_compliance_state": "COMPLIANT",
             "previous_running": false,
-            "previous_git_commit_url": "https://github.com/cyber-dojo/aws-prod-co-promotion/commit/76325d840dc66e1c84743725e17de05a16616419",
-            "previous_trail_name": "promotion-one-130",
-            "previous_template_reference_name": "web"
+            "previous_git_commit_url": "https://github.com/cyber-dojo/aws-prod-co-promotion/commit/81c216a55b2cb1787645e699ceaceca868cad253",
+            "previous_trail_name": "promotion-one-140",
+            "previous_template_reference_name": "spooler"
           },
-          "commit_lead_time": 97576.0,
+          "commit_lead_time": 162231.0,
           "artifact_compliance_in_flow": true,
           "flow_reasons_for_non_compliance": []
         }
       ],
       "ecs_context": {
-        "task_arn": "arn:aws:ecs:eu-central-1:274425519734:task/app/7290e7992d1d42b9a23b641bf02cea9a",
+        "task_arn": "arn:aws:ecs:eu-central-1:274425519734:task/app/e26ec5335fcb49c3a938df19ecc5b23c",
         "cluster_name": null,
         "service_name": null
       }

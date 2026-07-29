@@ -66,11 +66,11 @@ kosli diff snapshots aws-beta aws-prod --output=json
 ```json
 {
   "snappish1": {
-    "snapshot_id": "aws-beta#7866",
+    "snapshot_id": "aws-beta#7875",
     "artifacts": []
   },
   "snappish2": {
-    "snapshot_id": "aws-prod#5126",
+    "snapshot_id": "aws-prod#5134",
     "artifacts": []
   },
   "changed": {
@@ -87,6 +87,14 @@ kosli diff snapshots aws-beta aws-prod --output=json
         "instance_count": 1
       },
       {
+        "fingerprint": "6ca8f8d96e1fe8c360fce64b81c330c4ac05d3f128461be4034d36b37147eeac",
+        "name": "244531986313.dkr.ecr.eu-central-1.amazonaws.com/spooler:c81791f@sha256:6ca8f8d96e1fe8c360fce64b81c330c4ac05d3f128461be4034d36b37147eeac",
+        "most_recent_timestamp": 1785310509,
+        "flow": "spooler-ci",
+        "commit_url": "https://github.com/cyber-dojo/spooler/commit/c81791fd10558a59f83876137fb021abcd89f262",
+        "instance_count": 1
+      },
+      {
         "fingerprint": "8c604f9f203a21ad88bd4c9610ef323242874410f0ce796ccdc884d101117b67",
         "name": "244531986313.dkr.ecr.eu-central-1.amazonaws.com/runner:19f8734@sha256:8c604f9f203a21ad88bd4c9610ef323242874410f0ce796ccdc884d101117b67",
         "most_recent_timestamp": 1785138609,
@@ -100,14 +108,6 @@ kosli diff snapshots aws-beta aws-prod --output=json
         "most_recent_timestamp": 1785241244,
         "flow": "custom-start-points-ci",
         "commit_url": "https://github.com/cyber-dojo/custom-start-points/commit/790d86b66f4d86ab47f5c521daf5039dc8aeef4d",
-        "instance_count": 1
-      },
-      {
-        "fingerprint": "a20359795934beb03d992ba5a8f8b95ca637e609284e5a84781bdcbb1b861975",
-        "name": "244531986313.dkr.ecr.eu-central-1.amazonaws.com/spooler:92c624e@sha256:a20359795934beb03d992ba5a8f8b95ca637e609284e5a84781bdcbb1b861975",
-        "most_recent_timestamp": 1785224823,
-        "flow": "spooler-ci",
-        "commit_url": "https://github.com/cyber-dojo/spooler/commit/92c624eabb024729fb2af6cdbe354db11ee3882f",
         "instance_count": 1
       },
       {
