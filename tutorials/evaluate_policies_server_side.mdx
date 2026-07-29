@@ -33,17 +33,22 @@ kosli create policy pr-approved pr-approved.rego \
 # Evaluate it from your pipeline, as often as you like.
 kosli evaluate policy \
     --flow my-release-flow \
+    --trail my-release-trail \
     --policy pr-approved \
     --control RCTL-043 \
+    --context trail=my-release-trail \
     --fingerprint "$ARTIFACT_FINGERPRINT" \
     --name pr-approval-decision \
+    --params '{"pr_attestation_name": "pull-request"}' \
     --assert
 ```
 
-Kosli runs the policy against the trail's attestations and records a **decision** against control
-`RCTL-043`, citing the policy version, the parameters, and the exact facts it used. `--assert` fails
-the pipeline step if the policy denies. Everything else on this page is detail around those two
-commands.
+Kosli evaluates the attestations on `my-release-trail` and records a **decision** against control
+`RCTL-043`, citing the policy version, the parameters, and the exact facts it used. `--flow` and
+`--trail` say where the decision is recorded, as on any other Kosli command, and `--context` says
+which trail's facts to evaluate — the same trail here, a different one when you need it. `--assert`
+fails the pipeline step if the policy denies. Everything else on this page is detail around those
+two commands.
 
 ### What is in the beta, and what is not
 
@@ -53,7 +58,7 @@ has produced.
 
 **Not in:** evaluating anything other than trails, evaluating the contents of attachments, composing
 several policies into one, scheduled evaluations, pinning an evaluation to a policy version, and
-advisory-only outcomes. [Full list, with reasons](#whats-out-of-scope-for-the-beta) — worth reading
+advisory-only outcomes. [Full list, with reasons](#out-of-scope-for-the-beta) — worth reading
 before you send feedback, so you don't spend it on something already deferred.
 
 ### Where to go next
@@ -156,7 +161,7 @@ import rego.v1
 
 pr_attestation_name := data.params.pr_attestation_name
 
-default allow = false
+default allow := false
 
 allow if {
     every pr in input.trail.compliance_status.attestations_statuses[pr_attestation_name].pull_requests {
@@ -169,7 +174,17 @@ violations contains msg if {
     count(pr.approvers) == 0
     msg := sprintf("pull-request %v has no approvers", [pr.url])
 }
+
+violations contains msg if {
+    not input.trail.compliance_status.attestations_statuses[pr_attestation_name]
+    msg := sprintf("expected attestation %v is missing from the trail", [pr_attestation_name])
+}
 ```
+
+Note the second `violations` rule. Without it, a trail that is missing the attestation entirely
+leaves both `allow` and the first `violations` rule undefined — a denial with an empty violations
+list and nothing for the team to act on. Cover the missing-fact case explicitly, so every way the
+policy can deny produces something to fix.
 
 Before you ship it, you can [validate and test the policy](#validate-and-test-a-policy) against
 real trail data.
@@ -177,7 +192,7 @@ real trail data.
 <Info>
 In the beta, a policy evaluates the facts on the trail(s) you point it at — attestations on
 `trail` / `trails`. Evaluating other targets (snapshots, artifacts, generic input) and
-composing multiple policies into one are **not included** (see [What's out of scope](#whats-out-of-scope-for-the-beta)).
+composing multiple policies into one are **not included** (see [What's out of scope](#out-of-scope-for-the-beta)).
 </Info>
 
 </Step>
@@ -240,6 +255,7 @@ return the outcome, as shown here.
 ```shell
 kosli evaluate policy \
     --flow "$FLOW_NAME" \
+    --trail "$TRAIL_NAME" \
     --policy pr-approved \
     --control RCTL-043 \
     --context trail="$TRAIL_NAME" \
@@ -261,14 +277,18 @@ The four flags that carry the meaning:
 |------|-------------|
 | `--policy` | The policy to run — a Kosli policy **identifier** (uses its current version) or a local `.rego` file. |
 | `--control` | The control identifier the resulting decision is recorded against. |
-| `--context` | What it runs against — the **source**. Defaults to the decision trail. |
-| `--flow` / `--trail` | Where the decision is recorded — the **destination**. |
+| `--context` | What it runs against — the **source**. Optional; defaults to the trail named by `--flow` / `--trail`. |
+| `--flow` / `--trail` | Where the decision is recorded — the **destination**. Both always required. |
 
 <Warning>
-These flags pull in opposite directions, so it is worth reading them slowly. `--context` chooses
-the trail whose facts are **read**. `--flow` and `--trail` choose the trail the decision is
-**written** to. Most of the time all three name the same trail; when they don't, that is a
-deliberate choice — see the *Evaluating facts from another flow* example below.
+These flags pull in opposite directions, so it is worth reading them slowly. `--flow` and `--trail`
+choose the trail the decision is **written** to, and are always required — as on every other Kosli
+command that writes to a trail. `--context` chooses the trail whose facts are **read**. Most of the
+time both name the same trail, as above; when they don't, that is a deliberate choice — see the
+*Evaluating facts from another flow* example below. `--context` can be omitted, in which case it
+falls back to the trail you are writing to, but the examples here pass it explicitly: a command that
+names its source and its destination is easier to read back months later than one relying on a
+default.
 </Warning>
 
 By default the command queues the evaluation and returns without waiting; the decision is
@@ -281,11 +301,11 @@ recorded, a decision appears against the policy — see
 
 | Flag | Description |
 |------|-------------|
-| `--flow` | The flow the decision is recorded on (the **destination** flow). |
-| `--trail` | The trail the decision is recorded on. Defaults to the evaluation trail when a single one is evaluated; required otherwise. |
+| `--flow` | The flow the decision is recorded on (the **destination** flow). **Required.** |
+| `--trail` | The trail the decision is recorded on. **Required** — there is no default, the same as every other Kosli command that writes to a trail. Set it once as `KOSLI_TRAIL` to keep it off each command. |
 | `--policy` | The policy to evaluate — a Kosli policy **identifier** (uses its current version) or a **local** `.rego` file (see [Evaluate a local policy file](#evaluate-a-local-policy-file)). |
 | `--control` | The control identifier the resulting decision is recorded against. |
-| `--context` | One or more **typed references** to what should be evaluated (the **source**), repeatable. This is what Kosli resolves into the [evaluation context](#re-run-a-decision-offline) a decision cites — not a cluster or account selector. In the beta the only reference *type* is a trail: `trail=<trail_id>` (in `--flow`), or `trail=<flow_id>/<trail_id>` to name a trail in another flow. Repeat the flag to evaluate several trails — see [Evaluating multiple trails](#evaluating-multiple-trails). Defaults to the decision trail. The typed form leaves room for other context types — snapshots and reported workloads, for example — later, without new flags. |
+| `--context` | One or more **typed references** to what should be evaluated (the **source**), repeatable. This is what Kosli resolves into the [evaluation context](#re-run-a-decision-offline) a decision cites — not a cluster or account selector. In the beta the only reference *type* is a trail: `trail=<trail_id>` (in `--flow`), or `trail=<flow_id>/<trail_id>` to name a trail in another flow. Repeat the flag to evaluate several trails — see [Evaluating multiple trails](#evaluating-multiple-trails). Optional: defaults to the trail named by `--flow` / `--trail`. The typed form leaves room for other context types — snapshots and reported workloads, for example — later, without new flags. |
 | `--fingerprint` / `--artifact-type` | The artifact the decision applies to. Pass `--fingerprint` directly, or `--artifact-type` with the artifact name/path so Kosli calculates the fingerprint. |
 | `--name` | The attestation slot name the decision is recorded under on the trail. A decision recorded here satisfies a `type: decision` attestation in the trail's [flow template](/template-reference/flow_template) when the names match — see [Requiring decisions in flow templates](/tutorials/working_with_controls#requiring-decisions-in-flow-templates). |
 | `--params` | Parameters passed to the policy as `data.params`. Validated against the parameters the policy reads before the evaluation is queued — an unknown or missing name is an error. Every evaluation records the params it used. |
@@ -400,8 +420,8 @@ kosli evaluate policy \
 
 The context schema and the number of references have to agree: passing several references to a
 `trail`-schema policy is rejected before the evaluation is queued, as is passing one reference to a
-`trails`-schema policy. Because there is no single evaluation trail to default to, `--trail` is
-required to say where the decision is recorded.
+`trails`-schema policy. Note that `--context` is doing real work here: several trails are read, but
+the decision is still recorded on exactly one trail — the one named by `--flow` and `--trail`.
 
 ## The Rego authoring contract
 
@@ -618,6 +638,7 @@ but no decision is stored — so `--control` and `--name` aren't needed:
 ```shell
 kosli evaluate policy \
     --flow "$FLOW_NAME" \
+    --trail "$TRAIL_NAME" \
     --policy pr-approved.rego \
     --context trail="$TRAIL_NAME" \
     --params '{"pr_attestation_name": "pull-request"}' \
@@ -641,6 +662,7 @@ would for a stored policy — useful while you're still iterating on a policy yo
 ```shell
 kosli evaluate policy \
     --flow "$FLOW_NAME" \
+    --trail "$TRAIL_NAME" \
     --policy ./pr-approved.rego \
     --control RCTL-043 \
     --context trail="$TRAIL_NAME" \
@@ -922,7 +944,7 @@ case.
 </Tip>
 
 Re-running a stored decision through a *different* policy or version — to ask "what would the new
-policy have said?" — is [out of scope for the beta](#whats-out-of-scope-for-the-beta). Exporting the
+policy have said?" — is [out of scope for the beta](#out-of-scope-for-the-beta). Exporting the
 fixture and running it locally is the way to answer that question today.
 
 ## Inspect a failing evaluation
@@ -942,6 +964,7 @@ readable directly in CI logs:
 ```shell
 kosli evaluate policy \
     --flow "$FLOW_NAME" \
+    --trail "$TRAIL_NAME" \
     --policy pr-approved \
     --control RCTL-043 \
     --context trail="$TRAIL_NAME" \
@@ -960,7 +983,7 @@ In the Kosli UI, the violations are parsed out of the decision and rendered on t
 (shown above under [View the decisions for a policy](#view-the-decisions-for-a-policy)), so an
 application team can see exactly what to fix.
 
-## What's out of scope for the beta
+## Out of scope for the beta
 
 The following are explicitly **not included** in the beta and may be addressed later. They are
 listed so you can tell what has been deferred from what has not been considered — if something here
@@ -997,5 +1020,5 @@ This is a design preview. If you are reviewing the proposed beta flow, the most 
 is on the command surface (`kosli evaluate policy` and how policies are published),
 [the Rego authoring contract](#the-rego-authoring-contract) — particularly any constraint there
 that would stop you shipping a control you need — the decision and audit model, and anything in
-[What's out of scope](#whats-out-of-scope-for-the-beta) that you would expect in the beta. Share
+[What's out of scope](#out-of-scope-for-the-beta) that you would expect in the beta. Share
 comments with the Kosli team.
