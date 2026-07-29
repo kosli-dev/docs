@@ -1,6 +1,6 @@
 ---
 title: "Evaluate policies server-side"
-description: "Proposed beta design for server-side policy evaluation in Kosli: author and ship a versioned policy, then evaluate it to record a trustworthy, replicable decision."
+description: "Proposed beta design: ship a versioned policy to Kosli, then evaluate it server-side to record a trustworthy, replicable decision."
 ---
 
 <Warning>
@@ -200,14 +200,15 @@ composing multiple policies into one are **not included** (see [What's out of sc
 <Step title="Ship a versioned policy into Kosli">
 
 Publish the policy into Kosli via the CLI (or API). The positional argument is the policy's
-**stable identifier** (`pr-approved` here) — this is what decisions and evaluations use to refer to
-the policy, so it is **immutable once created**; choose one that matches how your organization
-names its policies. `--name` and `--description` are the human-readable label and purpose, and
-both can be changed later without changing the identifier.
+**stable identifier** (`pr-approved` in the example below) — this is what decisions and evaluations
+use to refer to the policy, so it is **immutable once created**; choose one that matches how your
+organization names its policies. `--name` and `--description` are the human-readable label and
+purpose, and both can be changed later without changing the identifier.
 
-Pass a single `.rego` file, as here, or a directory of them when a policy is split into packages —
-Kosli stores the whole set as one versioned bundle with one digest, so a decision still points at
-one unambiguous thing. Tests are stored with the bundle but never executed server-side.
+Pass a single `.rego` file, as in the example below, or a directory of them when a policy is split
+into packages — Kosli stores the whole set as one versioned bundle with one digest, so a decision
+still points at one unambiguous thing. Tests are stored with the bundle but never executed
+server-side.
 
 Kosli records the first **version** on publish. Every later change creates a new version and
 records who made it, so a decision can always point back to the exact policy that produced it —
@@ -250,7 +251,7 @@ beta, authoring is **CLI/API only** — the Kosli UI is read/tag-only.
 `kosli evaluate policy` is the core command. Kosli fetches the in-scope facts, runs the policy
 **server-side**, and records a **decision** against a control. Evaluation is **asynchronous by
 default** — the command returns once the evaluation is queued. Add `--sync` to wait for and
-return the outcome, as shown here.
+return the outcome, as the example below does.
 
 ```shell
 kosli evaluate policy \
@@ -291,10 +292,8 @@ names its source and its destination is easier to read back months later than on
 default.
 </Warning>
 
-By default the command queues the evaluation and returns without waiting; the decision is
-recorded when the evaluation completes. Add `--sync` to wait for the outcome, or `--assert` to
-both wait and fail the step when the policy denies — use `--assert` as a pipeline gate. Once
-recorded, a decision appears against the policy — see
+Use `--assert` in place of `--sync` when the step should also fail on a denial — that is how an
+evaluation becomes a pipeline gate. Once recorded, a decision appears against the policy — see
 [View the decisions for a policy](#view-the-decisions-for-a-policy).
 
 <Accordion title="All flags for kosli evaluate policy">
