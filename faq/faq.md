@@ -100,22 +100,19 @@ Archiving policies isn't available yet. If this is something you'd find useful, 
 
 Flags with values can usually be specified with an `=` or with a **space** as a separator.
 For example, `--artifact-type=file` or `--artifact-type file`.
-However, an explicitly specified boolean flag value **must** use an `=`.
-For example, if you try this:
+Boolean flags accept both forms from CLI v2.36.0 onwards:
 ```
-kosli attest generic Dockerfile --artifact-type file  --compliant true ...
+kosli attest generic Dockerfile --artifact-type file --compliant false ...
 ```
-You will get an error stating:
+On earlier versions an explicitly specified boolean flag value **must** use an `=`.
+Either upgrade the CLI, or write the flag as `--compliant=false`.
+Without the `=` the command above fails with:
 ```
 Error: accepts at most 1 arg(s), received 2
 ```
-Here, `--artifact-type file` is parsed as if it was `--artifact-type=file`, leaving:
+because `--compliant` is parsed as if *implicitly* defaulting to `--compliant=true`, leaving:
 ```
-kosli attest generic Dockerfile --compliant true ...
+kosli attest generic Dockerfile false ...
 ```
-Then `--compliant` is parsed as if *implicitly* defaulting to `--compliant=true`, leaving:
-```
-kosli attest generic Dockerfile true ...
-```
-The parser then sees `Dockerfile` and `true` as the two
+The parser then sees `Dockerfile` and `false` as the two
 arguments to `kosli attest generic`.
