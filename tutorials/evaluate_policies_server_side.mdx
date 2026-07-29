@@ -447,6 +447,17 @@ A policy evaluates the **attestations in the slots on the trail** — nothing el
 attestations from earlier moments of the same trail. Slots are matched **by name**, not by
 attestation type.
 
+**Attachments are not opened.** A policy sees an attestation's own fields, not the bytes of the
+files attached to it, so it cannot parse a SARIF file, an SBOM, or a PDF report to reason about
+individual findings. To evaluate that content, summarize it into JSON when you make the attestation
+and pass it as `--user-data` — extract the counts, severities, or package identifiers the policy
+needs, and the policy evaluates the summary.
+
+Keep the original file on the same attestation with `--attachments`. The summary is what the policy
+reads; the attachment is what makes the summary worth trusting, because an auditor can go back to
+the file the summary was derived from and check that it is faithful. A summary with no attachment
+behind it is just another self-reported number.
+
 The `--input-schema` you declare when you publish the policy selects the shape of `input`:
 
 | `--input-schema` | `input` contains | Reference schema |
@@ -988,7 +999,9 @@ The following are explicitly **not included** in the beta and may be addressed l
 listed so you can tell what has been deferred from what has not been considered — if something here
 blocks you, that is worth telling us.
 
-- **Evidence-attachment content evaluation** — evaluating the contents of attached files.
+- **Evidence-attachment content evaluation** — evaluating the contents of attached files. Summarize
+  the attachment into JSON `--user-data` at attestation time and a policy can evaluate that instead —
+  see [What the policy sees in `input`](#what-the-policy-sees-in-input).
 - **Composable policies** — composing many authored policies into one versioned policy.
 - **Non-trail evaluate targets** — snapshots, artifacts, and generic input.
 - **Scheduled evaluations** and **risk measurement**.
