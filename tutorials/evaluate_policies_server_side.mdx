@@ -27,7 +27,7 @@ Publish a policy, then evaluate it. That is the feature:
 # Publish a versioned policy into Kosli, once.
 kosli create policy pr-approved pr-approved.rego \
     --type rego \
-    --context-schema trail \
+    --input-schema trail \
     --name "Pull request approved"
 
 # Evaluate it from your pipeline, as often as you like.
@@ -138,7 +138,7 @@ decisions they produce.
 <Step title="Author a policy locally">
 
 Author your policy as code in your own repository. A policy is its **policy-as-code** (Rego), a
-human-readable **name**, a short **description** of its purpose, and an **input-context schema**
+human-readable **name**, a short **description** of its purpose, and an **input schema**
 declaring whether it evaluates a single trail or multiple trails. You give it a stable
 **identifier** when you publish it to Kosli (next step).
 
@@ -223,7 +223,7 @@ control, but only an admin can decide what the control checks.
 ```shell
 kosli create policy pr-approved pr-approved.rego \
     --type rego \
-    --context-schema trail \
+    --input-schema trail \
     --name "Pull request approved" \
     --description "Every pull request on the trail has at least one approver."
 ```
@@ -402,7 +402,7 @@ produced, see [View the decisions for a policy](#view-the-decisions-for-a-policy
 
 ### Evaluating multiple trails
 
-A policy published with `--context-schema trails` evaluates several trails at once and receives
+A policy published with `--input-schema trails` evaluates several trails at once and receives
 them as `input.trails`. Repeat `--context` to name each one:
 
 ```shell
@@ -418,7 +418,7 @@ kosli evaluate policy \
     --sync
 ```
 
-The context schema and the number of references have to agree: passing several references to a
+The input schema and the number of references have to agree: passing several references to a
 `trail`-schema policy is rejected before the evaluation is queued, as is passing one reference to a
 `trails`-schema policy. Note that `--context` is doing real work here: several trails are read, but
 the decision is still recorded on exactly one trail — the one named by `--flow` and `--trail`.
@@ -448,9 +448,9 @@ A policy evaluates the **attestations in the slots on the trail** — nothing el
 attestations from earlier moments of the same trail. Slots are matched **by name**, not by
 attestation type.
 
-The `--context-schema` you declare when you publish the policy selects the shape of `input`:
+The `--input-schema` you declare when you publish the policy selects the shape of `input`:
 
-| `--context-schema` | `input` contains | Reference schema |
+| `--input-schema` | `input` contains | Reference schema |
 |---|---|---|
 | `trail` | `input.trail` — a single trail object | `https://docs.kosli.com/schemas/evaluation-input/trail/v1.json` |
 | `trails` | `input.trails` — an array of trail objects | `https://docs.kosli.com/schemas/evaluation-input/trails/v1.json` |
@@ -616,13 +616,13 @@ catching regressions before you publish a new version.
 confirms that:
 
 - the Rego **compiles**;
-- it matches its declared **input-context schema** (`trail` / `trails`);
+- it matches its declared **input schema** (`trail` / `trails`);
 - it satisfies the **output schema** — an `allow` rule is mandatory.
 
 ```shell
 kosli validate policy \
     --policy pr-approved.rego \
-    --context-schema trail
+    --input-schema trail
 ```
 
 ```plaintext
@@ -695,7 +695,7 @@ that produced it. The identifier never changes.
 ```shell
 kosli create policy pr-approved pr-approved.rego \
     --type rego \
-    --context-schema trail \
+    --input-schema trail \
     --name "Pull request approved by a code owner" \
     --description "Every pull request on the trail has an approver from a code owner." \
     --comment "Require approval from a code owner"
@@ -719,9 +719,9 @@ What counts as a change:
 
 | Publish | Result |
 |---|---|
-| Same policy source, same name, description, and context schema | **No-op.** No version created. |
+| Same policy source, same name, description, and input schema | **No-op.** No version created. |
 | Any change to the policy source | New version. The digest is over the bytes, so reformatting counts. |
-| Same source, changed name, description, or context schema | New version — the description is part of what an auditor reads off a version. |
+| Same source, changed name, description, or input schema | New version — the description is part of what an auditor reads off a version. |
 | Only `--comment` differs | **No-op.** A comment describes a change; with no change there is nothing to describe. |
 
 Comparison is against the **current** version, not the whole history. So republishing the bundle
@@ -768,7 +768,7 @@ join up:
 ```shell
 kosli create policy pr-approved pr-approved.rego \
     --type rego \
-    --context-schema trail \
+    --input-schema trail \
     --comment "Require approval from a code owner (acme/policies#214)"
 ```
 </Step>
@@ -833,13 +833,13 @@ a control owner has to answer — *does this policy meet the control objective?*
 description can only claim.
 
 <Frame>
-  <img src="/images/tutorials/policy-source.png" alt="Policy tab for a policy showing the bundle digest, roots, entrypoint and context schema, a file list, and the read-only Rego source of the selected file with line numbers" />
+  <img src="/images/tutorials/policy-source.png" alt="Policy tab for a policy showing the bundle digest, roots, entrypoint and input schema, a file list, and the read-only Rego source of the selected file with line numbers" />
 </Frame>
 
 A policy can be a single `.rego` file or several, so the tab lists the files in the version and
 shows the one you select. Alongside them it shows what an auditor needs to check the record: the
 **bundle digest** a decision cites, the **entrypoint** that Kosli evaluates, the declared
-**context schema**, and the **parameters** the policy reads. Tests shipped with the policy are
+**input schema**, and the **parameters** the policy reads. Tests shipped with the policy are
 listed and marked *not executed* — Kosli stores them as evidence the policy was tested, but only
 the entrypoint runs.
 
