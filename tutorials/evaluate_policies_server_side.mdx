@@ -205,10 +205,10 @@ use to refer to the policy, so it is **immutable once created**; choose one that
 organization names its policies. `--name` and `--description` are the human-readable label and
 purpose, and both can be changed later without changing the identifier.
 
-Pass a single `.rego` file, as in the example below, or a directory of them when a policy is split
-into packages — Kosli stores the whole set as one versioned bundle with one digest, so a decision
-still points at one unambiguous thing. Tests are stored with the bundle but never executed
-server-side.
+Pass a single `.rego` file, as in the example below, or a directory when the policy is split across
+several files. A directory holds **one policy's bundle**, not a collection of separate policies —
+Kosli stores the whole set as one versioned bundle with one digest, so a decision still points at one
+unambiguous thing. Tests are stored with the bundle but never executed server-side.
 
 Kosli records the first **version** on publish. Every later change creates a new version and
 records who made it, so a decision can always point back to the exact policy that produced it —
@@ -276,7 +276,7 @@ The four flags that carry the meaning:
 
 | Flag | Description |
 |------|-------------|
-| `--policy` | The policy to run — a Kosli policy **identifier** (uses its current version) or a local `.rego` file. |
+| `--policy` | The policy to run — a Kosli policy **identifier** (uses its current version), or a local `.rego` file or bundle directory. |
 | `--control` | The control identifier the resulting decision is recorded against. |
 | `--context` | What it runs against — the **source**. |
 | `--flow` / `--trail` | Where the decision is recorded — the **destination**. |
@@ -295,7 +295,7 @@ evaluation becomes a pipeline gate. Once recorded, a decision appears against th
 |------|-------------|
 | `--flow` | The flow the decision is recorded on (the **destination** flow). **Required.** |
 | `--trail` | The trail the decision is recorded on. **Required** — there is no default, the same as every other Kosli command that writes to a trail. Set it once as `KOSLI_TRAIL` to keep it off each command. |
-| `--policy` | The policy to evaluate — a Kosli policy **identifier** (uses its current version) or a **local** `.rego` file (see [Evaluate a local policy file](#evaluate-a-local-policy-file)). |
+| `--policy` | The policy to evaluate — a Kosli policy **identifier** (uses its current version), or a **local** `.rego` file or bundle directory (see [Evaluate a local policy](#evaluate-a-local-policy)). |
 | `--control` | The control identifier the resulting decision is recorded against. |
 | `--context` | One or more **typed references** to what should be evaluated (the **source**), repeatable. **Required** — see below. |
 | `--fingerprint` / `--artifact-type` | The artifact the decision applies to. Pass `--fingerprint` directly, or `--artifact-type` with the artifact name/path so Kosli calculates the fingerprint. |
@@ -639,6 +639,10 @@ kosli validate policy \
 RESULT:  VALID
 ```
 
+`--policy` takes a single `.rego` file, as here, or a directory holding the policy's bundle —
+the same forms `kosli create policy` and `kosli evaluate policy` accept, so you can validate
+exactly what you are about to publish.
+
 ### Run an ad-hoc evaluation
 
 To see how a policy behaves against real trail data *without* recording a decision, add
@@ -663,11 +667,12 @@ RESULT:  ALLOWED  (dry-run — no decision recorded)
 This is the fastest way to iterate: point a candidate policy at a trail you know should pass (or
 fail) and confirm the outcome before publishing a version or gating a pipeline on it.
 
-### Evaluate a local policy file
+### Evaluate a local policy
 
 You don't have to publish a policy before it can record a decision. Point `--policy` at a local,
-unpublished `.rego` file and Kosli evaluates it server-side and records the decision, just as it
-would for a stored policy — useful while you're still iterating on a policy you haven't shipped:
+unpublished `.rego` file — or at a directory holding the policy's bundle — and Kosli evaluates it
+server-side and records the decision, just as it would for a stored policy. This is useful while
+you're still iterating on a policy you haven't shipped:
 
 ```shell
 kosli evaluate policy \
