@@ -297,7 +297,7 @@ evaluation becomes a pipeline gate. Once recorded, a decision appears against th
 | `--trail` | The trail the decision is recorded on. **Required** — there is no default, the same as every other Kosli command that writes to a trail. Set it once as `KOSLI_TRAIL` to keep it off each command. |
 | `--policy` | The policy to evaluate — a Kosli policy **identifier** (uses its current version) or a **local** `.rego` file (see [Evaluate a local policy file](#evaluate-a-local-policy-file)). |
 | `--control` | The control identifier the resulting decision is recorded against. |
-| `--context` | One or more **typed references** to what should be evaluated (the **source**), repeatable. This is what Kosli resolves into the [evaluation context](#re-run-a-decision-offline) a decision cites — not a cluster or account selector. In the beta the only reference *type* is a trail: `trail=<trail_id>` (in `--flow`), or `trail=<flow_id>/<trail_id>` to name a trail in another flow. Repeat the flag to evaluate several trails — see [Evaluating multiple trails](#evaluating-multiple-trails). **Required.** The typed form leaves room for other context types — snapshots and reported workloads, for example — later, without new flags. |
+| `--context` | One or more **typed references** to what should be evaluated (the **source**), repeatable. **Required** — see below. |
 | `--fingerprint` / `--artifact-type` | The artifact the decision applies to. Pass `--fingerprint` directly, or `--artifact-type` with the artifact name/path so Kosli calculates the fingerprint. |
 | `--name` | The attestation slot name the decision is recorded under on the trail. A decision recorded here satisfies a `type: decision` attestation in the trail's [flow template](/template-reference/flow_template) when the names match — see [Requiring decisions in flow templates](/tutorials/working_with_controls#requiring-decisions-in-flow-templates). |
 | `--params` | Parameters passed to the policy as `data.params`. Validated against the parameters the policy reads before the evaluation is queued — an unknown or missing name is an error. Every evaluation records the params it used. |
@@ -307,10 +307,17 @@ evaluation becomes a pipeline gate. Once recorded, a decision appears against th
 | `--assert` | Exit non-zero when the policy denies, for use as a pipeline gate. Implies `--sync`, since asserting requires the outcome. |
 | `--dry-run` | Evaluate and return the outcome **without recording a decision** — for testing (see [Run an ad-hoc evaluation](#run-an-ad-hoc-evaluation)). |
 
+**More on `--context`.** In the beta the only reference *type* is a trail: `trail=<trail_id>` names a
+trail in `--flow`, and `trail=<flow_id>/<trail_id>` names one in another flow. Repeat the flag to
+evaluate several trails — see [Evaluating multiple trails](#evaluating-multiple-trails). Kosli
+resolves these references into the [evaluation context](#re-run-a-decision-offline) a decision cites;
+they are not a cluster or account selector. The typed form leaves room for other context types —
+snapshots and reported workloads, for example — later, without new flags.
+
 </Accordion>
 
-**Evaluating facts from another flow.** By default the decision is recorded on the same trail
-whose facts you evaluate. Because each `--context` reference carries its own flow
+**Evaluating facts from another flow.** Usually `--context` and `--flow` / `--trail` name the same
+trail. Because each `--context` reference carries its own flow
 (`trail=<flow_id>/<trail_id>`), you can evaluate a trail in a *different* flow — for example,
 evaluating a build flow's trail but recording the decision on a release flow's trail:
 
