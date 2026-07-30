@@ -498,9 +498,15 @@ attestation type.
 
 **Attachments are not opened.** A policy sees an attestation's own fields, not the bytes of the
 files attached to it, so it cannot parse a SARIF file, an SBOM, or a PDF report to reason about
-individual findings. To evaluate that content, summarize it into JSON when you make the attestation
-and pass it as `--user-data` — extract the counts, severities, or package identifiers the policy
-needs, and the policy evaluates the summary.
+individual findings. To evaluate that content, summarize it into JSON at attestation time — the
+counts, severities, or package identifiers the policy needs — using whichever field the attestation
+type gives you for structured data:
+
+- For a [custom attestation type](/administration/managing_custom_attestation_types/overview) you
+  define, pass the summary as `--attestation-data`, validated against your type's schema. This is
+  the better fit when the summary is a recurring shape worth its own schema.
+- For a built-in type (`generic`, `snyk`, `sonar`, and others) with no schema field for your
+  summary, pass it as `--user-data` instead.
 
 Keep the original file on the same attestation with `--attachments`. The summary is what the policy
 reads; the attachment is what lets an auditor go back to the file the summary was derived from and
@@ -1065,8 +1071,9 @@ listed so you can tell what has been deferred from what has not been considered 
 blocks you, that is worth telling us.
 
 - **Evidence-attachment content evaluation** — evaluating the contents of attached files. Summarize
-  the attachment into JSON `--user-data` at attestation time and a policy can evaluate that instead —
-  see [What the policy sees in `input`](#what-the-policy-sees-in-input).
+  the attachment into JSON at attestation time — `--attestation-data` for a custom attestation type,
+  `--user-data` otherwise — and a policy can evaluate that instead — see
+  [What the policy sees in `input`](#what-the-policy-sees-in-input).
 - **Composable policies** — combining several **separately published** policies, each with its own
   identifier and version, into one evaluation. This is distinct from a bundle, where one policy spans
   several Rego files under a single identifier, version, and digest. Bundles are supported.
