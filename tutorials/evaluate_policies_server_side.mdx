@@ -595,16 +595,12 @@ Kosli pins the OPA version it evaluates with and records it on every decision al
 version, so a decision states exactly what ran. Author against that version locally and check with
 `opa check --v1-compatible` to avoid a policy that compiles on your machine but not in Kosli.
 
-{/* TODO: state the pinned OPA version once the evaluation runtime is chosen. */}
-
 ### When evaluation itself fails
 
 A policy that times out, exhausts its memory budget, or hits a runtime error is a *broken policy*,
 not a non-compliant artifact, and Kosli reports the two differently — a failed evaluation records
 a typed error rather than a `--compliant=false` decision, and `--assert` exits with a distinct
 code so a pipeline can tell "this change is not compliant" from "this policy is broken".
-
-{/* TODO: confirm the exit codes and whether a failed evaluation records a decision at all. */}
 
 Open questions we would particularly like feedback on: whether a built-in error should abort the
 evaluation or evaluate to undefined (and therefore deny), and whether `print` and `trace` output
