@@ -389,14 +389,18 @@ the **evaluation context** it was reached from:
 | The **evaluation engine version** | The same policy on a different engine is not guaranteed to be the same evaluation. |
 | The **requested** and **recorded** times | See below. |
 
-**A decision carries two timestamps.** The **requested** time is when the evaluation was asked
-for; the **recorded** time is when the decision was written, once the evaluation came off the
-queue. A decision is **valid as of the requested time**, even though it was recorded later. Kosli
-records both and never backdates the record.
+**A decision carries two timestamps.** The **requested** time is when the evaluation was enqueued;
+the **recorded** time is when the decision was written, once the evaluation ran. Kosli fixes the
+trail moment — which attestations are in scope — at the requested time. The trail data itself is
+only queried and serialized once the evaluation executes, but always **as of** that fixed timestamp,
+not as of whatever the trail contains by then — so a queued evaluation is deterministic no matter
+how long it waits. Kosli never backdates the record.
 
-This matters when facts arrive mid-flight: an attestation added between the two timestamps is
-*not* part of the decision, because the trail moment is anchored to the requested time. If that
-new fact changes the answer, it takes a new evaluation to say so.
+For example, evaluation `ec_7f3a91c2` is requested at 09:14:22 and executes at 09:14:25. If a new
+pull-request approval landed on the trail at 09:14:24 — after the request, before execution — it is
+still **not** part of this decision: the query at 09:14:25 reads the trail as it stood at 09:14:22,
+not as it stands when the evaluation happens to run. If that new fact changes the answer, it takes a
+new evaluation to say so.
 
 Because the policy version, parameters, and trail moments are all pinned to that requested time,
 the decision states exactly what was evaluated and when it applied — enough to
