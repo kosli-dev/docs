@@ -14,14 +14,14 @@ Today, `kosli evaluate` runs **client-side**: the policy lives in your repositor
 runs on your CI runner, and Kosli only learns the outcome if you **explicitly attest it back** —
 a self-reported result Kosli takes on trust. Server-side policy evaluation moves the Policy
 Decision Point (PDP) **into Kosli**. You ship a versioned policy to Kosli, Kosli executes it
-against facts it already holds, and Kosli **records the decision itself** — one it can vouch for,
-connected to the exact policy version and inputs used.
+against facts it already holds, and Kosli **records the decision itself**, along with the exact
+policy version and inputs it used.
 
 ## Start here
 
-### The whole loop in two commands
+### Publish a policy, then evaluate it
 
-Publish a policy, then evaluate it. That is the feature:
+Two commands, which the rest of this page fills in:
 
 ```shell
 # Publish a versioned policy into Kosli, once.
@@ -58,16 +58,15 @@ has produced.
 
 **Not in:** evaluating anything other than trails, evaluating the contents of attachments, composing
 several policies into one, scheduled evaluations, pinning an evaluation to a policy version, and
-advisory-only outcomes. [Full list, with reasons](#out-of-scope-for-the-beta) — worth reading
-before you send feedback, so you don't spend it on something already deferred.
+advisory-only outcomes. See the [full list, with reasons](#out-of-scope-for-the-beta).
 
 ### Where to go next
 
 <CardGroup cols={3}>
 
 <Card title="Author and ship policies" icon="pen-nib" href="#author-ship-and-evaluate-a-policy">
-For **governance platform engineers**. The core loop, the Rego contract, testing, and managing
-policies over time.
+For **governance platform engineers**. Publishing and evaluating, the Rego contract, testing, and
+managing policies over time.
 </Card>
 
 <Card title="Audit the decisions" icon="magnifying-glass" href="#view-the-decisions-for-a-policy">
@@ -89,13 +88,14 @@ CLI runs the policy locally. Here, Kosli stores the policy and performs the eval
 
 ## Why server-side
 
-Running evaluation inside Kosli changes what a decision means — and where the data is processed:
+Running evaluation inside Kosli changes **who computed the decision** — and where the data is
+processed:
 
 | | Client-side `kosli evaluate trail` (today) | Server-side `kosli evaluate policy` (proposed) |
 |---|---|---|
 | **Where the policy lives** | Your repository | Stored and versioned in Kosli |
 | **Where it runs** | Your CI runner | Kosli (isolated from the API) |
-| **What Kosli stores** | Whatever you attest back (self-reported) | A decision Kosli computed and can vouch for |
+| **What Kosli stores** | Whatever you attest back (self-reported) | A decision Kosli computed, with the policy version and inputs it used |
 | **Data movement** | Full trail evidence is fetched to the runner | Evaluated in place — nothing shipped to the client |
 | **Replicability** | Depends on your pipeline | Decision cites its exact policy version and inputs |
 
@@ -128,7 +128,7 @@ export KOSLI_API_TOKEN=<your-api-token>
 
 ## Author, ship, and evaluate a policy
 
-The core loop takes a policy from local Rego to a recorded decision. The later sections build on
+This section takes a policy from local Rego to a recorded decision. The later sections build on
 it — [validating](#validate-and-test-a-policy) and [managing](#manage-policies) policies, and
 [viewing](#view-the-decisions-for-a-policy) and [inspecting](#inspect-a-failing-evaluation) the
 decisions they produce.
@@ -248,10 +248,10 @@ beta, authoring is **CLI/API only** — the Kosli UI is read/tag-only.
 
 <Step title="Evaluate and record a decision">
 
-`kosli evaluate policy` is the core command. Kosli fetches the in-scope facts, runs the policy
-**server-side**, and records a **decision** against a control. Evaluation is **asynchronous by
-default** — the command returns once the evaluation is queued. Add `--sync` to wait for and
-return the outcome, as the example below does.
+With `kosli evaluate policy`, Kosli fetches the in-scope facts, runs the policy **server-side**, and
+records a **decision** against a control. Evaluation is **asynchronous by default** — the command
+returns once the evaluation is queued. Add `--sync` to wait for and return the outcome, as the
+example below does.
 
 ```shell
 kosli evaluate policy \
@@ -419,8 +419,8 @@ kosli evaluate policy \
 
 The input schema and the number of references have to agree: passing several references to a
 `trail`-schema policy is rejected before the evaluation is queued, as is passing one reference to a
-`trails`-schema policy. Note that `--context` is doing real work here: several trails are read, but
-the decision is still recorded on exactly one trail — the one named by `--flow` and `--trail`.
+`trails`-schema policy. Several trails are read, but the decision is still recorded on exactly one
+trail — the one named by `--flow` and `--trail`.
 
 ## The Rego authoring contract
 
