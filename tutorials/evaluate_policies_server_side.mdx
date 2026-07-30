@@ -347,12 +347,11 @@ The decision records which flow and trail the facts came from, so a reviewer can
 release decision was reached from a build flow's evidence rather than from the release trail itself.
 
 <Warning>
-**Be deliberate about which flows may satisfy a production control.** Any flow you can write to can
-supply the facts for a decision on any other flow, and the beta does not check that a given policy
-or source flow is acceptable for a given control. That makes it possible for evidence from a
-low-assurance flow — a sandbox or an experiment — to close a control that gates production. Until
-Kosli can constrain this, treat the set of flows that feed production controls as something to
-decide and review, not something to leave open.
+Any flow you can write to can supply the facts for a decision on any other flow, and the beta does
+not check that a given policy or source flow is acceptable for a given control. That makes it
+possible for evidence from a low-assurance flow — a sandbox or an experiment — to close a control
+that gates production. Until Kosli can constrain this, treat the set of flows that feed production
+controls as something to decide and review, not something to leave open.
 </Warning>
 
 <Info>
