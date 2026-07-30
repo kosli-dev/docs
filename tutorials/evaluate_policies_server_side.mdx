@@ -57,8 +57,9 @@ against controls, validating and testing policies, and reviewing or exporting th
 has produced.
 
 **Not in:** evaluating anything other than trails, evaluating the contents of attachments, composing
-several policies into one, scheduled evaluations, pinning an evaluation to a policy version, and
-advisory-only outcomes. See the [full list, with reasons](#out-of-scope-for-the-beta).
+several **published** policies into one evaluation, scheduled evaluations, pinning an evaluation to
+a policy version, and advisory-only outcomes. See the
+[full list, with reasons](#out-of-scope-for-the-beta).
 
 ### Where to go next
 
@@ -923,7 +924,7 @@ The export contains what the evaluation was given, as ordinary OPA inputs:
 |---|---|
 | `input.json` | The trail moment that was evaluated — `input.trail` or `input.trails`. |
 | `data.json` | `params` as supplied, and the `kosli.evaluation_time` that was injected. |
-| `policy.rego` | The exact policy source that ran, matching the digest on the decision. |
+| `policy/` | The exact policy source that ran, laid out as it was published — one `.rego` file, or every file in the bundle. Re-digesting this directory reproduces the digest on the decision. |
 
 <Tip>
 A context exists from the moment an evaluation is queued, so this also works when there is **no
@@ -931,18 +932,23 @@ decision to look at** — an evaluation still in the queue, or one that failed. 
 case you most want to inspect.
 </Tip>
 
-Evaluate it with OPA directly:
+Evaluate it with OPA directly. `--bundle` loads the whole policy directory, so the same command
+works whether the policy was one file or many:
 
 ```shell
 opa eval --input replay/input.json \
     --data replay/data.json \
-    --data replay/policy.rego \
+    --bundle replay/policy/ \
     'data.policy.allow'
 ```
 
 Because the evaluation sandbox excludes anything non-deterministic — no clock, no network, no
 randomness, with time supplied as data — this returns the outcome the decision recorded. If it
 doesn't, that is a finding in itself.
+
+The export preserves the bundle's file layout because the digest is over the whole set — so an
+auditor can verify the digest on the decision as well as re-run the policy, rather than taking on
+trust that the exported source is what ran.
 
 <Tip>
 This is the strongest form of the audit story, because it doesn't ask anyone to trust Kosli to check
@@ -1001,7 +1007,9 @@ blocks you, that is worth telling us.
 - **Evidence-attachment content evaluation** — evaluating the contents of attached files. Summarize
   the attachment into JSON `--user-data` at attestation time and a policy can evaluate that instead —
   see [What the policy sees in `input`](#what-the-policy-sees-in-input).
-- **Composable policies** — composing many authored policies into one versioned policy.
+- **Composable policies** — combining several **separately published** policies, each with its own
+  identifier and version, into one evaluation. This is distinct from a bundle, where one policy spans
+  several Rego files under a single identifier, version, and digest. Bundles are supported.
 - **Non-trail evaluate targets** — snapshots, artifacts, and generic input.
 - **Scheduled evaluations** and **risk measurement**.
 - **Associating policies to controls** — a stored policy-to-control link that lets Kosli infer
