@@ -218,9 +218,8 @@ see [Manage policies](#manage-policies) for updating, tagging, and archiving ove
 **Only org admins can publish a policy.** Creating, updating, and archiving a policy all require
 org admin, the same as [controls](/tutorials/working_with_controls#creating-a-control). Running an
 evaluation and recording a decision does not — an ordinary API token or service account is enough,
-so pipelines can invoke a policy without being able to change one. That split is what makes a
-server-side decision worth more than a self-reported one: the team being audited can *run* the
-control, but only an admin can decide what the control checks.
+so pipelines can invoke a policy without being able to change one. That split means the team being
+audited can *run* the control, but only an admin can decide what the control checks.
 
 ```shell
 kosli create policy pr-approved pr-approved.rego \
@@ -240,7 +239,7 @@ Policy 'pr-approved' created
 <Info>
 `kosli create policy` is the same command used for [environment policies](/getting_started/policies):
 `--type rego` selects an evaluation policy, while the default `--type env` creates an environment
-policy. Note that the positional argument differs between the two — for `--type env` it is the
+policy. The positional argument differs between the two — for `--type env` it is the
 policy **name**, while for `--type rego` it is the immutable **identifier** described above. In the
 beta, authoring is **CLI/API only** — the Kosli UI is read/tag-only.
 </Info>
@@ -375,7 +374,7 @@ the **evaluation context** it was reached from:
 | Recorded | Why it is there |
 |---|---|
 | The **evaluation context** the decision came from | The context holds what the evaluation was given. Naming it is what makes the decision traceable — and [re-runnable](#re-run-a-decision-offline). |
-| The policy **version**, and a **digest** of the exact policy source that ran | A version number says which release; a digest proves the bytes. Together they mean nobody has to trust that version 3 is still what version 3 was. |
+| The policy **version**, and a **digest** of the exact policy source that ran | A version number says which release; a digest proves the bytes. |
 | The **parameters** used | Parameters are the only outside input, so a decision is not interpretable without them. |
 | The trail **moments** in scope, and the **attestation IDs** actually used | A policy may ignore half a trail, so the context names the facts it actually relied on. |
 | The **evaluation engine version** | The same policy on a different engine is not guaranteed to be the same evaluation. |
@@ -383,9 +382,8 @@ the **evaluation context** it was reached from:
 
 **A decision carries two timestamps.** The **requested** time is when the evaluation was asked
 for; the **recorded** time is when the decision was written, once the evaluation came off the
-queue. A decision is **valid as of the requested time**, even though it was recorded later — the
-same distinction as a trade executed at one time and booked at another. Kosli records both and
-never backdates the record.
+queue. A decision is **valid as of the requested time**, even though it was recorded later. Kosli
+records both and never backdates the record.
 
 This matters when facts arrive mid-flight: an attestation added between the two timestamps is
 *not* part of the decision, because the trail moment is anchored to the requested time. If that
@@ -455,9 +453,8 @@ and pass it as `--user-data` — extract the counts, severities, or package iden
 needs, and the policy evaluates the summary.
 
 Keep the original file on the same attestation with `--attachments`. The summary is what the policy
-reads; the attachment is what makes the summary worth trusting, because an auditor can go back to
-the file the summary was derived from and check that it is faithful. A summary with no attachment
-behind it is just another self-reported number.
+reads; the attachment is what lets an auditor go back to the file the summary was derived from and
+check that it is faithful.
 
 The `--input-schema` you declare when you publish the policy selects the shape of `input`:
 
@@ -726,9 +723,9 @@ version, Kosli creates no new version, says so, and exits `0`:
 Policy 'pr-approved' unchanged — still at version 4
 ```
 
-This is what makes publishing safe to run on every merge, or from `terraform apply`: the command is
-idempotent, so a pipeline that republishes an untouched policy leaves the history alone instead of
-filling it with identical versions.
+Publishing is idempotent, so it is safe to run on every merge, or from `terraform apply`: a pipeline
+that republishes an untouched policy leaves the history alone instead of filling it with identical
+versions.
 
 What counts as a change:
 
@@ -843,9 +840,7 @@ kosli list policies --type rego --tag team=platform
 ### View a policy
 
 Select a policy to open it. The **Policy** tab is the default view: it shows the policy-as-code
-that Kosli actually runs, read-only, for the version you choose. This is what answers the question
-a control owner has to answer — *does this policy meet the control objective?* — which a name and
-description can only claim.
+that Kosli actually runs, read-only, for the version you choose — not a name and description of it.
 
 <Frame>
   <img src="/images/tutorials/policy-source.png" alt="Policy tab for a policy showing the bundle digest, roots, entrypoint and input schema, a file list, and the read-only Rego source of the selected file with line numbers" />
@@ -956,8 +951,7 @@ auditor can verify the digest on the decision as well as re-run the policy, rath
 trust that the exported source is what ran.
 
 <Tip>
-This is the strongest form of the audit story, because it doesn't ask anyone to trust Kosli to check
-Kosli. An auditor can reach the same conclusion independently, with a tool Kosli doesn't control.
+An auditor can reach the same conclusion independently, with a tool Kosli doesn't control.
 The same export doubles as a **regression fixture**: commit `input.json` and `data.json` beside your
 policy and assert against them with `opa test`, and a real past decision becomes a permanent test
 case.
