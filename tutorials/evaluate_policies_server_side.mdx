@@ -315,7 +315,6 @@ evaluation becomes a pipeline gate. Once recorded, a decision appears against th
 | `--annotate` | Optional `key=value` annotations stored with the decision. |
 | `--sync` | Wait for the evaluation to finish and return the outcome. Off by default — evaluation runs asynchronously. |
 | `--assert` | Exit non-zero when the policy denies, for use as a pipeline gate. Implies `--sync`, since asserting requires the outcome. |
-| `--dry-run` | Evaluate and return the outcome **without recording a decision** — for testing (see [Run an ad-hoc evaluation](#run-an-ad-hoc-evaluation)). |
 
 **More on `--context`.** In the beta the only reference *type* is a trail: `trail=<trail_id>` names a
 trail in `--flow`, and `trail=<flow_id>/<trail_id>` names one in another flow. Repeat the flag to
@@ -707,30 +706,6 @@ RESULT:  VALID
 the same forms `kosli create policy` and `kosli evaluate policy` accept, so you can validate
 exactly what you are about to publish.
 
-### Run an ad-hoc evaluation
-
-To see how a policy behaves against real trail data *without* recording a decision, add
-`--dry-run` to `kosli evaluate policy`. Kosli runs the policy server-side and returns the outcome,
-but no decision is stored — so `--control` and `--name` aren't needed:
-
-```shell
-kosli evaluate policy \
-    --flow "$FLOW_NAME" \
-    --trail "$TRAIL_NAME" \
-    --policy pr-approved.rego \
-    --context trail="$TRAIL_NAME" \
-    --params '{"pr_attestation_name": "pull-request"}' \
-    --sync \
-    --dry-run
-```
-
-```plaintext
-RESULT:  ALLOWED  (dry-run — no decision recorded)
-```
-
-This is the fastest way to iterate: point a candidate policy at a trail you know should pass (or
-fail) and confirm the outcome before publishing a version or gating a pipeline on it.
-
 ### Evaluate a local policy
 
 You don't have to publish a policy before it can record a decision. Point `--policy` at a local,
@@ -751,8 +726,7 @@ kosli evaluate policy \
 ```
 
 Because there is no stored policy version to cite, the decision records the exact policy source
-that was evaluated instead. Unlike the ad-hoc evaluation above, this **records** a decision — add
-`--dry-run` if you only want the outcome without recording one.
+that was evaluated instead.
 
 <Warning>
 A decision made this way did **not** go through the org-admin gate on
