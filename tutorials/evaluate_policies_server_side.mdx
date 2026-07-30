@@ -208,7 +208,8 @@ purpose, and both can be changed later without changing the identifier.
 Pass a single `.rego` file, as in the example below, or a directory when the policy is split across
 several files. A directory holds **one policy's bundle**, not a collection of separate policies —
 Kosli stores the whole set as one versioned bundle with one digest, so a decision still points at one
-unambiguous thing. Tests are stored with the bundle but never executed server-side.
+unambiguous thing. Tests — files named `*_test.rego`, following OPA's convention — are stored with
+the bundle but never executed server-side.
 
 Kosli records the first **version** on publish. Every later change creates a new version and
 records who made it, so a decision can always point back to the exact policy that produced it —
@@ -856,10 +857,10 @@ description can only claim.
 
 A policy can be a single `.rego` file or several, so the tab lists the files in the version and
 shows the one you select. Alongside them it shows what an auditor needs to check the record: the
-**bundle digest** a decision cites, the **entrypoint** that Kosli evaluates, the declared
-**input schema**, and the **parameters** the policy reads. Tests shipped with the policy are
-listed and marked *not executed* — Kosli stores them as evidence the policy was tested, but only
-the entrypoint runs.
+**bundle digest** a decision cites, the bundle's **roots** (the `data` paths it owns), the
+**entrypoint** that Kosli evaluates, the declared **input schema**, and the **parameters** the
+policy reads. Tests shipped with the policy are listed and marked *not executed* — Kosli stores them
+as evidence the policy was tested, but only the entrypoint runs.
 
 <Tip>
 When you open a policy from a decision, the tab shows the version **that decision used**, not the
