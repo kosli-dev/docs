@@ -147,12 +147,11 @@ reviewed, and tested. Kosli is authoritative for **what executed**: once a versi
 that stored version is what runs and what a decision cites, so the audit record never depends on
 your repository still being reachable or unchanged.
 
-The output schema requires an `allow` rule; you can return richer output alongside it. Follow
-the same fail-safe design rules as client-side policies — see
-[Evaluate trails with OPA policies](/tutorials/evaluate_trails_with_opa) for the
-reasoning behind them. The full contract a policy is written against — entry point, `input`,
-parameters, available built-ins, and output — is in
-[The Rego authoring contract](#the-rego-authoring-contract).
+The result schema requires an `allow` rule; you can return more alongside it. Follow the same
+fail-safe design rules as client-side policies — see
+[Evaluate trails with OPA policies](/tutorials/evaluate_trails_with_opa) for the reasoning behind
+them. The full contract a policy is written against — entry point, `input`, parameters, available
+built-ins, and result — is in [The Rego authoring contract](#the-rego-authoring-contract).
 
 ```rego pr-approved.rego
 package policy
@@ -427,7 +426,7 @@ trail — the one named by `--flow` and `--trail`.
 Kosli evaluates your policy with OPA, so the tooling you already use locally — `opa fmt`,
 `opa check`, `opa test` — works on these policies unchanged. What Kosli fixes is the contract
 around the policy: the entry point it evaluates, the shape of `input`, the parameters and
-built-ins a policy may use, and the output Kosli reads back.
+built-ins a policy may use, and the result Kosli reads back.
 
 <Info>
 Everything in this section is **proposed and open for comment**. If a constraint here would stop
@@ -537,7 +536,7 @@ Parameters are recorded on every decision and are visible to anyone who can read
 Pass thresholds, names, and flags — never secrets or personal data.
 </Warning>
 
-### Output
+### Result
 
 | Field | Required | Purpose |
 |---|---|---|
@@ -627,7 +626,7 @@ confirms that:
 
 - the Rego **compiles**;
 - it matches its declared **input schema** (`trail` / `trails`);
-- it satisfies the **output schema** — an `allow` rule is mandatory.
+- it satisfies the **result schema** — an `allow` rule is mandatory.
 
 ```shell
 kosli validate policy \
@@ -964,7 +963,7 @@ through its `violations`. Whether the policy's rules weren't met (for example, a
 no approver) or an expected attestation was missing from the trail, both surface as violations on
 the decision.
 
-A policy can return **more than `allow` and `violations`** — any additional fields in its output
+A policy can return **more than `allow` and `violations`** — any additional fields in its result
 are captured on the decision, so you can surface richer, human-readable context beyond a bare
 pass/fail.
 
@@ -1014,8 +1013,8 @@ blocks you, that is worth telling us.
   context through a different policy or version to compare outcomes.
 - **Advisory outcomes** — a decision is compliant or non-compliant. There is no advisory or
   warn-only mode that records a concern without failing the control.
-- **Verbose evaluation tracing** — beyond `violations` and any custom output the policy returns,
-  there is no rule-by-rule trace of why a policy reached its result.
+- **Verbose evaluation tracing** — beyond `violations` and any custom result fields the policy
+  returns, there is no rule-by-rule trace of how a policy reached its answer.
 - **Filtering decisions by branch or environment** — decisions can be filtered by outcome, policy
   version, and time, but not by where the change came from or where it was heading.
 
