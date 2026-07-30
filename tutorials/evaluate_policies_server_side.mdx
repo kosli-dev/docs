@@ -249,9 +249,19 @@ beta, authoring is **CLI/API only** — the Kosli UI is read/tag-only.
 <Step title="Evaluate and record a decision">
 
 With `kosli evaluate policy`, Kosli fetches the in-scope facts, runs the policy **server-side**, and
-records a **decision** against a control. Evaluation is **asynchronous by default** — the command
-returns once the evaluation is queued. Add `--sync` to wait for and return the outcome, as the
-example below does.
+records a **decision** against a control.
+
+Evaluation is **asynchronous by default** — the command returns once the evaluation is queued,
+naming the **evaluation context** that will carry the outcome:
+
+```plaintext
+Evaluation queued
+  context:  ec_7f3a91c2
+```
+
+You then either poll that context (see
+[Check an asynchronous evaluation](#check-an-asynchronous-evaluation)) or, more usually in a
+pipeline, add `--sync` to wait for the outcome, as the example below does.
 
 ```shell
 kosli evaluate policy \
@@ -310,7 +320,7 @@ evaluation becomes a pipeline gate. Once recorded, a decision appears against th
 **More on `--context`.** In the beta the only reference *type* is a trail: `trail=<trail_id>` names a
 trail in `--flow`, and `trail=<flow_id>/<trail_id>` names one in another flow. Repeat the flag to
 evaluate several trails — see [Evaluating multiple trails](#evaluating-multiple-trails). Kosli
-resolves these references into the [evaluation context](#re-run-a-decision-offline) a decision cites;
+resolves these references into the [evaluation context](#check-an-asynchronous-evaluation) a decision cites;
 they are not a cluster or account selector. The typed form leaves room for other context types —
 snapshots and reported workloads, for example — later, without new flags.
 
@@ -397,6 +407,43 @@ produced, see [View the decisions for a policy](#view-the-decisions-for-a-policy
 </Step>
 
 </Steps>
+
+### Check an asynchronous evaluation
+
+Without `--sync`, the outcome arrives on the **evaluation context** the command named. A context
+exists from the moment the evaluation is queued, so you can ask about it before there is any
+decision to look at:
+
+```shell
+kosli get evaluation-context ec_7f3a91c2
+```
+
+```plaintext
+CONTEXT:    ec_7f3a91c2
+STATUS:     completed
+POLICY:     pr-approved @ version 1
+REQUESTED:  2026-07-30T09:14:22Z
+RECORDED:   2026-07-30T09:14:25Z
+DECISION:   pr-approval-decision on my-release-flow/my-release-trail — ALLOWED
+```
+
+`STATUS` is `queued` until the evaluation runs, then `completed` or `failed` — see
+[When evaluation itself fails](#when-evaluation-itself-fails). Once it is `completed`, the context
+names the decision it produced, so a queued evaluation and the decision it becomes are one hop apart
+in both directions.
+
+The same command returns what the evaluation was **given**, not just what it concluded:
+
+| Form | Returns |
+|---|---|
+| `kosli get evaluation-context ID` | The summary above. |
+| `--output json` | The same, as JSON. |
+| `--show-input --output json` | The above plus the policy input that was evaluated, under `.input`. |
+| `--fixture --dir ./replay` | A replay bundle on disk — see [Re-run a decision offline](#re-run-a-decision-offline). |
+
+`--show-input` behaves as it does on the client-side
+[`kosli evaluate trail`](/client_reference/kosli_evaluate_trail), so `jq '.input'` extracts the
+policy input and `kosli evaluate input` consumes it unchanged.
 
 ### Evaluating multiple trails
 
@@ -598,6 +645,17 @@ A policy that times out, exhausts its memory budget, or hits a runtime error is 
 not a non-compliant artifact, and Kosli reports the two differently — a failed evaluation records
 a typed error rather than a `--compliant=false` decision, and `--assert` exits with a distinct
 code so a pipeline can tell "this change is not compliant" from "this policy is broken".
+
+The typed error lands on the evaluation context, so a failure is visible without `--sync` or
+`--assert` — the distinction holds in the asynchronous path too:
+
+```plaintext
+CONTEXT:    ec_7f3a91c2
+STATUS:     failed
+POLICY:     pr-approved @ version 1
+REQUESTED:  2026-07-30T09:14:22Z
+ERROR:      evaluation exceeded its time budget
+```
 
 Open questions we would particularly like feedback on: whether a built-in error should abort the
 evaluation or evaluate to undefined (and therefore deny), and whether `print` and `trace` output
@@ -912,7 +970,7 @@ evaluation was given is held on its **evaluation context**, which the decision n
 export that context and evaluate the policy again yourself, with stock OPA, on your own machine:
 
 ```shell
-kosli get evaluation-context CONTEXT-ID --output fixture --dir ./replay
+kosli get evaluation-context CONTEXT-ID --fixture --dir ./replay
 ```
 
 Every decision shows the evaluation context it came from, in the UI and in
@@ -927,9 +985,9 @@ The export contains what the evaluation was given, as ordinary OPA inputs:
 | `policy/` | The exact policy source that ran, laid out as it was published — one `.rego` file, or every file in the bundle. Re-digesting this directory reproduces the digest on the decision. |
 
 <Tip>
-A context exists from the moment an evaluation is queued, so this also works when there is **no
-decision to look at** — an evaluation still in the queue, or one that failed. That is usually the
-case you most want to inspect.
+Because a context exists from the moment an evaluation is queued, this export also works when there
+is **no decision to look at** — an evaluation still in the queue, or one that failed. That is usually
+the case you most want to inspect.
 </Tip>
 
 Evaluate it with OPA directly. `--bundle` loads the whole policy directory, so the same command
