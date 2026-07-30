@@ -625,9 +625,12 @@ catching regressions before you publish a new version.
 `kosli validate policy` checks that a policy is well-formed without recording anything. It
 confirms that:
 
-- the Rego **compiles**;
+- the Rego **compiles** — a bundle is validated as a whole, not file by file;
 - it matches its declared **input schema** (`trail` / `trails`);
 - it satisfies the **result schema** — an `allow` rule is mandatory.
+
+Kosli runs the same validation when you publish, so a policy that fails these checks never becomes
+a version.
 
 ```shell
 kosli validate policy \
