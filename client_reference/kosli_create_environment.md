@@ -22,12 +22,6 @@ The following types are supported:
   - server     - Generic type
   - logical    - Logical grouping of real environments
 
-By default, kosli will not make new snapshots for scaling events (change in number of instances running).
-For large clusters the scaling events will often outnumber the actual change of SW.
-
-It is possible to enable new snapshots for scaling events with the --include-scaling flag, or turn
-it off again with the --exclude-scaling.
-
 Logical environments are used for grouping of physical environments. For instance **prod-aws** and **prod-s3** can
 be grouped into logical environment **prod**. Logical environments are view-only, you can not report snapshots
 to them.
@@ -40,9 +34,7 @@ to them.
 | :--- | :--- |
 |    `-d`, `--description` string  |  [optional] The environment description.  |
 |    `-D`, `--dry-run`  |  [optional] Run in dry-run mode. When enabled, no data is sent to Kosli and the CLI exits with 0 exit code regardless of any errors.  |
-|        `--exclude-scaling`  |  [optional] Exclude scaling events for snapshots. Snapshots with scaling changes will not result in new environment records.  |
 |    `-h`, `--help`  |  help for environment  |
-|        `--include-scaling`  |  [optional] Include scaling events for snapshots. Snapshots with scaling changes will result in new environment records.  |
 |        `--included-environments` strings  |  [optional] Comma separated list of environments to include in logical environment  |
 |    `-t`, `--type` string  |  The type of environment. Valid types are: [K8S, ECS, S3, lambda, server, docker, azure-apps, cloud-run, logical].  |
 

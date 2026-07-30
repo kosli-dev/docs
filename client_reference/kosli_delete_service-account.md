@@ -16,6 +16,9 @@ from the organization, along with their API keys. Deletion is immediate and
 cannot be undone. You are asked to confirm before deletion; use
 `--assume-yes`/`--yes` to skip the confirmation prompt.
 
+When stdin is not interactive (e.g. in CI) the prompt cannot be answered and the
+command fails without deleting anything, so pass `--assume-yes` there.
+
 ## Flags
 | Flag | Description |
 | :--- | :--- |

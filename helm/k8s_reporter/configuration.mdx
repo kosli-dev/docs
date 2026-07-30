@@ -90,7 +90,7 @@ description: All values.yaml options for the Kosli k8s-reporter Helm chart.
 </ParamField>
 
 <ParamField path="reporterConfig.includeScaling" type="boolean" default="">
-  Whether to record scaling (replica count) changes for every environment auto-created in this run. Leave unset to use the Kosli server default; set to `true` to pass `--include-scaling` or `false` to pass `--exclude-scaling`. Only used when `autoEnvironment` is true; existing environments are never modified.
+  **Deprecated and ignored** — used to control whether scaling (replica count) changes were recorded for environments auto-created in this run. Scaling events no longer trigger new snapshots and an environment can no longer have scaling capture turned on, so the `--include-scaling` / `--exclude-scaling` flags this passed to the CLI had stopped having any effect. As of chart version 2.7.0 the flags are no longer passed. Setting this value does nothing; remove it from your values.
 </ParamField>
 
 <ParamField path="reporterConfig.kosliOrg" type="string" default="">
