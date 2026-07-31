@@ -24,6 +24,7 @@ You can specify flow parameters in flags.
 |    `-t`, `--template` strings  |  [defaulted] The comma-separated list of required compliance controls names.  |
 |    `-f`, `--template-file` string  |  [optional] The path to a yaml template file. Cannot be used together with `--use-empty-template`  |
 |        `--use-empty-template`  |  Use an empty template for the flow creation without specifying a file. Cannot be used together with `--template` or `--template-file`  |
+|        `--visibility` string  |  [deprecated] The visibility of the Kosli flow. This flag is deprecated and will be removed in a future version. (DEPRECATED: this flag is deprecated and will be removed in a future version.)  |
 
 
 ## Flags inherited from parent commands

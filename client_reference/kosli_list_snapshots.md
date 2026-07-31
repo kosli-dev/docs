@@ -64,11 +64,46 @@ kosli list snapshots aws-prod --output=json
 ```json
 [
   {
-    "index": 5138,
-    "from": 1785386758.6525679,
+    "index": 5143,
+    "from": 1785488758.445761,
     "to": 0.0,
     "compliant": true,
-    "duration": 18396.789004325867
+    "duration": 7183.661288738251
+  },
+  {
+    "index": 5142,
+    "from": 1785488698.5792832,
+    "to": 1785488758.445761,
+    "compliant": true,
+    "duration": 59.866477727890015
+  },
+  {
+    "index": 5141,
+    "from": 1785474718.4306936,
+    "to": 1785488698.5792832,
+    "compliant": true,
+    "duration": 13980.148589611053
+  },
+  {
+    "index": 5140,
+    "from": 1785474598.4708273,
+    "to": 1785474718.4306936,
+    "compliant": true,
+    "duration": 119.9598662853241
+  },
+  {
+    "index": 5139,
+    "from": 1785474478.4712877,
+    "to": 1785474598.4708273,
+    "compliant": true,
+    "duration": 119.99953961372375
+  },
+  {
+    "index": 5138,
+    "from": 1785386758.6525679,
+    "to": 1785474478.4712877,
+    "compliant": true,
+    "duration": 87719.81871986389
   },
   {
     "index": 5137,
@@ -132,41 +167,6 @@ kosli list snapshots aws-prod --output=json
     "to": 1785301018.7636228,
     "compliant": true,
     "duration": 60.20175361633301
-  },
-  {
-    "index": 5128,
-    "from": 1785300898.3949952,
-    "to": 1785300958.5618691,
-    "compliant": true,
-    "duration": 60.166873931884766
-  },
-  {
-    "index": 5127,
-    "from": 1785300838.4479997,
-    "to": 1785300898.3949952,
-    "compliant": true,
-    "duration": 59.94699549674988
-  },
-  {
-    "index": 5126,
-    "from": 1785243478.598589,
-    "to": 1785300838.4479997,
-    "compliant": true,
-    "duration": 57359.84941077232
-  },
-  {
-    "index": 5125,
-    "from": 1785243418.5364106,
-    "to": 1785243478.598589,
-    "compliant": true,
-    "duration": 60.06217837333679
-  },
-  {
-    "index": 5124,
-    "from": 1785241678.414592,
-    "to": 1785243418.5364106,
-    "compliant": true,
-    "duration": 1740.1218185424805
   }
 ]
 ```

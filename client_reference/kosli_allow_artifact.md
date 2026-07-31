@@ -49,6 +49,7 @@ is set), registry credentials are resolved as follows:
 |    `-h`, `--help`  |  help for artifact  |
 |        `--reason` string  |  The reason why this artifact is allowlisted.  |
 |        `--registry-password` string  |  [conditional] The container registry password or access token. Only required if you want to read container image SHA256 digest from a remote container registry and it is not already accessible via Docker/Podman auth files or a credential helper.  |
+|        `--registry-provider` string  |  [deprecated] The docker registry provider or url. Only required if you want to read docker image SHA256 digest from a remote docker registry. (DEPRECATED: no longer used)  |
 |        `--registry-username` string  |  [conditional] The container registry username. Only required if you want to read container image SHA256 digest from a remote container registry and it is not already accessible via Docker/Podman auth files or a credential helper.  |
 
 

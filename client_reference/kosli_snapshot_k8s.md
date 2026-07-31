@@ -34,8 +34,10 @@ to include or exclude namespaces.
 |    `-A`, `--auto-environment`  |  [optional] Create the environment (with the type inferred from the snapshot subcommand) if it does not already exist, before reporting the snapshot.  |
 |        `--debug`  |  [optional] Print debug logs to stdout.  |
 |        `--environment-description` string  |  [optional] The environment description.  |
+|        `--exclude-scaling`  |  [optional] Exclude scaling events for snapshots. Snapshots with scaling changes will not result in new environment records. (DEPRECATED: this flag is deprecated and will be removed in a future version. Scaling events do not trigger new snapshots.)  |
 |    `-H`, `--host` string  |  [defaulted] The Kosli endpoint. (default "https://app.kosli.com")  |
 |        `--http-proxy` string  |  [optional] The HTTP proxy URL including protocol and port number. e.g. `http://proxy-server-ip:proxy-port`  |
+|        `--include-scaling`  |  [optional] Include scaling events for snapshots. Snapshots with scaling changes will result in new environment records. (DEPRECATED: this flag is deprecated and will be removed in a future version. Scaling events do not trigger new snapshots.)  |
 |    `-r`, `--max-api-retries` int  |  [defaulted] How many times should API calls be retried when the API host is not reachable. (default 3)  |
 |        `--org` string  |  The Kosli organization.  |
 |    `-q`, `--quiet`  |  [optional] Suppress non-critical warning messages. Errors and normal output are not affected. If both `--quiet` and `--debug` are set, `--debug` wins.  |

@@ -46,6 +46,7 @@ non-zero code if non-compliant status.
 |    `-o`, `--output` string  |  [defaulted] The format of the output. Valid formats are: [table, json]. (default "table")  |
 |        `--policy` strings  |  [optional] policy name (can be specified multiple times)  |
 |        `--registry-password` string  |  [conditional] The container registry password or access token. Only required if you want to read container image SHA256 digest from a remote container registry and it is not already accessible via Docker/Podman auth files or a credential helper.  |
+|        `--registry-provider` string  |  [deprecated] The docker registry provider or url. Only required if you want to read docker image SHA256 digest from a remote docker registry. (DEPRECATED: no longer used)  |
 |        `--registry-username` string  |  [conditional] The container registry username. Only required if you want to read container image SHA256 digest from a remote container registry and it is not already accessible via Docker/Podman auth files or a credential helper.  |
 
 
@@ -68,7 +69,7 @@ non-zero code if non-compliant status.
 	<Tab title="GitHub">
 	View an example of the `kosli assert artifact` command in GitHub.
 
-	In [this YAML file](https://github.com/cyber-dojo/differ/blob/1b7ea87a174a1a290600b469dc1029ec4c974320/.github/workflows/main.yml#L271)
+	In [this YAML file](https://github.com/cyber-dojo/differ/blob/10e162d4e1294815375a31121f14d57e13183b34/.github/workflows/main.yml#L271)
 	</Tab>
 	<Tab title="GitLab">
 	View an example of the `kosli assert artifact` command in GitLab.
