@@ -34,8 +34,11 @@ to them.
 | :--- | :--- |
 |    `-d`, `--description` string  |  [optional] The environment description.  |
 |    `-D`, `--dry-run`  |  [optional] Run in dry-run mode. When enabled, no data is sent to Kosli and the CLI exits with 0 exit code regardless of any errors.  |
+|        `--exclude-scaling`  |  [optional] Exclude scaling events for snapshots. Snapshots with scaling changes will not result in new environment records. (DEPRECATED: this flag is deprecated and will be removed in a future version. Scaling events do not trigger new snapshots.)  |
 |    `-h`, `--help`  |  help for environment  |
+|        `--include-scaling`  |  [optional] Include scaling events for snapshots. Snapshots with scaling changes will result in new environment records. (DEPRECATED: this flag is deprecated and will be removed in a future version. Scaling events do not trigger new snapshots.)  |
 |        `--included-environments` strings  |  [optional] Comma separated list of environments to include in logical environment  |
+|        `--require-provenance`  |  [defaulted] Require provenance for all artifacts running in environment snapshots. (DEPRECATED: this flag is deprecated and will be removed in a future version. Use policies instead.)  |
 |    `-t`, `--type` string  |  The type of environment. Valid types are: [K8S, ECS, S3, lambda, server, docker, azure-apps, cloud-run, logical].  |
 
 

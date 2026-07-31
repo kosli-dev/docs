@@ -63,6 +63,7 @@ The attestation can be bound to an *artifact* in two ways:
 |        `--pull-request` string  |  [conditional] The ID of the pull-request. Only required if you want to use the project key/pull-request to get the scan results rather than using Sonar's metadata file. Cannot be used with `--sonar-revision`.  |
 |        `--redact-commit-info` strings  |  [optional] The list of commit info to be redacted before sending to Kosli. Allowed values are one or more of [author, message, branch].  |
 |        `--registry-password` string  |  [conditional] The container registry password or access token. Only required if you want to read container image SHA256 digest from a remote container registry and it is not already accessible via Docker/Podman auth files or a credential helper.  |
+|        `--registry-provider` string  |  [deprecated] The docker registry provider or url. Only required if you want to read docker image SHA256 digest from a remote docker registry. (DEPRECATED: no longer used)  |
 |        `--registry-username` string  |  [conditional] The container registry username. Only required if you want to read container image SHA256 digest from a remote container registry and it is not already accessible via Docker/Podman auth files or a credential helper.  |
 |        `--repo-id` string  |  [conditional] The stable, unique identifier for the repository in your VCS provider (e.g. a numeric ID). Do not use the repository name as it can change if the repo is renamed. All three of `--repo-id`, `--repo-url` and `--repository` must be set to record repository information (defaulted in some CIs: [docs](/integrations/ci_cd) ).  |
 |        `--repo-provider` string  |  [optional] The source code hosting provider. One of: github, gitlab, bitbucket, bitbucket_cloud, bitbucket_dc, azure-devops, azure_devops_services, azure_devops_server, git, subversion (defaulted in some CIs: [docs](/integrations/ci_cd) ).  |
@@ -98,7 +99,7 @@ The attestation can be bound to an *artifact* in two ways:
 	<Tab title="GitHub">
 	View an example of the `kosli attest sonar` command in GitHub.
 
-	In [this YAML file](https://github.com/cyber-dojo/dashboard/blob/0fb0be439480821efb926a5079e39ce5941eaa48/.github/workflows/main.yml#L122), which created [this Kosli Event](https://app.kosli.com/cyber-dojo/flows/dashboard-ci/trails/0fb0be439480821efb926a5079e39ce5941eaa48?attestation_id=2ca1e327-ed19-492a-80d3-2ec96963).
+	In [this YAML file](https://github.com/cyber-dojo/dashboard/blob/09d5c85f03a24915e7fd278719729436a36e62bc/.github/workflows/main.yml#L122), which created [this Kosli Event](https://app.kosli.com/cyber-dojo/flows/dashboard-ci/trails/09d5c85f03a24915e7fd278719729436a36e62bc?attestation_id=1c64ecb4-864a-4663-b969-365e763d).
 	</Tab>
 </Tabs>
 
