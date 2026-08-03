@@ -15,29 +15,29 @@ Authentication to Bitbucket can be done with an access token (recommended) or an
 Bitbucket app passwords are no longer supported as of 28 July 2026; replace any app passwords with API tokens. Credentials need to have read access for both repos and pull requests.
 
 ## Flags
-| Flag | Description |
-| :--- | :--- |
-|        `--bitbucket-access-token` string  |  Bitbucket repo/project/workspace access token. See [Bitbucket access tokens](https://developer.atlassian.com/cloud/bitbucket/rest/intro/#access-tokens) for more details.  |
-|        `--bitbucket-password` string  |  Bitbucket API token. Bitbucket app passwords are no longer supported as of 28 July 2026. See [Bitbucket authentication](https://developer.atlassian.com/cloud/bitbucket/rest/intro/#authentication) for more details.  |
-|        `--bitbucket-username` string  |  Bitbucket username (your Atlassian account email when using an API token). Only needed if you use `--bitbucket-password`  |
-|        `--bitbucket-workspace` string  |  Bitbucket workspace ID.  |
-|        `--commit` string  |  Git commit for which to find pull request evidence. (defaulted in some CIs: [docs](/integrations/ci_cd) ). (default "HEAD")  |
-|    `-D`, `--dry-run`  |  [optional] Run in dry-run mode. When enabled, no data is sent to Kosli and the CLI exits with 0 exit code regardless of any errors.  |
-|    `-h`, `--help`  |  help for bitbucket  |
-|        `--repository` string  |  Git repository. (defaulted in some CIs: [docs](/integrations/ci_cd) ).  |
+| Flag | Type | Description |
+| :--- | :--- | :--- |
+| `--bitbucket-access-token` | string | Bitbucket repo/project/workspace access token. See [Bitbucket access tokens](https://developer.atlassian.com/cloud/bitbucket/rest/intro/#access-tokens) for more details. |
+| `--bitbucket-password` | string | Bitbucket API token. Bitbucket app passwords are no longer supported as of 28 July 2026. See [Bitbucket authentication](https://developer.atlassian.com/cloud/bitbucket/rest/intro/#authentication) for more details. |
+| `--bitbucket-username` | string | Bitbucket username (your Atlassian account email when using an API token). Only needed if you use `--bitbucket-password` |
+| `--bitbucket-workspace` | string | Bitbucket workspace ID. |
+| `--commit` | string | Git commit for which to find pull request evidence. (defaulted in some CIs: [docs](/integrations/ci_cd) ). (default "HEAD") |
+| `-D`, `--dry-run` | bool | [optional] Run in dry-run mode. When enabled, no data is sent to Kosli and the CLI exits with 0 exit code regardless of any errors. |
+| `-h`, `--help` | bool | help for bitbucket |
+| `--repository` | string | Git repository. (defaulted in some CIs: [docs](/integrations/ci_cd) ). |
 
 
 ## Flags inherited from parent commands
-| Flag | Description |
-| :--- | :--- |
-|    `-a`, `--api-token` string  |  The Kosli API token.  |
-|    `-c`, `--config-file` string  |  [optional] The Kosli config file path. (default "kosli")  |
-|        `--debug`  |  [optional] Print debug logs to stdout.  |
-|    `-H`, `--host` string  |  [defaulted] The Kosli endpoint. (default "https://app.kosli.com")  |
-|        `--http-proxy` string  |  [optional] The HTTP proxy URL including protocol and port number. e.g. `http://proxy-server-ip:proxy-port`  |
-|    `-r`, `--max-api-retries` int  |  [defaulted] How many times should API calls be retried when the API host is not reachable. (default 3)  |
-|        `--org` string  |  The Kosli organization.  |
-|    `-q`, `--quiet`  |  [optional] Suppress non-critical warning messages. Errors and normal output are not affected. If both `--quiet` and `--debug` are set, `--debug` wins.  |
+| Flag | Type | Description |
+| :--- | :--- | :--- |
+| `-a`, `--api-token` | string | The Kosli API token. |
+| `-c`, `--config-file` | string | [optional] The Kosli config file path. (default "kosli") |
+| `--debug` | bool | [optional] Print debug logs to stdout. |
+| `-H`, `--host` | string | [defaulted] The Kosli endpoint. (default "https://app.kosli.com") |
+| `--http-proxy` | string | [optional] The HTTP proxy URL including protocol and port number. e.g. `http://proxy-server-ip:proxy-port` |
+| `-r`, `--max-api-retries` | int | [defaulted] How many times should API calls be retried when the API host is not reachable. (default 3) |
+| `--org` | string | The Kosli organization. |
+| `-q`, `--quiet` | bool | [optional] Suppress non-critical warning messages. Errors and normal output are not affected. If both `--quiet` and `--debug` are set, `--debug` wins. |
 
 
 ## Examples Use Cases
