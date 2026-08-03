@@ -50,7 +50,7 @@ rss: true
 
 ## Breaking changes
 
-- **`include_scaling` removed from `kosli_environment`** — the `include_scaling` attribute has been removed from both the `kosli_environment` resource and data source. The Kosli API no longer honours it (it always reports `false`), and setting it to `true` caused apply failures. Remove any `include_scaling` values from your configuration before upgrading.
+- **`include_scaling` removed from `kosli_environment`** — the `include_scaling` attribute has been removed from both the `kosli_environment` resource and data source. The Kosli API no longer honors it (it always reports `false`), and setting it to `true` caused apply failures. Remove any `include_scaling` values from your configuration before upgrading.
 
 [View on GitHub](https://github.com/kosli-dev/terraform-provider-kosli/releases/tag/v0.9.2)
 
@@ -70,12 +70,12 @@ rss: true
 
 ## Updates
 
-- **Cleaner errors for unknown commands** — unrecognised command tokens (for example `kosli list garbage`) now report an error and exit non-zero instead of silently exiting `0`.
+- **Cleaner errors for unknown commands** — unrecognized command tokens (for example `kosli list garbage`) now report an error and exit non-zero instead of silently exiting `0`.
 - **Boolean flag help cleanup** — the boolean-flag FAQ link has been removed from the `--compliant` and `--compliance-status` flag descriptions now that space-form booleans are handled correctly.
 
 ## Bug fixes
 
-- **Space-form boolean flags** — boolean flags written in the space form (for example `--compliant false`) were being misread as positional arguments, causing spurious errors or silently wrong behaviour. They now parse correctly.
+- **Space-form boolean flags** — boolean flags written in the space form (for example `--compliant false`) were being misread as positional arguments, causing spurious errors or silently wrong behavior. They now parse correctly.
 
 [View on GitHub](https://github.com/kosli-dev/cli/releases/tag/v2.36.0)
 
