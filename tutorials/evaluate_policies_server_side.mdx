@@ -50,11 +50,17 @@ which trail's facts to evaluate — the same trail here, a different one when yo
 fails the pipeline step if the policy denies. Everything else on this page is detail around those
 two commands.
 
+**Adding `--control` is what records a decision.** Omit it and Kosli still runs the policy and keeps
+the result, but writes no decision — an
+[ad-hoc evaluation](#evaluate-without-recording-a-decision) you can inspect without adding anything
+to the audit trail. That makes this one command two things: a way to check a policy against real
+facts, and a way to claim a control is satisfied.
+
 ### What is in the beta, and what is not
 
-**In:** publishing versioned policies, evaluating them against a trail or trails, recording decisions
-against controls, validating and testing policies, and reviewing or exporting the decisions a policy
-has produced.
+**In:** publishing versioned policies, evaluating them against a trail or trails, running evaluations
+that record no decision, recording decisions against controls, validating and testing policies, and
+reviewing or exporting the decisions a policy has produced.
 
 **Not in:** evaluating anything other than trails, evaluating the contents of attachments, composing
 several **published** policies into one evaluation, scheduled evaluations, pinning an evaluation to
@@ -248,18 +254,19 @@ beta, authoring is **CLI/API only** — the Kosli UI is read/tag-only.
 
 <Step title="Evaluate and record a decision">
 
-With `kosli evaluate policy`, Kosli fetches the in-scope facts, runs the policy **server-side**, and
-records a **decision** against a control.
+With `kosli evaluate policy`, Kosli fetches the in-scope facts and runs the policy **server-side**.
+Passing `--control` additionally records a **decision** against that control, which is what this
+step does; [omitting it](#evaluate-without-recording-a-decision) runs the evaluation on its own.
 
 Evaluation is **asynchronous by default** — the command returns once the evaluation is queued,
-naming the **evaluation context** that will carry the outcome:
+naming the **evaluation** that will carry the outcome:
 
 ```plaintext
 Evaluation queued
-  context:  ec_7f3a91c2
+  evaluation:  ev_7f3a91c2
 ```
 
-You then either poll that context (see
+You then either fetch that evaluation (see
 [Check an asynchronous evaluation](#check-an-asynchronous-evaluation)) or, more usually in a
 pipeline, add `--sync` to wait for the outcome, as the example below does.
 
@@ -282,18 +289,23 @@ DECISION:  recorded against control RCTL-043
 POLICY:    pr-approved @ version 1
 ```
 
-The four flags that carry the meaning:
+The flags that carry the meaning, in two groups:
 
-| Flag | Description |
-|------|-------------|
-| `--policy` | The policy to run — a Kosli policy **identifier** (uses its current version), or a local `.rego` file or bundle directory. |
-| `--control` | The control identifier the resulting decision is recorded against. |
-| `--context` | What it runs against — the **source**. |
-| `--flow` / `--trail` | Where the decision is recorded — the **destination**. |
+| Flag | Group | Description |
+|------|-------|-------------|
+| `--policy` | Source | The policy to run — a Kosli policy **identifier** (uses its current version), or a local `.rego` file or bundle directory. |
+| `--context` | Source | What it runs against. |
+| `--control` | Destination | The control the resulting decision is recorded against. **Optional** — supplying it is what records a decision. |
+| `--flow` / `--trail` | Destination | Where the decision is recorded. |
 
-All four are **required**. `--context` names the trail whose facts are **read**; `--flow` and
-`--trail` name the trail the decision is **written** to. They are often the same trail, as above —
-see the *Evaluating facts from another flow* example below for when they are not.
+`--policy` and `--context` are always **required** — they are the evaluation. The destination
+group — `--control`, `--flow`, `--trail`, `--name`, and the artifact — is **required together when
+you record a decision**, and rejected when you don't. `--flow` is the one exception: it may be
+passed on its own, because a bare `trail=<trail_id>` reference resolves against it.
+
+`--context` names the trail whose facts are **read**; `--flow` and `--trail` name the trail the
+decision is **written** to. They are often the same trail, as above — see the *Evaluating facts
+from another flow* example below for when they are not.
 
 Use `--assert` in place of `--sync` when the step should also fail on a denial — that is how an
 evaluation becomes a pipeline gate. Once recorded, a decision appears against the policy — see
@@ -303,23 +315,23 @@ evaluation becomes a pipeline gate. Once recorded, a decision appears against th
 
 | Flag | Description |
 |------|-------------|
-| `--flow` | The flow the decision is recorded on (the **destination** flow). **Required.** |
-| `--trail` | The trail the decision is recorded on. **Required** — there is no default, the same as every other Kosli command that writes to a trail. Set it once as `KOSLI_TRAIL` to keep it off each command. |
-| `--policy` | The policy to evaluate — a Kosli policy **identifier** (uses its current version), or a **local** `.rego` file or bundle directory (see [Evaluate a local policy](#evaluate-a-local-policy)). |
-| `--control` | The control identifier the resulting decision is recorded against. |
+| `--flow` | The flow the decision is recorded on (the **destination** flow). **Required with `--control`.** May also be passed on its own, to resolve bare `trail=<trail_id>` references. |
+| `--trail` | The trail the decision is recorded on. **Required with `--control`** — there is no default, the same as every other Kosli command that writes to a trail. Set it once as `KOSLI_TRAIL` to keep it off each command. |
+| `--policy` | The policy to evaluate — a Kosli policy **identifier** (uses its current version), or a **local** `.rego` file or bundle directory (see [Evaluate a local policy](#evaluate-a-local-policy)). **Required.** |
+| `--control` | The control the resulting decision is recorded against. **Optional** — supplying it records a decision; omitting it runs the evaluation and records none (see [Evaluate without recording a decision](#evaluate-without-recording-a-decision)). An empty value is an error, not an omission. Not valid with a local `--policy` file — see [Evaluate a local policy](#evaluate-a-local-policy). |
 | `--context` | One or more **typed references** to what should be evaluated (the **source**), repeatable. **Required** — see below. |
-| `--fingerprint` / `--artifact-type` | The artifact the decision applies to. Pass `--fingerprint` directly, or `--artifact-type` with the artifact name/path so Kosli calculates the fingerprint. |
-| `--name` | The attestation slot name the decision is recorded under on the trail. A decision recorded here satisfies a `type: decision` attestation in the trail's [flow template](/template-reference/flow_template) when the names match — see [Requiring decisions in flow templates](/tutorials/working_with_controls#requiring-decisions-in-flow-templates). |
+| `--fingerprint` / `--artifact-type` | The artifact the decision applies to. Pass `--fingerprint` directly, or `--artifact-type` with the artifact name/path so Kosli calculates the fingerprint. **Required with `--control`.** |
+| `--name` | The attestation slot name the decision is recorded under on the trail. **Required with `--control`.** A decision recorded here satisfies a `type: decision` attestation in the trail's [flow template](/template-reference/flow_template) when the names match — see [Requiring decisions in flow templates](/tutorials/working_with_controls#requiring-decisions-in-flow-templates). |
 | `--params` | Parameters passed to the policy as `data.params`. Validated against the parameters the policy reads before the evaluation is queued — an unknown or missing name is an error. Every evaluation records the params it used. |
-| `--description` | Optional human-readable context for the decision. |
-| `--annotate` | Optional `key=value` annotations stored with the decision. |
+| `--description` | Optional human-readable context for the decision. Only valid with `--control`. |
+| `--annotate` | Optional `key=value` annotations stored with the decision. Only valid with `--control`. |
 | `--sync` | Wait for the evaluation to finish and return the outcome. Off by default — evaluation runs asynchronously. |
-| `--assert` | Exit non-zero when the policy denies, for use as a pipeline gate. Implies `--sync`, since asserting requires the outcome. |
+| `--assert` | Exit non-zero when the policy denies, for use as a pipeline gate. Implies `--sync`, since asserting requires the outcome. Valid without `--control`, in which case it gates on the outcome without recording a decision. |
 
 **More on `--context`.** In the beta the only reference *type* is a trail: `trail=<trail_id>` names a
 trail in `--flow`, and `trail=<flow_id>/<trail_id>` names one in another flow. Repeat the flag to
 evaluate several trails — see [Evaluating multiple trails](#evaluating-multiple-trails). Kosli
-resolves these references into the [evaluation context](#check-an-asynchronous-evaluation) a decision cites;
+resolves these references into the [evaluation](#check-an-asynchronous-evaluation) a decision cites;
 they are not a cluster or account selector. The typed form leaves room for other context types —
 snapshots and reported workloads, for example — later, without new flags.
 
@@ -377,11 +389,11 @@ exactly as before. Recording the decision is the PDP; asserting it is the PEP.
 
 As soon as the evaluation completes, the decision appears in Kosli against the control and the
 policy that produced it. Open it in the [Kosli app](https://app.kosli.com) to see the outcome, and
-the **evaluation context** it was reached from:
+the **evaluation** it was reached from:
 
 | Recorded | Why it is there |
 |---|---|
-| The **evaluation context** the decision came from | The context holds what the evaluation was given. Naming it is what makes the decision traceable — and [re-runnable](#re-run-a-decision-offline). |
+| The **evaluation** the decision came from | The evaluation holds what it was given. Naming it is what makes the decision traceable — and [re-runnable](#re-run-a-decision-offline). |
 | The policy **version**, and a **digest** of the exact policy source that ran | A version number says which release; a digest proves the bytes. |
 | The **parameters** used | Parameters are the only outside input, so a decision is not interpretable without them. |
 | The trail **moments** in scope, and the **attestation IDs** actually used | A policy may ignore half a trail, so the context names the facts it actually relied on. |
@@ -395,7 +407,7 @@ only queried and serialized once the evaluation executes, but always **as of** t
 not as of whatever the trail contains by then — so a queued evaluation is deterministic no matter
 how long it waits. Kosli never backdates the record.
 
-For example, evaluation `ec_7f3a91c2` is requested at 09:14:22 and executes at 09:14:25. If a new
+For example, evaluation `ev_7f3a91c2` is requested at 09:14:22 and executes at 09:14:25. If a new
 pull-request approval landed on the trail at 09:14:24 — after the request, before execution — it is
 still **not** part of this decision: the query at 09:14:25 reads the trail as it stood at 09:14:22,
 not as it stands when the evaluation happens to run. If that new fact changes the answer, it takes a
@@ -412,33 +424,45 @@ produced, see [View the decisions for a policy](#view-the-decisions-for-a-policy
 
 ### Check an asynchronous evaluation
 
-Without `--sync`, the outcome arrives on the **evaluation context** the command named. A context
-exists from the moment the evaluation is queued, so you can ask about it before there is any
-decision to look at:
+Without `--sync`, the outcome arrives on the **evaluation** the command named. An evaluation exists
+from the moment it is queued, so you can ask about it before there is any outcome — or any
+decision — to look at:
 
 ```shell
-kosli get evaluation-context ec_7f3a91c2
+kosli get evaluation ev_7f3a91c2
 ```
 
 ```plaintext
-CONTEXT:    ec_7f3a91c2
-STATUS:     completed
-POLICY:     pr-approved @ version 1
-REQUESTED:  2026-07-30T09:14:22Z
-RECORDED:   2026-07-30T09:14:25Z
-DECISION:   pr-approval-decision on my-release-flow/my-release-trail — ALLOWED
+EVALUATION:  ev_7f3a91c2
+STATUS:      completed
+POLICY:      pr-approved @ version 1
+REQUESTED:   2026-07-30T09:14:22Z
+RECORDED:    2026-07-30T09:14:25Z
+DECISION:    pr-approval-decision on my-release-flow/my-release-trail — ALLOWED
 ```
 
 `STATUS` is `queued` until the evaluation runs, then `completed` or `failed` — see
-[When evaluation itself fails](#when-evaluation-itself-fails). Once it is `completed`, the context
-names the decision it produced, so a queued evaluation and the decision it becomes are one hop apart
-in both directions.
+[When evaluation itself fails](#when-evaluation-itself-fails). Branch on `STATUS`, not on whether a
+field is present: the response carries the same keys at every status, with the ones that aren't known
+yet returned empty, so a client written against a completed evaluation still parses a queued one.
+Once it is `completed`, the evaluation names the decision it produced, if any, so a queued evaluation
+and the decision it becomes are one hop apart in both directions.
+
+An evaluation reaches a terminal status **once**. Its result is written a single time and never
+revised, so `completed` and `failed` are final — re-evaluating creates a new evaluation rather than
+changing this one.
+
+Add `--wait` to block until the evaluation is terminal instead of polling for it:
+
+```shell
+kosli get evaluation ev_7f3a91c2 --wait --wait-timeout 60s
+```
 
 The same command returns what the evaluation was **given**, not just what it concluded:
 
 | Form | Returns |
 |---|---|
-| `kosli get evaluation-context ID` | The summary above. |
+| `kosli get evaluation ID` | The summary above. |
 | `--output json` | The same, as JSON. |
 | `--show-input --output json` | The above plus the policy input that was evaluated, under `.input`. |
 | `--fixture --dir ./replay` | A replay bundle on disk — see [Re-run a decision offline](#re-run-a-decision-offline). |
@@ -446,6 +470,47 @@ The same command returns what the evaluation was **given**, not just what it con
 `--show-input` behaves as it does on the client-side
 [`kosli evaluate trail`](/client_reference/kosli_evaluate_trail), so `jq '.input'` extracts the
 policy input and `kosli evaluate input` consumes it unchanged.
+
+### Evaluate without recording a decision
+
+Leave `--control` off and Kosli runs the policy exactly as it would otherwise — same facts, same
+pinning, same recorded result — but writes no decision:
+
+```shell
+kosli evaluate policy \
+    --policy pr-approved \
+    --context trail=my-release-flow/my-release-trail \
+    --params '{"pr_attestation_name": "pull-request"}' \
+    --sync
+```
+
+```plaintext
+RESULT:    ALLOWED
+DECISION:  not recorded (no --control)
+```
+
+The evaluation is still a full record: it has an ID, it pins the policy version and parameters it
+used, and it can be [replayed](#re-run-a-decision-offline) like any other. What it doesn't do is
+claim that a control is satisfied. Use it to check a policy against real facts — while you are
+[iterating on one](#evaluate-a-local-policy), or to answer a one-off question — without adding to
+the set of decisions an auditor samples.
+
+Because the destination flags describe the decision, they are rejected here: `--trail`, `--name`,
+`--fingerprint`, `--description`, and `--annotate` all require a decision to be recorded. `--flow`
+is accepted on its own, since a bare `trail=<trail_id>` reference resolves against it.
+
+<Warning>
+An empty `--control` is an **error**, not an omission. Otherwise an unset `$CONTROL_ID` would quietly
+turn a step that records a decision into one that records nothing, and the step would still pass. If
+a control must be closed on every run, require it in the trail's
+[flow template](/template-reference/flow_template) as a `type: decision` slot as well — a missing
+decision then surfaces as a non-compliant trail rather than as silence.
+</Warning>
+
+`--assert` works here too, and gates the pipeline on the outcome without recording a decision. That
+is a reasonable way to try a policy against real pipelines before you let it close a control — but it
+is not a control: the evaluation records that the check ran, and nothing records that the control was
+satisfied.
 
 ### Evaluating multiple trails
 
@@ -624,7 +689,7 @@ opa check --capabilities kosli-capabilities.json pr-approved.rego
 ### Evaluation time
 
 A policy cannot read the clock, because a decision that depends on when it happened to run is not
-replicable. Instead, Kosli injects the evaluation context's request timestamp — the moment the
+replicable. Instead, Kosli injects the evaluation's request timestamp — the moment the
 decision is **valid as of** — as `data.kosli.evaluation_time`, in nanoseconds since the Unix
 epoch, so it can be compared directly against a parsed attestation timestamp:
 
@@ -654,20 +719,25 @@ not a non-compliant artifact, and Kosli reports the two differently — a failed
 a typed error rather than a `--compliant=false` decision, and `--assert` exits with a distinct
 code so a pipeline can tell "this change is not compliant" from "this policy is broken".
 
-The typed error lands on the evaluation context, so a failure is visible without `--sync` or
+The typed error lands on the evaluation, so a failure is visible without `--sync` or
 `--assert` — the distinction holds in the asynchronous path too:
 
 ```plaintext
-CONTEXT:    ec_7f3a91c2
-STATUS:     failed
-POLICY:     pr-approved @ version 1
-REQUESTED:  2026-07-30T09:14:22Z
-ERROR:      evaluation exceeded its time budget
+EVALUATION:  ev_7f3a91c2
+STATUS:      failed
+POLICY:      pr-approved @ version 1
+REQUESTED:   2026-07-30T09:14:22Z
+ERROR:       evaluation exceeded its time budget
 ```
 
-Open questions we would particularly like feedback on: whether a built-in error should abort the
-evaluation or evaluate to undefined (and therefore deny), and whether `print` and `trace` output
-should be discarded or captured on the evaluation report.
+An evaluation that is never picked up — a worker lost, a queue drained — also terminates rather than
+sitting in `queued` indefinitely: Kosli writes a typed `abandoned` error against it after a timeout,
+so every evaluation reaches a terminal status.
+
+A built-in that errors **aborts** the evaluation rather than evaluating to undefined — an undefined
+built-in would deny with no violations, which is the outcome this design avoids everywhere else.
+`print` and `trace` output is discarded rather than captured on the report; express diagnostics
+through `violations` or a custom result field instead.
 
 ## Validate and test a policy
 
@@ -708,33 +778,27 @@ exactly what you are about to publish.
 
 ### Evaluate a local policy
 
-You don't have to publish a policy before it can record a decision. Point `--policy` at a local,
+You don't have to publish a policy before it can evaluate anything. Point `--policy` at a local,
 unpublished `.rego` file — or at a directory holding the policy's bundle — and Kosli evaluates it
-server-side and records the decision, just as it would for a stored policy. This is useful while
-you're still iterating on a policy you haven't shipped:
+server-side just as it would a stored policy. This is how you iterate on a policy you haven't
+shipped, against the facts it will really run on:
 
 ```shell
 kosli evaluate policy \
-    --flow "$FLOW_NAME" \
-    --trail "$TRAIL_NAME" \
     --policy ./pr-approved.rego \
-    --control RCTL-043 \
     --context trail="$TRAIL_NAME" \
-    --fingerprint "$ARTIFACT_FINGERPRINT" \
-    --name pr-approval-decision \
-    --params '{"pr_attestation_name": "pull-request"}'
+    --params '{"pr_attestation_name": "pull-request"}' \
+    --sync
 ```
 
-Because there is no stored policy version to cite, the decision records the exact policy source
-that was evaluated instead.
+Because there is no stored version to cite, the evaluation records the exact policy source that ran,
+so the result is still [replayable](#re-run-a-decision-offline).
 
-<Warning>
-A decision made this way did **not** go through the org-admin gate on
-[publishing a policy](#author-ship-and-evaluate-a-policy) — anyone who can record a decision can
-supply the Rego that produced it. Treat these as decisions for iterating on a policy, not as
-audit evidence, and publish a version before a control depends on the outcome. We would like
-feedback on whether the beta should mark such decisions distinctly, or restrict them entirely.
-</Warning>
+A local policy **cannot record a decision** — a local `--policy` file and `--control` are mutually
+exclusive. [Publishing](#author-ship-and-evaluate-a-policy) is what puts a policy through the
+org-admin gate, so a decision from unpublished Rego would let anyone who can record a decision supply
+the code behind it. Publish a version — [a no-op if nothing changed](#update-a-policy) — and the same
+evaluation records a decision.
 
 ## Manage policies
 
@@ -946,18 +1010,23 @@ auditor can sample by control as well as by policy. That is not part of the
 [controls](/tutorials/working_with_controls) feature today.
 </Note>
 
+<Note>
+Evaluations that record **no decision** do not appear here, since this view lists decisions — in the
+beta you reach an ad-hoc evaluation by its ID.
+</Note>
+
 ### Re-run a decision offline
 
 Sampling a decision usually raises the question of whether it was *right*. Everything the
-evaluation was given is held on its **evaluation context**, which the decision names — so you can
-export that context and evaluate the policy again yourself, with stock OPA, on your own machine:
+evaluation was given is held on the **evaluation** itself, which the decision names — so you can
+export it and evaluate the policy again yourself, with stock OPA, on your own machine:
 
 ```shell
-kosli get evaluation-context CONTEXT-ID --fixture --dir ./replay
+kosli get evaluation EVALUATION-ID --fixture --dir ./replay
 ```
 
-Every decision shows the evaluation context it came from, in the UI and in
-`kosli get decision`, so the context ID is one hop from the decision you are looking at.
+Every decision shows the evaluation it came from, in the UI and in
+`kosli get decision`, so the evaluation ID is one hop from the decision you are looking at.
 
 The export contains what the evaluation was given, as ordinary OPA inputs:
 
@@ -968,9 +1037,10 @@ The export contains what the evaluation was given, as ordinary OPA inputs:
 | `policy/` | The exact policy source that ran, laid out as it was published — one `.rego` file, or every file in the bundle. Re-digesting this directory reproduces the digest on the decision. |
 
 <Tip>
-Because a context exists from the moment an evaluation is queued, this export also works when there
-is **no decision to look at** — an evaluation still in the queue, or one that failed. That is usually
-the case you most want to inspect.
+Because an evaluation exists from the moment it is queued, this export also works when there
+is **no decision to look at** — an evaluation still in the queue, one that failed, or one
+[run without `--control`](#evaluate-without-recording-a-decision). That is usually the case you most
+want to inspect.
 </Tip>
 
 Evaluate it with OPA directly. `--bundle` loads the whole policy directory, so the same command
@@ -1058,8 +1128,9 @@ blocks you, that is worth telling us.
   `--control`; there is no stored mapping.
 - **Pinning an evaluation to a policy version** — an evaluation always uses the policy's current
   version. There is no way to hold a pipeline on version 3 while version 4 is rolled out.
-- **Re-running a past decision against a new policy** — you cannot replay a stored evaluation
-  context through a different policy or version to compare outcomes.
+- **Re-running an evaluation in Kosli** — you cannot replay a stored evaluation, either through a
+  different policy or version to compare outcomes, or as-is to check that it still reaches the same
+  answer. Export the fixture and run it locally.
 - **Advisory outcomes** — a decision is compliant or non-compliant. There is no advisory or
   warn-only mode that records a concern without failing the control.
 - **Verbose evaluation tracing** — beyond `violations` and any custom result fields the policy
