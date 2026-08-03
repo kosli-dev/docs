@@ -27,35 +27,35 @@ Each line should specify a relative path or path glob to be ignored. You can inc
 The `.kosli_ignore` will be treated as part of the artifact like any other file, unless it is explicitly ignored itself.
 
 ## Flags
-| Flag | Description |
-| :--- | :--- |
-|        `--aws-key-id` string  |  The AWS access key ID.  |
-|        `--aws-region` string  |  The AWS region.  |
-|        `--aws-secret-key` string  |  The AWS secret access key.  |
-|        `--bucket` string  |  The name of the S3 bucket.  |
-|    `-D`, `--dry-run`  |  [optional] Run in dry-run mode. When enabled, no data is sent to Kosli and the CLI exits with 0 exit code regardless of any errors.  |
-|    `-x`, `--exclude` strings  |  [optional] The comma separated list of file and/or directory paths in the S3 bucket to exclude when fingerprinting. Paths match by literal prefix. Cannot be used together with `--include` or `--include-regex`.  |
-|        `--exclude-regex` strings  |  [optional] The comma separated list of Go regular expressions matched against object keys in the S3 bucket to exclude when fingerprinting. Cannot be used together with `--include` or `--include-regex`.  |
-|    `-h`, `--help`  |  help for s3  |
-|    `-i`, `--include` strings  |  [optional] The comma separated list of file and/or directory paths in the S3 bucket to include when fingerprinting. Paths match by literal prefix. Cannot be used together with `--exclude` or `--exclude-regex`.  |
-|        `--include-regex` strings  |  [optional] The comma separated list of Go regular expressions matched against object keys in the S3 bucket to include when fingerprinting. Cannot be used together with `--exclude` or `--exclude-regex`.  |
+| Flag | Type | Description |
+| :--- | :--- | :--- |
+| `--aws-key-id` | string | The AWS access key ID. |
+| `--aws-region` | string | The AWS region. |
+| `--aws-secret-key` | string | The AWS secret access key. |
+| `--bucket` | string | The name of the S3 bucket. |
+| `-D`, `--dry-run` | bool | [optional] Run in dry-run mode. When enabled, no data is sent to Kosli and the CLI exits with 0 exit code regardless of any errors. |
+| `-x`, `--exclude` | strings | [optional] The comma separated list of file and/or directory paths in the S3 bucket to exclude when fingerprinting. Paths match by literal prefix. Cannot be used together with `--include` or `--include-regex`. |
+| `--exclude-regex` | strings | [optional] The comma separated list of Go regular expressions matched against object keys in the S3 bucket to exclude when fingerprinting. Cannot be used together with `--include` or `--include-regex`. |
+| `-h`, `--help` | bool | help for s3 |
+| `-i`, `--include` | strings | [optional] The comma separated list of file and/or directory paths in the S3 bucket to include when fingerprinting. Paths match by literal prefix. Cannot be used together with `--exclude` or `--exclude-regex`. |
+| `--include-regex` | strings | [optional] The comma separated list of Go regular expressions matched against object keys in the S3 bucket to include when fingerprinting. Cannot be used together with `--exclude` or `--exclude-regex`. |
 
 
 ## Flags inherited from parent commands
-| Flag | Description |
-| :--- | :--- |
-|    `-a`, `--api-token` string  |  The Kosli API token.  |
-|    `-A`, `--auto-environment`  |  [optional] Create the environment (with the type inferred from the snapshot subcommand) if it does not already exist, before reporting the snapshot.  |
-|    `-c`, `--config-file` string  |  [optional] The Kosli config file path. (default "kosli")  |
-|        `--debug`  |  [optional] Print debug logs to stdout.  |
-|        `--environment-description` string  |  [optional] The environment description.  |
-|        `--exclude-scaling`  |  [optional] Exclude scaling events for snapshots. Snapshots with scaling changes will not result in new environment records. (DEPRECATED: this flag is deprecated and will be removed in a future version. Scaling events do not trigger new snapshots.)  |
-|    `-H`, `--host` string  |  [defaulted] The Kosli endpoint. (default "https://app.kosli.com")  |
-|        `--http-proxy` string  |  [optional] The HTTP proxy URL including protocol and port number. e.g. `http://proxy-server-ip:proxy-port`  |
-|        `--include-scaling`  |  [optional] Include scaling events for snapshots. Snapshots with scaling changes will result in new environment records. (DEPRECATED: this flag is deprecated and will be removed in a future version. Scaling events do not trigger new snapshots.)  |
-|    `-r`, `--max-api-retries` int  |  [defaulted] How many times should API calls be retried when the API host is not reachable. (default 3)  |
-|        `--org` string  |  The Kosli organization.  |
-|    `-q`, `--quiet`  |  [optional] Suppress non-critical warning messages. Errors and normal output are not affected. If both `--quiet` and `--debug` are set, `--debug` wins.  |
+| Flag | Type | Description |
+| :--- | :--- | :--- |
+| `-a`, `--api-token` | string | The Kosli API token. |
+| `-A`, `--auto-environment` | bool | [optional] Create the environment (with the type inferred from the snapshot subcommand) if it does not already exist, before reporting the snapshot. |
+| `-c`, `--config-file` | string | [optional] The Kosli config file path. (default "kosli") |
+| `--debug` | bool | [optional] Print debug logs to stdout. |
+| `--environment-description` | string | [optional] The environment description. |
+| `--exclude-scaling` | bool | [optional] Exclude scaling events for snapshots. Snapshots with scaling changes will not result in new environment records. (DEPRECATED: this flag is deprecated and will be removed in a future version. Scaling events do not trigger new snapshots.) |
+| `-H`, `--host` | string | [defaulted] The Kosli endpoint. (default "https://app.kosli.com") |
+| `--http-proxy` | string | [optional] The HTTP proxy URL including protocol and port number. e.g. `http://proxy-server-ip:proxy-port` |
+| `--include-scaling` | bool | [optional] Include scaling events for snapshots. Snapshots with scaling changes will result in new environment records. (DEPRECATED: this flag is deprecated and will be removed in a future version. Scaling events do not trigger new snapshots.) |
+| `-r`, `--max-api-retries` | int | [defaulted] How many times should API calls be retried when the API host is not reachable. (default 3) |
+| `--org` | string | The Kosli organization. |
+| `-q`, `--quiet` | bool | [optional] Suppress non-critical warning messages. Errors and normal output are not affected. If both `--quiet` and `--debug` are set, `--debug` wins. |
 
 
 ## Examples Use Cases

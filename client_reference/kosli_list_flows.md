@@ -15,27 +15,27 @@ includes pagination metadata and a page footer (table) or a "data"/"pagination" 
 The list can be filtered by name with --name (and --ignore-case for case-insensitive matching).
 
 ## Flags
-| Flag | Description |
-| :--- | :--- |
-|    `-h`, `--help`  |  help for flows  |
-|    `-i`, `--ignore-case`  |  [optional] Perform case-insensitive matching for `--name`. By default matching is case sensitive.  |
-|    `-N`, `--name` string  |  [optional] Only list flows whose name contains this substring. The Kosli API supports alphanumeric characters and '-'.  |
-|    `-o`, `--output` string  |  [defaulted] The format of the output. Valid formats are: [table, json]. (default "table")  |
-|        `--page` int  |  [defaulted] The page number of a response. (default 1)  |
-|    `-n`, `--page-limit` int  |  [defaulted] The number of elements per page. (default 20)  |
+| Flag | Type | Description |
+| :--- | :--- | :--- |
+| `-h`, `--help` | bool | help for flows |
+| `-i`, `--ignore-case` | bool | [optional] Perform case-insensitive matching for `--name`. By default matching is case sensitive. |
+| `-N`, `--name` | string | [optional] Only list flows whose name contains this substring. The Kosli API supports alphanumeric characters and '-'. |
+| `-o`, `--output` | string | [defaulted] The format of the output. Valid formats are: [table, json]. (default "table") |
+| `--page` | int | [defaulted] The page number of a response. (default 1) |
+| `-n`, `--page-limit` | int | [defaulted] The number of elements per page. (default 20) |
 
 
 ## Flags inherited from parent commands
-| Flag | Description |
-| :--- | :--- |
-|    `-a`, `--api-token` string  |  The Kosli API token.  |
-|    `-c`, `--config-file` string  |  [optional] The Kosli config file path. (default "kosli")  |
-|        `--debug`  |  [optional] Print debug logs to stdout.  |
-|    `-H`, `--host` string  |  [defaulted] The Kosli endpoint. (default "https://app.kosli.com")  |
-|        `--http-proxy` string  |  [optional] The HTTP proxy URL including protocol and port number. e.g. `http://proxy-server-ip:proxy-port`  |
-|    `-r`, `--max-api-retries` int  |  [defaulted] How many times should API calls be retried when the API host is not reachable. (default 3)  |
-|        `--org` string  |  The Kosli organization.  |
-|    `-q`, `--quiet`  |  [optional] Suppress non-critical warning messages. Errors and normal output are not affected. If both `--quiet` and `--debug` are set, `--debug` wins.  |
+| Flag | Type | Description |
+| :--- | :--- | :--- |
+| `-a`, `--api-token` | string | The Kosli API token. |
+| `-c`, `--config-file` | string | [optional] The Kosli config file path. (default "kosli") |
+| `--debug` | bool | [optional] Print debug logs to stdout. |
+| `-H`, `--host` | string | [defaulted] The Kosli endpoint. (default "https://app.kosli.com") |
+| `--http-proxy` | string | [optional] The HTTP proxy URL including protocol and port number. e.g. `http://proxy-server-ip:proxy-port` |
+| `-r`, `--max-api-retries` | int | [defaulted] How many times should API calls be retried when the API host is not reachable. (default 3) |
+| `--org` | string | The Kosli organization. |
+| `-q`, `--quiet` | bool | [optional] Suppress non-critical warning messages. Errors and normal output are not affected. If both `--quiet` and `--debug` are set, `--debug` wins. |
 
 
 ## Live Example
@@ -60,7 +60,7 @@ kosli list flows --output=json
     "description": "UX for Group/Kata creation",
     "visibility": "private",
     "org": "cyber-dojo",
-    "template": "version: 1\n\ntrail:\n  attestations:\n    - name: pull-request\n      type: pull_request\n  artifacts:\n    - name: creator\n      attestations:\n        - name: provenance-facts\n          type: custom:provenance-facts\n        - name: provenance-decision\n          type: decision\n\n        - name: sbom-facts\n          type: custom:sbom-facts\n        - name: sbom-decision\n          type: decision\n\n        - name: snyk-container-scan\n          type: decision\n\n        - name: lint\n          type: generic\n        - name: unit-test\n          type: junit\n        - name: test-branch-coverage\n          type: generic\n",
+    "template": "version: 1\n\ntrail:\n  attestations:\n    - name: pull-request\n      type: pull_request\n  artifacts:\n    - name: creator\n      attestations:\n        - name: provenance-facts\n          type: custom:provenance-facts\n        - name: provenance-decision\n          type: decision\n\n        - name: sbom-facts\n          type: custom:sbom-facts\n        - name: sbom-decision\n          type: decision\n\n        - name: snyk-container-scan\n          type: decision\n\n        - name: rubocop-lint\n          type: junit\n        - name: unit-test\n          type: junit\n        - name: unit-test-coverage\n          type: generic\n",
     "repo_url": "https://github.com/cyber-dojo/creator",
     "tags": {
       "ci": "github",
