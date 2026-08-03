@@ -4,6 +4,83 @@ description: "Release notes for Kosli products."
 rss: true
 ---
 
+<Update label="July 31, 2026" description="v2.36.3" tags={["CLI"]}>
+
+## Updates
+
+- **Deprecated flags visible in reference docs** — deprecated flags (for example `--registry-provider`) are now listed in the [CLI reference](/client_reference) with their migration message, instead of being silently hidden.
+
+[View on GitHub](https://github.com/kosli-dev/cli/releases/tag/v2.36.3)
+
+</Update>
+
+<Update label="July 31, 2026" description="" tags={["Platform"]}>
+
+## Updates
+
+- **Cleaner snapshot change summaries** — an artifact is no longer marked as `changed` when only its timestamp differs from the previous snapshot (for example a touched file or a restarted pod). Only differences that carry compliance meaning now produce a change event, so real changes stand out on the snapshot page.
+- **Snapshot event counts add up** — the started/changed/exited breakdown next to a snapshot's total event count now includes legacy `changed` events, so the totals match.
+- **Accurate compliance evaluation timestamps** — `compliance_status.evaluated_at` on the v2 API now reflects the event that triggered the evaluation, instead of the previous one. Verdicts no longer appear to predate the attestation inside them.
+
+## Bug fixes
+
+- **Instance count hidden without scaling capture** — environments that don't capture scaling no longer display a stale instance count on artifact and event views.
+
+</Update>
+
+<Update label="July 30, 2026" description="v2.36.2" tags={["CLI"]}>
+
+## New features
+
+- **Non-interactive delete safety** — `kosli delete api-key` and `kosli delete service-account` now fail with a clear error when stdin is not a TTY (for example in CI) instead of silently exiting without deleting. Pass `--assume-yes` to delete non-interactively.
+
+## Updates
+
+- **`--include-scaling` / `--exclude-scaling` deprecated** — these flags on `kosli create environment` and `kosli snapshot` now print a deprecation warning. Scaling events no longer trigger new snapshots.
+
+## Bug fixes
+
+- **Payload logging failures no longer abort requests** — a failure to log an outgoing request payload now warns instead of exiting, so the request itself is no longer canceled.
+
+[View on GitHub](https://github.com/kosli-dev/cli/releases/tag/v2.36.2)
+
+</Update>
+
+<Update label="July 30, 2026" description="v0.9.2" tags={["Terraform Provider"]}>
+
+## Breaking changes
+
+- **`include_scaling` removed from `kosli_environment`** — the `include_scaling` attribute has been removed from both the `kosli_environment` resource and data source. The Kosli API no longer honors it (it always reports `false`), and setting it to `true` caused apply failures. Remove any `include_scaling` values from your configuration before upgrading.
+
+[View on GitHub](https://github.com/kosli-dev/terraform-provider-kosli/releases/tag/v0.9.2)
+
+</Update>
+
+<Update label="July 29, 2026" description="v2.36.1" tags={["CLI"]}>
+
+## Bug fixes
+
+- **FAQ URL typo** — fixed a double slash in the FAQ link shown when boolean flag arguments are misused (`https://docs.kosli.com//faq/` → `https://docs.kosli.com/faq/`).
+
+[View on GitHub](https://github.com/kosli-dev/cli/releases/tag/v2.36.1)
+
+</Update>
+
+<Update label="July 28, 2026" description="v2.36.0" tags={["CLI"]}>
+
+## Updates
+
+- **Cleaner errors for unknown commands** — unrecognized command tokens (for example `kosli list garbage`) now report an error and exit non-zero instead of silently exiting `0`.
+- **Boolean flag help cleanup** — the boolean-flag FAQ link has been removed from the `--compliant` and `--compliance-status` flag descriptions now that space-form booleans are handled correctly.
+
+## Bug fixes
+
+- **Space-form boolean flags** — boolean flags written in the space form (for example `--compliant false`) were being misread as positional arguments, causing spurious errors or silently wrong behavior. They now parse correctly.
+
+[View on GitHub](https://github.com/kosli-dev/cli/releases/tag/v2.36.0)
+
+</Update>
+
 <Update label="July 28, 2026" description="v2.35.0" tags={["CLI"]}>
 
 ## Breaking changes
