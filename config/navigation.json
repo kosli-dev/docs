@@ -97,6 +97,7 @@
               "group": "Reporting environments",
               "pages": [
                 "tutorials/report_aws_envs",
+                "tutorials/report_agentcore_envs",
                 "tutorials/report_k8s_envs",
                 "tutorials/report_cloud_run_envs"
               ]
