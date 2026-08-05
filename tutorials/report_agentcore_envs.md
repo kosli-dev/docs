@@ -302,9 +302,28 @@ container-based runtimes only. If you deploy agents from code bundles today,
 moving to container builds is also what puts you on the CI-build-and-attest path
 described above.
 
-**Agent configuration is not tracked.** A snapshot covers the image that is
-running. Prompts, tool availability, and model choice are not part of the
-fingerprint.
+**Runtime configuration is not tracked yet, and for agents that gap is wider
+than usual.** A snapshot covers the image digest. For an ECS service or a Lambda
+function, the image or the code is most of what the workload does, so the digest
+is a good proxy for its behavior. An AgentCore runtime is different: a lot of
+what the agent can actually do lives in configuration that never touches the
+image, and all of the following can change while the digest stays identical.
+
+| Field | What a change means |
+| --- | --- |
+| `roleArn` | The execution role. Swap it and the agent reaches different data. |
+| `networkConfiguration` | `PUBLIC` or `VPC`, with subnets and security groups. Egress posture. |
+| `authorizerConfiguration` | Inbound JWT auth, including allowed audience and clients. Its absence means the endpoint is unauthenticated. |
+| `filesystemConfigurations` | Mounted EFS access points, S3 Files access points, and session storage. What persistent data the agent reads and writes. |
+
+`environmentVariables` belongs on that list too, and is often the most decisive
+of all, since model IDs, tool endpoints, and sometimes prompts are passed that
+way. It is also where secrets end up, and the AWS SDKs mark it sensitive, so it
+needs different handling from the rest: a key set or a hash, never the values.
+
+Treat the digest as answering "which build is running", not "what is this agent
+allowed to do". Until Kosli reports configuration, pin the fields above in the
+infrastructure code that creates the runtime and review changes to them there.
 
 ## What you've accomplished
 
