@@ -172,10 +172,46 @@ has not yet run reporting against a runtime deployed this way end to end, so
 treat the invocation above as a starting point rather than a tested recipe.
 </Note>
 </Step>
+
+<Step title="Verify the loop closed">
+Report the environment as described in
+[Report using Kosli CLI](#report-using-kosli-cli), then read the snapshot back
+with [`kosli get snapshot`](/client_reference/kosli_get_snapshot):
+
+```shell
+kosli get snapshot agentcore-env-tutorial \
+    --api-token <your-api-token-here> \
+    --org <your-kosli-org-name>
+```
+
+```
+COMMIT   ARTIFACT                        FLOW      COMPLIANCE  RUNNING_SINCE  REPLICAS
+a1b2c3d  Name: my-agent                  my-agent  COMPLIANT   2 minutes ago  1
+         Fingerprint: 4f9c2b8e1d7a...
+```
+
+Three columns tell you whether the pipeline is wired up correctly:
+
+- **`Fingerprint`** matches the image you attested. Kosli stores the digest
+  without its `sha256:` prefix, so compare it against the hex part of the digest
+  you pushed.
+- **`FLOW`** names the flow you attested to, and **`COMMIT`** the commit that
+  produced the image. This is the traceability the whole pipeline exists for.
+- **`COMPLIANCE`** reads `COMPLIANT`.
+
+A `FLOW` of `N/A` alongside `NON-COMPLIANT` means Kosli has no record of the
+running image: it reached the runtime without being attested first. That is the
+exact failure the ordering in this section prevents, and it is what you would see
+if you attested after releasing rather than before.
+
+Add `-o json` to assert on this from a pipeline rather than reading it by eye.
+To look further back, `agentcore-env-tutorial~1` gets the previous snapshot and
+`agentcore-env-tutorial#N` gets the Nth.
+</Step>
 </Steps>
 
-Now the digest running in AgentCore is a digest your CI produced and attested,
-and the environment snapshot below can be matched against it.
+The digest running in AgentCore is now a digest your CI produced and attested,
+and you have a way to prove it.
 
 ## Report using Kosli CLI
 
@@ -346,7 +382,7 @@ agent changes, Kosli records it, and you can trace the running digest back to
 the commit that produced it.
 
 From here you can:
-* Query your environment with [`kosli list snapshots`](/client_reference/kosli_list_snapshots) and [`kosli get snapshot`](/client_reference/kosli_get_snapshot)
-* [Compare snapshots to see what changed](/client_reference/kosli_diff_snapshots)
+* List an environment's history with [`kosli list snapshots`](/client_reference/kosli_list_snapshots)
+* [Compare two snapshots to see what changed](/client_reference/kosli_diff_snapshots)
 * Trace a running artifact back to its git commit with the [From commit to production](/tutorials/following_a_git_commit_to_runtime_environments) tutorial
 * Report your other AWS workloads with the [Report AWS environments](/tutorials/report_aws_envs) guide
