@@ -199,6 +199,12 @@ Three columns tell you whether the pipeline is wired up correctly:
   produced the image. This is the traceability the whole pipeline exists for.
 - **`COMPLIANCE`** reads `COMPLIANT`.
 
+`REPLICAS` needs care. It counts reported entries sharing one digest, which for
+ECS is the number of tasks. AgentCore runs each session in its own microVM and
+does not expose a count, so the number here is how many runtimes are on that
+image, not how many instances are up. Rows are grouped by digest, so two
+runtimes serving the same image appear as a single row with `REPLICAS: 2`.
+
 A `FLOW` of `N/A` alongside `NON-COMPLIANT` means Kosli has no record of the
 running image: it reached the runtime without being attested first. That is the
 exact failure the ordering in this section prevents, and it is what you would see
@@ -367,6 +373,8 @@ elsewhere on this page, expected to close in later iterations. They are
 direction rather than commitments, with no order or dates implied.
 
 - **Configuration reporting**, starting with the four fields in the table above.
+- **Per-runtime identity in snapshots**, so two runtimes serving the same image
+  can be told apart instead of grouping into one row.
 - **CodeZip support**, once there is a fingerprint that cannot be silently wrong.
 - **Terraform module support**, so reporting runs continuously instead of from
   your own scheduled job. See [Report using Terraform module](#report-using-terraform-module).
