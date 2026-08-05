@@ -325,6 +325,19 @@ Treat the digest as answering "which build is running", not "what is this agent
 allowed to do". Until Kosli reports configuration, pin the fields above in the
 infrastructure code that creates the runtime and review changes to them there.
 
+<Info>
+**Known gaps, gathered in one place.** These are the limits described above and
+elsewhere on this page, expected to close in later iterations. They are
+direction rather than commitments, with no order or dates implied.
+
+- **Configuration reporting**, starting with the four fields in the table above.
+- **CodeZip support**, once there is a fingerprint that cannot be silently wrong.
+- **Terraform module support**, so reporting runs continuously instead of from
+  your own scheduled job. See [Report using Terraform module](#report-using-terraform-module).
+- **`kosli snapshot agentcore` itself**, along with the `agentcore` environment
+  type. Nothing on this page runs until that ships.
+</Info>
+
 ## What you've accomplished
 
 You have an agent image built and attested in your own CI, and a Kosli
