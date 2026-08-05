@@ -17,12 +17,13 @@ produced it.
 
 This guide covers the two halves of that:
 
-- **Build the agent image in your own CI and attest it**, so an artifact exists
-  in Kosli to compare against.
+- **Attest the agent image before you release it**, so the evidence exists while
+  you can still act on it.
 - **Report the running AgentCore runtimes to Kosli** as an environment snapshot,
   so you can see what is actually serving.
 
-The first half matters more than it looks, so start there.
+How you structure the first half decides whether Kosli can gate a release or only
+record it, so start there.
 
 ## Prerequisites
 
@@ -63,17 +64,41 @@ scoping to specific runtime ARNs rather than `"Resource": "*"`. See
 [Security best practices for AgentCore Runtime](https://docs.aws.amazon.com/bedrock-agentcore/latest/devguide/runtime-security-best-practices.html).
 </Tip>
 
-## Build the image in CI, not in AWS
+## Separate the build from the release
 
 The AgentCore CLI's `agentcore deploy` builds your container image **inside your
-AWS account**. It provisions a CodeBuild project and builds from source there.
+AWS account**: it provisions a CodeBuild project, builds from source there, and
+creates or updates the runtime in the same operation.
 
-That is convenient, and it breaks the chain you are trying to establish. If AWS
-builds the image, your CI never produces an artifact, so there is nothing in
-Kosli to compare the running runtime against. The snapshot tells you a digest is
-running and nothing can tell you where it came from.
+The problem is not that AWS did the building. You can attest an image you did not
+build - `kosli attest artifact` with `--artifact-type oci` reads the digest from
+the registry - so running it after `agentcore deploy` does produce an artifact in
+Kosli whose fingerprint matches the snapshot.
 
-Build the image yourself instead, and point AgentCore at it.
+The problem is **when** the artifact becomes known. Because the build and the
+runtime update are one operation, there is no point at which the image exists and
+the runtime has not already been pointed at it. Anything you attest afterwards
+describes something that is already serving traffic:
+
+- A Kosli policy on that artifact reports a violation instead of preventing one.
+- Vulnerability scans, approvals, and test evidence all land post-release.
+- Until you attest, the snapshot shows a running artifact Kosli has never seen,
+  which reads as a compliance gap that later resolves itself.
+
+Splitting build from release fixes all of that, and it's the pattern AWS itself
+publishes for CI/CD: their
+[GitHub Actions reference pipeline](https://aws.amazon.com/blogs/machine-learning/deploy-ai-agents-on-amazon-bedrock-agentcore-using-github-actions/)
+builds and pushes the image to ECR from the Dockerfile, scans it with Amazon
+Inspector, and only then creates the AgentCore runtime from that image. It does
+not use `agentcore deploy`. Attesting to Kosli goes in the same slot as the scan.
+
+<Note>
+If you are staying on `agentcore deploy` for now, attesting the ECR image
+afterwards is still worth doing. You get a complete audit trail of what is
+running and where it came from. What you do not get is the ability to stop a bad
+build from reaching production, because by the time you can attest it, it is
+already live.
+</Note>
 
 <Steps>
 <Step title="Build for ARM64">
@@ -111,6 +136,9 @@ Add whatever else your pipeline proves about this build with
 [`kosli attest`](/client_reference/kosli_attest_generic) - test results, scan
 results, approvals. That evidence is what makes the running agent auditable
 later.
+
+This is the step that has to happen before the release, not after it. Gate the
+next step on it if you want the build blocked rather than merely recorded.
 </Step>
 
 <Step title="Point AgentCore at the pre-built image">
