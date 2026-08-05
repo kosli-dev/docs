@@ -86,8 +86,8 @@ describes something that is already serving traffic:
   which reads as a compliance gap that later resolves itself.
 
 Splitting build from release fixes all of that, and it's the pattern AWS itself
-publishes for CI/CD: their
-[GitHub Actions reference pipeline](https://aws.amazon.com/blogs/machine-learning/deploy-ai-agents-on-amazon-bedrock-agentcore-using-github-actions/)
+publishes for CI/CD. Their reference pipeline
+[Deploy AI agents on Amazon Bedrock AgentCore using GitHub Actions](https://aws.amazon.com/blogs/machine-learning/deploy-ai-agents-on-amazon-bedrock-agentcore-using-github-actions/)
 builds and pushes the image to ECR from the Dockerfile, scans it with Amazon
 Inspector, and only then creates the AgentCore runtime from that image. It does
 not use `agentcore deploy`. Attesting to Kosli goes in the same slot as the scan.
@@ -255,14 +255,19 @@ environment:
 kosli snapshot agentcore agentcore-env-tutorial --runtimes runtime1,runtime2 ...
 
 # include runtimes matching a pattern
-kosli snapshot agentcore agentcore-env-tutorial --runtimes-regex "prod-*" ...
+kosli snapshot agentcore agentcore-env-tutorial --runtimes-regex "prod-.*" ...
 
 # exclude runtimes matching a pattern
-kosli snapshot agentcore agentcore-env-tutorial --exclude-regex "dev-*" ...
+kosli snapshot agentcore agentcore-env-tutorial --exclude-regex "dev-.*" ...
 ```
 
 All filtering is case-sensitive. Include and exclude flags are mutually
 exclusive.
+
+The `-regex` flags take Go regular expressions, not shell globs, and they are
+unanchored. Write `prod-.*` rather than `prod-*`: the latter is valid but means
+`prod-` followed by any number of hyphens, so it also matches a runtime called
+`prod`. Anchor with `^` and `$` when you want an exact match.
 
 ## How Kosli fingerprints an agent
 
