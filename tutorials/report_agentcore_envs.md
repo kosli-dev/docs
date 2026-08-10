@@ -102,8 +102,8 @@ already live.
 
 <Steps>
 <Step title="Build for ARM64">
-AgentCore runtimes are `aarch64`. If your CI runners are `x86_64`, cross-build
-with buildx:
+AgentCore runtimes are ARM64. If your CI runners are x86_64, cross-build with
+buildx:
 
 ```shell
 docker buildx build \
