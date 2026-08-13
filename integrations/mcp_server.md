@@ -26,7 +26,7 @@ Rather than ship one tool per Kosli endpoint, the server generates a catalog of 
 | `execute_read_action` | Invoke any `GET` action by ID. Auto-allowed in MCP clients. |
 | `execute_write_action` | Invoke any `POST`, `PUT`, `PATCH`, or `DELETE` action by ID. Gated behind user approval. |
 
-The assistant first calls `search_actions` to find the right action ID and its parameter schema, then calls `execute_read_action` or `execute_write_action` with that ID. Both `execute_*` tools accept an optional `fields` array that limits the response to specific top-level fields, which keeps responses small and token usage down.
+These are the tool names your client shows as the assistant works, and the name in the prompt when it asks you to approve a write.
 
 <Warning>
 `execute_write_action` creates, modifies, and deletes real resources in your Kosli organization. MCP clients gate these calls behind an approval prompt, and that prompt is the only checkpoint before the call is made. An assistant may choose the wrong action, or the right action with the wrong parameters, so read the action ID and parameters before approving. Treat deletions and anything touching service accounts or API keys with particular care.
