@@ -34,7 +34,7 @@ These are the tool names your client shows as the assistant works, and the name 
 
 ## Prerequisites
 
-- Node.js v22 or higher. This applies to every install method, including the `.mcpb` bundle, which declares the same requirement in its extension manifest.
+- Node.js v22 or higher, for the `npx`-based install methods. You do not need it for the `.mcpb` bundle, because Claude Desktop ships its own Node runtime.
 - A Kosli API key. Use a [personal API key](/user/personal_api_keys) when you run the server on your own machine, or a [service account key](/administration/authentication/service_accounts) for automation.
 - An MCP-capable client, such as Claude Code or Claude Desktop
 
