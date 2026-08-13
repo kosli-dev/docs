@@ -26,9 +26,7 @@ Rather than ship one tool per Kosli endpoint, the server generates a catalog of 
 | `execute_read_action` | Invoke any `GET` action by ID. Auto-allowed in MCP clients. |
 | `execute_write_action` | Invoke any `POST`, `PUT`, `PATCH`, or `DELETE` action by ID. Gated behind user approval. |
 
-The assistant first calls `search_actions` to find the right action ID and its parameter schema, then calls `execute_read_action` or `execute_write_action` with that ID. Both execute tools accept an optional `fields` array that limits the response to specific top-level fields, which keeps responses small and token usage down.
-
-The `org` path parameter defaults to `KOSLI_ORG` when it is not supplied.
+The assistant first calls `search_actions` to find the right action ID and its parameter schema, then calls `execute_read_action` or `execute_write_action` with that ID. Both `execute_*` tools accept an optional `fields` array that limits the response to specific top-level fields, which keeps responses small and token usage down.
 
 <Warning>
 `execute_write_action` creates, modifies, and deletes real resources in your Kosli organization. MCP clients gate these calls behind an approval prompt, and that prompt is the only checkpoint before the call is made. An assistant may choose the wrong action, or the right action with the wrong parameters, so read the action ID and parameters before approving. Treat deletions and anything touching service accounts or API keys with particular care.
@@ -94,7 +92,7 @@ The server reads its configuration from environment variables.
 | Variable | Required | Default | Notes |
 |----------|----------|---------|-------|
 | `KOSLI_API_TOKEN` | yes | - | `KOSLI_API_KEY` is accepted as a fallback. |
-| `KOSLI_ORG` | yes | - | Default org, used when an action does not supply an `org` path parameter. |
+| `KOSLI_ORG` | yes | - | Default org. Used as the `org` path parameter when an action does not supply one. |
 | `KOSLI_BASE_URL` | no | `https://app.kosli.com` | Use `https://app.us.kosli.com` for US, or your own single-tenant endpoint. |
 
 ## Example prompts
