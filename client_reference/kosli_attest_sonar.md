@@ -99,7 +99,7 @@ The attestation can be bound to an *artifact* in two ways:
 	<Tab title="GitHub">
 	View an example of the `kosli attest sonar` command in GitHub.
 
-	In [this YAML file](https://github.com/cyber-dojo/dashboard/blob/da7bacefac23b0983d2b9f39d87508e0f85b1167/.github/workflows/main.yml#L122), which created [this Kosli Event](https://app.kosli.com/cyber-dojo/flows/dashboard-ci/trails/da7bacefac23b0983d2b9f39d87508e0f85b1167?attestation_id=d7a7562d-cb07-4f68-837f-66f0ad70).
+	In [this YAML file](https://github.com/cyber-dojo/dashboard/blob/2b300f450f72006f6a9000aaf9cd04485f1e8095/.github/workflows/main.yml#L123), which created [this Kosli Event](https://app.kosli.com/cyber-dojo/flows/dashboard-ci/trails/2b300f450f72006f6a9000aaf9cd04485f1e8095?attestation_id=1b233c18-d972-4d0e-8d5c-8255544a).
 	</Tab>
 </Tabs>
 
