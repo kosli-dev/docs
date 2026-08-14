@@ -325,7 +325,8 @@ kosli get trail dashboard-ci e4757683b74df7033c95aa544a7824b395c2f8bb --output=j
       "attestation_type": "pull_request",
       "is_compliant": true,
       "attestation_id": "60045efd-1851-45f4-9b27-5f7ae946",
-      "template_reference_name": "pull-request"
+      "template_reference_name": "pull-request",
+      "is_reattestation": null
     },
     {
       "org_id": "83acb2bc-2c26-48a7-8b87-90dfcce7",
@@ -364,6 +365,7 @@ kosli get trail dashboard-ci e4757683b74df7033c95aa544a7824b395c2f8bb --output=j
       "is_compliant": true,
       "attestation_id": "d81b5df8-7c67-42ce-b332-5f10aba5",
       "template_reference_name": "rubocop-lint",
+      "is_reattestation": null,
       "target_artifact": "dashboard"
     },
     {
@@ -442,6 +444,7 @@ kosli get trail dashboard-ci e4757683b74df7033c95aa544a7824b395c2f8bb --output=j
       "is_compliant": true,
       "attestation_id": "8753765c-0df9-421c-bfe3-c8aa1f8d",
       "template_reference_name": "provenance-facts",
+      "is_reattestation": null,
       "artifact_fingerprint": "54f6da185cd0f0ef001a0b33c099565fa736546562e0411f706832e72dca47bb",
       "artifact_name": "244531986313.dkr.ecr.eu-central-1.amazonaws.com/dashboard:e475768",
       "target_artifact": "dashboard"
@@ -483,6 +486,7 @@ kosli get trail dashboard-ci e4757683b74df7033c95aa544a7824b395c2f8bb --output=j
       "is_compliant": true,
       "attestation_id": "b0786932-6ff7-4359-bb20-1bb43671",
       "template_reference_name": "provenance-decision",
+      "is_reattestation": null,
       "artifact_fingerprint": "54f6da185cd0f0ef001a0b33c099565fa736546562e0411f706832e72dca47bb",
       "artifact_name": "244531986313.dkr.ecr.eu-central-1.amazonaws.com/dashboard:e475768",
       "target_artifact": "dashboard"
@@ -524,6 +528,7 @@ kosli get trail dashboard-ci e4757683b74df7033c95aa544a7824b395c2f8bb --output=j
       "is_compliant": true,
       "attestation_id": "7d834d1e-e7de-4890-870c-a783053b",
       "template_reference_name": "sbom-facts",
+      "is_reattestation": null,
       "artifact_fingerprint": "54f6da185cd0f0ef001a0b33c099565fa736546562e0411f706832e72dca47bb",
       "artifact_name": "244531986313.dkr.ecr.eu-central-1.amazonaws.com/dashboard:e475768",
       "target_artifact": "dashboard"
@@ -565,6 +570,7 @@ kosli get trail dashboard-ci e4757683b74df7033c95aa544a7824b395c2f8bb --output=j
       "is_compliant": true,
       "attestation_id": "c955d971-4600-4b45-950f-cd8b3642",
       "template_reference_name": "sonarcloud-scan",
+      "is_reattestation": null,
       "target_artifact": "dashboard"
     },
     {
@@ -604,6 +610,7 @@ kosli get trail dashboard-ci e4757683b74df7033c95aa544a7824b395c2f8bb --output=j
       "is_compliant": true,
       "attestation_id": "d37cd3aa-3909-4d0d-a8c3-0c623de1",
       "template_reference_name": "sbom-decision",
+      "is_reattestation": null,
       "artifact_fingerprint": "54f6da185cd0f0ef001a0b33c099565fa736546562e0411f706832e72dca47bb",
       "artifact_name": "244531986313.dkr.ecr.eu-central-1.amazonaws.com/dashboard:e475768",
       "target_artifact": "dashboard"
@@ -645,6 +652,7 @@ kosli get trail dashboard-ci e4757683b74df7033c95aa544a7824b395c2f8bb --output=j
       "is_compliant": true,
       "attestation_id": "084be09c-f101-4a29-985e-ee305d60",
       "template_reference_name": "unit-test",
+      "is_reattestation": null,
       "artifact_fingerprint": "54f6da185cd0f0ef001a0b33c099565fa736546562e0411f706832e72dca47bb",
       "artifact_name": "244531986313.dkr.ecr.eu-central-1.amazonaws.com/dashboard:e475768",
       "target_artifact": "dashboard"
@@ -686,6 +694,7 @@ kosli get trail dashboard-ci e4757683b74df7033c95aa544a7824b395c2f8bb --output=j
       "is_compliant": true,
       "attestation_id": "ede0b52b-d56e-474f-b04c-03e6be01",
       "template_reference_name": "unit-test-coverage",
+      "is_reattestation": null,
       "artifact_fingerprint": "54f6da185cd0f0ef001a0b33c099565fa736546562e0411f706832e72dca47bb",
       "artifact_name": "244531986313.dkr.ecr.eu-central-1.amazonaws.com/dashboard:e475768",
       "target_artifact": "dashboard"
@@ -727,6 +736,7 @@ kosli get trail dashboard-ci e4757683b74df7033c95aa544a7824b395c2f8bb --output=j
       "is_compliant": true,
       "attestation_id": "2e01c56f-18f9-4e75-8b45-f7d5846e",
       "template_reference_name": "snyk-container-scan",
+      "is_reattestation": null,
       "artifact_fingerprint": "54f6da185cd0f0ef001a0b33c099565fa736546562e0411f706832e72dca47bb",
       "artifact_name": "244531986313.dkr.ecr.eu-central-1.amazonaws.com/dashboard:e475768",
       "target_artifact": "dashboard"
