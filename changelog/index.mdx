@@ -4,6 +4,52 @@ description: "Release notes for Kosli products."
 rss: true
 ---
 
+<Update label="August 14, 2026" description="v2.36.6" tags={["CLI"]}>
+
+## Bug fixes
+
+- **Empty multi-value flag elements rejected** — `--attachments` or `--template` values that expand to an empty element (for example from an unset shell variable) now fail with a clear error naming the flag instead of being silently dropped.
+- **Empty boolean flag values rejected** — passing an empty value to a boolean flag (for example `--compliant ""` or `--new-compliance-status ""`) now fails with a clear error instead of recording the opposite compliance verdict.
+- **`KOSLI_*` env vars set to empty treated as unset** — `KOSLI_CONFIG_FILE=""` no longer suppresses config file loading, and `KOSLI_API_TOKEN=""` no longer skips decryption of a config-file token. Both fall back to the default.
+- **Bad config values surface errors** — config file or environment values that cannot be applied to a flag now produce an error naming the flag and its source, instead of silently failing.
+
+[View on GitHub](https://github.com/kosli-dev/cli/releases/tag/v2.36.6)
+
+</Update>
+
+<Update label="August 14, 2026" description="" tags={["Platform"]}>
+
+## New features
+
+- **Custom attestation summaries** — [custom attestation types](/getting_started/attestations) can now define a `summary` list of JQ expressions that extract key values (for example `Critical`, `Tool`) from the payload. The attestation drawer renders these as labelled rows instead of only raw JSON, matching the built-in Sonar, Snyk, and JUnit types. Summaries are versioned with the type, so schema changes create a new version. Array payloads render one summary group per element.
+
+## Updates
+
+- **SCIM changes attributed to "External IdP"** — audit-log rows whose source is `scim` (create, set, or revoke membership) now show **External IdP** in the **Changed by** column instead of the org's first admin. The change is also reflected in the v2 audit-log API, which returns no setter for these rows.
+
+</Update>
+
+<Update label="August 13, 2026" description="" tags={["Platform"]}>
+
+## Updates
+
+- **Flows list rebuilt as a React page** — `/<org>/flows/` now runs as a React island. Search, space filter, sort (by name or latest activity), and paging update in place instead of triggering a full page reload. The `GET /api/v2/flows/{org}` endpoint gained `latest_activity_at` and `latest_state` fields and a `sort` (`name` | `latest_activity`) parameter with `sort_direction` to power the new UI.
+
+</Update>
+
+<Update label="August 11, 2026" description="" tags={["Platform"]}>
+
+## Updates
+
+- **SCIM webhook status handling** — a Descope SCIM payload whose status is neither `enabled` nor `disabled` (for example `invited`) is now rejected with an explicit error instead of silently doing nothing. Tenant membership is read from the loaded Descope user, so it always follows authoritative IdP state.
+
+## Bug fixes
+
+- **Faster webhook saves** — the SSRF guard on webhook URLs no longer performs a blocking DNS lookup while saving an action. A slow resolver can no longer stall the save (or time out the request).
+- **Notification emails and trail events hardened against injected HTML** — user-controlled names and descriptions in notification emails and trail event descriptions are now HTML-escaped when rendered, closing a defence-in-depth gap on top of existing input validation.
+
+</Update>
+
 <Update label="August 7, 2026" description="" tags={["Platform"]}>
 
 ## Bug fixes
