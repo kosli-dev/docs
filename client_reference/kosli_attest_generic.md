@@ -25,46 +25,47 @@ These are automatically set in GitHub Actions, GitLab CI, Bitbucket Pipelines, a
 In other CI systems, set them explicitly to capture repository metadata.
 
 ## Flags
-| Flag | Description |
-| :--- | :--- |
-|        `--annotate` stringToString  |  [optional] Annotate the attestation with data using key=value.  |
-|    `-t`, `--artifact-type` string  |  The type of the artifact to calculate its SHA256 fingerprint. One of: [oci, docker, file, dir]. Only required if you want Kosli to calculate the fingerprint for you (i.e. when you don't specify '`--fingerprint`' on commands that allow it).  |
-|        `--attachments` strings  |  [optional] The comma-separated list of paths of attachments for the reported attestation. Attachments can be files or directories. All attachments are compressed and uploaded to Kosli's evidence vault.  |
-|    `-g`, `--commit` string  |  [conditional] The git commit for which the attestation is associated to. Becomes required when reporting an attestation for an artifact before reporting it to Kosli. (defaulted in some CIs: [docs](/integrations/ci_cd) ).  |
-|    `-C`, `--compliant`  |  [defaulted] Whether the attestation is compliant or not. (default true)  |
-|        `--description` string  |  [optional] attestation description  |
-|    `-D`, `--dry-run`  |  [optional] Run in dry-run mode. When enabled, no data is sent to Kosli and the CLI exits with 0 exit code regardless of any errors.  |
-|    `-x`, `--exclude` strings  |  [optional] The comma separated list of directories and files to exclude from fingerprinting. Can take glob patterns. Only applicable for `--artifact-type` dir.  |
-|        `--external-fingerprint` stringToString  |  [optional] A SHA256 fingerprint of an external attachment represented by `--external-url`. The format is label=fingerprint (labels cannot contain '.' or '='). This flag can be set multiple times. There must be an external url with a matching label for each external fingerprint.  |
-|        `--external-url` stringToString  |  [optional] Add labeled reference URL for an external resource. The format is label=url (labels cannot contain '.' or '='). This flag can be set multiple times. If the resource is a file or dir, you can optionally add its fingerprint via `--external-fingerprint`  |
-|    `-F`, `--fingerprint` string  |  [conditional] The SHA256 fingerprint of the artifact to attach the attestation to. Only required if the attestation is for an artifact and `--artifact-type` and artifact name/path are not used.  |
-|    `-f`, `--flow` string  |  The Kosli flow name.  |
-|    `-h`, `--help`  |  help for generic  |
-|    `-n`, `--name` string  |  The name of the attestation as declared in the flow or trail yaml template.  |
-|    `-o`, `--origin-url` string  |  [optional] The url pointing to where the attestation came from or is related. (defaulted to the CI url in some CIs: [docs](/integrations/ci_cd/#defaulted-kosli-command-flags-from-ci-variables) ).  |
-|        `--redact-commit-info` strings  |  [optional] The list of commit info to be redacted before sending to Kosli. Allowed values are one or more of [author, message, branch].  |
-|        `--registry-password` string  |  [conditional] The container registry password or access token. Only required if you want to read container image SHA256 digest from a remote container registry and it is not already accessible via Docker/Podman auth files or a credential helper.  |
-|        `--registry-username` string  |  [conditional] The container registry username. Only required if you want to read container image SHA256 digest from a remote container registry and it is not already accessible via Docker/Podman auth files or a credential helper.  |
-|        `--repo-id` string  |  [conditional] The stable, unique identifier for the repository in your VCS provider (e.g. a numeric ID). Do not use the repository name as it can change if the repo is renamed. All three of `--repo-id`, `--repo-url` and `--repository` must be set to record repository information (defaulted in some CIs: [docs](/integrations/ci_cd) ).  |
-|        `--repo-provider` string  |  [optional] The source code hosting provider. One of: github, gitlab, bitbucket, bitbucket_cloud, bitbucket_dc, azure-devops, azure_devops_services, azure_devops_server, git, subversion (defaulted in some CIs: [docs](/integrations/ci_cd) ).  |
-|        `--repo-root` string  |  [defaulted] The directory where the source git repository is available. Only used if `--commit` is used or defaulted in CI, see [docs](/integrations/ci_cd/#defaulted-kosli-command-flags-from-ci-variables) . (default ".")  |
-|        `--repo-url` string  |  [conditional] The URL of the repository. Must be a valid URL. All three of `--repo-id`, `--repo-url` and `--repository` must be set to record repository information (defaulted in some CIs: [docs](/integrations/ci_cd) ).  |
-|        `--repository` string  |  [conditional] The name of the repository (e.g. owner/repo-name). All three of `--repo-id`, `--repo-url` and `--repository` must be set to record repository information (defaulted in some CIs: [docs](/integrations/ci_cd) ).  |
-|    `-T`, `--trail` string  |  The Kosli trail name.  |
-|    `-u`, `--user-data` string  |  [optional] The path to a JSON file containing additional data you would like to attach to the attestation.  |
+| Flag | Type | Description |
+| :--- | :--- | :--- |
+| `--annotate` | stringToString | [optional] Annotate the attestation with data using key=value. |
+| `-t`, `--artifact-type` | string | The type of the artifact to calculate its SHA256 fingerprint. One of: [oci, docker, file, dir]. Only required if you want Kosli to calculate the fingerprint for you (i.e. when you don't specify '`--fingerprint`' on commands that allow it). |
+| `--attachments` | strings | [optional] The comma-separated list of paths of attachments for the reported attestation. Attachments can be files or directories. All attachments are compressed and uploaded to Kosli's evidence vault. |
+| `-g`, `--commit` | string | [conditional] The git commit for which the attestation is associated to. Becomes required when reporting an attestation for an artifact before reporting it to Kosli. (defaulted in some CIs: [docs](/integrations/ci_cd) ). |
+| `-C`, `--compliant` | bool | [defaulted] Whether the attestation is compliant or not. (default true) |
+| `--description` | string | [optional] attestation description |
+| `-D`, `--dry-run` | bool | [optional] Run in dry-run mode. When enabled, no data is sent to Kosli and the CLI exits with 0 exit code regardless of any errors. |
+| `-x`, `--exclude` | strings | [optional] The comma separated list of directories and files to exclude from fingerprinting. Can take glob patterns. Only applicable for `--artifact-type` dir. |
+| `--external-fingerprint` | stringToString | [optional] A SHA256 fingerprint of an external attachment represented by `--external-url`. The format is label=fingerprint (labels cannot contain '.' or '='). This flag can be set multiple times. There must be an external url with a matching label for each external fingerprint. |
+| `--external-url` | stringToString | [optional] Add labeled reference URL for an external resource. The format is label=url (labels cannot contain '.' or '='). This flag can be set multiple times. If the resource is a file or dir, you can optionally add its fingerprint via `--external-fingerprint` |
+| `-F`, `--fingerprint` | string | [conditional] The SHA256 fingerprint of the artifact to attach the attestation to. Only required if the attestation is for an artifact and `--artifact-type` and artifact name/path are not used. |
+| `-f`, `--flow` | string | The Kosli flow name. |
+| `-h`, `--help` | bool | help for generic |
+| `-n`, `--name` | string | The name of the attestation as declared in the flow or trail yaml template. |
+| `-o`, `--origin-url` | string | [optional] The url pointing to where the attestation came from or is related. (defaulted to the CI url in some CIs: [docs](/integrations/ci_cd/#defaulted-kosli-command-flags-from-ci-variables) ). |
+| `--redact-commit-info` | strings | [optional] The list of commit info to be redacted before sending to Kosli. Allowed values are one or more of [author, message, branch]. |
+| `--registry-password` | string | [conditional] The container registry password or access token. Only required if you want to read container image SHA256 digest from a remote container registry and it is not already accessible via Docker/Podman auth files or a credential helper. |
+| `--registry-provider` | string | [deprecated] The docker registry provider or url. Only required if you want to read docker image SHA256 digest from a remote docker registry. (DEPRECATED: no longer used) |
+| `--registry-username` | string | [conditional] The container registry username. Only required if you want to read container image SHA256 digest from a remote container registry and it is not already accessible via Docker/Podman auth files or a credential helper. |
+| `--repo-id` | string | [conditional] The stable, unique identifier for the repository in your VCS provider (e.g. a numeric ID). Do not use the repository name as it can change if the repo is renamed. All three of `--repo-id`, `--repo-url` and `--repository` must be set to record repository information (defaulted in some CIs: [docs](/integrations/ci_cd) ). |
+| `--repo-provider` | string | [optional] The source code hosting provider. One of: github, gitlab, bitbucket, bitbucket_cloud, bitbucket_dc, azure-devops, azure_devops_services, azure_devops_server, git, subversion (defaulted in some CIs: [docs](/integrations/ci_cd) ). |
+| `--repo-root` | string | [defaulted] The directory where the source git repository is available. Only used if `--commit` is used or defaulted in CI, see [docs](/integrations/ci_cd/#defaulted-kosli-command-flags-from-ci-variables) . (default ".") |
+| `--repo-url` | string | [conditional] The URL of the repository. Must be a valid URL. All three of `--repo-id`, `--repo-url` and `--repository` must be set to record repository information (defaulted in some CIs: [docs](/integrations/ci_cd) ). |
+| `--repository` | string | [conditional] The name of the repository (e.g. owner/repo-name). All three of `--repo-id`, `--repo-url` and `--repository` must be set to record repository information (defaulted in some CIs: [docs](/integrations/ci_cd) ). |
+| `-T`, `--trail` | string | The Kosli trail name. |
+| `-u`, `--user-data` | string | [optional] The path to a JSON file containing additional data you would like to attach to the attestation. |
 
 
 ## Flags inherited from parent commands
-| Flag | Description |
-| :--- | :--- |
-|    `-a`, `--api-token` string  |  The Kosli API token.  |
-|    `-c`, `--config-file` string  |  [optional] The Kosli config file path. (default "kosli")  |
-|        `--debug`  |  [optional] Print debug logs to stdout.  |
-|    `-H`, `--host` string  |  [defaulted] The Kosli endpoint. (default "https://app.kosli.com")  |
-|        `--http-proxy` string  |  [optional] The HTTP proxy URL including protocol and port number. e.g. `http://proxy-server-ip:proxy-port`  |
-|    `-r`, `--max-api-retries` int  |  [defaulted] How many times should API calls be retried when the API host is not reachable. (default 3)  |
-|        `--org` string  |  The Kosli organization.  |
-|    `-q`, `--quiet`  |  [optional] Suppress non-critical warning messages. Errors and normal output are not affected. If both `--quiet` and `--debug` are set, `--debug` wins.  |
+| Flag | Type | Description |
+| :--- | :--- | :--- |
+| `-a`, `--api-token` | string | The Kosli API token. |
+| `-c`, `--config-file` | string | [optional] The Kosli config file path. (default "kosli") |
+| `--debug` | bool | [optional] Print debug logs to stdout. |
+| `-H`, `--host` | string | [defaulted] The Kosli endpoint. (default "https://app.kosli.com") |
+| `--http-proxy` | string | [optional] The HTTP proxy URL including protocol and port number. e.g. `http://proxy-server-ip:proxy-port` |
+| `-r`, `--max-api-retries` | int | [defaulted] How many times should API calls be retried when the API host is not reachable. (default 3) |
+| `--org` | string | The Kosli organization. |
+| `-q`, `--quiet` | bool | [optional] Suppress non-critical warning messages. Errors and normal output are not affected. If both `--quiet` and `--debug` are set, `--debug` wins. |
 
 
 ## Live Examples in different CI systems
@@ -73,12 +74,12 @@ In other CI systems, set them explicitly to capture repository metadata.
 	<Tab title="GitHub">
 	View an example of the `kosli attest generic` command in GitHub.
 
-	In [this YAML file](https://github.com/cyber-dojo/dashboard/blob/0fb0be439480821efb926a5079e39ce5941eaa48/.github/workflows/main.yml#L197), which created [this Kosli Event](https://app.kosli.com/cyber-dojo/flows/dashboard-ci/trails/0fb0be439480821efb926a5079e39ce5941eaa48?attestation_id=c12ffdfa-3c59-4d52-ab07-4e6dae54).
+	In [this YAML file](https://github.com/cyber-dojo/dashboard/blob/2b300f450f72006f6a9000aaf9cd04485f1e8095/.github/workflows/main.yml#L198), which created [this Kosli Event](https://app.kosli.com/cyber-dojo/flows/dashboard-ci/trails/2b300f450f72006f6a9000aaf9cd04485f1e8095?attestation_id=238c219e-af62-4ac5-a626-e089df79).
 	</Tab>
 	<Tab title="GitLab">
 	View an example of the `kosli attest generic` command in GitLab.
 
-	In [this YAML file](https://gitlab.com/cyber-dojo/creator/-/blob/65fd2bfa2478534ea4bc5ccf30f6bfc6aab7550c/.gitlab/workflows/main.yml#L131), which created [this Kosli Event](https://app.kosli.com/cyber-dojo/flows/creator-ci/trails/76672a8b247049c3ce8c3140852e17be8f47d995?attestation_id=6d5f489d-2e46-439e-808c-35a2495d).
+	In [this YAML file](https://gitlab.com/cyber-dojo/creator/-/blob/65fd2bfa2478534ea4bc5ccf30f6bfc6aab7550c/.gitlab/workflows/main.yml#L131), which created [this Kosli Event](https://app.kosli.com/cyber-dojo/flows/creator-ci/trails/83357f112ef5c10b157cb84732c77965cc8ddc48?attestation_id=800f7d9d-621f-4c31-98b2-cb507548).
 	</Tab>
 </Tabs>
 

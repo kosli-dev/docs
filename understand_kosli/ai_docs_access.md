@@ -5,6 +5,10 @@ description: 'Use MCP servers, skill.md, and llms.txt to let AI tools read and s
 
 Kosli documentation supports AI-friendly access through three mechanisms: an **MCP server** for semantic search, a **skill.md** endpoint that teaches AI assistants how the docs are organized, and **llms.txt** files that provide full documentation content. These let you query Kosli documentation directly from AI coding assistants like Cursor, Claude Code, Windsurf, VS Code with Copilot, and others.
 
+<Note>
+Everything on this page covers access to the documentation. To let an AI assistant query the data in your own Kosli organization, see the [Kosli MCP server](/integrations/mcp_server).
+</Note>
+
 ## MCP server
 
 The Model Context Protocol (MCP) server lets AI tools search Kosli documentation semantically. Instead of copy-pasting docs into a chat window, you connect your AI assistant to the MCP endpoint and it can search the docs on its own.

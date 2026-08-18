@@ -177,7 +177,8 @@
             "integrations/ci_cd",
             "integrations/slack",
             "integrations/launchdarkly",
-            "integrations/sonar"
+            "integrations/sonar",
+            "integrations/mcp_server"
           ]
         }
       ]

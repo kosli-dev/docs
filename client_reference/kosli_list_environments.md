@@ -15,31 +15,31 @@ When --page or --page-limit is set, the results are paginated and the response i
 The list can be filtered by name, type, space and tags, and sorted with --sort and --sort-direction.
 
 ## Flags
-| Flag | Description |
-| :--- | :--- |
-|    `-h`, `--help`  |  help for environments  |
-|        `--name` string  |  [optional] Only list environments whose name contains this substring (case-insensitive).  |
-|    `-o`, `--output` string  |  [defaulted] The format of the output. Valid formats are: [table, json]. (default "table")  |
-|        `--page` int  |  [defaulted] The page number of a response. (default 1)  |
-|    `-n`, `--page-limit` int  |  [defaulted] The number of elements per page. (default 15)  |
-|        `--sort` string  |  [optional] The field to sort environments by. Valid values are: [name, last_modified_at, last_changed_at]. (defaults to name)  |
-|        `--sort-direction` string  |  [optional] The direction to sort environments in. Valid values are: [asc, desc]. (defaults to asc)  |
-|        `--space-id` strings  |  [optional] Only list environments in the space with this ID. Can be repeated to match more than one space.  |
-|        `--tag` stringArray  |  [optional] Only list environments that have this tag, given as 'key' or 'key:value'. Can be repeated to match more than one tag.  |
-|        `--type` strings  |  [optional] Only list environments of this type. Valid types are: [K8S, ECS, S3, lambda, server, docker, azure-apps, cloud-run, logical]. Can be repeated to match more than one type.  |
+| Flag | Type | Description |
+| :--- | :--- | :--- |
+| `-h`, `--help` | bool | help for environments |
+| `--name` | string | [optional] Only list environments whose name contains this substring (case-insensitive). |
+| `-o`, `--output` | string | [defaulted] The format of the output. Valid formats are: [table, json]. (default "table") |
+| `--page` | int | [defaulted] The page number of a response. (default 1) |
+| `-n`, `--page-limit` | int | [defaulted] The number of elements per page. (default 15) |
+| `--sort` | string | [optional] The field to sort environments by. Valid values are: [name, last_modified_at, last_changed_at]. (defaults to name) |
+| `--sort-direction` | string | [optional] The direction to sort environments in. Valid values are: [asc, desc]. (defaults to asc) |
+| `--space-id` | strings | [optional] Only list environments in the space with this ID. Can be repeated to match more than one space. |
+| `--tag` | stringArray | [optional] Only list environments that have this tag, given as 'key' or 'key:value'. Can be repeated to match more than one tag. |
+| `--type` | strings | [optional] Only list environments of this type. Valid types are: [K8S, ECS, S3, lambda, server, docker, azure-apps, cloud-run, logical]. Can be repeated to match more than one type. |
 
 
 ## Flags inherited from parent commands
-| Flag | Description |
-| :--- | :--- |
-|    `-a`, `--api-token` string  |  The Kosli API token.  |
-|    `-c`, `--config-file` string  |  [optional] The Kosli config file path. (default "kosli")  |
-|        `--debug`  |  [optional] Print debug logs to stdout.  |
-|    `-H`, `--host` string  |  [defaulted] The Kosli endpoint. (default "https://app.kosli.com")  |
-|        `--http-proxy` string  |  [optional] The HTTP proxy URL including protocol and port number. e.g. `http://proxy-server-ip:proxy-port`  |
-|    `-r`, `--max-api-retries` int  |  [defaulted] How many times should API calls be retried when the API host is not reachable. (default 3)  |
-|        `--org` string  |  The Kosli organization.  |
-|    `-q`, `--quiet`  |  [optional] Suppress non-critical warning messages. Errors and normal output are not affected. If both `--quiet` and `--debug` are set, `--debug` wins.  |
+| Flag | Type | Description |
+| :--- | :--- | :--- |
+| `-a`, `--api-token` | string | The Kosli API token. |
+| `-c`, `--config-file` | string | [optional] The Kosli config file path. (default "kosli") |
+| `--debug` | bool | [optional] Print debug logs to stdout. |
+| `-H`, `--host` | string | [defaulted] The Kosli endpoint. (default "https://app.kosli.com") |
+| `--http-proxy` | string | [optional] The HTTP proxy URL including protocol and port number. e.g. `http://proxy-server-ip:proxy-port` |
+| `-r`, `--max-api-retries` | int | [defaulted] How many times should API calls be retried when the API host is not reachable. (default 3) |
+| `--org` | string | The Kosli organization. |
+| `-q`, `--quiet` | bool | [optional] Suppress non-critical warning messages. Errors and normal output are not affected. If both `--quiet` and `--debug` are set, `--debug` wins. |
 
 
 ## Live Example
@@ -63,9 +63,9 @@ kosli list environments --output=json
     "name": "aws-beta",
     "type": "ECS",
     "description": "The ECS cluster for staging cyber-dojo",
-    "last_modified_at": 1785257304.0827382,
-    "last_reported_at": 1785257304.0827382,
-    "last_changed_at": 1785243263.9648561,
+    "last_modified_at": 1786720043.998481,
+    "last_reported_at": 1786720043.998481,
+    "last_changed_at": 1786679783.9316874,
     "state": true,
     "include_scaling": false,
     "tags": {
@@ -84,9 +84,9 @@ kosli list environments --output=json
     "name": "aws-beta-terraform-drift-detection",
     "type": "server",
     "description": "Detection of drift of the Infrastructure-as-code components of aws-beta",
-    "last_modified_at": 1785257109.0435762,
-    "last_reported_at": 1785257109.0435762,
-    "last_changed_at": 1785243308.9429753,
+    "last_modified_at": 1786719908.7127595,
+    "last_reported_at": 1786719908.7127595,
+    "last_changed_at": 1786632908.9464843,
     "state": true,
     "include_scaling": false,
     "tags": {},
@@ -100,9 +100,9 @@ kosli list environments --output=json
     "name": "aws-prod",
     "type": "ECS",
     "description": "The ECS cluster for production cyber-dojo",
-    "last_modified_at": 1785257278.4557931,
-    "last_reported_at": 1785257278.4557931,
-    "last_changed_at": 1785243478.598589,
+    "last_modified_at": 1786720018.4959269,
+    "last_reported_at": 1786720018.4959269,
+    "last_changed_at": 1786679818.4046729,
     "state": true,
     "include_scaling": false,
     "tags": {
@@ -122,9 +122,9 @@ kosli list environments --output=json
     "name": "aws-prod-terraform-drift-detection",
     "type": "server",
     "description": "Detection of drift of the Infrastructure-as-code components of aws-prod",
-    "last_modified_at": 1785257011.940645,
-    "last_reported_at": 1785257011.940645,
-    "last_changed_at": 1785243812.1531923,
+    "last_modified_at": 1786719811.9755135,
+    "last_reported_at": 1786719811.9755135,
+    "last_changed_at": 1786426111.953674,
     "state": true,
     "include_scaling": false,
     "tags": {},
@@ -138,9 +138,9 @@ kosli list environments --output=json
     "name": "production",
     "type": "logical",
     "description": "Production environments for cyber-dojo",
-    "last_modified_at": 1785243812.1531923,
+    "last_modified_at": 1786679818.4046729,
     "last_reported_at": null,
-    "last_changed_at": 1785243812.1531923,
+    "last_changed_at": 1786679818.4046729,
     "state": true,
     "include_scaling": false,
     "tags": {},
@@ -155,9 +155,9 @@ kosli list environments --output=json
     "name": "staging",
     "type": "logical",
     "description": "Staging environments for cyber-dojo",
-    "last_modified_at": 1785243308.9429753,
+    "last_modified_at": 1786679783.9316874,
     "last_reported_at": null,
-    "last_changed_at": 1785243308.9429753,
+    "last_changed_at": 1786679783.9316874,
     "state": true,
     "include_scaling": false,
     "tags": {},

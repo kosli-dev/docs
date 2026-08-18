@@ -27,26 +27,26 @@ All rules must return `true` for the evaluation to pass and the attestation to b
 
 
 ## Flags
-| Flag | Description |
-| :--- | :--- |
-|    `-d`, `--description` string  |  [optional] The attestation type description.  |
-|    `-D`, `--dry-run`  |  [optional] Run in dry-run mode. When enabled, no data is sent to Kosli and the CLI exits with 0 exit code regardless of any errors.  |
-|    `-h`, `--help`  |  help for attestation-type  |
-|        `--jq` stringArray  |  [optional] The attestation type evaluation JQ rules.  |
-|    `-s`, `--schema` string  |  [optional] Path to the attestation type schema in JSON Schema format.  |
+| Flag | Type | Description |
+| :--- | :--- | :--- |
+| `-d`, `--description` | string | [optional] The attestation type description. |
+| `-D`, `--dry-run` | bool | [optional] Run in dry-run mode. When enabled, no data is sent to Kosli and the CLI exits with 0 exit code regardless of any errors. |
+| `-h`, `--help` | bool | help for attestation-type |
+| `--jq` | stringArray | [optional] The attestation type evaluation JQ rules. |
+| `-s`, `--schema` | string | [optional] Path to the attestation type schema in JSON Schema format. |
 
 
 ## Flags inherited from parent commands
-| Flag | Description |
-| :--- | :--- |
-|    `-a`, `--api-token` string  |  The Kosli API token.  |
-|    `-c`, `--config-file` string  |  [optional] The Kosli config file path. (default "kosli")  |
-|        `--debug`  |  [optional] Print debug logs to stdout.  |
-|    `-H`, `--host` string  |  [defaulted] The Kosli endpoint. (default "https://app.kosli.com")  |
-|        `--http-proxy` string  |  [optional] The HTTP proxy URL including protocol and port number. e.g. `http://proxy-server-ip:proxy-port`  |
-|    `-r`, `--max-api-retries` int  |  [defaulted] How many times should API calls be retried when the API host is not reachable. (default 3)  |
-|        `--org` string  |  The Kosli organization.  |
-|    `-q`, `--quiet`  |  [optional] Suppress non-critical warning messages. Errors and normal output are not affected. If both `--quiet` and `--debug` are set, `--debug` wins.  |
+| Flag | Type | Description |
+| :--- | :--- | :--- |
+| `-a`, `--api-token` | string | The Kosli API token. |
+| `-c`, `--config-file` | string | [optional] The Kosli config file path. (default "kosli") |
+| `--debug` | bool | [optional] Print debug logs to stdout. |
+| `-H`, `--host` | string | [defaulted] The Kosli endpoint. (default "https://app.kosli.com") |
+| `--http-proxy` | string | [optional] The HTTP proxy URL including protocol and port number. e.g. `http://proxy-server-ip:proxy-port` |
+| `-r`, `--max-api-retries` | int | [defaulted] How many times should API calls be retried when the API host is not reachable. (default 3) |
+| `--org` | string | The Kosli organization. |
+| `-q`, `--quiet` | bool | [optional] Suppress non-critical warning messages. Errors and normal output are not affected. If both `--quiet` and `--debug` are set, `--debug` wins. |
 
 
 ## Live Examples in different CI systems
@@ -55,7 +55,7 @@ All rules must return `true` for the evaluation to pass and the attestation to b
 	<Tab title="GitHub">
 	View an example of the `kosli create attestation-type` command in GitHub.
 
-	In [this YAML file](https://github.com/cyber-dojo/kosli-attestation-types/blob/b4596ac88e5a447cb0c8fa3aaf7a5cbf4c9b0c57/.github/workflows/main.yml#L30)
+	In [this YAML file](https://github.com/cyber-dojo/kosli-attestation-types/blob/e115b88d482df7563cb10ac4fe80bdc34aad1209/.github/workflows/main.yml#L50)
 	</Tab>
 </Tabs>
 

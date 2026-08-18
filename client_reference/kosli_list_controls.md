@@ -18,29 +18,29 @@ List controls for an org.
 The results are paginated; use --page and --page-limit to navigate the pages.
 
 ## Flags
-| Flag | Description |
-| :--- | :--- |
-|        `--archived`  |  [optional] List archived controls instead of active ones.  |
-|    `-h`, `--help`  |  help for controls  |
-|    `-o`, `--output` string  |  [defaulted] The format of the output. Valid formats are: [table, json]. (default "table")  |
-|        `--page` int  |  [defaulted] The page number of a response. (default 1)  |
-|    `-n`, `--page-limit` int  |  [defaulted] The number of elements per page. (default 15)  |
-|        `--search` string  |  [optional] Only list controls whose name or identifier contains this substring (case-insensitive).  |
-|        `--sort-direction` string  |  [optional] The direction to sort controls in. Valid values are: [asc, desc]. (defaults to asc)  |
-|        `--tag` stringArray  |  [optional] Filter by tag, given as 'key' or 'key:value'. Can be repeated to match more than one tag.  |
+| Flag | Type | Description |
+| :--- | :--- | :--- |
+| `--archived` | bool | [optional] List archived controls instead of active ones. |
+| `-h`, `--help` | bool | help for controls |
+| `-o`, `--output` | string | [defaulted] The format of the output. Valid formats are: [table, json]. (default "table") |
+| `--page` | int | [defaulted] The page number of a response. (default 1) |
+| `-n`, `--page-limit` | int | [defaulted] The number of elements per page. (default 15) |
+| `--search` | string | [optional] Only list controls whose name or identifier contains this substring (case-insensitive). |
+| `--sort-direction` | string | [optional] The direction to sort controls in. Valid values are: [asc, desc]. (defaults to asc) |
+| `--tag` | stringArray | [optional] Filter by tag, given as 'key' or 'key:value'. Can be repeated to match more than one tag. |
 
 
 ## Flags inherited from parent commands
-| Flag | Description |
-| :--- | :--- |
-|    `-a`, `--api-token` string  |  The Kosli API token.  |
-|    `-c`, `--config-file` string  |  [optional] The Kosli config file path. (default "kosli")  |
-|        `--debug`  |  [optional] Print debug logs to stdout.  |
-|    `-H`, `--host` string  |  [defaulted] The Kosli endpoint. (default "https://app.kosli.com")  |
-|        `--http-proxy` string  |  [optional] The HTTP proxy URL including protocol and port number. e.g. `http://proxy-server-ip:proxy-port`  |
-|    `-r`, `--max-api-retries` int  |  [defaulted] How many times should API calls be retried when the API host is not reachable. (default 3)  |
-|        `--org` string  |  The Kosli organization.  |
-|    `-q`, `--quiet`  |  [optional] Suppress non-critical warning messages. Errors and normal output are not affected. If both `--quiet` and `--debug` are set, `--debug` wins.  |
+| Flag | Type | Description |
+| :--- | :--- | :--- |
+| `-a`, `--api-token` | string | The Kosli API token. |
+| `-c`, `--config-file` | string | [optional] The Kosli config file path. (default "kosli") |
+| `--debug` | bool | [optional] Print debug logs to stdout. |
+| `-H`, `--host` | string | [defaulted] The Kosli endpoint. (default "https://app.kosli.com") |
+| `--http-proxy` | string | [optional] The HTTP proxy URL including protocol and port number. e.g. `http://proxy-server-ip:proxy-port` |
+| `-r`, `--max-api-retries` | int | [defaulted] How many times should API calls be retried when the API host is not reachable. (default 3) |
+| `--org` | string | The Kosli organization. |
+| `-q`, `--quiet` | bool | [optional] Suppress non-critical warning messages. Errors and normal output are not affected. If both `--quiet` and `--debug` are set, `--debug` wins. |
 
 
 ## Examples Use Cases

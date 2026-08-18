@@ -15,27 +15,27 @@ includes pagination metadata and a page footer (table) or a "data"/"pagination" 
 The list can be filtered by name with --name (and --ignore-case for case-insensitive matching).
 
 ## Flags
-| Flag | Description |
-| :--- | :--- |
-|    `-h`, `--help`  |  help for flows  |
-|    `-i`, `--ignore-case`  |  [optional] Perform case-insensitive matching for `--name`. By default matching is case sensitive.  |
-|    `-N`, `--name` string  |  [optional] Only list flows whose name contains this substring. The Kosli API supports alphanumeric characters and '-'.  |
-|    `-o`, `--output` string  |  [defaulted] The format of the output. Valid formats are: [table, json]. (default "table")  |
-|        `--page` int  |  [defaulted] The page number of a response. (default 1)  |
-|    `-n`, `--page-limit` int  |  [defaulted] The number of elements per page. (default 20)  |
+| Flag | Type | Description |
+| :--- | :--- | :--- |
+| `-h`, `--help` | bool | help for flows |
+| `-i`, `--ignore-case` | bool | [optional] Perform case-insensitive matching for `--name`. By default matching is case sensitive. |
+| `-N`, `--name` | string | [optional] Only list flows whose name contains this substring. The Kosli API supports alphanumeric characters and '-'. |
+| `-o`, `--output` | string | [defaulted] The format of the output. Valid formats are: [table, json]. (default "table") |
+| `--page` | int | [defaulted] The page number of a response. (default 1) |
+| `-n`, `--page-limit` | int | [defaulted] The number of elements per page. (default 20) |
 
 
 ## Flags inherited from parent commands
-| Flag | Description |
-| :--- | :--- |
-|    `-a`, `--api-token` string  |  The Kosli API token.  |
-|    `-c`, `--config-file` string  |  [optional] The Kosli config file path. (default "kosli")  |
-|        `--debug`  |  [optional] Print debug logs to stdout.  |
-|    `-H`, `--host` string  |  [defaulted] The Kosli endpoint. (default "https://app.kosli.com")  |
-|        `--http-proxy` string  |  [optional] The HTTP proxy URL including protocol and port number. e.g. `http://proxy-server-ip:proxy-port`  |
-|    `-r`, `--max-api-retries` int  |  [defaulted] How many times should API calls be retried when the API host is not reachable. (default 3)  |
-|        `--org` string  |  The Kosli organization.  |
-|    `-q`, `--quiet`  |  [optional] Suppress non-critical warning messages. Errors and normal output are not affected. If both `--quiet` and `--debug` are set, `--debug` wins.  |
+| Flag | Type | Description |
+| :--- | :--- | :--- |
+| `-a`, `--api-token` | string | The Kosli API token. |
+| `-c`, `--config-file` | string | [optional] The Kosli config file path. (default "kosli") |
+| `--debug` | bool | [optional] Print debug logs to stdout. |
+| `-H`, `--host` | string | [defaulted] The Kosli endpoint. (default "https://app.kosli.com") |
+| `--http-proxy` | string | [optional] The HTTP proxy URL including protocol and port number. e.g. `http://proxy-server-ip:proxy-port` |
+| `-r`, `--max-api-retries` | int | [defaulted] How many times should API calls be retried when the API host is not reachable. (default 3) |
+| `--org` | string | The Kosli organization. |
+| `-q`, `--quiet` | bool | [optional] Suppress non-critical warning messages. Errors and normal output are not affected. If both `--quiet` and `--debug` are set, `--debug` wins. |
 
 
 ## Live Example
@@ -60,14 +60,16 @@ kosli list flows --output=json
     "description": "UX for Group/Kata creation",
     "visibility": "private",
     "org": "cyber-dojo",
-    "template": "version: 1\n\ntrail:\n  attestations:\n    - name: pull-request\n      type: pull_request\n  artifacts:\n    - name: creator\n      attestations:\n        - name: provenance-facts\n          type: custom:provenance-facts\n        - name: provenance-decision\n          type: decision\n\n        - name: sbom-facts\n          type: custom:sbom-facts\n        - name: sbom-decision\n          type: decision\n\n        - name: snyk-container-scan\n          type: decision\n\n        - name: lint\n          type: generic\n        - name: unit-test\n          type: junit\n        - name: test-branch-coverage\n          type: generic\n",
+    "template": "version: 1\n\ntrail:\n  attestations:\n    - name: pull-request\n      type: pull_request\n  artifacts:\n    - name: creator\n      attestations:\n        - name: provenance-facts\n          type: custom:provenance-facts\n        - name: provenance-decision\n          type: decision\n\n        - name: sbom-facts\n          type: custom:sbom-facts\n        - name: sbom-decision\n          type: decision\n\n        - name: snyk-container-scan\n          type: decision\n\n        - name: rubocop-lint\n          type: junit\n        - name: unit-test\n          type: junit\n        - name: unit-test-coverage\n          type: generic\n",
     "repo_url": "https://github.com/cyber-dojo/creator",
     "tags": {
       "ci": "github",
       "repo_url": "https://github.com/cyber-dojo/creator",
       "kind": "build",
       "env": "aws-beta"
-    }
+    },
+    "latest_activity_at": 1786438583.8978486,
+    "latest_state": "COMPLIANT"
   },
   {
     "id": "217f4b82-2fe6-41ef-8214-e34c3a47",
@@ -82,7 +84,9 @@ kosli list flows --output=json
       "repo_url": "https://github.com/cyber-dojo/custom-start-points",
       "kind": "build",
       "env": "aws-beta"
-    }
+    },
+    "latest_activity_at": 1786437744.0761797,
+    "latest_state": "COMPLIANT"
   },
   {
     "id": "f60c8f3f-67cd-4496-8e17-ed6fdb1e",
@@ -97,7 +101,9 @@ kosli list flows --output=json
       "repo_url": "https://github.com/cyber-dojo/dashboard",
       "kind": "build",
       "env": "aws-beta"
-    }
+    },
+    "latest_activity_at": 1786438583.8978486,
+    "latest_state": "COMPLIANT"
   },
   {
     "id": "d398561b-b0a9-4f0e-95a3-bbb0e347",
@@ -112,7 +118,9 @@ kosli list flows --output=json
       "repo_url": "https://github.com/cyber-dojo/differ",
       "kind": "build",
       "env": "aws-beta"
-    }
+    },
+    "latest_activity_at": 1786632623.852957,
+    "latest_state": "COMPLIANT"
   },
   {
     "id": "7f0ddaf2-32be-4cae-9512-161dc24c",
@@ -122,7 +130,9 @@ kosli list flows --output=json
     "org": "cyber-dojo",
     "template": "version: 1\n\ntrail:\n  artifacts:\n    - name: docker-base\n      attestations:\n        - name: snyk-container-scan\n          type: decision\n",
     "repo_url": "https://github.com/cyber-dojo/docker-base",
-    "tags": {}
+    "tags": {},
+    "latest_activity_at": 1783067775.5474463,
+    "latest_state": "COMPLIANT"
   },
   {
     "id": "c1bb83be-5195-4814-9fae-eac6bf67",
@@ -137,7 +147,9 @@ kosli list flows --output=json
       "repo_url": "https://github.com/cyber-dojo/exercises-start-points",
       "kind": "build",
       "env": "aws-beta"
-    }
+    },
+    "latest_activity_at": 1786437264.0834873,
+    "latest_state": "COMPLIANT"
   },
   {
     "id": "0b4a3bb0-4f77-41a9-8dea-733d1dc3",
@@ -152,7 +164,9 @@ kosli list flows --output=json
       "repo_url": "https://github.com/cyber-dojo/languages-start-points",
       "kind": "build",
       "env": "aws-beta"
-    }
+    },
+    "latest_activity_at": 1786437984.0695097,
+    "latest_state": "COMPLIANT"
   },
   {
     "id": "d81371fe-6264-4bb1-aace-9b0af86c",
@@ -162,7 +176,9 @@ kosli list flows --output=json
     "org": "cyber-dojo",
     "template": "version: 1",
     "repo_url": "https://github.com/cyber-dojo/monorepo",
-    "tags": {}
+    "tags": {},
+    "latest_activity_at": 1781600733.1821082,
+    "latest_state": "COMPLIANT"
   },
   {
     "id": "10751390-44e0-4d32-a860-bd5f7584",
@@ -172,7 +188,9 @@ kosli list flows --output=json
     "org": "cyber-dojo",
     "template": "\nversion: 1\ntrail:\n  attestations:\n    - { name: pull-request, type: pull_request }\n  artifacts:\n    - name: creator\n      attestations:\n        - { name: unit-test, type: junit }\n",
     "repo_url": "https://github.com/cyber-dojo/monorepo",
-    "tags": {}
+    "tags": {},
+    "latest_activity_at": 1781600708.1972978,
+    "latest_state": "COMPLIANT"
   },
   {
     "id": "0f0e3f56-f7ac-4830-acc3-3a36e111",
@@ -182,7 +200,9 @@ kosli list flows --output=json
     "org": "cyber-dojo",
     "template": "\nversion: 1\ntrail:\n  attestations:\n    - { name: pull-request, type: pull_request }\n  artifacts:\n    - name: dashboard\n      attestations:\n        - { name: rubocop,             type: junit }\n        - { name: snyk-container-scan, type: generic }\n",
     "repo_url": "https://github.com/cyber-dojo/monorepo",
-    "tags": {}
+    "tags": {},
+    "latest_activity_at": 1781600707.3320358,
+    "latest_state": "COMPLIANT"
   },
   {
     "id": "c03d5ba2-cb6e-4f6c-a5ec-05805c49",
@@ -192,7 +212,9 @@ kosli list flows --output=json
     "org": "cyber-dojo",
     "template": "\nversion: 1\ntrail:\n  attestations:\n    - { name: pull-request, type: pull_request }\n  artifacts:\n    - name: web\n      attestations:\n        - { name: lint,      type: generic }\n        - { name: unit-test, type: junit }\n",
     "repo_url": "https://github.com/cyber-dojo/monorepo",
-    "tags": {}
+    "tags": {},
+    "latest_activity_at": 1781600712.989079,
+    "latest_state": "COMPLIANT"
   },
   {
     "id": "28447c7d-904b-4594-8b05-88d5d938",
@@ -207,7 +229,9 @@ kosli list flows --output=json
       "repo_url": "https://github.com/cyber-dojo/nginx",
       "kind": "build",
       "env": "aws-beta"
-    }
+    },
+    "latest_activity_at": 1786438104.0795615,
+    "latest_state": "COMPLIANT"
   },
   {
     "id": "d454e45e-3746-417f-992c-e41515d5",
@@ -215,14 +239,16 @@ kosli list flows --output=json
     "description": "Promotes sets of Artifacts from aws-beta to aws-prod",
     "visibility": "private",
     "org": "cyber-dojo",
-    "template": "version: 1\n\ntrail:\n  attestations:\n    - name: one-promotion\n      type: generic\n",
+    "template": "version: 1\n\ntrail:\n  attestations:\n    - name: all-promotions\n      type: generic\n",
     "repo_url": "https://github.com/cyber-dojo/aws-prod-co-promotion",
     "tags": {
       "ci": "github",
       "repo_url": "https://github.com/cyber-dojo/aws-prod-co-promotion",
       "kind": "release",
       "env": "aws-prod"
-    }
+    },
+    "latest_activity_at": 1786424495.509061,
+    "latest_state": "COMPLIANT"
   },
   {
     "id": "4afd2a1f-5045-4145-934a-64b533a6",
@@ -232,7 +258,9 @@ kosli list flows --output=json
     "org": "cyber-dojo",
     "template": "version: 1\ntrail:\n  attestations:\n  - name: command-logs\n    type: generic\n  - name: user-identity\n    type: generic\n  - name: service-identity\n    type: generic\n  - name: sso-session-data\n    type: generic\n",
     "repo_url": "",
-    "tags": {}
+    "tags": {},
+    "latest_activity_at": 1711724314.4139948,
+    "latest_state": "COMPLIANT"
   },
   {
     "id": "a81e8c6d-bb00-474f-b986-a6cb9b08",
@@ -247,7 +275,9 @@ kosli list flows --output=json
       "repo_url": "https://github.com/cyber-dojo/runner",
       "kind": "build",
       "env": "aws-beta"
-    }
+    },
+    "latest_activity_at": 1786438471.9191556,
+    "latest_state": "COMPLIANT"
   },
   {
     "id": "e54bdf65-de27-448f-807a-08e09590",
@@ -262,7 +292,9 @@ kosli list flows --output=json
       "repo_url": "https://github.com/cyber-dojo/saver",
       "kind": "build",
       "env": "aws-beta"
-    }
+    },
+    "latest_activity_at": 1786438471.9191556,
+    "latest_state": "COMPLIANT"
   },
   {
     "id": "9a967617-89c5-4121-ab26-99e1f4ae",
@@ -276,7 +308,9 @@ kosli list flows --output=json
       "ci": "github",
       "kind": "run",
       "repo_url": "https://github.com/cyber-dojo/secrets"
-    }
+    },
+    "latest_activity_at": 1786681248.1733625,
+    "latest_state": "NON-COMPLIANT"
   },
   {
     "id": "a43239d6-fa3d-4e58-b7c4-f00b7432",
@@ -291,7 +325,9 @@ kosli list flows --output=json
       "kind": "run",
       "workflow_url": "https://github.com/cyber-dojo/snyk-scanning/blob/main/.github/workflows/aws-beta.yml",
       "env": "aws-beta"
-    }
+    },
+    "latest_activity_at": 1786679730.0200381,
+    "latest_state": "COMPLIANT"
   },
   {
     "id": "e0f4dbb0-0d25-44d0-8aa1-ced9876e",
@@ -306,7 +342,9 @@ kosli list flows --output=json
       "env": "aws-beta",
       "kind": "run",
       "workflow_url": "https://github.com/cyber-dojo/snyk-scanning/blob/main/.github/workflows/artifact_snyk_test.yml"
-    }
+    },
+    "latest_activity_at": 1786679615.989234,
+    "latest_state": "COMPLIANT"
   },
   {
     "id": "021d42e3-f52e-4e48-959b-33f1fd60",
@@ -321,7 +359,9 @@ kosli list flows --output=json
       "kind": "run",
       "workflow_url": "https://github.com/cyber-dojo/snyk-scanning/blob/main/.github/workflows/aws-prod.yml",
       "env": "aws-prod"
-    }
+    },
+    "latest_activity_at": 1786679766.2105615,
+    "latest_state": "COMPLIANT"
   },
   {
     "id": "7fc06a03-241f-4b17-baa1-05cf7585",
@@ -336,7 +376,9 @@ kosli list flows --output=json
       "env": "aws-prod",
       "kind": "run",
       "workflow_url": "https://github.com/cyber-dojo/snyk-scanning/blob/main/.github/workflows/artifact_snyk_test.yml"
-    }
+    },
+    "latest_activity_at": 1786679720.7573857,
+    "latest_state": "COMPLIANT"
   },
   {
     "id": "6d59cdf1-0d6b-412a-bd81-ecdc8767",
@@ -348,7 +390,9 @@ kosli list flows --output=json
     "repo_url": "https://github.com/cyber-dojo/spooler",
     "tags": {
       "env": "aws-beta"
-    }
+    },
+    "latest_activity_at": 1786425598.492372,
+    "latest_state": "COMPLIANT"
   },
   {
     "id": "57de7461-f687-4b93-a1d7-d4268e44",
@@ -358,7 +402,9 @@ kosli list flows --output=json
     "org": "cyber-dojo",
     "template": "version: 1\ntrail:\n  attestations:\n    - name: terraform-plan\n      type: generic\n    - name: terraform-apply\n      type: generic\n  artifacts:\n    - name: terraform-state\n    - name: drift-plan\n",
     "repo_url": "https://github.com/cyber-dojo/creator",
-    "tags": {}
+    "tags": {},
+    "latest_activity_at": 1786438808.6495974,
+    "latest_state": "COMPLIANT"
   },
   {
     "id": "63ea4110-f185-4a04-ae62-8519474b",
@@ -368,7 +414,9 @@ kosli list flows --output=json
     "org": "cyber-dojo",
     "template": "version: 1\ntrail:\n  attestations:\n    - name: terraform-plan\n      type: generic\n    - name: terraform-apply\n      type: generic\n  artifacts:\n    - name: terraform-state\n    - name: drift-plan\n",
     "repo_url": "https://github.com/cyber-dojo/custom-start-points",
-    "tags": {}
+    "tags": {},
+    "latest_activity_at": 1786438808.6495974,
+    "latest_state": "COMPLIANT"
   },
   {
     "id": "ceb02030-a523-436d-86a5-c45270dc",
@@ -378,7 +426,9 @@ kosli list flows --output=json
     "org": "cyber-dojo",
     "template": "version: 1\ntrail:\n  attestations:\n    - name: terraform-plan\n      type: generic\n    - name: terraform-apply\n      type: generic\n  artifacts:\n    - name: terraform-state\n    - name: drift-plan\n",
     "repo_url": "https://github.com/cyber-dojo/dashboard",
-    "tags": {}
+    "tags": {},
+    "latest_activity_at": 1786438808.6495974,
+    "latest_state": "COMPLIANT"
   },
   {
     "id": "92d8c902-3dc1-4db5-ad07-6ceabc1e",
@@ -388,7 +438,9 @@ kosli list flows --output=json
     "org": "cyber-dojo",
     "template": "version: 1\ntrail:\n  attestations:\n    - name: terraform-plan\n      type: generic\n    - name: terraform-apply\n      type: generic\n  artifacts:\n    - name: terraform-state\n    - name: drift-plan\n",
     "repo_url": "https://github.com/cyber-dojo/differ",
-    "tags": {}
+    "tags": {},
+    "latest_activity_at": 1786632908.9464843,
+    "latest_state": "COMPLIANT"
   },
   {
     "id": "3a0768fb-33b4-47f6-ba63-5c69df8e",
@@ -398,7 +450,9 @@ kosli list flows --output=json
     "org": "cyber-dojo",
     "template": "version: 1\ntrail:\n  attestations:\n    - name: terraform-plan\n      type: generic\n    - name: terraform-apply\n      type: generic\n  artifacts:\n    - name: terraform-state\n    - name: drift-plan\n",
     "repo_url": "https://github.com/cyber-dojo/exercises-start-points",
-    "tags": {}
+    "tags": {},
+    "latest_activity_at": 1786437608.696814,
+    "latest_state": "COMPLIANT"
   },
   {
     "id": "03286d89-1428-4077-9294-fddf609b",
@@ -408,7 +462,9 @@ kosli list flows --output=json
     "org": "cyber-dojo",
     "template": "version: 1\ntrail:\n  attestations:\n    - name: terraform-plan\n      type: generic\n    - name: terraform-apply\n      type: generic\n  artifacts:\n    - name: terraform-state\n    - name: drift-plan\n",
     "repo_url": "https://github.com/cyber-dojo/languages-start-points",
-    "tags": {}
+    "tags": {},
+    "latest_activity_at": 1786438808.6495974,
+    "latest_state": "COMPLIANT"
   },
   {
     "id": "152592aa-87a9-46e5-9b4b-2180b0b5",
@@ -418,7 +474,9 @@ kosli list flows --output=json
     "org": "cyber-dojo",
     "template": "version: 1\ntrail:\n  attestations:\n    - name: terraform-plan\n      type: generic\n    - name: terraform-apply\n      type: generic\n  artifacts:\n    - name: terraform-state\n    - name: drift-plan\n",
     "repo_url": "https://github.com/cyber-dojo/nginx",
-    "tags": {}
+    "tags": {},
+    "latest_activity_at": 1786438808.6495974,
+    "latest_state": "COMPLIANT"
   },
   {
     "id": "091c0875-2863-48cb-b1f5-e08bb8dd",
@@ -428,7 +486,9 @@ kosli list flows --output=json
     "org": "cyber-dojo",
     "template": "version: 1\ntrail:\n  attestations:\n    - name: terraform-plan\n      type: generic\n    - name: terraform-apply\n      type: generic\n  artifacts:\n    - name: terraform-state\n    - name: drift-plan\n",
     "repo_url": "https://github.com/cyber-dojo/runner",
-    "tags": {}
+    "tags": {},
+    "latest_activity_at": 1786438808.6495974,
+    "latest_state": "COMPLIANT"
   },
   {
     "id": "348ea96a-84ba-4c17-8ed9-55b397f2",
@@ -438,7 +498,9 @@ kosli list flows --output=json
     "org": "cyber-dojo",
     "template": "version: 1\ntrail:\n  attestations:\n    - name: terraform-plan\n      type: generic\n    - name: terraform-apply\n      type: generic\n  artifacts:\n    - name: terraform-state\n    - name: drift-plan\n",
     "repo_url": "https://github.com/cyber-dojo/saver",
-    "tags": {}
+    "tags": {},
+    "latest_activity_at": 1786438808.6495974,
+    "latest_state": "COMPLIANT"
   },
   {
     "id": "418dcba5-0f85-44c1-9bfa-73fe61a2",
@@ -448,7 +510,9 @@ kosli list flows --output=json
     "org": "cyber-dojo",
     "template": "version: 1\ntrail:\n  attestations:\n    - name: terraform-plan\n      type: generic\n    - name: terraform-apply\n      type: generic\n  artifacts:\n    - name: terraform-state\n    - name: drift-plan\n",
     "repo_url": "https://github.com/cyber-dojo/spooler",
-    "tags": {}
+    "tags": {},
+    "latest_activity_at": 1786254608.5082495,
+    "latest_state": "COMPLIANT"
   },
   {
     "id": "0408259b-db9a-47b4-bd5d-2cafb533",
@@ -458,7 +522,9 @@ kosli list flows --output=json
     "org": "cyber-dojo",
     "template": "version: 1\ntrail:\n  attestations:\n    - name: terraform-plan\n      type: generic\n    - name: terraform-apply\n      type: generic\n    - name: pull-request\n      type: pull_request\n  artifacts:\n    - name: terraform-state\n    - name: drift-plan\n",
     "repo_url": "https://github.com/cyber-dojo/terraform-base-infra",
-    "tags": {}
+    "tags": {},
+    "latest_activity_at": 1785232808.6739333,
+    "latest_state": "COMPLIANT"
   },
   {
     "id": "60bfe410-ffe9-421e-a347-0bbd1554",
@@ -468,7 +534,9 @@ kosli list flows --output=json
     "org": "cyber-dojo",
     "template": "version: 1\ntrail:\n  attestations:\n    - name: terraform-plan\n      type: generic\n    - name: terraform-apply\n      type: generic\n  artifacts:\n    - name: terraform-state\n    - name: drift-plan\n",
     "repo_url": "https://github.com/cyber-dojo/web",
-    "tags": {}
+    "tags": {},
+    "latest_activity_at": 1786439708.543009,
+    "latest_state": "COMPLIANT"
   },
   {
     "id": "61ab4b1c-5b59-4f2b-a484-86b887cb",
@@ -477,8 +545,10 @@ kosli list flows --output=json
     "visibility": "private",
     "org": "cyber-dojo",
     "template": "version: 1\ntrail:\n  attestations:\n    - name: terraform-plan\n      type: generic\n    - name: terraform-apply\n      type: generic\n  artifacts:\n    - name: terraform-state\n    - name: drift-plan\n",
-    "repo_url": "https://github.com/cyber-dojo/web",
-    "tags": {}
+    "repo_url": "https://github.com/cyber-dojo/runner",
+    "tags": {},
+    "latest_activity_at": 1786426111.953674,
+    "latest_state": "COMPLIANT"
   },
   {
     "id": "d32a5b61-d72c-4279-824a-55226c4b",
@@ -488,7 +558,9 @@ kosli list flows --output=json
     "org": "cyber-dojo",
     "template": "version: 1\ntrail:\n  attestations:\n    - name: terraform-plan\n      type: generic\n    - name: terraform-apply\n      type: generic\n    - name: pull-request\n      type: pull_request\n  artifacts:\n    - name: terraform-state\n    - name: drift-plan\n",
     "repo_url": "https://github.com/cyber-dojo/terraform-base-infra",
-    "tags": {}
+    "tags": {},
+    "latest_activity_at": 1785236322.8149745,
+    "latest_state": "COMPLIANT"
   },
   {
     "id": "cf915667-e09e-4451-b689-8efe0605",
@@ -498,7 +570,9 @@ kosli list flows --output=json
     "org": "cyber-dojo",
     "template": "version: 1\ntrail:\n  attestations:\n    - name: terraform-plan\n      type: generic\n",
     "repo_url": "",
-    "tags": {}
+    "tags": {},
+    "latest_activity_at": 1785166016.9913907,
+    "latest_state": "COMPLIANT"
   },
   {
     "id": "27cb0696-7226-4420-b4c9-b8c91ed7",
@@ -508,7 +582,9 @@ kosli list flows --output=json
     "org": "cyber-dojo",
     "template": "version: 1\ntrail:\n  attestations:\n    - name: terraform-plan\n      type: generic\n",
     "repo_url": "",
-    "tags": {}
+    "tags": {},
+    "latest_activity_at": 1785232718.7436328,
+    "latest_state": "COMPLIANT"
   },
   {
     "id": "fd583a48-28de-4b5c-b4a7-b6356e94",
@@ -516,14 +592,16 @@ kosli list flows --output=json
     "description": "UX for practicing TDD",
     "visibility": "private",
     "org": "cyber-dojo",
-    "template": "version: 1\n\ntrail:\n  attestations:\n    - name: pull-request\n      type: pull_request\n\n  artifacts:\n    - name: web\n      attestations:\n        - name: provenance-facts\n          type: custom:provenance-facts\n        - name: provenance-decision\n          type: decision\n\n        - name: sbom-facts\n          type: custom:sbom-facts\n        - name: sbom-decision\n          type: decision\n\n        - name: snyk-container-scan\n          type: decision\n",
+    "template": "version: 1\n\ntrail:\n  attestations:\n    - name: pull-request\n      type: pull_request\n\n  artifacts:\n    - name: web\n      attestations:\n        - name: provenance-facts\n          type: custom:provenance-facts\n        - name: provenance-decision\n          type: decision\n\n        - name: sbom-facts\n          type: custom:sbom-facts\n        - name: sbom-decision\n          type: decision\n\n        - name: snyk-container-scan\n          type: decision\n\n        - name: rubocop-lint\n          type: junit\n\n        - name: server-test\n          type: junit\n\n        - name: test-facts\n          type: custom:test-facts\n        - name: test-decision\n          type: decision\n\n        - name: coverage-facts\n          type: custom:coverage-facts\n        - name: coverage-decision\n          type: decision\n",
     "repo_url": "https://github.com/cyber-dojo/web",
     "tags": {
       "ci": "github",
       "repo_url": "https://github.com/cyber-dojo/web",
       "kind": "build",
       "env": "aws-beta"
-    }
+    },
+    "latest_activity_at": 1786439303.8973844,
+    "latest_state": "COMPLIANT"
   }
 ]
 ```

@@ -16,27 +16,28 @@ You can specify flow parameters in flags.
 
 
 ## Flags
-| Flag | Description |
-| :--- | :--- |
-|        `--description` string  |  [optional] The Kosli flow description.  |
-|    `-D`, `--dry-run`  |  [optional] Run in dry-run mode. When enabled, no data is sent to Kosli and the CLI exits with 0 exit code regardless of any errors.  |
-|    `-h`, `--help`  |  help for flow  |
-|    `-t`, `--template` strings  |  [defaulted] The comma-separated list of required compliance controls names.  |
-|    `-f`, `--template-file` string  |  [optional] The path to a yaml template file. Cannot be used together with `--use-empty-template`  |
-|        `--use-empty-template`  |  Use an empty template for the flow creation without specifying a file. Cannot be used together with `--template` or `--template-file`  |
+| Flag | Type | Description |
+| :--- | :--- | :--- |
+| `--description` | string | [optional] The Kosli flow description. |
+| `-D`, `--dry-run` | bool | [optional] Run in dry-run mode. When enabled, no data is sent to Kosli and the CLI exits with 0 exit code regardless of any errors. |
+| `-h`, `--help` | bool | help for flow |
+| `-t`, `--template` | strings | [defaulted] The comma-separated list of required compliance controls names. |
+| `-f`, `--template-file` | string | [optional] The path to a yaml template file. Cannot be used together with `--use-empty-template` |
+| `--use-empty-template` | bool | Use an empty template for the flow creation without specifying a file. Cannot be used together with `--template` or `--template-file` |
+| `--visibility` | string | [deprecated] The visibility of the Kosli flow. This flag is deprecated and will be removed in a future version. (DEPRECATED: this flag is deprecated and will be removed in a future version.) |
 
 
 ## Flags inherited from parent commands
-| Flag | Description |
-| :--- | :--- |
-|    `-a`, `--api-token` string  |  The Kosli API token.  |
-|    `-c`, `--config-file` string  |  [optional] The Kosli config file path. (default "kosli")  |
-|        `--debug`  |  [optional] Print debug logs to stdout.  |
-|    `-H`, `--host` string  |  [defaulted] The Kosli endpoint. (default "https://app.kosli.com")  |
-|        `--http-proxy` string  |  [optional] The HTTP proxy URL including protocol and port number. e.g. `http://proxy-server-ip:proxy-port`  |
-|    `-r`, `--max-api-retries` int  |  [defaulted] How many times should API calls be retried when the API host is not reachable. (default 3)  |
-|        `--org` string  |  The Kosli organization.  |
-|    `-q`, `--quiet`  |  [optional] Suppress non-critical warning messages. Errors and normal output are not affected. If both `--quiet` and `--debug` are set, `--debug` wins.  |
+| Flag | Type | Description |
+| :--- | :--- | :--- |
+| `-a`, `--api-token` | string | The Kosli API token. |
+| `-c`, `--config-file` | string | [optional] The Kosli config file path. (default "kosli") |
+| `--debug` | bool | [optional] Print debug logs to stdout. |
+| `-H`, `--host` | string | [defaulted] The Kosli endpoint. (default "https://app.kosli.com") |
+| `--http-proxy` | string | [optional] The HTTP proxy URL including protocol and port number. e.g. `http://proxy-server-ip:proxy-port` |
+| `-r`, `--max-api-retries` | int | [defaulted] How many times should API calls be retried when the API host is not reachable. (default 3) |
+| `--org` | string | The Kosli organization. |
+| `-q`, `--quiet` | bool | [optional] Suppress non-critical warning messages. Errors and normal output are not affected. If both `--quiet` and `--debug` are set, `--debug` wins. |
 
 
 ## Live Examples in different CI systems
@@ -45,7 +46,7 @@ You can specify flow parameters in flags.
 	<Tab title="GitHub">
 	View an example of the `kosli create flow` command in GitHub.
 
-	In [this YAML file](https://github.com/cyber-dojo/runner/blob/19f873464a01f28ecd588504ffe03529119d6297/.github/workflows/main.yml#L62)
+	In [this YAML file](https://github.com/cyber-dojo/runner/blob/85cac880cb74678426eb2ed4dbf2538995404c5c/.github/workflows/main.yml#L62)
 	</Tab>
 	<Tab title="GitLab">
 	View an example of the `kosli create flow` command in GitLab.
