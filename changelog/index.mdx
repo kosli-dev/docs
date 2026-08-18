@@ -21,11 +21,7 @@ rss: true
 
 ## New features
 
-- **Custom attestation summaries** — [custom attestation types](/getting_started/attestations) can now define a `summary` list of JQ expressions that extract key values (for example `Critical`, `Tool`) from the payload. The attestation drawer renders these as labelled rows instead of only raw JSON, matching the built-in Sonar, Snyk, and JUnit types. Summaries are versioned with the type, so schema changes create a new version. Array payloads render one summary group per element.
-
-## Updates
-
-- **SCIM changes attributed to "External IdP"** — audit-log rows whose source is `scim` (create, set, or revoke membership) now show **External IdP** in the **Changed by** column instead of the org's first admin. The change is also reflected in the v2 audit-log API, which returns no setter for these rows.
+- **Custom attestation summaries** — [custom attestation types](/getting_started/attestations) can now define a `summary` list of JQ expressions that extract key values (for example `Critical`, `Tool`) from the payload. The attestation drawer renders these as labeled rows instead of only raw JSON, matching the built-in Sonar, Snyk, and JUnit types. Summaries are versioned with the type, so schema changes create a new version. Array payloads render one summary group per element.
 
 </Update>
 
@@ -39,14 +35,10 @@ rss: true
 
 <Update label="August 11, 2026" description="" tags={["Platform"]}>
 
-## Updates
-
-- **SCIM webhook status handling** — a Descope SCIM payload whose status is neither `enabled` nor `disabled` (for example `invited`) is now rejected with an explicit error instead of silently doing nothing. Tenant membership is read from the loaded Descope user, so it always follows authoritative IdP state.
-
 ## Bug fixes
 
 - **Faster webhook saves** — the SSRF guard on webhook URLs no longer performs a blocking DNS lookup while saving an action. A slow resolver can no longer stall the save (or time out the request).
-- **Notification emails and trail events hardened against injected HTML** — user-controlled names and descriptions in notification emails and trail event descriptions are now HTML-escaped when rendered, closing a defence-in-depth gap on top of existing input validation.
+- **Notification emails and trail events hardened against injected HTML** — user-controlled names and descriptions in notification emails and trail event descriptions are now HTML-escaped when rendered, closing a defense-in-depth gap on top of existing input validation.
 
 </Update>
 
