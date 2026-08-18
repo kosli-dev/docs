@@ -119,7 +119,7 @@ arguments to `kosli attest generic`.
 
 ## Empty flag values
 
-A flag given an empty value is an error from CLI vX.Y.0 onwards:
+A flag given an empty value is an error from CLI v2.37.0 onwards:
 ```
 kosli attest generic Dockerfile --artifact-type file --exclude "" ...
 Error: flag '--exclude' was given an empty value
