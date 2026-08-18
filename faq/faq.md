@@ -137,7 +137,6 @@ the flag exists to withhold. Each exited 0 and printed what success prints.
 
 Either give the flag a real value, or remove it. In almost every case an empty
 value did what leaving the flag out does, so removing it keeps the earlier
-value did what leaving the flag out does, so removing it keeps the earlier
 behavior and says so plainly.
 
 Leaving a flag out is unchanged, including the values filled in from your CI
