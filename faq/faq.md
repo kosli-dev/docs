@@ -116,3 +116,34 @@ kosli attest generic Dockerfile false ...
 ```
 The parser then sees `Dockerfile` and `false` as the two
 arguments to `kosli attest generic`.
+
+## Empty flag values
+
+A flag given an empty value is an error from CLI vX.Y.0 onwards:
+```
+kosli attest generic Dockerfile --artifact-type file --exclude "" ...
+Error: flag '--exclude' was given an empty value
+```
+The usual cause is a shell variable that is unset, so `--exclude "$BUILD_TMP"`
+reaches the CLI as `--exclude ""`. The same applies to a value from a `KOSLI_`
+environment variable or from `~/.kosli.yml`, and to an empty element of a
+comma-separated list such as `--exclude "node_modules,,vendor"`.
+
+On earlier versions most of these were accepted silently. `--exclude ""`
+excluded nothing, so the fingerprint was one no artifact matched;
+`--fingerprint ""` recorded an attestation against the trail rather than the
+artifact named; `--redact-commit-info ""` sent the commit author and message
+the flag exists to withhold. Each exited 0 and printed what success prints.
+
+Either give the flag a real value, or remove it. In almost every case an empty
+value did what leaving the flag out does, so removing it keeps the earlier
+behaviour and says so plainly.
+
+Leaving a flag out is unchanged, including the values filled in from your CI
+environment, such as `--build-url`, `--commit-url` and `--repository`.
+
+One case the CLI cannot catch: a boolean flag written without quotes loses the
+empty value in the shell rather than in the CLI, so `--compliant ${UNSET}`
+arrives as `--compliant` with nothing after it, which is indistinguishable from
+typing `--compliant` deliberately. Quote the variable, `--compliant "${VAR}"`,
+and it is refused like any other empty value.
