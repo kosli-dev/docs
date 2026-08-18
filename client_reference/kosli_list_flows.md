@@ -309,7 +309,7 @@ kosli list flows --output=json
       "kind": "run",
       "repo_url": "https://github.com/cyber-dojo/secrets"
     },
-    "latest_activity_at": 1786681248.1733625,
+    "latest_activity_at": 1787022767.4788537,
     "latest_state": "NON-COMPLIANT"
   },
   {
@@ -326,7 +326,7 @@ kosli list flows --output=json
       "workflow_url": "https://github.com/cyber-dojo/snyk-scanning/blob/main/.github/workflows/aws-beta.yml",
       "env": "aws-beta"
     },
-    "latest_activity_at": 1786679730.0200381,
+    "latest_activity_at": 1787021222.2429254,
     "latest_state": "COMPLIANT"
   },
   {
@@ -343,7 +343,7 @@ kosli list flows --output=json
       "kind": "run",
       "workflow_url": "https://github.com/cyber-dojo/snyk-scanning/blob/main/.github/workflows/artifact_snyk_test.yml"
     },
-    "latest_activity_at": 1786679615.989234,
+    "latest_activity_at": 1787021178.2297814,
     "latest_state": "COMPLIANT"
   },
   {
@@ -360,7 +360,7 @@ kosli list flows --output=json
       "workflow_url": "https://github.com/cyber-dojo/snyk-scanning/blob/main/.github/workflows/aws-prod.yml",
       "env": "aws-prod"
     },
-    "latest_activity_at": 1786679766.2105615,
+    "latest_activity_at": 1787021171.7664993,
     "latest_state": "COMPLIANT"
   },
   {
@@ -377,7 +377,7 @@ kosli list flows --output=json
       "kind": "run",
       "workflow_url": "https://github.com/cyber-dojo/snyk-scanning/blob/main/.github/workflows/artifact_snyk_test.yml"
     },
-    "latest_activity_at": 1786679720.7573857,
+    "latest_activity_at": 1787021053.5322313,
     "latest_state": "COMPLIANT"
   },
   {
