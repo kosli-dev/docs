@@ -6,9 +6,8 @@ rss: true
 
 <Update label="August 7, 2026" description="" tags={["Platform"]}>
 
-## Updates
+## Bug fixes
 
-- **SCIM role changes sync from Descope** — SCIM webhooks that carry a role or group change without a status field are no longer ignored. A user's Kosli membership is reconciled from Descope on every `SCIMUserModified` event, so a role change (for example member → admin) or the removal of a role now applies immediately.
 - **React pages redirect to login on session timeout** — Controls, Repos, Environments, and Audit Log now send you to the login page (with `next` set to where you were) when the session expires, instead of leaving the page with a generic error.
 - **Unmatched `/api/*` returns JSON 404** — a request to a non-existent `/api/*` path now returns a JSON `404` instead of redirecting to the HTML login page, so API clients see a proper error.
 
@@ -27,7 +26,7 @@ rss: true
 
 ## Updates
 
-- **Richer override attestation view** — override attestations now render a dedicated summary showing the reason, the original attestation's type and status, and a link to the overridden attestation, instead of the raw JSON payload.
+- **Readable summary for override attestations** — an override attestation now opens on a summary showing the reason, the original attestation's type and status, and a link to the attestation it overrides. The raw JSON payload is still available in the raw view.
 
 ## Bug fixes
 
@@ -39,7 +38,7 @@ rss: true
 
 ## Bug fixes
 
-- **`kosli attest` no longer fails on container-produced attachments** — passing two or more `--attachments` paths could abort with `chown ...: operation not permitted` when an attachment (for example lint, test, or coverage output) had been written by a Docker container running as a different user. The CLI no longer tries to preserve file ownership when staging attachments for upload. A genuine copy error now also names the evidence path you passed rather than an internal temp directory. See the [`kosli attest` reference](/client_reference/kosli_attest_artifact) for usage.
+- **`kosli attest` no longer fails on container-produced attachments** — passing two or more `--attachments` paths could abort with `chown ...: operation not permitted` when an attachment (for example lint, test, or coverage output) had been written by a Docker container running as a different user. The CLI no longer tries to preserve file ownership when staging attachments for upload. A genuine copy error now also names the evidence path you passed rather than an internal temp directory. See the [`kosli attest artifact` reference](/client_reference/kosli_attest_artifact) for usage.
 
 [View on GitHub](https://github.com/kosli-dev/cli/releases/tag/v2.36.4)
 
