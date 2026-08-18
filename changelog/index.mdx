@@ -4,6 +4,17 @@ description: "Release notes for Kosli products."
 rss: true
 ---
 
+<Update label="August 18, 2026" description="v2.37.0" tags={["CLI"]}>
+
+## Breaking changes
+
+- **An empty flag value is refused** — `--flag ""` is now an error on every flag of every command, wherever the value comes from: the command line, a `KOSLI_` environment variable, or `~/.kosli.yml`. Accepting it was a bug. An empty value never did what the command was asked to do, and usually reported success anyway, so a pipeline that starts failing here was already producing a result nobody asked for. The usual cause is a shell variable that is unset. The error names the flag: give it a real value, or remove the flag, since in almost every case an empty value did what leaving the flag out does. Leaving a flag out is unchanged, including defaults filled in from your CI environment. See [empty flag values](/faq/faq#empty-flag-values).
+- **`--description ""` no longer clears a description** — on `kosli update control` and `kosli update service-account`, an empty value was the only way to empty a description. That is no longer possible: a description can be changed but not emptied.
+
+[View on GitHub](https://github.com/kosli-dev/cli/releases/tag/v2.37.0)
+
+</Update>
+
 <Update label="August 14, 2026" description="v2.36.6" tags={["CLI"]}>
 
 ## Bug fixes
