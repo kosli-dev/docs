@@ -57,7 +57,7 @@ jobs:
           # gh subcommands needed to read PR context and post comments.
           claude_args: |
             --max-turns 30
-            --model claude-opus-4-6
+            --model claude-opus-5
             --allowedTools "mcp__github_inline_comment__create_inline_comment,Bash(gh pr comment:*),Bash(gh pr diff:*),Bash(gh pr view:*)"
           prompt: |
             REPO: ${{ github.repository }}
