@@ -165,7 +165,7 @@ kosli list flows --output=json
       "kind": "build",
       "env": "aws-beta"
     },
-    "latest_activity_at": 1786437984.0695097,
+    "latest_activity_at": 1787118563.9915287,
     "latest_state": "COMPLIANT"
   },
   {
@@ -309,7 +309,7 @@ kosli list flows --output=json
       "kind": "run",
       "repo_url": "https://github.com/cyber-dojo/secrets"
     },
-    "latest_activity_at": 1787022767.4788537,
+    "latest_activity_at": 1787109305.2935905,
     "latest_state": "NON-COMPLIANT"
   },
   {
@@ -326,7 +326,7 @@ kosli list flows --output=json
       "workflow_url": "https://github.com/cyber-dojo/snyk-scanning/blob/main/.github/workflows/aws-beta.yml",
       "env": "aws-beta"
     },
-    "latest_activity_at": 1787021222.2429254,
+    "latest_activity_at": 1787107732.8268142,
     "latest_state": "COMPLIANT"
   },
   {
@@ -343,7 +343,7 @@ kosli list flows --output=json
       "kind": "run",
       "workflow_url": "https://github.com/cyber-dojo/snyk-scanning/blob/main/.github/workflows/artifact_snyk_test.yml"
     },
-    "latest_activity_at": 1787021178.2297814,
+    "latest_activity_at": 1787107622.178765,
     "latest_state": "COMPLIANT"
   },
   {
@@ -360,7 +360,7 @@ kosli list flows --output=json
       "workflow_url": "https://github.com/cyber-dojo/snyk-scanning/blob/main/.github/workflows/aws-prod.yml",
       "env": "aws-prod"
     },
-    "latest_activity_at": 1787021171.7664993,
+    "latest_activity_at": 1787107779.5673716,
     "latest_state": "COMPLIANT"
   },
   {
@@ -377,7 +377,7 @@ kosli list flows --output=json
       "kind": "run",
       "workflow_url": "https://github.com/cyber-dojo/snyk-scanning/blob/main/.github/workflows/artifact_snyk_test.yml"
     },
-    "latest_activity_at": 1787021053.5322313,
+    "latest_activity_at": 1787107736.1795952,
     "latest_state": "COMPLIANT"
   },
   {
@@ -463,7 +463,7 @@ kosli list flows --output=json
     "template": "version: 1\ntrail:\n  attestations:\n    - name: terraform-plan\n      type: generic\n    - name: terraform-apply\n      type: generic\n  artifacts:\n    - name: terraform-state\n    - name: drift-plan\n",
     "repo_url": "https://github.com/cyber-dojo/languages-start-points",
     "tags": {},
-    "latest_activity_at": 1786438808.6495974,
+    "latest_activity_at": 1787118920.72072,
     "latest_state": "COMPLIANT"
   },
   {
@@ -535,7 +535,7 @@ kosli list flows --output=json
     "template": "version: 1\ntrail:\n  attestations:\n    - name: terraform-plan\n      type: generic\n    - name: terraform-apply\n      type: generic\n  artifacts:\n    - name: terraform-state\n    - name: drift-plan\n",
     "repo_url": "https://github.com/cyber-dojo/web",
     "tags": {},
-    "latest_activity_at": 1786439708.543009,
+    "latest_activity_at": 1787073908.6807432,
     "latest_state": "COMPLIANT"
   },
   {
@@ -600,7 +600,7 @@ kosli list flows --output=json
       "kind": "build",
       "env": "aws-beta"
     },
-    "latest_activity_at": 1786439303.8973844,
+    "latest_activity_at": 1787073684.01979,
     "latest_state": "COMPLIANT"
   }
 ]

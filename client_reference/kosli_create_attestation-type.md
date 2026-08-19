@@ -25,6 +25,18 @@ These rules specify acceptable values for attestation data, e.g. `.age >= 21` or
 When a custom attestation is reported, the provided data is evaluated according to the rules defined in its attestation-type. 
 All rules must return `true` for the evaluation to pass and the attestation to be determined compliant.
 
+`--summary` defines one entry of the summary shown for attestations of this type, given as
+`'NAME=EXPRESSION'` where the expression is a jq expression evaluated against the attestation data.
+The flag can be repeated to add further entries, which are displayed in the order given, e.g.
+`--summary "Critical=.critical_count" --summary "Tool=.scanner.name"`.
+Each value is split on its first `=` only, so jq expressions containing `==` are unaffected.
+
+`--summary-json` is an alternative to `--summary` for summaries that are easier to express as JSON,
+given as a JSON array of `\{"name": ..., "expression": ...\}` entries, e.g.
+`'[\{"name":"Critical","expression":".critical_count"\}]'`. The two summary flags cannot be combined.
+
+Attestation types created without a summary fall back to the jq evaluation rules checklist.
+
 
 ## Flags
 | Flag | Type | Description |
@@ -34,6 +46,8 @@ All rules must return `true` for the evaluation to pass and the attestation to b
 | `-h`, `--help` | bool | help for attestation-type |
 | `--jq` | stringArray | [optional] The attestation type evaluation JQ rules. |
 | `-s`, `--schema` | string | [optional] Path to the attestation type schema in JSON Schema format. |
+| `--summary` | stringArray | [optional] An attestation type summary entry, given as 'NAME=EXPRESSION'. Can be repeated. Cannot be used with `--summary-json`. |
+| `--summary-json` | string | [optional] The attestation type summary, given as a JSON array of \{name, expression\} entries, e.g. '[\{"name":"Critical","expression":".critical_count"\}]'. Cannot be used with `--summary`. |
 
 
 ## Flags inherited from parent commands
@@ -77,6 +91,23 @@ kosli create attestation-type customTypeName
     --schema person-schema.json 
     --jq ".age >= 18"
     --jq ".age < 65"
+
+```
+</Accordion>
+<Accordion title="create/update a custom attestation type with a summary">
+```shell
+kosli create attestation-type customTypeName 
+    --schema scan-schema.json 
+    --summary "Critical=.critical_count" 
+    --summary "Tool=.scanner.name"
+
+```
+</Accordion>
+<Accordion title="create/update a custom attestation type with a summary given as JSON">
+```shell
+kosli create attestation-type customTypeName 
+    --schema scan-schema.json 
+    --summary-json '[{"name":"Critical","expression":".critical_count"},{"name":"Tool","expression":".scanner.name"}]'
 ```
 </Accordion>
 </AccordionGroup>
