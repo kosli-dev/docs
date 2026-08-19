@@ -64,7 +64,7 @@ kosli get snapshot aws-prod --output=json
 
 ```json
 {
-  "index": 5249,
+  "index": 5253,
   "is_latest": true,
   "next_snapshot_timestamp": null,
   "artifact_compliance_count": {
@@ -72,10 +72,10 @@ kosli get snapshot aws-prod --output=json
     "false": 0,
     "null": 0
   },
-  "timestamp": 1787021218.5403302,
+  "timestamp": 1787107798.493415,
   "type": "ECS",
   "compliant": true,
-  "html_url": "https://app.kosli.com/cyber-dojo/environments/aws-prod/snapshots/5249",
+  "html_url": "https://app.kosli.com/cyber-dojo/environments/aws-prod/snapshots/5253",
   "artifacts": [
     {
       "name": "244531986313.dkr.ecr.eu-central-1.amazonaws.com/runner:85cac88@sha256:f3cdc22a599ddb789e7791389a5a58b43fd9c30d3af079aec392d5962d181096",
@@ -920,7 +920,7 @@ kosli get snapshot aws-prod --output=json
             "timestamp": 1786602393.0,
             "url": "https://github.com/cyber-dojo/snyk-scanning/commit/10203d5d23f93844726f204390cf3d5ca8d5c913"
           },
-          "html_url": "https://app.kosli.com/cyber-dojo/flows/snyk-aws-prod-per-artifact/artifacts/f3cdc22a599ddb789e7791389a5a58b43fd9c30d3af079aec392d5962d181096?artifact_id=ab875660-aa6a-466c-b224-ec94bca3",
+          "html_url": "https://app.kosli.com/cyber-dojo/flows/snyk-aws-prod-per-artifact/artifacts/f3cdc22a599ddb789e7791389a5a58b43fd9c30d3af079aec392d5962d181096?artifact_id=15359073-0c4f-45c4-9dc6-a91f5a0b",
           "flow_html_url": "https://app.kosli.com/cyber-dojo/flows/snyk-aws-prod-per-artifact",
           "deployment_diff": {
             "diff_url": "https://github.com/cyber-dojo/snyk-scanning/compare/00c479764cb9eca038fdaaaef108672d0bb0ed26...10203d5d23f93844726f204390cf3d5ca8d5c913",
@@ -1754,7 +1754,7 @@ kosli get snapshot aws-prod --output=json
             "timestamp": 1786602393.0,
             "url": "https://github.com/cyber-dojo/snyk-scanning/commit/10203d5d23f93844726f204390cf3d5ca8d5c913"
           },
-          "html_url": "https://app.kosli.com/cyber-dojo/flows/snyk-aws-prod-per-artifact/artifacts/ff871c3c8f4b5cfb60012bed1cd7f020b20f17fdabc2db0d8a5c77e75518fce0?artifact_id=4028a69a-8f9a-4855-9716-f1fc77c9",
+          "html_url": "https://app.kosli.com/cyber-dojo/flows/snyk-aws-prod-per-artifact/artifacts/ff871c3c8f4b5cfb60012bed1cd7f020b20f17fdabc2db0d8a5c77e75518fce0?artifact_id=88a6a058-3b14-4e58-941d-cbaaff7e",
           "flow_html_url": "https://app.kosli.com/cyber-dojo/flows/snyk-aws-prod-per-artifact",
           "deployment_diff": null,
           "commit_lead_time": -176881.0,
@@ -1775,7 +1775,7 @@ kosli get snapshot aws-prod --output=json
             "timestamp": 1786602393.0,
             "url": "https://github.com/cyber-dojo/snyk-scanning/commit/10203d5d23f93844726f204390cf3d5ca8d5c913"
           },
-          "html_url": "https://app.kosli.com/cyber-dojo/flows/snyk-aws-beta-per-artifact/artifacts/ff871c3c8f4b5cfb60012bed1cd7f020b20f17fdabc2db0d8a5c77e75518fce0?artifact_id=e5d56e7c-c459-4cb4-8004-387e9ea3",
+          "html_url": "https://app.kosli.com/cyber-dojo/flows/snyk-aws-beta-per-artifact/artifacts/ff871c3c8f4b5cfb60012bed1cd7f020b20f17fdabc2db0d8a5c77e75518fce0?artifact_id=a128c065-b310-4f1e-b927-65ee9702",
           "flow_html_url": "https://app.kosli.com/cyber-dojo/flows/snyk-aws-beta-per-artifact",
           "deployment_diff": null,
           "commit_lead_time": -176881.0,
@@ -2632,7 +2632,7 @@ kosli get snapshot aws-prod --output=json
             "timestamp": 1786602393.0,
             "url": "https://github.com/cyber-dojo/snyk-scanning/commit/10203d5d23f93844726f204390cf3d5ca8d5c913"
           },
-          "html_url": "https://app.kosli.com/cyber-dojo/flows/snyk-aws-prod-per-artifact/artifacts/6f394e0dccb59b852fa52ffa114fde8452280054c84de05b0627b1b0f18657bd?artifact_id=6edd9e01-0c2e-48b4-98a6-10da27d1",
+          "html_url": "https://app.kosli.com/cyber-dojo/flows/snyk-aws-prod-per-artifact/artifacts/6f394e0dccb59b852fa52ffa114fde8452280054c84de05b0627b1b0f18657bd?artifact_id=9d213801-fb65-4435-aa44-8eec7607",
           "flow_html_url": "https://app.kosli.com/cyber-dojo/flows/snyk-aws-prod-per-artifact",
           "deployment_diff": {
             "diff_url": "https://github.com/cyber-dojo/snyk-scanning/compare/00c479764cb9eca038fdaaaef108672d0bb0ed26...10203d5d23f93844726f204390cf3d5ca8d5c913",
@@ -3497,7 +3497,7 @@ kosli get snapshot aws-prod --output=json
             "timestamp": 1786602393.0,
             "url": "https://github.com/cyber-dojo/snyk-scanning/commit/10203d5d23f93844726f204390cf3d5ca8d5c913"
           },
-          "html_url": "https://app.kosli.com/cyber-dojo/flows/snyk-aws-prod-per-artifact/artifacts/adb922d738b50876f1cd13f5a998ade341abfd64b3561d0889264399c33c528b?artifact_id=68c91d43-921c-4024-a9c2-94fb5101",
+          "html_url": "https://app.kosli.com/cyber-dojo/flows/snyk-aws-prod-per-artifact/artifacts/adb922d738b50876f1cd13f5a998ade341abfd64b3561d0889264399c33c528b?artifact_id=34fe2ea0-cc82-4a41-9751-5ca5b935",
           "flow_html_url": "https://app.kosli.com/cyber-dojo/flows/snyk-aws-prod-per-artifact",
           "deployment_diff": {
             "diff_url": "https://github.com/cyber-dojo/snyk-scanning/compare/7172cc22125f480a9f12127edb481a4d84aabea3...10203d5d23f93844726f204390cf3d5ca8d5c913",
@@ -4362,7 +4362,7 @@ kosli get snapshot aws-prod --output=json
             "timestamp": 1786602393.0,
             "url": "https://github.com/cyber-dojo/snyk-scanning/commit/10203d5d23f93844726f204390cf3d5ca8d5c913"
           },
-          "html_url": "https://app.kosli.com/cyber-dojo/flows/snyk-aws-prod-per-artifact/artifacts/31a4c3abc3ccef33397ed1d84496a08d94ca9d6f9d0df44b6a72aba9743bc8ac?artifact_id=690b4ddd-ace2-4b7d-9471-12b200ec",
+          "html_url": "https://app.kosli.com/cyber-dojo/flows/snyk-aws-prod-per-artifact/artifacts/31a4c3abc3ccef33397ed1d84496a08d94ca9d6f9d0df44b6a72aba9743bc8ac?artifact_id=125b24cc-3621-4637-a67a-290d5667",
           "flow_html_url": "https://app.kosli.com/cyber-dojo/flows/snyk-aws-prod-per-artifact",
           "deployment_diff": {
             "diff_url": "https://github.com/cyber-dojo/snyk-scanning/compare/00c479764cb9eca038fdaaaef108672d0bb0ed26...10203d5d23f93844726f204390cf3d5ca8d5c913",
@@ -5227,7 +5227,7 @@ kosli get snapshot aws-prod --output=json
             "timestamp": 1786602393.0,
             "url": "https://github.com/cyber-dojo/snyk-scanning/commit/10203d5d23f93844726f204390cf3d5ca8d5c913"
           },
-          "html_url": "https://app.kosli.com/cyber-dojo/flows/snyk-aws-prod-per-artifact/artifacts/2ec004d6e7c2668ff407b4384d6b4c62f92d9606ae18447c5fb326211921bc6a?artifact_id=3cf28177-22a0-448e-8041-517eb434",
+          "html_url": "https://app.kosli.com/cyber-dojo/flows/snyk-aws-prod-per-artifact/artifacts/2ec004d6e7c2668ff407b4384d6b4c62f92d9606ae18447c5fb326211921bc6a?artifact_id=5a3e5426-60c8-41b5-a6a6-3ae4622a",
           "flow_html_url": "https://app.kosli.com/cyber-dojo/flows/snyk-aws-prod-per-artifact",
           "deployment_diff": {
             "diff_url": "https://github.com/cyber-dojo/snyk-scanning/compare/00c479764cb9eca038fdaaaef108672d0bb0ed26...10203d5d23f93844726f204390cf3d5ca8d5c913",
@@ -6092,7 +6092,7 @@ kosli get snapshot aws-prod --output=json
             "timestamp": 1786602393.0,
             "url": "https://github.com/cyber-dojo/snyk-scanning/commit/10203d5d23f93844726f204390cf3d5ca8d5c913"
           },
-          "html_url": "https://app.kosli.com/cyber-dojo/flows/snyk-aws-prod-per-artifact/artifacts/1342e060fb8af6c34d004e474544d1472b940250eb0084f206c3d7bf9d78e2b5?artifact_id=57054d48-c200-4d8f-b566-d51d2a3d",
+          "html_url": "https://app.kosli.com/cyber-dojo/flows/snyk-aws-prod-per-artifact/artifacts/1342e060fb8af6c34d004e474544d1472b940250eb0084f206c3d7bf9d78e2b5?artifact_id=50027d44-5ef3-46fc-b026-af87c9f5",
           "flow_html_url": "https://app.kosli.com/cyber-dojo/flows/snyk-aws-prod-per-artifact",
           "deployment_diff": {
             "diff_url": "https://github.com/cyber-dojo/snyk-scanning/compare/00c479764cb9eca038fdaaaef108672d0bb0ed26...10203d5d23f93844726f204390cf3d5ca8d5c913",
@@ -6957,7 +6957,7 @@ kosli get snapshot aws-prod --output=json
             "timestamp": 1786602393.0,
             "url": "https://github.com/cyber-dojo/snyk-scanning/commit/10203d5d23f93844726f204390cf3d5ca8d5c913"
           },
-          "html_url": "https://app.kosli.com/cyber-dojo/flows/snyk-aws-prod-per-artifact/artifacts/adf2596645ae3fe9b711849a2e9aae3a65173b270963e3214b9c7ea00b03c1cb?artifact_id=8950ac80-e8f9-49b8-b910-00050d53",
+          "html_url": "https://app.kosli.com/cyber-dojo/flows/snyk-aws-prod-per-artifact/artifacts/adf2596645ae3fe9b711849a2e9aae3a65173b270963e3214b9c7ea00b03c1cb?artifact_id=f7e64e04-f253-483f-bc9b-3e9545f7",
           "flow_html_url": "https://app.kosli.com/cyber-dojo/flows/snyk-aws-prod-per-artifact",
           "deployment_diff": {
             "diff_url": "https://github.com/cyber-dojo/snyk-scanning/compare/00c479764cb9eca038fdaaaef108672d0bb0ed26...10203d5d23f93844726f204390cf3d5ca8d5c913",
@@ -7822,7 +7822,7 @@ kosli get snapshot aws-prod --output=json
             "timestamp": 1786602393.0,
             "url": "https://github.com/cyber-dojo/snyk-scanning/commit/10203d5d23f93844726f204390cf3d5ca8d5c913"
           },
-          "html_url": "https://app.kosli.com/cyber-dojo/flows/snyk-aws-prod-per-artifact/artifacts/b70ff1f9493f5d4205e0e95e565b3fc4d909de237b10e490b250671d0d6895cf?artifact_id=d9ae3fe8-6c0e-43dc-92c5-167a742c",
+          "html_url": "https://app.kosli.com/cyber-dojo/flows/snyk-aws-prod-per-artifact/artifacts/b70ff1f9493f5d4205e0e95e565b3fc4d909de237b10e490b250671d0d6895cf?artifact_id=efec6b2c-db0c-41cb-ad08-aad538f8",
           "flow_html_url": "https://app.kosli.com/cyber-dojo/flows/snyk-aws-prod-per-artifact",
           "deployment_diff": {
             "diff_url": "https://github.com/cyber-dojo/snyk-scanning/compare/00c479764cb9eca038fdaaaef108672d0bb0ed26...10203d5d23f93844726f204390cf3d5ca8d5c913",
@@ -8687,7 +8687,7 @@ kosli get snapshot aws-prod --output=json
             "timestamp": 1786602393.0,
             "url": "https://github.com/cyber-dojo/snyk-scanning/commit/10203d5d23f93844726f204390cf3d5ca8d5c913"
           },
-          "html_url": "https://app.kosli.com/cyber-dojo/flows/snyk-aws-prod-per-artifact/artifacts/c7b7fd69d904329f9264e111bd3dc63cf98724cce567bae719e79a171e6925ea?artifact_id=d28229df-bd00-4604-9dbd-c16495e1",
+          "html_url": "https://app.kosli.com/cyber-dojo/flows/snyk-aws-prod-per-artifact/artifacts/c7b7fd69d904329f9264e111bd3dc63cf98724cce567bae719e79a171e6925ea?artifact_id=84b1346f-0ba1-4444-9026-ed25d0dc",
           "flow_html_url": "https://app.kosli.com/cyber-dojo/flows/snyk-aws-prod-per-artifact",
           "deployment_diff": {
             "diff_url": "https://github.com/cyber-dojo/snyk-scanning/compare/00c479764cb9eca038fdaaaef108672d0bb0ed26...10203d5d23f93844726f204390cf3d5ca8d5c913",
@@ -9552,7 +9552,7 @@ kosli get snapshot aws-prod --output=json
             "timestamp": 1786602393.0,
             "url": "https://github.com/cyber-dojo/snyk-scanning/commit/10203d5d23f93844726f204390cf3d5ca8d5c913"
           },
-          "html_url": "https://app.kosli.com/cyber-dojo/flows/snyk-aws-prod-per-artifact/artifacts/8e965dda26af2d2e68032c25d68e792c85e0c7bd9814862de231bc4c6e935b81?artifact_id=fd2e72e8-e9eb-449f-a9cd-11e9bc6e",
+          "html_url": "https://app.kosli.com/cyber-dojo/flows/snyk-aws-prod-per-artifact/artifacts/8e965dda26af2d2e68032c25d68e792c85e0c7bd9814862de231bc4c6e935b81?artifact_id=7e65d24a-4909-4c84-b63f-c39581db",
           "flow_html_url": "https://app.kosli.com/cyber-dojo/flows/snyk-aws-prod-per-artifact",
           "deployment_diff": {
             "diff_url": "https://github.com/cyber-dojo/snyk-scanning/compare/00c479764cb9eca038fdaaaef108672d0bb0ed26...10203d5d23f93844726f204390cf3d5ca8d5c913",
