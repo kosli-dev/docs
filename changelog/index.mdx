@@ -18,7 +18,7 @@ rss: true
 
 ## New features
 
-- **Custom attestation type summaries** — `kosli create attestation-type` and `kosli update attestation-type` now accept `--summary-json`, a JSON list of ordered `{name, expression}` entries. Each expression is a jq expression evaluated against the attestation payload, and Kosli renders the results as labeled rows on the attestation detail page. See [custom attestation types](/getting_started/attestations).
+- **Custom attestation type summaries** — `kosli create attestation-type` now accepts `--summary`, a repeatable `'NAME=EXPRESSION'` entry (for example `--summary "Critical=.critical_count"`), and `--summary-json`, the same list given as a JSON array of `{name, expression}` entries. Each expression is a jq expression evaluated against the attestation payload, and Kosli renders the results as labeled rows on the attestation detail page, in the order given. The two flags cannot be combined. See [custom attestation types](/getting_started/attestations) and the [`kosli create attestation-type` reference](/client_reference/kosli_create_attestation-type).
 
 ## Bug fixes
 
@@ -43,6 +43,17 @@ rss: true
 
 - **`attest override --commit` no longer 500s without prior git provenance** — overriding an attestation that was reported without a commit failed with a 500 when the override supplied `--commit`. Overrides now work whether or not the original attestation had git provenance.
 - **Environment listing tolerates logical environments without included environments** — a logical environment created with no `--included-environments` could 500 the org's whole environment listing. The listing now returns normally, and newly created logical environments always record an explicit (possibly empty) included-environments list.
+
+</Update>
+
+<Update label="August 18, 2026" description="v2.37.0" tags={["CLI"]}>
+
+## Breaking changes
+
+- **An empty flag value is refused** — `--flag ""` is now an error on every flag of every command, wherever the value comes from: the command line, a `KOSLI_` environment variable, or `~/.kosli.yml`. Accepting it was a bug. An empty value never did what the command was asked to do, and usually reported success anyway, so a pipeline that starts failing here was already producing a result nobody asked for. The usual cause is a shell variable that is unset. The error names the flag: give it a real value, or remove the flag, since in almost every case an empty value did what leaving the flag out does. Leaving a flag out is unchanged, including defaults filled in from your CI environment. See [empty flag values](/faq/faq#empty-flag-values).
+- **`--description ""` no longer clears a description** — on `kosli update control` and `kosli update service-account`, an empty value was the only way to empty a description. That is no longer possible: a description can be changed but not emptied.
+
+[View on GitHub](https://github.com/kosli-dev/cli/releases/tag/v2.37.0)
 
 </Update>
 
@@ -80,17 +91,6 @@ rss: true
 ## Bug fixes
 
 - **Flows list no longer breaks on legacy `repo_url` values** — flows created before the artifact endpoint moved to strict URL validation could store a non-URL `repo_url`, which caused the flows page to return an error instead of the list. Invalid values are now repaired (scp-style Azure remotes converted to browse URLs, scheme-less hosts prefixed with `https://`, known placeholders removed) so the page loads.
-
-</Update>
-
-<Update label="August 18, 2026" description="v2.37.0" tags={["CLI"]}>
-
-## Breaking changes
-
-- **An empty flag value is refused** — `--flag ""` is now an error on every flag of every command, wherever the value comes from: the command line, a `KOSLI_` environment variable, or `~/.kosli.yml`. Accepting it was a bug. An empty value never did what the command was asked to do, and usually reported success anyway, so a pipeline that starts failing here was already producing a result nobody asked for. The usual cause is a shell variable that is unset. The error names the flag: give it a real value, or remove the flag, since in almost every case an empty value did what leaving the flag out does. Leaving a flag out is unchanged, including defaults filled in from your CI environment. See [empty flag values](/faq/faq#empty-flag-values).
-- **`--description ""` no longer clears a description** — on `kosli update control` and `kosli update service-account`, an empty value was the only way to empty a description. That is no longer possible: a description can be changed but not emptied.
-
-[View on GitHub](https://github.com/kosli-dev/cli/releases/tag/v2.37.0)
 
 </Update>
 
