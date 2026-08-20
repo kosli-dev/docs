@@ -4,6 +4,85 @@ description: "Release notes for Kosli products."
 rss: true
 ---
 
+<Update label="August 20, 2026" description="" tags={["Platform"]}>
+
+## Bug fixes
+
+- **Empty attestation names refused in flow templates** — a flow template with an attestation named `""` could be saved but never satisfied, since no attestation can be reported under that name. Creating or updating a template with an empty attestation name is now rejected with a clear error. Existing records with the empty value still load.
+- **Empty filenames refused when reporting artifacts** — `POST` to the artifact create endpoint with `filename: ""` is now rejected instead of storing a blank filename against the artifact's fingerprint.
+- **A single malformed record no longer breaks list endpoints** — on environments, flows, artifacts, and other list endpoints, an exception rendering one record used to fail the whole response for every caller. The listing now returns successfully with a clearly-marked placeholder in place of the bad record.
+
+</Update>
+
+<Update label="August 19, 2026" description="v2.38.0" tags={["CLI"]}>
+
+## New features
+
+- **Custom attestation type summaries** — `kosli create attestation-type` and `kosli update attestation-type` now accept `--summary-json`, a JSON list of ordered `{name, expression}` entries. Each expression is a jq expression evaluated against the attestation payload, and Kosli renders the results as labeled rows on the attestation detail page. See [custom attestation types](/getting_started/attestations).
+
+## Bug fixes
+
+- **`kosli begin trail` no longer wipes description and user_data on re-run** — running `kosli begin trail` without `--description` or `--user-data` used to send empty values and overwrite whatever was stored. The CLI now omits those fields when they aren't set, matching how the API behaves.
+- **Docker image has a writable `/tmp`** — the scratch-based image now ships an empty `/tmp`, so operations that rely on a temp directory (directory fingerprinting, evidence tarballing) work inside the container.
+
+[View on GitHub](https://github.com/kosli-dev/cli/releases/tag/v2.38.0)
+
+</Update>
+
+<Update label="August 19, 2026" description="" tags={["Platform"]}>
+
+## Updates
+
+- **Scaling removed from environments** — capture of scale-only changes has been retired. An instance-count-only difference no longer creates a new snapshot or annotates an artifact as scaled, and the `include_scaling` environment setting is gone. Instance counts are still recorded on snapshots saved for another reason. Scaling had no compliance value: when a workload scales up or down, the artifact, its digest, and its provenance are unchanged.
+
+</Update>
+
+<Update label="August 18, 2026" description="" tags={["Platform"]}>
+
+## Bug fixes
+
+- **`attest override --commit` no longer 500s without prior git provenance** — overriding an attestation that was reported without a commit failed with a 500 when the override supplied `--commit`. Overrides now work whether or not the original attestation had git provenance.
+- **Environment listing tolerates logical environments without included environments** — a logical environment created with no `--included-environments` could 500 the org's whole environment listing. The listing now returns normally, and newly created logical environments always record an explicit (possibly empty) included-environments list.
+
+</Update>
+
+<Update label="August 18, 2026" description="v0.9.3" tags={["Terraform Provider"]}>
+
+## New features
+
+- **`summary` attribute on `kosli_custom_attestation_type`** — the resource and data source now accept an optional `summary`: a JSON list of ordered, labeled jq expressions that Kosli renders as rows on the attestation detail page. URL values render as links.
+
+  ```hcl
+  resource "kosli_custom_attestation_type" "security_scan" {
+    name     = "security-scan"
+    schema   = file("${path.module}/schemas/security-scan.json")
+    jq_rules = [".critical_count == 0"]
+
+    summary = jsonencode([
+      { name = "Critical", expression = ".critical_count" },
+      { name = "Report",   expression = ".report_url" },
+    ])
+  }
+  ```
+
+  See [custom attestation types](/getting_started/attestations).
+
+[View on GitHub](https://github.com/kosli-dev/terraform-provider-kosli/releases/tag/v0.9.3)
+
+</Update>
+
+<Update label="August 17, 2026" description="" tags={["Platform"]}>
+
+## Updates
+
+- **Faster snapshot responses** — `GET /api/v2/snapshots*` used to fetch each artifact's provenance one at a time and read every attestation on the artifact. Provenance lookups are now batched across a snapshot's artifacts, and only the newest attestation is read per artifact. On snapshots with a single running artifact this cuts multi-second waits down to well under a second.
+
+## Bug fixes
+
+- **Flows list no longer breaks on legacy `repo_url` values** — flows created before the artifact endpoint moved to strict URL validation could store a non-URL `repo_url`, which caused the flows page to return an error instead of the list. Invalid values are now repaired (scp-style Azure remotes converted to browse URLs, scheme-less hosts prefixed with `https://`, known placeholders removed) so the page loads.
+
+</Update>
+
 <Update label="August 18, 2026" description="v2.37.0" tags={["CLI"]}>
 
 ## Breaking changes
