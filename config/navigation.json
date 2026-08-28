@@ -126,7 +126,8 @@
             {
               "group": "Evaluation",
               "pages": [
-                "tutorials/evaluate_trails_with_opa"
+                "tutorials/evaluate_trails_with_opa",
+                "tutorials/evaluate_policies_server_side"
               ]
             },
             {
