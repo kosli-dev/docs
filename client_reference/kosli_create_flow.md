@@ -46,7 +46,7 @@ You can specify flow parameters in flags.
 	<Tab title="GitHub">
 	View an example of the `kosli create flow` command in GitHub.
 
-	In [this YAML file](https://github.com/cyber-dojo/runner/blob/85cac880cb74678426eb2ed4dbf2538995404c5c/.github/workflows/main.yml#L62)
+	In [this YAML file](https://github.com/cyber-dojo/runner/blob/76610271f641f1a5634465e97f880dfe019e515e/.github/workflows/main.yml#L62)
 	</Tab>
 	<Tab title="GitLab">
 	View an example of the `kosli create flow` command in GitLab.

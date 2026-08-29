@@ -33,6 +33,10 @@ to a specific flow. Without `--flow`, all flows containing the artifact
 Exits with zero code if the artifact has compliant status,
 non-zero code if non-compliant status.
 
+To specify paths in a directory artifact that should always be excluded from the SHA256 calculation, you can add a `.kosli_ignore` file to the root of the artifact.
+Each line should specify a relative path or path glob to be ignored. You can include comments in this file, using `#`.
+The `.kosli_ignore` will be treated as part of the artifact like any other file, unless it is explicitly ignored itself.
+
 ## Flags
 | Flag | Type | Description |
 | :--- | :--- | :--- |
@@ -69,7 +73,7 @@ non-zero code if non-compliant status.
 	<Tab title="GitHub">
 	View an example of the `kosli assert artifact` command in GitHub.
 
-	In [this YAML file](https://github.com/cyber-dojo/differ/blob/a88b337310cef9b1ee259d18db3d43fed5dd9e03/.github/workflows/main.yml#L271)
+	In [this YAML file](https://github.com/cyber-dojo/differ/blob/dbf0c0f13b6df5bc50b4616cc0f7c1c22bb91e24/.github/workflows/main.yml#L271)
 	</Tab>
 	<Tab title="GitLab">
 	View an example of the `kosli assert artifact` command in GitLab.
