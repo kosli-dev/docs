@@ -26,6 +26,8 @@ exponential backoff between retries. Once the results are available they are att
 2. Providing the Sonar project key and either the revision or the pull-request ID of the scan (plus the SonarQube server URL if relevant).
 For branch scans: if running the Kosli CLI in some CI/CD pipeline, the revision is defaulted to the commit SHA. If you are running the command locally,
 or have overriden the revision in SonarQube via parameters to the Sonar scanner, you can provide the correct revision using the `--sonar-revision` flag.
+If the scan ran on a branch other than the project's main branch in SonarQube, also provide the branch name using the `--sonar-branch` flag:
+SonarQube searches only the main branch unless it is told otherwise, so without it the scan cannot be found.
 For pull request scans: provide the pull-request ID using the `--pull-request` flag instead of the revision.
 Kosli then finds the scan results for the specified project key and revision or pull-request ID.
 
@@ -41,6 +43,10 @@ The attestation can be bound to a *trail* using the trail name.
 The attestation can be bound to an *artifact* in two ways:
 - using the artifact's SHA256 fingerprint which is calculated (based on the `--artifact-type` flag and the artifact name/path argument) or can be provided directly (with the `--fingerprint` flag).
 - using the artifact's name in the flow yaml template and the git commit from which the artifact is/will be created. Useful when reporting an attestation before creating/reporting the artifact.
+
+To specify paths in a directory artifact that should always be excluded from the SHA256 calculation, you can add a `.kosli_ignore` file to the root of the artifact.
+Each line should specify a relative path or path glob to be ignored. You can include comments in this file, using `#`.
+The `.kosli_ignore` will be treated as part of the artifact like any other file, unless it is explicitly ignored itself.
 
 ## Flags
 | Flag | Type | Description |
@@ -60,7 +66,7 @@ The attestation can be bound to an *artifact* in two ways:
 | `--max-wait` | int | [optional] Allow the command to wait and retry fetching the scan results from SonarQube, up to the maximum number of seconds provided, with exponential backoff. Useful when using SonarQube's metadata file to retrieve and attest scans that take a long time to process . Defaults to 30 seconds. (default 30) |
 | `-n`, `--name` | string | The name of the attestation as declared in the flow or trail yaml template. |
 | `-o`, `--origin-url` | string | [optional] The url pointing to where the attestation came from or is related. (defaulted to the CI url in some CIs: [docs](/integrations/ci_cd/#defaulted-kosli-command-flags-from-ci-variables) ). |
-| `--pull-request` | string | [conditional] The ID of the pull-request. Only required if you want to use the project key/pull-request to get the scan results rather than using Sonar's metadata file. Cannot be used with `--sonar-revision`. |
+| `--pull-request` | string | [conditional] The ID of the pull-request. Only required if you want to use the project key/pull-request to get the scan results rather than using Sonar's metadata file. Cannot be used with `--sonar-revision` or `--sonar-branch`. |
 | `--redact-commit-info` | strings | [optional] The list of commit info to be redacted before sending to Kosli. Allowed values are one or more of [author, message, branch]. |
 | `--registry-password` | string | [conditional] The container registry password or access token. Only required if you want to read container image SHA256 digest from a remote container registry and it is not already accessible via Docker/Podman auth files or a credential helper. |
 | `--registry-provider` | string | [deprecated] The docker registry provider or url. Only required if you want to read docker image SHA256 digest from a remote docker registry. (DEPRECATED: no longer used) |
@@ -71,6 +77,7 @@ The attestation can be bound to an *artifact* in two ways:
 | `--repo-url` | string | [conditional] The URL of the repository. Must be a valid URL. All three of `--repo-id`, `--repo-url` and `--repository` must be set to record repository information (defaulted in some CIs: [docs](/integrations/ci_cd) ). |
 | `--repository` | string | [conditional] The name of the repository (e.g. owner/repo-name). All three of `--repo-id`, `--repo-url` and `--repository` must be set to record repository information (defaulted in some CIs: [docs](/integrations/ci_cd) ). |
 | `--sonar-api-token` | string | [required] SonarQube API token. |
+| `--sonar-branch` | string | [conditional] The name of the branch the SonarQube scan ran on. Only required if you are using the project key/revision to get the scan results and the scan ran on a branch other than the project's main branch in SonarQube. Cannot be used with `--pull-request`. |
 | `--sonar-ce-task-url` | string | [conditional] The URL of the SonarQube CE task. Can be used instead of `--sonar-working-dir` when the report-task.txt file is not accessible, e.g. due to container isolation in CI/CD pipelines. |
 | `--sonar-project-key` | string | [conditional] The project key of the SonarQube project. Only required if you want to use the project key/revision/pull-request to get the scan results rather than using Sonar's metadata file. |
 | `--sonar-revision` | string | [conditional] The revision of the SonarQube project. Only required if you want to use the project key/revision to get the scan results rather than using Sonar's metadata file and you have overridden the default revision, or you aren't using a CI. Defaults to the value of the git commit flag. Cannot be used with `--pull-request`. |
@@ -145,6 +152,17 @@ kosli attest sonar
 	--sonar-server-url yourSonarServerURL 
 	--sonar-project-key yourSonarProjectKey 
 	--sonar-revision yourSonarRevision 
+
+```
+</Accordion>
+<Accordion title="report a SonarQube Cloud attestation about a trail using key/revision for a scan on a non-main branch">
+```shell
+kosli attest sonar 
+	--name yourAttestationName 
+	--sonar-api-token yourSonarAPIToken 
+	--sonar-project-key yourSonarProjectKey 
+	--sonar-revision yourSonarRevision 
+	--sonar-branch yourSonarBranchName 
 
 ```
 </Accordion>

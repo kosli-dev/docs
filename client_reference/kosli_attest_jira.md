@@ -43,7 +43,9 @@ The found issue references will be checked against Jira to confirm their existen
 The attestation is reported in all cases, and its compliance status depends on referencing
 existing Jira issues.  
 If you have wrong Jira credentials or wrong Jira-base-url it will be reported as non existing Jira issue.
-This is because Jira returns same 404 error code in all cases.
+This is because Jira returns same 404 error code in all cases. When Jira's response shows that it did not
+accept the credentials, a warning naming them is printed and the issue is reported as not confirmed rather
+than silently as missing; run with `--debug` to see the status Jira returned for each issue.
 
 The `--jira-issue-fields` can be used to include fields from the jira issue. By default no fields
 are included. `*all` will give all fields. Using `--jira-issue-fields "*all" --dry-run` will give you
@@ -55,6 +57,10 @@ The attestation can be bound to a *trail* using the trail name.
 The attestation can be bound to an *artifact* in two ways:
 - using the artifact's SHA256 fingerprint which is calculated (based on the `--artifact-type` flag and the artifact name/path argument) or can be provided directly (with the `--fingerprint` flag).
 - using the artifact's name in the flow yaml template and the git commit from which the artifact is/will be created. Useful when reporting an attestation before creating/reporting the artifact.
+
+To specify paths in a directory artifact that should always be excluded from the SHA256 calculation, you can add a `.kosli_ignore` file to the root of the artifact.
+Each line should specify a relative path or path glob to be ignored. You can include comments in this file, using `#`.
+The `.kosli_ignore` will be treated as part of the artifact like any other file, unless it is explicitly ignored itself.
 
 You can optionally associate the attestation to a git commit using `--commit` (requires access to a git repo).
 You can optionally redact some of the git commit data sent to Kosli using `--redact-commit-info`.
@@ -85,7 +91,7 @@ In other CI systems, set them explicitly to capture repository metadata.
 | `--jira-base-url` | string | The base url for the jira project, e.g. `https://kosli.atlassian.net` |
 | `--jira-issue-fields` | string | [optional] The comma separated list of fields to include from the Jira issue. Default no fields are included. '*all' will give all fields. |
 | `--jira-pat` | string | Jira personal access token (for self-hosted Jira) |
-| `--jira-project-key` | strings | [optional] Jira project key to match against. Can be repeated. Defaults to matching any jira project key. |
+| `--jira-project-key` | strings | [optional] Jira project key to match against. Can be repeated, or given as a comma-separated list. Defaults to matching any jira project key. |
 | `--jira-secondary-source` | string | [optional] An optional string to search for Jira ticket reference, e.g. '`--jira-secondary-source` $\{\{ github.head_ref \}\}' |
 | `--jira-username` | string | Jira username (for Jira Cloud) |
 | `-n`, `--name` | string | The name of the attestation as declared in the flow or trail yaml template. |
