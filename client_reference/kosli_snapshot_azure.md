@@ -16,10 +16,10 @@ For Azure Function apps or Web apps which uses zip deployment the fingerprint is
 content of the zip file. This is the same as unzipping the file and then running `kosli fingerprint -t dir yourDirName`.
 When doing zip deployment the WEBSITE_RUN_FROM_PACKAGE must NOT be set to 1. This will cause the azure
 API calls to not return the content of what is running on the server and fingerprint calculations
-will not match. See 
+will not match. See
 https://learn.microsoft.com/en-us/azure/azure-functions/functions-app-settings#website_run_from_package
 
-For zip-deployed apps, the fingerprint honours a `.kosli_ignore` file at the root of the deployed package.
+For zip-deployed apps, the fingerprint respects a `.kosli_ignore` file at the root of the deployed package.
 To specify paths in a directory artifact that should always be excluded from the SHA256 calculation, you can add a `.kosli_ignore` file to the root of the artifact.
 Each line should specify a relative path or path glob to be ignored. You can include comments in this file, using `#`.
 The `.kosli_ignore` will be treated as part of the artifact like any other file, unless it is explicitly ignored itself.

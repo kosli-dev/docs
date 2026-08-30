@@ -84,7 +84,7 @@ kosli create attestation-type customTypeName
 
 ```
 </Accordion>
-<Accordion title="create/update a custom attestation type with schema and ^jq^ evaluation rules">
+<Accordion title="create/update a custom attestation type with schema and `jq` evaluation rules">
 ```shell
 kosli create attestation-type customTypeName 
     --description "Attest that a person meets the age requirements." 
