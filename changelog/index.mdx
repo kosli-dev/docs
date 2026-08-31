@@ -12,7 +12,6 @@ rss: true
 
 ## Bug fixes
 
-- **Magic links survive email scanners** — a `HEAD` request (from a browser or a link scanner) no longer consumes a sign-in magic link, so the link still works when the user actually clicks it. Previously a pre-scanned link failed with "already used".
 - **Attestations filter no longer breaks infinite scroll** — applying a filter on the org attestations list while a page request was still in flight could stop pagination for the rest of the session: the first page of filtered results rendered and nothing more, with no error. Filter and page requests are now serialised.
 
 </Update>
