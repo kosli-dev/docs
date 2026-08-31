@@ -4,6 +4,83 @@ description: "Release notes for Kosli products."
 rss: true
 ---
 
+<Update label="August 31, 2026" description="" tags={["Platform"]}>
+
+## Updates
+
+- **SCIM orgs: user management moves to your IdP** — in an organization whose user lifecycle is managed by SCIM, members owned by the IdP can no longer be invited, re-invited, role-changed, or removed through Kosli. Such edits used to appear to succeed, only to be silently overwritten by the next sync, leaving audit-log entries attributing the change to the wrong actor. An admin can opt back in to managing the remaining (non-IdP) users via a toggle on the user management page; with the opt-in off, the UI permits no invitations or role changes. Service accounts are unaffected and stay editable throughout.
+
+## Bug fixes
+
+- **Magic links survive email scanners** — a `HEAD` request (from a browser or a link scanner) no longer consumes a sign-in magic link, so the link still works when the user actually clicks it. Previously a pre-scanned link failed with "already used".
+- **Attestations filter no longer breaks infinite scroll** — applying a filter on the org attestations list while a page request was still in flight could stop pagination for the rest of the session: the first page of filtered results rendered and nothing more, with no error. Filter and page requests are now serialised.
+
+</Update>
+
+<Update label="August 30, 2026" description="v2.39.1" tags={["CLI"]}>
+
+## Updates
+
+- **Clearer help text** — reworded the help for [`kosli attest jira`](/client_reference/kosli_attest_jira), [`kosli attest sonar`](/client_reference/kosli_attest_sonar), and [`kosli snapshot azure`](/client_reference/kosli_snapshot_azure), and fixed formatting glitches in the generated CLI reference.
+
+[View on GitHub](https://github.com/kosli-dev/cli/releases/tag/v2.39.1)
+
+</Update>
+
+<Update label="August 29, 2026" description="v2.39.0" tags={["CLI"]}>
+
+## New features
+
+- **`--sonar-branch` on `kosli attest sonar`** — attest a SonarQube scan that ran on a branch other than the project's main branch by naming the branch. The flag cannot be combined with `--pull-request`. When a scan revision is not found, the error now says that only the main branch was searched and suggests passing `--sonar-branch`. See the [`kosli attest sonar` reference](/client_reference/kosli_attest_sonar).
+
+## Updates
+
+- **`kosli attest jira` reports rejected credentials as such** — when Jira does not accept the credentials (for example an expired API token), the CLI prints a warning naming the username and reports the affected issues as "not confirmed" instead of silently as missing. The `--assert` failure message distinguishes missing, unconfirmed, and mixed cases. See the [`kosli attest jira` reference](/client_reference/kosli_attest_jira).
+- **`--jira-project-key` tolerates whitespace** — comma-separated lists like `"ABC, DEF"` are now accepted; each key is trimmed before validation, and invalid keys are quoted in the error message.
+- **`.kosli_ignore` documented in command help** — the help for `kosli allow artifact`, `kosli assert artifact`, and every `kosli attest` command now describes `.kosli_ignore` support when fingerprinting directories.
+
+[View on GitHub](https://github.com/kosli-dev/cli/releases/tag/v2.39.0)
+
+</Update>
+
+<Update label="August 28, 2026" description="" tags={["Platform"]}>
+
+## New features
+
+- **Spaces enabled for every org** — Spaces, the hierarchical tree for organizing flows and environments, is now available to every organization by default. The Manage Spaces page and the Space filter on the Flows and Environments lists no longer require a feature flag or an org-level opt-in setting, both of which are gone.
+
+</Update>
+
+<Update label="August 27, 2026" description="" tags={["Platform"]}>
+
+## Bug fixes
+
+- **Policy expressions treat a missing value as never matching** — `matches()` and the ordering comparisons (`<`, `>`, `<=`, `>=`) now evaluate to `false` when either side is missing, consistent with how `==`, `!=`, `in`, and `exists()` already behaved. Missing values are common: `flow` is empty for any artifact without provenance, and `flow.tags.<key>` is empty for a tag a flow doesn't have. Previously an expression like `not matches(flow.name, "^snyk-.*")` crashed snapshot compliance evaluation, and could return a 500 from the assert-artifact endpoint. See [policy expressions](/policy-reference/environment_policy#policy-expressions).
+
+</Update>
+
+<Update label="August 26, 2026" description="" tags={["Platform"]}>
+
+## Updates
+
+- **Environments tag filter drills into values** — the tag filter on the Environments list now offers both key-existence and key:value filtering, matching the Flows, Repos, and Controls pages. Previously it only listed keys, which made it useless when environments share keys but differ on values.
+
+## Bug fixes
+
+- **Environment policies see override attestations** — `attestation` rules in [environment policies](/policy-reference/environment_policy) (and the assert-artifact API) now evaluate the newest attestation including overrides. Previously an override never matched the rule's attestation type, so overriding a non-compliant attestation could not bring an environment back to compliant, and overriding a compliant one down to non-compliant left the environment falsely reporting compliant.
+- **Archived resources disappear from the Spaces tree** — archiving two or more environments or flows could leave some of them still showing on the Spaces page. All archived resources are now filtered out.
+- **Attestation reads tolerate retargeted artifact names** — reading attestations no longer fails with a 500 when the same fingerprint was later reported under a different artifact name in the same trail. The artifact-name consistency check now runs when an attestation is written, not on every read.
+
+</Update>
+
+<Update label="August 24, 2026" description="" tags={["Platform"]}>
+
+## Updates
+
+- **Cleaner timestamps on the flows list** — the flows list now shows a plain date and time, matching the environments list, instead of a stacked icon, caption, and timestamp. The frequency-chart tooltip on the repo page also switches from DD/MM/YYYY to the app-standard YYYY-MM-DD.
+
+</Update>
+
 <Update label="August 20, 2026" description="" tags={["Platform"]}>
 
 ## Bug fixes
