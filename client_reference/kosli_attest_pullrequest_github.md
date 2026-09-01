@@ -75,7 +75,7 @@ The `.kosli_ignore` will be treated as part of the artifact like any other file,
 	<Tab title="GitHub">
 	View an example of the `kosli attest pullrequest github` command in GitHub.
 
-	In [this YAML file](https://github.com/cyber-dojo/differ/blob/108cccf9bccf9af5d455db66c250480b53cbecc7/.github/workflows/main.yml#L81), which created [this Kosli Event](https://app.kosli.com/cyber-dojo/flows/differ-ci/trails/108cccf9bccf9af5d455db66c250480b53cbecc7?attestation_id=c3aae39c-ec5d-445c-974a-336c84b9).
+	In [this YAML file](https://github.com/cyber-dojo/differ/blob/bcac1c18385b2573ef6c6e8eeae0f62ed14a03de/.github/workflows/main.yml#L81), which created [this Kosli Event](https://app.kosli.com/cyber-dojo/flows/differ-ci/trails/bcac1c18385b2573ef6c6e8eeae0f62ed14a03de?attestation_id=7cf44301-0ca2-4b1f-9ce2-6f17ee0d).
 	</Tab>
 </Tabs>
 
