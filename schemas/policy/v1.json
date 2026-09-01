@@ -69,7 +69,7 @@
       "type": "object"
     },
     "PolicyExpression": {
-      "description": "Boolean expression evaluated against flow/artifact context. In YAML this is often written as a string wrapped in ${{ ... }}.",
+      "description": "Boolean expression evaluated against flow/artifact context. In YAML this is often written as a string wrapped in ${{ ... }}. A missing (None) context value never matches: matches() and the ordering comparisons (<, >, <=, >=) return false if either operand is missing, and `in` is a list-membership test that returns false unless its right-hand side is a list containing the left-hand value.",
       "properties": {
         "text": {
           "title": "Text",
