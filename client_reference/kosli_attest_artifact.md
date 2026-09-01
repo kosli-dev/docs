@@ -93,12 +93,12 @@ In other CI systems, set them explicitly to capture repository metadata.
 	<Tab title="GitHub">
 	View an example of the `kosli attest artifact` command in GitHub.
 
-	In [this YAML file](https://github.com/cyber-dojo/reusable-actions-workflows/blob/25f0b797c18403de1c8490a9a71bbe9789c809a9/.github/workflows/secure-docker-build.yml#L210), which created [this Kosli Event](https://app.kosli.com/cyber-dojo/flows/differ-ci/trails/108cccf9bccf9af5d455db66c250480b53cbecc7?attestation_id=50b8cff6-1888-4c76-b31a-fdd7a311).
+	In [this YAML file](https://github.com/cyber-dojo/reusable-actions-workflows/blob/25f0b797c18403de1c8490a9a71bbe9789c809a9/.github/workflows/secure-docker-build.yml#L210), which created [this Kosli Event](https://app.kosli.com/cyber-dojo/flows/differ-ci/trails/bcac1c18385b2573ef6c6e8eeae0f62ed14a03de?attestation_id=11345222-f37a-4f8d-8051-ec26a321).
 	</Tab>
 	<Tab title="GitLab">
 	View an example of the `kosli attest artifact` command in GitLab.
 
-	In [this YAML file](https://gitlab.com/cyber-dojo/creator/-/blob/65fd2bfa2478534ea4bc5ccf30f6bfc6aab7550c/.gitlab/workflows/main.yml#L111), which created [this Kosli Event](https://app.kosli.com/cyber-dojo/flows/creator-ci/trails/83357f112ef5c10b157cb84732c77965cc8ddc48?attestation_id=11539f6a-befb-4b79-9484-fd9f25d3).
+	In [this YAML file](https://gitlab.com/cyber-dojo/creator/-/blob/65fd2bfa2478534ea4bc5ccf30f6bfc6aab7550c/.gitlab/workflows/main.yml#L111), which created [this Kosli Event](https://app.kosli.com/cyber-dojo/flows/creator-ci/trails/d64d2b11879179255f11dc991e81fbaf4a040264?attestation_id=61384b36-4d32-43f2-8d5d-a72e2e7e).
 	</Tab>
 </Tabs>
 
