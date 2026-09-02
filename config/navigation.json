@@ -73,7 +73,15 @@
                 "administration/managing_custom_attestation_types/overview"
               ]
             },
-            "administration/managing_tags"
+            "administration/managing_tags",
+            {
+              "group": "Cloud Capture",
+              "pages": [
+                "administration/cloud_capture/overview",
+                "administration/cloud_capture/getting_started",
+                "administration/cloud_capture/security"
+              ]
+            }
           ]
         },
         {
