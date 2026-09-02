@@ -274,3 +274,4 @@ From here you can:
 * Query your environment with [`kosli list snapshots`](/client_reference/kosli_list_snapshots) and [`kosli get snapshot`](/client_reference/kosli_get_snapshot)
 * [Compare snapshots to see what changed](/client_reference/kosli_diff_snapshots)
 * Trace a running artifact back to its git commit with the [From commit to production](/tutorials/following_a_git_commit_to_runtime_environments) tutorial
+* Report AWS Bedrock AgentCore agent runtimes with the [Report AgentCore environments](/tutorials/report_agentcore_envs) guide
