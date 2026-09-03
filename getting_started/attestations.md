@@ -349,6 +349,57 @@ Currently, we support the following types of evidence:
     - So `32 / 1209 * 100 <= 5` evaluates to `2.64 <= 5` which is `true`
 
 
+    #### Summaries
+
+    By default, the attestation detail page in Kosli shows the type's evaluation rules as a
+    pass/fail checklist, plus the raw attestation data. Add a **summary** to the type to pull named
+    values out of the attestation data and display them as labeled rows instead — the way the
+    built-in Sonar, Snyk and JUnit attestations do.
+
+    A summary is an ordered list of `name`/`expression` pairs, where each expression is a
+    [jq expression](https://jqlang.org/manual/) evaluated against the attestation data. Add one
+    entry per `--summary` flag:
+
+    ```bash
+    kosli create attestation-type coverage-metrics
+      --jq=".code.lines.missed / .code.lines.total * 100 <= 5"
+      --summary="Lines missed=.code.lines.missed"
+      --summary="Lines total=.code.lines.total"
+    ```
+
+    Attestations of the `coverage-metrics` type above then show `Lines missed` and `Lines total`,
+    in that order, with the values taken from each attestation's own data.
+
+    Each `--summary` value is split on its first `=` only, so `==` inside a jq expression is safe.
+    Use [`--summary-json`](/client_reference/kosli_create_attestation-type) instead if the list is
+    easier to express as JSON, or the
+    [`summary` attribute](/terraform-reference/resources/custom_attestation_type) if you manage
+    your types with Terraform:
+
+    ```json
+    [
+      { "name": "Lines missed", "expression": ".code.lines.missed" },
+      { "name": "Lines total", "expression": ".code.lines.total" }
+    ]
+    ```
+
+    Worth knowing:
+
+    - The summary is part of the **versioned** type definition. Changing it creates a new version of
+      the type, just like changing the schema or the evaluation rules. Each attestation keeps the
+      version of the type it was reported against.
+    - Expressions are evaluated when the attestation is **displayed**, against the stored
+      attestation data. A summary never affects the compliance status of an attestation.
+    - Invalid jq is rejected when the type is created, so authoring mistakes surface immediately
+      rather than as a broken detail page later.
+    - An expression that returns `null`, or that fails against a particular attestation's data,
+      renders as `N/A`. The rest of the summary still renders.
+    - A value that is a valid URL renders as a clickable link, the same as
+      [annotation values](#annotating-attestations).
+    - If the attestation data is a top-level array, Kosli renders one summary group per element
+      (`Summary 1:`, `Summary 2:`, and so on). Write the expressions against a single element
+      (`.code.lines.missed`) — each element is evaluated separately.
+
     See:
     * [create custom attestation type](/client_reference/kosli_create_attestation-type) and
     * [report custom attestation to an artifact or a trail](/client_reference/kosli_attest_custom/) for usage details and examples.

@@ -1,6 +1,6 @@
 ---
 title: Managing Custom Attestation Types
-description: Learn how to manage Kosli custom attestation types via Terraform, including creating and importing types with JSON Schema and jq evaluation rules.
+description: Learn how to manage Kosli custom attestation types via Terraform, including creating and importing types with JSON Schema, jq evaluation rules, and summaries.
 ---
 
 The preferred way to manage custom attestation types is via the <Tooltip tip="An official HashiCorp-registered Terraform provider that lets you manage Kosli resources (environments, flows, policies, etc.) as infrastructure as code." cta="View on Terraform Registry" href="https://registry.terraform.io/providers/kosli-dev/kosli/latest/docs/">Kosli Terraform provider</Tooltip>, so your Kosli configuration is version-controlled alongside your infrastructure. You can also manage custom attestation types through the Kosli CLI.
@@ -13,8 +13,11 @@ Custom attestation types define how Kosli validates evidence from tools that don
 
 - A **JSON Schema** (optional) that defines the expected structure of attestation data
 - **jq rules** (optional) that evaluate the data to determine compliance
+- A **summary** (optional) — ordered, labeled jq expressions that Kosli renders as rows on the attestation detail page
 
-At least one of the two must be provided.
+At least one of the schema and the jq rules must be provided. The summary is independent of both:
+it only affects how attestations of the type are displayed, never whether they are compliant. See
+[Summaries](/getting_started/attestations#summaries) for how summaries render.
 
 ## Create a custom attestation type
 
@@ -71,6 +74,42 @@ resource "kosli_custom_attestation_type" "deployment_record" {
   })
 }
 ```
+
+### With a summary
+
+`summary` takes a JSON array of `{name, expression}` objects. Each expression is a jq expression
+evaluated against the attestation data when the attestation is displayed, and the entries render in
+the order given. A value that is a valid URL renders as a clickable link.
+
+```hcl
+resource "kosli_custom_attestation_type" "vulnerability_scan" {
+  name        = "vulnerability-scan"
+  description = "Validates vulnerability scan results"
+
+  jq_rules = [".critical_vulnerabilities == 0"]
+
+  summary = jsonencode([
+    { name = "Critical", expression = ".critical_vulnerabilities" },
+    { name = "High", expression = ".high_vulnerabilities" },
+    { name = "Scanner", expression = ".scanner_version" },
+    { name = "Report", expression = ".report_url" },
+  ])
+}
+```
+
+Use `file()` instead of `jsonencode()` to keep the summary in a standalone JSON file, so the same
+definition can be shared with other tooling:
+
+```hcl
+summary = file("${path.module}/summaries/vulnerability-scan.json")
+```
+
+<Note>
+The summary is part of the versioned type definition, so changing it creates a new version of the
+attestation type — exactly like changing the schema or the jq rules. Removing `summary` from a type
+that had one clears the summary, and its attestations fall back to showing the jq evaluation results
+as a pass/fail checklist.
+</Note>
 
 ## Import an existing custom attestation type
 

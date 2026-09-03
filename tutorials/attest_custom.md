@@ -27,8 +27,19 @@ For this tutorial we'll create a minimal `coverage-report` type that requires a 
 ```shell
 kosli create attestation-type coverage-report \
   --description "Code coverage report" \
-  --jq '.coverage >= 80'
+  --jq '.coverage >= 80' \
+  --summary "Coverage=.coverage" \
+  --summary "Tool=.tool"
 ```
+
+The two `--summary` entries are optional, but they're worth adding: each one is a
+`'NAME=EXPRESSION'` pair whose [jq expression](https://jqlang.org/manual/) is evaluated against the
+attestation data, and Kosli renders the results as labeled rows on the attestation detail page. So
+the attestation you report below opens on a readable `Coverage: 92` / `Tool: pytest-cov` summary
+instead of only the raw JSON. See
+[Summaries](/getting_started/attestations#summaries) for the details, and
+[`kosli create attestation-type`](/client_reference/kosli_create_attestation-type) for the
+`--summary-json` alternative.
 
 Prepare a JSON file with the data you want to attest. Save it as `coverage.json`:
 
