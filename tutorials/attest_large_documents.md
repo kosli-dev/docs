@@ -8,6 +8,10 @@ By the end, you will have a Kosli attestation that captures the key facts from y
 
 This two-part approach keeps attestation payloads focused on what compliance rules need to evaluate, while ensuring the raw evidence remains available.
 
+<Note>
+The `--attestation-data` JSON payload sent by `kosli attest custom` is limited to 1 MB — exceeding it returns a 400 error. Distill larger reports into a summary and attach the full document with `--attachments`, as described below.
+</Note>
+
 ## Prerequisites
 
 * [Install Kosli CLI](/getting_started/install).
