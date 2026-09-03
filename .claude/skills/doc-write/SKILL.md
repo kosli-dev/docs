@@ -65,7 +65,7 @@ Classification determines placement. Getting this wrong costs a follow-up commit
 
 The Reference tab wins on content shape, not on subject. A reference page about an integration belongs in Reference — a GitHub Action reference page was once authored into `integrations/` and had to be moved in a follow-up commit.
 
-Note that the Documentation ▸ Tutorials group holds mostly how-to guides despite its name. Put a how-to there and follow the group's existing convention; do not create a parallel group.
+A group's label may not describe its contents — read the pages already in your chosen group before writing. Where label and contents disagree, follow the convention the existing pages set; do not create a parallel group alongside it.
 
 ## Navigation rules
 

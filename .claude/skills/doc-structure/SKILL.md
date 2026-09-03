@@ -78,7 +78,7 @@ grep -o '](/[a-z_/#-]*' changelog/index.mdx | sed 's|](||; s|#.*||' | sort | uni
 
 **Then, for each feature named in an entry from roughly the last quarter, check that the page the entry links to actually explains it.** Take the feature's own keyword — the flag, attribute, or noun the entry is about — and grep the linked page for it. A changelog entry that links to a page which never mentions the thing is a concrete, high-confidence gap.
 
-This check earns its keep. `/getting_started/attestations` is the changelog's most-linked page, and three entries across three products — a CLI `--summary` flag, a Terraform `summary` attribute, and a Platform release rendering summaries in the UI — all pointed there while the page contained no occurrence of "summary".
+This check has caught a real gap. Custom attestation summaries shipped across three products — a CLI `--summary` flag, a Terraform `summary` attribute, and a Platform release rendering them in the UI. All three changelog entries linked to `/getting_started/attestations` to explain the feature. That page contained no occurrence of the word "summary".
 
 Also flag:
 

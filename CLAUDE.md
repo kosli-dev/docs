@@ -36,7 +36,7 @@ Reported by the Mintlify GitHub app, alongside this repo's own workflows:
 | Check | Enforces | Source |
 |---|---|---|
 | `Mintlify Validation (kosli) - vale-spellcheck` | `.vale.ini` + `styles/Kosli/AmericanSpelling.yml` | Mintlify app |
-| `Mintlify Validation (kosli) - link-rot` | Link targets — but reports `skipping` on most PRs, so **don't rely on it**. Run `mint broken-links` locally (core rule 5). | Mintlify app |
+| `Mintlify Validation (kosli) - link-rot` | Link targets — unreliable, frequently reports `skipping`. **Don't rely on it**; run `mint broken-links` locally (core rule 5) and check `gh pr checks` before assuming links were validated. | Mintlify app |
 | `Mintlify Deployment` | Preview build | Mintlify app |
 | `Doc quality review` | The `doc-review` skill | `doc-review.yml` |
 | `Validate PR Title` | Conventional Commits | `pr-quality.yml` |

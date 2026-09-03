@@ -17,7 +17,7 @@ Do not re-do this work:
 - **PR title format** — the `Validate PR Title` job enforces Conventional Commits.
 - **Live-docs script behavior** — the `Test live-docs scripts` job runs `pytest tests/`.
 
-Note that `Mintlify Validation (kosli) - link-rot` reports `skipping` on most PRs, so **internal link resolution is not reliably enforced** — keep verifying link targets yourself.
+**Link checking is the exception — verify it yourself.** `Mintlify Validation (kosli) - link-rot` is unreliable: check the PR's own check runs (`gh pr checks`), and if it reports `skipping` or is absent, nothing has validated the links. Treat that as the default and confirm every internal target resolves.
 
 ## Before reviewing
 
@@ -81,7 +81,7 @@ A change is rarely confined to the files it touches. Grep the rest of the site f
 
 ### 3. Redirects
 
-Three of the last fourteen doc PRs needed `config/redirects.json` entries. Any PR that renames, moves, or deletes a page needs one. A missing redirect for a page that was live is **Critical** — the URL is in customers' bookmarks, in CLI error output, and in the changelog.
+Any PR that renames, moves, or deletes a page needs a `config/redirects.json` entry. This is one of the easiest things to forget, because the PR looks complete without it. A missing redirect for a page that was live is **Critical** — the URL is in customers' bookmarks, in CLI error output, and in the changelog.
 
 ### 4. Anchor stability
 
