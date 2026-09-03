@@ -15,9 +15,10 @@ Custom attestation types define how Kosli validates evidence from tools that don
 - **jq rules** (optional) that evaluate the data to determine compliance
 - A **summary** (optional) — ordered, labeled jq expressions that Kosli renders as rows on the attestation detail page
 
-At least one of the schema and the jq rules must be provided. The summary is independent of both:
+At least one of the schema or the jq rules must be provided. The summary is independent of both:
 it only affects how attestations of the type are displayed, never whether they are compliant. See
-[Summaries](/getting_started/attestations#summaries) for how summaries render.
+[Summarizing custom attestations](/getting_started/attestations#summarizing-custom-attestations) for
+how summaries render.
 
 ## Create a custom attestation type
 
@@ -79,7 +80,7 @@ resource "kosli_custom_attestation_type" "deployment_record" {
 
 `summary` takes a JSON array of `{name, expression}` objects. Each expression is a jq expression
 evaluated against the attestation data when the attestation is displayed, and the entries render in
-the order given. A value that is a valid URL renders as a clickable link.
+the order given. A string value beginning with `http://` or `https://` renders as a clickable link.
 
 ```hcl
 resource "kosli_custom_attestation_type" "vulnerability_scan" {
@@ -107,8 +108,9 @@ summary = file("${path.module}/summaries/vulnerability-scan.json")
 <Note>
 The summary is part of the versioned type definition, so changing it creates a new version of the
 attestation type — exactly like changing the schema or the jq rules. Removing `summary` from a type
-that had one clears the summary, and its attestations fall back to showing the jq evaluation results
-as a pass/fail checklist.
+that had one clears the summary on the new version, so attestations reported against it fall back to
+showing the jq evaluation results as a pass/fail checklist. Attestations reported against an earlier
+version keep the summary that version defined.
 </Note>
 
 ## Import an existing custom attestation type

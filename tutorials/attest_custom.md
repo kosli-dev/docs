@@ -22,7 +22,7 @@ Before you can report a custom attestation, the type referenced by `--type` must
 * **CLI** — [`kosli create attestation-type`](/client_reference/kosli_create_attestation-type) (good for quick experiments).
 * **Terraform** — the [`kosli_custom_attestation_type` resource](/terraform-reference/resources/custom_attestation_type) (recommended so the type is version-controlled).
 
-For this tutorial we'll create a minimal `coverage-report` type that requires a `coverage` field of at least 80:
+For this tutorial we'll create a small `coverage-report` type that requires a `coverage` field of at least 80:
 
 ```shell
 kosli create attestation-type coverage-report \
@@ -32,14 +32,9 @@ kosli create attestation-type coverage-report \
   --summary "Tool=.tool"
 ```
 
-The two `--summary` entries are optional, but they're worth adding: each one is a
-`'NAME=EXPRESSION'` pair whose [jq expression](https://jqlang.org/manual/) is evaluated against the
-attestation data, and Kosli renders the results as labeled rows on the attestation detail page. So
-the attestation you report below opens on a readable `Coverage: 92` / `Tool: pytest-cov` summary
-instead of only the raw JSON. See
-[Summaries](/getting_started/attestations#summaries) for the details, and
-[`kosli create attestation-type`](/client_reference/kosli_create_attestation-type) for the
-`--summary-json` alternative.
+The `--summary` entries are optional. Each is a `'NAME=EXPRESSION'` pair, so the attestation you
+report below opens on a readable `Coverage: 92` / `Tool: pytest-cov` summary instead of raw JSON —
+see [Summarizing custom attestations](/getting_started/attestations#summarizing-custom-attestations).
 
 Prepare a JSON file with the data you want to attest. Save it as `coverage.json`:
 
