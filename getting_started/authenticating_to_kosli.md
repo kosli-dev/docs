@@ -25,6 +25,8 @@ For anything automated, use a service account. Personal API keys inherit your us
 
     - EU: [app.kosli.com](https://app.kosli.com)
     - US: [app.us.kosli.com](https://app.us.kosli.com)
+
+    Depending on how your organization is set up, you'll sign in with [single sign-on](/administration/authentication/single_sign_on) or [Magic Link](/administration/authentication/magic_link).
   </Step>
   <Step title="Create a key">
     - **For CI/CD**, follow [Service accounts](/administration/authentication/service_accounts) to create a service account and generate its first API key.
@@ -48,6 +50,8 @@ For CLI usage, basic auth, and full examples, see [API authentication methods](/
 
 ## See also
 
+- [Single sign-on](/administration/authentication/single_sign_on) — configure sign-in through your identity provider.
+- [Magic Link](/administration/authentication/magic_link) — sign in with an emailed link, without an identity provider.
 - [Service accounts](/administration/authentication/service_accounts) — admin lifecycle for machine credentials.
 - [API key rotation](/administration/authentication/api_key_rotation) — how rotation works, with a [step-by-step tutorial](/tutorials/rotating_api_keys).
 - [Roles in Kosli](/administration/managing_users/roles_in_kosli) — what users and service accounts can do at each role.
