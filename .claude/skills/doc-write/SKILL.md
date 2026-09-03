@@ -15,19 +15,27 @@ Author Mintlify pages for the Kosli docs site following Diátaxis and this repo'
 4. **Check open issues** — `gh issue list --state open --label content` — the gap may already be tracked, with context on what the reader needs.
 5. **Read 2-3 pages in the destination group** to match voice, structure, and component usage.
 
-## Never hand-edit generated pages
+## Generated pages
 
-These are generated and your edits will be overwritten on the next run:
+**Deterministically regenerated — an edit here is deleted on the next release.** Fix the source instead:
 
-| Path | Source |
+| Path | Fix it in |
 |---|---|
-| `client_reference/` | `scripts/` — run `scripts/dev_live_docs.sh` |
-| `terraform-reference/` | `.mintlify/workflows/update-terraform-reference.md` |
-| `helm/` | `.github/workflows/update-cli-docs.yml` |
-| `github-action-reference/` | `.mintlify/workflows/update-github-action-reference.md` |
-| `schemas/` | `scripts/update_schemas.py` (from the API) |
+| `client_reference/kosli*.md` | **`kosli-dev/cli`** → `cmd/kosli/<command>.go` (e.g. `kosli_attest_sonar.md` ← `attestSonar.go`) |
+| `helm/k8s_reporter/*.mdx` | **`kosli-dev/cli`** → `charts/k8s-reporter/mintlify/<page>.md.gotmpl` or `values.yaml` |
+| `schemas/` | **`kosli-dev/server`** → the Pydantic models, then `scripts/update_schemas.py` |
+| The `kosli *` groups in `config/navigation.json` | This repo → `scripts/update-cli-nav.py` |
+| Live-docs sections in `client_reference/` | This repo → `scripts/add_livedocs.py`, `scripts/live_docs_*_data.py` |
 
-To change one, fix its generator. To document a command's *usage*, write a how-to that links to the generated reference rather than restating its flags — a restated flag list goes stale silently.
+Run `scripts/dev_live_docs.sh` to regenerate locally; it restores `client_reference/` on exit.
+
+In the CLI's Go long descriptions, **`^` means backtick** (`^--jq^`, `^jq^`) and `kosli docs` substitutes it. Write `^`, not a literal backtick, when editing those strings.
+
+**Agent-synced from upstream — an edit survives but will drift.** `terraform-reference/` (from `kosli-dev/terraform-provider-kosli`) and `github-action-reference/setup_cli_action.md` (from `kosli-dev/setup-cli-action`'s `README.md` and `action.yml`) are maintained by the `.mintlify/workflows/` agents. Edit the page when it is wrong, but check it against upstream first — if upstream disagrees, the next sync undoes you.
+
+**Hand-authored despite the directory:** `client_reference/overview.md` and `client_reference/output_and_verbosity.md`. Regeneration only removes `kosli*.md`. Edit these freely.
+
+To document a command's *usage*, write a how-to that links to the generated reference rather than restating its flags — a restated flag list goes stale silently.
 
 ## Classify the doc type
 

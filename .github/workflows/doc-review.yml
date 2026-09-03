@@ -89,6 +89,21 @@ jobs:
               `config/redirects.json` has an entry. Critical if missing.
             - Flag relative links (e.g. `../foo`) as Critical - they must be
               root-relative.
+            - GENERATED PAGES: this workflow reviews the automated
+              `docs: update CLI and helm reference for vX.Y.Z` PRs, whose
+              diffs are almost entirely machine-generated. Follow the skill's
+              "Generated pages" section. Do NOT post inline comments on
+              `client_reference/kosli*.md`, `helm/k8s_reporter/*.mdx` or
+              `schemas/` - those lines are deleted on the next release. Do NOT
+              emit a "Fix this" link scoped to this repo for such a page.
+              Report the finding in the top-level comment under an
+              "Upstream - does not block this merge" heading, naming the
+              upstream repo and file (usually `kosli-dev/cli`,
+              `cmd/kosli/<command>.go` or
+              `charts/k8s-reporter/mintlify/<page>.md.gotmpl`).
+            - Do not itemise regenerated sample-data churn (timestamps,
+              fingerprints, commit SHAs). Confirm it is only churn, say so in
+              one line, and move on.
             - Apply the skill's "What not to report" bar and its 8-finding
               cap. If nothing clears the bar, say so in one sentence.
             - This review is advisory: do not request changes or approve.
