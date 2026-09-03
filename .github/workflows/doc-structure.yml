@@ -76,6 +76,15 @@ jobs:
             - Every issue body must carry the evidence that proves the
               finding — file paths, line numbers, the command that found it —
               so it can be acted on without re-running the audit.
+            - For a navigation restructure, read
+              `.github/ISSUE_TEMPLATE/docs-restructure.md` and reproduce its
+              sections in the issue body. `gh issue create --body` does not
+              apply templates mechanically, so you must follow it yourself.
+              Fill in its URL impact section correctly: a group rename or a
+              collapsed wrapper changes no URLs, but a moved page file needs a
+              `config/redirects.json` entry.
+            - Cluster before filing. Many shape findings share one underlying
+              cause and belong in one issue, not one issue per line.
             - If nothing clears the bar, file nothing and say so. A quiet run
               is a valid result.
 

@@ -99,6 +99,14 @@ Follow the repo's conventions:
 - **Labels** — `content` on nearly everything. Add `documentation` for a missing or incomplete page, `enhancement` for a structural change, `automation` for a generator or workflow fix. Add `priority: high` only for something actively misleading readers. Confirm against `gh label list` rather than assuming.
 - **Body** — state the finding, the evidence that proves it (file paths, line numbers, the grep that found it, the changelog entries involved), and what a fix would look like. Someone should be able to act on the issue without re-running the audit.
 
+This audit files two kinds of issue, and they need different bodies:
+
+**Restructure** — a navigation shape change from step 2 or 3. Read `.github/ISSUE_TEMPLATE/docs-restructure.md` and follow its sections. `gh issue create --body` does not apply a template mechanically, so you must reproduce the structure yourself. Its **URL impact** section is the one that matters: a group rename or a collapsed wrapper changes no URLs, but moving a page file does and needs a `config/redirects.json` entry. Get that distinction right or the issue will propose a change that breaks live links.
+
+**Coverage** — a feature from step 4 with missing or incomplete docs. No template; these match the existing backlog (an issue naming the page to change and the changelog entries that prove the gap). Say which product(s) shipped the feature, which changelog entries cover it, which page should explain it, and what a reader currently cannot find out.
+
+Never file a restructure issue against generated navigation. The `Reference ▸ CLI Reference` subtree mirrors the CLI's command tree — the audit script already excludes it, so a shape finding there means the exclusion needs fixing, not the navigation.
+
 Do not assign, milestone, or set priority beyond the labels above.
 
 ## Step 7 — Summarize
