@@ -1,0 +1,84 @@
+name: Doc Structure Audit
+
+on:
+  schedule:
+    # 09:00 UTC on the 1st of each month.
+    - cron: '0 9 1 * *'
+  workflow_dispatch:
+    inputs:
+      focus:
+        description: 'Optional: limit the audit to one area (e.g. "navigation", "changelog coverage", "Tutorials group")'
+        required: false
+        type: string
+
+# Never let two audits run at once — both would file the same issues, since
+# neither can see the other's output when it deduplicates.
+concurrency:
+  group: doc-structure
+  cancel-in-progress: false
+
+jobs:
+  doc-structure:
+    name: Docs navigation and coverage audit
+    runs-on: ubuntu-latest
+    timeout-minutes: 30
+    permissions:
+      contents: read
+      issues: write
+      id-token: write # required: used to fetch the GitHub OIDC token
+    steps:
+      - name: Harden Runner
+        uses: step-security/harden-runner@05e31511f85b41b11d1cf0ef85d0992719546e2c # v2.21.0
+        with:
+          egress-policy: audit
+
+      - uses: actions/checkout@9c091bb21b7c1c1d1991bb908d89e4e9dddfe3e0 # v7.0.0
+
+      - name: Run docs structure audit
+        uses: anthropics/claude-code-action@a874e9ecd7bb36efdad65429c6b35815f5a08f10 # v1.0.210
+        env:
+          GH_TOKEN: ${{ github.token }}
+        with:
+          anthropic_federation_rule_id: ${{ vars.ANTHROPIC_FEDERATION_RULE_ID }}
+          anthropic_organization_id: ${{ vars.ANTHROPIC_ORGANIZATION_ID }}
+          anthropic_service_account_id: ${{ vars.ANTHROPIC_SERVICE_ACCOUNT_ID }}
+          # The `doc-structure` skill is defined locally in
+          # `.claude/skills/doc-structure/SKILL.md` and is picked up
+          # automatically from the checked-out repo.
+          # --allowedTools is a whitelist - the agent can ONLY use these tools
+          # plus the implicit Read/Grep/Glob set. It has no write access to the
+          # working tree: this audit files issues, it does not change docs.
+          claude_args: |
+            --max-turns 60
+            --model claude-opus-5
+            --allowedTools "Bash(python3:*),Bash(find:*),Bash(grep:*),Bash(comm:*),Bash(sed:*),Bash(sort:*),Bash(gh issue list:*),Bash(gh issue view:*),Bash(gh issue create:*),Bash(gh issue comment:*),Bash(gh label list:*)"
+          prompt: |
+            REPO: ${{ github.repository }}
+
+            Run a full documentation structure audit of this repository.
+            Follow the `doc-structure` skill (defined in
+            `.claude/skills/doc-structure/SKILL.md`) and the rules in this
+            repo's CLAUDE.md. Work through its steps in order.
+
+            ${{ github.event.inputs.focus && format('Focus this run on: {0}. Skip audit areas outside that focus.', github.event.inputs.focus) || 'Audit all areas: navigation integrity, information architecture, and changelog coverage.' }}
+
+            Constraints:
+            - Read every open issue BEFORE filing anything. Most findings are
+              already tracked. Filing a duplicate is worse than filing nothing.
+            - This audit is read-only against the docs. Do not edit any page,
+              `config/navigation.json`, or `docs.json`. Your only writes are
+              GitHub issues.
+            - Cap the run at 8 new issues. If more findings clear the bar,
+              file the 8 highest-impact and list the rest in your summary.
+            - Every issue body must carry the evidence that proves the
+              finding — file paths, line numbers, the command that found it —
+              so it can be acted on without re-running the audit.
+            - If nothing clears the bar, file nothing and say so. A quiet run
+              is a valid result.
+
+            Note: the repository is already checked out in the current working
+            directory.
+
+            End with a summary of issues filed, findings skipped as duplicates
+            (naming the issue that already covers each), and findings that
+            exceeded the cap.
