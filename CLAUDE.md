@@ -40,7 +40,7 @@ Reported by the Mintlify GitHub app, alongside this repo's own workflows:
 | `Mintlify Deployment` | Preview build | Mintlify app |
 | `Doc quality review` | The `doc-review` skill | `doc-review.yml` |
 | `Validate PR Title` | Conventional Commits | `pr-quality.yml` |
-| `Test live-docs scripts` | `pytest tests/` | `pr-quality.yml` |
+| `Test live-docs scripts` | `pytest tests/` — including navigation integrity, so **core rule 2 is enforced**: a page file with no `config/navigation.json` entry fails the build | `pr-quality.yml` |
 
 Because spelling is already enforced, review agents should not spend turns hand-checking it.
 
@@ -81,6 +81,23 @@ generator escaping bug, not a typo in the description.
 are hand-authored; regeneration only removes `kosli*.md`.
 
 Tests for the generators live in `tests/` and run with `pytest`.
+
+## Auditing navigation
+
+```bash
+python scripts/audit_navigation.py           # readable report
+python scripts/audit_navigation.py --check    # exit 1 on integrity findings
+python scripts/audit_navigation.py --json     # for the doc-structure skill
+```
+
+**Integrity** — orphaned pages (a file with no `navigation` entry, core rule 2)
+and dangling entries (an entry with no file). Enforced on every PR by
+`pytest tests/`.
+
+**Shape** — advisory information-architecture signals: single-child groups,
+deep nesting, Title Case labels, oversized groups, inconsistent icons. Never
+fails a build. The `Reference ▸ CLI Reference` subtree is exempt because
+`update-cli-nav.py` generates it from the CLI's command tree.
 
 ## Schemas
 
