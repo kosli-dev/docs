@@ -1,6 +1,7 @@
 ---
 title: "Magic Link"
 description: "Learn about signing in to Kosli with Magic Link."
+icon: "wand-magic-sparkles"
 ---
 
 Magic Link is a method of signing into Kosli without needing to setup Single Sign On, or needing a password. When you wish to sign into Kosli, a link is emailed to you and clicking the link signs you in.
