@@ -203,8 +203,8 @@ Use **`--attestation-data`** on `kosli attest custom` to provide the JSON data t
 attestation type's jq expression evaluates. This is what determines the compliance status of the
 attestation. See the [Custom](#custom) attestation type below for details.
 
-The `--attestation-data` payload is limited to 1 MB. For larger reports, distill the data you need
-into a summary and attach the full document separately — see
+The `--attestation-data` payload is limited to 1 MB — exceeding it returns a 400 error. For larger
+reports, distill the data you need into a summary and attach the full document separately — see
 [Attesting large documents](/tutorials/attest_large_documents).
 
 ```shell
