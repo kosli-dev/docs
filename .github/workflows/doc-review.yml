@@ -67,17 +67,45 @@ jobs:
             the `doc-review` skill (defined in `.claude/skills/doc-review/SKILL.md`)
             and the rules in this repo's CLAUDE.md.
 
-            Scope: only the docs files (.md, .mdx, config/navigation.json,
+            Scope: the docs files (.md, .mdx, config/navigation.json,
             docs.json) changed in this PR. Use `gh pr diff` to discover them.
+            You may read any file in the repo to check the change against it -
+            cross-file consistency is the most valuable thing you can do here.
 
             Constraints:
-            - Read each changed file and CLAUDE.md before commenting.
-            - If a new page was added, verify it is also listed in
-              `config/navigation.json`. Flag as Critical if missing.
+            - Read each changed file AT THE CURRENT BRANCH HEAD, not just the
+              diff. Never report something a later commit already fixed.
+            - Never report spelling. The `vale-spellcheck` check enforces
+              `styles/Kosli/AmericanSpelling.yml` on every PR. Do not restate
+              checks that passed, and do not include a "what looks good"
+              section - the sticky comment re-renders on every push.
+            - Prioritise the cross-file checks in the skill: prose against
+              generated reference pages and schemas, and incomplete sweeps
+              when a concept is renamed or removed.
+            - If a new page was added, verify it is listed in
+              `config/navigation.json` (Critical if missing) AND question
+              whether its tab and group are right for its Diátaxis type.
+            - If a page was moved, renamed, or deleted, verify
+              `config/redirects.json` has an entry. Critical if missing.
             - Flag relative links (e.g. `../foo`) as Critical - they must be
               root-relative.
-            - Be concise. Group findings by file. Use the doc-reviewer agent's
-              Critical / Improvement / Suggestion categories.
+            - GENERATED PAGES: this workflow reviews the automated
+              `docs: update CLI and helm reference for vX.Y.Z` PRs, whose
+              diffs are almost entirely machine-generated. Follow the skill's
+              "Generated pages" section. Do NOT post inline comments on
+              `client_reference/kosli*.md`, `helm/k8s_reporter/*.mdx` or
+              `schemas/` - those lines are deleted on the next release. Do NOT
+              emit a "Fix this" link scoped to this repo for such a page.
+              Report the finding in the top-level comment under an
+              "Upstream - does not block this merge" heading, naming the
+              upstream repo and file (usually `kosli-dev/cli`,
+              `cmd/kosli/<command>.go` or
+              `charts/k8s-reporter/mintlify/<page>.md.gotmpl`).
+            - Do not itemise regenerated sample-data churn (timestamps,
+              fingerprints, commit SHAs). Confirm it is only churn, say so in
+              one line, and move on.
+            - Apply the skill's "What not to report" bar and its 8-finding
+              cap. If nothing clears the bar, say so in one sentence.
             - This review is advisory: do not request changes or approve.
 
             Note: The PR branch is already checked out in the current working
