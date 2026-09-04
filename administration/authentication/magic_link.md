@@ -28,4 +28,4 @@ To use magic link with your company email, email [support@kosli.com](mailto:supp
 
     <Frame><img src="/images/administration/magic-link-email.png" alt="Magic link email from Kosli with a button to sign in" /></Frame>
   </Step>
-</Step>
+</Steps>

@@ -1,5 +1,5 @@
 ---
-title: "Single Sign On"
+title: Single Sign On
 description: "Learn about configuring Single Sign On with Kosli"
 icon: "key"
 ---
