@@ -1,7 +1,7 @@
 ---
 title: "Single Sign On"
 description: "Learn about configuring Single Sign On with Kosli"
-icon: "right-to-bracket"
+icon: "key"
 ---
 
 Kosli supports signing-in using your identity provider, via Single Sign On (SSO).
