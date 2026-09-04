@@ -41,14 +41,16 @@ You will need to tell us which of your Kosli organizations you wish to have SCIM
 
 Within your IdP you will need to create a group for each of these roles. You will then add your users to the groups corresponding to the organizations/roles you wish them to have in Kosli. If a member receives two different roles for the same organization, the highest-privilege role will be assigned.
 
-<Note>
-Once a user has been provisioned through SCIM, the IdP is authoritative and will override that user's pre-existing organization memberships/roles within Kosli.
-</Note>
+### Map your IdP groups to Kosli roles
 
 Within the **SSO Configuration** wizard (not the SCIM wizard this time), go to the **Group Attribute Mapping** tab and follow the instructions. Ensure you correctly map each of your IdP groups to the corresponding role.
-
-When you have finished the group mapping, you can click through to the **Testing** page and save the configuration.
 
 <Frame>
   <img src="/images/administration/scim-group-role-mapping.png" alt="Section in the SSO Setup Suite Wizard showing how to configure mapping of IdP groups to Kosli roles" />
 </Frame>
+
+When you have finished the group mapping, you can click through to the **Testing** page and save the configuration.
+
+<Note>
+Once a user has been provisioned through SCIM, the IdP is authoritative for that user: their roles can no longer be changed in Kosli, and provisioning replaces any organization memberships and roles they already had.
+</Note>
