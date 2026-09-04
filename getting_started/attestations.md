@@ -333,15 +333,15 @@ Currently, we support the following types of evidence:
     You could create a custom attestation type called `coverage-metrics` using a [jq expression](https://jqlang.org/manual/) rule defining a minimum line coverage of 95%:
 
     ```bash
-    kosli create attestation-type coverage-metrics
+    kosli create attestation-type coverage-metrics \
       --jq=".code.lines.missed / .code.lines.total * 100 <= 5"
     ```
 
     You could then make your custom attestation with the json file:
     ```bash
-    kosli attest custom
-      --type=coverage-metrics
-      --attestation-data=unit-test-coverage.json
+    kosli attest custom \
+      --type=coverage-metrics \
+      --attestation-data=unit-test-coverage.json \
       ...
     ```
 
@@ -352,6 +352,10 @@ Currently, we support the following types of evidence:
       - `.code.lines.total` is `1209`
     - So `32 / 1209 * 100 <= 5` evaluates to `2.64 <= 5` which is `true`
 
+
+    A custom attestation type can also define a **summary**, so that attestations of the type show
+    named values from their data instead of only raw JSON. See
+    [Summarizing custom attestations](#summarizing-custom-attestations) below.
 
     See:
     * [create custom attestation type](/client_reference/kosli_create_attestation-type) and
@@ -368,3 +372,56 @@ Currently, we support the following types of evidence:
   </Accordion>
 </AccordionGroup>
 
+## Summarizing custom attestations
+
+By default, the attestation detail page in Kosli shows a custom attestation type's evaluation rules
+as a pass/fail checklist, plus the raw attestation data. Add a **summary** to the type to pull named
+values out of the attestation data and display them as labeled rows instead — the way the built-in
+Sonar, Snyk and JUnit attestations do.
+
+A summary is an ordered list of `name`/`expression` pairs, where each expression is a
+[jq expression](https://jqlang.org/manual/) evaluated against the attestation data. Add one entry
+per `--summary` flag:
+
+```bash
+kosli create attestation-type coverage-metrics \
+  --jq=".code.lines.missed / .code.lines.total * 100 <= 5" \
+  --summary="Lines missed=.code.lines.missed" \
+  --summary="Lines total=.code.lines.total"
+```
+
+Attestations of the `coverage-metrics` type then show `Lines missed` and `Lines total`, in that
+order, with the values taken from each attestation's own data. Re-running `kosli create
+attestation-type` for a name that already exists updates that type rather than creating a second
+one — see the note on versioning below.
+
+Each `--summary` value is split on its first `=` only, so `==` inside a jq expression is safe. Use
+[`--summary-json`](/client_reference/kosli_create_attestation-type) instead if the list is easier to
+express as JSON, or the
+[`summary` attribute](/terraform-reference/resources/custom_attestation_type) if you manage your
+types with Terraform:
+
+```json
+[
+  { "name": "Lines missed", "expression": ".code.lines.missed" },
+  { "name": "Lines total", "expression": ".code.lines.total" }
+]
+```
+
+Worth knowing:
+
+- The summary is part of the **versioned** type definition. Changing it creates a new version of the
+  type, just like changing the schema or the evaluation rules. Each attestation is displayed using
+  the version of the type it was reported against, so editing a summary does not change how existing
+  attestations render.
+- Expressions are evaluated when the attestation is **displayed**, against the stored attestation
+  data. A summary never affects the compliance status of an attestation.
+- Invalid jq is rejected when the type is created, so authoring mistakes surface immediately rather
+  than as a broken detail page later.
+- An expression that returns `null`, or that fails against a particular attestation's data, renders
+  as `N/A`. The rest of the summary still renders.
+- A value that is a string beginning with `http://` or `https://` renders as a clickable link, as
+  [annotation values](#annotating-attestations) do. Other values render as text.
+- If the attestation data is a top-level array, Kosli renders one summary group per element
+  (`Summary 1:`, `Summary 2:`, and so on). Write the expressions against a single element
+  (`.code.lines.missed`) — each element is evaluated separately.
