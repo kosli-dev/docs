@@ -25,7 +25,7 @@ Before you begin, you will need access to your Identity Provider (IdP) — such 
     </Frame>
   </Step>
   <Step title="Select your identity provider">
-    Click **+ Add**, then select your IdP from the list (e.g. Okta, Azure Entra ID, Keycloak, Auth0). Select **OIDC** if there is a choice, unless you are using Okta and plan to use SCIM provisioning — in this case, select **SAML**.
+    Click **+ Add**, then select your IdP from the list (e.g. Okta, Azure Entra ID, Keycloak, Auth0). Select **OIDC** if there is a choice, unless you are using Okta and plan to use [SCIM provisioning](/administration/managing_users/automated_user_provisioning) — in this case, select **SAML**.
 
     <Frame>
       <img src="/images/administration/select-idp.png" alt="The Identity Provider (IdP) Selection step of the wizard, with a search box and cards for OKTA, Azure Entra ID, Keycloak, and Auth0." />

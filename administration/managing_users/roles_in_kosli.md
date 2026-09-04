@@ -198,6 +198,8 @@ To assign or change a user's role:
 
 <Note>
 Role changes take effect immediately. Users will see their updated permissions the next time they interact with Kosli.
+
+This procedure does not apply to users provisioned through [automated user provisioning](/administration/managing_users/automated_user_provisioning) — their roles cannot be changed in Kosli. Manage those roles through your identity provider groups instead.
 </Note>
 
 ---
