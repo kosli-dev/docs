@@ -69,7 +69,8 @@
                 "administration/managing_custom_attestation_types/overview"
               ]
             },
-            "administration/managing_tags"
+            "administration/managing_tags",
+            "administration/kosli_capture"
           ]
         },
         {

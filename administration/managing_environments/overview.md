@@ -64,6 +64,10 @@ terraform import kosli_environment.my_environment production
 The `type` in your Terraform configuration must exactly match the type of the existing environment in Kosli. A mismatch will cause import errors or misconfiguration.
 </Warning>
 
+### Automatically creating physical environments
+
+The [Kosli Capture Managed Service](/administration/kosli_capture) will automatically snapshot your infrastructure according to rules you define. Kosli Capture will create physical environments as needed.
+
 ## Managing logical environments
 
 Logical environments group physical environments into a combined view — useful for representing a full production tier across multiple runtimes.
