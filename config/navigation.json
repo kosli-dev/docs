@@ -47,14 +47,17 @@
               "pages": [
                 "administration/authentication/api_authentication_methods",
                 "administration/authentication/service_accounts",
-                "administration/authentication/api_key_rotation"
+                "administration/authentication/api_key_rotation",
+                "administration/authentication/single_sign_on",
+                "administration/authentication/magic_link"
               ]
             },
             {
               "group": "Users & roles",
               "pages": [
                 "administration/managing_users/roles_in_kosli",
-                "administration/managing_users/mapping_users_to_roles"
+                "administration/managing_users/mapping_users_to_roles",
+                "administration/managing_users/automated_user_provisioning"
               ]
             },
             {
