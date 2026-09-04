@@ -1,25 +1,31 @@
 ---
-title: "Magic Link"
+title: Magic Link
 description: "Learn about signing in to Kosli with Magic Link."
 icon: "wand-magic-sparkles"
 ---
 
-Magic Link is a method of signing into Kosli without needing to setup Single Sign On, or needing a password. When you wish to sign into Kosli, a link is emailed to you and clicking the link signs you in.
+Magic Link is a way of signing into Kosli without needing to setup [single sign-on](/administration/authentication/single_sign_on). When you want to sign in, Kosli emails you a link, and clicking that link signs you in.
 
-## Enabling Magic Link
+## Enabling magic link
 
-If you wish to use Magic Link to access Kosli using your company email, get in touch with the Customer Success team who will enable it for your email domain.
+To use magic link with your company email, email [support@kosli.com](mailto:support@kosli.com) and we'll enable it for your email domain.
 
-## Using Magic Link
+## Using magic link
 
-To signin once Magic Link has been enabled, enter your email address on our sign-in page and click the "Continue with SSO" button.
+<Steps>
+  <Step>
+    Once magic link is enabled for your domain, enter your email address on the Kosli sign-in page and select **Continue with SSO** — the same button is used for magic link sign-in.
 
-<Frame><img src="/images/administration/magic-link-enter-email.png" alt="Kosli sign-in page with an email address entered and the Continue with SSO button" /></Frame>
+    <Frame><img src="/images/administration/magic-link-enter-email.png" alt="Kosli sign-in page with an email address entered and the Continue with SSO button" /></Frame>
+  </Step>
+  <Step>
+    Kosli then sends you an email containing the link and ask you to check your inbox
 
-Kosli will then send you an email containing a link and tell you check your inbox
+    <Frame><img src="/images/administration/magic-link-check-email.png" alt="Kosli prompt telling you to check your inbox for the sign-in link" /></Frame>
+  </Step>
+  <Step>
+    The email contains a button to click; clicking this will sign you in to your Kosli account.
 
-<Frame><img src="/images/administration/magic-link-check-email.png" alt="Kosli prompt telling you to check your inbox for the sign-in link" /></Frame>
-
-The email contains a button to click; clicking this will sign you in to your Kosli account.
-
-<Frame><img src="/images/administration/magic-link-email.png" alt="Magic link email from Kosli with a button to sign in" /></Frame>
+    <Frame><img src="/images/administration/magic-link-email.png" alt="Magic link email from Kosli with a button to sign in" /></Frame>
+  </Step>
+</Step>
