@@ -69,7 +69,14 @@
                 "administration/managing_custom_attestation_types/overview"
               ]
             },
-            "administration/managing_tags"
+            "administration/managing_tags",
+            {
+              "group": "Kosli Capture",
+              "pages": [
+                "administration/kosli_capture",
+                "administration/kosli_capture_security"
+              ]
+            }
           ]
         },
         {
