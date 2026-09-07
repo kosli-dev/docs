@@ -181,21 +181,7 @@ For the full model — how job pods affect environment churn and compliance, and
 
 ## Running multiple reporters
 
-If you are considering running more than one reporter against the same cluster, the table below summarizes which setups produce meaningful snapshots and which don't.
-
-| Scenario | Supported | Explanation |
-| :--- | :---: | :--- |
-| Two orgs, separate environments, overlapping namespaces | Yes | Different environments → independent snapshots. |
-| One org, two environments, overlapping namespaces | Yes | Same as above. |
-| One org, **same environment**, two reporters with overlapping namespaces | No | Snapshots toggle between each reporter's view. No data is deleted, but diffs between consecutive snapshots become meaningless. |
-| One org, same environment, two reporters with **disjoint** namespaces | No | Each snapshot only reflects one reporter's namespaces, so diffs compare unrelated scopes. |
-
-<Warning>
-A single Kosli environment must have exactly one reporter feeding it. Snapshots are never overwritten or deleted, but if two reporters take turns updating the same environment:
-
-* Diffs between consecutive snapshots compare unrelated views of the cluster.
-* The environment history shows artifacts continuously stopping and starting as each report toggles which namespaces are visible.
-</Warning>
+A single Kosli environment must have exactly one reporter feeding it. Pointing two reporters at the same environment does not delete data, but it makes diffs between consecutive snapshots meaningless. For the supported and unsupported topologies, see [Running multiple reporters](/administration/managing_environments/kubernetes_reporting#running-multiple-reporters).
 
 ## What you've accomplished
 

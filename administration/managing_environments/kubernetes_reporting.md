@@ -68,7 +68,7 @@ The install steps in the [tutorial](/tutorials/report_k8s_envs) pass no `-n`, so
 
 The reporter filters by namespace only; there is no way to exclude pods by owner kind. Three options:
 
-* **Run jobs in their own namespace,** then either leave that namespace out of reporting or give it its own Kosli environment, so job churn does not affect the compliance of your long-running workloads. With the Helm chart, both are per-entry namespace selectors under `reporterConfig.environments`: `excludeNamespaces` on your main entry, plus a second entry whose `namespaces` is the job namespace if you want it reported separately. If your main entry already lists `namespaces` or `namespacesRegex`, drop the job namespace from that list instead — the include and exclude selectors are mutually exclusive within one entry. A second entry is not a second reporter, so the caveats in [Running multiple reporters](/tutorials/report_k8s_envs#running-multiple-reporters) do not apply. See the [chart configuration reference](/helm/k8s_reporter/configuration). With the CLI, use `--exclude-namespaces` when reporting the whole cluster, or simply omit the job namespace from `--namespaces`.
+* **Run jobs in their own namespace,** then either leave that namespace out of reporting or give it its own Kosli environment, so job churn does not affect the compliance of your long-running workloads. With the Helm chart, both are per-entry namespace selectors under `reporterConfig.environments`: `excludeNamespaces` on your main entry, plus a second entry whose `namespaces` is the job namespace if you want it reported separately. If your main entry already lists `namespaces` or `namespacesRegex`, drop the job namespace from that list instead — the include and exclude selectors are mutually exclusive within one entry. A second entry is not a second reporter, so the caveats in [Running multiple reporters](#running-multiple-reporters) do not apply. See the [chart configuration reference](/helm/k8s_reporter/configuration). With the CLI, use `--exclude-namespaces` when reporting the whole cluster, or simply omit the job namespace from `--namespaces`.
 * **Waive provenance for the job's image** if you want the job pods in the environment but not the compliance flicker. An environment policy's `artifacts.provenance.exceptions` drops the provenance requirement for artifacts matching a policy expression:
 
     ```yaml
@@ -83,3 +83,21 @@ The reporter filters by namespace only; there is no way to exclude pods by owner
 
     See [environment policy](/policy-reference/environment_policy).
 * **Attest the job to a flow instead.** Environment snapshots answer "what is running right now"; they are the wrong tool for "what ran, when, and did it succeed". Create a [flow](/getting_started/flows) for the job, [begin a trail](/getting_started/trails) for each run, and attest its outcome. Unlike snapshots, this captures every run no matter how briefly it ran.
+
+## Running multiple reporters
+
+If you are considering running more than one reporter against the same cluster, the table below summarizes which setups produce meaningful snapshots and which don't.
+
+| Scenario | Supported | Explanation |
+| :--- | :---: | :--- |
+| Two orgs, separate environments, overlapping namespaces | Yes | Different environments → independent snapshots. |
+| One org, two environments, overlapping namespaces | Yes | Same as above. |
+| One org, **same environment**, two reporters with overlapping namespaces | No | Snapshots toggle between each reporter's view. No data is deleted, but diffs between consecutive snapshots become meaningless. |
+| One org, same environment, two reporters with **disjoint** namespaces | No | Each snapshot only reflects one reporter's namespaces, so diffs compare unrelated scopes. |
+
+<Warning>
+A single Kosli environment must have exactly one reporter feeding it. Snapshots are never overwritten or deleted, but if two reporters take turns updating the same environment:
+
+* Diffs between consecutive snapshots compare unrelated views of the cluster.
+* The environment history shows artifacts continuously stopping and starting as each report toggles which namespaces are visible.
+</Warning>
