@@ -7,7 +7,7 @@ Kosli supports SCIM provisioning and deprovisioning of users. This feature allow
 
 ## Benefits
 
-User provisioning within your IdP simplifies the process of granting access to Kosli; you no longer need to explicitly invite people one-by-one. Your existing processes and procedures for onboarding team members can now be leveraged to give access to the Kosli platform.
+User provisioning within your IdP simplifies the process of granting access to Kosli; you no longer need to explicitly invite people one-by-one. Your existing processes and procedures for onboarding team members can now be leveraged to give access to Kosli.
 
 User deprovisioning within your IdP means that when your people no longer need access to Kosli, for example because they have changed roles or left your organization, their access to Kosli is revoked automatically.
 
@@ -56,8 +56,8 @@ representative.
     how to map those groups to Kosli roles.
   </Step>
   <Step title="Trigger a provisioning cycle">
-    Once your users are in the right groups and you have triggered a provisioning cycle, changes to your users
-    within the IdP are reflected in Kosli.
+    Once your users are in the right groups and you have triggered a provisioning cycle within your IdP,
+    changes to your users within the IdP are reflected in Kosli.
   </Step>
 </Steps>
 

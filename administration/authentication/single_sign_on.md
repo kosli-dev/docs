@@ -32,10 +32,7 @@ Before you begin, you will need access to your Identity Provider (IdP) — such 
     </Frame>
   </Step>
   <Step title="Configure the connection">
-    The wizard will guide you through the setup process with screenshots specific to your IdP. You'll be asked to copy and paste values between your IdP and the wizard, including:
-
-    - **Client ID** from your IdP's application registration
-    - **Client Secret** from your IdP's application registration
+    The wizard will guide you through the setup process with screenshots specific to your IdP. You'll be asked to copy and paste values between your IdP and the wizard.  For an OIDC connection these are the Client ID and Client Secret from your IdP's application registration; for a SAML connection the wizard asks for your IdP's metadata instead.
 
     <Frame>
       <img src="/images/administration/sso-setup-suite.png" alt="Step 2 of 6 of the wizard, Identity Provider Information and User Attribute Mapping, with Client ID and Client Secret fields and a screenshot showing where to find those values in Okta." />

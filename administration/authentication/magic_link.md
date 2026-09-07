@@ -13,17 +13,17 @@ To use Magic Link with your company email, email [support@kosli.com](mailto:supp
 ## Using Magic Link
 
 <Steps>
-  <Step>
+  <Step title="Enter your email address">
     Once Magic Link is enabled for your domain, enter your email address on the Kosli sign-in page and select **Continue with SSO** — the same button is used for Magic Link sign-in.
 
     <Frame><img src="/images/administration/magic-link-enter-email.png" alt="Kosli sign-in page with an email address entered and the Continue with SSO button" /></Frame>
   </Step>
-  <Step>
+  <Step title="Check your inbox">
     Kosli then sends you an email containing the link and asks you to check your inbox.
 
     <Frame><img src="/images/administration/magic-link-check-email.png" alt="Kosli prompt telling you to check your inbox for the sign-in link" /></Frame>
   </Step>
-  <Step>
+  <Step title="Click to sign in">
     The email contains a button to click; clicking this will sign you in to your Kosli account.
 
     <Frame><img src="/images/administration/magic-link-email.png" alt="Magic Link email from Kosli with a button to sign in" /></Frame>
