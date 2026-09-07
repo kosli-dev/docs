@@ -198,11 +198,12 @@ kosli get snapshot k8s-tutorial \
 
 ### Jobs and CronJobs
 
-Because reporting is driven by pod phase, a `Job` or `CronJob` pod is captured only while it is running:
+Because reporting is driven by pod phase, a `Job` or `CronJob` pod is captured only while it is running — or, if it fails, until the failed pod is cleaned up:
 
-* A job that starts and finishes between two snapshots never appears at all. Roughly, a run is captured about as often as its runtime divides into the snapshot interval — so on the Helm chart's default `*/5 * * * *` schedule a job that runs for a few seconds is almost always missed, while one that runs for most of the interval is almost always caught.
+* A job that starts and finishes between two snapshots never appears at all. As a rough guide, a run is captured about as often as its runtime divides into the snapshot interval — so on the Helm chart's default `*/5 * * * *` schedule a job that runs for a few seconds is almost always missed, while one that runs for most of the interval is almost always caught. That guide assumes the job starts at an arbitrary point in the interval. A `CronJob` whose schedule shares a period with the reporter's does not sample randomly at all: it is caught on nearly every run or on nearly none, depending on which of the two fires first.
 * A job that happens to be running when a snapshot is taken appears in that snapshot and is gone from the next one.
-* A completed job leaves no trace. `Succeeded` pods are never reported, so nothing in the environment records that the run happened.
+* A job that **fails** is the exception. `Failed` is a terminal phase, so the pod stays in it — and keeps being reported — until Kubernetes garbage-collects it: the Job's `ttlSecondsAfterFinished`, or for a `CronJob` the failed Job retained by `failedJobsHistoryLimit` (default `1`). Until then a failed run is not a flicker; it parks a stopped artifact in the environment.
+* A job that succeeds leaves no trace. `Succeeded` pods are never reported, so nothing in the environment records that the run happened.
 
 Whether a captured run shows up as environment churn depends on the image:
 
@@ -210,11 +211,17 @@ Whether a captured run shows up as environment churn depends on the image:
 * If the job runs the same image as a long-running workload, only the instance count changes. Instance-count-only differences do not create a snapshot, so the run is invisible — and because the report is discarded, the pod's owner references are not stored either. Owner references only reach Kosli for runs that produce a snapshot.
 
 <Warning>
-If the job's image was never attested to a Kosli flow, it is reported as an artifact with no provenance. Under an [environment policy](/policy-reference/environment_policy) that requires provenance, snapshots taken while a job was running are non-compliant and snapshots taken between runs are compliant — so compliance appears to flicker.
+If the job's image was never attested to a Kosli flow, it is reported as an artifact with no provenance. Under an [environment policy](/policy-reference/environment_policy) that requires provenance, snapshots taken while a job was running are non-compliant and snapshots taken between runs are compliant — so compliance appears to flicker. A failed run is worse than a flicker: the `Failed` pod is reported in every snapshot until it is garbage-collected, holding the environment non-compliant for as long as it survives.
 </Warning>
 
 <Note>
-The reporter deployed by the Helm chart is itself a `CronJob`, and at the default whole-cluster scope it is running whenever it takes a snapshot — so it appears in its own snapshots. Kosli ignores the reporter's image (`ghcr.io/kosli-dev/cli`) when deciding whether a snapshot is worth saving, so the reporter's own pods never create snapshots or start and exit events. The reporter is *not* exempt from compliance evaluation, though: under a policy that requires provenance it counts as an artifact without provenance — persistently, not intermittently. Leave the reporter's namespace out of reporting, or waive provenance for its image.
+The reporter deployed by the Helm chart is itself a `CronJob`, and at the default whole-cluster scope it is running whenever it takes a snapshot — so it appears in its own snapshots. Kosli ignores the reporter's image (`ghcr.io/kosli-dev/cli`) when deciding whether a snapshot is worth saving, so the reporter's own pods never create snapshots or start and exit events. The reporter is *not* exempt from compliance evaluation, though: under a policy that requires provenance it counts as an artifact without provenance — persistently, not intermittently. Either waive provenance for its image, or install the reporter into a namespace of its own and exclude that namespace:
+
+```shell
+helm install kosli-reporter kosli/k8s-reporter -n kosli --create-namespace -f tutorial-values.yaml
+```
+
+The install command earlier on this page has no `-n`, so the reporter shares whichever namespace you are currently in — excluding *that* would drop your own workloads from the environment along with it.
 </Note>
 
 ### Handling job workloads
