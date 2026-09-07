@@ -173,14 +173,16 @@ kosli snapshot k8s k8s-tutorial \
 
 ## What gets reported
 
-A Kubernetes snapshot is a list of **pods**, not of workload kinds. For each pod the reporter records the pod name, its namespace, its container image digests, its creation timestamp, and its owner references. The reporter has no awareness of `Deployment`, `StatefulSet`, `Job`, or `CronJob` objects — a Job pod is reported exactly like a Deployment pod.
+The reporter collects **pods**, and is blind to workload kind: it has no awareness of `Deployment`, `StatefulSet`, `Job`, or `CronJob` objects, so a Job pod is reported exactly like a Deployment pod. For each pod it records the pod name, its namespace, its container image digests, its creation timestamp, and its owner references.
+
+In the snapshot those pods are grouped under the artifact whose image they run — a snapshot is a list of artifacts, each carrying the pods running it. That is why the churn rules below turn on image digests rather than on individual pods.
 
 Only pods in certain phases are reported:
 
 | Pod phase | Reported | Notes |
 | :--- | :---: | :--- |
 | `Running` | Yes | |
-| `Failed` | Yes | Skipped, with a warning, if any of its containers has no image ID. |
+| `Failed` | Yes* | *Skipped, with a warning, if any of its containers has no image ID. |
 | `Succeeded` | No | Where a completed Job pod ends up. |
 | `Pending` | No | No image digests exist yet. |
 | `Unknown` | No | |
@@ -188,7 +190,10 @@ Only pods in certain phases are reported:
 Owner references are stored on the snapshot, so the `Job` or `CronJob` that owns a pod does reach Kosli. They are not in the table output of [`kosli get snapshot`](/client_reference/kosli_get_snapshot) — read them from the JSON:
 
 ```shell
-kosli get snapshot k8s-tutorial --output json | jq '.artifacts[].pods'
+kosli get snapshot k8s-tutorial \
+    --api-token <your-api-token-here> \
+    --org <your-kosli-org-name> \
+    --output json | jq '.artifacts[].pods'
 ```
 
 ### Jobs and CronJobs
@@ -208,11 +213,22 @@ Whether a captured run shows up as environment churn depends on the image:
 If the job's image was never attested to a Kosli flow, it is reported as an artifact with no provenance. Under an [environment policy](/policy-reference/environment_policy) that requires provenance, snapshots taken while a job was running are non-compliant and snapshots taken between runs are compliant — so compliance appears to flicker.
 </Warning>
 
-### Keep job pods out of an environment
+### Handling job workloads
 
-The reporter filters by namespace only; there is no way to exclude pods by owner kind. Two options:
+The reporter filters by namespace only; there is no way to exclude pods by owner kind. Three options:
 
-* **Run jobs in their own namespace.** Then either exclude that namespace with `--exclude-namespaces`, or report it to a separate Kosli environment so job churn does not affect the compliance of your long-running workloads.
+* **Run jobs in their own namespace,** then either leave that namespace out of reporting or give it its own Kosli environment, so job churn does not affect the compliance of your long-running workloads. With the Helm chart, both are per-entry namespace selectors under `reporterConfig.environments`: `excludeNamespaces` on your main entry, plus a second entry whose `namespaces` is the job namespace if you want it reported separately. A second entry is not a second reporter, so the caveats in [Running multiple reporters](#running-multiple-reporters) do not apply. See the [chart configuration reference](/helm/k8s_reporter/configuration). With the CLI, use `--exclude-namespaces`.
+* **Waive provenance for the job's image** if you want the job pods in the environment but not the compliance flicker. An environment policy's `artifacts.provenance.exceptions` drops the provenance requirement for artifacts matching a policy expression:
+
+    ```yaml
+    artifacts:
+      provenance:
+        required: true
+        exceptions:
+          - if: ${{ matches(artifact.name, "^my-job:.*") }}
+    ```
+
+    See [environment policy](/policy-reference/environment_policy).
 * **Attest the job to a flow instead.** Environment snapshots answer "what is running right now"; they are the wrong tool for "what ran, when, and did it succeed". Create a [flow](/getting_started/flows) for the job, [begin a trail](/getting_started/trails) for each run, and attest its outcome. Unlike snapshots, this captures every run no matter how briefly it ran.
 
 ## Running multiple reporters
