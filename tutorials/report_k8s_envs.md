@@ -202,7 +202,7 @@ Because reporting is driven by pod phase, a `Job` or `CronJob` pod is captured o
 
 * A job that starts and finishes between two snapshots never appears at all. As a rough guide, a run is captured about as often as its runtime divides into the snapshot interval — so on the Helm chart's default `*/5 * * * *` schedule a job that runs for a few seconds is almost always missed, while one that runs for most of the interval is almost always caught. That guide assumes the job starts at an arbitrary point in the interval. A `CronJob` whose schedule shares a period with the reporter's does not sample randomly at all: it is caught on nearly every run or on nearly none, depending on which of the two fires first.
 * A job that happens to be running when a snapshot is taken appears in that snapshot and is gone from the next one.
-* A job that **fails** is the exception. `Failed` is a terminal phase, so the pod stays in it — and keeps being reported — until Kubernetes garbage-collects it: the Job's `ttlSecondsAfterFinished`, or for a `CronJob` the failed Job retained by `failedJobsHistoryLimit` (default `1`). Until then a failed run is not a flicker; it parks a stopped artifact in the environment.
+* A job that **fails** is the exception. `Failed` is a terminal phase, so the pod stays in it — and keeps being reported — for as long as it exists, and nothing removes it by default. `ttlSecondsAfterFinished` is unset unless you set it, so a standalone Job's failed pods survive until the Job is deleted; a `CronJob` always retains its most recent failed Job (`failedJobsHistoryLimit`, default `1`). A Job with `restartPolicy: Never` that keeps failing leaves one `Failed` pod per attempt, up to `backoffLimit` (default `6`), and each is reported. Until they are gone, a failed run is not a flicker: Kosli keeps showing the dead pods' artifact as running in the environment.
 * A job that succeeds leaves no trace. `Succeeded` pods are never reported, so nothing in the environment records that the run happened.
 
 Whether a captured run shows up as environment churn depends on the image:
@@ -215,13 +215,17 @@ If the job's image was never attested to a Kosli flow, it is reported as an arti
 </Warning>
 
 <Note>
-The reporter deployed by the Helm chart is itself a `CronJob`, and at the default whole-cluster scope it is running whenever it takes a snapshot — so it appears in its own snapshots. Kosli ignores the reporter's image (`ghcr.io/kosli-dev/cli`) when deciding whether a snapshot is worth saving, so the reporter's own pods never create snapshots or start and exit events. The reporter is *not* exempt from compliance evaluation, though: under a policy that requires provenance it counts as an artifact without provenance — persistently, not intermittently. Either waive provenance for its image, or install the reporter into a namespace of its own and exclude that namespace:
+The reporter deployed by the Helm chart is itself a `CronJob`, and at the default whole-cluster scope it is running whenever it takes a snapshot — so it appears in its own snapshots. Kosli ignores the reporter's image (`ghcr.io/kosli-dev/cli`) when deciding whether a snapshot is worth saving, so the reporter's own pods never create snapshots or start and exit events. The match is on the image name, so if you override `image.repository` to mirror the reporter image into your own registry, its pods stop being ignored and each run shows up as an artifact starting and exiting. The reporter is *not* exempt from compliance evaluation, though: under a policy that requires provenance it counts as an artifact without provenance — persistently, not intermittently. Either waive provenance for its image, or install the reporter into a namespace of its own and exclude that namespace — subject to the same include/exclude constraint as the [first option below](#handling-job-workloads).
+
+The API token secret is namespace-scoped, so a dedicated namespace needs its own copy of it. Create both before installing:
 
 ```shell
-helm install kosli-reporter kosli/k8s-reporter -n kosli --create-namespace -f tutorial-values.yaml
+kubectl create namespace kosli
+kubectl create secret generic kosli-api-token -n kosli --from-literal=apikey=<your-kosli-api-token>
+helm install kosli-reporter kosli/k8s-reporter -n kosli -f tutorial-values.yaml
 ```
 
-The install command earlier on this page has no `-n`, so the reporter shares whichever namespace you are currently in — excluding *that* would drop your own workloads from the environment along with it.
+The commands earlier on this page pass no `-n`, so they put the secret and the reporter in whichever namespace you are currently in — usually alongside the workloads you came here to report. Excluding *that* namespace would drop those workloads from the environment too.
 </Note>
 
 ### Handling job workloads
