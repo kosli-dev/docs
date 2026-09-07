@@ -28,10 +28,6 @@ rss: true
 
 - **Clearer help text** — reworded the help for [`kosli attest jira`](/client_reference/kosli_attest_jira), [`kosli attest sonar`](/client_reference/kosli_attest_sonar), and [`kosli snapshot azure`](/client_reference/kosli_snapshot_azure), and fixed formatting glitches in the generated CLI reference.
 
-## Bug fixes
-
-- **Docker image reports the correct version** — the published Docker image now takes its version from the release itself instead of git tags, so `kosli version` inside the container shows the right release.
-
 [View on GitHub](https://github.com/kosli-dev/cli/releases/tag/v2.39.1)
 
 </Update>
@@ -50,7 +46,7 @@ rss: true
 
 ## Bug fixes
 
-- **Docker images report their real version** — published Docker images now report the actual CLI version and tree state instead of a placeholder.
+- **`kosli version` reports the real release inside published Docker images** — published images identified themselves as `dev+<commit-sha>` instead of the release tag they were built from, so `kosli version` in a container could not tell you which release was running. Images from v2.39.0 onward report their release tag. Published images had carried the wrong version since at least May 2024.
 
 [View on GitHub](https://github.com/kosli-dev/cli/releases/tag/v2.39.0)
 
