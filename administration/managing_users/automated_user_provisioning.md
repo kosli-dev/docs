@@ -15,7 +15,14 @@ User deprovisioning within your IdP means that when your people no longer need a
 
 To get started with SCIM provisioning, the team managing your [single sign-on](/administration/authentication/single_sign_on) and IdP will need to configure the connection between your IdP and Kosli's auth provider. Different IdPs require different configuration, so Kosli's Customer Success team will provide you a link to the setup wizard with step-by-step instructions, which you can pass on to the relevant team.
 
-On the first screen, select the **SCIM Configuration** box to get started (note that you do not need to make any changes to the existing SSO Configuration):
+<Note>
+Adding SCIM does not normally require any change to your existing SSO connection. The exception is Okta over
+OIDC: Okta's SCIM integration only works with a SAML connection, so an Okta OIDC connection has to be recreated
+using SAML before SCIM can be enabled. If you are not sure which your IdP uses, ask your Kosli Customer Success
+representative.
+</Note>
+
+On the first screen, select the **SCIM Configuration** box to get started:
 
 <Frame>
   <img src="/images/administration/scim-setup-wizard.png" alt="Start page for the SSO and SCIM setup suite wizard" />
