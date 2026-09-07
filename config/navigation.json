@@ -70,7 +70,13 @@
               ]
             },
             "administration/managing_tags",
-            "administration/kosli_capture"
+            {
+              "group": "Kosli Capture",
+              "pages": [
+                "administration/kosli_capture",
+                "administration/kosli_capture_security"
+              ]
+            }
           ]
         },
         {
