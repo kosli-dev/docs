@@ -171,6 +171,50 @@ kosli snapshot k8s k8s-tutorial \
 </Tab>
 </Tabs>
 
+## What gets reported
+
+A Kubernetes snapshot is a list of **pods**, not of workload kinds. For each pod the reporter records the pod name, its namespace, its container image digests, its creation timestamp, and its owner references. The reporter has no awareness of `Deployment`, `StatefulSet`, `Job`, or `CronJob` objects — a Job pod is reported exactly like a Deployment pod.
+
+Only pods in certain phases are reported:
+
+| Pod phase | Reported | Notes |
+| :--- | :---: | :--- |
+| `Running` | Yes | |
+| `Failed` | Yes | Skipped, with a warning, if any of its containers has no image ID. |
+| `Succeeded` | No | Where a completed Job pod ends up. |
+| `Pending` | No | No image digests exist yet. |
+| `Unknown` | No | |
+
+Owner references are stored on the snapshot, so the `Job` or `CronJob` that owns a pod does reach Kosli. They are not in the table output of [`kosli get snapshot`](/client_reference/kosli_get_snapshot) — read them from the JSON:
+
+```shell
+kosli get snapshot k8s-tutorial --output json | jq '.artifacts[].pods'
+```
+
+### Jobs and CronJobs
+
+Because reporting is driven by pod phase, a `Job` or `CronJob` pod is captured only while it is running:
+
+* A job that starts and finishes between two snapshots never appears at all. With the Helm chart's default `*/5 * * * *` schedule, a job that completes in under five minutes is likely to be missed.
+* A job that happens to be running when a snapshot is taken appears in that snapshot and is gone from the next one.
+* A completed job leaves no trace. `Succeeded` pods are never reported, so nothing in the environment records that the run happened.
+
+Whether a captured run shows up as environment churn depends on the image:
+
+* If the job runs an image that nothing else in the environment runs, each captured run produces one snapshot where the artifact started and a later one where it exited.
+* If the job runs the same image as a long-running workload, only the instance count changes. Instance-count-only differences do not create a snapshot, so the run is invisible.
+
+<Warning>
+If the job's image was never attested to a Kosli flow, it is reported as an artifact with no provenance. Under an [environment policy](/policy-reference/environment_policy) that requires provenance, snapshots taken while a job was running are non-compliant and snapshots taken between runs are compliant — so compliance appears to flicker.
+</Warning>
+
+### Keep job pods out of an environment
+
+The reporter filters by namespace only; there is no way to exclude pods by owner kind. Two options:
+
+* **Run jobs in their own namespace.** Then either exclude that namespace with `--exclude-namespaces`, or report it to a separate Kosli environment so job churn does not affect the compliance of your long-running workloads.
+* **Attest the job to a flow instead.** Environment snapshots answer "what is running right now"; they are the wrong tool for "what ran, when, and did it succeed". Create a [flow](/getting_started/flows) for the job, [begin a trail](/getting_started/trails) for each run, and attest its outcome. Unlike snapshots, this captures every run no matter how briefly it ran.
+
 ## Running multiple reporters
 
 If you are considering running more than one reporter against the same cluster, the table below summarizes which setups produce meaningful snapshots and which don't.
