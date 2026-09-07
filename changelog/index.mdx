@@ -4,6 +4,16 @@ description: "Release notes for Kosli products."
 rss: true
 ---
 
+<Update label="September 1, 2026" description="v2.39.2" tags={["CLI"]}>
+
+## Updates
+
+- **Help text fixes** — corrected typos in the help text for [`kosli attest sonar`](/client_reference/kosli_attest_sonar) and its `--sonar-working-dir` flag description.
+
+[View on GitHub](https://github.com/kosli-dev/cli/releases/tag/v2.39.2)
+
+</Update>
+
 <Update label="August 31, 2026" description="" tags={["Platform"]}>
 
 ## Bug fixes
@@ -17,6 +27,10 @@ rss: true
 ## Updates
 
 - **Clearer help text** — reworded the help for [`kosli attest jira`](/client_reference/kosli_attest_jira), [`kosli attest sonar`](/client_reference/kosli_attest_sonar), and [`kosli snapshot azure`](/client_reference/kosli_snapshot_azure), and fixed formatting glitches in the generated CLI reference.
+
+## Bug fixes
+
+- **Docker image reports the correct version** — the published Docker image now takes its version from the release itself instead of git tags, so `kosli version` inside the container shows the right release.
 
 [View on GitHub](https://github.com/kosli-dev/cli/releases/tag/v2.39.1)
 
@@ -33,6 +47,10 @@ rss: true
 - **`kosli attest jira` reports rejected credentials as such** — when Jira does not accept the credentials (for example an expired API token), the CLI prints a warning naming the username and reports the affected issues as "not confirmed" instead of silently as missing. The `--assert` failure message distinguishes missing, unconfirmed, and mixed cases. See the [`kosli attest jira` reference](/client_reference/kosli_attest_jira).
 - **`--jira-project-key` tolerates whitespace** — comma-separated lists like `"ABC, DEF"` are now accepted; each key is trimmed before validation, and invalid keys are quoted in the error message.
 - **`.kosli_ignore` documented in command help** — the help for `kosli allow artifact`, `kosli assert artifact`, and every `kosli attest` command now describes `.kosli_ignore` support when fingerprinting directories.
+
+## Bug fixes
+
+- **Docker images report their real version** — published Docker images now report the actual CLI version and tree state instead of a placeholder.
 
 [View on GitHub](https://github.com/kosli-dev/cli/releases/tag/v2.39.0)
 
