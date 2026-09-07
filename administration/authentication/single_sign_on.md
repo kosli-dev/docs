@@ -1,14 +1,14 @@
 ---
-title: Single Sign On
-description: "Learn about configuring Single Sign On with Kosli"
+title: Single sign-on
+description: "Learn about configuring single sign-on with Kosli"
 icon: "key"
 ---
 
-Kosli supports signing-in using your identity provider, via Single Sign On (SSO).
+Kosli supports signing in using your identity provider, via single sign-on (SSO). If you don't use an identity provider, [Magic Link](/administration/authentication/magic_link) is an alternative way to sign in.
 
-## Enabling Single Sign On
+## Enabling single sign-on
 
-When you are ready for your organization to access Kosli using Single Sign On, your IT team will need to configure a new SSO connection. It's done through a self-service setup wizard to make this as straightforward as possible.
+When you are ready for your organization to access Kosli using single sign-on, your IT team will need to configure a new SSO connection. It's done through a self-service setup wizard to make this as straightforward as possible.
 
 Your Kosli Customer Success representative will provide you with a custom direct link to your personalized SSO setup wizard.
 
@@ -25,7 +25,7 @@ Before you begin, you will need access to your Identity Provider (IdP) — such 
     </Frame>
   </Step>
   <Step title="Select your identity provider">
-    Click **+ Add**, then select your IdP from the list (e.g. Okta, Azure Entra ID, Keycloak, Auth0). Select **OIDC** if there is a choice, unless you are using Okta and plan to use [SCIM provisioning](/administration/managing_users/automated_user_provisioning) — in this case, select **SAML**.
+    Click **+ Add**, then select your IdP from the list (for example, Okta, Azure Entra ID, Keycloak, or Auth0). Select **OIDC** if there is a choice, unless you are using Okta and plan to use [SCIM provisioning](/administration/managing_users/automated_user_provisioning) — in this case, select **SAML**.
 
     <Frame>
       <img src="/images/administration/select-idp.png" alt="The Identity Provider (IdP) Selection step of the wizard, with a search box and cards for OKTA, Azure Entra ID, Keycloak, and Auth0." />

@@ -3,13 +3,13 @@ title: Automated user provisioning
 description: "Learn about configuring automated user provisioning (SCIM) with Kosli."
 ---
 
-Kosli supports SCIM provisioning and deprovisioning of users. This feature allows users to be added to Kosli by assigning them to the Kosli application within your Identity Provider (IdP). This section explains how to get started.
+Kosli supports SCIM provisioning and deprovisioning of users. This feature allows users to be added to Kosli by assigning them to the Kosli application within your Identity Provider (IdP). This page explains how to get started.
 
 ## Benefits
 
 User provisioning within your IdP simplifies the process of granting access to Kosli; you no longer need to explicitly invite people one-by-one. Your existing processes and procedures for onboarding team members can now be leveraged to give access to the Kosli platform.
 
-User deprovisioning within your IdP means that when your people no longer need access to Kosli, for example because they have changed roles or left your organization, they are automatically revoked from Kosli.
+User deprovisioning within your IdP means that when your people no longer need access to Kosli, for example because they have changed roles or left your organization, their access to Kosli is revoked automatically.
 
 ## Setup
 
@@ -35,7 +35,7 @@ People who already have access to Kosli via SSO will retain their access, but wi
 
 ## Roles for new and existing users
 
-Kosli now allows handling role assignment through your IdP, so that users' [roles within Kosli](/administration/managing_users/roles_in_kosli) can be managed by your onboarding and IT teams, without requiring admin access to Kosli.
+Kosli supports role assignment through your IdP, so that users' [roles within Kosli](/administration/managing_users/roles_in_kosli) can be managed by your onboarding and IT teams, without requiring admin access to Kosli.
 
 You will need to tell us which of your Kosli organizations you wish to have SCIM enabled for; we will then create the necessary roles within our auth provider. Each organization will have four roles, with the names `kosli-<org-name>-<role>`, to correspond to the available roles in Kosli (admin, member, snapshotter, reader).
 
