@@ -53,7 +53,15 @@ Once changes within your IdP have been synced, they are typically reflected in K
 
 ## Existing Kosli users
 
-People who already have access to Kosli via SSO will retain their access, but will be automatically managed by SCIM once they have been provisioned through the IdP.
+People who already have access to Kosli via SSO keep that access. Enabling SCIM does not, by itself, change
+anyone's roles or organization memberships — nothing in Kosli moves until your IdP sends a change.
+
+From then on, your IdP drives membership. Once a user has been provisioned through SCIM, the groups they belong
+to in your IdP determine their organizations and roles in Kosli, replacing whatever they had before.
+
+That makes the first sync worth planning. A full or forced sync in your IdP — however it is labeled there —
+provisions every assigned user at once, not only the ones you have just changed, so make sure your groups and
+[role mappings](#map-your-idp-groups-to-kosli-roles) are correct before you trigger one.
 
 ## Roles for new and existing users
 
@@ -74,5 +82,6 @@ Within the **SSO Configuration** wizard (not the SCIM wizard this time), go to t
 When you have finished the group mapping, you can click through to the **Testing** page and save the configuration.
 
 <Note>
-Once a user has been provisioned through SCIM, the IdP is authoritative for that user: their roles can no longer be changed in Kosli, and provisioning replaces any organization memberships and roles they already had.
+Once a user has been provisioned through SCIM, your IdP is authoritative for that user: their roles can no
+longer be changed in Kosli, so every later role change has to be made through their IdP group membership.
 </Note>
