@@ -200,27 +200,33 @@ kosli get snapshot k8s-tutorial \
 
 Because reporting is driven by pod phase, a `Job` or `CronJob` pod is captured only while it is running:
 
-* A job that starts and finishes between two snapshots never appears at all. With the Helm chart's default `*/5 * * * *` schedule, a job that completes in under five minutes is likely to be missed.
+* A job that starts and finishes between two snapshots never appears at all. Roughly, a run is captured about as often as its runtime divides into the snapshot interval — so on the Helm chart's default `*/5 * * * *` schedule a job that runs for a few seconds is almost always missed, while one that runs for most of the interval is almost always caught.
 * A job that happens to be running when a snapshot is taken appears in that snapshot and is gone from the next one.
 * A completed job leaves no trace. `Succeeded` pods are never reported, so nothing in the environment records that the run happened.
 
 Whether a captured run shows up as environment churn depends on the image:
 
 * If the job runs an image that nothing else in the environment runs, each captured run produces one snapshot where the artifact started and a later one where it exited.
-* If the job runs the same image as a long-running workload, only the instance count changes. Instance-count-only differences do not create a snapshot, so the run is invisible.
+* If the job runs the same image as a long-running workload, only the instance count changes. Instance-count-only differences do not create a snapshot, so the run is invisible — and because the report is discarded, the pod's owner references are not stored either. Owner references only reach Kosli for runs that produce a snapshot.
 
 <Warning>
 If the job's image was never attested to a Kosli flow, it is reported as an artifact with no provenance. Under an [environment policy](/policy-reference/environment_policy) that requires provenance, snapshots taken while a job was running are non-compliant and snapshots taken between runs are compliant — so compliance appears to flicker.
 </Warning>
 
+<Note>
+The reporter deployed by the Helm chart is itself a `CronJob`, and at the default whole-cluster scope it is running whenever it takes a snapshot — so it appears in its own snapshots. Kosli ignores the reporter's image (`ghcr.io/kosli-dev/cli`) when deciding whether a snapshot is worth saving, so the reporter's own pods never create snapshots or start and exit events. The reporter is *not* exempt from compliance evaluation, though: under a policy that requires provenance it counts as an artifact without provenance — persistently, not intermittently. Leave the reporter's namespace out of reporting, or waive provenance for its image.
+</Note>
+
 ### Handling job workloads
 
 The reporter filters by namespace only; there is no way to exclude pods by owner kind. Three options:
 
-* **Run jobs in their own namespace,** then either leave that namespace out of reporting or give it its own Kosli environment, so job churn does not affect the compliance of your long-running workloads. With the Helm chart, both are per-entry namespace selectors under `reporterConfig.environments`: `excludeNamespaces` on your main entry, plus a second entry whose `namespaces` is the job namespace if you want it reported separately. A second entry is not a second reporter, so the caveats in [Running multiple reporters](#running-multiple-reporters) do not apply. See the [chart configuration reference](/helm/k8s_reporter/configuration). With the CLI, use `--exclude-namespaces`.
+* **Run jobs in their own namespace,** then either leave that namespace out of reporting or give it its own Kosli environment, so job churn does not affect the compliance of your long-running workloads. With the Helm chart, both are per-entry namespace selectors under `reporterConfig.environments`: `excludeNamespaces` on your main entry, plus a second entry whose `namespaces` is the job namespace if you want it reported separately. If your main entry already lists `namespaces` or `namespacesRegex`, drop the job namespace from that list instead — the include and exclude selectors are mutually exclusive within one entry. A second entry is not a second reporter, so the caveats in [Running multiple reporters](#running-multiple-reporters) do not apply. See the [chart configuration reference](/helm/k8s_reporter/configuration). With the CLI, use `--exclude-namespaces` when reporting the whole cluster, or simply omit the job namespace from `--namespaces`.
 * **Waive provenance for the job's image** if you want the job pods in the environment but not the compliance flicker. An environment policy's `artifacts.provenance.exceptions` drops the provenance requirement for artifacts matching a policy expression:
 
     ```yaml
+    _schema: https://docs.kosli.com/schemas/policy/v1
+
     artifacts:
       provenance:
         required: true
