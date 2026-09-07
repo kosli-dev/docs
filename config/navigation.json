@@ -11,6 +11,7 @@
             "understand_kosli/risks",
             "understand_kosli/controls",
             "understand_kosli/how_kosli_works",
+            "understand_kosli/kubernetes_snapshots",
             "understand_kosli/glossary",
             "understand_kosli/ai_docs_access"
           ]
