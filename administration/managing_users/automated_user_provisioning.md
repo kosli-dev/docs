@@ -11,9 +11,24 @@ User provisioning within your IdP simplifies the process of granting access to K
 
 User deprovisioning within your IdP means that when your people no longer need access to Kosli, for example because they have changed roles or left your organization, their access to Kosli is revoked automatically.
 
+## Prerequisites
+
+Before configuring SCIM, make sure that:
+
+- **[Single sign-on](/administration/authentication/single_sign_on) is already configured.** SCIM builds on your
+  existing SSO connection, and IdP groups are mapped to Kosli roles in the SSO part of the same wizard.
+- **SCIM is enabled for your Kosli organizations.** Tell your Kosli Customer Success representative which
+  organizations you want SCIM for, so that the matching roles can be created — see
+  [Roles for new and existing users](#roles-for-new-and-existing-users) below.
+- **You have a link to the setup wizard.** Your Customer Success representative provides one with instructions
+  for your IdP, which you can pass on to the team that will do the work.
+- **That team can administer your IdP.** They need permissions to create or modify application registrations,
+  and to manage the groups you map to Kosli roles.
+
 ## Setup
 
-To get started with SCIM provisioning, the team managing your [single sign-on](/administration/authentication/single_sign_on) and IdP will need to configure the connection between your IdP and Kosli's auth provider. Different IdPs require different configuration, so Kosli's Customer Success team will provide you a link to the setup wizard with step-by-step instructions, which you can pass on to the relevant team.
+The team that manages your IdP configures the connection between your IdP and Kosli's auth provider. Because
+different IdPs need different configuration, the wizard gives step-by-step instructions specific to yours.
 
 <Note>
 Adding SCIM does not normally require any change to your existing SSO connection. The exception is Okta over
