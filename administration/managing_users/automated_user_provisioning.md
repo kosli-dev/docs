@@ -63,7 +63,7 @@ representative.
 
 ## Timeliness
 
-Once changes within your IdP have been synced, they are typically reflected in Kosli within five minutes.
+How quickly a change reaches Kosli depends on your IdP's provisioning schedule, which you configure there — some IdPs sync on a fixed interval rather than immediately. Once your IdP has sent the change, it is typically reflected in Kosli within five minutes. To apply a change straight away, trigger a sync in your IdP.
 
 ## Existing Kosli users
 
