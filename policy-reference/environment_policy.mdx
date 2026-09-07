@@ -73,6 +73,8 @@ An environment policy is a YAML file that declares compliance requirements for a
           A [policy expression](#policy-expressions). When present, this attestation is only required when the expression evaluates to `true`.
         </ParamField>
       </Expandable>
+
+      A rule is satisfied by the newest matching attestation, including overrides. Overriding a non-compliant attestation can therefore bring an environment back to compliant, and overriding a compliant one down to non-compliant makes the environment non-compliant.
     </ParamField>
   </Expandable>
 </ParamField>
@@ -151,6 +153,21 @@ Parentheses control precedence: `${{ flow.name == 'prod' and (flow.tags.team == 
 |----------|-------------|---------|
 | `exists(arg)` | Returns `true` if `arg` is not null. | `${{ exists(flow) }}` |
 | `matches(input, regex)` | Returns `true` if `input` matches the regular expression. | `${{ matches(artifact.name, "^datadog:.*") }}` |
+
+### Missing values
+
+Every operator and function evaluates to `false` when either operand is missing. This holds for `==`, `!=`, `in`, `exists()`, `matches()`, and the ordering comparisons `<`, `>`, `<=`, and `>=`.
+
+Missing values are common rather than exceptional:
+
+- `flow` is empty for any artifact reported without provenance.
+- `flow.tags.<key>` is empty for a tag the flow does not have.
+
+A missing value never matches, so negating a comparison does not make it match either: for an artifact with no provenance, both `${{ matches(flow.name, "^snyk-.*") }}` and `${{ not matches(flow.name, "^snyk-.*") }}` evaluate to `false`. To branch on presence, test it explicitly with `exists()`:
+
+```yaml
+if: ${{ not exists(flow) or not matches(flow.name, "^snyk-.*") }}
+```
 
 ## Constraints
 
