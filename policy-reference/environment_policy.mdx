@@ -60,6 +60,8 @@ An environment policy is a YAML file that declares compliance requirements for a
     <ParamField path="artifacts.attestations" type="array" default="[]">
       List of attestations every artifact must have. Each element is a required-attestation rule.
 
+      A rule is evaluated against the newest attestation whose `name` and `type` match the rule, including override attestations — an override supersedes the status of the attestation it overrides. Overriding a non-compliant attestation can therefore bring an environment back to compliant, and overriding a compliant one down to non-compliant makes the environment non-compliant.
+
       <Expandable title="attestation rule properties">
         <ParamField path="artifacts.attestations[].type" type="string" required>
           The [attestation type](#attestation-types) to require. Cannot be `*` when `name` is also `*`.
@@ -73,8 +75,6 @@ An environment policy is a YAML file that declares compliance requirements for a
           A [policy expression](#policy-expressions). When present, this attestation is only required when the expression evaluates to `true`.
         </ParamField>
       </Expandable>
-
-      A rule is satisfied by the newest matching attestation, including overrides. Overriding a non-compliant attestation can therefore bring an environment back to compliant, and overriding a compliant one down to non-compliant makes the environment non-compliant.
     </ParamField>
   </Expandable>
 </ParamField>
@@ -156,18 +156,14 @@ Parentheses control precedence: `${{ flow.name == 'prod' and (flow.tags.team == 
 
 ### Missing values
 
-Every operator and function evaluates to `false` when either operand is missing. This holds for `==`, `!=`, `in`, `exists()`, `matches()`, and the ordering comparisons `<`, `>`, `<=`, and `>=`.
+A value is missing when the context does not supply it. This is common rather than exceptional:
 
-Missing values are common rather than exceptional:
+- `flow` is missing for any artifact reported without provenance.
+- `flow.tags.<key>` is missing for a tag the flow does not have.
 
-- `flow` is empty for any artifact reported without provenance.
-- `flow.tags.<key>` is empty for a tag the flow does not have.
+The comparison operators (`==`, `!=`, `<`, `>`, `<=`, `>=`), the membership operator `in`, and the functions `exists()` and `matches()` all evaluate to `false` when either operand is missing. A missing operand is not an error — the comparison is simply not satisfied.
 
-A missing value never matches, so negating a comparison does not make it match either: for an artifact with no provenance, both `${{ matches(flow.name, "^snyk-.*") }}` and `${{ not matches(flow.name, "^snyk-.*") }}` evaluate to `false`. To branch on presence, test it explicitly with `exists()`:
-
-```yaml
-if: ${{ not exists(flow) or not matches(flow.name, "^snyk-.*") }}
-```
+To branch on whether a value is present at all, test it with `exists()` rather than relying on a comparison against it.
 
 ## Constraints
 
