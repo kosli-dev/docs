@@ -6,14 +6,6 @@ rss: true
 
 <Update label="August 31, 2026" description="" tags={["Platform"]}>
 
-## Breaking changes
-
-- **SCIM orgs: user management moves to your IdP** — in an organization whose user lifecycle is managed by SCIM, members owned by the IdP can no longer be invited, re-invited, role-changed, or removed through Kosli. Such edits used to appear to succeed, only to be silently overwritten by the next sync, leaving Audit Log entries attributing the change to the wrong actor. Service accounts are unaffected and stay editable throughout.
-
-## Updates
-
-- **Opt back in to managing non-SCIM users** — an admin in a SCIM-managed organization can manage the remaining (non-IdP) users via a toggle on the user management page. With the opt-in off, the UI permits no invitations or role changes.
-
 ## Bug fixes
 
 - **Attestations filter no longer breaks infinite scroll** — applying a filter on the org attestations list while a page request was still in flight could stop pagination for the rest of the session: the first page of filtered results rendered and nothing more, with no error. Filter and page requests are now serialized.
