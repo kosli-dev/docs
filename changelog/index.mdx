@@ -46,7 +46,7 @@ rss: true
 
 ## Bug fixes
 
-- **`kosli version` reports the real release inside published Docker images** — published images identified themselves as `dev+<commit-sha>` instead of the release tag they were built from, so `kosli version` in a container could not tell you which release was running. Images from v2.39.0 onward report their release tag. Published images had carried the wrong version since at least May 2024.
+- **`kosli version` reports the real release inside published Docker images** — published images identified themselves as `dev+<commit-sha>` instead of the release tag they were built from, so `kosli version` in a container could not tell you which release was running. Any image published before v2.39.0 is affected; images from v2.39.0 onward report their release tag.
 
 [View on GitHub](https://github.com/kosli-dev/cli/releases/tag/v2.39.0)
 
