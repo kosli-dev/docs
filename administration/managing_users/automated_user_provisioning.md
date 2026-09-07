@@ -37,15 +37,29 @@ using SAML before SCIM can be enabled. If you are not sure which your IdP uses, 
 representative.
 </Note>
 
-On the first screen, select the **SCIM Configuration** box to get started:
+<Steps>
+  <Step title="Open the wizard and select SCIM Configuration">
+    Open the link from your Customer Success representative and select the **SCIM Configuration** box on the
+    first screen.
 
-<Frame>
-  <img src="/images/administration/scim-setup-wizard.png" alt="Start page for the SSO and SCIM setup suite wizard" />
-</Frame>
-
-The setup wizard then has a step-by-step guide, with screenshots, showing how to set up and configure the application.
-
-When that is all done, and you have added your users to the relevant groups inside your IdP and triggered a provisioning cycle, any changes to your users within the IdP will be reflected within Kosli.
+    <Frame>
+      <img src="/images/administration/scim-setup-wizard.png" alt="Start page for the SSO and SCIM setup suite wizard" />
+    </Frame>
+  </Step>
+  <Step title="Follow the wizard">
+    The wizard then guides you through setting up and configuring the application, with screenshots at each
+    stage.
+  </Step>
+  <Step title="Create your IdP groups and add your users">
+    Create a group in your IdP for each Kosli organization and role you need, then add your users to them. See
+    [Roles for new and existing users](#roles-for-new-and-existing-users) for the group naming scheme, and for
+    how to map those groups to Kosli roles.
+  </Step>
+  <Step title="Trigger a provisioning cycle">
+    Once your users are in the right groups and you have triggered a provisioning cycle, changes to your users
+    within the IdP are reflected in Kosli.
+  </Step>
+</Steps>
 
 ## Timeliness
 
@@ -73,13 +87,22 @@ Within your IdP you will need to create a group for each of these roles. You wil
 
 ### Map your IdP groups to Kosli roles
 
-Within the **SSO Configuration** wizard (not the SCIM wizard this time), go to the **Group Attribute Mapping** tab and follow the instructions. Ensure you correctly map each of your IdP groups to the corresponding role.
+<Steps>
+  <Step title="Switch to the SSO Configuration wizard">
+    Group mapping is done in **SSO Configuration**, not in the SCIM configuration you used to set up
+    provisioning. Open **SSO Configuration** and go to the **Group Attribute Mapping** tab.
+  </Step>
+  <Step title="Map each group to its Kosli role">
+    Follow the instructions on the tab, mapping each of your IdP groups to the corresponding role.
 
-<Frame>
-  <img src="/images/administration/scim-group-role-mapping.png" alt="Section in the SSO Setup Suite Wizard showing how to configure mapping of IdP groups to Kosli roles" />
-</Frame>
-
-When you have finished the group mapping, you can click through to the **Testing** page and save the configuration.
+    <Frame>
+      <img src="/images/administration/scim-group-role-mapping.png" alt="Section in the SSO Setup Suite Wizard showing how to configure mapping of IdP groups to Kosli roles" />
+    </Frame>
+  </Step>
+  <Step title="Save the configuration">
+    Click through to the **Testing** page and save the configuration.
+  </Step>
+</Steps>
 
 <Note>
 Once a user has been provisioned through SCIM, your IdP is authoritative for that user: their roles can no
