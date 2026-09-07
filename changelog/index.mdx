@@ -4,6 +4,16 @@ description: "Release notes for Kosli products."
 rss: true
 ---
 
+<Update label="September 1, 2026" description="v2.39.2" tags={["CLI"]}>
+
+## Updates
+
+- **Help text fixes** — corrected typos in the help text for [`kosli attest sonar`](/client_reference/kosli_attest_sonar) and its `--sonar-working-dir` flag description.
+
+[View on GitHub](https://github.com/kosli-dev/cli/releases/tag/v2.39.2)
+
+</Update>
+
 <Update label="August 31, 2026" description="" tags={["Platform"]}>
 
 ## Bug fixes
@@ -33,6 +43,10 @@ rss: true
 - **`kosli attest jira` reports rejected credentials as such** — when Jira does not accept the credentials (for example an expired API token), the CLI prints a warning naming the username and reports the affected issues as "not confirmed" instead of silently as missing. The `--assert` failure message distinguishes missing, unconfirmed, and mixed cases. See the [`kosli attest jira` reference](/client_reference/kosli_attest_jira).
 - **`--jira-project-key` tolerates whitespace** — comma-separated lists like `"ABC, DEF"` are now accepted; each key is trimmed before validation, and invalid keys are quoted in the error message.
 - **`.kosli_ignore` documented in command help** — the help for `kosli allow artifact`, `kosli assert artifact`, and every `kosli attest` command now describes `.kosli_ignore` support when fingerprinting directories.
+
+## Bug fixes
+
+- **`kosli version` reports the real release inside published Docker images** — published images identified themselves as `dev+<commit-sha>` instead of the release tag they were built from, so `kosli version` in a container could not tell you which release was running. Any image published before v2.39.0 is affected; images from v2.39.0 onward report their release tag.
 
 [View on GitHub](https://github.com/kosli-dev/cli/releases/tag/v2.39.0)
 
