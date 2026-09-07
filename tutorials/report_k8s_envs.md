@@ -177,7 +177,7 @@ A snapshot lists the **pods** running in scope. The reporter is blind to workloa
 
 That matters most for short-lived workloads. A `Job` or `CronJob` pod is captured only while it is running, so a job that starts and finishes between two snapshots never appears, and a successful run leaves no trace in the environment. A pod that *fails* is the exception — it keeps being reported until Kubernetes cleans it up.
 
-For the full model — how job pods affect environment churn and compliance, and what to do about it — see [Kubernetes environment snapshots](/understand_kosli/kubernetes_snapshots).
+For the full model — how job pods affect environment churn and compliance, and what to do about it — see [Understand Kubernetes reporting](/administration/managing_environments/kubernetes_reporting).
 
 ## Running multiple reporters
 
@@ -205,4 +205,4 @@ From here you can:
 * Query your environment with [`kosli list snapshots`](/client_reference/kosli_list_snapshots) and [`kosli get snapshot`](/client_reference/kosli_get_snapshot)
 * [Compare snapshots to see what changed](/client_reference/kosli_diff_snapshots)
 * Trace a running artifact back to its git commit with the [From commit to production](/tutorials/following_a_git_commit_to_runtime_environments) tutorial
-* Understand what snapshots do and don't capture in [Kubernetes environment snapshots](/understand_kosli/kubernetes_snapshots)
+* See what snapshots do and don't capture in [Understand Kubernetes reporting](/administration/managing_environments/kubernetes_reporting)

@@ -1,5 +1,5 @@
 ---
-title: 'Kubernetes environment snapshots'
+title: 'Understand Kubernetes reporting'
 description: 'What the Kosli Kubernetes reporter captures, which pod phases it reports, and what that means for Job and CronJob workloads.'
 ---
 
