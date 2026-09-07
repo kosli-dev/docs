@@ -26,7 +26,7 @@ For anything automated, use a service account. Personal API keys inherit your us
     - EU: [app.kosli.com](https://app.kosli.com)
     - US: [app.us.kosli.com](https://app.us.kosli.com)
 
-    Depending on how your organization is set up, you'll sign in with [single sign-on](/administration/authentication/single_sign_on), [Magic Link](/administration/authentication/magic_link) or GitHub.
+    Depending on how your organization is set up, you'll sign in with single sign-on, [Magic Link](/administration/authentication/magic_link) or GitHub.
   </Step>
   <Step title="Create a key">
     - **For CI/CD**, follow [Service accounts](/administration/authentication/service_accounts) to create a service account and generate its first API key.

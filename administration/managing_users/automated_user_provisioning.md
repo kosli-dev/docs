@@ -68,10 +68,12 @@ Once changes within your IdP have been synced, they are typically reflected in K
 ## Existing Kosli users
 
 People who already have access to Kosli via SSO keep that access. Enabling SCIM does not, by itself, change
-anyone's roles or organization memberships — nothing in Kosli moves until your IdP sends a change.
+anyone's roles or organization memberships. Nothing in Kosli changes until your Idp sends a change.  A user who
+is not assigned to any Kosli group is not provisioned or deprovisioned and their existing access is untouched
+until you add them to a group.
 
-From then on, your IdP drives membership. Once a user has been provisioned through SCIM, the groups they belong
-to in your IdP determine their organizations and roles in Kosli, replacing whatever they had before.
+Once SCIM has started sending changes, your IdP drives membership. Once a user has been provisioned through SCIM,
+the groups they belong to in your IdP determine their organizations and roles in Kosli, replacing whatever they had before.
 
 That makes the first sync worth planning. A full or forced sync in your IdP — however it is labeled there —
 provisions every assigned user at once, not only the ones you have just changed, so make sure your groups and
