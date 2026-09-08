@@ -188,6 +188,10 @@ The following sections provide more details about each Kosli user role, includin
 
 ## Assigning roles
 
+<Note>
+This procedure does not apply to users provisioned through [automated user provisioning](/administration/managing_users/automated_user_provisioning) - their roles, and their membership of the organization, cannot be changed in Kosli. Manage those through your identity provider groups instead.
+</Note>
+
 To assign or change a user's role:
 
 1. Log in to Kosli as an Admin
