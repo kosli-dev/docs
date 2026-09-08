@@ -387,9 +387,9 @@ kosli create attestation-type coverage-metrics \
 ```
 
 Attestations of the `coverage-metrics` type then show `Lines missed` and `Lines total`, in that
-order, with the values taken from each attestation's own data. Re-running `kosli create
-attestation-type` for a name that already exists updates that type rather than creating a second
-one — see the note on versioning below.
+order, with the values taken from each attestation's own data. Re-running
+`kosli create attestation-type` for a name that already exists updates that type rather than
+creating a second one — see the note on versioning below.
 
 Each `--summary` value is split on its first `=` only, so `==` inside a jq expression is safe. Use
 [`--summary-json`](/client_reference/kosli_create_attestation-type) instead if the list is easier to
@@ -416,8 +416,10 @@ Worth knowing:
   than as a broken detail page later.
 - An expression that returns `null`, or that fails against a particular attestation's data, renders
   as `N/A`. The rest of the summary still renders.
-- A value that is a string beginning with `http://` or `https://` renders as a clickable link, as
-  [annotation values](#annotating-attestations) do. Other values render as text.
-- If the attestation data is a top-level array, Kosli renders one summary group per element
-  (`Summary 1:`, `Summary 2:`, and so on). Write the expressions against a single element
-  (`.code.lines.missed`) — each element is evaluated separately.
+- A value renders as a clickable link only when it is a string beginning with `http://` or
+  `https://`. Everything else — including URLs with another scheme — renders as text. This is
+  stricter than the rule for [annotation values](#annotating-attestations).
+- If the attestation data is a top-level array, Kosli renders one summary group per element,
+  numbering them (`Summary 1:`, `Summary 2:`, and so on) when there is more than one. Write the
+  expressions against a single element (`.code.lines.missed`) — each element is evaluated
+  separately.

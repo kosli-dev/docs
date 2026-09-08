@@ -76,7 +76,7 @@ resource "kosli_custom_attestation_type" "deployment_record" {
 }
 ```
 
-### With a summary
+### Adding a summary
 
 `summary` takes a JSON array of `{name, expression}` objects. Each expression is a jq expression
 evaluated against the attestation data when the attestation is displayed, and the entries render in
