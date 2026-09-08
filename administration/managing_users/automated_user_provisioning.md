@@ -68,7 +68,7 @@ How quickly a change reaches Kosli depends on your IdP's provisioning schedule, 
 ## Existing Kosli users
 
 People who already have access to Kosli via SSO keep that access. Enabling SCIM does not, by itself, change
-anyone's roles or organization memberships. Nothing in Kosli changes until your Idp sends a change.  A user who
+anyone's roles or organization memberships. Nothing in Kosli changes until your IdP sends a change. A user who
 is not assigned to any Kosli group is not provisioned or deprovisioned and their existing access is untouched
 until you add them to a group.
 
@@ -107,6 +107,6 @@ Within your IdP you will need to create a group for each of these roles. You wil
 </Steps>
 
 <Note>
-Once a user has been provisioned through SCIM, your IdP is authoritative for that user: their roles can no
-longer be changed in Kosli, so every later role change has to be made through their IdP group membership.
+Once a user has been provisioned through SCIM, your IdP is authoritative for that user: neither their roles nor
+their membership of your Kosli organizations can be changed in Kosli, so every later change has to be made through their IdP group membership.
 </Note>
