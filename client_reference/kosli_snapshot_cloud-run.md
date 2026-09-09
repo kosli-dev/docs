@@ -71,7 +71,7 @@ reverse-lookup. Only supported for Artifact Registry hosts.
 | :--- | :--- | :--- |
 | `-a`, `--api-token` | string | The Kosli API token. |
 | `-A`, `--auto-environment` | bool | [optional] Create the environment (with the type inferred from the snapshot subcommand) if it does not already exist, before reporting the snapshot. |
-| `-c`, `--config-file` | string | [optional] The Kosli config file path. (default "$HOME/.kosli.yml") |
+| `-c`, `--config-file` | string | [optional] The Kosli config file path. Config is read from this path or the default only, never implicitly from the current directory. (default "$HOME/.kosli.yml") |
 | `--debug` | bool | [optional] Print debug logs to stdout. |
 | `--environment-description` | string | [optional] The environment description. |
 | `--exclude-scaling` | bool | [optional] Exclude scaling events for snapshots. Snapshots with scaling changes will not result in new environment records. (DEPRECATED: this flag is deprecated and will be removed in a future version. Scaling events do not trigger new snapshots.) |
