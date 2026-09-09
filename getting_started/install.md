@@ -165,7 +165,11 @@ Each key in the config file corresponds to the flag name, capitalized. For insta
 
 Config files can be written in JSON, YAML, or TOML formats.
 
-To direct Kosli CLI to use a config file, employ the --config-file flag when executing Kosli commands. By default, the CLI looks for a config file called `kosli.<yaml/yml/json/toml>`
+To direct Kosli CLI to use a config file, employ the `--config-file` flag when executing Kosli commands, or set `KOSLI_CONFIG_FILE` in the environment. By default the CLI reads `$HOME/.kosli.yml`, the file [`kosli config`](/client_reference/kosli_config) writes; a config file anywhere else has to be named.
+
+<Warning>
+Up to CLI v2.39.2, a file named `kosli.<yaml|toml|json|env>` in the directory you ran Kosli from was loaded automatically, without `--config-file`. That is no longer the case, because it let the contents of a repository decide where the CLI sent your API token. If you relied on it, add `--config-file kosli.yml` to your commands or set `KOSLI_CONFIG_FILE=kosli.yml`. From v2.40.0 the CLI warns when it finds such a file and is ignoring it.
+</Warning>
 
 Below are examples of different config file formats:
 
