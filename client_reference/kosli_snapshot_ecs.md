@@ -54,7 +54,7 @@ More details can be found here: https://aws.github.io/aws-sdk-go-v2/docs/configu
 | :--- | :--- | :--- |
 | `-a`, `--api-token` | string | The Kosli API token. |
 | `-A`, `--auto-environment` | bool | [optional] Create the environment (with the type inferred from the snapshot subcommand) if it does not already exist, before reporting the snapshot. |
-| `-c`, `--config-file` | string | [optional] The Kosli config file path. (default "kosli") |
+| `-c`, `--config-file` | string | [optional] The Kosli config file path. (default "$HOME/.kosli.yml") |
 | `--debug` | bool | [optional] Print debug logs to stdout. |
 | `--environment-description` | string | [optional] The environment description. |
 | `--exclude-scaling` | bool | [optional] Exclude scaling events for snapshots. Snapshots with scaling changes will not result in new environment records. (DEPRECATED: this flag is deprecated and will be removed in a future version. Scaling events do not trigger new snapshots.) |
