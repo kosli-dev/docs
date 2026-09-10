@@ -106,17 +106,12 @@
       ]
     },
     {
-      "tab": "Risks & controls",
+      "tab": "Risks and controls",
       "icon": "shield-halved",
-      "groups": [
-        {
-          "group": "Risks and controls",
-          "pages": [
-            "understand_kosli/risks",
-            "understand_kosli/controls",
-            "tutorials/working_with_controls"
-          ]
-        },
+      "pages": [
+        "understand_kosli/risks",
+        "understand_kosli/controls",
+        "tutorials/working_with_controls",
         {
           "group": "Policies and evaluation",
           "pages": [
@@ -187,7 +182,7 @@
           ]
         },
         {
-          "group": "Evidence sources",
+          "group": "Integrations",
           "pages": [
             "integrations/sonar",
             "integrations/slack",

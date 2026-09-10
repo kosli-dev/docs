@@ -30,7 +30,7 @@ You report events of interest (builds, test results, deployments, environment st
     Read [Risks](/understand_kosli/risks), [Controls](/understand_kosli/controls), and [How Kosli works](/understand_kosli/how_kosli_works) in order. Use the [Glossary](/understand_kosli/glossary) as a reference along the way. When you are ready to try it hands-on, work through the [Learning Labs](/labs).
   </Accordion>
   <Accordion title="Setting up Kosli for your team?" icon="users">
-    Head to [Getting Started](/getting_started/install) for step-by-step setup, or see the [Implementation Guide](/implementation_guide/phase_1/roles_and_responsibilities/overview) for organizational rollout planning.
+    Head to [Getting Started](/getting_started/install) for step-by-step setup, or see [Planning your rollout](/implementation_guide/phase_1/roles_and_responsibilities/overview) for organizational rollout planning.
   </Accordion>
   <Accordion title="Looking up a specific term?" icon="magnifying-glass">
     See the [Glossary](/understand_kosli/glossary) for quick-reference definitions of every Kosli term.
