@@ -1,5 +1,5 @@
 ---
-title: Flow Template
+title: Flow template
 description: "Reference for the YAML template file used to define compliance controls for a Kosli flow."
 ---
 
