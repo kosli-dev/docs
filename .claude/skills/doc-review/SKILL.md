@@ -76,7 +76,7 @@ A change is rarely confined to the files it touches. Grep the rest of the site f
 ### 2. Placement and navigation
 
 - Every new page must appear in `config/navigation.json`. Missing entry is **Critical**.
-- **Ask whether the page is in the right tab and group**, not just whether it is listed somewhere. Apply the placement table in the `doc-write` skill. A page whose content is complete factual lookup belongs in the **Reference** tab even when it documents an integration. *Precedent: a GitHub Action reference page was first authored into `integrations/`; a human reviewer had to ask for the move to Reference. That question should come from this review.*
+- **Ask whether the page is in the right tab and group**, not just whether it is listed somewhere. Apply the tab membership tests in CLAUDE.md, under "Where a page goes". A page whose content is complete factual lookup belongs in the **Reference** tab even when it documents an integration. *Precedent: a GitHub Action reference page was first authored into `integrations/`; a human reviewer had to ask for the move to Reference. That question should come from this review.*
 - Flag a new group created to hold a single page, and any page nested more than three levels below its tab.
 
 ### 3. Redirects

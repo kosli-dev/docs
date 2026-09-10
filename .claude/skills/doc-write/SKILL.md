@@ -63,7 +63,7 @@ Three rules the table does not carry:
 ## Navigation rules
 
 - **Creating a page and adding it to `config/navigation.json` are one task.** A page absent from navigation does not exist on the site.
-- Add it to an existing group. Only create a group when you are adding three or more sibling pages — a group wrapping a single page adds a click and gives nothing back.
+- Add it to an existing group. Only create a group for two or more sibling pages — a group wrapping a single page adds a click and gives nothing back, which is the shape `audit_navigation.py` flags.
 - Keep pages within three levels of their tab.
 - **Sentence case for group labels**, matching CLAUDE.md's heading rule: "Naming conventions", not "Naming Conventions".
 
@@ -75,7 +75,7 @@ Three rules the table does not carry:
 
 ## Writing
 
-1. Classify the doc type and pick the destination from the table above.
+1. Classify the doc type, then pick the tab from the membership tests in CLAUDE.md, under "Where a page goes". The type table above decides the page's form, not its place.
 2. Outline against the doc type.
 3. Write the file. Root-relative links only (`/getting_started/install`). Frontmatter `title` and `description` are required.
 4. Add the navigation entry.
