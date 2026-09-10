@@ -52,23 +52,13 @@ Tutorials teach through doing; how-to guides solve one problem for someone who a
 
 Tabs are named after subjects, not document types, so **placement follows the reader's job, not the classification above.** One subject draws all four Diátaxis needs, and they belong in the same tab, sorted by page form inside it.
 
-Pick the tab whose membership test the page satisfies. If a page fails every test, the structure is wrong, not the page — raise it rather than forcing a fit.
+**The tab set and its membership tests live in CLAUDE.md, under "Where a page goes".** Read them there — including the warning not to rename the `Reference` tab or its `CLI Reference` menu item — and pick the tab whose test the page satisfies. If a page fails every test, the structure is wrong, not the page: raise it rather than forcing a fit.
 
-| Tab | Membership test — the reader… |
-|---|---|
-| **Discover Kosli** | …has not started yet: orientation, first run, learning, getting unstuck |
-| **Platform administration** | …is configuring Kosli itself for an organization |
-| **Risks & controls** | …is deciding what must be true, or proving it was |
-| **Environments and runtime** | …is reporting, or interpreting, what is actually running |
-| **Record evidence** | …is instrumenting a pipeline to produce evidence |
-| **Reference** | …knows what they want and needs exact syntax or values |
-| **Changelog** | …wants to know what shipped |
+Three rules the table does not carry:
 
-Reference wins on content shape, not on subject. A reference page about an integration belongs in Reference — a GitHub Action reference page was once authored into `integrations/` and had to be moved in a follow-up commit.
-
-Two tests can both look plausible. When they do, ask which reader is holding the page: someone standing Kosli up for the first time is in Discover Kosli even if the task is administrative; someone hardening an existing org is in Platform administration even if it is their first week.
-
-Read the pages already in your chosen group before writing, and follow the convention they set rather than creating a parallel group beside them.
+- **Reference wins on content shape, not on subject.** A reference page about an integration belongs in Reference — a GitHub Action reference page was once authored into `integrations/` and had to be moved in a follow-up commit.
+- **When two tests both look plausible, ask which reader is holding the page.** Someone standing Kosli up for the first time is in Discover Kosli even if the task is administrative; someone hardening an existing org is in Platform administration even if it is their first week.
+- **Read the pages already in your chosen group before writing**, and follow the convention they set rather than creating a parallel group beside them.
 
 ## Navigation rules
 

@@ -145,7 +145,7 @@ four needs, so they sit in one tab, sorted by form inside it.
 |---|---|
 | Discover Kosli | …has not started yet: orientation, first run, learning, getting unstuck |
 | Platform administration | …is configuring Kosli itself for an organization |
-| Risks & controls | …is deciding what must be true, or proving it was |
+| Risks and controls | …is deciding what must be true, or proving it was |
 | Environments and runtime | …is reporting, or interpreting, what is actually running |
 | Record evidence | …is instrumenting a pipeline to produce evidence |
 | Reference | …knows what they want and needs exact syntax or values |

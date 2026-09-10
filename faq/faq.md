@@ -1,7 +1,6 @@
 ---
 title: FAQ
 description: "Frequently asked questions"
-icon: circle-question
 ---
 
 <AccordionGroup>
