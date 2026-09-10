@@ -50,22 +50,25 @@ Tutorials teach through doing; how-to guides solve one problem for someone who a
 
 ## Decide where the page goes
 
-Classification determines placement. Getting this wrong costs a follow-up commit and a reviewer's time, so decide it before writing, not after.
+Tabs are named after subjects, not document types, so **placement follows the reader's job, not the classification above.** One subject draws all four Diátaxis needs, and they belong in the same tab, sorted by page form inside it.
 
-| The page is… | Tab ▸ group |
+Pick the tab whose membership test the page satisfies. If a page fails every test, the structure is wrong, not the page — raise it rather than forcing a fit.
+
+| Tab | Membership test — the reader… |
 |---|---|
-| A concept, or the reasoning behind a design | Documentation ▸ Understand Kosli |
-| Part of the first-run sequence a new user follows in order | Documentation ▸ Getting started |
-| A task an org admin performs (users, roles, auth, org-wide settings) | Documentation ▸ Administration |
-| A task a user performs with Kosli | Documentation ▸ Tutorials |
-| Setting up Kosli with a third-party product | Documentation ▸ Integrations |
-| A specific error message or symptom | Documentation ▸ Troubleshooting |
-| Complete factual lookup — CLI, API, Terraform, Helm, schema, policy | **Reference** tab |
-| Rollout and adoption guidance for a team standing Kosli up | Implementation Guide |
+| **Discover Kosli** | …has not started yet: orientation, first run, learning, getting unstuck |
+| **Platform administration** | …is configuring Kosli itself for an organization |
+| **Risks & controls** | …is deciding what must be true, or proving it was |
+| **Environments and runtime** | …is reporting, or interpreting, what is actually running |
+| **Record evidence** | …is instrumenting a pipeline to produce evidence |
+| **Reference** | …knows what they want and needs exact syntax or values |
+| **Changelog** | …wants to know what shipped |
 
-The Reference tab wins on content shape, not on subject. A reference page about an integration belongs in Reference — a GitHub Action reference page was once authored into `integrations/` and had to be moved in a follow-up commit.
+Reference wins on content shape, not on subject. A reference page about an integration belongs in Reference — a GitHub Action reference page was once authored into `integrations/` and had to be moved in a follow-up commit.
 
-A group's label may not describe its contents — read the pages already in your chosen group before writing. Where label and contents disagree, follow the convention the existing pages set; do not create a parallel group alongside it.
+Two tests can both look plausible. When they do, ask which reader is holding the page: someone standing Kosli up for the first time is in Discover Kosli even if the task is administrative; someone hardening an existing org is in Platform administration even if it is their first week.
+
+Read the pages already in your chosen group before writing, and follow the convention they set rather than creating a parallel group beside them.
 
 ## Navigation rules
 

@@ -135,6 +135,32 @@ description: One sentence describing the page purpose.
   - **Explanation** — concepts and background (e.g., "What is Kosli?")
 - **MAY** Add an `icon` field to front matter using [Font Awesome](https://fontawesome.com/icons) names.
 
+### Where a page goes
+
+Tabs are named after subjects, not document types. Diátaxis decides a page's
+*form*; the tab's membership test decides its *place*. One subject draws all
+four needs, so they sit in one tab, sorted by form inside it.
+
+| Tab | Membership test — the reader… |
+|---|---|
+| Discover Kosli | …has not started yet: orientation, first run, learning, getting unstuck |
+| Platform administration | …is configuring Kosli itself for an organization |
+| Risks & controls | …is deciding what must be true, or proving it was |
+| Environments and runtime | …is reporting, or interpreting, what is actually running |
+| Record evidence | …is instrumenting a pipeline to produce evidence |
+| Reference | …knows what they want and needs exact syntax or values |
+| Changelog | …wants to know what shipped |
+
+If a page fails every test, the structure is wrong, not the page — raise it.
+
+Sidebar position is independent of the file path, so a page can change tab
+without changing its URL. Directory names still follow the old structure;
+aligning them is #397.
+
+**Don't rename the `Reference` tab or its `CLI Reference` menu item.**
+`scripts/update-cli-nav.py` hard-codes both and exits 1 without them, which
+breaks the next CLI release's doc sync.
+
 ### MDX Components
 
 | Component | Use for |
