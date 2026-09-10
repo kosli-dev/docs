@@ -1,155 +1,38 @@
 {
   "tabs": [
     {
-      "tab": "Documentation",
-      "pages": [
+      "tab": "Discover Kosli",
+      "icon": "compass",
+      "groups": [
         {
           "group": "Understand Kosli",
-          "icon": "book-open",
           "pages": [
             "understand_kosli/what_is_kosli",
-            "understand_kosli/risks",
-            "understand_kosli/controls",
             "understand_kosli/how_kosli_works",
-            "understand_kosli/glossary",
-            "understand_kosli/ai_docs_access"
+            "understand_kosli/glossary"
           ]
         },
         {
-          "group": "Getting started",
-          "icon": "rocket",
+          "group": "Get started",
           "pages": [
             "getting_started/install",
             "getting_started/authenticating_to_kosli",
+            "tutorials/try_kosli_locally"
+          ]
+        },
+        {
+          "group": "Core concepts",
+          "pages": [
             "getting_started/flows",
             "getting_started/trails",
             "getting_started/artifacts",
             "getting_started/attestations",
             "getting_started/environments",
-            "getting_started/policies",
-            "getting_started/enforce_policies"
+            "getting_started/policies"
           ]
         },
         {
-          "group": "User",
-          "icon": "user",
-          "pages": [
-            "user/default_organization",
-            "user/personal_api_keys"
-          ]
-        },
-        {
-          "group": "Administration",
-          "icon": "cog",
-          "pages": [
-            {
-              "group": "Authentication & access",
-              "pages": [
-                "administration/authentication/single_sign_on",
-                "administration/authentication/magic_link",
-                "administration/authentication/api_authentication_methods",
-                "administration/authentication/service_accounts",
-                "administration/authentication/api_key_rotation"
-              ]
-            },
-            {
-              "group": "Users & roles",
-              "pages": [
-                "administration/managing_users/roles_in_kosli",
-                "administration/managing_users/mapping_users_to_roles",
-                "administration/managing_users/automated_user_provisioning"
-              ]
-            },
-            "administration/managing_environments/overview",
-            "administration/managing_custom_attestation_types/overview",
-            "administration/managing_tags"
-          ]
-        },
-        {
-          "group": "Tutorials",
-          "icon": "graduation-cap",
-          "pages": [
-            {
-              "group": "Getting started",
-              "pages": [
-                "tutorials/try_kosli_locally",
-                "tutorials/cli_and_http_proxy",
-                "tutorials/organizing_with_spaces"
-              ]
-            },
-            {
-              "group": "Attesting",
-              "pages": [
-                "tutorials/attest_custom",
-                "tutorials/attest_snyk",
-                "tutorials/custom-attestation-ctrf",
-                "tutorials/attest_large_documents"
-              ]
-            },
-            {
-              "group": "Reporting environments",
-              "pages": [
-                "tutorials/report_aws_envs",
-                "tutorials/report_k8s_envs",
-                "tutorials/report_cloud_run_envs"
-              ]
-            },
-            {
-              "group": "Querying & tracing",
-              "pages": [
-                "tutorials/querying_kosli",
-                "tutorials/following_a_git_commit_to_runtime_environments",
-                "tutorials/tracing_a_production_incident_back_to_git_commits",
-                "tutorials/trail_summaries_in_ci"
-              ]
-            },
-            {
-              "group": "Security",
-              "pages": [
-                "tutorials/detecting_unexpected_statefile_changes",
-                "tutorials/detecting_non_terraform_changes",
-                "tutorials/rotating_api_keys"
-              ]
-            },
-            "tutorials/evaluate_trails_with_opa",
-            "tutorials/linking_trails_across_branches",
-            "tutorials/working_with_controls",
-            "tutorials/repositories"
-          ]
-        },
-        {
-          "group": "Troubleshooting",
-          "icon": "wrench",
-          "pages": [
-            "troubleshooting/what_do_i_do_if_kosli_is_down",
-            "troubleshooting/docker_api_version_error",
-            "troubleshooting/repo_digest_unavailable",
-            "troubleshooting/zsh_no_such_user",
-            "troubleshooting/github_kosli_api_token",
-            "troubleshooting/subshell_stderr",
-            "troubleshooting/whitespace_path"
-          ]
-        },
-        "faq/faq",
-        {
-          "group": "Integrations",
-          "icon": "puzzle-piece",
-          "pages": [
-            "integrations/kosli_actions",
-            "integrations/ci_cd",
-            "integrations/slack",
-            "integrations/launchdarkly",
-            "integrations/sonar",
-            "integrations/mcp_server"
-          ]
-        }
-      ]
-    },
-    {
-      "tab": "Labs",
-      "groups": [
-        {
-          "group": "Kosli learning labs",
+          "group": "Learning labs",
           "pages": [
             "labs/index",
             "labs/lab-01-get-ready",
@@ -158,15 +41,60 @@
             "labs/lab-04-release-controls",
             "labs/lab-05-runtime-controls"
           ]
+        },
+        {
+          "group": "Help and troubleshooting",
+          "pages": [
+            "faq/faq",
+            "troubleshooting/what_do_i_do_if_kosli_is_down",
+            "troubleshooting/docker_api_version_error",
+            "troubleshooting/repo_digest_unavailable",
+            "troubleshooting/zsh_no_such_user",
+            "troubleshooting/github_kosli_api_token",
+            "troubleshooting/subshell_stderr",
+            "troubleshooting/whitespace_path",
+            "understand_kosli/ai_docs_access"
+          ]
         }
       ]
     },
     {
-      "tab": "Implementation Guide",
+      "tab": "Platform administration",
+      "icon": "sliders",
       "groups": [
         {
-          "group": "Phase 1: initial discovery",
-          "icon": "lightbulb",
+          "group": "Your account",
+          "pages": [
+            "user/default_organization",
+            "user/personal_api_keys"
+          ]
+        },
+        {
+          "group": "Users and access",
+          "pages": [
+            "administration/managing_users/roles_in_kosli",
+            "administration/managing_users/mapping_users_to_roles",
+            "administration/managing_users/automated_user_provisioning",
+            "administration/authentication/single_sign_on",
+            "administration/authentication/magic_link",
+            "administration/authentication/api_authentication_methods",
+            "administration/authentication/service_accounts",
+            "administration/authentication/api_key_rotation",
+            "tutorials/rotating_api_keys"
+          ]
+        },
+        {
+          "group": "Organization structure",
+          "pages": [
+            "administration/managing_tags",
+            "administration/managing_custom_attestation_types/overview",
+            "implementation_guide/phase_2/plan_organizational_structure/naming_conventions/overview",
+            "implementation_guide/phase_2/plan_organizational_structure/naming_conventions/attestation_types",
+            "implementation_guide/phase_2/plan_organizational_structure/naming_conventions/flows_and_trails"
+          ]
+        },
+        {
+          "group": "Planning your rollout",
           "pages": [
             "implementation_guide/phase_1/roles_and_responsibilities/overview",
             "implementation_guide/phase_1/roles_and_responsibilities/platform_engineers",
@@ -174,19 +102,97 @@
             "implementation_guide/phase_1/roles_and_responsibilities/security_compliance",
             "implementation_guide/phase_1/roles_and_responsibilities/sponsors"
           ]
+        }
+      ]
+    },
+    {
+      "tab": "Risks & controls",
+      "icon": "shield-halved",
+      "groups": [
+        {
+          "group": "Risks and controls",
+          "pages": [
+            "understand_kosli/risks",
+            "understand_kosli/controls",
+            "tutorials/working_with_controls"
+          ]
         },
         {
-          "group": "Phase 2: configure Kosli",
-          "icon": "gear",
+          "group": "Policies and evaluation",
           "pages": [
-            {
-              "group": "Naming conventions",
-              "pages": [
-                "implementation_guide/phase_2/plan_organizational_structure/naming_conventions/overview",
-                "implementation_guide/phase_2/plan_organizational_structure/naming_conventions/attestation_types",
-                "implementation_guide/phase_2/plan_organizational_structure/naming_conventions/flows_and_trails"
-              ]
-            }
+            "getting_started/enforce_policies",
+            "tutorials/evaluate_trails_with_opa"
+          ]
+        },
+        {
+          "group": "Investigate and audit",
+          "pages": [
+            "tutorials/querying_kosli",
+            "tutorials/following_a_git_commit_to_runtime_environments",
+            "tutorials/tracing_a_production_incident_back_to_git_commits"
+          ]
+        },
+        {
+          "group": "Drift detection",
+          "pages": [
+            "tutorials/detecting_unexpected_statefile_changes",
+            "tutorials/detecting_non_terraform_changes"
+          ]
+        }
+      ]
+    },
+    {
+      "tab": "Environments and runtime",
+      "icon": "server",
+      "pages": [
+        {
+          "group": "Reporting your runtime",
+          "pages": [
+            "tutorials/report_k8s_envs",
+            "tutorials/report_aws_envs",
+            "tutorials/report_cloud_run_envs"
+          ]
+        },
+        "administration/managing_environments/overview"
+      ]
+    },
+    {
+      "tab": "Record evidence",
+      "icon": "clipboard-check",
+      "groups": [
+        {
+          "group": "Flows and trails",
+          "pages": [
+            "tutorials/organizing_with_spaces",
+            "tutorials/linking_trails_across_branches",
+            "tutorials/repositories"
+          ]
+        },
+        {
+          "group": "Attestations",
+          "pages": [
+            "tutorials/attest_custom",
+            "tutorials/attest_snyk",
+            "tutorials/attest_large_documents",
+            "tutorials/custom-attestation-ctrf"
+          ]
+        },
+        {
+          "group": "CI/CD",
+          "pages": [
+            "integrations/ci_cd",
+            "integrations/kosli_actions",
+            "tutorials/trail_summaries_in_ci",
+            "tutorials/cli_and_http_proxy"
+          ]
+        },
+        {
+          "group": "Evidence sources",
+          "pages": [
+            "integrations/sonar",
+            "integrations/slack",
+            "integrations/launchdarkly",
+            "integrations/mcp_server"
           ]
         }
       ]
@@ -504,7 +510,8 @@
             }
           ]
         }
-      ]
+      ],
+      "icon": "book"
     },
     {
       "tab": "Changelog",
