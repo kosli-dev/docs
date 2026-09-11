@@ -11,10 +11,15 @@ Rotating API keys regularly limits the blast radius of a leaked credential. Kosl
 When you rotate a service account API key, Kosli:
 
 1. Generates a new API key and returns its value once.
-2. Keeps the old key valid for a configurable grace period (default: **24 hours**).
-3. Automatically revokes the old key when the grace period expires.
+2. Sets the new key's expiry to the **rotated key's current expiry** unless you pass `--expires-at` (CLI) or `expires_at` (API), bounded by the server-side **maximum lifetime of 365 days from creation**.
+3. Keeps the old key valid for a configurable grace period (default: **24 hours**).
+4. Automatically revokes the old key when the grace period expires.
 
 Choose a grace period that fits your deployment cadence — long enough to roll the new key out to every consumer, short enough to limit exposure.
+
+<Warning>
+Rotation on its own does not extend the credential. If the rotated key was already close to its expiry, the new key expires at the same moment unless you pass an explicit `--expires-at` (up to the 365-day cap).
+</Warning>
 
 ## Where next
 
