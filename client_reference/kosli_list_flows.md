@@ -153,7 +153,7 @@ kosli list flows --output=json
       "kind": "build",
       "env": "aws-beta"
     },
-    "latest_activity_at": 1789113443.9263997,
+    "latest_activity_at": 1789130423.8240678,
     "latest_state": "COMPLIANT"
   },
   {
@@ -235,7 +235,7 @@ kosli list flows --output=json
       "kind": "release",
       "env": "aws-prod"
     },
-    "latest_activity_at": 1789023183.9163306,
+    "latest_activity_at": 1789129363.806646,
     "latest_state": "COMPLIANT"
   },
   {
@@ -454,7 +454,7 @@ kosli list flows --output=json
     "template": "version: 1\ntrail:\n  attestations:\n    - name: terraform-plan\n      type: generic\n    - name: terraform-apply\n      type: generic\n  artifacts:\n    - name: terraform-state\n    - name: drift-plan\n",
     "repo_url": "https://github.com/cyber-dojo/languages-start-points",
     "tags": {},
-    "latest_activity_at": 1789113909.1972687,
+    "latest_activity_at": 1789130708.8031085,
     "latest_state": "COMPLIANT"
   },
   {

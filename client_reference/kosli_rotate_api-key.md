@@ -12,16 +12,16 @@ kosli rotate api-key KEY-ID [KEY-ID...] [flags]
 Rotate one or more API keys for a service account.
 
 A new API key is generated immediately. The old key remains valid for a grace period to
-allow time to update dependent systems; the length of that grace period is server-managed
-unless overridden with `--grace-period-hours`. The new key value is only returned once, so
-make sure to store it securely.
+allow time to update dependent systems; that grace period has a standard length unless
+overridden with `--grace-period-hours`. The new key value is only returned once, so make
+sure to store it securely.
 
 ## Flags
 | Flag | Type | Description |
 | :--- | :--- | :--- |
 | `-D`, `--dry-run` | bool | [optional] Run in dry-run mode. When enabled, no data is sent to Kosli and the CLI exits with 0 exit code regardless of any errors. |
-| `-e`, `--expires-at` | string | [optional] When the API key expires. Accepts an epoch timestamp or a date like '2026-06-04', '2026-06-04 15:04:05', or an RFC3339 timestamp. Defaults to no expiry. |
-| `-g`, `--grace-period-hours` | int | [optional] How many hours the old API key remains valid after rotation, to allow time to update dependent systems. Defaults to the server-side value when not set. |
+| `-e`, `--expires-at` | string | [optional] When the new API key expires. Accepts an epoch timestamp or a date like '2026-06-04', '2026-06-04 15:04:05', or an RFC3339 timestamp. Defaults to the rotated key's current expiry, and is capped by the maximum allowed key lifetime. |
+| `-g`, `--grace-period-hours` | int | [optional] How many hours the old API key remains valid after rotation, to allow time to update dependent systems. Defaults to the standard grace period when not set. |
 | `-h`, `--help` | bool | help for api-key |
 | `-o`, `--output` | string | [defaulted] The format of the output. Valid formats are: [table, json]. (default "table") |
 | `-s`, `--service-account` | string | The name of the service account whose API keys are managed. |
