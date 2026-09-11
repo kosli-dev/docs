@@ -61,9 +61,10 @@
               ]
             },
             {
-              "group": "Managing Environments",
+              "group": "Environments",
               "pages": [
-                "administration/managing_environments/overview"
+                "administration/managing_environments/overview",
+                "administration/managing_environments/kubernetes_reporting"
               ]
             },
             {
