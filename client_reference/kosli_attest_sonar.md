@@ -46,7 +46,10 @@ The attestation can be bound to an *artifact* in two ways:
 
 To specify paths in a directory artifact that should always be excluded from the SHA256 calculation, you can add a `.kosli_ignore` file to the root of the artifact.
 Each line should specify a relative path or path glob to be ignored. You can include comments in this file, using `#`.
-The `.kosli_ignore` will be treated as part of the artifact like any other file, unless it is explicitly ignored itself.
+The `.kosli_ignore` file is always treated as part of the artifact: its own entries cannot exclude it, so the exclusion list cannot be changed without changing the fingerprint.
+Paths the list already matches stay excluded whatever is later added there, so keep its entries as narrow as possible.
+Excluding the file with `--exclude` keeps it out of the fingerprint but still applies the paths it lists, which lets a writable directory change the list again.
+To drop the file from the fingerprint safely, move its entries to `--exclude` and delete it.
 
 ## Flags
 | Flag | Type | Description |
@@ -84,14 +87,14 @@ The `.kosli_ignore` will be treated as part of the artifact like any other file,
 | `--sonar-server-url` | string | [conditional] The URL of your SonarQube server. Only required if you are using SonarQube Server and not using SonarQube's metadata file to get scan results. (default "https://sonarcloud.io") |
 | `--sonar-working-dir` | string | [conditional] The base directory of the repo scanned by SonarQube. Only required if you have overridden the default in the Sonar scanner or you are running the CLI locally in a separate folder from the repo. (default ".scannerwork") |
 | `-T`, `--trail` | string | The Kosli trail name. |
-| `-u`, `--user-data` | string | [optional] The path to a JSON file containing additional data you would like to attach to the attestation. |
+| `-u`, `--user-data` | string | [optional] The path to a JSON file containing additional data you would like to attach to the attestation. The maximum JSON payload size is 1MB. |
 
 
 ## Flags inherited from parent commands
 | Flag | Type | Description |
 | :--- | :--- | :--- |
 | `-a`, `--api-token` | string | The Kosli API token. |
-| `-c`, `--config-file` | string | [optional] The Kosli config file path. (default "kosli") |
+| `-c`, `--config-file` | string | [optional] The Kosli config file path. Config is read from this path or the default only, never implicitly from the current directory. (default "$HOME/.kosli.yml") |
 | `--debug` | bool | [optional] Print debug logs to stdout. |
 | `-H`, `--host` | string | [defaulted] The Kosli endpoint. (default "https://app.kosli.com") |
 | `--http-proxy` | string | [optional] The HTTP proxy URL including protocol and port number. e.g. `http://proxy-server-ip:proxy-port` |
@@ -106,7 +109,7 @@ The `.kosli_ignore` will be treated as part of the artifact like any other file,
 	<Tab title="GitHub">
 	View an example of the `kosli attest sonar` command in GitHub.
 
-	In [this YAML file](https://github.com/cyber-dojo/dashboard/blob/ff9f292e809801d35246183988b7812826bc2760/.github/workflows/main.yml#L123), which created [this Kosli Event](https://app.kosli.com/cyber-dojo/flows/dashboard-ci/trails/ff9f292e809801d35246183988b7812826bc2760?attestation_id=6d693383-c6de-4551-8a29-1025803a).
+	In [this YAML file](https://github.com/cyber-dojo/dashboard/blob/6b20a423d5ce05139d4480e9ce67f40e3eda2e07/.github/workflows/main.yml#L123), which created [this Kosli Event](https://app.kosli.com/cyber-dojo/flows/dashboard-ci/trails/6b20a423d5ce05139d4480e9ce67f40e3eda2e07?attestation_id=484f07e3-f170-4790-9b2e-0c5b6688).
 	</Tab>
 </Tabs>
 

@@ -21,10 +21,12 @@ More details can be found here: https://aws.github.io/aws-sdk-go-v2/docs/configu
 	
 You can report the entire bucket content, or filter some of the content using `--include` / `--exclude` (literal prefix match) or `--include-regex` / `--exclude-regex` (Go regular expressions matched against the full object key).
 In all cases, the content is reported as one artifact. If you wish to report separate files/dirs within the same bucket as separate artifacts, you need to run the command twice.
+Object keys that cannot be stored as a local file, such as keys containing a `..` path segment, are rejected and fail the snapshot, naming the key. Two keys that resolve to the same local file are also an error. A legitimate key of that shape can be left out with `--exclude-regex` (anchor and escape it, since the pattern is a regular expression matched against the whole key); when `--include` or `--include-regex` is set, exclude filters are ignored, so narrow the include filter instead.
 
 To specify paths in a directory artifact that should always be excluded from the SHA256 calculation, you can add a `.kosli_ignore` file to the root of the artifact.
 Each line should specify a relative path or path glob to be ignored. You can include comments in this file, using `#`.
-The `.kosli_ignore` will be treated as part of the artifact like any other file, unless it is explicitly ignored itself.
+The `.kosli_ignore` file is always treated as part of the artifact: its own entries cannot exclude it, so the exclusion list cannot be changed without changing the fingerprint.
+Paths the list already matches stay excluded whatever is later added there, so keep its entries as narrow as possible.
 
 ## Flags
 | Flag | Type | Description |
@@ -46,7 +48,7 @@ The `.kosli_ignore` will be treated as part of the artifact like any other file,
 | :--- | :--- | :--- |
 | `-a`, `--api-token` | string | The Kosli API token. |
 | `-A`, `--auto-environment` | bool | [optional] Create the environment (with the type inferred from the snapshot subcommand) if it does not already exist, before reporting the snapshot. |
-| `-c`, `--config-file` | string | [optional] The Kosli config file path. (default "kosli") |
+| `-c`, `--config-file` | string | [optional] The Kosli config file path. Config is read from this path or the default only, never implicitly from the current directory. (default "$HOME/.kosli.yml") |
 | `--debug` | bool | [optional] Print debug logs to stdout. |
 | `--environment-description` | string | [optional] The environment description. |
 | `--exclude-scaling` | bool | [optional] Exclude scaling events for snapshots. Snapshots with scaling changes will not result in new environment records. (DEPRECATED: this flag is deprecated and will be removed in a future version. Scaling events do not trigger new snapshots.) |

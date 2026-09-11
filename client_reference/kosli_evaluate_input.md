@@ -49,7 +49,7 @@ This accepts inline JSON or a file reference (`@file.json`).
 | Flag | Type | Description |
 | :--- | :--- | :--- |
 | `-a`, `--api-token` | string | The Kosli API token. |
-| `-c`, `--config-file` | string | [optional] The Kosli config file path. (default "kosli") |
+| `-c`, `--config-file` | string | [optional] The Kosli config file path. Config is read from this path or the default only, never implicitly from the current directory. (default "$HOME/.kosli.yml") |
 | `--debug` | bool | [optional] Print debug logs to stdout. |
 | `-H`, `--host` | string | [defaulted] The Kosli endpoint. (default "https://app.kosli.com") |
 | `--http-proxy` | string | [optional] The HTTP proxy URL including protocol and port number. e.g. `http://proxy-server-ip:proxy-port` |
@@ -64,7 +64,7 @@ This accepts inline JSON or a file reference (`@file.json`).
 	<Tab title="GitHub">
 	View an example of the `kosli evaluate input` command in GitHub.
 
-	In [this YAML file](https://github.com/cyber-dojo/snyk-scanning/blob/ed3c81d7322bb8058615095f4aab28c147c53933/tests/test_rego_rules.sh#L286)
+	In [this YAML file](https://github.com/cyber-dojo/snyk-scanning/blob/30111f180ac4e3611cdbd7d805381a0bb9f53cff/tests/test_rego_rules.sh#L304)
 	</Tab>
 </Tabs>
 

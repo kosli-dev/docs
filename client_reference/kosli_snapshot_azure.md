@@ -20,9 +20,17 @@ will not match. See
 https://learn.microsoft.com/en-us/azure/azure-functions/functions-app-settings#website_run_from_package
 
 For zip-deployed apps, the fingerprint respects a `.kosli_ignore` file at the root of the deployed package.
+
+With `--digests-source acr`, the registry is taken from each app's own container configuration. Azure
+credentials are only ever sent to an Azure Container Registry login server. An app whose image comes
+from any other registry is read without credentials, which works for a public image but not a private
+one; report those apps with `--digests-source logs` instead.
+
+`--dry-run` suppresses only the request to Kosli. Azure discovery and registry lookups still run.
 To specify paths in a directory artifact that should always be excluded from the SHA256 calculation, you can add a `.kosli_ignore` file to the root of the artifact.
 Each line should specify a relative path or path glob to be ignored. You can include comments in this file, using `#`.
-The `.kosli_ignore` will be treated as part of the artifact like any other file, unless it is explicitly ignored itself.
+The `.kosli_ignore` file is always treated as part of the artifact: its own entries cannot exclude it, so the exclusion list cannot be changed without changing the fingerprint.
+Paths the list already matches stay excluded whatever is later added there, so keep its entries as narrow as possible.
 
 To authenticate to Azure, you need to create Azure service principal with a secret
 and provide these Azure credentials via flags or by exporting the equivalent KOSLI env vars (e.g. KOSLI_AZURE_CLIENT_ID).
@@ -40,7 +48,7 @@ The service principal needs to have the following permissions:
 | `--azure-resource-group-name` | string | Azure resource group name. |
 | `--azure-subscription-id` | string | Azure subscription ID. |
 | `--azure-tenant-id` | string | Azure tenant ID. |
-| `--digests-source` | string | [defaulted] Where to get the digests from. Valid values are 'acr' and 'logs'. (default "acr") |
+| `--digests-source` | string | [defaulted] Where to get the digests from. Valid values are 'acr' and 'logs'. With 'acr', Azure credentials are only sent to Azure Container Registry login servers; an app whose image comes from any other registry is read without credentials, so a private third-party registry needs 'logs'. (default "acr") |
 | `-D`, `--dry-run` | bool | [optional] Run in dry-run mode. When enabled, no data is sent to Kosli and the CLI exits with 0 exit code regardless of any errors. |
 | `-h`, `--help` | bool | help for azure |
 | `--zip` | bool | Download logs from Azure as zip files |
@@ -51,7 +59,7 @@ The service principal needs to have the following permissions:
 | :--- | :--- | :--- |
 | `-a`, `--api-token` | string | The Kosli API token. |
 | `-A`, `--auto-environment` | bool | [optional] Create the environment (with the type inferred from the snapshot subcommand) if it does not already exist, before reporting the snapshot. |
-| `-c`, `--config-file` | string | [optional] The Kosli config file path. (default "kosli") |
+| `-c`, `--config-file` | string | [optional] The Kosli config file path. Config is read from this path or the default only, never implicitly from the current directory. (default "$HOME/.kosli.yml") |
 | `--debug` | bool | [optional] Print debug logs to stdout. |
 | `--environment-description` | string | [optional] The environment description. |
 | `--exclude-scaling` | bool | [optional] Exclude scaling events for snapshots. Snapshots with scaling changes will not result in new environment records. (DEPRECATED: this flag is deprecated and will be removed in a future version. Scaling events do not trigger new snapshots.) |

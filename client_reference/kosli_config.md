@@ -1,6 +1,6 @@
 ---
 title: "kosli config"
-description: "Config global Kosli flags values and store them in $HOME/.kosli .  "
+description: "Config global Kosli flags values and store them in $HOME/.kosli.yml .  "
 ---
 
 ## Synopsis
@@ -9,13 +9,16 @@ description: "Config global Kosli flags values and store them in $HOME/.kosli . 
 kosli config [flags]
 ```
 
-Config global Kosli flags values and store them in $HOME/.kosli .  
+Config global Kosli flags values and store them in $HOME/.kosli.yml .  
 
 Flag values are determined in the following order (highest precedence first):
 - command line flags on each executed command.
 - environment variables.
-- custom config file provided with --config-file flag.
-- default config file in $HOME/.kosli
+- custom config file provided with the --config-file flag or the KOSLI_CONFIG_FILE env var.
+- default config file in $HOME/.kosli.yml
+
+A config file in the directory a command runs from is never read unless it is named
+with --config-file or KOSLI_CONFIG_FILE.
 
 You can configure global Kosli flags (the ones that apply to all/most commands) using their dedicated
 convenience flags (e.g. --org). 
@@ -38,7 +41,7 @@ Keys correspond to the specific flag name, capitalized. For instance: --flow wou
 | Flag | Type | Description |
 | :--- | :--- | :--- |
 | `-a`, `--api-token` | string | The Kosli API token. |
-| `-c`, `--config-file` | string | [optional] The Kosli config file path. (default "kosli") |
+| `-c`, `--config-file` | string | [optional] The Kosli config file path. Config is read from this path or the default only, never implicitly from the current directory. (default "$HOME/.kosli.yml") |
 | `--debug` | bool | [optional] Print debug logs to stdout. |
 | `-H`, `--host` | string | [defaulted] The Kosli endpoint. (default "https://app.kosli.com") |
 | `--http-proxy` | string | [optional] The HTTP proxy URL including protocol and port number. e.g. `http://proxy-server-ip:proxy-port` |
