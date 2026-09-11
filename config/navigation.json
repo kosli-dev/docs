@@ -460,7 +460,18 @@
         {
           "item": "API Reference",
           "icon": "code",
-          "openapi": "https://app.kosli.com/api/v2/openapi.json"
+          "groups": [
+            {
+              "group": "Guides",
+              "pages": [
+                "api-reference/snapshot_artifacts_and_deployment_diffs"
+              ]
+            },
+            {
+              "group": "Endpoints",
+              "openapi": "https://app.kosli.com/api/v2/openapi.json"
+            }
+          ]
         },
         {
           "item": "GitHub Action Reference",

@@ -195,6 +195,8 @@ You can also diff two different environments to see what's running in one but no
 kosli diff snapshots aws-beta~3 aws-prod
 ```
 
+A snapshot diff tells you what changed between two points in time. To find out what a single running artifact *replaced*, and the commit range between the two, read its `deployment_diff` in the API response instead. See [Snapshot artifacts and deployment diffs](/api-reference/snapshot_artifacts_and_deployment_diffs).
+
 ## Don't parse the raw CLI output
 
 The human-readable output you see above (tables, `COMPLIANT`/`NON-COMPLIANT` labels, history lines, etc.) is intended for people, not scripts. The exact wording, casing, and field labels may change between CLI versions to improve clarity or to stay aligned with the UI, and parsing this text in scripts or CI gates will silently break when it does.
