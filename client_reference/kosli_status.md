@@ -24,7 +24,7 @@ If you like to assert the Kosli server status, you can use the `--assert` flag o
 | Flag | Type | Description |
 | :--- | :--- | :--- |
 | `-a`, `--api-token` | string | The Kosli API token. |
-| `-c`, `--config-file` | string | [optional] The Kosli config file path. (default "kosli") |
+| `-c`, `--config-file` | string | [optional] The Kosli config file path. Config is read from this path or the default only, never implicitly from the current directory. (default "$HOME/.kosli.yml") |
 | `--debug` | bool | [optional] Print debug logs to stdout. |
 | `-H`, `--host` | string | [defaulted] The Kosli endpoint. (default "https://app.kosli.com") |
 | `--http-proxy` | string | [optional] The HTTP proxy URL including protocol and port number. e.g. `http://proxy-server-ip:proxy-port` |

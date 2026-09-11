@@ -21,7 +21,10 @@ The attestation can be bound to an *artifact* in two ways:
 
 To specify paths in a directory artifact that should always be excluded from the SHA256 calculation, you can add a `.kosli_ignore` file to the root of the artifact.
 Each line should specify a relative path or path glob to be ignored. You can include comments in this file, using `#`.
-The `.kosli_ignore` will be treated as part of the artifact like any other file, unless it is explicitly ignored itself.
+The `.kosli_ignore` file is always treated as part of the artifact: its own entries cannot exclude it, so the exclusion list cannot be changed without changing the fingerprint.
+Paths the list already matches stay excluded whatever is later added there, so keep its entries as narrow as possible.
+Excluding the file with `--exclude` keeps it out of the fingerprint but still applies the paths it lists, which lets a writable directory change the list again.
+To drop the file from the fingerprint safely, move its entries to `--exclude` and delete it.
 
 You can optionally associate the attestation to a git commit using `--commit` (requires access to a git repo).
 You can optionally redact some of the git commit data sent to Kosli using `--redact-commit-info`.
@@ -37,7 +40,7 @@ In other CI systems, set them explicitly to capture repository metadata.
 | `--annotate` | stringToString | [optional] Annotate the attestation with data using key=value. |
 | `-t`, `--artifact-type` | string | The type of the artifact to calculate its SHA256 fingerprint. One of: [oci, docker, file, dir]. Only required if you want Kosli to calculate the fingerprint for you (i.e. when you don't specify '`--fingerprint`' on commands that allow it). |
 | `--attachments` | strings | [optional] The comma-separated list of paths of attachments for the reported attestation. Attachments can be files or directories. All attachments are compressed and uploaded to Kosli's evidence vault. |
-| `--attestation-data` | string | The filepath of a json file containing the custom attestation data. |
+| `--attestation-data` | string | The filepath of a JSON file containing the custom attestation data. The maximum JSON payload size is 1MB. |
 | `-g`, `--commit` | string | [conditional] The git commit for which the attestation is associated to. Becomes required when reporting an attestation for an artifact before reporting it to Kosli. (defaulted in some CIs: [docs](/integrations/ci_cd) ). |
 | `--description` | string | [optional] attestation description |
 | `-D`, `--dry-run` | bool | [optional] Run in dry-run mode. When enabled, no data is sent to Kosli and the CLI exits with 0 exit code regardless of any errors. |
@@ -60,14 +63,14 @@ In other CI systems, set them explicitly to capture repository metadata.
 | `--repository` | string | [conditional] The name of the repository (e.g. owner/repo-name). All three of `--repo-id`, `--repo-url` and `--repository` must be set to record repository information (defaulted in some CIs: [docs](/integrations/ci_cd) ). |
 | `-T`, `--trail` | string | The Kosli trail name. |
 | `--type` | string | The name of the custom attestation type. |
-| `-u`, `--user-data` | string | [optional] The path to a JSON file containing additional data you would like to attach to the attestation. |
+| `-u`, `--user-data` | string | [optional] The path to a JSON file containing additional data you would like to attach to the attestation. The maximum JSON payload size is 1MB. |
 
 
 ## Flags inherited from parent commands
 | Flag | Type | Description |
 | :--- | :--- | :--- |
 | `-a`, `--api-token` | string | The Kosli API token. |
-| `-c`, `--config-file` | string | [optional] The Kosli config file path. (default "kosli") |
+| `-c`, `--config-file` | string | [optional] The Kosli config file path. Config is read from this path or the default only, never implicitly from the current directory. (default "$HOME/.kosli.yml") |
 | `--debug` | bool | [optional] Print debug logs to stdout. |
 | `-H`, `--host` | string | [defaulted] The Kosli endpoint. (default "https://app.kosli.com") |
 | `--http-proxy` | string | [optional] The HTTP proxy URL including protocol and port number. e.g. `http://proxy-server-ip:proxy-port` |
@@ -82,7 +85,7 @@ In other CI systems, set them explicitly to capture repository metadata.
 	<Tab title="GitHub">
 	View an example of the `kosli attest custom` command in GitHub.
 
-	In [this YAML file](https://github.com/cyber-dojo/differ/blob/bcac1c18385b2573ef6c6e8eeae0f62ed14a03de/.github/workflows/main.yml#L168), which created [this Kosli Event](https://app.kosli.com/cyber-dojo/flows/differ-ci/trails/bcac1c18385b2573ef6c6e8eeae0f62ed14a03de?attestation_id=8dfb2b55-0e6d-4d76-8396-4c85e9aa).
+	In [this YAML file](https://github.com/cyber-dojo/differ/blob/2e9bd969b50fff6b86578d69b7139f2d688ef6e2/.github/workflows/main.yml#L168), which created [this Kosli Event](https://app.kosli.com/cyber-dojo/flows/differ-ci/trails/2e9bd969b50fff6b86578d69b7139f2d688ef6e2?attestation_id=46b51e1e-c0db-463e-b8d0-63dd8d20).
 	</Tab>
 </Tabs>
 

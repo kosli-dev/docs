@@ -37,7 +37,7 @@ or any of the `--flow`, `--trail` or `--fingerprint` flags.
 | Flag | Type | Description |
 | :--- | :--- | :--- |
 | `-a`, `--api-token` | string | The Kosli API token. |
-| `-c`, `--config-file` | string | [optional] The Kosli config file path. (default "kosli") |
+| `-c`, `--config-file` | string | [optional] The Kosli config file path. Config is read from this path or the default only, never implicitly from the current directory. (default "$HOME/.kosli.yml") |
 | `--debug` | bool | [optional] Print debug logs to stdout. |
 | `-H`, `--host` | string | [defaulted] The Kosli endpoint. (default "https://app.kosli.com") |
 | `--http-proxy` | string | [optional] The HTTP proxy URL including protocol and port number. e.g. `http://proxy-server-ip:proxy-port` |
@@ -104,11 +104,11 @@ kosli get attestation snyk-container-scan --flow=differ-ci --fingerprint=0cbbe3a
       ]
     },
     "attestation_id": "f7cd9b3a-2738-47e6-be36-689d511d",
-    "html_url": "https://app.kosli.com/cyber-dojo/flows/differ-ci/trails/5ccc5c141fdd1fbd97905b7fe0af87e5a592bfb6?attestation_id=f7cd9b3a-2738-47e6-be36-689d511d",
     "flow_name": "differ-ci",
     "trail_name": "5ccc5c141fdd1fbd97905b7fe0af87e5a592bfb6",
     "reported_by": "ci-pipelines",
     "has_audit_package": true,
+    "html_url": "https://app.kosli.com/cyber-dojo/flows/differ-ci/trails/5ccc5c141fdd1fbd97905b7fe0af87e5a592bfb6?attestation_id=f7cd9b3a-2738-47e6-be36-689d511d",
     "_links": {
       "self": {
         "href": "https://app.kosli.com/api/v2/attestations/cyber-dojo/differ-ci/artifact/0cbbe3a6e73e733e8ca4b8813738d68e824badad0508ff20842832b5143b48c0/snyk-container-scan"

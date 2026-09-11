@@ -10,8 +10,15 @@ kosli attest jira [IMAGE-NAME | FILE-PATH | DIR-PATH] [flags]
 ```
 
 Report a jira attestation to an artifact or a trail in a Kosli flow.  
-Parses the given commit's message, current branch name or the content of the `--jira-secondary-source`
-argument for Jira issue references of the form:
+By default, parses the given commit's message, current branch name, or the content of the
+`--jira-secondary-source` argument for Jira issue references.
+Use `--jira-trailer` to read issue keys exclusively from a named git trailer line instead
+(e.g. `Jira: PROJ-42`); only the last block of lines in the commit message is scanned
+(everything after the final blank line, or the whole message if there is no blank line).
+The rest of the commit message and branch name are not scanned.
+`--jira-trailer` and `--jira-secondary-source` are mutually exclusive.
+
+Jira issue references have the form:
 'at least 2 characters long, starting with an uppercase letter project key followed by
 dash and one or more digits'.
 
@@ -31,13 +38,19 @@ because `CVE-2026` would be followed by `-4`. This applies across all parsed sou
 (commit message, branch name, and secondary source).
 Note: if your Jira project key collides with this pattern (e.g. a project key of `CVE`), an
 issue reference that happens to be the prefix of a longer hyphenated number (such as a CVE
-identifier) will be filtered out. Use `--jira-secondary-source` with a different identifier
-format as a workaround.
+identifier) will be filtered out. Use `--jira-trailer` to read issue keys from a dedicated
+git trailer line (e.g. `Jira: CVE-42`), which confines scanning to the trailer value and
+removes collisions caused by surrounding commit text; write the issue key alone in the
+trailer value, not embedded in a longer hyphenated string (e.g. `Jira: CVE-2026-41284`
+would still be filtered out). Alternatively, use `--jira-secondary-source` with a different
+identifier format.
 
 If you want to restrict the Jira issue matching to a specific project, use the
 `--jira-project-key` flag to specify your own project key. You can specify multiple project keys if needed.
 
 If the `--ignore-branch-match` is set, the branch name is not parsed for a match.
+`--ignore-branch-match` has no effect when `--jira-trailer` is set, since the branch is
+never scanned in trailer mode.
 
 The found issue references will be checked against Jira to confirm their existence.
 The attestation is reported in all cases, and its compliance status depends on referencing
@@ -62,7 +75,10 @@ The attestation can be bound to an *artifact* in two ways:
 
 To specify paths in a directory artifact that should always be excluded from the SHA256 calculation, you can add a `.kosli_ignore` file to the root of the artifact.
 Each line should specify a relative path or path glob to be ignored. You can include comments in this file, using `#`.
-The `.kosli_ignore` will be treated as part of the artifact like any other file, unless it is explicitly ignored itself.
+The `.kosli_ignore` file is always treated as part of the artifact: its own entries cannot exclude it, so the exclusion list cannot be changed without changing the fingerprint.
+Paths the list already matches stay excluded whatever is later added there, so keep its entries as narrow as possible.
+Excluding the file with `--exclude` keeps it out of the fingerprint but still applies the paths it lists, which lets a writable directory change the list again.
+To drop the file from the fingerprint safely, move its entries to `--exclude` and delete it.
 
 You can optionally associate the attestation to a git commit using `--commit` (requires access to a git repo).
 You can optionally redact some of the git commit data sent to Kosli using `--redact-commit-info`.
@@ -94,7 +110,8 @@ In other CI systems, set them explicitly to capture repository metadata.
 | `--jira-issue-fields` | string | [optional] The comma separated list of fields to include from the Jira issue. Default no fields are included. '*all' will give all fields. |
 | `--jira-pat` | string | Jira personal access token (for self-hosted Jira) |
 | `--jira-project-key` | strings | [optional] Jira project key to match against. Can be repeated, or given as a comma-separated list. Defaults to matching any jira project key. |
-| `--jira-secondary-source` | string | [optional] An optional string to search for Jira ticket reference, e.g. '`--jira-secondary-source` $\{\{ github.head_ref \}\}' |
+| `--jira-secondary-source` | string | [optional] An optional string to search for Jira ticket reference, e.g. '`--jira-secondary-source` $\{\{ github.head_ref \}\}'. Mutually exclusive with `--jira-trailer`. |
+| `--jira-trailer` | string | [optional] The git trailer key to use as the sole source of Jira issue references (e.g. '`--jira-trailer` Jira' extracts the value of 'Jira: `issue-key`' lines from the final paragraph of the commit message). When set, the rest of the commit message and branch name are not scanned. Mutually exclusive with `--jira-secondary-source`. |
 | `--jira-username` | string | Jira username (for Jira Cloud) |
 | `-n`, `--name` | string | The name of the attestation as declared in the flow or trail yaml template. |
 | `-o`, `--origin-url` | string | [optional] The url pointing to where the attestation came from or is related. (defaulted to the CI url in some CIs: [docs](/integrations/ci_cd/#defaulted-kosli-command-flags-from-ci-variables) ). |
@@ -108,14 +125,14 @@ In other CI systems, set them explicitly to capture repository metadata.
 | `--repo-url` | string | [conditional] The URL of the repository. Must be a valid URL. All three of `--repo-id`, `--repo-url` and `--repository` must be set to record repository information (defaulted in some CIs: [docs](/integrations/ci_cd) ). |
 | `--repository` | string | [conditional] The name of the repository (e.g. owner/repo-name). All three of `--repo-id`, `--repo-url` and `--repository` must be set to record repository information (defaulted in some CIs: [docs](/integrations/ci_cd) ). |
 | `-T`, `--trail` | string | The Kosli trail name. |
-| `-u`, `--user-data` | string | [optional] The path to a JSON file containing additional data you would like to attach to the attestation. |
+| `-u`, `--user-data` | string | [optional] The path to a JSON file containing additional data you would like to attach to the attestation. The maximum JSON payload size is 1MB. |
 
 
 ## Flags inherited from parent commands
 | Flag | Type | Description |
 | :--- | :--- | :--- |
 | `-a`, `--api-token` | string | The Kosli API token. |
-| `-c`, `--config-file` | string | [optional] The Kosli config file path. (default "kosli") |
+| `-c`, `--config-file` | string | [optional] The Kosli config file path. Config is read from this path or the default only, never implicitly from the current directory. (default "$HOME/.kosli.yml") |
 | `--debug` | bool | [optional] Print debug logs to stdout. |
 | `-H`, `--host` | string | [defaulted] The Kosli endpoint. (default "https://app.kosli.com") |
 | `--http-proxy` | string | [optional] The HTTP proxy URL including protocol and port number. e.g. `http://proxy-server-ip:proxy-port` |
@@ -221,6 +238,32 @@ kosli attest jira
 kosli attest jira 
 	--name yourAttestationName 
 	--jira-secondary-source ${{ github.head_ref }} 
+	--jira-base-url https://kosli.atlassian.net 
+	--jira-username user@domain.com 
+	--jira-api-token yourJiraAPIToken 
+
+```
+</Accordion>
+<Accordion title="read the jira issue key exclusively from a git trailer line (e.g. 'Jira: PROJ-42')">
+```shell
+
+```
+</Accordion>
+<Accordion title="confines scanning to the trailer value — useful when project keys collide with">
+```shell
+
+```
+</Accordion>
+<Accordion title="patterns like CVE identifiers; write the issue key alone (e.g. 'Jira: CVE-42'),">
+```shell
+
+```
+</Accordion>
+<Accordion title="not embedded in a longer hyphenated string ('Jira: CVE-2026-41284' is still filtered)">
+```shell
+kosli attest jira 
+	--name yourAttestationName 
+	--jira-trailer Jira 
 	--jira-base-url https://kosli.atlassian.net 
 	--jira-username user@domain.com 
 	--jira-api-token yourJiraAPIToken 

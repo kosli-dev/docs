@@ -22,7 +22,7 @@ Get an environment's metadata.
 | Flag | Type | Description |
 | :--- | :--- | :--- |
 | `-a`, `--api-token` | string | The Kosli API token. |
-| `-c`, `--config-file` | string | [optional] The Kosli config file path. (default "kosli") |
+| `-c`, `--config-file` | string | [optional] The Kosli config file path. Config is read from this path or the default only, never implicitly from the current directory. (default "$HOME/.kosli.yml") |
 | `--debug` | bool | [optional] Print debug logs to stdout. |
 | `-H`, `--host` | string | [defaulted] The Kosli endpoint. (default "https://app.kosli.com") |
 | `--http-proxy` | string | [optional] The HTTP proxy URL including protocol and port number. e.g. `http://proxy-server-ip:proxy-port` |
@@ -50,9 +50,9 @@ kosli get environment aws-prod --output=json
   "name": "aws-prod",
   "type": "ECS",
   "description": "The ECS cluster for production cyber-dojo",
-  "last_modified_at": 1788260398.5436597,
-  "last_reported_at": 1788260398.5436597,
-  "last_changed_at": 1788256325.6192138,
+  "last_modified_at": 1789114018.585112,
+  "last_reported_at": 1789114018.585112,
+  "last_changed_at": 1789108858.5535865,
   "state": true,
   "include_scaling": false,
   "tags": {

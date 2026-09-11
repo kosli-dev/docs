@@ -22,7 +22,10 @@ The attestation can be bound to an *artifact* in two ways:
 
 To specify paths in a directory artifact that should always be excluded from the SHA256 calculation, you can add a `.kosli_ignore` file to the root of the artifact.
 Each line should specify a relative path or path glob to be ignored. You can include comments in this file, using `#`.
-The `.kosli_ignore` will be treated as part of the artifact like any other file, unless it is explicitly ignored itself.
+The `.kosli_ignore` file is always treated as part of the artifact: its own entries cannot exclude it, so the exclusion list cannot be changed without changing the fingerprint.
+Paths the list already matches stay excluded whatever is later added there, so keep its entries as narrow as possible.
+Excluding the file with `--exclude` keeps it out of the fingerprint but still applies the paths it lists, which lets a writable directory change the list again.
+To drop the file from the fingerprint safely, move its entries to `--exclude` and delete it.
 
 You can optionally associate the attestation to a git commit using `--commit` (requires access to a git repo).
 You can optionally redact some of the git commit data sent to Kosli using `--redact-commit-info`.
@@ -61,14 +64,14 @@ In other CI systems, set them explicitly to capture repository metadata.
 | `-R`, `--results-dir` | string | [defaulted] The path to a directory with JUnit test results. By default, the directory will be uploaded to Kosli's evidence vault. (default ".") |
 | `-T`, `--trail` | string | The Kosli trail name. |
 | `--upload-results` | bool | [defaulted] Whether to upload the provided Junit results directory as an attachment to Kosli or not. (default true) |
-| `-u`, `--user-data` | string | [optional] The path to a JSON file containing additional data you would like to attach to the attestation. |
+| `-u`, `--user-data` | string | [optional] The path to a JSON file containing additional data you would like to attach to the attestation. The maximum JSON payload size is 1MB. |
 
 
 ## Flags inherited from parent commands
 | Flag | Type | Description |
 | :--- | :--- | :--- |
 | `-a`, `--api-token` | string | The Kosli API token. |
-| `-c`, `--config-file` | string | [optional] The Kosli config file path. (default "kosli") |
+| `-c`, `--config-file` | string | [optional] The Kosli config file path. Config is read from this path or the default only, never implicitly from the current directory. (default "$HOME/.kosli.yml") |
 | `--debug` | bool | [optional] Print debug logs to stdout. |
 | `-H`, `--host` | string | [defaulted] The Kosli endpoint. (default "https://app.kosli.com") |
 | `--http-proxy` | string | [optional] The HTTP proxy URL including protocol and port number. e.g. `http://proxy-server-ip:proxy-port` |
@@ -83,12 +86,12 @@ In other CI systems, set them explicitly to capture repository metadata.
 	<Tab title="GitHub">
 	View an example of the `kosli attest junit` command in GitHub.
 
-	In [this YAML file](https://github.com/cyber-dojo/differ/blob/bcac1c18385b2573ef6c6e8eeae0f62ed14a03de/.github/workflows/main.yml#L101), which created [this Kosli Event](https://app.kosli.com/cyber-dojo/flows/differ-ci/trails/bcac1c18385b2573ef6c6e8eeae0f62ed14a03de?attestation_id=1143f5cc-9e0e-4bbc-a6bd-be16b348).
+	In [this YAML file](https://github.com/cyber-dojo/differ/blob/2e9bd969b50fff6b86578d69b7139f2d688ef6e2/.github/workflows/main.yml#L101), which created [this Kosli Event](https://app.kosli.com/cyber-dojo/flows/differ-ci/trails/2e9bd969b50fff6b86578d69b7139f2d688ef6e2?attestation_id=e6d4ca97-543f-43e2-85c5-24013053).
 	</Tab>
 	<Tab title="GitLab">
 	View an example of the `kosli attest junit` command in GitLab.
 
-	In [this YAML file](https://gitlab.com/cyber-dojo/creator/-/blob/65fd2bfa2478534ea4bc5ccf30f6bfc6aab7550c/.gitlab/workflows/main.yml#L126), which created [this Kosli Event](https://app.kosli.com/cyber-dojo/flows/creator-ci/trails/d64d2b11879179255f11dc991e81fbaf4a040264?attestation_id=bea54670-c4f5-4e14-93b1-e234c111).
+	In [this YAML file](https://gitlab.com/cyber-dojo/creator/-/blob/65fd2bfa2478534ea4bc5ccf30f6bfc6aab7550c/.gitlab/workflows/main.yml#L126), which created [this Kosli Event](https://app.kosli.com/cyber-dojo/flows/creator-ci/trails/99d7b74f39e311d492902ad48dbe97da63f2c687?attestation_id=5401706d-eaca-41ff-a481-7fc8a1b8).
 	</Tab>
 </Tabs>
 
