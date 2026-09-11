@@ -13,12 +13,15 @@ Create an API key for a service account.
 
 The key value is only returned once, at creation time, so make sure to store it securely.
 
+Every API key expires. Without `--expires-at` the key is given the maximum allowed
+lifetime, and an `--expires-at` beyond that maximum is capped to it.
+
 ## Flags
 | Flag | Type | Description |
 | :--- | :--- | :--- |
 | `-d`, `--description` | string | A description for the API key. |
 | `-D`, `--dry-run` | bool | [optional] Run in dry-run mode. When enabled, no data is sent to Kosli and the CLI exits with 0 exit code regardless of any errors. |
-| `-e`, `--expires-at` | string | [optional] When the API key expires. Accepts an epoch timestamp or a date like '2026-06-04', '2026-06-04 15:04:05', or an RFC3339 timestamp. Defaults to no expiry. |
+| `-e`, `--expires-at` | string | [optional] When the API key expires. Accepts an epoch timestamp or a date like '2026-06-04', '2026-06-04 15:04:05', or an RFC3339 timestamp. Keys always expire: when not set, the key gets the maximum allowed lifetime, which also caps later dates. |
 | `-h`, `--help` | bool | help for api-key |
 | `-o`, `--output` | string | [defaulted] The format of the output. Valid formats are: [table, json]. (default "table") |
 | `-s`, `--service-account` | string | The name of the service account whose API keys are managed. |
