@@ -4,6 +4,50 @@ description: "Release notes for Kosli products."
 rss: true
 ---
 
+<Update label="September 11, 2026" description="v2.40.1" tags={["CLI"]}>
+
+## Updates
+
+- **Clearer help text for API key expiry** — reworded the `--expires-at` help for [`kosli create api-key`](/client_reference/kosli_create_api-key) and [`kosli rotate api-key`](/client_reference/kosli_rotate_api-key), and the `--grace-period-hours` help, to spell out that keys always expire, that leaving `--expires-at` unset uses the maximum allowed lifetime, and that dates beyond the maximum are capped.
+
+[View on GitHub](https://github.com/kosli-dev/cli/releases/tag/v2.40.1)
+
+</Update>
+
+<Update label="September 11, 2026" description="v0.9.4" tags={["Terraform Provider"]}>
+
+## Bug fixes
+
+- **`kosli_service_account_api_key` no longer drifts on `expires_at`** — the resource now aligns with the server's 365-day cap on API key expiry, including the "never expires" case, so `expires_at` no longer produces an inconsistent result after apply. Omitting `expires_at` now yields the maximum 365-day expiry rather than a non-expiring key.
+
+[View on GitHub](https://github.com/kosli-dev/terraform-provider-kosli/releases/tag/v0.9.4)
+
+</Update>
+
+<Update label="September 11, 2026" description="v2.40.0" tags={["CLI"]}>
+
+## New features
+
+- **`--jira-trailer` on `kosli attest jira`** — read Jira issue keys exclusively from a named git trailer line (for example `Jira: ABC-123`) instead of scanning branch names and commit messages. The flag is mutually exclusive with `--jira-secondary-source`, and `--ignore-branch-match` has no effect when it is set. See the [`kosli attest jira` reference](/client_reference/kosli_attest_jira).
+
+## Updates
+
+- **Pagination for pull request commits and reviews** — GitHub, GitLab, and Azure pull request attestations now page through every commit and every approved review, instead of silently stopping at the provider's default page size (100 for GitHub GraphQL/REST, 20 for GitLab, one page for Azure). A stuck cursor or exhausted page cap now fails the attestation with the pull request named, rather than recording a truncated list. Affects all `kosli attest pullrequest-*` commands.
+- **1&nbsp;MB payload limit documented** — the help for `--attestation-data` and `--user-data` now states the 1&nbsp;MB maximum JSON payload size accepted by the server.
+- **Security policy points to the platform bug bounty** — the CLI [SECURITY.md](https://github.com/kosli-dev/cli/blob/main/SECURITY.md) now states that the CLI itself has no bug bounty and directs reporters to the Kosli platform program.
+
+## Bug fixes
+
+- **`kosli.yml` no longer loaded from the working directory** (breaking) — the CLI previously loaded configuration from `kosli.yml` in whichever directory it was invoked in, which let a checked-in file in a repository silently change behavior. It now only reads config from the standard locations. Before upgrading, check for `kosli.yml` files at the root of any repository where the CLI runs.
+- **`kosli snapshot azure` scopes Azure credentials to ACR** — Azure credentials configured for the snapshot are no longer sent to non-Azure Container Registry hosts that a scanned Azure Web App references, closing a credential-disclosure path. See the [`kosli snapshot azure` reference](/client_reference/kosli_snapshot_azure).
+- **`.kosli_ignore` can no longer exclude itself from a fingerprint** — a `.kosli_ignore` entry that matched the file itself used to change the resulting directory fingerprint. The CLI now always includes `.kosli_ignore` when fingerprinting a directory. Directories with self-excluding `.kosli_ignore` files will produce a different fingerprint after upgrading.
+- **`kosli snapshot s3` rejects unsafe object keys** — object keys containing `..` segments are now rejected, and a downloaded object is never overwritten by a later key that resolves to the same local path. Snapshots of buckets with such keys will fail rather than silently collide. See the [`kosli snapshot s3` reference](/client_reference/kosli_snapshot_s3).
+- **`golang.org/x/crypto` upgraded to v0.56.0** — picks up the fix for CVE-2026-56855, a resource-exhaustion issue in `x/crypto/ssh` connection multiplexing.
+
+[View on GitHub](https://github.com/kosli-dev/cli/releases/tag/v2.40.0)
+
+</Update>
+
 <Update label="September 1, 2026" description="v2.39.2" tags={["CLI"]}>
 
 ## Updates
