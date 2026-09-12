@@ -1,5 +1,5 @@
 ---
-title: "Overview"
+title: "Roles and responsibilities"
 description: "Define roles and responsibilities for Kosli implementation"
 ---
 
