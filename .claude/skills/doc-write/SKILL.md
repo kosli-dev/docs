@@ -50,27 +50,20 @@ Tutorials teach through doing; how-to guides solve one problem for someone who a
 
 ## Decide where the page goes
 
-Classification determines placement. Getting this wrong costs a follow-up commit and a reviewer's time, so decide it before writing, not after.
+Tabs are named after subjects, not document types, so **placement follows the reader's job, not the classification above.** One subject draws all four Diátaxis needs, and they belong in the same tab, sorted by page form inside it.
 
-| The page is… | Tab ▸ group |
-|---|---|
-| A concept, or the reasoning behind a design | Documentation ▸ Understand Kosli |
-| Part of the first-run sequence a new user follows in order | Documentation ▸ Getting started |
-| A task an org admin performs (users, roles, auth, org-wide settings) | Documentation ▸ Administration |
-| A task a user performs with Kosli | Documentation ▸ Tutorials |
-| Setting up Kosli with a third-party product | Documentation ▸ Integrations |
-| A specific error message or symptom | Documentation ▸ Troubleshooting |
-| Complete factual lookup — CLI, API, Terraform, Helm, schema, policy | **Reference** tab |
-| Rollout and adoption guidance for a team standing Kosli up | Implementation Guide |
+**The tab set and its membership tests live in CLAUDE.md, under "Where a page goes".** Read them there — including the warning not to rename the `Reference` tab or its `CLI Reference` menu item — and pick the tab whose test the page satisfies. If a page fails every test, the structure is wrong, not the page: raise it rather than forcing a fit.
 
-The Reference tab wins on content shape, not on subject. A reference page about an integration belongs in Reference — a GitHub Action reference page was once authored into `integrations/` and had to be moved in a follow-up commit.
+Three rules the table does not carry:
 
-A group's label may not describe its contents — read the pages already in your chosen group before writing. Where label and contents disagree, follow the convention the existing pages set; do not create a parallel group alongside it.
+- **Reference wins on content shape, not on subject.** A reference page about an integration belongs in Reference — a GitHub Action reference page was once authored into `integrations/` and had to be moved in a follow-up commit.
+- **When two tests both look plausible, ask which reader is holding the page.** Someone standing Kosli up for the first time is in Discover Kosli even if the task is administrative; someone hardening an existing org is in Platform administration even if it is their first week.
+- **Read the pages already in your chosen group before writing**, and follow the convention they set rather than creating a parallel group beside them.
 
 ## Navigation rules
 
 - **Creating a page and adding it to `config/navigation.json` are one task.** A page absent from navigation does not exist on the site.
-- Add it to an existing group. Only create a group when you are adding three or more sibling pages — a group wrapping a single page adds a click and gives nothing back.
+- Add it to an existing group. Only create a group for two or more sibling pages — a group wrapping a single page adds a click and gives nothing back, which is the shape `audit_navigation.py` flags.
 - Keep pages within three levels of their tab.
 - **Sentence case for group labels**, matching CLAUDE.md's heading rule: "Naming conventions", not "Naming Conventions".
 
@@ -82,7 +75,7 @@ A group's label may not describe its contents — read the pages already in your
 
 ## Writing
 
-1. Classify the doc type and pick the destination from the table above.
+1. Classify the doc type, then pick the tab from the membership tests in CLAUDE.md, under "Where a page goes". The type table above decides the page's form, not its place.
 2. Outline against the doc type.
 3. Write the file. Root-relative links only (`/getting_started/install`). Frontmatter `title` and `description` are required.
 4. Add the navigation entry.
