@@ -55,6 +55,8 @@ runner-ci                   Test runner                                         
 ...some output elided...
 ```
 
+The `VISIBILITY` column is a legacy per-flow field and does not affect who can read a flow. Access is determined by the organization's visibility. cyber-dojo is a public organization, so any valid Kosli API token can read every flow listed here.
+
 ## Follow the artifact
 
 The commit that fixed the replica count was [16d9990](https://github.com/cyber-dojo/runner/commit/16d9990ad23a40eecaf087abac2a58a2d2a4b3f4) in the `runner` repository. Fetch its history from Kosli with `kosli search`, which accepts a git commit (full or short-form) or an artifact fingerprint:

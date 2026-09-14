@@ -20,6 +20,8 @@ export KOSLI_ORG=cyber-dojo
 export KOSLI_API_TOKEN=<your-api-token>
 ```
 
+Any valid Kosli API token can read cyber-dojo, because it is a public organization. If you don't have a token yet, the read-only cyber-dojo token shown in the [CLI reference live examples](/client_reference/kosli_list_flows#live-example) works for this tutorial.
+
 ## Search by commit SHA
 
 If you have a git commit SHA, `kosli search` will find any artifact built from it:
@@ -46,10 +48,11 @@ History:
     Artifact created                              Thu, 10 Sep 2026 08:01:20 CEST
     Started running in aws-beta#8339 environment  Thu, 10 Sep 2026 08:06:24 CEST
     Started running in aws-prod#5349 environment  Thu, 10 Sep 2026 08:55:58 CEST
-[...]
+
+[... further artifacts for this commit ...]
 ```
 
-One commit can produce several artifacts. Here the same commit also produced Terraform state artifacts in other flows, which are trimmed from the output above.
+One commit can produce several artifacts, and `kosli search` prints each one as its own block. Here the same commit also produced Terraform state artifacts in other flows; those blocks are trimmed from the output above.
 
 ## List flows and artifacts
 
@@ -69,7 +72,7 @@ differ-ci               Diff files from two traffic-lights  private     [ci=gith
 web-ci                  UX for practicing TDD               private     [ci=github], [repo_url=https://github.com/cyber-dojo/web], [kind=build], [env=aws-beta]
 ```
 
-The `VISIBILITY` column is a legacy per-flow field and does not affect who can read a flow. Access is determined by the organization's visibility, and cyber-dojo is a public organization, so every flow here is readable without logging in.
+The `VISIBILITY` column is a legacy per-flow field and does not affect who can read a flow. Access is determined by the organization's visibility. cyber-dojo is a public organization, so any valid Kosli API token can read every flow listed here.
 
 Once you know the flow name, you can list the artifacts reported to it:
 
