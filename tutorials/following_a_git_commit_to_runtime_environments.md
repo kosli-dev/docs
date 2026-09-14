@@ -1,6 +1,6 @@
 ---
 title: From commit to production
-description: "In this 5 minute tutorial you'll learn how Kosli tracks \"life after git\" and shows you events from CI pipelines (eg, building the docker image, running the unit tests, deploying, etc) and runtime environments (eg, the blue-green rollover, instance scaling, etc)"
+description: "In this 5 minute tutorial you'll learn how Kosli tracks \"life after git\" and shows you events from CI pipelines (eg, building the docker image, running the unit tests, deploying, etc) and runtime environments (eg, the blue-green rollover, an artifact starting or stopping, etc)"
 ---
 
 We will follow an actual git commit from a CI pipeline all the way into production runtime environments.

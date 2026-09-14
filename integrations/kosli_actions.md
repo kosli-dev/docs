@@ -11,14 +11,20 @@ Learn more about roles in Kosli in [Roles in Kosli](/administration/managing_use
 
 Actions enable you to automate the execution of if-this-do-that workflows based on Kosli events. You can configure actions to either receive a Slack notification or a JSON payload on a custom webhook when certain Kosli events happen.
 
-You can configure actions to be triggered by one or more of the following events occurring in one or more environments:
+You can configure actions to be triggered by one or more of the following events occurring in one or more environments. The first column is the name shown in the Kosli UI. The second column is the value to use in the [API](/api-reference/actions/create-or-update-environment-action) and in the [Terraform provider](/terraform-reference/resources/action).
 
-- When a new artifact starts execution in an environment.
-- When an artifact ceases execution in an environment.
-- When instances of an artifact are scaled up or down.
-- When an artifact is added to the allow-list in an environment.
-- When an environment changes state from <Badge color="green">Compliant</Badge> to <Badge color="red">Non-Compliant</Badge>.
-- When an environment changes state from <Badge color="red">Non-Compliant</Badge> to <Badge color="green">Compliant</Badge>.
+| Trigger (UI) | API value | Fires when |
+|---|---|---|
+| Artifact Start | `ON_STARTED_ARTIFACT` | An artifact starts running in the environment. |
+| Artifact Stop | `ON_EXITED_ARTIFACT` | An artifact stops running in the environment. |
+| Artifact changed | `ON_SCALED_ARTIFACT` | An artifact that is already running becomes compliant or non-compliant, or new provenance is recorded for it (for example, an attestation arrives after the artifact was deployed). It does **not** fire for new deployments; use Artifact Start for that. |
+| Artifact allow-listing | `ON_ALLOWED_ARTIFACT` | An artifact is added to the allow-list in the environment. |
+| Environment becomes compliant | `ON_COMPLIANT_ENV` | The environment changes from <Badge color="red">Non-Compliant</Badge> to <Badge color="green">Compliant</Badge>. |
+| Environment becomes non-compliant | `ON_NON_COMPLIANT_ENV` | The environment changes from <Badge color="green">Compliant</Badge> to <Badge color="red">Non-Compliant</Badge>. |
+
+<Note>
+`ON_SCALED_ARTIFACT` keeps its historical name for API compatibility. Kosli no longer records instance scaling events, so this trigger never fires because of a change in replica count.
+</Note>
 
 
 ## Slack Notifications
@@ -44,7 +50,7 @@ Custom webhook notifications empower you to implement automation workflows for "
     "timestamp": "1692616493",
     "org": "cyber-dojo",
     "environment": "aws-prod",
-    "event_type": "ARTIFACT_STARTED",
+    "event_type": "STARTED_ARTIFACT",
     "description": "1 instance started running (from 0 to 1)",
     "snapshot":  {
            "index": "1035",
@@ -67,6 +73,8 @@ Custom webhook notifications empower you to implement automation workflows for "
     }
 }
 ```
+
+`event_type` is the trigger's API value without the `ON_` prefix: `STARTED_ARTIFACT`, `EXITED_ARTIFACT`, `SCALED_ARTIFACT`, `ALLOWED_ARTIFACT`, `COMPLIANT_ENV`, or `NON_COMPLIANT_ENV`. For `SCALED_ARTIFACT`, the `description` field says which change occurred: the artifact became compliant, became non-compliant, or had new provenance recorded.
 
 ## Email
 
