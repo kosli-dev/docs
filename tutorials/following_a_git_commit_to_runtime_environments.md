@@ -24,7 +24,8 @@ Set your environment variables to use the public `cyber-dojo` Kosli organization
 
 ```shell
 export KOSLI_ORG=cyber-dojo
-export KOSLI_API_TOKEN=<your-api-token>
+# The API token below is read-only
+export KOSLI_API_TOKEN=Pj_XT2deaVA6V1qrTlthuaWsmjVt4eaHQwqnwqjRO3A
 ```
 
 ## List flows
@@ -55,7 +56,7 @@ runner-ci                   Test runner                                         
 ...some output elided...
 ```
 
-The `VISIBILITY` column is a legacy per-flow field and does not affect who can read a flow. Access is determined by the organization's visibility. cyber-dojo is a public organization, so every flow listed here is readable with any API token, valid or not.
+The `VISIBILITY` column is a legacy per-flow field and does not affect who can read a flow. Access is determined by the organization's visibility. cyber-dojo is a public organization, so every flow listed here is readable with the read-only token from Setup.
 
 ## Follow the artifact
 
