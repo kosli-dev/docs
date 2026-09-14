@@ -44,7 +44,6 @@ History:
     Started running in aws-beta#217 environment        Fri, 09 Sep 2022 12:02:42 CEST
     Deployment #60 to aws-prod environment             Fri, 09 Sep 2022 12:06:37 CEST
     Started running in aws-prod#202 environment        Fri, 09 Sep 2022 12:07:28 CEST
-    Scaled up from 1 to 3 in aws-prod#203 environment  Fri, 09 Sep 2022 12:08:28 CEST
     No longer running in aws-beta#222 environment      Sat, 10 Sep 2022 08:44:42 CEST
     No longer running in aws-prod#210 environment      Sat, 10 Sep 2022 08:49:28 CEST
 ```
