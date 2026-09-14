@@ -1,5 +1,5 @@
 ---
-title: Managing Custom Attestation Types
+title: Managing custom attestation types
 description: Learn how to manage Kosli custom attestation types via Terraform, including creating and importing types with JSON Schema, jq evaluation rules, and summaries.
 ---
 

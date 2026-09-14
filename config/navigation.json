@@ -2,7 +2,7 @@
   "tabs": [
     {
       "tab": "Documentation",
-      "groups": [
+      "pages": [
         {
           "group": "Understand Kosli",
           "icon": "book-open",
@@ -60,18 +60,8 @@
                 "administration/managing_users/automated_user_provisioning"
               ]
             },
-            {
-              "group": "Managing Environments",
-              "pages": [
-                "administration/managing_environments/overview"
-              ]
-            },
-            {
-              "group": "Managing Custom Attestation Types",
-              "pages": [
-                "administration/managing_custom_attestation_types/overview"
-              ]
-            },
+            "administration/managing_environments/overview",
+            "administration/managing_custom_attestation_types/overview",
             "administration/managing_tags"
           ]
         },
@@ -116,40 +106,15 @@
             {
               "group": "Security",
               "pages": [
-                {
-                  "group": "Detecting Terraform drift",
-                  "pages": [
-                    "tutorials/detecting_unexpected_statefile_changes",
-                    "tutorials/detecting_non_terraform_changes"
-                  ]
-                },
+                "tutorials/detecting_unexpected_statefile_changes",
+                "tutorials/detecting_non_terraform_changes",
                 "tutorials/rotating_api_keys"
               ]
             },
-            {
-              "group": "Evaluation",
-              "pages": [
-                "tutorials/evaluate_trails_with_opa"
-              ]
-            },
-            {
-              "group": "Multi-flow workflows",
-              "pages": [
-                "tutorials/linking_trails_across_branches"
-              ]
-            },
-            {
-              "group": "Controls",
-              "pages": [
-                "tutorials/working_with_controls"
-              ]
-            },
-            {
-              "group": "Repositories",
-              "pages": [
-                "tutorials/repositories"
-              ]
-            }
+            "tutorials/evaluate_trails_with_opa",
+            "tutorials/linking_trails_across_branches",
+            "tutorials/working_with_controls",
+            "tutorials/repositories"
           ]
         },
         {
@@ -165,13 +130,7 @@
             "troubleshooting/whitespace_path"
           ]
         },
-        {
-          "group": "FAQ",
-          "icon": "circle-question",
-          "pages": [
-            "faq/faq"
-          ]
-        },
+        "faq/faq",
         {
           "group": "Integrations",
           "icon": "puzzle-piece",
@@ -190,7 +149,7 @@
       "tab": "Labs",
       "groups": [
         {
-          "group": "Kosli Learning Labs",
+          "group": "Kosli learning labs",
           "pages": [
             "labs/index",
             "labs/lab-01-get-ready",
@@ -206,36 +165,26 @@
       "tab": "Implementation Guide",
       "groups": [
         {
-          "group": "Phase 1: Initial Discovery",
+          "group": "Phase 1: initial discovery",
           "icon": "lightbulb",
           "pages": [
-            {
-              "group": "Roles & Responsibilities",
-              "pages": [
-                "implementation_guide/phase_1/roles_and_responsibilities/overview",
-                "implementation_guide/phase_1/roles_and_responsibilities/platform_engineers",
-                "implementation_guide/phase_1/roles_and_responsibilities/app_developers",
-                "implementation_guide/phase_1/roles_and_responsibilities/security_compliance",
-                "implementation_guide/phase_1/roles_and_responsibilities/sponsors"
-              ]
-            }
+            "implementation_guide/phase_1/roles_and_responsibilities/overview",
+            "implementation_guide/phase_1/roles_and_responsibilities/platform_engineers",
+            "implementation_guide/phase_1/roles_and_responsibilities/app_developers",
+            "implementation_guide/phase_1/roles_and_responsibilities/security_compliance",
+            "implementation_guide/phase_1/roles_and_responsibilities/sponsors"
           ]
         },
         {
-          "group": "Phase 2: Configure Kosli",
+          "group": "Phase 2: configure Kosli",
           "icon": "gear",
           "pages": [
             {
-              "group": "Plan Organizational Structure",
+              "group": "Naming conventions",
               "pages": [
-                {
-                  "group": "Naming Conventions",
-                  "pages": [
-                    "implementation_guide/phase_2/plan_organizational_structure/naming_conventions/overview",
-                    "implementation_guide/phase_2/plan_organizational_structure/naming_conventions/attestation_types",
-                    "implementation_guide/phase_2/plan_organizational_structure/naming_conventions/flows_and_trails"
-                  ]
-                }
+                "implementation_guide/phase_2/plan_organizational_structure/naming_conventions/overview",
+                "implementation_guide/phase_2/plan_organizational_structure/naming_conventions/attestation_types",
+                "implementation_guide/phase_2/plan_organizational_structure/naming_conventions/flows_and_trails"
               ]
             }
           ]
@@ -465,13 +414,8 @@
         {
           "item": "GitHub Action Reference",
           "icon": "github",
-          "groups": [
-            {
-              "group": "GitHub Action",
-              "pages": [
-                "github-action-reference/setup_cli_action"
-              ]
-            }
+          "pages": [
+            "github-action-reference/setup_cli_action"
           ]
         },
         {
@@ -500,7 +444,7 @@
               ]
             },
             {
-              "group": "Data Sources",
+              "group": "Data sources",
               "pages": [
                 "terraform-reference/data-sources/environment",
                 "terraform-reference/data-sources/logical_environment",
@@ -513,7 +457,7 @@
               ]
             },
             {
-              "group": "List Resources",
+              "group": "List resources",
               "pages": [
                 "terraform-reference/list-resources/control"
               ]
@@ -525,21 +469,16 @@
           "icon": "layer-group",
           "groups": [
             {
-              "group": "Helm Charts",
+              "group": "Kubernetes reporter",
               "pages": [
-                {
-                  "group": "Kubernetes Reporter",
-                  "pages": [
-                    "helm/k8s_reporter/overview",
-                    "helm/k8s_reporter/prerequisites",
-                    "helm/k8s_reporter/installing",
-                    "helm/k8s_reporter/upgrading",
-                    "helm/k8s_reporter/uninstalling",
-                    "helm/k8s_reporter/tls-proxy",
-                    "helm/k8s_reporter/karpenter",
-                    "helm/k8s_reporter/configuration"
-                  ]
-                }
+                "helm/k8s_reporter/overview",
+                "helm/k8s_reporter/prerequisites",
+                "helm/k8s_reporter/installing",
+                "helm/k8s_reporter/upgrading",
+                "helm/k8s_reporter/uninstalling",
+                "helm/k8s_reporter/tls-proxy",
+                "helm/k8s_reporter/karpenter",
+                "helm/k8s_reporter/configuration"
               ]
             }
           ]
@@ -547,13 +486,8 @@
         {
           "item": "Template Reference",
           "icon": "file-code",
-          "groups": [
-            {
-              "group": "Templates",
-              "pages": [
-                "template-reference/flow_template"
-              ]
-            }
+          "pages": [
+            "template-reference/flow_template"
           ]
         },
         {
@@ -575,13 +509,8 @@
     {
       "tab": "Changelog",
       "icon": "clock",
-      "groups": [
-        {
-          "group": "Changelog",
-          "pages": [
-            "changelog/index"
-          ]
-        }
+      "pages": [
+        "changelog/index"
       ]
     }
   ]
