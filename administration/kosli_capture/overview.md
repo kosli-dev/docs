@@ -66,7 +66,7 @@ Kosli Capture can operate across multiple AWS regions and accounts, allowing you
 
 ## IAM permissions
 
-For Kosli Capture to snapshot your environment, you must grant a set of read-only permissions. Kosli's CloudFormation template lists these. The permissions are typically "Describe" or "List" permissions.  The [Kosli Capture Security](./kosli_capture_security) page provides a deep-diver into the structure of the permissions needed.
+For Kosli Capture to snapshot your environment, you must grant a set of read-only permissions. Kosli's CloudFormation template lists these. The permissions are typically "Describe" or "List" permissions.  The [Kosli Capture Security](/administration/kosli_capture/security) page provides a deep-diver into the structure of the permissions needed.
 
 The IAM role created in your environment includes a trust policy that allows Kosli Capture to assume the role. The trust policy limits access to the AWS account in which Kosli Capture is running. Furthermore, the trust policy includes an external ID that acts as a shared secret between Kosli and you, so that only access from Kosli Capture is permitted.
 

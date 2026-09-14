@@ -66,7 +66,7 @@ The `type` in your Terraform configuration must exactly match the type of the ex
 
 ### Automatically creating physical environments
 
-The [Kosli Capture Managed Service](/administration/kosli_capture) will automatically snapshot your infrastructure according to rules you define. Kosli Capture will create physical environments as needed.
+The [Kosli Capture Managed Service](/administration/kosli_capture/overview) will automatically snapshot your infrastructure according to rules you define. Kosli Capture will create physical environments as needed.
 
 ## Managing logical environments
 
