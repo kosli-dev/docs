@@ -25,70 +25,66 @@ export KOSLI_API_TOKEN=<your-api-token>
 If you have a git commit SHA, `kosli search` will find any artifact built from it:
 
 ```shell
-kosli search 0f5c9e1
+kosli search 99d7b74
 ```
 
 ```
-Search result resolved to commit 0f5c9e19c4d4f948d19ce4c8495b2a44745cda96
-Name:              cyberdojo/web:0f5c9e1
-Fingerprint:       62e1d2909cc59193b31bfd120276fcb8ba5e42dd6becd873218a41e4ce022505
+Search result resolved to commit 99d7b74f39e311d492902ad48dbe97da63f2c687
+Name:              244531986313.dkr.ecr.eu-central-1.amazonaws.com/creator:99d7b74
+Fingerprint:       a39fa3230549d3c6cb1732cc929c4e21041a09a21b2bb692cd37c9afe5fcd424
 Has provenance:    true
-Flow:              web
-Git commit:        0f5c9e19c4d4f948d19ce4c8495b2a44745cda96
-Commit URL:        https://github.com/cyber-dojo/web/commit/0f5c9e19c4d4f948d19ce4c8495b2a44745cda96
-Build URL:         https://github.com/cyber-dojo/web/actions/runs/3021563461
+Flow:              creator-ci
+Git commit:        99d7b74f39e311d492902ad48dbe97da63f2c687
+Commit URL:        https://github.com/cyber-dojo/creator/commit/99d7b74f39e311d492902ad48dbe97da63f2c687
+Build URL:         https://github.com/cyber-dojo/creator/actions/runs/34443243072
+Artifact URL:      https://app.kosli.com/cyber-dojo/flows/creator-ci/artifacts/a39fa3230549d3c6cb1732cc929c4e21041a09a21b2bb692cd37c9afe5fcd424
 Compliance state:  COMPLIANT
+Running in:        [ aws-beta, aws-prod ]
+Exited from:       [  ]
 History:
-    Artifact created                                   Fri, 09 Sep 2022 11:59:50 CEST
-    Deployment #59 to aws-beta environment             Fri, 09 Sep 2022 12:01:12 CEST
-    Started running in aws-beta#217 environment        Fri, 09 Sep 2022 12:02:42 CEST
-    Deployment #60 to aws-prod environment             Fri, 09 Sep 2022 12:06:37 CEST
-    Started running in aws-prod#202 environment        Fri, 09 Sep 2022 12:07:28 CEST
-    Scaled up from 1 to 3 in aws-prod#203 environment  Fri, 09 Sep 2022 12:08:28 CEST
-    No longer running in aws-beta#222 environment      Sat, 10 Sep 2022 08:44:42 CEST
-    No longer running in aws-prod#210 environment      Sat, 10 Sep 2022 08:49:28 CEST
+    Commit 99d7b74                                Thu, 10 Sep 2026 07:58:56 CEST
+    Artifact created                              Thu, 10 Sep 2026 08:01:20 CEST
+    Started running in aws-beta#8339 environment  Thu, 10 Sep 2026 08:06:24 CEST
+    Started running in aws-prod#5349 environment  Thu, 10 Sep 2026 08:55:58 CEST
+[...]
 ```
+
+One commit can produce several artifacts. Here the same commit also produced Terraform state artifacts in other flows, which are trimmed from the output above.
 
 ## List flows and artifacts
 
-The search result tells us this artifact belongs to the `web` flow. If you don't know which flows exist in your org, you can list them all:
+The search result tells us this artifact belongs to the `creator-ci` flow. If you don't know which flows exist in your org, you can list them all:
 
 ```shell
 kosli list flows
 ```
 
 ```
-NAME                    DESCRIPTION                         VISIBILITY
-creator                 UX for Group/Kata creation          public
-custom-start-points     Custom exercises choices            public
-dashboard               UX for a group practice dashboard   public
-differ                  Diff files from two traffic-lights  public
-exercises-start-points  Exercises choices                   public
-languages-start-points  Language+TestFramework choices      public
-nginx                   Reverse proxy                       public
-repler                  REPL for Python images              public
-runner                  Test runner                         public
-saver                   Group/Kata model+persistence        public
-shas                    UX for git+image shas               public
-web                     UX for practicing TDD               public
+NAME                    DESCRIPTION                         VISIBILITY  TAGS
+creator-ci              UX for Group/Kata creation          private     [ci=github], [repo_url=https://github.com/cyber-dojo/creator], [kind=build], [env=aws-beta]
+custom-start-points-ci  Custom exercises choices            private     [ci=github], [repo_url=https://github.com/cyber-dojo/custom-start-points], [kind=build], [env=aws-beta]
+dashboard-ci            UX for a group practice dashboard   private     [ci=github], [repo_url=https://github.com/cyber-dojo/dashboard], [kind=build], [env=aws-beta]
+differ-ci               Diff files from two traffic-lights  private     [ci=github], [repo_url=https://github.com/cyber-dojo/differ], [kind=build], [env=aws-beta]
+[...]
+web-ci                  UX for practicing TDD               private     [ci=github], [repo_url=https://github.com/cyber-dojo/web], [kind=build], [env=aws-beta]
 ```
 
 Once you know the flow name, you can list the artifacts reported to it:
 
 ```shell
-kosli list artifacts --flow creator
+kosli list artifacts --flow creator-ci
 ```
 
 ```
-COMMIT   ARTIFACT                                  STATE       CREATED_AT
-344430d  Name: cyberdojo/creator:344430d           COMPLIANT   Wed, 14 Sep 2022 10:48:09 CEST
-         Fingerprint: 817a72(...)6b5a273399c693
+COMMIT   ARTIFACT                                                                       STATE      CREATED_AT
+99d7b74  Name: 244531986313.dkr.ecr.eu-central-1.amazonaws.com/creator:99d7b74          COMPLIANT  Thu, 10 Sep 2026 08:01:20 CEST
+         Fingerprint: a39fa3230549d3c6cb1732cc929c4e21041a09a21b2bb692cd37c9afe5fcd424
 
-41bfb7b  Name: cyberdojo/creator:41bfb7b           COMPLIANT   Sat, 10 Sep 2022 08:41:15 CEST
-         Fingerprint: 8d6fef(...)b84c281f712ef8
+abdc613  Name: 244531986313.dkr.ecr.eu-central-1.amazonaws.com/creator:abdc613          COMPLIANT  Mon, 07 Sep 2026 12:56:13 CEST
+         Fingerprint: ba988cfdac64da22bc8268442c467504fe8df565e65c2f3c4344ce00c83e561a
 
-aa0a3d3  Name: cyberdojo/creator:aa0a3d3           COMPLIANT   Fri, 09 Sep 2022 11:58:56 CEST
-         Fingerprint: 3ede07(...)238845a631e96a
+b1e77bf  Name: 244531986313.dkr.ecr.eu-central-1.amazonaws.com/creator:b1e77bf          COMPLIANT  Thu, 03 Sep 2026 16:53:05 CEST
+         Fingerprint: 3e2248d4cd5715c23ef4b322291cc34b48c741f5ea299f8681349529b0829d56
 [...]
 ```
 
@@ -96,30 +92,36 @@ By default, the last 15 artifacts are shown. Use <Tooltip tip="Limit results per
 
 ## Get an artifact
 
-The artifact list gives you commit SHAs and fingerprints. Use either to fetch the full history of a specific artifact — the syntax is <Tooltip tip="Use flow:sha to identify by commit SHA (e.g. creator:344430d), or flow@fingerprint to identify by fingerprint (e.g. creator@817a726...).">flow:sha or flow@fingerprint</Tooltip>:
+The artifact list gives you commit SHAs and fingerprints. Use either to fetch the full history of a specific artifact — the syntax is <Tooltip tip="Use flow:sha to identify by commit SHA (e.g. creator-ci:99d7b74), or flow@fingerprint to identify by fingerprint (e.g. creator-ci@a39fa32...).">flow:sha or flow@fingerprint</Tooltip>:
 
 ```shell
-kosli get artifact creator:344430d
+kosli get artifact creator-ci:99d7b74
 ```
 
 ```
-Name:                     cyberdojo/creator:344430d
-Flow:                     creator
-Fingerprint:              817a72609041c51cd2a3bbbcbeb048c687677986b5a273399c6938b5e6aa1ded
-Created on:               Wed, 14 Sep 2022 10:48:09 CEST • 2 months ago
-Git commit:               344430d530d26068aa1f39760a9c094c989382f3
-Commit URL:               https://github.com/cyber-dojo/creator/commit/344430d530d26068aa1f39760a9c094c989382f3
-Build URL:                https://github.com/cyber-dojo/creator/actions/runs/3051390570
+Name:                     244531986313.dkr.ecr.eu-central-1.amazonaws.com/creator:99d7b74
+Flow:                     creator-ci
+Trail:                    99d7b74f39e311d492902ad48dbe97da63f2c687
+Name in template:         creator
+Fingerprint:              a39fa3230549d3c6cb1732cc929c4e21041a09a21b2bb692cd37c9afe5fcd424
+Created on:               Thu, 10 Sep 2026 08:01:20 CEST • 4 days ago
+Git commit:               99d7b74f39e311d492902ad48dbe97da63f2c687
+Commit URL:               https://github.com/cyber-dojo/creator/commit/99d7b74f39e311d492902ad48dbe97da63f2c687
+Build URL:                https://github.com/cyber-dojo/creator/actions/runs/34443243072
+Artifact URL:             https://app.kosli.com/cyber-dojo/flows/creator-ci/artifacts/a39fa3230549d3c6cb1732cc929c4e21041a09a21b2bb692cd37c9afe5fcd424
 State:                    COMPLIANT
-Running in environments:  aws-beta#265, aws-prod#259
+Running in environments:  aws-beta#8339, aws-prod#5349
 History:
-    Artifact created                               Wed, 14 Sep 2022 10:48:09 CEST
-    branch-coverage evidence received              Wed, 14 Sep 2022 10:49:11 CEST
-    Deployment #100 to aws-beta environment        Wed, 14 Sep 2022 10:50:40 CEST
-    Deployment #101 to aws-prod environment        Wed, 14 Sep 2022 10:51:43 CEST
-    Started running in aws-beta#229 environment    Wed, 14 Sep 2022 10:52:42 CEST
-    Started running in aws-prod#217 environment    Wed, 14 Sep 2022 10:53:28 CEST
-    ...
+    creator reported                                                Thu, 10 Sep 2026 08:01:20 CEST
+    Attestation creator.provenance-facts (custom:provenance-facts)  Thu, 10 Sep 2026 08:01:22 CEST
+    Attestation creator.provenance-decision (decision)              Thu, 10 Sep 2026 08:01:28 CEST
+    Attestation creator.sbom-facts (custom:sbom-facts)              Thu, 10 Sep 2026 08:01:31 CEST
+    Attestation creator.sbom-decision (decision)                    Thu, 10 Sep 2026 08:01:44 CEST
+    Attestation creator.snyk-container-scan (decision)              Thu, 10 Sep 2026 08:03:10 CEST
+    Attestation creator.unit-test (junit)                           Thu, 10 Sep 2026 08:03:52 CEST
+    Attestation creator.unit-test-coverage (generic)                Thu, 10 Sep 2026 08:03:54 CEST
+    Deployment of creator in aws-beta#8339                          Thu, 10 Sep 2026 08:06:24 CEST
+    Deployment of creator in aws-prod#5349                          Thu, 10 Sep 2026 08:55:58 CEST
 ```
 
 
@@ -132,11 +134,13 @@ kosli list environments
 ```
 
 ```
-NAME      TYPE  LAST REPORT                LAST MODIFIED
-aws-beta  ECS   2022-10-30T14:51:42+01:00  2022-10-30T14:51:42+01:00
-aws-prod  ECS   2022-10-30T14:51:28+01:00  2022-10-30T14:51:28+01:00
-beta      K8S   2022-06-15T11:39:59+02:00  2022-06-15T11:39:59+02:00
-prod      K8S   2022-06-15T11:40:01+02:00  2022-06-15T11:40:01+02:00
+NAME                                TYPE     LAST REPORT                LAST MODIFIED              TAGS                                POLICIES
+aws-beta                            ECS      2026-09-14T11:27:23+02:00  2026-09-14T11:27:23+02:00  [url=https://beta.cyber-dojo.org/]  [provenance pull-request snyk-scan-aws-beta trail-compliance-aws-beta]
+aws-beta-terraform-drift-detection  server   2026-09-14T11:25:08+02:00  2026-09-14T11:25:08+02:00                                      [provenance]
+aws-prod                            ECS      2026-09-14T11:26:58+02:00  2026-09-14T11:26:58+02:00  [url=https://cyber-dojo.org/]       [production-promotion provenance pull-request snyk-scan-aws-prod trail-compliance-aws-prod]
+aws-prod-terraform-drift-detection  server   2026-09-14T11:23:32+02:00  2026-09-14T11:23:32+02:00                                      [provenance]
+production                          logical                             2026-09-14T09:04:58+02:00                                      []
+staging                             logical                             2026-09-14T09:05:24+02:00                                      []
 ```
 
 To browse the history of changes in an environment:
@@ -146,26 +150,27 @@ kosli list snapshots aws-beta
 ```
 
 ```
-SNAPSHOT  FROM                            TO                              DURATION
-266       Wed, 19 Oct 2022 09:47:42 CEST  now                             11 days
-265       Wed, 19 Oct 2022 09:46:42 CEST  Wed, 19 Oct 2022 09:47:42 CEST  59 seconds
-264       Wed, 19 Oct 2022 09:45:42 CEST  Wed, 19 Oct 2022 09:46:42 CEST  about a minute
+SNAPSHOT  FROM                            TO                              DURATION        COMPLIANT
+8372      Mon, 14 Sep 2026 09:05:24 CEST  now                             2 hours         true
+8371      Mon, 14 Sep 2026 09:04:24 CEST  Mon, 14 Sep 2026 09:05:24 CEST  about a minute  true
+8370      Mon, 14 Sep 2026 09:01:23 CEST  Mon, 14 Sep 2026 09:04:24 CEST  3 minutes       true
+8369      Mon, 14 Sep 2026 09:00:24 CEST  Mon, 14 Sep 2026 09:01:23 CEST  59 seconds      true
 ...
 ```
 
-To see what was running in a specific snapshot:
+To see what was running in a specific snapshot, for example `#8339`, where the `creator` artifact above started running:
 
 ```shell
-kosli get snapshot aws-beta#256
+kosli get snapshot aws-beta#8339
 ```
 
 ```
-COMMIT   ARTIFACT                                                                              FLOW      RUNNING_SINCE  REPLICAS
-6fe0d30  Name: 244531986313.dkr.ecr.eu-central-1.amazonaws.com/repler:6fe0d30                  N/A       16 days ago    1
-         Fingerprint: a0c03099c832e4ce5f23f5e33dac9889c0b7ccd61297fffdaf1c67e7b99e6f8f
+COMMIT   ARTIFACT                                                                                                                                      FLOW        COMPLIANCE  RUNNING_SINCE  REPLICAS
+99d7b74  Name: 244531986313.dkr.ecr.eu-central-1.amazonaws.com/creator:99d7b74@sha256:a39fa3230549d3c6cb1732cc929c4e21041a09a21b2bb692cd37c9afe5fcd424  creator-ci  COMPLIANT   4 days ago     1
+         Fingerprint: a39fa3230549d3c6cb1732cc929c4e21041a09a21b2bb692cd37c9afe5fcd424
 
-d90a3e4  Name: 244531986313.dkr.ecr.eu-central-1.amazonaws.com/dashboard:d90a3e4               N/A       16 days ago    1
-         Fingerprint: dd5308fdcda117c1ff3963e192a069ae390c2fe9e10e8abfa2430224265efe98
+06dc33a  Name: 244531986313.dkr.ecr.eu-central-1.amazonaws.com/differ:06dc33a@sha256:dbd68f81c38a9bdbccac20e2ca5c23c6377a7093b0c7e5730156431eb06d64cf   differ-ci   COMPLIANT   5 days ago     1
+         Fingerprint: dbd68f81c38a9bdbccac20e2ca5c23c6377a7093b0c7e5730156431eb06d64cf
 [...]
 ```
 
@@ -173,21 +178,24 @@ You can also reference snapshots relatively — `aws-beta~1` means one behind th
 
 ## Compare snapshots
 
-Now that you can see individual snapshots, you can also diff two of them to find out exactly what changed between any two points in time:
+Now that you can see individual snapshots, you can also diff two of them to find out exactly what changed between any two points in time. Comparing snapshot `#8339` with the one before it shows the `creator` deployment:
 
 ```shell
-kosli diff snapshots aws-beta aws-beta~1
+kosli diff snapshots aws-beta#8339 aws-beta#8338
 ```
 
 ```
-Only present in aws-beta (snapshot: aws-beta#266)
+Only present in aws-beta#8339
 
-     Name:         244531986313.dkr.ecr.eu-central-1.amazonaws.com/dashboard:d90a3e4
-     Fingerprint:  dd5308fdcda117c1ff3963e192a069ae390c2fe9e10e8abfa2430224265efe98
-     Flow:         dashboard
-     Commit URL:   https://github.com/cyber-dojo/dashboard/commit/d90a3e481d57023816f6694ba4252342889405eb
-     Started:      Wed, 19 Oct 2022 09:47:33 CEST • 11 days ago
+     Name:         244531986313.dkr.ecr.eu-central-1.amazonaws.com/creator:99d7b74@sha256:a39fa3230549d3c6cb1732cc929c4e21041a09a21b2bb692cd37c9afe5fcd424
+     Fingerprint:  a39fa3230549d3c6cb1732cc929c4e21041a09a21b2bb692cd37c9afe5fcd424
+     Flow:         creator-ci
+     Commit URL:   https://github.com/cyber-dojo/creator/commit/99d7b74f39e311d492902ad48dbe97da63f2c687
+     Started:      Thu, 10 Sep 2026 08:06:01 CEST • 4 days ago
+     Instances:    1
 ```
+
+Relative references work here too. `kosli diff snapshots aws-beta aws-beta~1` compares the two most recent snapshots. If the same artifacts are running in both, the command prints nothing.
 
 You can also diff two different environments to see what's running in one but not the other:
 
