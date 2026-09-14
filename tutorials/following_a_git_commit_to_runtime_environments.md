@@ -16,7 +16,7 @@ The commit we follow fixed a misconfiguration: `runner` should run with three re
 ## Prerequisites
 
 * [Install Kosli CLI](/getting_started/install).
-* [Get a Kosli API token](/getting_started/authenticating_to_kosli).
+* Optional: [get a Kosli API token](/getting_started/authenticating_to_kosli). You need one to query your own organization, but not for this tutorial.
 
 ## Setup
 
@@ -24,7 +24,8 @@ Set your environment variables to use the public `cyber-dojo` Kosli organization
 
 ```shell
 export KOSLI_ORG=cyber-dojo
-export KOSLI_API_TOKEN=<your-api-token>
+# cyber-dojo is public, so the token is not checked; the CLI only needs a non-empty value
+export KOSLI_API_TOKEN=ignored
 ```
 
 ## List flows
@@ -38,22 +39,24 @@ kosli list flows
 You will see:
 
 ```plaintext
-NAME                        DESCRIPTION                                               VISIBILITY  TAGS
-creator-ci                  UX for Group/Kata creation                                private     [ci=github], [repo_url=https://github.com/cyber-dojo/creator], [kind=build], [env=aws-beta]
-custom-start-points-ci      Custom exercises choices                                  private     [env=aws-beta], [ci=github], [repo_url=https://github.com/cyber-dojo/custom-start-points], [kind=build]
-dashboard-ci                UX for a group practice dashboard                         private     [ci=github], [repo_url=https://github.com/cyber-dojo/dashboard], [kind=build], [env=aws-beta]
-differ-ci                   Diff files from two traffic-lights                        private     [env=aws-beta], [ci=github], [repo_url=https://github.com/cyber-dojo/differ], [kind=build]
-differ-ci-tf                Terraform human-readable plan and state file fingerprint  private
-docker-base-ci              Build cyber-dojo/docker-base image                        private
-exercises-start-points-ci   Exercises choices                                         private     [ci=github], [repo_url=https://github.com/cyber-dojo/exercises-start-points], [kind=build], [env=aws-beta]
-languages-start-points-ci   Language+TestFramework choices                            private     [ci=github], [repo_url=https://github.com/cyber-dojo/languages-start-points], [kind=build], [env=aws-beta]
-nginx-ci                    Reverse proxy                                             private     [kind=build], [env=aws-beta], [ci=github], [repo_url=https://github.com/cyber-dojo/nginx]
-production-promotion        Promotes sets of Artifacts from aws-beta to aws-prod      private     [ci=github], [repo_url=https://github.com/cyber-dojo/aws-prod-co-promotion], [kind=release], [env=aws-prod]
-production-server-access    Flow to track production server access                    private
-runner-ci                   Test runner                                               private     [ci=github], [repo_url=https://github.com/cyber-dojo/runner], [kind=build], [env=aws-beta]
+NAME                                         DESCRIPTION                                                VISIBILITY  TAGS
+creator-ci                                   UX for Group/Kata creation                                 private     [kind=build], [env=aws-beta], [ci=github], [repo_url=https://github.com/cyber-dojo/creator]
+custom-start-points-ci                       Custom exercises choices                                   private     [ci=github], [repo_url=https://github.com/cyber-dojo/custom-start-points], [kind=build], [env=aws-beta]
+dashboard-ci                                 UX for a group practice dashboard                          private     [ci=github], [repo_url=https://github.com/cyber-dojo/dashboard], [kind=build], [env=aws-beta]
+differ-ci                                    Diff files from two traffic-lights                         private     [repo_url=https://github.com/cyber-dojo/differ], [kind=build], [env=aws-beta], [ci=github]
+exercises-start-points-ci                    Exercises choices                                          private     [repo_url=https://github.com/cyber-dojo/exercises-start-points], [kind=build], [env=aws-beta], [ci=github]
+languages-start-points-ci                    Language+TestFramework choices                             private     [ci=github], [repo_url=https://github.com/cyber-dojo/languages-start-points], [kind=build], [env=aws-beta]
+monorepo-co-deployment                       Bind shared commit deployments                             private
+monorepo-creator                             UX for Group/Kata creation                                 public
+monorepo-dashboard                           UX for a group practice dashboard                          public
+monorepo-web                                 UX for practicing TDD                                      public
+nginx-ci                                     Reverse proxy                                              private     [ci=github], [repo_url=https://github.com/cyber-dojo/nginx], [kind=build], [env=aws-beta]
+production-promotion                         Promotes sets of Artifacts from aws-beta to aws-prod       private     [repo_url=https://github.com/cyber-dojo/aws-prod-co-promotion], [kind=release], [env=aws-prod], [ci=github]
 
 ...some output elided...
 ```
+
+The `VISIBILITY` column is a legacy per-flow field and does not affect who can read a flow. Access is determined by the organization's visibility. cyber-dojo is a public organization, so every flow listed here is readable without a real token.
 
 ## Follow the artifact
 
