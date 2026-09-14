@@ -69,6 +69,8 @@ differ-ci               Diff files from two traffic-lights  private     [ci=gith
 web-ci                  UX for practicing TDD               private     [ci=github], [repo_url=https://github.com/cyber-dojo/web], [kind=build], [env=aws-beta]
 ```
 
+The `VISIBILITY` column is a legacy per-flow field and does not affect who can read a flow. Access is determined by the organization's visibility, and cyber-dojo is a public organization, so every flow here is readable without logging in.
+
 Once you know the flow name, you can list the artifacts reported to it:
 
 ```shell
