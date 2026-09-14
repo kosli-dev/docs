@@ -201,7 +201,7 @@ Only present in aws-beta#8339
      Instances:    1
 ```
 
-Relative references work here too. `kosli diff snapshots aws-beta aws-beta~1` compares the two most recent snapshots. If the same artifacts are running in both, the command prints nothing.
+Relative references work here too. `kosli diff snapshots aws-beta aws-beta~1` compares the two most recent snapshots. If the same artifacts are running in both, the command prints nothing; add `--show-unchanged` to list the artifacts that are present in both.
 
 You can also diff two different environments to see what's running in one but not the other:
 

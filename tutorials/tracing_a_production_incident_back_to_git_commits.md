@@ -12,15 +12,16 @@ By the end of this tutorial, you will have traced a production incident from a 5
 ## Prerequisites
 
 * [Install Kosli CLI](/getting_started/install).
-* [Get a Kosli API token](/getting_started/authenticating_to_kosli).
+* Optional: [get a Kosli API token](/getting_started/authenticating_to_kosli). You need one to query your own organization, but not for this tutorial.
 
 ## Setup
 
-The `cyber-dojo` Kosli organization is public, so any authenticated user can read its data:
+The `cyber-dojo` Kosli organization is public, so you can follow this tutorial before you have a token of your own. When you query your own organization, replace `ignored` with a real API token.
 
 ```shell
 export KOSLI_ORG=cyber-dojo
-export KOSLI_API_TOKEN=<your-api-token>
+# cyber-dojo is public, so the token is not checked; the CLI only needs a non-empty value
+export KOSLI_API_TOKEN=ignored
 ```
 
 ## Start with the environment
