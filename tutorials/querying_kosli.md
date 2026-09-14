@@ -17,11 +17,11 @@ We will query **cyber-dojo**, an open-source project whose Kosli data is public.
 
 ```shell
 export KOSLI_ORG=cyber-dojo
-# The API token below is read-only
-export KOSLI_API_TOKEN=Pj_XT2deaVA6V1qrTlthuaWsmjVt4eaHQwqnwqjRO3A
+# cyber-dojo is public, so the token is not checked; the CLI only needs a non-empty value
+export KOSLI_API_TOKEN=ignored
 ```
 
-cyber-dojo is a public organization, so you can follow this tutorial before you have a token of your own. The read-only token above is the same one the [CLI reference](/client_reference/kosli_list_flows) live examples use.
+cyber-dojo is a public organization, so you can follow this tutorial before you have a token of your own. When you query your own organization, replace `ignored` with a real API token.
 
 ## Search by commit SHA
 
@@ -73,7 +73,7 @@ differ-ci               Diff files from two traffic-lights  private     [ci=gith
 web-ci                  UX for practicing TDD               private     [ci=github], [repo_url=https://github.com/cyber-dojo/web], [kind=build], [env=aws-beta]
 ```
 
-The `VISIBILITY` column is a legacy per-flow field and does not affect who can read a flow. Access is determined by the organization's visibility. cyber-dojo is a public organization, so every flow listed here is readable with the read-only token from Setup.
+The `VISIBILITY` column is a legacy per-flow field and does not affect who can read a flow. Access is determined by the organization's visibility. cyber-dojo is a public organization, so every flow listed here is readable without a real token.
 
 Once you know the flow name, you can list the artifacts reported to it:
 
