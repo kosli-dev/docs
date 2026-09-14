@@ -55,7 +55,7 @@ runner-ci                   Test runner                                         
 ...some output elided...
 ```
 
-The `VISIBILITY` column is a legacy per-flow field and does not affect who can read a flow. Access is determined by the organization's visibility. cyber-dojo is a public organization, so any valid Kosli API token can read every flow listed here.
+The `VISIBILITY` column is a legacy per-flow field and does not affect who can read a flow. Access is determined by the organization's visibility. cyber-dojo is a public organization, so every flow listed here is readable with any API token, valid or not.
 
 ## Follow the artifact
 
