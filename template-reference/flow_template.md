@@ -24,7 +24,7 @@ A flow template defines what attestations are required for a trail and its artif
         </ParamField>
 
         <ParamField path="trail.attestations[].type" type="string" required>
-          The attestation type. One of: `generic`, `jira`, `junit`, `pull_request`, `snyk`, `sonar`, `*` (matches any type).
+          The attestation type. One of: `generic`, `jira`, `junit`, `pull_request`, `snyk`, `sonar`, `decision`, `sbom`, `custom:<custom-type-name>` for [custom attestation types](/client_reference/kosli_create_attestation-type), or `*` to match any type.
         </ParamField>
       </Expandable>
     </ParamField>
@@ -46,7 +46,7 @@ A flow template defines what attestations are required for a trail and its artif
             </ParamField>
 
             <ParamField path="trail.artifacts[].attestations[].type" type="string" required>
-              The attestation type. One of: `generic`, `jira`, `junit`, `pull_request`, `snyk`, `sonar`, or `custom:<custom-type-name>` for [custom attestation types](/client_reference/kosli_create_attestation-type).
+              The attestation type. One of: `generic`, `jira`, `junit`, `pull_request`, `snyk`, `sonar`, `decision`, `sbom`, `custom:<custom-type-name>` for [custom attestation types](/client_reference/kosli_create_attestation-type), or `*` to match any type.
             </ParamField>
           </Expandable>
         </ParamField>
