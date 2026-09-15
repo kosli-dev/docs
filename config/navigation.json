@@ -47,6 +47,7 @@
               "pages": [
                 "administration/authentication/single_sign_on",
                 "administration/authentication/magic_link",
+                "administration/authentication/github_login",
                 "administration/authentication/api_authentication_methods",
                 "administration/authentication/service_accounts",
                 "administration/authentication/api_key_rotation"

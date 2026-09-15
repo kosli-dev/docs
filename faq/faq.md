@@ -86,6 +86,8 @@ kosli report evidence artifact generic server:1.0 \
 If you sign in to Kosli with GitHub, you must have a verified email address on your GitHub account — otherwise login will fail.
 
 You can check the status of your email addresses at [github.com/settings/emails](https://github.com/settings/emails).
+
+If your GitHub organization uses an IP allow list, you also need to allow Kosli's sign-in traffic. See [GitHub sign-in](/administration/authentication/github_login#github-ip-allow-lists) for the addresses to add.
 </Accordion>
 
 <Accordion title="Why can't I delete or archive a policy?">
