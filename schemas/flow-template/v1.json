@@ -52,7 +52,10 @@
               "type": "string"
             },
             {
-              "const": "decision",
+              "enum": [
+                "decision",
+                "sbom"
+              ],
               "type": "string"
             },
             {
