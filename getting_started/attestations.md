@@ -306,6 +306,23 @@ Currently, we support the following types of evidence:
     Nothing in the SBOM is checked against the artifact. It is recorded as reported, so the
     attestation says what the SBOM claims, not whether the claim is true.
 
+    **What you get depends on the format.** Kosli records what the document declares, and the
+    two formats are filled in differently by the tools that write them. Two differences matter
+    if you plan to write a policy against the attestation.
+
+    *The subject's digest is often absent from CycloneDX.* In SPDX the subject is a package and
+    its checksum sits on that package, which Kosli reads into `subject.sha256`. CycloneDX has a
+    `hashes` field for the same job, but Snyk and Syft both leave it empty and write the digest
+    into `version` instead, where it reads as a version string rather than a checksum. Kosli
+    does not infer a checksum from a version, so `subject.sha256` is typically set on an SPDX
+    attestation and empty on a CycloneDX one. If a policy of yours ties the SBOM to the
+    artifact by digest, assert the field is present rather than comparing it directly, or
+    attest the SBOM as SPDX.
+
+    *Package counts are not comparable between formats.* `package_count` counts what each
+    format calls a package. CycloneDX entries describing a file are not counted; the SPDX
+    equivalents are. The same artifact can report a different count in each format.
+
     The CLI refuses an SBOM file larger than 9 MiB, which leaves room for the attestation
     itself within the 10 MB the server accepts. We are working on raising this.
 
