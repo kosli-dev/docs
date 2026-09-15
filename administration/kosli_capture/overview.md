@@ -15,12 +15,7 @@ Kosli also supports reporting from your own cloud accounts by running the Kosli 
 
 ## Overview
 
-Kosli Capture connects to your cloud accounts using permissions that you manage.  You configure Kosli Capture by providing a few details describing what you want to be in scope, and Kosli Capture uses the permissions to regularly reach into your estate and record snapshots, sending the data into your Kosli organization.  Kosli Capture is architected to be driven by your tagging scheme; it examines the tags on your infrastructure and uses them to determine how to structure the snapshots, and how to build the environments within Kosli.
-
-There are several benefits to this this architecture:
-
-* the only infrastructure you need to manage is an IAM role; you do not need to install or execute any additional software in your cloud estate;
-* Kosli Capture leverages your existing tagging scheme, so as your infrastructure evolves, Kosli Capture will automatically discover the snapshots it needs to take.
+Kosli Capture connects to your cloud accounts using permissions that you manage.  You configure Kosli Capture by activating it for different AWS services, and Kosli Capture uses the permissions to regularly reach into your estate and record snapshots, sending the data into your Kosli organization.  Kosli Capture uses details about your infrastructure, such as the name of an ECS cluster, to build environments within Kosli.
 
 ## Security
 
@@ -30,39 +25,23 @@ The security of your cloud infrastructure is the primary driver behind the inter
 * When the job finishes, those credentials are discarded. A worker holding credentials for your cloud account has no path to anyone else's account.
 * The trust policy's ExternalId lives in Parameter Store and is readable only by the Kosli-side role for your organization. The shared task role cannot read any customer's ExternalId. Separation is enforced by IAM, not by application code.
 
-Kosli Catpure does not hold any customer data, it is near-stateless with the only thing it keeps is your configuration data.  Snapshots taken by Kosli Catpure are immediately sent to Kosli through the same ingest path as your existing pipelines.
+Kosli Catpure itself does not hold any customer data. Snapshots taken by Kosli Catpure are immediately sent to Kosli through the same ingest path as your existing pipelines.
 
 ## Hands-off operation
 
-Kosli Capture has been designed to operate with no on-going support from you.  Once the initial security permissions have been created, Kosli capture will continue to operate in a headless mode.  Monitoring, maintenance and rotation of API keys is all handed automatically.  As your cloud infrastructure changes over time, Kosli capture will continue to find resources according to your tagging scheme without you needing to do anything; your application teams do not need to take any action in order to onboard their products and services into Kosli.
-
-## Setup
-
-Getting started with Kosli Capture involves three stages:
-
-<Steps>
-  <Step title="Prepare your environment">
-    Create an IAM role in your AWS account specifically for Kosli Capture. Kosli provides a CloudFormation template to simplify this process. The template requires a shared secret, which Kosli provides to you during onboarding.
-  </Step>
-  <Step title="Write the configuration document">
-    Working with Kosli's Customer Success team, author a configuration document that shows how your cloud resources should be mapped to Kosli environments. This configuration document is loaded into Kosli.
-  </Step>
-  <Step title="Enable Kosli Capture">
-    Kosli enables Kosli Capture for your Kosli org, and the regular snapshots appear in Kosli.
-  </Step>
-</Steps>
+Kosli Capture has been designed to operate with no on-going support from you.  Once the initial security permissions have been created, Kosli capture will continue to operate in a headless mode.  Monitoring, maintenance and rotation of API keys is all handed automatically.  As your cloud infrastructure changes over time, Kosli capture will continue to find resources without you needing to do anything; your application teams do not need to take any action in order to onboard their products and services into Kosli.
 
 ## Finding resources
 
-Kosli Capture finds all supported resources within your AWS accounts, and examines the tags on those resources to determine which Kosli environment should hold the snapshots. Kosli Capture will create physical environments for you.
+Kosli Capture finds all supported resources within your AWS accounts, and determines which Kosli environment should hold the snapshots. Kosli Capture will create physical environments for you.
 
-Kosli Capture can filter out resources based on your tags.
+Kosli Capture can filter out resources based on AWS tags.
 
 As your cloud environment evolves, such as the addition of new ECS clusters or the retirement of existing Lambdas, Kosli Capture automatically detects the changes. Because Kosli Capture creates physical environments as needed, when your infrastructure changes, Kosli will keep up. No changes to the configuration created during the initial setup are required.
 
 ## Multiple AWS accounts
 
-Kosli Capture can operate across multiple AWS regions and accounts, allowing you to snapshot development, QA, pre-production, and production workloads with the same configuration document.
+Kosli Capture can operate across multiple AWS regions and accounts, allowing you to snapshot development, QA, pre-production, and production workloads with the same process.
 
 ## IAM permissions
 

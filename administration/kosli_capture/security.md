@@ -13,6 +13,8 @@ Kosli Capture is still in active development. Its capabilities and configuration
 
 The Kosli Capture managed service uses the public AWS, GCP and Azure APIs to extract information about your cloud environments.  In order to do this, you need to provide Kosli with an IAM role that allows access to these APIs.  The role is created and owned by you.  Kosli publishes a CloudFormation template, for use in AWS, showing the permissions needed.  The template is publicly accessible and can be used directly within an `aws cloudformation create-stack` call.
 
+The CloudFormation template we share with you includes a "phone-home" feature that notifies Kosli when a CloudFormation stack has been built from it; this allows us to pick up the AWS AccountId for the account in which you have used the CloudFormation template without you needing to do anything.  This automation is especially useful when you deploy the template as a StackSet within an Organizational Unit.
+
 ### Assume role
 
 The IAM role defined within the CloudFormation template includes an "assume role" policy granting permission from Kosli.  This appears as:
