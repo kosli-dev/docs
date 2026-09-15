@@ -8,6 +8,8 @@ By the end, you will have a Kosli attestation that captures the key facts from y
 
 This two-part approach keeps attestation payloads focused on what compliance rules need to evaluate, while ensuring the raw evidence remains available.
 
+For SBOMs there is now a dedicated type, `kosli attest sbom`, which reads the format, tools, subject and package count from the file for you. It is in beta. This tutorial remains the approach for any report Kosli does not parse, such as SARIF.
+
 <Note>
 The `--attestation-data` JSON payload sent by `kosli attest custom` is limited to 1 MB — exceeding it returns a 400 error. Distill larger reports into a summary and attach the full document with `--attachments`, as described below.
 </Note>

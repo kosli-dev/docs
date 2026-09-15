@@ -4,6 +4,8 @@ description: "Learn how to make attestations to Kosli to prove compliance in you
 icon: "receipt"
 ---
 
+import CliBetaNotice from "/snippets/cli-beta-notice.mdx";
+
 Attestations are how you record the facts you care about in your software supply chain.
 They are the evidence that you have performed certain activities, such as running tests, security scans, or ensuring that a certain requirement is met.
 
@@ -287,6 +289,27 @@ Currently, we support the following types of evidence:
     You can report results of a Snyk security scan to Kosli and it will analyze the Snyk scan results and determine the compliance status based on whether vulnerabilities were found or not.
 
     See [attest Snyk results to an artifact or a trail](/client_reference/kosli_attest_snyk/) for usage details and examples.
+  </Accordion>
+  <Accordion title="SBOM" icon="list-tree">
+
+    <CliBetaNotice />
+
+    You can attest a software bill of materials in CycloneDX (JSON or XML) or SPDX (JSON or
+    tag-value) format. Kosli reads the format, the creation time, the tools that produced it,
+    the subject it describes and how many packages it lists, and records those alongside the
+    file itself in the [Evidence Vault](#evidence-vault).
+
+    The file is uploaded as supplied, so the checksum Kosli records is the checksum of your
+    file and you can verify it by hand. Kosli sets the `sbom_format` and `sbom_sha256`
+    annotations for you; you do not pass them with `--annotate`.
+
+    Nothing in the SBOM is checked against the artifact. It is recorded as reported, so the
+    attestation says what the SBOM claims, not whether the claim is true.
+
+    The CLI refuses an SBOM file larger than 9 MiB, which leaves room for the attestation
+    itself within the 10 MB the server accepts. We are working on raising this.
+
+    See [attest an SBOM to an artifact or a trail](/client_reference/kosli_attest_sbom/) for usage details and examples.
   </Accordion>
   <Accordion title="Jira issues" icon="clipboard-list-check">
 
