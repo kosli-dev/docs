@@ -13,6 +13,8 @@ Kosli Capture is a managed service that runs on Kosli's infrastructure and conne
 
 Kosli also supports reporting from your own cloud accounts by running the Kosli CLI on a schedule. Kosli Capture inverts this, with Kosli running the regular [snapshots](/getting_started/environments) so there is no software for you to install.
 
+To set it up for your organization, see [Getting started with Kosli Capture](/administration/kosli_capture/getting_started).
+
 ## Overview
 
 Kosli Capture connects to your cloud accounts using permissions that you manage.  You configure Kosli Capture by activating it for different AWS services, and Kosli Capture uses the permissions to regularly reach into your estate and record snapshots, sending the data into your Kosli organization.  Kosli Capture uses details about your infrastructure, such as the name of an ECS cluster, to build environments within Kosli.
@@ -35,7 +37,7 @@ Kosli Capture has been designed to operate with no on-going support from you.  O
 
 Kosli Capture finds all supported resources within your AWS accounts, and determines which Kosli environment should hold the snapshots. Kosli Capture will create physical environments for you.
 
-Kosli Capture can filter out resources based on AWS tags.
+Kosli Capture can [filter out resources based on AWS tags](/administration/kosli_capture/getting_started#excluding-resources).
 
 As your cloud environment evolves, such as the addition of new ECS clusters or the retirement of existing Lambdas, Kosli Capture automatically detects the changes. Because Kosli Capture creates physical environments as needed, when your infrastructure changes, Kosli will keep up. No changes to the configuration created during the initial setup are required.
 

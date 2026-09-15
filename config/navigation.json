@@ -77,6 +77,7 @@
               "group": "Kosli Capture",
               "pages": [
                 "administration/kosli_capture/overview",
+                "administration/kosli_capture/getting_started",
                 "administration/kosli_capture/security"
               ]
             }
