@@ -6,6 +6,8 @@ description: "Instructions to install Kosli CLI on various platforms"
 icon: "download"
 ---
 
+import WorkingDirConfigNotice from "/snippets/cli-working-dir-config-notice.mdx";
+
 <Steps>
   <Step title="Choose your installation method">
 
@@ -165,7 +167,9 @@ Each key in the config file corresponds to the flag name, capitalized. For insta
 
 Config files can be written in JSON, YAML, or TOML formats.
 
-To direct Kosli CLI to use a config file, employ the --config-file flag when executing Kosli commands. By default, the CLI looks for a config file called `kosli.<yaml/yml/json/toml>`
+To direct Kosli CLI to use a config file, employ the `--config-file` flag when executing Kosli commands, or set `KOSLI_CONFIG_FILE` in the environment. By default the CLI reads `$HOME/.kosli.yml`, the file [`kosli config`](/client_reference/kosli_config) writes; a config file anywhere else has to be named.
+
+<WorkingDirConfigNotice />
 
 Below are examples of different config file formats:
 

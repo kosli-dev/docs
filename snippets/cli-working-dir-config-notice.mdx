@@ -1,0 +1,3 @@
+<Warning>
+Up to CLI v2.39.2, a file named `kosli.<yaml|yml|json|toml>` in the directory you ran Kosli from was loaded automatically, without `--config-file`. That is no longer the case, because it let the contents of a repository decide where the CLI sent your API token. If you relied on it, name your config file explicitly with `--config-file` on each command, or set `KOSLI_CONFIG_FILE` to its path. To apply its settings to every command instead, move them to your home config file with [`kosli config`](/client_reference/kosli_config). From v2.40.0 the CLI warns when it finds such a file and is ignoring it, unless you pass `--quiet`.
+</Warning>

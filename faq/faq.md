@@ -3,6 +3,8 @@ title: FAQ
 description: "Frequently asked questions"
 ---
 
+import WorkingDirConfigNotice from "/snippets/cli-working-dir-config-notice.mdx";
+
 <AccordionGroup>
 
 <Accordion title="Where can I find API documentation?">
@@ -53,7 +55,9 @@ When calling a Kosli command you can skip the file extension. For example, to li
 kosli list environments --config-file kosli-conf
 ```
 
-`--config-file` defaults to `kosli`, so if you name your file `kosli.<yaml|toml|json>` and the file is in the same location as where you run Kosli commands from, you can skip the `--config-file` altogether.
+`--config-file` defaults to `$HOME/.kosli.yml`, which is the file [`kosli config`](/client_reference/kosli_config) writes. Any other config file has to be named explicitly, either with `--config-file` on each command or by setting `KOSLI_CONFIG_FILE` in the environment.
+
+<WorkingDirConfigNotice />
 </Accordion>
 
 <Accordion title="Reporting the same artifact and evidence multiple times">
