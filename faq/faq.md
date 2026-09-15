@@ -3,6 +3,8 @@ title: FAQ
 description: "Frequently asked questions"
 ---
 
+import WorkingDirConfigNotice from "/snippets/cli-working-dir-config-notice.mdx";
+
 <AccordionGroup>
 
 <Accordion title="Where can I find API documentation?">
@@ -55,9 +57,7 @@ kosli list environments --config-file kosli-conf
 
 `--config-file` defaults to `$HOME/.kosli.yml`, which is the file [`kosli config`](/client_reference/kosli_config) writes. Any other config file has to be named explicitly, either with `--config-file` on each command or by setting `KOSLI_CONFIG_FILE` in the environment.
 
-<Warning>
-Up to CLI v2.39.2, a file named `kosli.<yaml|toml|json|env>` in the directory you ran Kosli from was loaded automatically, without `--config-file`. That is no longer the case, because it let the contents of a repository decide where the CLI sent your API token. If you relied on it, add `--config-file kosli.yml` to your commands or set `KOSLI_CONFIG_FILE=kosli.yml`. From v2.40.0 the CLI warns when it finds such a file and is ignoring it.
-</Warning>
+<WorkingDirConfigNotice />
 </Accordion>
 
 <Accordion title="Reporting the same artifact and evidence multiple times">
