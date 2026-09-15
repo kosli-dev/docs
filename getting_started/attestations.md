@@ -324,10 +324,24 @@ Currently, we support the following types of evidence:
     `kosli_Linux_arm64.rpm` in CycloneDX and two for the same file in SPDX.
 
     Of the two policy mechanisms, only [Rego](/policy-reference/rego_policy#input-data) can read
-    these fields; environment policy expressions expose the artifact's name and fingerprint but
-    not attestation content. An artifact-scoped SBOM is reachable at
-    `input.trail.compliance_status.artifacts_statuses.<artifact>.attestations_statuses.<name>.attestation_data.document`,
-    and a trail-scoped one at the same path without the `artifacts_statuses.<artifact>` step.
+    these fields. Environment policy expressions expose the artifact's name and fingerprint,
+    not attestation content. Evaluation copies an attestation's own fields onto its status
+    entry, so the summary sits under `attestation_data`:
+
+    ```rego
+    sbom_attestation_name := data.params.sbom_attestation_name
+
+    sbom_describes(artifact) if {
+        sbom := artifact.attestations_statuses[sbom_attestation_name]
+        sbom.attestation_data.document.subject.sha256 == artifact.artifact_fingerprint
+    }
+    ```
+
+    A trail-scoped SBOM sits at `trail.compliance_status.attestations_statuses[name]` instead.
+
+    If you narrow the input with `kosli evaluate trail --attestations`, name the SBOM there too,
+    dot-qualified as `<artifact>.<name>` for an artifact-scoped one. Anything left out is absent
+    from the input, and a rule reading it does not match rather than failing.
 
     The CLI refuses an SBOM file larger than 9 MiB, which leaves room for the attestation
     itself within the 10 MB the server accepts. We are working on raising this.
