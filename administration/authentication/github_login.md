@@ -23,8 +23,8 @@ your email addresses at [github.com/settings/emails](https://github.com/settings
     - US: [app.us.kosli.com](https://app.us.kosli.com)
   </Step>
   <Step title="Choose GitHub">
-    Select the GitHub option on the sign-in page. GitHub asks you to authorize Kosli the first time
-    you sign in.
+    Select **Continue with GitHub** on the sign-in page. GitHub asks you to authorize Kosli the
+    first time you sign in.
   </Step>
   <Step title="Return to Kosli">
     Once GitHub confirms the authorization, you are signed in to Kosli.
