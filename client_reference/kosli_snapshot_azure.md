@@ -20,11 +20,20 @@ will not match. See
 https://learn.microsoft.com/en-us/azure/azure-functions/functions-app-settings#website_run_from_package
 
 For zip-deployed apps, the fingerprint respects a `.kosli_ignore` file at the root of the deployed package.
+The package is extracted into a temporary directory. An entry whose name would resolve outside that directory
+(for example one containing a `..` segment) is never written; instead the whole snapshot fails and no app in
+the environment is reported until the offending app is redeployed without that entry.
 
 With `--digests-source acr`, the registry is taken from each app's own container configuration. Azure
 credentials are only ever sent to an Azure Container Registry login server. An app whose image comes
 from any other registry is read without credentials, which works for a public image but not a private
 one; report those apps with `--digests-source logs` instead.
+
+With `--digests-source logs`, the digest is read from each app's docker log: the image the platform records
+running when it last started the container. That log also carries the container's own output, so a
+compromised container could try to misreport its image. Lines the container writes are ignored, but the
+registry is the stronger source; a warning is printed whenever this mode is used, and an app whose log holds
+no platform-written digest is reported without a fingerprint and named in a warning.
 
 `--dry-run` suppresses only the request to Kosli. Azure discovery and registry lookups still run.
 To specify paths in a directory artifact that should always be excluded from the SHA256 calculation, you can add a `.kosli_ignore` file to the root of the artifact.
@@ -48,7 +57,7 @@ The service principal needs to have the following permissions:
 | `--azure-resource-group-name` | string | Azure resource group name. |
 | `--azure-subscription-id` | string | Azure subscription ID. |
 | `--azure-tenant-id` | string | Azure tenant ID. |
-| `--digests-source` | string | [defaulted] Where to get the digests from. Valid values are 'acr' and 'logs'. With 'acr', Azure credentials are only sent to Azure Container Registry login servers; an app whose image comes from any other registry is read without credentials, so a private third-party registry needs 'logs'. (default "acr") |
+| `--digests-source` | string | [defaulted] Where to get the digests from. Valid values are 'acr' and 'logs'. With 'acr', Azure credentials are only sent to Azure Container Registry login servers; an app whose image comes from any other registry is read without credentials, so a private third-party registry needs 'logs'. 'logs' reads the digest from the app's docker log, which the running container can also write to, and is the weaker source. (default "acr") |
 | `-D`, `--dry-run` | bool | [optional] Run in dry-run mode. When enabled, no data is sent to Kosli and the CLI exits with 0 exit code regardless of any errors. |
 | `-h`, `--help` | bool | help for azure |
 | `--zip` | bool | Download logs from Azure as zip files |

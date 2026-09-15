@@ -312,6 +312,7 @@
                 "client_reference/kosli_attest_pullrequest_bitbucket",
                 "client_reference/kosli_attest_pullrequest_github",
                 "client_reference/kosli_attest_pullrequest_gitlab",
+                "client_reference/kosli_attest_sbom",
                 "client_reference/kosli_attest_snyk",
                 "client_reference/kosli_attest_sonar"
               ]
