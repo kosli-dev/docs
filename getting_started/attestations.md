@@ -307,7 +307,7 @@ Currently, we support the following types of evidence:
     attestation says what the SBOM claims, not whether the claim is true.
 
     **What you get depends on the tool, not just the format.** Kosli records what the document
-    declares, and tools fill the same fields differently. Two differences catch people out.
+    declares, and tools fill the same fields differently. Three differences catch people out.
 
     *The subject's digest is often absent from CycloneDX.* Kosli reads the subject's SHA-256
     `hashes` entry into `subject.sha256`, in both formats. Syft's SPDX output fills it. Snyk's
@@ -315,8 +315,15 @@ Currently, we support the following types of evidence:
     `version`, where it reads as a version string rather than a checksum. Kosli does not infer
     a checksum from a version, so the field is empty for those two. That is the tool's choice
     rather than a limit of CycloneDX, so check what yours writes instead of assuming either
-    way. If a policy of yours ties the SBOM to the artifact by digest, assert the field is
-    present before comparing it, so a missing digest fails the rule instead of skipping it.
+    way.
+
+    *A digest that is present is not automatically the artifact's.* The subject identifies what
+    the generator scanned. Point one at a tag and it records whatever that tag resolved to on
+    that machine. For a multi-architecture image that is a single architecture, and it can be a
+    local image id rather than a registry digest. Kosli does not check the subject against the
+    artifact, so a digest that is present can still belong to something else. Compare the two
+    only where your pipeline pointed the generator at the exact artifact it attests. Otherwise
+    check it in the pipeline, where the build can fail, rather than in a policy.
 
     *Package counts are not comparable between formats.* `package_count` counts what each
     format calls a package. A CycloneDX component with `type: file` is skipped, while the SPDX
