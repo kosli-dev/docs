@@ -21,7 +21,8 @@ More details can be found here: https://aws.github.io/aws-sdk-go-v2/docs/configu
 	
 You can report the entire bucket content, or filter some of the content using `--include` / `--exclude` (literal prefix match) or `--include-regex` / `--exclude-regex` (Go regular expressions matched against the full object key).
 In all cases, the content is reported as one artifact. If you wish to report separate files/dirs within the same bucket as separate artifacts, you need to run the command twice.
-Object keys that cannot be stored as a local file, such as keys containing a `..` path segment, are rejected and fail the snapshot, naming the key. Two keys that resolve to the same local file are also an error. A legitimate key of that shape can be left out with `--exclude-regex` (anchor and escape it, since the pattern is a regular expression matched against the whole key); when `--include` or `--include-regex` is set, exclude filters are ignored, so narrow the include filter instead.
+Object keys are never used as local file names: each object is downloaded to a temporary file, hashed and removed, and the fingerprint is computed from the keys and the content digests, so any key S3 accepts can be fingerprinted on any operating system.
+Keys that cannot form a directory tree are rejected and fail the snapshot, naming every key involved: a key containing a `..` segment, two keys that resolve to the same path (such as `a//b` and `a/b`), or an object whose key is also a prefix of other objects (such as `a` beside `a/b`). A legitimate key of that shape can be left out with `--exclude-regex` (anchor and escape it, since the pattern is a regular expression matched against the whole key); when `--include` or `--include-regex` is set, exclude filters are ignored, so narrow the include filter instead.
 
 To specify paths in a directory artifact that should always be excluded from the SHA256 calculation, you can add a `.kosli_ignore` file to the root of the artifact.
 Each line should specify a relative path or path glob to be ignored. You can include comments in this file, using `#`.
@@ -35,6 +36,8 @@ Paths the list already matches stay excluded whatever is later added there, so k
 | `--aws-region` | string | The AWS region. |
 | `--aws-secret-key` | string | The AWS secret access key. |
 | `--bucket` | string | The name of the S3 bucket. |
+| `--download-budget` | string | [optional] The maximum total size of the S3 objects downloading at the same time, which caps the temporary disk the snapshot uses. A bare number is megabytes; add K, M, G or T (optionally followed by B) to choose the unit, e.g. 512M or 8G. An object larger than the budget still downloads, on its own. Objects are downloaded to the OS temporary directory. (default "512M") |
+| `--download-concurrency` | int | [optional] The number of S3 objects to download at the same time when fingerprinting the bucket. Each object in flight may hold up to 40 MB of download buffers in memory, on top of the disk the `--download-budget` allows. (default 8) |
 | `-D`, `--dry-run` | bool | [optional] Run in dry-run mode. When enabled, no data is sent to Kosli and the CLI exits with 0 exit code regardless of any errors. |
 | `-x`, `--exclude` | strings | [optional] The comma separated list of file and/or directory paths in the S3 bucket to exclude when fingerprinting. Paths match by literal prefix. Cannot be used together with `--include` or `--include-regex`. |
 | `--exclude-regex` | strings | [optional] The comma separated list of Go regular expressions matched against object keys in the S3 bucket to exclude when fingerprinting. Cannot be used together with `--include` or `--include-regex`. |
