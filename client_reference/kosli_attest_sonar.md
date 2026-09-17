@@ -29,6 +29,8 @@ or have overridden the revision in SonarQube via parameters to the Sonar scanner
 If the scan ran on a branch other than the project's main branch in SonarQube, also provide the branch name using the `--sonar-branch` flag.
 SonarQube only searches the project's main branch unless told otherwise, so without this flag the scan cannot be found.
 For pull request scans: provide the pull-request ID using the `--pull-request` flag instead of the revision.
+SonarQube keeps only the latest analysis of a pull request, so if the scan for the current push has not finished, that is the previous push's analysis.
+To make sure the attested analysis is of the commit you expect, also pass `--sonar-revision`: the command then fails if the pull request's analysis is of another commit.
 Kosli then finds the scan results for the specified project key and revision or pull-request ID.
 
 3. Providing the CE task URL directly via `--sonar-ce-task-url`. The CE task URL can be found in the `report-task.txt` file
@@ -69,7 +71,7 @@ To drop the file from the fingerprint safely, move its entries to `--exclude` an
 | `--max-wait` | int | [optional] Allow the command to wait and retry fetching the scan results from SonarQube, up to the maximum number of seconds provided, with exponential backoff. Useful when using SonarQube's metadata file to retrieve and attest scans that take a long time to process . Defaults to 30 seconds. (default 30) |
 | `-n`, `--name` | string | The name of the attestation as declared in the flow or trail yaml template. |
 | `-o`, `--origin-url` | string | [optional] The url pointing to where the attestation came from or is related. (defaulted to the CI url in some CIs: [docs](/integrations/ci_cd/#defaulted-kosli-command-flags-from-ci-variables) ). |
-| `--pull-request` | string | [conditional] The ID of the pull-request. Only required if you want to use the project key/pull-request to get the scan results rather than using Sonar's metadata file. Cannot be used with `--sonar-revision` or `--sonar-branch`. |
+| `--pull-request` | string | [conditional] The ID of the pull-request. Only required if you want to use the project key/pull-request to get the scan results rather than using Sonar's metadata file. Cannot be used with `--sonar-branch`. |
 | `--redact-commit-info` | strings | [optional] The list of commit info to be redacted before sending to Kosli. Allowed values are one or more of [author, message, branch]. |
 | `--registry-password` | string | [conditional] The container registry password or access token. Only required if you want to read container image SHA256 digest from a remote container registry and it is not already accessible via Docker/Podman auth files or a credential helper. |
 | `--registry-provider` | string | [deprecated] The docker registry provider or url. Only required if you want to read docker image SHA256 digest from a remote docker registry. (DEPRECATED: no longer used) |
@@ -83,7 +85,7 @@ To drop the file from the fingerprint safely, move its entries to `--exclude` an
 | `--sonar-branch` | string | [conditional] The name of the branch the SonarQube scan ran on. Only required if you are using the project key/revision to get the scan results and the scan ran on a branch other than the project's main branch in SonarQube. Cannot be used with `--pull-request`. |
 | `--sonar-ce-task-url` | string | [conditional] The URL of the SonarQube CE task. Can be used instead of `--sonar-working-dir` when the report-task.txt file is not accessible, e.g. due to container isolation in CI/CD pipelines. |
 | `--sonar-project-key` | string | [conditional] The project key of the SonarQube project. Only required if you want to use the project key/revision/pull-request to get the scan results rather than using Sonar's metadata file. |
-| `--sonar-revision` | string | [conditional] The revision of the SonarQube project. Only required if you want to use the project key/revision to get the scan results rather than using Sonar's metadata file and you have overridden the default revision, or you aren't using a CI. Defaults to the value of the git commit flag. Cannot be used with `--pull-request`. |
+| `--sonar-revision` | string | [conditional] The revision of the SonarQube project. Only required if you want to use the project key/revision to get the scan results rather than using Sonar's metadata file and you have overridden the default revision, or you aren't using a CI. Defaults to the value of the git commit flag. With `--pull-request`, optional: when given, the pull request's analysis must be of this revision or the command fails. |
 | `--sonar-server-url` | string | [conditional] The URL of your SonarQube server. Only required if you are using SonarQube Server and not using SonarQube's metadata file to get scan results. (default "https://sonarcloud.io") |
 | `--sonar-working-dir` | string | [conditional] The base directory of the repo scanned by SonarQube. Only required if you have overridden the default in the Sonar scanner or you are running the CLI locally in a separate folder from the repo. (default ".scannerwork") |
 | `-T`, `--trail` | string | The Kosli trail name. |
@@ -176,6 +178,17 @@ kosli attest sonar
 	--sonar-api-token yourSonarAPIToken 
 	--sonar-project-key yourSonarProjectKey 
 	--pull-request yourPullRequestID 
+
+```
+</Accordion>
+<Accordion title="report a SonarQube Cloud attestation about a trail for a pull request scan, failing unless the analysis is of the given commit">
+```shell
+kosli attest sonar 
+	--name yourAttestationName 
+	--sonar-api-token yourSonarAPIToken 
+	--sonar-project-key yourSonarProjectKey 
+	--pull-request yourPullRequestID 
+	--sonar-revision yourSonarRevision 
 
 ```
 </Accordion>

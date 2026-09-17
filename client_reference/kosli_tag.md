@@ -57,7 +57,7 @@ name as-is, whereas a real run sends the resolved ID.
 	<Tab title="GitLab">
 	View an example of the `kosli tag` command in GitLab.
 
-	In [this YAML file](https://gitlab.com/cyber-dojo/creator/-/blob/42876c4da26ee74e4bbfe14c2949cc7cb2d3345e/.gitlab/workflows/main.yml#L55)
+	In [this YAML file](https://gitlab.com/cyber-dojo/creator/-/blob/48bdbd3b059d45489e8ae5f9f680f48bc6201ad8/.gitlab/workflows/main.yml#L52)
 	</Tab>
 </Tabs>
 

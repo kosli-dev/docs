@@ -66,7 +66,7 @@ kosli diff snapshots aws-beta aws-prod --output=json
 ```json
 {
   "snappish1": {
-    "snapshot_id": "aws-beta#8376",
+    "snapshot_id": "aws-beta#8381",
     "artifacts": [
       {
         "fingerprint": "1d819a21e793bffbe50a39c9b6b8c4154e0b4271051931839dc8a2fa0c564e2a",
@@ -135,7 +135,7 @@ kosli diff snapshots aws-beta aws-prod --output=json
     ]
   },
   "snappish2": {
-    "snapshot_id": "aws-prod#5363",
+    "snapshot_id": "aws-prod#5368",
     "artifacts": [
       {
         "fingerprint": "4889ce921333abe3acc52880342a6ceb27cd66482e4f8fc93e20d5a91d972d29",

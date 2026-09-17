@@ -297,7 +297,7 @@ kosli list flows --output=json
       "kind": "run",
       "repo_url": "https://github.com/cyber-dojo/secrets"
     },
-    "latest_activity_at": 1789460528.1555216,
+    "latest_activity_at": 1789631338.0531034,
     "latest_state": "COMPLIANT"
   },
   {
@@ -314,7 +314,7 @@ kosli list flows --output=json
       "workflow_url": "https://github.com/cyber-dojo/snyk-scanning/blob/main/.github/workflows/aws-beta.yml",
       "env": "aws-beta"
     },
-    "latest_activity_at": 1789454516.6486828,
+    "latest_activity_at": 1789627190.1856432,
     "latest_state": "COMPLIANT"
   },
   {
@@ -348,7 +348,7 @@ kosli list flows --output=json
       "workflow_url": "https://github.com/cyber-dojo/snyk-scanning/blob/main/.github/workflows/aws-prod.yml",
       "env": "aws-prod"
     },
-    "latest_activity_at": 1789454469.7935915,
+    "latest_activity_at": 1789627221.2172713,
     "latest_state": "COMPLIANT"
   },
   {
