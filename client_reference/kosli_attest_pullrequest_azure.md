@@ -34,7 +34,7 @@ To drop the file from the fingerprint safely, move its entries to `--exclude` an
 | `--attachments` | strings | [optional] The comma-separated list of paths of attachments for the reported attestation. Attachments can be files or directories. All attachments are compressed and uploaded to Kosli's evidence vault. |
 | `--azure-org-url` | string | Azure organization url. E.g. `https://dev.azure.com/myOrg` (defaulted if you are running in Azure Devops pipelines: [docs](/integrations/ci_cd) ). |
 | `--azure-token` | string | Azure Personal Access token. |
-| `-g`, `--commit` | string | [conditional] The git commit for which the attestation is associated to. Becomes required when reporting an attestation for an artifact before reporting it to Kosli. (defaulted in some CIs: [docs](/integrations/ci_cd) ). |
+| `-g`, `--commit` | string | [conditional] The git commit for which the attestation is associated to. Becomes required when reporting an attestation for an artifact before reporting it to Kosli. (defaulted in some CIs: [docs](/integrations/ci_cd) ). If both `--commit` and `--repo-root` are left at their defaults and the commit cannot be read from the repository, a warning is printed and the attestation is sent without commit info. |
 | `--description` | string | [optional] attestation description |
 | `-D`, `--dry-run` | bool | [optional] Run in dry-run mode. When enabled, no data is sent to Kosli and the CLI exits with 0 exit code regardless of any errors. |
 | `-x`, `--exclude` | strings | [optional] The comma separated list of directories and files to exclude from fingerprinting. Can take glob patterns. Only applicable for `--artifact-type` dir. |
