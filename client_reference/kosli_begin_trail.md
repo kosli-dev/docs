@@ -23,7 +23,7 @@ In other CI systems, set them explicitly to capture repository metadata.
 ## Flags
 | Flag | Type | Description |
 | :--- | :--- | :--- |
-| `-g`, `--commit` | string | [defaulted] The git commit from which the trail is begun. (defaulted in some CIs: [docs](/integrations/ci_cd), otherwise defaults to HEAD ). |
+| `-g`, `--commit` | string | [defaulted] The git commit from which the trail is begun. (defaulted in some CIs: [docs](/integrations/ci_cd), otherwise unset ). If both `--commit` and `--repo-root` are left at their defaults and the commit cannot be read from the repository, a warning is printed and the trail is begun without commit info. |
 | `--description` | string | [optional] The Kosli trail description. |
 | `-D`, `--dry-run` | bool | [optional] Run in dry-run mode. When enabled, no data is sent to Kosli and the CLI exits with 0 exit code regardless of any errors. |
 | `--external-fingerprint` | stringToString | [optional] A SHA256 fingerprint of an external attachment represented by `--external-url`. The format is label=fingerprint (labels cannot contain '.' or '='). This flag can be set multiple times. There must be an external url with a matching label for each external fingerprint. |
