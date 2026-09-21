@@ -4,6 +4,64 @@ description: "Release notes for Kosli products."
 rss: true
 ---
 
+<Update label="September 18, 2026" description="v2.43.1" tags={["CLI"]}>
+
+## Updates
+
+- **Attestation commands survive missing repositories** — `kosli attest` commands now warn (instead of failing) when a CI-defaulted `--commit` cannot be resolved because no repository is checked out, letting jobs without a repo continue.
+- **Clearer errors when commit info is required** — `kosli attest pullrequest-*` and [`kosli attest jira`](/client_reference/kosli_attest_jira) now emit a descriptive error when the commit cannot be resolved, instead of silently proceeding or panicking. Explicit `--commit` or `--repo-root` values that fail to resolve now name the fix.
+
+[View on GitHub](https://github.com/kosli-dev/cli/releases/tag/v2.43.1)
+
+</Update>
+
+<Update label="September 17, 2026" description="v2.43.0" tags={["CLI"]}>
+
+## New features
+
+- **`kosli evaluate policy`** — evaluate a policy and record the decision in a single request, instead of calling evaluate and record separately. **Beta**
+
+[View on GitHub](https://github.com/kosli-dev/cli/releases/tag/v2.43.0)
+
+</Update>
+
+<Update label="September 16, 2026" description="v2.42.0" tags={["CLI"]}>
+
+## New features
+
+- **Parallel S3 downloads with a byte budget** — [`kosli snapshot s3`](/client_reference/kosli_snapshot_s3) now takes `--download-concurrency` and `--download-budget` to control how many objects download in parallel and the peak temporary disk usage while fingerprinting a bucket.
+- **`--sonar-revision` works with `--pull-request`** — [`kosli attest sonar`](/client_reference/kosli_attest_sonar) now accepts both flags together. The command fails if the pull request's latest analysis is not of the specified revision.
+
+## Updates
+
+- **S3 keys no longer used as local file names** — [`kosli snapshot s3`](/client_reference/kosli_snapshot_s3) downloads each object to a temporary file, hashes it, and removes it, so any valid S3 key can be fingerprinted on any operating system.
+- **`Visibility` dropped from flow output** — `kosli get flow` and `kosli list flows` no longer show the legacy `Visibility` field, which had no effect on access.
+
+## Bug fixes
+
+- **`kosli list flows` no longer panics on flows without tags** — listing a flow that has no tags now succeeds instead of crashing.
+
+[View on GitHub](https://github.com/kosli-dev/cli/releases/tag/v2.42.0)
+
+</Update>
+
+<Update label="September 15, 2026" description="v2.41.0" tags={["CLI"]}>
+
+## New features
+
+- **`kosli attest sbom` (beta)** — attest a software bill of materials (CycloneDX JSON/XML or SPDX JSON/tag-value) to an artifact or trail in a Kosli flow. The SBOM file checksum, format, and a parsed summary are recorded, and `sbom_format` and `sbom_sha256` are added as annotations. See the [`kosli attest sbom` reference](/client_reference/kosli_attest_sbom).
+
+## Bug fixes
+
+- **`kosli attest sonar` never sends the API token to a redirect target** — the Sonar API token is no longer forwarded when the request is redirected off the configured host. See the [`kosli attest sonar` reference](/client_reference/kosli_attest_sonar).
+- **`kosli snapshot azure` rejects unsafe zip entries** — zip archives fetched during a snapshot can no longer extract files outside the temporary directory. See the [`kosli snapshot azure` reference](/client_reference/kosli_snapshot_azure).
+- **`kosli snapshot azure` cannot be spoofed via a container digest in logs mode** — a container claiming a different image digest in its logs no longer overrides the digest recorded for the snapshot.
+- **CycloneDX SBOM tool read from `services`** — the SBOM tool name is now taken from a CycloneDX `services` entry when present, so [`kosli attest sbom`](/client_reference/kosli_attest_sbom) reports the correct tool.
+
+[View on GitHub](https://github.com/kosli-dev/cli/releases/tag/v2.41.0)
+
+</Update>
+
 <Update label="September 11, 2026" description="v2.40.1" tags={["CLI"]}>
 
 ## Updates
