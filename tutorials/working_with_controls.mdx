@@ -21,7 +21,7 @@ This tutorial covers how to:
 ## Prerequisites
 
 - [Install Kosli CLI](/getting_started/install).
-- [Get a Kosli API token](/getting_started/service-accounts).
+- [Get a Kosli API token](/getting_started/authenticating_to_kosli).
 - Have at least one [Flow](/getting_started/flows) and [Trail](/getting_started/trails) already created.
 
 ## Setup
@@ -97,7 +97,7 @@ You can also list controls from the CLI with `kosli list controls`, fetch a sing
 
 When a control is retired, archive it rather than deleting it. Archiving moves the control out of the main catalog into its **Archived** view but preserves its full history — past decisions and every version of the definition remain intact for audit — and an archived control can be unarchived later if it comes back into use.
 
-Archive or unarchive a control from its detail page (org admins only), from the CLI with `kosli archive control CONTROL-IDENTIFIER` and `kosli unarchive control CONTROL-IDENTIFIER`, or through the controls API (`POST /api/v2/controls/{org}/{identifier}/archive` and `.../unarchive`). Both actions appear as events in the control's **Versions** tab, alongside Created and Edited events, so the full lifecycle is auditable.
+Archive or unarchive a control from its detail page (org admins only), from the CLI with `kosli archive control CONTROL-IDENTIFIER` and `kosli unarchive control CONTROL-IDENTIFIER`, or through the controls API (`POST /api/v2/controls/{org}/{identifier}/archive` and `.../unarchive`). Archiving and unarchiving are recorded as events with the actor and time, and do not create a new version of the definition. Both appear in the control's **Versions** tab alongside Created and Edited events, so the full lifecycle is auditable in one place.
 
 ## Recording a decision against a control
 
