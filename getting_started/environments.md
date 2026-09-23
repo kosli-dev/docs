@@ -108,7 +108,7 @@ kosli tag env production-k8s \
 
 Tags can also be referenced in [Environment Policy](/getting_started/policies) expressions to make attestation requirements conditional — for example, requiring security scans only for flows tagged `risk-level=high`.
 
-For the full guide on managing tags, recommended patterns, and usage in policies, see [Managing Tags](/administration/managing_tags).
+For the full guide on managing tags, recommended patterns, and usage in policies, see [Managing tags](/administration/managing_tags).
 
 ## Logical Environments
 

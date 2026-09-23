@@ -1,6 +1,7 @@
 ---
 title: FAQ
 description: "Frequently asked questions"
+icon: circle-question
 ---
 
 import WorkingDirConfigNotice from "/snippets/cli-working-dir-config-notice.mdx";
