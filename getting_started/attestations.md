@@ -342,14 +342,22 @@ Currently, we support the following types of evidence:
 
     sbom_attestation_name := data.params.sbom_attestation_name
 
+    default allow := false
+
     sbom_lists_packages(artifact) if {
         sbom := artifact.attestations_statuses[sbom_attestation_name]
         sbom.attestation_data.document.package_count > 0
     }
+
+    allow if {
+        every artifact in input.trail.compliance_status.artifacts_statuses {
+            sbom_lists_packages(artifact)
+        }
+    }
     ```
 
-    `artifact` comes from looping over `artifacts_statuses`, as in the
-    [Rego examples](/policy-reference/rego_policy#examples). A trail-scoped SBOM sits at
+    Pass the attestation name in [`--params`](/policy-reference/rego_policy#params). Without it
+    the alias is undefined and no rule using it runs. A trail-scoped SBOM sits at
     `input.trail.compliance_status.attestations_statuses[sbom_attestation_name].attestation_data.document`.
 
     If you narrow the input with `kosli evaluate trail --attestations`, name the SBOM there too,
