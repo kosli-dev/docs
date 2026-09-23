@@ -330,21 +330,27 @@ Currently, we support the following types of evidence:
     package describing that same file is counted. Syft reports one package for
     `kosli_Linux_arm64.rpm` in CycloneDX and two for the same file in SPDX.
 
-    Of the two policy mechanisms, only [Rego](/policy-reference/rego_policy#input-data) can read
-    these fields. Environment policy expressions expose the artifact's name and fingerprint,
-    not attestation content. Evaluation copies an attestation's own fields onto its status
-    entry, so the summary sits under `attestation_data`:
+    Only [Rego](/policy-reference/rego_policy#input-data) can read these fields. Environment
+    policy expressions get the artifact's name and fingerprint, nothing from inside an
+    attestation. Evaluation copies an attestation's own fields onto its status entry, so the
+    summary sits under `attestation_data`:
 
     ```rego
+    package policy
+
+    import rego.v1
+
     sbom_attestation_name := data.params.sbom_attestation_name
 
-    sbom_describes(artifact) if {
+    sbom_lists_packages(artifact) if {
         sbom := artifact.attestations_statuses[sbom_attestation_name]
-        sbom.attestation_data.document.subject.sha256 == artifact.artifact_fingerprint
+        sbom.attestation_data.document.package_count > 0
     }
     ```
 
-    A trail-scoped SBOM sits at `trail.compliance_status.attestations_statuses[name]` instead.
+    `artifact` comes from looping over `artifacts_statuses`, as in the
+    [Rego examples](/policy-reference/rego_policy#examples). A trail-scoped SBOM sits at
+    `input.trail.compliance_status.attestations_statuses[sbom_attestation_name].attestation_data.document`.
 
     If you narrow the input with `kosli evaluate trail --attestations`, name the SBOM there too,
     dot-qualified as `<artifact>.<name>` for an artifact-scoped one. Anything left out is absent
