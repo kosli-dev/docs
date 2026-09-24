@@ -309,11 +309,13 @@ Currently, we support the following types of evidence:
     **What you get depends on the tool, not just the format.** Kosli records what the document
     declares, and tools fill the same fields differently. Three differences catch people out.
 
-    *The subject's digest is often absent from CycloneDX.* Kosli reads the subject's SHA-256
-    `hashes` entry into `subject.sha256`, in both formats. Syft's SPDX output fills it. Snyk's
-    and Syft's CycloneDX output does not: both leave `hashes` empty and write the digest into
-    `version`, where it reads as a version string rather than a checksum. Kosli does not infer
-    a checksum from a version, so the field is empty for those two. That is the tool's choice
+    *The subject's digest is often absent from CycloneDX.* Kosli fills `subject.sha256` from
+    the subject's SHA-256 checksum. Each format spells that differently: `hashes` in
+    CycloneDX, and `checksums` in SPDX, written `PackageChecksum` in the tag-value form. Syft's
+    SPDX output fills it. Snyk's and Syft's CycloneDX output does not: both leave `hashes`
+    empty and put the digest in `version`, where it reads as a version string rather than a
+    checksum. Kosli does not infer a checksum from a version, so `subject.sha256` is empty for
+    those two, and the digest they wrote is in `subject.version`. That is the tool's choice
     rather than a limit of CycloneDX, so check what yours writes instead of assuming either
     way.
 
