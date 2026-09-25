@@ -54,7 +54,7 @@ The instructions use the AWS Console. If your organization uses AWS CDK or anoth
 <Frame><img src="/images/administration/kms/kms-configure-key.png" alt="Configure key screen with Symmetric, Encrypt and decrypt, and Multi-Region key selected" /></Frame>
 
 <Note>
-Selecting **Multi-Region key** limits the Key material origin to KMS. If you need CloudHSM or an external key store, see [Single-region keys](#single-region-keys).
+Selecting **Multi-region key** rules out a custom key store as the key material origin. You can still choose **KMS** or **External (Import Key material)**. If you need CloudHSM or an external key store, see [Single-region keys](#single-region-keys).
 </Note>
 
 Click **Next**.
