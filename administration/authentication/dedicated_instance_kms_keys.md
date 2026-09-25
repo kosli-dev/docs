@@ -23,7 +23,7 @@ A member of the Kosli Customer Success team will give you:
 
 ## Choose the key shape
 
-AWS only permits **multi-region KMS keys** where the key material originates in KMS itself.
+AWS does not permit **multi-region KMS keys** whose key material lives in a custom key store.
 
 - If your cryptographic policy allows KMS-generated key material, create **one multi-region key** in the primary region and replicate it into the secondary region. This is the path described below.
 - If your policy requires an [AWS CloudHSM key store](https://docs.aws.amazon.com/kms/latest/developerguide/keystore-cloudhsm.html) or an external key store for key material, create **two single-region keys** — one in each region. See [Single-region keys](#single-region-keys) for the differences.
