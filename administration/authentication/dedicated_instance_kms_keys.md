@@ -9,7 +9,7 @@ Kosli Dedicated is a single-tenant governance platform for software delivery. On
 Kosli hosts your data across two AWS regions — a **primary** and a **secondary** — so you provide a key in each region. This page walks through creating those keys in the AWS Console (with an equivalent Terraform example in the appendix) and sharing their ARNs with Kosli.
 
 <Note>
-Your Kosli Customer Success representative will give you:
+A member of the Kosli Customer Success team will give you:
 
 - The **primary** and **secondary** AWS regions your instance uses.
 - The **Kosli AWS account ID** (`<<kosli-account-id>>`) to grant access to in the key policy.
@@ -19,7 +19,7 @@ Your Kosli Customer Success representative will give you:
 
 - An AWS account you will use to own the KMS keys.
 - Permissions in that account to create and manage KMS keys.
-- The primary/secondary regions and the Kosli account ID (`<<kosli-account-id>>`) from your Customer Success representative.
+- The primary/secondary regions and the Kosli account ID (`<<kosli-account-id>>`) from a member of the Kosli Customer Success team.
 
 ## Choose the key shape
 
@@ -88,7 +88,7 @@ Click **Next**.
 
 ### Step 5 — Edit the key policy
 
-The console loads a default policy that grants access to your account root. Click **Edit**, then click **Add new statement** and add a **second statement** to the `Statement` array with the following content. Your Customer Success representative will give you the value for `<<kosli-account-id>>`.
+The console loads a default policy that grants access to your account root. Click **Edit**, then click **Add new statement** and add a **second statement** to the `Statement` array with the following content. A member of the Kosli Customer Success team will give you the value for `<<kosli-account-id>>`.
 
 <Frame><img src="/images/administration/kms/kms-edit-key-policy-add-statement.png" alt="Edit key policy with the Add new statement button highlighted" /></Frame>
 
@@ -157,7 +157,7 @@ The primary key's details page reloads with the replica listed under **Related m
 
 ## Share the key ARNs with Kosli
 
-Kosli uses the primary and replica keys to encrypt data. Send both ARNs to your Customer Success representative:
+Kosli uses the primary and replica keys to encrypt data. Send both ARNs to a member of the Kosli Customer Success team:
 
 - The **primary key ARN** — from the **General configuration** panel of the primary key's details page.
 - The **replica key ARN** — from the **Related multi-region keys** panel on the same page, or from the replica key's own details page in the secondary region.
@@ -179,7 +179,7 @@ The steps to create the primary key are the same as above, with two differences:
 
 Once the primary key exists, switch the console to the **secondary Kosli region** and repeat the process. Include a reference to the primary key's ARN or alias in the secondary key's **Description** so the pairing is obvious later.
 
-Share both ARNs with your Customer Success representative. Unlike a multi-region key, the two single-region ARNs differ beyond just the region segment.
+Share both ARNs with a member of the Kosli Customer Success team. Unlike a multi-region key, the two single-region ARNs differ beyond just the region segment.
 
 ## Terraform example
 
