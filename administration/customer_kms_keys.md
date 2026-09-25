@@ -74,7 +74,7 @@ The key is not used from inside your AWS account, so there is usually no reason 
 
 To protect against accidental deletion, untick **Allow key administrators to delete this key** under **Key deletion**.
 
-<Frame><img src="/images/administration/kms/kms-key-administrators.png" alt="Define key administrative permissions screen showing the default state, with Allow key administrators to delete this key still ticked — untick it before proceeding" /></Frame>
+<Frame caption="The console ticks this by default — untick it before clicking Next."><img src="/images/administration/kms/kms-key-administrators.png" /></Frame>
 
 Click **Next**.
 
