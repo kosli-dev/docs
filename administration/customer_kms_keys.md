@@ -49,7 +49,7 @@ The instructions use the AWS Console. If your organization uses AWS CDK or anoth
 
 - **Key type:** Symmetric
 - **Key usage:** Encrypt and decrypt
-- Expand **Advanced options** and select **Multi-Region key**.
+- Expand **Advanced options** and, under **Regionality**, select **Multi-region key**.
 
 <Frame><img src="/images/administration/kms/kms-configure-key.png" alt="Configure key screen with Symmetric, Encrypt and decrypt, and Multi-Region key selected" /></Frame>
 
