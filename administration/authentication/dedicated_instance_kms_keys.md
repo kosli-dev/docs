@@ -12,14 +12,14 @@ Kosli hosts your data across two AWS regions — a **primary** and a **secondary
 Your Kosli Customer Success representative will give you:
 
 - The **primary** and **secondary** AWS regions your instance uses.
-- The **Kosli AWS account ID** (`<kosli-account-id>`) to grant access to in the key policy.
+- The **Kosli AWS account ID** (`<<kosli-account-id>>`) to grant access to in the key policy.
 </Note>
 
 ## Prerequisites
 
 - An AWS account you will use to own the KMS keys.
 - Permissions in that account to create and manage KMS keys.
-- The primary/secondary regions and the Kosli account ID from your Customer Success representative.
+- The primary/secondary regions and the Kosli account ID (`<<kosli-account-id>>`) from your Customer Success representative.
 
 ## Choose the key shape
 
@@ -30,18 +30,18 @@ AWS only permits **multi-region KMS keys** where the key material originates in 
 
 Most of the steps are identical for both shapes.
 
-The instructions use the AWS Console. If your organization uses AWS CDK or another IaC tool, [Appendix A - Terraform](#appendix-a-terraform) gives enough detail to translate.
+The instructions use the AWS Console. If your organization uses AWS CDK or another IaC tool, the [Terraform example](#terraform-example) gives enough detail to translate.
 
 ## Create the primary key
 
 1. Sign in to the AWS account that will own the keys and open the **AWS KMS** service.
 2. KMS is a regional service. Switch the console to the **primary Kosli region**.
 
-   ![KMS console with the primary region selected](/images/administration/kms/kms-breadcrumb-region.png)
+   <Frame><img src="/images/administration/kms/kms-breadcrumb-region.png" alt="KMS console with the primary region selected" /></Frame>
 
 3. In the left-hand menu, select **Customer-managed keys**.
 
-   ![Customer-managed keys list in the KMS console](/images/administration/kms/kms-customer-managed-keys-list.png)
+   <Frame><img src="/images/administration/kms/kms-customer-managed-keys-list.png" alt="Customer-managed keys list in the KMS console" /></Frame>
 
 4. Click **Create key** in the top right to start the wizard.
 
@@ -51,7 +51,7 @@ The instructions use the AWS Console. If your organization uses AWS CDK or anoth
 - **Key usage:** Encrypt and decrypt
 - Expand **Advanced options** and select **Multi-Region key**.
 
-![Configure key screen with Symmetric, Encrypt and decrypt, and Multi-Region key selected](/images/administration/kms/kms-configure-key.png)
+<Frame><img src="/images/administration/kms/kms-configure-key.png" alt="Configure key screen with Symmetric, Encrypt and decrypt, and Multi-Region key selected" /></Frame>
 
 <Note>
 Selecting **Multi-Region key** limits the Key material origin to KMS. If you need CloudHSM or an external key store, see [Single-region keys](#single-region-keys).
@@ -64,7 +64,7 @@ Click **Next**.
 - **Alias:** use whatever labelling strategy your organization prefers, for example `alias/kosli-dedicated-cross-account-key`.
 - Optionally add a description and tags to help your team.
 
-![Add labels screen with an alias filled in](/images/administration/kms/kms-add-labels.png)
+<Frame><img src="/images/administration/kms/kms-add-labels.png" alt="Add labels screen with an alias filled in" /></Frame>
 
 Click **Next**.
 
@@ -74,7 +74,7 @@ The key is not used from inside your AWS account, so there is usually no reason 
 
 To protect against accidental deletion, **untick** the option that lets key administrators delete the key.
 
-![Define key administrative permissions with Allow key administrators to delete this key unticked](/images/administration/kms/kms-key-administrators.png)
+<Frame><img src="/images/administration/kms/kms-key-administrators.png" alt="Define key administrative permissions with Allow key administrators to delete this key unticked" /></Frame>
 
 Click **Next**.
 
@@ -82,7 +82,7 @@ Click **Next**.
 
 The key policy is managed as JSON on the next screen, so leave the usage permissions on this page unselected. Do **not** add an "Other AWS account" here either — cross-account access is granted via the JSON policy.
 
-![Define key usage permissions screen with no users or accounts selected](/images/administration/kms/kms-key-usage-permissions.png)
+<Frame><img src="/images/administration/kms/kms-key-usage-permissions.png" alt="Define key usage permissions screen with no users or accounts selected" /></Frame>
 
 Click **Next**.
 
@@ -90,7 +90,7 @@ Click **Next**.
 
 The console loads a default policy that grants access to your account root. Click **Edit**, then click **Add new statement** and add a **second statement** to the `Statement` array with the following content. Your Customer Success representative will give you the value for `<<kosli-account-id>>`.
 
-![Edit key policy with the Add new statement button highlighted](/images/administration/kms/kms-edit-key-policy-add-statement.png)
+<Frame><img src="/images/administration/kms/kms-edit-key-policy-add-statement.png" alt="Edit key policy with the Add new statement button highlighted" /></Frame>
 
 ```json
 {
@@ -115,11 +115,11 @@ The console loads a default policy that grants access to your account root. Clic
 
 Make sure you add a comma between the existing statement object and this new one.
 
-![Edit key policy with the new Kosli-Dedicated statement pasted in](/images/administration/kms/kms-edit-key-policy-second-statement.png)
+<Frame><img src="/images/administration/kms/kms-edit-key-policy-second-statement.png" alt="Edit key policy with the new Kosli-Dedicated statement pasted in" /></Frame>
 
 Click **Preview** to format and validate the JSON. The preview shows both statements — one for your AWS account root, one for the Kosli-Dedicated account.
 
-![Key policy preview showing your AWS account ID and the Kosli-Dedicated AWS account ID](/images/administration/kms/kms-key-policy-preview.png)
+<Frame><img src="/images/administration/kms/kms-key-policy-preview.png" alt="Key policy preview showing your AWS account ID and the Kosli-Dedicated AWS account ID" /></Frame>
 
 Click **Next**.
 
@@ -142,15 +142,15 @@ If anything needs changing, click **Edit** for that section. Otherwise click **F
 1. Click the new key's alias to open its details.
 2. Select the **Regionality** tab. The **Primary key** panel shows that the key has no replicas yet.
 
-   ![Key details page with the Regionality tab selected and no replicas listed](/images/administration/kms/kms-regionality-tab.png)
+   <Frame><img src="/images/administration/kms/kms-regionality-tab.png" alt="Key details page with the Regionality tab selected and no replicas listed" /></Frame>
 
 3. Click **Create new replica keys**.
 4. In the region dropdown (which excludes the primary region), tick the **Kosli secondary region** and click **Next**.
 
-   ![Create new replica keys with a secondary region selected](/images/administration/kms/kms-create-replica-region.png)
+   <Frame><img src="/images/administration/kms/kms-create-replica-region.png" alt="Create new replica keys with a secondary region selected" /></Frame>
 
 5. The **Add labels** screen is pre-populated from the primary key. Change if your organization requires it, otherwise click **Next**.
-6. The replica inherits the primary key's policy — no changes needed. Click **Next**.
+6. The console pre-populates the replica's policy from the primary key — no changes needed. Click **Next**.
 7. Review the **Confirmation** message, tick the acknowledgement box, and click **Create new replica keys**.
 
 The primary key's details page reloads with the replica listed under **Related multi-region keys**.
@@ -162,7 +162,7 @@ Kosli uses the primary and replica keys to encrypt data. Send both ARNs to your 
 - The **primary key ARN** — from the **General configuration** panel of the primary key's details page.
 - The **replica key ARN** — from the **Related multi-region keys** panel on the same page, or from the replica key's own details page in the secondary region.
 
-![Primary key details page with the primary and replica ARNs highlighted](/images/administration/kms/kms-share-arns.png)
+<Frame><img src="/images/administration/kms/kms-share-arns.png" alt="Primary key details page with the primary and replica ARNs highlighted" /></Frame>
 
 For a multi-region key the two ARNs are identical except for the region segment.
 
@@ -181,11 +181,15 @@ Once the primary key exists, switch the console to the **secondary Kosli region*
 
 Share both ARNs with your Customer Success representative. Unlike a multi-region key, the two single-region ARNs differ beyond just the region segment.
 
-## Appendix A - Terraform
+## Terraform example
 
 The following is the minimum Terraform needed to create the multi-region key and its replica for Kosli Dedicated. Set `primary_aws_region`, `secondary_aws_region`, and `kosli_dedicated_account_id` for your instance.
 
-```terraform
+<Note>
+This example uses the top-level `region` argument on `aws_kms_key`, `aws_kms_alias`, and `aws_kms_replica_key`, which requires **AWS provider v6.0 or later**. On earlier versions, use aliased provider blocks instead.
+</Note>
+
+```hcl
 data "aws_caller_identity" "current" {}
 
 resource "aws_kms_key" "primary" {
@@ -233,6 +237,8 @@ resource "aws_kms_key" "primary" {
 }
 
 resource "aws_kms_alias" "primary_alias" {
+  region = var.primary_aws_region
+
   name          = "alias/kosli-dedicated-cross-account-key"
   target_key_id = aws_kms_key.primary.key_id
 }
@@ -241,7 +247,8 @@ resource "aws_kms_replica_key" "replica" {
   region = var.secondary_aws_region
 
   description             = "Multi-Region replica key"
-  deletion_window_in_days = 7
+  deletion_window_in_days = 30
   primary_key_arn         = aws_kms_key.primary.arn
+  policy                  = aws_kms_key.primary.policy
 }
 ```
