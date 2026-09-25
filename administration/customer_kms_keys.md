@@ -51,7 +51,7 @@ The instructions use the AWS Console. If your organization uses AWS CDK or anoth
 - **Key usage:** Encrypt and decrypt
 - Expand **Advanced options** and, under **Regionality**, select **Multi-region key**.
 
-<Frame><img src="/images/administration/kms/kms-configure-key.png" alt="Configure key screen with Symmetric, Encrypt and decrypt, and Multi-Region key selected" /></Frame>
+<Frame><img src="/images/administration/kms/kms-configure-key.png" alt="Configure key screen with Symmetric, Encrypt and decrypt, and Multi-region key selected" /></Frame>
 
 <Note>
 Selecting **Multi-region key** rules out a custom key store as the key material origin. You can still choose **KMS** or **External (Import Key material)**. If you need CloudHSM or an external key store, see [Single-region keys](#single-region-keys).
@@ -72,9 +72,9 @@ Click **Next**.
 
 The key is not used from inside your AWS account, so there is usually no reason to add key administrators.
 
-To protect against accidental deletion, **untick** the option that lets key administrators delete the key.
+To protect against accidental deletion, untick **Allow key administrators to delete this key** under **Key deletion**.
 
-<Frame><img src="/images/administration/kms/kms-key-administrators.png" alt="Define key administrative permissions with Allow key administrators to delete this key unticked" /></Frame>
+<Frame><img src="/images/administration/kms/kms-key-administrators.png" alt="Define key administrative permissions screen showing the default state, with Allow key administrators to delete this key still ticked — untick it before proceeding" /></Frame>
 
 Click **Next**.
 
@@ -174,7 +174,7 @@ If your organization requires a CloudHSM key store (or an external key store) fo
 
 The steps to create the primary key are the same as above, with two differences:
 
-- **Do not** tick **Multi-Region key** under Advanced options.
+- **Do not** tick **Multi-region key** under **Regionality**.
 - Under **Key material origin**, select your CloudHSM key store (or external key store) rather than KMS.
 
 Once the primary key exists, switch the console to the **secondary Kosli region** and repeat the process. Include a reference to the primary key's ARN or alias in the secondary key's **Description** so the pairing is obvious later.
@@ -261,9 +261,16 @@ resource "aws_kms_alias" "primary_alias" {
 resource "aws_kms_replica_key" "replica" {
   region = var.secondary_aws_region
 
-  description             = "Multi-Region replica key"
+  description             = "Multi-region replica key"
   deletion_window_in_days = 30
   primary_key_arn         = aws_kms_key.primary.arn
   policy                  = aws_kms_key.primary.policy
+}
+
+resource "aws_kms_alias" "replica_alias" {
+  region = var.secondary_aws_region
+
+  name          = "alias/kosli-dedicated-cross-account-key"
+  target_key_id = aws_kms_replica_key.replica.key_id
 }
 ```
