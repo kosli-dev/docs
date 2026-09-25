@@ -166,7 +166,7 @@ Kosli uses the primary and replica keys to encrypt data. Send both ARNs to a mem
 
 For a multi-region key the two ARNs are identical except for the region segment.
 
-The key policy limits the use of these keys to your Kosli Dedicated instance, so the ARNs can be shared over email.
+A key ARN is an identifier, not a secret: only the AWS account named in the key policy can use the key, so the ARNs can be shared over email.
 
 ## Single-region keys
 
