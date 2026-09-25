@@ -74,7 +74,12 @@
               ]
             },
             "administration/managing_tags",
-            "administration/dedicated_instance_kms_keys",
+            {
+              "group": "Dedicated instance",
+              "pages": [
+                "administration/dedicated_instance_kms_keys"
+              ]
+            },
             {
               "group": "Cloud Capture",
               "pages": [
