@@ -10,7 +10,7 @@ A Kosli Dedicated instance is a single-tenant Kosli instance hosted on infrastru
 
 ### Identity
 
-- **SSO / SCIM setup** — the identity provider and protocol you want to sign in with (SAML or OIDC), and, if applicable, the SCIM directory for automated user provisioning. See [Single sign-on](/administration/authentication/single_sign_on) for the supported providers and the metadata Kosli needs from your IdP.
+- **SSO / SCIM setup** — the identity provider and protocol you want to sign in with (SAML or OIDC), and, if applicable, the SCIM directory for automated user provisioning. See [Single sign-on](/administration/authentication/single_sign_on) for the supported providers and the metadata Kosli needs from your IdP, and [Automated user provisioning](/administration/managing_users/automated_user_provisioning) for SCIM.
 
 ### Hosting
 
