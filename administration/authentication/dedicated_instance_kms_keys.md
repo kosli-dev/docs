@@ -6,7 +6,7 @@ icon: "key"
 
 Kosli Dedicated is a single-tenant Kosli instance, hosted on infrastructure dedicated to your organization. On a Dedicated instance you provide Kosli with the AWS KMS keys that encrypt all data at rest.
 
-Kosli hosts your data across two AWS regions — a **primary** and a **secondary** — so you provide a key in each region. This page walks through creating those keys in the AWS Console (with an equivalent Terraform example in the appendix) and sharing their ARNs with Kosli.
+Kosli hosts your data across two AWS regions — a **primary** and a **secondary** — so you provide a key in each region. This page walks through creating those keys in the AWS Console (with an equivalent [Terraform example](#terraform-example)) and sharing their ARNs with Kosli.
 
 <Note>
 A member of the Kosli Customer Success team will give you:
