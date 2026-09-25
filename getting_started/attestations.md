@@ -306,6 +306,66 @@ Currently, we support the following types of evidence:
     Nothing in the SBOM is checked against the artifact. It is recorded as reported, so the
     attestation says what the SBOM claims, not whether the claim is true.
 
+    **What you get depends on the tool, not just the format.** Kosli records what the document
+    declares, and tools fill the same fields differently. Three differences catch people out.
+
+    *The subject's digest is often absent from CycloneDX.* Kosli fills `subject.sha256` from
+    the subject's SHA-256 checksum. Each format spells that differently: `hashes` in
+    CycloneDX, and `checksums` in SPDX, written `PackageChecksum` in the tag-value form. Syft's
+    SPDX output fills it. Snyk's and Syft's CycloneDX output does not: both leave `hashes`
+    empty and put the digest in `version`, where it reads as a version string rather than a
+    checksum. Kosli does not infer a checksum from a version, so `subject.sha256` is empty for
+    those two, and the digest they wrote is in `subject.version`. That is the tool's choice
+    rather than a limit of CycloneDX, so check what yours writes instead of assuming either
+    way.
+
+    *A digest that is present is not automatically the artifact's.* The subject identifies what
+    the generator scanned. Point one at a tag and it records whatever that tag resolved to on
+    that machine. For a multi-architecture image that is a single architecture, and it can be a
+    local image id rather than a registry digest. Kosli does not check the subject against the
+    artifact, so a digest that is present can still belong to something else. Compare the two
+    only where your pipeline pointed the generator at the exact artifact it attests. Otherwise
+    check it in the pipeline, where the build can fail, rather than in a policy.
+
+    *Package counts are not comparable between formats.* `package_count` counts what each
+    format calls a package. A CycloneDX component with `type: file` is skipped, while the SPDX
+    package describing that same file is counted. Syft reports one package for
+    `kosli_Linux_arm64.rpm` in CycloneDX and two for the same file in SPDX.
+
+    Only [Rego](/policy-reference/rego_policy#input-data) can read these fields. Environment
+    policy expressions get the artifact's name and fingerprint, nothing from inside an
+    attestation. Evaluation copies an attestation's own fields onto its status entry, so the
+    summary sits under `attestation_data`:
+
+    ```rego
+    package policy
+
+    import rego.v1
+
+    sbom_attestation_name := data.params.sbom_attestation_name
+
+    default allow := false
+
+    sbom_lists_packages(artifact) if {
+        sbom := artifact.attestations_statuses[sbom_attestation_name]
+        sbom.attestation_data.document.package_count > 0
+    }
+
+    allow if {
+        every artifact in input.trail.compliance_status.artifacts_statuses {
+            sbom_lists_packages(artifact)
+        }
+    }
+    ```
+
+    Pass the attestation name in [`--params`](/policy-reference/rego_policy#params). Without it
+    the alias is undefined and no rule using it runs. A trail-scoped SBOM sits at
+    `input.trail.compliance_status.attestations_statuses[sbom_attestation_name].attestation_data.document`.
+
+    If you narrow the input with `kosli evaluate trail --attestations`, name the SBOM there too,
+    dot-qualified as `<artifact>.<name>` for an artifact-scoped one. Anything left out is absent
+    from the input, and a rule reading it does not match rather than failing.
+
     The CLI refuses an SBOM file larger than 9 MiB, which leaves room for the attestation
     itself within the 10 MB the server accepts. We are working on raising this.
 
