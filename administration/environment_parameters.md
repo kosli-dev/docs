@@ -14,7 +14,7 @@ A Kosli Dedicated environment is a single-tenant Kosli instance hosted on infras
 
 ### Hosting
 
-- **DNS host** — the hostname you want your instance to be reachable at (for example, `kosli.your-company.com`). Kosli issues a TLS certificate for this hostname.
+- **DNS host** — the hostname you want your instance to be reachable at (for example, `<instance>.kosli.com`). Kosli issues a TLS certificate for this hostname.
 - **Customer KMS keys** — the ARNs of the AWS KMS keys that encrypt all data at rest. Follow [Customer KMS keys](/administration/customer_kms_keys) to create a primary key and a secondary-region replica (or two single-region keys) in your own AWS account and share the ARNs with Kosli.
 - **AWS regions** — the **primary** and **secondary** AWS regions your instance runs in. Both regions must be ones Kosli Dedicated supports; a member of the Kosli Customer Success team will confirm the current options.
 
