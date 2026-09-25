@@ -52,8 +52,3 @@ Cloud Capture can operate across multiple AWS regions and accounts, allowing you
 ## Operation
 
 When Cloud Capture runs against one of your cloud accounts, it starts by gaining temporary credentials for the role you have created. It then uses these credentials to find resources to snapshot, such as finding all of your AWS ECS clusters.  For each resource it identifies, Cloud Capture generates a snapshot within Kosli.
-
-<Frame>
-<img src="/images/administration/cloud-capture-4-steps.png" alt="Diagram of the four steps Cloud Capture follows in a customer AWS account: assume the IAM role using the external ID, receive temporary STS credentials, find the ECS clusters, then snapshot the clusters" />
-</Frame>
-
