@@ -1,5 +1,5 @@
 ---
-title: Environment parameters
+title: Dedicated instance parameters
 description: "Shape and required parameters for a Kosli Dedicated instance environment."
 icon: "sliders"
 ---
