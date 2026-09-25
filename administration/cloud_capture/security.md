@@ -322,7 +322,7 @@ gcloud infra-manager deployments apply \
 </Tab>
 </Tabs>
 
-## How Kosli isolates customers
+## How Kosli isolates tenants
 
 Cloud Capture runs as a shared, autoscaled service, but each job runs under a role that is scoped to
 one customer:
