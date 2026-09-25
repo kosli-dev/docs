@@ -1,10 +1,10 @@
 ---
 title: Dedicated instance parameters
-description: "Shape and required parameters for a Kosli Dedicated instance environment."
+description: "Required parameters for provisioning a Kosli Dedicated instance."
 icon: "sliders"
 ---
 
-A Kosli Dedicated environment is a single-tenant Kosli instance hosted on infrastructure dedicated to your organization. Provisioning one requires a small set of parameters that a member of the Kosli Customer Success team collects from you before deployment.
+A Kosli Dedicated instance is a single-tenant Kosli instance hosted on infrastructure dedicated to your organization. Provisioning one requires a small set of parameters that a member of the Kosli Customer Success team collects from you before deployment.
 
 ## Required parameters
 

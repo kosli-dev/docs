@@ -25,7 +25,7 @@ A member of the Kosli Customer Success team will give you:
 
 AWS does not permit **multi-region KMS keys** whose key material lives in a custom key store.
 
-- If your cryptographic policy allows KMS-generated key material, create **one multi-region key** in the primary region and replicate it into the secondary region. This is the path described below.
+- If your key material can live in KMS (generated or imported), create **one multi-region key** in the primary region and replicate it into the secondary region. This is the path described below.
 - If your policy requires an [AWS CloudHSM key store](https://docs.aws.amazon.com/kms/latest/developerguide/keystore-cloudhsm.html) or an external key store for key material, create **two single-region keys** — one in each region. See [Single-region keys](#single-region-keys) for the differences.
 
 Most of the steps are identical for both shapes.
@@ -190,6 +190,21 @@ This example uses the top-level `region` argument on `aws_kms_key`, `aws_kms_ali
 </Note>
 
 ```hcl
+variable "primary_aws_region" {
+  type        = string
+  description = "Primary AWS region for your Kosli Dedicated instance"
+}
+
+variable "secondary_aws_region" {
+  type        = string
+  description = "Secondary AWS region for your Kosli Dedicated instance"
+}
+
+variable "kosli_dedicated_account_id" {
+  type        = string
+  description = "Kosli AWS account ID, supplied by the Kosli Customer Success team"
+}
+
 data "aws_caller_identity" "current" {}
 
 resource "aws_kms_key" "primary" {

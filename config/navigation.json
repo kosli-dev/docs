@@ -77,7 +77,7 @@
             {
               "group": "Dedicated instance",
               "pages": [
-                "administration/environment_parameters",
+                "administration/dedicated_instance_parameters",
                 "administration/customer_kms_keys"
               ]
             },
