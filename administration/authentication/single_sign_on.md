@@ -1,7 +1,7 @@
 ---
 title: Single sign-on
 description: "Learn about configuring single sign-on with Kosli"
-icon: "key"
+icon: "id-badge"
 ---
 
 Kosli supports signing in using your identity provider, via single sign-on (SSO). If you don't use an identity provider, [Magic Link](/administration/authentication/magic_link) is an alternative way to sign in.

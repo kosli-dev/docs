@@ -1,7 +1,7 @@
 ---
 title: Dedicated instance KMS keys
 description: "Create cross-account AWS KMS keys for Kosli Dedicated and share them with Kosli for data-at-rest encryption."
-icon: "key"
+icon: "lock"
 ---
 
 Kosli Dedicated is a single-tenant governance platform for software delivery. On the single-tenant offering, you provide Kosli with the AWS KMS keys that encrypt all data at rest.
