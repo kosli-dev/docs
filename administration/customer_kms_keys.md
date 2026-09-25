@@ -1,5 +1,5 @@
 ---
-title: Dedicated instance KMS keys
+title: Customer KMS keys
 description: "Create cross-account AWS KMS keys for Kosli Dedicated and share them with Kosli for data-at-rest encryption."
 icon: "key"
 ---
