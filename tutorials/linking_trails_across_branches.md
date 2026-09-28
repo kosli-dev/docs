@@ -72,7 +72,7 @@ Use `kosli evaluate trail` on the main-branch build to evaluate the PR trail aga
         ```bash
         IS_COMPLIANT=$(kosli get trail "$PR_TRAIL" \
           --flow app-pr \
-          --output json | jq -r '.compliance.is_compliant')
+          --output json | jq -r '.compliance_status.is_compliant')
         ```
 
         This is simpler but does not use a formal policy. You will need `$IS_COMPLIANT` in the next step.
@@ -260,7 +260,7 @@ Below is a simplified GitHub Actions workflow for a main-branch build that links
             run: |
               IS_COMPLIANT=$(kosli get trail "${{ steps.pr.outputs.trail }}" \
                 --flow app-pr \
-                --output json | jq -r '.compliance.is_compliant')
+                --output json | jq -r '.compliance_status.is_compliant')
 
               kosli attest generic \
                 --name pr-build-compliance \
