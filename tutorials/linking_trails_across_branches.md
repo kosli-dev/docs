@@ -45,12 +45,14 @@ Use `kosli evaluate trail` on the main-branch build to evaluate the PR trail aga
         Use `kosli evaluate trail` to check the PR trail against a Rego policy. Create a policy file (e.g. `pr-compliant.rego`):
 
         ```rego pr-compliant.rego
-        package main
+        package policy
 
-        default allow = false
+        import rego.v1
 
-        allow {
-          input.trail.compliance.is_compliant == true
+        default allow := false
+
+        allow if {
+          input.trail.compliance_status.is_compliant == true
         }
         ```
 
