@@ -37,7 +37,7 @@ jobs:
 
       - name: Run Claude doc review (general)
         if: github.event.action != 'synchronize'
-        uses: anthropics/claude-code-action@cfc3eb22bfed5c26ef66e3223c982af27e4524de # v1.0.231
+        uses: anthropics/claude-code-action@756cc22e19660d20e8cc9496b4f242475a7f7790 # v1.0.235
         env:
           GH_TOKEN: ${{ github.token }}
         with:
@@ -117,7 +117,7 @@ jobs:
 
       - name: Run Claude doc review (new commits only)
         if: github.event.action == 'synchronize'
-        uses: anthropics/claude-code-action@cfc3eb22bfed5c26ef66e3223c982af27e4524de # v1.0.231
+        uses: anthropics/claude-code-action@756cc22e19660d20e8cc9496b4f242475a7f7790 # v1.0.235
         env:
           GH_TOKEN: ${{ github.token }}
         with:
