@@ -25,6 +25,10 @@ The chain of custody that links an artifact's fingerprint to its origin, build e
 
 A repeatable, verifiable activity that mitigates one or more [risks](/understand_kosli/risks). Controls span build, release, runtime, and lifecycle phases.
 
+### Deployment Diff
+
+For an artifact running in an Environment, a pointer to the artifact it replaced there: the previous artifact from the same Flow, its commit, and the commit range between the two. Computed per Flow from snapshot start events. See [Snapshot artifacts and deployment diffs](/api-reference/snapshot_artifacts_and_deployment_diffs).
+
 ### Environment
 
 A Kosli representation of a runtime system you want to monitor (Kubernetes cluster, ECS service, Lambda function, S3 bucket, server directory, Docker host, Azure Web App).
