@@ -20,7 +20,7 @@ To set it up for your organization, see [Getting started with Cloud Capture](/ad
 Cloud Capture connects to your cloud accounts using permissions that you manage.  You configure Cloud Capture by activating it for different services, and Cloud Capture uses the permissions to regularly reach into your estate and record snapshots, sending the data into your Kosli organization.  Cloud Capture uses details about your infrastructure, such as the name of an ECS cluster, to build environments within Kosli.
 
 <Frame>
-<img src="/images/administration/cloud-capture-overview.png" alt="Diagram showing Cloud Capture, inside Kosli, sending queries to and receiving snapshots from three customer cloud accounts, then passing the data to the Kosli API and database" />
+<img src="/images/administration/cloud-capture-overview.png" alt="Diagram showing Cloud Capture, inside Kosli, sending queries to and receiving snapshots from three tenant cloud accounts, then passing the data to the Kosli API and database" />
 </Frame>
 
 ## Security
@@ -28,8 +28,8 @@ Cloud Capture connects to your cloud accounts using permissions that you manage.
 The security of your cloud infrastructure is the primary driver behind the internal architecture of
 Cloud Capture. You grant a read-only IAM role in your account, protected by an external ID that acts
 as a shared secret between Kosli and you. On Kosli's side, each Cloud Capture job runs under a role
-scoped to your organization alone, so a worker running for another customer cannot reach your cloud
-account. Cloud Capture holds no customer data; snapshots go straight to Kosli through the same ingest
+scoped to your organization alone, so a worker running for another tenant cannot reach your cloud
+account. Cloud Capture holds no tenant data; snapshots go straight to Kosli through the same ingest
 path as your existing pipelines. See [Cloud Capture Security](/administration/cloud_capture/security)
 for the isolation model and the full list of permissions.
 
