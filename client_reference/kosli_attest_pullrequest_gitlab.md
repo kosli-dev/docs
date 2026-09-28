@@ -78,7 +78,7 @@ To drop the file from the fingerprint safely, move its entries to `--exclude` an
 	<Tab title="GitLab">
 	View an example of the `kosli attest pullrequest gitlab` command in GitLab.
 
-	In [this YAML file](https://gitlab.com/cyber-dojo/creator/-/blob/65fd2bfa2478534ea4bc5ccf30f6bfc6aab7550c/.gitlab/workflows/main.yml#L75), which created [this Kosli Event](https://app.kosli.com/cyber-dojo/flows/creator-ci/trails/99d7b74f39e311d492902ad48dbe97da63f2c687?attestation_id=a70287f4-c9fa-4072-9221-34faa89d).
+	In [this YAML file](https://gitlab.com/cyber-dojo/creator/-/blob/65fd2bfa2478534ea4bc5ccf30f6bfc6aab7550c/.gitlab/workflows/main.yml#L75), which created [this Kosli Event](https://app.kosli.com/cyber-dojo/flows/creator-ci/trails/10ed49777abb7b3c7be0da1bd536c6b44f34533c?attestation_id=88bbec6b-5db4-45ff-b286-342d3be8).
 	</Tab>
 </Tabs>
 
