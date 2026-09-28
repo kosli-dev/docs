@@ -4,7 +4,6 @@ description: "Learn how to make attestations to Kosli to prove compliance in you
 icon: "receipt"
 ---
 
-import CliBetaNotice from "/snippets/cli-beta-notice.mdx";
 
 Attestations are how you record the facts you care about in your software supply chain.
 They are the evidence that you have performed certain activities, such as running tests, security scans, or ensuring that a certain requirement is met.
@@ -291,8 +290,6 @@ Currently, we support the following types of evidence:
     See [attest Snyk results to an artifact or a trail](/client_reference/kosli_attest_snyk/) for usage details and examples.
   </Accordion>
   <Accordion title="SBOM" icon="list-tree">
-
-    <CliBetaNotice />
 
     You can attest a software bill of materials in CycloneDX (JSON or XML) or SPDX (JSON or
     tag-value) format. Kosli reads the format, the creation time, the tools that produced it,
