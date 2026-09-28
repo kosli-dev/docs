@@ -21,7 +21,8 @@ The trail data is passed to the policy as `input.trails` (an array), unlike
 
 Use `--attestations` to enrich the input with detailed attestation data
 (e.g. pull request approvers, scan results). Use `--show-input` to inspect the
-full data structure available to the policy. Use `--output json` for structured output.
+full data structure available to the policy. Use `--output json` for structured output,
+and `--output-rule` to add other rules of the policy, like a report, to it.
 
 ## Flags
 | Flag | Type | Description |
@@ -32,6 +33,7 @@ full data structure available to the policy. Use `--output json` for structured 
 | `-h`, `--help` | bool | help for trails |
 | `--no-assert` | bool | [optional] Print the result and always exit 0, even when the policy denies. Use when this command feeds another tool as a policy decision point. |
 | `-o`, `--output` | string | [defaulted] The format of the output. Valid formats are: [table, json]. (default "table") |
+| `--output-rule` | strings | [optional] [experimental] Name of a policy rule to add to the JSON output, next to allow and violations. Can be repeated, or given as a comma-separated list. Subject to change. |
 | `--params` | string | [optional] Policy parameters as inline JSON or @file.json. Available in policies as data.params. |
 | `-p`, `--policy` | string | Path or http(s):// URL of a Rego policy to evaluate against the trails. |
 | `--show-input` | bool | [optional] Include the policy input data in the output. |
@@ -99,6 +101,15 @@ kosli evaluate trails yourTrailName1 yourTrailName2
 kosli evaluate trails yourTrailName1 yourTrailName2 
 	--policy yourPolicyFile.rego 
 	--no-assert 
+
+```
+</Accordion>
+<Accordion title="add the policy's report rule to the JSON output">
+```shell
+kosli evaluate trails yourTrailName1 yourTrailName2 
+	--policy yourPolicyFile.rego 
+	--output-rule report 
+	--output json 
 ```
 </Accordion>
 </AccordionGroup>

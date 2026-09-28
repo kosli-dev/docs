@@ -1,12 +1,7 @@
 ---
 title: "kosli attest sbom"
-tag: "BETA"
 description: "Report a software bill of materials to an artifact or a trail in a Kosli flow.  "
 ---
-
-import CliBetaNotice from "/snippets/cli-beta-notice.mdx";
-
-<CliBetaNotice />
 
 ## Synopsis
 

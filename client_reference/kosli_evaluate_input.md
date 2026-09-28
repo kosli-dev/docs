@@ -22,6 +22,7 @@ the policy input from a `--show-input --output json` capture.
 
 The policy must use `package policy` and define an `allow` rule.
 An optional `violations` rule (a set of strings) can provide human-readable denial reasons.
+Use `--output-rule` to add other rules of the policy, like a report, to the JSON output.
 
 By default a deny exits with code 1. Pass `--no-assert` to print the verdict
 and exit 0 even on deny, when this command is feeding another tool as a
@@ -40,6 +41,7 @@ This accepts inline JSON or a file reference (`@file.json`).
 | `-i`, `--input-file` | string | [optional] Path to a JSON input file. Reads from stdin if omitted. |
 | `--no-assert` | bool | [optional] Print the result and always exit 0, even when the policy denies. Use when this command feeds another tool as a policy decision point. |
 | `-o`, `--output` | string | [defaulted] The format of the output. Valid formats are: [table, json]. (default "table") |
+| `--output-rule` | strings | [optional] [experimental] Name of a policy rule to add to the JSON output, next to allow and violations. Can be repeated, or given as a comma-separated list. Subject to change. |
 | `--params` | string | [optional] Policy parameters as inline JSON or @file.json. Available in policies as data.params. |
 | `-p`, `--policy` | string | Path or http(s):// URL of a Rego policy to evaluate against the input. |
 | `--show-input` | bool | [optional] Include the policy input data in the output. |
@@ -138,6 +140,16 @@ kosli evaluate input
 	--input-file trail-data.json 
 	--policy policy.rego 
 	--no-assert
+
+```
+</Accordion>
+<Accordion title="add the policy's report rule to the JSON output">
+```shell
+kosli evaluate input 
+	--input-file trail-data.json 
+	--policy policy.rego 
+	--output-rule report 
+	--output json
 ```
 </Accordion>
 </AccordionGroup>

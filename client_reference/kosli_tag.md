@@ -52,7 +52,7 @@ name as-is, whereas a real run sends the resolved ID.
 	<Tab title="GitHub">
 	View an example of the `kosli tag` command in GitHub.
 
-	In [this YAML file](https://github.com/cyber-dojo/aws-prod-co-promotion/blob/7494758f8bbc4e66cb5df90ef4cd6b72d75ca584/.github/workflows/promote_one.yml#L74)
+	In [this YAML file](https://github.com/cyber-dojo/aws-prod-co-promotion/blob/78095bc425078b1de3795c7dc866d8cafbd564ee/.github/workflows/promote_one.yml#L74)
 	</Tab>
 	<Tab title="GitLab">
 	View an example of the `kosli tag` command in GitLab.
