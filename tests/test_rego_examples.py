@@ -62,6 +62,16 @@ def rego_policies():
             )
 
 
+POLICIES = list(rego_policies())
+
+
+def test_the_docs_still_contain_rego_policies():
+    assert POLICIES, (
+        "no Rego policies found, so the checks below all pass without checking "
+        "anything; the fence pattern has stopped matching the docs"
+    )
+
+
 def _opa():
     opa = shutil.which("opa")
     if opa:
@@ -71,7 +81,7 @@ def _opa():
     pytest.skip("opa is not installed; install it to check the Rego examples")
 
 
-@pytest.mark.parametrize("body,package", rego_policies())
+@pytest.mark.parametrize("body,package", POLICIES)
 def test_rego_policy_compiles(body, package):
     opa = _opa()
     with tempfile.TemporaryDirectory() as tmp:
@@ -83,7 +93,7 @@ def test_rego_policy_compiles(body, package):
     assert result.returncode == 0, (result.stdout + result.stderr).strip()
 
 
-@pytest.mark.parametrize("body,package", rego_policies())
+@pytest.mark.parametrize("body,package", POLICIES)
 def test_rego_policy_follows_the_kosli_contract(body, package):
     # policy-reference/rego_policy.mdx: Kosli reads data.policy.allow, and exits 0
     # when it is true and 1 when it is false.
