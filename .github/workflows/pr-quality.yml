@@ -28,13 +28,9 @@ jobs:
         run: pip install requests pytest
 
       - name: Install opa
-        run: |
-          curl -fsSL -o /tmp/opa \
-            https://openpolicyagent.org/downloads/v1.9.0/opa_linux_amd64_static
-          echo "66fa66f3b730b2fb086003863428b382b2898d343adb4b5dfab5598b4d739eed  /tmp/opa" \
-            | sha256sum -c -
-          install -m 0755 /tmp/opa /usr/local/bin/opa
-          opa version
+        uses: open-policy-agent/setup-opa@b2b258e089860efaadaaf71bf6e3aecb4a3eeff1 # v2.4.0
+        with:
+          version: 1.9.0
 
       - name: Run tests
         run: pytest tests/
