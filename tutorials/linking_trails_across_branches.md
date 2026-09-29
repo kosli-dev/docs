@@ -45,12 +45,14 @@ Use `kosli evaluate trail` on the main-branch build to evaluate the PR trail aga
         Use `kosli evaluate trail` to check the PR trail against a Rego policy. Create a policy file (e.g. `pr-compliant.rego`):
 
         ```rego pr-compliant.rego
-        package main
+        package policy
 
-        default allow = false
+        import rego.v1
 
-        allow {
-          input.trail.compliance.is_compliant == true
+        default allow := false
+
+        allow if {
+          input.trail.compliance_status.is_compliant == true
         }
         ```
 
@@ -70,7 +72,7 @@ Use `kosli evaluate trail` on the main-branch build to evaluate the PR trail aga
         ```bash
         IS_COMPLIANT=$(kosli get trail "$PR_TRAIL" \
           --flow app-pr \
-          --output json | jq -r '.compliance.is_compliant')
+          --output json | jq -r '.compliance_status.is_compliant')
         ```
 
         This is simpler but does not use a formal policy. You will need `$IS_COMPLIANT` in the next step.
@@ -258,7 +260,7 @@ Below is a simplified GitHub Actions workflow for a main-branch build that links
             run: |
               IS_COMPLIANT=$(kosli get trail "${{ steps.pr.outputs.trail }}" \
                 --flow app-pr \
-                --output json | jq -r '.compliance.is_compliant')
+                --output json | jq -r '.compliance_status.is_compliant')
 
               kosli attest generic \
                 --name pr-build-compliance \
