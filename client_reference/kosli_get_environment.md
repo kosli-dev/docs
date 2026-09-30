@@ -50,9 +50,9 @@ kosli get environment aws-prod --output=json
   "name": "aws-prod",
   "type": "ECS",
   "description": "The ECS cluster for production cyber-dojo",
-  "last_modified_at": 1790608078.4205186,
-  "last_reported_at": 1790608078.4205186,
-  "last_changed_at": 1790581078.5249808,
+  "last_modified_at": 1790775358.377852,
+  "last_reported_at": 1790775358.377852,
+  "last_changed_at": 1790759338.4899325,
   "state": true,
   "include_scaling": false,
   "tags": {
@@ -65,7 +65,9 @@ kosli get environment aws-prod --output=json
     "snyk-scan-aws-prod",
     "trail-compliance-aws-prod"
   ],
-  "included_environments": null
+  "included_environments": null,
+  "archived_at": null,
+  "archived_by": null
 }
 ```
 
