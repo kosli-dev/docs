@@ -44,6 +44,14 @@ This approach is suitable for testing only.
 gcloud auth application-default login
 ```
 
+Set a quota project on those credentials so Cloud Asset API calls are billed and quota-checked against your project:
+
+```shell
+gcloud auth application-default set-quota-project <your-gcp-project>
+```
+
+Without this, `cloudasset.googleapis.com` typically rejects the call with a "requires a quota project" error.
+
 Run the snapshot command:
 
 ```shell
@@ -78,7 +86,9 @@ gcloud iam service-accounts create kosli-gke-reporter \
 
 <Step title="Grant the reporter Cloud Asset Inventory access">
 
-Create a custom role with the minimum permissions the reporter needs, and grant it on the scope you want to snapshot (project, folder, or organization):
+Create a custom role with the minimum permissions the reporter needs, and grant it on the scope you want to snapshot.
+
+For a project-wide snapshot, create the role in that project and bind it there:
 
 ```shell
 gcloud iam roles create kosliGkeReporter \
@@ -91,7 +101,20 @@ gcloud projects add-iam-policy-binding <your-gcp-project> \
     --role="projects/<your-gcp-project>/roles/kosliGkeReporter"
 ```
 
-For a folder- or organization-wide snapshot, bind the same role at that level with `gcloud resource-manager folders add-iam-policy-binding` or `gcloud organizations add-iam-policy-binding`.
+For a folder- or organization-wide snapshot, create the role at the organization level (GCP does not let you bind a project-level custom role above the project), then bind it on the folder or organization:
+
+```shell
+gcloud iam roles create kosliGkeReporter \
+    --organization=<your-gcp-org-id> \
+    --title="Kosli GKE reporter" \
+    --permissions=cloudasset.assets.listContainerPod,serviceusage.services.use
+
+gcloud organizations add-iam-policy-binding <your-gcp-org-id> \
+    --member="serviceAccount:kosli-gke-reporter@<your-gcp-project>.iam.gserviceaccount.com" \
+    --role="organizations/<your-gcp-org-id>/roles/kosliGkeReporter"
+```
+
+Swap `gcloud organizations add-iam-policy-binding` for `gcloud resource-manager folders add-iam-policy-binding <your-gcp-folder-id>` to bind at a folder instead.
 
 <Note>
 `roles/cloudasset.viewer` also works, but it grants `listResource` for every asset type, including `k8s.io/Secret`. The custom role above restricts the reporter to listing GKE pods.
@@ -138,7 +161,7 @@ gcloud run jobs deploy kosli-gke-reporter \
 ```
 
 <Tip>
-Pin the CLI image to a specific version (for example `ghcr.io/kosli-dev/cli:v2.18.0`) so the reporter behavior does not change unexpectedly when a new release is published.
+Pin the CLI image to a specific version that includes `kosli snapshot gke` (for example `ghcr.io/kosli-dev/cli:v<version>`) so the reporter behavior does not change unexpectedly when a new release is published.
 </Tip>
 
 <Note>
