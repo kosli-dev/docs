@@ -63,9 +63,9 @@ kosli list environments --output=json
     "name": "aws-beta",
     "type": "ECS",
     "description": "The ECS cluster for staging cyber-dojo",
-    "last_modified_at": 1790608103.904653,
-    "last_reported_at": 1790608103.904653,
-    "last_changed_at": 1790598323.9149764,
+    "last_modified_at": 1790775383.9179575,
+    "last_reported_at": 1790775383.9179575,
+    "last_changed_at": 1790774544.0207713,
     "state": true,
     "include_scaling": false,
     "tags": {
@@ -77,32 +77,36 @@ kosli list environments --output=json
       "snyk-scan-aws-beta",
       "trail-compliance-aws-beta"
     ],
-    "included_environments": null
+    "included_environments": null,
+    "archived_at": null,
+    "archived_by": null
   },
   {
     "org": "cyber-dojo",
     "name": "aws-beta-terraform-drift-detection",
     "type": "server",
     "description": "Detection of drift of the Infrastructure-as-code components of aws-beta",
-    "last_modified_at": 1790607908.7049706,
-    "last_reported_at": 1790607908.7049706,
-    "last_changed_at": 1790598608.7818315,
+    "last_modified_at": 1790775308.9382122,
+    "last_reported_at": 1790775308.9382122,
+    "last_changed_at": 1790775009.1899378,
     "state": true,
     "include_scaling": false,
     "tags": {},
     "policies": [
       "provenance"
     ],
-    "included_environments": null
+    "included_environments": null,
+    "archived_at": null,
+    "archived_by": null
   },
   {
     "org": "cyber-dojo",
     "name": "aws-prod",
     "type": "ECS",
     "description": "The ECS cluster for production cyber-dojo",
-    "last_modified_at": 1790608138.494066,
-    "last_reported_at": 1790608138.494066,
-    "last_changed_at": 1790581078.5249808,
+    "last_modified_at": 1790775358.377852,
+    "last_reported_at": 1790775358.377852,
+    "last_changed_at": 1790759338.4899325,
     "state": true,
     "include_scaling": false,
     "tags": {
@@ -115,15 +119,17 @@ kosli list environments --output=json
       "snyk-scan-aws-prod",
       "trail-compliance-aws-prod"
     ],
-    "included_environments": null
+    "included_environments": null,
+    "archived_at": null,
+    "archived_by": null
   },
   {
     "org": "cyber-dojo",
     "name": "aws-prod-terraform-drift-detection",
     "type": "server",
     "description": "Detection of drift of the Infrastructure-as-code components of aws-prod",
-    "last_modified_at": 1790608112.1498253,
-    "last_reported_at": 1790608112.1498253,
+    "last_modified_at": 1790775212.2658806,
+    "last_reported_at": 1790775212.2658806,
     "last_changed_at": 1790420323.0627275,
     "state": true,
     "include_scaling": false,
@@ -131,16 +137,18 @@ kosli list environments --output=json
     "policies": [
       "provenance"
     ],
-    "included_environments": null
+    "included_environments": null,
+    "archived_at": null,
+    "archived_by": null
   },
   {
     "org": "cyber-dojo",
     "name": "production",
     "type": "logical",
     "description": "Production environments for cyber-dojo",
-    "last_modified_at": 1790581078.5249808,
+    "last_modified_at": 1790759338.4899325,
     "last_reported_at": null,
-    "last_changed_at": 1790581078.5249808,
+    "last_changed_at": 1790759338.4899325,
     "state": true,
     "include_scaling": false,
     "tags": {},
@@ -148,16 +156,18 @@ kosli list environments --output=json
     "included_environments": [
       "aws-prod",
       "aws-prod-terraform-drift-detection"
-    ]
+    ],
+    "archived_at": null,
+    "archived_by": null
   },
   {
     "org": "cyber-dojo",
     "name": "staging",
     "type": "logical",
     "description": "Staging environments for cyber-dojo",
-    "last_modified_at": 1790598608.7818315,
+    "last_modified_at": 1790775009.1899378,
     "last_reported_at": null,
-    "last_changed_at": 1790598608.7818315,
+    "last_changed_at": 1790775009.1899378,
     "state": true,
     "include_scaling": false,
     "tags": {},
@@ -165,7 +175,9 @@ kosli list environments --output=json
     "included_environments": [
       "aws-beta",
       "aws-beta-terraform-drift-detection"
-    ]
+    ],
+    "archived_at": null,
+    "archived_by": null
   }
 ]
 ```
