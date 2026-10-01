@@ -23,7 +23,7 @@ Rotation on its own does not extend the credential. If the rotated key was alrea
 
 ## Expiry warnings
 
-Kosli warns you before an API key expires, so you can rotate it in time. Keys with no expiry never trigger a warning.
+Kosli warns you before an API key expires, so you can replace it in time: rotate a service account key, or create a new personal key and revoke the old one. Keys with no expiry never trigger a warning.
 
 ### When warnings are sent
 
