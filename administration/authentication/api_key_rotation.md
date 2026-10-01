@@ -27,7 +27,7 @@ Kosli warns you before an API key expires, so you can rotate it in time. Keys wi
 
 ### When warnings are sent
 
-A key gets at most two warnings:
+Kosli checks for expiring keys once a day. An expiring key gets at most two warnings:
 
 | Warning | Sent when |
 |---|---|
