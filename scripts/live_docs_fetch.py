@@ -11,6 +11,7 @@ import live_docs_modifiers_data
 import live_docs_queries_data
 
 _KOSLI_API_BASE = "https://app.kosli.com/api/v2"
+#The below is an intentionally public example key. 
 _KOSLI_API_TOKEN = "Pj_XT2deaVA6V1qrTlthuaWsmjVt4eaHQwqnwqjRO3A"
 
 
