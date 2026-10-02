@@ -4,6 +4,64 @@ description: "Release notes for Kosli products."
 rss: true
 ---
 
+<Update label="October 2, 2026" description="v2.46.1" tags={["CLI"]}>
+
+## Updates
+
+- **Clear error for SHA-256 Git repositories** — commands that read Git history now explain that repositories using the SHA-256 object format are not supported, instead of failing with a cryptic `objectformat` extension error.
+
+[View on GitHub](https://github.com/kosli-dev/cli/releases/tag/v2.46.1)
+
+</Update>
+
+<Update label="October 1, 2026" description="v2.46.0" tags={["CLI"]}>
+
+## New features
+
+- **`kosli snapshot gke` (beta)** — report the running and failed pods of GKE clusters to a Kosli K8S environment by reading Google Cloud Asset Inventory. No kubeconfig, Kubernetes RBAC, or control plane access is needed. Scope the snapshot with `--project`, `--folder`, or `--organization`, and narrow it with `--clusters`, `--clusters-regex`, `--locations`, and the namespace flags. Errors name the missing permissions, a disabled Cloud Asset API, or Application Default Credentials problems. See the [`kosli snapshot gke` reference](/client_reference/kosli_snapshot_gke).
+
+[View on GitHub](https://github.com/kosli-dev/cli/releases/tag/v2.46.0)
+
+</Update>
+
+<Update label="October 1, 2026" description="v0.10.0" tags={["Terraform Provider"]}>
+
+## New features
+
+- **`kosli_notification_config` resource and data source** — manage and query where Kosli sends the notifications it raises itself, such as API key expiry warnings. Targets can be email addresses, Slack webhooks, or webhooks. See the [Terraform provider reference](/terraform-reference).
+
+## Bug fixes
+
+- **Corrected `kosli_action` trigger docs** — the `triggers` attribute now documents all six valid values. `ON_SCALED_ARTIFACT` is now correctly described as firing on artifact compliance or provenance changes, not scaling. See the [`kosli_action` reference](/terraform-reference/resources/action).
+
+[View on GitHub](https://github.com/kosli-dev/terraform-provider-kosli/releases/tag/v0.10.0)
+
+</Update>
+
+<Update label="September 30, 2026" description="v2.45.0" tags={["CLI"]}>
+
+## Updates
+
+- **Server-side evaluations print all outputs** — `kosli evaluate` with server-side evaluation now prints every output the policy returns in the JSON output, next to `allow`. Structured violations are shown as JSON in the table output and in the denial error.
+
+[View on GitHub](https://github.com/kosli-dev/cli/releases/tag/v2.45.0)
+
+</Update>
+
+<Update label="September 28, 2026" description="v2.44.0" tags={["CLI"]}>
+
+## New features
+
+- **`--output-rule` for policy evaluation (experimental)** — [`kosli evaluate input`](/client_reference/kosli_evaluate_input), [`trail`](/client_reference/kosli_evaluate_trail), and [`trails`](/client_reference/kosli_evaluate_trails) can add the value of named policy rules to the JSON output, next to `allow` and `violations`. Repeat the flag or pass a comma-separated list. Unknown rule names are rejected.
+
+## Updates
+
+- **`kosli attest sbom` is generally available** — the command no longer carries a beta marker. See the [`kosli attest sbom` reference](/client_reference/kosli_attest_sbom).
+
+[View on GitHub](https://github.com/kosli-dev/cli/releases/tag/v2.44.0)
+
+</Update>
+
 <Update label="September 18, 2026" description="v2.43.1" tags={["CLI"]}>
 
 ## Updates
