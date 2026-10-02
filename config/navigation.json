@@ -451,6 +451,7 @@
                 "client_reference/kosli_snapshot_cloud-run",
                 "client_reference/kosli_snapshot_docker",
                 "client_reference/kosli_snapshot_ecs",
+                "client_reference/kosli_snapshot_gke",
                 "client_reference/kosli_snapshot_k8s",
                 "client_reference/kosli_snapshot_lambda",
                 "client_reference/kosli_snapshot_path",
