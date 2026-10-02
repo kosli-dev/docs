@@ -75,7 +75,9 @@ kosli get trail dashboard-ci e4757683b74df7033c95aa544a7824b395c2f8bb --output=j
         "overridden_attestation_id": null,
         "status": "COMPLETE",
         "is_compliant": true,
-        "unexpected": false
+        "unexpected": false,
+        "type_mismatch": false,
+        "expected_attestation_type": null
       }
     ],
     "artifacts_statuses": {
@@ -92,7 +94,9 @@ kosli get trail dashboard-ci e4757683b74df7033c95aa544a7824b395c2f8bb --output=j
             "overridden_attestation_id": null,
             "status": "COMPLETE",
             "is_compliant": true,
-            "unexpected": false
+            "unexpected": false,
+            "type_mismatch": false,
+            "expected_attestation_type": null
           },
           {
             "attestation_name": "provenance-decision",
@@ -101,7 +105,9 @@ kosli get trail dashboard-ci e4757683b74df7033c95aa544a7824b395c2f8bb --output=j
             "overridden_attestation_id": null,
             "status": "COMPLETE",
             "is_compliant": true,
-            "unexpected": false
+            "unexpected": false,
+            "type_mismatch": false,
+            "expected_attestation_type": null
           },
           {
             "attestation_name": "sbom-facts",
@@ -110,7 +116,9 @@ kosli get trail dashboard-ci e4757683b74df7033c95aa544a7824b395c2f8bb --output=j
             "overridden_attestation_id": null,
             "status": "COMPLETE",
             "is_compliant": true,
-            "unexpected": false
+            "unexpected": false,
+            "type_mismatch": false,
+            "expected_attestation_type": null
           },
           {
             "attestation_name": "sbom-decision",
@@ -119,7 +127,9 @@ kosli get trail dashboard-ci e4757683b74df7033c95aa544a7824b395c2f8bb --output=j
             "overridden_attestation_id": null,
             "status": "COMPLETE",
             "is_compliant": true,
-            "unexpected": false
+            "unexpected": false,
+            "type_mismatch": false,
+            "expected_attestation_type": null
           },
           {
             "attestation_name": "snyk-container-scan",
@@ -128,7 +138,9 @@ kosli get trail dashboard-ci e4757683b74df7033c95aa544a7824b395c2f8bb --output=j
             "overridden_attestation_id": null,
             "status": "COMPLETE",
             "is_compliant": true,
-            "unexpected": false
+            "unexpected": false,
+            "type_mismatch": false,
+            "expected_attestation_type": null
           },
           {
             "attestation_name": "rubocop-lint",
@@ -137,7 +149,9 @@ kosli get trail dashboard-ci e4757683b74df7033c95aa544a7824b395c2f8bb --output=j
             "overridden_attestation_id": null,
             "status": "COMPLETE",
             "is_compliant": true,
-            "unexpected": false
+            "unexpected": false,
+            "type_mismatch": false,
+            "expected_attestation_type": null
           },
           {
             "attestation_name": "sonarcloud-scan",
@@ -146,7 +160,9 @@ kosli get trail dashboard-ci e4757683b74df7033c95aa544a7824b395c2f8bb --output=j
             "overridden_attestation_id": null,
             "status": "COMPLETE",
             "is_compliant": true,
-            "unexpected": false
+            "unexpected": false,
+            "type_mismatch": false,
+            "expected_attestation_type": null
           },
           {
             "attestation_name": "unit-test",
@@ -155,7 +171,9 @@ kosli get trail dashboard-ci e4757683b74df7033c95aa544a7824b395c2f8bb --output=j
             "overridden_attestation_id": null,
             "status": "COMPLETE",
             "is_compliant": true,
-            "unexpected": false
+            "unexpected": false,
+            "type_mismatch": false,
+            "expected_attestation_type": null
           },
           {
             "attestation_name": "unit-test-coverage",
@@ -164,7 +182,9 @@ kosli get trail dashboard-ci e4757683b74df7033c95aa544a7824b395c2f8bb --output=j
             "overridden_attestation_id": null,
             "status": "COMPLETE",
             "is_compliant": true,
-            "unexpected": false
+            "unexpected": false,
+            "type_mismatch": false,
+            "expected_attestation_type": null
           }
         ],
         "unexpected": false,
