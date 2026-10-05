@@ -515,7 +515,8 @@
                 "terraform-reference/resources/policy_attachment",
                 "terraform-reference/resources/service_account",
                 "terraform-reference/resources/service_account_api_key",
-                "terraform-reference/resources/control"
+                "terraform-reference/resources/control",
+                "terraform-reference/resources/notification_config"
               ]
             },
             {
@@ -528,7 +529,8 @@
                 "terraform-reference/data-sources/action",
                 "terraform-reference/data-sources/policy",
                 "terraform-reference/data-sources/service_account",
-                "terraform-reference/data-sources/control"
+                "terraform-reference/data-sources/control",
+                "terraform-reference/data-sources/notification_config"
               ]
             },
             {
