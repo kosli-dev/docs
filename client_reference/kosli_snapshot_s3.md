@@ -21,8 +21,13 @@ More details can be found here: https://aws.github.io/aws-sdk-go-v2/docs/configu
 	
 You can report the entire bucket content, or filter some of the content using `--include` / `--exclude` (literal prefix match) or `--include-regex` / `--exclude-regex` (Go regular expressions matched against the full object key).
 In all cases, the content is reported as one artifact. If you wish to report separate files/dirs within the same bucket as separate artifacts, you need to run the command twice.
-Object keys are never used as local file names: each object is downloaded to a temporary file, hashed and removed, and the fingerprint is computed from the keys and the content digests, so any key S3 accepts can be fingerprinted on any operating system.
+Object keys are never used as local file names: by default each object is downloaded to a temporary file, hashed and removed, and the fingerprint is computed from the keys and the content digests, so any key S3 accepts can be fingerprinted on any operating system.
 Keys that cannot form a directory tree are rejected and fail the snapshot, naming every key involved: a key containing a `..` segment, two keys that resolve to the same path (such as `a//b` and `a/b`), or an object whose key is also a prefix of other objects (such as `a` beside `a/b`). A legitimate key of that shape can be left out with `--exclude-regex` (anchor and escape it, since the pattern is a regular expression matched against the whole key); when `--include` or `--include-regex` is set, exclude filters are ignored, so narrow the include filter instead.
+
+By default each object's SHA256 comes from downloading the object and hashing it. `--fingerprint-source metadata` reads the SHA256 checksum S3 stores for the object instead, which skips the download, the temporary disk and the hashing. Everything else, like the keys, the `.kosli_ignore` rules, the way digests combine into the fingerprint, is the same in both modes, so the fingerprint is identical and a snapshot matches the artifact you attested either way. Two conditions apply:
+- Every contributing object must carry a full-object SHA256 checksum. S3 only stores one when the upload asked for it, for example `aws s3api put-object --checksum-algorithm SHA256`. Objects without one fail the snapshot, all named in one run.
+- A multipart upload gets a composite SHA256, which hashes the checksums of the parts rather than the object content, so it cannot serve as the object's fingerprint. Such an object can be collapsed into a single part in place with `aws s3api copy-object --checksum-algorithm SHA256 --copy-source yourBucket/yourKey --bucket yourBucket --key yourKey`.
+A root `.kosli_ignore` is still downloaded in this mode, because its rules decide which objects contribute; the objects it excludes are never fetched and need no checksum. Reading a checksum does not need fewer permissions than downloading: AWS requires `s3:GetObject` for both, and an SSE-KMS encrypted object additionally needs `kms:GenerateDataKey` and `kms:Decrypt` either way.
 
 To specify paths in a directory artifact that should always be excluded from the SHA256 calculation, you can add a `.kosli_ignore` file to the root of the artifact.
 Each line should specify a relative path or path glob to be ignored. You can include comments in this file, using `#`.
@@ -36,11 +41,12 @@ Paths the list already matches stay excluded whatever is later added there, so k
 | `--aws-region` | string | The AWS region. |
 | `--aws-secret-key` | string | The AWS secret access key. |
 | `--bucket` | string | The name of the S3 bucket. |
-| `--download-budget` | string | [optional] The maximum total size of the S3 objects downloading at the same time, which caps the temporary disk the snapshot uses. A bare number is megabytes; add K, M, G or T (optionally followed by B) to choose the unit, e.g. 512M or 8G. An object larger than the budget still downloads, on its own. Objects are downloaded to the OS temporary directory. (default "512M") |
-| `--download-concurrency` | int | [optional] The number of S3 objects to download at the same time when fingerprinting the bucket. Each object in flight may hold up to 40 MB of download buffers in memory, on top of the disk the `--download-budget` allows. (default 8) |
+| `--download-budget` | string | [optional] The maximum total size of the S3 objects downloading at the same time, which caps the temporary disk the snapshot uses. A bare number is megabytes; add K, M, G or T (optionally followed by B) to choose the unit, e.g. 512M or 8G. An object larger than the budget still downloads, on its own. Objects are downloaded to the OS temporary directory. Has no effect with `--fingerprint-source` metadata, which reads stored checksums and uses no temporary disk. (default "512M") |
+| `--download-concurrency` | int | [optional] The number of S3 objects to fetch at the same time when fingerprinting the bucket. When downloading, the default, each object in flight may hold up to 40 MB of download buffers in memory, on top of the disk the `--download-budget` allows. With `--fingerprint-source` metadata it bounds the checksum reads instead, which hold neither, and defaults to 32. (default 8) |
 | `-D`, `--dry-run` | bool | [optional] Run in dry-run mode. When enabled, no data is sent to Kosli and the CLI exits with 0 exit code regardless of any errors. |
 | `-x`, `--exclude` | strings | [optional] The comma separated list of file and/or directory paths in the S3 bucket to exclude when fingerprinting. Paths match by literal prefix. Cannot be used together with `--include` or `--include-regex`. |
 | `--exclude-regex` | strings | [optional] The comma separated list of Go regular expressions matched against object keys in the S3 bucket to exclude when fingerprinting. Cannot be used together with `--include` or `--include-regex`. |
+| `--fingerprint-source` | string | [defaulted] Where each object's SHA256 comes from when fingerprinting the bucket. Valid sources are: [content, metadata]. 'content' downloads every contributing object and hashes it. 'metadata' reads the SHA256 checksum S3 stores for each object instead, which skips the download but requires every contributing object to have been uploaded with a full-object SHA256 checksum. Both produce the same fingerprint and need the same permissions. (default "content") |
 | `-h`, `--help` | bool | help for s3 |
 | `-i`, `--include` | strings | [optional] The comma separated list of file and/or directory paths in the S3 bucket to include when fingerprinting. Paths match by literal prefix. Cannot be used together with `--exclude` or `--exclude-regex`. |
 | `--include-regex` | strings | [optional] The comma separated list of Go regular expressions matched against object keys in the S3 bucket to include when fingerprinting. Cannot be used together with `--exclude` or `--exclude-regex`. |
@@ -118,6 +124,19 @@ kosli snapshot s3 yourEnvironmentName
 kosli snapshot s3 yourEnvironmentName 
 	--bucket yourBucketName 
 	--exclude-regex '.*\.png$' 
+
+```
+</Accordion>
+<Accordion title="report contents of an AWS S3 bucket without downloading the objects,">
+```shell
+
+```
+</Accordion>
+<Accordion title="using the SHA256 checksums S3 stores for them">
+```shell
+kosli snapshot s3 yourEnvironmentName 
+	--bucket yourBucketName 
+	--fingerprint-source metadata 
 ```
 </Accordion>
 </AccordionGroup>
