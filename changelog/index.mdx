@@ -4,6 +4,27 @@ description: "Release notes for Kosli products."
 rss: true
 ---
 
+<Update label="October 9, 2026" description="v2.47.0" tags={["CLI"]}>
+
+## New features
+
+- **Fingerprint S3 buckets from metadata** — `kosli snapshot s3 --fingerprint-source metadata` reads the SHA256 checksums S3 already stores instead of downloading and hashing every object. Fingerprints are identical to the default content mode. Every contributing object needs a full-object SHA256 checksum, and `s3:GetObject` is still required. See the [`kosli snapshot s3` reference](/client_reference/kosli_snapshot_s3).
+
+[View on GitHub](https://github.com/kosli-dev/cli/releases/tag/v2.47.0)
+
+</Update>
+
+<Update label="October 5, 2026" description="v2.46.2" tags={["CLI"]}>
+
+## Updates
+
+- **Multiple `--policy` flags for `kosli evaluate policy`** — send a policy and a shared library in one command without copying them into one directory. Conflicting files that the evaluator loads under the same name are rejected.
+- **Smaller policy bundles** — dot-directories such as `.git` are no longer included when a policy directory is bundled.
+
+[View on GitHub](https://github.com/kosli-dev/cli/releases/tag/v2.46.2)
+
+</Update>
+
 <Update label="October 2, 2026" description="v2.46.1" tags={["CLI"]}>
 
 ## Updates
