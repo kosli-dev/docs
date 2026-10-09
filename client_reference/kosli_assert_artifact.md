@@ -76,7 +76,7 @@ To drop the file from the fingerprint safely, move its entries to `--exclude` an
 	<Tab title="GitHub">
 	View an example of the `kosli assert artifact` command in GitHub.
 
-	In [this YAML file](https://github.com/cyber-dojo/differ/blob/9b498758459dd636ff7dbca04367de3f547454f0/.github/workflows/main.yml#L274)
+	In [this YAML file](https://github.com/cyber-dojo/differ/blob/3de03439fe739a891e793b40d11b97acb2bd2c00/.github/workflows/main.yml#L274)
 	</Tab>
 	<Tab title="GitLab">
 	View an example of the `kosli assert artifact` command in GitLab.

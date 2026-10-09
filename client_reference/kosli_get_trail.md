@@ -269,7 +269,9 @@ kosli get trail dashboard-ci e4757683b74df7033c95aa544a7824b395c2f8bb --output=j
         "url": "https://github.com/cyber-dojo/dashboard/commit/e4757683b74df7033c95aa544a7824b395c2f8bb",
         "parents": null,
         "verified": null,
-        "signature_state": null
+        "signature_state": null,
+        "signer_username": null,
+        "signed_by_platform": null
       },
       "repo_info": {
         "inner_id": "4c546fde-c5ee-4a39-b399-8c71d7e1",
@@ -325,7 +327,9 @@ kosli get trail dashboard-ci e4757683b74df7033c95aa544a7824b395c2f8bb --output=j
         "url": "https://github.com/cyber-dojo/dashboard/commit/e4757683b74df7033c95aa544a7824b395c2f8bb",
         "parents": null,
         "verified": null,
-        "signature_state": null
+        "signature_state": null,
+        "signer_username": null,
+        "signed_by_platform": null
       },
       "repo_info": {
         "inner_id": "4c546fde-c5ee-4a39-b399-8c71d7e1",
@@ -364,7 +368,9 @@ kosli get trail dashboard-ci e4757683b74df7033c95aa544a7824b395c2f8bb --output=j
         "url": "https://github.com/cyber-dojo/dashboard/commit/e4757683b74df7033c95aa544a7824b395c2f8bb",
         "parents": null,
         "verified": null,
-        "signature_state": null
+        "signature_state": null,
+        "signer_username": null,
+        "signed_by_platform": null
       },
       "repo_info": {
         "inner_id": "4c546fde-c5ee-4a39-b399-8c71d7e1",
@@ -404,7 +410,9 @@ kosli get trail dashboard-ci e4757683b74df7033c95aa544a7824b395c2f8bb --output=j
         "url": "https://github.com/cyber-dojo/dashboard/commit/e4757683b74df7033c95aa544a7824b395c2f8bb",
         "parents": null,
         "verified": null,
-        "signature_state": null
+        "signature_state": null,
+        "signer_username": null,
+        "signed_by_platform": null
       },
       "repo_info": {
         "inner_id": "4c546fde-c5ee-4a39-b399-8c71d7e1",
@@ -443,7 +451,9 @@ kosli get trail dashboard-ci e4757683b74df7033c95aa544a7824b395c2f8bb --output=j
         "url": "https://github.com/cyber-dojo/dashboard/commit/e4757683b74df7033c95aa544a7824b395c2f8bb",
         "parents": null,
         "verified": null,
-        "signature_state": null
+        "signature_state": null,
+        "signer_username": null,
+        "signed_by_platform": null
       },
       "repo_info": {
         "inner_id": "4c546fde-c5ee-4a39-b399-8c71d7e1",
@@ -485,7 +495,9 @@ kosli get trail dashboard-ci e4757683b74df7033c95aa544a7824b395c2f8bb --output=j
         "url": "https://github.com/cyber-dojo/dashboard/commit/e4757683b74df7033c95aa544a7824b395c2f8bb",
         "parents": null,
         "verified": null,
-        "signature_state": null
+        "signature_state": null,
+        "signer_username": null,
+        "signed_by_platform": null
       },
       "repo_info": {
         "inner_id": "4c546fde-c5ee-4a39-b399-8c71d7e1",
@@ -527,7 +539,9 @@ kosli get trail dashboard-ci e4757683b74df7033c95aa544a7824b395c2f8bb --output=j
         "url": "https://github.com/cyber-dojo/dashboard/commit/e4757683b74df7033c95aa544a7824b395c2f8bb",
         "parents": null,
         "verified": null,
-        "signature_state": null
+        "signature_state": null,
+        "signer_username": null,
+        "signed_by_platform": null
       },
       "repo_info": {
         "inner_id": "4c546fde-c5ee-4a39-b399-8c71d7e1",
@@ -569,7 +583,9 @@ kosli get trail dashboard-ci e4757683b74df7033c95aa544a7824b395c2f8bb --output=j
         "url": "https://github.com/cyber-dojo/dashboard/commit/e4757683b74df7033c95aa544a7824b395c2f8bb",
         "parents": null,
         "verified": null,
-        "signature_state": null
+        "signature_state": null,
+        "signer_username": null,
+        "signed_by_platform": null
       },
       "repo_info": {
         "inner_id": "4c546fde-c5ee-4a39-b399-8c71d7e1",
@@ -609,7 +625,9 @@ kosli get trail dashboard-ci e4757683b74df7033c95aa544a7824b395c2f8bb --output=j
         "url": "https://github.com/cyber-dojo/dashboard/commit/e4757683b74df7033c95aa544a7824b395c2f8bb",
         "parents": null,
         "verified": null,
-        "signature_state": null
+        "signature_state": null,
+        "signer_username": null,
+        "signed_by_platform": null
       },
       "repo_info": {
         "inner_id": "4c546fde-c5ee-4a39-b399-8c71d7e1",
@@ -651,7 +669,9 @@ kosli get trail dashboard-ci e4757683b74df7033c95aa544a7824b395c2f8bb --output=j
         "url": "https://github.com/cyber-dojo/dashboard/commit/e4757683b74df7033c95aa544a7824b395c2f8bb",
         "parents": null,
         "verified": null,
-        "signature_state": null
+        "signature_state": null,
+        "signer_username": null,
+        "signed_by_platform": null
       },
       "repo_info": {
         "inner_id": "4c546fde-c5ee-4a39-b399-8c71d7e1",
@@ -693,7 +713,9 @@ kosli get trail dashboard-ci e4757683b74df7033c95aa544a7824b395c2f8bb --output=j
         "url": "https://github.com/cyber-dojo/dashboard/commit/e4757683b74df7033c95aa544a7824b395c2f8bb",
         "parents": null,
         "verified": null,
-        "signature_state": null
+        "signature_state": null,
+        "signer_username": null,
+        "signed_by_platform": null
       },
       "repo_info": {
         "inner_id": "4c546fde-c5ee-4a39-b399-8c71d7e1",
@@ -735,7 +757,9 @@ kosli get trail dashboard-ci e4757683b74df7033c95aa544a7824b395c2f8bb --output=j
         "url": "https://github.com/cyber-dojo/dashboard/commit/e4757683b74df7033c95aa544a7824b395c2f8bb",
         "parents": null,
         "verified": null,
-        "signature_state": null
+        "signature_state": null,
+        "signer_username": null,
+        "signed_by_platform": null
       },
       "repo_info": {
         "inner_id": "4c546fde-c5ee-4a39-b399-8c71d7e1",

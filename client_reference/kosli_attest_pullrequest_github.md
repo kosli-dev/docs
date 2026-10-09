@@ -78,7 +78,7 @@ To drop the file from the fingerprint safely, move its entries to `--exclude` an
 	<Tab title="GitHub">
 	View an example of the `kosli attest pullrequest github` command in GitHub.
 
-	In [this YAML file](https://github.com/cyber-dojo/differ/blob/8d428aa6c487aacc14f820314ab5749a861f1319/.github/workflows/main.yml#L84), which created [this Kosli Event](https://app.kosli.com/cyber-dojo/flows/differ-ci/trails/8d428aa6c487aacc14f820314ab5749a861f1319?attestation_id=2e774d8c-0316-453d-8b1b-af13048e).
+	In [this YAML file](https://github.com/cyber-dojo/differ/blob/9b498758459dd636ff7dbca04367de3f547454f0/.github/workflows/main.yml#L84), which created [this Kosli Event](https://app.kosli.com/cyber-dojo/flows/differ-ci/trails/9b498758459dd636ff7dbca04367de3f547454f0?attestation_id=542c4818-b68e-4057-bf3a-afa3c552).
 	</Tab>
 </Tabs>
 

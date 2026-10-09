@@ -85,7 +85,7 @@ In other CI systems, set them explicitly to capture repository metadata.
 	<Tab title="GitHub">
 	View an example of the `kosli attest custom` command in GitHub.
 
-	In [this YAML file](https://github.com/cyber-dojo/differ/blob/8d428aa6c487aacc14f820314ab5749a861f1319/.github/workflows/main.yml#L171), which created [this Kosli Event](https://app.kosli.com/cyber-dojo/flows/differ-ci/trails/8d428aa6c487aacc14f820314ab5749a861f1319?attestation_id=ff943dff-d1ad-4277-a249-8fc8ffcb).
+	In [this YAML file](https://github.com/cyber-dojo/differ/blob/9b498758459dd636ff7dbca04367de3f547454f0/.github/workflows/main.yml#L171), which created [this Kosli Event](https://app.kosli.com/cyber-dojo/flows/differ-ci/trails/9b498758459dd636ff7dbca04367de3f547454f0?attestation_id=b9747470-c5e0-449d-80c7-77366f03).
 	</Tab>
 </Tabs>
 
