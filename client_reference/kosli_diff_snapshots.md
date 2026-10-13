@@ -66,187 +66,171 @@ kosli diff snapshots aws-beta aws-prod --output=json
 ```json
 {
   "snappish1": {
-    "snapshot_id": "aws-beta#8612",
+    "snapshot_id": "aws-beta#8716",
     "artifacts": [
       {
-        "fingerprint": "1a553509f1da255fde3135ee4370d5a4e01792f728f198eef9ec2b913be8b260",
-        "name": "244531986313.dkr.ecr.eu-central-1.amazonaws.com/web:3b4ef04@sha256:1a553509f1da255fde3135ee4370d5a4e01792f728f198eef9ec2b913be8b260",
-        "most_recent_timestamp": 1791373163,
-        "flow": "web-ci",
-        "commit_url": "https://github.com/cyber-dojo/web/commit/3b4ef042cde981a0668dec70ed3137041a51cbe6",
-        "instance_count": 3
-      },
-      {
-        "fingerprint": "299aafbad77b4604fd2260ada0659e3f64a770f3411010827087cda34b52dc9e",
-        "name": "244531986313.dkr.ecr.eu-central-1.amazonaws.com/creator:3b4ef04@sha256:299aafbad77b4604fd2260ada0659e3f64a770f3411010827087cda34b52dc9e",
-        "most_recent_timestamp": 1791373221,
-        "flow": "creator-ci",
-        "commit_url": "https://github.com/cyber-dojo/web/commit/3b4ef042cde981a0668dec70ed3137041a51cbe6",
-        "instance_count": 1
-      },
-      {
-        "fingerprint": "38b4430f1a0663014d541b34a1e179bfeff1d6031dfa55bbb0ab3ff89b363a77",
-        "name": "244531986313.dkr.ecr.eu-central-1.amazonaws.com/saver:0a1905d@sha256:38b4430f1a0663014d541b34a1e179bfeff1d6031dfa55bbb0ab3ff89b363a77",
-        "most_recent_timestamp": 1791373522,
-        "flow": "saver-ci",
-        "commit_url": "https://github.com/cyber-dojo/saver/commit/0a1905d0a06d08403ec0c66cde09e534f3c18956",
-        "instance_count": 1
-      },
-      {
-        "fingerprint": "47a964d2b9dc0d68365405fa156cd5441e8940cdba5ea726aa3a133b4a5b5c7f",
-        "name": "244531986313.dkr.ecr.eu-central-1.amazonaws.com/custom-start-points:b2878c5@sha256:47a964d2b9dc0d68365405fa156cd5441e8940cdba5ea726aa3a133b4a5b5c7f",
-        "most_recent_timestamp": 1791373971,
-        "flow": "custom-start-points-ci",
-        "commit_url": "https://github.com/cyber-dojo/custom-start-points/commit/b2878c5d26679b8a15a6cae6f84f0d00b8c31f7a",
-        "instance_count": 1
-      },
-      {
-        "fingerprint": "50b327c98f15d46203cf92f2a71ecb86489c17c7833ac6af70df0e1bae9d2f94",
-        "name": "244531986313.dkr.ecr.eu-central-1.amazonaws.com/runner:be71103@sha256:50b327c98f15d46203cf92f2a71ecb86489c17c7833ac6af70df0e1bae9d2f94",
-        "most_recent_timestamp": 1791539562,
-        "flow": "runner-ci",
-        "commit_url": "https://github.com/cyber-dojo/runner/commit/be71103c39a7e583340ab79688c7348e944a395a",
-        "instance_count": 3
-      },
-      {
-        "fingerprint": "7f3a2785e30856078bfdd627273284b01622abca591ecee898cd32da0b5784ad",
-        "name": "244531986313.dkr.ecr.eu-central-1.amazonaws.com/dashboard:3b4ef04@sha256:7f3a2785e30856078bfdd627273284b01622abca591ecee898cd32da0b5784ad",
-        "most_recent_timestamp": 1791373162,
-        "flow": "dashboard-ci",
-        "commit_url": "https://github.com/cyber-dojo/web/commit/3b4ef042cde981a0668dec70ed3137041a51cbe6",
-        "instance_count": 1
-      },
-      {
-        "fingerprint": "81123901f1d806cfe4fc4d251d82a46539582163b3852f93418c721815ad65a4",
-        "name": "244531986313.dkr.ecr.eu-central-1.amazonaws.com/nginx:bd5de37@sha256:81123901f1d806cfe4fc4d251d82a46539582163b3852f93418c721815ad65a4",
-        "most_recent_timestamp": 1791459746,
+        "fingerprint": "077acb1cee6e27ab5b2bbbc3f22c4959d99901a560d2d17e064f6245eb6e2f0f",
+        "name": "244531986313.dkr.ecr.eu-central-1.amazonaws.com/nginx:50fd199@sha256:077acb1cee6e27ab5b2bbbc3f22c4959d99901a560d2d17e064f6245eb6e2f0f",
+        "most_recent_timestamp": 1791805272,
         "flow": "nginx-ci",
-        "commit_url": "https://github.com/cyber-dojo/nginx/commit/bd5de37db0efe67df14b1710d67af499ac7a0999",
+        "commit_url": "https://github.com/cyber-dojo/nginx/commit/50fd199655303bfa344546c4dc0bd8ca67edac95",
         "instance_count": 1
       },
       {
-        "fingerprint": "9264149af68b23851f1615dbbaaa471de3f76af75f852dbc7b8d3a1e3270f32a",
-        "name": "244531986313.dkr.ecr.eu-central-1.amazonaws.com/languages-start-points:5e80258@sha256:9264149af68b23851f1615dbbaaa471de3f76af75f852dbc7b8d3a1e3270f32a",
-        "most_recent_timestamp": 1791374029,
-        "flow": "languages-start-points-ci",
-        "commit_url": "https://github.com/cyber-dojo/languages-start-points/commit/5e802585c0d83f61d1405e7a7b01b1ba2b9a3b3a",
-        "instance_count": 1
-      },
-      {
-        "fingerprint": "dffbf5a77e8a3b15393a7c9a8c5efa97ec889bf3d3c79a2c48e79efd5b8c1127",
-        "name": "244531986313.dkr.ecr.eu-central-1.amazonaws.com/spooler:8f6076f@sha256:dffbf5a77e8a3b15393a7c9a8c5efa97ec889bf3d3c79a2c48e79efd5b8c1127",
-        "most_recent_timestamp": 1791373127,
-        "flow": "spooler-ci",
-        "commit_url": "https://github.com/cyber-dojo/spooler/commit/8f6076fce137b0b2eccf7548aa9ac6b775402bb6",
-        "instance_count": 1
-      },
-      {
-        "fingerprint": "e16c7c7e1ec2ca0b286f9580b22b8c8ddba61fcb59ca9bc02d97ce9ffb8049f2",
-        "name": "244531986313.dkr.ecr.eu-central-1.amazonaws.com/exercises-start-points:e14e470@sha256:e16c7c7e1ec2ca0b286f9580b22b8c8ddba61fcb59ca9bc02d97ce9ffb8049f2",
-        "most_recent_timestamp": 1791373993,
+        "fingerprint": "19ec5fa8d3a1d4140f41ec9ce85fce6ff45e9d670800c370e1c2f30200f94e4f",
+        "name": "244531986313.dkr.ecr.eu-central-1.amazonaws.com/exercises-start-points:3b59027@sha256:19ec5fa8d3a1d4140f41ec9ce85fce6ff45e9d670800c370e1c2f30200f94e4f",
+        "most_recent_timestamp": 1791659761,
         "flow": "exercises-start-points-ci",
-        "commit_url": "https://github.com/cyber-dojo/exercises-start-points/commit/e14e4701d37584b79f6259432960159ceaa5816b",
+        "commit_url": "https://github.com/cyber-dojo/exercises-start-points/commit/3b59027fd20dcec38c72ef3aa04f4bfe3e8423f5",
         "instance_count": 1
       },
       {
-        "fingerprint": "e1fab0b977c2b51127878e9a48db9b9df6613d36466b876e7ce91470bb311e67",
-        "name": "244531986313.dkr.ecr.eu-central-1.amazonaws.com/differ:3de0343@sha256:e1fab0b977c2b51127878e9a48db9b9df6613d36466b876e7ce91470bb311e67",
-        "most_recent_timestamp": 1791373930,
+        "fingerprint": "1fefe489906242ccf8d86fbbb213f9a322381221abddaca2501a38bfcbffd053",
+        "name": "244531986313.dkr.ecr.eu-central-1.amazonaws.com/saver:383e3a8@sha256:1fefe489906242ccf8d86fbbb213f9a322381221abddaca2501a38bfcbffd053",
+        "most_recent_timestamp": 1791808475,
+        "flow": "saver-ci",
+        "commit_url": "https://github.com/cyber-dojo/saver/commit/383e3a8fb52c3122e7d819f35a6a1f3da2c34817",
+        "instance_count": 1
+      },
+      {
+        "fingerprint": "3a74612ac429c984212aa88a7029c018548825b219432fadbe32dbe9c2b3896e",
+        "name": "244531986313.dkr.ecr.eu-central-1.amazonaws.com/custom-start-points:f988f2f@sha256:3a74612ac429c984212aa88a7029c018548825b219432fadbe32dbe9c2b3896e",
+        "most_recent_timestamp": 1791659697,
+        "flow": "custom-start-points-ci",
+        "commit_url": "https://github.com/cyber-dojo/custom-start-points/commit/f988f2fc03966492f54b1a58b78c66b221609604",
+        "instance_count": 1
+      },
+      {
+        "fingerprint": "40423324f7159a96fddbe0b1d19f202cee7d730c1409d94fe58f11d41ba95783",
+        "name": "244531986313.dkr.ecr.eu-central-1.amazonaws.com/spooler:76ab738@sha256:40423324f7159a96fddbe0b1d19f202cee7d730c1409d94fe58f11d41ba95783",
+        "most_recent_timestamp": 1791653158,
+        "flow": "spooler-ci",
+        "commit_url": "https://github.com/cyber-dojo/spooler/commit/76ab7386c31b97d9ff7985663cb85fa7a7048359",
+        "instance_count": 1
+      },
+      {
+        "fingerprint": "5998101c453c93fb5122ada77c16a0013e0b5cf3dca00683236ed07aff1514c0",
+        "name": "244531986313.dkr.ecr.eu-central-1.amazonaws.com/runner:221006e@sha256:5998101c453c93fb5122ada77c16a0013e0b5cf3dca00683236ed07aff1514c0",
+        "most_recent_timestamp": 1791805688,
+        "flow": "runner-ci",
+        "commit_url": "https://github.com/cyber-dojo/runner/commit/221006eb9aaf720665a0014a8cbcc8efe7c180a5",
+        "instance_count": 3
+      },
+      {
+        "fingerprint": "69b1a9a10599734f7733def9dee3f3a207007220a49d7971f291d825e44fe1be",
+        "name": "244531986313.dkr.ecr.eu-central-1.amazonaws.com/dashboard:eb9f90d@sha256:69b1a9a10599734f7733def9dee3f3a207007220a49d7971f291d825e44fe1be",
+        "most_recent_timestamp": 1791786929,
+        "flow": "dashboard-ci",
+        "commit_url": "https://github.com/cyber-dojo/web/commit/eb9f90d8a22b94845fddb23949fad738cfb6e21f",
+        "instance_count": 1
+      },
+      {
+        "fingerprint": "9b08067c8e91b5e6703d99884207863d7f6faeb29b17a9701c98612ec0025eeb",
+        "name": "244531986313.dkr.ecr.eu-central-1.amazonaws.com/differ:2ceef98@sha256:9b08067c8e91b5e6703d99884207863d7f6faeb29b17a9701c98612ec0025eeb",
+        "most_recent_timestamp": 1791663982,
         "flow": "differ-ci",
-        "commit_url": "https://github.com/cyber-dojo/differ/commit/3de03439fe739a891e793b40d11b97acb2bd2c00",
+        "commit_url": "https://github.com/cyber-dojo/differ/commit/2ceef988c9fc3078310ee4547410de56d4c975c5",
+        "instance_count": 1
+      },
+      {
+        "fingerprint": "a328fc2e1beff1e171a04ec1b3b445b066bab6c46a539817265af43c7ee3ef89",
+        "name": "244531986313.dkr.ecr.eu-central-1.amazonaws.com/creator:eb9f90d@sha256:a328fc2e1beff1e171a04ec1b3b445b066bab6c46a539817265af43c7ee3ef89",
+        "most_recent_timestamp": 1791786940,
+        "flow": "creator-ci",
+        "commit_url": "https://github.com/cyber-dojo/web/commit/eb9f90d8a22b94845fddb23949fad738cfb6e21f",
+        "instance_count": 1
+      },
+      {
+        "fingerprint": "f199c463e8e115a3b9a6f8ac7765a4e5b92cc837cfd7cc87ae5dcc576fcb9d96",
+        "name": "244531986313.dkr.ecr.eu-central-1.amazonaws.com/languages-start-points:078bf55@sha256:f199c463e8e115a3b9a6f8ac7765a4e5b92cc837cfd7cc87ae5dcc576fcb9d96",
+        "most_recent_timestamp": 1791803897,
+        "flow": "languages-start-points-ci",
+        "commit_url": "https://github.com/cyber-dojo/languages-start-points/commit/078bf554a5a66ab60f4e33649ac29aa73ce4dbb1",
         "instance_count": 1
       }
     ]
   },
   "snappish2": {
-    "snapshot_id": "aws-prod#5440",
+    "snapshot_id": "aws-prod#5480",
     "artifacts": [
       {
-        "fingerprint": "2c861510e434ed618b2e296eaed392648aaf18629908b890947733b11aa97e8d",
-        "name": "244531986313.dkr.ecr.eu-central-1.amazonaws.com/exercises-start-points:e302b99@sha256:2c861510e434ed618b2e296eaed392648aaf18629908b890947733b11aa97e8d",
-        "most_recent_timestamp": 1790419522,
-        "flow": "exercises-start-points-ci",
-        "commit_url": "https://github.com/cyber-dojo/exercises-start-points/commit/e302b99e045f21adf33ac13c793616cc2fb2ba00",
-        "instance_count": 1
-      },
-      {
-        "fingerprint": "3fb70797c4e8a01bb490bcb7a040bd2c689048d4c0b4a810beee5a5e7cacfb39",
-        "name": "244531986313.dkr.ecr.eu-central-1.amazonaws.com/custom-start-points:3fb02b6@sha256:3fb70797c4e8a01bb490bcb7a040bd2c689048d4c0b4a810beee5a5e7cacfb39",
-        "most_recent_timestamp": 1791364437,
-        "flow": "custom-start-points-ci",
-        "commit_url": "https://github.com/cyber-dojo/custom-start-points/commit/3fb02b6f8a2d4e9edfd7a5e36b8df7c503ee1e99",
-        "instance_count": 1
-      },
-      {
-        "fingerprint": "57dbb120326b3c3fabcec03bc1d2bb220a978fd7b5778f182ddb3dfe4906f1b4",
-        "name": "244531986313.dkr.ecr.eu-central-1.amazonaws.com/runner:7a96f63@sha256:57dbb120326b3c3fabcec03bc1d2bb220a978fd7b5778f182ddb3dfe4906f1b4",
-        "most_recent_timestamp": 1791287540,
-        "flow": "runner-ci",
-        "commit_url": "https://github.com/cyber-dojo/runner/commit/7a96f6335ac05b814cfed0947bed40e29fb14c92",
-        "instance_count": 3
-      },
-      {
-        "fingerprint": "5f565084b081f73bf44aa1e08407d0f022b6edb8b9cb61c29970b00f84104aaa",
-        "name": "244531986313.dkr.ecr.eu-central-1.amazonaws.com/languages-start-points:c5dd4fa@sha256:5f565084b081f73bf44aa1e08407d0f022b6edb8b9cb61c29970b00f84104aaa",
-        "most_recent_timestamp": 1791287456,
-        "flow": "languages-start-points-ci",
-        "commit_url": "https://github.com/cyber-dojo/languages-start-points/commit/c5dd4faa2f40a6a85afceae4565a43a6df553845",
-        "instance_count": 1
-      },
-      {
-        "fingerprint": "932659867f5bf3d46457c66690f4d559edbf494b9bbefc97bb5e225e80287273",
-        "name": "244531986313.dkr.ecr.eu-central-1.amazonaws.com/web:2390863@sha256:932659867f5bf3d46457c66690f4d559edbf494b9bbefc97bb5e225e80287273",
-        "most_recent_timestamp": 1791287842,
-        "flow": "web-ci",
-        "commit_url": "https://github.com/cyber-dojo/web/commit/239086385550e2c369fd3aa1f656b56f362db8f7",
-        "instance_count": 3
-      },
-      {
-        "fingerprint": "a944be1a68419c9feffe3656541af2bff65b2efbef9421ae18563bb150868beb",
-        "name": "244531986313.dkr.ecr.eu-central-1.amazonaws.com/creator:2390863@sha256:a944be1a68419c9feffe3656541af2bff65b2efbef9421ae18563bb150868beb",
-        "most_recent_timestamp": 1791290238,
-        "flow": "creator-ci",
-        "commit_url": "https://github.com/cyber-dojo/web/commit/239086385550e2c369fd3aa1f656b56f362db8f7",
-        "instance_count": 1
-      },
-      {
-        "fingerprint": "b0d1d69124bb75a316f7436a630bf2c5483d6a26e02c9ec709ec9bd3b132fa45",
-        "name": "244531986313.dkr.ecr.eu-central-1.amazonaws.com/dashboard:2390863@sha256:b0d1d69124bb75a316f7436a630bf2c5483d6a26e02c9ec709ec9bd3b132fa45",
-        "most_recent_timestamp": 1791290226,
-        "flow": "dashboard-ci",
-        "commit_url": "https://github.com/cyber-dojo/web/commit/239086385550e2c369fd3aa1f656b56f362db8f7",
-        "instance_count": 1
-      },
-      {
-        "fingerprint": "b268bc93ea9aac4a2db861f98c67c21b8a8165091c3f937b8f7ba129e81f665c",
-        "name": "244531986313.dkr.ecr.eu-central-1.amazonaws.com/differ:9b49875@sha256:b268bc93ea9aac4a2db861f98c67c21b8a8165091c3f937b8f7ba129e81f665c",
-        "most_recent_timestamp": 1791287790,
-        "flow": "differ-ci",
-        "commit_url": "https://github.com/cyber-dojo/differ/commit/9b498758459dd636ff7dbca04367de3f547454f0",
-        "instance_count": 1
-      },
-      {
-        "fingerprint": "c162e3974e3067c3902b2574098819f99d35c24d88f57e70efb73d617e1f653d",
-        "name": "244531986313.dkr.ecr.eu-central-1.amazonaws.com/spooler:28636f6@sha256:c162e3974e3067c3902b2574098819f99d35c24d88f57e70efb73d617e1f653d",
-        "most_recent_timestamp": 1791287466,
+        "fingerprint": "0fe7da2f4c8a0afd88f81bb066bbdd30e02e45f4872f6a0a4538f527185d729f",
+        "name": "244531986313.dkr.ecr.eu-central-1.amazonaws.com/spooler:afeb2f3@sha256:0fe7da2f4c8a0afd88f81bb066bbdd30e02e45f4872f6a0a4538f527185d729f",
+        "most_recent_timestamp": 1791648279,
         "flow": "spooler-ci",
-        "commit_url": "https://github.com/cyber-dojo/spooler/commit/28636f69be43a7676d61db98b086eaff507d6e9c",
+        "commit_url": "https://github.com/cyber-dojo/spooler/commit/afeb2f32f34dfb29fc36ecc3eb3aeb602030eec5",
         "instance_count": 1
       },
       {
-        "fingerprint": "efbafb99870cf4c4a838324e8bbc70975c4f3ea2ba5d395433c5344456b60ae4",
-        "name": "244531986313.dkr.ecr.eu-central-1.amazonaws.com/saver:8e32bc0@sha256:efbafb99870cf4c4a838324e8bbc70975c4f3ea2ba5d395433c5344456b60ae4",
-        "most_recent_timestamp": 1791287798,
+        "fingerprint": "2bb4255d1477046c8042e9973482a02e0d66b35ce31d86287a58342e990c0efa",
+        "name": "244531986313.dkr.ecr.eu-central-1.amazonaws.com/saver:b543342@sha256:2bb4255d1477046c8042e9973482a02e0d66b35ce31d86287a58342e990c0efa",
+        "most_recent_timestamp": 1791801879,
         "flow": "saver-ci",
-        "commit_url": "https://github.com/cyber-dojo/saver/commit/8e32bc009dd16087e5160d309a9ce4303b7d895f",
+        "commit_url": "https://github.com/cyber-dojo/saver/commit/b543342fa06b0ef415950745fddfff5a85f9d80d",
         "instance_count": 1
       },
       {
-        "fingerprint": "f4430327f644e75c547f98d43a148da029760006c572b28d3f957e175bb2352d",
-        "name": "244531986313.dkr.ecr.eu-central-1.amazonaws.com/nginx:69e4ccf@sha256:f4430327f644e75c547f98d43a148da029760006c572b28d3f957e175bb2352d",
-        "most_recent_timestamp": 1791287458,
+        "fingerprint": "2dffee94d09db0d3e291cef0fc416f007271ab578adcba8b35f359fda5f2a8a8",
+        "name": "244531986313.dkr.ecr.eu-central-1.amazonaws.com/exercises-start-points:68636be@sha256:2dffee94d09db0d3e291cef0fc416f007271ab578adcba8b35f359fda5f2a8a8",
+        "most_recent_timestamp": 1791648622,
+        "flow": "exercises-start-points-ci",
+        "commit_url": "https://github.com/cyber-dojo/exercises-start-points/commit/68636bed4906a15df27ee99e2afddd4377d3867e",
+        "instance_count": 1
+      },
+      {
+        "fingerprint": "5f70df2163e8918675c92251f398bc1a88d0d7a9ce1eef39d1f603525de077b6",
+        "name": "244531986313.dkr.ecr.eu-central-1.amazonaws.com/dashboard:3e6678b@sha256:5f70df2163e8918675c92251f398bc1a88d0d7a9ce1eef39d1f603525de077b6",
+        "most_recent_timestamp": 1791648357,
+        "flow": "dashboard-ci",
+        "commit_url": "https://github.com/cyber-dojo/web/commit/3e6678b80d51d7ec4c89d88f46dcee93f27fd6c1",
+        "instance_count": 1
+      },
+      {
+        "fingerprint": "6726c2fe6436edca6caaeed069531e326f7bfdceeac41feed28bef90a036cc93",
+        "name": "244531986313.dkr.ecr.eu-central-1.amazonaws.com/custom-start-points:270c3c8@sha256:6726c2fe6436edca6caaeed069531e326f7bfdceeac41feed28bef90a036cc93",
+        "most_recent_timestamp": 1791648621,
+        "flow": "custom-start-points-ci",
+        "commit_url": "https://github.com/cyber-dojo/custom-start-points/commit/270c3c87aecb0e008e90879be753e67983e692c8",
+        "instance_count": 1
+      },
+      {
+        "fingerprint": "807d0a7538fb9c739beab0b9f2793fe24c0a8bf079ef731ec2a2c2fe6464c463",
+        "name": "244531986313.dkr.ecr.eu-central-1.amazonaws.com/differ:842bdad@sha256:807d0a7538fb9c739beab0b9f2793fe24c0a8bf079ef731ec2a2c2fe6464c463",
+        "most_recent_timestamp": 1791648283,
+        "flow": "differ-ci",
+        "commit_url": "https://github.com/cyber-dojo/differ/commit/842bdad4a2fc94d0acfe996d059972b50037b304",
+        "instance_count": 1
+      },
+      {
+        "fingerprint": "896a2cd49408db95a29b752857d17c6b68df23d8a27b75e70f2e55aa0c3d367f",
+        "name": "244531986313.dkr.ecr.eu-central-1.amazonaws.com/nginx:b17fe49@sha256:896a2cd49408db95a29b752857d17c6b68df23d8a27b75e70f2e55aa0c3d367f",
+        "most_recent_timestamp": 1791648263,
         "flow": "nginx-ci",
-        "commit_url": "https://github.com/cyber-dojo/nginx/commit/69e4ccffb7596125f4bb09886437ca3dee4ac0cf",
+        "commit_url": "https://github.com/cyber-dojo/nginx/commit/b17fe49939a63ae7b3996c4bf4f80e2362d537a2",
+        "instance_count": 1
+      },
+      {
+        "fingerprint": "9b6ccf0845871128cd22f33e8ec0e0a29b1794e736b5ef783ade3c8bca11c80b",
+        "name": "244531986313.dkr.ecr.eu-central-1.amazonaws.com/runner:ef6768e@sha256:9b6ccf0845871128cd22f33e8ec0e0a29b1794e736b5ef783ade3c8bca11c80b",
+        "most_recent_timestamp": 1791648776,
+        "flow": "runner-ci",
+        "commit_url": "https://github.com/cyber-dojo/runner/commit/ef6768eefe96ec54dacc1b8cabac1dde2d2f636e",
+        "instance_count": 3
+      },
+      {
+        "fingerprint": "b4f37af37368717581502192e3dfc9a55526c528d2f0dd927ff562c856c1a81a",
+        "name": "244531986313.dkr.ecr.eu-central-1.amazonaws.com/languages-start-points:8442c1b@sha256:b4f37af37368717581502192e3dfc9a55526c528d2f0dd927ff562c856c1a81a",
+        "most_recent_timestamp": 1791648278,
+        "flow": "languages-start-points-ci",
+        "commit_url": "https://github.com/cyber-dojo/languages-start-points/commit/8442c1b837d6dca9e349a6c3401437f11e6bd9f0",
+        "instance_count": 1
+      },
+      {
+        "fingerprint": "ee739c0183759b660a740afe28fbbdb20b4c3b434faa48dab975aa8576173efb",
+        "name": "244531986313.dkr.ecr.eu-central-1.amazonaws.com/creator:3e6678b@sha256:ee739c0183759b660a740afe28fbbdb20b4c3b434faa48dab975aa8576173efb",
+        "most_recent_timestamp": 1791648284,
+        "flow": "creator-ci",
+        "commit_url": "https://github.com/cyber-dojo/web/commit/3e6678b80d51d7ec4c89d88f46dcee93f27fd6c1",
         "instance_count": 1
       }
     ]
@@ -255,7 +239,16 @@ kosli diff snapshots aws-beta aws-prod --output=json
     "artifacts": []
   },
   "not-changed": {
-    "artifacts": []
+    "artifacts": [
+      {
+        "fingerprint": "da7984414ab096232877f301d3d7cea1daf3cdd3fdb72157f530fe186cba3d78",
+        "name": "244531986313.dkr.ecr.eu-central-1.amazonaws.com/web:83553f5@sha256:da7984414ab096232877f301d3d7cea1daf3cdd3fdb72157f530fe186cba3d78",
+        "most_recent_timestamp": 1791806445,
+        "flow": "web-ci",
+        "commit_url": "https://github.com/cyber-dojo/web/commit/83553f52e8de8a9766a64fced8fbfb3cd32318a3",
+        "instance_count": 3
+      }
+    ]
   }
 }
 ```
