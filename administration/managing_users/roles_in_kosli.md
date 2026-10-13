@@ -14,7 +14,7 @@ Roles apply to service accounts the same way they apply to users. Wherever this 
 |------|-------------|----------|
 | **Admin** | Full control over the organization | Organization owners, security leads, platform engineering leads |
 | **Member** | Can create and modify resources | Developers, platform engineers, CI/CD systems |
-| **Snapshotter** | Can create snapshots, environments, and manage their own service accounts | Environment and operations teams |
+| **Snapshotter** | Can report snapshots and create environments, and create service accounts in the web UI | Environment and operations teams |
 | **Reader** | Read-only access to view data | Auditors, compliance officers, stakeholders, reporting systems |
 
 ## Permissions Matrix
@@ -26,26 +26,37 @@ Roles apply to service accounts the same way they apply to users. Wherever this 
 | Change user roles | ✅ | ❌ | ❌ | ❌ |
 | **Organization Settings** | | | |
 | Modify organization settings | ✅ | ❌ | ❌ | ❌ |
-| Configure integrations (Slack, LaunchDarkly) | ✅ | ✅ | ❌ | ❌ |
+| Configure integrations (LaunchDarkly, Sonar) | ✅ | ✅ | ❌ | ❌ |
+| Manage spaces | ✅ | ❌ | ❌ | ❌ |
+| View spaces | ✅ | ✅ | ❌ | ❌ |
 | **Service Accounts** | | | |
-| Create and manage service accounts | ✅ | ✅ | ✅ | ❌ |
-| Generate service account API keys | ✅ | ✅ | ✅ | ❌ |
+| Create service accounts | ✅ | ✅ | ✅† | ❌ |
+| Update/delete service accounts | ✅ | Own only\* | Own only\*† | ❌ |
+| Manage service account API keys | ✅ | Own only\* | Own only\*† | ❌ |
 | **Resource Management** | | | |
 | Create flows | ✅ | ✅ | ❌ | ❌ |
-| Update/delete flows | ✅ | ✅ | ❌ | ❌ |
-| Create environments (and re-create) | ✅ | ✅ | ✅ | ❌ |
-| Update environments (PATCH, archive, rename, attach/detach policies) | ✅ | ✅ | ❌ | ❌ |
-| Delete environments | ✅ | ❌ | ❌ | ❌ |
+| Update flow settings and rename | ✅ | ✅ | ❌ | ❌ |
+| Archive flows | ✅ | ❌ | ❌ | ❌ |
+| Begin trails | ✅ | ✅ | ❌ | ❌ |
+| Create environments | ✅ | ✅ | ✅‡ | ❌ |
+| Update environments (description, rename, attach/detach policies) | ✅ | ✅ | ❌ | ❌ |
+| Archive environments | ✅ | ❌ | ❌ | ❌ |
 | Create/update policies | ✅ | ✅ | ❌ | ❌ |
-| Delete policies | ❌ | ❌ | ❌ | ❌ |
 | Create attestation types | ✅ | ✅ | ❌ | ❌ |
-| Update/delete attestation types | ✅ | ✅ | ❌ | ❌ |
+| Update attestation types | ✅ | ✅ | ❌ | ❌ |
+| Archive attestation types | ✅ | Own only\* | ❌ | ❌ |
+| Manage repos | ✅ | ✅ | ❌ | ❌ |
+| Tag flows, environments, repos, and controls | ✅ | ✅ | ❌ | ❌ |
+| Add to and revoke from the allowlist | ✅ | ✅ | ❌ | ❌ |
 | **Attestations & Snapshots** | | | |
 | Report attestations | ✅ | ✅ | ❌ | ❌ |
+| Report artifacts | ✅ | ✅ | ❌ | ❌ |
 | Report environment snapshots | ✅ | ✅ | ✅ | ❌ |
 | **Actions** | | | |
 | Create, update, and delete actions | ✅ | ✅ | ❌ | ❌ |
 | View actions | ✅ | ✅ | ✅ | ✅ |
+| **Controls** (beta) | | | |
+| Create, update, archive, and unarchive controls | ✅ | ❌ | ❌ | ❌ |
 | **Data Access** | | | |
 | View trails and artifacts | ✅ | ✅ | ✅ | ✅ |
 | View attestations | ✅ | ✅ | ✅ | ✅ |
@@ -53,6 +64,12 @@ Roles apply to service accounts the same way they apply to users. Wherever this 
 | Query and search data | ✅ | ✅ | ✅ | ✅ |
 | Export and generate reports | ✅ | ✅ | ✅ | ✅ |
 | View flow/policy configurations | ✅ | ✅ | ✅ | ✅ |
+
+\* Admins can act on any service account or attestation type. Other roles can act only on the ones they created themselves.
+
+† Snapshotters can create and manage service accounts in the web UI only. The API allows a snapshotter no writes beyond reporting environment snapshots and creating environments.
+
+‡ Creating an environment that already exists succeeds as long as the request would not change it, so CI pipelines that create the same environment at the same time don't fail. A request that would change an existing environment needs the Member or Admin role.
 
 ---
 
@@ -71,8 +88,9 @@ The following sections provide more details about each Kosli user role, includin
   - **User Management**: Invite, remove, and change roles of organization members (Admin only)
   - **Organization Settings**: Modify organization-wide settings and configurations (Admin only)
   - **Service Accounts**: Create and manage service accounts and their API keys
-  - **Integrations**: Configure integrations with external systems (Slack, LaunchDarkly, etc.)
-  - **Resource Management**: Create, update, and delete flows, environments, policies, and attestation types
+  - **Integrations**: Configure integrations with external systems (LaunchDarkly, Sonar)
+  - **Resource Management**: Create, update, and archive flows, environments, and attestation types, and create and update policies
+  - **Controls**: Create, update, archive, and unarchive controls (Admin only)
   - **Attestations & Snapshots**: Report attestations and environment snapshots
   - **Actions**: Create, update, and delete actions for automated workflows and notifications
   - **Data Access**: View all trails, artifacts, attestations, and snapshots
@@ -91,15 +109,15 @@ The following sections provide more details about each Kosli user role, includin
   </Accordion>
   <Accordion title="Member" icon="user-check">
 
-  Members can create and modify resources, manage service accounts, and configure integrations, but cannot manage users or organization-wide settings.
+  Members can create and modify resources, manage the service accounts they create, and configure integrations, but cannot manage users or organization-wide settings.
 
   ### Permissions
 
   Members can:
 
-  - **Service Accounts**: Create and manage service accounts and their API keys
-  - **Integrations**: Configure integrations with external systems (Slack, LaunchDarkly, etc.)
-  - **Resource Management**: Create, update, and delete flows, environments, policies, and attestation types
+  - **Service Accounts**: Create service accounts, and manage the ones they created and those accounts' API keys
+  - **Integrations**: Configure integrations with external systems (LaunchDarkly, Sonar)
+  - **Resource Management**: Create and update flows, environments, policies, and attestation types
   - **Attestations & Snapshots**: Report attestations and environment snapshots
   - **Actions**: Create, update, and delete actions for automated workflows and notifications
   - **Data Access**: View all trails, artifacts, attestations, and snapshots
@@ -107,6 +125,11 @@ The following sections provide more details about each Kosli user role, includin
   Members cannot:
   - Manage users or change user roles
   - Modify organization-wide settings
+  - Archive flows or environments
+  - Archive attestation types they did not create
+  - Manage service accounts they did not create
+  - Create, update, archive, or unarchive controls
+  - Manage spaces
 
   ### When to assign
 
@@ -120,14 +143,14 @@ The following sections provide more details about each Kosli user role, includin
   <Accordion title="Snapshotter" icon="camera">
 
 
-  Snapshotters can create environments, report environment snapshots, and manage their own service accounts, but cannot modify other resources, manage users, configure integrations, or change organization-wide settings.
+  Snapshotters can create environments, report environment snapshots, and create service accounts in the web UI, but cannot modify other resources, manage users, configure integrations, or change organization-wide settings.
 
   ### Permissions
 
   Snapshotters can:
 
-  - **Service Accounts**: Create service accounts. They can manage the API keys of service accounts they created themselves — API keys on other service accounts can only be managed by the account's creator or an org Admin.
-  - **Environments**: Create new environments (needed so CLI flows like `--auto-environment` work with a snapshotter token).
+  - **Service Accounts**: In the web UI only, create service accounts and manage the ones they created and those accounts' API keys. The API does not allow a snapshotter to do this.
+  - **Environments**: Create new environments (needed so CLI flows like `--auto-environment` work with a snapshotter token). Creating an environment that already exists succeeds as long as the request would not change it.
   - **Snapshots**: Report environment snapshots.
   - **View Data**: Access trails, artifacts, attestations, and snapshots.
   - **Query Information**: Search and filter data across flows and environments.
@@ -135,16 +158,13 @@ The following sections provide more details about each Kosli user role, includin
   - **View Configurations**: See flow definitions, policies, attestation types, and actions (but cannot modify them).
 
   Snapshotters cannot:
-  - Use the dedicated update paths on an environment (PATCH, archive, rename, attach/detach policies).
+  - Change an existing environment, whether through the update endpoints or by re-creating it with different settings.
+  - Archive environments.
   - Create, update, or delete flows, policies, attestation types, or other resources.
   - Report attestations.
   - Create or manage actions.
   - Configure integrations.
   - Invite users or change settings.
-
-  <Warning>
-  Because the environment create endpoint (`PUT /api/v2/environments/{org}`) is idempotent — a re-PUT of an existing environment updates it — a snapshotter token can modify an existing environment's description, scaling, policies, and included environments by re-PUTting a full payload. Only the dedicated update paths (PATCH, archive, rename, policy attach/detach) are blocked. Keep this in mind when scoping snapshotter tokens for environments you don't want them to change.
-  </Warning>
 
   ### When to assign
 
