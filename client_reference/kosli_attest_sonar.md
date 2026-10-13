@@ -111,7 +111,7 @@ To drop the file from the fingerprint safely, move its entries to `--exclude` an
 	<Tab title="GitHub">
 	View an example of the `kosli attest sonar` command in GitHub.
 
-	In [this YAML file](https://github.com/cyber-dojo/dashboard/blob/a6ece2b597888f7ab149759daadda08e3afab0c1/.github/workflows/main.yml#L166), which created [this Kosli Event](https://app.kosli.com/cyber-dojo/flows/dashboard-ci/trails/239086385550e2c369fd3aa1f656b56f362db8f7?attestation_id=3ea855fc-4ec6-4232-a8f3-7006d172).
+	In [this YAML file](https://github.com/cyber-dojo/dashboard/blob/a6ece2b597888f7ab149759daadda08e3afab0c1/.github/workflows/main.yml#L166), which created [this Kosli Event](https://app.kosli.com/cyber-dojo/flows/dashboard-ci/trails/3e6678b80d51d7ec4c89d88f46dcee93f27fd6c1?attestation_id=60c21451-a215-4338-90af-ebb62e1f).
 	</Tab>
 </Tabs>
 
