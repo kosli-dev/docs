@@ -14,7 +14,7 @@ Roles apply to service accounts the same way they apply to users. Wherever this 
 |------|-------------|----------|
 | **Admin** | Full control over the organization | Organization owners, security leads, platform engineering leads |
 | **Member** | Can create and modify resources | Developers, platform engineers, CI/CD systems |
-| **Snapshotter** | Can report snapshots and create environments, and create service accounts in the web UI | Environment and operations teams |
+| **Snapshotter** | Can report snapshots, create and tag environments, and create service accounts in the web UI | Environment and operations teams |
 | **Reader** | Read-only access to view data | Auditors, compliance officers, stakeholders, reporting systems |
 
 ## Permissions Matrix
@@ -46,7 +46,8 @@ Roles apply to service accounts the same way they apply to users. Wherever this 
 | Update attestation types | ✅ | ✅ | ❌ | ❌ |
 | Archive attestation types | ✅ | Own only\* | ❌ | ❌ |
 | Manage repos | ✅ | ✅ | ❌ | ❌ |
-| Tag flows, environments, repos, and controls | ✅ | ✅ | ❌ | ❌ |
+| Tag environments | ✅ | ✅ | ✅ | ❌ |
+| Tag flows, repos, and controls | ✅ | ✅ | ❌ | ❌ |
 | Add to and revoke from the allowlist | ✅ | ✅ | ❌ | ❌ |
 | **Attestations & Snapshots** | | | |
 | Report attestations | ✅ | ✅ | ❌ | ❌ |
@@ -67,7 +68,7 @@ Roles apply to service accounts the same way they apply to users. Wherever this 
 
 \* Admins can act on any service account or attestation type. Other roles can act only on the ones they created themselves.
 
-† Snapshotters can create and manage service accounts in the web UI only. The API allows a snapshotter no writes beyond reporting environment snapshots and creating environments.
+† Snapshotters can create and manage service accounts in the web UI only. The API allows a snapshotter no writes beyond reporting environment snapshots, creating environments and tagging them.
 
 ‡ Creating an environment that already exists succeeds as long as the request would not change it, so CI pipelines that create the same environment at the same time don't fail. A request that would change an existing environment needs the Member or Admin role.
 
@@ -143,7 +144,7 @@ The following sections provide more details about each Kosli user role, includin
   <Accordion title="Snapshotter" icon="camera">
 
 
-  Snapshotters can create environments, report environment snapshots, and create service accounts in the web UI, but cannot modify other resources, manage users, configure integrations, or change organization-wide settings.
+  Snapshotters can create and tag environments, report environment snapshots, and create service accounts in the web UI, but cannot modify other resources, manage users, configure integrations, or change organization-wide settings.
 
   ### Permissions
 
@@ -151,6 +152,7 @@ The following sections provide more details about each Kosli user role, includin
 
   - **Service Accounts**: In the web UI only, create service accounts and manage the ones they created and those accounts' API keys. The API does not allow a snapshotter to do this.
   - **Environments**: Create new environments (needed so CLI flows like `--auto-environment` work with a snapshotter token). Creating an environment that already exists succeeds as long as the request would not change it.
+  - **Tags**: Set and remove tags on environments (`kosli tag environment`).
   - **Snapshots**: Report environment snapshots.
   - **View Data**: Access trails, artifacts, attestations, and snapshots.
   - **Query Information**: Search and filter data across flows and environments.
@@ -158,7 +160,7 @@ The following sections provide more details about each Kosli user role, includin
   - **View Configurations**: See flow definitions, policies, attestation types, and actions (but cannot modify them).
 
   Snapshotters cannot:
-  - Change an existing environment, whether through the update endpoints or by re-creating it with different settings.
+  - Change an existing environment other than its tags, whether through the update endpoints or by re-creating it with different settings.
   - Archive environments.
   - Create, update, or delete flows, policies, attestation types, or other resources.
   - Report attestations.
