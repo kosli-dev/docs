@@ -53,10 +53,6 @@ If there are resources you do not wish to include within a Cloud Capture snapsho
 GCP support is coming soon
 </Warning>
 
-### Prerequisites
-
-Cloud Capture connects to each cluster's Kubernetes API from Kosli's infrastructure, so each cluster's control plane endpoint must be reachable from outside your VPC. Cloud Capture cannot snapshot a cluster whose control plane has only a private endpoint.
-
 ### Prepare your environment
 
 In order for Cloud Capture to reach into your GCP project, to discover your GKE clusters, you need to grant permission to Kosli to do so.  This requires a service account in your project that Cloud Capture can impersonate through workload identity federation; the service account, and the workload identity pool that guards it, exist within your own project.

@@ -149,12 +149,6 @@ resources needed are those shown below. The pool must accept only the Kosli AWS 
 it, only the Kosli-side role for your organization, and only that role may impersonate the service
 account. The specific permissions needed to find and snapshot GKE clusters are in the custom role.
 
-<Note>
-Cloud Capture connects to each cluster's Kubernetes API from Kosli's infrastructure, so the
-cluster's control plane endpoint must be reachable from outside your VPC. A cluster whose control
-plane has a private endpoint only cannot be snapshotted.
-</Note>
-
 ### Workload identity federation
 
 The Terraform configuration creates a workload identity pool, an AWS provider within it that trusts
@@ -271,23 +265,39 @@ output "kosli_capture_service_account" {
 
 ### GKE permissions
 
-The Terraform configuration grants the service account a custom role containing read-only GKE
-permissions. GKE enforces these permissions both on the GKE API and on the Kubernetes API of each
-cluster, so no Kubernetes RBAC objects need to be created inside your clusters. The role is:
+The Terraform configuration grants the service account a custom role containing read-only
+permissions. Cloud Capture reads the pods of your GKE clusters from
+[Cloud Asset Inventory](https://cloud.google.com/asset-inventory/docs/overview), in the same way as
+[`kosli snapshot gke`](/client_reference/kosli_snapshot_gke). It never calls a cluster's Kubernetes
+API, so no Kubernetes RBAC objects need to be created inside your clusters, and Cloud Capture needs
+no network access to any cluster control plane. Asset Inventory is eventually consistent, so a
+snapshot can lag behind recent pod changes.
+
+The configuration also enables the Cloud Asset API in your project. These appear as:
+
+{/* TODO: Confirm Cloud Capture still discovers clusters with container.clusters.list/get. If discovery also goes through Cloud Asset Inventory, replace those two permissions and the "How Capture finds what to snapshot" comment. */}
 
 ```hcl
+# Cloud Capture reads pods through the Cloud Asset API, so it must be enabled
+# in the project.
+resource "google_project_service" "cloudasset" {
+  project            = var.project_id
+  service            = "cloudasset.googleapis.com"
+  disable_on_destroy = false
+}
+
 # How Capture finds what to snapshot. Discovery lists the GKE clusters in the
-# project and reads each cluster's labels, endpoint and CA certificate from
-# the same clusters.get call.
+# project and reads each cluster's labels from the same clusters.get call.
 #
-# Worth knowing for a security review: GKE checks the container.* permissions
-# below when Cloud Capture calls the Kubernetes API, so this role is also the
-# Kubernetes RBAC. None of it returns application data. pods.list is the
-# widest - a pod spec holds the container image, the command, and any
-# environment variables written into the spec itself in plain text. Values
-# taken from a Secret or ConfigMap are named there rather than resolved, and
-# this role grants no access to Secrets or ConfigMaps, so what comes back is
-# the reference and not the secret.
+# Worth knowing for a security review: Cloud Capture reads pods from Cloud
+# Asset Inventory rather than from each cluster's Kubernetes API, so it needs
+# no Kubernetes RBAC and no network access to any cluster control plane. None
+# of it returns application data. listContainerPod is the widest - a pod spec
+# holds the container image, the command, and any environment variables
+# written into the spec itself in plain text. Values taken from a Secret or
+# ConfigMap are named there rather than resolved, so what comes back is the
+# reference and not the secret. This role lists pod assets only; the broader
+# roles/cloudasset.viewer would also list k8s.io/Secret assets.
 resource "google_project_iam_custom_role" "kosli_capture" {
   project     = var.project_id
   role_id     = "kosliCapture"
@@ -299,11 +309,11 @@ resource "google_project_iam_custom_role" "kosli_capture" {
     "container.clusters.get",
     "container.clusters.list",
 
-    # Snapshot: the Kubernetes API calls that kosli snapshot k8s makes
-    "container.namespaces.get",
-    "container.namespaces.list",
-    "container.pods.get",
-    "container.pods.list",
+    # Snapshot: the Cloud Asset Inventory calls that kosli snapshot gke makes.
+    # serviceusage.services.use lets the Cloud Asset API calls use this
+    # project as their quota project.
+    "cloudasset.assets.listContainerPod",
+    "serviceusage.services.use",
   ]
 }
 
