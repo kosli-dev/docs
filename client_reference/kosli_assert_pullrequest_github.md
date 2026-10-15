@@ -12,6 +12,8 @@ kosli assert pullrequest github [flags]
 Assert a Github pull request for a git commit exists.  
 The command exits with non-zero exit code
 if no pull requests were found for the commit.
+No local git repository is needed: `--commit` is looked up through the git provider's API.
+Outside a supported CI, set `--commit` to a full commit SHA: its `HEAD` default is not read from your local checkout.
 
 ## Flags
 | Flag | Type | Description |

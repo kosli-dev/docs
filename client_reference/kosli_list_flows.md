@@ -63,7 +63,7 @@ kosli list flows --output=json
     "template": "version: 1\ntrail:\n  attestations:\n    - name: drift-detection\n      type: decision\n",
     "repo_url": "",
     "tags": {},
-    "latest_activity_at": 1791901238.073453,
+    "latest_activity_at": 1792014443.271743,
     "latest_state": "COMPLIANT"
   },
   {
@@ -75,7 +75,7 @@ kosli list flows --output=json
     "template": "version: 1\ntrail:\n  attestations:\n    - name: drift-detection\n      type: decision\n",
     "repo_url": "",
     "tags": {},
-    "latest_activity_at": 1791901231.2126298,
+    "latest_activity_at": 1792014437.8309128,
     "latest_state": "COMPLIANT"
   },
   {
@@ -273,8 +273,8 @@ kosli list flows --output=json
       "kind": "run",
       "repo_url": "https://github.com/cyber-dojo/secrets"
     },
-    "latest_activity_at": 1791884042.0315425,
-    "latest_state": "NON-COMPLIANT"
+    "latest_activity_at": 1791981126.0239997,
+    "latest_state": "COMPLIANT"
   },
   {
     "id": "a43239d6-fa3d-4e58-b7c4-f00b7432",
@@ -290,7 +290,7 @@ kosli list flows --output=json
       "workflow_url": "https://github.com/cyber-dojo/snyk-scanning/blob/main/.github/workflows/aws-beta.yml",
       "env": "aws-beta"
     },
-    "latest_activity_at": 1791879994.749658,
+    "latest_activity_at": 1792045567.7301688,
     "latest_state": "COMPLIANT"
   },
   {
@@ -324,7 +324,7 @@ kosli list flows --output=json
       "workflow_url": "https://github.com/cyber-dojo/snyk-scanning/blob/main/.github/workflows/aws-prod.yml",
       "env": "aws-prod"
     },
-    "latest_activity_at": 1791879906.3080175,
+    "latest_activity_at": 1792045493.7299936,
     "latest_state": "COMPLIANT"
   },
   {
