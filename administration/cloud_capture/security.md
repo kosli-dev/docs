@@ -11,7 +11,7 @@ Cloud Capture is still in active development. Its capabilities and configuration
 
 ## Cloud Capture permissions
 
-The Cloud Capture managed service uses the public cloud APIs to extract information about your cloud environments.  In order to do this, you need to provide Kosli with an IAM role inside your cloud environment that allows access to these APIs.  The role is created and managed by you. The role must contain the relevant assume-trust policy to allow Kosli to access your account and must contain the correct permissions for Kosli to find and snapshot your resources.
+The Cloud Capture managed service uses the public cloud APIs to extract information about your cloud environments.  In order to do this, you need to provide Kosli with an identity in your cloud account that Kosli can use to call these APIs.  The identity is created and managed by you. It must be protected by a trust condition that allows only Kosli to use it, and it must hold the read-only permissions Kosli needs to find and snapshot your resources.
 
 <Tabs>
 <Tab title="AWS">
@@ -123,18 +123,26 @@ Cloud Capture runs in AWS and reaches your project through
 Capture exchanges its own short-lived AWS credentials for a short-lived Google token, then
 impersonates a service account that you create. No service account key is ever created or shared.
 
-The trust has two parts, mirroring the AWS assume-role policy and external ID. The workload identity
-pool accepts credentials only from the Kosli AWS account, which is the counterpart of the principal
-in the trust policy. Within that account it accepts only the Kosli-side IAM role that is dedicated
-to your organization, which is the counterpart of the external ID. Every Cloud Capture job runs
-under the role for the organization it is working for, so a job for another Kosli tenant presents
-a different role name and is refused by your pool, even if that tenant gave Kosli your provider
-and service account instead of their own. The role name is part of the credential that AWS signs
-and Google verifies, so it cannot be forged by the caller.
+Your workload identity pool makes two checks before it issues a token:
 
-GCP has no equivalent of the CloudFormation "phone-home" feature, so the configuration emits the
-values Kosli needs as Terraform outputs. Share them with Kosli after the deployment completes; you
-can read them at any time with `gcloud infra-manager deployments describe`.
+1. It accepts only credentials issued by the Kosli AWS account in which Cloud Capture runs.
+2. Within that account, it accepts only the Kosli-side IAM role dedicated to your organization.
+   Every Cloud Capture job runs under the role for the organization it is working for. A job for
+   another Kosli tenant presents a different role name, so your pool refuses it, even if that
+   tenant gave Kosli your provider and service account details instead of their own.
+
+The role name is part of the credential that AWS signs and Google verifies, so the caller cannot
+forge it.
+
+For readers familiar with the AWS setup: the account check plays the part of the principal in the
+assume-role trust policy, and the role check plays the part of the external ID.
+
+Kosli needs two values to connect to your project: the full resource name of the workload identity
+provider, and the email of the service account. The configuration emits both as Terraform outputs.
+Share them with Kosli after the deployment completes. You can read them at any time with
+`gcloud infra-manager deployments describe`.
+
+{/* TODO: Confirm where the user submits these two values (a form in the Kosli UI, or Customer Success) and say so here. */}
 
 If you wish to grant access for Cloud Capture without using our published configuration, the
 resources needed are those shown below. The pool must accept only the Kosli AWS account and, within
@@ -178,9 +186,10 @@ variable "kosli_role_name" {
   description = <<-EOT
     The name of the IAM role, in the Kosli AWS account, that Cloud Capture
     uses when working for your organization. Supplied by Kosli. Each Kosli
-    organization has its own role, so this value is the counterpart of the
-    AWS external ID: only jobs run on your behalf can obtain a token from
-    your project.
+    organization has its own role, and the workload identity pool accepts
+    only this one, so only Cloud Capture jobs run on behalf of your
+    organization can obtain a token from your project. In the AWS setup,
+    the external ID plays the same part.
   EOT
 
   validation {
@@ -218,12 +227,12 @@ resource "google_iam_workload_identity_pool_provider" "kosli_aws" {
     "attribute.aws_role" = "assertion.arn.extract('assumed-role/{role}/')"
   }
 
-  # Two checks, mirroring the AWS trust policy. The account check is the
-  # counterpart of the trust policy principal: only credentials issued by the
-  # Kosli account are accepted, however the token reaches Google. The role
-  # check is the counterpart of the external ID: within that account, only the
-  # Kosli-side role dedicated to your organization is accepted. A Cloud Capture
-  # job for another tenant runs under a different role and is refused here.
+  # Two checks before the pool issues a token. The account check accepts only
+  # credentials issued by the Kosli AWS account, however the token reaches
+  # Google. The role check accepts, within that account, only the Kosli-side
+  # role dedicated to your organization. A Cloud Capture job for another tenant
+  # runs under a different role and is refused here. In the AWS setup, these
+  # checks correspond to the trust policy principal and the external ID.
   attribute_condition = join(" && ", [
     "attribute.account == \"${var.kosli_aws_account_id}\"",
     "attribute.aws_role == \"${var.kosli_role_name}\"",
@@ -325,7 +334,10 @@ gcloud infra-manager deployments apply \
 ## How Kosli isolates tenants
 
 Cloud Capture runs as a shared, autoscaled service, but each job runs under a role that is scoped to
-one tenant:
+one tenant.
+
+<Tabs>
+<Tab title="AWS">
 
 * A Cloud Capture worker picks up a job for your organization and assumes the role in your account
   using your externalId. A worker running for a different tenant is unable to read the externalId
@@ -340,11 +352,22 @@ The trust policy on the role in your account limits access to the AWS account in
 Capture is running. The ExternalId acts as a shared secret between Kosli and you, so that only
 Cloud Capture is permitted to assume the role.
 
+</Tab>
+<Tab title="GCP">
+
+Each Cloud Capture job for your organization runs under the Kosli-side IAM role dedicated to your
+organization. The workload identity pool in your project accepts only that role, so a job running
+for a different tenant cannot obtain a token from your project or impersonate your service account.
+Separation is enforced by the identity provider, not by application code.
+
+</Tab>
+</Tabs>
+
 Cloud Capture itself does not hold any tenant data. Snapshots taken by Cloud Capture are
 immediately sent to Kosli through the same ingest path as your existing pipelines.
 
 ## Changing security permissions
 
-If the IAM role assumed by Cloud Capture is removed or edited within your cloud accounts, Cloud
-Capture will fail to operate correctly. The failure will be detected and the account will be
+If the role, or the service account and workload identity pool, that Cloud Capture uses is removed
+or edited within your cloud accounts, Cloud Capture will fail to operate correctly. The failure will be detected and the account will be
 removed from the list of accounts captured.
