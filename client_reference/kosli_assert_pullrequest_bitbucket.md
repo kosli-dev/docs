@@ -13,6 +13,8 @@ Assert a Bitbucket pull request for a git commit exists.
 The command exits with non-zero exit code if no pull requests were found for the commit.
 Authentication to Bitbucket can be done with an access token (recommended) or an Atlassian API token, passed via --bitbucket-username (your Atlassian account email) and --bitbucket-password.
 Bitbucket app passwords are no longer supported as of 28 July 2026; replace any app passwords with API tokens. Credentials need to have read access for both repos and pull requests.
+No local git repository is needed: `--commit` is looked up through the git provider's API.
+Outside a supported CI, set `--commit` to a full commit SHA: its `HEAD` default is not read from your local checkout.
 
 ## Flags
 | Flag | Type | Description |
