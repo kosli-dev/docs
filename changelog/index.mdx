@@ -4,6 +4,16 @@ description: "Release notes for Kosli products."
 rss: true
 ---
 
+<Update label="October 15, 2026" description="v2.48.0" tags={["CLI"]}>
+
+## New features
+
+- **Attachments up to 100 MB** — `--attachments` on every `kosli attest` command, and the file given to `kosli attest sbom`, now take files up to 100 MB (previously 10 MB, and 9 MiB for an SBOM). The CLI uploads the file straight to the Evidence Vault over the Kosli hostname, so no new network access is needed. The limit is per organization; contact Kosli support to raise it. See [attachments](/getting_started/attestations#when-to-use-which).
+
+[View on GitHub](https://github.com/kosli-dev/cli/releases/tag/v2.48.0)
+
+</Update>
+
 <Update label="October 9, 2026" description="v2.47.0" tags={["CLI"]}>
 
 ## New features
