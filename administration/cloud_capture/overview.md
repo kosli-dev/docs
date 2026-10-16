@@ -9,7 +9,7 @@ tag: "BETA"
 Cloud Capture is still in active development. Its capabilities and configuration format may change, and onboarding is done together with Kosli's Customer Success team.
 </Warning>
 
-Cloud Capture is a managed service that runs on Kosli's infrastructure and connects to your cloud platform to observe the resources deployed there. You grant Cloud Capture a set of permissions, and it uses them to run a `kosli snapshot` every few minutes against the infrastructure you have allowed it to scan.
+Cloud Capture is a managed service that runs on Kosli's infrastructure and connects to your cloud platform to observe the resources deployed there. You grant Cloud Capture a set of permissions, and it uses them to run a `kosli snapshot` against the infrastructure you have allowed it to scan, every five minutes unless you [choose another frequency](/administration/cloud_capture/getting_started#scan-frequency).
 
 Kosli also supports reporting from your own cloud accounts by running the Kosli CLI on a schedule. Cloud Capture inverts this, with Kosli running the regular [snapshots](/getting_started/environments) so there is no software for you to install.
 
@@ -41,7 +41,7 @@ Cloud Capture has been designed to operate with no on-going support from you.  O
 
 Cloud Capture finds all supported resources within your AWS accounts, and determines which Kosli environment should hold the snapshots. Cloud Capture will create physical environments for you inside Kosli.
 
-Cloud Capture can [filter out resources based on AWS tags](/administration/cloud_capture/getting_started#excluding-resources).
+You can keep a resource out of Cloud Capture by tagging it with any tag you have listed in your Cloud Capture settings; see [Excluding resources](/administration/cloud_capture/getting_started#excluding-resources).
 
 As your cloud environment evolves, such as the addition of new AWS ECS clusters or the retirement of existing Lambdas, Cloud Capture automatically detects the changes. Because Cloud Capture creates physical environments as needed, when your infrastructure changes, Kosli will keep up. No changes to the configuration created during the initial setup are required.
 
