@@ -120,5 +120,5 @@ To change it, open your organization's **Settings**, go to **Cloud Capture**, an
 
 Each scan reports what is running in every environment Cloud Capture manages for you, and Kosli records a new snapshot when that differs from the last one. The interval is therefore how long a change can go unnoticed: a deployment that lands and is rolled back inside one interval may never be seen. Five minutes suits most teams; an estate that changes rarely can scan hourly.
 
-Through the API, the frequency is `scan_interval_minutes` on the same settings resource as the skip tags above: a whole number of minutes from 5 to 1440 (a day), with 5 the value when it is left out. The PUT replaces every setting, so read the current configuration first and send the other settings back unchanged.
+Through the API, the frequency is `scan_interval_minutes` on the same settings resource as the skip tags above: any whole number of minutes from 5 to 1440 (a day), not only the presets the settings page offers, with 5 the value when it is left out. An interval set this way that is not one of the presets is shown on the settings page as its own option, so saving another setting there keeps it. The PUT replaces every setting, so read the current configuration first and send the other settings back unchanged.
 
