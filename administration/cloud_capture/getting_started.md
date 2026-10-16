@@ -118,7 +118,7 @@ Cloud Capture scans your registered accounts every five minutes unless you choos
 
 To change it, open your organization's **Settings**, go to **Cloud Capture**, and under **Scan frequency** pick an interval from the list: every 5, 10, 15 or 30 minutes, or every 1, 2, 6, 12 or 24 hours. Select **Save**, and the next scan runs at the new interval; nothing restarts and no snapshots are lost. Like the other Cloud Capture settings, the frequency can only be changed while Cloud Capture is enabled.
 
-Each scan reports what is running in every environment Cloud Capture manages for you, and Kosli records a new snapshot when that differs from the last one. The interval is therefore how long a change can go unnoticed: a deployment that lands and is rolled back inside one interval may never be seen. Five minutes suits most teams; an estate that changes rarely can scan hourly. Scanning more often than every five minutes is available on request through Kosli's Customer Success team.
+Each scan reports what is running in every environment Cloud Capture manages for you, and Kosli records a new snapshot when that differs from the last one. The interval is therefore how long a change can go unnoticed: a deployment that lands and is rolled back inside one interval may never be seen. Five minutes suits most teams; an estate that changes rarely can scan hourly.
 
 Through the API, the frequency is `scan_interval_minutes` on the same settings resource as the skip tags above: a whole number of minutes from 5 to 1440 (a day), with 5 the value when it is left out. The PUT replaces every setting, so read the current configuration first and send the other settings back unchanged.
 
