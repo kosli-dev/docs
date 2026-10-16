@@ -190,7 +190,12 @@ kosli attest generic \
 
 Use **`--attachments`** when you want to archive files for audit purposes — such as test reports,
 scan output, or policy files — in the Evidence Vault for later retrieval. Provide multiple paths
-as a comma-separated list.
+as a comma-separated list. A single file is uploaded as it is; a directory, or several paths, are
+packaged into one tar archive first.
+
+The upload can be up to 100 MB by default. The limit is per organization; contact Kosli support
+to raise it. The CLI sends the file to the Evidence Vault over the same Kosli hostname it uses
+for everything else, so no further network access is needed.
 
 ```shell
 kosli attest generic \
@@ -362,9 +367,6 @@ Currently, we support the following types of evidence:
     If you narrow the input with `kosli evaluate trail --attestations`, name the SBOM there too,
     dot-qualified as `<artifact>.<name>` for an artifact-scoped one. Anything left out is absent
     from the input, and a rule reading it does not match rather than failing.
-
-    The CLI refuses an SBOM file larger than 9 MiB, which leaves room for the attestation
-    itself within the 10 MB the server accepts. We are working on raising this.
 
     See [attest an SBOM to an artifact or a trail](/client_reference/kosli_attest_sbom/) for usage details and examples.
   </Accordion>
