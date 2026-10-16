@@ -41,7 +41,7 @@ When used, the CloudFormation template will send your AWS account id to Kosli, s
 
 ### Enable Cloud Capture
 
-When you have created the IAM role, using the CloudFormation template, you can activate Cloud Capture within the Kosli user-interface.  Cloud Capture runs on a five-minute schedule, and once you have enabled it, Cloud Capture will pick up your environment the next time it runs - you should see environments and snapshots appearing within a few minutes.
+When you have created the IAM role, using the CloudFormation template, you can activate Cloud Capture within the Kosli user-interface.  Cloud Capture scans every five minutes unless you [choose another frequency](#scan-frequency), and once you have enabled it, Cloud Capture will pick up your environment the next time it runs - you should see environments and snapshots appearing within a few minutes.
 
 ### Excluding resources
 
@@ -65,13 +65,16 @@ How the tags are matched:
 
 - A resource is skipped when any one of its tags equals any one of the skip tags, key and value both, exactly as AWS stores them. Tags are case-sensitive, so `Env=test` does not match `env=test`. A key on its own does not match: to skip both `env=test` and `env=staging`, add both.
 - The tag is read on the resource Cloud Capture snapshots. An ECS cluster is skipped with everything in it, its services and tasks included; tags on a service or a task definition are not read. A Lambda function is skipped on its own, and the region's Lambda environment in Kosli is made up of the functions that remain.
-- The change takes effect on the next scheduled run. A Kosli environment that was already being captured keeps its last snapshot and receives no new ones; nothing is deleted. Remove the tag, or the skip tag, and the next run picks the resource up again.
+- The change takes effect on the next scan. A Kosli environment that was already being captured keeps its last snapshot and receives no new ones; nothing is deleted. Remove the tag, or the skip tag, and the next run picks the resource up again.
 - Skip tags, like the other Cloud Capture settings, can only be changed while Cloud Capture is enabled.
 - The IAM role created by the CloudFormation template already grants the permissions needed to read tags, `ecs:DescribeClusters` and `lambda:ListTags`, so no change to the role is needed.
 
-Skip tags can also be set through the API, as part of the organization's Cloud Capture settings. The settings are replaced whole on each write, so send them all:
+Skip tags can also be set through the API, as part of the organization's Cloud Capture settings. The settings PUT replaces every setting, not only the one you are changing, so start from what is stored: read the current configuration, take the `enabled`, `default_regions`, `scan_interval_minutes` and `skip_tags` values from its `settings` object, add your tags to `skip_tags`, and send those four fields back. Sending the example below as it stands would also set your default regions and scan interval to the values shown.
 
 ```bash
+curl "https://app.kosli.com/api/v2/cloud-capture/<your-org>" \
+  -H "Authorization: Bearer <api-key>"
+
 curl -X PUT "https://app.kosli.com/api/v2/cloud-capture/<your-org>/settings" \
   -H "Authorization: Bearer <api-key>" \
   -H "Content-Type: application/json" \
@@ -101,11 +104,21 @@ GCP has no equivalent of the CloudFormation "phone-home" feature, so the Terrafo
 
 ### Enable Cloud Capture
 
-When you have created the role and added the account details to Kosli, you can activate Cloud Capture within the Kosli user-interface.  Cloud Capture runs on a five-minute schedule, and once you have enabled it, Cloud Capture will pick up your environment the next time it runs - you should see environments and snapshots appearing within a few minutes.
+When you have created the role and added the account details to Kosli, you can activate Cloud Capture within the Kosli user-interface.  Cloud Capture scans every five minutes unless you [choose another frequency](#scan-frequency), and once you have enabled it, Cloud Capture will pick up your environment the next time it runs - you should see environments and snapshots appearing within a few minutes.
 
 ### Excluding resources
 
 Excluding resources by label is coming with GCP support.
 </Tab>
 </Tabs>
+
+## Scan frequency
+
+Cloud Capture scans your registered accounts every five minutes unless you choose otherwise. The frequency is a setting of your Kosli organization, so it applies to every account and region Cloud Capture scans for you.
+
+To change it, open your organization's **Settings**, go to **Cloud Capture**, and under **Scan frequency** pick an interval from the list: every 5, 10, 15 or 30 minutes, or every 1, 2, 6, 12 or 24 hours. Select **Save**, and the next scan runs at the new interval; nothing restarts and no snapshots are lost. Like the other Cloud Capture settings, the frequency can only be changed while Cloud Capture is enabled.
+
+Each scan reports what is running in every environment Cloud Capture manages for you, and Kosli records a new snapshot when that differs from the last one. The interval is therefore how long a change can go unnoticed: a deployment that lands and is rolled back inside one interval may never be seen. Five minutes suits most teams; an estate that changes rarely can scan hourly. Scanning more often than every five minutes is available on request through Kosli's Customer Success team.
+
+Through the API, the frequency is `scan_interval_minutes` on the same settings resource as the skip tags above: a whole number of minutes from 5 to 1440 (a day), with 5 the value when it is left out. The PUT replaces every setting, so read the current configuration first and send the other settings back unchanged.
 

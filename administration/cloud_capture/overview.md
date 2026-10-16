@@ -9,7 +9,7 @@ tag: "BETA"
 Cloud Capture is still in active development. Its capabilities and configuration format may change, and onboarding is done together with Kosli's Customer Success team.
 </Warning>
 
-Cloud Capture is a managed service that runs on Kosli's infrastructure and connects to your cloud platform to observe the resources deployed there. You grant Cloud Capture a set of permissions, and it uses them to run a `kosli snapshot` every few minutes against the infrastructure you have allowed it to scan.
+Cloud Capture is a managed service that runs on Kosli's infrastructure and connects to your cloud platform to observe the resources deployed there. You grant Cloud Capture a set of permissions, and it uses them to run a `kosli snapshot` against the infrastructure you have allowed it to scan, every five minutes unless you [choose another frequency](/administration/cloud_capture/getting_started#scan-frequency).
 
 Kosli also supports reporting from your own cloud accounts by running the Kosli CLI on a schedule. Cloud Capture inverts this, with Kosli running the regular [snapshots](/getting_started/environments) so there is no software for you to install.
 
