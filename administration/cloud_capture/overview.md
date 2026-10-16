@@ -41,7 +41,7 @@ Cloud Capture has been designed to operate with no on-going support from you.  O
 
 Cloud Capture finds all supported resources within your AWS accounts, and determines which Kosli environment should hold the snapshots. Cloud Capture will create physical environments for you inside Kosli.
 
-Cloud Capture can [filter out resources based on AWS tags](/administration/cloud_capture/getting_started#excluding-resources).
+You can keep a resource out of Cloud Capture by tagging it with any tag you have listed in your Cloud Capture settings; see [Excluding resources](/administration/cloud_capture/getting_started#excluding-resources).
 
 As your cloud environment evolves, such as the addition of new AWS ECS clusters or the retirement of existing Lambdas, Cloud Capture automatically detects the changes. Because Cloud Capture creates physical environments as needed, when your infrastructure changes, Kosli will keep up. No changes to the configuration created during the initial setup are required.
 

@@ -45,7 +45,43 @@ When you have created the IAM role, using the CloudFormation template, you can a
 
 ### Excluding resources
 
-If there are resources you do not wish to include within a Cloud Capture snapshot, for example an ECS cluster that you consider to be out of scope, you can add a tag to it indicating that the item should be skipped.  Adding a tag with the name `kosli.capture` and the value `false` will ensure that Cloud Capture skips over that resource.
+If there are resources you do not want Cloud Capture to snapshot, such as a test cluster or a service a vendor runs in your account, exclude them by tag. You choose the tags: in your organization's **Settings**, under **Cloud Capture**, the **Skip tags** panel takes any number of key and value pairs, and Cloud Capture skips every resource that carries one of them.
+
+1. Tag the resource in AWS, with any key and value you like. For example, to tag an ECS cluster and a Lambda function with `kosli-capture=false`:
+
+   ```bash
+   aws ecs tag-resource \
+     --resource-arn arn:aws:ecs:eu-west-1:123456789012:cluster/sandbox \
+     --tags key=kosli-capture,value=false
+
+   aws lambda tag-resource \
+     --resource arn:aws:lambda:eu-west-1:123456789012:function:scratch \
+     --tags kosli-capture=false
+   ```
+
+2. In the **Skip tags** panel, enter the key `kosli-capture` and the value `false`, select **Add**, then **Save**.
+
+How the tags are matched:
+
+- A resource is skipped when any one of its tags equals any one of the skip tags, key and value both, exactly as AWS stores them. Tags are case-sensitive, so `Env=test` does not match `env=test`. A key on its own does not match: to skip both `env=test` and `env=staging`, add both.
+- The tag is read on the resource Cloud Capture snapshots. An ECS cluster is skipped with everything in it, its services and tasks included; tags on a service or a task definition are not read. A Lambda function is skipped on its own, and the region's Lambda environment in Kosli is made up of the functions that remain.
+- The change takes effect on the next scheduled run. A Kosli environment that was already being captured keeps its last snapshot and receives no new ones; nothing is deleted. Remove the tag, or the skip tag, and the next run picks the resource up again.
+- Skip tags, like the other Cloud Capture settings, can only be changed while Cloud Capture is enabled.
+- The IAM role created by the CloudFormation template already grants the permissions needed to read tags, `ecs:DescribeClusters` and `lambda:ListTags`, so no change to the role is needed.
+
+Skip tags can also be set through the API, as part of the organization's Cloud Capture settings. The settings are replaced whole on each write, so send them all:
+
+```bash
+curl -X PUT "https://app.kosli.com/api/v2/cloud-capture/<your-org>/settings" \
+  -H "Authorization: Bearer <api-key>" \
+  -H "Content-Type: application/json" \
+  -d '{
+    "enabled": true,
+    "default_regions": {"aws": ["eu-west-1"]},
+    "scan_interval_minutes": 5,
+    "skip_tags": {"aws": [{"key": "kosli-capture", "value": "false"}]}
+  }'
+```
 </Tab>
 <Tab title="GCP">
 
@@ -69,7 +105,7 @@ When you have created the role and added the account details to Kosli, you can a
 
 ### Excluding resources
 
-Support for excluding resources is coming soon.
+Excluding resources by label is coming with GCP support.
 </Tab>
 </Tabs>
 
