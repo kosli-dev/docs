@@ -89,7 +89,7 @@ artifacts:
 
 ### Exceptions
 
-You can add exceptions to policy rules using [policy expressions](/policy-reference/environment_policy#policy-expressions).
+You can add exceptions to policy rules using [policy expressions](/policy-reference/environment_policy#policy-expressions). Note how expressions behave when a value is [missing](/policy-reference/environment_policy#missing-values), which is common for artifacts reported without provenance.
 
 ```yaml
 _schema: https://docs.kosli.com/schemas/policy/v1
