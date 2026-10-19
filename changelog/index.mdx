@@ -14,6 +14,32 @@ rss: true
 
 </Update>
 
+<Update label="October 13, 2026" description="v2.47.2" tags={["CLI"]}>
+
+## Updates
+
+- Maintenance release with no user-facing changes.
+
+[View on GitHub](https://github.com/kosli-dev/cli/releases/tag/v2.47.2)
+
+</Update>
+
+<Update label="October 13, 2026" description="v2.47.1" tags={["CLI"]}>
+
+## New features
+
+- **Evaluate a published Rego policy** — `kosli evaluate policy --identifier <policy>` evaluates the current version of a Rego policy published to Kosli, instead of sending local files. Give exactly one of `--identifier` or `--path`. For a published policy, `--params` must match its params schema. **Beta**
+
+## Updates
+
+- **`--path` replaces `--policy` on `kosli evaluate policy`** — `--policy` still works as a deprecated alias for one release.
+- **Policy version printed with the verdict** — `kosli evaluate policy` now shows which policy ran: a published policy by identifier, version, and digest, and a local one by its digest.
+- **New JSON output shape** — `kosli evaluate policy --output json` prints the evaluation as Kosli returns it, with policy outputs under `result.outputs`. Update any scripts that read outputs from the top level.
+
+[View on GitHub](https://github.com/kosli-dev/cli/releases/tag/v2.47.1)
+
+</Update>
+
 <Update label="October 9, 2026" description="v2.47.0" tags={["CLI"]}>
 
 ## New features
