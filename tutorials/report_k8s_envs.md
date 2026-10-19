@@ -171,23 +171,17 @@ kosli snapshot k8s k8s-tutorial \
 </Tab>
 </Tabs>
 
+## What gets reported
+
+A snapshot lists the **pods** running in scope. The reporter is blind to workload kind — a `Job` pod is reported exactly like a `Deployment` pod — and only pods in the `Running` and `Failed` phases are reported; `Succeeded` and `Pending` pods are not.
+
+That matters most for short-lived workloads. A `Job` or `CronJob` pod is captured only while it is running, so a job that starts and finishes between two snapshots never appears, and a successful run leaves no trace in the environment. A pod that *fails* is the exception — it keeps being reported until Kubernetes cleans it up.
+
+For the full model — how job pods affect environment churn and compliance, and what to do about it — see [Understand Kubernetes reporting](/administration/managing_environments/kubernetes_reporting).
+
 ## Running multiple reporters
 
-If you are considering running more than one reporter against the same cluster, the table below summarizes which setups produce meaningful snapshots and which don't.
-
-| Scenario | Supported | Explanation |
-| :--- | :---: | :--- |
-| Two orgs, separate environments, overlapping namespaces | Yes | Different environments → independent snapshots. |
-| One org, two environments, overlapping namespaces | Yes | Same as above. |
-| One org, **same environment**, two reporters with overlapping namespaces | No | Snapshots toggle between each reporter's view. No data is deleted, but diffs between consecutive snapshots become meaningless. |
-| One org, same environment, two reporters with **disjoint** namespaces | No | Each snapshot only reflects one reporter's namespaces, so diffs compare unrelated scopes. |
-
-<Warning>
-A single Kosli environment must have exactly one reporter feeding it. Snapshots are never overwritten or deleted, but if two reporters take turns updating the same environment:
-
-* Diffs between consecutive snapshots compare unrelated views of the cluster.
-* The environment history shows artifacts continuously stopping and starting as each report toggles which namespaces are visible.
-</Warning>
+A single Kosli environment must have exactly one reporter feeding it. Pointing two reporters at the same environment does not delete data, but it makes diffs between consecutive snapshots meaningless. For the supported and unsupported topologies, see [Running multiple reporters](/administration/managing_environments/kubernetes_reporting#running-multiple-reporters).
 
 ## What you've accomplished
 
@@ -197,3 +191,4 @@ From here you can:
 * Query your environment with [`kosli list snapshots`](/client_reference/kosli_list_snapshots) and [`kosli get snapshot`](/client_reference/kosli_get_snapshot)
 * [Compare snapshots to see what changed](/client_reference/kosli_diff_snapshots)
 * Trace a running artifact back to its git commit with the [From commit to production](/tutorials/following_a_git_commit_to_runtime_environments) tutorial
+* See what snapshots do and don't capture in [Understand Kubernetes reporting](/administration/managing_environments/kubernetes_reporting)
