@@ -104,9 +104,7 @@ If you would rather create these resources yourself, see [Cloud Capture Security
   <Step title="Download the Terraform configuration">
     Download the Terraform configuration from the Settings page for your organization within the Kosli UI.
 
-    You also need two values from Kosli: the Kosli AWS account ID, and the name of the Kosli-side IAM role for your organization.
-
-    {/* TODO: Confirm whether the Terraform downloaded from the Settings page comes pre-filled with the Kosli AWS account ID and role name, or where the user obtains them, and say so here. */}
+    You also need two values from Kosli: the Kosli AWS account ID, and the name of the Kosli-side IAM role for your organization. The configuration isn't pre-filled with them. Copy them from the Cloud Capture section of your organization's Settings page in the Kosli UI.
   </Step>
   <Step title="Deploy with Infrastructure Manager">
     Deploy the configuration once in each project that holds GKE clusters you want Cloud Capture to snapshot. Run the following from the directory containing the configuration:
@@ -127,15 +125,23 @@ If you would rather create these resources yourself, see [Cloud Capture Security
     - `kosli_capture_provider`: the full resource name of the workload identity provider
     - `kosli_capture_service_account`: the email of the service account Cloud Capture impersonates
 
-    Share them with Kosli after the deployment completes. You can read them at any time with `gcloud infra-manager deployments describe`.
+    After the deployment completes, register them with Kosli through the Kosli API's cloud accounts endpoint. You can read them at any time from the deployment's latest revision:
 
-    {/* TODO: Confirm where the user submits these two values (a form in the Kosli UI, or Customer Success) and say so here. */}
+    ```bash
+    gcloud infra-manager revisions describe \
+        "$(gcloud infra-manager deployments describe \
+            projects/<your-gcp-project>/locations/<your-gcp-region>/deployments/kosli-capture \
+            --format='value(latestRevision)')" \
+        --format='yaml(applyResults.outputs)'
+    ```
+
+    {/* TODO: Link to the cloud accounts endpoint in the API reference, and show the call, once it is published. */}
   </Step>
 </Steps>
 
 ### Enable Cloud Capture
 
-When you have deployed the configuration and shared the workload identity provider name and service account email with Kosli, you can activate Cloud Capture within the Kosli user-interface.  Cloud Capture scans every five minutes unless you [choose another frequency](#scan-frequency), and once you have enabled it, Cloud Capture will pick up your environment the next time it runs - you should see environments and snapshots appearing within a few minutes.
+When you have deployed the configuration and registered the workload identity provider name and service account email with Kosli, you can activate Cloud Capture within the Kosli user-interface.  Cloud Capture scans every five minutes unless you [choose another frequency](#scan-frequency), and once you have enabled it, Cloud Capture will pick up your environment the next time it runs - you should see environments and snapshots appearing within a few minutes.
 
 ### Excluding resources
 

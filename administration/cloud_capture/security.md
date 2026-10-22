@@ -139,10 +139,11 @@ assume-role trust policy, and the role check plays the part of the external ID.
 
 Kosli needs two values to connect to your project: the full resource name of the workload identity
 provider, and the email of the service account. The configuration emits both as Terraform outputs.
-Share them with Kosli after the deployment completes. You can read them at any time with
-`gcloud infra-manager deployments describe`.
+After the deployment completes, register them with Kosli through the Kosli API's cloud accounts
+endpoint. You can read them at any time from the deployment's latest revision, under
+`applyResults.outputs`, with `gcloud infra-manager revisions describe`.
 
-{/* TODO: Confirm where the user submits these two values (a form in the Kosli UI, or Customer Success) and say so here. */}
+{/* TODO: Link to the cloud accounts endpoint in the API reference once it is published. */}
 
 If you wish to grant access for Cloud Capture without using our published configuration, the
 resources needed are those shown below. The pool must accept only the Kosli AWS account and, within
@@ -250,8 +251,8 @@ resource "google_service_account_iam_member" "kosli_impersonation" {
   member             = "principalSet://iam.googleapis.com/${google_iam_workload_identity_pool.kosli_capture.name}/attribute.aws_role/${var.kosli_role_name}"
 }
 
-# Kosli needs these two values to connect. Infrastructure Manager shows them
-# with `gcloud infra-manager deployments describe`.
+# Kosli needs these two values to connect. Infrastructure Manager records them
+# on the deployment's latest revision, under applyResults.outputs.
 output "kosli_capture_provider" {
   description = "Full resource name of the workload identity provider; give this to Kosli."
   value       = google_iam_workload_identity_pool_provider.kosli_aws.name
@@ -270,8 +271,7 @@ permissions. Cloud Capture reads the pods of your GKE clusters from
 [Cloud Asset Inventory](https://cloud.google.com/asset-inventory/docs/overview), in the same way as
 [`kosli snapshot gke`](/client_reference/kosli_snapshot_gke). It never calls a cluster's Kubernetes
 API, so no Kubernetes RBAC objects need to be created inside your clusters, and Cloud Capture needs
-no network access to any cluster control plane. Asset Inventory is eventually consistent, so a
-snapshot can lag behind recent pod changes.
+no network access to any cluster control plane.
 
 The configuration also enables the Cloud Asset API in your project. These appear as:
 
@@ -329,6 +329,8 @@ resource "google_project_iam_member" "kosli_capture" {
 Run the following from the directory containing the configuration. Infrastructure Manager runs
 Terraform as the service account you name, so that service account needs permission to enable APIs
 and to create workload identity pools, service accounts, custom roles and project IAM bindings.
+Copy the Kosli AWS account ID and role name from the Cloud Capture section of your organization's
+Settings page in the Kosli UI.
 
 ```bash
 gcloud infra-manager deployments apply \
