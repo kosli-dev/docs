@@ -143,7 +143,15 @@ Declare the params a policy accepts with a `schemas` annotation on the policy pa
 # METADATA
 # schemas:
 #   - data.params: {"type": "object", "properties": {"max_high": {"type": "integer"}}, "required": ["max_high"]}
-package snyk_high
+package policy
+
+import rego.v1
+
+max_high := data.params.max_high
+
+default allow := false
+
+allow if input.trail.compliance_status.attestations_statuses.snyk.high_count <= max_high
 ```
 
 Kosli records the schema when the version is published, and refuses an evaluation of a published policy whose params do not match it, before anything is evaluated. Params sent with local policy files (`--path`) are not checked.
@@ -283,7 +291,7 @@ Allows only when every trail in `input.trails` has at least one pull request wit
 # METADATA
 # schemas:
 #   - data.params: {"type": "object", "properties": {"pr_attestation_name": {"type": "string"}}, "required": ["pr_attestation_name"]}
-package pr_approved
+package policy
 
 import rego.v1
 
@@ -317,7 +325,7 @@ violations contains msg if {
 Allows only when every artifact in the trail has a Snyk scan where the high-severity vulnerability count does not exceed `max_high`. Both the attestation name and the threshold are read from params. Publish it with `--input-schema trail`.
 
 ```rego
-package snyk_high
+package policy
 
 import rego.v1
 
