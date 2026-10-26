@@ -50,9 +50,9 @@ kosli get environment aws-prod --output=json
   "name": "aws-prod",
   "type": "ECS",
   "description": "The ECS cluster for production cyber-dojo",
-  "last_modified_at": 1792747979.6438622,
-  "last_reported_at": 1792747978.4493206,
-  "last_changed_at": 1792737118.3849633,
+  "last_modified_at": 1793021638.4771292,
+  "last_reported_at": 1793021638.4771292,
+  "last_changed_at": 1793005258.405105,
   "state": true,
   "include_scaling": false,
   "tags": {
