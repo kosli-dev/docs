@@ -40,7 +40,7 @@ These rules are Kosli-specific conventions, not OPA built-ins.
   ```rego
   default allow := false
 
-  allow if trail_is_compliant(input.trail)
+  allow if requirements_met(input.trail)
   ```
 </ParamField>
 
@@ -87,11 +87,11 @@ Below `compliance_status`, the input schema does not type fields, so strict mode
 
 ## Safe policy design
 
-Three rules prevent a policy from incorrectly reporting a non-compliant trail as compliant.
+Three rules prevent a policy from allowing what it should deny.
 
 ### Rule 1: use a fail-safe default
 
-Always start with `default allow := false`. A trail must be explicitly approved rather than allowed by the absence of evidence against it.
+Always start with `default allow := false`. `allow` must be earned by evidence, not granted by the absence of evidence against it.
 
 Use parameter aliases at the top of the policy file rather than hardcoding threshold values. If a required param is absent, any rule that references its alias fails to evaluate, and `allow` correctly remains `false`.
 
@@ -102,7 +102,7 @@ max_ignore_expiry_days := data.params.max_ignore_expiry_days
 
 ### Rule 2: drive `allow` through positive assertions
 
-Drive the `allow` decision through a condition that must be true for the trail to be compliant. Do not write:
+Drive the `allow` decision through a condition that must be true for the requirements to be met. Do not write:
 
 ```rego
 # Unsafe: allow depends on the absence of violations
@@ -111,16 +111,16 @@ allow if {
 }
 ```
 
-When a `violations` rule body encounters an undefined reference, such as a missing param or an absent attestation field, OPA silently skips that rule body and adds no message to the set. The set is then empty, `count(violations) == 0` evaluates to `true`, and `allow` fires even though the policy never verified compliance. This produces a false-positive compliant result.
+When a `violations` rule body encounters an undefined reference, such as a missing param or an absent attestation field, OPA silently skips that rule body and adds no message to the set. The set is then empty, `count(violations) == 0` evaluates to `true`, and `allow` fires even though the policy never checked its requirements. This produces a false allow.
 
-The safe pattern makes compliance explicit:
+The safe pattern makes the requirement explicit:
 
 ```rego
-# Safe: allow fires only when trail_is_compliant is positively true
-allow if trail_is_compliant(input.trail)
+# Safe: allow fires only when requirements_met is positively true
+allow if requirements_met(input.trail)
 ```
 
-If any field referenced inside `trail_is_compliant` is undefined, the rule body fails to evaluate and `allow` remains `false`.
+If any field referenced inside `requirements_met` is undefined, the rule body fails to evaluate and `allow` remains `false`.
 
 ### Rule 3: violations are diagnostics only
 
@@ -151,7 +151,7 @@ max_high := data.params.max_high
 
 default allow := false
 
-allow if input.trail.compliance_status.attestations_statuses.snyk.high_count <= max_high
+allow if max_high >= 0
 ```
 
 Kosli records the schema when the version is published, and refuses an evaluation of a published policy whose params do not match it, before anything is evaluated. Params sent with local policy files (`--path`) are not checked.
@@ -215,7 +215,7 @@ A trail moment is the state of a trail at one instant.
 
   <Expandable title="compliance_status properties">
     <ParamField path="compliance_status.is_compliant" type="boolean">
-      Whether the trail is compliant against its flow template.
+      Whether the trail is compliant against its flow template. A policy should check the attestations it requires rather than read this field.
     </ParamField>
 
     <ParamField path="compliance_status.status" type="string">
@@ -341,13 +341,13 @@ artifact_within_threshold(artifact) if {
     }
 }
 
-trail_is_compliant(trail) if {
+requirements_met(trail) if {
     every artifact in trail.compliance_status.artifacts_statuses {
         artifact_within_threshold(artifact)
     }
 }
 
-allow if trail_is_compliant(input.trail)
+allow if requirements_met(input.trail)
 
 # METADATA
 # entrypoint: true
