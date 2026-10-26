@@ -118,7 +118,7 @@ kosli publish rego-policy rctl-043 \
     --name "Source code review"
 ```
 
-The policy follows the [Rego policy contract](/policy-reference/rego_policy), and `--input-schema trail` gives it the same `input` that `kosli evaluate trail` does.
+The policy follows the [Rego policy contract](/policy-reference/rego_policy#policy-contract), and `--input-schema trail` gives it a single [trail moment](/policy-reference/rego_policy#trail-moment) as `input.trail`.
 
 Then evaluate it and record the outcome as a decision. Use `--fingerprint` to identify the artifact the decision applies to — this is what allows `kosli assert artifact --environment` to later check that all required controls have passing decisions for that artifact specifically.
 

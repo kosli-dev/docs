@@ -196,7 +196,7 @@ RESULT:  ALLOWED
 The trail has zero high-severity vulnerabilities, so the policy allows it.
 
 <Info>
-The `input.trail` / `input.trails` distinction and the full input data shape are documented in the [Rego Policy reference](/policy-reference/rego_policy#input-data).
+The `input.trail` / `input.trails` distinction and the full input data shape are documented in the [Rego Policy reference](/policy-reference/rego_policy#local-input-data).
 </Info>
 
 </Step>
@@ -397,7 +397,7 @@ Use the `--attestations` flag to limit which attestations are enriched with full
 
 <Step title="Use in CI/CD">
 
-The `kosli evaluate` commands exit with `0` on allow and `1` on deny or error -- making them straightforward to use as pipeline gates. See the [Rego Policy reference](/policy-reference/rego_policy#exit-codes) for details on distinguishing denial from command failure.
+The `kosli evaluate` commands exit with `0` on allow and `1` on deny or error -- making them straightforward to use as pipeline gates. See the [Rego Policy reference](/policy-reference/rego_policy#local-exit-codes) for details on distinguishing denial from command failure.
 
 ```shell
 # Example: gate a deployment on policy evaluation
