@@ -4,7 +4,7 @@ description: "Learn how to define controls in Kosli, record decisions against th
 ---
 
 <Info>
-**This feature is in beta.** Controls, decisions, the controls CLI commands (`kosli create control`, `kosli attest decision`, and related), and the `for_control` policy requirement are all available in Kosli but in beta — the UI, CLI flags, and policy YAML schema may still change. It is rolled out per organization, so reach out to the Kosli team to enable it for yours, or with any questions and comments.
+**This feature is in beta.** Controls, decisions, the controls CLI commands (`kosli create control` and related), server-side evaluation (`kosli publish rego-policy` and `kosli evaluate policy`), and the `for_control` policy requirement are all available in Kosli but in beta — the UI, CLI flags, and policy YAML schema may still change. It is rolled out per organization, so reach out to the Kosli team to enable it for yours, or with any questions and comments.
 </Info>
 
 Controls in Kosli represent the named, identifiable governance requirements that your organization enforces across software delivery — things like "source code review", "no hard-coded credentials", or "vulnerability scan passed". They are the things auditors ask about, the things compliance teams track, and the things governance platform engineers build automation around.
@@ -14,14 +14,14 @@ Without controls as first-class entities, Kosli can tell you _that_ an attestati
 This tutorial covers how to:
 
 - Define a control library in Kosli that mirrors your existing controls catalog
-- Record decision outcomes against controls from your pipelines
-- Require decisions in flow templates and reference controls in environment policies
+- Record decisions against controls by evaluating published policies from your pipelines
+- Reference controls in environment policies
 - Review the decisions, coverage, and version history of each control
 
 ## Prerequisites
 
 - [Install Kosli CLI](/getting_started/install).
-- [Get a Kosli API token](/getting_started/service-accounts).
+- [Get a Kosli API token](/administration/authentication/service_accounts).
 - Have at least one [Flow](/getting_started/flows) and [Trail](/getting_started/trails) already created.
 
 ## Setup
@@ -37,7 +37,13 @@ Before creating controls, it helps to understand how they fit into the Kosli dat
 
 **Raw fact attestations** are the evidence you collect in pipelines — test results, vulnerability scans, pull request approvals. These are facts about what happened.
 
-**Decisions** are the recorded outcomes of a Policy Decision Point (PDP) — the step in your process where a judgment is reached about a specific control: "control `RCTL-043` is satisfied for this artifact." A decision is an attestation that references a control, recorded at the point where the judgment is made — typically during a release or promotion step.
+**Decisions** are the recorded outcomes of a Policy Decision Point (PDP) — the step in your process where a judgment is reached about a specific control: "control `RCTL-043` is satisfied for this artifact." In Kosli, the PDP is a server-side evaluation: Kosli evaluates a published Rego policy against the trails you name and records the outcome as a decision against the control. A decision is recorded at the point where the judgment is made — typically during a release or promotion step.
+
+A decision must be **complete**: one decision closes a control, and there is no partial decision. When a control depends on several checks — for example unit, integration, and system tests — the policy that records the control's decision has to cover all of them.
+
+<Note>
+  Multi-level evaluations are not supported yet: a policy cannot read the outcome of other evaluations or decisions, so several evaluations cannot be combined into one control's decision. Until then, write one policy per control that checks everything the control requires.
+</Note>
 
 **Controls** are the named governance requirements that decisions are recorded against. They have a stable identity (the control identifier), a human-readable name, and an optional description and links pointing back to your GRC system or policy document.
 
@@ -101,91 +107,43 @@ Archive or unarchive a control from its detail page (org admins only), from the 
 
 ## Recording a decision against a control
 
-A decision records the outcome of a PDP against a named control, scoped to a specific artifact. Use `--fingerprint` to identify the artifact the decision applies to — this is what allows `kosli assert artifact --environment` to later check that all required controls have passing decisions for that artifact specifically.
+A decision is recorded by evaluating a published Rego policy and naming the control it answers. Only a published policy can record a decision: publishing is limited to org admins and Kosli validates the policy, so the team being assessed cannot supply the policy that judges it.
+
+First, publish the policy. Each publish stores a new version, and an evaluation runs the current one:
 
 ```bash
-kosli attest decision \
+kosli publish rego-policy rctl-043 \
+    --path rctl-043.rego \
+    --input-schema trail \
+    --name "Source code review"
+```
+
+Then evaluate it and record the outcome as a decision. Use `--fingerprint` to identify the artifact the decision applies to — this is what allows `kosli assert artifact --environment` to later check that all required controls have passing decisions for that artifact specifically.
+
+```bash
+kosli evaluate policy \
+    --context trail=my-release-flow/my-release-trail \
+    --identifier rctl-043 \
+    --control RCTL-043 \
     --flow my-release-flow \
     --trail my-release-trail \
     --fingerprint "$ARTIFACT_FINGERPRINT" \
-    --control RCTL-043 \
-    --compliant=true \
-    --name "source-code-review-decision" \
-    --description "All 14 commits in this release have been reviewed by a second developer."
+    --name source-code-review-decision
 ```
 
 | Flag | Description |
 |------|-------------|
-| `--control` | **Required.** The control identifier this decision is recorded against. |
-| `--compliant` | **Required.** Whether the control is satisfied. Boolean flag — pass `--compliant=true` or `--compliant=false`. |
-| `--fingerprint` | The SHA256 fingerprint of the artifact this decision applies to. Scope decisions to an artifact so that assertions and environment policies can check compliance for that artifact specifically. Omit to record a trail-scoped decision instead. |
-| `--artifact-type` | The artifact type (e.g. `docker`, `file`). Provide this with the artifact name/path as the command argument instead of `--fingerprint` to have Kosli calculate the fingerprint. |
-| `--name` | The attestation slot name on the trail. |
-| `--description` | Optional human-readable context for the decision. |
-| `--attachments` | Optional evidence file(s) to attach (e.g. an evaluation report, a REGO policy output). |
-| `--user-data` | Optional path to a JSON file containing additional structured data to attach to the attestation. |
+| `--context` | **Required.** A trail to evaluate, as `trail=<flow>/<trail>`. Repeat it to evaluate several trails at the same instant. |
+| `--identifier` | **Required to record a decision.** The published policy to evaluate. Its current version runs, and the decision cites that version. |
+| `--control` | The control identifier the decision is recorded against. Without it, the evaluation records nothing. |
+| `--flow`, `--trail` | The flow and trail the decision is recorded in. Required with `--control`; can be set as `KOSLI_FLOW` and `KOSLI_TRAIL`. |
+| `--fingerprint` | The SHA256 fingerprint of the artifact the decision applies to. Omit it to record the decision against the trail itself. |
+| `--name` | The attestation name the decision is recorded under. Defaults to `<control>-decision`. |
+| `--params` | Values the policy reads as `data.params`, as inline JSON or `@file.json`. They must match the params schema of the policy's current version. |
 
-The decision attestation goes on a trail, like any other attestation. It affects trail compliance: a `--compliant=false` decision makes the trail non-compliant. There are no restrictions on which flow or trail a decision can be recorded on — place it wherever makes sense in your process, typically at the point where the decision is actually being made (e.g. during a release preparation or promotion step). You can record multiple decisions for the same control on a trail; the most recent one is used when evaluating compliance.
+Kosli evaluates the policy where the trails are stored and records the decision in the same request, so the outcome never passes through your pipeline. The decision carries its evidence: the policy version that ran, the params, the result, and the policy files as an attachment. You can record more than one decision for the same control; the most recent one is used when evaluating compliance.
 
-<Info>
-  A decision records the outcome of a PDP. How the PDP is implemented — running `kosli evaluate`, executing a custom script, or using a third-party tool — is up to you. `kosli attest decision` records the outcome; it does not make the decision for you.
-</Info>
-
-### Attaching evidence to a decision
-
-Evidence attached to a decision explains _why_ the decision was reached — not just that a control passed or failed, but what information was used to make that judgment. This is what auditors will ask for: the policy that was applied and the evaluation report that justified the outcome.
-
-A natural source of evidence is a `kosli evaluate` report. `kosli evaluate` is a PDP: it runs a Rego policy against a trail's evidence and writes the allow/deny result to its output. By default it also asserts — exiting non-zero when the policy denies — so pass `--no-assert` when you want to capture the result and record it as a decision yourself rather than failing the step. The example below evaluates a trail, captures the full JSON report, reads the result, and records it as a decision. See [Evaluate trails with OPA policies](/tutorials/evaluate_trails_with_opa) for a full walkthrough of `kosli evaluate`.
-
-```bash
-# Run the evaluation and save the full JSON report.
-# --no-assert makes kosli evaluate exit 0 even when the policy denies,
-# so the pipeline can read the result from the JSON output itself.
-kosli evaluate trail "$TRAIL_NAME" \
-    --policy supply-chain-policy.rego \
-    --flow "$FLOW_NAME" \
-    --no-assert \
-    --output json > eval-report.json
-
-# Read the allow/deny result from the report
-is_compliant=$(jq -r '.allow' eval-report.json)
-
-# Extract violations as structured user-data
-jq '{violations: .violations}' eval-report.json > eval-violations.json
-
-# Record the decision, attaching the policy and evaluation report as evidence
-kosli attest decision \
-    --flow "$FLOW_NAME" \
-    --trail "$TRAIL_NAME" \
-    --fingerprint "$ARTIFACT_FINGERPRINT" \
-    --control RCTL-1866 \
-    --compliant="$is_compliant" \
-    --name supply-chain-integrity-decision \
-    --attachments supply-chain-policy.rego,eval-report.json \
-    --user-data eval-violations.json
-```
-
-This creates a decision attestation with:
-- **`--attachments`** containing the Rego policy (for reproducibility) and the full JSON evaluation report
-- **`--user-data`** containing the violations, which appear in the Kosli UI as structured metadata on the attestation
-- **`--compliant`** set directly from the evaluation result
-
-## Requiring decisions in flow templates
-
-A [flow template](/template-reference/flow_template) defines which attestations a trail must have to be compliant. Because a decision is an attestation, you can make one a required part of a trail by adding an attestation of `type: decision`. The `name` must match the `--name` you record the decision under.
-
-```yaml release-template.yml
-# yaml-language-server: $schema=https://docs.kosli.com/schemas/flow-template/v1.json
-version: 1
-trail:
-  attestations:
-  - name: source-code-review-decision
-    type: decision
-```
-
-With this template, a trail is only compliant once a decision attestation named `source-code-review-decision` has been recorded on it. Use this when the decision is part of the trail's own definition of done — for example, a release trail that must carry a recorded judgment before it is considered complete.
-
-Flow templates require _that a decision was recorded_; they do not tie it to a specific control identifier. To require a decision for a **named control**, use `for_control` in an [environment policy](#referencing-controls-in-environment-policies) instead. The two mechanisms complement each other: the flow template gates trail compliance, the environment policy gates what may run in an environment.
+An evaluation without `--control` records nothing. Use it to try a policy out — `--path` sends local policy files instead of a published policy, but cannot be used with `--control`.
 
 ## Asserting artifact compliance
 
@@ -206,7 +164,7 @@ kosli assert artifact \
 If the artifact satisfies all policy requirements — including passing decisions for every listed control — the command exits 0. If not, the command exits non-zero and prints which requirements were not met, failing the pipeline step.
 
 <Tip>
-  `kosli attest decision` is the PDP: it records a judgment about a control. `kosli assert artifact --environment` is the PEP: it enforces that judgment as part of the environment policy. Keep them in separate pipeline steps — the PDP step is where evidence is evaluated and the outcome is recorded; the PEP step is where the pipeline gates on that recorded outcome.
+  `kosli evaluate policy --control` is the PDP: it records a judgment about a control. `kosli assert artifact --environment` is the PEP: it enforces that judgment as part of the environment policy. Keep them in separate pipeline steps — the PDP step is where evidence is evaluated and the outcome is recorded; the PEP step is where the pipeline gates on that recorded outcome.
 </Tip>
 
 ## End-to-end pipeline flow
@@ -231,10 +189,9 @@ sequenceDiagram
 
         P->>K: "`kosli begin trail release-456 --flow my-release`"
 
-        Note right of P: 🔵 PDP — evaluate RCTL-043
-        P->>K: "`kosli evaluate trail release-456 --policy rctl-043.rego --flow my-release --no-assert --output json`"
-        K-->>P: eval-report.json
-        P->>K: "`kosli attest decision --flow my-release --trail release-456 --fingerprint $FP_A --control RCTL-043 --compliant=$IS_COMPLIANT --attachments eval-report.json`"
+        Note right of P: 🔵 PDP — evaluate RCTL-043 and record its decision
+        P->>K: "`kosli evaluate policy --context trail=my-release/release-456 --identifier rctl-043 --control RCTL-043 --flow my-release --trail release-456 --fingerprint $FP_A`"
+        K-->>P: verdict and decision
     end
 
     rect rgb(220,255,220)
@@ -248,7 +205,7 @@ sequenceDiagram
 
 ## Referencing controls in environment policies
 
-Environment policies define the requirements an artifact must satisfy before it can run in a given environment. You can require that specific named controls have a passing decision recorded — not just that the trail is generally compliant. This is the key distinction: rather than relying on trail compliance as a catch-all, you can make individual controls explicit policy gates.
+Environment policies define the requirements an artifact must satisfy before it can run in a given environment. You can require that specific named controls have a passing decision recorded, making individual controls explicit policy gates.
 
 ```yaml prod-policy.yaml
 _schema: https://docs.kosli.com/schemas/policy/v1
@@ -262,7 +219,7 @@ artifacts:
       for_control: RCTL-1866
 ```
 
-Each `attestations` rule with `type: decision` and a `for_control` identifier requires a compliant decision recorded for that control. The control must already exist in your organization — unlike recording a decision, a policy that references an unknown control identifier is rejected. With this policy in place, an artifact deployed to this environment will be marked **non-compliant** if a passing decision has not been recorded for each listed control on its trail. The artifact can still be deployed — Kosli records compliance state but does not block deployments by default. To gate deployments on compliance, use [`kosli assert`](/getting_started/enforce_policies) in your pipeline. This abstracts the policy from the specific tooling your pipelines use: instead of "has an attestation of type `snyk` with zero criticals", the policy expresses "control `RCTL-1866` has been satisfied" — and the decision attestation carries the evidence of how that judgment was reached.
+Each `attestations` rule with `type: decision` and a `for_control` identifier requires a compliant decision recorded for that control. The control must already exist in your organization — unlike recording a decision, a policy that references an unknown control identifier is rejected. With this policy in place, an artifact deployed to this environment will be marked **non-compliant** if a passing decision has not been recorded for that artifact for each listed control. The artifact can still be deployed — Kosli records compliance state but does not block deployments by default. To gate deployments on compliance, use [`kosli assert`](/getting_started/enforce_policies) in your pipeline. This abstracts the policy from the specific tooling your pipelines use: instead of "has an attestation of type `snyk` with zero criticals", the policy expresses "control `RCTL-1866` has been satisfied" — and the decision attestation carries the evidence of how that judgment was reached.
 
 For the complete policy syntax, including attestation requirements and exceptions, see the [Environment Policies](/getting_started/policies) page.
 
@@ -278,10 +235,10 @@ The Decisions tab is the default view. It lists every decision recorded against 
   <img src="/images/tutorials/controls-decisions.png" alt="Decisions tab for a control showing decisions with timestamp, compliant/non-compliant outcome, trail, and artifact fingerprint" />
 </Frame>
 
-Select a decision to open its detail, showing the trail and artifact it applies to, the origin URL, the user-data behind the judgment (such as the Rego evaluation result and the parameters it was run with), and any attached evidence files (such as the Rego policy).
+Select a decision to open its detail, showing the trail it is recorded on, the trails it was evaluated against and when, the policy and version that judged it, the artifact it applies to, and the evaluated policy bundle (`policy.tar.gz`) attached as evidence.
 
 <Frame>
-  <img src="/images/tutorials/controls-decision-detail.png" alt="Decision detail tray showing the trail, artifact, origin URL, user-data, and attached evidence file for a decision" />
+  <img src="/images/tutorials/controls-decision-detail.png" alt="Decision detail tray showing the trail, the trail it was evaluated against, the policy and its version, the artifact, and the policy.tar.gz evidence file for a decision" />
 </Frame>
 
 ### Coverage
@@ -306,7 +263,7 @@ The Versions tab lists every version of the control definition — the name, des
 
 ## What you've accomplished
 
-You have learned how to define controls in Kosli, record decisions against them from pipelines using `kosli attest decision` as the PDP, require controls in environment policies with `for_control`, assert artifact compliance using `kosli assert artifact --environment` as the PEP, and review the decisions, coverage, and version history of each control.
+You have learned how to define controls in Kosli, record decisions against them by evaluating published policies with `kosli evaluate policy --control` as the PDP, require controls in environment policies with `for_control`, assert artifact compliance using `kosli assert artifact --environment` as the PEP, and review the decisions, coverage, and version history of each control.
 
 Your controls catalog is now the bridge between the evidence Kosli collects and the requirements your auditors, control owners, and regulators care about. For each production change, you can now answer: "which of our controls have a compliant decision recorded, and which don't?"
 
@@ -315,4 +272,3 @@ From here you can:
 - Learn more about [controls](/understand_kosli/controls)
 - Learn more about [environment policies](/getting_started/policies)
 - Learn more about [attestations](/getting_started/attestations)
-- [Evaluate trails with Rego policies](/tutorials/evaluate_trails_with_opa) to automate decision-making
