@@ -4,6 +4,21 @@ description: "Release notes for Kosli products."
 rss: true
 ---
 
+<Update label="October 26, 2026" description="v2.49.0" tags={["CLI"]}>
+
+## Breaking changes
+
+- **Decisions need a published policy** — `kosli evaluate policy --control` now requires `--identifier`. Combining `--control` with `--path` or `--policy` is refused before any request is sent, because only a published policy can have a decision recorded against it.
+
+## Bug fixes
+
+- **Null fields in pull request replies** — `kosli attest pullrequest` and `kosli assert pullrequest` no longer crash when GitHub, GitLab, Bitbucket, or Azure DevOps returns a null or missing field, such as an unmerged merge request or a reviewer with no state. On GitHub, one unresolvable field no longer drops the whole pull request evidence. See the [`kosli attest pullrequest github` reference](/client_reference/kosli_attest_pullrequest_github).
+- **GitLab commits with no author** — a commit with no author name or email is now recorded as empty instead of `" <>"`.
+
+[View on GitHub](https://github.com/kosli-dev/cli/releases/tag/v2.49.0)
+
+</Update>
+
 <Update label="October 23, 2026" description="v2.48.2" tags={["CLI"]}>
 
 ## Updates
