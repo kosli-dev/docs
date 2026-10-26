@@ -4,6 +4,39 @@ description: "Release notes for Kosli products."
 rss: true
 ---
 
+<Update label="October 23, 2026" description="v2.48.2" tags={["CLI"]}>
+
+## Updates
+
+- **Go 1.26.10** — the CLI is now built with Go 1.26.10, which fixes a high-severity vulnerability in Go's `crypto/x509` (CVE-2026-111943).
+
+## Bug fixes
+
+- **SonarQube Cloud short-lived branches** — `kosli attest sonar --sonar-branch` now works for feature branches on SonarQube Cloud, instead of failing with "Branch '...' is not of type LONG". The attestation fails if a newer analysis replaces the commit while it is being read. See the [`kosli attest sonar` reference](/client_reference/kosli_attest_sonar).
+- **Readable error messages** — messages containing `%`, such as URL-encoded paths, are no longer garbled (for example, `%2F` printed as `%!F(MISSING)`).
+
+[View on GitHub](https://github.com/kosli-dev/cli/releases/tag/v2.48.2)
+
+</Update>
+
+<Update label="October 20, 2026" description="v2.48.1" tags={["CLI"]}>
+
+## New features
+
+- **Every pull request review recorded** — pull request attestations now include a list of all reviews, not only approvals, for GitHub, GitLab, Bitbucket, and Azure DevOps. States are `APPROVED`, `CHANGES_REQUESTED`, `COMMENTED`, and on GitHub, `DISMISSED`. Policies can now see a change request made after an approval. See the [`kosli attest pullrequest github` reference](/client_reference/kosli_attest_pullrequest_github).
+
+## Updates
+
+- **No duplicate GitHub approvers** — a reviewer who approves the same commit twice is listed once. Approvals of different commits are still both kept.
+
+## Bug fixes
+
+- **Commits signed by GitHub Apps** — `kosli attest pullrequest github` no longer fails when a pull request contains commits signed by a GitHub App such as Renovate. The signer username is left empty for those commits.
+
+[View on GitHub](https://github.com/kosli-dev/cli/releases/tag/v2.48.1)
+
+</Update>
+
 <Update label="October 15, 2026" description="v2.48.0" tags={["CLI"]}>
 
 ## New features
