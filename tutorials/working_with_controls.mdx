@@ -107,7 +107,7 @@ Archive or unarchive a control from its detail page (org admins only), from the 
 
 ## Recording a decision against a control
 
-A decision is recorded by evaluating a published Rego policy and naming the control it answers. Only a published policy can record a decision: publishing is limited to org admins and Kosli validates the policy, so the team being assessed cannot supply the policy that judges it.
+A decision is recorded by evaluating a published Rego policy and naming the control it answers. An evaluation records a decision only from a published policy: publishing is limited to org admins and Kosli validates the policy, so the team being assessed cannot supply the policy that judges it.
 
 First, publish the policy. Each publish stores a new version, and an evaluation runs the current one:
 
@@ -117,6 +117,8 @@ kosli publish rego-policy rctl-043 \
     --input-schema trail \
     --name "Source code review"
 ```
+
+The policy follows the [Rego policy contract](/policy-reference/rego_policy), and `--input-schema trail` gives it the same `input` that `kosli evaluate trail` does.
 
 Then evaluate it and record the outcome as a decision. Use `--fingerprint` to identify the artifact the decision applies to — this is what allows `kosli assert artifact --environment` to later check that all required controls have passing decisions for that artifact specifically.
 
