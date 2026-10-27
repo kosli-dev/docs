@@ -69,7 +69,7 @@
       "type": "object"
     },
     "PolicyExpression": {
-      "description": "Boolean expression evaluated against flow/artifact context. In YAML this is often written as a string wrapped in ${{ ... }}. A missing (None) context value never matches: matches() and the ordering comparisons (<, >, <=, >=) return false if either operand is missing, and `in` is a list-membership test that returns false unless its right-hand side is a list containing the left-hand value.",
+      "description": "Boolean expression evaluated against flow/artifact context. In YAML this is often written as a string wrapped in ${{ ... }}. A missing (None) context value never matches: matches() and the ordering comparisons (<, >, <=, >=) return false if either operand is missing, and `in` is a list-membership test that returns false unless its right-hand side is a list containing the left-hand value. The ordering comparisons compare two numbers numerically (an optional `-`, digits, and an optional `.` followed by digits, such as 10 or -1.5) and anything else as text. When exactly one side is a number the comparison has no answer, and the rule it belongs to is treated as required: an `if` condition applies and an exception does not waive.",
       "properties": {
         "text": {
           "title": "Text",
