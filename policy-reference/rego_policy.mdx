@@ -26,7 +26,7 @@ kosli evaluate policy \
   --trail "$TRAIL_NAME"
 ```
 
-We recommend writing policies with [Ergo](#writing-policies-with-ergo), a Rego library from Kosli that expresses requirements as YAML sentences. Plain Rego works too, and both follow the same contract.
+We recommend writing policies with [Ergo](#writing-policies-with-ergo), an open source Rego library maintained by Kosli that expresses requirements as YAML sentences. Plain Rego works too, and both follow the same contract.
 
 The older `kosli evaluate trail` and `kosli evaluate trails` commands evaluate a policy in the CLI instead. They follow a different contract and receive a different input, described in [Local evaluation](#local-evaluation).
 
@@ -76,12 +76,12 @@ A bundle holds at most 100 files and 1 MiB. A data file cannot write `data.param
 
 [Ergo](https://ergo.kosli.com) is a single Rego file, `ergo.rego`, that evaluates requirements written in YAML. A policy written with Ergo is three files in one bundle:
 
-- `ergo.rego`, the library, downloaded from the [latest Ergo release](https://github.com/kosli-dev/ergo/releases/latest).
+- `ergo.rego`, the library, downloaded from a pinned [Ergo release](https://github.com/kosli-dev/ergo/releases), such as `https://github.com/kosli-dev/ergo/releases/download/rego-v0.2.0/ergo.rego`. The `ergo_spec` in the YAML must match the release: `rego-v0.2.0` reads `ergo_spec: v0.2`.
 - A `*.ergo.yaml` file with the subjects and requirements. Kosli loads it into `data`.
 - A `.rego` file in the policy package that hands the requirements to Ergo and declares `allow`.
 
 ```yaml policy.ergo.yaml
-ergo_spec: v0.1
+ergo_spec: v0.2
 subjects:
   pull request attestation:
     from: trail.compliance_status.attestations_statuses named by $params.pr_attestation_name
@@ -350,82 +350,55 @@ Use `--assert` to fail a pipeline step on a denial.
 
 ## Examples
 
-### Check pull request approvals across multiple trails
+### Require a compliant pull request on every trail
 
-Allows only when every trail in `input.trails` has at least one pull request with at least one approver. The attestation name is read from params so the same policy works across orgs that use different naming conventions. Publish it with `--input-schema trails`.
+Allows only when every trail in `input.trails` has a compliant pull request attestation. The attestation name is read from params. Publish it with `--input-schema trails` and evaluate it with one `--context` per trail.
 
-```rego
-# METADATA
-# schemas:
-#   - data.params: {"type": "object", "properties": {"pr_attestation_name": {"type": "string"}}, "required": ["pr_attestation_name"]}
-package policy
+<Tabs>
+  <Tab title="Ergo">
+    Use the `policy.rego` from [Writing policies with Ergo](#writing-policies-with-ergo) unchanged, with this YAML beside it:
 
-import rego.v1
+    ```yaml policy.ergo.yaml
+    ergo_spec: v0.2
+    subjects:
+      trail:
+        from: trails
+    requirements:
+      code_review:
+        description: Every trail has a compliant pull request attestation
+        subject: trail
+        checks:
+          compliant: compliance_status.attestations_statuses named by $params.pr_attestation_name.is_compliant is true
+    ```
+  </Tab>
+  <Tab title="Rego">
+    Write the same check in plain Rego as `policy.rego`:
 
-pr_attestation_name := data.params.pr_attestation_name
+    ```rego policy.rego
+    package policy
 
-default allow := false
+    import rego.v1
 
-trail_has_approved_pr(trail) if {
-    some pr in trail.compliance_status.attestations_statuses[pr_attestation_name].pull_requests
-    count(pr.approvers) > 0
-}
+    pr_attestation_name := data.params.pr_attestation_name
 
-allow if {
-    every trail in input.trails {
-        trail_has_approved_pr(trail)
+    default allow := false
+
+    allow if {
+        every trail in input.trails {
+            trail.compliance_status.attestations_statuses[pr_attestation_name].is_compliant == true
+        }
     }
-}
 
-# METADATA
-# entrypoint: true
-violations contains msg if {
-    some trail in input.trails
-    some pr in trail.compliance_status.attestations_statuses[pr_attestation_name].pull_requests
-    count(pr.approvers) == 0
-    msg := sprintf("trail '%v/%v': pull-request %v has no approvers", [trail.flow_name, trail.trail_name, pr.url])
-}
-```
-
-### Check Snyk scan results on a single trail
-
-Allows only when every artifact in the trail has a Snyk scan where the high-severity vulnerability count does not exceed `max_high`. Both the attestation name and the threshold are read from params. Publish it with `--input-schema trail`.
-
-```rego
-package policy
-
-import rego.v1
-
-snyk_attestation_name := data.params.snyk_attestation_name
-max_high              := data.params.max_high
-
-default allow := false
-
-artifact_within_threshold(artifact) if {
-    snyk := artifact.attestations_statuses[snyk_attestation_name]
-    every result in snyk.processed_snyk_results.results {
-        result.high_count <= max_high
+    # METADATA
+    # entrypoint: true
+    violations contains msg if {
+        some trail in input.trails
+        not trail.compliance_status.attestations_statuses[pr_attestation_name].is_compliant == true
+        msg := sprintf("trail '%v/%v': attestation '%v' is missing or not compliant", [trail.flow_name, trail.trail_name, pr_attestation_name])
     }
-}
-
-requirements_met(trail) if {
-    every artifact in trail.compliance_status.artifacts_statuses {
-        artifact_within_threshold(artifact)
-    }
-}
-
-allow if requirements_met(input.trail)
-
-# METADATA
-# entrypoint: true
-violations contains msg if {
-    some name, artifact in input.trail.compliance_status.artifacts_statuses
-    snyk := artifact.attestations_statuses[snyk_attestation_name]
-    some result in snyk.processed_snyk_results.results
-    result.high_count > max_high
-    msg := sprintf("artifact '%v': snyk scan found %d high severity vulnerabilities (limit: %d)", [name, result.high_count, max_high])
-}
-```
+    ```
+  </Tab>
+</Tabs>
 
 ## Local evaluation
 
