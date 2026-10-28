@@ -19,6 +19,10 @@ FENCE = re.compile(r"^[ \t]*```([a-zA-Z0-9_+-]*)([^\n]*)\n(.*?)^[ \t]*```", re.S
 PACKAGE = re.compile(r"^\s*package\s+([A-Za-z_][\w.]*)", re.M)
 # A rule that can become true, so `default allow := false` on its own does not count.
 ALLOW_RULE = re.compile(r"^\s*allow\b(?!\s*:?=\s*false)", re.M)
+# An Ergo policy only compiles with the library beside it, as the docs publish it.
+# The copy is the release whose spec the examples declare (`ergo_spec: v0.1`).
+IMPORTS_ERGO = re.compile(r"^\s*import\s+data\.ergo\b", re.M)
+ERGO = Path(__file__).resolve().parent / "fixtures" / "ergo.rego"
 
 
 def _dedent(body):
@@ -87,8 +91,11 @@ def test_rego_policy_compiles(body, package):
     with tempfile.TemporaryDirectory() as tmp:
         policy = Path(tmp) / "policy.rego"
         policy.write_text(body, encoding="utf-8")
+        modules = [str(policy)]
+        if IMPORTS_ERGO.search(body):
+            modules.append(str(ERGO))
         result = subprocess.run(
-            [opa, "check", str(policy)], capture_output=True, text=True
+            [opa, "check", *modules], capture_output=True, text=True
         )
     assert result.returncode == 0, (result.stdout + result.stderr).strip()
 
