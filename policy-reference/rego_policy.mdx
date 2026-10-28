@@ -26,6 +26,8 @@ kosli evaluate policy \
   --trail "$TRAIL_NAME"
 ```
 
+We recommend writing policies with [Ergo](#writing-policies-with-ergo), a Rego library from Kosli that expresses requirements as YAML sentences. Plain Rego works too, and both follow the same contract.
+
 The older `kosli evaluate trail` and `kosli evaluate trails` commands evaluate a policy in the CLI instead. They follow a different contract and receive a different input, described in [Local evaluation](#local-evaluation).
 
 ## Policy contract
@@ -69,6 +71,71 @@ Policies are written in Rego v1. A `.rego` file in the older v0 syntax does not 
 - Data files named `data.json`, `data.yaml`, or `data.yml`, and `*.ergo.yaml` or `*.ergo.yml` files. Each is mounted under `data` at its directory path.
 
 A bundle holds at most 100 files and 1 MiB. A data file cannot write `data.params`, which holds the [params](#params) of each evaluation.
+
+### Writing policies with Ergo
+
+[Ergo](https://ergo.kosli.com) is a single Rego file, `ergo.rego`, that evaluates requirements written in YAML. A policy written with Ergo is three files in one bundle:
+
+- `ergo.rego`, the library, downloaded from the [latest Ergo release](https://github.com/kosli-dev/ergo/releases/latest).
+- A `*.ergo.yaml` file with the subjects and requirements. Kosli loads it into `data`.
+- A `.rego` file in the policy package that hands the requirements to Ergo and declares `allow`.
+
+```yaml policy.ergo.yaml
+ergo_spec: v0.1
+subjects:
+  pull request attestation:
+    from: trail.compliance_status.attestations_statuses named by $params.pr_attestation_name
+requirements:
+  code_review:
+    description: The change was reviewed in a pull request
+    subject: pull request attestation
+    checks:
+      recorded: status is "COMPLETE"
+      compliant: is_compliant is true
+```
+
+```rego policy.rego
+package policy
+
+import data.ergo
+import rego.v1
+
+default ergo_spec := null
+
+ergo_spec := data.ergo_spec
+
+default subjects := {}
+
+subjects := data.subjects
+
+default requirements := {}
+
+requirements := data.requirements
+
+# METADATA
+# entrypoint: true
+report := ergo.report(input, {"ergo_spec": ergo_spec, "subjects": subjects, "requirements": requirements}, data.params)
+
+default allow := false
+
+allow if report.compliant
+
+# METADATA
+# entrypoint: true
+violations := ergo.violations(report)
+```
+
+`allow` follows Ergo's overall answer, `report.compliant`, which is a positive assertion as [Safe policy design](#safe-policy-design) requires. The report records every check Ergo ran, passed or failed, and is returned in `outputs.report`. Publish the policy directory and the library together:
+
+```shell
+kosli publish rego-policy rctl-043 \
+  --path policy/ \
+  --path lib/ergo.rego \
+  --input-schema trail \
+  --name "Source code review"
+```
+
+A policy that imports Ergo cannot be evaluated with `kosli evaluate trail`, which takes a single file. See the [Ergo documentation](https://ergo.kosli.com) for subjects, sentences, and the report format.
 
 ## Publishing a policy
 
@@ -179,7 +246,7 @@ The input names the instant it was evaluated at, and every trail in the context,
 </ParamField>
 
 <ParamField path="input.trails" type="array">
-  Every trail in the context, each a trail moment. Always present, even for one trail. The order carries no meaning, so select a trail by its `flow_name` and `trail_name`.
+  Every trail in the context, each a trail moment. Name each trail with its own `--context trail=<flow>/<trail>`, for example `--context trail=my-app/build-123 --context trail=my-release/release-456`. Always present, even for one trail. The order carries no meaning, so select a trail by its `flow_name` and `trail_name`.
 </ParamField>
 
 <ParamField path="input.trail" type="object">
@@ -396,7 +463,17 @@ kosli evaluate trail "$TRAIL_NAME" \
 
 ### Local testing
 
-Use [`kosli evaluate input`](/client_reference/kosli_evaluate_input) to test a policy against captured trail data without making live Kosli API calls:
+To test a policy before publishing it, run `kosli evaluate policy --path` against a real trail: Kosli evaluates the local files exactly as it will evaluate the published policy, and records nothing. This works for Ergo policies and for policies split across several files.
+
+```shell
+kosli evaluate policy \
+  --context trail="$FLOW/$TRAIL_NAME" \
+  --path policy/ \
+  --path lib/ergo.rego \
+  --params '{"pr_attestation_name": "pull-request"}'
+```
+
+For the local contract, use [`kosli evaluate input`](/client_reference/kosli_evaluate_input) to test a policy against captured trail data without making live Kosli API calls:
 
 ```shell
 # Capture trail data once
