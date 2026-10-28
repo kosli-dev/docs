@@ -64,7 +64,7 @@ kosli get snapshot aws-prod --output=json
 
 ```json
 {
-  "index": 5525,
+  "index": 5541,
   "is_latest": true,
   "next_snapshot_timestamp": null,
   "artifact_compliance_count": {
@@ -72,5200 +72,13 @@ kosli get snapshot aws-prod --output=json
     "false": 0,
     "null": 0
   },
-  "timestamp": 1793005258.405105,
+  "timestamp": 1793179798.4294283,
   "type": "ECS",
   "compliant": true,
-  "html_url": "https://app.kosli.com/cyber-dojo/environments/aws-prod/snapshots/5525",
+  "html_url": "https://app.kosli.com/cyber-dojo/environments/aws-prod/snapshots/5541",
   "artifacts": [
     {
-      "name": "244531986313.dkr.ecr.eu-central-1.amazonaws.com/runner:ef6768e@sha256:9b6ccf0845871128cd22f33e8ec0e0a29b1794e736b5ef783ade3c8bca11c80b",
-      "compliant": true,
-      "deployments": [],
-      "policy_decisions": [
-        {
-          "policy_version": 2,
-          "status": "COMPLIANT",
-          "rule_evaluations": [
-            {
-              "rule": {
-                "type": "provenance",
-                "definition": {
-                  "required": false,
-                  "exceptions": []
-                }
-              },
-              "satisfied": null,
-              "ignored": true,
-              "resolutions": [
-                {
-                  "type": "rule_not_applicable",
-                  "context": {
-                    "flow_name": "runner-ci",
-                    "trail_name": "ef6768eefe96ec54dacc1b8cabac1dde2d2f636e",
-                    "artifact_status": null
-                  }
-                },
-                {
-                  "type": "rule_not_applicable",
-                  "context": {
-                    "flow_name": "production-promotion",
-                    "trail_name": "promote-all-41",
-                    "artifact_status": null
-                  }
-                },
-                {
-                  "type": "rule_not_applicable",
-                  "context": {
-                    "flow_name": "snyk-aws-prod-per-artifact",
-                    "trail_name": "runner-9b6ccf0845871128cd22f33e8ec0e0a29b1794e736b5ef783ade3c8bca11c80b",
-                    "artifact_status": null
-                  }
-                }
-              ]
-            },
-            {
-              "rule": {
-                "type": "trail-compliance",
-                "definition": {
-                  "required": false,
-                  "exceptions": []
-                }
-              },
-              "satisfied": null,
-              "ignored": true,
-              "resolutions": [
-                {
-                  "type": "rule_not_applicable",
-                  "context": {
-                    "flow_name": "runner-ci",
-                    "trail_name": "ef6768eefe96ec54dacc1b8cabac1dde2d2f636e",
-                    "artifact_status": "COMPLIANT"
-                  }
-                },
-                {
-                  "type": "rule_not_applicable",
-                  "context": {
-                    "flow_name": "production-promotion",
-                    "trail_name": "promote-all-41",
-                    "artifact_status": "COMPLIANT"
-                  }
-                },
-                {
-                  "type": "rule_not_applicable",
-                  "context": {
-                    "flow_name": "snyk-aws-prod-per-artifact",
-                    "trail_name": "runner-9b6ccf0845871128cd22f33e8ec0e0a29b1794e736b5ef783ade3c8bca11c80b",
-                    "artifact_status": "COMPLIANT"
-                  }
-                }
-              ]
-            },
-            {
-              "rule": {
-                "type": "attestation",
-                "definition": {
-                  "if": {
-                    "text": "flow.name == \"production-promotion\""
-                  },
-                  "name": "snyk-scan",
-                  "type": "decision",
-                  "must_be_compliant": true,
-                  "for_control": null
-                }
-              },
-              "satisfied": true,
-              "ignored": false,
-              "resolutions": [
-                {
-                  "type": "rule_not_applicable",
-                  "context": {
-                    "flow_name": "runner-ci",
-                    "trail_name": "ef6768eefe96ec54dacc1b8cabac1dde2d2f636e",
-                    "artifact_status": null
-                  }
-                },
-                {
-                  "type": "rule_satisfied",
-                  "context": {
-                    "flow_name": "production-promotion",
-                    "trail_name": "promote-all-41",
-                    "artifact_status": null
-                  }
-                },
-                {
-                  "type": "rule_not_applicable",
-                  "context": {
-                    "flow_name": "snyk-aws-prod-per-artifact",
-                    "trail_name": "runner-9b6ccf0845871128cd22f33e8ec0e0a29b1794e736b5ef783ade3c8bca11c80b",
-                    "artifact_status": null
-                  }
-                }
-              ]
-            }
-          ],
-          "policy_name": "production-promotion"
-        },
-        {
-          "policy_version": 3,
-          "status": "COMPLIANT",
-          "rule_evaluations": [
-            {
-              "rule": {
-                "type": "provenance",
-                "definition": {
-                  "required": true,
-                  "exceptions": []
-                }
-              },
-              "satisfied": true,
-              "ignored": false,
-              "resolutions": [
-                {
-                  "type": "rule_satisfied",
-                  "context": {
-                    "flow_name": "runner-ci",
-                    "trail_name": "ef6768eefe96ec54dacc1b8cabac1dde2d2f636e",
-                    "artifact_status": null
-                  }
-                },
-                {
-                  "type": "rule_satisfied",
-                  "context": {
-                    "flow_name": "production-promotion",
-                    "trail_name": "promote-all-41",
-                    "artifact_status": null
-                  }
-                },
-                {
-                  "type": "rule_satisfied",
-                  "context": {
-                    "flow_name": "snyk-aws-prod-per-artifact",
-                    "trail_name": "runner-9b6ccf0845871128cd22f33e8ec0e0a29b1794e736b5ef783ade3c8bca11c80b",
-                    "artifact_status": null
-                  }
-                }
-              ]
-            },
-            {
-              "rule": {
-                "type": "trail-compliance",
-                "definition": {
-                  "required": false,
-                  "exceptions": []
-                }
-              },
-              "satisfied": null,
-              "ignored": true,
-              "resolutions": [
-                {
-                  "type": "rule_not_applicable",
-                  "context": {
-                    "flow_name": "runner-ci",
-                    "trail_name": "ef6768eefe96ec54dacc1b8cabac1dde2d2f636e",
-                    "artifact_status": "COMPLIANT"
-                  }
-                },
-                {
-                  "type": "rule_not_applicable",
-                  "context": {
-                    "flow_name": "production-promotion",
-                    "trail_name": "promote-all-41",
-                    "artifact_status": "COMPLIANT"
-                  }
-                },
-                {
-                  "type": "rule_not_applicable",
-                  "context": {
-                    "flow_name": "snyk-aws-prod-per-artifact",
-                    "trail_name": "runner-9b6ccf0845871128cd22f33e8ec0e0a29b1794e736b5ef783ade3c8bca11c80b",
-                    "artifact_status": "COMPLIANT"
-                  }
-                }
-              ]
-            },
-            {
-              "rule": {
-                "type": "attestation",
-                "definition": {
-                  "if": {
-                    "text": "flow.tags.kind == \"build\""
-                  },
-                  "name": "*",
-                  "type": "decision",
-                  "must_be_compliant": true,
-                  "for_control": "SDLC-CTRL-0002"
-                }
-              },
-              "satisfied": true,
-              "ignored": false,
-              "resolutions": [
-                {
-                  "type": "rule_satisfied",
-                  "context": {
-                    "flow_name": "runner-ci",
-                    "trail_name": "ef6768eefe96ec54dacc1b8cabac1dde2d2f636e",
-                    "artifact_status": null,
-                    "for_control": "SDLC-CTRL-0002"
-                  }
-                },
-                {
-                  "type": "rule_not_applicable",
-                  "context": {
-                    "flow_name": "production-promotion",
-                    "trail_name": "promote-all-41",
-                    "artifact_status": null,
-                    "for_control": "SDLC-CTRL-0002"
-                  }
-                },
-                {
-                  "type": "rule_not_applicable",
-                  "context": {
-                    "flow_name": "snyk-aws-prod-per-artifact",
-                    "trail_name": "runner-9b6ccf0845871128cd22f33e8ec0e0a29b1794e736b5ef783ade3c8bca11c80b",
-                    "artifact_status": null,
-                    "for_control": "SDLC-CTRL-0002"
-                  }
-                }
-              ]
-            }
-          ],
-          "policy_name": "provenance"
-        },
-        {
-          "policy_version": 3,
-          "status": "COMPLIANT",
-          "rule_evaluations": [
-            {
-              "rule": {
-                "type": "provenance",
-                "definition": {
-                  "required": false,
-                  "exceptions": []
-                }
-              },
-              "satisfied": null,
-              "ignored": true,
-              "resolutions": [
-                {
-                  "type": "rule_not_applicable",
-                  "context": {
-                    "flow_name": "runner-ci",
-                    "trail_name": "ef6768eefe96ec54dacc1b8cabac1dde2d2f636e",
-                    "artifact_status": null
-                  }
-                },
-                {
-                  "type": "rule_not_applicable",
-                  "context": {
-                    "flow_name": "production-promotion",
-                    "trail_name": "promote-all-41",
-                    "artifact_status": null
-                  }
-                },
-                {
-                  "type": "rule_not_applicable",
-                  "context": {
-                    "flow_name": "snyk-aws-prod-per-artifact",
-                    "trail_name": "runner-9b6ccf0845871128cd22f33e8ec0e0a29b1794e736b5ef783ade3c8bca11c80b",
-                    "artifact_status": null
-                  }
-                }
-              ]
-            },
-            {
-              "rule": {
-                "type": "trail-compliance",
-                "definition": {
-                  "required": false,
-                  "exceptions": []
-                }
-              },
-              "satisfied": null,
-              "ignored": true,
-              "resolutions": [
-                {
-                  "type": "rule_not_applicable",
-                  "context": {
-                    "flow_name": "runner-ci",
-                    "trail_name": "ef6768eefe96ec54dacc1b8cabac1dde2d2f636e",
-                    "artifact_status": "COMPLIANT"
-                  }
-                },
-                {
-                  "type": "rule_not_applicable",
-                  "context": {
-                    "flow_name": "production-promotion",
-                    "trail_name": "promote-all-41",
-                    "artifact_status": "COMPLIANT"
-                  }
-                },
-                {
-                  "type": "rule_not_applicable",
-                  "context": {
-                    "flow_name": "snyk-aws-prod-per-artifact",
-                    "trail_name": "runner-9b6ccf0845871128cd22f33e8ec0e0a29b1794e736b5ef783ade3c8bca11c80b",
-                    "artifact_status": "COMPLIANT"
-                  }
-                }
-              ]
-            },
-            {
-              "rule": {
-                "type": "attestation",
-                "definition": {
-                  "if": {
-                    "text": "flow.tags.kind == \"build\""
-                  },
-                  "name": "*",
-                  "type": "pull_request",
-                  "must_be_compliant": true,
-                  "for_control": null
-                }
-              },
-              "satisfied": true,
-              "ignored": false,
-              "resolutions": [
-                {
-                  "type": "rule_satisfied",
-                  "context": {
-                    "flow_name": "runner-ci",
-                    "trail_name": "ef6768eefe96ec54dacc1b8cabac1dde2d2f636e",
-                    "artifact_status": null
-                  }
-                },
-                {
-                  "type": "rule_not_applicable",
-                  "context": {
-                    "flow_name": "production-promotion",
-                    "trail_name": "promote-all-41",
-                    "artifact_status": null
-                  }
-                },
-                {
-                  "type": "rule_not_applicable",
-                  "context": {
-                    "flow_name": "snyk-aws-prod-per-artifact",
-                    "trail_name": "runner-9b6ccf0845871128cd22f33e8ec0e0a29b1794e736b5ef783ade3c8bca11c80b",
-                    "artifact_status": null
-                  }
-                }
-              ]
-            }
-          ],
-          "policy_name": "pull-request"
-        },
-        {
-          "policy_version": 4,
-          "status": "COMPLIANT",
-          "rule_evaluations": [
-            {
-              "rule": {
-                "type": "provenance",
-                "definition": {
-                  "required": false,
-                  "exceptions": []
-                }
-              },
-              "satisfied": null,
-              "ignored": true,
-              "resolutions": [
-                {
-                  "type": "rule_not_applicable",
-                  "context": {
-                    "flow_name": "runner-ci",
-                    "trail_name": "ef6768eefe96ec54dacc1b8cabac1dde2d2f636e",
-                    "artifact_status": null
-                  }
-                },
-                {
-                  "type": "rule_not_applicable",
-                  "context": {
-                    "flow_name": "production-promotion",
-                    "trail_name": "promote-all-41",
-                    "artifact_status": null
-                  }
-                },
-                {
-                  "type": "rule_not_applicable",
-                  "context": {
-                    "flow_name": "snyk-aws-prod-per-artifact",
-                    "trail_name": "runner-9b6ccf0845871128cd22f33e8ec0e0a29b1794e736b5ef783ade3c8bca11c80b",
-                    "artifact_status": null
-                  }
-                }
-              ]
-            },
-            {
-              "rule": {
-                "type": "trail-compliance",
-                "definition": {
-                  "required": false,
-                  "exceptions": []
-                }
-              },
-              "satisfied": null,
-              "ignored": true,
-              "resolutions": [
-                {
-                  "type": "rule_not_applicable",
-                  "context": {
-                    "flow_name": "runner-ci",
-                    "trail_name": "ef6768eefe96ec54dacc1b8cabac1dde2d2f636e",
-                    "artifact_status": "COMPLIANT"
-                  }
-                },
-                {
-                  "type": "rule_not_applicable",
-                  "context": {
-                    "flow_name": "production-promotion",
-                    "trail_name": "promote-all-41",
-                    "artifact_status": "COMPLIANT"
-                  }
-                },
-                {
-                  "type": "rule_not_applicable",
-                  "context": {
-                    "flow_name": "snyk-aws-prod-per-artifact",
-                    "trail_name": "runner-9b6ccf0845871128cd22f33e8ec0e0a29b1794e736b5ef783ade3c8bca11c80b",
-                    "artifact_status": "COMPLIANT"
-                  }
-                }
-              ]
-            },
-            {
-              "rule": {
-                "type": "attestation",
-                "definition": {
-                  "if": {
-                    "text": "flow.name == \"snyk-aws-prod-per-artifact\""
-                  },
-                  "name": "snyk-container-scan",
-                  "type": "decision",
-                  "must_be_compliant": true,
-                  "for_control": "SDLC-CTRL-0022"
-                }
-              },
-              "satisfied": true,
-              "ignored": false,
-              "resolutions": [
-                {
-                  "type": "rule_not_applicable",
-                  "context": {
-                    "flow_name": "runner-ci",
-                    "trail_name": "ef6768eefe96ec54dacc1b8cabac1dde2d2f636e",
-                    "artifact_status": null,
-                    "for_control": "SDLC-CTRL-0022"
-                  }
-                },
-                {
-                  "type": "rule_not_applicable",
-                  "context": {
-                    "flow_name": "production-promotion",
-                    "trail_name": "promote-all-41",
-                    "artifact_status": null,
-                    "for_control": "SDLC-CTRL-0022"
-                  }
-                },
-                {
-                  "type": "rule_satisfied",
-                  "context": {
-                    "flow_name": "snyk-aws-prod-per-artifact",
-                    "trail_name": "runner-9b6ccf0845871128cd22f33e8ec0e0a29b1794e736b5ef783ade3c8bca11c80b",
-                    "artifact_status": null,
-                    "for_control": "SDLC-CTRL-0022"
-                  }
-                }
-              ]
-            }
-          ],
-          "policy_name": "snyk-scan-aws-prod"
-        },
-        {
-          "policy_version": 2,
-          "status": "COMPLIANT",
-          "rule_evaluations": [
-            {
-              "rule": {
-                "type": "provenance",
-                "definition": {
-                  "required": false,
-                  "exceptions": []
-                }
-              },
-              "satisfied": null,
-              "ignored": true,
-              "resolutions": [
-                {
-                  "type": "rule_not_applicable",
-                  "context": {
-                    "flow_name": "runner-ci",
-                    "trail_name": "ef6768eefe96ec54dacc1b8cabac1dde2d2f636e",
-                    "artifact_status": null
-                  }
-                },
-                {
-                  "type": "rule_not_applicable",
-                  "context": {
-                    "flow_name": "production-promotion",
-                    "trail_name": "promote-all-41",
-                    "artifact_status": null
-                  }
-                },
-                {
-                  "type": "rule_not_applicable",
-                  "context": {
-                    "flow_name": "snyk-aws-prod-per-artifact",
-                    "trail_name": "runner-9b6ccf0845871128cd22f33e8ec0e0a29b1794e736b5ef783ade3c8bca11c80b",
-                    "artifact_status": null
-                  }
-                }
-              ]
-            },
-            {
-              "rule": {
-                "type": "trail-compliance",
-                "definition": {
-                  "required": true,
-                  "exceptions": [
-                    {
-                      "if": {
-                        "text": "exists(flow.tags.env) and flow.tags.env != \"aws-prod\""
-                      }
-                    }
-                  ]
-                }
-              },
-              "satisfied": true,
-              "ignored": false,
-              "resolutions": [
-                {
-                  "type": "rule_not_applicable",
-                  "context": {
-                    "flow_name": "runner-ci",
-                    "trail_name": "ef6768eefe96ec54dacc1b8cabac1dde2d2f636e",
-                    "artifact_status": "COMPLIANT"
-                  }
-                },
-                {
-                  "type": "rule_satisfied",
-                  "context": {
-                    "flow_name": "production-promotion",
-                    "trail_name": "promote-all-41",
-                    "artifact_status": "COMPLIANT"
-                  }
-                },
-                {
-                  "type": "rule_satisfied",
-                  "context": {
-                    "flow_name": "snyk-aws-prod-per-artifact",
-                    "trail_name": "runner-9b6ccf0845871128cd22f33e8ec0e0a29b1794e736b5ef783ade3c8bca11c80b",
-                    "artifact_status": "COMPLIANT"
-                  }
-                }
-              ]
-            }
-          ],
-          "policy_name": "trail-compliance-aws-prod"
-        }
-      ],
-      "reasons_for_incompliance": [],
-      "fingerprint": "9b6ccf0845871128cd22f33e8ec0e0a29b1794e736b5ef783ade3c8bca11c80b",
-      "creationTimestamp": [
-        1791648700,
-        1791648702,
-        1791648776
-      ],
-      "pods": null,
-      "annotation": {
-        "type": "changed",
-        "was": 3,
-        "now": 3
-      },
-      "flow_name": "runner-ci",
-      "git_commit": "ef6768eefe96ec54dacc1b8cabac1dde2d2f636e",
-      "commit_url": "https://github.com/cyber-dojo/runner/commit/ef6768eefe96ec54dacc1b8cabac1dde2d2f636e",
-      "html_url": "https://app.kosli.com/cyber-dojo/flows/runner-ci/artifacts/9b6ccf0845871128cd22f33e8ec0e0a29b1794e736b5ef783ade3c8bca11c80b?artifact_id=c0267819-47af-42c9-bb43-4470c04f",
-      "flow_html_url": "https://app.kosli.com/cyber-dojo/flows/runner-ci",
-      "deployment_diff": {
-        "diff_url": "https://github.com/cyber-dojo/runner/compare/376f811ff50beefefbfda03047b45ba8b62fccc0...ef6768eefe96ec54dacc1b8cabac1dde2d2f636e",
-        "previous_git_commit": "376f811ff50beefefbfda03047b45ba8b62fccc0",
-        "previous_git_commit_url": "https://github.com/cyber-dojo/runner/commit/376f811ff50beefefbfda03047b45ba8b62fccc0",
-        "previous_fingerprint": "68910f8c3ee153005cc9e2dbf7eec3d41129d98ad05f2c7e89a0f7b263f279e2",
-        "previous_artifact_name": "244531986313.dkr.ecr.eu-central-1.amazonaws.com/runner:376f811@sha256:68910f8c3ee153005cc9e2dbf7eec3d41129d98ad05f2c7e89a0f7b263f279e2",
-        "previous_artifact_compliance_state": "COMPLIANT",
-        "previous_running": false,
-        "previous_trail_name": "376f811ff50beefefbfda03047b45ba8b62fccc0",
-        "previous_template_reference_name": "runner"
-      },
-      "commit_lead_time": 16199.0,
-      "flows": [
-        {
-          "flow_name": "runner-ci",
-          "trail_name": "ef6768eefe96ec54dacc1b8cabac1dde2d2f636e",
-          "template_reference_name": "runner",
-          "git_commit": "ef6768eefe96ec54dacc1b8cabac1dde2d2f636e",
-          "commit_url": "https://github.com/cyber-dojo/runner/commit/ef6768eefe96ec54dacc1b8cabac1dde2d2f636e",
-          "git_commit_info": {
-            "sha1": "ef6768eefe96ec54dacc1b8cabac1dde2d2f636e",
-            "message": "Build runner for amd64 and arm64, push to Hub (#325)\n\nThe runner image was amd64-only, so it could not\nrun natively on arm64 hosts, and reached Docker\nHub only via versioner copying it from ECR.\n\nsecure-docker-build now builds both platforms\nand, given Docker Hub credentials, pushes\ncyberdojo/runner:<tag> from the same build as\nECR, so both hold the digest Kosli attests.\n\nCo-Authored-By: Claude Opus 5.5\n  <noreply@anthropic.com>\n\nCo-authored-by: Claude Opus 5.5 <noreply@anthropic.com>",
-            "author": "Jon Jagger <jon@kosli.com>",
-            "branch": "",
-            "timestamp": 1791632501.0,
-            "url": "https://github.com/cyber-dojo/runner/commit/ef6768eefe96ec54dacc1b8cabac1dde2d2f636e"
-          },
-          "html_url": "https://app.kosli.com/cyber-dojo/flows/runner-ci/artifacts/9b6ccf0845871128cd22f33e8ec0e0a29b1794e736b5ef783ade3c8bca11c80b?artifact_id=c0267819-47af-42c9-bb43-4470c04f",
-          "flow_html_url": "https://app.kosli.com/cyber-dojo/flows/runner-ci",
-          "deployment_diff": {
-            "diff_url": "https://github.com/cyber-dojo/runner/compare/376f811ff50beefefbfda03047b45ba8b62fccc0...ef6768eefe96ec54dacc1b8cabac1dde2d2f636e",
-            "previous_git_commit": "376f811ff50beefefbfda03047b45ba8b62fccc0",
-            "previous_git_commit_url": "https://github.com/cyber-dojo/runner/commit/376f811ff50beefefbfda03047b45ba8b62fccc0",
-            "previous_fingerprint": "68910f8c3ee153005cc9e2dbf7eec3d41129d98ad05f2c7e89a0f7b263f279e2",
-            "previous_artifact_name": "244531986313.dkr.ecr.eu-central-1.amazonaws.com/runner:376f811@sha256:68910f8c3ee153005cc9e2dbf7eec3d41129d98ad05f2c7e89a0f7b263f279e2",
-            "previous_artifact_compliance_state": "COMPLIANT",
-            "previous_running": false,
-            "previous_trail_name": "376f811ff50beefefbfda03047b45ba8b62fccc0",
-            "previous_template_reference_name": "runner"
-          },
-          "commit_lead_time": 16199.0,
-          "artifact_compliance_in_flow": true,
-          "flow_reasons_for_non_compliance": []
-        },
-        {
-          "flow_name": "production-promotion",
-          "trail_name": "promote-all-41",
-          "template_reference_name": "runner",
-          "git_commit": "54306f735c51413c972b38398da4d0a5fc86d47a",
-          "commit_url": "https://github.com/cyber-dojo/aws-prod-co-promotion/commit/54306f735c51413c972b38398da4d0a5fc86d47a",
-          "git_commit_info": {
-            "sha1": "54306f735c51413c972b38398da4d0a5fc86d47a",
-            "message": "Merge pull request #18 from cyber-dojo/promote-one-requires-a-service\n\nFail promote-one when no service is chosen",
-            "author": "Jon Jagger <jon@kosli.com>",
-            "branch": "main",
-            "timestamp": 1791640516.0,
-            "url": "https://github.com/cyber-dojo/aws-prod-co-promotion/commit/54306f735c51413c972b38398da4d0a5fc86d47a"
-          },
-          "html_url": "https://app.kosli.com/cyber-dojo/flows/production-promotion/artifacts/9b6ccf0845871128cd22f33e8ec0e0a29b1794e736b5ef783ade3c8bca11c80b?artifact_id=67c17ef1-1ce5-4810-a8b2-98ea3843",
-          "flow_html_url": "https://app.kosli.com/cyber-dojo/flows/production-promotion",
-          "deployment_diff": {
-            "diff_url": "https://github.com/cyber-dojo/aws-prod-co-promotion/compare/8c76df3ae03cf8f4d6be40d4af6d550c2e6f1d25...54306f735c51413c972b38398da4d0a5fc86d47a",
-            "previous_git_commit": "8c76df3ae03cf8f4d6be40d4af6d550c2e6f1d25",
-            "previous_git_commit_url": "https://github.com/cyber-dojo/aws-prod-co-promotion/commit/8c76df3ae03cf8f4d6be40d4af6d550c2e6f1d25",
-            "previous_fingerprint": "68910f8c3ee153005cc9e2dbf7eec3d41129d98ad05f2c7e89a0f7b263f279e2",
-            "previous_artifact_name": "244531986313.dkr.ecr.eu-central-1.amazonaws.com/runner:376f811@sha256:68910f8c3ee153005cc9e2dbf7eec3d41129d98ad05f2c7e89a0f7b263f279e2",
-            "previous_artifact_compliance_state": "COMPLIANT",
-            "previous_running": false,
-            "previous_trail_name": "promotion-one-177",
-            "previous_template_reference_name": "runner"
-          },
-          "commit_lead_time": 8184.0,
-          "artifact_compliance_in_flow": true,
-          "flow_reasons_for_non_compliance": []
-        },
-        {
-          "flow_name": "snyk-aws-prod-per-artifact",
-          "trail_name": "runner-9b6ccf0845871128cd22f33e8ec0e0a29b1794e736b5ef783ade3c8bca11c80b",
-          "template_reference_name": "runner",
-          "git_commit": "359c98460f5c3aefb136a77eef08d1be4c4ca08d",
-          "commit_url": "https://github.com/cyber-dojo/snyk-scanning/commit/359c98460f5c3aefb136a77eef08d1be4c4ca08d",
-          "git_commit_info": {
-            "sha1": "359c98460f5c3aefb136a77eef08d1be4c4ca08d",
-            "message": "Merge pull request #6 from cyber-dojo/key-uploads-and-trails-on-component-not-repo\n\nTell apart artifacts built by one repo",
-            "author": "Jon Jagger <jon@kosli.com>",
-            "branch": "main",
-            "timestamp": 1790759058.0,
-            "url": "https://github.com/cyber-dojo/snyk-scanning/commit/359c98460f5c3aefb136a77eef08d1be4c4ca08d"
-          },
-          "html_url": "https://app.kosli.com/cyber-dojo/flows/snyk-aws-prod-per-artifact/artifacts/9b6ccf0845871128cd22f33e8ec0e0a29b1794e736b5ef783ade3c8bca11c80b?artifact_id=981e46cc-3200-4673-9bbc-d0c08788",
-          "flow_html_url": "https://app.kosli.com/cyber-dojo/flows/snyk-aws-prod-per-artifact",
-          "deployment_diff": {
-            "diff_url": "https://github.com/cyber-dojo/snyk-scanning/compare/359c98460f5c3aefb136a77eef08d1be4c4ca08d...359c98460f5c3aefb136a77eef08d1be4c4ca08d",
-            "previous_git_commit": "359c98460f5c3aefb136a77eef08d1be4c4ca08d",
-            "previous_git_commit_url": "https://github.com/cyber-dojo/snyk-scanning/commit/359c98460f5c3aefb136a77eef08d1be4c4ca08d",
-            "previous_fingerprint": "5cbe7d6eb91af8e485c9c87a2c9abfcada9773e8773da11b002f50639c2b0845",
-            "previous_artifact_name": "244531986313.dkr.ecr.eu-central-1.amazonaws.com/runner:6131d76@sha256:5cbe7d6eb91af8e485c9c87a2c9abfcada9773e8773da11b002f50639c2b0845",
-            "previous_artifact_compliance_state": "COMPLIANT",
-            "previous_running": false,
-            "previous_trail_name": "runner-5cbe7d6eb91af8e485c9c87a2c9abfcada9773e8773da11b002f50639c2b0845",
-            "previous_template_reference_name": "runner"
-          },
-          "commit_lead_time": 889642.0,
-          "artifact_compliance_in_flow": true,
-          "flow_reasons_for_non_compliance": []
-        }
-      ],
-      "ecs_context": {
-        "task_arn": "arn:aws:ecs:eu-central-1:274425519734:task/app/83a23b5804b04608a64c3b4ef0b3090b",
-        "cluster_name": null,
-        "service_name": null
-      }
-    },
-    {
-      "name": "244531986313.dkr.ecr.eu-central-1.amazonaws.com/exercises-start-points:68636be@sha256:2dffee94d09db0d3e291cef0fc416f007271ab578adcba8b35f359fda5f2a8a8",
-      "compliant": true,
-      "deployments": [],
-      "policy_decisions": [
-        {
-          "policy_version": 2,
-          "status": "COMPLIANT",
-          "rule_evaluations": [
-            {
-              "rule": {
-                "type": "provenance",
-                "definition": {
-                  "required": false,
-                  "exceptions": []
-                }
-              },
-              "satisfied": null,
-              "ignored": true,
-              "resolutions": [
-                {
-                  "type": "rule_not_applicable",
-                  "context": {
-                    "flow_name": "exercises-start-points-ci",
-                    "trail_name": "68636bed4906a15df27ee99e2afddd4377d3867e",
-                    "artifact_status": null
-                  }
-                },
-                {
-                  "type": "rule_not_applicable",
-                  "context": {
-                    "flow_name": "production-promotion",
-                    "trail_name": "promote-all-41",
-                    "artifact_status": null
-                  }
-                },
-                {
-                  "type": "rule_not_applicable",
-                  "context": {
-                    "flow_name": "snyk-aws-prod-per-artifact",
-                    "trail_name": "exercises-start-points-2dffee94d09db0d3e291cef0fc416f007271ab578adcba8b35f359fda5f2a8a8",
-                    "artifact_status": null
-                  }
-                }
-              ]
-            },
-            {
-              "rule": {
-                "type": "trail-compliance",
-                "definition": {
-                  "required": false,
-                  "exceptions": []
-                }
-              },
-              "satisfied": null,
-              "ignored": true,
-              "resolutions": [
-                {
-                  "type": "rule_not_applicable",
-                  "context": {
-                    "flow_name": "exercises-start-points-ci",
-                    "trail_name": "68636bed4906a15df27ee99e2afddd4377d3867e",
-                    "artifact_status": "COMPLIANT"
-                  }
-                },
-                {
-                  "type": "rule_not_applicable",
-                  "context": {
-                    "flow_name": "production-promotion",
-                    "trail_name": "promote-all-41",
-                    "artifact_status": "COMPLIANT"
-                  }
-                },
-                {
-                  "type": "rule_not_applicable",
-                  "context": {
-                    "flow_name": "snyk-aws-prod-per-artifact",
-                    "trail_name": "exercises-start-points-2dffee94d09db0d3e291cef0fc416f007271ab578adcba8b35f359fda5f2a8a8",
-                    "artifact_status": "COMPLIANT"
-                  }
-                }
-              ]
-            },
-            {
-              "rule": {
-                "type": "attestation",
-                "definition": {
-                  "if": {
-                    "text": "flow.name == \"production-promotion\""
-                  },
-                  "name": "snyk-scan",
-                  "type": "decision",
-                  "must_be_compliant": true,
-                  "for_control": null
-                }
-              },
-              "satisfied": true,
-              "ignored": false,
-              "resolutions": [
-                {
-                  "type": "rule_not_applicable",
-                  "context": {
-                    "flow_name": "exercises-start-points-ci",
-                    "trail_name": "68636bed4906a15df27ee99e2afddd4377d3867e",
-                    "artifact_status": null
-                  }
-                },
-                {
-                  "type": "rule_satisfied",
-                  "context": {
-                    "flow_name": "production-promotion",
-                    "trail_name": "promote-all-41",
-                    "artifact_status": null
-                  }
-                },
-                {
-                  "type": "rule_not_applicable",
-                  "context": {
-                    "flow_name": "snyk-aws-prod-per-artifact",
-                    "trail_name": "exercises-start-points-2dffee94d09db0d3e291cef0fc416f007271ab578adcba8b35f359fda5f2a8a8",
-                    "artifact_status": null
-                  }
-                }
-              ]
-            }
-          ],
-          "policy_name": "production-promotion"
-        },
-        {
-          "policy_version": 3,
-          "status": "COMPLIANT",
-          "rule_evaluations": [
-            {
-              "rule": {
-                "type": "provenance",
-                "definition": {
-                  "required": true,
-                  "exceptions": []
-                }
-              },
-              "satisfied": true,
-              "ignored": false,
-              "resolutions": [
-                {
-                  "type": "rule_satisfied",
-                  "context": {
-                    "flow_name": "exercises-start-points-ci",
-                    "trail_name": "68636bed4906a15df27ee99e2afddd4377d3867e",
-                    "artifact_status": null
-                  }
-                },
-                {
-                  "type": "rule_satisfied",
-                  "context": {
-                    "flow_name": "production-promotion",
-                    "trail_name": "promote-all-41",
-                    "artifact_status": null
-                  }
-                },
-                {
-                  "type": "rule_satisfied",
-                  "context": {
-                    "flow_name": "snyk-aws-prod-per-artifact",
-                    "trail_name": "exercises-start-points-2dffee94d09db0d3e291cef0fc416f007271ab578adcba8b35f359fda5f2a8a8",
-                    "artifact_status": null
-                  }
-                }
-              ]
-            },
-            {
-              "rule": {
-                "type": "trail-compliance",
-                "definition": {
-                  "required": false,
-                  "exceptions": []
-                }
-              },
-              "satisfied": null,
-              "ignored": true,
-              "resolutions": [
-                {
-                  "type": "rule_not_applicable",
-                  "context": {
-                    "flow_name": "exercises-start-points-ci",
-                    "trail_name": "68636bed4906a15df27ee99e2afddd4377d3867e",
-                    "artifact_status": "COMPLIANT"
-                  }
-                },
-                {
-                  "type": "rule_not_applicable",
-                  "context": {
-                    "flow_name": "production-promotion",
-                    "trail_name": "promote-all-41",
-                    "artifact_status": "COMPLIANT"
-                  }
-                },
-                {
-                  "type": "rule_not_applicable",
-                  "context": {
-                    "flow_name": "snyk-aws-prod-per-artifact",
-                    "trail_name": "exercises-start-points-2dffee94d09db0d3e291cef0fc416f007271ab578adcba8b35f359fda5f2a8a8",
-                    "artifact_status": "COMPLIANT"
-                  }
-                }
-              ]
-            },
-            {
-              "rule": {
-                "type": "attestation",
-                "definition": {
-                  "if": {
-                    "text": "flow.tags.kind == \"build\""
-                  },
-                  "name": "*",
-                  "type": "decision",
-                  "must_be_compliant": true,
-                  "for_control": "SDLC-CTRL-0002"
-                }
-              },
-              "satisfied": true,
-              "ignored": false,
-              "resolutions": [
-                {
-                  "type": "rule_satisfied",
-                  "context": {
-                    "flow_name": "exercises-start-points-ci",
-                    "trail_name": "68636bed4906a15df27ee99e2afddd4377d3867e",
-                    "artifact_status": null,
-                    "for_control": "SDLC-CTRL-0002"
-                  }
-                },
-                {
-                  "type": "rule_not_applicable",
-                  "context": {
-                    "flow_name": "production-promotion",
-                    "trail_name": "promote-all-41",
-                    "artifact_status": null,
-                    "for_control": "SDLC-CTRL-0002"
-                  }
-                },
-                {
-                  "type": "rule_not_applicable",
-                  "context": {
-                    "flow_name": "snyk-aws-prod-per-artifact",
-                    "trail_name": "exercises-start-points-2dffee94d09db0d3e291cef0fc416f007271ab578adcba8b35f359fda5f2a8a8",
-                    "artifact_status": null,
-                    "for_control": "SDLC-CTRL-0002"
-                  }
-                }
-              ]
-            }
-          ],
-          "policy_name": "provenance"
-        },
-        {
-          "policy_version": 3,
-          "status": "COMPLIANT",
-          "rule_evaluations": [
-            {
-              "rule": {
-                "type": "provenance",
-                "definition": {
-                  "required": false,
-                  "exceptions": []
-                }
-              },
-              "satisfied": null,
-              "ignored": true,
-              "resolutions": [
-                {
-                  "type": "rule_not_applicable",
-                  "context": {
-                    "flow_name": "exercises-start-points-ci",
-                    "trail_name": "68636bed4906a15df27ee99e2afddd4377d3867e",
-                    "artifact_status": null
-                  }
-                },
-                {
-                  "type": "rule_not_applicable",
-                  "context": {
-                    "flow_name": "production-promotion",
-                    "trail_name": "promote-all-41",
-                    "artifact_status": null
-                  }
-                },
-                {
-                  "type": "rule_not_applicable",
-                  "context": {
-                    "flow_name": "snyk-aws-prod-per-artifact",
-                    "trail_name": "exercises-start-points-2dffee94d09db0d3e291cef0fc416f007271ab578adcba8b35f359fda5f2a8a8",
-                    "artifact_status": null
-                  }
-                }
-              ]
-            },
-            {
-              "rule": {
-                "type": "trail-compliance",
-                "definition": {
-                  "required": false,
-                  "exceptions": []
-                }
-              },
-              "satisfied": null,
-              "ignored": true,
-              "resolutions": [
-                {
-                  "type": "rule_not_applicable",
-                  "context": {
-                    "flow_name": "exercises-start-points-ci",
-                    "trail_name": "68636bed4906a15df27ee99e2afddd4377d3867e",
-                    "artifact_status": "COMPLIANT"
-                  }
-                },
-                {
-                  "type": "rule_not_applicable",
-                  "context": {
-                    "flow_name": "production-promotion",
-                    "trail_name": "promote-all-41",
-                    "artifact_status": "COMPLIANT"
-                  }
-                },
-                {
-                  "type": "rule_not_applicable",
-                  "context": {
-                    "flow_name": "snyk-aws-prod-per-artifact",
-                    "trail_name": "exercises-start-points-2dffee94d09db0d3e291cef0fc416f007271ab578adcba8b35f359fda5f2a8a8",
-                    "artifact_status": "COMPLIANT"
-                  }
-                }
-              ]
-            },
-            {
-              "rule": {
-                "type": "attestation",
-                "definition": {
-                  "if": {
-                    "text": "flow.tags.kind == \"build\""
-                  },
-                  "name": "*",
-                  "type": "pull_request",
-                  "must_be_compliant": true,
-                  "for_control": null
-                }
-              },
-              "satisfied": true,
-              "ignored": false,
-              "resolutions": [
-                {
-                  "type": "rule_satisfied",
-                  "context": {
-                    "flow_name": "exercises-start-points-ci",
-                    "trail_name": "68636bed4906a15df27ee99e2afddd4377d3867e",
-                    "artifact_status": null
-                  }
-                },
-                {
-                  "type": "rule_not_applicable",
-                  "context": {
-                    "flow_name": "production-promotion",
-                    "trail_name": "promote-all-41",
-                    "artifact_status": null
-                  }
-                },
-                {
-                  "type": "rule_not_applicable",
-                  "context": {
-                    "flow_name": "snyk-aws-prod-per-artifact",
-                    "trail_name": "exercises-start-points-2dffee94d09db0d3e291cef0fc416f007271ab578adcba8b35f359fda5f2a8a8",
-                    "artifact_status": null
-                  }
-                }
-              ]
-            }
-          ],
-          "policy_name": "pull-request"
-        },
-        {
-          "policy_version": 4,
-          "status": "COMPLIANT",
-          "rule_evaluations": [
-            {
-              "rule": {
-                "type": "provenance",
-                "definition": {
-                  "required": false,
-                  "exceptions": []
-                }
-              },
-              "satisfied": null,
-              "ignored": true,
-              "resolutions": [
-                {
-                  "type": "rule_not_applicable",
-                  "context": {
-                    "flow_name": "exercises-start-points-ci",
-                    "trail_name": "68636bed4906a15df27ee99e2afddd4377d3867e",
-                    "artifact_status": null
-                  }
-                },
-                {
-                  "type": "rule_not_applicable",
-                  "context": {
-                    "flow_name": "production-promotion",
-                    "trail_name": "promote-all-41",
-                    "artifact_status": null
-                  }
-                },
-                {
-                  "type": "rule_not_applicable",
-                  "context": {
-                    "flow_name": "snyk-aws-prod-per-artifact",
-                    "trail_name": "exercises-start-points-2dffee94d09db0d3e291cef0fc416f007271ab578adcba8b35f359fda5f2a8a8",
-                    "artifact_status": null
-                  }
-                }
-              ]
-            },
-            {
-              "rule": {
-                "type": "trail-compliance",
-                "definition": {
-                  "required": false,
-                  "exceptions": []
-                }
-              },
-              "satisfied": null,
-              "ignored": true,
-              "resolutions": [
-                {
-                  "type": "rule_not_applicable",
-                  "context": {
-                    "flow_name": "exercises-start-points-ci",
-                    "trail_name": "68636bed4906a15df27ee99e2afddd4377d3867e",
-                    "artifact_status": "COMPLIANT"
-                  }
-                },
-                {
-                  "type": "rule_not_applicable",
-                  "context": {
-                    "flow_name": "production-promotion",
-                    "trail_name": "promote-all-41",
-                    "artifact_status": "COMPLIANT"
-                  }
-                },
-                {
-                  "type": "rule_not_applicable",
-                  "context": {
-                    "flow_name": "snyk-aws-prod-per-artifact",
-                    "trail_name": "exercises-start-points-2dffee94d09db0d3e291cef0fc416f007271ab578adcba8b35f359fda5f2a8a8",
-                    "artifact_status": "COMPLIANT"
-                  }
-                }
-              ]
-            },
-            {
-              "rule": {
-                "type": "attestation",
-                "definition": {
-                  "if": {
-                    "text": "flow.name == \"snyk-aws-prod-per-artifact\""
-                  },
-                  "name": "snyk-container-scan",
-                  "type": "decision",
-                  "must_be_compliant": true,
-                  "for_control": "SDLC-CTRL-0022"
-                }
-              },
-              "satisfied": true,
-              "ignored": false,
-              "resolutions": [
-                {
-                  "type": "rule_not_applicable",
-                  "context": {
-                    "flow_name": "exercises-start-points-ci",
-                    "trail_name": "68636bed4906a15df27ee99e2afddd4377d3867e",
-                    "artifact_status": null,
-                    "for_control": "SDLC-CTRL-0022"
-                  }
-                },
-                {
-                  "type": "rule_not_applicable",
-                  "context": {
-                    "flow_name": "production-promotion",
-                    "trail_name": "promote-all-41",
-                    "artifact_status": null,
-                    "for_control": "SDLC-CTRL-0022"
-                  }
-                },
-                {
-                  "type": "rule_satisfied",
-                  "context": {
-                    "flow_name": "snyk-aws-prod-per-artifact",
-                    "trail_name": "exercises-start-points-2dffee94d09db0d3e291cef0fc416f007271ab578adcba8b35f359fda5f2a8a8",
-                    "artifact_status": null,
-                    "for_control": "SDLC-CTRL-0022"
-                  }
-                }
-              ]
-            }
-          ],
-          "policy_name": "snyk-scan-aws-prod"
-        },
-        {
-          "policy_version": 2,
-          "status": "COMPLIANT",
-          "rule_evaluations": [
-            {
-              "rule": {
-                "type": "provenance",
-                "definition": {
-                  "required": false,
-                  "exceptions": []
-                }
-              },
-              "satisfied": null,
-              "ignored": true,
-              "resolutions": [
-                {
-                  "type": "rule_not_applicable",
-                  "context": {
-                    "flow_name": "exercises-start-points-ci",
-                    "trail_name": "68636bed4906a15df27ee99e2afddd4377d3867e",
-                    "artifact_status": null
-                  }
-                },
-                {
-                  "type": "rule_not_applicable",
-                  "context": {
-                    "flow_name": "production-promotion",
-                    "trail_name": "promote-all-41",
-                    "artifact_status": null
-                  }
-                },
-                {
-                  "type": "rule_not_applicable",
-                  "context": {
-                    "flow_name": "snyk-aws-prod-per-artifact",
-                    "trail_name": "exercises-start-points-2dffee94d09db0d3e291cef0fc416f007271ab578adcba8b35f359fda5f2a8a8",
-                    "artifact_status": null
-                  }
-                }
-              ]
-            },
-            {
-              "rule": {
-                "type": "trail-compliance",
-                "definition": {
-                  "required": true,
-                  "exceptions": [
-                    {
-                      "if": {
-                        "text": "exists(flow.tags.env) and flow.tags.env != \"aws-prod\""
-                      }
-                    }
-                  ]
-                }
-              },
-              "satisfied": true,
-              "ignored": false,
-              "resolutions": [
-                {
-                  "type": "rule_not_applicable",
-                  "context": {
-                    "flow_name": "exercises-start-points-ci",
-                    "trail_name": "68636bed4906a15df27ee99e2afddd4377d3867e",
-                    "artifact_status": "COMPLIANT"
-                  }
-                },
-                {
-                  "type": "rule_satisfied",
-                  "context": {
-                    "flow_name": "production-promotion",
-                    "trail_name": "promote-all-41",
-                    "artifact_status": "COMPLIANT"
-                  }
-                },
-                {
-                  "type": "rule_satisfied",
-                  "context": {
-                    "flow_name": "snyk-aws-prod-per-artifact",
-                    "trail_name": "exercises-start-points-2dffee94d09db0d3e291cef0fc416f007271ab578adcba8b35f359fda5f2a8a8",
-                    "artifact_status": "COMPLIANT"
-                  }
-                }
-              ]
-            }
-          ],
-          "policy_name": "trail-compliance-aws-prod"
-        }
-      ],
-      "reasons_for_incompliance": [],
-      "fingerprint": "2dffee94d09db0d3e291cef0fc416f007271ab578adcba8b35f359fda5f2a8a8",
-      "creationTimestamp": [
-        1791648622
-      ],
-      "pods": null,
-      "annotation": {
-        "type": "changed",
-        "was": 1,
-        "now": 1
-      },
-      "flow_name": "exercises-start-points-ci",
-      "git_commit": "68636bed4906a15df27ee99e2afddd4377d3867e",
-      "commit_url": "https://github.com/cyber-dojo/exercises-start-points/commit/68636bed4906a15df27ee99e2afddd4377d3867e",
-      "html_url": "https://app.kosli.com/cyber-dojo/flows/exercises-start-points-ci/artifacts/2dffee94d09db0d3e291cef0fc416f007271ab578adcba8b35f359fda5f2a8a8?artifact_id=3a46596a-b98c-4c2f-a72a-d8452f32",
-      "flow_html_url": "https://app.kosli.com/cyber-dojo/flows/exercises-start-points-ci",
-      "deployment_diff": {
-        "diff_url": "https://github.com/cyber-dojo/exercises-start-points/compare/009779d876c8b977e993fcf9ed1187e9c3bcdcc8...68636bed4906a15df27ee99e2afddd4377d3867e",
-        "previous_git_commit": "009779d876c8b977e993fcf9ed1187e9c3bcdcc8",
-        "previous_git_commit_url": "https://github.com/cyber-dojo/exercises-start-points/commit/009779d876c8b977e993fcf9ed1187e9c3bcdcc8",
-        "previous_fingerprint": "b2cc2492bec7b295c6e33a4992af9fbe9e55f2332c29f1feb9f9ed453fad43c9",
-        "previous_artifact_name": "244531986313.dkr.ecr.eu-central-1.amazonaws.com/exercises-start-points:009779d@sha256:b2cc2492bec7b295c6e33a4992af9fbe9e55f2332c29f1feb9f9ed453fad43c9",
-        "previous_artifact_compliance_state": "COMPLIANT",
-        "previous_running": false,
-        "previous_trail_name": "009779d876c8b977e993fcf9ed1187e9c3bcdcc8",
-        "previous_template_reference_name": "exercises-start-points"
-      },
-      "commit_lead_time": 2134.0,
-      "flows": [
-        {
-          "flow_name": "exercises-start-points-ci",
-          "trail_name": "68636bed4906a15df27ee99e2afddd4377d3867e",
-          "template_reference_name": "exercises-start-points",
-          "git_commit": "68636bed4906a15df27ee99e2afddd4377d3867e",
-          "commit_url": "https://github.com/cyber-dojo/exercises-start-points/commit/68636bed4906a15df27ee99e2afddd4377d3867e",
-          "git_commit_info": {
-            "sha1": "68636bed4906a15df27ee99e2afddd4377d3867e",
-            "message": "Merge pull request #157 from cyber-dojo/multi-arch-start-point\n\nBuild the start-point image for amd64 and arm64",
-            "author": "Jon Jagger <jon@kosli.com>",
-            "branch": "",
-            "timestamp": 1791646488.0,
-            "url": "https://github.com/cyber-dojo/exercises-start-points/commit/68636bed4906a15df27ee99e2afddd4377d3867e"
-          },
-          "html_url": "https://app.kosli.com/cyber-dojo/flows/exercises-start-points-ci/artifacts/2dffee94d09db0d3e291cef0fc416f007271ab578adcba8b35f359fda5f2a8a8?artifact_id=3a46596a-b98c-4c2f-a72a-d8452f32",
-          "flow_html_url": "https://app.kosli.com/cyber-dojo/flows/exercises-start-points-ci",
-          "deployment_diff": {
-            "diff_url": "https://github.com/cyber-dojo/exercises-start-points/compare/009779d876c8b977e993fcf9ed1187e9c3bcdcc8...68636bed4906a15df27ee99e2afddd4377d3867e",
-            "previous_git_commit": "009779d876c8b977e993fcf9ed1187e9c3bcdcc8",
-            "previous_git_commit_url": "https://github.com/cyber-dojo/exercises-start-points/commit/009779d876c8b977e993fcf9ed1187e9c3bcdcc8",
-            "previous_fingerprint": "b2cc2492bec7b295c6e33a4992af9fbe9e55f2332c29f1feb9f9ed453fad43c9",
-            "previous_artifact_name": "244531986313.dkr.ecr.eu-central-1.amazonaws.com/exercises-start-points:009779d@sha256:b2cc2492bec7b295c6e33a4992af9fbe9e55f2332c29f1feb9f9ed453fad43c9",
-            "previous_artifact_compliance_state": "COMPLIANT",
-            "previous_running": false,
-            "previous_trail_name": "009779d876c8b977e993fcf9ed1187e9c3bcdcc8",
-            "previous_template_reference_name": "exercises-start-points"
-          },
-          "commit_lead_time": 2134.0,
-          "artifact_compliance_in_flow": true,
-          "flow_reasons_for_non_compliance": []
-        },
-        {
-          "flow_name": "production-promotion",
-          "trail_name": "promote-all-41",
-          "template_reference_name": "exercises-start-points",
-          "git_commit": "54306f735c51413c972b38398da4d0a5fc86d47a",
-          "commit_url": "https://github.com/cyber-dojo/aws-prod-co-promotion/commit/54306f735c51413c972b38398da4d0a5fc86d47a",
-          "git_commit_info": {
-            "sha1": "54306f735c51413c972b38398da4d0a5fc86d47a",
-            "message": "Merge pull request #18 from cyber-dojo/promote-one-requires-a-service\n\nFail promote-one when no service is chosen",
-            "author": "Jon Jagger <jon@kosli.com>",
-            "branch": "main",
-            "timestamp": 1791640516.0,
-            "url": "https://github.com/cyber-dojo/aws-prod-co-promotion/commit/54306f735c51413c972b38398da4d0a5fc86d47a"
-          },
-          "html_url": "https://app.kosli.com/cyber-dojo/flows/production-promotion/artifacts/2dffee94d09db0d3e291cef0fc416f007271ab578adcba8b35f359fda5f2a8a8?artifact_id=1d6f3ca7-ce34-4cfc-b5f0-6c998408",
-          "flow_html_url": "https://app.kosli.com/cyber-dojo/flows/production-promotion",
-          "deployment_diff": {
-            "diff_url": "https://github.com/cyber-dojo/aws-prod-co-promotion/compare/8c76df3ae03cf8f4d6be40d4af6d550c2e6f1d25...54306f735c51413c972b38398da4d0a5fc86d47a",
-            "previous_git_commit": "8c76df3ae03cf8f4d6be40d4af6d550c2e6f1d25",
-            "previous_git_commit_url": "https://github.com/cyber-dojo/aws-prod-co-promotion/commit/8c76df3ae03cf8f4d6be40d4af6d550c2e6f1d25",
-            "previous_fingerprint": "b2cc2492bec7b295c6e33a4992af9fbe9e55f2332c29f1feb9f9ed453fad43c9",
-            "previous_artifact_name": "244531986313.dkr.ecr.eu-central-1.amazonaws.com/exercises-start-points:009779d@sha256:b2cc2492bec7b295c6e33a4992af9fbe9e55f2332c29f1feb9f9ed453fad43c9",
-            "previous_artifact_compliance_state": "COMPLIANT",
-            "previous_running": false,
-            "previous_trail_name": "promotion-one-180",
-            "previous_template_reference_name": "exercises-start-points"
-          },
-          "commit_lead_time": 8106.0,
-          "artifact_compliance_in_flow": true,
-          "flow_reasons_for_non_compliance": []
-        },
-        {
-          "flow_name": "snyk-aws-prod-per-artifact",
-          "trail_name": "exercises-start-points-2dffee94d09db0d3e291cef0fc416f007271ab578adcba8b35f359fda5f2a8a8",
-          "template_reference_name": "exercises-start-points",
-          "git_commit": "359c98460f5c3aefb136a77eef08d1be4c4ca08d",
-          "commit_url": "https://github.com/cyber-dojo/snyk-scanning/commit/359c98460f5c3aefb136a77eef08d1be4c4ca08d",
-          "git_commit_info": {
-            "sha1": "359c98460f5c3aefb136a77eef08d1be4c4ca08d",
-            "message": "Merge pull request #6 from cyber-dojo/key-uploads-and-trails-on-component-not-repo\n\nTell apart artifacts built by one repo",
-            "author": "Jon Jagger <jon@kosli.com>",
-            "branch": "main",
-            "timestamp": 1790759058.0,
-            "url": "https://github.com/cyber-dojo/snyk-scanning/commit/359c98460f5c3aefb136a77eef08d1be4c4ca08d"
-          },
-          "html_url": "https://app.kosli.com/cyber-dojo/flows/snyk-aws-prod-per-artifact/artifacts/2dffee94d09db0d3e291cef0fc416f007271ab578adcba8b35f359fda5f2a8a8?artifact_id=dd336a73-0ddc-4f2b-8ce1-d6d20f90",
-          "flow_html_url": "https://app.kosli.com/cyber-dojo/flows/snyk-aws-prod-per-artifact",
-          "deployment_diff": {
-            "diff_url": "https://github.com/cyber-dojo/snyk-scanning/compare/30111f180ac4e3611cdbd7d805381a0bb9f53cff...359c98460f5c3aefb136a77eef08d1be4c4ca08d",
-            "previous_git_commit": "30111f180ac4e3611cdbd7d805381a0bb9f53cff",
-            "previous_git_commit_url": "https://github.com/cyber-dojo/snyk-scanning/commit/30111f180ac4e3611cdbd7d805381a0bb9f53cff",
-            "previous_fingerprint": "bc1dae4e8ce742e027a6dc6b68e44c65361cd48e588483d3fd9f6d6911a84c31",
-            "previous_artifact_name": "244531986313.dkr.ecr.eu-central-1.amazonaws.com/exercises-start-points:d01bb39@sha256:bc1dae4e8ce742e027a6dc6b68e44c65361cd48e588483d3fd9f6d6911a84c31",
-            "previous_artifact_compliance_state": "COMPLIANT",
-            "previous_running": false,
-            "previous_trail_name": "exercises-start-points-bc1dae4e8ce742e027a6dc6b68e44c65361cd48e588483d3fd9f6d6911a84c31",
-            "previous_template_reference_name": "exercises-start-points"
-          },
-          "commit_lead_time": 889564.0,
-          "artifact_compliance_in_flow": true,
-          "flow_reasons_for_non_compliance": []
-        }
-      ],
-      "ecs_context": {
-        "task_arn": "arn:aws:ecs:eu-central-1:274425519734:task/app/a56b0b31ecdf4a978746c67594ee418f",
-        "cluster_name": null,
-        "service_name": null
-      }
-    },
-    {
-      "name": "244531986313.dkr.ecr.eu-central-1.amazonaws.com/custom-start-points:270c3c8@sha256:6726c2fe6436edca6caaeed069531e326f7bfdceeac41feed28bef90a036cc93",
-      "compliant": true,
-      "deployments": [],
-      "policy_decisions": [
-        {
-          "policy_version": 2,
-          "status": "COMPLIANT",
-          "rule_evaluations": [
-            {
-              "rule": {
-                "type": "provenance",
-                "definition": {
-                  "required": false,
-                  "exceptions": []
-                }
-              },
-              "satisfied": null,
-              "ignored": true,
-              "resolutions": [
-                {
-                  "type": "rule_not_applicable",
-                  "context": {
-                    "flow_name": "custom-start-points-ci",
-                    "trail_name": "270c3c87aecb0e008e90879be753e67983e692c8",
-                    "artifact_status": null
-                  }
-                },
-                {
-                  "type": "rule_not_applicable",
-                  "context": {
-                    "flow_name": "production-promotion",
-                    "trail_name": "promote-all-41",
-                    "artifact_status": null
-                  }
-                },
-                {
-                  "type": "rule_not_applicable",
-                  "context": {
-                    "flow_name": "snyk-aws-prod-per-artifact",
-                    "trail_name": "custom-start-points-6726c2fe6436edca6caaeed069531e326f7bfdceeac41feed28bef90a036cc93",
-                    "artifact_status": null
-                  }
-                }
-              ]
-            },
-            {
-              "rule": {
-                "type": "trail-compliance",
-                "definition": {
-                  "required": false,
-                  "exceptions": []
-                }
-              },
-              "satisfied": null,
-              "ignored": true,
-              "resolutions": [
-                {
-                  "type": "rule_not_applicable",
-                  "context": {
-                    "flow_name": "custom-start-points-ci",
-                    "trail_name": "270c3c87aecb0e008e90879be753e67983e692c8",
-                    "artifact_status": "COMPLIANT"
-                  }
-                },
-                {
-                  "type": "rule_not_applicable",
-                  "context": {
-                    "flow_name": "production-promotion",
-                    "trail_name": "promote-all-41",
-                    "artifact_status": "COMPLIANT"
-                  }
-                },
-                {
-                  "type": "rule_not_applicable",
-                  "context": {
-                    "flow_name": "snyk-aws-prod-per-artifact",
-                    "trail_name": "custom-start-points-6726c2fe6436edca6caaeed069531e326f7bfdceeac41feed28bef90a036cc93",
-                    "artifact_status": "COMPLIANT"
-                  }
-                }
-              ]
-            },
-            {
-              "rule": {
-                "type": "attestation",
-                "definition": {
-                  "if": {
-                    "text": "flow.name == \"production-promotion\""
-                  },
-                  "name": "snyk-scan",
-                  "type": "decision",
-                  "must_be_compliant": true,
-                  "for_control": null
-                }
-              },
-              "satisfied": true,
-              "ignored": false,
-              "resolutions": [
-                {
-                  "type": "rule_not_applicable",
-                  "context": {
-                    "flow_name": "custom-start-points-ci",
-                    "trail_name": "270c3c87aecb0e008e90879be753e67983e692c8",
-                    "artifact_status": null
-                  }
-                },
-                {
-                  "type": "rule_satisfied",
-                  "context": {
-                    "flow_name": "production-promotion",
-                    "trail_name": "promote-all-41",
-                    "artifact_status": null
-                  }
-                },
-                {
-                  "type": "rule_not_applicable",
-                  "context": {
-                    "flow_name": "snyk-aws-prod-per-artifact",
-                    "trail_name": "custom-start-points-6726c2fe6436edca6caaeed069531e326f7bfdceeac41feed28bef90a036cc93",
-                    "artifact_status": null
-                  }
-                }
-              ]
-            }
-          ],
-          "policy_name": "production-promotion"
-        },
-        {
-          "policy_version": 3,
-          "status": "COMPLIANT",
-          "rule_evaluations": [
-            {
-              "rule": {
-                "type": "provenance",
-                "definition": {
-                  "required": true,
-                  "exceptions": []
-                }
-              },
-              "satisfied": true,
-              "ignored": false,
-              "resolutions": [
-                {
-                  "type": "rule_satisfied",
-                  "context": {
-                    "flow_name": "custom-start-points-ci",
-                    "trail_name": "270c3c87aecb0e008e90879be753e67983e692c8",
-                    "artifact_status": null
-                  }
-                },
-                {
-                  "type": "rule_satisfied",
-                  "context": {
-                    "flow_name": "production-promotion",
-                    "trail_name": "promote-all-41",
-                    "artifact_status": null
-                  }
-                },
-                {
-                  "type": "rule_satisfied",
-                  "context": {
-                    "flow_name": "snyk-aws-prod-per-artifact",
-                    "trail_name": "custom-start-points-6726c2fe6436edca6caaeed069531e326f7bfdceeac41feed28bef90a036cc93",
-                    "artifact_status": null
-                  }
-                }
-              ]
-            },
-            {
-              "rule": {
-                "type": "trail-compliance",
-                "definition": {
-                  "required": false,
-                  "exceptions": []
-                }
-              },
-              "satisfied": null,
-              "ignored": true,
-              "resolutions": [
-                {
-                  "type": "rule_not_applicable",
-                  "context": {
-                    "flow_name": "custom-start-points-ci",
-                    "trail_name": "270c3c87aecb0e008e90879be753e67983e692c8",
-                    "artifact_status": "COMPLIANT"
-                  }
-                },
-                {
-                  "type": "rule_not_applicable",
-                  "context": {
-                    "flow_name": "production-promotion",
-                    "trail_name": "promote-all-41",
-                    "artifact_status": "COMPLIANT"
-                  }
-                },
-                {
-                  "type": "rule_not_applicable",
-                  "context": {
-                    "flow_name": "snyk-aws-prod-per-artifact",
-                    "trail_name": "custom-start-points-6726c2fe6436edca6caaeed069531e326f7bfdceeac41feed28bef90a036cc93",
-                    "artifact_status": "COMPLIANT"
-                  }
-                }
-              ]
-            },
-            {
-              "rule": {
-                "type": "attestation",
-                "definition": {
-                  "if": {
-                    "text": "flow.tags.kind == \"build\""
-                  },
-                  "name": "*",
-                  "type": "decision",
-                  "must_be_compliant": true,
-                  "for_control": "SDLC-CTRL-0002"
-                }
-              },
-              "satisfied": true,
-              "ignored": false,
-              "resolutions": [
-                {
-                  "type": "rule_satisfied",
-                  "context": {
-                    "flow_name": "custom-start-points-ci",
-                    "trail_name": "270c3c87aecb0e008e90879be753e67983e692c8",
-                    "artifact_status": null,
-                    "for_control": "SDLC-CTRL-0002"
-                  }
-                },
-                {
-                  "type": "rule_not_applicable",
-                  "context": {
-                    "flow_name": "production-promotion",
-                    "trail_name": "promote-all-41",
-                    "artifact_status": null,
-                    "for_control": "SDLC-CTRL-0002"
-                  }
-                },
-                {
-                  "type": "rule_not_applicable",
-                  "context": {
-                    "flow_name": "snyk-aws-prod-per-artifact",
-                    "trail_name": "custom-start-points-6726c2fe6436edca6caaeed069531e326f7bfdceeac41feed28bef90a036cc93",
-                    "artifact_status": null,
-                    "for_control": "SDLC-CTRL-0002"
-                  }
-                }
-              ]
-            }
-          ],
-          "policy_name": "provenance"
-        },
-        {
-          "policy_version": 3,
-          "status": "COMPLIANT",
-          "rule_evaluations": [
-            {
-              "rule": {
-                "type": "provenance",
-                "definition": {
-                  "required": false,
-                  "exceptions": []
-                }
-              },
-              "satisfied": null,
-              "ignored": true,
-              "resolutions": [
-                {
-                  "type": "rule_not_applicable",
-                  "context": {
-                    "flow_name": "custom-start-points-ci",
-                    "trail_name": "270c3c87aecb0e008e90879be753e67983e692c8",
-                    "artifact_status": null
-                  }
-                },
-                {
-                  "type": "rule_not_applicable",
-                  "context": {
-                    "flow_name": "production-promotion",
-                    "trail_name": "promote-all-41",
-                    "artifact_status": null
-                  }
-                },
-                {
-                  "type": "rule_not_applicable",
-                  "context": {
-                    "flow_name": "snyk-aws-prod-per-artifact",
-                    "trail_name": "custom-start-points-6726c2fe6436edca6caaeed069531e326f7bfdceeac41feed28bef90a036cc93",
-                    "artifact_status": null
-                  }
-                }
-              ]
-            },
-            {
-              "rule": {
-                "type": "trail-compliance",
-                "definition": {
-                  "required": false,
-                  "exceptions": []
-                }
-              },
-              "satisfied": null,
-              "ignored": true,
-              "resolutions": [
-                {
-                  "type": "rule_not_applicable",
-                  "context": {
-                    "flow_name": "custom-start-points-ci",
-                    "trail_name": "270c3c87aecb0e008e90879be753e67983e692c8",
-                    "artifact_status": "COMPLIANT"
-                  }
-                },
-                {
-                  "type": "rule_not_applicable",
-                  "context": {
-                    "flow_name": "production-promotion",
-                    "trail_name": "promote-all-41",
-                    "artifact_status": "COMPLIANT"
-                  }
-                },
-                {
-                  "type": "rule_not_applicable",
-                  "context": {
-                    "flow_name": "snyk-aws-prod-per-artifact",
-                    "trail_name": "custom-start-points-6726c2fe6436edca6caaeed069531e326f7bfdceeac41feed28bef90a036cc93",
-                    "artifact_status": "COMPLIANT"
-                  }
-                }
-              ]
-            },
-            {
-              "rule": {
-                "type": "attestation",
-                "definition": {
-                  "if": {
-                    "text": "flow.tags.kind == \"build\""
-                  },
-                  "name": "*",
-                  "type": "pull_request",
-                  "must_be_compliant": true,
-                  "for_control": null
-                }
-              },
-              "satisfied": true,
-              "ignored": false,
-              "resolutions": [
-                {
-                  "type": "rule_satisfied",
-                  "context": {
-                    "flow_name": "custom-start-points-ci",
-                    "trail_name": "270c3c87aecb0e008e90879be753e67983e692c8",
-                    "artifact_status": null
-                  }
-                },
-                {
-                  "type": "rule_not_applicable",
-                  "context": {
-                    "flow_name": "production-promotion",
-                    "trail_name": "promote-all-41",
-                    "artifact_status": null
-                  }
-                },
-                {
-                  "type": "rule_not_applicable",
-                  "context": {
-                    "flow_name": "snyk-aws-prod-per-artifact",
-                    "trail_name": "custom-start-points-6726c2fe6436edca6caaeed069531e326f7bfdceeac41feed28bef90a036cc93",
-                    "artifact_status": null
-                  }
-                }
-              ]
-            }
-          ],
-          "policy_name": "pull-request"
-        },
-        {
-          "policy_version": 4,
-          "status": "COMPLIANT",
-          "rule_evaluations": [
-            {
-              "rule": {
-                "type": "provenance",
-                "definition": {
-                  "required": false,
-                  "exceptions": []
-                }
-              },
-              "satisfied": null,
-              "ignored": true,
-              "resolutions": [
-                {
-                  "type": "rule_not_applicable",
-                  "context": {
-                    "flow_name": "custom-start-points-ci",
-                    "trail_name": "270c3c87aecb0e008e90879be753e67983e692c8",
-                    "artifact_status": null
-                  }
-                },
-                {
-                  "type": "rule_not_applicable",
-                  "context": {
-                    "flow_name": "production-promotion",
-                    "trail_name": "promote-all-41",
-                    "artifact_status": null
-                  }
-                },
-                {
-                  "type": "rule_not_applicable",
-                  "context": {
-                    "flow_name": "snyk-aws-prod-per-artifact",
-                    "trail_name": "custom-start-points-6726c2fe6436edca6caaeed069531e326f7bfdceeac41feed28bef90a036cc93",
-                    "artifact_status": null
-                  }
-                }
-              ]
-            },
-            {
-              "rule": {
-                "type": "trail-compliance",
-                "definition": {
-                  "required": false,
-                  "exceptions": []
-                }
-              },
-              "satisfied": null,
-              "ignored": true,
-              "resolutions": [
-                {
-                  "type": "rule_not_applicable",
-                  "context": {
-                    "flow_name": "custom-start-points-ci",
-                    "trail_name": "270c3c87aecb0e008e90879be753e67983e692c8",
-                    "artifact_status": "COMPLIANT"
-                  }
-                },
-                {
-                  "type": "rule_not_applicable",
-                  "context": {
-                    "flow_name": "production-promotion",
-                    "trail_name": "promote-all-41",
-                    "artifact_status": "COMPLIANT"
-                  }
-                },
-                {
-                  "type": "rule_not_applicable",
-                  "context": {
-                    "flow_name": "snyk-aws-prod-per-artifact",
-                    "trail_name": "custom-start-points-6726c2fe6436edca6caaeed069531e326f7bfdceeac41feed28bef90a036cc93",
-                    "artifact_status": "COMPLIANT"
-                  }
-                }
-              ]
-            },
-            {
-              "rule": {
-                "type": "attestation",
-                "definition": {
-                  "if": {
-                    "text": "flow.name == \"snyk-aws-prod-per-artifact\""
-                  },
-                  "name": "snyk-container-scan",
-                  "type": "decision",
-                  "must_be_compliant": true,
-                  "for_control": "SDLC-CTRL-0022"
-                }
-              },
-              "satisfied": true,
-              "ignored": false,
-              "resolutions": [
-                {
-                  "type": "rule_not_applicable",
-                  "context": {
-                    "flow_name": "custom-start-points-ci",
-                    "trail_name": "270c3c87aecb0e008e90879be753e67983e692c8",
-                    "artifact_status": null,
-                    "for_control": "SDLC-CTRL-0022"
-                  }
-                },
-                {
-                  "type": "rule_not_applicable",
-                  "context": {
-                    "flow_name": "production-promotion",
-                    "trail_name": "promote-all-41",
-                    "artifact_status": null,
-                    "for_control": "SDLC-CTRL-0022"
-                  }
-                },
-                {
-                  "type": "rule_satisfied",
-                  "context": {
-                    "flow_name": "snyk-aws-prod-per-artifact",
-                    "trail_name": "custom-start-points-6726c2fe6436edca6caaeed069531e326f7bfdceeac41feed28bef90a036cc93",
-                    "artifact_status": null,
-                    "for_control": "SDLC-CTRL-0022"
-                  }
-                }
-              ]
-            }
-          ],
-          "policy_name": "snyk-scan-aws-prod"
-        },
-        {
-          "policy_version": 2,
-          "status": "COMPLIANT",
-          "rule_evaluations": [
-            {
-              "rule": {
-                "type": "provenance",
-                "definition": {
-                  "required": false,
-                  "exceptions": []
-                }
-              },
-              "satisfied": null,
-              "ignored": true,
-              "resolutions": [
-                {
-                  "type": "rule_not_applicable",
-                  "context": {
-                    "flow_name": "custom-start-points-ci",
-                    "trail_name": "270c3c87aecb0e008e90879be753e67983e692c8",
-                    "artifact_status": null
-                  }
-                },
-                {
-                  "type": "rule_not_applicable",
-                  "context": {
-                    "flow_name": "production-promotion",
-                    "trail_name": "promote-all-41",
-                    "artifact_status": null
-                  }
-                },
-                {
-                  "type": "rule_not_applicable",
-                  "context": {
-                    "flow_name": "snyk-aws-prod-per-artifact",
-                    "trail_name": "custom-start-points-6726c2fe6436edca6caaeed069531e326f7bfdceeac41feed28bef90a036cc93",
-                    "artifact_status": null
-                  }
-                }
-              ]
-            },
-            {
-              "rule": {
-                "type": "trail-compliance",
-                "definition": {
-                  "required": true,
-                  "exceptions": [
-                    {
-                      "if": {
-                        "text": "exists(flow.tags.env) and flow.tags.env != \"aws-prod\""
-                      }
-                    }
-                  ]
-                }
-              },
-              "satisfied": true,
-              "ignored": false,
-              "resolutions": [
-                {
-                  "type": "rule_not_applicable",
-                  "context": {
-                    "flow_name": "custom-start-points-ci",
-                    "trail_name": "270c3c87aecb0e008e90879be753e67983e692c8",
-                    "artifact_status": "COMPLIANT"
-                  }
-                },
-                {
-                  "type": "rule_satisfied",
-                  "context": {
-                    "flow_name": "production-promotion",
-                    "trail_name": "promote-all-41",
-                    "artifact_status": "COMPLIANT"
-                  }
-                },
-                {
-                  "type": "rule_satisfied",
-                  "context": {
-                    "flow_name": "snyk-aws-prod-per-artifact",
-                    "trail_name": "custom-start-points-6726c2fe6436edca6caaeed069531e326f7bfdceeac41feed28bef90a036cc93",
-                    "artifact_status": "COMPLIANT"
-                  }
-                }
-              ]
-            }
-          ],
-          "policy_name": "trail-compliance-aws-prod"
-        }
-      ],
-      "reasons_for_incompliance": [],
-      "fingerprint": "6726c2fe6436edca6caaeed069531e326f7bfdceeac41feed28bef90a036cc93",
-      "creationTimestamp": [
-        1791648621
-      ],
-      "pods": null,
-      "annotation": {
-        "type": "changed",
-        "was": 1,
-        "now": 1
-      },
-      "flow_name": "custom-start-points-ci",
-      "git_commit": "270c3c87aecb0e008e90879be753e67983e692c8",
-      "commit_url": "https://github.com/cyber-dojo/custom-start-points/commit/270c3c87aecb0e008e90879be753e67983e692c8",
-      "html_url": "https://app.kosli.com/cyber-dojo/flows/custom-start-points-ci/artifacts/6726c2fe6436edca6caaeed069531e326f7bfdceeac41feed28bef90a036cc93?artifact_id=93be9d1e-6eff-4ff5-a077-ed2baf30",
-      "flow_html_url": "https://app.kosli.com/cyber-dojo/flows/custom-start-points-ci",
-      "deployment_diff": {
-        "diff_url": "https://github.com/cyber-dojo/custom-start-points/compare/12bbf7bcb4553b0b0e24741d7bfc76d9972a7dd2...270c3c87aecb0e008e90879be753e67983e692c8",
-        "previous_git_commit": "12bbf7bcb4553b0b0e24741d7bfc76d9972a7dd2",
-        "previous_git_commit_url": "https://github.com/cyber-dojo/custom-start-points/commit/12bbf7bcb4553b0b0e24741d7bfc76d9972a7dd2",
-        "previous_fingerprint": "72c50c09d16309e07d241e0100e4acccff549f92cdf6de712a59f54fddb5c477",
-        "previous_artifact_name": "244531986313.dkr.ecr.eu-central-1.amazonaws.com/custom-start-points:12bbf7b@sha256:72c50c09d16309e07d241e0100e4acccff549f92cdf6de712a59f54fddb5c477",
-        "previous_artifact_compliance_state": "COMPLIANT",
-        "previous_running": false,
-        "previous_trail_name": "12bbf7bcb4553b0b0e24741d7bfc76d9972a7dd2",
-        "previous_template_reference_name": "custom-start-points"
-      },
-      "commit_lead_time": 2571.0,
-      "flows": [
-        {
-          "flow_name": "custom-start-points-ci",
-          "trail_name": "270c3c87aecb0e008e90879be753e67983e692c8",
-          "template_reference_name": "custom-start-points",
-          "git_commit": "270c3c87aecb0e008e90879be753e67983e692c8",
-          "commit_url": "https://github.com/cyber-dojo/custom-start-points/commit/270c3c87aecb0e008e90879be753e67983e692c8",
-          "git_commit_info": {
-            "sha1": "270c3c87aecb0e008e90879be753e67983e692c8",
-            "message": "Merge pull request #154 from cyber-dojo/multi-arch-start-point\n\nBuild the start-point image for amd64 and arm64",
-            "author": "Jon Jagger <jon@kosli.com>",
-            "branch": "",
-            "timestamp": 1791646050.0,
-            "url": "https://github.com/cyber-dojo/custom-start-points/commit/270c3c87aecb0e008e90879be753e67983e692c8"
-          },
-          "html_url": "https://app.kosli.com/cyber-dojo/flows/custom-start-points-ci/artifacts/6726c2fe6436edca6caaeed069531e326f7bfdceeac41feed28bef90a036cc93?artifact_id=93be9d1e-6eff-4ff5-a077-ed2baf30",
-          "flow_html_url": "https://app.kosli.com/cyber-dojo/flows/custom-start-points-ci",
-          "deployment_diff": {
-            "diff_url": "https://github.com/cyber-dojo/custom-start-points/compare/12bbf7bcb4553b0b0e24741d7bfc76d9972a7dd2...270c3c87aecb0e008e90879be753e67983e692c8",
-            "previous_git_commit": "12bbf7bcb4553b0b0e24741d7bfc76d9972a7dd2",
-            "previous_git_commit_url": "https://github.com/cyber-dojo/custom-start-points/commit/12bbf7bcb4553b0b0e24741d7bfc76d9972a7dd2",
-            "previous_fingerprint": "72c50c09d16309e07d241e0100e4acccff549f92cdf6de712a59f54fddb5c477",
-            "previous_artifact_name": "244531986313.dkr.ecr.eu-central-1.amazonaws.com/custom-start-points:12bbf7b@sha256:72c50c09d16309e07d241e0100e4acccff549f92cdf6de712a59f54fddb5c477",
-            "previous_artifact_compliance_state": "COMPLIANT",
-            "previous_running": false,
-            "previous_trail_name": "12bbf7bcb4553b0b0e24741d7bfc76d9972a7dd2",
-            "previous_template_reference_name": "custom-start-points"
-          },
-          "commit_lead_time": 2571.0,
-          "artifact_compliance_in_flow": true,
-          "flow_reasons_for_non_compliance": []
-        },
-        {
-          "flow_name": "production-promotion",
-          "trail_name": "promote-all-41",
-          "template_reference_name": "custom-start-points",
-          "git_commit": "54306f735c51413c972b38398da4d0a5fc86d47a",
-          "commit_url": "https://github.com/cyber-dojo/aws-prod-co-promotion/commit/54306f735c51413c972b38398da4d0a5fc86d47a",
-          "git_commit_info": {
-            "sha1": "54306f735c51413c972b38398da4d0a5fc86d47a",
-            "message": "Merge pull request #18 from cyber-dojo/promote-one-requires-a-service\n\nFail promote-one when no service is chosen",
-            "author": "Jon Jagger <jon@kosli.com>",
-            "branch": "main",
-            "timestamp": 1791640516.0,
-            "url": "https://github.com/cyber-dojo/aws-prod-co-promotion/commit/54306f735c51413c972b38398da4d0a5fc86d47a"
-          },
-          "html_url": "https://app.kosli.com/cyber-dojo/flows/production-promotion/artifacts/6726c2fe6436edca6caaeed069531e326f7bfdceeac41feed28bef90a036cc93?artifact_id=94089d91-ec7f-46a8-ade1-2b93b563",
-          "flow_html_url": "https://app.kosli.com/cyber-dojo/flows/production-promotion",
-          "deployment_diff": {
-            "diff_url": "https://github.com/cyber-dojo/aws-prod-co-promotion/compare/8c76df3ae03cf8f4d6be40d4af6d550c2e6f1d25...54306f735c51413c972b38398da4d0a5fc86d47a",
-            "previous_git_commit": "8c76df3ae03cf8f4d6be40d4af6d550c2e6f1d25",
-            "previous_git_commit_url": "https://github.com/cyber-dojo/aws-prod-co-promotion/commit/8c76df3ae03cf8f4d6be40d4af6d550c2e6f1d25",
-            "previous_fingerprint": "72c50c09d16309e07d241e0100e4acccff549f92cdf6de712a59f54fddb5c477",
-            "previous_artifact_name": "244531986313.dkr.ecr.eu-central-1.amazonaws.com/custom-start-points:12bbf7b@sha256:72c50c09d16309e07d241e0100e4acccff549f92cdf6de712a59f54fddb5c477",
-            "previous_artifact_compliance_state": "COMPLIANT",
-            "previous_running": false,
-            "previous_trail_name": "promotion-one-182",
-            "previous_template_reference_name": "custom-start-points"
-          },
-          "commit_lead_time": 8105.0,
-          "artifact_compliance_in_flow": true,
-          "flow_reasons_for_non_compliance": []
-        },
-        {
-          "flow_name": "snyk-aws-prod-per-artifact",
-          "trail_name": "custom-start-points-6726c2fe6436edca6caaeed069531e326f7bfdceeac41feed28bef90a036cc93",
-          "template_reference_name": "custom-start-points",
-          "git_commit": "359c98460f5c3aefb136a77eef08d1be4c4ca08d",
-          "commit_url": "https://github.com/cyber-dojo/snyk-scanning/commit/359c98460f5c3aefb136a77eef08d1be4c4ca08d",
-          "git_commit_info": {
-            "sha1": "359c98460f5c3aefb136a77eef08d1be4c4ca08d",
-            "message": "Merge pull request #6 from cyber-dojo/key-uploads-and-trails-on-component-not-repo\n\nTell apart artifacts built by one repo",
-            "author": "Jon Jagger <jon@kosli.com>",
-            "branch": "main",
-            "timestamp": 1790759058.0,
-            "url": "https://github.com/cyber-dojo/snyk-scanning/commit/359c98460f5c3aefb136a77eef08d1be4c4ca08d"
-          },
-          "html_url": "https://app.kosli.com/cyber-dojo/flows/snyk-aws-prod-per-artifact/artifacts/6726c2fe6436edca6caaeed069531e326f7bfdceeac41feed28bef90a036cc93?artifact_id=1200e931-ced2-44af-8087-460a6aac",
-          "flow_html_url": "https://app.kosli.com/cyber-dojo/flows/snyk-aws-prod-per-artifact",
-          "deployment_diff": {
-            "diff_url": "https://github.com/cyber-dojo/snyk-scanning/compare/30111f180ac4e3611cdbd7d805381a0bb9f53cff...359c98460f5c3aefb136a77eef08d1be4c4ca08d",
-            "previous_git_commit": "30111f180ac4e3611cdbd7d805381a0bb9f53cff",
-            "previous_git_commit_url": "https://github.com/cyber-dojo/snyk-scanning/commit/30111f180ac4e3611cdbd7d805381a0bb9f53cff",
-            "previous_fingerprint": "ed0b8b8cc04f951bc7224d792c9c68010388f9ebf3c45d9a5d375be3a68d0b2e",
-            "previous_artifact_name": "244531986313.dkr.ecr.eu-central-1.amazonaws.com/custom-start-points:86c839e@sha256:ed0b8b8cc04f951bc7224d792c9c68010388f9ebf3c45d9a5d375be3a68d0b2e",
-            "previous_artifact_compliance_state": "COMPLIANT",
-            "previous_running": false,
-            "previous_trail_name": "custom-start-points-ed0b8b8cc04f951bc7224d792c9c68010388f9ebf3c45d9a5d375be3a68d0b2e",
-            "previous_template_reference_name": "custom-start-points"
-          },
-          "commit_lead_time": 889563.0,
-          "artifact_compliance_in_flow": true,
-          "flow_reasons_for_non_compliance": []
-        }
-      ],
-      "ecs_context": {
-        "task_arn": "arn:aws:ecs:eu-central-1:274425519734:task/app/215ffdb9e276401e8e3a12a333e06afd",
-        "cluster_name": null,
-        "service_name": null
-      }
-    },
-    {
-      "name": "244531986313.dkr.ecr.eu-central-1.amazonaws.com/dashboard:3e6678b@sha256:5f70df2163e8918675c92251f398bc1a88d0d7a9ce1eef39d1f603525de077b6",
-      "compliant": true,
-      "deployments": [],
-      "policy_decisions": [
-        {
-          "policy_version": 2,
-          "status": "COMPLIANT",
-          "rule_evaluations": [
-            {
-              "rule": {
-                "type": "provenance",
-                "definition": {
-                  "required": false,
-                  "exceptions": []
-                }
-              },
-              "satisfied": null,
-              "ignored": true,
-              "resolutions": [
-                {
-                  "type": "rule_not_applicable",
-                  "context": {
-                    "flow_name": "dashboard-ci",
-                    "trail_name": "3e6678b80d51d7ec4c89d88f46dcee93f27fd6c1",
-                    "artifact_status": null
-                  }
-                },
-                {
-                  "type": "rule_not_applicable",
-                  "context": {
-                    "flow_name": "production-promotion",
-                    "trail_name": "promote-all-41",
-                    "artifact_status": null
-                  }
-                },
-                {
-                  "type": "rule_not_applicable",
-                  "context": {
-                    "flow_name": "snyk-aws-prod-per-artifact",
-                    "trail_name": "web-5f70df2163e8918675c92251f398bc1a88d0d7a9ce1eef39d1f603525de077b6",
-                    "artifact_status": null
-                  }
-                }
-              ]
-            },
-            {
-              "rule": {
-                "type": "trail-compliance",
-                "definition": {
-                  "required": false,
-                  "exceptions": []
-                }
-              },
-              "satisfied": null,
-              "ignored": true,
-              "resolutions": [
-                {
-                  "type": "rule_not_applicable",
-                  "context": {
-                    "flow_name": "dashboard-ci",
-                    "trail_name": "3e6678b80d51d7ec4c89d88f46dcee93f27fd6c1",
-                    "artifact_status": "COMPLIANT"
-                  }
-                },
-                {
-                  "type": "rule_not_applicable",
-                  "context": {
-                    "flow_name": "production-promotion",
-                    "trail_name": "promote-all-41",
-                    "artifact_status": "COMPLIANT"
-                  }
-                },
-                {
-                  "type": "rule_not_applicable",
-                  "context": {
-                    "flow_name": "snyk-aws-prod-per-artifact",
-                    "trail_name": "web-5f70df2163e8918675c92251f398bc1a88d0d7a9ce1eef39d1f603525de077b6",
-                    "artifact_status": "COMPLIANT"
-                  }
-                }
-              ]
-            },
-            {
-              "rule": {
-                "type": "attestation",
-                "definition": {
-                  "if": {
-                    "text": "flow.name == \"production-promotion\""
-                  },
-                  "name": "snyk-scan",
-                  "type": "decision",
-                  "must_be_compliant": true,
-                  "for_control": null
-                }
-              },
-              "satisfied": true,
-              "ignored": false,
-              "resolutions": [
-                {
-                  "type": "rule_not_applicable",
-                  "context": {
-                    "flow_name": "dashboard-ci",
-                    "trail_name": "3e6678b80d51d7ec4c89d88f46dcee93f27fd6c1",
-                    "artifact_status": null
-                  }
-                },
-                {
-                  "type": "rule_satisfied",
-                  "context": {
-                    "flow_name": "production-promotion",
-                    "trail_name": "promote-all-41",
-                    "artifact_status": null
-                  }
-                },
-                {
-                  "type": "rule_not_applicable",
-                  "context": {
-                    "flow_name": "snyk-aws-prod-per-artifact",
-                    "trail_name": "web-5f70df2163e8918675c92251f398bc1a88d0d7a9ce1eef39d1f603525de077b6",
-                    "artifact_status": null
-                  }
-                }
-              ]
-            }
-          ],
-          "policy_name": "production-promotion"
-        },
-        {
-          "policy_version": 3,
-          "status": "COMPLIANT",
-          "rule_evaluations": [
-            {
-              "rule": {
-                "type": "provenance",
-                "definition": {
-                  "required": true,
-                  "exceptions": []
-                }
-              },
-              "satisfied": true,
-              "ignored": false,
-              "resolutions": [
-                {
-                  "type": "rule_satisfied",
-                  "context": {
-                    "flow_name": "dashboard-ci",
-                    "trail_name": "3e6678b80d51d7ec4c89d88f46dcee93f27fd6c1",
-                    "artifact_status": null
-                  }
-                },
-                {
-                  "type": "rule_satisfied",
-                  "context": {
-                    "flow_name": "production-promotion",
-                    "trail_name": "promote-all-41",
-                    "artifact_status": null
-                  }
-                },
-                {
-                  "type": "rule_satisfied",
-                  "context": {
-                    "flow_name": "snyk-aws-prod-per-artifact",
-                    "trail_name": "web-5f70df2163e8918675c92251f398bc1a88d0d7a9ce1eef39d1f603525de077b6",
-                    "artifact_status": null
-                  }
-                }
-              ]
-            },
-            {
-              "rule": {
-                "type": "trail-compliance",
-                "definition": {
-                  "required": false,
-                  "exceptions": []
-                }
-              },
-              "satisfied": null,
-              "ignored": true,
-              "resolutions": [
-                {
-                  "type": "rule_not_applicable",
-                  "context": {
-                    "flow_name": "dashboard-ci",
-                    "trail_name": "3e6678b80d51d7ec4c89d88f46dcee93f27fd6c1",
-                    "artifact_status": "COMPLIANT"
-                  }
-                },
-                {
-                  "type": "rule_not_applicable",
-                  "context": {
-                    "flow_name": "production-promotion",
-                    "trail_name": "promote-all-41",
-                    "artifact_status": "COMPLIANT"
-                  }
-                },
-                {
-                  "type": "rule_not_applicable",
-                  "context": {
-                    "flow_name": "snyk-aws-prod-per-artifact",
-                    "trail_name": "web-5f70df2163e8918675c92251f398bc1a88d0d7a9ce1eef39d1f603525de077b6",
-                    "artifact_status": "COMPLIANT"
-                  }
-                }
-              ]
-            },
-            {
-              "rule": {
-                "type": "attestation",
-                "definition": {
-                  "if": {
-                    "text": "flow.tags.kind == \"build\""
-                  },
-                  "name": "*",
-                  "type": "decision",
-                  "must_be_compliant": true,
-                  "for_control": "SDLC-CTRL-0002"
-                }
-              },
-              "satisfied": true,
-              "ignored": false,
-              "resolutions": [
-                {
-                  "type": "rule_satisfied",
-                  "context": {
-                    "flow_name": "dashboard-ci",
-                    "trail_name": "3e6678b80d51d7ec4c89d88f46dcee93f27fd6c1",
-                    "artifact_status": null,
-                    "for_control": "SDLC-CTRL-0002"
-                  }
-                },
-                {
-                  "type": "rule_not_applicable",
-                  "context": {
-                    "flow_name": "production-promotion",
-                    "trail_name": "promote-all-41",
-                    "artifact_status": null,
-                    "for_control": "SDLC-CTRL-0002"
-                  }
-                },
-                {
-                  "type": "rule_not_applicable",
-                  "context": {
-                    "flow_name": "snyk-aws-prod-per-artifact",
-                    "trail_name": "web-5f70df2163e8918675c92251f398bc1a88d0d7a9ce1eef39d1f603525de077b6",
-                    "artifact_status": null,
-                    "for_control": "SDLC-CTRL-0002"
-                  }
-                }
-              ]
-            }
-          ],
-          "policy_name": "provenance"
-        },
-        {
-          "policy_version": 3,
-          "status": "COMPLIANT",
-          "rule_evaluations": [
-            {
-              "rule": {
-                "type": "provenance",
-                "definition": {
-                  "required": false,
-                  "exceptions": []
-                }
-              },
-              "satisfied": null,
-              "ignored": true,
-              "resolutions": [
-                {
-                  "type": "rule_not_applicable",
-                  "context": {
-                    "flow_name": "dashboard-ci",
-                    "trail_name": "3e6678b80d51d7ec4c89d88f46dcee93f27fd6c1",
-                    "artifact_status": null
-                  }
-                },
-                {
-                  "type": "rule_not_applicable",
-                  "context": {
-                    "flow_name": "production-promotion",
-                    "trail_name": "promote-all-41",
-                    "artifact_status": null
-                  }
-                },
-                {
-                  "type": "rule_not_applicable",
-                  "context": {
-                    "flow_name": "snyk-aws-prod-per-artifact",
-                    "trail_name": "web-5f70df2163e8918675c92251f398bc1a88d0d7a9ce1eef39d1f603525de077b6",
-                    "artifact_status": null
-                  }
-                }
-              ]
-            },
-            {
-              "rule": {
-                "type": "trail-compliance",
-                "definition": {
-                  "required": false,
-                  "exceptions": []
-                }
-              },
-              "satisfied": null,
-              "ignored": true,
-              "resolutions": [
-                {
-                  "type": "rule_not_applicable",
-                  "context": {
-                    "flow_name": "dashboard-ci",
-                    "trail_name": "3e6678b80d51d7ec4c89d88f46dcee93f27fd6c1",
-                    "artifact_status": "COMPLIANT"
-                  }
-                },
-                {
-                  "type": "rule_not_applicable",
-                  "context": {
-                    "flow_name": "production-promotion",
-                    "trail_name": "promote-all-41",
-                    "artifact_status": "COMPLIANT"
-                  }
-                },
-                {
-                  "type": "rule_not_applicable",
-                  "context": {
-                    "flow_name": "snyk-aws-prod-per-artifact",
-                    "trail_name": "web-5f70df2163e8918675c92251f398bc1a88d0d7a9ce1eef39d1f603525de077b6",
-                    "artifact_status": "COMPLIANT"
-                  }
-                }
-              ]
-            },
-            {
-              "rule": {
-                "type": "attestation",
-                "definition": {
-                  "if": {
-                    "text": "flow.tags.kind == \"build\""
-                  },
-                  "name": "*",
-                  "type": "pull_request",
-                  "must_be_compliant": true,
-                  "for_control": null
-                }
-              },
-              "satisfied": true,
-              "ignored": false,
-              "resolutions": [
-                {
-                  "type": "rule_satisfied",
-                  "context": {
-                    "flow_name": "dashboard-ci",
-                    "trail_name": "3e6678b80d51d7ec4c89d88f46dcee93f27fd6c1",
-                    "artifact_status": null
-                  }
-                },
-                {
-                  "type": "rule_not_applicable",
-                  "context": {
-                    "flow_name": "production-promotion",
-                    "trail_name": "promote-all-41",
-                    "artifact_status": null
-                  }
-                },
-                {
-                  "type": "rule_not_applicable",
-                  "context": {
-                    "flow_name": "snyk-aws-prod-per-artifact",
-                    "trail_name": "web-5f70df2163e8918675c92251f398bc1a88d0d7a9ce1eef39d1f603525de077b6",
-                    "artifact_status": null
-                  }
-                }
-              ]
-            }
-          ],
-          "policy_name": "pull-request"
-        },
-        {
-          "policy_version": 4,
-          "status": "COMPLIANT",
-          "rule_evaluations": [
-            {
-              "rule": {
-                "type": "provenance",
-                "definition": {
-                  "required": false,
-                  "exceptions": []
-                }
-              },
-              "satisfied": null,
-              "ignored": true,
-              "resolutions": [
-                {
-                  "type": "rule_not_applicable",
-                  "context": {
-                    "flow_name": "dashboard-ci",
-                    "trail_name": "3e6678b80d51d7ec4c89d88f46dcee93f27fd6c1",
-                    "artifact_status": null
-                  }
-                },
-                {
-                  "type": "rule_not_applicable",
-                  "context": {
-                    "flow_name": "production-promotion",
-                    "trail_name": "promote-all-41",
-                    "artifact_status": null
-                  }
-                },
-                {
-                  "type": "rule_not_applicable",
-                  "context": {
-                    "flow_name": "snyk-aws-prod-per-artifact",
-                    "trail_name": "web-5f70df2163e8918675c92251f398bc1a88d0d7a9ce1eef39d1f603525de077b6",
-                    "artifact_status": null
-                  }
-                }
-              ]
-            },
-            {
-              "rule": {
-                "type": "trail-compliance",
-                "definition": {
-                  "required": false,
-                  "exceptions": []
-                }
-              },
-              "satisfied": null,
-              "ignored": true,
-              "resolutions": [
-                {
-                  "type": "rule_not_applicable",
-                  "context": {
-                    "flow_name": "dashboard-ci",
-                    "trail_name": "3e6678b80d51d7ec4c89d88f46dcee93f27fd6c1",
-                    "artifact_status": "COMPLIANT"
-                  }
-                },
-                {
-                  "type": "rule_not_applicable",
-                  "context": {
-                    "flow_name": "production-promotion",
-                    "trail_name": "promote-all-41",
-                    "artifact_status": "COMPLIANT"
-                  }
-                },
-                {
-                  "type": "rule_not_applicable",
-                  "context": {
-                    "flow_name": "snyk-aws-prod-per-artifact",
-                    "trail_name": "web-5f70df2163e8918675c92251f398bc1a88d0d7a9ce1eef39d1f603525de077b6",
-                    "artifact_status": "COMPLIANT"
-                  }
-                }
-              ]
-            },
-            {
-              "rule": {
-                "type": "attestation",
-                "definition": {
-                  "if": {
-                    "text": "flow.name == \"snyk-aws-prod-per-artifact\""
-                  },
-                  "name": "snyk-container-scan",
-                  "type": "decision",
-                  "must_be_compliant": true,
-                  "for_control": "SDLC-CTRL-0022"
-                }
-              },
-              "satisfied": true,
-              "ignored": false,
-              "resolutions": [
-                {
-                  "type": "rule_not_applicable",
-                  "context": {
-                    "flow_name": "dashboard-ci",
-                    "trail_name": "3e6678b80d51d7ec4c89d88f46dcee93f27fd6c1",
-                    "artifact_status": null,
-                    "for_control": "SDLC-CTRL-0022"
-                  }
-                },
-                {
-                  "type": "rule_not_applicable",
-                  "context": {
-                    "flow_name": "production-promotion",
-                    "trail_name": "promote-all-41",
-                    "artifact_status": null,
-                    "for_control": "SDLC-CTRL-0022"
-                  }
-                },
-                {
-                  "type": "rule_satisfied",
-                  "context": {
-                    "flow_name": "snyk-aws-prod-per-artifact",
-                    "trail_name": "web-5f70df2163e8918675c92251f398bc1a88d0d7a9ce1eef39d1f603525de077b6",
-                    "artifact_status": null,
-                    "for_control": "SDLC-CTRL-0022"
-                  }
-                }
-              ]
-            }
-          ],
-          "policy_name": "snyk-scan-aws-prod"
-        },
-        {
-          "policy_version": 2,
-          "status": "COMPLIANT",
-          "rule_evaluations": [
-            {
-              "rule": {
-                "type": "provenance",
-                "definition": {
-                  "required": false,
-                  "exceptions": []
-                }
-              },
-              "satisfied": null,
-              "ignored": true,
-              "resolutions": [
-                {
-                  "type": "rule_not_applicable",
-                  "context": {
-                    "flow_name": "dashboard-ci",
-                    "trail_name": "3e6678b80d51d7ec4c89d88f46dcee93f27fd6c1",
-                    "artifact_status": null
-                  }
-                },
-                {
-                  "type": "rule_not_applicable",
-                  "context": {
-                    "flow_name": "production-promotion",
-                    "trail_name": "promote-all-41",
-                    "artifact_status": null
-                  }
-                },
-                {
-                  "type": "rule_not_applicable",
-                  "context": {
-                    "flow_name": "snyk-aws-prod-per-artifact",
-                    "trail_name": "web-5f70df2163e8918675c92251f398bc1a88d0d7a9ce1eef39d1f603525de077b6",
-                    "artifact_status": null
-                  }
-                }
-              ]
-            },
-            {
-              "rule": {
-                "type": "trail-compliance",
-                "definition": {
-                  "required": true,
-                  "exceptions": [
-                    {
-                      "if": {
-                        "text": "exists(flow.tags.env) and flow.tags.env != \"aws-prod\""
-                      }
-                    }
-                  ]
-                }
-              },
-              "satisfied": true,
-              "ignored": false,
-              "resolutions": [
-                {
-                  "type": "rule_not_applicable",
-                  "context": {
-                    "flow_name": "dashboard-ci",
-                    "trail_name": "3e6678b80d51d7ec4c89d88f46dcee93f27fd6c1",
-                    "artifact_status": "COMPLIANT"
-                  }
-                },
-                {
-                  "type": "rule_satisfied",
-                  "context": {
-                    "flow_name": "production-promotion",
-                    "trail_name": "promote-all-41",
-                    "artifact_status": "COMPLIANT"
-                  }
-                },
-                {
-                  "type": "rule_satisfied",
-                  "context": {
-                    "flow_name": "snyk-aws-prod-per-artifact",
-                    "trail_name": "web-5f70df2163e8918675c92251f398bc1a88d0d7a9ce1eef39d1f603525de077b6",
-                    "artifact_status": "COMPLIANT"
-                  }
-                }
-              ]
-            }
-          ],
-          "policy_name": "trail-compliance-aws-prod"
-        }
-      ],
-      "reasons_for_incompliance": [],
-      "fingerprint": "5f70df2163e8918675c92251f398bc1a88d0d7a9ce1eef39d1f603525de077b6",
-      "creationTimestamp": [
-        1791648357
-      ],
-      "pods": null,
-      "annotation": {
-        "type": "changed",
-        "was": 1,
-        "now": 1
-      },
-      "flow_name": "dashboard-ci",
-      "git_commit": "3e6678b80d51d7ec4c89d88f46dcee93f27fd6c1",
-      "commit_url": "https://github.com/cyber-dojo/web/commit/3e6678b80d51d7ec4c89d88f46dcee93f27fd6c1",
-      "html_url": "https://app.kosli.com/cyber-dojo/flows/dashboard-ci/artifacts/5f70df2163e8918675c92251f398bc1a88d0d7a9ce1eef39d1f603525de077b6?artifact_id=6923c594-deee-4b7c-83e9-3165a9ed",
-      "flow_html_url": "https://app.kosli.com/cyber-dojo/flows/dashboard-ci",
-      "deployment_diff": {
-        "diff_url": "https://github.com/cyber-dojo/web/compare/239086385550e2c369fd3aa1f656b56f362db8f7...3e6678b80d51d7ec4c89d88f46dcee93f27fd6c1",
-        "previous_git_commit": "239086385550e2c369fd3aa1f656b56f362db8f7",
-        "previous_git_commit_url": "https://github.com/cyber-dojo/web/commit/239086385550e2c369fd3aa1f656b56f362db8f7",
-        "previous_fingerprint": "b0d1d69124bb75a316f7436a630bf2c5483d6a26e02c9ec709ec9bd3b132fa45",
-        "previous_artifact_name": "244531986313.dkr.ecr.eu-central-1.amazonaws.com/dashboard:2390863@sha256:b0d1d69124bb75a316f7436a630bf2c5483d6a26e02c9ec709ec9bd3b132fa45",
-        "previous_artifact_compliance_state": "COMPLIANT",
-        "previous_running": false,
-        "previous_trail_name": "239086385550e2c369fd3aa1f656b56f362db8f7",
-        "previous_template_reference_name": "dashboard"
-      },
-      "commit_lead_time": 15159.0,
-      "flows": [
-        {
-          "flow_name": "dashboard-ci",
-          "trail_name": "3e6678b80d51d7ec4c89d88f46dcee93f27fd6c1",
-          "template_reference_name": "dashboard",
-          "git_commit": "3e6678b80d51d7ec4c89d88f46dcee93f27fd6c1",
-          "commit_url": "https://github.com/cyber-dojo/web/commit/3e6678b80d51d7ec4c89d88f46dcee93f27fd6c1",
-          "git_commit_info": {
-            "sha1": "3e6678b80d51d7ec4c89d88f46dcee93f27fd6c1",
-            "message": "Web multi platform and dockerhub (#468)\n\n* Build web, creator, dashboard for amd64 + arm64\n\nThe three images were amd64-only, and reached\nDocker Hub only via versioner copying from ECR.\nEach workflow now builds both platforms and\npasses Docker Hub credentials, so the same build\nis pushed to both, with the digest Kosli attests.\n\nasset_builder is amd64-only, but its output is\nCSS/JS text, so the asset stages run on the\nbuild platform and both targets copy the result.\n\nCo-Authored-By: Claude Opus 5.5\n  <noreply@anthropic.com>\n\n* Run the local runner with 16 spares\n\nPre-started spare containers spare test runs the\ncontainer start, so local runs reflect the\nrunner as it is deployed with spares.\n\n---------\n\nCo-authored-by: Claude Opus 5.5 <noreply@anthropic.com>",
-            "author": "Jon Jagger <jon@kosli.com>",
-            "branch": "",
-            "timestamp": 1791633198.0,
-            "url": "https://github.com/cyber-dojo/web/commit/3e6678b80d51d7ec4c89d88f46dcee93f27fd6c1"
-          },
-          "html_url": "https://app.kosli.com/cyber-dojo/flows/dashboard-ci/artifacts/5f70df2163e8918675c92251f398bc1a88d0d7a9ce1eef39d1f603525de077b6?artifact_id=6923c594-deee-4b7c-83e9-3165a9ed",
-          "flow_html_url": "https://app.kosli.com/cyber-dojo/flows/dashboard-ci",
-          "deployment_diff": {
-            "diff_url": "https://github.com/cyber-dojo/web/compare/239086385550e2c369fd3aa1f656b56f362db8f7...3e6678b80d51d7ec4c89d88f46dcee93f27fd6c1",
-            "previous_git_commit": "239086385550e2c369fd3aa1f656b56f362db8f7",
-            "previous_git_commit_url": "https://github.com/cyber-dojo/web/commit/239086385550e2c369fd3aa1f656b56f362db8f7",
-            "previous_fingerprint": "b0d1d69124bb75a316f7436a630bf2c5483d6a26e02c9ec709ec9bd3b132fa45",
-            "previous_artifact_name": "244531986313.dkr.ecr.eu-central-1.amazonaws.com/dashboard:2390863@sha256:b0d1d69124bb75a316f7436a630bf2c5483d6a26e02c9ec709ec9bd3b132fa45",
-            "previous_artifact_compliance_state": "COMPLIANT",
-            "previous_running": false,
-            "previous_trail_name": "239086385550e2c369fd3aa1f656b56f362db8f7",
-            "previous_template_reference_name": "dashboard"
-          },
-          "commit_lead_time": 15159.0,
-          "artifact_compliance_in_flow": true,
-          "flow_reasons_for_non_compliance": []
-        },
-        {
-          "flow_name": "production-promotion",
-          "trail_name": "promote-all-41",
-          "template_reference_name": "web",
-          "git_commit": "54306f735c51413c972b38398da4d0a5fc86d47a",
-          "commit_url": "https://github.com/cyber-dojo/aws-prod-co-promotion/commit/54306f735c51413c972b38398da4d0a5fc86d47a",
-          "git_commit_info": {
-            "sha1": "54306f735c51413c972b38398da4d0a5fc86d47a",
-            "message": "Merge pull request #18 from cyber-dojo/promote-one-requires-a-service\n\nFail promote-one when no service is chosen",
-            "author": "Jon Jagger <jon@kosli.com>",
-            "branch": "main",
-            "timestamp": 1791640516.0,
-            "url": "https://github.com/cyber-dojo/aws-prod-co-promotion/commit/54306f735c51413c972b38398da4d0a5fc86d47a"
-          },
-          "html_url": "https://app.kosli.com/cyber-dojo/flows/production-promotion/artifacts/5f70df2163e8918675c92251f398bc1a88d0d7a9ce1eef39d1f603525de077b6?artifact_id=89aad915-ff61-4fc0-8352-09d54068",
-          "flow_html_url": "https://app.kosli.com/cyber-dojo/flows/production-promotion",
-          "deployment_diff": {
-            "diff_url": "https://github.com/cyber-dojo/aws-prod-co-promotion/compare/54306f735c51413c972b38398da4d0a5fc86d47a...54306f735c51413c972b38398da4d0a5fc86d47a",
-            "previous_git_commit": "54306f735c51413c972b38398da4d0a5fc86d47a",
-            "previous_git_commit_url": "https://github.com/cyber-dojo/aws-prod-co-promotion/commit/54306f735c51413c972b38398da4d0a5fc86d47a",
-            "previous_fingerprint": "ee739c0183759b660a740afe28fbbdb20b4c3b434faa48dab975aa8576173efb",
-            "previous_artifact_name": "244531986313.dkr.ecr.eu-central-1.amazonaws.com/creator:3e6678b@sha256:ee739c0183759b660a740afe28fbbdb20b4c3b434faa48dab975aa8576173efb",
-            "previous_artifact_compliance_state": "COMPLIANT",
-            "previous_running": true,
-            "previous_trail_name": "promote-all-41",
-            "previous_template_reference_name": "web"
-          },
-          "commit_lead_time": 7841.0,
-          "artifact_compliance_in_flow": true,
-          "flow_reasons_for_non_compliance": []
-        },
-        {
-          "flow_name": "snyk-aws-prod-per-artifact",
-          "trail_name": "web-5f70df2163e8918675c92251f398bc1a88d0d7a9ce1eef39d1f603525de077b6",
-          "template_reference_name": "web",
-          "git_commit": "359c98460f5c3aefb136a77eef08d1be4c4ca08d",
-          "commit_url": "https://github.com/cyber-dojo/snyk-scanning/commit/359c98460f5c3aefb136a77eef08d1be4c4ca08d",
-          "git_commit_info": {
-            "sha1": "359c98460f5c3aefb136a77eef08d1be4c4ca08d",
-            "message": "Merge pull request #6 from cyber-dojo/key-uploads-and-trails-on-component-not-repo\n\nTell apart artifacts built by one repo",
-            "author": "Jon Jagger <jon@kosli.com>",
-            "branch": "main",
-            "timestamp": 1790759058.0,
-            "url": "https://github.com/cyber-dojo/snyk-scanning/commit/359c98460f5c3aefb136a77eef08d1be4c4ca08d"
-          },
-          "html_url": "https://app.kosli.com/cyber-dojo/flows/snyk-aws-prod-per-artifact/artifacts/5f70df2163e8918675c92251f398bc1a88d0d7a9ce1eef39d1f603525de077b6?artifact_id=76e327fa-3a32-4740-bf98-ffa98cc4",
-          "flow_html_url": "https://app.kosli.com/cyber-dojo/flows/snyk-aws-prod-per-artifact",
-          "deployment_diff": {
-            "diff_url": "https://github.com/cyber-dojo/snyk-scanning/compare/30111f180ac4e3611cdbd7d805381a0bb9f53cff...359c98460f5c3aefb136a77eef08d1be4c4ca08d",
-            "previous_git_commit": "30111f180ac4e3611cdbd7d805381a0bb9f53cff",
-            "previous_git_commit_url": "https://github.com/cyber-dojo/snyk-scanning/commit/30111f180ac4e3611cdbd7d805381a0bb9f53cff",
-            "previous_fingerprint": "e24bd03714d2e583a2196c0eaf82b2aad8eeecf73f29aec58875994b82f0f418",
-            "previous_artifact_name": "244531986313.dkr.ecr.eu-central-1.amazonaws.com/web:236898f@sha256:e24bd03714d2e583a2196c0eaf82b2aad8eeecf73f29aec58875994b82f0f418",
-            "previous_artifact_compliance_state": "COMPLIANT",
-            "previous_running": false,
-            "previous_trail_name": "web-e24bd03714d2e583a2196c0eaf82b2aad8eeecf73f29aec58875994b82f0f418",
-            "previous_template_reference_name": "web"
-          },
-          "commit_lead_time": 889299.0,
-          "artifact_compliance_in_flow": true,
-          "flow_reasons_for_non_compliance": []
-        }
-      ],
-      "ecs_context": {
-        "task_arn": "arn:aws:ecs:eu-central-1:274425519734:task/app/ee4c2f3bca0b492dbc7024a8db163a70",
-        "cluster_name": null,
-        "service_name": null
-      }
-    },
-    {
-      "name": "244531986313.dkr.ecr.eu-central-1.amazonaws.com/spooler:afeb2f3@sha256:0fe7da2f4c8a0afd88f81bb066bbdd30e02e45f4872f6a0a4538f527185d729f",
-      "compliant": true,
-      "deployments": [],
-      "policy_decisions": [
-        {
-          "policy_version": 2,
-          "status": "COMPLIANT",
-          "rule_evaluations": [
-            {
-              "rule": {
-                "type": "provenance",
-                "definition": {
-                  "required": false,
-                  "exceptions": []
-                }
-              },
-              "satisfied": null,
-              "ignored": true,
-              "resolutions": [
-                {
-                  "type": "rule_not_applicable",
-                  "context": {
-                    "flow_name": "spooler-ci",
-                    "trail_name": "afeb2f32f34dfb29fc36ecc3eb3aeb602030eec5",
-                    "artifact_status": null
-                  }
-                },
-                {
-                  "type": "rule_not_applicable",
-                  "context": {
-                    "flow_name": "production-promotion",
-                    "trail_name": "promote-all-41",
-                    "artifact_status": null
-                  }
-                },
-                {
-                  "type": "rule_not_applicable",
-                  "context": {
-                    "flow_name": "snyk-aws-prod-per-artifact",
-                    "trail_name": "spooler-0fe7da2f4c8a0afd88f81bb066bbdd30e02e45f4872f6a0a4538f527185d729f",
-                    "artifact_status": null
-                  }
-                }
-              ]
-            },
-            {
-              "rule": {
-                "type": "trail-compliance",
-                "definition": {
-                  "required": false,
-                  "exceptions": []
-                }
-              },
-              "satisfied": null,
-              "ignored": true,
-              "resolutions": [
-                {
-                  "type": "rule_not_applicable",
-                  "context": {
-                    "flow_name": "spooler-ci",
-                    "trail_name": "afeb2f32f34dfb29fc36ecc3eb3aeb602030eec5",
-                    "artifact_status": "COMPLIANT"
-                  }
-                },
-                {
-                  "type": "rule_not_applicable",
-                  "context": {
-                    "flow_name": "production-promotion",
-                    "trail_name": "promote-all-41",
-                    "artifact_status": "COMPLIANT"
-                  }
-                },
-                {
-                  "type": "rule_not_applicable",
-                  "context": {
-                    "flow_name": "snyk-aws-prod-per-artifact",
-                    "trail_name": "spooler-0fe7da2f4c8a0afd88f81bb066bbdd30e02e45f4872f6a0a4538f527185d729f",
-                    "artifact_status": "COMPLIANT"
-                  }
-                }
-              ]
-            },
-            {
-              "rule": {
-                "type": "attestation",
-                "definition": {
-                  "if": {
-                    "text": "flow.name == \"production-promotion\""
-                  },
-                  "name": "snyk-scan",
-                  "type": "decision",
-                  "must_be_compliant": true,
-                  "for_control": null
-                }
-              },
-              "satisfied": true,
-              "ignored": false,
-              "resolutions": [
-                {
-                  "type": "rule_not_applicable",
-                  "context": {
-                    "flow_name": "spooler-ci",
-                    "trail_name": "afeb2f32f34dfb29fc36ecc3eb3aeb602030eec5",
-                    "artifact_status": null
-                  }
-                },
-                {
-                  "type": "rule_satisfied",
-                  "context": {
-                    "flow_name": "production-promotion",
-                    "trail_name": "promote-all-41",
-                    "artifact_status": null
-                  }
-                },
-                {
-                  "type": "rule_not_applicable",
-                  "context": {
-                    "flow_name": "snyk-aws-prod-per-artifact",
-                    "trail_name": "spooler-0fe7da2f4c8a0afd88f81bb066bbdd30e02e45f4872f6a0a4538f527185d729f",
-                    "artifact_status": null
-                  }
-                }
-              ]
-            }
-          ],
-          "policy_name": "production-promotion"
-        },
-        {
-          "policy_version": 3,
-          "status": "COMPLIANT",
-          "rule_evaluations": [
-            {
-              "rule": {
-                "type": "provenance",
-                "definition": {
-                  "required": true,
-                  "exceptions": []
-                }
-              },
-              "satisfied": true,
-              "ignored": false,
-              "resolutions": [
-                {
-                  "type": "rule_satisfied",
-                  "context": {
-                    "flow_name": "spooler-ci",
-                    "trail_name": "afeb2f32f34dfb29fc36ecc3eb3aeb602030eec5",
-                    "artifact_status": null
-                  }
-                },
-                {
-                  "type": "rule_satisfied",
-                  "context": {
-                    "flow_name": "production-promotion",
-                    "trail_name": "promote-all-41",
-                    "artifact_status": null
-                  }
-                },
-                {
-                  "type": "rule_satisfied",
-                  "context": {
-                    "flow_name": "snyk-aws-prod-per-artifact",
-                    "trail_name": "spooler-0fe7da2f4c8a0afd88f81bb066bbdd30e02e45f4872f6a0a4538f527185d729f",
-                    "artifact_status": null
-                  }
-                }
-              ]
-            },
-            {
-              "rule": {
-                "type": "trail-compliance",
-                "definition": {
-                  "required": false,
-                  "exceptions": []
-                }
-              },
-              "satisfied": null,
-              "ignored": true,
-              "resolutions": [
-                {
-                  "type": "rule_not_applicable",
-                  "context": {
-                    "flow_name": "spooler-ci",
-                    "trail_name": "afeb2f32f34dfb29fc36ecc3eb3aeb602030eec5",
-                    "artifact_status": "COMPLIANT"
-                  }
-                },
-                {
-                  "type": "rule_not_applicable",
-                  "context": {
-                    "flow_name": "production-promotion",
-                    "trail_name": "promote-all-41",
-                    "artifact_status": "COMPLIANT"
-                  }
-                },
-                {
-                  "type": "rule_not_applicable",
-                  "context": {
-                    "flow_name": "snyk-aws-prod-per-artifact",
-                    "trail_name": "spooler-0fe7da2f4c8a0afd88f81bb066bbdd30e02e45f4872f6a0a4538f527185d729f",
-                    "artifact_status": "COMPLIANT"
-                  }
-                }
-              ]
-            },
-            {
-              "rule": {
-                "type": "attestation",
-                "definition": {
-                  "if": {
-                    "text": "flow.tags.kind == \"build\""
-                  },
-                  "name": "*",
-                  "type": "decision",
-                  "must_be_compliant": true,
-                  "for_control": "SDLC-CTRL-0002"
-                }
-              },
-              "satisfied": true,
-              "ignored": false,
-              "resolutions": [
-                {
-                  "type": "rule_satisfied",
-                  "context": {
-                    "flow_name": "spooler-ci",
-                    "trail_name": "afeb2f32f34dfb29fc36ecc3eb3aeb602030eec5",
-                    "artifact_status": null,
-                    "for_control": "SDLC-CTRL-0002"
-                  }
-                },
-                {
-                  "type": "rule_not_applicable",
-                  "context": {
-                    "flow_name": "production-promotion",
-                    "trail_name": "promote-all-41",
-                    "artifact_status": null,
-                    "for_control": "SDLC-CTRL-0002"
-                  }
-                },
-                {
-                  "type": "rule_not_applicable",
-                  "context": {
-                    "flow_name": "snyk-aws-prod-per-artifact",
-                    "trail_name": "spooler-0fe7da2f4c8a0afd88f81bb066bbdd30e02e45f4872f6a0a4538f527185d729f",
-                    "artifact_status": null,
-                    "for_control": "SDLC-CTRL-0002"
-                  }
-                }
-              ]
-            }
-          ],
-          "policy_name": "provenance"
-        },
-        {
-          "policy_version": 3,
-          "status": "COMPLIANT",
-          "rule_evaluations": [
-            {
-              "rule": {
-                "type": "provenance",
-                "definition": {
-                  "required": false,
-                  "exceptions": []
-                }
-              },
-              "satisfied": null,
-              "ignored": true,
-              "resolutions": [
-                {
-                  "type": "rule_not_applicable",
-                  "context": {
-                    "flow_name": "spooler-ci",
-                    "trail_name": "afeb2f32f34dfb29fc36ecc3eb3aeb602030eec5",
-                    "artifact_status": null
-                  }
-                },
-                {
-                  "type": "rule_not_applicable",
-                  "context": {
-                    "flow_name": "production-promotion",
-                    "trail_name": "promote-all-41",
-                    "artifact_status": null
-                  }
-                },
-                {
-                  "type": "rule_not_applicable",
-                  "context": {
-                    "flow_name": "snyk-aws-prod-per-artifact",
-                    "trail_name": "spooler-0fe7da2f4c8a0afd88f81bb066bbdd30e02e45f4872f6a0a4538f527185d729f",
-                    "artifact_status": null
-                  }
-                }
-              ]
-            },
-            {
-              "rule": {
-                "type": "trail-compliance",
-                "definition": {
-                  "required": false,
-                  "exceptions": []
-                }
-              },
-              "satisfied": null,
-              "ignored": true,
-              "resolutions": [
-                {
-                  "type": "rule_not_applicable",
-                  "context": {
-                    "flow_name": "spooler-ci",
-                    "trail_name": "afeb2f32f34dfb29fc36ecc3eb3aeb602030eec5",
-                    "artifact_status": "COMPLIANT"
-                  }
-                },
-                {
-                  "type": "rule_not_applicable",
-                  "context": {
-                    "flow_name": "production-promotion",
-                    "trail_name": "promote-all-41",
-                    "artifact_status": "COMPLIANT"
-                  }
-                },
-                {
-                  "type": "rule_not_applicable",
-                  "context": {
-                    "flow_name": "snyk-aws-prod-per-artifact",
-                    "trail_name": "spooler-0fe7da2f4c8a0afd88f81bb066bbdd30e02e45f4872f6a0a4538f527185d729f",
-                    "artifact_status": "COMPLIANT"
-                  }
-                }
-              ]
-            },
-            {
-              "rule": {
-                "type": "attestation",
-                "definition": {
-                  "if": {
-                    "text": "flow.tags.kind == \"build\""
-                  },
-                  "name": "*",
-                  "type": "pull_request",
-                  "must_be_compliant": true,
-                  "for_control": null
-                }
-              },
-              "satisfied": true,
-              "ignored": false,
-              "resolutions": [
-                {
-                  "type": "rule_satisfied",
-                  "context": {
-                    "flow_name": "spooler-ci",
-                    "trail_name": "afeb2f32f34dfb29fc36ecc3eb3aeb602030eec5",
-                    "artifact_status": null
-                  }
-                },
-                {
-                  "type": "rule_not_applicable",
-                  "context": {
-                    "flow_name": "production-promotion",
-                    "trail_name": "promote-all-41",
-                    "artifact_status": null
-                  }
-                },
-                {
-                  "type": "rule_not_applicable",
-                  "context": {
-                    "flow_name": "snyk-aws-prod-per-artifact",
-                    "trail_name": "spooler-0fe7da2f4c8a0afd88f81bb066bbdd30e02e45f4872f6a0a4538f527185d729f",
-                    "artifact_status": null
-                  }
-                }
-              ]
-            }
-          ],
-          "policy_name": "pull-request"
-        },
-        {
-          "policy_version": 4,
-          "status": "COMPLIANT",
-          "rule_evaluations": [
-            {
-              "rule": {
-                "type": "provenance",
-                "definition": {
-                  "required": false,
-                  "exceptions": []
-                }
-              },
-              "satisfied": null,
-              "ignored": true,
-              "resolutions": [
-                {
-                  "type": "rule_not_applicable",
-                  "context": {
-                    "flow_name": "spooler-ci",
-                    "trail_name": "afeb2f32f34dfb29fc36ecc3eb3aeb602030eec5",
-                    "artifact_status": null
-                  }
-                },
-                {
-                  "type": "rule_not_applicable",
-                  "context": {
-                    "flow_name": "production-promotion",
-                    "trail_name": "promote-all-41",
-                    "artifact_status": null
-                  }
-                },
-                {
-                  "type": "rule_not_applicable",
-                  "context": {
-                    "flow_name": "snyk-aws-prod-per-artifact",
-                    "trail_name": "spooler-0fe7da2f4c8a0afd88f81bb066bbdd30e02e45f4872f6a0a4538f527185d729f",
-                    "artifact_status": null
-                  }
-                }
-              ]
-            },
-            {
-              "rule": {
-                "type": "trail-compliance",
-                "definition": {
-                  "required": false,
-                  "exceptions": []
-                }
-              },
-              "satisfied": null,
-              "ignored": true,
-              "resolutions": [
-                {
-                  "type": "rule_not_applicable",
-                  "context": {
-                    "flow_name": "spooler-ci",
-                    "trail_name": "afeb2f32f34dfb29fc36ecc3eb3aeb602030eec5",
-                    "artifact_status": "COMPLIANT"
-                  }
-                },
-                {
-                  "type": "rule_not_applicable",
-                  "context": {
-                    "flow_name": "production-promotion",
-                    "trail_name": "promote-all-41",
-                    "artifact_status": "COMPLIANT"
-                  }
-                },
-                {
-                  "type": "rule_not_applicable",
-                  "context": {
-                    "flow_name": "snyk-aws-prod-per-artifact",
-                    "trail_name": "spooler-0fe7da2f4c8a0afd88f81bb066bbdd30e02e45f4872f6a0a4538f527185d729f",
-                    "artifact_status": "COMPLIANT"
-                  }
-                }
-              ]
-            },
-            {
-              "rule": {
-                "type": "attestation",
-                "definition": {
-                  "if": {
-                    "text": "flow.name == \"snyk-aws-prod-per-artifact\""
-                  },
-                  "name": "snyk-container-scan",
-                  "type": "decision",
-                  "must_be_compliant": true,
-                  "for_control": "SDLC-CTRL-0022"
-                }
-              },
-              "satisfied": true,
-              "ignored": false,
-              "resolutions": [
-                {
-                  "type": "rule_not_applicable",
-                  "context": {
-                    "flow_name": "spooler-ci",
-                    "trail_name": "afeb2f32f34dfb29fc36ecc3eb3aeb602030eec5",
-                    "artifact_status": null,
-                    "for_control": "SDLC-CTRL-0022"
-                  }
-                },
-                {
-                  "type": "rule_not_applicable",
-                  "context": {
-                    "flow_name": "production-promotion",
-                    "trail_name": "promote-all-41",
-                    "artifact_status": null,
-                    "for_control": "SDLC-CTRL-0022"
-                  }
-                },
-                {
-                  "type": "rule_satisfied",
-                  "context": {
-                    "flow_name": "snyk-aws-prod-per-artifact",
-                    "trail_name": "spooler-0fe7da2f4c8a0afd88f81bb066bbdd30e02e45f4872f6a0a4538f527185d729f",
-                    "artifact_status": null,
-                    "for_control": "SDLC-CTRL-0022"
-                  }
-                }
-              ]
-            }
-          ],
-          "policy_name": "snyk-scan-aws-prod"
-        },
-        {
-          "policy_version": 2,
-          "status": "COMPLIANT",
-          "rule_evaluations": [
-            {
-              "rule": {
-                "type": "provenance",
-                "definition": {
-                  "required": false,
-                  "exceptions": []
-                }
-              },
-              "satisfied": null,
-              "ignored": true,
-              "resolutions": [
-                {
-                  "type": "rule_not_applicable",
-                  "context": {
-                    "flow_name": "spooler-ci",
-                    "trail_name": "afeb2f32f34dfb29fc36ecc3eb3aeb602030eec5",
-                    "artifact_status": null
-                  }
-                },
-                {
-                  "type": "rule_not_applicable",
-                  "context": {
-                    "flow_name": "production-promotion",
-                    "trail_name": "promote-all-41",
-                    "artifact_status": null
-                  }
-                },
-                {
-                  "type": "rule_not_applicable",
-                  "context": {
-                    "flow_name": "snyk-aws-prod-per-artifact",
-                    "trail_name": "spooler-0fe7da2f4c8a0afd88f81bb066bbdd30e02e45f4872f6a0a4538f527185d729f",
-                    "artifact_status": null
-                  }
-                }
-              ]
-            },
-            {
-              "rule": {
-                "type": "trail-compliance",
-                "definition": {
-                  "required": true,
-                  "exceptions": [
-                    {
-                      "if": {
-                        "text": "exists(flow.tags.env) and flow.tags.env != \"aws-prod\""
-                      }
-                    }
-                  ]
-                }
-              },
-              "satisfied": true,
-              "ignored": false,
-              "resolutions": [
-                {
-                  "type": "rule_not_applicable",
-                  "context": {
-                    "flow_name": "spooler-ci",
-                    "trail_name": "afeb2f32f34dfb29fc36ecc3eb3aeb602030eec5",
-                    "artifact_status": "COMPLIANT"
-                  }
-                },
-                {
-                  "type": "rule_satisfied",
-                  "context": {
-                    "flow_name": "production-promotion",
-                    "trail_name": "promote-all-41",
-                    "artifact_status": "COMPLIANT"
-                  }
-                },
-                {
-                  "type": "rule_satisfied",
-                  "context": {
-                    "flow_name": "snyk-aws-prod-per-artifact",
-                    "trail_name": "spooler-0fe7da2f4c8a0afd88f81bb066bbdd30e02e45f4872f6a0a4538f527185d729f",
-                    "artifact_status": "COMPLIANT"
-                  }
-                }
-              ]
-            }
-          ],
-          "policy_name": "trail-compliance-aws-prod"
-        }
-      ],
-      "reasons_for_incompliance": [],
-      "fingerprint": "0fe7da2f4c8a0afd88f81bb066bbdd30e02e45f4872f6a0a4538f527185d729f",
-      "creationTimestamp": [
-        1791648279
-      ],
-      "pods": null,
-      "annotation": {
-        "type": "changed",
-        "was": 1,
-        "now": 1
-      },
-      "flow_name": "spooler-ci",
-      "git_commit": "afeb2f32f34dfb29fc36ecc3eb3aeb602030eec5",
-      "commit_url": "https://github.com/cyber-dojo/spooler/commit/afeb2f32f34dfb29fc36ecc3eb3aeb602030eec5",
-      "html_url": "https://app.kosli.com/cyber-dojo/flows/spooler-ci/artifacts/0fe7da2f4c8a0afd88f81bb066bbdd30e02e45f4872f6a0a4538f527185d729f?artifact_id=bf8d791d-6bcd-4297-b745-328db4df",
-      "flow_html_url": "https://app.kosli.com/cyber-dojo/flows/spooler-ci",
-      "deployment_diff": {
-        "diff_url": "https://github.com/cyber-dojo/spooler/compare/28636f69be43a7676d61db98b086eaff507d6e9c...afeb2f32f34dfb29fc36ecc3eb3aeb602030eec5",
-        "previous_git_commit": "28636f69be43a7676d61db98b086eaff507d6e9c",
-        "previous_git_commit_url": "https://github.com/cyber-dojo/spooler/commit/28636f69be43a7676d61db98b086eaff507d6e9c",
-        "previous_fingerprint": "c162e3974e3067c3902b2574098819f99d35c24d88f57e70efb73d617e1f653d",
-        "previous_artifact_name": "244531986313.dkr.ecr.eu-central-1.amazonaws.com/spooler:28636f6@sha256:c162e3974e3067c3902b2574098819f99d35c24d88f57e70efb73d617e1f653d",
-        "previous_artifact_compliance_state": "COMPLIANT",
-        "previous_running": false,
-        "previous_trail_name": "28636f69be43a7676d61db98b086eaff507d6e9c",
-        "previous_template_reference_name": "spooler"
-      },
-      "commit_lead_time": 15814.0,
-      "flows": [
-        {
-          "flow_name": "spooler-ci",
-          "trail_name": "afeb2f32f34dfb29fc36ecc3eb3aeb602030eec5",
-          "template_reference_name": "spooler",
-          "git_commit": "afeb2f32f34dfb29fc36ecc3eb3aeb602030eec5",
-          "commit_url": "https://github.com/cyber-dojo/spooler/commit/afeb2f32f34dfb29fc36ecc3eb3aeb602030eec5",
-          "git_commit_info": {
-            "sha1": "afeb2f32f34dfb29fc36ecc3eb3aeb602030eec5",
-            "message": "Merge pull request #25 from cyber-dojo/spooler-multi-platform-and-dockerhub\n\nBuild spooler for amd64 and arm64, push to Hub",
-            "author": "Jon Jagger <jon@kosli.com>",
-            "branch": "",
-            "timestamp": 1791632465.0,
-            "url": "https://github.com/cyber-dojo/spooler/commit/afeb2f32f34dfb29fc36ecc3eb3aeb602030eec5"
-          },
-          "html_url": "https://app.kosli.com/cyber-dojo/flows/spooler-ci/artifacts/0fe7da2f4c8a0afd88f81bb066bbdd30e02e45f4872f6a0a4538f527185d729f?artifact_id=bf8d791d-6bcd-4297-b745-328db4df",
-          "flow_html_url": "https://app.kosli.com/cyber-dojo/flows/spooler-ci",
-          "deployment_diff": {
-            "diff_url": "https://github.com/cyber-dojo/spooler/compare/28636f69be43a7676d61db98b086eaff507d6e9c...afeb2f32f34dfb29fc36ecc3eb3aeb602030eec5",
-            "previous_git_commit": "28636f69be43a7676d61db98b086eaff507d6e9c",
-            "previous_git_commit_url": "https://github.com/cyber-dojo/spooler/commit/28636f69be43a7676d61db98b086eaff507d6e9c",
-            "previous_fingerprint": "c162e3974e3067c3902b2574098819f99d35c24d88f57e70efb73d617e1f653d",
-            "previous_artifact_name": "244531986313.dkr.ecr.eu-central-1.amazonaws.com/spooler:28636f6@sha256:c162e3974e3067c3902b2574098819f99d35c24d88f57e70efb73d617e1f653d",
-            "previous_artifact_compliance_state": "COMPLIANT",
-            "previous_running": false,
-            "previous_trail_name": "28636f69be43a7676d61db98b086eaff507d6e9c",
-            "previous_template_reference_name": "spooler"
-          },
-          "commit_lead_time": 15814.0,
-          "artifact_compliance_in_flow": true,
-          "flow_reasons_for_non_compliance": []
-        },
-        {
-          "flow_name": "production-promotion",
-          "trail_name": "promote-all-41",
-          "template_reference_name": "spooler",
-          "git_commit": "54306f735c51413c972b38398da4d0a5fc86d47a",
-          "commit_url": "https://github.com/cyber-dojo/aws-prod-co-promotion/commit/54306f735c51413c972b38398da4d0a5fc86d47a",
-          "git_commit_info": {
-            "sha1": "54306f735c51413c972b38398da4d0a5fc86d47a",
-            "message": "Merge pull request #18 from cyber-dojo/promote-one-requires-a-service\n\nFail promote-one when no service is chosen",
-            "author": "Jon Jagger <jon@kosli.com>",
-            "branch": "main",
-            "timestamp": 1791640516.0,
-            "url": "https://github.com/cyber-dojo/aws-prod-co-promotion/commit/54306f735c51413c972b38398da4d0a5fc86d47a"
-          },
-          "html_url": "https://app.kosli.com/cyber-dojo/flows/production-promotion/artifacts/0fe7da2f4c8a0afd88f81bb066bbdd30e02e45f4872f6a0a4538f527185d729f?artifact_id=fc83823c-fb43-48ff-9c08-7b01c297",
-          "flow_html_url": "https://app.kosli.com/cyber-dojo/flows/production-promotion",
-          "deployment_diff": {
-            "diff_url": "https://github.com/cyber-dojo/aws-prod-co-promotion/compare/4b34724777db6edfc8a04174a9926c595f934dd8...54306f735c51413c972b38398da4d0a5fc86d47a",
-            "previous_git_commit": "4b34724777db6edfc8a04174a9926c595f934dd8",
-            "previous_git_commit_url": "https://github.com/cyber-dojo/aws-prod-co-promotion/commit/4b34724777db6edfc8a04174a9926c595f934dd8",
-            "previous_fingerprint": "c162e3974e3067c3902b2574098819f99d35c24d88f57e70efb73d617e1f653d",
-            "previous_artifact_name": "244531986313.dkr.ecr.eu-central-1.amazonaws.com/spooler:28636f6@sha256:c162e3974e3067c3902b2574098819f99d35c24d88f57e70efb73d617e1f653d",
-            "previous_artifact_compliance_state": "COMPLIANT",
-            "previous_running": false,
-            "previous_trail_name": "promote-all-39",
-            "previous_template_reference_name": "spooler"
-          },
-          "commit_lead_time": 7763.0,
-          "artifact_compliance_in_flow": true,
-          "flow_reasons_for_non_compliance": []
-        },
-        {
-          "flow_name": "snyk-aws-prod-per-artifact",
-          "trail_name": "spooler-0fe7da2f4c8a0afd88f81bb066bbdd30e02e45f4872f6a0a4538f527185d729f",
-          "template_reference_name": "spooler",
-          "git_commit": "359c98460f5c3aefb136a77eef08d1be4c4ca08d",
-          "commit_url": "https://github.com/cyber-dojo/snyk-scanning/commit/359c98460f5c3aefb136a77eef08d1be4c4ca08d",
-          "git_commit_info": {
-            "sha1": "359c98460f5c3aefb136a77eef08d1be4c4ca08d",
-            "message": "Merge pull request #6 from cyber-dojo/key-uploads-and-trails-on-component-not-repo\n\nTell apart artifacts built by one repo",
-            "author": "Jon Jagger <jon@kosli.com>",
-            "branch": "main",
-            "timestamp": 1790759058.0,
-            "url": "https://github.com/cyber-dojo/snyk-scanning/commit/359c98460f5c3aefb136a77eef08d1be4c4ca08d"
-          },
-          "html_url": "https://app.kosli.com/cyber-dojo/flows/snyk-aws-prod-per-artifact/artifacts/0fe7da2f4c8a0afd88f81bb066bbdd30e02e45f4872f6a0a4538f527185d729f?artifact_id=a351b028-ddfc-403d-aab5-7959a539",
-          "flow_html_url": "https://app.kosli.com/cyber-dojo/flows/snyk-aws-prod-per-artifact",
-          "deployment_diff": {
-            "diff_url": "https://github.com/cyber-dojo/snyk-scanning/compare/30111f180ac4e3611cdbd7d805381a0bb9f53cff...359c98460f5c3aefb136a77eef08d1be4c4ca08d",
-            "previous_git_commit": "30111f180ac4e3611cdbd7d805381a0bb9f53cff",
-            "previous_git_commit_url": "https://github.com/cyber-dojo/snyk-scanning/commit/30111f180ac4e3611cdbd7d805381a0bb9f53cff",
-            "previous_fingerprint": "9ef10b455706661560fee5c47aebcb592f0936fdaa1db1a0ad06590c6f39b86f",
-            "previous_artifact_name": "244531986313.dkr.ecr.eu-central-1.amazonaws.com/spooler:5e4740c@sha256:9ef10b455706661560fee5c47aebcb592f0936fdaa1db1a0ad06590c6f39b86f",
-            "previous_artifact_compliance_state": "COMPLIANT",
-            "previous_running": false,
-            "previous_trail_name": "spooler-9ef10b455706661560fee5c47aebcb592f0936fdaa1db1a0ad06590c6f39b86f",
-            "previous_template_reference_name": "spooler"
-          },
-          "commit_lead_time": 889221.0,
-          "artifact_compliance_in_flow": true,
-          "flow_reasons_for_non_compliance": []
-        }
-      ],
-      "ecs_context": {
-        "task_arn": "arn:aws:ecs:eu-central-1:274425519734:task/app/5916af07ea074242b150d7277c036f7e",
-        "cluster_name": null,
-        "service_name": null
-      }
-    },
-    {
-      "name": "244531986313.dkr.ecr.eu-central-1.amazonaws.com/languages-start-points:8442c1b@sha256:b4f37af37368717581502192e3dfc9a55526c528d2f0dd927ff562c856c1a81a",
-      "compliant": true,
-      "deployments": [],
-      "policy_decisions": [
-        {
-          "policy_version": 2,
-          "status": "COMPLIANT",
-          "rule_evaluations": [
-            {
-              "rule": {
-                "type": "provenance",
-                "definition": {
-                  "required": false,
-                  "exceptions": []
-                }
-              },
-              "satisfied": null,
-              "ignored": true,
-              "resolutions": [
-                {
-                  "type": "rule_not_applicable",
-                  "context": {
-                    "flow_name": "languages-start-points-ci",
-                    "trail_name": "8442c1b837d6dca9e349a6c3401437f11e6bd9f0",
-                    "artifact_status": null
-                  }
-                },
-                {
-                  "type": "rule_not_applicable",
-                  "context": {
-                    "flow_name": "production-promotion",
-                    "trail_name": "promote-all-41",
-                    "artifact_status": null
-                  }
-                },
-                {
-                  "type": "rule_not_applicable",
-                  "context": {
-                    "flow_name": "snyk-aws-prod-per-artifact",
-                    "trail_name": "languages-start-points-b4f37af37368717581502192e3dfc9a55526c528d2f0dd927ff562c856c1a81a",
-                    "artifact_status": null
-                  }
-                }
-              ]
-            },
-            {
-              "rule": {
-                "type": "trail-compliance",
-                "definition": {
-                  "required": false,
-                  "exceptions": []
-                }
-              },
-              "satisfied": null,
-              "ignored": true,
-              "resolutions": [
-                {
-                  "type": "rule_not_applicable",
-                  "context": {
-                    "flow_name": "languages-start-points-ci",
-                    "trail_name": "8442c1b837d6dca9e349a6c3401437f11e6bd9f0",
-                    "artifact_status": "COMPLIANT"
-                  }
-                },
-                {
-                  "type": "rule_not_applicable",
-                  "context": {
-                    "flow_name": "production-promotion",
-                    "trail_name": "promote-all-41",
-                    "artifact_status": "COMPLIANT"
-                  }
-                },
-                {
-                  "type": "rule_not_applicable",
-                  "context": {
-                    "flow_name": "snyk-aws-prod-per-artifact",
-                    "trail_name": "languages-start-points-b4f37af37368717581502192e3dfc9a55526c528d2f0dd927ff562c856c1a81a",
-                    "artifact_status": "COMPLIANT"
-                  }
-                }
-              ]
-            },
-            {
-              "rule": {
-                "type": "attestation",
-                "definition": {
-                  "if": {
-                    "text": "flow.name == \"production-promotion\""
-                  },
-                  "name": "snyk-scan",
-                  "type": "decision",
-                  "must_be_compliant": true,
-                  "for_control": null
-                }
-              },
-              "satisfied": true,
-              "ignored": false,
-              "resolutions": [
-                {
-                  "type": "rule_not_applicable",
-                  "context": {
-                    "flow_name": "languages-start-points-ci",
-                    "trail_name": "8442c1b837d6dca9e349a6c3401437f11e6bd9f0",
-                    "artifact_status": null
-                  }
-                },
-                {
-                  "type": "rule_satisfied",
-                  "context": {
-                    "flow_name": "production-promotion",
-                    "trail_name": "promote-all-41",
-                    "artifact_status": null
-                  }
-                },
-                {
-                  "type": "rule_not_applicable",
-                  "context": {
-                    "flow_name": "snyk-aws-prod-per-artifact",
-                    "trail_name": "languages-start-points-b4f37af37368717581502192e3dfc9a55526c528d2f0dd927ff562c856c1a81a",
-                    "artifact_status": null
-                  }
-                }
-              ]
-            }
-          ],
-          "policy_name": "production-promotion"
-        },
-        {
-          "policy_version": 3,
-          "status": "COMPLIANT",
-          "rule_evaluations": [
-            {
-              "rule": {
-                "type": "provenance",
-                "definition": {
-                  "required": true,
-                  "exceptions": []
-                }
-              },
-              "satisfied": true,
-              "ignored": false,
-              "resolutions": [
-                {
-                  "type": "rule_satisfied",
-                  "context": {
-                    "flow_name": "languages-start-points-ci",
-                    "trail_name": "8442c1b837d6dca9e349a6c3401437f11e6bd9f0",
-                    "artifact_status": null
-                  }
-                },
-                {
-                  "type": "rule_satisfied",
-                  "context": {
-                    "flow_name": "production-promotion",
-                    "trail_name": "promote-all-41",
-                    "artifact_status": null
-                  }
-                },
-                {
-                  "type": "rule_satisfied",
-                  "context": {
-                    "flow_name": "snyk-aws-prod-per-artifact",
-                    "trail_name": "languages-start-points-b4f37af37368717581502192e3dfc9a55526c528d2f0dd927ff562c856c1a81a",
-                    "artifact_status": null
-                  }
-                }
-              ]
-            },
-            {
-              "rule": {
-                "type": "trail-compliance",
-                "definition": {
-                  "required": false,
-                  "exceptions": []
-                }
-              },
-              "satisfied": null,
-              "ignored": true,
-              "resolutions": [
-                {
-                  "type": "rule_not_applicable",
-                  "context": {
-                    "flow_name": "languages-start-points-ci",
-                    "trail_name": "8442c1b837d6dca9e349a6c3401437f11e6bd9f0",
-                    "artifact_status": "COMPLIANT"
-                  }
-                },
-                {
-                  "type": "rule_not_applicable",
-                  "context": {
-                    "flow_name": "production-promotion",
-                    "trail_name": "promote-all-41",
-                    "artifact_status": "COMPLIANT"
-                  }
-                },
-                {
-                  "type": "rule_not_applicable",
-                  "context": {
-                    "flow_name": "snyk-aws-prod-per-artifact",
-                    "trail_name": "languages-start-points-b4f37af37368717581502192e3dfc9a55526c528d2f0dd927ff562c856c1a81a",
-                    "artifact_status": "COMPLIANT"
-                  }
-                }
-              ]
-            },
-            {
-              "rule": {
-                "type": "attestation",
-                "definition": {
-                  "if": {
-                    "text": "flow.tags.kind == \"build\""
-                  },
-                  "name": "*",
-                  "type": "decision",
-                  "must_be_compliant": true,
-                  "for_control": "SDLC-CTRL-0002"
-                }
-              },
-              "satisfied": true,
-              "ignored": false,
-              "resolutions": [
-                {
-                  "type": "rule_satisfied",
-                  "context": {
-                    "flow_name": "languages-start-points-ci",
-                    "trail_name": "8442c1b837d6dca9e349a6c3401437f11e6bd9f0",
-                    "artifact_status": null,
-                    "for_control": "SDLC-CTRL-0002"
-                  }
-                },
-                {
-                  "type": "rule_not_applicable",
-                  "context": {
-                    "flow_name": "production-promotion",
-                    "trail_name": "promote-all-41",
-                    "artifact_status": null,
-                    "for_control": "SDLC-CTRL-0002"
-                  }
-                },
-                {
-                  "type": "rule_not_applicable",
-                  "context": {
-                    "flow_name": "snyk-aws-prod-per-artifact",
-                    "trail_name": "languages-start-points-b4f37af37368717581502192e3dfc9a55526c528d2f0dd927ff562c856c1a81a",
-                    "artifact_status": null,
-                    "for_control": "SDLC-CTRL-0002"
-                  }
-                }
-              ]
-            }
-          ],
-          "policy_name": "provenance"
-        },
-        {
-          "policy_version": 3,
-          "status": "COMPLIANT",
-          "rule_evaluations": [
-            {
-              "rule": {
-                "type": "provenance",
-                "definition": {
-                  "required": false,
-                  "exceptions": []
-                }
-              },
-              "satisfied": null,
-              "ignored": true,
-              "resolutions": [
-                {
-                  "type": "rule_not_applicable",
-                  "context": {
-                    "flow_name": "languages-start-points-ci",
-                    "trail_name": "8442c1b837d6dca9e349a6c3401437f11e6bd9f0",
-                    "artifact_status": null
-                  }
-                },
-                {
-                  "type": "rule_not_applicable",
-                  "context": {
-                    "flow_name": "production-promotion",
-                    "trail_name": "promote-all-41",
-                    "artifact_status": null
-                  }
-                },
-                {
-                  "type": "rule_not_applicable",
-                  "context": {
-                    "flow_name": "snyk-aws-prod-per-artifact",
-                    "trail_name": "languages-start-points-b4f37af37368717581502192e3dfc9a55526c528d2f0dd927ff562c856c1a81a",
-                    "artifact_status": null
-                  }
-                }
-              ]
-            },
-            {
-              "rule": {
-                "type": "trail-compliance",
-                "definition": {
-                  "required": false,
-                  "exceptions": []
-                }
-              },
-              "satisfied": null,
-              "ignored": true,
-              "resolutions": [
-                {
-                  "type": "rule_not_applicable",
-                  "context": {
-                    "flow_name": "languages-start-points-ci",
-                    "trail_name": "8442c1b837d6dca9e349a6c3401437f11e6bd9f0",
-                    "artifact_status": "COMPLIANT"
-                  }
-                },
-                {
-                  "type": "rule_not_applicable",
-                  "context": {
-                    "flow_name": "production-promotion",
-                    "trail_name": "promote-all-41",
-                    "artifact_status": "COMPLIANT"
-                  }
-                },
-                {
-                  "type": "rule_not_applicable",
-                  "context": {
-                    "flow_name": "snyk-aws-prod-per-artifact",
-                    "trail_name": "languages-start-points-b4f37af37368717581502192e3dfc9a55526c528d2f0dd927ff562c856c1a81a",
-                    "artifact_status": "COMPLIANT"
-                  }
-                }
-              ]
-            },
-            {
-              "rule": {
-                "type": "attestation",
-                "definition": {
-                  "if": {
-                    "text": "flow.tags.kind == \"build\""
-                  },
-                  "name": "*",
-                  "type": "pull_request",
-                  "must_be_compliant": true,
-                  "for_control": null
-                }
-              },
-              "satisfied": true,
-              "ignored": false,
-              "resolutions": [
-                {
-                  "type": "rule_satisfied",
-                  "context": {
-                    "flow_name": "languages-start-points-ci",
-                    "trail_name": "8442c1b837d6dca9e349a6c3401437f11e6bd9f0",
-                    "artifact_status": null
-                  }
-                },
-                {
-                  "type": "rule_not_applicable",
-                  "context": {
-                    "flow_name": "production-promotion",
-                    "trail_name": "promote-all-41",
-                    "artifact_status": null
-                  }
-                },
-                {
-                  "type": "rule_not_applicable",
-                  "context": {
-                    "flow_name": "snyk-aws-prod-per-artifact",
-                    "trail_name": "languages-start-points-b4f37af37368717581502192e3dfc9a55526c528d2f0dd927ff562c856c1a81a",
-                    "artifact_status": null
-                  }
-                }
-              ]
-            }
-          ],
-          "policy_name": "pull-request"
-        },
-        {
-          "policy_version": 4,
-          "status": "COMPLIANT",
-          "rule_evaluations": [
-            {
-              "rule": {
-                "type": "provenance",
-                "definition": {
-                  "required": false,
-                  "exceptions": []
-                }
-              },
-              "satisfied": null,
-              "ignored": true,
-              "resolutions": [
-                {
-                  "type": "rule_not_applicable",
-                  "context": {
-                    "flow_name": "languages-start-points-ci",
-                    "trail_name": "8442c1b837d6dca9e349a6c3401437f11e6bd9f0",
-                    "artifact_status": null
-                  }
-                },
-                {
-                  "type": "rule_not_applicable",
-                  "context": {
-                    "flow_name": "production-promotion",
-                    "trail_name": "promote-all-41",
-                    "artifact_status": null
-                  }
-                },
-                {
-                  "type": "rule_not_applicable",
-                  "context": {
-                    "flow_name": "snyk-aws-prod-per-artifact",
-                    "trail_name": "languages-start-points-b4f37af37368717581502192e3dfc9a55526c528d2f0dd927ff562c856c1a81a",
-                    "artifact_status": null
-                  }
-                }
-              ]
-            },
-            {
-              "rule": {
-                "type": "trail-compliance",
-                "definition": {
-                  "required": false,
-                  "exceptions": []
-                }
-              },
-              "satisfied": null,
-              "ignored": true,
-              "resolutions": [
-                {
-                  "type": "rule_not_applicable",
-                  "context": {
-                    "flow_name": "languages-start-points-ci",
-                    "trail_name": "8442c1b837d6dca9e349a6c3401437f11e6bd9f0",
-                    "artifact_status": "COMPLIANT"
-                  }
-                },
-                {
-                  "type": "rule_not_applicable",
-                  "context": {
-                    "flow_name": "production-promotion",
-                    "trail_name": "promote-all-41",
-                    "artifact_status": "COMPLIANT"
-                  }
-                },
-                {
-                  "type": "rule_not_applicable",
-                  "context": {
-                    "flow_name": "snyk-aws-prod-per-artifact",
-                    "trail_name": "languages-start-points-b4f37af37368717581502192e3dfc9a55526c528d2f0dd927ff562c856c1a81a",
-                    "artifact_status": "COMPLIANT"
-                  }
-                }
-              ]
-            },
-            {
-              "rule": {
-                "type": "attestation",
-                "definition": {
-                  "if": {
-                    "text": "flow.name == \"snyk-aws-prod-per-artifact\""
-                  },
-                  "name": "snyk-container-scan",
-                  "type": "decision",
-                  "must_be_compliant": true,
-                  "for_control": "SDLC-CTRL-0022"
-                }
-              },
-              "satisfied": true,
-              "ignored": false,
-              "resolutions": [
-                {
-                  "type": "rule_not_applicable",
-                  "context": {
-                    "flow_name": "languages-start-points-ci",
-                    "trail_name": "8442c1b837d6dca9e349a6c3401437f11e6bd9f0",
-                    "artifact_status": null,
-                    "for_control": "SDLC-CTRL-0022"
-                  }
-                },
-                {
-                  "type": "rule_not_applicable",
-                  "context": {
-                    "flow_name": "production-promotion",
-                    "trail_name": "promote-all-41",
-                    "artifact_status": null,
-                    "for_control": "SDLC-CTRL-0022"
-                  }
-                },
-                {
-                  "type": "rule_satisfied",
-                  "context": {
-                    "flow_name": "snyk-aws-prod-per-artifact",
-                    "trail_name": "languages-start-points-b4f37af37368717581502192e3dfc9a55526c528d2f0dd927ff562c856c1a81a",
-                    "artifact_status": null,
-                    "for_control": "SDLC-CTRL-0022"
-                  }
-                }
-              ]
-            }
-          ],
-          "policy_name": "snyk-scan-aws-prod"
-        },
-        {
-          "policy_version": 2,
-          "status": "COMPLIANT",
-          "rule_evaluations": [
-            {
-              "rule": {
-                "type": "provenance",
-                "definition": {
-                  "required": false,
-                  "exceptions": []
-                }
-              },
-              "satisfied": null,
-              "ignored": true,
-              "resolutions": [
-                {
-                  "type": "rule_not_applicable",
-                  "context": {
-                    "flow_name": "languages-start-points-ci",
-                    "trail_name": "8442c1b837d6dca9e349a6c3401437f11e6bd9f0",
-                    "artifact_status": null
-                  }
-                },
-                {
-                  "type": "rule_not_applicable",
-                  "context": {
-                    "flow_name": "production-promotion",
-                    "trail_name": "promote-all-41",
-                    "artifact_status": null
-                  }
-                },
-                {
-                  "type": "rule_not_applicable",
-                  "context": {
-                    "flow_name": "snyk-aws-prod-per-artifact",
-                    "trail_name": "languages-start-points-b4f37af37368717581502192e3dfc9a55526c528d2f0dd927ff562c856c1a81a",
-                    "artifact_status": null
-                  }
-                }
-              ]
-            },
-            {
-              "rule": {
-                "type": "trail-compliance",
-                "definition": {
-                  "required": true,
-                  "exceptions": [
-                    {
-                      "if": {
-                        "text": "exists(flow.tags.env) and flow.tags.env != \"aws-prod\""
-                      }
-                    }
-                  ]
-                }
-              },
-              "satisfied": true,
-              "ignored": false,
-              "resolutions": [
-                {
-                  "type": "rule_not_applicable",
-                  "context": {
-                    "flow_name": "languages-start-points-ci",
-                    "trail_name": "8442c1b837d6dca9e349a6c3401437f11e6bd9f0",
-                    "artifact_status": "COMPLIANT"
-                  }
-                },
-                {
-                  "type": "rule_satisfied",
-                  "context": {
-                    "flow_name": "production-promotion",
-                    "trail_name": "promote-all-41",
-                    "artifact_status": "COMPLIANT"
-                  }
-                },
-                {
-                  "type": "rule_satisfied",
-                  "context": {
-                    "flow_name": "snyk-aws-prod-per-artifact",
-                    "trail_name": "languages-start-points-b4f37af37368717581502192e3dfc9a55526c528d2f0dd927ff562c856c1a81a",
-                    "artifact_status": "COMPLIANT"
-                  }
-                }
-              ]
-            }
-          ],
-          "policy_name": "trail-compliance-aws-prod"
-        }
-      ],
-      "reasons_for_incompliance": [],
-      "fingerprint": "b4f37af37368717581502192e3dfc9a55526c528d2f0dd927ff562c856c1a81a",
-      "creationTimestamp": [
-        1791648278
-      ],
-      "pods": null,
-      "annotation": {
-        "type": "changed",
-        "was": 1,
-        "now": 1
-      },
-      "flow_name": "languages-start-points-ci",
-      "git_commit": "8442c1b837d6dca9e349a6c3401437f11e6bd9f0",
-      "commit_url": "https://github.com/cyber-dojo/languages-start-points/commit/8442c1b837d6dca9e349a6c3401437f11e6bd9f0",
-      "html_url": "https://app.kosli.com/cyber-dojo/flows/languages-start-points-ci/artifacts/b4f37af37368717581502192e3dfc9a55526c528d2f0dd927ff562c856c1a81a?artifact_id=87445ff6-7ec9-4337-bf43-0e9b796b",
-      "flow_html_url": "https://app.kosli.com/cyber-dojo/flows/languages-start-points-ci",
-      "deployment_diff": {
-        "diff_url": "https://github.com/cyber-dojo/languages-start-points/compare/9c8c9cdb74d9aeeda67bae0f4063089bebc99efe...8442c1b837d6dca9e349a6c3401437f11e6bd9f0",
-        "previous_git_commit": "9c8c9cdb74d9aeeda67bae0f4063089bebc99efe",
-        "previous_git_commit_url": "https://github.com/cyber-dojo/languages-start-points/commit/9c8c9cdb74d9aeeda67bae0f4063089bebc99efe",
-        "previous_fingerprint": "a402a3b392cfc375a6939c822b5d00645e35bbed048a20eb2020ad9904820bda",
-        "previous_artifact_name": "244531986313.dkr.ecr.eu-central-1.amazonaws.com/languages-start-points:9c8c9cd@sha256:a402a3b392cfc375a6939c822b5d00645e35bbed048a20eb2020ad9904820bda",
-        "previous_artifact_compliance_state": "COMPLIANT",
-        "previous_running": false,
-        "previous_trail_name": "9c8c9cdb74d9aeeda67bae0f4063089bebc99efe",
-        "previous_template_reference_name": "languages-start-points"
-      },
-      "commit_lead_time": 1154.0,
-      "flows": [
-        {
-          "flow_name": "languages-start-points-ci",
-          "trail_name": "8442c1b837d6dca9e349a6c3401437f11e6bd9f0",
-          "template_reference_name": "languages-start-points",
-          "git_commit": "8442c1b837d6dca9e349a6c3401437f11e6bd9f0",
-          "commit_url": "https://github.com/cyber-dojo/languages-start-points/commit/8442c1b837d6dca9e349a6c3401437f11e6bd9f0",
-          "git_commit_info": {
-            "sha1": "8442c1b837d6dca9e349a6c3401437f11e6bd9f0",
-            "message": "Merge pull request #295 from cyber-dojo/multi-arch-start-point\n\nBuild the start-point image for amd64 and arm64",
-            "author": "Jon Jagger <jon@kosli.com>",
-            "branch": "",
-            "timestamp": 1791647124.0,
-            "url": "https://github.com/cyber-dojo/languages-start-points/commit/8442c1b837d6dca9e349a6c3401437f11e6bd9f0"
-          },
-          "html_url": "https://app.kosli.com/cyber-dojo/flows/languages-start-points-ci/artifacts/b4f37af37368717581502192e3dfc9a55526c528d2f0dd927ff562c856c1a81a?artifact_id=87445ff6-7ec9-4337-bf43-0e9b796b",
-          "flow_html_url": "https://app.kosli.com/cyber-dojo/flows/languages-start-points-ci",
-          "deployment_diff": {
-            "diff_url": "https://github.com/cyber-dojo/languages-start-points/compare/9c8c9cdb74d9aeeda67bae0f4063089bebc99efe...8442c1b837d6dca9e349a6c3401437f11e6bd9f0",
-            "previous_git_commit": "9c8c9cdb74d9aeeda67bae0f4063089bebc99efe",
-            "previous_git_commit_url": "https://github.com/cyber-dojo/languages-start-points/commit/9c8c9cdb74d9aeeda67bae0f4063089bebc99efe",
-            "previous_fingerprint": "a402a3b392cfc375a6939c822b5d00645e35bbed048a20eb2020ad9904820bda",
-            "previous_artifact_name": "244531986313.dkr.ecr.eu-central-1.amazonaws.com/languages-start-points:9c8c9cd@sha256:a402a3b392cfc375a6939c822b5d00645e35bbed048a20eb2020ad9904820bda",
-            "previous_artifact_compliance_state": "COMPLIANT",
-            "previous_running": false,
-            "previous_trail_name": "9c8c9cdb74d9aeeda67bae0f4063089bebc99efe",
-            "previous_template_reference_name": "languages-start-points"
-          },
-          "commit_lead_time": 1154.0,
-          "artifact_compliance_in_flow": true,
-          "flow_reasons_for_non_compliance": []
-        },
-        {
-          "flow_name": "production-promotion",
-          "trail_name": "promote-all-41",
-          "template_reference_name": "languages-start-points",
-          "git_commit": "54306f735c51413c972b38398da4d0a5fc86d47a",
-          "commit_url": "https://github.com/cyber-dojo/aws-prod-co-promotion/commit/54306f735c51413c972b38398da4d0a5fc86d47a",
-          "git_commit_info": {
-            "sha1": "54306f735c51413c972b38398da4d0a5fc86d47a",
-            "message": "Merge pull request #18 from cyber-dojo/promote-one-requires-a-service\n\nFail promote-one when no service is chosen",
-            "author": "Jon Jagger <jon@kosli.com>",
-            "branch": "main",
-            "timestamp": 1791640516.0,
-            "url": "https://github.com/cyber-dojo/aws-prod-co-promotion/commit/54306f735c51413c972b38398da4d0a5fc86d47a"
-          },
-          "html_url": "https://app.kosli.com/cyber-dojo/flows/production-promotion/artifacts/b4f37af37368717581502192e3dfc9a55526c528d2f0dd927ff562c856c1a81a?artifact_id=d19d8368-9910-475f-93ee-69cf1671",
-          "flow_html_url": "https://app.kosli.com/cyber-dojo/flows/production-promotion",
-          "deployment_diff": {
-            "diff_url": "https://github.com/cyber-dojo/aws-prod-co-promotion/compare/8c76df3ae03cf8f4d6be40d4af6d550c2e6f1d25...54306f735c51413c972b38398da4d0a5fc86d47a",
-            "previous_git_commit": "8c76df3ae03cf8f4d6be40d4af6d550c2e6f1d25",
-            "previous_git_commit_url": "https://github.com/cyber-dojo/aws-prod-co-promotion/commit/8c76df3ae03cf8f4d6be40d4af6d550c2e6f1d25",
-            "previous_fingerprint": "a402a3b392cfc375a6939c822b5d00645e35bbed048a20eb2020ad9904820bda",
-            "previous_artifact_name": "244531986313.dkr.ecr.eu-central-1.amazonaws.com/languages-start-points:9c8c9cd@sha256:a402a3b392cfc375a6939c822b5d00645e35bbed048a20eb2020ad9904820bda",
-            "previous_artifact_compliance_state": "COMPLIANT",
-            "previous_running": false,
-            "previous_trail_name": "promotion-one-181",
-            "previous_template_reference_name": "languages-start-points"
-          },
-          "commit_lead_time": 7762.0,
-          "artifact_compliance_in_flow": true,
-          "flow_reasons_for_non_compliance": []
-        },
-        {
-          "flow_name": "snyk-aws-prod-per-artifact",
-          "trail_name": "languages-start-points-b4f37af37368717581502192e3dfc9a55526c528d2f0dd927ff562c856c1a81a",
-          "template_reference_name": "languages-start-points",
-          "git_commit": "359c98460f5c3aefb136a77eef08d1be4c4ca08d",
-          "commit_url": "https://github.com/cyber-dojo/snyk-scanning/commit/359c98460f5c3aefb136a77eef08d1be4c4ca08d",
-          "git_commit_info": {
-            "sha1": "359c98460f5c3aefb136a77eef08d1be4c4ca08d",
-            "message": "Merge pull request #6 from cyber-dojo/key-uploads-and-trails-on-component-not-repo\n\nTell apart artifacts built by one repo",
-            "author": "Jon Jagger <jon@kosli.com>",
-            "branch": "main",
-            "timestamp": 1790759058.0,
-            "url": "https://github.com/cyber-dojo/snyk-scanning/commit/359c98460f5c3aefb136a77eef08d1be4c4ca08d"
-          },
-          "html_url": "https://app.kosli.com/cyber-dojo/flows/snyk-aws-prod-per-artifact/artifacts/b4f37af37368717581502192e3dfc9a55526c528d2f0dd927ff562c856c1a81a?artifact_id=795ffb11-c130-42e3-9b11-fd82351e",
-          "flow_html_url": "https://app.kosli.com/cyber-dojo/flows/snyk-aws-prod-per-artifact",
-          "deployment_diff": {
-            "diff_url": "https://github.com/cyber-dojo/snyk-scanning/compare/30111f180ac4e3611cdbd7d805381a0bb9f53cff...359c98460f5c3aefb136a77eef08d1be4c4ca08d",
-            "previous_git_commit": "30111f180ac4e3611cdbd7d805381a0bb9f53cff",
-            "previous_git_commit_url": "https://github.com/cyber-dojo/snyk-scanning/commit/30111f180ac4e3611cdbd7d805381a0bb9f53cff",
-            "previous_fingerprint": "040bd44819d9e92728fb3b338f6582d4345cd69df769c59e94c61ac0336ad909",
-            "previous_artifact_name": "244531986313.dkr.ecr.eu-central-1.amazonaws.com/languages-start-points:5d1d4b6@sha256:040bd44819d9e92728fb3b338f6582d4345cd69df769c59e94c61ac0336ad909",
-            "previous_artifact_compliance_state": "COMPLIANT",
-            "previous_running": false,
-            "previous_trail_name": "languages-start-points-040bd44819d9e92728fb3b338f6582d4345cd69df769c59e94c61ac0336ad909",
-            "previous_template_reference_name": "languages-start-points"
-          },
-          "commit_lead_time": 889220.0,
-          "artifact_compliance_in_flow": true,
-          "flow_reasons_for_non_compliance": []
-        }
-      ],
-      "ecs_context": {
-        "task_arn": "arn:aws:ecs:eu-central-1:274425519734:task/app/d6e440b28918420bb0710351d9527770",
-        "cluster_name": null,
-        "service_name": null
-      }
-    },
-    {
-      "name": "244531986313.dkr.ecr.eu-central-1.amazonaws.com/nginx:c6834ec@sha256:4fbb8f1c531b24dcb2a38c71c268e0b8d7244e650cb96ce042d62fb8c07cb85b",
-      "compliant": true,
-      "deployments": [],
-      "policy_decisions": [
-        {
-          "policy_version": 2,
-          "status": "COMPLIANT",
-          "rule_evaluations": [
-            {
-              "rule": {
-                "type": "provenance",
-                "definition": {
-                  "required": false,
-                  "exceptions": []
-                }
-              },
-              "satisfied": null,
-              "ignored": true,
-              "resolutions": [
-                {
-                  "type": "rule_not_applicable",
-                  "context": {
-                    "flow_name": "nginx-ci",
-                    "trail_name": "c6834ecc2c5b9e5622428f14be5c4de3b49dde46",
-                    "artifact_status": null
-                  }
-                },
-                {
-                  "type": "rule_not_applicable",
-                  "context": {
-                    "flow_name": "production-promotion",
-                    "trail_name": "promotion-one-188",
-                    "artifact_status": null
-                  }
-                },
-                {
-                  "type": "rule_not_applicable",
-                  "context": {
-                    "flow_name": "snyk-aws-prod-per-artifact",
-                    "trail_name": "nginx-4fbb8f1c531b24dcb2a38c71c268e0b8d7244e650cb96ce042d62fb8c07cb85b",
-                    "artifact_status": null
-                  }
-                },
-                {
-                  "type": "rule_not_applicable",
-                  "context": {
-                    "flow_name": "snyk-aws-beta-per-artifact",
-                    "trail_name": "nginx-4fbb8f1c531b24dcb2a38c71c268e0b8d7244e650cb96ce042d62fb8c07cb85b",
-                    "artifact_status": null
-                  }
-                }
-              ]
-            },
-            {
-              "rule": {
-                "type": "trail-compliance",
-                "definition": {
-                  "required": false,
-                  "exceptions": []
-                }
-              },
-              "satisfied": null,
-              "ignored": true,
-              "resolutions": [
-                {
-                  "type": "rule_not_applicable",
-                  "context": {
-                    "flow_name": "nginx-ci",
-                    "trail_name": "c6834ecc2c5b9e5622428f14be5c4de3b49dde46",
-                    "artifact_status": "COMPLIANT"
-                  }
-                },
-                {
-                  "type": "rule_not_applicable",
-                  "context": {
-                    "flow_name": "production-promotion",
-                    "trail_name": "promotion-one-188",
-                    "artifact_status": "COMPLIANT"
-                  }
-                },
-                {
-                  "type": "rule_not_applicable",
-                  "context": {
-                    "flow_name": "snyk-aws-prod-per-artifact",
-                    "trail_name": "nginx-4fbb8f1c531b24dcb2a38c71c268e0b8d7244e650cb96ce042d62fb8c07cb85b",
-                    "artifact_status": "COMPLIANT"
-                  }
-                },
-                {
-                  "type": "rule_not_applicable",
-                  "context": {
-                    "flow_name": "snyk-aws-beta-per-artifact",
-                    "trail_name": "nginx-4fbb8f1c531b24dcb2a38c71c268e0b8d7244e650cb96ce042d62fb8c07cb85b",
-                    "artifact_status": "COMPLIANT"
-                  }
-                }
-              ]
-            },
-            {
-              "rule": {
-                "type": "attestation",
-                "definition": {
-                  "if": {
-                    "text": "flow.name == \"production-promotion\""
-                  },
-                  "name": "snyk-scan",
-                  "type": "decision",
-                  "must_be_compliant": true,
-                  "for_control": null
-                }
-              },
-              "satisfied": true,
-              "ignored": false,
-              "resolutions": [
-                {
-                  "type": "rule_not_applicable",
-                  "context": {
-                    "flow_name": "nginx-ci",
-                    "trail_name": "c6834ecc2c5b9e5622428f14be5c4de3b49dde46",
-                    "artifact_status": null
-                  }
-                },
-                {
-                  "type": "rule_satisfied",
-                  "context": {
-                    "flow_name": "production-promotion",
-                    "trail_name": "promotion-one-188",
-                    "artifact_status": null
-                  }
-                },
-                {
-                  "type": "rule_not_applicable",
-                  "context": {
-                    "flow_name": "snyk-aws-prod-per-artifact",
-                    "trail_name": "nginx-4fbb8f1c531b24dcb2a38c71c268e0b8d7244e650cb96ce042d62fb8c07cb85b",
-                    "artifact_status": null
-                  }
-                },
-                {
-                  "type": "rule_not_applicable",
-                  "context": {
-                    "flow_name": "snyk-aws-beta-per-artifact",
-                    "trail_name": "nginx-4fbb8f1c531b24dcb2a38c71c268e0b8d7244e650cb96ce042d62fb8c07cb85b",
-                    "artifact_status": null
-                  }
-                }
-              ]
-            }
-          ],
-          "policy_name": "production-promotion"
-        },
-        {
-          "policy_version": 3,
-          "status": "COMPLIANT",
-          "rule_evaluations": [
-            {
-              "rule": {
-                "type": "provenance",
-                "definition": {
-                  "required": true,
-                  "exceptions": []
-                }
-              },
-              "satisfied": true,
-              "ignored": false,
-              "resolutions": [
-                {
-                  "type": "rule_satisfied",
-                  "context": {
-                    "flow_name": "nginx-ci",
-                    "trail_name": "c6834ecc2c5b9e5622428f14be5c4de3b49dde46",
-                    "artifact_status": null
-                  }
-                },
-                {
-                  "type": "rule_satisfied",
-                  "context": {
-                    "flow_name": "production-promotion",
-                    "trail_name": "promotion-one-188",
-                    "artifact_status": null
-                  }
-                },
-                {
-                  "type": "rule_satisfied",
-                  "context": {
-                    "flow_name": "snyk-aws-prod-per-artifact",
-                    "trail_name": "nginx-4fbb8f1c531b24dcb2a38c71c268e0b8d7244e650cb96ce042d62fb8c07cb85b",
-                    "artifact_status": null
-                  }
-                },
-                {
-                  "type": "rule_satisfied",
-                  "context": {
-                    "flow_name": "snyk-aws-beta-per-artifact",
-                    "trail_name": "nginx-4fbb8f1c531b24dcb2a38c71c268e0b8d7244e650cb96ce042d62fb8c07cb85b",
-                    "artifact_status": null
-                  }
-                }
-              ]
-            },
-            {
-              "rule": {
-                "type": "trail-compliance",
-                "definition": {
-                  "required": false,
-                  "exceptions": []
-                }
-              },
-              "satisfied": null,
-              "ignored": true,
-              "resolutions": [
-                {
-                  "type": "rule_not_applicable",
-                  "context": {
-                    "flow_name": "nginx-ci",
-                    "trail_name": "c6834ecc2c5b9e5622428f14be5c4de3b49dde46",
-                    "artifact_status": "COMPLIANT"
-                  }
-                },
-                {
-                  "type": "rule_not_applicable",
-                  "context": {
-                    "flow_name": "production-promotion",
-                    "trail_name": "promotion-one-188",
-                    "artifact_status": "COMPLIANT"
-                  }
-                },
-                {
-                  "type": "rule_not_applicable",
-                  "context": {
-                    "flow_name": "snyk-aws-prod-per-artifact",
-                    "trail_name": "nginx-4fbb8f1c531b24dcb2a38c71c268e0b8d7244e650cb96ce042d62fb8c07cb85b",
-                    "artifact_status": "COMPLIANT"
-                  }
-                },
-                {
-                  "type": "rule_not_applicable",
-                  "context": {
-                    "flow_name": "snyk-aws-beta-per-artifact",
-                    "trail_name": "nginx-4fbb8f1c531b24dcb2a38c71c268e0b8d7244e650cb96ce042d62fb8c07cb85b",
-                    "artifact_status": "COMPLIANT"
-                  }
-                }
-              ]
-            },
-            {
-              "rule": {
-                "type": "attestation",
-                "definition": {
-                  "if": {
-                    "text": "flow.tags.kind == \"build\""
-                  },
-                  "name": "*",
-                  "type": "decision",
-                  "must_be_compliant": true,
-                  "for_control": "SDLC-CTRL-0002"
-                }
-              },
-              "satisfied": true,
-              "ignored": false,
-              "resolutions": [
-                {
-                  "type": "rule_satisfied",
-                  "context": {
-                    "flow_name": "nginx-ci",
-                    "trail_name": "c6834ecc2c5b9e5622428f14be5c4de3b49dde46",
-                    "artifact_status": null,
-                    "for_control": "SDLC-CTRL-0002"
-                  }
-                },
-                {
-                  "type": "rule_not_applicable",
-                  "context": {
-                    "flow_name": "production-promotion",
-                    "trail_name": "promotion-one-188",
-                    "artifact_status": null,
-                    "for_control": "SDLC-CTRL-0002"
-                  }
-                },
-                {
-                  "type": "rule_not_applicable",
-                  "context": {
-                    "flow_name": "snyk-aws-prod-per-artifact",
-                    "trail_name": "nginx-4fbb8f1c531b24dcb2a38c71c268e0b8d7244e650cb96ce042d62fb8c07cb85b",
-                    "artifact_status": null,
-                    "for_control": "SDLC-CTRL-0002"
-                  }
-                },
-                {
-                  "type": "rule_not_applicable",
-                  "context": {
-                    "flow_name": "snyk-aws-beta-per-artifact",
-                    "trail_name": "nginx-4fbb8f1c531b24dcb2a38c71c268e0b8d7244e650cb96ce042d62fb8c07cb85b",
-                    "artifact_status": null,
-                    "for_control": "SDLC-CTRL-0002"
-                  }
-                }
-              ]
-            }
-          ],
-          "policy_name": "provenance"
-        },
-        {
-          "policy_version": 3,
-          "status": "COMPLIANT",
-          "rule_evaluations": [
-            {
-              "rule": {
-                "type": "provenance",
-                "definition": {
-                  "required": false,
-                  "exceptions": []
-                }
-              },
-              "satisfied": null,
-              "ignored": true,
-              "resolutions": [
-                {
-                  "type": "rule_not_applicable",
-                  "context": {
-                    "flow_name": "nginx-ci",
-                    "trail_name": "c6834ecc2c5b9e5622428f14be5c4de3b49dde46",
-                    "artifact_status": null
-                  }
-                },
-                {
-                  "type": "rule_not_applicable",
-                  "context": {
-                    "flow_name": "production-promotion",
-                    "trail_name": "promotion-one-188",
-                    "artifact_status": null
-                  }
-                },
-                {
-                  "type": "rule_not_applicable",
-                  "context": {
-                    "flow_name": "snyk-aws-prod-per-artifact",
-                    "trail_name": "nginx-4fbb8f1c531b24dcb2a38c71c268e0b8d7244e650cb96ce042d62fb8c07cb85b",
-                    "artifact_status": null
-                  }
-                },
-                {
-                  "type": "rule_not_applicable",
-                  "context": {
-                    "flow_name": "snyk-aws-beta-per-artifact",
-                    "trail_name": "nginx-4fbb8f1c531b24dcb2a38c71c268e0b8d7244e650cb96ce042d62fb8c07cb85b",
-                    "artifact_status": null
-                  }
-                }
-              ]
-            },
-            {
-              "rule": {
-                "type": "trail-compliance",
-                "definition": {
-                  "required": false,
-                  "exceptions": []
-                }
-              },
-              "satisfied": null,
-              "ignored": true,
-              "resolutions": [
-                {
-                  "type": "rule_not_applicable",
-                  "context": {
-                    "flow_name": "nginx-ci",
-                    "trail_name": "c6834ecc2c5b9e5622428f14be5c4de3b49dde46",
-                    "artifact_status": "COMPLIANT"
-                  }
-                },
-                {
-                  "type": "rule_not_applicable",
-                  "context": {
-                    "flow_name": "production-promotion",
-                    "trail_name": "promotion-one-188",
-                    "artifact_status": "COMPLIANT"
-                  }
-                },
-                {
-                  "type": "rule_not_applicable",
-                  "context": {
-                    "flow_name": "snyk-aws-prod-per-artifact",
-                    "trail_name": "nginx-4fbb8f1c531b24dcb2a38c71c268e0b8d7244e650cb96ce042d62fb8c07cb85b",
-                    "artifact_status": "COMPLIANT"
-                  }
-                },
-                {
-                  "type": "rule_not_applicable",
-                  "context": {
-                    "flow_name": "snyk-aws-beta-per-artifact",
-                    "trail_name": "nginx-4fbb8f1c531b24dcb2a38c71c268e0b8d7244e650cb96ce042d62fb8c07cb85b",
-                    "artifact_status": "COMPLIANT"
-                  }
-                }
-              ]
-            },
-            {
-              "rule": {
-                "type": "attestation",
-                "definition": {
-                  "if": {
-                    "text": "flow.tags.kind == \"build\""
-                  },
-                  "name": "*",
-                  "type": "pull_request",
-                  "must_be_compliant": true,
-                  "for_control": null
-                }
-              },
-              "satisfied": true,
-              "ignored": false,
-              "resolutions": [
-                {
-                  "type": "rule_satisfied",
-                  "context": {
-                    "flow_name": "nginx-ci",
-                    "trail_name": "c6834ecc2c5b9e5622428f14be5c4de3b49dde46",
-                    "artifact_status": null
-                  }
-                },
-                {
-                  "type": "rule_not_applicable",
-                  "context": {
-                    "flow_name": "production-promotion",
-                    "trail_name": "promotion-one-188",
-                    "artifact_status": null
-                  }
-                },
-                {
-                  "type": "rule_not_applicable",
-                  "context": {
-                    "flow_name": "snyk-aws-prod-per-artifact",
-                    "trail_name": "nginx-4fbb8f1c531b24dcb2a38c71c268e0b8d7244e650cb96ce042d62fb8c07cb85b",
-                    "artifact_status": null
-                  }
-                },
-                {
-                  "type": "rule_not_applicable",
-                  "context": {
-                    "flow_name": "snyk-aws-beta-per-artifact",
-                    "trail_name": "nginx-4fbb8f1c531b24dcb2a38c71c268e0b8d7244e650cb96ce042d62fb8c07cb85b",
-                    "artifact_status": null
-                  }
-                }
-              ]
-            }
-          ],
-          "policy_name": "pull-request"
-        },
-        {
-          "policy_version": 4,
-          "status": "COMPLIANT",
-          "rule_evaluations": [
-            {
-              "rule": {
-                "type": "provenance",
-                "definition": {
-                  "required": false,
-                  "exceptions": []
-                }
-              },
-              "satisfied": null,
-              "ignored": true,
-              "resolutions": [
-                {
-                  "type": "rule_not_applicable",
-                  "context": {
-                    "flow_name": "nginx-ci",
-                    "trail_name": "c6834ecc2c5b9e5622428f14be5c4de3b49dde46",
-                    "artifact_status": null
-                  }
-                },
-                {
-                  "type": "rule_not_applicable",
-                  "context": {
-                    "flow_name": "production-promotion",
-                    "trail_name": "promotion-one-188",
-                    "artifact_status": null
-                  }
-                },
-                {
-                  "type": "rule_not_applicable",
-                  "context": {
-                    "flow_name": "snyk-aws-prod-per-artifact",
-                    "trail_name": "nginx-4fbb8f1c531b24dcb2a38c71c268e0b8d7244e650cb96ce042d62fb8c07cb85b",
-                    "artifact_status": null
-                  }
-                },
-                {
-                  "type": "rule_not_applicable",
-                  "context": {
-                    "flow_name": "snyk-aws-beta-per-artifact",
-                    "trail_name": "nginx-4fbb8f1c531b24dcb2a38c71c268e0b8d7244e650cb96ce042d62fb8c07cb85b",
-                    "artifact_status": null
-                  }
-                }
-              ]
-            },
-            {
-              "rule": {
-                "type": "trail-compliance",
-                "definition": {
-                  "required": false,
-                  "exceptions": []
-                }
-              },
-              "satisfied": null,
-              "ignored": true,
-              "resolutions": [
-                {
-                  "type": "rule_not_applicable",
-                  "context": {
-                    "flow_name": "nginx-ci",
-                    "trail_name": "c6834ecc2c5b9e5622428f14be5c4de3b49dde46",
-                    "artifact_status": "COMPLIANT"
-                  }
-                },
-                {
-                  "type": "rule_not_applicable",
-                  "context": {
-                    "flow_name": "production-promotion",
-                    "trail_name": "promotion-one-188",
-                    "artifact_status": "COMPLIANT"
-                  }
-                },
-                {
-                  "type": "rule_not_applicable",
-                  "context": {
-                    "flow_name": "snyk-aws-prod-per-artifact",
-                    "trail_name": "nginx-4fbb8f1c531b24dcb2a38c71c268e0b8d7244e650cb96ce042d62fb8c07cb85b",
-                    "artifact_status": "COMPLIANT"
-                  }
-                },
-                {
-                  "type": "rule_not_applicable",
-                  "context": {
-                    "flow_name": "snyk-aws-beta-per-artifact",
-                    "trail_name": "nginx-4fbb8f1c531b24dcb2a38c71c268e0b8d7244e650cb96ce042d62fb8c07cb85b",
-                    "artifact_status": "COMPLIANT"
-                  }
-                }
-              ]
-            },
-            {
-              "rule": {
-                "type": "attestation",
-                "definition": {
-                  "if": {
-                    "text": "flow.name == \"snyk-aws-prod-per-artifact\""
-                  },
-                  "name": "snyk-container-scan",
-                  "type": "decision",
-                  "must_be_compliant": true,
-                  "for_control": "SDLC-CTRL-0022"
-                }
-              },
-              "satisfied": true,
-              "ignored": false,
-              "resolutions": [
-                {
-                  "type": "rule_not_applicable",
-                  "context": {
-                    "flow_name": "nginx-ci",
-                    "trail_name": "c6834ecc2c5b9e5622428f14be5c4de3b49dde46",
-                    "artifact_status": null,
-                    "for_control": "SDLC-CTRL-0022"
-                  }
-                },
-                {
-                  "type": "rule_not_applicable",
-                  "context": {
-                    "flow_name": "production-promotion",
-                    "trail_name": "promotion-one-188",
-                    "artifact_status": null,
-                    "for_control": "SDLC-CTRL-0022"
-                  }
-                },
-                {
-                  "type": "rule_satisfied",
-                  "context": {
-                    "flow_name": "snyk-aws-prod-per-artifact",
-                    "trail_name": "nginx-4fbb8f1c531b24dcb2a38c71c268e0b8d7244e650cb96ce042d62fb8c07cb85b",
-                    "artifact_status": null,
-                    "for_control": "SDLC-CTRL-0022"
-                  }
-                },
-                {
-                  "type": "rule_not_applicable",
-                  "context": {
-                    "flow_name": "snyk-aws-beta-per-artifact",
-                    "trail_name": "nginx-4fbb8f1c531b24dcb2a38c71c268e0b8d7244e650cb96ce042d62fb8c07cb85b",
-                    "artifact_status": null,
-                    "for_control": "SDLC-CTRL-0022"
-                  }
-                }
-              ]
-            }
-          ],
-          "policy_name": "snyk-scan-aws-prod"
-        },
-        {
-          "policy_version": 2,
-          "status": "COMPLIANT",
-          "rule_evaluations": [
-            {
-              "rule": {
-                "type": "provenance",
-                "definition": {
-                  "required": false,
-                  "exceptions": []
-                }
-              },
-              "satisfied": null,
-              "ignored": true,
-              "resolutions": [
-                {
-                  "type": "rule_not_applicable",
-                  "context": {
-                    "flow_name": "nginx-ci",
-                    "trail_name": "c6834ecc2c5b9e5622428f14be5c4de3b49dde46",
-                    "artifact_status": null
-                  }
-                },
-                {
-                  "type": "rule_not_applicable",
-                  "context": {
-                    "flow_name": "production-promotion",
-                    "trail_name": "promotion-one-188",
-                    "artifact_status": null
-                  }
-                },
-                {
-                  "type": "rule_not_applicable",
-                  "context": {
-                    "flow_name": "snyk-aws-prod-per-artifact",
-                    "trail_name": "nginx-4fbb8f1c531b24dcb2a38c71c268e0b8d7244e650cb96ce042d62fb8c07cb85b",
-                    "artifact_status": null
-                  }
-                },
-                {
-                  "type": "rule_not_applicable",
-                  "context": {
-                    "flow_name": "snyk-aws-beta-per-artifact",
-                    "trail_name": "nginx-4fbb8f1c531b24dcb2a38c71c268e0b8d7244e650cb96ce042d62fb8c07cb85b",
-                    "artifact_status": null
-                  }
-                }
-              ]
-            },
-            {
-              "rule": {
-                "type": "trail-compliance",
-                "definition": {
-                  "required": true,
-                  "exceptions": [
-                    {
-                      "if": {
-                        "text": "exists(flow.tags.env) and flow.tags.env != \"aws-prod\""
-                      }
-                    }
-                  ]
-                }
-              },
-              "satisfied": true,
-              "ignored": false,
-              "resolutions": [
-                {
-                  "type": "rule_not_applicable",
-                  "context": {
-                    "flow_name": "nginx-ci",
-                    "trail_name": "c6834ecc2c5b9e5622428f14be5c4de3b49dde46",
-                    "artifact_status": "COMPLIANT"
-                  }
-                },
-                {
-                  "type": "rule_satisfied",
-                  "context": {
-                    "flow_name": "production-promotion",
-                    "trail_name": "promotion-one-188",
-                    "artifact_status": "COMPLIANT"
-                  }
-                },
-                {
-                  "type": "rule_satisfied",
-                  "context": {
-                    "flow_name": "snyk-aws-prod-per-artifact",
-                    "trail_name": "nginx-4fbb8f1c531b24dcb2a38c71c268e0b8d7244e650cb96ce042d62fb8c07cb85b",
-                    "artifact_status": "COMPLIANT"
-                  }
-                },
-                {
-                  "type": "rule_not_applicable",
-                  "context": {
-                    "flow_name": "snyk-aws-beta-per-artifact",
-                    "trail_name": "nginx-4fbb8f1c531b24dcb2a38c71c268e0b8d7244e650cb96ce042d62fb8c07cb85b",
-                    "artifact_status": "COMPLIANT"
-                  }
-                }
-              ]
-            }
-          ],
-          "policy_name": "trail-compliance-aws-prod"
-        }
-      ],
-      "reasons_for_incompliance": [],
-      "fingerprint": "4fbb8f1c531b24dcb2a38c71c268e0b8d7244e650cb96ce042d62fb8c07cb85b",
-      "creationTimestamp": [
-        1792493363
-      ],
-      "pods": null,
-      "annotation": {
-        "type": "unchanged",
-        "was": 1,
-        "now": 1
-      },
-      "flow_name": "nginx-ci",
-      "git_commit": "c6834ecc2c5b9e5622428f14be5c4de3b49dde46",
-      "commit_url": "https://github.com/cyber-dojo/nginx/commit/c6834ecc2c5b9e5622428f14be5c4de3b49dde46",
-      "html_url": "https://app.kosli.com/cyber-dojo/flows/nginx-ci/artifacts/4fbb8f1c531b24dcb2a38c71c268e0b8d7244e650cb96ce042d62fb8c07cb85b?artifact_id=9a469b86-3cb3-4e51-99e2-74e5310c",
-      "flow_html_url": "https://app.kosli.com/cyber-dojo/flows/nginx-ci",
-      "deployment_diff": {
-        "diff_url": "https://github.com/cyber-dojo/nginx/compare/b17fe49939a63ae7b3996c4bf4f80e2362d537a2...c6834ecc2c5b9e5622428f14be5c4de3b49dde46",
-        "previous_git_commit": "b17fe49939a63ae7b3996c4bf4f80e2362d537a2",
-        "previous_git_commit_url": "https://github.com/cyber-dojo/nginx/commit/b17fe49939a63ae7b3996c4bf4f80e2362d537a2",
-        "previous_fingerprint": "896a2cd49408db95a29b752857d17c6b68df23d8a27b75e70f2e55aa0c3d367f",
-        "previous_artifact_name": "244531986313.dkr.ecr.eu-central-1.amazonaws.com/nginx:b17fe49@sha256:896a2cd49408db95a29b752857d17c6b68df23d8a27b75e70f2e55aa0c3d367f",
-        "previous_artifact_compliance_state": "COMPLIANT",
-        "previous_running": false,
-        "previous_trail_name": "b17fe49939a63ae7b3996c4bf4f80e2362d537a2",
-        "previous_template_reference_name": "nginx"
-      },
-      "commit_lead_time": 3027.0,
-      "flows": [
-        {
-          "flow_name": "nginx-ci",
-          "trail_name": "c6834ecc2c5b9e5622428f14be5c4de3b49dde46",
-          "template_reference_name": "nginx",
-          "git_commit": "c6834ecc2c5b9e5622428f14be5c4de3b49dde46",
-          "commit_url": "https://github.com/cyber-dojo/nginx/commit/c6834ecc2c5b9e5622428f14be5c4de3b49dde46",
-          "git_commit_info": {
-            "sha1": "c6834ecc2c5b9e5622428f14be5c4de3b49dde46",
-            "message": "Merge pull request #187 from cyber-dojo/run-workflow-158\n\nRun workflow to pick up fix for new libexpat snyk vuln",
-            "author": "Jon Jagger <jon@kosli.com>",
-            "branch": "",
-            "timestamp": 1792490336.0,
-            "url": "https://github.com/cyber-dojo/nginx/commit/c6834ecc2c5b9e5622428f14be5c4de3b49dde46"
-          },
-          "html_url": "https://app.kosli.com/cyber-dojo/flows/nginx-ci/artifacts/4fbb8f1c531b24dcb2a38c71c268e0b8d7244e650cb96ce042d62fb8c07cb85b?artifact_id=9a469b86-3cb3-4e51-99e2-74e5310c",
-          "flow_html_url": "https://app.kosli.com/cyber-dojo/flows/nginx-ci",
-          "deployment_diff": {
-            "diff_url": "https://github.com/cyber-dojo/nginx/compare/b17fe49939a63ae7b3996c4bf4f80e2362d537a2...c6834ecc2c5b9e5622428f14be5c4de3b49dde46",
-            "previous_git_commit": "b17fe49939a63ae7b3996c4bf4f80e2362d537a2",
-            "previous_git_commit_url": "https://github.com/cyber-dojo/nginx/commit/b17fe49939a63ae7b3996c4bf4f80e2362d537a2",
-            "previous_fingerprint": "896a2cd49408db95a29b752857d17c6b68df23d8a27b75e70f2e55aa0c3d367f",
-            "previous_artifact_name": "244531986313.dkr.ecr.eu-central-1.amazonaws.com/nginx:b17fe49@sha256:896a2cd49408db95a29b752857d17c6b68df23d8a27b75e70f2e55aa0c3d367f",
-            "previous_artifact_compliance_state": "COMPLIANT",
-            "previous_running": false,
-            "previous_trail_name": "b17fe49939a63ae7b3996c4bf4f80e2362d537a2",
-            "previous_template_reference_name": "nginx"
-          },
-          "commit_lead_time": 3027.0,
-          "artifact_compliance_in_flow": true,
-          "flow_reasons_for_non_compliance": []
-        },
-        {
-          "flow_name": "production-promotion",
-          "trail_name": "promotion-one-188",
-          "template_reference_name": "nginx",
-          "git_commit": "f1f6cd6bce0e887649f077657215b50f9cf47d93",
-          "commit_url": "https://github.com/cyber-dojo/aws-prod-co-promotion/commit/f1f6cd6bce0e887649f077657215b50f9cf47d93",
-          "git_commit_info": {
-            "sha1": "f1f6cd6bce0e887649f077657215b50f9cf47d93",
-            "message": "Merge pull request #19 from cyber-dojo/cap-parallel-prod-applies\n\nCap promote-all prod applies at three at a time",
-            "author": "Jon Jagger <jon@kosli.com>",
-            "branch": "main",
-            "timestamp": 1791649272.0,
-            "url": "https://github.com/cyber-dojo/aws-prod-co-promotion/commit/f1f6cd6bce0e887649f077657215b50f9cf47d93"
-          },
-          "html_url": "https://app.kosli.com/cyber-dojo/flows/production-promotion/artifacts/4fbb8f1c531b24dcb2a38c71c268e0b8d7244e650cb96ce042d62fb8c07cb85b?artifact_id=e7a05cff-b448-41b9-9fb6-e3906a40",
-          "flow_html_url": "https://app.kosli.com/cyber-dojo/flows/production-promotion",
-          "deployment_diff": {
-            "diff_url": "https://github.com/cyber-dojo/aws-prod-co-promotion/compare/54306f735c51413c972b38398da4d0a5fc86d47a...f1f6cd6bce0e887649f077657215b50f9cf47d93",
-            "previous_git_commit": "54306f735c51413c972b38398da4d0a5fc86d47a",
-            "previous_git_commit_url": "https://github.com/cyber-dojo/aws-prod-co-promotion/commit/54306f735c51413c972b38398da4d0a5fc86d47a",
-            "previous_fingerprint": "896a2cd49408db95a29b752857d17c6b68df23d8a27b75e70f2e55aa0c3d367f",
-            "previous_artifact_name": "244531986313.dkr.ecr.eu-central-1.amazonaws.com/nginx:b17fe49@sha256:896a2cd49408db95a29b752857d17c6b68df23d8a27b75e70f2e55aa0c3d367f",
-            "previous_artifact_compliance_state": "COMPLIANT",
-            "previous_running": false,
-            "previous_trail_name": "promote-all-41",
-            "previous_template_reference_name": "nginx"
-          },
-          "commit_lead_time": 844091.0,
-          "artifact_compliance_in_flow": true,
-          "flow_reasons_for_non_compliance": []
-        },
-        {
-          "flow_name": "snyk-aws-prod-per-artifact",
-          "trail_name": "nginx-4fbb8f1c531b24dcb2a38c71c268e0b8d7244e650cb96ce042d62fb8c07cb85b",
-          "template_reference_name": "nginx",
-          "git_commit": "359c98460f5c3aefb136a77eef08d1be4c4ca08d",
-          "commit_url": "https://github.com/cyber-dojo/snyk-scanning/commit/359c98460f5c3aefb136a77eef08d1be4c4ca08d",
-          "git_commit_info": {
-            "sha1": "359c98460f5c3aefb136a77eef08d1be4c4ca08d",
-            "message": "Merge pull request #6 from cyber-dojo/key-uploads-and-trails-on-component-not-repo\n\nTell apart artifacts built by one repo",
-            "author": "Jon Jagger <jon@kosli.com>",
-            "branch": "main",
-            "timestamp": 1790759058.0,
-            "url": "https://github.com/cyber-dojo/snyk-scanning/commit/359c98460f5c3aefb136a77eef08d1be4c4ca08d"
-          },
-          "html_url": "https://app.kosli.com/cyber-dojo/flows/snyk-aws-prod-per-artifact/artifacts/4fbb8f1c531b24dcb2a38c71c268e0b8d7244e650cb96ce042d62fb8c07cb85b?artifact_id=801a143f-6b2d-40ff-a9fd-3c2308ed",
-          "flow_html_url": "https://app.kosli.com/cyber-dojo/flows/snyk-aws-prod-per-artifact",
-          "deployment_diff": {
-            "diff_url": "https://github.com/cyber-dojo/snyk-scanning/compare/30111f180ac4e3611cdbd7d805381a0bb9f53cff...359c98460f5c3aefb136a77eef08d1be4c4ca08d",
-            "previous_git_commit": "30111f180ac4e3611cdbd7d805381a0bb9f53cff",
-            "previous_git_commit_url": "https://github.com/cyber-dojo/snyk-scanning/commit/30111f180ac4e3611cdbd7d805381a0bb9f53cff",
-            "previous_fingerprint": "aa63057d266fea8e2336b5d046a85889dd2ec37023cb81a465f6fff6c999c2c5",
-            "previous_artifact_name": "244531986313.dkr.ecr.eu-central-1.amazonaws.com/nginx:bd3938c@sha256:aa63057d266fea8e2336b5d046a85889dd2ec37023cb81a465f6fff6c999c2c5",
-            "previous_artifact_compliance_state": "COMPLIANT",
-            "previous_running": false,
-            "previous_trail_name": "nginx-aa63057d266fea8e2336b5d046a85889dd2ec37023cb81a465f6fff6c999c2c5",
-            "previous_template_reference_name": "nginx"
-          },
-          "commit_lead_time": 1734305.0,
-          "artifact_compliance_in_flow": true,
-          "flow_reasons_for_non_compliance": []
-        },
-        {
-          "flow_name": "snyk-aws-beta-per-artifact",
-          "trail_name": "nginx-4fbb8f1c531b24dcb2a38c71c268e0b8d7244e650cb96ce042d62fb8c07cb85b",
-          "template_reference_name": "nginx",
-          "git_commit": "359c98460f5c3aefb136a77eef08d1be4c4ca08d",
-          "commit_url": "https://github.com/cyber-dojo/snyk-scanning/commit/359c98460f5c3aefb136a77eef08d1be4c4ca08d",
-          "git_commit_info": {
-            "sha1": "359c98460f5c3aefb136a77eef08d1be4c4ca08d",
-            "message": "Merge pull request #6 from cyber-dojo/key-uploads-and-trails-on-component-not-repo\n\nTell apart artifacts built by one repo",
-            "author": "Jon Jagger <jon@kosli.com>",
-            "branch": "main",
-            "timestamp": 1790759058.0,
-            "url": "https://github.com/cyber-dojo/snyk-scanning/commit/359c98460f5c3aefb136a77eef08d1be4c4ca08d"
-          },
-          "html_url": "https://app.kosli.com/cyber-dojo/flows/snyk-aws-beta-per-artifact/artifacts/4fbb8f1c531b24dcb2a38c71c268e0b8d7244e650cb96ce042d62fb8c07cb85b?artifact_id=1351867c-b3af-4b03-b2b6-90daa87d",
-          "flow_html_url": "https://app.kosli.com/cyber-dojo/flows/snyk-aws-beta-per-artifact",
-          "deployment_diff": {
-            "diff_url": "https://github.com/cyber-dojo/snyk-scanning/compare/359c98460f5c3aefb136a77eef08d1be4c4ca08d...359c98460f5c3aefb136a77eef08d1be4c4ca08d",
-            "previous_git_commit": "359c98460f5c3aefb136a77eef08d1be4c4ca08d",
-            "previous_git_commit_url": "https://github.com/cyber-dojo/snyk-scanning/commit/359c98460f5c3aefb136a77eef08d1be4c4ca08d",
-            "previous_fingerprint": "f4430327f644e75c547f98d43a148da029760006c572b28d3f957e175bb2352d",
-            "previous_artifact_name": "244531986313.dkr.ecr.eu-central-1.amazonaws.com/nginx:69e4ccf@sha256:f4430327f644e75c547f98d43a148da029760006c572b28d3f957e175bb2352d",
-            "previous_artifact_compliance_state": "COMPLIANT",
-            "previous_running": false,
-            "previous_trail_name": "nginx-f4430327f644e75c547f98d43a148da029760006c572b28d3f957e175bb2352d",
-            "previous_template_reference_name": "nginx"
-          },
-          "commit_lead_time": 1734305.0,
-          "artifact_compliance_in_flow": true,
-          "flow_reasons_for_non_compliance": []
-        }
-      ],
-      "ecs_context": {
-        "task_arn": "arn:aws:ecs:eu-central-1:274425519734:task/app/d8d463dad73d456b95603f0e58e0c3b7",
-        "cluster_name": null,
-        "service_name": null
-      }
-    },
-    {
-      "name": "244531986313.dkr.ecr.eu-central-1.amazonaws.com/saver:edb38e8@sha256:daaa83990b31397a2892ef521dedd06f4d7fd0c19ace1be73da7cf06d6a4734a",
+      "name": "244531986313.dkr.ecr.eu-central-1.amazonaws.com/saver:573bc84@sha256:e16d7a10b27f5946e0c4ab8914f0b9e421b626854592692c5db5592eaebc7203",
       "compliant": true,
       "deployments": [],
       "policy_decisions": [
@@ -5288,23 +101,7 @@ kosli get snapshot aws-prod --output=json
                   "type": "rule_not_applicable",
                   "context": {
                     "flow_name": "saver-ci",
-                    "trail_name": "edb38e8b2a233345645ee339cdc9ed7b3b74fcd2",
-                    "artifact_status": null
-                  }
-                },
-                {
-                  "type": "rule_not_applicable",
-                  "context": {
-                    "flow_name": "production-promotion",
-                    "trail_name": "promotion-one-187",
-                    "artifact_status": null
-                  }
-                },
-                {
-                  "type": "rule_not_applicable",
-                  "context": {
-                    "flow_name": "snyk-aws-prod-per-artifact",
-                    "trail_name": "saver-daaa83990b31397a2892ef521dedd06f4d7fd0c19ace1be73da7cf06d6a4734a",
+                    "trail_name": "573bc849ed628bf0230b94be375122cf51b3f48f",
                     "artifact_status": null
                   }
                 },
@@ -5312,7 +109,23 @@ kosli get snapshot aws-prod --output=json
                   "type": "rule_not_applicable",
                   "context": {
                     "flow_name": "snyk-aws-beta-per-artifact",
-                    "trail_name": "saver-daaa83990b31397a2892ef521dedd06f4d7fd0c19ace1be73da7cf06d6a4734a",
+                    "trail_name": "saver-e16d7a10b27f5946e0c4ab8914f0b9e421b626854592692c5db5592eaebc7203",
+                    "artifact_status": null
+                  }
+                },
+                {
+                  "type": "rule_not_applicable",
+                  "context": {
+                    "flow_name": "production-promotion",
+                    "trail_name": "promote-all-42",
+                    "artifact_status": null
+                  }
+                },
+                {
+                  "type": "rule_not_applicable",
+                  "context": {
+                    "flow_name": "snyk-aws-prod-per-artifact",
+                    "trail_name": "saver-e16d7a10b27f5946e0c4ab8914f0b9e421b626854592692c5db5592eaebc7203",
                     "artifact_status": null
                   }
                 }
@@ -5333,23 +146,7 @@ kosli get snapshot aws-prod --output=json
                   "type": "rule_not_applicable",
                   "context": {
                     "flow_name": "saver-ci",
-                    "trail_name": "edb38e8b2a233345645ee339cdc9ed7b3b74fcd2",
-                    "artifact_status": "COMPLIANT"
-                  }
-                },
-                {
-                  "type": "rule_not_applicable",
-                  "context": {
-                    "flow_name": "production-promotion",
-                    "trail_name": "promotion-one-187",
-                    "artifact_status": "COMPLIANT"
-                  }
-                },
-                {
-                  "type": "rule_not_applicable",
-                  "context": {
-                    "flow_name": "snyk-aws-prod-per-artifact",
-                    "trail_name": "saver-daaa83990b31397a2892ef521dedd06f4d7fd0c19ace1be73da7cf06d6a4734a",
+                    "trail_name": "573bc849ed628bf0230b94be375122cf51b3f48f",
                     "artifact_status": "COMPLIANT"
                   }
                 },
@@ -5357,7 +154,23 @@ kosli get snapshot aws-prod --output=json
                   "type": "rule_not_applicable",
                   "context": {
                     "flow_name": "snyk-aws-beta-per-artifact",
-                    "trail_name": "saver-daaa83990b31397a2892ef521dedd06f4d7fd0c19ace1be73da7cf06d6a4734a",
+                    "trail_name": "saver-e16d7a10b27f5946e0c4ab8914f0b9e421b626854592692c5db5592eaebc7203",
+                    "artifact_status": "COMPLIANT"
+                  }
+                },
+                {
+                  "type": "rule_not_applicable",
+                  "context": {
+                    "flow_name": "production-promotion",
+                    "trail_name": "promote-all-42",
+                    "artifact_status": "COMPLIANT"
+                  }
+                },
+                {
+                  "type": "rule_not_applicable",
+                  "context": {
+                    "flow_name": "snyk-aws-prod-per-artifact",
+                    "trail_name": "saver-e16d7a10b27f5946e0c4ab8914f0b9e421b626854592692c5db5592eaebc7203",
                     "artifact_status": "COMPLIANT"
                   }
                 }
@@ -5383,23 +196,7 @@ kosli get snapshot aws-prod --output=json
                   "type": "rule_not_applicable",
                   "context": {
                     "flow_name": "saver-ci",
-                    "trail_name": "edb38e8b2a233345645ee339cdc9ed7b3b74fcd2",
-                    "artifact_status": null
-                  }
-                },
-                {
-                  "type": "rule_satisfied",
-                  "context": {
-                    "flow_name": "production-promotion",
-                    "trail_name": "promotion-one-187",
-                    "artifact_status": null
-                  }
-                },
-                {
-                  "type": "rule_not_applicable",
-                  "context": {
-                    "flow_name": "snyk-aws-prod-per-artifact",
-                    "trail_name": "saver-daaa83990b31397a2892ef521dedd06f4d7fd0c19ace1be73da7cf06d6a4734a",
+                    "trail_name": "573bc849ed628bf0230b94be375122cf51b3f48f",
                     "artifact_status": null
                   }
                 },
@@ -5407,7 +204,23 @@ kosli get snapshot aws-prod --output=json
                   "type": "rule_not_applicable",
                   "context": {
                     "flow_name": "snyk-aws-beta-per-artifact",
-                    "trail_name": "saver-daaa83990b31397a2892ef521dedd06f4d7fd0c19ace1be73da7cf06d6a4734a",
+                    "trail_name": "saver-e16d7a10b27f5946e0c4ab8914f0b9e421b626854592692c5db5592eaebc7203",
+                    "artifact_status": null
+                  }
+                },
+                {
+                  "type": "rule_satisfied",
+                  "context": {
+                    "flow_name": "production-promotion",
+                    "trail_name": "promote-all-42",
+                    "artifact_status": null
+                  }
+                },
+                {
+                  "type": "rule_not_applicable",
+                  "context": {
+                    "flow_name": "snyk-aws-prod-per-artifact",
+                    "trail_name": "saver-e16d7a10b27f5946e0c4ab8914f0b9e421b626854592692c5db5592eaebc7203",
                     "artifact_status": null
                   }
                 }
@@ -5435,23 +248,7 @@ kosli get snapshot aws-prod --output=json
                   "type": "rule_satisfied",
                   "context": {
                     "flow_name": "saver-ci",
-                    "trail_name": "edb38e8b2a233345645ee339cdc9ed7b3b74fcd2",
-                    "artifact_status": null
-                  }
-                },
-                {
-                  "type": "rule_satisfied",
-                  "context": {
-                    "flow_name": "production-promotion",
-                    "trail_name": "promotion-one-187",
-                    "artifact_status": null
-                  }
-                },
-                {
-                  "type": "rule_satisfied",
-                  "context": {
-                    "flow_name": "snyk-aws-prod-per-artifact",
-                    "trail_name": "saver-daaa83990b31397a2892ef521dedd06f4d7fd0c19ace1be73da7cf06d6a4734a",
+                    "trail_name": "573bc849ed628bf0230b94be375122cf51b3f48f",
                     "artifact_status": null
                   }
                 },
@@ -5459,7 +256,23 @@ kosli get snapshot aws-prod --output=json
                   "type": "rule_satisfied",
                   "context": {
                     "flow_name": "snyk-aws-beta-per-artifact",
-                    "trail_name": "saver-daaa83990b31397a2892ef521dedd06f4d7fd0c19ace1be73da7cf06d6a4734a",
+                    "trail_name": "saver-e16d7a10b27f5946e0c4ab8914f0b9e421b626854592692c5db5592eaebc7203",
+                    "artifact_status": null
+                  }
+                },
+                {
+                  "type": "rule_satisfied",
+                  "context": {
+                    "flow_name": "production-promotion",
+                    "trail_name": "promote-all-42",
+                    "artifact_status": null
+                  }
+                },
+                {
+                  "type": "rule_satisfied",
+                  "context": {
+                    "flow_name": "snyk-aws-prod-per-artifact",
+                    "trail_name": "saver-e16d7a10b27f5946e0c4ab8914f0b9e421b626854592692c5db5592eaebc7203",
                     "artifact_status": null
                   }
                 }
@@ -5480,23 +293,7 @@ kosli get snapshot aws-prod --output=json
                   "type": "rule_not_applicable",
                   "context": {
                     "flow_name": "saver-ci",
-                    "trail_name": "edb38e8b2a233345645ee339cdc9ed7b3b74fcd2",
-                    "artifact_status": "COMPLIANT"
-                  }
-                },
-                {
-                  "type": "rule_not_applicable",
-                  "context": {
-                    "flow_name": "production-promotion",
-                    "trail_name": "promotion-one-187",
-                    "artifact_status": "COMPLIANT"
-                  }
-                },
-                {
-                  "type": "rule_not_applicable",
-                  "context": {
-                    "flow_name": "snyk-aws-prod-per-artifact",
-                    "trail_name": "saver-daaa83990b31397a2892ef521dedd06f4d7fd0c19ace1be73da7cf06d6a4734a",
+                    "trail_name": "573bc849ed628bf0230b94be375122cf51b3f48f",
                     "artifact_status": "COMPLIANT"
                   }
                 },
@@ -5504,7 +301,23 @@ kosli get snapshot aws-prod --output=json
                   "type": "rule_not_applicable",
                   "context": {
                     "flow_name": "snyk-aws-beta-per-artifact",
-                    "trail_name": "saver-daaa83990b31397a2892ef521dedd06f4d7fd0c19ace1be73da7cf06d6a4734a",
+                    "trail_name": "saver-e16d7a10b27f5946e0c4ab8914f0b9e421b626854592692c5db5592eaebc7203",
+                    "artifact_status": "COMPLIANT"
+                  }
+                },
+                {
+                  "type": "rule_not_applicable",
+                  "context": {
+                    "flow_name": "production-promotion",
+                    "trail_name": "promote-all-42",
+                    "artifact_status": "COMPLIANT"
+                  }
+                },
+                {
+                  "type": "rule_not_applicable",
+                  "context": {
+                    "flow_name": "snyk-aws-prod-per-artifact",
+                    "trail_name": "saver-e16d7a10b27f5946e0c4ab8914f0b9e421b626854592692c5db5592eaebc7203",
                     "artifact_status": "COMPLIANT"
                   }
                 }
@@ -5530,25 +343,7 @@ kosli get snapshot aws-prod --output=json
                   "type": "rule_satisfied",
                   "context": {
                     "flow_name": "saver-ci",
-                    "trail_name": "edb38e8b2a233345645ee339cdc9ed7b3b74fcd2",
-                    "artifact_status": null,
-                    "for_control": "SDLC-CTRL-0002"
-                  }
-                },
-                {
-                  "type": "rule_not_applicable",
-                  "context": {
-                    "flow_name": "production-promotion",
-                    "trail_name": "promotion-one-187",
-                    "artifact_status": null,
-                    "for_control": "SDLC-CTRL-0002"
-                  }
-                },
-                {
-                  "type": "rule_not_applicable",
-                  "context": {
-                    "flow_name": "snyk-aws-prod-per-artifact",
-                    "trail_name": "saver-daaa83990b31397a2892ef521dedd06f4d7fd0c19ace1be73da7cf06d6a4734a",
+                    "trail_name": "573bc849ed628bf0230b94be375122cf51b3f48f",
                     "artifact_status": null,
                     "for_control": "SDLC-CTRL-0002"
                   }
@@ -5557,7 +352,25 @@ kosli get snapshot aws-prod --output=json
                   "type": "rule_not_applicable",
                   "context": {
                     "flow_name": "snyk-aws-beta-per-artifact",
-                    "trail_name": "saver-daaa83990b31397a2892ef521dedd06f4d7fd0c19ace1be73da7cf06d6a4734a",
+                    "trail_name": "saver-e16d7a10b27f5946e0c4ab8914f0b9e421b626854592692c5db5592eaebc7203",
+                    "artifact_status": null,
+                    "for_control": "SDLC-CTRL-0002"
+                  }
+                },
+                {
+                  "type": "rule_not_applicable",
+                  "context": {
+                    "flow_name": "production-promotion",
+                    "trail_name": "promote-all-42",
+                    "artifact_status": null,
+                    "for_control": "SDLC-CTRL-0002"
+                  }
+                },
+                {
+                  "type": "rule_not_applicable",
+                  "context": {
+                    "flow_name": "snyk-aws-prod-per-artifact",
+                    "trail_name": "saver-e16d7a10b27f5946e0c4ab8914f0b9e421b626854592692c5db5592eaebc7203",
                     "artifact_status": null,
                     "for_control": "SDLC-CTRL-0002"
                   }
@@ -5586,23 +399,7 @@ kosli get snapshot aws-prod --output=json
                   "type": "rule_not_applicable",
                   "context": {
                     "flow_name": "saver-ci",
-                    "trail_name": "edb38e8b2a233345645ee339cdc9ed7b3b74fcd2",
-                    "artifact_status": null
-                  }
-                },
-                {
-                  "type": "rule_not_applicable",
-                  "context": {
-                    "flow_name": "production-promotion",
-                    "trail_name": "promotion-one-187",
-                    "artifact_status": null
-                  }
-                },
-                {
-                  "type": "rule_not_applicable",
-                  "context": {
-                    "flow_name": "snyk-aws-prod-per-artifact",
-                    "trail_name": "saver-daaa83990b31397a2892ef521dedd06f4d7fd0c19ace1be73da7cf06d6a4734a",
+                    "trail_name": "573bc849ed628bf0230b94be375122cf51b3f48f",
                     "artifact_status": null
                   }
                 },
@@ -5610,7 +407,23 @@ kosli get snapshot aws-prod --output=json
                   "type": "rule_not_applicable",
                   "context": {
                     "flow_name": "snyk-aws-beta-per-artifact",
-                    "trail_name": "saver-daaa83990b31397a2892ef521dedd06f4d7fd0c19ace1be73da7cf06d6a4734a",
+                    "trail_name": "saver-e16d7a10b27f5946e0c4ab8914f0b9e421b626854592692c5db5592eaebc7203",
+                    "artifact_status": null
+                  }
+                },
+                {
+                  "type": "rule_not_applicable",
+                  "context": {
+                    "flow_name": "production-promotion",
+                    "trail_name": "promote-all-42",
+                    "artifact_status": null
+                  }
+                },
+                {
+                  "type": "rule_not_applicable",
+                  "context": {
+                    "flow_name": "snyk-aws-prod-per-artifact",
+                    "trail_name": "saver-e16d7a10b27f5946e0c4ab8914f0b9e421b626854592692c5db5592eaebc7203",
                     "artifact_status": null
                   }
                 }
@@ -5631,23 +444,7 @@ kosli get snapshot aws-prod --output=json
                   "type": "rule_not_applicable",
                   "context": {
                     "flow_name": "saver-ci",
-                    "trail_name": "edb38e8b2a233345645ee339cdc9ed7b3b74fcd2",
-                    "artifact_status": "COMPLIANT"
-                  }
-                },
-                {
-                  "type": "rule_not_applicable",
-                  "context": {
-                    "flow_name": "production-promotion",
-                    "trail_name": "promotion-one-187",
-                    "artifact_status": "COMPLIANT"
-                  }
-                },
-                {
-                  "type": "rule_not_applicable",
-                  "context": {
-                    "flow_name": "snyk-aws-prod-per-artifact",
-                    "trail_name": "saver-daaa83990b31397a2892ef521dedd06f4d7fd0c19ace1be73da7cf06d6a4734a",
+                    "trail_name": "573bc849ed628bf0230b94be375122cf51b3f48f",
                     "artifact_status": "COMPLIANT"
                   }
                 },
@@ -5655,7 +452,23 @@ kosli get snapshot aws-prod --output=json
                   "type": "rule_not_applicable",
                   "context": {
                     "flow_name": "snyk-aws-beta-per-artifact",
-                    "trail_name": "saver-daaa83990b31397a2892ef521dedd06f4d7fd0c19ace1be73da7cf06d6a4734a",
+                    "trail_name": "saver-e16d7a10b27f5946e0c4ab8914f0b9e421b626854592692c5db5592eaebc7203",
+                    "artifact_status": "COMPLIANT"
+                  }
+                },
+                {
+                  "type": "rule_not_applicable",
+                  "context": {
+                    "flow_name": "production-promotion",
+                    "trail_name": "promote-all-42",
+                    "artifact_status": "COMPLIANT"
+                  }
+                },
+                {
+                  "type": "rule_not_applicable",
+                  "context": {
+                    "flow_name": "snyk-aws-prod-per-artifact",
+                    "trail_name": "saver-e16d7a10b27f5946e0c4ab8914f0b9e421b626854592692c5db5592eaebc7203",
                     "artifact_status": "COMPLIANT"
                   }
                 }
@@ -5681,23 +494,7 @@ kosli get snapshot aws-prod --output=json
                   "type": "rule_satisfied",
                   "context": {
                     "flow_name": "saver-ci",
-                    "trail_name": "edb38e8b2a233345645ee339cdc9ed7b3b74fcd2",
-                    "artifact_status": null
-                  }
-                },
-                {
-                  "type": "rule_not_applicable",
-                  "context": {
-                    "flow_name": "production-promotion",
-                    "trail_name": "promotion-one-187",
-                    "artifact_status": null
-                  }
-                },
-                {
-                  "type": "rule_not_applicable",
-                  "context": {
-                    "flow_name": "snyk-aws-prod-per-artifact",
-                    "trail_name": "saver-daaa83990b31397a2892ef521dedd06f4d7fd0c19ace1be73da7cf06d6a4734a",
+                    "trail_name": "573bc849ed628bf0230b94be375122cf51b3f48f",
                     "artifact_status": null
                   }
                 },
@@ -5705,7 +502,23 @@ kosli get snapshot aws-prod --output=json
                   "type": "rule_not_applicable",
                   "context": {
                     "flow_name": "snyk-aws-beta-per-artifact",
-                    "trail_name": "saver-daaa83990b31397a2892ef521dedd06f4d7fd0c19ace1be73da7cf06d6a4734a",
+                    "trail_name": "saver-e16d7a10b27f5946e0c4ab8914f0b9e421b626854592692c5db5592eaebc7203",
+                    "artifact_status": null
+                  }
+                },
+                {
+                  "type": "rule_not_applicable",
+                  "context": {
+                    "flow_name": "production-promotion",
+                    "trail_name": "promote-all-42",
+                    "artifact_status": null
+                  }
+                },
+                {
+                  "type": "rule_not_applicable",
+                  "context": {
+                    "flow_name": "snyk-aws-prod-per-artifact",
+                    "trail_name": "saver-e16d7a10b27f5946e0c4ab8914f0b9e421b626854592692c5db5592eaebc7203",
                     "artifact_status": null
                   }
                 }
@@ -5733,23 +546,7 @@ kosli get snapshot aws-prod --output=json
                   "type": "rule_not_applicable",
                   "context": {
                     "flow_name": "saver-ci",
-                    "trail_name": "edb38e8b2a233345645ee339cdc9ed7b3b74fcd2",
-                    "artifact_status": null
-                  }
-                },
-                {
-                  "type": "rule_not_applicable",
-                  "context": {
-                    "flow_name": "production-promotion",
-                    "trail_name": "promotion-one-187",
-                    "artifact_status": null
-                  }
-                },
-                {
-                  "type": "rule_not_applicable",
-                  "context": {
-                    "flow_name": "snyk-aws-prod-per-artifact",
-                    "trail_name": "saver-daaa83990b31397a2892ef521dedd06f4d7fd0c19ace1be73da7cf06d6a4734a",
+                    "trail_name": "573bc849ed628bf0230b94be375122cf51b3f48f",
                     "artifact_status": null
                   }
                 },
@@ -5757,7 +554,23 @@ kosli get snapshot aws-prod --output=json
                   "type": "rule_not_applicable",
                   "context": {
                     "flow_name": "snyk-aws-beta-per-artifact",
-                    "trail_name": "saver-daaa83990b31397a2892ef521dedd06f4d7fd0c19ace1be73da7cf06d6a4734a",
+                    "trail_name": "saver-e16d7a10b27f5946e0c4ab8914f0b9e421b626854592692c5db5592eaebc7203",
+                    "artifact_status": null
+                  }
+                },
+                {
+                  "type": "rule_not_applicable",
+                  "context": {
+                    "flow_name": "production-promotion",
+                    "trail_name": "promote-all-42",
+                    "artifact_status": null
+                  }
+                },
+                {
+                  "type": "rule_not_applicable",
+                  "context": {
+                    "flow_name": "snyk-aws-prod-per-artifact",
+                    "trail_name": "saver-e16d7a10b27f5946e0c4ab8914f0b9e421b626854592692c5db5592eaebc7203",
                     "artifact_status": null
                   }
                 }
@@ -5778,23 +591,7 @@ kosli get snapshot aws-prod --output=json
                   "type": "rule_not_applicable",
                   "context": {
                     "flow_name": "saver-ci",
-                    "trail_name": "edb38e8b2a233345645ee339cdc9ed7b3b74fcd2",
-                    "artifact_status": "COMPLIANT"
-                  }
-                },
-                {
-                  "type": "rule_not_applicable",
-                  "context": {
-                    "flow_name": "production-promotion",
-                    "trail_name": "promotion-one-187",
-                    "artifact_status": "COMPLIANT"
-                  }
-                },
-                {
-                  "type": "rule_not_applicable",
-                  "context": {
-                    "flow_name": "snyk-aws-prod-per-artifact",
-                    "trail_name": "saver-daaa83990b31397a2892ef521dedd06f4d7fd0c19ace1be73da7cf06d6a4734a",
+                    "trail_name": "573bc849ed628bf0230b94be375122cf51b3f48f",
                     "artifact_status": "COMPLIANT"
                   }
                 },
@@ -5802,7 +599,23 @@ kosli get snapshot aws-prod --output=json
                   "type": "rule_not_applicable",
                   "context": {
                     "flow_name": "snyk-aws-beta-per-artifact",
-                    "trail_name": "saver-daaa83990b31397a2892ef521dedd06f4d7fd0c19ace1be73da7cf06d6a4734a",
+                    "trail_name": "saver-e16d7a10b27f5946e0c4ab8914f0b9e421b626854592692c5db5592eaebc7203",
+                    "artifact_status": "COMPLIANT"
+                  }
+                },
+                {
+                  "type": "rule_not_applicable",
+                  "context": {
+                    "flow_name": "production-promotion",
+                    "trail_name": "promote-all-42",
+                    "artifact_status": "COMPLIANT"
+                  }
+                },
+                {
+                  "type": "rule_not_applicable",
+                  "context": {
+                    "flow_name": "snyk-aws-prod-per-artifact",
+                    "trail_name": "saver-e16d7a10b27f5946e0c4ab8914f0b9e421b626854592692c5db5592eaebc7203",
                     "artifact_status": "COMPLIANT"
                   }
                 }
@@ -5828,25 +641,7 @@ kosli get snapshot aws-prod --output=json
                   "type": "rule_not_applicable",
                   "context": {
                     "flow_name": "saver-ci",
-                    "trail_name": "edb38e8b2a233345645ee339cdc9ed7b3b74fcd2",
-                    "artifact_status": null,
-                    "for_control": "SDLC-CTRL-0022"
-                  }
-                },
-                {
-                  "type": "rule_not_applicable",
-                  "context": {
-                    "flow_name": "production-promotion",
-                    "trail_name": "promotion-one-187",
-                    "artifact_status": null,
-                    "for_control": "SDLC-CTRL-0022"
-                  }
-                },
-                {
-                  "type": "rule_satisfied",
-                  "context": {
-                    "flow_name": "snyk-aws-prod-per-artifact",
-                    "trail_name": "saver-daaa83990b31397a2892ef521dedd06f4d7fd0c19ace1be73da7cf06d6a4734a",
+                    "trail_name": "573bc849ed628bf0230b94be375122cf51b3f48f",
                     "artifact_status": null,
                     "for_control": "SDLC-CTRL-0022"
                   }
@@ -5855,7 +650,25 @@ kosli get snapshot aws-prod --output=json
                   "type": "rule_not_applicable",
                   "context": {
                     "flow_name": "snyk-aws-beta-per-artifact",
-                    "trail_name": "saver-daaa83990b31397a2892ef521dedd06f4d7fd0c19ace1be73da7cf06d6a4734a",
+                    "trail_name": "saver-e16d7a10b27f5946e0c4ab8914f0b9e421b626854592692c5db5592eaebc7203",
+                    "artifact_status": null,
+                    "for_control": "SDLC-CTRL-0022"
+                  }
+                },
+                {
+                  "type": "rule_not_applicable",
+                  "context": {
+                    "flow_name": "production-promotion",
+                    "trail_name": "promote-all-42",
+                    "artifact_status": null,
+                    "for_control": "SDLC-CTRL-0022"
+                  }
+                },
+                {
+                  "type": "rule_satisfied",
+                  "context": {
+                    "flow_name": "snyk-aws-prod-per-artifact",
+                    "trail_name": "saver-e16d7a10b27f5946e0c4ab8914f0b9e421b626854592692c5db5592eaebc7203",
                     "artifact_status": null,
                     "for_control": "SDLC-CTRL-0022"
                   }
@@ -5884,23 +697,7 @@ kosli get snapshot aws-prod --output=json
                   "type": "rule_not_applicable",
                   "context": {
                     "flow_name": "saver-ci",
-                    "trail_name": "edb38e8b2a233345645ee339cdc9ed7b3b74fcd2",
-                    "artifact_status": null
-                  }
-                },
-                {
-                  "type": "rule_not_applicable",
-                  "context": {
-                    "flow_name": "production-promotion",
-                    "trail_name": "promotion-one-187",
-                    "artifact_status": null
-                  }
-                },
-                {
-                  "type": "rule_not_applicable",
-                  "context": {
-                    "flow_name": "snyk-aws-prod-per-artifact",
-                    "trail_name": "saver-daaa83990b31397a2892ef521dedd06f4d7fd0c19ace1be73da7cf06d6a4734a",
+                    "trail_name": "573bc849ed628bf0230b94be375122cf51b3f48f",
                     "artifact_status": null
                   }
                 },
@@ -5908,7 +705,23 @@ kosli get snapshot aws-prod --output=json
                   "type": "rule_not_applicable",
                   "context": {
                     "flow_name": "snyk-aws-beta-per-artifact",
-                    "trail_name": "saver-daaa83990b31397a2892ef521dedd06f4d7fd0c19ace1be73da7cf06d6a4734a",
+                    "trail_name": "saver-e16d7a10b27f5946e0c4ab8914f0b9e421b626854592692c5db5592eaebc7203",
+                    "artifact_status": null
+                  }
+                },
+                {
+                  "type": "rule_not_applicable",
+                  "context": {
+                    "flow_name": "production-promotion",
+                    "trail_name": "promote-all-42",
+                    "artifact_status": null
+                  }
+                },
+                {
+                  "type": "rule_not_applicable",
+                  "context": {
+                    "flow_name": "snyk-aws-prod-per-artifact",
+                    "trail_name": "saver-e16d7a10b27f5946e0c4ab8914f0b9e421b626854592692c5db5592eaebc7203",
                     "artifact_status": null
                   }
                 }
@@ -5935,23 +748,7 @@ kosli get snapshot aws-prod --output=json
                   "type": "rule_not_applicable",
                   "context": {
                     "flow_name": "saver-ci",
-                    "trail_name": "edb38e8b2a233345645ee339cdc9ed7b3b74fcd2",
-                    "artifact_status": "COMPLIANT"
-                  }
-                },
-                {
-                  "type": "rule_satisfied",
-                  "context": {
-                    "flow_name": "production-promotion",
-                    "trail_name": "promotion-one-187",
-                    "artifact_status": "COMPLIANT"
-                  }
-                },
-                {
-                  "type": "rule_satisfied",
-                  "context": {
-                    "flow_name": "snyk-aws-prod-per-artifact",
-                    "trail_name": "saver-daaa83990b31397a2892ef521dedd06f4d7fd0c19ace1be73da7cf06d6a4734a",
+                    "trail_name": "573bc849ed628bf0230b94be375122cf51b3f48f",
                     "artifact_status": "COMPLIANT"
                   }
                 },
@@ -5959,7 +756,23 @@ kosli get snapshot aws-prod --output=json
                   "type": "rule_not_applicable",
                   "context": {
                     "flow_name": "snyk-aws-beta-per-artifact",
-                    "trail_name": "saver-daaa83990b31397a2892ef521dedd06f4d7fd0c19ace1be73da7cf06d6a4734a",
+                    "trail_name": "saver-e16d7a10b27f5946e0c4ab8914f0b9e421b626854592692c5db5592eaebc7203",
+                    "artifact_status": "COMPLIANT"
+                  }
+                },
+                {
+                  "type": "rule_satisfied",
+                  "context": {
+                    "flow_name": "production-promotion",
+                    "trail_name": "promote-all-42",
+                    "artifact_status": "COMPLIANT"
+                  }
+                },
+                {
+                  "type": "rule_satisfied",
+                  "context": {
+                    "flow_name": "snyk-aws-prod-per-artifact",
+                    "trail_name": "saver-e16d7a10b27f5946e0c4ab8914f0b9e421b626854592692c5db5592eaebc7203",
                     "artifact_status": "COMPLIANT"
                   }
                 }
@@ -5970,130 +783,68 @@ kosli get snapshot aws-prod --output=json
         }
       ],
       "reasons_for_incompliance": [],
-      "fingerprint": "daaa83990b31397a2892ef521dedd06f4d7fd0c19ace1be73da7cf06d6a4734a",
+      "fingerprint": "e16d7a10b27f5946e0c4ab8914f0b9e421b626854592692c5db5592eaebc7203",
       "creationTimestamp": [
-        1792486374
+        1793179363
       ],
       "pods": null,
       "annotation": {
-        "type": "unchanged",
+        "type": "updated-provenance",
         "was": 1,
         "now": 1
       },
       "flow_name": "saver-ci",
-      "git_commit": "edb38e8b2a233345645ee339cdc9ed7b3b74fcd2",
-      "commit_url": "https://github.com/cyber-dojo/saver/commit/edb38e8b2a233345645ee339cdc9ed7b3b74fcd2",
-      "html_url": "https://app.kosli.com/cyber-dojo/flows/saver-ci/artifacts/daaa83990b31397a2892ef521dedd06f4d7fd0c19ace1be73da7cf06d6a4734a?artifact_id=6e81efc1-5e0d-43b3-8ff5-2814b1b7",
+      "git_commit": "573bc849ed628bf0230b94be375122cf51b3f48f",
+      "commit_url": "https://github.com/cyber-dojo/saver/commit/573bc849ed628bf0230b94be375122cf51b3f48f",
+      "html_url": "https://app.kosli.com/cyber-dojo/flows/saver-ci/artifacts/e16d7a10b27f5946e0c4ab8914f0b9e421b626854592692c5db5592eaebc7203?artifact_id=e65afc99-800c-4810-bf65-f0954120",
       "flow_html_url": "https://app.kosli.com/cyber-dojo/flows/saver-ci",
       "deployment_diff": {
-        "diff_url": "https://github.com/cyber-dojo/saver/compare/b543342fa06b0ef415950745fddfff5a85f9d80d...edb38e8b2a233345645ee339cdc9ed7b3b74fcd2",
-        "previous_git_commit": "b543342fa06b0ef415950745fddfff5a85f9d80d",
-        "previous_git_commit_url": "https://github.com/cyber-dojo/saver/commit/b543342fa06b0ef415950745fddfff5a85f9d80d",
-        "previous_fingerprint": "2bb4255d1477046c8042e9973482a02e0d66b35ce31d86287a58342e990c0efa",
-        "previous_artifact_name": "244531986313.dkr.ecr.eu-central-1.amazonaws.com/saver:b543342@sha256:2bb4255d1477046c8042e9973482a02e0d66b35ce31d86287a58342e990c0efa",
+        "diff_url": "https://github.com/cyber-dojo/saver/compare/edb38e8b2a233345645ee339cdc9ed7b3b74fcd2...573bc849ed628bf0230b94be375122cf51b3f48f",
+        "previous_git_commit": "edb38e8b2a233345645ee339cdc9ed7b3b74fcd2",
+        "previous_git_commit_url": "https://github.com/cyber-dojo/saver/commit/edb38e8b2a233345645ee339cdc9ed7b3b74fcd2",
+        "previous_fingerprint": "daaa83990b31397a2892ef521dedd06f4d7fd0c19ace1be73da7cf06d6a4734a",
+        "previous_artifact_name": "244531986313.dkr.ecr.eu-central-1.amazonaws.com/saver:edb38e8@sha256:daaa83990b31397a2892ef521dedd06f4d7fd0c19ace1be73da7cf06d6a4734a",
         "previous_artifact_compliance_state": "COMPLIANT",
         "previous_running": false,
-        "previous_trail_name": "b543342fa06b0ef415950745fddfff5a85f9d80d",
+        "previous_trail_name": "edb38e8b2a233345645ee339cdc9ed7b3b74fcd2",
         "previous_template_reference_name": "saver"
       },
-      "commit_lead_time": 1067.0,
+      "commit_lead_time": 77532.0,
       "flows": [
         {
           "flow_name": "saver-ci",
-          "trail_name": "edb38e8b2a233345645ee339cdc9ed7b3b74fcd2",
+          "trail_name": "573bc849ed628bf0230b94be375122cf51b3f48f",
           "template_reference_name": "saver",
-          "git_commit": "edb38e8b2a233345645ee339cdc9ed7b3b74fcd2",
-          "commit_url": "https://github.com/cyber-dojo/saver/commit/edb38e8b2a233345645ee339cdc9ed7b3b74fcd2",
+          "git_commit": "573bc849ed628bf0230b94be375122cf51b3f48f",
+          "commit_url": "https://github.com/cyber-dojo/saver/commit/573bc849ed628bf0230b94be375122cf51b3f48f",
           "git_commit_info": {
-            "sha1": "edb38e8b2a233345645ee339cdc9ed7b3b74fcd2",
-            "message": "Run workflow to fix new snyk vuln in libexpat (#465)",
+            "sha1": "573bc849ed628bf0230b94be375122cf51b3f48f",
+            "message": "Dockerfile - Automated base-image update (#466)\n\nCo-authored-by: JonJagger <JonJagger@users.noreply.github.com>",
             "author": "Jon Jagger <jon@kosli.com>",
             "branch": "",
-            "timestamp": 1792485307.0,
-            "url": "https://github.com/cyber-dojo/saver/commit/edb38e8b2a233345645ee339cdc9ed7b3b74fcd2"
+            "timestamp": 1793101831.0,
+            "url": "https://github.com/cyber-dojo/saver/commit/573bc849ed628bf0230b94be375122cf51b3f48f"
           },
-          "html_url": "https://app.kosli.com/cyber-dojo/flows/saver-ci/artifacts/daaa83990b31397a2892ef521dedd06f4d7fd0c19ace1be73da7cf06d6a4734a?artifact_id=6e81efc1-5e0d-43b3-8ff5-2814b1b7",
+          "html_url": "https://app.kosli.com/cyber-dojo/flows/saver-ci/artifacts/e16d7a10b27f5946e0c4ab8914f0b9e421b626854592692c5db5592eaebc7203?artifact_id=e65afc99-800c-4810-bf65-f0954120",
           "flow_html_url": "https://app.kosli.com/cyber-dojo/flows/saver-ci",
           "deployment_diff": {
-            "diff_url": "https://github.com/cyber-dojo/saver/compare/b543342fa06b0ef415950745fddfff5a85f9d80d...edb38e8b2a233345645ee339cdc9ed7b3b74fcd2",
-            "previous_git_commit": "b543342fa06b0ef415950745fddfff5a85f9d80d",
-            "previous_git_commit_url": "https://github.com/cyber-dojo/saver/commit/b543342fa06b0ef415950745fddfff5a85f9d80d",
-            "previous_fingerprint": "2bb4255d1477046c8042e9973482a02e0d66b35ce31d86287a58342e990c0efa",
-            "previous_artifact_name": "244531986313.dkr.ecr.eu-central-1.amazonaws.com/saver:b543342@sha256:2bb4255d1477046c8042e9973482a02e0d66b35ce31d86287a58342e990c0efa",
+            "diff_url": "https://github.com/cyber-dojo/saver/compare/edb38e8b2a233345645ee339cdc9ed7b3b74fcd2...573bc849ed628bf0230b94be375122cf51b3f48f",
+            "previous_git_commit": "edb38e8b2a233345645ee339cdc9ed7b3b74fcd2",
+            "previous_git_commit_url": "https://github.com/cyber-dojo/saver/commit/edb38e8b2a233345645ee339cdc9ed7b3b74fcd2",
+            "previous_fingerprint": "daaa83990b31397a2892ef521dedd06f4d7fd0c19ace1be73da7cf06d6a4734a",
+            "previous_artifact_name": "244531986313.dkr.ecr.eu-central-1.amazonaws.com/saver:edb38e8@sha256:daaa83990b31397a2892ef521dedd06f4d7fd0c19ace1be73da7cf06d6a4734a",
             "previous_artifact_compliance_state": "COMPLIANT",
             "previous_running": false,
-            "previous_trail_name": "b543342fa06b0ef415950745fddfff5a85f9d80d",
+            "previous_trail_name": "edb38e8b2a233345645ee339cdc9ed7b3b74fcd2",
             "previous_template_reference_name": "saver"
           },
-          "commit_lead_time": 1067.0,
-          "artifact_compliance_in_flow": true,
-          "flow_reasons_for_non_compliance": []
-        },
-        {
-          "flow_name": "production-promotion",
-          "trail_name": "promotion-one-187",
-          "template_reference_name": "saver",
-          "git_commit": "f1f6cd6bce0e887649f077657215b50f9cf47d93",
-          "commit_url": "https://github.com/cyber-dojo/aws-prod-co-promotion/commit/f1f6cd6bce0e887649f077657215b50f9cf47d93",
-          "git_commit_info": {
-            "sha1": "f1f6cd6bce0e887649f077657215b50f9cf47d93",
-            "message": "Merge pull request #19 from cyber-dojo/cap-parallel-prod-applies\n\nCap promote-all prod applies at three at a time",
-            "author": "Jon Jagger <jon@kosli.com>",
-            "branch": "main",
-            "timestamp": 1791649272.0,
-            "url": "https://github.com/cyber-dojo/aws-prod-co-promotion/commit/f1f6cd6bce0e887649f077657215b50f9cf47d93"
-          },
-          "html_url": "https://app.kosli.com/cyber-dojo/flows/production-promotion/artifacts/daaa83990b31397a2892ef521dedd06f4d7fd0c19ace1be73da7cf06d6a4734a?artifact_id=d98f72b1-818f-4053-b631-9006ff56",
-          "flow_html_url": "https://app.kosli.com/cyber-dojo/flows/production-promotion",
-          "deployment_diff": {
-            "diff_url": "https://github.com/cyber-dojo/aws-prod-co-promotion/compare/f1f6cd6bce0e887649f077657215b50f9cf47d93...f1f6cd6bce0e887649f077657215b50f9cf47d93",
-            "previous_git_commit": "f1f6cd6bce0e887649f077657215b50f9cf47d93",
-            "previous_git_commit_url": "https://github.com/cyber-dojo/aws-prod-co-promotion/commit/f1f6cd6bce0e887649f077657215b50f9cf47d93",
-            "previous_fingerprint": "2bb4255d1477046c8042e9973482a02e0d66b35ce31d86287a58342e990c0efa",
-            "previous_artifact_name": "244531986313.dkr.ecr.eu-central-1.amazonaws.com/saver:b543342@sha256:2bb4255d1477046c8042e9973482a02e0d66b35ce31d86287a58342e990c0efa",
-            "previous_artifact_compliance_state": "COMPLIANT",
-            "previous_running": false,
-            "previous_trail_name": "promotion-one-184",
-            "previous_template_reference_name": "saver"
-          },
-          "commit_lead_time": 837102.0,
-          "artifact_compliance_in_flow": true,
-          "flow_reasons_for_non_compliance": []
-        },
-        {
-          "flow_name": "snyk-aws-prod-per-artifact",
-          "trail_name": "saver-daaa83990b31397a2892ef521dedd06f4d7fd0c19ace1be73da7cf06d6a4734a",
-          "template_reference_name": "saver",
-          "git_commit": "359c98460f5c3aefb136a77eef08d1be4c4ca08d",
-          "commit_url": "https://github.com/cyber-dojo/snyk-scanning/commit/359c98460f5c3aefb136a77eef08d1be4c4ca08d",
-          "git_commit_info": {
-            "sha1": "359c98460f5c3aefb136a77eef08d1be4c4ca08d",
-            "message": "Merge pull request #6 from cyber-dojo/key-uploads-and-trails-on-component-not-repo\n\nTell apart artifacts built by one repo",
-            "author": "Jon Jagger <jon@kosli.com>",
-            "branch": "main",
-            "timestamp": 1790759058.0,
-            "url": "https://github.com/cyber-dojo/snyk-scanning/commit/359c98460f5c3aefb136a77eef08d1be4c4ca08d"
-          },
-          "html_url": "https://app.kosli.com/cyber-dojo/flows/snyk-aws-prod-per-artifact/artifacts/daaa83990b31397a2892ef521dedd06f4d7fd0c19ace1be73da7cf06d6a4734a?artifact_id=c728ac5a-ca87-4b99-a0a6-58c3ac2b",
-          "flow_html_url": "https://app.kosli.com/cyber-dojo/flows/snyk-aws-prod-per-artifact",
-          "deployment_diff": {
-            "diff_url": "https://github.com/cyber-dojo/snyk-scanning/compare/30111f180ac4e3611cdbd7d805381a0bb9f53cff...359c98460f5c3aefb136a77eef08d1be4c4ca08d",
-            "previous_git_commit": "30111f180ac4e3611cdbd7d805381a0bb9f53cff",
-            "previous_git_commit_url": "https://github.com/cyber-dojo/snyk-scanning/commit/30111f180ac4e3611cdbd7d805381a0bb9f53cff",
-            "previous_fingerprint": "9cfef3281fc531a3c5a5a00ed8a67256e1b954b5271b03936808623960afebfc",
-            "previous_artifact_name": "244531986313.dkr.ecr.eu-central-1.amazonaws.com/saver:7c4708f@sha256:9cfef3281fc531a3c5a5a00ed8a67256e1b954b5271b03936808623960afebfc",
-            "previous_artifact_compliance_state": "COMPLIANT",
-            "previous_running": false,
-            "previous_trail_name": "saver-9cfef3281fc531a3c5a5a00ed8a67256e1b954b5271b03936808623960afebfc",
-            "previous_template_reference_name": "saver"
-          },
-          "commit_lead_time": 1727316.0,
+          "commit_lead_time": 77532.0,
           "artifact_compliance_in_flow": true,
           "flow_reasons_for_non_compliance": []
         },
         {
           "flow_name": "snyk-aws-beta-per-artifact",
-          "trail_name": "saver-daaa83990b31397a2892ef521dedd06f4d7fd0c19ace1be73da7cf06d6a4734a",
+          "trail_name": "saver-e16d7a10b27f5946e0c4ab8914f0b9e421b626854592692c5db5592eaebc7203",
           "template_reference_name": "saver",
           "git_commit": "359c98460f5c3aefb136a77eef08d1be4c4ca08d",
           "commit_url": "https://github.com/cyber-dojo/snyk-scanning/commit/359c98460f5c3aefb136a77eef08d1be4c4ca08d",
@@ -6105,7 +856,7 @@ kosli get snapshot aws-prod --output=json
             "timestamp": 1790759058.0,
             "url": "https://github.com/cyber-dojo/snyk-scanning/commit/359c98460f5c3aefb136a77eef08d1be4c4ca08d"
           },
-          "html_url": "https://app.kosli.com/cyber-dojo/flows/snyk-aws-beta-per-artifact/artifacts/daaa83990b31397a2892ef521dedd06f4d7fd0c19ace1be73da7cf06d6a4734a?artifact_id=1329a3bc-e0e7-4819-9341-e19a3f74",
+          "html_url": "https://app.kosli.com/cyber-dojo/flows/snyk-aws-beta-per-artifact/artifacts/e16d7a10b27f5946e0c4ab8914f0b9e421b626854592692c5db5592eaebc7203?artifact_id=911ff1a8-4281-4d6a-b9cd-d299dfd6",
           "flow_html_url": "https://app.kosli.com/cyber-dojo/flows/snyk-aws-beta-per-artifact",
           "deployment_diff": {
             "diff_url": "https://github.com/cyber-dojo/snyk-scanning/compare/359c98460f5c3aefb136a77eef08d1be4c4ca08d...359c98460f5c3aefb136a77eef08d1be4c4ca08d",
@@ -6118,19 +869,3545 @@ kosli get snapshot aws-prod --output=json
             "previous_trail_name": "saver-efbafb99870cf4c4a838324e8bbc70975c4f3ea2ba5d395433c5344456b60ae4",
             "previous_template_reference_name": "saver"
           },
-          "commit_lead_time": 1727316.0,
+          "commit_lead_time": 2420305.0,
+          "artifact_compliance_in_flow": true,
+          "flow_reasons_for_non_compliance": []
+        },
+        {
+          "flow_name": "production-promotion",
+          "trail_name": "promote-all-42",
+          "template_reference_name": "saver",
+          "git_commit": "f1f6cd6bce0e887649f077657215b50f9cf47d93",
+          "commit_url": "https://github.com/cyber-dojo/aws-prod-co-promotion/commit/f1f6cd6bce0e887649f077657215b50f9cf47d93",
+          "git_commit_info": {
+            "sha1": "f1f6cd6bce0e887649f077657215b50f9cf47d93",
+            "message": "Merge pull request #19 from cyber-dojo/cap-parallel-prod-applies\n\nCap promote-all prod applies at three at a time",
+            "author": "Jon Jagger <jon@kosli.com>",
+            "branch": "main",
+            "timestamp": 1791649272.0,
+            "url": "https://github.com/cyber-dojo/aws-prod-co-promotion/commit/f1f6cd6bce0e887649f077657215b50f9cf47d93"
+          },
+          "html_url": "https://app.kosli.com/cyber-dojo/flows/production-promotion/artifacts/e16d7a10b27f5946e0c4ab8914f0b9e421b626854592692c5db5592eaebc7203?artifact_id=86c85fa9-632b-402f-9d00-81dca188",
+          "flow_html_url": "https://app.kosli.com/cyber-dojo/flows/production-promotion",
+          "deployment_diff": {
+            "diff_url": "https://github.com/cyber-dojo/aws-prod-co-promotion/compare/f1f6cd6bce0e887649f077657215b50f9cf47d93...f1f6cd6bce0e887649f077657215b50f9cf47d93",
+            "previous_git_commit": "f1f6cd6bce0e887649f077657215b50f9cf47d93",
+            "previous_git_commit_url": "https://github.com/cyber-dojo/aws-prod-co-promotion/commit/f1f6cd6bce0e887649f077657215b50f9cf47d93",
+            "previous_fingerprint": "daaa83990b31397a2892ef521dedd06f4d7fd0c19ace1be73da7cf06d6a4734a",
+            "previous_artifact_name": "244531986313.dkr.ecr.eu-central-1.amazonaws.com/saver:edb38e8@sha256:daaa83990b31397a2892ef521dedd06f4d7fd0c19ace1be73da7cf06d6a4734a",
+            "previous_artifact_compliance_state": "COMPLIANT",
+            "previous_running": false,
+            "previous_trail_name": "promotion-one-187",
+            "previous_template_reference_name": "saver"
+          },
+          "commit_lead_time": 1530091.0,
+          "artifact_compliance_in_flow": true,
+          "flow_reasons_for_non_compliance": []
+        },
+        {
+          "flow_name": "snyk-aws-prod-per-artifact",
+          "trail_name": "saver-e16d7a10b27f5946e0c4ab8914f0b9e421b626854592692c5db5592eaebc7203",
+          "template_reference_name": "saver",
+          "git_commit": "359c98460f5c3aefb136a77eef08d1be4c4ca08d",
+          "commit_url": "https://github.com/cyber-dojo/snyk-scanning/commit/359c98460f5c3aefb136a77eef08d1be4c4ca08d",
+          "git_commit_info": {
+            "sha1": "359c98460f5c3aefb136a77eef08d1be4c4ca08d",
+            "message": "Merge pull request #6 from cyber-dojo/key-uploads-and-trails-on-component-not-repo\n\nTell apart artifacts built by one repo",
+            "author": "Jon Jagger <jon@kosli.com>",
+            "branch": "main",
+            "timestamp": 1790759058.0,
+            "url": "https://github.com/cyber-dojo/snyk-scanning/commit/359c98460f5c3aefb136a77eef08d1be4c4ca08d"
+          },
+          "html_url": "https://app.kosli.com/cyber-dojo/flows/snyk-aws-prod-per-artifact/artifacts/e16d7a10b27f5946e0c4ab8914f0b9e421b626854592692c5db5592eaebc7203?artifact_id=77a7851d-6272-4dc2-b274-7f1e34cb",
+          "flow_html_url": "https://app.kosli.com/cyber-dojo/flows/snyk-aws-prod-per-artifact",
+          "deployment_diff": {
+            "diff_url": "https://github.com/cyber-dojo/snyk-scanning/compare/30111f180ac4e3611cdbd7d805381a0bb9f53cff...359c98460f5c3aefb136a77eef08d1be4c4ca08d",
+            "previous_git_commit": "30111f180ac4e3611cdbd7d805381a0bb9f53cff",
+            "previous_git_commit_url": "https://github.com/cyber-dojo/snyk-scanning/commit/30111f180ac4e3611cdbd7d805381a0bb9f53cff",
+            "previous_fingerprint": "9cfef3281fc531a3c5a5a00ed8a67256e1b954b5271b03936808623960afebfc",
+            "previous_artifact_name": "244531986313.dkr.ecr.eu-central-1.amazonaws.com/saver:7c4708f@sha256:9cfef3281fc531a3c5a5a00ed8a67256e1b954b5271b03936808623960afebfc",
+            "previous_artifact_compliance_state": "COMPLIANT",
+            "previous_running": false,
+            "previous_trail_name": "saver-9cfef3281fc531a3c5a5a00ed8a67256e1b954b5271b03936808623960afebfc",
+            "previous_template_reference_name": "saver"
+          },
+          "commit_lead_time": 2420305.0,
           "artifact_compliance_in_flow": true,
           "flow_reasons_for_non_compliance": []
         }
       ],
       "ecs_context": {
-        "task_arn": "arn:aws:ecs:eu-central-1:274425519734:task/app/42319575108d4077b44054a6c2d6a943",
+        "task_arn": "arn:aws:ecs:eu-central-1:274425519734:task/app/4f030a36de14460fbced81b2f96e6ff2",
         "cluster_name": null,
         "service_name": null
       }
     },
     {
-      "name": "244531986313.dkr.ecr.eu-central-1.amazonaws.com/differ:ce9bf5f@sha256:08830cb438e6e0da0b5b12192695bd16cdfa6fe58e1316bb041492cb7dfabdff",
+      "name": "244531986313.dkr.ecr.eu-central-1.amazonaws.com/web:fd680a8@sha256:b849bb4996749a3f8fc03f8dcb3038cf456dd8cc472826c6de20b988c91d61e4",
+      "compliant": true,
+      "deployments": [],
+      "policy_decisions": [
+        {
+          "policy_version": 2,
+          "status": "COMPLIANT",
+          "rule_evaluations": [
+            {
+              "rule": {
+                "type": "provenance",
+                "definition": {
+                  "required": false,
+                  "exceptions": []
+                }
+              },
+              "satisfied": null,
+              "ignored": true,
+              "resolutions": [
+                {
+                  "type": "rule_not_applicable",
+                  "context": {
+                    "flow_name": "web-ci",
+                    "trail_name": "fd680a809587fa6e4071fe874d63192f65f251c1",
+                    "artifact_status": null
+                  }
+                },
+                {
+                  "type": "rule_not_applicable",
+                  "context": {
+                    "flow_name": "snyk-aws-beta-per-artifact",
+                    "trail_name": "web-b849bb4996749a3f8fc03f8dcb3038cf456dd8cc472826c6de20b988c91d61e4",
+                    "artifact_status": null
+                  }
+                },
+                {
+                  "type": "rule_not_applicable",
+                  "context": {
+                    "flow_name": "production-promotion",
+                    "trail_name": "promote-all-42",
+                    "artifact_status": null
+                  }
+                },
+                {
+                  "type": "rule_not_applicable",
+                  "context": {
+                    "flow_name": "snyk-aws-prod-per-artifact",
+                    "trail_name": "web-b849bb4996749a3f8fc03f8dcb3038cf456dd8cc472826c6de20b988c91d61e4",
+                    "artifact_status": null
+                  }
+                }
+              ]
+            },
+            {
+              "rule": {
+                "type": "trail-compliance",
+                "definition": {
+                  "required": false,
+                  "exceptions": []
+                }
+              },
+              "satisfied": null,
+              "ignored": true,
+              "resolutions": [
+                {
+                  "type": "rule_not_applicable",
+                  "context": {
+                    "flow_name": "web-ci",
+                    "trail_name": "fd680a809587fa6e4071fe874d63192f65f251c1",
+                    "artifact_status": "COMPLIANT"
+                  }
+                },
+                {
+                  "type": "rule_not_applicable",
+                  "context": {
+                    "flow_name": "snyk-aws-beta-per-artifact",
+                    "trail_name": "web-b849bb4996749a3f8fc03f8dcb3038cf456dd8cc472826c6de20b988c91d61e4",
+                    "artifact_status": "COMPLIANT"
+                  }
+                },
+                {
+                  "type": "rule_not_applicable",
+                  "context": {
+                    "flow_name": "production-promotion",
+                    "trail_name": "promote-all-42",
+                    "artifact_status": "COMPLIANT"
+                  }
+                },
+                {
+                  "type": "rule_not_applicable",
+                  "context": {
+                    "flow_name": "snyk-aws-prod-per-artifact",
+                    "trail_name": "web-b849bb4996749a3f8fc03f8dcb3038cf456dd8cc472826c6de20b988c91d61e4",
+                    "artifact_status": "COMPLIANT"
+                  }
+                }
+              ]
+            },
+            {
+              "rule": {
+                "type": "attestation",
+                "definition": {
+                  "if": {
+                    "text": "flow.name == \"production-promotion\""
+                  },
+                  "name": "snyk-scan",
+                  "type": "decision",
+                  "must_be_compliant": true,
+                  "for_control": null
+                }
+              },
+              "satisfied": true,
+              "ignored": false,
+              "resolutions": [
+                {
+                  "type": "rule_not_applicable",
+                  "context": {
+                    "flow_name": "web-ci",
+                    "trail_name": "fd680a809587fa6e4071fe874d63192f65f251c1",
+                    "artifact_status": null
+                  }
+                },
+                {
+                  "type": "rule_not_applicable",
+                  "context": {
+                    "flow_name": "snyk-aws-beta-per-artifact",
+                    "trail_name": "web-b849bb4996749a3f8fc03f8dcb3038cf456dd8cc472826c6de20b988c91d61e4",
+                    "artifact_status": null
+                  }
+                },
+                {
+                  "type": "rule_satisfied",
+                  "context": {
+                    "flow_name": "production-promotion",
+                    "trail_name": "promote-all-42",
+                    "artifact_status": null
+                  }
+                },
+                {
+                  "type": "rule_not_applicable",
+                  "context": {
+                    "flow_name": "snyk-aws-prod-per-artifact",
+                    "trail_name": "web-b849bb4996749a3f8fc03f8dcb3038cf456dd8cc472826c6de20b988c91d61e4",
+                    "artifact_status": null
+                  }
+                }
+              ]
+            }
+          ],
+          "policy_name": "production-promotion"
+        },
+        {
+          "policy_version": 3,
+          "status": "COMPLIANT",
+          "rule_evaluations": [
+            {
+              "rule": {
+                "type": "provenance",
+                "definition": {
+                  "required": true,
+                  "exceptions": []
+                }
+              },
+              "satisfied": true,
+              "ignored": false,
+              "resolutions": [
+                {
+                  "type": "rule_satisfied",
+                  "context": {
+                    "flow_name": "web-ci",
+                    "trail_name": "fd680a809587fa6e4071fe874d63192f65f251c1",
+                    "artifact_status": null
+                  }
+                },
+                {
+                  "type": "rule_satisfied",
+                  "context": {
+                    "flow_name": "snyk-aws-beta-per-artifact",
+                    "trail_name": "web-b849bb4996749a3f8fc03f8dcb3038cf456dd8cc472826c6de20b988c91d61e4",
+                    "artifact_status": null
+                  }
+                },
+                {
+                  "type": "rule_satisfied",
+                  "context": {
+                    "flow_name": "production-promotion",
+                    "trail_name": "promote-all-42",
+                    "artifact_status": null
+                  }
+                },
+                {
+                  "type": "rule_satisfied",
+                  "context": {
+                    "flow_name": "snyk-aws-prod-per-artifact",
+                    "trail_name": "web-b849bb4996749a3f8fc03f8dcb3038cf456dd8cc472826c6de20b988c91d61e4",
+                    "artifact_status": null
+                  }
+                }
+              ]
+            },
+            {
+              "rule": {
+                "type": "trail-compliance",
+                "definition": {
+                  "required": false,
+                  "exceptions": []
+                }
+              },
+              "satisfied": null,
+              "ignored": true,
+              "resolutions": [
+                {
+                  "type": "rule_not_applicable",
+                  "context": {
+                    "flow_name": "web-ci",
+                    "trail_name": "fd680a809587fa6e4071fe874d63192f65f251c1",
+                    "artifact_status": "COMPLIANT"
+                  }
+                },
+                {
+                  "type": "rule_not_applicable",
+                  "context": {
+                    "flow_name": "snyk-aws-beta-per-artifact",
+                    "trail_name": "web-b849bb4996749a3f8fc03f8dcb3038cf456dd8cc472826c6de20b988c91d61e4",
+                    "artifact_status": "COMPLIANT"
+                  }
+                },
+                {
+                  "type": "rule_not_applicable",
+                  "context": {
+                    "flow_name": "production-promotion",
+                    "trail_name": "promote-all-42",
+                    "artifact_status": "COMPLIANT"
+                  }
+                },
+                {
+                  "type": "rule_not_applicable",
+                  "context": {
+                    "flow_name": "snyk-aws-prod-per-artifact",
+                    "trail_name": "web-b849bb4996749a3f8fc03f8dcb3038cf456dd8cc472826c6de20b988c91d61e4",
+                    "artifact_status": "COMPLIANT"
+                  }
+                }
+              ]
+            },
+            {
+              "rule": {
+                "type": "attestation",
+                "definition": {
+                  "if": {
+                    "text": "flow.tags.kind == \"build\""
+                  },
+                  "name": "*",
+                  "type": "decision",
+                  "must_be_compliant": true,
+                  "for_control": "SDLC-CTRL-0002"
+                }
+              },
+              "satisfied": true,
+              "ignored": false,
+              "resolutions": [
+                {
+                  "type": "rule_satisfied",
+                  "context": {
+                    "flow_name": "web-ci",
+                    "trail_name": "fd680a809587fa6e4071fe874d63192f65f251c1",
+                    "artifact_status": null,
+                    "for_control": "SDLC-CTRL-0002"
+                  }
+                },
+                {
+                  "type": "rule_not_applicable",
+                  "context": {
+                    "flow_name": "snyk-aws-beta-per-artifact",
+                    "trail_name": "web-b849bb4996749a3f8fc03f8dcb3038cf456dd8cc472826c6de20b988c91d61e4",
+                    "artifact_status": null,
+                    "for_control": "SDLC-CTRL-0002"
+                  }
+                },
+                {
+                  "type": "rule_not_applicable",
+                  "context": {
+                    "flow_name": "production-promotion",
+                    "trail_name": "promote-all-42",
+                    "artifact_status": null,
+                    "for_control": "SDLC-CTRL-0002"
+                  }
+                },
+                {
+                  "type": "rule_not_applicable",
+                  "context": {
+                    "flow_name": "snyk-aws-prod-per-artifact",
+                    "trail_name": "web-b849bb4996749a3f8fc03f8dcb3038cf456dd8cc472826c6de20b988c91d61e4",
+                    "artifact_status": null,
+                    "for_control": "SDLC-CTRL-0002"
+                  }
+                }
+              ]
+            }
+          ],
+          "policy_name": "provenance"
+        },
+        {
+          "policy_version": 3,
+          "status": "COMPLIANT",
+          "rule_evaluations": [
+            {
+              "rule": {
+                "type": "provenance",
+                "definition": {
+                  "required": false,
+                  "exceptions": []
+                }
+              },
+              "satisfied": null,
+              "ignored": true,
+              "resolutions": [
+                {
+                  "type": "rule_not_applicable",
+                  "context": {
+                    "flow_name": "web-ci",
+                    "trail_name": "fd680a809587fa6e4071fe874d63192f65f251c1",
+                    "artifact_status": null
+                  }
+                },
+                {
+                  "type": "rule_not_applicable",
+                  "context": {
+                    "flow_name": "snyk-aws-beta-per-artifact",
+                    "trail_name": "web-b849bb4996749a3f8fc03f8dcb3038cf456dd8cc472826c6de20b988c91d61e4",
+                    "artifact_status": null
+                  }
+                },
+                {
+                  "type": "rule_not_applicable",
+                  "context": {
+                    "flow_name": "production-promotion",
+                    "trail_name": "promote-all-42",
+                    "artifact_status": null
+                  }
+                },
+                {
+                  "type": "rule_not_applicable",
+                  "context": {
+                    "flow_name": "snyk-aws-prod-per-artifact",
+                    "trail_name": "web-b849bb4996749a3f8fc03f8dcb3038cf456dd8cc472826c6de20b988c91d61e4",
+                    "artifact_status": null
+                  }
+                }
+              ]
+            },
+            {
+              "rule": {
+                "type": "trail-compliance",
+                "definition": {
+                  "required": false,
+                  "exceptions": []
+                }
+              },
+              "satisfied": null,
+              "ignored": true,
+              "resolutions": [
+                {
+                  "type": "rule_not_applicable",
+                  "context": {
+                    "flow_name": "web-ci",
+                    "trail_name": "fd680a809587fa6e4071fe874d63192f65f251c1",
+                    "artifact_status": "COMPLIANT"
+                  }
+                },
+                {
+                  "type": "rule_not_applicable",
+                  "context": {
+                    "flow_name": "snyk-aws-beta-per-artifact",
+                    "trail_name": "web-b849bb4996749a3f8fc03f8dcb3038cf456dd8cc472826c6de20b988c91d61e4",
+                    "artifact_status": "COMPLIANT"
+                  }
+                },
+                {
+                  "type": "rule_not_applicable",
+                  "context": {
+                    "flow_name": "production-promotion",
+                    "trail_name": "promote-all-42",
+                    "artifact_status": "COMPLIANT"
+                  }
+                },
+                {
+                  "type": "rule_not_applicable",
+                  "context": {
+                    "flow_name": "snyk-aws-prod-per-artifact",
+                    "trail_name": "web-b849bb4996749a3f8fc03f8dcb3038cf456dd8cc472826c6de20b988c91d61e4",
+                    "artifact_status": "COMPLIANT"
+                  }
+                }
+              ]
+            },
+            {
+              "rule": {
+                "type": "attestation",
+                "definition": {
+                  "if": {
+                    "text": "flow.tags.kind == \"build\""
+                  },
+                  "name": "*",
+                  "type": "pull_request",
+                  "must_be_compliant": true,
+                  "for_control": null
+                }
+              },
+              "satisfied": true,
+              "ignored": false,
+              "resolutions": [
+                {
+                  "type": "rule_satisfied",
+                  "context": {
+                    "flow_name": "web-ci",
+                    "trail_name": "fd680a809587fa6e4071fe874d63192f65f251c1",
+                    "artifact_status": null
+                  }
+                },
+                {
+                  "type": "rule_not_applicable",
+                  "context": {
+                    "flow_name": "snyk-aws-beta-per-artifact",
+                    "trail_name": "web-b849bb4996749a3f8fc03f8dcb3038cf456dd8cc472826c6de20b988c91d61e4",
+                    "artifact_status": null
+                  }
+                },
+                {
+                  "type": "rule_not_applicable",
+                  "context": {
+                    "flow_name": "production-promotion",
+                    "trail_name": "promote-all-42",
+                    "artifact_status": null
+                  }
+                },
+                {
+                  "type": "rule_not_applicable",
+                  "context": {
+                    "flow_name": "snyk-aws-prod-per-artifact",
+                    "trail_name": "web-b849bb4996749a3f8fc03f8dcb3038cf456dd8cc472826c6de20b988c91d61e4",
+                    "artifact_status": null
+                  }
+                }
+              ]
+            }
+          ],
+          "policy_name": "pull-request"
+        },
+        {
+          "policy_version": 4,
+          "status": "COMPLIANT",
+          "rule_evaluations": [
+            {
+              "rule": {
+                "type": "provenance",
+                "definition": {
+                  "required": false,
+                  "exceptions": []
+                }
+              },
+              "satisfied": null,
+              "ignored": true,
+              "resolutions": [
+                {
+                  "type": "rule_not_applicable",
+                  "context": {
+                    "flow_name": "web-ci",
+                    "trail_name": "fd680a809587fa6e4071fe874d63192f65f251c1",
+                    "artifact_status": null
+                  }
+                },
+                {
+                  "type": "rule_not_applicable",
+                  "context": {
+                    "flow_name": "snyk-aws-beta-per-artifact",
+                    "trail_name": "web-b849bb4996749a3f8fc03f8dcb3038cf456dd8cc472826c6de20b988c91d61e4",
+                    "artifact_status": null
+                  }
+                },
+                {
+                  "type": "rule_not_applicable",
+                  "context": {
+                    "flow_name": "production-promotion",
+                    "trail_name": "promote-all-42",
+                    "artifact_status": null
+                  }
+                },
+                {
+                  "type": "rule_not_applicable",
+                  "context": {
+                    "flow_name": "snyk-aws-prod-per-artifact",
+                    "trail_name": "web-b849bb4996749a3f8fc03f8dcb3038cf456dd8cc472826c6de20b988c91d61e4",
+                    "artifact_status": null
+                  }
+                }
+              ]
+            },
+            {
+              "rule": {
+                "type": "trail-compliance",
+                "definition": {
+                  "required": false,
+                  "exceptions": []
+                }
+              },
+              "satisfied": null,
+              "ignored": true,
+              "resolutions": [
+                {
+                  "type": "rule_not_applicable",
+                  "context": {
+                    "flow_name": "web-ci",
+                    "trail_name": "fd680a809587fa6e4071fe874d63192f65f251c1",
+                    "artifact_status": "COMPLIANT"
+                  }
+                },
+                {
+                  "type": "rule_not_applicable",
+                  "context": {
+                    "flow_name": "snyk-aws-beta-per-artifact",
+                    "trail_name": "web-b849bb4996749a3f8fc03f8dcb3038cf456dd8cc472826c6de20b988c91d61e4",
+                    "artifact_status": "COMPLIANT"
+                  }
+                },
+                {
+                  "type": "rule_not_applicable",
+                  "context": {
+                    "flow_name": "production-promotion",
+                    "trail_name": "promote-all-42",
+                    "artifact_status": "COMPLIANT"
+                  }
+                },
+                {
+                  "type": "rule_not_applicable",
+                  "context": {
+                    "flow_name": "snyk-aws-prod-per-artifact",
+                    "trail_name": "web-b849bb4996749a3f8fc03f8dcb3038cf456dd8cc472826c6de20b988c91d61e4",
+                    "artifact_status": "COMPLIANT"
+                  }
+                }
+              ]
+            },
+            {
+              "rule": {
+                "type": "attestation",
+                "definition": {
+                  "if": {
+                    "text": "flow.name == \"snyk-aws-prod-per-artifact\""
+                  },
+                  "name": "snyk-container-scan",
+                  "type": "decision",
+                  "must_be_compliant": true,
+                  "for_control": "SDLC-CTRL-0022"
+                }
+              },
+              "satisfied": true,
+              "ignored": false,
+              "resolutions": [
+                {
+                  "type": "rule_not_applicable",
+                  "context": {
+                    "flow_name": "web-ci",
+                    "trail_name": "fd680a809587fa6e4071fe874d63192f65f251c1",
+                    "artifact_status": null,
+                    "for_control": "SDLC-CTRL-0022"
+                  }
+                },
+                {
+                  "type": "rule_not_applicable",
+                  "context": {
+                    "flow_name": "snyk-aws-beta-per-artifact",
+                    "trail_name": "web-b849bb4996749a3f8fc03f8dcb3038cf456dd8cc472826c6de20b988c91d61e4",
+                    "artifact_status": null,
+                    "for_control": "SDLC-CTRL-0022"
+                  }
+                },
+                {
+                  "type": "rule_not_applicable",
+                  "context": {
+                    "flow_name": "production-promotion",
+                    "trail_name": "promote-all-42",
+                    "artifact_status": null,
+                    "for_control": "SDLC-CTRL-0022"
+                  }
+                },
+                {
+                  "type": "rule_satisfied",
+                  "context": {
+                    "flow_name": "snyk-aws-prod-per-artifact",
+                    "trail_name": "web-b849bb4996749a3f8fc03f8dcb3038cf456dd8cc472826c6de20b988c91d61e4",
+                    "artifact_status": null,
+                    "for_control": "SDLC-CTRL-0022"
+                  }
+                }
+              ]
+            }
+          ],
+          "policy_name": "snyk-scan-aws-prod"
+        },
+        {
+          "policy_version": 2,
+          "status": "COMPLIANT",
+          "rule_evaluations": [
+            {
+              "rule": {
+                "type": "provenance",
+                "definition": {
+                  "required": false,
+                  "exceptions": []
+                }
+              },
+              "satisfied": null,
+              "ignored": true,
+              "resolutions": [
+                {
+                  "type": "rule_not_applicable",
+                  "context": {
+                    "flow_name": "web-ci",
+                    "trail_name": "fd680a809587fa6e4071fe874d63192f65f251c1",
+                    "artifact_status": null
+                  }
+                },
+                {
+                  "type": "rule_not_applicable",
+                  "context": {
+                    "flow_name": "snyk-aws-beta-per-artifact",
+                    "trail_name": "web-b849bb4996749a3f8fc03f8dcb3038cf456dd8cc472826c6de20b988c91d61e4",
+                    "artifact_status": null
+                  }
+                },
+                {
+                  "type": "rule_not_applicable",
+                  "context": {
+                    "flow_name": "production-promotion",
+                    "trail_name": "promote-all-42",
+                    "artifact_status": null
+                  }
+                },
+                {
+                  "type": "rule_not_applicable",
+                  "context": {
+                    "flow_name": "snyk-aws-prod-per-artifact",
+                    "trail_name": "web-b849bb4996749a3f8fc03f8dcb3038cf456dd8cc472826c6de20b988c91d61e4",
+                    "artifact_status": null
+                  }
+                }
+              ]
+            },
+            {
+              "rule": {
+                "type": "trail-compliance",
+                "definition": {
+                  "required": true,
+                  "exceptions": [
+                    {
+                      "if": {
+                        "text": "exists(flow.tags.env) and flow.tags.env != \"aws-prod\""
+                      }
+                    }
+                  ]
+                }
+              },
+              "satisfied": true,
+              "ignored": false,
+              "resolutions": [
+                {
+                  "type": "rule_not_applicable",
+                  "context": {
+                    "flow_name": "web-ci",
+                    "trail_name": "fd680a809587fa6e4071fe874d63192f65f251c1",
+                    "artifact_status": "COMPLIANT"
+                  }
+                },
+                {
+                  "type": "rule_not_applicable",
+                  "context": {
+                    "flow_name": "snyk-aws-beta-per-artifact",
+                    "trail_name": "web-b849bb4996749a3f8fc03f8dcb3038cf456dd8cc472826c6de20b988c91d61e4",
+                    "artifact_status": "COMPLIANT"
+                  }
+                },
+                {
+                  "type": "rule_satisfied",
+                  "context": {
+                    "flow_name": "production-promotion",
+                    "trail_name": "promote-all-42",
+                    "artifact_status": "COMPLIANT"
+                  }
+                },
+                {
+                  "type": "rule_satisfied",
+                  "context": {
+                    "flow_name": "snyk-aws-prod-per-artifact",
+                    "trail_name": "web-b849bb4996749a3f8fc03f8dcb3038cf456dd8cc472826c6de20b988c91d61e4",
+                    "artifact_status": "COMPLIANT"
+                  }
+                }
+              ]
+            }
+          ],
+          "policy_name": "trail-compliance-aws-prod"
+        }
+      ],
+      "reasons_for_incompliance": [],
+      "fingerprint": "b849bb4996749a3f8fc03f8dcb3038cf456dd8cc472826c6de20b988c91d61e4",
+      "creationTimestamp": [
+        1793179334,
+        1793179336,
+        1793179343
+      ],
+      "pods": null,
+      "annotation": {
+        "type": "updated-provenance",
+        "was": 3,
+        "now": 3
+      },
+      "flow_name": "web-ci",
+      "git_commit": "fd680a809587fa6e4071fe874d63192f65f251c1",
+      "commit_url": "https://github.com/cyber-dojo/web/commit/fd680a809587fa6e4071fe874d63192f65f251c1",
+      "html_url": "https://app.kosli.com/cyber-dojo/flows/web-ci/artifacts/b849bb4996749a3f8fc03f8dcb3038cf456dd8cc472826c6de20b988c91d61e4?artifact_id=05fa6306-e46c-490f-bda0-8c38d3c0",
+      "flow_html_url": "https://app.kosli.com/cyber-dojo/flows/web-ci",
+      "deployment_diff": {
+        "diff_url": "https://github.com/cyber-dojo/web/compare/83553f52e8de8a9766a64fced8fbfb3cd32318a3...fd680a809587fa6e4071fe874d63192f65f251c1",
+        "previous_git_commit": "83553f52e8de8a9766a64fced8fbfb3cd32318a3",
+        "previous_git_commit_url": "https://github.com/cyber-dojo/web/commit/83553f52e8de8a9766a64fced8fbfb3cd32318a3",
+        "previous_fingerprint": "da7984414ab096232877f301d3d7cea1daf3cdd3fdb72157f530fe186cba3d78",
+        "previous_artifact_name": "244531986313.dkr.ecr.eu-central-1.amazonaws.com/web:83553f5@sha256:da7984414ab096232877f301d3d7cea1daf3cdd3fdb72157f530fe186cba3d78",
+        "previous_artifact_compliance_state": "COMPLIANT",
+        "previous_running": false,
+        "previous_trail_name": "83553f52e8de8a9766a64fced8fbfb3cd32318a3",
+        "previous_template_reference_name": "web"
+      },
+      "commit_lead_time": 75922.0,
+      "flows": [
+        {
+          "flow_name": "web-ci",
+          "trail_name": "fd680a809587fa6e4071fe874d63192f65f251c1",
+          "template_reference_name": "web",
+          "git_commit": "fd680a809587fa6e4071fe874d63192f65f251c1",
+          "commit_url": "https://github.com/cyber-dojo/web/commit/fd680a809587fa6e4071fe874d63192f65f251c1",
+          "git_commit_info": {
+            "sha1": "fd680a809587fa6e4071fe874d63192f65f251c1",
+            "message": "Give creator, web and dashboard the same 15s health wait (#477)\n\nCreator polled 50 times at 0.1s, about 6s in all, and it\nnormally needs about 5s to boot. A slightly slow CI runner\ntipped it over and failed the base-image update (#476)\nwith an empty container log.\n\nWeb waited 60s and dashboard 10s for no stated reason.\nAll three now use docker compose --wait-timeout=15.\nCreator still dumps its container log on timeout.\n\nCo-authored-by: Claude Opus 5.5 <noreply@anthropic.com>",
+            "author": "Jon Jagger <jon@kosli.com>",
+            "branch": "",
+            "timestamp": 1793103412.0,
+            "url": "https://github.com/cyber-dojo/web/commit/fd680a809587fa6e4071fe874d63192f65f251c1"
+          },
+          "html_url": "https://app.kosli.com/cyber-dojo/flows/web-ci/artifacts/b849bb4996749a3f8fc03f8dcb3038cf456dd8cc472826c6de20b988c91d61e4?artifact_id=05fa6306-e46c-490f-bda0-8c38d3c0",
+          "flow_html_url": "https://app.kosli.com/cyber-dojo/flows/web-ci",
+          "deployment_diff": {
+            "diff_url": "https://github.com/cyber-dojo/web/compare/83553f52e8de8a9766a64fced8fbfb3cd32318a3...fd680a809587fa6e4071fe874d63192f65f251c1",
+            "previous_git_commit": "83553f52e8de8a9766a64fced8fbfb3cd32318a3",
+            "previous_git_commit_url": "https://github.com/cyber-dojo/web/commit/83553f52e8de8a9766a64fced8fbfb3cd32318a3",
+            "previous_fingerprint": "da7984414ab096232877f301d3d7cea1daf3cdd3fdb72157f530fe186cba3d78",
+            "previous_artifact_name": "244531986313.dkr.ecr.eu-central-1.amazonaws.com/web:83553f5@sha256:da7984414ab096232877f301d3d7cea1daf3cdd3fdb72157f530fe186cba3d78",
+            "previous_artifact_compliance_state": "COMPLIANT",
+            "previous_running": false,
+            "previous_trail_name": "83553f52e8de8a9766a64fced8fbfb3cd32318a3",
+            "previous_template_reference_name": "web"
+          },
+          "commit_lead_time": 75922.0,
+          "artifact_compliance_in_flow": true,
+          "flow_reasons_for_non_compliance": []
+        },
+        {
+          "flow_name": "snyk-aws-beta-per-artifact",
+          "trail_name": "web-b849bb4996749a3f8fc03f8dcb3038cf456dd8cc472826c6de20b988c91d61e4",
+          "template_reference_name": "web",
+          "git_commit": "359c98460f5c3aefb136a77eef08d1be4c4ca08d",
+          "commit_url": "https://github.com/cyber-dojo/snyk-scanning/commit/359c98460f5c3aefb136a77eef08d1be4c4ca08d",
+          "git_commit_info": {
+            "sha1": "359c98460f5c3aefb136a77eef08d1be4c4ca08d",
+            "message": "Merge pull request #6 from cyber-dojo/key-uploads-and-trails-on-component-not-repo\n\nTell apart artifacts built by one repo",
+            "author": "Jon Jagger <jon@kosli.com>",
+            "branch": "main",
+            "timestamp": 1790759058.0,
+            "url": "https://github.com/cyber-dojo/snyk-scanning/commit/359c98460f5c3aefb136a77eef08d1be4c4ca08d"
+          },
+          "html_url": "https://app.kosli.com/cyber-dojo/flows/snyk-aws-beta-per-artifact/artifacts/b849bb4996749a3f8fc03f8dcb3038cf456dd8cc472826c6de20b988c91d61e4?artifact_id=962abf13-b079-4055-b31b-6397314f",
+          "flow_html_url": "https://app.kosli.com/cyber-dojo/flows/snyk-aws-beta-per-artifact",
+          "deployment_diff": {
+            "diff_url": "https://github.com/cyber-dojo/snyk-scanning/compare/359c98460f5c3aefb136a77eef08d1be4c4ca08d...359c98460f5c3aefb136a77eef08d1be4c4ca08d",
+            "previous_git_commit": "359c98460f5c3aefb136a77eef08d1be4c4ca08d",
+            "previous_git_commit_url": "https://github.com/cyber-dojo/snyk-scanning/commit/359c98460f5c3aefb136a77eef08d1be4c4ca08d",
+            "previous_fingerprint": "0700dd34e5e360389f948bc6f321258e4dadc07c4d03452ea31a1dd2a8ac69af",
+            "previous_artifact_name": "244531986313.dkr.ecr.eu-central-1.amazonaws.com/dashboard:fd680a8@sha256:0700dd34e5e360389f948bc6f321258e4dadc07c4d03452ea31a1dd2a8ac69af",
+            "previous_artifact_compliance_state": "COMPLIANT",
+            "previous_running": true,
+            "previous_trail_name": "web-0700dd34e5e360389f948bc6f321258e4dadc07c4d03452ea31a1dd2a8ac69af",
+            "previous_template_reference_name": "web"
+          },
+          "commit_lead_time": 2420276.0,
+          "artifact_compliance_in_flow": true,
+          "flow_reasons_for_non_compliance": []
+        },
+        {
+          "flow_name": "production-promotion",
+          "trail_name": "promote-all-42",
+          "template_reference_name": "web",
+          "git_commit": "f1f6cd6bce0e887649f077657215b50f9cf47d93",
+          "commit_url": "https://github.com/cyber-dojo/aws-prod-co-promotion/commit/f1f6cd6bce0e887649f077657215b50f9cf47d93",
+          "git_commit_info": {
+            "sha1": "f1f6cd6bce0e887649f077657215b50f9cf47d93",
+            "message": "Merge pull request #19 from cyber-dojo/cap-parallel-prod-applies\n\nCap promote-all prod applies at three at a time",
+            "author": "Jon Jagger <jon@kosli.com>",
+            "branch": "main",
+            "timestamp": 1791649272.0,
+            "url": "https://github.com/cyber-dojo/aws-prod-co-promotion/commit/f1f6cd6bce0e887649f077657215b50f9cf47d93"
+          },
+          "html_url": "https://app.kosli.com/cyber-dojo/flows/production-promotion/artifacts/b849bb4996749a3f8fc03f8dcb3038cf456dd8cc472826c6de20b988c91d61e4?artifact_id=2b84def6-5492-4ad7-84af-dabc7ac6",
+          "flow_html_url": "https://app.kosli.com/cyber-dojo/flows/production-promotion",
+          "deployment_diff": {
+            "diff_url": "https://github.com/cyber-dojo/aws-prod-co-promotion/compare/f1f6cd6bce0e887649f077657215b50f9cf47d93...f1f6cd6bce0e887649f077657215b50f9cf47d93",
+            "previous_git_commit": "f1f6cd6bce0e887649f077657215b50f9cf47d93",
+            "previous_git_commit_url": "https://github.com/cyber-dojo/aws-prod-co-promotion/commit/f1f6cd6bce0e887649f077657215b50f9cf47d93",
+            "previous_fingerprint": "0700dd34e5e360389f948bc6f321258e4dadc07c4d03452ea31a1dd2a8ac69af",
+            "previous_artifact_name": "244531986313.dkr.ecr.eu-central-1.amazonaws.com/dashboard:fd680a8@sha256:0700dd34e5e360389f948bc6f321258e4dadc07c4d03452ea31a1dd2a8ac69af",
+            "previous_artifact_compliance_state": "COMPLIANT",
+            "previous_running": true,
+            "previous_trail_name": "promote-all-42",
+            "previous_template_reference_name": "web"
+          },
+          "commit_lead_time": 1530062.0,
+          "artifact_compliance_in_flow": true,
+          "flow_reasons_for_non_compliance": []
+        },
+        {
+          "flow_name": "snyk-aws-prod-per-artifact",
+          "trail_name": "web-b849bb4996749a3f8fc03f8dcb3038cf456dd8cc472826c6de20b988c91d61e4",
+          "template_reference_name": "web",
+          "git_commit": "359c98460f5c3aefb136a77eef08d1be4c4ca08d",
+          "commit_url": "https://github.com/cyber-dojo/snyk-scanning/commit/359c98460f5c3aefb136a77eef08d1be4c4ca08d",
+          "git_commit_info": {
+            "sha1": "359c98460f5c3aefb136a77eef08d1be4c4ca08d",
+            "message": "Merge pull request #6 from cyber-dojo/key-uploads-and-trails-on-component-not-repo\n\nTell apart artifacts built by one repo",
+            "author": "Jon Jagger <jon@kosli.com>",
+            "branch": "main",
+            "timestamp": 1790759058.0,
+            "url": "https://github.com/cyber-dojo/snyk-scanning/commit/359c98460f5c3aefb136a77eef08d1be4c4ca08d"
+          },
+          "html_url": "https://app.kosli.com/cyber-dojo/flows/snyk-aws-prod-per-artifact/artifacts/b849bb4996749a3f8fc03f8dcb3038cf456dd8cc472826c6de20b988c91d61e4?artifact_id=1296cdf3-54fc-4530-9af2-0ceb628d",
+          "flow_html_url": "https://app.kosli.com/cyber-dojo/flows/snyk-aws-prod-per-artifact",
+          "deployment_diff": {
+            "diff_url": "https://github.com/cyber-dojo/snyk-scanning/compare/30111f180ac4e3611cdbd7d805381a0bb9f53cff...359c98460f5c3aefb136a77eef08d1be4c4ca08d",
+            "previous_git_commit": "30111f180ac4e3611cdbd7d805381a0bb9f53cff",
+            "previous_git_commit_url": "https://github.com/cyber-dojo/snyk-scanning/commit/30111f180ac4e3611cdbd7d805381a0bb9f53cff",
+            "previous_fingerprint": "e24bd03714d2e583a2196c0eaf82b2aad8eeecf73f29aec58875994b82f0f418",
+            "previous_artifact_name": "244531986313.dkr.ecr.eu-central-1.amazonaws.com/web:236898f@sha256:e24bd03714d2e583a2196c0eaf82b2aad8eeecf73f29aec58875994b82f0f418",
+            "previous_artifact_compliance_state": "COMPLIANT",
+            "previous_running": false,
+            "previous_trail_name": "web-e24bd03714d2e583a2196c0eaf82b2aad8eeecf73f29aec58875994b82f0f418",
+            "previous_template_reference_name": "web"
+          },
+          "commit_lead_time": 2420276.0,
+          "artifact_compliance_in_flow": true,
+          "flow_reasons_for_non_compliance": []
+        }
+      ],
+      "ecs_context": {
+        "task_arn": "arn:aws:ecs:eu-central-1:274425519734:task/app/fdbeaec14a794d1d88bcc2236ef2bb58",
+        "cluster_name": null,
+        "service_name": null
+      }
+    },
+    {
+      "name": "244531986313.dkr.ecr.eu-central-1.amazonaws.com/custom-start-points:190eb03@sha256:a9aa686d2bfa307bc715841448326e65a394aa2861d94c4744f797a599fc9edb",
+      "compliant": true,
+      "deployments": [],
+      "policy_decisions": [
+        {
+          "policy_version": 2,
+          "status": "COMPLIANT",
+          "rule_evaluations": [
+            {
+              "rule": {
+                "type": "provenance",
+                "definition": {
+                  "required": false,
+                  "exceptions": []
+                }
+              },
+              "satisfied": null,
+              "ignored": true,
+              "resolutions": [
+                {
+                  "type": "rule_not_applicable",
+                  "context": {
+                    "flow_name": "custom-start-points-ci",
+                    "trail_name": "190eb03bc9a6d783dad9d8d74d977c85f1d3f30c",
+                    "artifact_status": null
+                  }
+                },
+                {
+                  "type": "rule_not_applicable",
+                  "context": {
+                    "flow_name": "snyk-aws-beta-per-artifact",
+                    "trail_name": "custom-start-points-a9aa686d2bfa307bc715841448326e65a394aa2861d94c4744f797a599fc9edb",
+                    "artifact_status": null
+                  }
+                },
+                {
+                  "type": "rule_not_applicable",
+                  "context": {
+                    "flow_name": "production-promotion",
+                    "trail_name": "promote-all-42",
+                    "artifact_status": null
+                  }
+                },
+                {
+                  "type": "rule_not_applicable",
+                  "context": {
+                    "flow_name": "snyk-aws-prod-per-artifact",
+                    "trail_name": "custom-start-points-a9aa686d2bfa307bc715841448326e65a394aa2861d94c4744f797a599fc9edb",
+                    "artifact_status": null
+                  }
+                }
+              ]
+            },
+            {
+              "rule": {
+                "type": "trail-compliance",
+                "definition": {
+                  "required": false,
+                  "exceptions": []
+                }
+              },
+              "satisfied": null,
+              "ignored": true,
+              "resolutions": [
+                {
+                  "type": "rule_not_applicable",
+                  "context": {
+                    "flow_name": "custom-start-points-ci",
+                    "trail_name": "190eb03bc9a6d783dad9d8d74d977c85f1d3f30c",
+                    "artifact_status": "COMPLIANT"
+                  }
+                },
+                {
+                  "type": "rule_not_applicable",
+                  "context": {
+                    "flow_name": "snyk-aws-beta-per-artifact",
+                    "trail_name": "custom-start-points-a9aa686d2bfa307bc715841448326e65a394aa2861d94c4744f797a599fc9edb",
+                    "artifact_status": "COMPLIANT"
+                  }
+                },
+                {
+                  "type": "rule_not_applicable",
+                  "context": {
+                    "flow_name": "production-promotion",
+                    "trail_name": "promote-all-42",
+                    "artifact_status": "COMPLIANT"
+                  }
+                },
+                {
+                  "type": "rule_not_applicable",
+                  "context": {
+                    "flow_name": "snyk-aws-prod-per-artifact",
+                    "trail_name": "custom-start-points-a9aa686d2bfa307bc715841448326e65a394aa2861d94c4744f797a599fc9edb",
+                    "artifact_status": "COMPLIANT"
+                  }
+                }
+              ]
+            },
+            {
+              "rule": {
+                "type": "attestation",
+                "definition": {
+                  "if": {
+                    "text": "flow.name == \"production-promotion\""
+                  },
+                  "name": "snyk-scan",
+                  "type": "decision",
+                  "must_be_compliant": true,
+                  "for_control": null
+                }
+              },
+              "satisfied": true,
+              "ignored": false,
+              "resolutions": [
+                {
+                  "type": "rule_not_applicable",
+                  "context": {
+                    "flow_name": "custom-start-points-ci",
+                    "trail_name": "190eb03bc9a6d783dad9d8d74d977c85f1d3f30c",
+                    "artifact_status": null
+                  }
+                },
+                {
+                  "type": "rule_not_applicable",
+                  "context": {
+                    "flow_name": "snyk-aws-beta-per-artifact",
+                    "trail_name": "custom-start-points-a9aa686d2bfa307bc715841448326e65a394aa2861d94c4744f797a599fc9edb",
+                    "artifact_status": null
+                  }
+                },
+                {
+                  "type": "rule_satisfied",
+                  "context": {
+                    "flow_name": "production-promotion",
+                    "trail_name": "promote-all-42",
+                    "artifact_status": null
+                  }
+                },
+                {
+                  "type": "rule_not_applicable",
+                  "context": {
+                    "flow_name": "snyk-aws-prod-per-artifact",
+                    "trail_name": "custom-start-points-a9aa686d2bfa307bc715841448326e65a394aa2861d94c4744f797a599fc9edb",
+                    "artifact_status": null
+                  }
+                }
+              ]
+            }
+          ],
+          "policy_name": "production-promotion"
+        },
+        {
+          "policy_version": 3,
+          "status": "COMPLIANT",
+          "rule_evaluations": [
+            {
+              "rule": {
+                "type": "provenance",
+                "definition": {
+                  "required": true,
+                  "exceptions": []
+                }
+              },
+              "satisfied": true,
+              "ignored": false,
+              "resolutions": [
+                {
+                  "type": "rule_satisfied",
+                  "context": {
+                    "flow_name": "custom-start-points-ci",
+                    "trail_name": "190eb03bc9a6d783dad9d8d74d977c85f1d3f30c",
+                    "artifact_status": null
+                  }
+                },
+                {
+                  "type": "rule_satisfied",
+                  "context": {
+                    "flow_name": "snyk-aws-beta-per-artifact",
+                    "trail_name": "custom-start-points-a9aa686d2bfa307bc715841448326e65a394aa2861d94c4744f797a599fc9edb",
+                    "artifact_status": null
+                  }
+                },
+                {
+                  "type": "rule_satisfied",
+                  "context": {
+                    "flow_name": "production-promotion",
+                    "trail_name": "promote-all-42",
+                    "artifact_status": null
+                  }
+                },
+                {
+                  "type": "rule_satisfied",
+                  "context": {
+                    "flow_name": "snyk-aws-prod-per-artifact",
+                    "trail_name": "custom-start-points-a9aa686d2bfa307bc715841448326e65a394aa2861d94c4744f797a599fc9edb",
+                    "artifact_status": null
+                  }
+                }
+              ]
+            },
+            {
+              "rule": {
+                "type": "trail-compliance",
+                "definition": {
+                  "required": false,
+                  "exceptions": []
+                }
+              },
+              "satisfied": null,
+              "ignored": true,
+              "resolutions": [
+                {
+                  "type": "rule_not_applicable",
+                  "context": {
+                    "flow_name": "custom-start-points-ci",
+                    "trail_name": "190eb03bc9a6d783dad9d8d74d977c85f1d3f30c",
+                    "artifact_status": "COMPLIANT"
+                  }
+                },
+                {
+                  "type": "rule_not_applicable",
+                  "context": {
+                    "flow_name": "snyk-aws-beta-per-artifact",
+                    "trail_name": "custom-start-points-a9aa686d2bfa307bc715841448326e65a394aa2861d94c4744f797a599fc9edb",
+                    "artifact_status": "COMPLIANT"
+                  }
+                },
+                {
+                  "type": "rule_not_applicable",
+                  "context": {
+                    "flow_name": "production-promotion",
+                    "trail_name": "promote-all-42",
+                    "artifact_status": "COMPLIANT"
+                  }
+                },
+                {
+                  "type": "rule_not_applicable",
+                  "context": {
+                    "flow_name": "snyk-aws-prod-per-artifact",
+                    "trail_name": "custom-start-points-a9aa686d2bfa307bc715841448326e65a394aa2861d94c4744f797a599fc9edb",
+                    "artifact_status": "COMPLIANT"
+                  }
+                }
+              ]
+            },
+            {
+              "rule": {
+                "type": "attestation",
+                "definition": {
+                  "if": {
+                    "text": "flow.tags.kind == \"build\""
+                  },
+                  "name": "*",
+                  "type": "decision",
+                  "must_be_compliant": true,
+                  "for_control": "SDLC-CTRL-0002"
+                }
+              },
+              "satisfied": true,
+              "ignored": false,
+              "resolutions": [
+                {
+                  "type": "rule_satisfied",
+                  "context": {
+                    "flow_name": "custom-start-points-ci",
+                    "trail_name": "190eb03bc9a6d783dad9d8d74d977c85f1d3f30c",
+                    "artifact_status": null,
+                    "for_control": "SDLC-CTRL-0002"
+                  }
+                },
+                {
+                  "type": "rule_not_applicable",
+                  "context": {
+                    "flow_name": "snyk-aws-beta-per-artifact",
+                    "trail_name": "custom-start-points-a9aa686d2bfa307bc715841448326e65a394aa2861d94c4744f797a599fc9edb",
+                    "artifact_status": null,
+                    "for_control": "SDLC-CTRL-0002"
+                  }
+                },
+                {
+                  "type": "rule_not_applicable",
+                  "context": {
+                    "flow_name": "production-promotion",
+                    "trail_name": "promote-all-42",
+                    "artifact_status": null,
+                    "for_control": "SDLC-CTRL-0002"
+                  }
+                },
+                {
+                  "type": "rule_not_applicable",
+                  "context": {
+                    "flow_name": "snyk-aws-prod-per-artifact",
+                    "trail_name": "custom-start-points-a9aa686d2bfa307bc715841448326e65a394aa2861d94c4744f797a599fc9edb",
+                    "artifact_status": null,
+                    "for_control": "SDLC-CTRL-0002"
+                  }
+                }
+              ]
+            }
+          ],
+          "policy_name": "provenance"
+        },
+        {
+          "policy_version": 3,
+          "status": "COMPLIANT",
+          "rule_evaluations": [
+            {
+              "rule": {
+                "type": "provenance",
+                "definition": {
+                  "required": false,
+                  "exceptions": []
+                }
+              },
+              "satisfied": null,
+              "ignored": true,
+              "resolutions": [
+                {
+                  "type": "rule_not_applicable",
+                  "context": {
+                    "flow_name": "custom-start-points-ci",
+                    "trail_name": "190eb03bc9a6d783dad9d8d74d977c85f1d3f30c",
+                    "artifact_status": null
+                  }
+                },
+                {
+                  "type": "rule_not_applicable",
+                  "context": {
+                    "flow_name": "snyk-aws-beta-per-artifact",
+                    "trail_name": "custom-start-points-a9aa686d2bfa307bc715841448326e65a394aa2861d94c4744f797a599fc9edb",
+                    "artifact_status": null
+                  }
+                },
+                {
+                  "type": "rule_not_applicable",
+                  "context": {
+                    "flow_name": "production-promotion",
+                    "trail_name": "promote-all-42",
+                    "artifact_status": null
+                  }
+                },
+                {
+                  "type": "rule_not_applicable",
+                  "context": {
+                    "flow_name": "snyk-aws-prod-per-artifact",
+                    "trail_name": "custom-start-points-a9aa686d2bfa307bc715841448326e65a394aa2861d94c4744f797a599fc9edb",
+                    "artifact_status": null
+                  }
+                }
+              ]
+            },
+            {
+              "rule": {
+                "type": "trail-compliance",
+                "definition": {
+                  "required": false,
+                  "exceptions": []
+                }
+              },
+              "satisfied": null,
+              "ignored": true,
+              "resolutions": [
+                {
+                  "type": "rule_not_applicable",
+                  "context": {
+                    "flow_name": "custom-start-points-ci",
+                    "trail_name": "190eb03bc9a6d783dad9d8d74d977c85f1d3f30c",
+                    "artifact_status": "COMPLIANT"
+                  }
+                },
+                {
+                  "type": "rule_not_applicable",
+                  "context": {
+                    "flow_name": "snyk-aws-beta-per-artifact",
+                    "trail_name": "custom-start-points-a9aa686d2bfa307bc715841448326e65a394aa2861d94c4744f797a599fc9edb",
+                    "artifact_status": "COMPLIANT"
+                  }
+                },
+                {
+                  "type": "rule_not_applicable",
+                  "context": {
+                    "flow_name": "production-promotion",
+                    "trail_name": "promote-all-42",
+                    "artifact_status": "COMPLIANT"
+                  }
+                },
+                {
+                  "type": "rule_not_applicable",
+                  "context": {
+                    "flow_name": "snyk-aws-prod-per-artifact",
+                    "trail_name": "custom-start-points-a9aa686d2bfa307bc715841448326e65a394aa2861d94c4744f797a599fc9edb",
+                    "artifact_status": "COMPLIANT"
+                  }
+                }
+              ]
+            },
+            {
+              "rule": {
+                "type": "attestation",
+                "definition": {
+                  "if": {
+                    "text": "flow.tags.kind == \"build\""
+                  },
+                  "name": "*",
+                  "type": "pull_request",
+                  "must_be_compliant": true,
+                  "for_control": null
+                }
+              },
+              "satisfied": true,
+              "ignored": false,
+              "resolutions": [
+                {
+                  "type": "rule_satisfied",
+                  "context": {
+                    "flow_name": "custom-start-points-ci",
+                    "trail_name": "190eb03bc9a6d783dad9d8d74d977c85f1d3f30c",
+                    "artifact_status": null
+                  }
+                },
+                {
+                  "type": "rule_not_applicable",
+                  "context": {
+                    "flow_name": "snyk-aws-beta-per-artifact",
+                    "trail_name": "custom-start-points-a9aa686d2bfa307bc715841448326e65a394aa2861d94c4744f797a599fc9edb",
+                    "artifact_status": null
+                  }
+                },
+                {
+                  "type": "rule_not_applicable",
+                  "context": {
+                    "flow_name": "production-promotion",
+                    "trail_name": "promote-all-42",
+                    "artifact_status": null
+                  }
+                },
+                {
+                  "type": "rule_not_applicable",
+                  "context": {
+                    "flow_name": "snyk-aws-prod-per-artifact",
+                    "trail_name": "custom-start-points-a9aa686d2bfa307bc715841448326e65a394aa2861d94c4744f797a599fc9edb",
+                    "artifact_status": null
+                  }
+                }
+              ]
+            }
+          ],
+          "policy_name": "pull-request"
+        },
+        {
+          "policy_version": 4,
+          "status": "COMPLIANT",
+          "rule_evaluations": [
+            {
+              "rule": {
+                "type": "provenance",
+                "definition": {
+                  "required": false,
+                  "exceptions": []
+                }
+              },
+              "satisfied": null,
+              "ignored": true,
+              "resolutions": [
+                {
+                  "type": "rule_not_applicable",
+                  "context": {
+                    "flow_name": "custom-start-points-ci",
+                    "trail_name": "190eb03bc9a6d783dad9d8d74d977c85f1d3f30c",
+                    "artifact_status": null
+                  }
+                },
+                {
+                  "type": "rule_not_applicable",
+                  "context": {
+                    "flow_name": "snyk-aws-beta-per-artifact",
+                    "trail_name": "custom-start-points-a9aa686d2bfa307bc715841448326e65a394aa2861d94c4744f797a599fc9edb",
+                    "artifact_status": null
+                  }
+                },
+                {
+                  "type": "rule_not_applicable",
+                  "context": {
+                    "flow_name": "production-promotion",
+                    "trail_name": "promote-all-42",
+                    "artifact_status": null
+                  }
+                },
+                {
+                  "type": "rule_not_applicable",
+                  "context": {
+                    "flow_name": "snyk-aws-prod-per-artifact",
+                    "trail_name": "custom-start-points-a9aa686d2bfa307bc715841448326e65a394aa2861d94c4744f797a599fc9edb",
+                    "artifact_status": null
+                  }
+                }
+              ]
+            },
+            {
+              "rule": {
+                "type": "trail-compliance",
+                "definition": {
+                  "required": false,
+                  "exceptions": []
+                }
+              },
+              "satisfied": null,
+              "ignored": true,
+              "resolutions": [
+                {
+                  "type": "rule_not_applicable",
+                  "context": {
+                    "flow_name": "custom-start-points-ci",
+                    "trail_name": "190eb03bc9a6d783dad9d8d74d977c85f1d3f30c",
+                    "artifact_status": "COMPLIANT"
+                  }
+                },
+                {
+                  "type": "rule_not_applicable",
+                  "context": {
+                    "flow_name": "snyk-aws-beta-per-artifact",
+                    "trail_name": "custom-start-points-a9aa686d2bfa307bc715841448326e65a394aa2861d94c4744f797a599fc9edb",
+                    "artifact_status": "COMPLIANT"
+                  }
+                },
+                {
+                  "type": "rule_not_applicable",
+                  "context": {
+                    "flow_name": "production-promotion",
+                    "trail_name": "promote-all-42",
+                    "artifact_status": "COMPLIANT"
+                  }
+                },
+                {
+                  "type": "rule_not_applicable",
+                  "context": {
+                    "flow_name": "snyk-aws-prod-per-artifact",
+                    "trail_name": "custom-start-points-a9aa686d2bfa307bc715841448326e65a394aa2861d94c4744f797a599fc9edb",
+                    "artifact_status": "COMPLIANT"
+                  }
+                }
+              ]
+            },
+            {
+              "rule": {
+                "type": "attestation",
+                "definition": {
+                  "if": {
+                    "text": "flow.name == \"snyk-aws-prod-per-artifact\""
+                  },
+                  "name": "snyk-container-scan",
+                  "type": "decision",
+                  "must_be_compliant": true,
+                  "for_control": "SDLC-CTRL-0022"
+                }
+              },
+              "satisfied": true,
+              "ignored": false,
+              "resolutions": [
+                {
+                  "type": "rule_not_applicable",
+                  "context": {
+                    "flow_name": "custom-start-points-ci",
+                    "trail_name": "190eb03bc9a6d783dad9d8d74d977c85f1d3f30c",
+                    "artifact_status": null,
+                    "for_control": "SDLC-CTRL-0022"
+                  }
+                },
+                {
+                  "type": "rule_not_applicable",
+                  "context": {
+                    "flow_name": "snyk-aws-beta-per-artifact",
+                    "trail_name": "custom-start-points-a9aa686d2bfa307bc715841448326e65a394aa2861d94c4744f797a599fc9edb",
+                    "artifact_status": null,
+                    "for_control": "SDLC-CTRL-0022"
+                  }
+                },
+                {
+                  "type": "rule_not_applicable",
+                  "context": {
+                    "flow_name": "production-promotion",
+                    "trail_name": "promote-all-42",
+                    "artifact_status": null,
+                    "for_control": "SDLC-CTRL-0022"
+                  }
+                },
+                {
+                  "type": "rule_satisfied",
+                  "context": {
+                    "flow_name": "snyk-aws-prod-per-artifact",
+                    "trail_name": "custom-start-points-a9aa686d2bfa307bc715841448326e65a394aa2861d94c4744f797a599fc9edb",
+                    "artifact_status": null,
+                    "for_control": "SDLC-CTRL-0022"
+                  }
+                }
+              ]
+            }
+          ],
+          "policy_name": "snyk-scan-aws-prod"
+        },
+        {
+          "policy_version": 2,
+          "status": "COMPLIANT",
+          "rule_evaluations": [
+            {
+              "rule": {
+                "type": "provenance",
+                "definition": {
+                  "required": false,
+                  "exceptions": []
+                }
+              },
+              "satisfied": null,
+              "ignored": true,
+              "resolutions": [
+                {
+                  "type": "rule_not_applicable",
+                  "context": {
+                    "flow_name": "custom-start-points-ci",
+                    "trail_name": "190eb03bc9a6d783dad9d8d74d977c85f1d3f30c",
+                    "artifact_status": null
+                  }
+                },
+                {
+                  "type": "rule_not_applicable",
+                  "context": {
+                    "flow_name": "snyk-aws-beta-per-artifact",
+                    "trail_name": "custom-start-points-a9aa686d2bfa307bc715841448326e65a394aa2861d94c4744f797a599fc9edb",
+                    "artifact_status": null
+                  }
+                },
+                {
+                  "type": "rule_not_applicable",
+                  "context": {
+                    "flow_name": "production-promotion",
+                    "trail_name": "promote-all-42",
+                    "artifact_status": null
+                  }
+                },
+                {
+                  "type": "rule_not_applicable",
+                  "context": {
+                    "flow_name": "snyk-aws-prod-per-artifact",
+                    "trail_name": "custom-start-points-a9aa686d2bfa307bc715841448326e65a394aa2861d94c4744f797a599fc9edb",
+                    "artifact_status": null
+                  }
+                }
+              ]
+            },
+            {
+              "rule": {
+                "type": "trail-compliance",
+                "definition": {
+                  "required": true,
+                  "exceptions": [
+                    {
+                      "if": {
+                        "text": "exists(flow.tags.env) and flow.tags.env != \"aws-prod\""
+                      }
+                    }
+                  ]
+                }
+              },
+              "satisfied": true,
+              "ignored": false,
+              "resolutions": [
+                {
+                  "type": "rule_not_applicable",
+                  "context": {
+                    "flow_name": "custom-start-points-ci",
+                    "trail_name": "190eb03bc9a6d783dad9d8d74d977c85f1d3f30c",
+                    "artifact_status": "COMPLIANT"
+                  }
+                },
+                {
+                  "type": "rule_not_applicable",
+                  "context": {
+                    "flow_name": "snyk-aws-beta-per-artifact",
+                    "trail_name": "custom-start-points-a9aa686d2bfa307bc715841448326e65a394aa2861d94c4744f797a599fc9edb",
+                    "artifact_status": "COMPLIANT"
+                  }
+                },
+                {
+                  "type": "rule_satisfied",
+                  "context": {
+                    "flow_name": "production-promotion",
+                    "trail_name": "promote-all-42",
+                    "artifact_status": "COMPLIANT"
+                  }
+                },
+                {
+                  "type": "rule_satisfied",
+                  "context": {
+                    "flow_name": "snyk-aws-prod-per-artifact",
+                    "trail_name": "custom-start-points-a9aa686d2bfa307bc715841448326e65a394aa2861d94c4744f797a599fc9edb",
+                    "artifact_status": "COMPLIANT"
+                  }
+                }
+              ]
+            }
+          ],
+          "policy_name": "trail-compliance-aws-prod"
+        }
+      ],
+      "reasons_for_incompliance": [],
+      "fingerprint": "a9aa686d2bfa307bc715841448326e65a394aa2861d94c4744f797a599fc9edb",
+      "creationTimestamp": [
+        1793179259
+      ],
+      "pods": null,
+      "annotation": {
+        "type": "updated-provenance",
+        "was": 1,
+        "now": 1
+      },
+      "flow_name": "custom-start-points-ci",
+      "git_commit": "190eb03bc9a6d783dad9d8d74d977c85f1d3f30c",
+      "commit_url": "https://github.com/cyber-dojo/custom-start-points/commit/190eb03bc9a6d783dad9d8d74d977c85f1d3f30c",
+      "html_url": "https://app.kosli.com/cyber-dojo/flows/custom-start-points-ci/artifacts/a9aa686d2bfa307bc715841448326e65a394aa2861d94c4744f797a599fc9edb?artifact_id=f30b0455-6aa8-425e-ba1d-2ae2b497",
+      "flow_html_url": "https://app.kosli.com/cyber-dojo/flows/custom-start-points-ci",
+      "deployment_diff": {
+        "diff_url": "https://github.com/cyber-dojo/custom-start-points/compare/270c3c87aecb0e008e90879be753e67983e692c8...190eb03bc9a6d783dad9d8d74d977c85f1d3f30c",
+        "previous_git_commit": "270c3c87aecb0e008e90879be753e67983e692c8",
+        "previous_git_commit_url": "https://github.com/cyber-dojo/custom-start-points/commit/270c3c87aecb0e008e90879be753e67983e692c8",
+        "previous_fingerprint": "6726c2fe6436edca6caaeed069531e326f7bfdceeac41feed28bef90a036cc93",
+        "previous_artifact_name": "244531986313.dkr.ecr.eu-central-1.amazonaws.com/custom-start-points:270c3c8@sha256:6726c2fe6436edca6caaeed069531e326f7bfdceeac41feed28bef90a036cc93",
+        "previous_artifact_compliance_state": "COMPLIANT",
+        "previous_running": false,
+        "previous_trail_name": "270c3c87aecb0e008e90879be753e67983e692c8",
+        "previous_template_reference_name": "custom-start-points"
+      },
+      "commit_lead_time": 76651.0,
+      "flows": [
+        {
+          "flow_name": "custom-start-points-ci",
+          "trail_name": "190eb03bc9a6d783dad9d8d74d977c85f1d3f30c",
+          "template_reference_name": "custom-start-points",
+          "git_commit": "190eb03bc9a6d783dad9d8d74d977c85f1d3f30c",
+          "commit_url": "https://github.com/cyber-dojo/custom-start-points/commit/190eb03bc9a6d783dad9d8d74d977c85f1d3f30c",
+          "git_commit_info": {
+            "sha1": "190eb03bc9a6d783dad9d8d74d977c85f1d3f30c",
+            "message": "Merge pull request #157 from cyber-dojo/update-base-image-2fa325e\n\nMerge update-base-image into main",
+            "author": "Jon Jagger <jon@kosli.com>",
+            "branch": "",
+            "timestamp": 1793102608.0,
+            "url": "https://github.com/cyber-dojo/custom-start-points/commit/190eb03bc9a6d783dad9d8d74d977c85f1d3f30c"
+          },
+          "html_url": "https://app.kosli.com/cyber-dojo/flows/custom-start-points-ci/artifacts/a9aa686d2bfa307bc715841448326e65a394aa2861d94c4744f797a599fc9edb?artifact_id=f30b0455-6aa8-425e-ba1d-2ae2b497",
+          "flow_html_url": "https://app.kosli.com/cyber-dojo/flows/custom-start-points-ci",
+          "deployment_diff": {
+            "diff_url": "https://github.com/cyber-dojo/custom-start-points/compare/270c3c87aecb0e008e90879be753e67983e692c8...190eb03bc9a6d783dad9d8d74d977c85f1d3f30c",
+            "previous_git_commit": "270c3c87aecb0e008e90879be753e67983e692c8",
+            "previous_git_commit_url": "https://github.com/cyber-dojo/custom-start-points/commit/270c3c87aecb0e008e90879be753e67983e692c8",
+            "previous_fingerprint": "6726c2fe6436edca6caaeed069531e326f7bfdceeac41feed28bef90a036cc93",
+            "previous_artifact_name": "244531986313.dkr.ecr.eu-central-1.amazonaws.com/custom-start-points:270c3c8@sha256:6726c2fe6436edca6caaeed069531e326f7bfdceeac41feed28bef90a036cc93",
+            "previous_artifact_compliance_state": "COMPLIANT",
+            "previous_running": false,
+            "previous_trail_name": "270c3c87aecb0e008e90879be753e67983e692c8",
+            "previous_template_reference_name": "custom-start-points"
+          },
+          "commit_lead_time": 76651.0,
+          "artifact_compliance_in_flow": true,
+          "flow_reasons_for_non_compliance": []
+        },
+        {
+          "flow_name": "snyk-aws-beta-per-artifact",
+          "trail_name": "custom-start-points-a9aa686d2bfa307bc715841448326e65a394aa2861d94c4744f797a599fc9edb",
+          "template_reference_name": "custom-start-points",
+          "git_commit": "359c98460f5c3aefb136a77eef08d1be4c4ca08d",
+          "commit_url": "https://github.com/cyber-dojo/snyk-scanning/commit/359c98460f5c3aefb136a77eef08d1be4c4ca08d",
+          "git_commit_info": {
+            "sha1": "359c98460f5c3aefb136a77eef08d1be4c4ca08d",
+            "message": "Merge pull request #6 from cyber-dojo/key-uploads-and-trails-on-component-not-repo\n\nTell apart artifacts built by one repo",
+            "author": "Jon Jagger <jon@kosli.com>",
+            "branch": "main",
+            "timestamp": 1790759058.0,
+            "url": "https://github.com/cyber-dojo/snyk-scanning/commit/359c98460f5c3aefb136a77eef08d1be4c4ca08d"
+          },
+          "html_url": "https://app.kosli.com/cyber-dojo/flows/snyk-aws-beta-per-artifact/artifacts/a9aa686d2bfa307bc715841448326e65a394aa2861d94c4744f797a599fc9edb?artifact_id=fcf0ff57-d6da-4db0-bf29-5bbffae1",
+          "flow_html_url": "https://app.kosli.com/cyber-dojo/flows/snyk-aws-beta-per-artifact",
+          "deployment_diff": {
+            "diff_url": "https://github.com/cyber-dojo/snyk-scanning/compare/359c98460f5c3aefb136a77eef08d1be4c4ca08d...359c98460f5c3aefb136a77eef08d1be4c4ca08d",
+            "previous_git_commit": "359c98460f5c3aefb136a77eef08d1be4c4ca08d",
+            "previous_git_commit_url": "https://github.com/cyber-dojo/snyk-scanning/commit/359c98460f5c3aefb136a77eef08d1be4c4ca08d",
+            "previous_fingerprint": "e232125238c2a0344957e75393c37ba8f88d35b114b35a7c048c642d32681828",
+            "previous_artifact_name": "244531986313.dkr.ecr.eu-central-1.amazonaws.com/custom-start-points:c415496@sha256:e232125238c2a0344957e75393c37ba8f88d35b114b35a7c048c642d32681828",
+            "previous_artifact_compliance_state": "COMPLIANT",
+            "previous_running": false,
+            "previous_trail_name": "custom-start-points-e232125238c2a0344957e75393c37ba8f88d35b114b35a7c048c642d32681828",
+            "previous_template_reference_name": "custom-start-points"
+          },
+          "commit_lead_time": 2420201.0,
+          "artifact_compliance_in_flow": true,
+          "flow_reasons_for_non_compliance": []
+        },
+        {
+          "flow_name": "production-promotion",
+          "trail_name": "promote-all-42",
+          "template_reference_name": "custom-start-points",
+          "git_commit": "f1f6cd6bce0e887649f077657215b50f9cf47d93",
+          "commit_url": "https://github.com/cyber-dojo/aws-prod-co-promotion/commit/f1f6cd6bce0e887649f077657215b50f9cf47d93",
+          "git_commit_info": {
+            "sha1": "f1f6cd6bce0e887649f077657215b50f9cf47d93",
+            "message": "Merge pull request #19 from cyber-dojo/cap-parallel-prod-applies\n\nCap promote-all prod applies at three at a time",
+            "author": "Jon Jagger <jon@kosli.com>",
+            "branch": "main",
+            "timestamp": 1791649272.0,
+            "url": "https://github.com/cyber-dojo/aws-prod-co-promotion/commit/f1f6cd6bce0e887649f077657215b50f9cf47d93"
+          },
+          "html_url": "https://app.kosli.com/cyber-dojo/flows/production-promotion/artifacts/a9aa686d2bfa307bc715841448326e65a394aa2861d94c4744f797a599fc9edb?artifact_id=78044fbb-8075-480a-bf0a-14fbeb7b",
+          "flow_html_url": "https://app.kosli.com/cyber-dojo/flows/production-promotion",
+          "deployment_diff": {
+            "diff_url": "https://github.com/cyber-dojo/aws-prod-co-promotion/compare/54306f735c51413c972b38398da4d0a5fc86d47a...f1f6cd6bce0e887649f077657215b50f9cf47d93",
+            "previous_git_commit": "54306f735c51413c972b38398da4d0a5fc86d47a",
+            "previous_git_commit_url": "https://github.com/cyber-dojo/aws-prod-co-promotion/commit/54306f735c51413c972b38398da4d0a5fc86d47a",
+            "previous_fingerprint": "6726c2fe6436edca6caaeed069531e326f7bfdceeac41feed28bef90a036cc93",
+            "previous_artifact_name": "244531986313.dkr.ecr.eu-central-1.amazonaws.com/custom-start-points:270c3c8@sha256:6726c2fe6436edca6caaeed069531e326f7bfdceeac41feed28bef90a036cc93",
+            "previous_artifact_compliance_state": "COMPLIANT",
+            "previous_running": false,
+            "previous_trail_name": "promote-all-41",
+            "previous_template_reference_name": "custom-start-points"
+          },
+          "commit_lead_time": 1529987.0,
+          "artifact_compliance_in_flow": true,
+          "flow_reasons_for_non_compliance": []
+        },
+        {
+          "flow_name": "snyk-aws-prod-per-artifact",
+          "trail_name": "custom-start-points-a9aa686d2bfa307bc715841448326e65a394aa2861d94c4744f797a599fc9edb",
+          "template_reference_name": "custom-start-points",
+          "git_commit": "359c98460f5c3aefb136a77eef08d1be4c4ca08d",
+          "commit_url": "https://github.com/cyber-dojo/snyk-scanning/commit/359c98460f5c3aefb136a77eef08d1be4c4ca08d",
+          "git_commit_info": {
+            "sha1": "359c98460f5c3aefb136a77eef08d1be4c4ca08d",
+            "message": "Merge pull request #6 from cyber-dojo/key-uploads-and-trails-on-component-not-repo\n\nTell apart artifacts built by one repo",
+            "author": "Jon Jagger <jon@kosli.com>",
+            "branch": "main",
+            "timestamp": 1790759058.0,
+            "url": "https://github.com/cyber-dojo/snyk-scanning/commit/359c98460f5c3aefb136a77eef08d1be4c4ca08d"
+          },
+          "html_url": "https://app.kosli.com/cyber-dojo/flows/snyk-aws-prod-per-artifact/artifacts/a9aa686d2bfa307bc715841448326e65a394aa2861d94c4744f797a599fc9edb?artifact_id=44b75897-0875-48fd-b992-924a81a1",
+          "flow_html_url": "https://app.kosli.com/cyber-dojo/flows/snyk-aws-prod-per-artifact",
+          "deployment_diff": {
+            "diff_url": "https://github.com/cyber-dojo/snyk-scanning/compare/30111f180ac4e3611cdbd7d805381a0bb9f53cff...359c98460f5c3aefb136a77eef08d1be4c4ca08d",
+            "previous_git_commit": "30111f180ac4e3611cdbd7d805381a0bb9f53cff",
+            "previous_git_commit_url": "https://github.com/cyber-dojo/snyk-scanning/commit/30111f180ac4e3611cdbd7d805381a0bb9f53cff",
+            "previous_fingerprint": "ed0b8b8cc04f951bc7224d792c9c68010388f9ebf3c45d9a5d375be3a68d0b2e",
+            "previous_artifact_name": "244531986313.dkr.ecr.eu-central-1.amazonaws.com/custom-start-points:86c839e@sha256:ed0b8b8cc04f951bc7224d792c9c68010388f9ebf3c45d9a5d375be3a68d0b2e",
+            "previous_artifact_compliance_state": "COMPLIANT",
+            "previous_running": false,
+            "previous_trail_name": "custom-start-points-ed0b8b8cc04f951bc7224d792c9c68010388f9ebf3c45d9a5d375be3a68d0b2e",
+            "previous_template_reference_name": "custom-start-points"
+          },
+          "commit_lead_time": 2420201.0,
+          "artifact_compliance_in_flow": true,
+          "flow_reasons_for_non_compliance": []
+        }
+      ],
+      "ecs_context": {
+        "task_arn": "arn:aws:ecs:eu-central-1:274425519734:task/app/54911a331a454eda99b5c608f03b479c",
+        "cluster_name": null,
+        "service_name": null
+      }
+    },
+    {
+      "name": "244531986313.dkr.ecr.eu-central-1.amazonaws.com/runner:bbd98e9@sha256:9f8ac40adc070f4ded8fa56ca2a168804cbc882c42d94fc4537666d39d8d1757",
+      "compliant": true,
+      "deployments": [],
+      "policy_decisions": [
+        {
+          "policy_version": 2,
+          "status": "COMPLIANT",
+          "rule_evaluations": [
+            {
+              "rule": {
+                "type": "provenance",
+                "definition": {
+                  "required": false,
+                  "exceptions": []
+                }
+              },
+              "satisfied": null,
+              "ignored": true,
+              "resolutions": [
+                {
+                  "type": "rule_not_applicable",
+                  "context": {
+                    "flow_name": "runner-ci",
+                    "trail_name": "bbd98e9edd32f97a4e2490ddb6963d4ed363eb6e",
+                    "artifact_status": null
+                  }
+                },
+                {
+                  "type": "rule_not_applicable",
+                  "context": {
+                    "flow_name": "snyk-aws-beta-per-artifact",
+                    "trail_name": "runner-9f8ac40adc070f4ded8fa56ca2a168804cbc882c42d94fc4537666d39d8d1757",
+                    "artifact_status": null
+                  }
+                },
+                {
+                  "type": "rule_not_applicable",
+                  "context": {
+                    "flow_name": "production-promotion",
+                    "trail_name": "promote-all-42",
+                    "artifact_status": null
+                  }
+                },
+                {
+                  "type": "rule_not_applicable",
+                  "context": {
+                    "flow_name": "snyk-aws-prod-per-artifact",
+                    "trail_name": "runner-9f8ac40adc070f4ded8fa56ca2a168804cbc882c42d94fc4537666d39d8d1757",
+                    "artifact_status": null
+                  }
+                }
+              ]
+            },
+            {
+              "rule": {
+                "type": "trail-compliance",
+                "definition": {
+                  "required": false,
+                  "exceptions": []
+                }
+              },
+              "satisfied": null,
+              "ignored": true,
+              "resolutions": [
+                {
+                  "type": "rule_not_applicable",
+                  "context": {
+                    "flow_name": "runner-ci",
+                    "trail_name": "bbd98e9edd32f97a4e2490ddb6963d4ed363eb6e",
+                    "artifact_status": "COMPLIANT"
+                  }
+                },
+                {
+                  "type": "rule_not_applicable",
+                  "context": {
+                    "flow_name": "snyk-aws-beta-per-artifact",
+                    "trail_name": "runner-9f8ac40adc070f4ded8fa56ca2a168804cbc882c42d94fc4537666d39d8d1757",
+                    "artifact_status": "COMPLIANT"
+                  }
+                },
+                {
+                  "type": "rule_not_applicable",
+                  "context": {
+                    "flow_name": "production-promotion",
+                    "trail_name": "promote-all-42",
+                    "artifact_status": "COMPLIANT"
+                  }
+                },
+                {
+                  "type": "rule_not_applicable",
+                  "context": {
+                    "flow_name": "snyk-aws-prod-per-artifact",
+                    "trail_name": "runner-9f8ac40adc070f4ded8fa56ca2a168804cbc882c42d94fc4537666d39d8d1757",
+                    "artifact_status": "COMPLIANT"
+                  }
+                }
+              ]
+            },
+            {
+              "rule": {
+                "type": "attestation",
+                "definition": {
+                  "if": {
+                    "text": "flow.name == \"production-promotion\""
+                  },
+                  "name": "snyk-scan",
+                  "type": "decision",
+                  "must_be_compliant": true,
+                  "for_control": null
+                }
+              },
+              "satisfied": true,
+              "ignored": false,
+              "resolutions": [
+                {
+                  "type": "rule_not_applicable",
+                  "context": {
+                    "flow_name": "runner-ci",
+                    "trail_name": "bbd98e9edd32f97a4e2490ddb6963d4ed363eb6e",
+                    "artifact_status": null
+                  }
+                },
+                {
+                  "type": "rule_not_applicable",
+                  "context": {
+                    "flow_name": "snyk-aws-beta-per-artifact",
+                    "trail_name": "runner-9f8ac40adc070f4ded8fa56ca2a168804cbc882c42d94fc4537666d39d8d1757",
+                    "artifact_status": null
+                  }
+                },
+                {
+                  "type": "rule_satisfied",
+                  "context": {
+                    "flow_name": "production-promotion",
+                    "trail_name": "promote-all-42",
+                    "artifact_status": null
+                  }
+                },
+                {
+                  "type": "rule_not_applicable",
+                  "context": {
+                    "flow_name": "snyk-aws-prod-per-artifact",
+                    "trail_name": "runner-9f8ac40adc070f4ded8fa56ca2a168804cbc882c42d94fc4537666d39d8d1757",
+                    "artifact_status": null
+                  }
+                }
+              ]
+            }
+          ],
+          "policy_name": "production-promotion"
+        },
+        {
+          "policy_version": 3,
+          "status": "COMPLIANT",
+          "rule_evaluations": [
+            {
+              "rule": {
+                "type": "provenance",
+                "definition": {
+                  "required": true,
+                  "exceptions": []
+                }
+              },
+              "satisfied": true,
+              "ignored": false,
+              "resolutions": [
+                {
+                  "type": "rule_satisfied",
+                  "context": {
+                    "flow_name": "runner-ci",
+                    "trail_name": "bbd98e9edd32f97a4e2490ddb6963d4ed363eb6e",
+                    "artifact_status": null
+                  }
+                },
+                {
+                  "type": "rule_satisfied",
+                  "context": {
+                    "flow_name": "snyk-aws-beta-per-artifact",
+                    "trail_name": "runner-9f8ac40adc070f4ded8fa56ca2a168804cbc882c42d94fc4537666d39d8d1757",
+                    "artifact_status": null
+                  }
+                },
+                {
+                  "type": "rule_satisfied",
+                  "context": {
+                    "flow_name": "production-promotion",
+                    "trail_name": "promote-all-42",
+                    "artifact_status": null
+                  }
+                },
+                {
+                  "type": "rule_satisfied",
+                  "context": {
+                    "flow_name": "snyk-aws-prod-per-artifact",
+                    "trail_name": "runner-9f8ac40adc070f4ded8fa56ca2a168804cbc882c42d94fc4537666d39d8d1757",
+                    "artifact_status": null
+                  }
+                }
+              ]
+            },
+            {
+              "rule": {
+                "type": "trail-compliance",
+                "definition": {
+                  "required": false,
+                  "exceptions": []
+                }
+              },
+              "satisfied": null,
+              "ignored": true,
+              "resolutions": [
+                {
+                  "type": "rule_not_applicable",
+                  "context": {
+                    "flow_name": "runner-ci",
+                    "trail_name": "bbd98e9edd32f97a4e2490ddb6963d4ed363eb6e",
+                    "artifact_status": "COMPLIANT"
+                  }
+                },
+                {
+                  "type": "rule_not_applicable",
+                  "context": {
+                    "flow_name": "snyk-aws-beta-per-artifact",
+                    "trail_name": "runner-9f8ac40adc070f4ded8fa56ca2a168804cbc882c42d94fc4537666d39d8d1757",
+                    "artifact_status": "COMPLIANT"
+                  }
+                },
+                {
+                  "type": "rule_not_applicable",
+                  "context": {
+                    "flow_name": "production-promotion",
+                    "trail_name": "promote-all-42",
+                    "artifact_status": "COMPLIANT"
+                  }
+                },
+                {
+                  "type": "rule_not_applicable",
+                  "context": {
+                    "flow_name": "snyk-aws-prod-per-artifact",
+                    "trail_name": "runner-9f8ac40adc070f4ded8fa56ca2a168804cbc882c42d94fc4537666d39d8d1757",
+                    "artifact_status": "COMPLIANT"
+                  }
+                }
+              ]
+            },
+            {
+              "rule": {
+                "type": "attestation",
+                "definition": {
+                  "if": {
+                    "text": "flow.tags.kind == \"build\""
+                  },
+                  "name": "*",
+                  "type": "decision",
+                  "must_be_compliant": true,
+                  "for_control": "SDLC-CTRL-0002"
+                }
+              },
+              "satisfied": true,
+              "ignored": false,
+              "resolutions": [
+                {
+                  "type": "rule_satisfied",
+                  "context": {
+                    "flow_name": "runner-ci",
+                    "trail_name": "bbd98e9edd32f97a4e2490ddb6963d4ed363eb6e",
+                    "artifact_status": null,
+                    "for_control": "SDLC-CTRL-0002"
+                  }
+                },
+                {
+                  "type": "rule_not_applicable",
+                  "context": {
+                    "flow_name": "snyk-aws-beta-per-artifact",
+                    "trail_name": "runner-9f8ac40adc070f4ded8fa56ca2a168804cbc882c42d94fc4537666d39d8d1757",
+                    "artifact_status": null,
+                    "for_control": "SDLC-CTRL-0002"
+                  }
+                },
+                {
+                  "type": "rule_not_applicable",
+                  "context": {
+                    "flow_name": "production-promotion",
+                    "trail_name": "promote-all-42",
+                    "artifact_status": null,
+                    "for_control": "SDLC-CTRL-0002"
+                  }
+                },
+                {
+                  "type": "rule_not_applicable",
+                  "context": {
+                    "flow_name": "snyk-aws-prod-per-artifact",
+                    "trail_name": "runner-9f8ac40adc070f4ded8fa56ca2a168804cbc882c42d94fc4537666d39d8d1757",
+                    "artifact_status": null,
+                    "for_control": "SDLC-CTRL-0002"
+                  }
+                }
+              ]
+            }
+          ],
+          "policy_name": "provenance"
+        },
+        {
+          "policy_version": 3,
+          "status": "COMPLIANT",
+          "rule_evaluations": [
+            {
+              "rule": {
+                "type": "provenance",
+                "definition": {
+                  "required": false,
+                  "exceptions": []
+                }
+              },
+              "satisfied": null,
+              "ignored": true,
+              "resolutions": [
+                {
+                  "type": "rule_not_applicable",
+                  "context": {
+                    "flow_name": "runner-ci",
+                    "trail_name": "bbd98e9edd32f97a4e2490ddb6963d4ed363eb6e",
+                    "artifact_status": null
+                  }
+                },
+                {
+                  "type": "rule_not_applicable",
+                  "context": {
+                    "flow_name": "snyk-aws-beta-per-artifact",
+                    "trail_name": "runner-9f8ac40adc070f4ded8fa56ca2a168804cbc882c42d94fc4537666d39d8d1757",
+                    "artifact_status": null
+                  }
+                },
+                {
+                  "type": "rule_not_applicable",
+                  "context": {
+                    "flow_name": "production-promotion",
+                    "trail_name": "promote-all-42",
+                    "artifact_status": null
+                  }
+                },
+                {
+                  "type": "rule_not_applicable",
+                  "context": {
+                    "flow_name": "snyk-aws-prod-per-artifact",
+                    "trail_name": "runner-9f8ac40adc070f4ded8fa56ca2a168804cbc882c42d94fc4537666d39d8d1757",
+                    "artifact_status": null
+                  }
+                }
+              ]
+            },
+            {
+              "rule": {
+                "type": "trail-compliance",
+                "definition": {
+                  "required": false,
+                  "exceptions": []
+                }
+              },
+              "satisfied": null,
+              "ignored": true,
+              "resolutions": [
+                {
+                  "type": "rule_not_applicable",
+                  "context": {
+                    "flow_name": "runner-ci",
+                    "trail_name": "bbd98e9edd32f97a4e2490ddb6963d4ed363eb6e",
+                    "artifact_status": "COMPLIANT"
+                  }
+                },
+                {
+                  "type": "rule_not_applicable",
+                  "context": {
+                    "flow_name": "snyk-aws-beta-per-artifact",
+                    "trail_name": "runner-9f8ac40adc070f4ded8fa56ca2a168804cbc882c42d94fc4537666d39d8d1757",
+                    "artifact_status": "COMPLIANT"
+                  }
+                },
+                {
+                  "type": "rule_not_applicable",
+                  "context": {
+                    "flow_name": "production-promotion",
+                    "trail_name": "promote-all-42",
+                    "artifact_status": "COMPLIANT"
+                  }
+                },
+                {
+                  "type": "rule_not_applicable",
+                  "context": {
+                    "flow_name": "snyk-aws-prod-per-artifact",
+                    "trail_name": "runner-9f8ac40adc070f4ded8fa56ca2a168804cbc882c42d94fc4537666d39d8d1757",
+                    "artifact_status": "COMPLIANT"
+                  }
+                }
+              ]
+            },
+            {
+              "rule": {
+                "type": "attestation",
+                "definition": {
+                  "if": {
+                    "text": "flow.tags.kind == \"build\""
+                  },
+                  "name": "*",
+                  "type": "pull_request",
+                  "must_be_compliant": true,
+                  "for_control": null
+                }
+              },
+              "satisfied": true,
+              "ignored": false,
+              "resolutions": [
+                {
+                  "type": "rule_satisfied",
+                  "context": {
+                    "flow_name": "runner-ci",
+                    "trail_name": "bbd98e9edd32f97a4e2490ddb6963d4ed363eb6e",
+                    "artifact_status": null
+                  }
+                },
+                {
+                  "type": "rule_not_applicable",
+                  "context": {
+                    "flow_name": "snyk-aws-beta-per-artifact",
+                    "trail_name": "runner-9f8ac40adc070f4ded8fa56ca2a168804cbc882c42d94fc4537666d39d8d1757",
+                    "artifact_status": null
+                  }
+                },
+                {
+                  "type": "rule_not_applicable",
+                  "context": {
+                    "flow_name": "production-promotion",
+                    "trail_name": "promote-all-42",
+                    "artifact_status": null
+                  }
+                },
+                {
+                  "type": "rule_not_applicable",
+                  "context": {
+                    "flow_name": "snyk-aws-prod-per-artifact",
+                    "trail_name": "runner-9f8ac40adc070f4ded8fa56ca2a168804cbc882c42d94fc4537666d39d8d1757",
+                    "artifact_status": null
+                  }
+                }
+              ]
+            }
+          ],
+          "policy_name": "pull-request"
+        },
+        {
+          "policy_version": 4,
+          "status": "COMPLIANT",
+          "rule_evaluations": [
+            {
+              "rule": {
+                "type": "provenance",
+                "definition": {
+                  "required": false,
+                  "exceptions": []
+                }
+              },
+              "satisfied": null,
+              "ignored": true,
+              "resolutions": [
+                {
+                  "type": "rule_not_applicable",
+                  "context": {
+                    "flow_name": "runner-ci",
+                    "trail_name": "bbd98e9edd32f97a4e2490ddb6963d4ed363eb6e",
+                    "artifact_status": null
+                  }
+                },
+                {
+                  "type": "rule_not_applicable",
+                  "context": {
+                    "flow_name": "snyk-aws-beta-per-artifact",
+                    "trail_name": "runner-9f8ac40adc070f4ded8fa56ca2a168804cbc882c42d94fc4537666d39d8d1757",
+                    "artifact_status": null
+                  }
+                },
+                {
+                  "type": "rule_not_applicable",
+                  "context": {
+                    "flow_name": "production-promotion",
+                    "trail_name": "promote-all-42",
+                    "artifact_status": null
+                  }
+                },
+                {
+                  "type": "rule_not_applicable",
+                  "context": {
+                    "flow_name": "snyk-aws-prod-per-artifact",
+                    "trail_name": "runner-9f8ac40adc070f4ded8fa56ca2a168804cbc882c42d94fc4537666d39d8d1757",
+                    "artifact_status": null
+                  }
+                }
+              ]
+            },
+            {
+              "rule": {
+                "type": "trail-compliance",
+                "definition": {
+                  "required": false,
+                  "exceptions": []
+                }
+              },
+              "satisfied": null,
+              "ignored": true,
+              "resolutions": [
+                {
+                  "type": "rule_not_applicable",
+                  "context": {
+                    "flow_name": "runner-ci",
+                    "trail_name": "bbd98e9edd32f97a4e2490ddb6963d4ed363eb6e",
+                    "artifact_status": "COMPLIANT"
+                  }
+                },
+                {
+                  "type": "rule_not_applicable",
+                  "context": {
+                    "flow_name": "snyk-aws-beta-per-artifact",
+                    "trail_name": "runner-9f8ac40adc070f4ded8fa56ca2a168804cbc882c42d94fc4537666d39d8d1757",
+                    "artifact_status": "COMPLIANT"
+                  }
+                },
+                {
+                  "type": "rule_not_applicable",
+                  "context": {
+                    "flow_name": "production-promotion",
+                    "trail_name": "promote-all-42",
+                    "artifact_status": "COMPLIANT"
+                  }
+                },
+                {
+                  "type": "rule_not_applicable",
+                  "context": {
+                    "flow_name": "snyk-aws-prod-per-artifact",
+                    "trail_name": "runner-9f8ac40adc070f4ded8fa56ca2a168804cbc882c42d94fc4537666d39d8d1757",
+                    "artifact_status": "COMPLIANT"
+                  }
+                }
+              ]
+            },
+            {
+              "rule": {
+                "type": "attestation",
+                "definition": {
+                  "if": {
+                    "text": "flow.name == \"snyk-aws-prod-per-artifact\""
+                  },
+                  "name": "snyk-container-scan",
+                  "type": "decision",
+                  "must_be_compliant": true,
+                  "for_control": "SDLC-CTRL-0022"
+                }
+              },
+              "satisfied": true,
+              "ignored": false,
+              "resolutions": [
+                {
+                  "type": "rule_not_applicable",
+                  "context": {
+                    "flow_name": "runner-ci",
+                    "trail_name": "bbd98e9edd32f97a4e2490ddb6963d4ed363eb6e",
+                    "artifact_status": null,
+                    "for_control": "SDLC-CTRL-0022"
+                  }
+                },
+                {
+                  "type": "rule_not_applicable",
+                  "context": {
+                    "flow_name": "snyk-aws-beta-per-artifact",
+                    "trail_name": "runner-9f8ac40adc070f4ded8fa56ca2a168804cbc882c42d94fc4537666d39d8d1757",
+                    "artifact_status": null,
+                    "for_control": "SDLC-CTRL-0022"
+                  }
+                },
+                {
+                  "type": "rule_not_applicable",
+                  "context": {
+                    "flow_name": "production-promotion",
+                    "trail_name": "promote-all-42",
+                    "artifact_status": null,
+                    "for_control": "SDLC-CTRL-0022"
+                  }
+                },
+                {
+                  "type": "rule_satisfied",
+                  "context": {
+                    "flow_name": "snyk-aws-prod-per-artifact",
+                    "trail_name": "runner-9f8ac40adc070f4ded8fa56ca2a168804cbc882c42d94fc4537666d39d8d1757",
+                    "artifact_status": null,
+                    "for_control": "SDLC-CTRL-0022"
+                  }
+                }
+              ]
+            }
+          ],
+          "policy_name": "snyk-scan-aws-prod"
+        },
+        {
+          "policy_version": 2,
+          "status": "COMPLIANT",
+          "rule_evaluations": [
+            {
+              "rule": {
+                "type": "provenance",
+                "definition": {
+                  "required": false,
+                  "exceptions": []
+                }
+              },
+              "satisfied": null,
+              "ignored": true,
+              "resolutions": [
+                {
+                  "type": "rule_not_applicable",
+                  "context": {
+                    "flow_name": "runner-ci",
+                    "trail_name": "bbd98e9edd32f97a4e2490ddb6963d4ed363eb6e",
+                    "artifact_status": null
+                  }
+                },
+                {
+                  "type": "rule_not_applicable",
+                  "context": {
+                    "flow_name": "snyk-aws-beta-per-artifact",
+                    "trail_name": "runner-9f8ac40adc070f4ded8fa56ca2a168804cbc882c42d94fc4537666d39d8d1757",
+                    "artifact_status": null
+                  }
+                },
+                {
+                  "type": "rule_not_applicable",
+                  "context": {
+                    "flow_name": "production-promotion",
+                    "trail_name": "promote-all-42",
+                    "artifact_status": null
+                  }
+                },
+                {
+                  "type": "rule_not_applicable",
+                  "context": {
+                    "flow_name": "snyk-aws-prod-per-artifact",
+                    "trail_name": "runner-9f8ac40adc070f4ded8fa56ca2a168804cbc882c42d94fc4537666d39d8d1757",
+                    "artifact_status": null
+                  }
+                }
+              ]
+            },
+            {
+              "rule": {
+                "type": "trail-compliance",
+                "definition": {
+                  "required": true,
+                  "exceptions": [
+                    {
+                      "if": {
+                        "text": "exists(flow.tags.env) and flow.tags.env != \"aws-prod\""
+                      }
+                    }
+                  ]
+                }
+              },
+              "satisfied": true,
+              "ignored": false,
+              "resolutions": [
+                {
+                  "type": "rule_not_applicable",
+                  "context": {
+                    "flow_name": "runner-ci",
+                    "trail_name": "bbd98e9edd32f97a4e2490ddb6963d4ed363eb6e",
+                    "artifact_status": "COMPLIANT"
+                  }
+                },
+                {
+                  "type": "rule_not_applicable",
+                  "context": {
+                    "flow_name": "snyk-aws-beta-per-artifact",
+                    "trail_name": "runner-9f8ac40adc070f4ded8fa56ca2a168804cbc882c42d94fc4537666d39d8d1757",
+                    "artifact_status": "COMPLIANT"
+                  }
+                },
+                {
+                  "type": "rule_satisfied",
+                  "context": {
+                    "flow_name": "production-promotion",
+                    "trail_name": "promote-all-42",
+                    "artifact_status": "COMPLIANT"
+                  }
+                },
+                {
+                  "type": "rule_satisfied",
+                  "context": {
+                    "flow_name": "snyk-aws-prod-per-artifact",
+                    "trail_name": "runner-9f8ac40adc070f4ded8fa56ca2a168804cbc882c42d94fc4537666d39d8d1757",
+                    "artifact_status": "COMPLIANT"
+                  }
+                }
+              ]
+            }
+          ],
+          "policy_name": "trail-compliance-aws-prod"
+        }
+      ],
+      "reasons_for_incompliance": [],
+      "fingerprint": "9f8ac40adc070f4ded8fa56ca2a168804cbc882c42d94fc4537666d39d8d1757",
+      "creationTimestamp": [
+        1793179127,
+        1793179130,
+        1793179132
+      ],
+      "pods": null,
+      "annotation": {
+        "type": "updated-provenance",
+        "was": 3,
+        "now": 3
+      },
+      "flow_name": "runner-ci",
+      "git_commit": "bbd98e9edd32f97a4e2490ddb6963d4ed363eb6e",
+      "commit_url": "https://github.com/cyber-dojo/runner/commit/bbd98e9edd32f97a4e2490ddb6963d4ed363eb6e",
+      "html_url": "https://app.kosli.com/cyber-dojo/flows/runner-ci/artifacts/9f8ac40adc070f4ded8fa56ca2a168804cbc882c42d94fc4537666d39d8d1757?artifact_id=f418eb3f-416b-4def-861c-aaebadf6",
+      "flow_html_url": "https://app.kosli.com/cyber-dojo/flows/runner-ci",
+      "deployment_diff": {
+        "diff_url": "https://github.com/cyber-dojo/runner/compare/ef6768eefe96ec54dacc1b8cabac1dde2d2f636e...bbd98e9edd32f97a4e2490ddb6963d4ed363eb6e",
+        "previous_git_commit": "ef6768eefe96ec54dacc1b8cabac1dde2d2f636e",
+        "previous_git_commit_url": "https://github.com/cyber-dojo/runner/commit/ef6768eefe96ec54dacc1b8cabac1dde2d2f636e",
+        "previous_fingerprint": "9b6ccf0845871128cd22f33e8ec0e0a29b1794e736b5ef783ade3c8bca11c80b",
+        "previous_artifact_name": "244531986313.dkr.ecr.eu-central-1.amazonaws.com/runner:ef6768e@sha256:9b6ccf0845871128cd22f33e8ec0e0a29b1794e736b5ef783ade3c8bca11c80b",
+        "previous_artifact_compliance_state": "COMPLIANT",
+        "previous_running": false,
+        "previous_trail_name": "ef6768eefe96ec54dacc1b8cabac1dde2d2f636e",
+        "previous_template_reference_name": "runner"
+      },
+      "commit_lead_time": 77252.0,
+      "flows": [
+        {
+          "flow_name": "runner-ci",
+          "trail_name": "bbd98e9edd32f97a4e2490ddb6963d4ed363eb6e",
+          "template_reference_name": "runner",
+          "git_commit": "bbd98e9edd32f97a4e2490ddb6963d4ed363eb6e",
+          "commit_url": "https://github.com/cyber-dojo/runner/commit/bbd98e9edd32f97a4e2490ddb6963d4ed363eb6e",
+          "git_commit_info": {
+            "sha1": "bbd98e9edd32f97a4e2490ddb6963d4ed363eb6e",
+            "message": "Dockerfile - Automated base-image update (#330)\n\nCo-authored-by: JonJagger <JonJagger@users.noreply.github.com>",
+            "author": "Jon Jagger <jon@kosli.com>",
+            "branch": "",
+            "timestamp": 1793101875.0,
+            "url": "https://github.com/cyber-dojo/runner/commit/bbd98e9edd32f97a4e2490ddb6963d4ed363eb6e"
+          },
+          "html_url": "https://app.kosli.com/cyber-dojo/flows/runner-ci/artifacts/9f8ac40adc070f4ded8fa56ca2a168804cbc882c42d94fc4537666d39d8d1757?artifact_id=f418eb3f-416b-4def-861c-aaebadf6",
+          "flow_html_url": "https://app.kosli.com/cyber-dojo/flows/runner-ci",
+          "deployment_diff": {
+            "diff_url": "https://github.com/cyber-dojo/runner/compare/ef6768eefe96ec54dacc1b8cabac1dde2d2f636e...bbd98e9edd32f97a4e2490ddb6963d4ed363eb6e",
+            "previous_git_commit": "ef6768eefe96ec54dacc1b8cabac1dde2d2f636e",
+            "previous_git_commit_url": "https://github.com/cyber-dojo/runner/commit/ef6768eefe96ec54dacc1b8cabac1dde2d2f636e",
+            "previous_fingerprint": "9b6ccf0845871128cd22f33e8ec0e0a29b1794e736b5ef783ade3c8bca11c80b",
+            "previous_artifact_name": "244531986313.dkr.ecr.eu-central-1.amazonaws.com/runner:ef6768e@sha256:9b6ccf0845871128cd22f33e8ec0e0a29b1794e736b5ef783ade3c8bca11c80b",
+            "previous_artifact_compliance_state": "COMPLIANT",
+            "previous_running": false,
+            "previous_trail_name": "ef6768eefe96ec54dacc1b8cabac1dde2d2f636e",
+            "previous_template_reference_name": "runner"
+          },
+          "commit_lead_time": 77252.0,
+          "artifact_compliance_in_flow": true,
+          "flow_reasons_for_non_compliance": []
+        },
+        {
+          "flow_name": "snyk-aws-beta-per-artifact",
+          "trail_name": "runner-9f8ac40adc070f4ded8fa56ca2a168804cbc882c42d94fc4537666d39d8d1757",
+          "template_reference_name": "runner",
+          "git_commit": "359c98460f5c3aefb136a77eef08d1be4c4ca08d",
+          "commit_url": "https://github.com/cyber-dojo/snyk-scanning/commit/359c98460f5c3aefb136a77eef08d1be4c4ca08d",
+          "git_commit_info": {
+            "sha1": "359c98460f5c3aefb136a77eef08d1be4c4ca08d",
+            "message": "Merge pull request #6 from cyber-dojo/key-uploads-and-trails-on-component-not-repo\n\nTell apart artifacts built by one repo",
+            "author": "Jon Jagger <jon@kosli.com>",
+            "branch": "main",
+            "timestamp": 1790759058.0,
+            "url": "https://github.com/cyber-dojo/snyk-scanning/commit/359c98460f5c3aefb136a77eef08d1be4c4ca08d"
+          },
+          "html_url": "https://app.kosli.com/cyber-dojo/flows/snyk-aws-beta-per-artifact/artifacts/9f8ac40adc070f4ded8fa56ca2a168804cbc882c42d94fc4537666d39d8d1757?artifact_id=f0d5afd4-48c8-4984-8776-00790e8a",
+          "flow_html_url": "https://app.kosli.com/cyber-dojo/flows/snyk-aws-beta-per-artifact",
+          "deployment_diff": {
+            "diff_url": "https://github.com/cyber-dojo/snyk-scanning/compare/359c98460f5c3aefb136a77eef08d1be4c4ca08d...359c98460f5c3aefb136a77eef08d1be4c4ca08d",
+            "previous_git_commit": "359c98460f5c3aefb136a77eef08d1be4c4ca08d",
+            "previous_git_commit_url": "https://github.com/cyber-dojo/snyk-scanning/commit/359c98460f5c3aefb136a77eef08d1be4c4ca08d",
+            "previous_fingerprint": "5cbe7d6eb91af8e485c9c87a2c9abfcada9773e8773da11b002f50639c2b0845",
+            "previous_artifact_name": "244531986313.dkr.ecr.eu-central-1.amazonaws.com/runner:6131d76@sha256:5cbe7d6eb91af8e485c9c87a2c9abfcada9773e8773da11b002f50639c2b0845",
+            "previous_artifact_compliance_state": "COMPLIANT",
+            "previous_running": false,
+            "previous_trail_name": "runner-5cbe7d6eb91af8e485c9c87a2c9abfcada9773e8773da11b002f50639c2b0845",
+            "previous_template_reference_name": "runner"
+          },
+          "commit_lead_time": 2420069.0,
+          "artifact_compliance_in_flow": true,
+          "flow_reasons_for_non_compliance": []
+        },
+        {
+          "flow_name": "production-promotion",
+          "trail_name": "promote-all-42",
+          "template_reference_name": "runner",
+          "git_commit": "f1f6cd6bce0e887649f077657215b50f9cf47d93",
+          "commit_url": "https://github.com/cyber-dojo/aws-prod-co-promotion/commit/f1f6cd6bce0e887649f077657215b50f9cf47d93",
+          "git_commit_info": {
+            "sha1": "f1f6cd6bce0e887649f077657215b50f9cf47d93",
+            "message": "Merge pull request #19 from cyber-dojo/cap-parallel-prod-applies\n\nCap promote-all prod applies at three at a time",
+            "author": "Jon Jagger <jon@kosli.com>",
+            "branch": "main",
+            "timestamp": 1791649272.0,
+            "url": "https://github.com/cyber-dojo/aws-prod-co-promotion/commit/f1f6cd6bce0e887649f077657215b50f9cf47d93"
+          },
+          "html_url": "https://app.kosli.com/cyber-dojo/flows/production-promotion/artifacts/9f8ac40adc070f4ded8fa56ca2a168804cbc882c42d94fc4537666d39d8d1757?artifact_id=e564abfe-1845-496c-821a-7edda247",
+          "flow_html_url": "https://app.kosli.com/cyber-dojo/flows/production-promotion",
+          "deployment_diff": {
+            "diff_url": "https://github.com/cyber-dojo/aws-prod-co-promotion/compare/54306f735c51413c972b38398da4d0a5fc86d47a...f1f6cd6bce0e887649f077657215b50f9cf47d93",
+            "previous_git_commit": "54306f735c51413c972b38398da4d0a5fc86d47a",
+            "previous_git_commit_url": "https://github.com/cyber-dojo/aws-prod-co-promotion/commit/54306f735c51413c972b38398da4d0a5fc86d47a",
+            "previous_fingerprint": "9b6ccf0845871128cd22f33e8ec0e0a29b1794e736b5ef783ade3c8bca11c80b",
+            "previous_artifact_name": "244531986313.dkr.ecr.eu-central-1.amazonaws.com/runner:ef6768e@sha256:9b6ccf0845871128cd22f33e8ec0e0a29b1794e736b5ef783ade3c8bca11c80b",
+            "previous_artifact_compliance_state": "COMPLIANT",
+            "previous_running": false,
+            "previous_trail_name": "promote-all-41",
+            "previous_template_reference_name": "runner"
+          },
+          "commit_lead_time": 1529855.0,
+          "artifact_compliance_in_flow": true,
+          "flow_reasons_for_non_compliance": []
+        },
+        {
+          "flow_name": "snyk-aws-prod-per-artifact",
+          "trail_name": "runner-9f8ac40adc070f4ded8fa56ca2a168804cbc882c42d94fc4537666d39d8d1757",
+          "template_reference_name": "runner",
+          "git_commit": "359c98460f5c3aefb136a77eef08d1be4c4ca08d",
+          "commit_url": "https://github.com/cyber-dojo/snyk-scanning/commit/359c98460f5c3aefb136a77eef08d1be4c4ca08d",
+          "git_commit_info": {
+            "sha1": "359c98460f5c3aefb136a77eef08d1be4c4ca08d",
+            "message": "Merge pull request #6 from cyber-dojo/key-uploads-and-trails-on-component-not-repo\n\nTell apart artifacts built by one repo",
+            "author": "Jon Jagger <jon@kosli.com>",
+            "branch": "main",
+            "timestamp": 1790759058.0,
+            "url": "https://github.com/cyber-dojo/snyk-scanning/commit/359c98460f5c3aefb136a77eef08d1be4c4ca08d"
+          },
+          "html_url": "https://app.kosli.com/cyber-dojo/flows/snyk-aws-prod-per-artifact/artifacts/9f8ac40adc070f4ded8fa56ca2a168804cbc882c42d94fc4537666d39d8d1757?artifact_id=c5846e99-261b-4939-975b-10a2ef67",
+          "flow_html_url": "https://app.kosli.com/cyber-dojo/flows/snyk-aws-prod-per-artifact",
+          "deployment_diff": {
+            "diff_url": "https://github.com/cyber-dojo/snyk-scanning/compare/359c98460f5c3aefb136a77eef08d1be4c4ca08d...359c98460f5c3aefb136a77eef08d1be4c4ca08d",
+            "previous_git_commit": "359c98460f5c3aefb136a77eef08d1be4c4ca08d",
+            "previous_git_commit_url": "https://github.com/cyber-dojo/snyk-scanning/commit/359c98460f5c3aefb136a77eef08d1be4c4ca08d",
+            "previous_fingerprint": "5cbe7d6eb91af8e485c9c87a2c9abfcada9773e8773da11b002f50639c2b0845",
+            "previous_artifact_name": "244531986313.dkr.ecr.eu-central-1.amazonaws.com/runner:6131d76@sha256:5cbe7d6eb91af8e485c9c87a2c9abfcada9773e8773da11b002f50639c2b0845",
+            "previous_artifact_compliance_state": "COMPLIANT",
+            "previous_running": false,
+            "previous_trail_name": "runner-5cbe7d6eb91af8e485c9c87a2c9abfcada9773e8773da11b002f50639c2b0845",
+            "previous_template_reference_name": "runner"
+          },
+          "commit_lead_time": 2420069.0,
+          "artifact_compliance_in_flow": true,
+          "flow_reasons_for_non_compliance": []
+        }
+      ],
+      "ecs_context": {
+        "task_arn": "arn:aws:ecs:eu-central-1:274425519734:task/app/fd1f0d36db6641058095ba8fc9981816",
+        "cluster_name": null,
+        "service_name": null
+      }
+    },
+    {
+      "name": "244531986313.dkr.ecr.eu-central-1.amazonaws.com/languages-start-points:9fcbc9e@sha256:7d318c34350a409ba26020f301a298ee8aa30979c8ec4854743911401d229024",
+      "compliant": true,
+      "deployments": [],
+      "policy_decisions": [
+        {
+          "policy_version": 2,
+          "status": "COMPLIANT",
+          "rule_evaluations": [
+            {
+              "rule": {
+                "type": "provenance",
+                "definition": {
+                  "required": false,
+                  "exceptions": []
+                }
+              },
+              "satisfied": null,
+              "ignored": true,
+              "resolutions": [
+                {
+                  "type": "rule_not_applicable",
+                  "context": {
+                    "flow_name": "languages-start-points-ci",
+                    "trail_name": "9fcbc9ef1306b6fed965cecfd4ff778582015fa3",
+                    "artifact_status": null
+                  }
+                },
+                {
+                  "type": "rule_not_applicable",
+                  "context": {
+                    "flow_name": "snyk-aws-beta-per-artifact",
+                    "trail_name": "languages-start-points-7d318c34350a409ba26020f301a298ee8aa30979c8ec4854743911401d229024",
+                    "artifact_status": null
+                  }
+                },
+                {
+                  "type": "rule_not_applicable",
+                  "context": {
+                    "flow_name": "production-promotion",
+                    "trail_name": "promote-all-42",
+                    "artifact_status": null
+                  }
+                },
+                {
+                  "type": "rule_not_applicable",
+                  "context": {
+                    "flow_name": "snyk-aws-prod-per-artifact",
+                    "trail_name": "languages-start-points-7d318c34350a409ba26020f301a298ee8aa30979c8ec4854743911401d229024",
+                    "artifact_status": null
+                  }
+                }
+              ]
+            },
+            {
+              "rule": {
+                "type": "trail-compliance",
+                "definition": {
+                  "required": false,
+                  "exceptions": []
+                }
+              },
+              "satisfied": null,
+              "ignored": true,
+              "resolutions": [
+                {
+                  "type": "rule_not_applicable",
+                  "context": {
+                    "flow_name": "languages-start-points-ci",
+                    "trail_name": "9fcbc9ef1306b6fed965cecfd4ff778582015fa3",
+                    "artifact_status": "COMPLIANT"
+                  }
+                },
+                {
+                  "type": "rule_not_applicable",
+                  "context": {
+                    "flow_name": "snyk-aws-beta-per-artifact",
+                    "trail_name": "languages-start-points-7d318c34350a409ba26020f301a298ee8aa30979c8ec4854743911401d229024",
+                    "artifact_status": "COMPLIANT"
+                  }
+                },
+                {
+                  "type": "rule_not_applicable",
+                  "context": {
+                    "flow_name": "production-promotion",
+                    "trail_name": "promote-all-42",
+                    "artifact_status": "COMPLIANT"
+                  }
+                },
+                {
+                  "type": "rule_not_applicable",
+                  "context": {
+                    "flow_name": "snyk-aws-prod-per-artifact",
+                    "trail_name": "languages-start-points-7d318c34350a409ba26020f301a298ee8aa30979c8ec4854743911401d229024",
+                    "artifact_status": "COMPLIANT"
+                  }
+                }
+              ]
+            },
+            {
+              "rule": {
+                "type": "attestation",
+                "definition": {
+                  "if": {
+                    "text": "flow.name == \"production-promotion\""
+                  },
+                  "name": "snyk-scan",
+                  "type": "decision",
+                  "must_be_compliant": true,
+                  "for_control": null
+                }
+              },
+              "satisfied": true,
+              "ignored": false,
+              "resolutions": [
+                {
+                  "type": "rule_not_applicable",
+                  "context": {
+                    "flow_name": "languages-start-points-ci",
+                    "trail_name": "9fcbc9ef1306b6fed965cecfd4ff778582015fa3",
+                    "artifact_status": null
+                  }
+                },
+                {
+                  "type": "rule_not_applicable",
+                  "context": {
+                    "flow_name": "snyk-aws-beta-per-artifact",
+                    "trail_name": "languages-start-points-7d318c34350a409ba26020f301a298ee8aa30979c8ec4854743911401d229024",
+                    "artifact_status": null
+                  }
+                },
+                {
+                  "type": "rule_satisfied",
+                  "context": {
+                    "flow_name": "production-promotion",
+                    "trail_name": "promote-all-42",
+                    "artifact_status": null
+                  }
+                },
+                {
+                  "type": "rule_not_applicable",
+                  "context": {
+                    "flow_name": "snyk-aws-prod-per-artifact",
+                    "trail_name": "languages-start-points-7d318c34350a409ba26020f301a298ee8aa30979c8ec4854743911401d229024",
+                    "artifact_status": null
+                  }
+                }
+              ]
+            }
+          ],
+          "policy_name": "production-promotion"
+        },
+        {
+          "policy_version": 3,
+          "status": "COMPLIANT",
+          "rule_evaluations": [
+            {
+              "rule": {
+                "type": "provenance",
+                "definition": {
+                  "required": true,
+                  "exceptions": []
+                }
+              },
+              "satisfied": true,
+              "ignored": false,
+              "resolutions": [
+                {
+                  "type": "rule_satisfied",
+                  "context": {
+                    "flow_name": "languages-start-points-ci",
+                    "trail_name": "9fcbc9ef1306b6fed965cecfd4ff778582015fa3",
+                    "artifact_status": null
+                  }
+                },
+                {
+                  "type": "rule_satisfied",
+                  "context": {
+                    "flow_name": "snyk-aws-beta-per-artifact",
+                    "trail_name": "languages-start-points-7d318c34350a409ba26020f301a298ee8aa30979c8ec4854743911401d229024",
+                    "artifact_status": null
+                  }
+                },
+                {
+                  "type": "rule_satisfied",
+                  "context": {
+                    "flow_name": "production-promotion",
+                    "trail_name": "promote-all-42",
+                    "artifact_status": null
+                  }
+                },
+                {
+                  "type": "rule_satisfied",
+                  "context": {
+                    "flow_name": "snyk-aws-prod-per-artifact",
+                    "trail_name": "languages-start-points-7d318c34350a409ba26020f301a298ee8aa30979c8ec4854743911401d229024",
+                    "artifact_status": null
+                  }
+                }
+              ]
+            },
+            {
+              "rule": {
+                "type": "trail-compliance",
+                "definition": {
+                  "required": false,
+                  "exceptions": []
+                }
+              },
+              "satisfied": null,
+              "ignored": true,
+              "resolutions": [
+                {
+                  "type": "rule_not_applicable",
+                  "context": {
+                    "flow_name": "languages-start-points-ci",
+                    "trail_name": "9fcbc9ef1306b6fed965cecfd4ff778582015fa3",
+                    "artifact_status": "COMPLIANT"
+                  }
+                },
+                {
+                  "type": "rule_not_applicable",
+                  "context": {
+                    "flow_name": "snyk-aws-beta-per-artifact",
+                    "trail_name": "languages-start-points-7d318c34350a409ba26020f301a298ee8aa30979c8ec4854743911401d229024",
+                    "artifact_status": "COMPLIANT"
+                  }
+                },
+                {
+                  "type": "rule_not_applicable",
+                  "context": {
+                    "flow_name": "production-promotion",
+                    "trail_name": "promote-all-42",
+                    "artifact_status": "COMPLIANT"
+                  }
+                },
+                {
+                  "type": "rule_not_applicable",
+                  "context": {
+                    "flow_name": "snyk-aws-prod-per-artifact",
+                    "trail_name": "languages-start-points-7d318c34350a409ba26020f301a298ee8aa30979c8ec4854743911401d229024",
+                    "artifact_status": "COMPLIANT"
+                  }
+                }
+              ]
+            },
+            {
+              "rule": {
+                "type": "attestation",
+                "definition": {
+                  "if": {
+                    "text": "flow.tags.kind == \"build\""
+                  },
+                  "name": "*",
+                  "type": "decision",
+                  "must_be_compliant": true,
+                  "for_control": "SDLC-CTRL-0002"
+                }
+              },
+              "satisfied": true,
+              "ignored": false,
+              "resolutions": [
+                {
+                  "type": "rule_satisfied",
+                  "context": {
+                    "flow_name": "languages-start-points-ci",
+                    "trail_name": "9fcbc9ef1306b6fed965cecfd4ff778582015fa3",
+                    "artifact_status": null,
+                    "for_control": "SDLC-CTRL-0002"
+                  }
+                },
+                {
+                  "type": "rule_not_applicable",
+                  "context": {
+                    "flow_name": "snyk-aws-beta-per-artifact",
+                    "trail_name": "languages-start-points-7d318c34350a409ba26020f301a298ee8aa30979c8ec4854743911401d229024",
+                    "artifact_status": null,
+                    "for_control": "SDLC-CTRL-0002"
+                  }
+                },
+                {
+                  "type": "rule_not_applicable",
+                  "context": {
+                    "flow_name": "production-promotion",
+                    "trail_name": "promote-all-42",
+                    "artifact_status": null,
+                    "for_control": "SDLC-CTRL-0002"
+                  }
+                },
+                {
+                  "type": "rule_not_applicable",
+                  "context": {
+                    "flow_name": "snyk-aws-prod-per-artifact",
+                    "trail_name": "languages-start-points-7d318c34350a409ba26020f301a298ee8aa30979c8ec4854743911401d229024",
+                    "artifact_status": null,
+                    "for_control": "SDLC-CTRL-0002"
+                  }
+                }
+              ]
+            }
+          ],
+          "policy_name": "provenance"
+        },
+        {
+          "policy_version": 3,
+          "status": "COMPLIANT",
+          "rule_evaluations": [
+            {
+              "rule": {
+                "type": "provenance",
+                "definition": {
+                  "required": false,
+                  "exceptions": []
+                }
+              },
+              "satisfied": null,
+              "ignored": true,
+              "resolutions": [
+                {
+                  "type": "rule_not_applicable",
+                  "context": {
+                    "flow_name": "languages-start-points-ci",
+                    "trail_name": "9fcbc9ef1306b6fed965cecfd4ff778582015fa3",
+                    "artifact_status": null
+                  }
+                },
+                {
+                  "type": "rule_not_applicable",
+                  "context": {
+                    "flow_name": "snyk-aws-beta-per-artifact",
+                    "trail_name": "languages-start-points-7d318c34350a409ba26020f301a298ee8aa30979c8ec4854743911401d229024",
+                    "artifact_status": null
+                  }
+                },
+                {
+                  "type": "rule_not_applicable",
+                  "context": {
+                    "flow_name": "production-promotion",
+                    "trail_name": "promote-all-42",
+                    "artifact_status": null
+                  }
+                },
+                {
+                  "type": "rule_not_applicable",
+                  "context": {
+                    "flow_name": "snyk-aws-prod-per-artifact",
+                    "trail_name": "languages-start-points-7d318c34350a409ba26020f301a298ee8aa30979c8ec4854743911401d229024",
+                    "artifact_status": null
+                  }
+                }
+              ]
+            },
+            {
+              "rule": {
+                "type": "trail-compliance",
+                "definition": {
+                  "required": false,
+                  "exceptions": []
+                }
+              },
+              "satisfied": null,
+              "ignored": true,
+              "resolutions": [
+                {
+                  "type": "rule_not_applicable",
+                  "context": {
+                    "flow_name": "languages-start-points-ci",
+                    "trail_name": "9fcbc9ef1306b6fed965cecfd4ff778582015fa3",
+                    "artifact_status": "COMPLIANT"
+                  }
+                },
+                {
+                  "type": "rule_not_applicable",
+                  "context": {
+                    "flow_name": "snyk-aws-beta-per-artifact",
+                    "trail_name": "languages-start-points-7d318c34350a409ba26020f301a298ee8aa30979c8ec4854743911401d229024",
+                    "artifact_status": "COMPLIANT"
+                  }
+                },
+                {
+                  "type": "rule_not_applicable",
+                  "context": {
+                    "flow_name": "production-promotion",
+                    "trail_name": "promote-all-42",
+                    "artifact_status": "COMPLIANT"
+                  }
+                },
+                {
+                  "type": "rule_not_applicable",
+                  "context": {
+                    "flow_name": "snyk-aws-prod-per-artifact",
+                    "trail_name": "languages-start-points-7d318c34350a409ba26020f301a298ee8aa30979c8ec4854743911401d229024",
+                    "artifact_status": "COMPLIANT"
+                  }
+                }
+              ]
+            },
+            {
+              "rule": {
+                "type": "attestation",
+                "definition": {
+                  "if": {
+                    "text": "flow.tags.kind == \"build\""
+                  },
+                  "name": "*",
+                  "type": "pull_request",
+                  "must_be_compliant": true,
+                  "for_control": null
+                }
+              },
+              "satisfied": true,
+              "ignored": false,
+              "resolutions": [
+                {
+                  "type": "rule_satisfied",
+                  "context": {
+                    "flow_name": "languages-start-points-ci",
+                    "trail_name": "9fcbc9ef1306b6fed965cecfd4ff778582015fa3",
+                    "artifact_status": null
+                  }
+                },
+                {
+                  "type": "rule_not_applicable",
+                  "context": {
+                    "flow_name": "snyk-aws-beta-per-artifact",
+                    "trail_name": "languages-start-points-7d318c34350a409ba26020f301a298ee8aa30979c8ec4854743911401d229024",
+                    "artifact_status": null
+                  }
+                },
+                {
+                  "type": "rule_not_applicable",
+                  "context": {
+                    "flow_name": "production-promotion",
+                    "trail_name": "promote-all-42",
+                    "artifact_status": null
+                  }
+                },
+                {
+                  "type": "rule_not_applicable",
+                  "context": {
+                    "flow_name": "snyk-aws-prod-per-artifact",
+                    "trail_name": "languages-start-points-7d318c34350a409ba26020f301a298ee8aa30979c8ec4854743911401d229024",
+                    "artifact_status": null
+                  }
+                }
+              ]
+            }
+          ],
+          "policy_name": "pull-request"
+        },
+        {
+          "policy_version": 4,
+          "status": "COMPLIANT",
+          "rule_evaluations": [
+            {
+              "rule": {
+                "type": "provenance",
+                "definition": {
+                  "required": false,
+                  "exceptions": []
+                }
+              },
+              "satisfied": null,
+              "ignored": true,
+              "resolutions": [
+                {
+                  "type": "rule_not_applicable",
+                  "context": {
+                    "flow_name": "languages-start-points-ci",
+                    "trail_name": "9fcbc9ef1306b6fed965cecfd4ff778582015fa3",
+                    "artifact_status": null
+                  }
+                },
+                {
+                  "type": "rule_not_applicable",
+                  "context": {
+                    "flow_name": "snyk-aws-beta-per-artifact",
+                    "trail_name": "languages-start-points-7d318c34350a409ba26020f301a298ee8aa30979c8ec4854743911401d229024",
+                    "artifact_status": null
+                  }
+                },
+                {
+                  "type": "rule_not_applicable",
+                  "context": {
+                    "flow_name": "production-promotion",
+                    "trail_name": "promote-all-42",
+                    "artifact_status": null
+                  }
+                },
+                {
+                  "type": "rule_not_applicable",
+                  "context": {
+                    "flow_name": "snyk-aws-prod-per-artifact",
+                    "trail_name": "languages-start-points-7d318c34350a409ba26020f301a298ee8aa30979c8ec4854743911401d229024",
+                    "artifact_status": null
+                  }
+                }
+              ]
+            },
+            {
+              "rule": {
+                "type": "trail-compliance",
+                "definition": {
+                  "required": false,
+                  "exceptions": []
+                }
+              },
+              "satisfied": null,
+              "ignored": true,
+              "resolutions": [
+                {
+                  "type": "rule_not_applicable",
+                  "context": {
+                    "flow_name": "languages-start-points-ci",
+                    "trail_name": "9fcbc9ef1306b6fed965cecfd4ff778582015fa3",
+                    "artifact_status": "COMPLIANT"
+                  }
+                },
+                {
+                  "type": "rule_not_applicable",
+                  "context": {
+                    "flow_name": "snyk-aws-beta-per-artifact",
+                    "trail_name": "languages-start-points-7d318c34350a409ba26020f301a298ee8aa30979c8ec4854743911401d229024",
+                    "artifact_status": "COMPLIANT"
+                  }
+                },
+                {
+                  "type": "rule_not_applicable",
+                  "context": {
+                    "flow_name": "production-promotion",
+                    "trail_name": "promote-all-42",
+                    "artifact_status": "COMPLIANT"
+                  }
+                },
+                {
+                  "type": "rule_not_applicable",
+                  "context": {
+                    "flow_name": "snyk-aws-prod-per-artifact",
+                    "trail_name": "languages-start-points-7d318c34350a409ba26020f301a298ee8aa30979c8ec4854743911401d229024",
+                    "artifact_status": "COMPLIANT"
+                  }
+                }
+              ]
+            },
+            {
+              "rule": {
+                "type": "attestation",
+                "definition": {
+                  "if": {
+                    "text": "flow.name == \"snyk-aws-prod-per-artifact\""
+                  },
+                  "name": "snyk-container-scan",
+                  "type": "decision",
+                  "must_be_compliant": true,
+                  "for_control": "SDLC-CTRL-0022"
+                }
+              },
+              "satisfied": true,
+              "ignored": false,
+              "resolutions": [
+                {
+                  "type": "rule_not_applicable",
+                  "context": {
+                    "flow_name": "languages-start-points-ci",
+                    "trail_name": "9fcbc9ef1306b6fed965cecfd4ff778582015fa3",
+                    "artifact_status": null,
+                    "for_control": "SDLC-CTRL-0022"
+                  }
+                },
+                {
+                  "type": "rule_not_applicable",
+                  "context": {
+                    "flow_name": "snyk-aws-beta-per-artifact",
+                    "trail_name": "languages-start-points-7d318c34350a409ba26020f301a298ee8aa30979c8ec4854743911401d229024",
+                    "artifact_status": null,
+                    "for_control": "SDLC-CTRL-0022"
+                  }
+                },
+                {
+                  "type": "rule_not_applicable",
+                  "context": {
+                    "flow_name": "production-promotion",
+                    "trail_name": "promote-all-42",
+                    "artifact_status": null,
+                    "for_control": "SDLC-CTRL-0022"
+                  }
+                },
+                {
+                  "type": "rule_satisfied",
+                  "context": {
+                    "flow_name": "snyk-aws-prod-per-artifact",
+                    "trail_name": "languages-start-points-7d318c34350a409ba26020f301a298ee8aa30979c8ec4854743911401d229024",
+                    "artifact_status": null,
+                    "for_control": "SDLC-CTRL-0022"
+                  }
+                }
+              ]
+            }
+          ],
+          "policy_name": "snyk-scan-aws-prod"
+        },
+        {
+          "policy_version": 2,
+          "status": "COMPLIANT",
+          "rule_evaluations": [
+            {
+              "rule": {
+                "type": "provenance",
+                "definition": {
+                  "required": false,
+                  "exceptions": []
+                }
+              },
+              "satisfied": null,
+              "ignored": true,
+              "resolutions": [
+                {
+                  "type": "rule_not_applicable",
+                  "context": {
+                    "flow_name": "languages-start-points-ci",
+                    "trail_name": "9fcbc9ef1306b6fed965cecfd4ff778582015fa3",
+                    "artifact_status": null
+                  }
+                },
+                {
+                  "type": "rule_not_applicable",
+                  "context": {
+                    "flow_name": "snyk-aws-beta-per-artifact",
+                    "trail_name": "languages-start-points-7d318c34350a409ba26020f301a298ee8aa30979c8ec4854743911401d229024",
+                    "artifact_status": null
+                  }
+                },
+                {
+                  "type": "rule_not_applicable",
+                  "context": {
+                    "flow_name": "production-promotion",
+                    "trail_name": "promote-all-42",
+                    "artifact_status": null
+                  }
+                },
+                {
+                  "type": "rule_not_applicable",
+                  "context": {
+                    "flow_name": "snyk-aws-prod-per-artifact",
+                    "trail_name": "languages-start-points-7d318c34350a409ba26020f301a298ee8aa30979c8ec4854743911401d229024",
+                    "artifact_status": null
+                  }
+                }
+              ]
+            },
+            {
+              "rule": {
+                "type": "trail-compliance",
+                "definition": {
+                  "required": true,
+                  "exceptions": [
+                    {
+                      "if": {
+                        "text": "exists(flow.tags.env) and flow.tags.env != \"aws-prod\""
+                      }
+                    }
+                  ]
+                }
+              },
+              "satisfied": true,
+              "ignored": false,
+              "resolutions": [
+                {
+                  "type": "rule_not_applicable",
+                  "context": {
+                    "flow_name": "languages-start-points-ci",
+                    "trail_name": "9fcbc9ef1306b6fed965cecfd4ff778582015fa3",
+                    "artifact_status": "COMPLIANT"
+                  }
+                },
+                {
+                  "type": "rule_not_applicable",
+                  "context": {
+                    "flow_name": "snyk-aws-beta-per-artifact",
+                    "trail_name": "languages-start-points-7d318c34350a409ba26020f301a298ee8aa30979c8ec4854743911401d229024",
+                    "artifact_status": "COMPLIANT"
+                  }
+                },
+                {
+                  "type": "rule_satisfied",
+                  "context": {
+                    "flow_name": "production-promotion",
+                    "trail_name": "promote-all-42",
+                    "artifact_status": "COMPLIANT"
+                  }
+                },
+                {
+                  "type": "rule_satisfied",
+                  "context": {
+                    "flow_name": "snyk-aws-prod-per-artifact",
+                    "trail_name": "languages-start-points-7d318c34350a409ba26020f301a298ee8aa30979c8ec4854743911401d229024",
+                    "artifact_status": "COMPLIANT"
+                  }
+                }
+              ]
+            }
+          ],
+          "policy_name": "trail-compliance-aws-prod"
+        }
+      ],
+      "reasons_for_incompliance": [],
+      "fingerprint": "7d318c34350a409ba26020f301a298ee8aa30979c8ec4854743911401d229024",
+      "creationTimestamp": [
+        1793179128
+      ],
+      "pods": null,
+      "annotation": {
+        "type": "updated-provenance",
+        "was": 1,
+        "now": 1
+      },
+      "flow_name": "languages-start-points-ci",
+      "git_commit": "9fcbc9ef1306b6fed965cecfd4ff778582015fa3",
+      "commit_url": "https://github.com/cyber-dojo/languages-start-points/commit/9fcbc9ef1306b6fed965cecfd4ff778582015fa3",
+      "html_url": "https://app.kosli.com/cyber-dojo/flows/languages-start-points-ci/artifacts/7d318c34350a409ba26020f301a298ee8aa30979c8ec4854743911401d229024?artifact_id=9b49ae7a-d0e1-4e04-ba77-ec89b9dd",
+      "flow_html_url": "https://app.kosli.com/cyber-dojo/flows/languages-start-points-ci",
+      "deployment_diff": {
+        "diff_url": "https://github.com/cyber-dojo/languages-start-points/compare/8442c1b837d6dca9e349a6c3401437f11e6bd9f0...9fcbc9ef1306b6fed965cecfd4ff778582015fa3",
+        "previous_git_commit": "8442c1b837d6dca9e349a6c3401437f11e6bd9f0",
+        "previous_git_commit_url": "https://github.com/cyber-dojo/languages-start-points/commit/8442c1b837d6dca9e349a6c3401437f11e6bd9f0",
+        "previous_fingerprint": "b4f37af37368717581502192e3dfc9a55526c528d2f0dd927ff562c856c1a81a",
+        "previous_artifact_name": "244531986313.dkr.ecr.eu-central-1.amazonaws.com/languages-start-points:8442c1b@sha256:b4f37af37368717581502192e3dfc9a55526c528d2f0dd927ff562c856c1a81a",
+        "previous_artifact_compliance_state": "COMPLIANT",
+        "previous_running": false,
+        "previous_trail_name": "8442c1b837d6dca9e349a6c3401437f11e6bd9f0",
+        "previous_template_reference_name": "languages-start-points"
+      },
+      "commit_lead_time": 73931.0,
+      "flows": [
+        {
+          "flow_name": "languages-start-points-ci",
+          "trail_name": "9fcbc9ef1306b6fed965cecfd4ff778582015fa3",
+          "template_reference_name": "languages-start-points",
+          "git_commit": "9fcbc9ef1306b6fed965cecfd4ff778582015fa3",
+          "commit_url": "https://github.com/cyber-dojo/languages-start-points/commit/9fcbc9ef1306b6fed965cecfd4ff778582015fa3",
+          "git_commit_info": {
+            "sha1": "9fcbc9ef1306b6fed965cecfd4ff778582015fa3",
+            "message": "Merge pull request #305 from cyber-dojo/update-readme-2\n\nUpdate readme screenshot to match readme text",
+            "author": "Jon Jagger <jon@kosli.com>",
+            "branch": "",
+            "timestamp": 1793105197.0,
+            "url": "https://github.com/cyber-dojo/languages-start-points/commit/9fcbc9ef1306b6fed965cecfd4ff778582015fa3"
+          },
+          "html_url": "https://app.kosli.com/cyber-dojo/flows/languages-start-points-ci/artifacts/7d318c34350a409ba26020f301a298ee8aa30979c8ec4854743911401d229024?artifact_id=9b49ae7a-d0e1-4e04-ba77-ec89b9dd",
+          "flow_html_url": "https://app.kosli.com/cyber-dojo/flows/languages-start-points-ci",
+          "deployment_diff": {
+            "diff_url": "https://github.com/cyber-dojo/languages-start-points/compare/8442c1b837d6dca9e349a6c3401437f11e6bd9f0...9fcbc9ef1306b6fed965cecfd4ff778582015fa3",
+            "previous_git_commit": "8442c1b837d6dca9e349a6c3401437f11e6bd9f0",
+            "previous_git_commit_url": "https://github.com/cyber-dojo/languages-start-points/commit/8442c1b837d6dca9e349a6c3401437f11e6bd9f0",
+            "previous_fingerprint": "b4f37af37368717581502192e3dfc9a55526c528d2f0dd927ff562c856c1a81a",
+            "previous_artifact_name": "244531986313.dkr.ecr.eu-central-1.amazonaws.com/languages-start-points:8442c1b@sha256:b4f37af37368717581502192e3dfc9a55526c528d2f0dd927ff562c856c1a81a",
+            "previous_artifact_compliance_state": "COMPLIANT",
+            "previous_running": false,
+            "previous_trail_name": "8442c1b837d6dca9e349a6c3401437f11e6bd9f0",
+            "previous_template_reference_name": "languages-start-points"
+          },
+          "commit_lead_time": 73931.0,
+          "artifact_compliance_in_flow": true,
+          "flow_reasons_for_non_compliance": []
+        },
+        {
+          "flow_name": "snyk-aws-beta-per-artifact",
+          "trail_name": "languages-start-points-7d318c34350a409ba26020f301a298ee8aa30979c8ec4854743911401d229024",
+          "template_reference_name": "languages-start-points",
+          "git_commit": "359c98460f5c3aefb136a77eef08d1be4c4ca08d",
+          "commit_url": "https://github.com/cyber-dojo/snyk-scanning/commit/359c98460f5c3aefb136a77eef08d1be4c4ca08d",
+          "git_commit_info": {
+            "sha1": "359c98460f5c3aefb136a77eef08d1be4c4ca08d",
+            "message": "Merge pull request #6 from cyber-dojo/key-uploads-and-trails-on-component-not-repo\n\nTell apart artifacts built by one repo",
+            "author": "Jon Jagger <jon@kosli.com>",
+            "branch": "main",
+            "timestamp": 1790759058.0,
+            "url": "https://github.com/cyber-dojo/snyk-scanning/commit/359c98460f5c3aefb136a77eef08d1be4c4ca08d"
+          },
+          "html_url": "https://app.kosli.com/cyber-dojo/flows/snyk-aws-beta-per-artifact/artifacts/7d318c34350a409ba26020f301a298ee8aa30979c8ec4854743911401d229024?artifact_id=dcb080cf-2d66-4ef0-a048-b642f376",
+          "flow_html_url": "https://app.kosli.com/cyber-dojo/flows/snyk-aws-beta-per-artifact",
+          "deployment_diff": {
+            "diff_url": "https://github.com/cyber-dojo/snyk-scanning/compare/359c98460f5c3aefb136a77eef08d1be4c4ca08d...359c98460f5c3aefb136a77eef08d1be4c4ca08d",
+            "previous_git_commit": "359c98460f5c3aefb136a77eef08d1be4c4ca08d",
+            "previous_git_commit_url": "https://github.com/cyber-dojo/snyk-scanning/commit/359c98460f5c3aefb136a77eef08d1be4c4ca08d",
+            "previous_fingerprint": "5f565084b081f73bf44aa1e08407d0f022b6edb8b9cb61c29970b00f84104aaa",
+            "previous_artifact_name": "244531986313.dkr.ecr.eu-central-1.amazonaws.com/languages-start-points:c5dd4fa@sha256:5f565084b081f73bf44aa1e08407d0f022b6edb8b9cb61c29970b00f84104aaa",
+            "previous_artifact_compliance_state": "COMPLIANT",
+            "previous_running": false,
+            "previous_trail_name": "languages-start-points-5f565084b081f73bf44aa1e08407d0f022b6edb8b9cb61c29970b00f84104aaa",
+            "previous_template_reference_name": "languages-start-points"
+          },
+          "commit_lead_time": 2420070.0,
+          "artifact_compliance_in_flow": true,
+          "flow_reasons_for_non_compliance": []
+        },
+        {
+          "flow_name": "production-promotion",
+          "trail_name": "promote-all-42",
+          "template_reference_name": "languages-start-points",
+          "git_commit": "f1f6cd6bce0e887649f077657215b50f9cf47d93",
+          "commit_url": "https://github.com/cyber-dojo/aws-prod-co-promotion/commit/f1f6cd6bce0e887649f077657215b50f9cf47d93",
+          "git_commit_info": {
+            "sha1": "f1f6cd6bce0e887649f077657215b50f9cf47d93",
+            "message": "Merge pull request #19 from cyber-dojo/cap-parallel-prod-applies\n\nCap promote-all prod applies at three at a time",
+            "author": "Jon Jagger <jon@kosli.com>",
+            "branch": "main",
+            "timestamp": 1791649272.0,
+            "url": "https://github.com/cyber-dojo/aws-prod-co-promotion/commit/f1f6cd6bce0e887649f077657215b50f9cf47d93"
+          },
+          "html_url": "https://app.kosli.com/cyber-dojo/flows/production-promotion/artifacts/7d318c34350a409ba26020f301a298ee8aa30979c8ec4854743911401d229024?artifact_id=d16ca28a-e85e-4367-87f2-ec3ea9ac",
+          "flow_html_url": "https://app.kosli.com/cyber-dojo/flows/production-promotion",
+          "deployment_diff": {
+            "diff_url": "https://github.com/cyber-dojo/aws-prod-co-promotion/compare/54306f735c51413c972b38398da4d0a5fc86d47a...f1f6cd6bce0e887649f077657215b50f9cf47d93",
+            "previous_git_commit": "54306f735c51413c972b38398da4d0a5fc86d47a",
+            "previous_git_commit_url": "https://github.com/cyber-dojo/aws-prod-co-promotion/commit/54306f735c51413c972b38398da4d0a5fc86d47a",
+            "previous_fingerprint": "b4f37af37368717581502192e3dfc9a55526c528d2f0dd927ff562c856c1a81a",
+            "previous_artifact_name": "244531986313.dkr.ecr.eu-central-1.amazonaws.com/languages-start-points:8442c1b@sha256:b4f37af37368717581502192e3dfc9a55526c528d2f0dd927ff562c856c1a81a",
+            "previous_artifact_compliance_state": "COMPLIANT",
+            "previous_running": false,
+            "previous_trail_name": "promote-all-41",
+            "previous_template_reference_name": "languages-start-points"
+          },
+          "commit_lead_time": 1529856.0,
+          "artifact_compliance_in_flow": true,
+          "flow_reasons_for_non_compliance": []
+        },
+        {
+          "flow_name": "snyk-aws-prod-per-artifact",
+          "trail_name": "languages-start-points-7d318c34350a409ba26020f301a298ee8aa30979c8ec4854743911401d229024",
+          "template_reference_name": "languages-start-points",
+          "git_commit": "359c98460f5c3aefb136a77eef08d1be4c4ca08d",
+          "commit_url": "https://github.com/cyber-dojo/snyk-scanning/commit/359c98460f5c3aefb136a77eef08d1be4c4ca08d",
+          "git_commit_info": {
+            "sha1": "359c98460f5c3aefb136a77eef08d1be4c4ca08d",
+            "message": "Merge pull request #6 from cyber-dojo/key-uploads-and-trails-on-component-not-repo\n\nTell apart artifacts built by one repo",
+            "author": "Jon Jagger <jon@kosli.com>",
+            "branch": "main",
+            "timestamp": 1790759058.0,
+            "url": "https://github.com/cyber-dojo/snyk-scanning/commit/359c98460f5c3aefb136a77eef08d1be4c4ca08d"
+          },
+          "html_url": "https://app.kosli.com/cyber-dojo/flows/snyk-aws-prod-per-artifact/artifacts/7d318c34350a409ba26020f301a298ee8aa30979c8ec4854743911401d229024?artifact_id=d2b0d7a7-8e89-4b56-a793-d92dad4e",
+          "flow_html_url": "https://app.kosli.com/cyber-dojo/flows/snyk-aws-prod-per-artifact",
+          "deployment_diff": {
+            "diff_url": "https://github.com/cyber-dojo/snyk-scanning/compare/30111f180ac4e3611cdbd7d805381a0bb9f53cff...359c98460f5c3aefb136a77eef08d1be4c4ca08d",
+            "previous_git_commit": "30111f180ac4e3611cdbd7d805381a0bb9f53cff",
+            "previous_git_commit_url": "https://github.com/cyber-dojo/snyk-scanning/commit/30111f180ac4e3611cdbd7d805381a0bb9f53cff",
+            "previous_fingerprint": "040bd44819d9e92728fb3b338f6582d4345cd69df769c59e94c61ac0336ad909",
+            "previous_artifact_name": "244531986313.dkr.ecr.eu-central-1.amazonaws.com/languages-start-points:5d1d4b6@sha256:040bd44819d9e92728fb3b338f6582d4345cd69df769c59e94c61ac0336ad909",
+            "previous_artifact_compliance_state": "COMPLIANT",
+            "previous_running": false,
+            "previous_trail_name": "languages-start-points-040bd44819d9e92728fb3b338f6582d4345cd69df769c59e94c61ac0336ad909",
+            "previous_template_reference_name": "languages-start-points"
+          },
+          "commit_lead_time": 2420070.0,
+          "artifact_compliance_in_flow": true,
+          "flow_reasons_for_non_compliance": []
+        }
+      ],
+      "ecs_context": {
+        "task_arn": "arn:aws:ecs:eu-central-1:274425519734:task/app/a5768b257e86419786f131e31ec1ba1a",
+        "cluster_name": null,
+        "service_name": null
+      }
+    },
+    {
+      "name": "244531986313.dkr.ecr.eu-central-1.amazonaws.com/differ:aca49ec@sha256:4769761969b2b6af19828321d9471320b6fa671357553b885fe922ff211461de",
       "compliant": true,
       "deployments": [],
       "policy_decisions": [
@@ -6153,15 +4430,7 @@ kosli get snapshot aws-prod --output=json
                   "type": "rule_not_applicable",
                   "context": {
                     "flow_name": "differ-ci",
-                    "trail_name": "ce9bf5fdfb6e10b5d2de1b324fd03483e8b67173",
-                    "artifact_status": null
-                  }
-                },
-                {
-                  "type": "rule_not_applicable",
-                  "context": {
-                    "flow_name": "production-promotion",
-                    "trail_name": "promotion-one-186",
+                    "trail_name": "aca49ec4abe49fb4abf98e4d7b7af3af6b8239c3",
                     "artifact_status": null
                   }
                 },
@@ -6169,7 +4438,15 @@ kosli get snapshot aws-prod --output=json
                   "type": "rule_not_applicable",
                   "context": {
                     "flow_name": "snyk-aws-beta-per-artifact",
-                    "trail_name": "differ-08830cb438e6e0da0b5b12192695bd16cdfa6fe58e1316bb041492cb7dfabdff",
+                    "trail_name": "differ-4769761969b2b6af19828321d9471320b6fa671357553b885fe922ff211461de",
+                    "artifact_status": null
+                  }
+                },
+                {
+                  "type": "rule_not_applicable",
+                  "context": {
+                    "flow_name": "production-promotion",
+                    "trail_name": "promote-all-42",
                     "artifact_status": null
                   }
                 },
@@ -6177,7 +4454,7 @@ kosli get snapshot aws-prod --output=json
                   "type": "rule_not_applicable",
                   "context": {
                     "flow_name": "snyk-aws-prod-per-artifact",
-                    "trail_name": "differ-08830cb438e6e0da0b5b12192695bd16cdfa6fe58e1316bb041492cb7dfabdff",
+                    "trail_name": "differ-4769761969b2b6af19828321d9471320b6fa671357553b885fe922ff211461de",
                     "artifact_status": null
                   }
                 }
@@ -6198,15 +4475,7 @@ kosli get snapshot aws-prod --output=json
                   "type": "rule_not_applicable",
                   "context": {
                     "flow_name": "differ-ci",
-                    "trail_name": "ce9bf5fdfb6e10b5d2de1b324fd03483e8b67173",
-                    "artifact_status": "COMPLIANT"
-                  }
-                },
-                {
-                  "type": "rule_not_applicable",
-                  "context": {
-                    "flow_name": "production-promotion",
-                    "trail_name": "promotion-one-186",
+                    "trail_name": "aca49ec4abe49fb4abf98e4d7b7af3af6b8239c3",
                     "artifact_status": "COMPLIANT"
                   }
                 },
@@ -6214,7 +4483,15 @@ kosli get snapshot aws-prod --output=json
                   "type": "rule_not_applicable",
                   "context": {
                     "flow_name": "snyk-aws-beta-per-artifact",
-                    "trail_name": "differ-08830cb438e6e0da0b5b12192695bd16cdfa6fe58e1316bb041492cb7dfabdff",
+                    "trail_name": "differ-4769761969b2b6af19828321d9471320b6fa671357553b885fe922ff211461de",
+                    "artifact_status": "COMPLIANT"
+                  }
+                },
+                {
+                  "type": "rule_not_applicable",
+                  "context": {
+                    "flow_name": "production-promotion",
+                    "trail_name": "promote-all-42",
                     "artifact_status": "COMPLIANT"
                   }
                 },
@@ -6222,7 +4499,7 @@ kosli get snapshot aws-prod --output=json
                   "type": "rule_not_applicable",
                   "context": {
                     "flow_name": "snyk-aws-prod-per-artifact",
-                    "trail_name": "differ-08830cb438e6e0da0b5b12192695bd16cdfa6fe58e1316bb041492cb7dfabdff",
+                    "trail_name": "differ-4769761969b2b6af19828321d9471320b6fa671357553b885fe922ff211461de",
                     "artifact_status": "COMPLIANT"
                   }
                 }
@@ -6248,15 +4525,7 @@ kosli get snapshot aws-prod --output=json
                   "type": "rule_not_applicable",
                   "context": {
                     "flow_name": "differ-ci",
-                    "trail_name": "ce9bf5fdfb6e10b5d2de1b324fd03483e8b67173",
-                    "artifact_status": null
-                  }
-                },
-                {
-                  "type": "rule_satisfied",
-                  "context": {
-                    "flow_name": "production-promotion",
-                    "trail_name": "promotion-one-186",
+                    "trail_name": "aca49ec4abe49fb4abf98e4d7b7af3af6b8239c3",
                     "artifact_status": null
                   }
                 },
@@ -6264,7 +4533,15 @@ kosli get snapshot aws-prod --output=json
                   "type": "rule_not_applicable",
                   "context": {
                     "flow_name": "snyk-aws-beta-per-artifact",
-                    "trail_name": "differ-08830cb438e6e0da0b5b12192695bd16cdfa6fe58e1316bb041492cb7dfabdff",
+                    "trail_name": "differ-4769761969b2b6af19828321d9471320b6fa671357553b885fe922ff211461de",
+                    "artifact_status": null
+                  }
+                },
+                {
+                  "type": "rule_satisfied",
+                  "context": {
+                    "flow_name": "production-promotion",
+                    "trail_name": "promote-all-42",
                     "artifact_status": null
                   }
                 },
@@ -6272,7 +4549,7 @@ kosli get snapshot aws-prod --output=json
                   "type": "rule_not_applicable",
                   "context": {
                     "flow_name": "snyk-aws-prod-per-artifact",
-                    "trail_name": "differ-08830cb438e6e0da0b5b12192695bd16cdfa6fe58e1316bb041492cb7dfabdff",
+                    "trail_name": "differ-4769761969b2b6af19828321d9471320b6fa671357553b885fe922ff211461de",
                     "artifact_status": null
                   }
                 }
@@ -6300,15 +4577,7 @@ kosli get snapshot aws-prod --output=json
                   "type": "rule_satisfied",
                   "context": {
                     "flow_name": "differ-ci",
-                    "trail_name": "ce9bf5fdfb6e10b5d2de1b324fd03483e8b67173",
-                    "artifact_status": null
-                  }
-                },
-                {
-                  "type": "rule_satisfied",
-                  "context": {
-                    "flow_name": "production-promotion",
-                    "trail_name": "promotion-one-186",
+                    "trail_name": "aca49ec4abe49fb4abf98e4d7b7af3af6b8239c3",
                     "artifact_status": null
                   }
                 },
@@ -6316,7 +4585,15 @@ kosli get snapshot aws-prod --output=json
                   "type": "rule_satisfied",
                   "context": {
                     "flow_name": "snyk-aws-beta-per-artifact",
-                    "trail_name": "differ-08830cb438e6e0da0b5b12192695bd16cdfa6fe58e1316bb041492cb7dfabdff",
+                    "trail_name": "differ-4769761969b2b6af19828321d9471320b6fa671357553b885fe922ff211461de",
+                    "artifact_status": null
+                  }
+                },
+                {
+                  "type": "rule_satisfied",
+                  "context": {
+                    "flow_name": "production-promotion",
+                    "trail_name": "promote-all-42",
                     "artifact_status": null
                   }
                 },
@@ -6324,7 +4601,7 @@ kosli get snapshot aws-prod --output=json
                   "type": "rule_satisfied",
                   "context": {
                     "flow_name": "snyk-aws-prod-per-artifact",
-                    "trail_name": "differ-08830cb438e6e0da0b5b12192695bd16cdfa6fe58e1316bb041492cb7dfabdff",
+                    "trail_name": "differ-4769761969b2b6af19828321d9471320b6fa671357553b885fe922ff211461de",
                     "artifact_status": null
                   }
                 }
@@ -6345,15 +4622,7 @@ kosli get snapshot aws-prod --output=json
                   "type": "rule_not_applicable",
                   "context": {
                     "flow_name": "differ-ci",
-                    "trail_name": "ce9bf5fdfb6e10b5d2de1b324fd03483e8b67173",
-                    "artifact_status": "COMPLIANT"
-                  }
-                },
-                {
-                  "type": "rule_not_applicable",
-                  "context": {
-                    "flow_name": "production-promotion",
-                    "trail_name": "promotion-one-186",
+                    "trail_name": "aca49ec4abe49fb4abf98e4d7b7af3af6b8239c3",
                     "artifact_status": "COMPLIANT"
                   }
                 },
@@ -6361,7 +4630,15 @@ kosli get snapshot aws-prod --output=json
                   "type": "rule_not_applicable",
                   "context": {
                     "flow_name": "snyk-aws-beta-per-artifact",
-                    "trail_name": "differ-08830cb438e6e0da0b5b12192695bd16cdfa6fe58e1316bb041492cb7dfabdff",
+                    "trail_name": "differ-4769761969b2b6af19828321d9471320b6fa671357553b885fe922ff211461de",
+                    "artifact_status": "COMPLIANT"
+                  }
+                },
+                {
+                  "type": "rule_not_applicable",
+                  "context": {
+                    "flow_name": "production-promotion",
+                    "trail_name": "promote-all-42",
                     "artifact_status": "COMPLIANT"
                   }
                 },
@@ -6369,7 +4646,7 @@ kosli get snapshot aws-prod --output=json
                   "type": "rule_not_applicable",
                   "context": {
                     "flow_name": "snyk-aws-prod-per-artifact",
-                    "trail_name": "differ-08830cb438e6e0da0b5b12192695bd16cdfa6fe58e1316bb041492cb7dfabdff",
+                    "trail_name": "differ-4769761969b2b6af19828321d9471320b6fa671357553b885fe922ff211461de",
                     "artifact_status": "COMPLIANT"
                   }
                 }
@@ -6395,16 +4672,7 @@ kosli get snapshot aws-prod --output=json
                   "type": "rule_satisfied",
                   "context": {
                     "flow_name": "differ-ci",
-                    "trail_name": "ce9bf5fdfb6e10b5d2de1b324fd03483e8b67173",
-                    "artifact_status": null,
-                    "for_control": "SDLC-CTRL-0002"
-                  }
-                },
-                {
-                  "type": "rule_not_applicable",
-                  "context": {
-                    "flow_name": "production-promotion",
-                    "trail_name": "promotion-one-186",
+                    "trail_name": "aca49ec4abe49fb4abf98e4d7b7af3af6b8239c3",
                     "artifact_status": null,
                     "for_control": "SDLC-CTRL-0002"
                   }
@@ -6413,7 +4681,16 @@ kosli get snapshot aws-prod --output=json
                   "type": "rule_not_applicable",
                   "context": {
                     "flow_name": "snyk-aws-beta-per-artifact",
-                    "trail_name": "differ-08830cb438e6e0da0b5b12192695bd16cdfa6fe58e1316bb041492cb7dfabdff",
+                    "trail_name": "differ-4769761969b2b6af19828321d9471320b6fa671357553b885fe922ff211461de",
+                    "artifact_status": null,
+                    "for_control": "SDLC-CTRL-0002"
+                  }
+                },
+                {
+                  "type": "rule_not_applicable",
+                  "context": {
+                    "flow_name": "production-promotion",
+                    "trail_name": "promote-all-42",
                     "artifact_status": null,
                     "for_control": "SDLC-CTRL-0002"
                   }
@@ -6422,7 +4699,7 @@ kosli get snapshot aws-prod --output=json
                   "type": "rule_not_applicable",
                   "context": {
                     "flow_name": "snyk-aws-prod-per-artifact",
-                    "trail_name": "differ-08830cb438e6e0da0b5b12192695bd16cdfa6fe58e1316bb041492cb7dfabdff",
+                    "trail_name": "differ-4769761969b2b6af19828321d9471320b6fa671357553b885fe922ff211461de",
                     "artifact_status": null,
                     "for_control": "SDLC-CTRL-0002"
                   }
@@ -6451,15 +4728,7 @@ kosli get snapshot aws-prod --output=json
                   "type": "rule_not_applicable",
                   "context": {
                     "flow_name": "differ-ci",
-                    "trail_name": "ce9bf5fdfb6e10b5d2de1b324fd03483e8b67173",
-                    "artifact_status": null
-                  }
-                },
-                {
-                  "type": "rule_not_applicable",
-                  "context": {
-                    "flow_name": "production-promotion",
-                    "trail_name": "promotion-one-186",
+                    "trail_name": "aca49ec4abe49fb4abf98e4d7b7af3af6b8239c3",
                     "artifact_status": null
                   }
                 },
@@ -6467,7 +4736,15 @@ kosli get snapshot aws-prod --output=json
                   "type": "rule_not_applicable",
                   "context": {
                     "flow_name": "snyk-aws-beta-per-artifact",
-                    "trail_name": "differ-08830cb438e6e0da0b5b12192695bd16cdfa6fe58e1316bb041492cb7dfabdff",
+                    "trail_name": "differ-4769761969b2b6af19828321d9471320b6fa671357553b885fe922ff211461de",
+                    "artifact_status": null
+                  }
+                },
+                {
+                  "type": "rule_not_applicable",
+                  "context": {
+                    "flow_name": "production-promotion",
+                    "trail_name": "promote-all-42",
                     "artifact_status": null
                   }
                 },
@@ -6475,7 +4752,7 @@ kosli get snapshot aws-prod --output=json
                   "type": "rule_not_applicable",
                   "context": {
                     "flow_name": "snyk-aws-prod-per-artifact",
-                    "trail_name": "differ-08830cb438e6e0da0b5b12192695bd16cdfa6fe58e1316bb041492cb7dfabdff",
+                    "trail_name": "differ-4769761969b2b6af19828321d9471320b6fa671357553b885fe922ff211461de",
                     "artifact_status": null
                   }
                 }
@@ -6496,15 +4773,7 @@ kosli get snapshot aws-prod --output=json
                   "type": "rule_not_applicable",
                   "context": {
                     "flow_name": "differ-ci",
-                    "trail_name": "ce9bf5fdfb6e10b5d2de1b324fd03483e8b67173",
-                    "artifact_status": "COMPLIANT"
-                  }
-                },
-                {
-                  "type": "rule_not_applicable",
-                  "context": {
-                    "flow_name": "production-promotion",
-                    "trail_name": "promotion-one-186",
+                    "trail_name": "aca49ec4abe49fb4abf98e4d7b7af3af6b8239c3",
                     "artifact_status": "COMPLIANT"
                   }
                 },
@@ -6512,7 +4781,15 @@ kosli get snapshot aws-prod --output=json
                   "type": "rule_not_applicable",
                   "context": {
                     "flow_name": "snyk-aws-beta-per-artifact",
-                    "trail_name": "differ-08830cb438e6e0da0b5b12192695bd16cdfa6fe58e1316bb041492cb7dfabdff",
+                    "trail_name": "differ-4769761969b2b6af19828321d9471320b6fa671357553b885fe922ff211461de",
+                    "artifact_status": "COMPLIANT"
+                  }
+                },
+                {
+                  "type": "rule_not_applicable",
+                  "context": {
+                    "flow_name": "production-promotion",
+                    "trail_name": "promote-all-42",
                     "artifact_status": "COMPLIANT"
                   }
                 },
@@ -6520,7 +4797,7 @@ kosli get snapshot aws-prod --output=json
                   "type": "rule_not_applicable",
                   "context": {
                     "flow_name": "snyk-aws-prod-per-artifact",
-                    "trail_name": "differ-08830cb438e6e0da0b5b12192695bd16cdfa6fe58e1316bb041492cb7dfabdff",
+                    "trail_name": "differ-4769761969b2b6af19828321d9471320b6fa671357553b885fe922ff211461de",
                     "artifact_status": "COMPLIANT"
                   }
                 }
@@ -6546,15 +4823,7 @@ kosli get snapshot aws-prod --output=json
                   "type": "rule_satisfied",
                   "context": {
                     "flow_name": "differ-ci",
-                    "trail_name": "ce9bf5fdfb6e10b5d2de1b324fd03483e8b67173",
-                    "artifact_status": null
-                  }
-                },
-                {
-                  "type": "rule_not_applicable",
-                  "context": {
-                    "flow_name": "production-promotion",
-                    "trail_name": "promotion-one-186",
+                    "trail_name": "aca49ec4abe49fb4abf98e4d7b7af3af6b8239c3",
                     "artifact_status": null
                   }
                 },
@@ -6562,7 +4831,15 @@ kosli get snapshot aws-prod --output=json
                   "type": "rule_not_applicable",
                   "context": {
                     "flow_name": "snyk-aws-beta-per-artifact",
-                    "trail_name": "differ-08830cb438e6e0da0b5b12192695bd16cdfa6fe58e1316bb041492cb7dfabdff",
+                    "trail_name": "differ-4769761969b2b6af19828321d9471320b6fa671357553b885fe922ff211461de",
+                    "artifact_status": null
+                  }
+                },
+                {
+                  "type": "rule_not_applicable",
+                  "context": {
+                    "flow_name": "production-promotion",
+                    "trail_name": "promote-all-42",
                     "artifact_status": null
                   }
                 },
@@ -6570,7 +4847,7 @@ kosli get snapshot aws-prod --output=json
                   "type": "rule_not_applicable",
                   "context": {
                     "flow_name": "snyk-aws-prod-per-artifact",
-                    "trail_name": "differ-08830cb438e6e0da0b5b12192695bd16cdfa6fe58e1316bb041492cb7dfabdff",
+                    "trail_name": "differ-4769761969b2b6af19828321d9471320b6fa671357553b885fe922ff211461de",
                     "artifact_status": null
                   }
                 }
@@ -6598,15 +4875,7 @@ kosli get snapshot aws-prod --output=json
                   "type": "rule_not_applicable",
                   "context": {
                     "flow_name": "differ-ci",
-                    "trail_name": "ce9bf5fdfb6e10b5d2de1b324fd03483e8b67173",
-                    "artifact_status": null
-                  }
-                },
-                {
-                  "type": "rule_not_applicable",
-                  "context": {
-                    "flow_name": "production-promotion",
-                    "trail_name": "promotion-one-186",
+                    "trail_name": "aca49ec4abe49fb4abf98e4d7b7af3af6b8239c3",
                     "artifact_status": null
                   }
                 },
@@ -6614,7 +4883,15 @@ kosli get snapshot aws-prod --output=json
                   "type": "rule_not_applicable",
                   "context": {
                     "flow_name": "snyk-aws-beta-per-artifact",
-                    "trail_name": "differ-08830cb438e6e0da0b5b12192695bd16cdfa6fe58e1316bb041492cb7dfabdff",
+                    "trail_name": "differ-4769761969b2b6af19828321d9471320b6fa671357553b885fe922ff211461de",
+                    "artifact_status": null
+                  }
+                },
+                {
+                  "type": "rule_not_applicable",
+                  "context": {
+                    "flow_name": "production-promotion",
+                    "trail_name": "promote-all-42",
                     "artifact_status": null
                   }
                 },
@@ -6622,7 +4899,7 @@ kosli get snapshot aws-prod --output=json
                   "type": "rule_not_applicable",
                   "context": {
                     "flow_name": "snyk-aws-prod-per-artifact",
-                    "trail_name": "differ-08830cb438e6e0da0b5b12192695bd16cdfa6fe58e1316bb041492cb7dfabdff",
+                    "trail_name": "differ-4769761969b2b6af19828321d9471320b6fa671357553b885fe922ff211461de",
                     "artifact_status": null
                   }
                 }
@@ -6643,15 +4920,7 @@ kosli get snapshot aws-prod --output=json
                   "type": "rule_not_applicable",
                   "context": {
                     "flow_name": "differ-ci",
-                    "trail_name": "ce9bf5fdfb6e10b5d2de1b324fd03483e8b67173",
-                    "artifact_status": "COMPLIANT"
-                  }
-                },
-                {
-                  "type": "rule_not_applicable",
-                  "context": {
-                    "flow_name": "production-promotion",
-                    "trail_name": "promotion-one-186",
+                    "trail_name": "aca49ec4abe49fb4abf98e4d7b7af3af6b8239c3",
                     "artifact_status": "COMPLIANT"
                   }
                 },
@@ -6659,7 +4928,15 @@ kosli get snapshot aws-prod --output=json
                   "type": "rule_not_applicable",
                   "context": {
                     "flow_name": "snyk-aws-beta-per-artifact",
-                    "trail_name": "differ-08830cb438e6e0da0b5b12192695bd16cdfa6fe58e1316bb041492cb7dfabdff",
+                    "trail_name": "differ-4769761969b2b6af19828321d9471320b6fa671357553b885fe922ff211461de",
+                    "artifact_status": "COMPLIANT"
+                  }
+                },
+                {
+                  "type": "rule_not_applicable",
+                  "context": {
+                    "flow_name": "production-promotion",
+                    "trail_name": "promote-all-42",
                     "artifact_status": "COMPLIANT"
                   }
                 },
@@ -6667,7 +4944,7 @@ kosli get snapshot aws-prod --output=json
                   "type": "rule_not_applicable",
                   "context": {
                     "flow_name": "snyk-aws-prod-per-artifact",
-                    "trail_name": "differ-08830cb438e6e0da0b5b12192695bd16cdfa6fe58e1316bb041492cb7dfabdff",
+                    "trail_name": "differ-4769761969b2b6af19828321d9471320b6fa671357553b885fe922ff211461de",
                     "artifact_status": "COMPLIANT"
                   }
                 }
@@ -6693,16 +4970,7 @@ kosli get snapshot aws-prod --output=json
                   "type": "rule_not_applicable",
                   "context": {
                     "flow_name": "differ-ci",
-                    "trail_name": "ce9bf5fdfb6e10b5d2de1b324fd03483e8b67173",
-                    "artifact_status": null,
-                    "for_control": "SDLC-CTRL-0022"
-                  }
-                },
-                {
-                  "type": "rule_not_applicable",
-                  "context": {
-                    "flow_name": "production-promotion",
-                    "trail_name": "promotion-one-186",
+                    "trail_name": "aca49ec4abe49fb4abf98e4d7b7af3af6b8239c3",
                     "artifact_status": null,
                     "for_control": "SDLC-CTRL-0022"
                   }
@@ -6711,7 +4979,16 @@ kosli get snapshot aws-prod --output=json
                   "type": "rule_not_applicable",
                   "context": {
                     "flow_name": "snyk-aws-beta-per-artifact",
-                    "trail_name": "differ-08830cb438e6e0da0b5b12192695bd16cdfa6fe58e1316bb041492cb7dfabdff",
+                    "trail_name": "differ-4769761969b2b6af19828321d9471320b6fa671357553b885fe922ff211461de",
+                    "artifact_status": null,
+                    "for_control": "SDLC-CTRL-0022"
+                  }
+                },
+                {
+                  "type": "rule_not_applicable",
+                  "context": {
+                    "flow_name": "production-promotion",
+                    "trail_name": "promote-all-42",
                     "artifact_status": null,
                     "for_control": "SDLC-CTRL-0022"
                   }
@@ -6720,7 +4997,7 @@ kosli get snapshot aws-prod --output=json
                   "type": "rule_satisfied",
                   "context": {
                     "flow_name": "snyk-aws-prod-per-artifact",
-                    "trail_name": "differ-08830cb438e6e0da0b5b12192695bd16cdfa6fe58e1316bb041492cb7dfabdff",
+                    "trail_name": "differ-4769761969b2b6af19828321d9471320b6fa671357553b885fe922ff211461de",
                     "artifact_status": null,
                     "for_control": "SDLC-CTRL-0022"
                   }
@@ -6749,15 +5026,7 @@ kosli get snapshot aws-prod --output=json
                   "type": "rule_not_applicable",
                   "context": {
                     "flow_name": "differ-ci",
-                    "trail_name": "ce9bf5fdfb6e10b5d2de1b324fd03483e8b67173",
-                    "artifact_status": null
-                  }
-                },
-                {
-                  "type": "rule_not_applicable",
-                  "context": {
-                    "flow_name": "production-promotion",
-                    "trail_name": "promotion-one-186",
+                    "trail_name": "aca49ec4abe49fb4abf98e4d7b7af3af6b8239c3",
                     "artifact_status": null
                   }
                 },
@@ -6765,7 +5034,15 @@ kosli get snapshot aws-prod --output=json
                   "type": "rule_not_applicable",
                   "context": {
                     "flow_name": "snyk-aws-beta-per-artifact",
-                    "trail_name": "differ-08830cb438e6e0da0b5b12192695bd16cdfa6fe58e1316bb041492cb7dfabdff",
+                    "trail_name": "differ-4769761969b2b6af19828321d9471320b6fa671357553b885fe922ff211461de",
+                    "artifact_status": null
+                  }
+                },
+                {
+                  "type": "rule_not_applicable",
+                  "context": {
+                    "flow_name": "production-promotion",
+                    "trail_name": "promote-all-42",
                     "artifact_status": null
                   }
                 },
@@ -6773,7 +5050,7 @@ kosli get snapshot aws-prod --output=json
                   "type": "rule_not_applicable",
                   "context": {
                     "flow_name": "snyk-aws-prod-per-artifact",
-                    "trail_name": "differ-08830cb438e6e0da0b5b12192695bd16cdfa6fe58e1316bb041492cb7dfabdff",
+                    "trail_name": "differ-4769761969b2b6af19828321d9471320b6fa671357553b885fe922ff211461de",
                     "artifact_status": null
                   }
                 }
@@ -6800,15 +5077,7 @@ kosli get snapshot aws-prod --output=json
                   "type": "rule_not_applicable",
                   "context": {
                     "flow_name": "differ-ci",
-                    "trail_name": "ce9bf5fdfb6e10b5d2de1b324fd03483e8b67173",
-                    "artifact_status": "COMPLIANT"
-                  }
-                },
-                {
-                  "type": "rule_satisfied",
-                  "context": {
-                    "flow_name": "production-promotion",
-                    "trail_name": "promotion-one-186",
+                    "trail_name": "aca49ec4abe49fb4abf98e4d7b7af3af6b8239c3",
                     "artifact_status": "COMPLIANT"
                   }
                 },
@@ -6816,7 +5085,15 @@ kosli get snapshot aws-prod --output=json
                   "type": "rule_not_applicable",
                   "context": {
                     "flow_name": "snyk-aws-beta-per-artifact",
-                    "trail_name": "differ-08830cb438e6e0da0b5b12192695bd16cdfa6fe58e1316bb041492cb7dfabdff",
+                    "trail_name": "differ-4769761969b2b6af19828321d9471320b6fa671357553b885fe922ff211461de",
+                    "artifact_status": "COMPLIANT"
+                  }
+                },
+                {
+                  "type": "rule_satisfied",
+                  "context": {
+                    "flow_name": "production-promotion",
+                    "trail_name": "promote-all-42",
                     "artifact_status": "COMPLIANT"
                   }
                 },
@@ -6824,7 +5101,7 @@ kosli get snapshot aws-prod --output=json
                   "type": "rule_satisfied",
                   "context": {
                     "flow_name": "snyk-aws-prod-per-artifact",
-                    "trail_name": "differ-08830cb438e6e0da0b5b12192695bd16cdfa6fe58e1316bb041492cb7dfabdff",
+                    "trail_name": "differ-4769761969b2b6af19828321d9471320b6fa671357553b885fe922ff211461de",
                     "artifact_status": "COMPLIANT"
                   }
                 }
@@ -6835,68 +5112,99 @@ kosli get snapshot aws-prod --output=json
         }
       ],
       "reasons_for_incompliance": [],
-      "fingerprint": "08830cb438e6e0da0b5b12192695bd16cdfa6fe58e1316bb041492cb7dfabdff",
+      "fingerprint": "4769761969b2b6af19828321d9471320b6fa671357553b885fe922ff211461de",
       "creationTimestamp": [
-        1792485660
+        1793179036
       ],
       "pods": null,
       "annotation": {
-        "type": "unchanged",
+        "type": "updated-provenance",
         "was": 1,
         "now": 1
       },
       "flow_name": "differ-ci",
-      "git_commit": "ce9bf5fdfb6e10b5d2de1b324fd03483e8b67173",
-      "commit_url": "https://github.com/cyber-dojo/differ/commit/ce9bf5fdfb6e10b5d2de1b324fd03483e8b67173",
-      "html_url": "https://app.kosli.com/cyber-dojo/flows/differ-ci/artifacts/08830cb438e6e0da0b5b12192695bd16cdfa6fe58e1316bb041492cb7dfabdff?artifact_id=a80fab87-944a-4e6e-a972-847a95aa",
+      "git_commit": "aca49ec4abe49fb4abf98e4d7b7af3af6b8239c3",
+      "commit_url": "https://github.com/cyber-dojo/differ/commit/aca49ec4abe49fb4abf98e4d7b7af3af6b8239c3",
+      "html_url": "https://app.kosli.com/cyber-dojo/flows/differ-ci/artifacts/4769761969b2b6af19828321d9471320b6fa671357553b885fe922ff211461de?artifact_id=e3e7a070-c230-46ac-a216-a4e6661f",
       "flow_html_url": "https://app.kosli.com/cyber-dojo/flows/differ-ci",
       "deployment_diff": {
-        "diff_url": "https://github.com/cyber-dojo/differ/compare/842bdad4a2fc94d0acfe996d059972b50037b304...ce9bf5fdfb6e10b5d2de1b324fd03483e8b67173",
-        "previous_git_commit": "842bdad4a2fc94d0acfe996d059972b50037b304",
-        "previous_git_commit_url": "https://github.com/cyber-dojo/differ/commit/842bdad4a2fc94d0acfe996d059972b50037b304",
-        "previous_fingerprint": "807d0a7538fb9c739beab0b9f2793fe24c0a8bf079ef731ec2a2c2fe6464c463",
-        "previous_artifact_name": "244531986313.dkr.ecr.eu-central-1.amazonaws.com/differ:842bdad@sha256:807d0a7538fb9c739beab0b9f2793fe24c0a8bf079ef731ec2a2c2fe6464c463",
+        "diff_url": "https://github.com/cyber-dojo/differ/compare/ce9bf5fdfb6e10b5d2de1b324fd03483e8b67173...aca49ec4abe49fb4abf98e4d7b7af3af6b8239c3",
+        "previous_git_commit": "ce9bf5fdfb6e10b5d2de1b324fd03483e8b67173",
+        "previous_git_commit_url": "https://github.com/cyber-dojo/differ/commit/ce9bf5fdfb6e10b5d2de1b324fd03483e8b67173",
+        "previous_fingerprint": "08830cb438e6e0da0b5b12192695bd16cdfa6fe58e1316bb041492cb7dfabdff",
+        "previous_artifact_name": "244531986313.dkr.ecr.eu-central-1.amazonaws.com/differ:ce9bf5f@sha256:08830cb438e6e0da0b5b12192695bd16cdfa6fe58e1316bb041492cb7dfabdff",
         "previous_artifact_compliance_state": "COMPLIANT",
         "previous_running": false,
-        "previous_trail_name": "842bdad4a2fc94d0acfe996d059972b50037b304",
+        "previous_trail_name": "ce9bf5fdfb6e10b5d2de1b324fd03483e8b67173",
         "previous_template_reference_name": "differ"
       },
-      "commit_lead_time": 5444.0,
+      "commit_lead_time": 75386.0,
       "flows": [
         {
           "flow_name": "differ-ci",
-          "trail_name": "ce9bf5fdfb6e10b5d2de1b324fd03483e8b67173",
+          "trail_name": "aca49ec4abe49fb4abf98e4d7b7af3af6b8239c3",
           "template_reference_name": "differ",
-          "git_commit": "ce9bf5fdfb6e10b5d2de1b324fd03483e8b67173",
-          "commit_url": "https://github.com/cyber-dojo/differ/commit/ce9bf5fdfb6e10b5d2de1b324fd03483e8b67173",
+          "git_commit": "aca49ec4abe49fb4abf98e4d7b7af3af6b8239c3",
+          "commit_url": "https://github.com/cyber-dojo/differ/commit/aca49ec4abe49fb4abf98e4d7b7af3af6b8239c3",
           "git_commit_info": {
-            "sha1": "ce9bf5fdfb6e10b5d2de1b324fd03483e8b67173",
-            "message": "Run workflow to pick up new snyk vuln fix (#508)",
+            "sha1": "aca49ec4abe49fb4abf98e4d7b7af3af6b8239c3",
+            "message": "Run workflow again to try and get past flaky sonarcloud-scan webhook (#515)",
             "author": "Jon Jagger <jon@kosli.com>",
             "branch": "",
-            "timestamp": 1792480216.0,
-            "url": "https://github.com/cyber-dojo/differ/commit/ce9bf5fdfb6e10b5d2de1b324fd03483e8b67173"
+            "timestamp": 1793103650.0,
+            "url": "https://github.com/cyber-dojo/differ/commit/aca49ec4abe49fb4abf98e4d7b7af3af6b8239c3"
           },
-          "html_url": "https://app.kosli.com/cyber-dojo/flows/differ-ci/artifacts/08830cb438e6e0da0b5b12192695bd16cdfa6fe58e1316bb041492cb7dfabdff?artifact_id=a80fab87-944a-4e6e-a972-847a95aa",
+          "html_url": "https://app.kosli.com/cyber-dojo/flows/differ-ci/artifacts/4769761969b2b6af19828321d9471320b6fa671357553b885fe922ff211461de?artifact_id=e3e7a070-c230-46ac-a216-a4e6661f",
           "flow_html_url": "https://app.kosli.com/cyber-dojo/flows/differ-ci",
           "deployment_diff": {
-            "diff_url": "https://github.com/cyber-dojo/differ/compare/842bdad4a2fc94d0acfe996d059972b50037b304...ce9bf5fdfb6e10b5d2de1b324fd03483e8b67173",
-            "previous_git_commit": "842bdad4a2fc94d0acfe996d059972b50037b304",
-            "previous_git_commit_url": "https://github.com/cyber-dojo/differ/commit/842bdad4a2fc94d0acfe996d059972b50037b304",
-            "previous_fingerprint": "807d0a7538fb9c739beab0b9f2793fe24c0a8bf079ef731ec2a2c2fe6464c463",
-            "previous_artifact_name": "244531986313.dkr.ecr.eu-central-1.amazonaws.com/differ:842bdad@sha256:807d0a7538fb9c739beab0b9f2793fe24c0a8bf079ef731ec2a2c2fe6464c463",
+            "diff_url": "https://github.com/cyber-dojo/differ/compare/ce9bf5fdfb6e10b5d2de1b324fd03483e8b67173...aca49ec4abe49fb4abf98e4d7b7af3af6b8239c3",
+            "previous_git_commit": "ce9bf5fdfb6e10b5d2de1b324fd03483e8b67173",
+            "previous_git_commit_url": "https://github.com/cyber-dojo/differ/commit/ce9bf5fdfb6e10b5d2de1b324fd03483e8b67173",
+            "previous_fingerprint": "08830cb438e6e0da0b5b12192695bd16cdfa6fe58e1316bb041492cb7dfabdff",
+            "previous_artifact_name": "244531986313.dkr.ecr.eu-central-1.amazonaws.com/differ:ce9bf5f@sha256:08830cb438e6e0da0b5b12192695bd16cdfa6fe58e1316bb041492cb7dfabdff",
             "previous_artifact_compliance_state": "COMPLIANT",
             "previous_running": false,
-            "previous_trail_name": "842bdad4a2fc94d0acfe996d059972b50037b304",
+            "previous_trail_name": "ce9bf5fdfb6e10b5d2de1b324fd03483e8b67173",
             "previous_template_reference_name": "differ"
           },
-          "commit_lead_time": 5444.0,
+          "commit_lead_time": 75386.0,
+          "artifact_compliance_in_flow": true,
+          "flow_reasons_for_non_compliance": []
+        },
+        {
+          "flow_name": "snyk-aws-beta-per-artifact",
+          "trail_name": "differ-4769761969b2b6af19828321d9471320b6fa671357553b885fe922ff211461de",
+          "template_reference_name": "differ",
+          "git_commit": "359c98460f5c3aefb136a77eef08d1be4c4ca08d",
+          "commit_url": "https://github.com/cyber-dojo/snyk-scanning/commit/359c98460f5c3aefb136a77eef08d1be4c4ca08d",
+          "git_commit_info": {
+            "sha1": "359c98460f5c3aefb136a77eef08d1be4c4ca08d",
+            "message": "Merge pull request #6 from cyber-dojo/key-uploads-and-trails-on-component-not-repo\n\nTell apart artifacts built by one repo",
+            "author": "Jon Jagger <jon@kosli.com>",
+            "branch": "main",
+            "timestamp": 1790759058.0,
+            "url": "https://github.com/cyber-dojo/snyk-scanning/commit/359c98460f5c3aefb136a77eef08d1be4c4ca08d"
+          },
+          "html_url": "https://app.kosli.com/cyber-dojo/flows/snyk-aws-beta-per-artifact/artifacts/4769761969b2b6af19828321d9471320b6fa671357553b885fe922ff211461de?artifact_id=80bb5764-5814-4083-8608-cbfcb002",
+          "flow_html_url": "https://app.kosli.com/cyber-dojo/flows/snyk-aws-beta-per-artifact",
+          "deployment_diff": {
+            "diff_url": "https://github.com/cyber-dojo/snyk-scanning/compare/359c98460f5c3aefb136a77eef08d1be4c4ca08d...359c98460f5c3aefb136a77eef08d1be4c4ca08d",
+            "previous_git_commit": "359c98460f5c3aefb136a77eef08d1be4c4ca08d",
+            "previous_git_commit_url": "https://github.com/cyber-dojo/snyk-scanning/commit/359c98460f5c3aefb136a77eef08d1be4c4ca08d",
+            "previous_fingerprint": "08830cb438e6e0da0b5b12192695bd16cdfa6fe58e1316bb041492cb7dfabdff",
+            "previous_artifact_name": "244531986313.dkr.ecr.eu-central-1.amazonaws.com/differ:ce9bf5f@sha256:08830cb438e6e0da0b5b12192695bd16cdfa6fe58e1316bb041492cb7dfabdff",
+            "previous_artifact_compliance_state": "COMPLIANT",
+            "previous_running": false,
+            "previous_trail_name": "differ-08830cb438e6e0da0b5b12192695bd16cdfa6fe58e1316bb041492cb7dfabdff",
+            "previous_template_reference_name": "differ"
+          },
+          "commit_lead_time": 2419978.0,
           "artifact_compliance_in_flow": true,
           "flow_reasons_for_non_compliance": []
         },
         {
           "flow_name": "production-promotion",
-          "trail_name": "promotion-one-186",
+          "trail_name": "promote-all-42",
           "template_reference_name": "differ",
           "git_commit": "f1f6cd6bce0e887649f077657215b50f9cf47d93",
           "commit_url": "https://github.com/cyber-dojo/aws-prod-co-promotion/commit/f1f6cd6bce0e887649f077657215b50f9cf47d93",
@@ -6908,57 +5216,26 @@ kosli get snapshot aws-prod --output=json
             "timestamp": 1791649272.0,
             "url": "https://github.com/cyber-dojo/aws-prod-co-promotion/commit/f1f6cd6bce0e887649f077657215b50f9cf47d93"
           },
-          "html_url": "https://app.kosli.com/cyber-dojo/flows/production-promotion/artifacts/08830cb438e6e0da0b5b12192695bd16cdfa6fe58e1316bb041492cb7dfabdff?artifact_id=eda90f94-ac70-4894-94b3-771da86a",
+          "html_url": "https://app.kosli.com/cyber-dojo/flows/production-promotion/artifacts/4769761969b2b6af19828321d9471320b6fa671357553b885fe922ff211461de?artifact_id=5d6c7a75-1c5d-4db4-a486-251787d1",
           "flow_html_url": "https://app.kosli.com/cyber-dojo/flows/production-promotion",
           "deployment_diff": {
-            "diff_url": "https://github.com/cyber-dojo/aws-prod-co-promotion/compare/54306f735c51413c972b38398da4d0a5fc86d47a...f1f6cd6bce0e887649f077657215b50f9cf47d93",
-            "previous_git_commit": "54306f735c51413c972b38398da4d0a5fc86d47a",
-            "previous_git_commit_url": "https://github.com/cyber-dojo/aws-prod-co-promotion/commit/54306f735c51413c972b38398da4d0a5fc86d47a",
-            "previous_fingerprint": "807d0a7538fb9c739beab0b9f2793fe24c0a8bf079ef731ec2a2c2fe6464c463",
-            "previous_artifact_name": "244531986313.dkr.ecr.eu-central-1.amazonaws.com/differ:842bdad@sha256:807d0a7538fb9c739beab0b9f2793fe24c0a8bf079ef731ec2a2c2fe6464c463",
+            "diff_url": "https://github.com/cyber-dojo/aws-prod-co-promotion/compare/f1f6cd6bce0e887649f077657215b50f9cf47d93...f1f6cd6bce0e887649f077657215b50f9cf47d93",
+            "previous_git_commit": "f1f6cd6bce0e887649f077657215b50f9cf47d93",
+            "previous_git_commit_url": "https://github.com/cyber-dojo/aws-prod-co-promotion/commit/f1f6cd6bce0e887649f077657215b50f9cf47d93",
+            "previous_fingerprint": "08830cb438e6e0da0b5b12192695bd16cdfa6fe58e1316bb041492cb7dfabdff",
+            "previous_artifact_name": "244531986313.dkr.ecr.eu-central-1.amazonaws.com/differ:ce9bf5f@sha256:08830cb438e6e0da0b5b12192695bd16cdfa6fe58e1316bb041492cb7dfabdff",
             "previous_artifact_compliance_state": "COMPLIANT",
             "previous_running": false,
-            "previous_trail_name": "promote-all-41",
+            "previous_trail_name": "promotion-one-186",
             "previous_template_reference_name": "differ"
           },
-          "commit_lead_time": 836388.0,
-          "artifact_compliance_in_flow": true,
-          "flow_reasons_for_non_compliance": []
-        },
-        {
-          "flow_name": "snyk-aws-beta-per-artifact",
-          "trail_name": "differ-08830cb438e6e0da0b5b12192695bd16cdfa6fe58e1316bb041492cb7dfabdff",
-          "template_reference_name": "differ",
-          "git_commit": "359c98460f5c3aefb136a77eef08d1be4c4ca08d",
-          "commit_url": "https://github.com/cyber-dojo/snyk-scanning/commit/359c98460f5c3aefb136a77eef08d1be4c4ca08d",
-          "git_commit_info": {
-            "sha1": "359c98460f5c3aefb136a77eef08d1be4c4ca08d",
-            "message": "Merge pull request #6 from cyber-dojo/key-uploads-and-trails-on-component-not-repo\n\nTell apart artifacts built by one repo",
-            "author": "Jon Jagger <jon@kosli.com>",
-            "branch": "main",
-            "timestamp": 1790759058.0,
-            "url": "https://github.com/cyber-dojo/snyk-scanning/commit/359c98460f5c3aefb136a77eef08d1be4c4ca08d"
-          },
-          "html_url": "https://app.kosli.com/cyber-dojo/flows/snyk-aws-beta-per-artifact/artifacts/08830cb438e6e0da0b5b12192695bd16cdfa6fe58e1316bb041492cb7dfabdff?artifact_id=87fbccfd-01e9-4532-a235-974725f3",
-          "flow_html_url": "https://app.kosli.com/cyber-dojo/flows/snyk-aws-beta-per-artifact",
-          "deployment_diff": {
-            "diff_url": "https://github.com/cyber-dojo/snyk-scanning/compare/359c98460f5c3aefb136a77eef08d1be4c4ca08d...359c98460f5c3aefb136a77eef08d1be4c4ca08d",
-            "previous_git_commit": "359c98460f5c3aefb136a77eef08d1be4c4ca08d",
-            "previous_git_commit_url": "https://github.com/cyber-dojo/snyk-scanning/commit/359c98460f5c3aefb136a77eef08d1be4c4ca08d",
-            "previous_fingerprint": "b268bc93ea9aac4a2db861f98c67c21b8a8165091c3f937b8f7ba129e81f665c",
-            "previous_artifact_name": "244531986313.dkr.ecr.eu-central-1.amazonaws.com/differ:9b49875@sha256:b268bc93ea9aac4a2db861f98c67c21b8a8165091c3f937b8f7ba129e81f665c",
-            "previous_artifact_compliance_state": "COMPLIANT",
-            "previous_running": false,
-            "previous_trail_name": "differ-b268bc93ea9aac4a2db861f98c67c21b8a8165091c3f937b8f7ba129e81f665c",
-            "previous_template_reference_name": "differ"
-          },
-          "commit_lead_time": 1726602.0,
+          "commit_lead_time": 1529764.0,
           "artifact_compliance_in_flow": true,
           "flow_reasons_for_non_compliance": []
         },
         {
           "flow_name": "snyk-aws-prod-per-artifact",
-          "trail_name": "differ-08830cb438e6e0da0b5b12192695bd16cdfa6fe58e1316bb041492cb7dfabdff",
+          "trail_name": "differ-4769761969b2b6af19828321d9471320b6fa671357553b885fe922ff211461de",
           "template_reference_name": "differ",
           "git_commit": "359c98460f5c3aefb136a77eef08d1be4c4ca08d",
           "commit_url": "https://github.com/cyber-dojo/snyk-scanning/commit/359c98460f5c3aefb136a77eef08d1be4c4ca08d",
@@ -6970,7 +5247,7 @@ kosli get snapshot aws-prod --output=json
             "timestamp": 1790759058.0,
             "url": "https://github.com/cyber-dojo/snyk-scanning/commit/359c98460f5c3aefb136a77eef08d1be4c4ca08d"
           },
-          "html_url": "https://app.kosli.com/cyber-dojo/flows/snyk-aws-prod-per-artifact/artifacts/08830cb438e6e0da0b5b12192695bd16cdfa6fe58e1316bb041492cb7dfabdff?artifact_id=e65f489f-2e15-490a-9fc2-b04df540",
+          "html_url": "https://app.kosli.com/cyber-dojo/flows/snyk-aws-prod-per-artifact/artifacts/4769761969b2b6af19828321d9471320b6fa671357553b885fe922ff211461de?artifact_id=3b24c78c-6d92-4a1d-ad47-df17789b",
           "flow_html_url": "https://app.kosli.com/cyber-dojo/flows/snyk-aws-prod-per-artifact",
           "deployment_diff": {
             "diff_url": "https://github.com/cyber-dojo/snyk-scanning/compare/30111f180ac4e3611cdbd7d805381a0bb9f53cff...359c98460f5c3aefb136a77eef08d1be4c4ca08d",
@@ -6983,19 +5260,19 @@ kosli get snapshot aws-prod --output=json
             "previous_trail_name": "differ-f61d363b12c540302c97e4f694c76edc6fcb594852e2dcdb8ce92d2d22521409",
             "previous_template_reference_name": "differ"
           },
-          "commit_lead_time": 1726602.0,
+          "commit_lead_time": 2419978.0,
           "artifact_compliance_in_flow": true,
           "flow_reasons_for_non_compliance": []
         }
       ],
       "ecs_context": {
-        "task_arn": "arn:aws:ecs:eu-central-1:274425519734:task/app/99235f292e76466195f23c7102735fa2",
+        "task_arn": "arn:aws:ecs:eu-central-1:274425519734:task/app/720e22f4f9af468399002b603a008980",
         "cluster_name": null,
         "service_name": null
       }
     },
     {
-      "name": "244531986313.dkr.ecr.eu-central-1.amazonaws.com/web:83553f5@sha256:da7984414ab096232877f301d3d7cea1daf3cdd3fdb72157f530fe186cba3d78",
+      "name": "244531986313.dkr.ecr.eu-central-1.amazonaws.com/nginx:3806299@sha256:44700e827553393dfc4ef9ba9f9948aeb28c1a2f75bd3f2dfa0ecfc3e7eb28df",
       "compliant": true,
       "deployments": [],
       "policy_decisions": [
@@ -7017,24 +5294,8 @@ kosli get snapshot aws-prod --output=json
                 {
                   "type": "rule_not_applicable",
                   "context": {
-                    "flow_name": "web-ci",
-                    "trail_name": "83553f52e8de8a9766a64fced8fbfb3cd32318a3",
-                    "artifact_status": null
-                  }
-                },
-                {
-                  "type": "rule_not_applicable",
-                  "context": {
-                    "flow_name": "production-promotion",
-                    "trail_name": "promotion-one-185",
-                    "artifact_status": null
-                  }
-                },
-                {
-                  "type": "rule_not_applicable",
-                  "context": {
-                    "flow_name": "snyk-aws-prod-per-artifact",
-                    "trail_name": "web-da7984414ab096232877f301d3d7cea1daf3cdd3fdb72157f530fe186cba3d78",
+                    "flow_name": "nginx-ci",
+                    "trail_name": "38062992c27234fbb3784c9730b0f7229a2dda66",
                     "artifact_status": null
                   }
                 },
@@ -7042,7 +5303,23 @@ kosli get snapshot aws-prod --output=json
                   "type": "rule_not_applicable",
                   "context": {
                     "flow_name": "snyk-aws-beta-per-artifact",
-                    "trail_name": "web-da7984414ab096232877f301d3d7cea1daf3cdd3fdb72157f530fe186cba3d78",
+                    "trail_name": "nginx-44700e827553393dfc4ef9ba9f9948aeb28c1a2f75bd3f2dfa0ecfc3e7eb28df",
+                    "artifact_status": null
+                  }
+                },
+                {
+                  "type": "rule_not_applicable",
+                  "context": {
+                    "flow_name": "production-promotion",
+                    "trail_name": "promote-all-42",
+                    "artifact_status": null
+                  }
+                },
+                {
+                  "type": "rule_not_applicable",
+                  "context": {
+                    "flow_name": "snyk-aws-prod-per-artifact",
+                    "trail_name": "nginx-44700e827553393dfc4ef9ba9f9948aeb28c1a2f75bd3f2dfa0ecfc3e7eb28df",
                     "artifact_status": null
                   }
                 }
@@ -7062,24 +5339,8 @@ kosli get snapshot aws-prod --output=json
                 {
                   "type": "rule_not_applicable",
                   "context": {
-                    "flow_name": "web-ci",
-                    "trail_name": "83553f52e8de8a9766a64fced8fbfb3cd32318a3",
-                    "artifact_status": "COMPLIANT"
-                  }
-                },
-                {
-                  "type": "rule_not_applicable",
-                  "context": {
-                    "flow_name": "production-promotion",
-                    "trail_name": "promotion-one-185",
-                    "artifact_status": "COMPLIANT"
-                  }
-                },
-                {
-                  "type": "rule_not_applicable",
-                  "context": {
-                    "flow_name": "snyk-aws-prod-per-artifact",
-                    "trail_name": "web-da7984414ab096232877f301d3d7cea1daf3cdd3fdb72157f530fe186cba3d78",
+                    "flow_name": "nginx-ci",
+                    "trail_name": "38062992c27234fbb3784c9730b0f7229a2dda66",
                     "artifact_status": "COMPLIANT"
                   }
                 },
@@ -7087,7 +5348,23 @@ kosli get snapshot aws-prod --output=json
                   "type": "rule_not_applicable",
                   "context": {
                     "flow_name": "snyk-aws-beta-per-artifact",
-                    "trail_name": "web-da7984414ab096232877f301d3d7cea1daf3cdd3fdb72157f530fe186cba3d78",
+                    "trail_name": "nginx-44700e827553393dfc4ef9ba9f9948aeb28c1a2f75bd3f2dfa0ecfc3e7eb28df",
+                    "artifact_status": "COMPLIANT"
+                  }
+                },
+                {
+                  "type": "rule_not_applicable",
+                  "context": {
+                    "flow_name": "production-promotion",
+                    "trail_name": "promote-all-42",
+                    "artifact_status": "COMPLIANT"
+                  }
+                },
+                {
+                  "type": "rule_not_applicable",
+                  "context": {
+                    "flow_name": "snyk-aws-prod-per-artifact",
+                    "trail_name": "nginx-44700e827553393dfc4ef9ba9f9948aeb28c1a2f75bd3f2dfa0ecfc3e7eb28df",
                     "artifact_status": "COMPLIANT"
                   }
                 }
@@ -7112,24 +5389,8 @@ kosli get snapshot aws-prod --output=json
                 {
                   "type": "rule_not_applicable",
                   "context": {
-                    "flow_name": "web-ci",
-                    "trail_name": "83553f52e8de8a9766a64fced8fbfb3cd32318a3",
-                    "artifact_status": null
-                  }
-                },
-                {
-                  "type": "rule_satisfied",
-                  "context": {
-                    "flow_name": "production-promotion",
-                    "trail_name": "promotion-one-185",
-                    "artifact_status": null
-                  }
-                },
-                {
-                  "type": "rule_not_applicable",
-                  "context": {
-                    "flow_name": "snyk-aws-prod-per-artifact",
-                    "trail_name": "web-da7984414ab096232877f301d3d7cea1daf3cdd3fdb72157f530fe186cba3d78",
+                    "flow_name": "nginx-ci",
+                    "trail_name": "38062992c27234fbb3784c9730b0f7229a2dda66",
                     "artifact_status": null
                   }
                 },
@@ -7137,7 +5398,23 @@ kosli get snapshot aws-prod --output=json
                   "type": "rule_not_applicable",
                   "context": {
                     "flow_name": "snyk-aws-beta-per-artifact",
-                    "trail_name": "web-da7984414ab096232877f301d3d7cea1daf3cdd3fdb72157f530fe186cba3d78",
+                    "trail_name": "nginx-44700e827553393dfc4ef9ba9f9948aeb28c1a2f75bd3f2dfa0ecfc3e7eb28df",
+                    "artifact_status": null
+                  }
+                },
+                {
+                  "type": "rule_satisfied",
+                  "context": {
+                    "flow_name": "production-promotion",
+                    "trail_name": "promote-all-42",
+                    "artifact_status": null
+                  }
+                },
+                {
+                  "type": "rule_not_applicable",
+                  "context": {
+                    "flow_name": "snyk-aws-prod-per-artifact",
+                    "trail_name": "nginx-44700e827553393dfc4ef9ba9f9948aeb28c1a2f75bd3f2dfa0ecfc3e7eb28df",
                     "artifact_status": null
                   }
                 }
@@ -7164,24 +5441,8 @@ kosli get snapshot aws-prod --output=json
                 {
                   "type": "rule_satisfied",
                   "context": {
-                    "flow_name": "web-ci",
-                    "trail_name": "83553f52e8de8a9766a64fced8fbfb3cd32318a3",
-                    "artifact_status": null
-                  }
-                },
-                {
-                  "type": "rule_satisfied",
-                  "context": {
-                    "flow_name": "production-promotion",
-                    "trail_name": "promotion-one-185",
-                    "artifact_status": null
-                  }
-                },
-                {
-                  "type": "rule_satisfied",
-                  "context": {
-                    "flow_name": "snyk-aws-prod-per-artifact",
-                    "trail_name": "web-da7984414ab096232877f301d3d7cea1daf3cdd3fdb72157f530fe186cba3d78",
+                    "flow_name": "nginx-ci",
+                    "trail_name": "38062992c27234fbb3784c9730b0f7229a2dda66",
                     "artifact_status": null
                   }
                 },
@@ -7189,7 +5450,23 @@ kosli get snapshot aws-prod --output=json
                   "type": "rule_satisfied",
                   "context": {
                     "flow_name": "snyk-aws-beta-per-artifact",
-                    "trail_name": "web-da7984414ab096232877f301d3d7cea1daf3cdd3fdb72157f530fe186cba3d78",
+                    "trail_name": "nginx-44700e827553393dfc4ef9ba9f9948aeb28c1a2f75bd3f2dfa0ecfc3e7eb28df",
+                    "artifact_status": null
+                  }
+                },
+                {
+                  "type": "rule_satisfied",
+                  "context": {
+                    "flow_name": "production-promotion",
+                    "trail_name": "promote-all-42",
+                    "artifact_status": null
+                  }
+                },
+                {
+                  "type": "rule_satisfied",
+                  "context": {
+                    "flow_name": "snyk-aws-prod-per-artifact",
+                    "trail_name": "nginx-44700e827553393dfc4ef9ba9f9948aeb28c1a2f75bd3f2dfa0ecfc3e7eb28df",
                     "artifact_status": null
                   }
                 }
@@ -7209,24 +5486,8 @@ kosli get snapshot aws-prod --output=json
                 {
                   "type": "rule_not_applicable",
                   "context": {
-                    "flow_name": "web-ci",
-                    "trail_name": "83553f52e8de8a9766a64fced8fbfb3cd32318a3",
-                    "artifact_status": "COMPLIANT"
-                  }
-                },
-                {
-                  "type": "rule_not_applicable",
-                  "context": {
-                    "flow_name": "production-promotion",
-                    "trail_name": "promotion-one-185",
-                    "artifact_status": "COMPLIANT"
-                  }
-                },
-                {
-                  "type": "rule_not_applicable",
-                  "context": {
-                    "flow_name": "snyk-aws-prod-per-artifact",
-                    "trail_name": "web-da7984414ab096232877f301d3d7cea1daf3cdd3fdb72157f530fe186cba3d78",
+                    "flow_name": "nginx-ci",
+                    "trail_name": "38062992c27234fbb3784c9730b0f7229a2dda66",
                     "artifact_status": "COMPLIANT"
                   }
                 },
@@ -7234,7 +5495,23 @@ kosli get snapshot aws-prod --output=json
                   "type": "rule_not_applicable",
                   "context": {
                     "flow_name": "snyk-aws-beta-per-artifact",
-                    "trail_name": "web-da7984414ab096232877f301d3d7cea1daf3cdd3fdb72157f530fe186cba3d78",
+                    "trail_name": "nginx-44700e827553393dfc4ef9ba9f9948aeb28c1a2f75bd3f2dfa0ecfc3e7eb28df",
+                    "artifact_status": "COMPLIANT"
+                  }
+                },
+                {
+                  "type": "rule_not_applicable",
+                  "context": {
+                    "flow_name": "production-promotion",
+                    "trail_name": "promote-all-42",
+                    "artifact_status": "COMPLIANT"
+                  }
+                },
+                {
+                  "type": "rule_not_applicable",
+                  "context": {
+                    "flow_name": "snyk-aws-prod-per-artifact",
+                    "trail_name": "nginx-44700e827553393dfc4ef9ba9f9948aeb28c1a2f75bd3f2dfa0ecfc3e7eb28df",
                     "artifact_status": "COMPLIANT"
                   }
                 }
@@ -7259,26 +5536,8 @@ kosli get snapshot aws-prod --output=json
                 {
                   "type": "rule_satisfied",
                   "context": {
-                    "flow_name": "web-ci",
-                    "trail_name": "83553f52e8de8a9766a64fced8fbfb3cd32318a3",
-                    "artifact_status": null,
-                    "for_control": "SDLC-CTRL-0002"
-                  }
-                },
-                {
-                  "type": "rule_not_applicable",
-                  "context": {
-                    "flow_name": "production-promotion",
-                    "trail_name": "promotion-one-185",
-                    "artifact_status": null,
-                    "for_control": "SDLC-CTRL-0002"
-                  }
-                },
-                {
-                  "type": "rule_not_applicable",
-                  "context": {
-                    "flow_name": "snyk-aws-prod-per-artifact",
-                    "trail_name": "web-da7984414ab096232877f301d3d7cea1daf3cdd3fdb72157f530fe186cba3d78",
+                    "flow_name": "nginx-ci",
+                    "trail_name": "38062992c27234fbb3784c9730b0f7229a2dda66",
                     "artifact_status": null,
                     "for_control": "SDLC-CTRL-0002"
                   }
@@ -7287,7 +5546,25 @@ kosli get snapshot aws-prod --output=json
                   "type": "rule_not_applicable",
                   "context": {
                     "flow_name": "snyk-aws-beta-per-artifact",
-                    "trail_name": "web-da7984414ab096232877f301d3d7cea1daf3cdd3fdb72157f530fe186cba3d78",
+                    "trail_name": "nginx-44700e827553393dfc4ef9ba9f9948aeb28c1a2f75bd3f2dfa0ecfc3e7eb28df",
+                    "artifact_status": null,
+                    "for_control": "SDLC-CTRL-0002"
+                  }
+                },
+                {
+                  "type": "rule_not_applicable",
+                  "context": {
+                    "flow_name": "production-promotion",
+                    "trail_name": "promote-all-42",
+                    "artifact_status": null,
+                    "for_control": "SDLC-CTRL-0002"
+                  }
+                },
+                {
+                  "type": "rule_not_applicable",
+                  "context": {
+                    "flow_name": "snyk-aws-prod-per-artifact",
+                    "trail_name": "nginx-44700e827553393dfc4ef9ba9f9948aeb28c1a2f75bd3f2dfa0ecfc3e7eb28df",
                     "artifact_status": null,
                     "for_control": "SDLC-CTRL-0002"
                   }
@@ -7315,24 +5592,8 @@ kosli get snapshot aws-prod --output=json
                 {
                   "type": "rule_not_applicable",
                   "context": {
-                    "flow_name": "web-ci",
-                    "trail_name": "83553f52e8de8a9766a64fced8fbfb3cd32318a3",
-                    "artifact_status": null
-                  }
-                },
-                {
-                  "type": "rule_not_applicable",
-                  "context": {
-                    "flow_name": "production-promotion",
-                    "trail_name": "promotion-one-185",
-                    "artifact_status": null
-                  }
-                },
-                {
-                  "type": "rule_not_applicable",
-                  "context": {
-                    "flow_name": "snyk-aws-prod-per-artifact",
-                    "trail_name": "web-da7984414ab096232877f301d3d7cea1daf3cdd3fdb72157f530fe186cba3d78",
+                    "flow_name": "nginx-ci",
+                    "trail_name": "38062992c27234fbb3784c9730b0f7229a2dda66",
                     "artifact_status": null
                   }
                 },
@@ -7340,7 +5601,23 @@ kosli get snapshot aws-prod --output=json
                   "type": "rule_not_applicable",
                   "context": {
                     "flow_name": "snyk-aws-beta-per-artifact",
-                    "trail_name": "web-da7984414ab096232877f301d3d7cea1daf3cdd3fdb72157f530fe186cba3d78",
+                    "trail_name": "nginx-44700e827553393dfc4ef9ba9f9948aeb28c1a2f75bd3f2dfa0ecfc3e7eb28df",
+                    "artifact_status": null
+                  }
+                },
+                {
+                  "type": "rule_not_applicable",
+                  "context": {
+                    "flow_name": "production-promotion",
+                    "trail_name": "promote-all-42",
+                    "artifact_status": null
+                  }
+                },
+                {
+                  "type": "rule_not_applicable",
+                  "context": {
+                    "flow_name": "snyk-aws-prod-per-artifact",
+                    "trail_name": "nginx-44700e827553393dfc4ef9ba9f9948aeb28c1a2f75bd3f2dfa0ecfc3e7eb28df",
                     "artifact_status": null
                   }
                 }
@@ -7360,24 +5637,8 @@ kosli get snapshot aws-prod --output=json
                 {
                   "type": "rule_not_applicable",
                   "context": {
-                    "flow_name": "web-ci",
-                    "trail_name": "83553f52e8de8a9766a64fced8fbfb3cd32318a3",
-                    "artifact_status": "COMPLIANT"
-                  }
-                },
-                {
-                  "type": "rule_not_applicable",
-                  "context": {
-                    "flow_name": "production-promotion",
-                    "trail_name": "promotion-one-185",
-                    "artifact_status": "COMPLIANT"
-                  }
-                },
-                {
-                  "type": "rule_not_applicable",
-                  "context": {
-                    "flow_name": "snyk-aws-prod-per-artifact",
-                    "trail_name": "web-da7984414ab096232877f301d3d7cea1daf3cdd3fdb72157f530fe186cba3d78",
+                    "flow_name": "nginx-ci",
+                    "trail_name": "38062992c27234fbb3784c9730b0f7229a2dda66",
                     "artifact_status": "COMPLIANT"
                   }
                 },
@@ -7385,7 +5646,23 @@ kosli get snapshot aws-prod --output=json
                   "type": "rule_not_applicable",
                   "context": {
                     "flow_name": "snyk-aws-beta-per-artifact",
-                    "trail_name": "web-da7984414ab096232877f301d3d7cea1daf3cdd3fdb72157f530fe186cba3d78",
+                    "trail_name": "nginx-44700e827553393dfc4ef9ba9f9948aeb28c1a2f75bd3f2dfa0ecfc3e7eb28df",
+                    "artifact_status": "COMPLIANT"
+                  }
+                },
+                {
+                  "type": "rule_not_applicable",
+                  "context": {
+                    "flow_name": "production-promotion",
+                    "trail_name": "promote-all-42",
+                    "artifact_status": "COMPLIANT"
+                  }
+                },
+                {
+                  "type": "rule_not_applicable",
+                  "context": {
+                    "flow_name": "snyk-aws-prod-per-artifact",
+                    "trail_name": "nginx-44700e827553393dfc4ef9ba9f9948aeb28c1a2f75bd3f2dfa0ecfc3e7eb28df",
                     "artifact_status": "COMPLIANT"
                   }
                 }
@@ -7410,24 +5687,8 @@ kosli get snapshot aws-prod --output=json
                 {
                   "type": "rule_satisfied",
                   "context": {
-                    "flow_name": "web-ci",
-                    "trail_name": "83553f52e8de8a9766a64fced8fbfb3cd32318a3",
-                    "artifact_status": null
-                  }
-                },
-                {
-                  "type": "rule_not_applicable",
-                  "context": {
-                    "flow_name": "production-promotion",
-                    "trail_name": "promotion-one-185",
-                    "artifact_status": null
-                  }
-                },
-                {
-                  "type": "rule_not_applicable",
-                  "context": {
-                    "flow_name": "snyk-aws-prod-per-artifact",
-                    "trail_name": "web-da7984414ab096232877f301d3d7cea1daf3cdd3fdb72157f530fe186cba3d78",
+                    "flow_name": "nginx-ci",
+                    "trail_name": "38062992c27234fbb3784c9730b0f7229a2dda66",
                     "artifact_status": null
                   }
                 },
@@ -7435,7 +5696,23 @@ kosli get snapshot aws-prod --output=json
                   "type": "rule_not_applicable",
                   "context": {
                     "flow_name": "snyk-aws-beta-per-artifact",
-                    "trail_name": "web-da7984414ab096232877f301d3d7cea1daf3cdd3fdb72157f530fe186cba3d78",
+                    "trail_name": "nginx-44700e827553393dfc4ef9ba9f9948aeb28c1a2f75bd3f2dfa0ecfc3e7eb28df",
+                    "artifact_status": null
+                  }
+                },
+                {
+                  "type": "rule_not_applicable",
+                  "context": {
+                    "flow_name": "production-promotion",
+                    "trail_name": "promote-all-42",
+                    "artifact_status": null
+                  }
+                },
+                {
+                  "type": "rule_not_applicable",
+                  "context": {
+                    "flow_name": "snyk-aws-prod-per-artifact",
+                    "trail_name": "nginx-44700e827553393dfc4ef9ba9f9948aeb28c1a2f75bd3f2dfa0ecfc3e7eb28df",
                     "artifact_status": null
                   }
                 }
@@ -7462,24 +5739,8 @@ kosli get snapshot aws-prod --output=json
                 {
                   "type": "rule_not_applicable",
                   "context": {
-                    "flow_name": "web-ci",
-                    "trail_name": "83553f52e8de8a9766a64fced8fbfb3cd32318a3",
-                    "artifact_status": null
-                  }
-                },
-                {
-                  "type": "rule_not_applicable",
-                  "context": {
-                    "flow_name": "production-promotion",
-                    "trail_name": "promotion-one-185",
-                    "artifact_status": null
-                  }
-                },
-                {
-                  "type": "rule_not_applicable",
-                  "context": {
-                    "flow_name": "snyk-aws-prod-per-artifact",
-                    "trail_name": "web-da7984414ab096232877f301d3d7cea1daf3cdd3fdb72157f530fe186cba3d78",
+                    "flow_name": "nginx-ci",
+                    "trail_name": "38062992c27234fbb3784c9730b0f7229a2dda66",
                     "artifact_status": null
                   }
                 },
@@ -7487,7 +5748,23 @@ kosli get snapshot aws-prod --output=json
                   "type": "rule_not_applicable",
                   "context": {
                     "flow_name": "snyk-aws-beta-per-artifact",
-                    "trail_name": "web-da7984414ab096232877f301d3d7cea1daf3cdd3fdb72157f530fe186cba3d78",
+                    "trail_name": "nginx-44700e827553393dfc4ef9ba9f9948aeb28c1a2f75bd3f2dfa0ecfc3e7eb28df",
+                    "artifact_status": null
+                  }
+                },
+                {
+                  "type": "rule_not_applicable",
+                  "context": {
+                    "flow_name": "production-promotion",
+                    "trail_name": "promote-all-42",
+                    "artifact_status": null
+                  }
+                },
+                {
+                  "type": "rule_not_applicable",
+                  "context": {
+                    "flow_name": "snyk-aws-prod-per-artifact",
+                    "trail_name": "nginx-44700e827553393dfc4ef9ba9f9948aeb28c1a2f75bd3f2dfa0ecfc3e7eb28df",
                     "artifact_status": null
                   }
                 }
@@ -7507,24 +5784,8 @@ kosli get snapshot aws-prod --output=json
                 {
                   "type": "rule_not_applicable",
                   "context": {
-                    "flow_name": "web-ci",
-                    "trail_name": "83553f52e8de8a9766a64fced8fbfb3cd32318a3",
-                    "artifact_status": "COMPLIANT"
-                  }
-                },
-                {
-                  "type": "rule_not_applicable",
-                  "context": {
-                    "flow_name": "production-promotion",
-                    "trail_name": "promotion-one-185",
-                    "artifact_status": "COMPLIANT"
-                  }
-                },
-                {
-                  "type": "rule_not_applicable",
-                  "context": {
-                    "flow_name": "snyk-aws-prod-per-artifact",
-                    "trail_name": "web-da7984414ab096232877f301d3d7cea1daf3cdd3fdb72157f530fe186cba3d78",
+                    "flow_name": "nginx-ci",
+                    "trail_name": "38062992c27234fbb3784c9730b0f7229a2dda66",
                     "artifact_status": "COMPLIANT"
                   }
                 },
@@ -7532,7 +5793,23 @@ kosli get snapshot aws-prod --output=json
                   "type": "rule_not_applicable",
                   "context": {
                     "flow_name": "snyk-aws-beta-per-artifact",
-                    "trail_name": "web-da7984414ab096232877f301d3d7cea1daf3cdd3fdb72157f530fe186cba3d78",
+                    "trail_name": "nginx-44700e827553393dfc4ef9ba9f9948aeb28c1a2f75bd3f2dfa0ecfc3e7eb28df",
+                    "artifact_status": "COMPLIANT"
+                  }
+                },
+                {
+                  "type": "rule_not_applicable",
+                  "context": {
+                    "flow_name": "production-promotion",
+                    "trail_name": "promote-all-42",
+                    "artifact_status": "COMPLIANT"
+                  }
+                },
+                {
+                  "type": "rule_not_applicable",
+                  "context": {
+                    "flow_name": "snyk-aws-prod-per-artifact",
+                    "trail_name": "nginx-44700e827553393dfc4ef9ba9f9948aeb28c1a2f75bd3f2dfa0ecfc3e7eb28df",
                     "artifact_status": "COMPLIANT"
                   }
                 }
@@ -7557,26 +5834,8 @@ kosli get snapshot aws-prod --output=json
                 {
                   "type": "rule_not_applicable",
                   "context": {
-                    "flow_name": "web-ci",
-                    "trail_name": "83553f52e8de8a9766a64fced8fbfb3cd32318a3",
-                    "artifact_status": null,
-                    "for_control": "SDLC-CTRL-0022"
-                  }
-                },
-                {
-                  "type": "rule_not_applicable",
-                  "context": {
-                    "flow_name": "production-promotion",
-                    "trail_name": "promotion-one-185",
-                    "artifact_status": null,
-                    "for_control": "SDLC-CTRL-0022"
-                  }
-                },
-                {
-                  "type": "rule_satisfied",
-                  "context": {
-                    "flow_name": "snyk-aws-prod-per-artifact",
-                    "trail_name": "web-da7984414ab096232877f301d3d7cea1daf3cdd3fdb72157f530fe186cba3d78",
+                    "flow_name": "nginx-ci",
+                    "trail_name": "38062992c27234fbb3784c9730b0f7229a2dda66",
                     "artifact_status": null,
                     "for_control": "SDLC-CTRL-0022"
                   }
@@ -7585,7 +5844,25 @@ kosli get snapshot aws-prod --output=json
                   "type": "rule_not_applicable",
                   "context": {
                     "flow_name": "snyk-aws-beta-per-artifact",
-                    "trail_name": "web-da7984414ab096232877f301d3d7cea1daf3cdd3fdb72157f530fe186cba3d78",
+                    "trail_name": "nginx-44700e827553393dfc4ef9ba9f9948aeb28c1a2f75bd3f2dfa0ecfc3e7eb28df",
+                    "artifact_status": null,
+                    "for_control": "SDLC-CTRL-0022"
+                  }
+                },
+                {
+                  "type": "rule_not_applicable",
+                  "context": {
+                    "flow_name": "production-promotion",
+                    "trail_name": "promote-all-42",
+                    "artifact_status": null,
+                    "for_control": "SDLC-CTRL-0022"
+                  }
+                },
+                {
+                  "type": "rule_satisfied",
+                  "context": {
+                    "flow_name": "snyk-aws-prod-per-artifact",
+                    "trail_name": "nginx-44700e827553393dfc4ef9ba9f9948aeb28c1a2f75bd3f2dfa0ecfc3e7eb28df",
                     "artifact_status": null,
                     "for_control": "SDLC-CTRL-0022"
                   }
@@ -7613,24 +5890,8 @@ kosli get snapshot aws-prod --output=json
                 {
                   "type": "rule_not_applicable",
                   "context": {
-                    "flow_name": "web-ci",
-                    "trail_name": "83553f52e8de8a9766a64fced8fbfb3cd32318a3",
-                    "artifact_status": null
-                  }
-                },
-                {
-                  "type": "rule_not_applicable",
-                  "context": {
-                    "flow_name": "production-promotion",
-                    "trail_name": "promotion-one-185",
-                    "artifact_status": null
-                  }
-                },
-                {
-                  "type": "rule_not_applicable",
-                  "context": {
-                    "flow_name": "snyk-aws-prod-per-artifact",
-                    "trail_name": "web-da7984414ab096232877f301d3d7cea1daf3cdd3fdb72157f530fe186cba3d78",
+                    "flow_name": "nginx-ci",
+                    "trail_name": "38062992c27234fbb3784c9730b0f7229a2dda66",
                     "artifact_status": null
                   }
                 },
@@ -7638,7 +5899,23 @@ kosli get snapshot aws-prod --output=json
                   "type": "rule_not_applicable",
                   "context": {
                     "flow_name": "snyk-aws-beta-per-artifact",
-                    "trail_name": "web-da7984414ab096232877f301d3d7cea1daf3cdd3fdb72157f530fe186cba3d78",
+                    "trail_name": "nginx-44700e827553393dfc4ef9ba9f9948aeb28c1a2f75bd3f2dfa0ecfc3e7eb28df",
+                    "artifact_status": null
+                  }
+                },
+                {
+                  "type": "rule_not_applicable",
+                  "context": {
+                    "flow_name": "production-promotion",
+                    "trail_name": "promote-all-42",
+                    "artifact_status": null
+                  }
+                },
+                {
+                  "type": "rule_not_applicable",
+                  "context": {
+                    "flow_name": "snyk-aws-prod-per-artifact",
+                    "trail_name": "nginx-44700e827553393dfc4ef9ba9f9948aeb28c1a2f75bd3f2dfa0ecfc3e7eb28df",
                     "artifact_status": null
                   }
                 }
@@ -7664,24 +5941,8 @@ kosli get snapshot aws-prod --output=json
                 {
                   "type": "rule_not_applicable",
                   "context": {
-                    "flow_name": "web-ci",
-                    "trail_name": "83553f52e8de8a9766a64fced8fbfb3cd32318a3",
-                    "artifact_status": "COMPLIANT"
-                  }
-                },
-                {
-                  "type": "rule_satisfied",
-                  "context": {
-                    "flow_name": "production-promotion",
-                    "trail_name": "promotion-one-185",
-                    "artifact_status": "COMPLIANT"
-                  }
-                },
-                {
-                  "type": "rule_satisfied",
-                  "context": {
-                    "flow_name": "snyk-aws-prod-per-artifact",
-                    "trail_name": "web-da7984414ab096232877f301d3d7cea1daf3cdd3fdb72157f530fe186cba3d78",
+                    "flow_name": "nginx-ci",
+                    "trail_name": "38062992c27234fbb3784c9730b0f7229a2dda66",
                     "artifact_status": "COMPLIANT"
                   }
                 },
@@ -7689,7 +5950,23 @@ kosli get snapshot aws-prod --output=json
                   "type": "rule_not_applicable",
                   "context": {
                     "flow_name": "snyk-aws-beta-per-artifact",
-                    "trail_name": "web-da7984414ab096232877f301d3d7cea1daf3cdd3fdb72157f530fe186cba3d78",
+                    "trail_name": "nginx-44700e827553393dfc4ef9ba9f9948aeb28c1a2f75bd3f2dfa0ecfc3e7eb28df",
+                    "artifact_status": "COMPLIANT"
+                  }
+                },
+                {
+                  "type": "rule_satisfied",
+                  "context": {
+                    "flow_name": "production-promotion",
+                    "trail_name": "promote-all-42",
+                    "artifact_status": "COMPLIANT"
+                  }
+                },
+                {
+                  "type": "rule_satisfied",
+                  "context": {
+                    "flow_name": "snyk-aws-prod-per-artifact",
+                    "trail_name": "nginx-44700e827553393dfc4ef9ba9f9948aeb28c1a2f75bd3f2dfa0ecfc3e7eb28df",
                     "artifact_status": "COMPLIANT"
                   }
                 }
@@ -7700,71 +5977,100 @@ kosli get snapshot aws-prod --output=json
         }
       ],
       "reasons_for_incompliance": [],
-      "fingerprint": "da7984414ab096232877f301d3d7cea1daf3cdd3fdb72157f530fe186cba3d78",
+      "fingerprint": "44700e827553393dfc4ef9ba9f9948aeb28c1a2f75bd3f2dfa0ecfc3e7eb28df",
       "creationTimestamp": [
-        1791806438,
-        1791806440,
-        1791806445
+        1793179016
       ],
       "pods": null,
       "annotation": {
-        "type": "unchanged",
-        "was": 3,
-        "now": 3
+        "type": "updated-provenance",
+        "was": 1,
+        "now": 1
       },
-      "flow_name": "web-ci",
-      "git_commit": "83553f52e8de8a9766a64fced8fbfb3cd32318a3",
-      "commit_url": "https://github.com/cyber-dojo/web/commit/83553f52e8de8a9766a64fced8fbfb3cd32318a3",
-      "html_url": "https://app.kosli.com/cyber-dojo/flows/web-ci/artifacts/da7984414ab096232877f301d3d7cea1daf3cdd3fdb72157f530fe186cba3d78?artifact_id=bb10f025-89b9-463a-9857-0a4a205b",
-      "flow_html_url": "https://app.kosli.com/cyber-dojo/flows/web-ci",
+      "flow_name": "nginx-ci",
+      "git_commit": "38062992c27234fbb3784c9730b0f7229a2dda66",
+      "commit_url": "https://github.com/cyber-dojo/nginx/commit/38062992c27234fbb3784c9730b0f7229a2dda66",
+      "html_url": "https://app.kosli.com/cyber-dojo/flows/nginx-ci/artifacts/44700e827553393dfc4ef9ba9f9948aeb28c1a2f75bd3f2dfa0ecfc3e7eb28df?artifact_id=a83de5fc-80e0-4742-8b87-3aea8a0f",
+      "flow_html_url": "https://app.kosli.com/cyber-dojo/flows/nginx-ci",
       "deployment_diff": {
-        "diff_url": "https://github.com/cyber-dojo/web/compare/3e6678b80d51d7ec4c89d88f46dcee93f27fd6c1...83553f52e8de8a9766a64fced8fbfb3cd32318a3",
-        "previous_git_commit": "3e6678b80d51d7ec4c89d88f46dcee93f27fd6c1",
-        "previous_git_commit_url": "https://github.com/cyber-dojo/web/commit/3e6678b80d51d7ec4c89d88f46dcee93f27fd6c1",
-        "previous_fingerprint": "b2c1ecdf766f6f687057bc95139e1c4f2cf9d086b81586f1b1e9096a279316fd",
-        "previous_artifact_name": "244531986313.dkr.ecr.eu-central-1.amazonaws.com/web:3e6678b@sha256:b2c1ecdf766f6f687057bc95139e1c4f2cf9d086b81586f1b1e9096a279316fd",
+        "diff_url": "https://github.com/cyber-dojo/nginx/compare/c6834ecc2c5b9e5622428f14be5c4de3b49dde46...38062992c27234fbb3784c9730b0f7229a2dda66",
+        "previous_git_commit": "c6834ecc2c5b9e5622428f14be5c4de3b49dde46",
+        "previous_git_commit_url": "https://github.com/cyber-dojo/nginx/commit/c6834ecc2c5b9e5622428f14be5c4de3b49dde46",
+        "previous_fingerprint": "4fbb8f1c531b24dcb2a38c71c268e0b8d7244e650cb96ce042d62fb8c07cb85b",
+        "previous_artifact_name": "244531986313.dkr.ecr.eu-central-1.amazonaws.com/nginx:c6834ec@sha256:4fbb8f1c531b24dcb2a38c71c268e0b8d7244e650cb96ce042d62fb8c07cb85b",
         "previous_artifact_compliance_state": "COMPLIANT",
         "previous_running": false,
-        "previous_trail_name": "3e6678b80d51d7ec4c89d88f46dcee93f27fd6c1",
-        "previous_template_reference_name": "web"
+        "previous_trail_name": "c6834ecc2c5b9e5622428f14be5c4de3b49dde46",
+        "previous_template_reference_name": "nginx"
       },
-      "commit_lead_time": 2820.0,
+      "commit_lead_time": 76256.0,
       "flows": [
         {
-          "flow_name": "web-ci",
-          "trail_name": "83553f52e8de8a9766a64fced8fbfb3cd32318a3",
-          "template_reference_name": "web",
-          "git_commit": "83553f52e8de8a9766a64fced8fbfb3cd32318a3",
-          "commit_url": "https://github.com/cyber-dojo/web/commit/83553f52e8de8a9766a64fced8fbfb3cd32318a3",
+          "flow_name": "nginx-ci",
+          "trail_name": "38062992c27234fbb3784c9730b0f7229a2dda66",
+          "template_reference_name": "nginx",
+          "git_commit": "38062992c27234fbb3784c9730b0f7229a2dda66",
+          "commit_url": "https://github.com/cyber-dojo/nginx/commit/38062992c27234fbb3784c9730b0f7229a2dda66",
           "git_commit_info": {
-            "sha1": "83553f52e8de8a9766a64fced8fbfb3cd32318a3",
-            "message": "Let a review fork a new avatar into the same group (#475)\n\nForking a light from a kata in a group could only start a\n  new solo kata or a new group, so a mob member who fell\n  behind had no way back into their own group's dashboard.\n  The fork dialog now offers an avatar option that joins the\n  same group and opens the new kata straight in the edit page.\n\n  It relies on saver's avatar_fork, which the current\n  versioner now provides. Saver answers null when the group\n  is full, so the option is disabled for a full group, and a\n  group that fills after the dialog opens shows the same\n  \"sorry, it's full\" dialog the creator does.\n\n  A pulling, timed_out or faulty light is not a test result,\n  so the fork button is now disabled on one.\n\n  The client suite brings containers down first, so the two\n  almost-full (63 avatar) test groups load fresh each run.",
+            "sha1": "38062992c27234fbb3784c9730b0f7229a2dda66",
+            "message": "Merge pull request #188 from cyber-dojo/run-workflow-159\n\nRun workflow to fix new snyk vuln",
             "author": "Jon Jagger <jon@kosli.com>",
             "branch": "",
-            "timestamp": 1791803618.0,
-            "url": "https://github.com/cyber-dojo/web/commit/83553f52e8de8a9766a64fced8fbfb3cd32318a3"
+            "timestamp": 1793102760.0,
+            "url": "https://github.com/cyber-dojo/nginx/commit/38062992c27234fbb3784c9730b0f7229a2dda66"
           },
-          "html_url": "https://app.kosli.com/cyber-dojo/flows/web-ci/artifacts/da7984414ab096232877f301d3d7cea1daf3cdd3fdb72157f530fe186cba3d78?artifact_id=bb10f025-89b9-463a-9857-0a4a205b",
-          "flow_html_url": "https://app.kosli.com/cyber-dojo/flows/web-ci",
+          "html_url": "https://app.kosli.com/cyber-dojo/flows/nginx-ci/artifacts/44700e827553393dfc4ef9ba9f9948aeb28c1a2f75bd3f2dfa0ecfc3e7eb28df?artifact_id=a83de5fc-80e0-4742-8b87-3aea8a0f",
+          "flow_html_url": "https://app.kosli.com/cyber-dojo/flows/nginx-ci",
           "deployment_diff": {
-            "diff_url": "https://github.com/cyber-dojo/web/compare/3e6678b80d51d7ec4c89d88f46dcee93f27fd6c1...83553f52e8de8a9766a64fced8fbfb3cd32318a3",
-            "previous_git_commit": "3e6678b80d51d7ec4c89d88f46dcee93f27fd6c1",
-            "previous_git_commit_url": "https://github.com/cyber-dojo/web/commit/3e6678b80d51d7ec4c89d88f46dcee93f27fd6c1",
-            "previous_fingerprint": "b2c1ecdf766f6f687057bc95139e1c4f2cf9d086b81586f1b1e9096a279316fd",
-            "previous_artifact_name": "244531986313.dkr.ecr.eu-central-1.amazonaws.com/web:3e6678b@sha256:b2c1ecdf766f6f687057bc95139e1c4f2cf9d086b81586f1b1e9096a279316fd",
+            "diff_url": "https://github.com/cyber-dojo/nginx/compare/c6834ecc2c5b9e5622428f14be5c4de3b49dde46...38062992c27234fbb3784c9730b0f7229a2dda66",
+            "previous_git_commit": "c6834ecc2c5b9e5622428f14be5c4de3b49dde46",
+            "previous_git_commit_url": "https://github.com/cyber-dojo/nginx/commit/c6834ecc2c5b9e5622428f14be5c4de3b49dde46",
+            "previous_fingerprint": "4fbb8f1c531b24dcb2a38c71c268e0b8d7244e650cb96ce042d62fb8c07cb85b",
+            "previous_artifact_name": "244531986313.dkr.ecr.eu-central-1.amazonaws.com/nginx:c6834ec@sha256:4fbb8f1c531b24dcb2a38c71c268e0b8d7244e650cb96ce042d62fb8c07cb85b",
             "previous_artifact_compliance_state": "COMPLIANT",
             "previous_running": false,
-            "previous_trail_name": "3e6678b80d51d7ec4c89d88f46dcee93f27fd6c1",
-            "previous_template_reference_name": "web"
+            "previous_trail_name": "c6834ecc2c5b9e5622428f14be5c4de3b49dde46",
+            "previous_template_reference_name": "nginx"
           },
-          "commit_lead_time": 2820.0,
+          "commit_lead_time": 76256.0,
+          "artifact_compliance_in_flow": true,
+          "flow_reasons_for_non_compliance": []
+        },
+        {
+          "flow_name": "snyk-aws-beta-per-artifact",
+          "trail_name": "nginx-44700e827553393dfc4ef9ba9f9948aeb28c1a2f75bd3f2dfa0ecfc3e7eb28df",
+          "template_reference_name": "nginx",
+          "git_commit": "359c98460f5c3aefb136a77eef08d1be4c4ca08d",
+          "commit_url": "https://github.com/cyber-dojo/snyk-scanning/commit/359c98460f5c3aefb136a77eef08d1be4c4ca08d",
+          "git_commit_info": {
+            "sha1": "359c98460f5c3aefb136a77eef08d1be4c4ca08d",
+            "message": "Merge pull request #6 from cyber-dojo/key-uploads-and-trails-on-component-not-repo\n\nTell apart artifacts built by one repo",
+            "author": "Jon Jagger <jon@kosli.com>",
+            "branch": "main",
+            "timestamp": 1790759058.0,
+            "url": "https://github.com/cyber-dojo/snyk-scanning/commit/359c98460f5c3aefb136a77eef08d1be4c4ca08d"
+          },
+          "html_url": "https://app.kosli.com/cyber-dojo/flows/snyk-aws-beta-per-artifact/artifacts/44700e827553393dfc4ef9ba9f9948aeb28c1a2f75bd3f2dfa0ecfc3e7eb28df?artifact_id=a6bc83cd-725d-47e1-9d7e-0915c0d9",
+          "flow_html_url": "https://app.kosli.com/cyber-dojo/flows/snyk-aws-beta-per-artifact",
+          "deployment_diff": {
+            "diff_url": "https://github.com/cyber-dojo/snyk-scanning/compare/359c98460f5c3aefb136a77eef08d1be4c4ca08d...359c98460f5c3aefb136a77eef08d1be4c4ca08d",
+            "previous_git_commit": "359c98460f5c3aefb136a77eef08d1be4c4ca08d",
+            "previous_git_commit_url": "https://github.com/cyber-dojo/snyk-scanning/commit/359c98460f5c3aefb136a77eef08d1be4c4ca08d",
+            "previous_fingerprint": "f4430327f644e75c547f98d43a148da029760006c572b28d3f957e175bb2352d",
+            "previous_artifact_name": "244531986313.dkr.ecr.eu-central-1.amazonaws.com/nginx:69e4ccf@sha256:f4430327f644e75c547f98d43a148da029760006c572b28d3f957e175bb2352d",
+            "previous_artifact_compliance_state": "COMPLIANT",
+            "previous_running": false,
+            "previous_trail_name": "nginx-f4430327f644e75c547f98d43a148da029760006c572b28d3f957e175bb2352d",
+            "previous_template_reference_name": "nginx"
+          },
+          "commit_lead_time": 2419958.0,
           "artifact_compliance_in_flow": true,
           "flow_reasons_for_non_compliance": []
         },
         {
           "flow_name": "production-promotion",
-          "trail_name": "promotion-one-185",
-          "template_reference_name": "web",
+          "trail_name": "promote-all-42",
+          "template_reference_name": "nginx",
           "git_commit": "f1f6cd6bce0e887649f077657215b50f9cf47d93",
           "commit_url": "https://github.com/cyber-dojo/aws-prod-co-promotion/commit/f1f6cd6bce0e887649f077657215b50f9cf47d93",
           "git_commit_info": {
@@ -7775,27 +6081,27 @@ kosli get snapshot aws-prod --output=json
             "timestamp": 1791649272.0,
             "url": "https://github.com/cyber-dojo/aws-prod-co-promotion/commit/f1f6cd6bce0e887649f077657215b50f9cf47d93"
           },
-          "html_url": "https://app.kosli.com/cyber-dojo/flows/production-promotion/artifacts/da7984414ab096232877f301d3d7cea1daf3cdd3fdb72157f530fe186cba3d78?artifact_id=318894c2-9470-4ec0-a282-1a903061",
+          "html_url": "https://app.kosli.com/cyber-dojo/flows/production-promotion/artifacts/44700e827553393dfc4ef9ba9f9948aeb28c1a2f75bd3f2dfa0ecfc3e7eb28df?artifact_id=084ba1c6-efea-4b20-8883-ddd2045a",
           "flow_html_url": "https://app.kosli.com/cyber-dojo/flows/production-promotion",
           "deployment_diff": {
-            "diff_url": "https://github.com/cyber-dojo/aws-prod-co-promotion/compare/54306f735c51413c972b38398da4d0a5fc86d47a...f1f6cd6bce0e887649f077657215b50f9cf47d93",
-            "previous_git_commit": "54306f735c51413c972b38398da4d0a5fc86d47a",
-            "previous_git_commit_url": "https://github.com/cyber-dojo/aws-prod-co-promotion/commit/54306f735c51413c972b38398da4d0a5fc86d47a",
-            "previous_fingerprint": "b2c1ecdf766f6f687057bc95139e1c4f2cf9d086b81586f1b1e9096a279316fd",
-            "previous_artifact_name": "244531986313.dkr.ecr.eu-central-1.amazonaws.com/web:3e6678b@sha256:b2c1ecdf766f6f687057bc95139e1c4f2cf9d086b81586f1b1e9096a279316fd",
+            "diff_url": "https://github.com/cyber-dojo/aws-prod-co-promotion/compare/f1f6cd6bce0e887649f077657215b50f9cf47d93...f1f6cd6bce0e887649f077657215b50f9cf47d93",
+            "previous_git_commit": "f1f6cd6bce0e887649f077657215b50f9cf47d93",
+            "previous_git_commit_url": "https://github.com/cyber-dojo/aws-prod-co-promotion/commit/f1f6cd6bce0e887649f077657215b50f9cf47d93",
+            "previous_fingerprint": "4fbb8f1c531b24dcb2a38c71c268e0b8d7244e650cb96ce042d62fb8c07cb85b",
+            "previous_artifact_name": "244531986313.dkr.ecr.eu-central-1.amazonaws.com/nginx:c6834ec@sha256:4fbb8f1c531b24dcb2a38c71c268e0b8d7244e650cb96ce042d62fb8c07cb85b",
             "previous_artifact_compliance_state": "COMPLIANT",
             "previous_running": false,
-            "previous_trail_name": "promote-all-41",
-            "previous_template_reference_name": "web"
+            "previous_trail_name": "promotion-one-188",
+            "previous_template_reference_name": "nginx"
           },
-          "commit_lead_time": 157166.0,
+          "commit_lead_time": 1529744.0,
           "artifact_compliance_in_flow": true,
           "flow_reasons_for_non_compliance": []
         },
         {
           "flow_name": "snyk-aws-prod-per-artifact",
-          "trail_name": "web-da7984414ab096232877f301d3d7cea1daf3cdd3fdb72157f530fe186cba3d78",
-          "template_reference_name": "web",
+          "trail_name": "nginx-44700e827553393dfc4ef9ba9f9948aeb28c1a2f75bd3f2dfa0ecfc3e7eb28df",
+          "template_reference_name": "nginx",
           "git_commit": "359c98460f5c3aefb136a77eef08d1be4c4ca08d",
           "commit_url": "https://github.com/cyber-dojo/snyk-scanning/commit/359c98460f5c3aefb136a77eef08d1be4c4ca08d",
           "git_commit_info": {
@@ -7806,26 +6112,2528 @@ kosli get snapshot aws-prod --output=json
             "timestamp": 1790759058.0,
             "url": "https://github.com/cyber-dojo/snyk-scanning/commit/359c98460f5c3aefb136a77eef08d1be4c4ca08d"
           },
-          "html_url": "https://app.kosli.com/cyber-dojo/flows/snyk-aws-prod-per-artifact/artifacts/da7984414ab096232877f301d3d7cea1daf3cdd3fdb72157f530fe186cba3d78?artifact_id=2546cf0d-6c89-45cb-9442-80abaa69",
+          "html_url": "https://app.kosli.com/cyber-dojo/flows/snyk-aws-prod-per-artifact/artifacts/44700e827553393dfc4ef9ba9f9948aeb28c1a2f75bd3f2dfa0ecfc3e7eb28df?artifact_id=298b1791-bbbe-4d62-9976-d5290ba1",
           "flow_html_url": "https://app.kosli.com/cyber-dojo/flows/snyk-aws-prod-per-artifact",
           "deployment_diff": {
             "diff_url": "https://github.com/cyber-dojo/snyk-scanning/compare/30111f180ac4e3611cdbd7d805381a0bb9f53cff...359c98460f5c3aefb136a77eef08d1be4c4ca08d",
             "previous_git_commit": "30111f180ac4e3611cdbd7d805381a0bb9f53cff",
             "previous_git_commit_url": "https://github.com/cyber-dojo/snyk-scanning/commit/30111f180ac4e3611cdbd7d805381a0bb9f53cff",
-            "previous_fingerprint": "e24bd03714d2e583a2196c0eaf82b2aad8eeecf73f29aec58875994b82f0f418",
-            "previous_artifact_name": "244531986313.dkr.ecr.eu-central-1.amazonaws.com/web:236898f@sha256:e24bd03714d2e583a2196c0eaf82b2aad8eeecf73f29aec58875994b82f0f418",
+            "previous_fingerprint": "aa63057d266fea8e2336b5d046a85889dd2ec37023cb81a465f6fff6c999c2c5",
+            "previous_artifact_name": "244531986313.dkr.ecr.eu-central-1.amazonaws.com/nginx:bd3938c@sha256:aa63057d266fea8e2336b5d046a85889dd2ec37023cb81a465f6fff6c999c2c5",
             "previous_artifact_compliance_state": "COMPLIANT",
             "previous_running": false,
-            "previous_trail_name": "web-e24bd03714d2e583a2196c0eaf82b2aad8eeecf73f29aec58875994b82f0f418",
-            "previous_template_reference_name": "web"
+            "previous_trail_name": "nginx-aa63057d266fea8e2336b5d046a85889dd2ec37023cb81a465f6fff6c999c2c5",
+            "previous_template_reference_name": "nginx"
           },
-          "commit_lead_time": 1047380.0,
+          "commit_lead_time": 2419958.0,
+          "artifact_compliance_in_flow": true,
+          "flow_reasons_for_non_compliance": []
+        }
+      ],
+      "ecs_context": {
+        "task_arn": "arn:aws:ecs:eu-central-1:274425519734:task/app/7fe88f121e034a1aa4df61b90fa42cb4",
+        "cluster_name": null,
+        "service_name": null
+      }
+    },
+    {
+      "name": "244531986313.dkr.ecr.eu-central-1.amazonaws.com/spooler:4bb52cb@sha256:345743d602e5af11022f409b4451193a7f632b69b90c3a23490201a96c443d41",
+      "compliant": true,
+      "deployments": [],
+      "policy_decisions": [
+        {
+          "policy_version": 2,
+          "status": "COMPLIANT",
+          "rule_evaluations": [
+            {
+              "rule": {
+                "type": "provenance",
+                "definition": {
+                  "required": false,
+                  "exceptions": []
+                }
+              },
+              "satisfied": null,
+              "ignored": true,
+              "resolutions": [
+                {
+                  "type": "rule_not_applicable",
+                  "context": {
+                    "flow_name": "spooler-ci",
+                    "trail_name": "4bb52cbbdefcd01d973f91b08fd9b5b386570c80",
+                    "artifact_status": null
+                  }
+                },
+                {
+                  "type": "rule_not_applicable",
+                  "context": {
+                    "flow_name": "snyk-aws-beta-per-artifact",
+                    "trail_name": "spooler-345743d602e5af11022f409b4451193a7f632b69b90c3a23490201a96c443d41",
+                    "artifact_status": null
+                  }
+                },
+                {
+                  "type": "rule_not_applicable",
+                  "context": {
+                    "flow_name": "production-promotion",
+                    "trail_name": "promote-all-42",
+                    "artifact_status": null
+                  }
+                },
+                {
+                  "type": "rule_not_applicable",
+                  "context": {
+                    "flow_name": "snyk-aws-prod-per-artifact",
+                    "trail_name": "spooler-345743d602e5af11022f409b4451193a7f632b69b90c3a23490201a96c443d41",
+                    "artifact_status": null
+                  }
+                }
+              ]
+            },
+            {
+              "rule": {
+                "type": "trail-compliance",
+                "definition": {
+                  "required": false,
+                  "exceptions": []
+                }
+              },
+              "satisfied": null,
+              "ignored": true,
+              "resolutions": [
+                {
+                  "type": "rule_not_applicable",
+                  "context": {
+                    "flow_name": "spooler-ci",
+                    "trail_name": "4bb52cbbdefcd01d973f91b08fd9b5b386570c80",
+                    "artifact_status": "COMPLIANT"
+                  }
+                },
+                {
+                  "type": "rule_not_applicable",
+                  "context": {
+                    "flow_name": "snyk-aws-beta-per-artifact",
+                    "trail_name": "spooler-345743d602e5af11022f409b4451193a7f632b69b90c3a23490201a96c443d41",
+                    "artifact_status": "COMPLIANT"
+                  }
+                },
+                {
+                  "type": "rule_not_applicable",
+                  "context": {
+                    "flow_name": "production-promotion",
+                    "trail_name": "promote-all-42",
+                    "artifact_status": "COMPLIANT"
+                  }
+                },
+                {
+                  "type": "rule_not_applicable",
+                  "context": {
+                    "flow_name": "snyk-aws-prod-per-artifact",
+                    "trail_name": "spooler-345743d602e5af11022f409b4451193a7f632b69b90c3a23490201a96c443d41",
+                    "artifact_status": "COMPLIANT"
+                  }
+                }
+              ]
+            },
+            {
+              "rule": {
+                "type": "attestation",
+                "definition": {
+                  "if": {
+                    "text": "flow.name == \"production-promotion\""
+                  },
+                  "name": "snyk-scan",
+                  "type": "decision",
+                  "must_be_compliant": true,
+                  "for_control": null
+                }
+              },
+              "satisfied": true,
+              "ignored": false,
+              "resolutions": [
+                {
+                  "type": "rule_not_applicable",
+                  "context": {
+                    "flow_name": "spooler-ci",
+                    "trail_name": "4bb52cbbdefcd01d973f91b08fd9b5b386570c80",
+                    "artifact_status": null
+                  }
+                },
+                {
+                  "type": "rule_not_applicable",
+                  "context": {
+                    "flow_name": "snyk-aws-beta-per-artifact",
+                    "trail_name": "spooler-345743d602e5af11022f409b4451193a7f632b69b90c3a23490201a96c443d41",
+                    "artifact_status": null
+                  }
+                },
+                {
+                  "type": "rule_satisfied",
+                  "context": {
+                    "flow_name": "production-promotion",
+                    "trail_name": "promote-all-42",
+                    "artifact_status": null
+                  }
+                },
+                {
+                  "type": "rule_not_applicable",
+                  "context": {
+                    "flow_name": "snyk-aws-prod-per-artifact",
+                    "trail_name": "spooler-345743d602e5af11022f409b4451193a7f632b69b90c3a23490201a96c443d41",
+                    "artifact_status": null
+                  }
+                }
+              ]
+            }
+          ],
+          "policy_name": "production-promotion"
+        },
+        {
+          "policy_version": 3,
+          "status": "COMPLIANT",
+          "rule_evaluations": [
+            {
+              "rule": {
+                "type": "provenance",
+                "definition": {
+                  "required": true,
+                  "exceptions": []
+                }
+              },
+              "satisfied": true,
+              "ignored": false,
+              "resolutions": [
+                {
+                  "type": "rule_satisfied",
+                  "context": {
+                    "flow_name": "spooler-ci",
+                    "trail_name": "4bb52cbbdefcd01d973f91b08fd9b5b386570c80",
+                    "artifact_status": null
+                  }
+                },
+                {
+                  "type": "rule_satisfied",
+                  "context": {
+                    "flow_name": "snyk-aws-beta-per-artifact",
+                    "trail_name": "spooler-345743d602e5af11022f409b4451193a7f632b69b90c3a23490201a96c443d41",
+                    "artifact_status": null
+                  }
+                },
+                {
+                  "type": "rule_satisfied",
+                  "context": {
+                    "flow_name": "production-promotion",
+                    "trail_name": "promote-all-42",
+                    "artifact_status": null
+                  }
+                },
+                {
+                  "type": "rule_satisfied",
+                  "context": {
+                    "flow_name": "snyk-aws-prod-per-artifact",
+                    "trail_name": "spooler-345743d602e5af11022f409b4451193a7f632b69b90c3a23490201a96c443d41",
+                    "artifact_status": null
+                  }
+                }
+              ]
+            },
+            {
+              "rule": {
+                "type": "trail-compliance",
+                "definition": {
+                  "required": false,
+                  "exceptions": []
+                }
+              },
+              "satisfied": null,
+              "ignored": true,
+              "resolutions": [
+                {
+                  "type": "rule_not_applicable",
+                  "context": {
+                    "flow_name": "spooler-ci",
+                    "trail_name": "4bb52cbbdefcd01d973f91b08fd9b5b386570c80",
+                    "artifact_status": "COMPLIANT"
+                  }
+                },
+                {
+                  "type": "rule_not_applicable",
+                  "context": {
+                    "flow_name": "snyk-aws-beta-per-artifact",
+                    "trail_name": "spooler-345743d602e5af11022f409b4451193a7f632b69b90c3a23490201a96c443d41",
+                    "artifact_status": "COMPLIANT"
+                  }
+                },
+                {
+                  "type": "rule_not_applicable",
+                  "context": {
+                    "flow_name": "production-promotion",
+                    "trail_name": "promote-all-42",
+                    "artifact_status": "COMPLIANT"
+                  }
+                },
+                {
+                  "type": "rule_not_applicable",
+                  "context": {
+                    "flow_name": "snyk-aws-prod-per-artifact",
+                    "trail_name": "spooler-345743d602e5af11022f409b4451193a7f632b69b90c3a23490201a96c443d41",
+                    "artifact_status": "COMPLIANT"
+                  }
+                }
+              ]
+            },
+            {
+              "rule": {
+                "type": "attestation",
+                "definition": {
+                  "if": {
+                    "text": "flow.tags.kind == \"build\""
+                  },
+                  "name": "*",
+                  "type": "decision",
+                  "must_be_compliant": true,
+                  "for_control": "SDLC-CTRL-0002"
+                }
+              },
+              "satisfied": true,
+              "ignored": false,
+              "resolutions": [
+                {
+                  "type": "rule_satisfied",
+                  "context": {
+                    "flow_name": "spooler-ci",
+                    "trail_name": "4bb52cbbdefcd01d973f91b08fd9b5b386570c80",
+                    "artifact_status": null,
+                    "for_control": "SDLC-CTRL-0002"
+                  }
+                },
+                {
+                  "type": "rule_not_applicable",
+                  "context": {
+                    "flow_name": "snyk-aws-beta-per-artifact",
+                    "trail_name": "spooler-345743d602e5af11022f409b4451193a7f632b69b90c3a23490201a96c443d41",
+                    "artifact_status": null,
+                    "for_control": "SDLC-CTRL-0002"
+                  }
+                },
+                {
+                  "type": "rule_not_applicable",
+                  "context": {
+                    "flow_name": "production-promotion",
+                    "trail_name": "promote-all-42",
+                    "artifact_status": null,
+                    "for_control": "SDLC-CTRL-0002"
+                  }
+                },
+                {
+                  "type": "rule_not_applicable",
+                  "context": {
+                    "flow_name": "snyk-aws-prod-per-artifact",
+                    "trail_name": "spooler-345743d602e5af11022f409b4451193a7f632b69b90c3a23490201a96c443d41",
+                    "artifact_status": null,
+                    "for_control": "SDLC-CTRL-0002"
+                  }
+                }
+              ]
+            }
+          ],
+          "policy_name": "provenance"
+        },
+        {
+          "policy_version": 3,
+          "status": "COMPLIANT",
+          "rule_evaluations": [
+            {
+              "rule": {
+                "type": "provenance",
+                "definition": {
+                  "required": false,
+                  "exceptions": []
+                }
+              },
+              "satisfied": null,
+              "ignored": true,
+              "resolutions": [
+                {
+                  "type": "rule_not_applicable",
+                  "context": {
+                    "flow_name": "spooler-ci",
+                    "trail_name": "4bb52cbbdefcd01d973f91b08fd9b5b386570c80",
+                    "artifact_status": null
+                  }
+                },
+                {
+                  "type": "rule_not_applicable",
+                  "context": {
+                    "flow_name": "snyk-aws-beta-per-artifact",
+                    "trail_name": "spooler-345743d602e5af11022f409b4451193a7f632b69b90c3a23490201a96c443d41",
+                    "artifact_status": null
+                  }
+                },
+                {
+                  "type": "rule_not_applicable",
+                  "context": {
+                    "flow_name": "production-promotion",
+                    "trail_name": "promote-all-42",
+                    "artifact_status": null
+                  }
+                },
+                {
+                  "type": "rule_not_applicable",
+                  "context": {
+                    "flow_name": "snyk-aws-prod-per-artifact",
+                    "trail_name": "spooler-345743d602e5af11022f409b4451193a7f632b69b90c3a23490201a96c443d41",
+                    "artifact_status": null
+                  }
+                }
+              ]
+            },
+            {
+              "rule": {
+                "type": "trail-compliance",
+                "definition": {
+                  "required": false,
+                  "exceptions": []
+                }
+              },
+              "satisfied": null,
+              "ignored": true,
+              "resolutions": [
+                {
+                  "type": "rule_not_applicable",
+                  "context": {
+                    "flow_name": "spooler-ci",
+                    "trail_name": "4bb52cbbdefcd01d973f91b08fd9b5b386570c80",
+                    "artifact_status": "COMPLIANT"
+                  }
+                },
+                {
+                  "type": "rule_not_applicable",
+                  "context": {
+                    "flow_name": "snyk-aws-beta-per-artifact",
+                    "trail_name": "spooler-345743d602e5af11022f409b4451193a7f632b69b90c3a23490201a96c443d41",
+                    "artifact_status": "COMPLIANT"
+                  }
+                },
+                {
+                  "type": "rule_not_applicable",
+                  "context": {
+                    "flow_name": "production-promotion",
+                    "trail_name": "promote-all-42",
+                    "artifact_status": "COMPLIANT"
+                  }
+                },
+                {
+                  "type": "rule_not_applicable",
+                  "context": {
+                    "flow_name": "snyk-aws-prod-per-artifact",
+                    "trail_name": "spooler-345743d602e5af11022f409b4451193a7f632b69b90c3a23490201a96c443d41",
+                    "artifact_status": "COMPLIANT"
+                  }
+                }
+              ]
+            },
+            {
+              "rule": {
+                "type": "attestation",
+                "definition": {
+                  "if": {
+                    "text": "flow.tags.kind == \"build\""
+                  },
+                  "name": "*",
+                  "type": "pull_request",
+                  "must_be_compliant": true,
+                  "for_control": null
+                }
+              },
+              "satisfied": true,
+              "ignored": false,
+              "resolutions": [
+                {
+                  "type": "rule_satisfied",
+                  "context": {
+                    "flow_name": "spooler-ci",
+                    "trail_name": "4bb52cbbdefcd01d973f91b08fd9b5b386570c80",
+                    "artifact_status": null
+                  }
+                },
+                {
+                  "type": "rule_not_applicable",
+                  "context": {
+                    "flow_name": "snyk-aws-beta-per-artifact",
+                    "trail_name": "spooler-345743d602e5af11022f409b4451193a7f632b69b90c3a23490201a96c443d41",
+                    "artifact_status": null
+                  }
+                },
+                {
+                  "type": "rule_not_applicable",
+                  "context": {
+                    "flow_name": "production-promotion",
+                    "trail_name": "promote-all-42",
+                    "artifact_status": null
+                  }
+                },
+                {
+                  "type": "rule_not_applicable",
+                  "context": {
+                    "flow_name": "snyk-aws-prod-per-artifact",
+                    "trail_name": "spooler-345743d602e5af11022f409b4451193a7f632b69b90c3a23490201a96c443d41",
+                    "artifact_status": null
+                  }
+                }
+              ]
+            }
+          ],
+          "policy_name": "pull-request"
+        },
+        {
+          "policy_version": 4,
+          "status": "COMPLIANT",
+          "rule_evaluations": [
+            {
+              "rule": {
+                "type": "provenance",
+                "definition": {
+                  "required": false,
+                  "exceptions": []
+                }
+              },
+              "satisfied": null,
+              "ignored": true,
+              "resolutions": [
+                {
+                  "type": "rule_not_applicable",
+                  "context": {
+                    "flow_name": "spooler-ci",
+                    "trail_name": "4bb52cbbdefcd01d973f91b08fd9b5b386570c80",
+                    "artifact_status": null
+                  }
+                },
+                {
+                  "type": "rule_not_applicable",
+                  "context": {
+                    "flow_name": "snyk-aws-beta-per-artifact",
+                    "trail_name": "spooler-345743d602e5af11022f409b4451193a7f632b69b90c3a23490201a96c443d41",
+                    "artifact_status": null
+                  }
+                },
+                {
+                  "type": "rule_not_applicable",
+                  "context": {
+                    "flow_name": "production-promotion",
+                    "trail_name": "promote-all-42",
+                    "artifact_status": null
+                  }
+                },
+                {
+                  "type": "rule_not_applicable",
+                  "context": {
+                    "flow_name": "snyk-aws-prod-per-artifact",
+                    "trail_name": "spooler-345743d602e5af11022f409b4451193a7f632b69b90c3a23490201a96c443d41",
+                    "artifact_status": null
+                  }
+                }
+              ]
+            },
+            {
+              "rule": {
+                "type": "trail-compliance",
+                "definition": {
+                  "required": false,
+                  "exceptions": []
+                }
+              },
+              "satisfied": null,
+              "ignored": true,
+              "resolutions": [
+                {
+                  "type": "rule_not_applicable",
+                  "context": {
+                    "flow_name": "spooler-ci",
+                    "trail_name": "4bb52cbbdefcd01d973f91b08fd9b5b386570c80",
+                    "artifact_status": "COMPLIANT"
+                  }
+                },
+                {
+                  "type": "rule_not_applicable",
+                  "context": {
+                    "flow_name": "snyk-aws-beta-per-artifact",
+                    "trail_name": "spooler-345743d602e5af11022f409b4451193a7f632b69b90c3a23490201a96c443d41",
+                    "artifact_status": "COMPLIANT"
+                  }
+                },
+                {
+                  "type": "rule_not_applicable",
+                  "context": {
+                    "flow_name": "production-promotion",
+                    "trail_name": "promote-all-42",
+                    "artifact_status": "COMPLIANT"
+                  }
+                },
+                {
+                  "type": "rule_not_applicable",
+                  "context": {
+                    "flow_name": "snyk-aws-prod-per-artifact",
+                    "trail_name": "spooler-345743d602e5af11022f409b4451193a7f632b69b90c3a23490201a96c443d41",
+                    "artifact_status": "COMPLIANT"
+                  }
+                }
+              ]
+            },
+            {
+              "rule": {
+                "type": "attestation",
+                "definition": {
+                  "if": {
+                    "text": "flow.name == \"snyk-aws-prod-per-artifact\""
+                  },
+                  "name": "snyk-container-scan",
+                  "type": "decision",
+                  "must_be_compliant": true,
+                  "for_control": "SDLC-CTRL-0022"
+                }
+              },
+              "satisfied": true,
+              "ignored": false,
+              "resolutions": [
+                {
+                  "type": "rule_not_applicable",
+                  "context": {
+                    "flow_name": "spooler-ci",
+                    "trail_name": "4bb52cbbdefcd01d973f91b08fd9b5b386570c80",
+                    "artifact_status": null,
+                    "for_control": "SDLC-CTRL-0022"
+                  }
+                },
+                {
+                  "type": "rule_not_applicable",
+                  "context": {
+                    "flow_name": "snyk-aws-beta-per-artifact",
+                    "trail_name": "spooler-345743d602e5af11022f409b4451193a7f632b69b90c3a23490201a96c443d41",
+                    "artifact_status": null,
+                    "for_control": "SDLC-CTRL-0022"
+                  }
+                },
+                {
+                  "type": "rule_not_applicable",
+                  "context": {
+                    "flow_name": "production-promotion",
+                    "trail_name": "promote-all-42",
+                    "artifact_status": null,
+                    "for_control": "SDLC-CTRL-0022"
+                  }
+                },
+                {
+                  "type": "rule_satisfied",
+                  "context": {
+                    "flow_name": "snyk-aws-prod-per-artifact",
+                    "trail_name": "spooler-345743d602e5af11022f409b4451193a7f632b69b90c3a23490201a96c443d41",
+                    "artifact_status": null,
+                    "for_control": "SDLC-CTRL-0022"
+                  }
+                }
+              ]
+            }
+          ],
+          "policy_name": "snyk-scan-aws-prod"
+        },
+        {
+          "policy_version": 2,
+          "status": "COMPLIANT",
+          "rule_evaluations": [
+            {
+              "rule": {
+                "type": "provenance",
+                "definition": {
+                  "required": false,
+                  "exceptions": []
+                }
+              },
+              "satisfied": null,
+              "ignored": true,
+              "resolutions": [
+                {
+                  "type": "rule_not_applicable",
+                  "context": {
+                    "flow_name": "spooler-ci",
+                    "trail_name": "4bb52cbbdefcd01d973f91b08fd9b5b386570c80",
+                    "artifact_status": null
+                  }
+                },
+                {
+                  "type": "rule_not_applicable",
+                  "context": {
+                    "flow_name": "snyk-aws-beta-per-artifact",
+                    "trail_name": "spooler-345743d602e5af11022f409b4451193a7f632b69b90c3a23490201a96c443d41",
+                    "artifact_status": null
+                  }
+                },
+                {
+                  "type": "rule_not_applicable",
+                  "context": {
+                    "flow_name": "production-promotion",
+                    "trail_name": "promote-all-42",
+                    "artifact_status": null
+                  }
+                },
+                {
+                  "type": "rule_not_applicable",
+                  "context": {
+                    "flow_name": "snyk-aws-prod-per-artifact",
+                    "trail_name": "spooler-345743d602e5af11022f409b4451193a7f632b69b90c3a23490201a96c443d41",
+                    "artifact_status": null
+                  }
+                }
+              ]
+            },
+            {
+              "rule": {
+                "type": "trail-compliance",
+                "definition": {
+                  "required": true,
+                  "exceptions": [
+                    {
+                      "if": {
+                        "text": "exists(flow.tags.env) and flow.tags.env != \"aws-prod\""
+                      }
+                    }
+                  ]
+                }
+              },
+              "satisfied": true,
+              "ignored": false,
+              "resolutions": [
+                {
+                  "type": "rule_not_applicable",
+                  "context": {
+                    "flow_name": "spooler-ci",
+                    "trail_name": "4bb52cbbdefcd01d973f91b08fd9b5b386570c80",
+                    "artifact_status": "COMPLIANT"
+                  }
+                },
+                {
+                  "type": "rule_not_applicable",
+                  "context": {
+                    "flow_name": "snyk-aws-beta-per-artifact",
+                    "trail_name": "spooler-345743d602e5af11022f409b4451193a7f632b69b90c3a23490201a96c443d41",
+                    "artifact_status": "COMPLIANT"
+                  }
+                },
+                {
+                  "type": "rule_satisfied",
+                  "context": {
+                    "flow_name": "production-promotion",
+                    "trail_name": "promote-all-42",
+                    "artifact_status": "COMPLIANT"
+                  }
+                },
+                {
+                  "type": "rule_satisfied",
+                  "context": {
+                    "flow_name": "snyk-aws-prod-per-artifact",
+                    "trail_name": "spooler-345743d602e5af11022f409b4451193a7f632b69b90c3a23490201a96c443d41",
+                    "artifact_status": "COMPLIANT"
+                  }
+                }
+              ]
+            }
+          ],
+          "policy_name": "trail-compliance-aws-prod"
+        }
+      ],
+      "reasons_for_incompliance": [],
+      "fingerprint": "345743d602e5af11022f409b4451193a7f632b69b90c3a23490201a96c443d41",
+      "creationTimestamp": [
+        1793178869
+      ],
+      "pods": null,
+      "annotation": {
+        "type": "updated-provenance",
+        "was": 1,
+        "now": 1
+      },
+      "flow_name": "spooler-ci",
+      "git_commit": "4bb52cbbdefcd01d973f91b08fd9b5b386570c80",
+      "commit_url": "https://github.com/cyber-dojo/spooler/commit/4bb52cbbdefcd01d973f91b08fd9b5b386570c80",
+      "html_url": "https://app.kosli.com/cyber-dojo/flows/spooler-ci/artifacts/345743d602e5af11022f409b4451193a7f632b69b90c3a23490201a96c443d41?artifact_id=96424b35-49cc-4dea-9efd-bc7e14c6",
+      "flow_html_url": "https://app.kosli.com/cyber-dojo/flows/spooler-ci",
+      "deployment_diff": {
+        "diff_url": "https://github.com/cyber-dojo/spooler/compare/afeb2f32f34dfb29fc36ecc3eb3aeb602030eec5...4bb52cbbdefcd01d973f91b08fd9b5b386570c80",
+        "previous_git_commit": "afeb2f32f34dfb29fc36ecc3eb3aeb602030eec5",
+        "previous_git_commit_url": "https://github.com/cyber-dojo/spooler/commit/afeb2f32f34dfb29fc36ecc3eb3aeb602030eec5",
+        "previous_fingerprint": "0fe7da2f4c8a0afd88f81bb066bbdd30e02e45f4872f6a0a4538f527185d729f",
+        "previous_artifact_name": "244531986313.dkr.ecr.eu-central-1.amazonaws.com/spooler:afeb2f3@sha256:0fe7da2f4c8a0afd88f81bb066bbdd30e02e45f4872f6a0a4538f527185d729f",
+        "previous_artifact_compliance_state": "COMPLIANT",
+        "previous_running": false,
+        "previous_trail_name": "afeb2f32f34dfb29fc36ecc3eb3aeb602030eec5",
+        "previous_template_reference_name": "spooler"
+      },
+      "commit_lead_time": 77067.0,
+      "flows": [
+        {
+          "flow_name": "spooler-ci",
+          "trail_name": "4bb52cbbdefcd01d973f91b08fd9b5b386570c80",
+          "template_reference_name": "spooler",
+          "git_commit": "4bb52cbbdefcd01d973f91b08fd9b5b386570c80",
+          "commit_url": "https://github.com/cyber-dojo/spooler/commit/4bb52cbbdefcd01d973f91b08fd9b5b386570c80",
+          "git_commit_info": {
+            "sha1": "4bb52cbbdefcd01d973f91b08fd9b5b386570c80",
+            "message": "Merge pull request #29 from cyber-dojo/update-base-image-5997b3d\n\nMerge update-base-image into main",
+            "author": "Jon Jagger <jon@kosli.com>",
+            "branch": "",
+            "timestamp": 1793101802.0,
+            "url": "https://github.com/cyber-dojo/spooler/commit/4bb52cbbdefcd01d973f91b08fd9b5b386570c80"
+          },
+          "html_url": "https://app.kosli.com/cyber-dojo/flows/spooler-ci/artifacts/345743d602e5af11022f409b4451193a7f632b69b90c3a23490201a96c443d41?artifact_id=96424b35-49cc-4dea-9efd-bc7e14c6",
+          "flow_html_url": "https://app.kosli.com/cyber-dojo/flows/spooler-ci",
+          "deployment_diff": {
+            "diff_url": "https://github.com/cyber-dojo/spooler/compare/afeb2f32f34dfb29fc36ecc3eb3aeb602030eec5...4bb52cbbdefcd01d973f91b08fd9b5b386570c80",
+            "previous_git_commit": "afeb2f32f34dfb29fc36ecc3eb3aeb602030eec5",
+            "previous_git_commit_url": "https://github.com/cyber-dojo/spooler/commit/afeb2f32f34dfb29fc36ecc3eb3aeb602030eec5",
+            "previous_fingerprint": "0fe7da2f4c8a0afd88f81bb066bbdd30e02e45f4872f6a0a4538f527185d729f",
+            "previous_artifact_name": "244531986313.dkr.ecr.eu-central-1.amazonaws.com/spooler:afeb2f3@sha256:0fe7da2f4c8a0afd88f81bb066bbdd30e02e45f4872f6a0a4538f527185d729f",
+            "previous_artifact_compliance_state": "COMPLIANT",
+            "previous_running": false,
+            "previous_trail_name": "afeb2f32f34dfb29fc36ecc3eb3aeb602030eec5",
+            "previous_template_reference_name": "spooler"
+          },
+          "commit_lead_time": 77067.0,
           "artifact_compliance_in_flow": true,
           "flow_reasons_for_non_compliance": []
         },
         {
           "flow_name": "snyk-aws-beta-per-artifact",
-          "trail_name": "web-da7984414ab096232877f301d3d7cea1daf3cdd3fdb72157f530fe186cba3d78",
+          "trail_name": "spooler-345743d602e5af11022f409b4451193a7f632b69b90c3a23490201a96c443d41",
+          "template_reference_name": "spooler",
+          "git_commit": "359c98460f5c3aefb136a77eef08d1be4c4ca08d",
+          "commit_url": "https://github.com/cyber-dojo/snyk-scanning/commit/359c98460f5c3aefb136a77eef08d1be4c4ca08d",
+          "git_commit_info": {
+            "sha1": "359c98460f5c3aefb136a77eef08d1be4c4ca08d",
+            "message": "Merge pull request #6 from cyber-dojo/key-uploads-and-trails-on-component-not-repo\n\nTell apart artifacts built by one repo",
+            "author": "Jon Jagger <jon@kosli.com>",
+            "branch": "main",
+            "timestamp": 1790759058.0,
+            "url": "https://github.com/cyber-dojo/snyk-scanning/commit/359c98460f5c3aefb136a77eef08d1be4c4ca08d"
+          },
+          "html_url": "https://app.kosli.com/cyber-dojo/flows/snyk-aws-beta-per-artifact/artifacts/345743d602e5af11022f409b4451193a7f632b69b90c3a23490201a96c443d41?artifact_id=77d6559d-9494-4d58-925b-eb20482b",
+          "flow_html_url": "https://app.kosli.com/cyber-dojo/flows/snyk-aws-beta-per-artifact",
+          "deployment_diff": {
+            "diff_url": "https://github.com/cyber-dojo/snyk-scanning/compare/359c98460f5c3aefb136a77eef08d1be4c4ca08d...359c98460f5c3aefb136a77eef08d1be4c4ca08d",
+            "previous_git_commit": "359c98460f5c3aefb136a77eef08d1be4c4ca08d",
+            "previous_git_commit_url": "https://github.com/cyber-dojo/snyk-scanning/commit/359c98460f5c3aefb136a77eef08d1be4c4ca08d",
+            "previous_fingerprint": "c162e3974e3067c3902b2574098819f99d35c24d88f57e70efb73d617e1f653d",
+            "previous_artifact_name": "244531986313.dkr.ecr.eu-central-1.amazonaws.com/spooler:28636f6@sha256:c162e3974e3067c3902b2574098819f99d35c24d88f57e70efb73d617e1f653d",
+            "previous_artifact_compliance_state": "COMPLIANT",
+            "previous_running": false,
+            "previous_trail_name": "spooler-c162e3974e3067c3902b2574098819f99d35c24d88f57e70efb73d617e1f653d",
+            "previous_template_reference_name": "spooler"
+          },
+          "commit_lead_time": 2419811.0,
+          "artifact_compliance_in_flow": true,
+          "flow_reasons_for_non_compliance": []
+        },
+        {
+          "flow_name": "production-promotion",
+          "trail_name": "promote-all-42",
+          "template_reference_name": "spooler",
+          "git_commit": "f1f6cd6bce0e887649f077657215b50f9cf47d93",
+          "commit_url": "https://github.com/cyber-dojo/aws-prod-co-promotion/commit/f1f6cd6bce0e887649f077657215b50f9cf47d93",
+          "git_commit_info": {
+            "sha1": "f1f6cd6bce0e887649f077657215b50f9cf47d93",
+            "message": "Merge pull request #19 from cyber-dojo/cap-parallel-prod-applies\n\nCap promote-all prod applies at three at a time",
+            "author": "Jon Jagger <jon@kosli.com>",
+            "branch": "main",
+            "timestamp": 1791649272.0,
+            "url": "https://github.com/cyber-dojo/aws-prod-co-promotion/commit/f1f6cd6bce0e887649f077657215b50f9cf47d93"
+          },
+          "html_url": "https://app.kosli.com/cyber-dojo/flows/production-promotion/artifacts/345743d602e5af11022f409b4451193a7f632b69b90c3a23490201a96c443d41?artifact_id=b2879b95-4e55-4935-a0d7-9c24be2c",
+          "flow_html_url": "https://app.kosli.com/cyber-dojo/flows/production-promotion",
+          "deployment_diff": {
+            "diff_url": "https://github.com/cyber-dojo/aws-prod-co-promotion/compare/54306f735c51413c972b38398da4d0a5fc86d47a...f1f6cd6bce0e887649f077657215b50f9cf47d93",
+            "previous_git_commit": "54306f735c51413c972b38398da4d0a5fc86d47a",
+            "previous_git_commit_url": "https://github.com/cyber-dojo/aws-prod-co-promotion/commit/54306f735c51413c972b38398da4d0a5fc86d47a",
+            "previous_fingerprint": "0fe7da2f4c8a0afd88f81bb066bbdd30e02e45f4872f6a0a4538f527185d729f",
+            "previous_artifact_name": "244531986313.dkr.ecr.eu-central-1.amazonaws.com/spooler:afeb2f3@sha256:0fe7da2f4c8a0afd88f81bb066bbdd30e02e45f4872f6a0a4538f527185d729f",
+            "previous_artifact_compliance_state": "COMPLIANT",
+            "previous_running": false,
+            "previous_trail_name": "promote-all-41",
+            "previous_template_reference_name": "spooler"
+          },
+          "commit_lead_time": 1529597.0,
+          "artifact_compliance_in_flow": true,
+          "flow_reasons_for_non_compliance": []
+        },
+        {
+          "flow_name": "snyk-aws-prod-per-artifact",
+          "trail_name": "spooler-345743d602e5af11022f409b4451193a7f632b69b90c3a23490201a96c443d41",
+          "template_reference_name": "spooler",
+          "git_commit": "359c98460f5c3aefb136a77eef08d1be4c4ca08d",
+          "commit_url": "https://github.com/cyber-dojo/snyk-scanning/commit/359c98460f5c3aefb136a77eef08d1be4c4ca08d",
+          "git_commit_info": {
+            "sha1": "359c98460f5c3aefb136a77eef08d1be4c4ca08d",
+            "message": "Merge pull request #6 from cyber-dojo/key-uploads-and-trails-on-component-not-repo\n\nTell apart artifacts built by one repo",
+            "author": "Jon Jagger <jon@kosli.com>",
+            "branch": "main",
+            "timestamp": 1790759058.0,
+            "url": "https://github.com/cyber-dojo/snyk-scanning/commit/359c98460f5c3aefb136a77eef08d1be4c4ca08d"
+          },
+          "html_url": "https://app.kosli.com/cyber-dojo/flows/snyk-aws-prod-per-artifact/artifacts/345743d602e5af11022f409b4451193a7f632b69b90c3a23490201a96c443d41?artifact_id=0b9b832f-09d3-44b6-86a5-e2581e2d",
+          "flow_html_url": "https://app.kosli.com/cyber-dojo/flows/snyk-aws-prod-per-artifact",
+          "deployment_diff": {
+            "diff_url": "https://github.com/cyber-dojo/snyk-scanning/compare/30111f180ac4e3611cdbd7d805381a0bb9f53cff...359c98460f5c3aefb136a77eef08d1be4c4ca08d",
+            "previous_git_commit": "30111f180ac4e3611cdbd7d805381a0bb9f53cff",
+            "previous_git_commit_url": "https://github.com/cyber-dojo/snyk-scanning/commit/30111f180ac4e3611cdbd7d805381a0bb9f53cff",
+            "previous_fingerprint": "9ef10b455706661560fee5c47aebcb592f0936fdaa1db1a0ad06590c6f39b86f",
+            "previous_artifact_name": "244531986313.dkr.ecr.eu-central-1.amazonaws.com/spooler:5e4740c@sha256:9ef10b455706661560fee5c47aebcb592f0936fdaa1db1a0ad06590c6f39b86f",
+            "previous_artifact_compliance_state": "COMPLIANT",
+            "previous_running": false,
+            "previous_trail_name": "spooler-9ef10b455706661560fee5c47aebcb592f0936fdaa1db1a0ad06590c6f39b86f",
+            "previous_template_reference_name": "spooler"
+          },
+          "commit_lead_time": 2419811.0,
+          "artifact_compliance_in_flow": true,
+          "flow_reasons_for_non_compliance": []
+        }
+      ],
+      "ecs_context": {
+        "task_arn": "arn:aws:ecs:eu-central-1:274425519734:task/app/beee4a33544b42e78811dfaf83a7417c",
+        "cluster_name": null,
+        "service_name": null
+      }
+    },
+    {
+      "name": "244531986313.dkr.ecr.eu-central-1.amazonaws.com/exercises-start-points:9f2aa63@sha256:30dbd3457ff111148a139daae9dd77d8d725629037bb59bd4eb450964e6a3509",
+      "compliant": true,
+      "deployments": [],
+      "policy_decisions": [
+        {
+          "policy_version": 2,
+          "status": "COMPLIANT",
+          "rule_evaluations": [
+            {
+              "rule": {
+                "type": "provenance",
+                "definition": {
+                  "required": false,
+                  "exceptions": []
+                }
+              },
+              "satisfied": null,
+              "ignored": true,
+              "resolutions": [
+                {
+                  "type": "rule_not_applicable",
+                  "context": {
+                    "flow_name": "exercises-start-points-ci",
+                    "trail_name": "9f2aa63fc77d01f4796ad05965a1b7d706d47bb6",
+                    "artifact_status": null
+                  }
+                },
+                {
+                  "type": "rule_not_applicable",
+                  "context": {
+                    "flow_name": "snyk-aws-beta-per-artifact",
+                    "trail_name": "exercises-start-points-30dbd3457ff111148a139daae9dd77d8d725629037bb59bd4eb450964e6a3509",
+                    "artifact_status": null
+                  }
+                },
+                {
+                  "type": "rule_not_applicable",
+                  "context": {
+                    "flow_name": "production-promotion",
+                    "trail_name": "promote-all-42",
+                    "artifact_status": null
+                  }
+                },
+                {
+                  "type": "rule_not_applicable",
+                  "context": {
+                    "flow_name": "snyk-aws-prod-per-artifact",
+                    "trail_name": "exercises-start-points-30dbd3457ff111148a139daae9dd77d8d725629037bb59bd4eb450964e6a3509",
+                    "artifact_status": null
+                  }
+                }
+              ]
+            },
+            {
+              "rule": {
+                "type": "trail-compliance",
+                "definition": {
+                  "required": false,
+                  "exceptions": []
+                }
+              },
+              "satisfied": null,
+              "ignored": true,
+              "resolutions": [
+                {
+                  "type": "rule_not_applicable",
+                  "context": {
+                    "flow_name": "exercises-start-points-ci",
+                    "trail_name": "9f2aa63fc77d01f4796ad05965a1b7d706d47bb6",
+                    "artifact_status": "COMPLIANT"
+                  }
+                },
+                {
+                  "type": "rule_not_applicable",
+                  "context": {
+                    "flow_name": "snyk-aws-beta-per-artifact",
+                    "trail_name": "exercises-start-points-30dbd3457ff111148a139daae9dd77d8d725629037bb59bd4eb450964e6a3509",
+                    "artifact_status": "COMPLIANT"
+                  }
+                },
+                {
+                  "type": "rule_not_applicable",
+                  "context": {
+                    "flow_name": "production-promotion",
+                    "trail_name": "promote-all-42",
+                    "artifact_status": "COMPLIANT"
+                  }
+                },
+                {
+                  "type": "rule_not_applicable",
+                  "context": {
+                    "flow_name": "snyk-aws-prod-per-artifact",
+                    "trail_name": "exercises-start-points-30dbd3457ff111148a139daae9dd77d8d725629037bb59bd4eb450964e6a3509",
+                    "artifact_status": "COMPLIANT"
+                  }
+                }
+              ]
+            },
+            {
+              "rule": {
+                "type": "attestation",
+                "definition": {
+                  "if": {
+                    "text": "flow.name == \"production-promotion\""
+                  },
+                  "name": "snyk-scan",
+                  "type": "decision",
+                  "must_be_compliant": true,
+                  "for_control": null
+                }
+              },
+              "satisfied": true,
+              "ignored": false,
+              "resolutions": [
+                {
+                  "type": "rule_not_applicable",
+                  "context": {
+                    "flow_name": "exercises-start-points-ci",
+                    "trail_name": "9f2aa63fc77d01f4796ad05965a1b7d706d47bb6",
+                    "artifact_status": null
+                  }
+                },
+                {
+                  "type": "rule_not_applicable",
+                  "context": {
+                    "flow_name": "snyk-aws-beta-per-artifact",
+                    "trail_name": "exercises-start-points-30dbd3457ff111148a139daae9dd77d8d725629037bb59bd4eb450964e6a3509",
+                    "artifact_status": null
+                  }
+                },
+                {
+                  "type": "rule_satisfied",
+                  "context": {
+                    "flow_name": "production-promotion",
+                    "trail_name": "promote-all-42",
+                    "artifact_status": null
+                  }
+                },
+                {
+                  "type": "rule_not_applicable",
+                  "context": {
+                    "flow_name": "snyk-aws-prod-per-artifact",
+                    "trail_name": "exercises-start-points-30dbd3457ff111148a139daae9dd77d8d725629037bb59bd4eb450964e6a3509",
+                    "artifact_status": null
+                  }
+                }
+              ]
+            }
+          ],
+          "policy_name": "production-promotion"
+        },
+        {
+          "policy_version": 3,
+          "status": "COMPLIANT",
+          "rule_evaluations": [
+            {
+              "rule": {
+                "type": "provenance",
+                "definition": {
+                  "required": true,
+                  "exceptions": []
+                }
+              },
+              "satisfied": true,
+              "ignored": false,
+              "resolutions": [
+                {
+                  "type": "rule_satisfied",
+                  "context": {
+                    "flow_name": "exercises-start-points-ci",
+                    "trail_name": "9f2aa63fc77d01f4796ad05965a1b7d706d47bb6",
+                    "artifact_status": null
+                  }
+                },
+                {
+                  "type": "rule_satisfied",
+                  "context": {
+                    "flow_name": "snyk-aws-beta-per-artifact",
+                    "trail_name": "exercises-start-points-30dbd3457ff111148a139daae9dd77d8d725629037bb59bd4eb450964e6a3509",
+                    "artifact_status": null
+                  }
+                },
+                {
+                  "type": "rule_satisfied",
+                  "context": {
+                    "flow_name": "production-promotion",
+                    "trail_name": "promote-all-42",
+                    "artifact_status": null
+                  }
+                },
+                {
+                  "type": "rule_satisfied",
+                  "context": {
+                    "flow_name": "snyk-aws-prod-per-artifact",
+                    "trail_name": "exercises-start-points-30dbd3457ff111148a139daae9dd77d8d725629037bb59bd4eb450964e6a3509",
+                    "artifact_status": null
+                  }
+                }
+              ]
+            },
+            {
+              "rule": {
+                "type": "trail-compliance",
+                "definition": {
+                  "required": false,
+                  "exceptions": []
+                }
+              },
+              "satisfied": null,
+              "ignored": true,
+              "resolutions": [
+                {
+                  "type": "rule_not_applicable",
+                  "context": {
+                    "flow_name": "exercises-start-points-ci",
+                    "trail_name": "9f2aa63fc77d01f4796ad05965a1b7d706d47bb6",
+                    "artifact_status": "COMPLIANT"
+                  }
+                },
+                {
+                  "type": "rule_not_applicable",
+                  "context": {
+                    "flow_name": "snyk-aws-beta-per-artifact",
+                    "trail_name": "exercises-start-points-30dbd3457ff111148a139daae9dd77d8d725629037bb59bd4eb450964e6a3509",
+                    "artifact_status": "COMPLIANT"
+                  }
+                },
+                {
+                  "type": "rule_not_applicable",
+                  "context": {
+                    "flow_name": "production-promotion",
+                    "trail_name": "promote-all-42",
+                    "artifact_status": "COMPLIANT"
+                  }
+                },
+                {
+                  "type": "rule_not_applicable",
+                  "context": {
+                    "flow_name": "snyk-aws-prod-per-artifact",
+                    "trail_name": "exercises-start-points-30dbd3457ff111148a139daae9dd77d8d725629037bb59bd4eb450964e6a3509",
+                    "artifact_status": "COMPLIANT"
+                  }
+                }
+              ]
+            },
+            {
+              "rule": {
+                "type": "attestation",
+                "definition": {
+                  "if": {
+                    "text": "flow.tags.kind == \"build\""
+                  },
+                  "name": "*",
+                  "type": "decision",
+                  "must_be_compliant": true,
+                  "for_control": "SDLC-CTRL-0002"
+                }
+              },
+              "satisfied": true,
+              "ignored": false,
+              "resolutions": [
+                {
+                  "type": "rule_satisfied",
+                  "context": {
+                    "flow_name": "exercises-start-points-ci",
+                    "trail_name": "9f2aa63fc77d01f4796ad05965a1b7d706d47bb6",
+                    "artifact_status": null,
+                    "for_control": "SDLC-CTRL-0002"
+                  }
+                },
+                {
+                  "type": "rule_not_applicable",
+                  "context": {
+                    "flow_name": "snyk-aws-beta-per-artifact",
+                    "trail_name": "exercises-start-points-30dbd3457ff111148a139daae9dd77d8d725629037bb59bd4eb450964e6a3509",
+                    "artifact_status": null,
+                    "for_control": "SDLC-CTRL-0002"
+                  }
+                },
+                {
+                  "type": "rule_not_applicable",
+                  "context": {
+                    "flow_name": "production-promotion",
+                    "trail_name": "promote-all-42",
+                    "artifact_status": null,
+                    "for_control": "SDLC-CTRL-0002"
+                  }
+                },
+                {
+                  "type": "rule_not_applicable",
+                  "context": {
+                    "flow_name": "snyk-aws-prod-per-artifact",
+                    "trail_name": "exercises-start-points-30dbd3457ff111148a139daae9dd77d8d725629037bb59bd4eb450964e6a3509",
+                    "artifact_status": null,
+                    "for_control": "SDLC-CTRL-0002"
+                  }
+                }
+              ]
+            }
+          ],
+          "policy_name": "provenance"
+        },
+        {
+          "policy_version": 3,
+          "status": "COMPLIANT",
+          "rule_evaluations": [
+            {
+              "rule": {
+                "type": "provenance",
+                "definition": {
+                  "required": false,
+                  "exceptions": []
+                }
+              },
+              "satisfied": null,
+              "ignored": true,
+              "resolutions": [
+                {
+                  "type": "rule_not_applicable",
+                  "context": {
+                    "flow_name": "exercises-start-points-ci",
+                    "trail_name": "9f2aa63fc77d01f4796ad05965a1b7d706d47bb6",
+                    "artifact_status": null
+                  }
+                },
+                {
+                  "type": "rule_not_applicable",
+                  "context": {
+                    "flow_name": "snyk-aws-beta-per-artifact",
+                    "trail_name": "exercises-start-points-30dbd3457ff111148a139daae9dd77d8d725629037bb59bd4eb450964e6a3509",
+                    "artifact_status": null
+                  }
+                },
+                {
+                  "type": "rule_not_applicable",
+                  "context": {
+                    "flow_name": "production-promotion",
+                    "trail_name": "promote-all-42",
+                    "artifact_status": null
+                  }
+                },
+                {
+                  "type": "rule_not_applicable",
+                  "context": {
+                    "flow_name": "snyk-aws-prod-per-artifact",
+                    "trail_name": "exercises-start-points-30dbd3457ff111148a139daae9dd77d8d725629037bb59bd4eb450964e6a3509",
+                    "artifact_status": null
+                  }
+                }
+              ]
+            },
+            {
+              "rule": {
+                "type": "trail-compliance",
+                "definition": {
+                  "required": false,
+                  "exceptions": []
+                }
+              },
+              "satisfied": null,
+              "ignored": true,
+              "resolutions": [
+                {
+                  "type": "rule_not_applicable",
+                  "context": {
+                    "flow_name": "exercises-start-points-ci",
+                    "trail_name": "9f2aa63fc77d01f4796ad05965a1b7d706d47bb6",
+                    "artifact_status": "COMPLIANT"
+                  }
+                },
+                {
+                  "type": "rule_not_applicable",
+                  "context": {
+                    "flow_name": "snyk-aws-beta-per-artifact",
+                    "trail_name": "exercises-start-points-30dbd3457ff111148a139daae9dd77d8d725629037bb59bd4eb450964e6a3509",
+                    "artifact_status": "COMPLIANT"
+                  }
+                },
+                {
+                  "type": "rule_not_applicable",
+                  "context": {
+                    "flow_name": "production-promotion",
+                    "trail_name": "promote-all-42",
+                    "artifact_status": "COMPLIANT"
+                  }
+                },
+                {
+                  "type": "rule_not_applicable",
+                  "context": {
+                    "flow_name": "snyk-aws-prod-per-artifact",
+                    "trail_name": "exercises-start-points-30dbd3457ff111148a139daae9dd77d8d725629037bb59bd4eb450964e6a3509",
+                    "artifact_status": "COMPLIANT"
+                  }
+                }
+              ]
+            },
+            {
+              "rule": {
+                "type": "attestation",
+                "definition": {
+                  "if": {
+                    "text": "flow.tags.kind == \"build\""
+                  },
+                  "name": "*",
+                  "type": "pull_request",
+                  "must_be_compliant": true,
+                  "for_control": null
+                }
+              },
+              "satisfied": true,
+              "ignored": false,
+              "resolutions": [
+                {
+                  "type": "rule_satisfied",
+                  "context": {
+                    "flow_name": "exercises-start-points-ci",
+                    "trail_name": "9f2aa63fc77d01f4796ad05965a1b7d706d47bb6",
+                    "artifact_status": null
+                  }
+                },
+                {
+                  "type": "rule_not_applicable",
+                  "context": {
+                    "flow_name": "snyk-aws-beta-per-artifact",
+                    "trail_name": "exercises-start-points-30dbd3457ff111148a139daae9dd77d8d725629037bb59bd4eb450964e6a3509",
+                    "artifact_status": null
+                  }
+                },
+                {
+                  "type": "rule_not_applicable",
+                  "context": {
+                    "flow_name": "production-promotion",
+                    "trail_name": "promote-all-42",
+                    "artifact_status": null
+                  }
+                },
+                {
+                  "type": "rule_not_applicable",
+                  "context": {
+                    "flow_name": "snyk-aws-prod-per-artifact",
+                    "trail_name": "exercises-start-points-30dbd3457ff111148a139daae9dd77d8d725629037bb59bd4eb450964e6a3509",
+                    "artifact_status": null
+                  }
+                }
+              ]
+            }
+          ],
+          "policy_name": "pull-request"
+        },
+        {
+          "policy_version": 4,
+          "status": "COMPLIANT",
+          "rule_evaluations": [
+            {
+              "rule": {
+                "type": "provenance",
+                "definition": {
+                  "required": false,
+                  "exceptions": []
+                }
+              },
+              "satisfied": null,
+              "ignored": true,
+              "resolutions": [
+                {
+                  "type": "rule_not_applicable",
+                  "context": {
+                    "flow_name": "exercises-start-points-ci",
+                    "trail_name": "9f2aa63fc77d01f4796ad05965a1b7d706d47bb6",
+                    "artifact_status": null
+                  }
+                },
+                {
+                  "type": "rule_not_applicable",
+                  "context": {
+                    "flow_name": "snyk-aws-beta-per-artifact",
+                    "trail_name": "exercises-start-points-30dbd3457ff111148a139daae9dd77d8d725629037bb59bd4eb450964e6a3509",
+                    "artifact_status": null
+                  }
+                },
+                {
+                  "type": "rule_not_applicable",
+                  "context": {
+                    "flow_name": "production-promotion",
+                    "trail_name": "promote-all-42",
+                    "artifact_status": null
+                  }
+                },
+                {
+                  "type": "rule_not_applicable",
+                  "context": {
+                    "flow_name": "snyk-aws-prod-per-artifact",
+                    "trail_name": "exercises-start-points-30dbd3457ff111148a139daae9dd77d8d725629037bb59bd4eb450964e6a3509",
+                    "artifact_status": null
+                  }
+                }
+              ]
+            },
+            {
+              "rule": {
+                "type": "trail-compliance",
+                "definition": {
+                  "required": false,
+                  "exceptions": []
+                }
+              },
+              "satisfied": null,
+              "ignored": true,
+              "resolutions": [
+                {
+                  "type": "rule_not_applicable",
+                  "context": {
+                    "flow_name": "exercises-start-points-ci",
+                    "trail_name": "9f2aa63fc77d01f4796ad05965a1b7d706d47bb6",
+                    "artifact_status": "COMPLIANT"
+                  }
+                },
+                {
+                  "type": "rule_not_applicable",
+                  "context": {
+                    "flow_name": "snyk-aws-beta-per-artifact",
+                    "trail_name": "exercises-start-points-30dbd3457ff111148a139daae9dd77d8d725629037bb59bd4eb450964e6a3509",
+                    "artifact_status": "COMPLIANT"
+                  }
+                },
+                {
+                  "type": "rule_not_applicable",
+                  "context": {
+                    "flow_name": "production-promotion",
+                    "trail_name": "promote-all-42",
+                    "artifact_status": "COMPLIANT"
+                  }
+                },
+                {
+                  "type": "rule_not_applicable",
+                  "context": {
+                    "flow_name": "snyk-aws-prod-per-artifact",
+                    "trail_name": "exercises-start-points-30dbd3457ff111148a139daae9dd77d8d725629037bb59bd4eb450964e6a3509",
+                    "artifact_status": "COMPLIANT"
+                  }
+                }
+              ]
+            },
+            {
+              "rule": {
+                "type": "attestation",
+                "definition": {
+                  "if": {
+                    "text": "flow.name == \"snyk-aws-prod-per-artifact\""
+                  },
+                  "name": "snyk-container-scan",
+                  "type": "decision",
+                  "must_be_compliant": true,
+                  "for_control": "SDLC-CTRL-0022"
+                }
+              },
+              "satisfied": true,
+              "ignored": false,
+              "resolutions": [
+                {
+                  "type": "rule_not_applicable",
+                  "context": {
+                    "flow_name": "exercises-start-points-ci",
+                    "trail_name": "9f2aa63fc77d01f4796ad05965a1b7d706d47bb6",
+                    "artifact_status": null,
+                    "for_control": "SDLC-CTRL-0022"
+                  }
+                },
+                {
+                  "type": "rule_not_applicable",
+                  "context": {
+                    "flow_name": "snyk-aws-beta-per-artifact",
+                    "trail_name": "exercises-start-points-30dbd3457ff111148a139daae9dd77d8d725629037bb59bd4eb450964e6a3509",
+                    "artifact_status": null,
+                    "for_control": "SDLC-CTRL-0022"
+                  }
+                },
+                {
+                  "type": "rule_not_applicable",
+                  "context": {
+                    "flow_name": "production-promotion",
+                    "trail_name": "promote-all-42",
+                    "artifact_status": null,
+                    "for_control": "SDLC-CTRL-0022"
+                  }
+                },
+                {
+                  "type": "rule_satisfied",
+                  "context": {
+                    "flow_name": "snyk-aws-prod-per-artifact",
+                    "trail_name": "exercises-start-points-30dbd3457ff111148a139daae9dd77d8d725629037bb59bd4eb450964e6a3509",
+                    "artifact_status": null,
+                    "for_control": "SDLC-CTRL-0022"
+                  }
+                }
+              ]
+            }
+          ],
+          "policy_name": "snyk-scan-aws-prod"
+        },
+        {
+          "policy_version": 2,
+          "status": "COMPLIANT",
+          "rule_evaluations": [
+            {
+              "rule": {
+                "type": "provenance",
+                "definition": {
+                  "required": false,
+                  "exceptions": []
+                }
+              },
+              "satisfied": null,
+              "ignored": true,
+              "resolutions": [
+                {
+                  "type": "rule_not_applicable",
+                  "context": {
+                    "flow_name": "exercises-start-points-ci",
+                    "trail_name": "9f2aa63fc77d01f4796ad05965a1b7d706d47bb6",
+                    "artifact_status": null
+                  }
+                },
+                {
+                  "type": "rule_not_applicable",
+                  "context": {
+                    "flow_name": "snyk-aws-beta-per-artifact",
+                    "trail_name": "exercises-start-points-30dbd3457ff111148a139daae9dd77d8d725629037bb59bd4eb450964e6a3509",
+                    "artifact_status": null
+                  }
+                },
+                {
+                  "type": "rule_not_applicable",
+                  "context": {
+                    "flow_name": "production-promotion",
+                    "trail_name": "promote-all-42",
+                    "artifact_status": null
+                  }
+                },
+                {
+                  "type": "rule_not_applicable",
+                  "context": {
+                    "flow_name": "snyk-aws-prod-per-artifact",
+                    "trail_name": "exercises-start-points-30dbd3457ff111148a139daae9dd77d8d725629037bb59bd4eb450964e6a3509",
+                    "artifact_status": null
+                  }
+                }
+              ]
+            },
+            {
+              "rule": {
+                "type": "trail-compliance",
+                "definition": {
+                  "required": true,
+                  "exceptions": [
+                    {
+                      "if": {
+                        "text": "exists(flow.tags.env) and flow.tags.env != \"aws-prod\""
+                      }
+                    }
+                  ]
+                }
+              },
+              "satisfied": true,
+              "ignored": false,
+              "resolutions": [
+                {
+                  "type": "rule_not_applicable",
+                  "context": {
+                    "flow_name": "exercises-start-points-ci",
+                    "trail_name": "9f2aa63fc77d01f4796ad05965a1b7d706d47bb6",
+                    "artifact_status": "COMPLIANT"
+                  }
+                },
+                {
+                  "type": "rule_not_applicable",
+                  "context": {
+                    "flow_name": "snyk-aws-beta-per-artifact",
+                    "trail_name": "exercises-start-points-30dbd3457ff111148a139daae9dd77d8d725629037bb59bd4eb450964e6a3509",
+                    "artifact_status": "COMPLIANT"
+                  }
+                },
+                {
+                  "type": "rule_satisfied",
+                  "context": {
+                    "flow_name": "production-promotion",
+                    "trail_name": "promote-all-42",
+                    "artifact_status": "COMPLIANT"
+                  }
+                },
+                {
+                  "type": "rule_satisfied",
+                  "context": {
+                    "flow_name": "snyk-aws-prod-per-artifact",
+                    "trail_name": "exercises-start-points-30dbd3457ff111148a139daae9dd77d8d725629037bb59bd4eb450964e6a3509",
+                    "artifact_status": "COMPLIANT"
+                  }
+                }
+              ]
+            }
+          ],
+          "policy_name": "trail-compliance-aws-prod"
+        }
+      ],
+      "reasons_for_incompliance": [],
+      "fingerprint": "30dbd3457ff111148a139daae9dd77d8d725629037bb59bd4eb450964e6a3509",
+      "creationTimestamp": [
+        1793178791
+      ],
+      "pods": null,
+      "annotation": {
+        "type": "updated-provenance",
+        "was": 1,
+        "now": 1
+      },
+      "flow_name": "exercises-start-points-ci",
+      "git_commit": "9f2aa63fc77d01f4796ad05965a1b7d706d47bb6",
+      "commit_url": "https://github.com/cyber-dojo/exercises-start-points/commit/9f2aa63fc77d01f4796ad05965a1b7d706d47bb6",
+      "html_url": "https://app.kosli.com/cyber-dojo/flows/exercises-start-points-ci/artifacts/30dbd3457ff111148a139daae9dd77d8d725629037bb59bd4eb450964e6a3509?artifact_id=4369d9e0-a55a-40ac-aab6-01719a95",
+      "flow_html_url": "https://app.kosli.com/cyber-dojo/flows/exercises-start-points-ci",
+      "deployment_diff": {
+        "diff_url": "https://github.com/cyber-dojo/exercises-start-points/compare/68636bed4906a15df27ee99e2afddd4377d3867e...9f2aa63fc77d01f4796ad05965a1b7d706d47bb6",
+        "previous_git_commit": "68636bed4906a15df27ee99e2afddd4377d3867e",
+        "previous_git_commit_url": "https://github.com/cyber-dojo/exercises-start-points/commit/68636bed4906a15df27ee99e2afddd4377d3867e",
+        "previous_fingerprint": "2dffee94d09db0d3e291cef0fc416f007271ab578adcba8b35f359fda5f2a8a8",
+        "previous_artifact_name": "244531986313.dkr.ecr.eu-central-1.amazonaws.com/exercises-start-points:68636be@sha256:2dffee94d09db0d3e291cef0fc416f007271ab578adcba8b35f359fda5f2a8a8",
+        "previous_artifact_compliance_state": "COMPLIANT",
+        "previous_running": false,
+        "previous_trail_name": "68636bed4906a15df27ee99e2afddd4377d3867e",
+        "previous_template_reference_name": "exercises-start-points"
+      },
+      "commit_lead_time": 76180.0,
+      "flows": [
+        {
+          "flow_name": "exercises-start-points-ci",
+          "trail_name": "9f2aa63fc77d01f4796ad05965a1b7d706d47bb6",
+          "template_reference_name": "exercises-start-points",
+          "git_commit": "9f2aa63fc77d01f4796ad05965a1b7d706d47bb6",
+          "commit_url": "https://github.com/cyber-dojo/exercises-start-points/commit/9f2aa63fc77d01f4796ad05965a1b7d706d47bb6",
+          "git_commit_info": {
+            "sha1": "9f2aa63fc77d01f4796ad05965a1b7d706d47bb6",
+            "message": "Merge pull request #160 from cyber-dojo/update-base-image-2fa325e\n\nMerge update-base-image into main",
+            "author": "Jon Jagger <jon@kosli.com>",
+            "branch": "",
+            "timestamp": 1793102611.0,
+            "url": "https://github.com/cyber-dojo/exercises-start-points/commit/9f2aa63fc77d01f4796ad05965a1b7d706d47bb6"
+          },
+          "html_url": "https://app.kosli.com/cyber-dojo/flows/exercises-start-points-ci/artifacts/30dbd3457ff111148a139daae9dd77d8d725629037bb59bd4eb450964e6a3509?artifact_id=4369d9e0-a55a-40ac-aab6-01719a95",
+          "flow_html_url": "https://app.kosli.com/cyber-dojo/flows/exercises-start-points-ci",
+          "deployment_diff": {
+            "diff_url": "https://github.com/cyber-dojo/exercises-start-points/compare/68636bed4906a15df27ee99e2afddd4377d3867e...9f2aa63fc77d01f4796ad05965a1b7d706d47bb6",
+            "previous_git_commit": "68636bed4906a15df27ee99e2afddd4377d3867e",
+            "previous_git_commit_url": "https://github.com/cyber-dojo/exercises-start-points/commit/68636bed4906a15df27ee99e2afddd4377d3867e",
+            "previous_fingerprint": "2dffee94d09db0d3e291cef0fc416f007271ab578adcba8b35f359fda5f2a8a8",
+            "previous_artifact_name": "244531986313.dkr.ecr.eu-central-1.amazonaws.com/exercises-start-points:68636be@sha256:2dffee94d09db0d3e291cef0fc416f007271ab578adcba8b35f359fda5f2a8a8",
+            "previous_artifact_compliance_state": "COMPLIANT",
+            "previous_running": false,
+            "previous_trail_name": "68636bed4906a15df27ee99e2afddd4377d3867e",
+            "previous_template_reference_name": "exercises-start-points"
+          },
+          "commit_lead_time": 76180.0,
+          "artifact_compliance_in_flow": true,
+          "flow_reasons_for_non_compliance": []
+        },
+        {
+          "flow_name": "snyk-aws-beta-per-artifact",
+          "trail_name": "exercises-start-points-30dbd3457ff111148a139daae9dd77d8d725629037bb59bd4eb450964e6a3509",
+          "template_reference_name": "exercises-start-points",
+          "git_commit": "359c98460f5c3aefb136a77eef08d1be4c4ca08d",
+          "commit_url": "https://github.com/cyber-dojo/snyk-scanning/commit/359c98460f5c3aefb136a77eef08d1be4c4ca08d",
+          "git_commit_info": {
+            "sha1": "359c98460f5c3aefb136a77eef08d1be4c4ca08d",
+            "message": "Merge pull request #6 from cyber-dojo/key-uploads-and-trails-on-component-not-repo\n\nTell apart artifacts built by one repo",
+            "author": "Jon Jagger <jon@kosli.com>",
+            "branch": "main",
+            "timestamp": 1790759058.0,
+            "url": "https://github.com/cyber-dojo/snyk-scanning/commit/359c98460f5c3aefb136a77eef08d1be4c4ca08d"
+          },
+          "html_url": "https://app.kosli.com/cyber-dojo/flows/snyk-aws-beta-per-artifact/artifacts/30dbd3457ff111148a139daae9dd77d8d725629037bb59bd4eb450964e6a3509?artifact_id=e2cd99e5-d3b4-420b-89ba-927933af",
+          "flow_html_url": "https://app.kosli.com/cyber-dojo/flows/snyk-aws-beta-per-artifact",
+          "deployment_diff": {
+            "diff_url": "https://github.com/cyber-dojo/snyk-scanning/compare/30111f180ac4e3611cdbd7d805381a0bb9f53cff...359c98460f5c3aefb136a77eef08d1be4c4ca08d",
+            "previous_git_commit": "30111f180ac4e3611cdbd7d805381a0bb9f53cff",
+            "previous_git_commit_url": "https://github.com/cyber-dojo/snyk-scanning/commit/30111f180ac4e3611cdbd7d805381a0bb9f53cff",
+            "previous_fingerprint": "bc1dae4e8ce742e027a6dc6b68e44c65361cd48e588483d3fd9f6d6911a84c31",
+            "previous_artifact_name": "244531986313.dkr.ecr.eu-central-1.amazonaws.com/exercises-start-points:d01bb39@sha256:bc1dae4e8ce742e027a6dc6b68e44c65361cd48e588483d3fd9f6d6911a84c31",
+            "previous_artifact_compliance_state": "COMPLIANT",
+            "previous_running": false,
+            "previous_trail_name": "exercises-start-points-bc1dae4e8ce742e027a6dc6b68e44c65361cd48e588483d3fd9f6d6911a84c31",
+            "previous_template_reference_name": "exercises-start-points"
+          },
+          "commit_lead_time": 2419733.0,
+          "artifact_compliance_in_flow": true,
+          "flow_reasons_for_non_compliance": []
+        },
+        {
+          "flow_name": "production-promotion",
+          "trail_name": "promote-all-42",
+          "template_reference_name": "exercises-start-points",
+          "git_commit": "f1f6cd6bce0e887649f077657215b50f9cf47d93",
+          "commit_url": "https://github.com/cyber-dojo/aws-prod-co-promotion/commit/f1f6cd6bce0e887649f077657215b50f9cf47d93",
+          "git_commit_info": {
+            "sha1": "f1f6cd6bce0e887649f077657215b50f9cf47d93",
+            "message": "Merge pull request #19 from cyber-dojo/cap-parallel-prod-applies\n\nCap promote-all prod applies at three at a time",
+            "author": "Jon Jagger <jon@kosli.com>",
+            "branch": "main",
+            "timestamp": 1791649272.0,
+            "url": "https://github.com/cyber-dojo/aws-prod-co-promotion/commit/f1f6cd6bce0e887649f077657215b50f9cf47d93"
+          },
+          "html_url": "https://app.kosli.com/cyber-dojo/flows/production-promotion/artifacts/30dbd3457ff111148a139daae9dd77d8d725629037bb59bd4eb450964e6a3509?artifact_id=d0272b0b-9b01-45a4-95f8-924f3794",
+          "flow_html_url": "https://app.kosli.com/cyber-dojo/flows/production-promotion",
+          "deployment_diff": {
+            "diff_url": "https://github.com/cyber-dojo/aws-prod-co-promotion/compare/54306f735c51413c972b38398da4d0a5fc86d47a...f1f6cd6bce0e887649f077657215b50f9cf47d93",
+            "previous_git_commit": "54306f735c51413c972b38398da4d0a5fc86d47a",
+            "previous_git_commit_url": "https://github.com/cyber-dojo/aws-prod-co-promotion/commit/54306f735c51413c972b38398da4d0a5fc86d47a",
+            "previous_fingerprint": "2dffee94d09db0d3e291cef0fc416f007271ab578adcba8b35f359fda5f2a8a8",
+            "previous_artifact_name": "244531986313.dkr.ecr.eu-central-1.amazonaws.com/exercises-start-points:68636be@sha256:2dffee94d09db0d3e291cef0fc416f007271ab578adcba8b35f359fda5f2a8a8",
+            "previous_artifact_compliance_state": "COMPLIANT",
+            "previous_running": false,
+            "previous_trail_name": "promote-all-41",
+            "previous_template_reference_name": "exercises-start-points"
+          },
+          "commit_lead_time": 1529519.0,
+          "artifact_compliance_in_flow": true,
+          "flow_reasons_for_non_compliance": []
+        },
+        {
+          "flow_name": "snyk-aws-prod-per-artifact",
+          "trail_name": "exercises-start-points-30dbd3457ff111148a139daae9dd77d8d725629037bb59bd4eb450964e6a3509",
+          "template_reference_name": "exercises-start-points",
+          "git_commit": "359c98460f5c3aefb136a77eef08d1be4c4ca08d",
+          "commit_url": "https://github.com/cyber-dojo/snyk-scanning/commit/359c98460f5c3aefb136a77eef08d1be4c4ca08d",
+          "git_commit_info": {
+            "sha1": "359c98460f5c3aefb136a77eef08d1be4c4ca08d",
+            "message": "Merge pull request #6 from cyber-dojo/key-uploads-and-trails-on-component-not-repo\n\nTell apart artifacts built by one repo",
+            "author": "Jon Jagger <jon@kosli.com>",
+            "branch": "main",
+            "timestamp": 1790759058.0,
+            "url": "https://github.com/cyber-dojo/snyk-scanning/commit/359c98460f5c3aefb136a77eef08d1be4c4ca08d"
+          },
+          "html_url": "https://app.kosli.com/cyber-dojo/flows/snyk-aws-prod-per-artifact/artifacts/30dbd3457ff111148a139daae9dd77d8d725629037bb59bd4eb450964e6a3509?artifact_id=600fa31f-0736-4452-be69-f092d2a1",
+          "flow_html_url": "https://app.kosli.com/cyber-dojo/flows/snyk-aws-prod-per-artifact",
+          "deployment_diff": {
+            "diff_url": "https://github.com/cyber-dojo/snyk-scanning/compare/30111f180ac4e3611cdbd7d805381a0bb9f53cff...359c98460f5c3aefb136a77eef08d1be4c4ca08d",
+            "previous_git_commit": "30111f180ac4e3611cdbd7d805381a0bb9f53cff",
+            "previous_git_commit_url": "https://github.com/cyber-dojo/snyk-scanning/commit/30111f180ac4e3611cdbd7d805381a0bb9f53cff",
+            "previous_fingerprint": "bc1dae4e8ce742e027a6dc6b68e44c65361cd48e588483d3fd9f6d6911a84c31",
+            "previous_artifact_name": "244531986313.dkr.ecr.eu-central-1.amazonaws.com/exercises-start-points:d01bb39@sha256:bc1dae4e8ce742e027a6dc6b68e44c65361cd48e588483d3fd9f6d6911a84c31",
+            "previous_artifact_compliance_state": "COMPLIANT",
+            "previous_running": false,
+            "previous_trail_name": "exercises-start-points-bc1dae4e8ce742e027a6dc6b68e44c65361cd48e588483d3fd9f6d6911a84c31",
+            "previous_template_reference_name": "exercises-start-points"
+          },
+          "commit_lead_time": 2419733.0,
+          "artifact_compliance_in_flow": true,
+          "flow_reasons_for_non_compliance": []
+        }
+      ],
+      "ecs_context": {
+        "task_arn": "arn:aws:ecs:eu-central-1:274425519734:task/app/963d5df329324b95b125fc539ee4790c",
+        "cluster_name": null,
+        "service_name": null
+      }
+    },
+    {
+      "name": "244531986313.dkr.ecr.eu-central-1.amazonaws.com/dashboard:fd680a8@sha256:0700dd34e5e360389f948bc6f321258e4dadc07c4d03452ea31a1dd2a8ac69af",
+      "compliant": true,
+      "deployments": [],
+      "policy_decisions": [
+        {
+          "policy_version": 2,
+          "status": "COMPLIANT",
+          "rule_evaluations": [
+            {
+              "rule": {
+                "type": "provenance",
+                "definition": {
+                  "required": false,
+                  "exceptions": []
+                }
+              },
+              "satisfied": null,
+              "ignored": true,
+              "resolutions": [
+                {
+                  "type": "rule_not_applicable",
+                  "context": {
+                    "flow_name": "dashboard-ci",
+                    "trail_name": "fd680a809587fa6e4071fe874d63192f65f251c1",
+                    "artifact_status": null
+                  }
+                },
+                {
+                  "type": "rule_not_applicable",
+                  "context": {
+                    "flow_name": "snyk-aws-beta-per-artifact",
+                    "trail_name": "web-0700dd34e5e360389f948bc6f321258e4dadc07c4d03452ea31a1dd2a8ac69af",
+                    "artifact_status": null
+                  }
+                },
+                {
+                  "type": "rule_not_applicable",
+                  "context": {
+                    "flow_name": "production-promotion",
+                    "trail_name": "promote-all-42",
+                    "artifact_status": null
+                  }
+                },
+                {
+                  "type": "rule_not_applicable",
+                  "context": {
+                    "flow_name": "snyk-aws-prod-per-artifact",
+                    "trail_name": "web-0700dd34e5e360389f948bc6f321258e4dadc07c4d03452ea31a1dd2a8ac69af",
+                    "artifact_status": null
+                  }
+                }
+              ]
+            },
+            {
+              "rule": {
+                "type": "trail-compliance",
+                "definition": {
+                  "required": false,
+                  "exceptions": []
+                }
+              },
+              "satisfied": null,
+              "ignored": true,
+              "resolutions": [
+                {
+                  "type": "rule_not_applicable",
+                  "context": {
+                    "flow_name": "dashboard-ci",
+                    "trail_name": "fd680a809587fa6e4071fe874d63192f65f251c1",
+                    "artifact_status": "COMPLIANT"
+                  }
+                },
+                {
+                  "type": "rule_not_applicable",
+                  "context": {
+                    "flow_name": "snyk-aws-beta-per-artifact",
+                    "trail_name": "web-0700dd34e5e360389f948bc6f321258e4dadc07c4d03452ea31a1dd2a8ac69af",
+                    "artifact_status": "COMPLIANT"
+                  }
+                },
+                {
+                  "type": "rule_not_applicable",
+                  "context": {
+                    "flow_name": "production-promotion",
+                    "trail_name": "promote-all-42",
+                    "artifact_status": "COMPLIANT"
+                  }
+                },
+                {
+                  "type": "rule_not_applicable",
+                  "context": {
+                    "flow_name": "snyk-aws-prod-per-artifact",
+                    "trail_name": "web-0700dd34e5e360389f948bc6f321258e4dadc07c4d03452ea31a1dd2a8ac69af",
+                    "artifact_status": "COMPLIANT"
+                  }
+                }
+              ]
+            },
+            {
+              "rule": {
+                "type": "attestation",
+                "definition": {
+                  "if": {
+                    "text": "flow.name == \"production-promotion\""
+                  },
+                  "name": "snyk-scan",
+                  "type": "decision",
+                  "must_be_compliant": true,
+                  "for_control": null
+                }
+              },
+              "satisfied": true,
+              "ignored": false,
+              "resolutions": [
+                {
+                  "type": "rule_not_applicable",
+                  "context": {
+                    "flow_name": "dashboard-ci",
+                    "trail_name": "fd680a809587fa6e4071fe874d63192f65f251c1",
+                    "artifact_status": null
+                  }
+                },
+                {
+                  "type": "rule_not_applicable",
+                  "context": {
+                    "flow_name": "snyk-aws-beta-per-artifact",
+                    "trail_name": "web-0700dd34e5e360389f948bc6f321258e4dadc07c4d03452ea31a1dd2a8ac69af",
+                    "artifact_status": null
+                  }
+                },
+                {
+                  "type": "rule_satisfied",
+                  "context": {
+                    "flow_name": "production-promotion",
+                    "trail_name": "promote-all-42",
+                    "artifact_status": null
+                  }
+                },
+                {
+                  "type": "rule_not_applicable",
+                  "context": {
+                    "flow_name": "snyk-aws-prod-per-artifact",
+                    "trail_name": "web-0700dd34e5e360389f948bc6f321258e4dadc07c4d03452ea31a1dd2a8ac69af",
+                    "artifact_status": null
+                  }
+                }
+              ]
+            }
+          ],
+          "policy_name": "production-promotion"
+        },
+        {
+          "policy_version": 3,
+          "status": "COMPLIANT",
+          "rule_evaluations": [
+            {
+              "rule": {
+                "type": "provenance",
+                "definition": {
+                  "required": true,
+                  "exceptions": []
+                }
+              },
+              "satisfied": true,
+              "ignored": false,
+              "resolutions": [
+                {
+                  "type": "rule_satisfied",
+                  "context": {
+                    "flow_name": "dashboard-ci",
+                    "trail_name": "fd680a809587fa6e4071fe874d63192f65f251c1",
+                    "artifact_status": null
+                  }
+                },
+                {
+                  "type": "rule_satisfied",
+                  "context": {
+                    "flow_name": "snyk-aws-beta-per-artifact",
+                    "trail_name": "web-0700dd34e5e360389f948bc6f321258e4dadc07c4d03452ea31a1dd2a8ac69af",
+                    "artifact_status": null
+                  }
+                },
+                {
+                  "type": "rule_satisfied",
+                  "context": {
+                    "flow_name": "production-promotion",
+                    "trail_name": "promote-all-42",
+                    "artifact_status": null
+                  }
+                },
+                {
+                  "type": "rule_satisfied",
+                  "context": {
+                    "flow_name": "snyk-aws-prod-per-artifact",
+                    "trail_name": "web-0700dd34e5e360389f948bc6f321258e4dadc07c4d03452ea31a1dd2a8ac69af",
+                    "artifact_status": null
+                  }
+                }
+              ]
+            },
+            {
+              "rule": {
+                "type": "trail-compliance",
+                "definition": {
+                  "required": false,
+                  "exceptions": []
+                }
+              },
+              "satisfied": null,
+              "ignored": true,
+              "resolutions": [
+                {
+                  "type": "rule_not_applicable",
+                  "context": {
+                    "flow_name": "dashboard-ci",
+                    "trail_name": "fd680a809587fa6e4071fe874d63192f65f251c1",
+                    "artifact_status": "COMPLIANT"
+                  }
+                },
+                {
+                  "type": "rule_not_applicable",
+                  "context": {
+                    "flow_name": "snyk-aws-beta-per-artifact",
+                    "trail_name": "web-0700dd34e5e360389f948bc6f321258e4dadc07c4d03452ea31a1dd2a8ac69af",
+                    "artifact_status": "COMPLIANT"
+                  }
+                },
+                {
+                  "type": "rule_not_applicable",
+                  "context": {
+                    "flow_name": "production-promotion",
+                    "trail_name": "promote-all-42",
+                    "artifact_status": "COMPLIANT"
+                  }
+                },
+                {
+                  "type": "rule_not_applicable",
+                  "context": {
+                    "flow_name": "snyk-aws-prod-per-artifact",
+                    "trail_name": "web-0700dd34e5e360389f948bc6f321258e4dadc07c4d03452ea31a1dd2a8ac69af",
+                    "artifact_status": "COMPLIANT"
+                  }
+                }
+              ]
+            },
+            {
+              "rule": {
+                "type": "attestation",
+                "definition": {
+                  "if": {
+                    "text": "flow.tags.kind == \"build\""
+                  },
+                  "name": "*",
+                  "type": "decision",
+                  "must_be_compliant": true,
+                  "for_control": "SDLC-CTRL-0002"
+                }
+              },
+              "satisfied": true,
+              "ignored": false,
+              "resolutions": [
+                {
+                  "type": "rule_satisfied",
+                  "context": {
+                    "flow_name": "dashboard-ci",
+                    "trail_name": "fd680a809587fa6e4071fe874d63192f65f251c1",
+                    "artifact_status": null,
+                    "for_control": "SDLC-CTRL-0002"
+                  }
+                },
+                {
+                  "type": "rule_not_applicable",
+                  "context": {
+                    "flow_name": "snyk-aws-beta-per-artifact",
+                    "trail_name": "web-0700dd34e5e360389f948bc6f321258e4dadc07c4d03452ea31a1dd2a8ac69af",
+                    "artifact_status": null,
+                    "for_control": "SDLC-CTRL-0002"
+                  }
+                },
+                {
+                  "type": "rule_not_applicable",
+                  "context": {
+                    "flow_name": "production-promotion",
+                    "trail_name": "promote-all-42",
+                    "artifact_status": null,
+                    "for_control": "SDLC-CTRL-0002"
+                  }
+                },
+                {
+                  "type": "rule_not_applicable",
+                  "context": {
+                    "flow_name": "snyk-aws-prod-per-artifact",
+                    "trail_name": "web-0700dd34e5e360389f948bc6f321258e4dadc07c4d03452ea31a1dd2a8ac69af",
+                    "artifact_status": null,
+                    "for_control": "SDLC-CTRL-0002"
+                  }
+                }
+              ]
+            }
+          ],
+          "policy_name": "provenance"
+        },
+        {
+          "policy_version": 3,
+          "status": "COMPLIANT",
+          "rule_evaluations": [
+            {
+              "rule": {
+                "type": "provenance",
+                "definition": {
+                  "required": false,
+                  "exceptions": []
+                }
+              },
+              "satisfied": null,
+              "ignored": true,
+              "resolutions": [
+                {
+                  "type": "rule_not_applicable",
+                  "context": {
+                    "flow_name": "dashboard-ci",
+                    "trail_name": "fd680a809587fa6e4071fe874d63192f65f251c1",
+                    "artifact_status": null
+                  }
+                },
+                {
+                  "type": "rule_not_applicable",
+                  "context": {
+                    "flow_name": "snyk-aws-beta-per-artifact",
+                    "trail_name": "web-0700dd34e5e360389f948bc6f321258e4dadc07c4d03452ea31a1dd2a8ac69af",
+                    "artifact_status": null
+                  }
+                },
+                {
+                  "type": "rule_not_applicable",
+                  "context": {
+                    "flow_name": "production-promotion",
+                    "trail_name": "promote-all-42",
+                    "artifact_status": null
+                  }
+                },
+                {
+                  "type": "rule_not_applicable",
+                  "context": {
+                    "flow_name": "snyk-aws-prod-per-artifact",
+                    "trail_name": "web-0700dd34e5e360389f948bc6f321258e4dadc07c4d03452ea31a1dd2a8ac69af",
+                    "artifact_status": null
+                  }
+                }
+              ]
+            },
+            {
+              "rule": {
+                "type": "trail-compliance",
+                "definition": {
+                  "required": false,
+                  "exceptions": []
+                }
+              },
+              "satisfied": null,
+              "ignored": true,
+              "resolutions": [
+                {
+                  "type": "rule_not_applicable",
+                  "context": {
+                    "flow_name": "dashboard-ci",
+                    "trail_name": "fd680a809587fa6e4071fe874d63192f65f251c1",
+                    "artifact_status": "COMPLIANT"
+                  }
+                },
+                {
+                  "type": "rule_not_applicable",
+                  "context": {
+                    "flow_name": "snyk-aws-beta-per-artifact",
+                    "trail_name": "web-0700dd34e5e360389f948bc6f321258e4dadc07c4d03452ea31a1dd2a8ac69af",
+                    "artifact_status": "COMPLIANT"
+                  }
+                },
+                {
+                  "type": "rule_not_applicable",
+                  "context": {
+                    "flow_name": "production-promotion",
+                    "trail_name": "promote-all-42",
+                    "artifact_status": "COMPLIANT"
+                  }
+                },
+                {
+                  "type": "rule_not_applicable",
+                  "context": {
+                    "flow_name": "snyk-aws-prod-per-artifact",
+                    "trail_name": "web-0700dd34e5e360389f948bc6f321258e4dadc07c4d03452ea31a1dd2a8ac69af",
+                    "artifact_status": "COMPLIANT"
+                  }
+                }
+              ]
+            },
+            {
+              "rule": {
+                "type": "attestation",
+                "definition": {
+                  "if": {
+                    "text": "flow.tags.kind == \"build\""
+                  },
+                  "name": "*",
+                  "type": "pull_request",
+                  "must_be_compliant": true,
+                  "for_control": null
+                }
+              },
+              "satisfied": true,
+              "ignored": false,
+              "resolutions": [
+                {
+                  "type": "rule_satisfied",
+                  "context": {
+                    "flow_name": "dashboard-ci",
+                    "trail_name": "fd680a809587fa6e4071fe874d63192f65f251c1",
+                    "artifact_status": null
+                  }
+                },
+                {
+                  "type": "rule_not_applicable",
+                  "context": {
+                    "flow_name": "snyk-aws-beta-per-artifact",
+                    "trail_name": "web-0700dd34e5e360389f948bc6f321258e4dadc07c4d03452ea31a1dd2a8ac69af",
+                    "artifact_status": null
+                  }
+                },
+                {
+                  "type": "rule_not_applicable",
+                  "context": {
+                    "flow_name": "production-promotion",
+                    "trail_name": "promote-all-42",
+                    "artifact_status": null
+                  }
+                },
+                {
+                  "type": "rule_not_applicable",
+                  "context": {
+                    "flow_name": "snyk-aws-prod-per-artifact",
+                    "trail_name": "web-0700dd34e5e360389f948bc6f321258e4dadc07c4d03452ea31a1dd2a8ac69af",
+                    "artifact_status": null
+                  }
+                }
+              ]
+            }
+          ],
+          "policy_name": "pull-request"
+        },
+        {
+          "policy_version": 4,
+          "status": "COMPLIANT",
+          "rule_evaluations": [
+            {
+              "rule": {
+                "type": "provenance",
+                "definition": {
+                  "required": false,
+                  "exceptions": []
+                }
+              },
+              "satisfied": null,
+              "ignored": true,
+              "resolutions": [
+                {
+                  "type": "rule_not_applicable",
+                  "context": {
+                    "flow_name": "dashboard-ci",
+                    "trail_name": "fd680a809587fa6e4071fe874d63192f65f251c1",
+                    "artifact_status": null
+                  }
+                },
+                {
+                  "type": "rule_not_applicable",
+                  "context": {
+                    "flow_name": "snyk-aws-beta-per-artifact",
+                    "trail_name": "web-0700dd34e5e360389f948bc6f321258e4dadc07c4d03452ea31a1dd2a8ac69af",
+                    "artifact_status": null
+                  }
+                },
+                {
+                  "type": "rule_not_applicable",
+                  "context": {
+                    "flow_name": "production-promotion",
+                    "trail_name": "promote-all-42",
+                    "artifact_status": null
+                  }
+                },
+                {
+                  "type": "rule_not_applicable",
+                  "context": {
+                    "flow_name": "snyk-aws-prod-per-artifact",
+                    "trail_name": "web-0700dd34e5e360389f948bc6f321258e4dadc07c4d03452ea31a1dd2a8ac69af",
+                    "artifact_status": null
+                  }
+                }
+              ]
+            },
+            {
+              "rule": {
+                "type": "trail-compliance",
+                "definition": {
+                  "required": false,
+                  "exceptions": []
+                }
+              },
+              "satisfied": null,
+              "ignored": true,
+              "resolutions": [
+                {
+                  "type": "rule_not_applicable",
+                  "context": {
+                    "flow_name": "dashboard-ci",
+                    "trail_name": "fd680a809587fa6e4071fe874d63192f65f251c1",
+                    "artifact_status": "COMPLIANT"
+                  }
+                },
+                {
+                  "type": "rule_not_applicable",
+                  "context": {
+                    "flow_name": "snyk-aws-beta-per-artifact",
+                    "trail_name": "web-0700dd34e5e360389f948bc6f321258e4dadc07c4d03452ea31a1dd2a8ac69af",
+                    "artifact_status": "COMPLIANT"
+                  }
+                },
+                {
+                  "type": "rule_not_applicable",
+                  "context": {
+                    "flow_name": "production-promotion",
+                    "trail_name": "promote-all-42",
+                    "artifact_status": "COMPLIANT"
+                  }
+                },
+                {
+                  "type": "rule_not_applicable",
+                  "context": {
+                    "flow_name": "snyk-aws-prod-per-artifact",
+                    "trail_name": "web-0700dd34e5e360389f948bc6f321258e4dadc07c4d03452ea31a1dd2a8ac69af",
+                    "artifact_status": "COMPLIANT"
+                  }
+                }
+              ]
+            },
+            {
+              "rule": {
+                "type": "attestation",
+                "definition": {
+                  "if": {
+                    "text": "flow.name == \"snyk-aws-prod-per-artifact\""
+                  },
+                  "name": "snyk-container-scan",
+                  "type": "decision",
+                  "must_be_compliant": true,
+                  "for_control": "SDLC-CTRL-0022"
+                }
+              },
+              "satisfied": true,
+              "ignored": false,
+              "resolutions": [
+                {
+                  "type": "rule_not_applicable",
+                  "context": {
+                    "flow_name": "dashboard-ci",
+                    "trail_name": "fd680a809587fa6e4071fe874d63192f65f251c1",
+                    "artifact_status": null,
+                    "for_control": "SDLC-CTRL-0022"
+                  }
+                },
+                {
+                  "type": "rule_not_applicable",
+                  "context": {
+                    "flow_name": "snyk-aws-beta-per-artifact",
+                    "trail_name": "web-0700dd34e5e360389f948bc6f321258e4dadc07c4d03452ea31a1dd2a8ac69af",
+                    "artifact_status": null,
+                    "for_control": "SDLC-CTRL-0022"
+                  }
+                },
+                {
+                  "type": "rule_not_applicable",
+                  "context": {
+                    "flow_name": "production-promotion",
+                    "trail_name": "promote-all-42",
+                    "artifact_status": null,
+                    "for_control": "SDLC-CTRL-0022"
+                  }
+                },
+                {
+                  "type": "rule_satisfied",
+                  "context": {
+                    "flow_name": "snyk-aws-prod-per-artifact",
+                    "trail_name": "web-0700dd34e5e360389f948bc6f321258e4dadc07c4d03452ea31a1dd2a8ac69af",
+                    "artifact_status": null,
+                    "for_control": "SDLC-CTRL-0022"
+                  }
+                }
+              ]
+            }
+          ],
+          "policy_name": "snyk-scan-aws-prod"
+        },
+        {
+          "policy_version": 2,
+          "status": "COMPLIANT",
+          "rule_evaluations": [
+            {
+              "rule": {
+                "type": "provenance",
+                "definition": {
+                  "required": false,
+                  "exceptions": []
+                }
+              },
+              "satisfied": null,
+              "ignored": true,
+              "resolutions": [
+                {
+                  "type": "rule_not_applicable",
+                  "context": {
+                    "flow_name": "dashboard-ci",
+                    "trail_name": "fd680a809587fa6e4071fe874d63192f65f251c1",
+                    "artifact_status": null
+                  }
+                },
+                {
+                  "type": "rule_not_applicable",
+                  "context": {
+                    "flow_name": "snyk-aws-beta-per-artifact",
+                    "trail_name": "web-0700dd34e5e360389f948bc6f321258e4dadc07c4d03452ea31a1dd2a8ac69af",
+                    "artifact_status": null
+                  }
+                },
+                {
+                  "type": "rule_not_applicable",
+                  "context": {
+                    "flow_name": "production-promotion",
+                    "trail_name": "promote-all-42",
+                    "artifact_status": null
+                  }
+                },
+                {
+                  "type": "rule_not_applicable",
+                  "context": {
+                    "flow_name": "snyk-aws-prod-per-artifact",
+                    "trail_name": "web-0700dd34e5e360389f948bc6f321258e4dadc07c4d03452ea31a1dd2a8ac69af",
+                    "artifact_status": null
+                  }
+                }
+              ]
+            },
+            {
+              "rule": {
+                "type": "trail-compliance",
+                "definition": {
+                  "required": true,
+                  "exceptions": [
+                    {
+                      "if": {
+                        "text": "exists(flow.tags.env) and flow.tags.env != \"aws-prod\""
+                      }
+                    }
+                  ]
+                }
+              },
+              "satisfied": true,
+              "ignored": false,
+              "resolutions": [
+                {
+                  "type": "rule_not_applicable",
+                  "context": {
+                    "flow_name": "dashboard-ci",
+                    "trail_name": "fd680a809587fa6e4071fe874d63192f65f251c1",
+                    "artifact_status": "COMPLIANT"
+                  }
+                },
+                {
+                  "type": "rule_not_applicable",
+                  "context": {
+                    "flow_name": "snyk-aws-beta-per-artifact",
+                    "trail_name": "web-0700dd34e5e360389f948bc6f321258e4dadc07c4d03452ea31a1dd2a8ac69af",
+                    "artifact_status": "COMPLIANT"
+                  }
+                },
+                {
+                  "type": "rule_satisfied",
+                  "context": {
+                    "flow_name": "production-promotion",
+                    "trail_name": "promote-all-42",
+                    "artifact_status": "COMPLIANT"
+                  }
+                },
+                {
+                  "type": "rule_satisfied",
+                  "context": {
+                    "flow_name": "snyk-aws-prod-per-artifact",
+                    "trail_name": "web-0700dd34e5e360389f948bc6f321258e4dadc07c4d03452ea31a1dd2a8ac69af",
+                    "artifact_status": "COMPLIANT"
+                  }
+                }
+              ]
+            }
+          ],
+          "policy_name": "trail-compliance-aws-prod"
+        }
+      ],
+      "reasons_for_incompliance": [],
+      "fingerprint": "0700dd34e5e360389f948bc6f321258e4dadc07c4d03452ea31a1dd2a8ac69af",
+      "creationTimestamp": [
+        1793178783
+      ],
+      "pods": null,
+      "annotation": {
+        "type": "updated-provenance",
+        "was": 1,
+        "now": 1
+      },
+      "flow_name": "dashboard-ci",
+      "git_commit": "fd680a809587fa6e4071fe874d63192f65f251c1",
+      "commit_url": "https://github.com/cyber-dojo/web/commit/fd680a809587fa6e4071fe874d63192f65f251c1",
+      "html_url": "https://app.kosli.com/cyber-dojo/flows/dashboard-ci/artifacts/0700dd34e5e360389f948bc6f321258e4dadc07c4d03452ea31a1dd2a8ac69af?artifact_id=9134bfd2-d550-4c10-93d3-bbd4f6c4",
+      "flow_html_url": "https://app.kosli.com/cyber-dojo/flows/dashboard-ci",
+      "deployment_diff": {
+        "diff_url": "https://github.com/cyber-dojo/web/compare/3e6678b80d51d7ec4c89d88f46dcee93f27fd6c1...fd680a809587fa6e4071fe874d63192f65f251c1",
+        "previous_git_commit": "3e6678b80d51d7ec4c89d88f46dcee93f27fd6c1",
+        "previous_git_commit_url": "https://github.com/cyber-dojo/web/commit/3e6678b80d51d7ec4c89d88f46dcee93f27fd6c1",
+        "previous_fingerprint": "5f70df2163e8918675c92251f398bc1a88d0d7a9ce1eef39d1f603525de077b6",
+        "previous_artifact_name": "244531986313.dkr.ecr.eu-central-1.amazonaws.com/dashboard:3e6678b@sha256:5f70df2163e8918675c92251f398bc1a88d0d7a9ce1eef39d1f603525de077b6",
+        "previous_artifact_compliance_state": "COMPLIANT",
+        "previous_running": false,
+        "previous_trail_name": "3e6678b80d51d7ec4c89d88f46dcee93f27fd6c1",
+        "previous_template_reference_name": "dashboard"
+      },
+      "commit_lead_time": 75371.0,
+      "flows": [
+        {
+          "flow_name": "dashboard-ci",
+          "trail_name": "fd680a809587fa6e4071fe874d63192f65f251c1",
+          "template_reference_name": "dashboard",
+          "git_commit": "fd680a809587fa6e4071fe874d63192f65f251c1",
+          "commit_url": "https://github.com/cyber-dojo/web/commit/fd680a809587fa6e4071fe874d63192f65f251c1",
+          "git_commit_info": {
+            "sha1": "fd680a809587fa6e4071fe874d63192f65f251c1",
+            "message": "Give creator, web and dashboard the same 15s health wait (#477)\n\nCreator polled 50 times at 0.1s, about 6s in all, and it\nnormally needs about 5s to boot. A slightly slow CI runner\ntipped it over and failed the base-image update (#476)\nwith an empty container log.\n\nWeb waited 60s and dashboard 10s for no stated reason.\nAll three now use docker compose --wait-timeout=15.\nCreator still dumps its container log on timeout.\n\nCo-authored-by: Claude Opus 5.5 <noreply@anthropic.com>",
+            "author": "Jon Jagger <jon@kosli.com>",
+            "branch": "",
+            "timestamp": 1793103412.0,
+            "url": "https://github.com/cyber-dojo/web/commit/fd680a809587fa6e4071fe874d63192f65f251c1"
+          },
+          "html_url": "https://app.kosli.com/cyber-dojo/flows/dashboard-ci/artifacts/0700dd34e5e360389f948bc6f321258e4dadc07c4d03452ea31a1dd2a8ac69af?artifact_id=9134bfd2-d550-4c10-93d3-bbd4f6c4",
+          "flow_html_url": "https://app.kosli.com/cyber-dojo/flows/dashboard-ci",
+          "deployment_diff": {
+            "diff_url": "https://github.com/cyber-dojo/web/compare/3e6678b80d51d7ec4c89d88f46dcee93f27fd6c1...fd680a809587fa6e4071fe874d63192f65f251c1",
+            "previous_git_commit": "3e6678b80d51d7ec4c89d88f46dcee93f27fd6c1",
+            "previous_git_commit_url": "https://github.com/cyber-dojo/web/commit/3e6678b80d51d7ec4c89d88f46dcee93f27fd6c1",
+            "previous_fingerprint": "5f70df2163e8918675c92251f398bc1a88d0d7a9ce1eef39d1f603525de077b6",
+            "previous_artifact_name": "244531986313.dkr.ecr.eu-central-1.amazonaws.com/dashboard:3e6678b@sha256:5f70df2163e8918675c92251f398bc1a88d0d7a9ce1eef39d1f603525de077b6",
+            "previous_artifact_compliance_state": "COMPLIANT",
+            "previous_running": false,
+            "previous_trail_name": "3e6678b80d51d7ec4c89d88f46dcee93f27fd6c1",
+            "previous_template_reference_name": "dashboard"
+          },
+          "commit_lead_time": 75371.0,
+          "artifact_compliance_in_flow": true,
+          "flow_reasons_for_non_compliance": []
+        },
+        {
+          "flow_name": "snyk-aws-beta-per-artifact",
+          "trail_name": "web-0700dd34e5e360389f948bc6f321258e4dadc07c4d03452ea31a1dd2a8ac69af",
           "template_reference_name": "web",
           "git_commit": "359c98460f5c3aefb136a77eef08d1be4c4ca08d",
           "commit_url": "https://github.com/cyber-dojo/snyk-scanning/commit/359c98460f5c3aefb136a77eef08d1be4c4ca08d",
@@ -7837,7 +8645,7 @@ kosli get snapshot aws-prod --output=json
             "timestamp": 1790759058.0,
             "url": "https://github.com/cyber-dojo/snyk-scanning/commit/359c98460f5c3aefb136a77eef08d1be4c4ca08d"
           },
-          "html_url": "https://app.kosli.com/cyber-dojo/flows/snyk-aws-beta-per-artifact/artifacts/da7984414ab096232877f301d3d7cea1daf3cdd3fdb72157f530fe186cba3d78?artifact_id=c52f4e9a-2a15-468a-a6a4-c5f9d40b",
+          "html_url": "https://app.kosli.com/cyber-dojo/flows/snyk-aws-beta-per-artifact/artifacts/0700dd34e5e360389f948bc6f321258e4dadc07c4d03452ea31a1dd2a8ac69af?artifact_id=fdaace20-9757-42d1-8a2b-98cc46fc",
           "flow_html_url": "https://app.kosli.com/cyber-dojo/flows/snyk-aws-beta-per-artifact",
           "deployment_diff": {
             "diff_url": "https://github.com/cyber-dojo/snyk-scanning/compare/359c98460f5c3aefb136a77eef08d1be4c4ca08d...359c98460f5c3aefb136a77eef08d1be4c4ca08d",
@@ -7850,19 +8658,81 @@ kosli get snapshot aws-prod --output=json
             "previous_trail_name": "web-299aafbad77b4604fd2260ada0659e3f64a770f3411010827087cda34b52dc9e",
             "previous_template_reference_name": "web"
           },
-          "commit_lead_time": 1047380.0,
+          "commit_lead_time": 2419725.0,
+          "artifact_compliance_in_flow": true,
+          "flow_reasons_for_non_compliance": []
+        },
+        {
+          "flow_name": "production-promotion",
+          "trail_name": "promote-all-42",
+          "template_reference_name": "web",
+          "git_commit": "f1f6cd6bce0e887649f077657215b50f9cf47d93",
+          "commit_url": "https://github.com/cyber-dojo/aws-prod-co-promotion/commit/f1f6cd6bce0e887649f077657215b50f9cf47d93",
+          "git_commit_info": {
+            "sha1": "f1f6cd6bce0e887649f077657215b50f9cf47d93",
+            "message": "Merge pull request #19 from cyber-dojo/cap-parallel-prod-applies\n\nCap promote-all prod applies at three at a time",
+            "author": "Jon Jagger <jon@kosli.com>",
+            "branch": "main",
+            "timestamp": 1791649272.0,
+            "url": "https://github.com/cyber-dojo/aws-prod-co-promotion/commit/f1f6cd6bce0e887649f077657215b50f9cf47d93"
+          },
+          "html_url": "https://app.kosli.com/cyber-dojo/flows/production-promotion/artifacts/0700dd34e5e360389f948bc6f321258e4dadc07c4d03452ea31a1dd2a8ac69af?artifact_id=553972b2-76dd-47c6-a058-f379d2be",
+          "flow_html_url": "https://app.kosli.com/cyber-dojo/flows/production-promotion",
+          "deployment_diff": {
+            "diff_url": "https://github.com/cyber-dojo/aws-prod-co-promotion/compare/f1f6cd6bce0e887649f077657215b50f9cf47d93...f1f6cd6bce0e887649f077657215b50f9cf47d93",
+            "previous_git_commit": "f1f6cd6bce0e887649f077657215b50f9cf47d93",
+            "previous_git_commit_url": "https://github.com/cyber-dojo/aws-prod-co-promotion/commit/f1f6cd6bce0e887649f077657215b50f9cf47d93",
+            "previous_fingerprint": "da7984414ab096232877f301d3d7cea1daf3cdd3fdb72157f530fe186cba3d78",
+            "previous_artifact_name": "244531986313.dkr.ecr.eu-central-1.amazonaws.com/web:83553f5@sha256:da7984414ab096232877f301d3d7cea1daf3cdd3fdb72157f530fe186cba3d78",
+            "previous_artifact_compliance_state": "COMPLIANT",
+            "previous_running": false,
+            "previous_trail_name": "promotion-one-185",
+            "previous_template_reference_name": "web"
+          },
+          "commit_lead_time": 1529511.0,
+          "artifact_compliance_in_flow": true,
+          "flow_reasons_for_non_compliance": []
+        },
+        {
+          "flow_name": "snyk-aws-prod-per-artifact",
+          "trail_name": "web-0700dd34e5e360389f948bc6f321258e4dadc07c4d03452ea31a1dd2a8ac69af",
+          "template_reference_name": "web",
+          "git_commit": "359c98460f5c3aefb136a77eef08d1be4c4ca08d",
+          "commit_url": "https://github.com/cyber-dojo/snyk-scanning/commit/359c98460f5c3aefb136a77eef08d1be4c4ca08d",
+          "git_commit_info": {
+            "sha1": "359c98460f5c3aefb136a77eef08d1be4c4ca08d",
+            "message": "Merge pull request #6 from cyber-dojo/key-uploads-and-trails-on-component-not-repo\n\nTell apart artifacts built by one repo",
+            "author": "Jon Jagger <jon@kosli.com>",
+            "branch": "main",
+            "timestamp": 1790759058.0,
+            "url": "https://github.com/cyber-dojo/snyk-scanning/commit/359c98460f5c3aefb136a77eef08d1be4c4ca08d"
+          },
+          "html_url": "https://app.kosli.com/cyber-dojo/flows/snyk-aws-prod-per-artifact/artifacts/0700dd34e5e360389f948bc6f321258e4dadc07c4d03452ea31a1dd2a8ac69af?artifact_id=774a977c-cdf0-4998-afaf-fcf96b7f",
+          "flow_html_url": "https://app.kosli.com/cyber-dojo/flows/snyk-aws-prod-per-artifact",
+          "deployment_diff": {
+            "diff_url": "https://github.com/cyber-dojo/snyk-scanning/compare/30111f180ac4e3611cdbd7d805381a0bb9f53cff...359c98460f5c3aefb136a77eef08d1be4c4ca08d",
+            "previous_git_commit": "30111f180ac4e3611cdbd7d805381a0bb9f53cff",
+            "previous_git_commit_url": "https://github.com/cyber-dojo/snyk-scanning/commit/30111f180ac4e3611cdbd7d805381a0bb9f53cff",
+            "previous_fingerprint": "e24bd03714d2e583a2196c0eaf82b2aad8eeecf73f29aec58875994b82f0f418",
+            "previous_artifact_name": "244531986313.dkr.ecr.eu-central-1.amazonaws.com/web:236898f@sha256:e24bd03714d2e583a2196c0eaf82b2aad8eeecf73f29aec58875994b82f0f418",
+            "previous_artifact_compliance_state": "COMPLIANT",
+            "previous_running": false,
+            "previous_trail_name": "web-e24bd03714d2e583a2196c0eaf82b2aad8eeecf73f29aec58875994b82f0f418",
+            "previous_template_reference_name": "web"
+          },
+          "commit_lead_time": 2419725.0,
           "artifact_compliance_in_flow": true,
           "flow_reasons_for_non_compliance": []
         }
       ],
       "ecs_context": {
-        "task_arn": "arn:aws:ecs:eu-central-1:274425519734:task/app/ae6431361d3b4a9ea10f22ec6a4d7642",
+        "task_arn": "arn:aws:ecs:eu-central-1:274425519734:task/app/50c09d6d3dc34e76a623145a7e82f1a9",
         "cluster_name": null,
         "service_name": null
       }
     },
     {
-      "name": "244531986313.dkr.ecr.eu-central-1.amazonaws.com/creator:3e6678b@sha256:ee739c0183759b660a740afe28fbbdb20b4c3b434faa48dab975aa8576173efb",
+      "name": "244531986313.dkr.ecr.eu-central-1.amazonaws.com/creator:fd680a8@sha256:000a36f4debb15073c77bc5e9b7a864ebf60c2ce3116fed603ce0ac654bdf568",
       "compliant": true,
       "deployments": [],
       "policy_decisions": [
@@ -7885,7 +8755,15 @@ kosli get snapshot aws-prod --output=json
                   "type": "rule_not_applicable",
                   "context": {
                     "flow_name": "creator-ci",
-                    "trail_name": "3e6678b80d51d7ec4c89d88f46dcee93f27fd6c1",
+                    "trail_name": "fd680a809587fa6e4071fe874d63192f65f251c1",
+                    "artifact_status": null
+                  }
+                },
+                {
+                  "type": "rule_not_applicable",
+                  "context": {
+                    "flow_name": "snyk-aws-beta-per-artifact",
+                    "trail_name": "web-000a36f4debb15073c77bc5e9b7a864ebf60c2ce3116fed603ce0ac654bdf568",
                     "artifact_status": null
                   }
                 },
@@ -7893,7 +8771,7 @@ kosli get snapshot aws-prod --output=json
                   "type": "rule_not_applicable",
                   "context": {
                     "flow_name": "production-promotion",
-                    "trail_name": "promote-all-41",
+                    "trail_name": "promote-all-42",
                     "artifact_status": null
                   }
                 },
@@ -7901,7 +8779,7 @@ kosli get snapshot aws-prod --output=json
                   "type": "rule_not_applicable",
                   "context": {
                     "flow_name": "snyk-aws-prod-per-artifact",
-                    "trail_name": "web-ee739c0183759b660a740afe28fbbdb20b4c3b434faa48dab975aa8576173efb",
+                    "trail_name": "web-000a36f4debb15073c77bc5e9b7a864ebf60c2ce3116fed603ce0ac654bdf568",
                     "artifact_status": null
                   }
                 }
@@ -7922,7 +8800,15 @@ kosli get snapshot aws-prod --output=json
                   "type": "rule_not_applicable",
                   "context": {
                     "flow_name": "creator-ci",
-                    "trail_name": "3e6678b80d51d7ec4c89d88f46dcee93f27fd6c1",
+                    "trail_name": "fd680a809587fa6e4071fe874d63192f65f251c1",
+                    "artifact_status": "COMPLIANT"
+                  }
+                },
+                {
+                  "type": "rule_not_applicable",
+                  "context": {
+                    "flow_name": "snyk-aws-beta-per-artifact",
+                    "trail_name": "web-000a36f4debb15073c77bc5e9b7a864ebf60c2ce3116fed603ce0ac654bdf568",
                     "artifact_status": "COMPLIANT"
                   }
                 },
@@ -7930,7 +8816,7 @@ kosli get snapshot aws-prod --output=json
                   "type": "rule_not_applicable",
                   "context": {
                     "flow_name": "production-promotion",
-                    "trail_name": "promote-all-41",
+                    "trail_name": "promote-all-42",
                     "artifact_status": "COMPLIANT"
                   }
                 },
@@ -7938,7 +8824,7 @@ kosli get snapshot aws-prod --output=json
                   "type": "rule_not_applicable",
                   "context": {
                     "flow_name": "snyk-aws-prod-per-artifact",
-                    "trail_name": "web-ee739c0183759b660a740afe28fbbdb20b4c3b434faa48dab975aa8576173efb",
+                    "trail_name": "web-000a36f4debb15073c77bc5e9b7a864ebf60c2ce3116fed603ce0ac654bdf568",
                     "artifact_status": "COMPLIANT"
                   }
                 }
@@ -7964,7 +8850,15 @@ kosli get snapshot aws-prod --output=json
                   "type": "rule_not_applicable",
                   "context": {
                     "flow_name": "creator-ci",
-                    "trail_name": "3e6678b80d51d7ec4c89d88f46dcee93f27fd6c1",
+                    "trail_name": "fd680a809587fa6e4071fe874d63192f65f251c1",
+                    "artifact_status": null
+                  }
+                },
+                {
+                  "type": "rule_not_applicable",
+                  "context": {
+                    "flow_name": "snyk-aws-beta-per-artifact",
+                    "trail_name": "web-000a36f4debb15073c77bc5e9b7a864ebf60c2ce3116fed603ce0ac654bdf568",
                     "artifact_status": null
                   }
                 },
@@ -7972,7 +8866,7 @@ kosli get snapshot aws-prod --output=json
                   "type": "rule_satisfied",
                   "context": {
                     "flow_name": "production-promotion",
-                    "trail_name": "promote-all-41",
+                    "trail_name": "promote-all-42",
                     "artifact_status": null
                   }
                 },
@@ -7980,7 +8874,7 @@ kosli get snapshot aws-prod --output=json
                   "type": "rule_not_applicable",
                   "context": {
                     "flow_name": "snyk-aws-prod-per-artifact",
-                    "trail_name": "web-ee739c0183759b660a740afe28fbbdb20b4c3b434faa48dab975aa8576173efb",
+                    "trail_name": "web-000a36f4debb15073c77bc5e9b7a864ebf60c2ce3116fed603ce0ac654bdf568",
                     "artifact_status": null
                   }
                 }
@@ -8008,7 +8902,15 @@ kosli get snapshot aws-prod --output=json
                   "type": "rule_satisfied",
                   "context": {
                     "flow_name": "creator-ci",
-                    "trail_name": "3e6678b80d51d7ec4c89d88f46dcee93f27fd6c1",
+                    "trail_name": "fd680a809587fa6e4071fe874d63192f65f251c1",
+                    "artifact_status": null
+                  }
+                },
+                {
+                  "type": "rule_satisfied",
+                  "context": {
+                    "flow_name": "snyk-aws-beta-per-artifact",
+                    "trail_name": "web-000a36f4debb15073c77bc5e9b7a864ebf60c2ce3116fed603ce0ac654bdf568",
                     "artifact_status": null
                   }
                 },
@@ -8016,7 +8918,7 @@ kosli get snapshot aws-prod --output=json
                   "type": "rule_satisfied",
                   "context": {
                     "flow_name": "production-promotion",
-                    "trail_name": "promote-all-41",
+                    "trail_name": "promote-all-42",
                     "artifact_status": null
                   }
                 },
@@ -8024,7 +8926,7 @@ kosli get snapshot aws-prod --output=json
                   "type": "rule_satisfied",
                   "context": {
                     "flow_name": "snyk-aws-prod-per-artifact",
-                    "trail_name": "web-ee739c0183759b660a740afe28fbbdb20b4c3b434faa48dab975aa8576173efb",
+                    "trail_name": "web-000a36f4debb15073c77bc5e9b7a864ebf60c2ce3116fed603ce0ac654bdf568",
                     "artifact_status": null
                   }
                 }
@@ -8045,7 +8947,15 @@ kosli get snapshot aws-prod --output=json
                   "type": "rule_not_applicable",
                   "context": {
                     "flow_name": "creator-ci",
-                    "trail_name": "3e6678b80d51d7ec4c89d88f46dcee93f27fd6c1",
+                    "trail_name": "fd680a809587fa6e4071fe874d63192f65f251c1",
+                    "artifact_status": "COMPLIANT"
+                  }
+                },
+                {
+                  "type": "rule_not_applicable",
+                  "context": {
+                    "flow_name": "snyk-aws-beta-per-artifact",
+                    "trail_name": "web-000a36f4debb15073c77bc5e9b7a864ebf60c2ce3116fed603ce0ac654bdf568",
                     "artifact_status": "COMPLIANT"
                   }
                 },
@@ -8053,7 +8963,7 @@ kosli get snapshot aws-prod --output=json
                   "type": "rule_not_applicable",
                   "context": {
                     "flow_name": "production-promotion",
-                    "trail_name": "promote-all-41",
+                    "trail_name": "promote-all-42",
                     "artifact_status": "COMPLIANT"
                   }
                 },
@@ -8061,7 +8971,7 @@ kosli get snapshot aws-prod --output=json
                   "type": "rule_not_applicable",
                   "context": {
                     "flow_name": "snyk-aws-prod-per-artifact",
-                    "trail_name": "web-ee739c0183759b660a740afe28fbbdb20b4c3b434faa48dab975aa8576173efb",
+                    "trail_name": "web-000a36f4debb15073c77bc5e9b7a864ebf60c2ce3116fed603ce0ac654bdf568",
                     "artifact_status": "COMPLIANT"
                   }
                 }
@@ -8087,7 +8997,16 @@ kosli get snapshot aws-prod --output=json
                   "type": "rule_satisfied",
                   "context": {
                     "flow_name": "creator-ci",
-                    "trail_name": "3e6678b80d51d7ec4c89d88f46dcee93f27fd6c1",
+                    "trail_name": "fd680a809587fa6e4071fe874d63192f65f251c1",
+                    "artifact_status": null,
+                    "for_control": "SDLC-CTRL-0002"
+                  }
+                },
+                {
+                  "type": "rule_not_applicable",
+                  "context": {
+                    "flow_name": "snyk-aws-beta-per-artifact",
+                    "trail_name": "web-000a36f4debb15073c77bc5e9b7a864ebf60c2ce3116fed603ce0ac654bdf568",
                     "artifact_status": null,
                     "for_control": "SDLC-CTRL-0002"
                   }
@@ -8096,7 +9015,7 @@ kosli get snapshot aws-prod --output=json
                   "type": "rule_not_applicable",
                   "context": {
                     "flow_name": "production-promotion",
-                    "trail_name": "promote-all-41",
+                    "trail_name": "promote-all-42",
                     "artifact_status": null,
                     "for_control": "SDLC-CTRL-0002"
                   }
@@ -8105,7 +9024,7 @@ kosli get snapshot aws-prod --output=json
                   "type": "rule_not_applicable",
                   "context": {
                     "flow_name": "snyk-aws-prod-per-artifact",
-                    "trail_name": "web-ee739c0183759b660a740afe28fbbdb20b4c3b434faa48dab975aa8576173efb",
+                    "trail_name": "web-000a36f4debb15073c77bc5e9b7a864ebf60c2ce3116fed603ce0ac654bdf568",
                     "artifact_status": null,
                     "for_control": "SDLC-CTRL-0002"
                   }
@@ -8134,7 +9053,15 @@ kosli get snapshot aws-prod --output=json
                   "type": "rule_not_applicable",
                   "context": {
                     "flow_name": "creator-ci",
-                    "trail_name": "3e6678b80d51d7ec4c89d88f46dcee93f27fd6c1",
+                    "trail_name": "fd680a809587fa6e4071fe874d63192f65f251c1",
+                    "artifact_status": null
+                  }
+                },
+                {
+                  "type": "rule_not_applicable",
+                  "context": {
+                    "flow_name": "snyk-aws-beta-per-artifact",
+                    "trail_name": "web-000a36f4debb15073c77bc5e9b7a864ebf60c2ce3116fed603ce0ac654bdf568",
                     "artifact_status": null
                   }
                 },
@@ -8142,7 +9069,7 @@ kosli get snapshot aws-prod --output=json
                   "type": "rule_not_applicable",
                   "context": {
                     "flow_name": "production-promotion",
-                    "trail_name": "promote-all-41",
+                    "trail_name": "promote-all-42",
                     "artifact_status": null
                   }
                 },
@@ -8150,7 +9077,7 @@ kosli get snapshot aws-prod --output=json
                   "type": "rule_not_applicable",
                   "context": {
                     "flow_name": "snyk-aws-prod-per-artifact",
-                    "trail_name": "web-ee739c0183759b660a740afe28fbbdb20b4c3b434faa48dab975aa8576173efb",
+                    "trail_name": "web-000a36f4debb15073c77bc5e9b7a864ebf60c2ce3116fed603ce0ac654bdf568",
                     "artifact_status": null
                   }
                 }
@@ -8171,7 +9098,15 @@ kosli get snapshot aws-prod --output=json
                   "type": "rule_not_applicable",
                   "context": {
                     "flow_name": "creator-ci",
-                    "trail_name": "3e6678b80d51d7ec4c89d88f46dcee93f27fd6c1",
+                    "trail_name": "fd680a809587fa6e4071fe874d63192f65f251c1",
+                    "artifact_status": "COMPLIANT"
+                  }
+                },
+                {
+                  "type": "rule_not_applicable",
+                  "context": {
+                    "flow_name": "snyk-aws-beta-per-artifact",
+                    "trail_name": "web-000a36f4debb15073c77bc5e9b7a864ebf60c2ce3116fed603ce0ac654bdf568",
                     "artifact_status": "COMPLIANT"
                   }
                 },
@@ -8179,7 +9114,7 @@ kosli get snapshot aws-prod --output=json
                   "type": "rule_not_applicable",
                   "context": {
                     "flow_name": "production-promotion",
-                    "trail_name": "promote-all-41",
+                    "trail_name": "promote-all-42",
                     "artifact_status": "COMPLIANT"
                   }
                 },
@@ -8187,7 +9122,7 @@ kosli get snapshot aws-prod --output=json
                   "type": "rule_not_applicable",
                   "context": {
                     "flow_name": "snyk-aws-prod-per-artifact",
-                    "trail_name": "web-ee739c0183759b660a740afe28fbbdb20b4c3b434faa48dab975aa8576173efb",
+                    "trail_name": "web-000a36f4debb15073c77bc5e9b7a864ebf60c2ce3116fed603ce0ac654bdf568",
                     "artifact_status": "COMPLIANT"
                   }
                 }
@@ -8213,7 +9148,15 @@ kosli get snapshot aws-prod --output=json
                   "type": "rule_satisfied",
                   "context": {
                     "flow_name": "creator-ci",
-                    "trail_name": "3e6678b80d51d7ec4c89d88f46dcee93f27fd6c1",
+                    "trail_name": "fd680a809587fa6e4071fe874d63192f65f251c1",
+                    "artifact_status": null
+                  }
+                },
+                {
+                  "type": "rule_not_applicable",
+                  "context": {
+                    "flow_name": "snyk-aws-beta-per-artifact",
+                    "trail_name": "web-000a36f4debb15073c77bc5e9b7a864ebf60c2ce3116fed603ce0ac654bdf568",
                     "artifact_status": null
                   }
                 },
@@ -8221,7 +9164,7 @@ kosli get snapshot aws-prod --output=json
                   "type": "rule_not_applicable",
                   "context": {
                     "flow_name": "production-promotion",
-                    "trail_name": "promote-all-41",
+                    "trail_name": "promote-all-42",
                     "artifact_status": null
                   }
                 },
@@ -8229,7 +9172,7 @@ kosli get snapshot aws-prod --output=json
                   "type": "rule_not_applicable",
                   "context": {
                     "flow_name": "snyk-aws-prod-per-artifact",
-                    "trail_name": "web-ee739c0183759b660a740afe28fbbdb20b4c3b434faa48dab975aa8576173efb",
+                    "trail_name": "web-000a36f4debb15073c77bc5e9b7a864ebf60c2ce3116fed603ce0ac654bdf568",
                     "artifact_status": null
                   }
                 }
@@ -8257,7 +9200,15 @@ kosli get snapshot aws-prod --output=json
                   "type": "rule_not_applicable",
                   "context": {
                     "flow_name": "creator-ci",
-                    "trail_name": "3e6678b80d51d7ec4c89d88f46dcee93f27fd6c1",
+                    "trail_name": "fd680a809587fa6e4071fe874d63192f65f251c1",
+                    "artifact_status": null
+                  }
+                },
+                {
+                  "type": "rule_not_applicable",
+                  "context": {
+                    "flow_name": "snyk-aws-beta-per-artifact",
+                    "trail_name": "web-000a36f4debb15073c77bc5e9b7a864ebf60c2ce3116fed603ce0ac654bdf568",
                     "artifact_status": null
                   }
                 },
@@ -8265,7 +9216,7 @@ kosli get snapshot aws-prod --output=json
                   "type": "rule_not_applicable",
                   "context": {
                     "flow_name": "production-promotion",
-                    "trail_name": "promote-all-41",
+                    "trail_name": "promote-all-42",
                     "artifact_status": null
                   }
                 },
@@ -8273,7 +9224,7 @@ kosli get snapshot aws-prod --output=json
                   "type": "rule_not_applicable",
                   "context": {
                     "flow_name": "snyk-aws-prod-per-artifact",
-                    "trail_name": "web-ee739c0183759b660a740afe28fbbdb20b4c3b434faa48dab975aa8576173efb",
+                    "trail_name": "web-000a36f4debb15073c77bc5e9b7a864ebf60c2ce3116fed603ce0ac654bdf568",
                     "artifact_status": null
                   }
                 }
@@ -8294,7 +9245,15 @@ kosli get snapshot aws-prod --output=json
                   "type": "rule_not_applicable",
                   "context": {
                     "flow_name": "creator-ci",
-                    "trail_name": "3e6678b80d51d7ec4c89d88f46dcee93f27fd6c1",
+                    "trail_name": "fd680a809587fa6e4071fe874d63192f65f251c1",
+                    "artifact_status": "COMPLIANT"
+                  }
+                },
+                {
+                  "type": "rule_not_applicable",
+                  "context": {
+                    "flow_name": "snyk-aws-beta-per-artifact",
+                    "trail_name": "web-000a36f4debb15073c77bc5e9b7a864ebf60c2ce3116fed603ce0ac654bdf568",
                     "artifact_status": "COMPLIANT"
                   }
                 },
@@ -8302,7 +9261,7 @@ kosli get snapshot aws-prod --output=json
                   "type": "rule_not_applicable",
                   "context": {
                     "flow_name": "production-promotion",
-                    "trail_name": "promote-all-41",
+                    "trail_name": "promote-all-42",
                     "artifact_status": "COMPLIANT"
                   }
                 },
@@ -8310,7 +9269,7 @@ kosli get snapshot aws-prod --output=json
                   "type": "rule_not_applicable",
                   "context": {
                     "flow_name": "snyk-aws-prod-per-artifact",
-                    "trail_name": "web-ee739c0183759b660a740afe28fbbdb20b4c3b434faa48dab975aa8576173efb",
+                    "trail_name": "web-000a36f4debb15073c77bc5e9b7a864ebf60c2ce3116fed603ce0ac654bdf568",
                     "artifact_status": "COMPLIANT"
                   }
                 }
@@ -8336,7 +9295,16 @@ kosli get snapshot aws-prod --output=json
                   "type": "rule_not_applicable",
                   "context": {
                     "flow_name": "creator-ci",
-                    "trail_name": "3e6678b80d51d7ec4c89d88f46dcee93f27fd6c1",
+                    "trail_name": "fd680a809587fa6e4071fe874d63192f65f251c1",
+                    "artifact_status": null,
+                    "for_control": "SDLC-CTRL-0022"
+                  }
+                },
+                {
+                  "type": "rule_not_applicable",
+                  "context": {
+                    "flow_name": "snyk-aws-beta-per-artifact",
+                    "trail_name": "web-000a36f4debb15073c77bc5e9b7a864ebf60c2ce3116fed603ce0ac654bdf568",
                     "artifact_status": null,
                     "for_control": "SDLC-CTRL-0022"
                   }
@@ -8345,7 +9313,7 @@ kosli get snapshot aws-prod --output=json
                   "type": "rule_not_applicable",
                   "context": {
                     "flow_name": "production-promotion",
-                    "trail_name": "promote-all-41",
+                    "trail_name": "promote-all-42",
                     "artifact_status": null,
                     "for_control": "SDLC-CTRL-0022"
                   }
@@ -8354,7 +9322,7 @@ kosli get snapshot aws-prod --output=json
                   "type": "rule_satisfied",
                   "context": {
                     "flow_name": "snyk-aws-prod-per-artifact",
-                    "trail_name": "web-ee739c0183759b660a740afe28fbbdb20b4c3b434faa48dab975aa8576173efb",
+                    "trail_name": "web-000a36f4debb15073c77bc5e9b7a864ebf60c2ce3116fed603ce0ac654bdf568",
                     "artifact_status": null,
                     "for_control": "SDLC-CTRL-0022"
                   }
@@ -8383,7 +9351,15 @@ kosli get snapshot aws-prod --output=json
                   "type": "rule_not_applicable",
                   "context": {
                     "flow_name": "creator-ci",
-                    "trail_name": "3e6678b80d51d7ec4c89d88f46dcee93f27fd6c1",
+                    "trail_name": "fd680a809587fa6e4071fe874d63192f65f251c1",
+                    "artifact_status": null
+                  }
+                },
+                {
+                  "type": "rule_not_applicable",
+                  "context": {
+                    "flow_name": "snyk-aws-beta-per-artifact",
+                    "trail_name": "web-000a36f4debb15073c77bc5e9b7a864ebf60c2ce3116fed603ce0ac654bdf568",
                     "artifact_status": null
                   }
                 },
@@ -8391,7 +9367,7 @@ kosli get snapshot aws-prod --output=json
                   "type": "rule_not_applicable",
                   "context": {
                     "flow_name": "production-promotion",
-                    "trail_name": "promote-all-41",
+                    "trail_name": "promote-all-42",
                     "artifact_status": null
                   }
                 },
@@ -8399,7 +9375,7 @@ kosli get snapshot aws-prod --output=json
                   "type": "rule_not_applicable",
                   "context": {
                     "flow_name": "snyk-aws-prod-per-artifact",
-                    "trail_name": "web-ee739c0183759b660a740afe28fbbdb20b4c3b434faa48dab975aa8576173efb",
+                    "trail_name": "web-000a36f4debb15073c77bc5e9b7a864ebf60c2ce3116fed603ce0ac654bdf568",
                     "artifact_status": null
                   }
                 }
@@ -8426,7 +9402,15 @@ kosli get snapshot aws-prod --output=json
                   "type": "rule_not_applicable",
                   "context": {
                     "flow_name": "creator-ci",
-                    "trail_name": "3e6678b80d51d7ec4c89d88f46dcee93f27fd6c1",
+                    "trail_name": "fd680a809587fa6e4071fe874d63192f65f251c1",
+                    "artifact_status": "COMPLIANT"
+                  }
+                },
+                {
+                  "type": "rule_not_applicable",
+                  "context": {
+                    "flow_name": "snyk-aws-beta-per-artifact",
+                    "trail_name": "web-000a36f4debb15073c77bc5e9b7a864ebf60c2ce3116fed603ce0ac654bdf568",
                     "artifact_status": "COMPLIANT"
                   }
                 },
@@ -8434,7 +9418,7 @@ kosli get snapshot aws-prod --output=json
                   "type": "rule_satisfied",
                   "context": {
                     "flow_name": "production-promotion",
-                    "trail_name": "promote-all-41",
+                    "trail_name": "promote-all-42",
                     "artifact_status": "COMPLIANT"
                   }
                 },
@@ -8442,7 +9426,7 @@ kosli get snapshot aws-prod --output=json
                   "type": "rule_satisfied",
                   "context": {
                     "flow_name": "snyk-aws-prod-per-artifact",
-                    "trail_name": "web-ee739c0183759b660a740afe28fbbdb20b4c3b434faa48dab975aa8576173efb",
+                    "trail_name": "web-000a36f4debb15073c77bc5e9b7a864ebf60c2ce3116fed603ce0ac654bdf568",
                     "artifact_status": "COMPLIANT"
                   }
                 }
@@ -8453,99 +9437,68 @@ kosli get snapshot aws-prod --output=json
         }
       ],
       "reasons_for_incompliance": [],
-      "fingerprint": "ee739c0183759b660a740afe28fbbdb20b4c3b434faa48dab975aa8576173efb",
+      "fingerprint": "000a36f4debb15073c77bc5e9b7a864ebf60c2ce3116fed603ce0ac654bdf568",
       "creationTimestamp": [
-        1791648284
+        1793178778
       ],
       "pods": null,
       "annotation": {
-        "type": "unchanged",
+        "type": "updated-provenance",
         "was": 1,
         "now": 1
       },
       "flow_name": "creator-ci",
-      "git_commit": "3e6678b80d51d7ec4c89d88f46dcee93f27fd6c1",
-      "commit_url": "https://github.com/cyber-dojo/web/commit/3e6678b80d51d7ec4c89d88f46dcee93f27fd6c1",
-      "html_url": "https://app.kosli.com/cyber-dojo/flows/creator-ci/artifacts/ee739c0183759b660a740afe28fbbdb20b4c3b434faa48dab975aa8576173efb?artifact_id=349ebdb8-fe2c-41fb-a05d-49675a91",
+      "git_commit": "fd680a809587fa6e4071fe874d63192f65f251c1",
+      "commit_url": "https://github.com/cyber-dojo/web/commit/fd680a809587fa6e4071fe874d63192f65f251c1",
+      "html_url": "https://app.kosli.com/cyber-dojo/flows/creator-ci/artifacts/000a36f4debb15073c77bc5e9b7a864ebf60c2ce3116fed603ce0ac654bdf568?artifact_id=0e7140db-7422-4ea7-954b-fa840a0a",
       "flow_html_url": "https://app.kosli.com/cyber-dojo/flows/creator-ci",
       "deployment_diff": {
-        "diff_url": "https://github.com/cyber-dojo/web/compare/3b4ef042cde981a0668dec70ed3137041a51cbe6...3e6678b80d51d7ec4c89d88f46dcee93f27fd6c1",
-        "previous_git_commit": "3b4ef042cde981a0668dec70ed3137041a51cbe6",
-        "previous_git_commit_url": "https://github.com/cyber-dojo/web/commit/3b4ef042cde981a0668dec70ed3137041a51cbe6",
-        "previous_fingerprint": "299aafbad77b4604fd2260ada0659e3f64a770f3411010827087cda34b52dc9e",
-        "previous_artifact_name": "244531986313.dkr.ecr.eu-central-1.amazonaws.com/creator:3b4ef04@sha256:299aafbad77b4604fd2260ada0659e3f64a770f3411010827087cda34b52dc9e",
+        "diff_url": "https://github.com/cyber-dojo/web/compare/3e6678b80d51d7ec4c89d88f46dcee93f27fd6c1...fd680a809587fa6e4071fe874d63192f65f251c1",
+        "previous_git_commit": "3e6678b80d51d7ec4c89d88f46dcee93f27fd6c1",
+        "previous_git_commit_url": "https://github.com/cyber-dojo/web/commit/3e6678b80d51d7ec4c89d88f46dcee93f27fd6c1",
+        "previous_fingerprint": "ee739c0183759b660a740afe28fbbdb20b4c3b434faa48dab975aa8576173efb",
+        "previous_artifact_name": "244531986313.dkr.ecr.eu-central-1.amazonaws.com/creator:3e6678b@sha256:ee739c0183759b660a740afe28fbbdb20b4c3b434faa48dab975aa8576173efb",
         "previous_artifact_compliance_state": "COMPLIANT",
         "previous_running": false,
-        "previous_trail_name": "3b4ef042cde981a0668dec70ed3137041a51cbe6",
+        "previous_trail_name": "3e6678b80d51d7ec4c89d88f46dcee93f27fd6c1",
         "previous_template_reference_name": "creator"
       },
-      "commit_lead_time": 15086.0,
+      "commit_lead_time": 75366.0,
       "flows": [
         {
           "flow_name": "creator-ci",
-          "trail_name": "3e6678b80d51d7ec4c89d88f46dcee93f27fd6c1",
+          "trail_name": "fd680a809587fa6e4071fe874d63192f65f251c1",
           "template_reference_name": "creator",
-          "git_commit": "3e6678b80d51d7ec4c89d88f46dcee93f27fd6c1",
-          "commit_url": "https://github.com/cyber-dojo/web/commit/3e6678b80d51d7ec4c89d88f46dcee93f27fd6c1",
+          "git_commit": "fd680a809587fa6e4071fe874d63192f65f251c1",
+          "commit_url": "https://github.com/cyber-dojo/web/commit/fd680a809587fa6e4071fe874d63192f65f251c1",
           "git_commit_info": {
-            "sha1": "3e6678b80d51d7ec4c89d88f46dcee93f27fd6c1",
-            "message": "Web multi platform and dockerhub (#468)\n\n* Build web, creator, dashboard for amd64 + arm64\n\nThe three images were amd64-only, and reached\nDocker Hub only via versioner copying from ECR.\nEach workflow now builds both platforms and\npasses Docker Hub credentials, so the same build\nis pushed to both, with the digest Kosli attests.\n\nasset_builder is amd64-only, but its output is\nCSS/JS text, so the asset stages run on the\nbuild platform and both targets copy the result.\n\nCo-Authored-By: Claude Opus 5.5\n  <noreply@anthropic.com>\n\n* Run the local runner with 16 spares\n\nPre-started spare containers spare test runs the\ncontainer start, so local runs reflect the\nrunner as it is deployed with spares.\n\n---------\n\nCo-authored-by: Claude Opus 5.5 <noreply@anthropic.com>",
+            "sha1": "fd680a809587fa6e4071fe874d63192f65f251c1",
+            "message": "Give creator, web and dashboard the same 15s health wait (#477)\n\nCreator polled 50 times at 0.1s, about 6s in all, and it\nnormally needs about 5s to boot. A slightly slow CI runner\ntipped it over and failed the base-image update (#476)\nwith an empty container log.\n\nWeb waited 60s and dashboard 10s for no stated reason.\nAll three now use docker compose --wait-timeout=15.\nCreator still dumps its container log on timeout.\n\nCo-authored-by: Claude Opus 5.5 <noreply@anthropic.com>",
             "author": "Jon Jagger <jon@kosli.com>",
             "branch": "",
-            "timestamp": 1791633198.0,
-            "url": "https://github.com/cyber-dojo/web/commit/3e6678b80d51d7ec4c89d88f46dcee93f27fd6c1"
+            "timestamp": 1793103412.0,
+            "url": "https://github.com/cyber-dojo/web/commit/fd680a809587fa6e4071fe874d63192f65f251c1"
           },
-          "html_url": "https://app.kosli.com/cyber-dojo/flows/creator-ci/artifacts/ee739c0183759b660a740afe28fbbdb20b4c3b434faa48dab975aa8576173efb?artifact_id=349ebdb8-fe2c-41fb-a05d-49675a91",
+          "html_url": "https://app.kosli.com/cyber-dojo/flows/creator-ci/artifacts/000a36f4debb15073c77bc5e9b7a864ebf60c2ce3116fed603ce0ac654bdf568?artifact_id=0e7140db-7422-4ea7-954b-fa840a0a",
           "flow_html_url": "https://app.kosli.com/cyber-dojo/flows/creator-ci",
           "deployment_diff": {
-            "diff_url": "https://github.com/cyber-dojo/web/compare/3b4ef042cde981a0668dec70ed3137041a51cbe6...3e6678b80d51d7ec4c89d88f46dcee93f27fd6c1",
-            "previous_git_commit": "3b4ef042cde981a0668dec70ed3137041a51cbe6",
-            "previous_git_commit_url": "https://github.com/cyber-dojo/web/commit/3b4ef042cde981a0668dec70ed3137041a51cbe6",
-            "previous_fingerprint": "299aafbad77b4604fd2260ada0659e3f64a770f3411010827087cda34b52dc9e",
-            "previous_artifact_name": "244531986313.dkr.ecr.eu-central-1.amazonaws.com/creator:3b4ef04@sha256:299aafbad77b4604fd2260ada0659e3f64a770f3411010827087cda34b52dc9e",
+            "diff_url": "https://github.com/cyber-dojo/web/compare/3e6678b80d51d7ec4c89d88f46dcee93f27fd6c1...fd680a809587fa6e4071fe874d63192f65f251c1",
+            "previous_git_commit": "3e6678b80d51d7ec4c89d88f46dcee93f27fd6c1",
+            "previous_git_commit_url": "https://github.com/cyber-dojo/web/commit/3e6678b80d51d7ec4c89d88f46dcee93f27fd6c1",
+            "previous_fingerprint": "ee739c0183759b660a740afe28fbbdb20b4c3b434faa48dab975aa8576173efb",
+            "previous_artifact_name": "244531986313.dkr.ecr.eu-central-1.amazonaws.com/creator:3e6678b@sha256:ee739c0183759b660a740afe28fbbdb20b4c3b434faa48dab975aa8576173efb",
             "previous_artifact_compliance_state": "COMPLIANT",
             "previous_running": false,
-            "previous_trail_name": "3b4ef042cde981a0668dec70ed3137041a51cbe6",
+            "previous_trail_name": "3e6678b80d51d7ec4c89d88f46dcee93f27fd6c1",
             "previous_template_reference_name": "creator"
           },
-          "commit_lead_time": 15086.0,
+          "commit_lead_time": 75366.0,
           "artifact_compliance_in_flow": true,
           "flow_reasons_for_non_compliance": []
         },
         {
-          "flow_name": "production-promotion",
-          "trail_name": "promote-all-41",
-          "template_reference_name": "web",
-          "git_commit": "54306f735c51413c972b38398da4d0a5fc86d47a",
-          "commit_url": "https://github.com/cyber-dojo/aws-prod-co-promotion/commit/54306f735c51413c972b38398da4d0a5fc86d47a",
-          "git_commit_info": {
-            "sha1": "54306f735c51413c972b38398da4d0a5fc86d47a",
-            "message": "Merge pull request #18 from cyber-dojo/promote-one-requires-a-service\n\nFail promote-one when no service is chosen",
-            "author": "Jon Jagger <jon@kosli.com>",
-            "branch": "main",
-            "timestamp": 1791640516.0,
-            "url": "https://github.com/cyber-dojo/aws-prod-co-promotion/commit/54306f735c51413c972b38398da4d0a5fc86d47a"
-          },
-          "html_url": "https://app.kosli.com/cyber-dojo/flows/production-promotion/artifacts/ee739c0183759b660a740afe28fbbdb20b4c3b434faa48dab975aa8576173efb?artifact_id=4bb1dbd0-0ea2-40ee-aae1-a4bbe612",
-          "flow_html_url": "https://app.kosli.com/cyber-dojo/flows/production-promotion",
-          "deployment_diff": {
-            "diff_url": "https://github.com/cyber-dojo/aws-prod-co-promotion/compare/8c76df3ae03cf8f4d6be40d4af6d550c2e6f1d25...54306f735c51413c972b38398da4d0a5fc86d47a",
-            "previous_git_commit": "8c76df3ae03cf8f4d6be40d4af6d550c2e6f1d25",
-            "previous_git_commit_url": "https://github.com/cyber-dojo/aws-prod-co-promotion/commit/8c76df3ae03cf8f4d6be40d4af6d550c2e6f1d25",
-            "previous_fingerprint": "299aafbad77b4604fd2260ada0659e3f64a770f3411010827087cda34b52dc9e",
-            "previous_artifact_name": "244531986313.dkr.ecr.eu-central-1.amazonaws.com/creator:3b4ef04@sha256:299aafbad77b4604fd2260ada0659e3f64a770f3411010827087cda34b52dc9e",
-            "previous_artifact_compliance_state": "COMPLIANT",
-            "previous_running": false,
-            "previous_trail_name": "promotion-one-178",
-            "previous_template_reference_name": "web"
-          },
-          "commit_lead_time": 7768.0,
-          "artifact_compliance_in_flow": true,
-          "flow_reasons_for_non_compliance": []
-        },
-        {
-          "flow_name": "snyk-aws-prod-per-artifact",
-          "trail_name": "web-ee739c0183759b660a740afe28fbbdb20b4c3b434faa48dab975aa8576173efb",
+          "flow_name": "snyk-aws-beta-per-artifact",
+          "trail_name": "web-000a36f4debb15073c77bc5e9b7a864ebf60c2ce3116fed603ce0ac654bdf568",
           "template_reference_name": "web",
           "git_commit": "359c98460f5c3aefb136a77eef08d1be4c4ca08d",
           "commit_url": "https://github.com/cyber-dojo/snyk-scanning/commit/359c98460f5c3aefb136a77eef08d1be4c4ca08d",
@@ -8557,7 +9510,69 @@ kosli get snapshot aws-prod --output=json
             "timestamp": 1790759058.0,
             "url": "https://github.com/cyber-dojo/snyk-scanning/commit/359c98460f5c3aefb136a77eef08d1be4c4ca08d"
           },
-          "html_url": "https://app.kosli.com/cyber-dojo/flows/snyk-aws-prod-per-artifact/artifacts/ee739c0183759b660a740afe28fbbdb20b4c3b434faa48dab975aa8576173efb?artifact_id=f8cac503-b2fd-4fd1-88c0-44b3a2e6",
+          "html_url": "https://app.kosli.com/cyber-dojo/flows/snyk-aws-beta-per-artifact/artifacts/000a36f4debb15073c77bc5e9b7a864ebf60c2ce3116fed603ce0ac654bdf568?artifact_id=fd8062d0-3970-465e-8f41-19ff47d5",
+          "flow_html_url": "https://app.kosli.com/cyber-dojo/flows/snyk-aws-beta-per-artifact",
+          "deployment_diff": {
+            "diff_url": "https://github.com/cyber-dojo/snyk-scanning/compare/359c98460f5c3aefb136a77eef08d1be4c4ca08d...359c98460f5c3aefb136a77eef08d1be4c4ca08d",
+            "previous_git_commit": "359c98460f5c3aefb136a77eef08d1be4c4ca08d",
+            "previous_git_commit_url": "https://github.com/cyber-dojo/snyk-scanning/commit/359c98460f5c3aefb136a77eef08d1be4c4ca08d",
+            "previous_fingerprint": "299aafbad77b4604fd2260ada0659e3f64a770f3411010827087cda34b52dc9e",
+            "previous_artifact_name": "244531986313.dkr.ecr.eu-central-1.amazonaws.com/creator:3b4ef04@sha256:299aafbad77b4604fd2260ada0659e3f64a770f3411010827087cda34b52dc9e",
+            "previous_artifact_compliance_state": "COMPLIANT",
+            "previous_running": false,
+            "previous_trail_name": "web-299aafbad77b4604fd2260ada0659e3f64a770f3411010827087cda34b52dc9e",
+            "previous_template_reference_name": "web"
+          },
+          "commit_lead_time": 2419720.0,
+          "artifact_compliance_in_flow": true,
+          "flow_reasons_for_non_compliance": []
+        },
+        {
+          "flow_name": "production-promotion",
+          "trail_name": "promote-all-42",
+          "template_reference_name": "web",
+          "git_commit": "f1f6cd6bce0e887649f077657215b50f9cf47d93",
+          "commit_url": "https://github.com/cyber-dojo/aws-prod-co-promotion/commit/f1f6cd6bce0e887649f077657215b50f9cf47d93",
+          "git_commit_info": {
+            "sha1": "f1f6cd6bce0e887649f077657215b50f9cf47d93",
+            "message": "Merge pull request #19 from cyber-dojo/cap-parallel-prod-applies\n\nCap promote-all prod applies at three at a time",
+            "author": "Jon Jagger <jon@kosli.com>",
+            "branch": "main",
+            "timestamp": 1791649272.0,
+            "url": "https://github.com/cyber-dojo/aws-prod-co-promotion/commit/f1f6cd6bce0e887649f077657215b50f9cf47d93"
+          },
+          "html_url": "https://app.kosli.com/cyber-dojo/flows/production-promotion/artifacts/000a36f4debb15073c77bc5e9b7a864ebf60c2ce3116fed603ce0ac654bdf568?artifact_id=53803fd2-76ca-488d-a7ec-e46cd58d",
+          "flow_html_url": "https://app.kosli.com/cyber-dojo/flows/production-promotion",
+          "deployment_diff": {
+            "diff_url": "https://github.com/cyber-dojo/aws-prod-co-promotion/compare/f1f6cd6bce0e887649f077657215b50f9cf47d93...f1f6cd6bce0e887649f077657215b50f9cf47d93",
+            "previous_git_commit": "f1f6cd6bce0e887649f077657215b50f9cf47d93",
+            "previous_git_commit_url": "https://github.com/cyber-dojo/aws-prod-co-promotion/commit/f1f6cd6bce0e887649f077657215b50f9cf47d93",
+            "previous_fingerprint": "da7984414ab096232877f301d3d7cea1daf3cdd3fdb72157f530fe186cba3d78",
+            "previous_artifact_name": "244531986313.dkr.ecr.eu-central-1.amazonaws.com/web:83553f5@sha256:da7984414ab096232877f301d3d7cea1daf3cdd3fdb72157f530fe186cba3d78",
+            "previous_artifact_compliance_state": "COMPLIANT",
+            "previous_running": false,
+            "previous_trail_name": "promotion-one-185",
+            "previous_template_reference_name": "web"
+          },
+          "commit_lead_time": 1529506.0,
+          "artifact_compliance_in_flow": true,
+          "flow_reasons_for_non_compliance": []
+        },
+        {
+          "flow_name": "snyk-aws-prod-per-artifact",
+          "trail_name": "web-000a36f4debb15073c77bc5e9b7a864ebf60c2ce3116fed603ce0ac654bdf568",
+          "template_reference_name": "web",
+          "git_commit": "359c98460f5c3aefb136a77eef08d1be4c4ca08d",
+          "commit_url": "https://github.com/cyber-dojo/snyk-scanning/commit/359c98460f5c3aefb136a77eef08d1be4c4ca08d",
+          "git_commit_info": {
+            "sha1": "359c98460f5c3aefb136a77eef08d1be4c4ca08d",
+            "message": "Merge pull request #6 from cyber-dojo/key-uploads-and-trails-on-component-not-repo\n\nTell apart artifacts built by one repo",
+            "author": "Jon Jagger <jon@kosli.com>",
+            "branch": "main",
+            "timestamp": 1790759058.0,
+            "url": "https://github.com/cyber-dojo/snyk-scanning/commit/359c98460f5c3aefb136a77eef08d1be4c4ca08d"
+          },
+          "html_url": "https://app.kosli.com/cyber-dojo/flows/snyk-aws-prod-per-artifact/artifacts/000a36f4debb15073c77bc5e9b7a864ebf60c2ce3116fed603ce0ac654bdf568?artifact_id=fecea4f0-50a3-4da0-aeb2-311c11a2",
           "flow_html_url": "https://app.kosli.com/cyber-dojo/flows/snyk-aws-prod-per-artifact",
           "deployment_diff": {
             "diff_url": "https://github.com/cyber-dojo/snyk-scanning/compare/30111f180ac4e3611cdbd7d805381a0bb9f53cff...359c98460f5c3aefb136a77eef08d1be4c4ca08d",
@@ -8570,13 +9585,13 @@ kosli get snapshot aws-prod --output=json
             "previous_trail_name": "web-e24bd03714d2e583a2196c0eaf82b2aad8eeecf73f29aec58875994b82f0f418",
             "previous_template_reference_name": "web"
           },
-          "commit_lead_time": 889226.0,
+          "commit_lead_time": 2419720.0,
           "artifact_compliance_in_flow": true,
           "flow_reasons_for_non_compliance": []
         }
       ],
       "ecs_context": {
-        "task_arn": "arn:aws:ecs:eu-central-1:274425519734:task/app/b0901864b2ba4e5fae7b124fa29c2bd1",
+        "task_arn": "arn:aws:ecs:eu-central-1:274425519734:task/app/ca3e3783c9cc455d9b55b7406f645307",
         "cluster_name": null,
         "service_name": null
       }
