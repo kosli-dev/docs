@@ -1,6 +1,6 @@
 ---
 title: "kosli rotate api-key"
-description: "Rotate one or more API keys for a service account."
+description: "Rotate one or more API keys for a service account, or your own personal API keys."
 ---
 
 ## Synopsis
@@ -9,12 +9,16 @@ description: "Rotate one or more API keys for a service account."
 kosli rotate api-key KEY-ID [KEY-ID...] [flags]
 ```
 
-Rotate one or more API keys for a service account.
+Rotate one or more API keys for a service account, or your own personal API keys.
 
 A new API key is generated immediately. The old key remains valid for a grace period to
 allow time to update dependent systems; that grace period has a standard length unless
 overridden with `--grace-period-hours`. The new key value is only returned once, so make
 sure to store it securely.
+
+With `--personal` and an API key as `--api-token`, you can rotate only that key and keys
+created with it, and the rotated key expires no later than that key. To get a key that
+outlives it, create one from your profile page in the Kosli app.
 
 ## Flags
 | Flag | Type | Description |
@@ -24,7 +28,8 @@ sure to store it securely.
 | `-g`, `--grace-period-hours` | int | [optional] How many hours the old API key remains valid after rotation, to allow time to update dependent systems. Defaults to the standard grace period when not set. |
 | `-h`, `--help` | bool | help for api-key |
 | `-o`, `--output` | string | [defaulted] The format of the output. Valid formats are: [table, json]. (default "table") |
-| `-s`, `--service-account` | string | The name of the service account whose API keys are managed. |
+| `--personal` | bool | Manage your own personal API keys instead of a service account's. `--org` is not needed. Either this or `--service-account` is required. |
+| `-s`, `--service-account` | string | The name of the service account whose API keys are managed. Either this or `--personal` is required. |
 
 
 ## Flags inherited from parent commands
@@ -64,6 +69,13 @@ kosli rotate api-key keyID1 keyID2
 kosli rotate api-key yourApiKeyID 
 	--grace-period-hours 48 
 	--service-account yourServiceAccountName 
+
+```
+</Accordion>
+<Accordion title="rotate one of your own personal API keys">
+```shell
+kosli rotate api-key yourApiKeyID 
+	--personal 
 ```
 </Accordion>
 </AccordionGroup>

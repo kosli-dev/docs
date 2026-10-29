@@ -1,6 +1,6 @@
 ---
 title: "kosli get api-key"
-description: "Get an API key's metadata for a service account."
+description: "Get an API key's metadata for a service account, or one of your own personal API keys."
 ---
 
 ## Synopsis
@@ -9,7 +9,7 @@ description: "Get an API key's metadata for a service account."
 kosli get api-key KEY-ID [flags]
 ```
 
-Get an API key's metadata for a service account.
+Get an API key's metadata for a service account, or one of your own personal API keys.
 
 Only the metadata of the API key is returned; the key value itself is never
 returned (it is only shown once, at creation or rotation time).
@@ -19,7 +19,8 @@ returned (it is only shown once, at creation or rotation time).
 | :--- | :--- | :--- |
 | `-h`, `--help` | bool | help for api-key |
 | `-o`, `--output` | string | [defaulted] The format of the output. Valid formats are: [table, json]. (default "table") |
-| `-s`, `--service-account` | string | The name of the service account whose API keys are managed. |
+| `--personal` | bool | Manage your own personal API keys instead of a service account's. `--org` is not needed. Either this or `--service-account` is required. |
+| `-s`, `--service-account` | string | The name of the service account whose API keys are managed. Either this or `--personal` is required. |
 
 
 ## Flags inherited from parent commands
@@ -44,6 +45,13 @@ These examples all assume that the flags  `--api-token`, `--org`, `--host`, (and
 ```shell
 kosli get api-key yourApiKeyID 
 	--service-account yourServiceAccountName 
+
+```
+</Accordion>
+<Accordion title="get the metadata of one of your own personal API keys">
+```shell
+kosli get api-key yourApiKeyID 
+	--personal 
 ```
 </Accordion>
 </AccordionGroup>
