@@ -1,6 +1,6 @@
 ---
 title: "kosli list api-keys"
-description: "List API keys for a service account."
+description: "List API keys for a service account, or your own personal API keys."
 ---
 
 ## Synopsis
@@ -9,7 +9,7 @@ description: "List API keys for a service account."
 kosli list api-keys [flags]
 ```
 
-List API keys for a service account.
+List API keys for a service account, or your own personal API keys.
 
 Only the metadata of each active API key is returned; the key values themselves are never
 listed (they are only shown once, at creation or rotation time).
@@ -19,7 +19,8 @@ listed (they are only shown once, at creation or rotation time).
 | :--- | :--- | :--- |
 | `-h`, `--help` | bool | help for api-keys |
 | `-o`, `--output` | string | [defaulted] The format of the output. Valid formats are: [table, json]. (default "table") |
-| `-s`, `--service-account` | string | The name of the service account whose API keys are managed. |
+| `--personal` | bool | Manage your own personal API keys instead of a service account's. `--org` is not needed. Either this or `--service-account` is required. |
+| `-s`, `--service-account` | string | The name of the service account whose API keys are managed. Either this or `--personal` is required. |
 
 
 ## Flags inherited from parent commands
@@ -44,6 +45,13 @@ These examples all assume that the flags  `--api-token`, `--org`, `--host`, (and
 ```shell
 kosli list api-keys 
 	--service-account yourServiceAccountName 
+
+```
+</Accordion>
+<Accordion title="list your own personal API keys">
+```shell
+kosli list api-keys 
+	--personal 
 ```
 </Accordion>
 </AccordionGroup>

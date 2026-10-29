@@ -1,6 +1,6 @@
 ---
 title: "kosli create api-key"
-description: "Create an API key for a service account."
+description: "Create an API key for a service account, or a personal API key for yourself."
 ---
 
 ## Synopsis
@@ -9,12 +9,15 @@ description: "Create an API key for a service account."
 kosli create api-key [flags]
 ```
 
-Create an API key for a service account.
+Create an API key for a service account, or a personal API key for yourself.
 
 The key value is only returned once, at creation time, so make sure to store it securely.
 
 Every API key expires. Without `--expires-at` the key is given the maximum allowed
 lifetime, and an `--expires-at` beyond that maximum is capped to it.
+
+With `--personal`, a key created using another API key is revoked along with that key,
+and expires no later than it.
 
 ## Flags
 | Flag | Type | Description |
@@ -24,7 +27,8 @@ lifetime, and an `--expires-at` beyond that maximum is capped to it.
 | `-e`, `--expires-at` | string | [optional] When the API key expires. Accepts an epoch timestamp or a date like '2026-06-04', '2026-06-04 15:04:05', or an RFC3339 timestamp. Keys always expire: when not set, the key gets the maximum allowed lifetime, which also caps later dates. |
 | `-h`, `--help` | bool | help for api-key |
 | `-o`, `--output` | string | [defaulted] The format of the output. Valid formats are: [table, json]. (default "table") |
-| `-s`, `--service-account` | string | The name of the service account whose API keys are managed. |
+| `--personal` | bool | Manage your own personal API keys instead of a service account's. `--org` is not needed. Either this or `--service-account` is required. |
+| `-s`, `--service-account` | string | The name of the service account whose API keys are managed. Either this or `--personal` is required. |
 
 
 ## Flags inherited from parent commands
@@ -59,6 +63,14 @@ kosli create api-key
 	--service-account yourServiceAccountName 
 	--description "key for CI" 
 	--expires-at 2026-12-31 
+
+```
+</Accordion>
+<Accordion title="create a personal API key for yourself">
+```shell
+kosli create api-key 
+	--personal 
+	--description "key for CI" 
 ```
 </Accordion>
 </AccordionGroup>

@@ -1,6 +1,6 @@
 ---
 title: "kosli delete api-key"
-description: "Delete one or more API keys for a service account."
+description: "Delete one or more API keys for a service account, or your own personal API keys."
 ---
 
 ## Synopsis
@@ -9,7 +9,7 @@ description: "Delete one or more API keys for a service account."
 kosli delete api-key KEY-ID [KEY-ID...] [flags]
 ```
 
-Delete one or more API keys for a service account.
+Delete one or more API keys for a service account, or your own personal API keys.
 
 This permanently deletes the API key(s) identified by KEY-ID. Deletion is immediate and
 cannot be undone. You are asked to confirm before the key is deleted; use
@@ -18,13 +18,17 @@ cannot be undone. You are asked to confirm before the key is deleted; use
 When stdin is not interactive (e.g. in CI) the prompt cannot be answered and the
 command fails without deleting anything, so pass `--assume-yes` there.
 
+Deleting a key also deletes every key that was created with it. With `--personal` and an
+API key as `--api-token`, you can delete only that key and keys created with it.
+
 ## Flags
 | Flag | Type | Description |
 | :--- | :--- | :--- |
 | `-y`, `--assume-yes` | bool | [optional] Skip the confirmation prompt and delete the API key without asking. (alias: `--yes`) |
 | `-D`, `--dry-run` | bool | [optional] Run in dry-run mode. When enabled, no data is sent to Kosli and the CLI exits with 0 exit code regardless of any errors. |
 | `-h`, `--help` | bool | help for api-key |
-| `-s`, `--service-account` | string | The name of the service account whose API keys are managed. |
+| `--personal` | bool | Manage your own personal API keys instead of a service account's. `--org` is not needed. Either this or `--service-account` is required. |
+| `-s`, `--service-account` | string | The name of the service account whose API keys are managed. Either this or `--personal` is required. |
 
 
 ## Flags inherited from parent commands
@@ -64,6 +68,13 @@ kosli delete api-key keyID1 keyID2
 kosli delete api-key yourApiKeyID 
 	--service-account yourServiceAccountName 
 	--assume-yes 
+
+```
+</Accordion>
+<Accordion title="delete one of your own personal API keys">
+```shell
+kosli delete api-key yourApiKeyID 
+	--personal 
 ```
 </Accordion>
 </AccordionGroup>
