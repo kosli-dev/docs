@@ -60,6 +60,14 @@ To create an API token:
 API tokens grant full access to your Kosli organization. Store them securely and never commit them to version control.
 </Warning>
 
+### Required permissions
+
+Use a token that belongs to a user or service account with the **Admin** role.
+
+Some provider operations are restricted to admins. Destroying a `kosli_environment` or `kosli_logical_environment` archives the environment in Kosli, and archiving requires the Admin role. With a Member token, `terraform apply` can create and update environments. However, `terraform destroy` (or removing the resource from your configuration) fails with `403 Forbidden` and the resource stays in state.
+
+The recommended setup is a dedicated service account with the `admin` privilege and an API key minted for it. You can create both in the Kosli UI under **Settings** → **Service Accounts**, or with the [`kosli_service_account`](/terraform-reference/resources/service_account) and [`kosli_service_account_api_key`](/terraform-reference/resources/service_account_api_key) resources. The initial bootstrap with these resources must itself run with an Admin token, because a service account cannot be granted a higher privilege than the caller's.
+
 ## Regional endpoints
 
 Kosli operates in multiple regions. Configure the `api_url` to match your organization's region:
@@ -67,11 +75,23 @@ Kosli operates in multiple regions. Configure the `api_url` to match your organi
 - **EU (Default)**: `https://app.kosli.com`
 - **US**: `https://app.us.kosli.com`
 
+The `api_url` must use `https`. Plain `http` is only accepted for localhost.
+
+## Telemetry
+
+Alongside the `User-Agent`, every request the provider sends to Kosli carries these headers, which Kosli uses to understand how the provider is used:
+
+- `X-Kosli-Client`: the provider name and version, for example `terraform/v0.11.0`
+- `X-Kosli-Operation`: the resource, data source, or list resource type and the operation, for example `kosli_environment create` or `data.kosli_flow read`
+- `X-Kosli-Invocation-Id`: a random ID generated each time Terraform starts the provider, which groups the requests from that run
+
+These headers contain only type names and operation names. The provider never sends configuration values, such as resource names, URLs, or IDs, in these headers.
+
 ## Schema
 
 ### Optional
 
 - `api_token` (String, Sensitive) Kosli API token for authentication. Can also be set via KOSLI_API_TOKEN environment variable.
-- `api_url` (String) Kosli API endpoint URL. Defaults to https://app.kosli.com (EU region). Use https://app.us.kosli.com for US region. Can also be set via KOSLI_API_URL environment variable.
+- `api_url` (String) Kosli API endpoint URL. Defaults to https://app.kosli.com (EU region). Use https://app.us.kosli.com for US region. Must use https; plain http is only accepted for localhost. Can also be set via KOSLI_API_URL environment variable.
 - `org` (String) Kosli organization name. Can also be set via KOSLI_ORG environment variable.
 - `timeout` (Number) HTTP client timeout in seconds. Defaults to 30 seconds.
