@@ -4,6 +4,58 @@ description: "Release notes for Kosli products."
 rss: true
 ---
 
+<Update label="October 29, 2026" description="v2.51.0" tags={["CLI"]}>
+
+## New features
+
+- **Personal API keys** — `kosli list api-keys`, `get api-key`, `create api-key`, `rotate api-key`, and `delete api-key` now take `--personal` to manage your own API keys instead of a service account's. `--org` is not needed with `--personal`. Give exactly one of `--personal` or `--service-account`. See the [`kosli create api-key` reference](/client_reference/kosli_create_api-key).
+
+[View on GitHub](https://github.com/kosli-dev/cli/releases/tag/v2.51.0)
+
+</Update>
+
+<Update label="October 28, 2026" description="v2.50.0" tags={["CLI"]}>
+
+## New features
+
+- **Download a Rego policy version** — `kosli get rego-policy --policy-version <version> --download <dir>` writes every file of that version into a directory, at the paths they were published with, so you can inspect or replay it offline. Nothing is written if any file would land outside the directory or overwrite an existing file.
+
+## Updates
+
+- **Usage headers** — the CLI now sends usage headers to the Kosli host with each request: the CLI version, the command name, the names of the flags used, and the CI system. Flag values, arguments, and connection flags such as `--api-token` and `--host` are never sent.
+
+[View on GitHub](https://github.com/kosli-dev/cli/releases/tag/v2.50.0)
+
+</Update>
+
+<Update label="October 28, 2026" description="v0.10.2" tags={["Terraform Provider"]}>
+
+## Updates
+
+- **Usage headers** — the provider now sends usage headers with API requests. They carry only static resource and operation names, never configuration values.
+
+[View on GitHub](https://github.com/kosli-dev/terraform-provider-kosli/releases/tag/v0.10.2)
+
+</Update>
+
+<Update label="October 26, 2026" description="v0.10.1" tags={["Terraform Provider"]}>
+
+## Updates
+
+- **Logging honors `TF_LOG`** — HTTP request and retry logs now go through Terraform's logging, so they follow `TF_LOG` instead of always printing to stderr.
+- **Admin role to destroy environments** — destroying `kosli_environment` or `kosli_logical_environment` archives the environment, which requires a service account with the Admin role. See the [`kosli_environment` reference](/terraform-reference/resources/environment).
+
+## Bug fixes
+
+- **HTTPS required for `api_url`** — the provider now rejects non-`https` values for `api_url` and `KOSLI_API_URL`, except loopback addresses, so your API token is never sent in cleartext.
+- **Names with `/` in request paths** — resource names, identifiers, and import IDs are now encoded in API paths, so a value containing `/` no longer reaches a different endpoint.
+- **Bounded response size** — API response bodies are now capped to prevent unbounded memory use.
+- **CVE-2026-78669** — updated `golang.org/x/net` to fix a high-severity HTTP/2 denial-of-service vulnerability.
+
+[View on GitHub](https://github.com/kosli-dev/terraform-provider-kosli/releases/tag/v0.10.1)
+
+</Update>
+
 <Update label="October 26, 2026" description="v2.49.0" tags={["CLI"]}>
 
 ## Breaking changes
