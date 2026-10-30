@@ -375,6 +375,7 @@
               "group": "kosli evaluate",
               "pages": [
                 "client_reference/kosli_evaluate_input",
+                "client_reference/kosli_evaluate_policy",
                 "client_reference/kosli_evaluate_trail",
                 "client_reference/kosli_evaluate_trails"
               ]
@@ -391,6 +392,7 @@
                 "client_reference/kosli_get_environment",
                 "client_reference/kosli_get_flow",
                 "client_reference/kosli_get_policy",
+                "client_reference/kosli_get_rego-policy",
                 "client_reference/kosli_get_repo",
                 "client_reference/kosli_get_service-account",
                 "client_reference/kosli_get_snapshot",
@@ -413,6 +415,7 @@
                 "client_reference/kosli_list_environments",
                 "client_reference/kosli_list_flows",
                 "client_reference/kosli_list_policies",
+                "client_reference/kosli_list_rego-policies",
                 "client_reference/kosli_list_repos",
                 "client_reference/kosli_list_service-accounts",
                 "client_reference/kosli_list_snapshots",
@@ -423,6 +426,12 @@
               "group": "kosli log",
               "pages": [
                 "client_reference/kosli_log_environment"
+              ]
+            },
+            {
+              "group": "kosli publish",
+              "pages": [
+                "client_reference/kosli_publish_rego-policy"
               ]
             },
             {
