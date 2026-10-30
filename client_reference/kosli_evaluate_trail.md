@@ -35,6 +35,7 @@ and `--output-rule` to add other rules of the policy, like a report, to it.
 | `--output-rule` | strings | [optional] [experimental] Name of a policy rule to add to the JSON output, next to allow and violations. Can be repeated, or given as a comma-separated list. Subject to change. |
 | `--params` | string | [optional] Policy parameters as inline JSON or @file.json. Available in policies as data.params. |
 | `-p`, `--policy` | string | Path or http(s):// URL of a Rego policy to evaluate against the trail. |
+| `--server-side` | bool | [optional] Evaluate the policy on the Kosli server rather than on this machine. Cannot be combined with `--attestations`, `--show-input` or `--output-rule`. |
 | `--show-input` | bool | [optional] Include the policy input data in the output. |
 
 
