@@ -9,7 +9,7 @@ The Kosli MCP server is a [Model Context Protocol](https://modelcontextprotocol.
 It is published from [`kosli-dev/mcp-server`](https://github.com/kosli-dev/mcp-server) and distributed as an npm package (`@kosli/mcp-server`) and as a `.mcpb` bundle for Claude Desktop.
 
 <Warning>
-The Kosli MCP server is in beta. Tool names, parameters, and behavior may change between releases. Pin a version if you need stability: `npx -y @kosli/mcp-server@0.5.0`.
+The Kosli MCP server is in beta. Tool names, parameters, and behavior may change between releases. Pin a version if you need stability: `npx -y @kosli/mcp-server@0.7.0`.
 </Warning>
 
 <Note>
@@ -47,12 +47,11 @@ These are the tool names your client shows as the assistant works, and the name 
     ```bash
     claude mcp add kosli \
       -e KOSLI_API_TOKEN=your-token \
-      -e KOSLI_ORG=your-org \
       -- npx -y @kosli/mcp-server
     ```
   </Tab>
   <Tab title="Claude Desktop (.mcpb)">
-    Download the latest `.mcpb` file from the [releases page](https://github.com/kosli-dev/mcp-server/releases) and drag it into Claude Desktop, or double-click it to install. Claude Desktop prompts you for your API key and organization, and stores the secrets in your operating system keychain.
+    Download the latest `.mcpb` file from the [releases page](https://github.com/kosli-dev/mcp-server/releases) and drag it into Claude Desktop, or double-click it to install. Claude Desktop prompts you for your API key, and optionally your Kosli base URL, and stores the key in your operating system keychain.
 
     This is the recommended method for Claude Desktop.
 
@@ -70,8 +69,7 @@ These are the tool names your client shows as the assistant works, and the name 
           "command": "npx",
           "args": ["-y", "@kosli/mcp-server"],
           "env": {
-            "KOSLI_API_TOKEN": "your-token",
-            "KOSLI_ORG": "your-org"
+            "KOSLI_API_TOKEN": "your-token"
           }
         }
       }
@@ -92,8 +90,17 @@ The server reads its configuration from environment variables.
 | Variable | Required | Default | Notes |
 |----------|----------|---------|-------|
 | `KOSLI_API_TOKEN` | yes | - | `KOSLI_API_KEY` is accepted as a fallback. |
-| `KOSLI_ORG` | yes | - | Default org. Used as the `org` path parameter when an action does not supply one. |
 | `KOSLI_BASE_URL` | no | `https://app.kosli.com` | Use `https://app.us.kosli.com` for US, or your own single-tenant endpoint. |
+
+## Choosing the organization
+
+The server has no default organization. Each call names the organization it runs against, so one running server can reach every organization your API key has access to, and you can work with several in one conversation, for example "compare the environments in `org-a` and `org-b`".
+
+When you don't name an organization, the assistant asks you which one to use. It can also look up your default organization in Kosli and offer it, but it asks you to confirm before using it. Writes only land in an organization you chose.
+
+<Note>
+Versions before 0.6.0 read a default organization from `KOSLI_ORG`. The server now ignores it and prints a message saying so when it starts. Remove it from your configuration.
+</Note>
 
 ## Example prompts
 
@@ -119,6 +126,8 @@ The last prompt takes several tool calls, because the assistant has to list what
 
 - The action catalog is generated from a snapshot of the OpenAPI spec. New endpoints become available when the catalog is regenerated and a new version of the package is published.
 - Ambiguous questions may take several `search_actions` calls before the assistant settles on the right action.
+- The assistant can't upload attachment files itself. When an attestation needs a file, it gives you an upload URL so you can upload the file, and waits for you to confirm before it records the attestation.
+- Before it records a generic attestation, the assistant asks you whether the attestation passed. It doesn't decide compliance on its own.
 - Responses are whatever the Kosli API returns. Large responses consume a lot of context, so ask for specific fields when you can.
 
 ## Feedback
