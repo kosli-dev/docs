@@ -40,7 +40,7 @@ Make sure that type of Kosli environment matches the type of the environment you
   </Tab>
 </Tabs>
 
-## Snapshoting an environment
+## Snapshotting an environment
 
 To record the current status of your environment you need to use the Kosli CLI to snapshot the running artifacts in it and report it to Kosli.
 When Kosli receives an environment report, if the received list of running artifacts is different than what is in the latest environment snapshot, a new snapshot is created. Snapshots are immutable and can't be tampered with.
