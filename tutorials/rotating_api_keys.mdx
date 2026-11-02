@@ -9,6 +9,10 @@ Rotating API keys regularly is a security best practice that limits the blast ra
 Kosli never stores your API token in plain text. Only a cryptographic hash of the token is stored, so the original token cannot be retrieved from our systems — make sure to copy a new key immediately after creating or rotating it.
 </Tip>
 
+<Note>
+Personal API keys rotate the same way. Use **Regenerate** on your **Profile** page, or pass `--personal` instead of `--service-account` and `--org` to `kosli rotate api-key`. See [Personal API keys](/user/personal_api_keys#rotate-a-key).
+</Note>
+
 ## Prerequisites
 
 - A Kosli shared organization with at least one [service account](/administration/authentication/service_accounts) and an existing API key.
