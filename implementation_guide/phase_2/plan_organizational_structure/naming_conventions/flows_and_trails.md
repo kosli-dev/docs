@@ -5,6 +5,10 @@ description: "Recommended naming conventions for Flows and Trails in Kosli."
 
 This document outlines recommended naming conventions for Flows and Trails as they closely relate to each other in Kosli. Adopting these conventions will help maintain clarity and consistency across your organization.
 
+<Note>
+Already have flows in use? See [Adopting a convention on existing flows](/implementation_guide/phase_2/plan_organizational_structure/naming_conventions/existing_flows) for how to rename them without losing history or coordinating a cutover.
+</Note>
+
 ## Flows
 
 A clear naming convention transforms a simple ID into a meaningful identifier that everyone understands. This shared language ensures attestations go to the right place and you can track your releases from start to finish.
@@ -15,7 +19,7 @@ The naming convention relates to `FLOW-NAME` in Kosli CLI command:
 kosli create flow FLOW-NAME [flags]
 ```
 
-See [CLI documentation](client_reference/kosli_create_flow) for more details.
+See [CLI documentation](/client_reference/kosli_create_flow) for more details.
 
 The following sections define conventions for the two main types of Flows in Kosli: Build Flows and Release Flows.
 
@@ -144,7 +148,7 @@ kosli begin trail TRAIL-NAME \
   [other flags]
 ```
 
-See [CLI documentation](client_reference/kosli_begin_trail) for more details.
+See [CLI documentation](/client_reference/kosli_begin_trail) for more details.
 
 
 ### Associated with [Build Flows](#build-flows)
