@@ -284,14 +284,30 @@ kosli evaluate policy \
 | Flag | Description |
 |------|-------------|
 | `--context` | **Required.** A trail to evaluate, as `trail=<flow>/<trail>`. Repeat it to evaluate several trails together; see [Evaluating several trails](#evaluating-several-trails). |
-| `--identifier` | **Required to record a decision.** The published policy to evaluate. Its current version runs, and the decision cites that version. |
+| `--identifier` | **Required to record a decision.** The published policy to evaluate. Its current version runs, and the decision cites that version. Append `@v<n>`, as in `rctl-043@v2`, to run version `n` instead; see [Pinning a policy version](#pinning-a-policy-version). |
 | `--control` | The control identifier the decision is recorded against. Without it, the evaluation records nothing. |
 | `--flow`, `--trail` | The flow and trail the decision is recorded in. Required with `--control`; can be set as `KOSLI_FLOW` and `KOSLI_TRAIL`. |
 | `--fingerprint` | The SHA256 fingerprint of the artifact the decision applies to. Omit it to record the decision against the trail itself. |
 | `--name` | The attestation name the decision is recorded under. Defaults to `<control>-decision`. |
-| `--params` | Values the policy reads as `data.params`, as inline JSON or `@file.json`. They must match the params schema of the policy's current version. |
+| `--params` | Values the policy reads as `data.params`, as inline JSON or `@file.json`. They must match the params schema of the policy version that runs. |
 
 Kosli evaluates the policy where the trails are stored and records the decision in the same request, so the outcome never passes through your pipeline. The decision carries its evidence: the policy version that ran, the params, the result, and the policy files as an attachment. You can record more than one decision for the same control; the most recent one is used when evaluating compliance.
+
+### Pinning a policy version
+
+By default, `--identifier` runs the policy's current version, so publishing a new version changes what every later decision runs. To keep a control's decisions on a version you have reviewed, pin it by appending `@v<n>` to the identifier:
+
+```shell
+kosli evaluate policy \
+    --context trail=my-app/build-123 \
+    --identifier rctl-043@v2 \
+    --params @params.json \
+    --control RCTL-043 \
+    --flow my-release \
+    --trail release-456
+```
+
+The pinned version must exist and have passed validation, or Kosli refuses the evaluation. The decision cites the version that ran, and `--params` must match that version's params schema. Move the pin when you are ready to adopt a newer version.
 
 ### Evaluating several trails
 

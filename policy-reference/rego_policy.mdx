@@ -404,6 +404,8 @@ Allows only when every trail in `input.trails` has a compliant pull request atte
 
 [`kosli evaluate trail`](/client_reference/kosli_evaluate_trail) and [`kosli evaluate trails`](/client_reference/kosli_evaluate_trails) fetch trail data from Kosli and evaluate a local policy file in the CLI, passed with `--policy`. A local evaluation records nothing: it cannot record a decision against a control. To try a policy on the server's input before publishing it, use `kosli evaluate policy --path` instead.
 
+To evaluate the same policy file on the Kosli server instead, add `--server-side` (beta) to either command. Kosli builds the input from the trails you name, so the CLI reads no trail data. The flag can't be combined with `--attestations`, `--show-input` or `--output-rule`, and a server-side evaluation takes at most 100 trails.
+
 A local evaluation differs from a server-side one:
 
 - The policy is a single `.rego` file that declares `package policy`. Kosli reads `data.policy.allow` and `data.policy.violations`, with no annotations needed.
