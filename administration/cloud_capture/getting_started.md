@@ -82,7 +82,8 @@ curl -X PUT "https://app.kosli.com/api/v2/cloud-capture/<your-org>/settings" \
     "enabled": true,
     "default_regions": {"aws": ["eu-west-1"]},
     "scan_interval_minutes": 5,
-    "skip_tags": {"aws": [{"key": "kosli-capture", "value": "false"}]}
+    "skip_tags": {"aws": [{"key": "kosli-capture", "value": "false"}]},
+    "dry_run": false
   }'
 ```
 </Tab>
@@ -184,7 +185,7 @@ How a template is rendered:
 - A resource that does not carry a tag the template names is not captured, and the scan reports it as failed. So is a resource whose rendered name Kosli does not accept, for example because a tag value contains a space. A tag that is present with an empty value renders empty.
 
 <Warning>
-Give every resource its own name. A template that renders the same name for two resources sends both into one environment, and that environment then switches between the two resources on every scan. This happens with `aws-prod` on an account with two ECS clusters, with a template that has no `{region}` on an account scanned in two regions, and with a template that has no `{account_id}` when two accounts hold a cluster of the same name. It also happens with a template built only from `{tag:Key}` placeholders: those are empty for Lambda functions, so `aws-{tag:Env}` sends every region's Lambda functions into `aws`. Run a [dry run](#dry-run) to check the names before you rely on them.
+Give every resource its own name. A template that renders the same name for two resources sends both into one environment, and that environment then switches between the two resources on every scan. This happens with `aws-prod` on an account with two ECS clusters, with a template that has no `{region}` on an account scanned in two regions, and with a template that has no `{account_id}` when two accounts hold a cluster of the same name. It also happens with `{tag:Key}` placeholders: those are empty for Lambda functions, so `aws-{tag:Env}` sends every region's Lambda functions into `aws`. Run a [dry run](#dry-run) to check the names before you rely on them.
 </Warning>
 
 Through the API, the template is `environment_name_template` on the same settings resource as the skip tags above. Leaving it out, or sending `null`, uses the default template. A template that breaks the rules above is refused with a `400` response.

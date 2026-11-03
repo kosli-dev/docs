@@ -145,7 +145,7 @@ A policy that imports Ergo cannot be evaluated with `kosli evaluate trail`, whic
 
 | Version status | Meaning | CLI exit code |
 |---|---|---|
-| `valid` | The version can be evaluated. Evaluations run the newest valid version. | `0` |
+| `valid` | The version can be evaluated. Evaluations run the newest valid version unless you pin one with `--identifier <id>@v<n>`. See [Pinning a policy version](/tutorials/working_with_controls#pinning-a-policy-version). | `0` |
 | `rejected` | The policy is at fault. The reason is printed. | `1` |
 | `failed` | Kosli could not validate it. Publish again to retry. | `1` |
 | `pending` | Validation has not finished within the CLI's 30-second wait. | `1` |
@@ -404,7 +404,7 @@ Allows only when every trail in `input.trails` has a compliant pull request atte
 
 [`kosli evaluate trail`](/client_reference/kosli_evaluate_trail) and [`kosli evaluate trails`](/client_reference/kosli_evaluate_trails) fetch trail data from Kosli and evaluate a local policy file in the CLI, passed with `--policy`. A local evaluation records nothing: it cannot record a decision against a control. To try a policy on the server's input before publishing it, use `kosli evaluate policy --path` instead.
 
-To evaluate the same policy file on the Kosli server instead, add `--server-side` (beta) to either command. Kosli builds the input from the trails you name, so the CLI reads no trail data. The flag can't be combined with `--attestations`, `--show-input` or `--output-rule`, and a server-side evaluation takes at most 100 trails.
+To evaluate a policy file on the Kosli server instead, add `--server-side` (beta) to either command. Kosli builds the input from the trails you name as [trail moments](#trail-moment), so the CLI reads no trail data. A policy written for local input may need its field paths changed first. The flag can't be combined with `--attestations`, `--show-input` or `--output-rule`, and a server-side evaluation takes at most 100 trails.
 
 A local evaluation differs from a server-side one:
 
