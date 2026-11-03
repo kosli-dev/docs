@@ -19,7 +19,7 @@ Renaming keeps the flow's history attached to it, and the old name keeps routing
 
 After renaming, the old name still resolves to the renamed flow for both reads and writes:
 
-- `kosli get flow`, `kosli list trails` and similar queries return the renamed flow.
+- `kosli get flow`, `kosli list trails` and similar queries act on the renamed flow.
 - `kosli begin trail` and `kosli attest` commands that still use the old name record into the renamed flow rather than auto-creating a new one.
 
 The only operation that requires the current name is a further rename.
@@ -58,4 +58,4 @@ For flows whose trail naming also changes, either:
 ## Limits
 
 - **A rename cannot split a flow.** A flow that mixes build and release activity cannot be turned into a Build Flow and a Release Flow by renaming. Create the new flows, point the pipelines at them, and archive the old flow once it is no longer used.
-- **Archiving retires a name safely.** Names held by archived flows are refused by auto-creation, so a stale job using an archived flow's name fails instead of silently creating a new flow. See [`kosli archive flow`](/client_reference/kosli_archive_flow).
+- **Archiving retires a name from auto-creation.** Archiving a flow renames it to `<name>-archived-at-<timestamp>`, but Kosli remembers the original name. A stale `kosli attest` or `kosli begin trail` job that still uses it fails with "Cannot auto-create Flow because '<name>' previously existed" instead of silently creating a new flow. An explicit `kosli create flow` with that name still succeeds and takes the name over. See [`kosli archive flow`](/client_reference/kosli_archive_flow).
