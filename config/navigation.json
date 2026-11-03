@@ -390,6 +390,7 @@
                 "client_reference/kosli_get_control",
                 "client_reference/kosli_get_default-org",
                 "client_reference/kosli_get_environment",
+                "client_reference/kosli_get_evaluation",
                 "client_reference/kosli_get_flow",
                 "client_reference/kosli_get_policy",
                 "client_reference/kosli_get_rego-policy",
