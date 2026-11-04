@@ -33,7 +33,7 @@ _REPO_ROOT = Path(__file__).resolve().parent.parent
 
 # Pages live at the repo root in topic directories. Everything here is either
 # not a site page or not routed through navigation.
-_EXCLUDED_DIRS = {".github", ".mintlify", ".claude", "node_modules", "snippets", "styles", "tests"}
+_EXCLUDED_DIRS = {".github", ".mintlify", ".claude", "node_modules", "snippets", "styles", "tests", "docs"}
 _EXCLUDED_NAMES = {"CLAUDE.md", "README.md"}
 
 # The site landing page is configured outside `navigation`, so it is never an orphan.
