@@ -1,7 +1,9 @@
 name: Update JSON Schemas
 
 # Regenerates the static JSON Schema files from the Kosli API (the source of
-# truth in kosli-dev/server) and opens a PR when they drift. See issue #293.
+# truth in kosli-dev/server), and the OPA capabilities file from
+# kosli-dev/opa-lambda's latest release, and opens a PR when they drift.
+# See issue #293.
 
 on:
   schedule:
@@ -33,20 +35,26 @@ jobs:
       - name: Install Python dependencies
         run: pip install requests
 
-      - name: Regenerate schemas from the API
+      - name: Regenerate schemas from the API and opa-lambda
+        env:
+          OPA_LAMBDA_READ_TOKEN: ${{ secrets.OPA_LAMBDA_READ_TOKEN }}
         run: python scripts/update_schemas.py
 
       - name: Create Pull Request
         uses: peter-evans/create-pull-request@v8
         with:
-          commit-message: "docs: regenerate JSON schemas from the API"
-          title: "docs: regenerate JSON schemas from the API"
+          commit-message: "docs: regenerate JSON schemas and OPA capabilities"
+          title: "docs: regenerate JSON schemas and OPA capabilities"
           body: |
             Automated regeneration of the static JSON Schema files from the Kosli
-            API (source of truth in `kosli-dev/server`).
+            API (source of truth in `kosli-dev/server`), and of the OPA
+            capabilities file from `kosli-dev/opa-lambda`.
 
             - `schemas/flow-template/v1.json` ← `GET /api/v2/schemas/flow-template/v1`
             - `schemas/policy/v1.json` ← `GET /api/v2/schemas/environment-policy/v1`
+            - `schemas/evaluation-input/trail/v1.json` ← `GET /api/v2/schemas/evaluation-input/trail/v1`
+            - `schemas/evaluation-input/trails/v1.json` ← `GET /api/v2/schemas/evaluation-input/trails/v1`
+            - `rego/capabilities/v1.json` ← `capabilities.json` at `kosli-dev/opa-lambda`'s latest `release-*` tag
 
             This PR only appears when the committed files have drifted from the API.
           branch: schemas/regenerate
