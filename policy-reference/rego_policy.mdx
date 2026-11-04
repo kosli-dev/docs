@@ -324,7 +324,7 @@ The last path segment selects the moment: `latest`, a moment number, or `@{2026-
 
 ### Replaying an evaluation
 
-To see what an evaluation that already ran was given, use [`kosli get evaluation`](/client_reference/kosli_get_evaluation) with the evaluation's ID. `--show-input` adds the document the policy read as `input` under `.input`, with each trail as it stood when the evaluation was requested. It needs `--output json`:
+To see what an evaluation was given, use [`kosli get evaluation`](/client_reference/kosli_get_evaluation) with the evaluation's ID. `kosli evaluate policy --output json` prints the ID as `id`, and the error for an evaluation still pending after 30 seconds names it too. A pending evaluation can be read back as well, as its input does not depend on its outcome. `--show-input` adds the document the policy read as `input` under `.input`, with each trail as it stood when the evaluation was requested. It needs `--output json`:
 
 ```shell
 kosli get evaluation "$EVALUATION_ID" --show-input --output json | jq '.input'
@@ -337,6 +337,8 @@ kosli get evaluation "$EVALUATION_ID" --fixture --dir ./replay
 opa eval --input replay/input.json --data replay/data.json \
   --bundle replay/policy/ 'data.policy.allow'
 ```
+
+The query assumes the policy package is named `policy`. Replace `policy` in `data.policy.allow` with your policy's package name.
 
 ## Restrictions
 
