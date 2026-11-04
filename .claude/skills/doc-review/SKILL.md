@@ -39,6 +39,7 @@ Most of the diff volume in this repo is machine-generated. A finding on a genera
 | `client_reference/kosli*.md` | `kosli docs` from the release binary | **`kosli-dev/cli`** → `cmd/kosli/<command>.go` |
 | `helm/k8s_reporter/*.mdx` | `helm-docs` | **`kosli-dev/cli`** → `charts/k8s-reporter/mintlify/<page>.md.gotmpl`, its `_templates.gotmpl` / `_mintlify_templates.gotmpl`, or `values.yaml` |
 | `schemas/flow-template/v1.json`, `schemas/policy/v1.json` | `scripts/update_schemas.py` from the API | **`kosli-dev/server`** → the Pydantic models |
+| `rego/capabilities/v1.json` | `scripts/update_schemas.py` from opa-lambda's latest release tag | **`kosli-dev/opa-lambda`** → `evaluator/capabilities.go` |
 | The `kosli *` groups in `config/navigation.json` | `scripts/update-cli-nav.py` | This repo → the script |
 | Live-docs sections under `client_reference/` | `scripts/add_livedocs.py` | This repo → the script and `scripts/live_docs_*_data.py` |
 

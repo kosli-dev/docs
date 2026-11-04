@@ -105,16 +105,22 @@ fails a build. The `Reference ▸ CLI Reference` subtree is exempt because
 `schemas/flow-template/v1.json` and `schemas/policy/v1.json` are the static
 JSON Schema assets served from `https://docs.kosli.com/schemas/...`. They are
 **generated from the Kosli API** (the source of truth in `kosli-dev/server`),
-not hand-edited:
+not hand-edited. `rego/capabilities/v1.json`, the OPA capabilities file for
+`opa check --capabilities`, is generated the same way from `capabilities.json`
+at `kosli-dev/opa-lambda`'s latest `release-*` tag, the version production runs.
+It is not a schema, and opa-lambda is private, so this copy is its only public
+URL:
 
 ```bash
-python scripts/update_schemas.py          # regenerate from the API
-python scripts/update_schemas.py --check   # exit non-zero if they have drifted
+OPA_LAMBDA_CROSS_REPO_READ_TOKEN=$(gh auth token) python scripts/update_schemas.py          # regenerate
+OPA_LAMBDA_CROSS_REPO_READ_TOKEN=$(gh auth token) python scripts/update_schemas.py --check  # exit non-zero on drift
 ```
 
-The `update-schemas.yml` workflow runs the script on a schedule and opens a PR
-when the committed files drift from the API. Don't hand-edit these files — fix
-the Pydantic models in `kosli-dev/server` instead.
+opa-lambda is private, so the token must be able to read it; the workflow uses
+the `OPA_LAMBDA_CROSS_REPO_READ_TOKEN` secret. The `update-schemas.yml` workflow
+runs the script on a schedule and opens a PR when the committed files drift. Don't
+hand-edit these files: fix the Pydantic models in `kosli-dev/server`, or the
+capability set in `kosli-dev/opa-lambda`, instead.
 
 Only schemas whose URL users write into their own files are mirrored here.
 Link any other schema at its API URL (`https://app.kosli.com/api/v2/schemas/...`)

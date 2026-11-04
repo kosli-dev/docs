@@ -24,6 +24,7 @@ Author Mintlify pages for the Kosli docs site following Diátaxis and this repo'
 | `client_reference/kosli*.md` | **`kosli-dev/cli`** → `cmd/kosli/<command>.go` (e.g. `kosli_attest_sonar.md` ← `attestSonar.go`) |
 | `helm/k8s_reporter/*.mdx` | **`kosli-dev/cli`** → `charts/k8s-reporter/mintlify/<page>.md.gotmpl` or `values.yaml` |
 | `schemas/` | **`kosli-dev/server`** → the Pydantic models, then `scripts/update_schemas.py` |
+| `rego/capabilities/v1.json` | **`kosli-dev/opa-lambda`** → `evaluator/capabilities.go`, released to production, then `scripts/update_schemas.py` |
 | The `kosli *` groups in `config/navigation.json` | This repo → `scripts/update-cli-nav.py` |
 | Live-docs sections in `client_reference/` | This repo → `scripts/add_livedocs.py`, `scripts/live_docs_*_data.py` |
 
