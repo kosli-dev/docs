@@ -37,7 +37,7 @@ jobs:
 
       - name: Regenerate schemas from the API and opa-lambda
         env:
-          OPA_LAMBDA_READ_TOKEN: ${{ secrets.OPA_LAMBDA_READ_TOKEN }}
+          OPA_LAMBDA_CROSS_REPO_READ_TOKEN: ${{ secrets.OPA_LAMBDA_CROSS_REPO_READ_TOKEN }}
         run: python scripts/update_schemas.py
 
       - name: Create Pull Request

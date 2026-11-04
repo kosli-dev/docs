@@ -105,7 +105,7 @@ class FakeGitHub:
 
 
 def _stub_github(monkeypatch, tmp_path, github):
-    monkeypatch.setenv("OPA_LAMBDA_READ_TOKEN", "t0ken")
+    monkeypatch.setenv("OPA_LAMBDA_CROSS_REPO_READ_TOKEN", "t0ken")
     monkeypatch.setattr(update_schemas, "_REPO_ROOT", tmp_path)
     monkeypatch.setattr(update_schemas, "_SCHEMAS", {})
     monkeypatch.setattr(update_schemas, "_CAPABILITIES", {"capabilities.json": "rego/capabilities/v1.json"})
@@ -144,9 +144,9 @@ def test_capabilities_missing_from_the_release_fails_naming_the_tag(tmp_path, mo
 def test_capabilities_need_a_token(tmp_path, monkeypatch):
     github = FakeGitHub(tags=["release-2026-10-28-09-49-06"], contents={})
     _stub_github(monkeypatch, tmp_path, github)
-    monkeypatch.delenv("OPA_LAMBDA_READ_TOKEN")
+    monkeypatch.delenv("OPA_LAMBDA_CROSS_REPO_READ_TOKEN")
 
     with pytest.raises(SystemExit) as exc:
         update_schemas.main()
-    assert "OPA_LAMBDA_READ_TOKEN" in str(exc.value.code)
+    assert "OPA_LAMBDA_CROSS_REPO_READ_TOKEN" in str(exc.value.code)
     assert github.requests == []

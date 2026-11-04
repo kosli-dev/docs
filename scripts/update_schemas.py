@@ -15,9 +15,9 @@ published paths.
 | schemas/evaluation-input/trails/v1.json | GET /api/v2/schemas/evaluation-input/trails/v1       |
 | rego/capabilities/v1.json               | capabilities.json at opa-lambda's latest release tag |
 
-opa-lambda is private, so the capabilities file needs OPA_LAMBDA_READ_TOKEN, a
-token that can read its contents. The release tag, not main, is what production
-runs.
+opa-lambda is private, so the capabilities file needs
+OPA_LAMBDA_CROSS_REPO_READ_TOKEN, a token that can read its contents. The
+release tag, not main, is what production runs.
 
 Usage:
     python scripts/update_schemas.py            # regenerate the files in place
@@ -59,9 +59,9 @@ def fetch_schema(endpoint):
 
 
 def _opa_lambda_get(path, accept="application/vnd.github+json", **kwargs):
-    token = os.environ.get("OPA_LAMBDA_READ_TOKEN")
+    token = os.environ.get("OPA_LAMBDA_CROSS_REPO_READ_TOKEN")
     if not token:
-        sys.exit("OPA_LAMBDA_READ_TOKEN is not set: it is needed to read the private kosli-dev/opa-lambda repo.")
+        sys.exit("OPA_LAMBDA_CROSS_REPO_READ_TOKEN is not set: it is needed to read the private kosli-dev/opa-lambda repo.")
     response = requests.get(
         f"{_OPA_LAMBDA_API}/{path}",
         headers={"Authorization": f"Bearer {token}", "Accept": accept},

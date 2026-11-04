@@ -110,13 +110,13 @@ not hand-edited. `rego/capabilities/v1.json`, the OPA capabilities file for
 at `kosli-dev/opa-lambda`'s latest `release-*` tag, the version production runs:
 
 ```bash
-OPA_LAMBDA_READ_TOKEN=$(gh auth token) python scripts/update_schemas.py          # regenerate
-OPA_LAMBDA_READ_TOKEN=$(gh auth token) python scripts/update_schemas.py --check  # exit non-zero on drift
+OPA_LAMBDA_CROSS_REPO_READ_TOKEN=$(gh auth token) python scripts/update_schemas.py          # regenerate
+OPA_LAMBDA_CROSS_REPO_READ_TOKEN=$(gh auth token) python scripts/update_schemas.py --check  # exit non-zero on drift
 ```
 
 opa-lambda is private, so the token must be able to read it; the workflow uses
-the `OPA_LAMBDA_READ_TOKEN` secret. The `update-schemas.yml` workflow runs the
-script on a schedule and opens a PR when the committed files drift. Don't
+the `OPA_LAMBDA_CROSS_REPO_READ_TOKEN` secret. The `update-schemas.yml` workflow
+runs the script on a schedule and opens a PR when the committed files drift. Don't
 hand-edit these files: fix the Pydantic models in `kosli-dev/server`, or the
 capability set in `kosli-dev/opa-lambda`, instead.
 
