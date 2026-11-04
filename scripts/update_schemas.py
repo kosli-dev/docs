@@ -7,13 +7,11 @@ against. Editing the committed copies by hand lets them drift from what is
 actually enforced, so this script fetches them and writes them to the
 published paths.
 
-| Published file                          | Source                                               |
-|-----------------------------------------|------------------------------------------------------|
-| schemas/flow-template/v1.json           | GET /api/v2/schemas/flow-template/v1                 |
-| schemas/policy/v1.json                  | GET /api/v2/schemas/environment-policy/v1            |
-| schemas/evaluation-input/trail/v1.json  | GET /api/v2/schemas/evaluation-input/trail/v1        |
-| schemas/evaluation-input/trails/v1.json | GET /api/v2/schemas/evaluation-input/trails/v1       |
-| rego/capabilities/v1.json               | capabilities.json at opa-lambda's latest release tag |
+| Published file                | Source                                               |
+|-------------------------------|------------------------------------------------------|
+| schemas/flow-template/v1.json | GET /api/v2/schemas/flow-template/v1                 |
+| schemas/policy/v1.json        | GET /api/v2/schemas/environment-policy/v1            |
+| rego/capabilities/v1.json     | capabilities.json at opa-lambda's latest release tag |
 
 opa-lambda is private, so the capabilities file needs
 OPA_LAMBDA_CROSS_REPO_READ_TOKEN, a token that can read its contents. The
@@ -38,8 +36,6 @@ _REPO_ROOT = Path(__file__).resolve().parent.parent
 _SCHEMAS = {
     "flow-template/v1": "schemas/flow-template/v1.json",
     "environment-policy/v1": "schemas/policy/v1.json",
-    "evaluation-input/trail/v1": "schemas/evaluation-input/trail/v1.json",
-    "evaluation-input/trails/v1": "schemas/evaluation-input/trails/v1.json",
 }
 
 _OPA_LAMBDA_API = "https://api.github.com/repos/kosli-dev/opa-lambda"

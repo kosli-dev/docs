@@ -102,13 +102,14 @@ fails a build. The `Reference ▸ CLI Reference` subtree is exempt because
 
 ## Schemas
 
-The files under `schemas/` (flow template, environment policy, and the
-`evaluation-input/trail` and `trails` input of a Rego policy) are the static
+`schemas/flow-template/v1.json` and `schemas/policy/v1.json` are the static
 JSON Schema assets served from `https://docs.kosli.com/schemas/...`. They are
 **generated from the Kosli API** (the source of truth in `kosli-dev/server`),
 not hand-edited. `rego/capabilities/v1.json`, the OPA capabilities file for
 `opa check --capabilities`, is generated the same way from `capabilities.json`
-at `kosli-dev/opa-lambda`'s latest `release-*` tag, the version production runs:
+at `kosli-dev/opa-lambda`'s latest `release-*` tag, the version production runs.
+It is not a schema, and opa-lambda is private, so this copy is its only public
+URL:
 
 ```bash
 OPA_LAMBDA_CROSS_REPO_READ_TOKEN=$(gh auth token) python scripts/update_schemas.py          # regenerate

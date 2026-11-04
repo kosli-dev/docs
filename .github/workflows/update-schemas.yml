@@ -52,8 +52,6 @@ jobs:
 
             - `schemas/flow-template/v1.json` ← `GET /api/v2/schemas/flow-template/v1`
             - `schemas/policy/v1.json` ← `GET /api/v2/schemas/environment-policy/v1`
-            - `schemas/evaluation-input/trail/v1.json` ← `GET /api/v2/schemas/evaluation-input/trail/v1`
-            - `schemas/evaluation-input/trails/v1.json` ← `GET /api/v2/schemas/evaluation-input/trails/v1`
             - `rego/capabilities/v1.json` ← `capabilities.json` at `kosli-dev/opa-lambda`'s latest `release-*` tag
 
             This PR only appears when the committed files have drifted from the API.
