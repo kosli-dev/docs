@@ -55,6 +55,7 @@ Because spelling is already enforced, review agents should not spend turns hand-
 - **`tests/`** — pytest suite for the live-docs scripts.
 - **`.github/workflows/`** — `doc-review.yml` (Claude-powered PR review), `doc-structure.yml` (monthly navigation and coverage audit that files issues), `pr-quality.yml` (PR title + live-docs tests), `update-cli-docs.yml`, `update-schemas.yml`.
 - **`schemas/`** — Generated JSON Schema assets. See [Schemas](#schemas) below.
+- **`docs/ADRs/`**: architecture decision records for this repo. Not published: `docs/` is in `.mintignore` and excluded by `scripts/audit_navigation.py`. See [Architecture decisions](#architecture-decisions) below.
 
 ## Live docs
 
@@ -119,6 +120,19 @@ the `OPA_LAMBDA_CROSS_REPO_READ_TOKEN` secret. The `update-schemas.yml` workflow
 runs the script on a schedule and opens a PR when the committed files drift. Don't
 hand-edit these files: fix the Pydantic models in `kosli-dev/server`, or the
 capability set in `kosli-dev/opa-lambda`, instead.
+
+Only schemas whose URL users write into their own files are mirrored here.
+Link any other schema at its API URL (`https://app.kosli.com/api/v2/schemas/...`)
+and don't add it to `update_schemas.py`. See
+`docs/ADRs/20261104-hosting-json-schemas.md`.
+
+## Architecture decisions
+
+Decisions about how this repo works (what it generates, hosts, or mirrors)
+are recorded in `docs/ADRs/`, in the format `kosli-dev/server` uses
+(`docs/ADRs/ADR-template.md` there): file name `YYYYMMDD-short-title.md`,
+then Overview, Context, Options, Decision and Consequences. Check them before
+reversing a decision, and add one when you make a decision of that kind.
 
 ## Content Conventions
 

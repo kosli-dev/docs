@@ -4,6 +4,17 @@ description: "Release notes for Kosli products."
 rss: true
 ---
 
+<Update label="October 30, 2026" description="v2.52.0" tags={["CLI"]}>
+
+## New features
+
+- **Server-side policy evaluation (beta)** — `kosli evaluate policy`, `kosli publish rego-policy`, `kosli list rego-policies`, `kosli get rego-policy`, and the `--server-side` flag on `kosli evaluate trail` and `kosli evaluate trails` are now public as beta. See the [`kosli evaluate policy` reference](/client_reference/kosli_evaluate_policy).
+- **Pin a policy version** — `kosli evaluate policy --identifier <id>@v<n>` evaluates a specific published version instead of the current one, so you can try a new version before relying on it. Without the suffix, the current version runs as before. A malformed suffix is rejected before any request is sent.
+
+[View on GitHub](https://github.com/kosli-dev/cli/releases/tag/v2.52.0)
+
+</Update>
+
 <Update label="October 29, 2026" description="v2.51.0" tags={["CLI"]}>
 
 ## New features

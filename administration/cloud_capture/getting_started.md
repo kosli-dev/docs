@@ -69,7 +69,7 @@ How the tags are matched:
 - Skip tags, like the other Cloud Capture settings, can only be changed while Cloud Capture is enabled.
 - The IAM role created by the CloudFormation template already grants the permissions needed to read tags, `ecs:DescribeClusters` and `lambda:ListTags`, so no change to the role is needed.
 
-Skip tags can also be set through the API, as part of the organization's Cloud Capture settings. The settings PUT replaces every setting, not only the one you are changing, so start from what is stored: read the current configuration, take the `enabled`, `default_regions`, `scan_interval_minutes` and `skip_tags` values from its `settings` object, add your tags to `skip_tags`, and send those four fields back. Sending the example below as it stands would also set your default regions and scan interval to the values shown.
+Skip tags can also be set through the API, as part of the organization's Cloud Capture settings. The settings PUT replaces every setting, not only the one you are changing, so start from what is stored: read the current configuration, take the `enabled`, `default_regions`, `scan_interval_minutes`, `skip_tags`, `dry_run` and `environment_name_template` values from its `settings` object, add your tags to `skip_tags`, and send those fields back. A field you leave out is reset: `dry_run` to `false`, and `environment_name_template` to the [default template](#environment-names). The response leaves out `environment_name_template` while your organization uses the default, so leave it out of the PUT in that case too. Sending the example below as it stands would also set your default regions, scan interval and dry run to the values shown, and your environment names to the default.
 
 ```bash
 curl "https://app.kosli.com/api/v2/cloud-capture/<your-org>" \
@@ -82,7 +82,8 @@ curl -X PUT "https://app.kosli.com/api/v2/cloud-capture/<your-org>/settings" \
     "enabled": true,
     "default_regions": {"aws": ["eu-west-1"]},
     "scan_interval_minutes": 5,
-    "skip_tags": {"aws": [{"key": "kosli-capture", "value": "false"}]}
+    "skip_tags": {"aws": [{"key": "kosli-capture", "value": "false"}]},
+    "dry_run": false
   }'
 ```
 </Tab>
@@ -159,3 +160,42 @@ Each scan reports what is running in every environment Cloud Capture manages for
 
 Through the API, the frequency is `scan_interval_minutes` on the same settings resource as the skip tags above: any whole number of minutes from 5 to 1440 (a day), not only the presets the settings page offers, with 5 the value when it is left out. An interval set this way that is not one of the presets is shown on the settings page as its own option, so saving another setting there keeps it. The PUT replaces every setting, so read the current configuration first and send the other settings back unchanged.
 
+## Environment names
+
+Cloud Capture names each environment it reports into from a template. The default template is `{account_id}-{region}-{service}-{resource}`, so an ECS cluster named `app` in account `123456789012` and region `eu-central-1` reports into `123456789012-eu-central-1-ecs-app`. If a name matches an environment that already exists in your organization, Cloud Capture reports into that environment. This lets you name environments so you can tell accounts apart, or send snapshots into environments you already have.
+
+To change the template, open your organization's **Settings**, go to **Cloud Capture**, and under **Environment names** select **Edit**. As you type, the page previews the names the template gives an example ECS cluster and a region's Lambda functions. Select **Save** to store it, or **Use the default** and then **Save** to go back to the default template. Like the other Cloud Capture settings, the template can only be changed while Cloud Capture is enabled. Resources are named with the new template from the next scan.
+
+A template is text with any of these placeholders:
+
+| Placeholder | Value |
+|-------------|-------|
+| `{cloud}` | The cloud provider, for example `aws`. |
+| `{account_id}` | The cloud account ID. |
+| `{region}` | The region, for example `eu-central-1`. |
+| `{service}` | The service, for example `ecs` or `lambda`. |
+| `{resource}` | The resource's own name, such as the ECS cluster name. |
+| `{tag:Key}` | The value of the resource's tag `Key`. For example, `aws-{tag:Env}` names a cluster tagged `Env=prod` as `aws-prod`. |
+
+How a template is rendered:
+
+- The text between placeholders can only hold letters, digits, `.`, `_` and `-`, and a template must start with a letter, a digit or a placeholder. Placeholder names are case-sensitive and take no formatting.
+- A region's Lambda functions are captured together as one resource, so `{resource}` and every `{tag:Key}` are empty for them. An empty placeholder removes the separator before it: with the default template, a region's Lambda functions report into `123456789012-eu-central-1-lambda`.
+- Tag keys are case-sensitive, as AWS stores them, so `{tag:env}` does not read a tag named `Env`. A key may contain colons and spaces, as in `{tag:aws:cloudformation:stack-name}`.
+- A resource that does not carry a tag the template names is not captured, and the scan reports it as failed. So is a resource whose rendered name Kosli does not accept, for example because a tag value contains a space. A tag that is present with an empty value renders empty.
+
+<Warning>
+Give every resource its own name. A template that renders the same name for two resources sends both into one environment, and that environment then switches between the two resources on every scan. This happens with `aws-prod` on an account with two ECS clusters, with a template that has no `{region}` on an account scanned in two regions, and with a template that has no `{account_id}` when two accounts hold a cluster of the same name. It also happens when a `{tag:Key}` placeholder is the only part that would tell resources apart: tag placeholders are empty for Lambda functions, so `aws-{tag:Env}` sends every region's Lambda functions into `aws`. Run a [dry run](#dry-run) to check the names before you rely on them.
+</Warning>
+
+Through the API, the template is `environment_name_template` on the same settings resource as the skip tags above. Leaving it out, or sending `null`, uses the default template. A template that breaks the rules above is refused with a `400` response.
+
+## Dry run
+
+A dry run shows what Cloud Capture would do without changing anything in your organization. Every scan that is a dry run searches the registered accounts and reports what it found, but records no snapshots and creates no environments.
+
+To turn it on for the whole organization, open **Settings**, go to **Cloud Capture**, and switch on **Dry run**. To dry run a single account, switch on **Dry run** in that account's row of the **Registered accounts** table. While the organization-wide dry run is on, every account is a dry run. Like the other Cloud Capture settings, dry run can only be changed while Cloud Capture is enabled.
+
+After a dry run, open the actions menu in the account's row and select **Show latest results**. The results list what the scan found in each region and service, the environment each resource would report into, which of those environments would be created, and why any resource failed. Switch dry run off to start recording snapshots.
+
+Through the API, the organization-wide switch is `dry_run` on the same settings resource as the skip tags above.

@@ -143,9 +143,17 @@ A policy that imports Ergo cannot be evaluated with `kosli evaluate trail`, whic
 
 `--input-schema` declares the input the policy reads: `trail` for a single trail, or `trails` for several. Kosli then validates the version: it compiles the policy in OPA's strict mode against the schema of that input, so a policy that reads a field the input cannot have does not compile. A `trails` policy that reads `input.trail` fails here rather than at evaluation.
 
+To catch these errors before you publish, download the schema Kosli validates against and type-check the policy with `opa check`. Kosli serves one schema for each input: `evaluation-input/trail/v1` for `--input-schema trail`, and `evaluation-input/trails/v1` for `--input-schema trails`.
+
+```shell
+curl -o input-schema.json \
+  "https://app.kosli.com/api/v2/schemas/evaluation-input/trail/v1"
+opa check --strict --schema input-schema.json policy/
+```
+
 | Version status | Meaning | CLI exit code |
 |---|---|---|
-| `valid` | The version can be evaluated. Evaluations run the newest valid version. | `0` |
+| `valid` | The version can be evaluated. Evaluations run the newest valid version unless you pin one with `--identifier <id>@v<n>`. See [Pinning a policy version](/tutorials/working_with_controls#pinning-a-policy-version). | `0` |
 | `rejected` | The policy is at fault. The reason is printed. | `1` |
 | `failed` | Kosli could not validate it. Publish again to retry. | `1` |
 | `pending` | Validation has not finished within the CLI's 30-second wait. | `1` |
@@ -314,6 +322,24 @@ curl -H "Authorization: Bearer $KOSLI_API_TOKEN" \
 
 The last path segment selects the moment: `latest`, a moment number, or `@{2026-10-26T06:40:05}` for the newest moment at or before that UTC instant. `GET .../moments` lists a trail's moments. The response is one trail moment; wrap it as shown in [Input data](#input-data) to get the full input.
 
+### Replaying an evaluation
+
+To see what an evaluation was given, use [`kosli get evaluation`](/client_reference/kosli_get_evaluation) with the evaluation's ID. `kosli evaluate policy --output json` prints the ID as `id`, and the error for an evaluation still pending after 30 seconds names it too. A pending evaluation can be read back as well, as its input does not depend on its outcome. `--show-input` adds the document the policy read as `input` under `.input`, with each trail as it stood when the evaluation was requested. It needs `--output json`:
+
+```shell
+kosli get evaluation "$EVALUATION_ID" --show-input --output json | jq '.input'
+```
+
+To check a result independently, write what the evaluation was given to a directory with `--fixture` and `--dir`, then replay it with OPA. Kosli writes `input.json`, the params as `data.json`, and the files of the policy that ran under `policy/`. The directory must be empty or not exist yet.
+
+```shell
+kosli get evaluation "$EVALUATION_ID" --fixture --dir ./replay
+opa eval --input replay/input.json --data replay/data.json \
+  --bundle replay/policy/ 'data.policy.allow'
+```
+
+The query assumes the policy package is named `policy`. Replace `policy` in `data.policy.allow` with your policy's package name.
+
 ## Restrictions
 
 The server evaluates a policy the same way every time it is run against the same input:
@@ -403,6 +429,8 @@ Allows only when every trail in `input.trails` has a compliant pull request atte
 ## Local evaluation
 
 [`kosli evaluate trail`](/client_reference/kosli_evaluate_trail) and [`kosli evaluate trails`](/client_reference/kosli_evaluate_trails) fetch trail data from Kosli and evaluate a local policy file in the CLI, passed with `--policy`. A local evaluation records nothing: it cannot record a decision against a control. To try a policy on the server's input before publishing it, use `kosli evaluate policy --path` instead.
+
+To evaluate a policy file on the Kosli server instead, add `--server-side` (beta) to either command. Kosli builds the input from the trails you name as [trail moments](#trail-moment), so the CLI reads no trail data. A policy written for local input may need its field paths changed first. See [Local input data](#local-input-data). The flag can't be combined with `--attestations`, `--show-input` or `--output-rule`, and a server-side evaluation takes at most 100 trails.
 
 A local evaluation differs from a server-side one:
 

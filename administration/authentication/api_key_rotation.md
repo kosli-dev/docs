@@ -4,11 +4,11 @@ description: Reference for how Kosli API key rotation works, including grace per
 icon: "arrows-rotate"
 ---
 
-Rotating API keys regularly limits the blast radius of a leaked credential. Kosli supports **zero-downtime rotation** for service account API keys: a new key is issued immediately while the old key remains valid for a configurable grace period.
+Rotating API keys regularly limits the blast radius of a leaked credential. Kosli supports **zero-downtime rotation** for service account API keys and [personal API keys](/user/personal_api_keys#rotate-a-key): a new key is issued immediately while the old key remains valid for a configurable grace period.
 
 ## How rotation works
 
-When you rotate a service account API key, Kosli:
+When you rotate an API key, Kosli:
 
 1. Generates a new API key and returns its value once.
 2. Sets the new key's expiry to the **rotated key's current expiry** unless you pass `--expires-at` (CLI) or `expires_at` (API), bounded by the server-side **maximum lifetime of 365 days from creation**.
@@ -23,7 +23,7 @@ Rotation on its own does not extend the credential. If the rotated key was alrea
 
 ## Expiry warnings
 
-Kosli warns you before an API key expires, so you can replace it in time: rotate a service account key, or create a new personal key and revoke the old one. Keys with no expiry never trigger a warning.
+Kosli warns you before an API key expires, so you can rotate it in time. Keys with no expiry never trigger a warning.
 
 ### When warnings are sent
 
@@ -75,6 +75,7 @@ The API offers the same settings under `/api/v2/notification-config/{org}/api_ke
 
 - [Rotating API keys (tutorial)](/tutorials/rotating_api_keys) — step-by-step walkthrough in the web app and via the API.
 - [Service accounts](/administration/authentication/service_accounts) — service account lifecycle.
+- [Personal API keys](/user/personal_api_keys) — regenerate your own keys in the app or with `kosli rotate api-key --personal`.
 - [Rotate an API key (API reference)](/api-reference/service-accounts/rotate-an-api-key-for-a-service-account)
 - [Revoke an API key (API reference)](/api-reference/service-accounts/revoke-an-api-key-for-a-service-account)
 - [List API keys (API reference)](/api-reference/service-accounts/list-api-keys-for-a-service-account)
