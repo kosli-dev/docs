@@ -116,6 +116,13 @@
           ]
         },
         {
+          "group": "Notifications and automation",
+          "pages": [
+            "integrations/slack",
+            "integrations/kosli_actions"
+          ]
+        },
+        {
           "group": "Dedicated instance",
           "pages": [
             "administration/dedicated_instance_parameters",
@@ -164,6 +171,7 @@
           "group": "Investigate and audit",
           "pages": [
             "tutorials/querying_kosli",
+            "integrations/mcp_server",
             "tutorials/following_a_git_commit_to_runtime_environments",
             "tutorials/tracing_a_production_incident_back_to_git_commits"
           ]
@@ -224,18 +232,15 @@
           "group": "CI/CD",
           "pages": [
             "integrations/ci_cd",
-            "integrations/kosli_actions",
             "tutorials/trail_summaries_in_ci",
             "tutorials/cli_and_http_proxy"
           ]
         },
         {
-          "group": "Integrations",
+          "group": "Evidence sources",
           "pages": [
             "integrations/sonar",
-            "integrations/slack",
-            "integrations/launchdarkly",
-            "integrations/mcp_server"
+            "integrations/launchdarkly"
           ]
         }
       ]
