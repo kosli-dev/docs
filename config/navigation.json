@@ -2,7 +2,6 @@
   "tabs": [
     {
       "tab": "Discover Kosli",
-      "icon": "compass",
       "groups": [
         {
           "group": "Understand Kosli",
@@ -66,7 +65,6 @@
     },
     {
       "tab": "Platform administration",
-      "icon": "sliders",
       "groups": [
         {
           "group": "Your account",
@@ -149,7 +147,6 @@
     },
     {
       "tab": "Risks and controls",
-      "icon": "shield-halved",
       "groups": [
         {
           "group": "Concepts",
@@ -186,7 +183,6 @@
     },
     {
       "tab": "Environments and runtime",
-      "icon": "server",
       "pages": [
         {
           "group": "Setting up environments",
@@ -215,7 +211,6 @@
     },
     {
       "tab": "Record evidence",
-      "icon": "clipboard-check",
       "groups": [
         {
           "group": "Flows and trails",
@@ -577,8 +572,7 @@
             }
           ]
         }
-      ],
-      "icon": "book"
+      ]
     },
     {
       "tab": "Changelog",
