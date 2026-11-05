@@ -77,6 +77,7 @@
             "administration/managing_users/automated_user_provisioning",
             "administration/authentication/single_sign_on",
             "administration/authentication/magic_link",
+            "administration/authentication/github_login",
             "administration/authentication/api_authentication_methods",
             "administration/authentication/service_accounts",
             "administration/authentication/api_key_rotation",
@@ -90,7 +91,15 @@
             "administration/managing_custom_attestation_types/overview",
             "implementation_guide/phase_2/plan_organizational_structure/naming_conventions/overview",
             "implementation_guide/phase_2/plan_organizational_structure/naming_conventions/attestation_types",
-            "implementation_guide/phase_2/plan_organizational_structure/naming_conventions/flows_and_trails"
+            "implementation_guide/phase_2/plan_organizational_structure/naming_conventions/flows_and_trails",
+            "implementation_guide/phase_2/plan_organizational_structure/naming_conventions/existing_flows"
+          ]
+        },
+        {
+          "group": "Dedicated instance",
+          "pages": [
+            "administration/dedicated_instance_parameters",
+            "administration/customer_kms_keys"
           ]
         },
         {
@@ -145,7 +154,16 @@
           "pages": [
             "tutorials/report_k8s_envs",
             "tutorials/report_aws_envs",
-            "tutorials/report_cloud_run_envs"
+            "tutorials/report_cloud_run_envs",
+            "tutorials/report_gke_envs"
+          ]
+        },
+        {
+          "group": "Cloud Capture",
+          "pages": [
+            "administration/cloud_capture/overview",
+            "administration/cloud_capture/getting_started",
+            "administration/cloud_capture/security"
           ]
         },
         "administration/managing_environments/overview"
