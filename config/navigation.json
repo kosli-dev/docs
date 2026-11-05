@@ -89,10 +89,15 @@
           "pages": [
             "administration/managing_tags",
             "administration/managing_custom_attestation_types/overview",
-            "implementation_guide/phase_2/plan_organizational_structure/naming_conventions/overview",
-            "implementation_guide/phase_2/plan_organizational_structure/naming_conventions/attestation_types",
-            "implementation_guide/phase_2/plan_organizational_structure/naming_conventions/flows_and_trails",
-            "implementation_guide/phase_2/plan_organizational_structure/naming_conventions/existing_flows"
+            {
+              "group": "Naming conventions",
+              "pages": [
+                "implementation_guide/phase_2/plan_organizational_structure/naming_conventions/overview",
+                "implementation_guide/phase_2/plan_organizational_structure/naming_conventions/attestation_types",
+                "implementation_guide/phase_2/plan_organizational_structure/naming_conventions/flows_and_trails",
+                "implementation_guide/phase_2/plan_organizational_structure/naming_conventions/existing_flows"
+              ]
+            }
           ]
         },
         {
