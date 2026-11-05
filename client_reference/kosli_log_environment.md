@@ -72,11 +72,11 @@ kosli log environment aws-prod --output=json
 [
   {
     "environment_name": "aws-prod",
-    "snapshot_index": 5564,
+    "snapshot_index": 5569,
     "artifact_name": "244531986313.dkr.ecr.eu-central-1.amazonaws.com/creator:fd680a8@sha256:000a36f4debb15073c77bc5e9b7a864ebf60c2ce3116fed603ce0ac654bdf568",
     "sha256": "000a36f4debb15073c77bc5e9b7a864ebf60c2ce3116fed603ce0ac654bdf568",
     "description": "1 instance changed",
-    "reported_at": 1793779378.4743404,
+    "reported_at": 1793867518.4103153,
     "pipeline": "creator-ci",
     "deployments": [],
     "flows": [
@@ -107,18 +107,18 @@ kosli log environment aws-prod --output=json
         "html": "https://app.kosli.com/cyber-dojo/flows/creator-ci/artifacts/000a36f4debb15073c77bc5e9b7a864ebf60c2ce3116fed603ce0ac654bdf568?artifact_id=0e7140db-7422-4ea7-954b-fa840a0a"
       },
       "snapshot": {
-        "self": "https://app.kosli.com/api/v2/snapshots/cyber-dojo/aws-prod/5564",
-        "html": "https://app.kosli.com/cyber-dojo/environments/aws-prod/snapshots/5564"
+        "self": "https://app.kosli.com/api/v2/snapshots/cyber-dojo/aws-prod/5569",
+        "html": "https://app.kosli.com/cyber-dojo/environments/aws-prod/snapshots/5569"
       }
     }
   },
   {
     "environment_name": "aws-prod",
-    "snapshot_index": 5564,
+    "snapshot_index": 5569,
     "artifact_name": "244531986313.dkr.ecr.eu-central-1.amazonaws.com/dashboard:fd680a8@sha256:0700dd34e5e360389f948bc6f321258e4dadc07c4d03452ea31a1dd2a8ac69af",
     "sha256": "0700dd34e5e360389f948bc6f321258e4dadc07c4d03452ea31a1dd2a8ac69af",
     "description": "1 instance changed",
-    "reported_at": 1793779378.4743404,
+    "reported_at": 1793867518.4103153,
     "pipeline": "dashboard-ci",
     "deployments": [],
     "flows": [
@@ -141,7 +141,7 @@ kosli log environment aws-prod --output=json
     ],
     "artifact_compliance": true,
     "snapshot_compliance": true,
-    "type": "changed",
+    "type": "updated-provenance",
     "code_diff": "https://github.com/cyber-dojo/web/compare/3e6678b80d51d7ec4c89d88f46dcee93f27fd6c1...fd680a809587fa6e4071fe874d63192f65f251c1",
     "_links": {
       "artifact": {
@@ -149,18 +149,18 @@ kosli log environment aws-prod --output=json
         "html": "https://app.kosli.com/cyber-dojo/flows/dashboard-ci/artifacts/0700dd34e5e360389f948bc6f321258e4dadc07c4d03452ea31a1dd2a8ac69af?artifact_id=9134bfd2-d550-4c10-93d3-bbd4f6c4"
       },
       "snapshot": {
-        "self": "https://app.kosli.com/api/v2/snapshots/cyber-dojo/aws-prod/5564",
-        "html": "https://app.kosli.com/cyber-dojo/environments/aws-prod/snapshots/5564"
+        "self": "https://app.kosli.com/api/v2/snapshots/cyber-dojo/aws-prod/5569",
+        "html": "https://app.kosli.com/cyber-dojo/environments/aws-prod/snapshots/5569"
       }
     }
   },
   {
     "environment_name": "aws-prod",
-    "snapshot_index": 5564,
+    "snapshot_index": 5569,
     "artifact_name": "244531986313.dkr.ecr.eu-central-1.amazonaws.com/nginx:3806299@sha256:44700e827553393dfc4ef9ba9f9948aeb28c1a2f75bd3f2dfa0ecfc3e7eb28df",
     "sha256": "44700e827553393dfc4ef9ba9f9948aeb28c1a2f75bd3f2dfa0ecfc3e7eb28df",
     "description": "1 instance changed",
-    "reported_at": 1793779378.4743404,
+    "reported_at": 1793867518.4103153,
     "pipeline": "nginx-ci",
     "deployments": [],
     "flows": [
@@ -191,18 +191,18 @@ kosli log environment aws-prod --output=json
         "html": "https://app.kosli.com/cyber-dojo/flows/nginx-ci/artifacts/44700e827553393dfc4ef9ba9f9948aeb28c1a2f75bd3f2dfa0ecfc3e7eb28df?artifact_id=a83de5fc-80e0-4742-8b87-3aea8a0f"
       },
       "snapshot": {
-        "self": "https://app.kosli.com/api/v2/snapshots/cyber-dojo/aws-prod/5564",
-        "html": "https://app.kosli.com/cyber-dojo/environments/aws-prod/snapshots/5564"
+        "self": "https://app.kosli.com/api/v2/snapshots/cyber-dojo/aws-prod/5569",
+        "html": "https://app.kosli.com/cyber-dojo/environments/aws-prod/snapshots/5569"
       }
     }
   },
   {
     "environment_name": "aws-prod",
-    "snapshot_index": 5564,
+    "snapshot_index": 5569,
     "artifact_name": "244531986313.dkr.ecr.eu-central-1.amazonaws.com/differ:aca49ec@sha256:4769761969b2b6af19828321d9471320b6fa671357553b885fe922ff211461de",
     "sha256": "4769761969b2b6af19828321d9471320b6fa671357553b885fe922ff211461de",
     "description": "1 instance changed",
-    "reported_at": 1793779378.4743404,
+    "reported_at": 1793867518.4103153,
     "pipeline": "differ-ci",
     "deployments": [],
     "flows": [
@@ -233,18 +233,18 @@ kosli log environment aws-prod --output=json
         "html": "https://app.kosli.com/cyber-dojo/flows/differ-ci/artifacts/4769761969b2b6af19828321d9471320b6fa671357553b885fe922ff211461de?artifact_id=e3e7a070-c230-46ac-a216-a4e6661f"
       },
       "snapshot": {
-        "self": "https://app.kosli.com/api/v2/snapshots/cyber-dojo/aws-prod/5564",
-        "html": "https://app.kosli.com/cyber-dojo/environments/aws-prod/snapshots/5564"
+        "self": "https://app.kosli.com/api/v2/snapshots/cyber-dojo/aws-prod/5569",
+        "html": "https://app.kosli.com/cyber-dojo/environments/aws-prod/snapshots/5569"
       }
     }
   },
   {
     "environment_name": "aws-prod",
-    "snapshot_index": 5564,
+    "snapshot_index": 5569,
     "artifact_name": "244531986313.dkr.ecr.eu-central-1.amazonaws.com/languages-start-points:9fcbc9e@sha256:7d318c34350a409ba26020f301a298ee8aa30979c8ec4854743911401d229024",
     "sha256": "7d318c34350a409ba26020f301a298ee8aa30979c8ec4854743911401d229024",
     "description": "1 instance changed",
-    "reported_at": 1793779378.4743404,
+    "reported_at": 1793867518.4103153,
     "pipeline": "languages-start-points-ci",
     "deployments": [],
     "flows": [
@@ -275,18 +275,60 @@ kosli log environment aws-prod --output=json
         "html": "https://app.kosli.com/cyber-dojo/flows/languages-start-points-ci/artifacts/7d318c34350a409ba26020f301a298ee8aa30979c8ec4854743911401d229024?artifact_id=9b49ae7a-d0e1-4e04-ba77-ec89b9dd"
       },
       "snapshot": {
-        "self": "https://app.kosli.com/api/v2/snapshots/cyber-dojo/aws-prod/5564",
-        "html": "https://app.kosli.com/cyber-dojo/environments/aws-prod/snapshots/5564"
+        "self": "https://app.kosli.com/api/v2/snapshots/cyber-dojo/aws-prod/5569",
+        "html": "https://app.kosli.com/cyber-dojo/environments/aws-prod/snapshots/5569"
       }
     }
   },
   {
     "environment_name": "aws-prod",
-    "snapshot_index": 5564,
+    "snapshot_index": 5569,
+    "artifact_name": "244531986313.dkr.ecr.eu-central-1.amazonaws.com/runner:bbd98e9@sha256:9f8ac40adc070f4ded8fa56ca2a168804cbc882c42d94fc4537666d39d8d1757",
+    "sha256": "9f8ac40adc070f4ded8fa56ca2a168804cbc882c42d94fc4537666d39d8d1757",
+    "description": "3 instances changed",
+    "reported_at": 1793867518.4103153,
+    "pipeline": "runner-ci",
+    "deployments": [],
+    "flows": [
+      {
+        "flow_name": "runner-ci",
+        "deployments": null
+      },
+      {
+        "flow_name": "production-promotion",
+        "deployments": null
+      },
+      {
+        "flow_name": "snyk-aws-prod-per-artifact",
+        "deployments": null
+      },
+      {
+        "flow_name": "snyk-aws-beta-per-artifact",
+        "deployments": null
+      }
+    ],
+    "artifact_compliance": true,
+    "snapshot_compliance": true,
+    "type": "changed",
+    "code_diff": "https://github.com/cyber-dojo/runner/compare/ef6768eefe96ec54dacc1b8cabac1dde2d2f636e...bbd98e9edd32f97a4e2490ddb6963d4ed363eb6e",
+    "_links": {
+      "artifact": {
+        "self": "https://app.kosli.com/api/v2/artifacts/cyber-dojo/runner-ci/fingerprint/9f8ac40adc070f4ded8fa56ca2a168804cbc882c42d94fc4537666d39d8d1757",
+        "html": "https://app.kosli.com/cyber-dojo/flows/runner-ci/artifacts/9f8ac40adc070f4ded8fa56ca2a168804cbc882c42d94fc4537666d39d8d1757?artifact_id=f418eb3f-416b-4def-861c-aaebadf6"
+      },
+      "snapshot": {
+        "self": "https://app.kosli.com/api/v2/snapshots/cyber-dojo/aws-prod/5569",
+        "html": "https://app.kosli.com/cyber-dojo/environments/aws-prod/snapshots/5569"
+      }
+    }
+  },
+  {
+    "environment_name": "aws-prod",
+    "snapshot_index": 5569,
     "artifact_name": "244531986313.dkr.ecr.eu-central-1.amazonaws.com/web:fd680a8@sha256:b849bb4996749a3f8fc03f8dcb3038cf456dd8cc472826c6de20b988c91d61e4",
     "sha256": "b849bb4996749a3f8fc03f8dcb3038cf456dd8cc472826c6de20b988c91d61e4",
     "description": "3 instances changed",
-    "reported_at": 1793779378.4743404,
+    "reported_at": 1793867518.4103153,
     "pipeline": "web-ci",
     "deployments": [],
     "flows": [
@@ -309,7 +351,7 @@ kosli log environment aws-prod --output=json
     ],
     "artifact_compliance": true,
     "snapshot_compliance": true,
-    "type": "changed",
+    "type": "updated-provenance",
     "code_diff": "https://github.com/cyber-dojo/web/compare/83553f52e8de8a9766a64fced8fbfb3cd32318a3...fd680a809587fa6e4071fe874d63192f65f251c1",
     "_links": {
       "artifact": {
@@ -317,60 +359,18 @@ kosli log environment aws-prod --output=json
         "html": "https://app.kosli.com/cyber-dojo/flows/web-ci/artifacts/b849bb4996749a3f8fc03f8dcb3038cf456dd8cc472826c6de20b988c91d61e4?artifact_id=05fa6306-e46c-490f-bda0-8c38d3c0"
       },
       "snapshot": {
-        "self": "https://app.kosli.com/api/v2/snapshots/cyber-dojo/aws-prod/5564",
-        "html": "https://app.kosli.com/cyber-dojo/environments/aws-prod/snapshots/5564"
+        "self": "https://app.kosli.com/api/v2/snapshots/cyber-dojo/aws-prod/5569",
+        "html": "https://app.kosli.com/cyber-dojo/environments/aws-prod/snapshots/5569"
       }
     }
   },
   {
     "environment_name": "aws-prod",
-    "snapshot_index": 5563,
-    "artifact_name": "244531986313.dkr.ecr.eu-central-1.amazonaws.com/dashboard:fd680a8@sha256:0700dd34e5e360389f948bc6f321258e4dadc07c4d03452ea31a1dd2a8ac69af",
-    "sha256": "0700dd34e5e360389f948bc6f321258e4dadc07c4d03452ea31a1dd2a8ac69af",
-    "description": "1 instance changed",
-    "reported_at": 1793779318.4284134,
-    "pipeline": "dashboard-ci",
-    "deployments": [],
-    "flows": [
-      {
-        "flow_name": "dashboard-ci",
-        "deployments": null
-      },
-      {
-        "flow_name": "production-promotion",
-        "deployments": null
-      },
-      {
-        "flow_name": "snyk-aws-prod-per-artifact",
-        "deployments": null
-      },
-      {
-        "flow_name": "snyk-aws-beta-per-artifact",
-        "deployments": null
-      }
-    ],
-    "artifact_compliance": true,
-    "snapshot_compliance": true,
-    "type": "updated-provenance",
-    "code_diff": "https://github.com/cyber-dojo/web/compare/3e6678b80d51d7ec4c89d88f46dcee93f27fd6c1...fd680a809587fa6e4071fe874d63192f65f251c1",
-    "_links": {
-      "artifact": {
-        "self": "https://app.kosli.com/api/v2/artifacts/cyber-dojo/dashboard-ci/fingerprint/0700dd34e5e360389f948bc6f321258e4dadc07c4d03452ea31a1dd2a8ac69af",
-        "html": "https://app.kosli.com/cyber-dojo/flows/dashboard-ci/artifacts/0700dd34e5e360389f948bc6f321258e4dadc07c4d03452ea31a1dd2a8ac69af?artifact_id=9134bfd2-d550-4c10-93d3-bbd4f6c4"
-      },
-      "snapshot": {
-        "self": "https://app.kosli.com/api/v2/snapshots/cyber-dojo/aws-prod/5563",
-        "html": "https://app.kosli.com/cyber-dojo/environments/aws-prod/snapshots/5563"
-      }
-    }
-  },
-  {
-    "environment_name": "aws-prod",
-    "snapshot_index": 5563,
+    "snapshot_index": 5568,
     "artifact_name": "244531986313.dkr.ecr.eu-central-1.amazonaws.com/exercises-start-points:9f2aa63@sha256:30dbd3457ff111148a139daae9dd77d8d725629037bb59bd4eb450964e6a3509",
     "sha256": "30dbd3457ff111148a139daae9dd77d8d725629037bb59bd4eb450964e6a3509",
     "description": "1 instance changed",
-    "reported_at": 1793779318.4284134,
+    "reported_at": 1793867458.551026,
     "pipeline": "exercises-start-points-ci",
     "deployments": [],
     "flows": [
@@ -401,18 +401,18 @@ kosli log environment aws-prod --output=json
         "html": "https://app.kosli.com/cyber-dojo/flows/exercises-start-points-ci/artifacts/30dbd3457ff111148a139daae9dd77d8d725629037bb59bd4eb450964e6a3509?artifact_id=4369d9e0-a55a-40ac-aab6-01719a95"
       },
       "snapshot": {
-        "self": "https://app.kosli.com/api/v2/snapshots/cyber-dojo/aws-prod/5563",
-        "html": "https://app.kosli.com/cyber-dojo/environments/aws-prod/snapshots/5563"
+        "self": "https://app.kosli.com/api/v2/snapshots/cyber-dojo/aws-prod/5568",
+        "html": "https://app.kosli.com/cyber-dojo/environments/aws-prod/snapshots/5568"
       }
     }
   },
   {
     "environment_name": "aws-prod",
-    "snapshot_index": 5563,
+    "snapshot_index": 5568,
     "artifact_name": "244531986313.dkr.ecr.eu-central-1.amazonaws.com/spooler:4bb52cb@sha256:345743d602e5af11022f409b4451193a7f632b69b90c3a23490201a96c443d41",
     "sha256": "345743d602e5af11022f409b4451193a7f632b69b90c3a23490201a96c443d41",
     "description": "1 instance changed",
-    "reported_at": 1793779318.4284134,
+    "reported_at": 1793867458.551026,
     "pipeline": "spooler-ci",
     "deployments": [],
     "flows": [
@@ -443,18 +443,18 @@ kosli log environment aws-prod --output=json
         "html": "https://app.kosli.com/cyber-dojo/flows/spooler-ci/artifacts/345743d602e5af11022f409b4451193a7f632b69b90c3a23490201a96c443d41?artifact_id=96424b35-49cc-4dea-9efd-bc7e14c6"
       },
       "snapshot": {
-        "self": "https://app.kosli.com/api/v2/snapshots/cyber-dojo/aws-prod/5563",
-        "html": "https://app.kosli.com/cyber-dojo/environments/aws-prod/snapshots/5563"
+        "self": "https://app.kosli.com/api/v2/snapshots/cyber-dojo/aws-prod/5568",
+        "html": "https://app.kosli.com/cyber-dojo/environments/aws-prod/snapshots/5568"
       }
     }
   },
   {
     "environment_name": "aws-prod",
-    "snapshot_index": 5563,
+    "snapshot_index": 5568,
     "artifact_name": "244531986313.dkr.ecr.eu-central-1.amazonaws.com/runner:bbd98e9@sha256:9f8ac40adc070f4ded8fa56ca2a168804cbc882c42d94fc4537666d39d8d1757",
     "sha256": "9f8ac40adc070f4ded8fa56ca2a168804cbc882c42d94fc4537666d39d8d1757",
     "description": "3 instances changed",
-    "reported_at": 1793779318.4284134,
+    "reported_at": 1793867458.551026,
     "pipeline": "runner-ci",
     "deployments": [],
     "flows": [
@@ -485,18 +485,18 @@ kosli log environment aws-prod --output=json
         "html": "https://app.kosli.com/cyber-dojo/flows/runner-ci/artifacts/9f8ac40adc070f4ded8fa56ca2a168804cbc882c42d94fc4537666d39d8d1757?artifact_id=f418eb3f-416b-4def-861c-aaebadf6"
       },
       "snapshot": {
-        "self": "https://app.kosli.com/api/v2/snapshots/cyber-dojo/aws-prod/5563",
-        "html": "https://app.kosli.com/cyber-dojo/environments/aws-prod/snapshots/5563"
+        "self": "https://app.kosli.com/api/v2/snapshots/cyber-dojo/aws-prod/5568",
+        "html": "https://app.kosli.com/cyber-dojo/environments/aws-prod/snapshots/5568"
       }
     }
   },
   {
     "environment_name": "aws-prod",
-    "snapshot_index": 5563,
+    "snapshot_index": 5568,
     "artifact_name": "244531986313.dkr.ecr.eu-central-1.amazonaws.com/custom-start-points:190eb03@sha256:a9aa686d2bfa307bc715841448326e65a394aa2861d94c4744f797a599fc9edb",
     "sha256": "a9aa686d2bfa307bc715841448326e65a394aa2861d94c4744f797a599fc9edb",
     "description": "1 instance changed",
-    "reported_at": 1793779318.4284134,
+    "reported_at": 1793867458.551026,
     "pipeline": "custom-start-points-ci",
     "deployments": [],
     "flows": [
@@ -527,18 +527,18 @@ kosli log environment aws-prod --output=json
         "html": "https://app.kosli.com/cyber-dojo/flows/custom-start-points-ci/artifacts/a9aa686d2bfa307bc715841448326e65a394aa2861d94c4744f797a599fc9edb?artifact_id=f30b0455-6aa8-425e-ba1d-2ae2b497"
       },
       "snapshot": {
-        "self": "https://app.kosli.com/api/v2/snapshots/cyber-dojo/aws-prod/5563",
-        "html": "https://app.kosli.com/cyber-dojo/environments/aws-prod/snapshots/5563"
+        "self": "https://app.kosli.com/api/v2/snapshots/cyber-dojo/aws-prod/5568",
+        "html": "https://app.kosli.com/cyber-dojo/environments/aws-prod/snapshots/5568"
       }
     }
   },
   {
     "environment_name": "aws-prod",
-    "snapshot_index": 5563,
+    "snapshot_index": 5567,
     "artifact_name": "244531986313.dkr.ecr.eu-central-1.amazonaws.com/web:fd680a8@sha256:b849bb4996749a3f8fc03f8dcb3038cf456dd8cc472826c6de20b988c91d61e4",
     "sha256": "b849bb4996749a3f8fc03f8dcb3038cf456dd8cc472826c6de20b988c91d61e4",
     "description": "3 instances changed",
-    "reported_at": 1793779318.4284134,
+    "reported_at": 1793867398.5068898,
     "pipeline": "web-ci",
     "deployments": [],
     "flows": [
@@ -551,17 +551,17 @@ kosli log environment aws-prod --output=json
         "deployments": null
       },
       {
-        "flow_name": "snyk-aws-prod-per-artifact",
+        "flow_name": "snyk-aws-beta-per-artifact",
         "deployments": null
       },
       {
-        "flow_name": "snyk-aws-beta-per-artifact",
+        "flow_name": "snyk-aws-prod-per-artifact",
         "deployments": null
       }
     ],
     "artifact_compliance": true,
     "snapshot_compliance": true,
-    "type": "updated-provenance",
+    "type": "changed",
     "code_diff": "https://github.com/cyber-dojo/web/compare/83553f52e8de8a9766a64fced8fbfb3cd32318a3...fd680a809587fa6e4071fe874d63192f65f251c1",
     "_links": {
       "artifact": {
@@ -569,18 +569,18 @@ kosli log environment aws-prod --output=json
         "html": "https://app.kosli.com/cyber-dojo/flows/web-ci/artifacts/b849bb4996749a3f8fc03f8dcb3038cf456dd8cc472826c6de20b988c91d61e4?artifact_id=05fa6306-e46c-490f-bda0-8c38d3c0"
       },
       "snapshot": {
-        "self": "https://app.kosli.com/api/v2/snapshots/cyber-dojo/aws-prod/5563",
-        "html": "https://app.kosli.com/cyber-dojo/environments/aws-prod/snapshots/5563"
+        "self": "https://app.kosli.com/api/v2/snapshots/cyber-dojo/aws-prod/5567",
+        "html": "https://app.kosli.com/cyber-dojo/environments/aws-prod/snapshots/5567"
       }
     }
   },
   {
     "environment_name": "aws-prod",
-    "snapshot_index": 5562,
+    "snapshot_index": 5566,
     "artifact_name": "244531986313.dkr.ecr.eu-central-1.amazonaws.com/creator:fd680a8@sha256:000a36f4debb15073c77bc5e9b7a864ebf60c2ce3116fed603ce0ac654bdf568",
     "sha256": "000a36f4debb15073c77bc5e9b7a864ebf60c2ce3116fed603ce0ac654bdf568",
     "description": "1 instance changed",
-    "reported_at": 1793779258.398902,
+    "reported_at": 1793867338.4644825,
     "pipeline": "creator-ci",
     "deployments": [],
     "flows": [
@@ -611,18 +611,18 @@ kosli log environment aws-prod --output=json
         "html": "https://app.kosli.com/cyber-dojo/flows/creator-ci/artifacts/000a36f4debb15073c77bc5e9b7a864ebf60c2ce3116fed603ce0ac654bdf568?artifact_id=0e7140db-7422-4ea7-954b-fa840a0a"
       },
       "snapshot": {
-        "self": "https://app.kosli.com/api/v2/snapshots/cyber-dojo/aws-prod/5562",
-        "html": "https://app.kosli.com/cyber-dojo/environments/aws-prod/snapshots/5562"
+        "self": "https://app.kosli.com/api/v2/snapshots/cyber-dojo/aws-prod/5566",
+        "html": "https://app.kosli.com/cyber-dojo/environments/aws-prod/snapshots/5566"
       }
     }
   },
   {
     "environment_name": "aws-prod",
-    "snapshot_index": 5562,
+    "snapshot_index": 5566,
     "artifact_name": "244531986313.dkr.ecr.eu-central-1.amazonaws.com/dashboard:fd680a8@sha256:0700dd34e5e360389f948bc6f321258e4dadc07c4d03452ea31a1dd2a8ac69af",
     "sha256": "0700dd34e5e360389f948bc6f321258e4dadc07c4d03452ea31a1dd2a8ac69af",
     "description": "1 instance changed",
-    "reported_at": 1793779258.398902,
+    "reported_at": 1793867338.4644825,
     "pipeline": "dashboard-ci",
     "deployments": [],
     "flows": [
@@ -653,18 +653,18 @@ kosli log environment aws-prod --output=json
         "html": "https://app.kosli.com/cyber-dojo/flows/dashboard-ci/artifacts/0700dd34e5e360389f948bc6f321258e4dadc07c4d03452ea31a1dd2a8ac69af?artifact_id=9134bfd2-d550-4c10-93d3-bbd4f6c4"
       },
       "snapshot": {
-        "self": "https://app.kosli.com/api/v2/snapshots/cyber-dojo/aws-prod/5562",
-        "html": "https://app.kosli.com/cyber-dojo/environments/aws-prod/snapshots/5562"
+        "self": "https://app.kosli.com/api/v2/snapshots/cyber-dojo/aws-prod/5566",
+        "html": "https://app.kosli.com/cyber-dojo/environments/aws-prod/snapshots/5566"
       }
     }
   },
   {
     "environment_name": "aws-prod",
-    "snapshot_index": 5562,
+    "snapshot_index": 5566,
     "artifact_name": "244531986313.dkr.ecr.eu-central-1.amazonaws.com/exercises-start-points:9f2aa63@sha256:30dbd3457ff111148a139daae9dd77d8d725629037bb59bd4eb450964e6a3509",
     "sha256": "30dbd3457ff111148a139daae9dd77d8d725629037bb59bd4eb450964e6a3509",
     "description": "1 instance changed",
-    "reported_at": 1793779258.398902,
+    "reported_at": 1793867338.4644825,
     "pipeline": "exercises-start-points-ci",
     "deployments": [],
     "flows": [
@@ -695,8 +695,8 @@ kosli log environment aws-prod --output=json
         "html": "https://app.kosli.com/cyber-dojo/flows/exercises-start-points-ci/artifacts/30dbd3457ff111148a139daae9dd77d8d725629037bb59bd4eb450964e6a3509?artifact_id=4369d9e0-a55a-40ac-aab6-01719a95"
       },
       "snapshot": {
-        "self": "https://app.kosli.com/api/v2/snapshots/cyber-dojo/aws-prod/5562",
-        "html": "https://app.kosli.com/cyber-dojo/environments/aws-prod/snapshots/5562"
+        "self": "https://app.kosli.com/api/v2/snapshots/cyber-dojo/aws-prod/5566",
+        "html": "https://app.kosli.com/cyber-dojo/environments/aws-prod/snapshots/5566"
       }
     }
   }

@@ -22,7 +22,13 @@ https://learn.microsoft.com/en-us/azure/azure-functions/functions-app-settings#w
 For zip-deployed apps, the fingerprint respects a `.kosli_ignore` file at the root of the deployed package.
 The package is extracted into a temporary directory. An entry whose name would resolve outside that directory
 (for example one containing a `..` segment) is never written; instead the whole snapshot fails and no app in
-the environment is reported until the offending app is redeployed without that entry.
+the environment is reported until the offending app is redeployed without that entry, or left out with `--exclude`.
+
+Skip the filtering flags to report every running app in the resource group. Use `--include` and/or
+`--include-regex` to report only a subset by name, OR `--exclude` and/or `--exclude-regex` to leave apps
+out; include and exclude are mutually exclusive. Filtering happens before any app is fingerprinted, so a
+filtered-out app is never downloaded and cannot fail the snapshot: exclude a zip-deployed app when the
+credentials cannot download its package. Filters are case-sensitive.
 
 With `--digests-source acr`, the registry is taken from each app's own container configuration. Azure
 credentials are only ever sent to an Azure Container Registry login server. An app whose image comes
@@ -34,6 +40,15 @@ running when it last started the container. That log also carries the container'
 compromised container could try to misreport its image. Lines the container writes are ignored, but the
 registry is the stronger source; a warning is printed whenever this mode is used, and an app whose log holds
 no platform-written digest is reported without a fingerprint and named in a warning.
+
+`--azure-cloud` selects the Azure public cloud, Azure China or Azure Government. `--azure-authority-host` and
+`--azure-resource-manager-url` replace that cloud's Microsoft Entra ID authority and Resource Manager endpoint, for a
+private cloud or a stand-in; tokens are still requested for the chosen cloud's Resource Manager audience. Both must
+be https URLs.
+
+Each zip-deployed app's package is downloaded, with an Azure token, from the Kudu host its site lists. That host must
+be the app's own SCM host in the chosen cloud, ``app`.scm.azurewebsites.net` or ``app`-`hash`.scm.`region`.azurewebsites.net`
+in the public cloud, unless `--azure-resource-manager-url` is set.
 
 `--dry-run` suppresses only the request to Kosli. Azure discovery and registry lookups still run.
 To specify paths in a directory artifact that should always be excluded from the SHA256 calculation, you can add a `.kosli_ignore` file to the root of the artifact.
@@ -52,14 +67,21 @@ The service principal needs to have the following permissions:
 ## Flags
 | Flag | Type | Description |
 | :--- | :--- | :--- |
+| `--azure-authority-host` | string | [optional] The Microsoft Entra ID authority host to authenticate against, replacing the one of `--azure-cloud`. E.g. `https://login.example.com/`. |
 | `--azure-client-id` | string | Azure client ID. |
 | `--azure-client-secret` | string | Azure client secret. |
+| `--azure-cloud` | string | [defaulted] The Azure cloud to authenticate against and read apps from. Valid values are 'public', 'china' and 'usgov'. (default "public") |
 | `--azure-resource-group-name` | string | Azure resource group name. |
+| `--azure-resource-manager-url` | string | [optional] The Azure Resource Manager endpoint to read apps from, replacing the one of `--azure-cloud`. E.g. `https://management.example.com`. |
 | `--azure-subscription-id` | string | Azure subscription ID. |
 | `--azure-tenant-id` | string | Azure tenant ID. |
 | `--digests-source` | string | [defaulted] Where to get the digests from. Valid values are 'acr' and 'logs'. With 'acr', Azure credentials are only sent to Azure Container Registry login servers; an app whose image comes from any other registry is read without credentials, so a private third-party registry needs 'logs'. 'logs' reads the digest from the app's docker log, which the running container can also write to, and is the weaker source. (default "acr") |
 | `-D`, `--dry-run` | bool | [optional] Run in dry-run mode. When enabled, no data is sent to Kosli and the CLI exits with 0 exit code regardless of any errors. |
+| `--exclude` | strings | [optional] The comma-separated list of Azure web app or function app names to exclude. Can't be used together with `--include` or `--include-regex`. |
+| `--exclude-regex` | strings | [optional] The comma-separated list of Azure web app or function app name regex patterns to exclude. Can't be used together with `--include` or `--include-regex`. Allowed regex patterns are described in [RE2 syntax](https://github.com/google/re2/wiki/Syntax) |
 | `-h`, `--help` | bool | help for azure |
+| `--include` | strings | [optional] The comma-separated list of Azure web app or function app names to snapshot. Can't be used together with `--exclude` or `--exclude-regex`. |
+| `--include-regex` | strings | [optional] The comma-separated list of Azure web app or function app name regex patterns to snapshot. Can't be used together with `--exclude` or `--exclude-regex`. Allowed regex patterns are described in [RE2 syntax](https://github.com/google/re2/wiki/Syntax) |
 | `--zip` | bool | Download logs from Azure as zip files |
 
 
@@ -106,6 +128,31 @@ kosli snapshot azure yourEnvironmentName
 	--azure-subscription-id yourAzureSubscriptionID 
 	--azure-resource-group-name yourAzureResourceGroupName 
 	--digests-source logs 
+
+```
+</Accordion>
+<Accordion title="Report a snapshot from Azure Government">
+```shell
+kosli snapshot azure yourEnvironmentName 
+	--azure-client-id yourAzureClientID 
+	--azure-client-secret yourAzureClientSecret 
+	--azure-tenant-id yourAzureTenantID 
+	--azure-subscription-id yourAzureSubscriptionID 
+	--azure-resource-group-name yourAzureResourceGroupName 
+	--azure-cloud usgov 
+
+```
+</Accordion>
+<Accordion title="Report every app except a zip-deployed function app and any app whose name starts with 'staging-'">
+```shell
+kosli snapshot azure yourEnvironmentName 
+	--azure-client-id yourAzureClientID 
+	--azure-client-secret yourAzureClientSecret 
+	--azure-tenant-id yourAzureTenantID 
+	--azure-subscription-id yourAzureSubscriptionID 
+	--azure-resource-group-name yourAzureResourceGroupName 
+	--exclude yourZipFunctionApp 
+	--exclude-regex "^staging-" 
 
 ```
 </Accordion>
