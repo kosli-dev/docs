@@ -1,6 +1,7 @@
 ---
 title: 'What is Kosli?'
 description: 'Why compliance automation matters and how Kosli approaches it.'
+icon: "lightbulb"
 ---
 
 Proving compliance in fast-moving software delivery is hard. Evidence is scattered across tools, audits are manual, and changes happen faster than any spreadsheet or CAB meeting can track. Kosli automates this. It is a tool-agnostic platform that integrates with your existing CI systems, scanners, and runtime environments, consolidating compliance data into a single place.

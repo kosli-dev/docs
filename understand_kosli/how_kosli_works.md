@@ -1,6 +1,7 @@
 ---
 title: 'How Kosli works'
 description: 'How Kosli models software delivery using Flows, Trails, Artifacts, Attestations, and Environments.'
+icon: "gears"
 ---
 
 Kosli provides a set of building blocks that implement [controls](/understand_kosli/controls) across your software delivery lifecycle. This page explains what those building blocks are, why they exist, and how they fit together.
