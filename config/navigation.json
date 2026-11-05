@@ -175,6 +175,12 @@
       "icon": "server",
       "pages": [
         {
+          "group": "Setting up environments",
+          "pages": [
+            "administration/managing_environments/overview"
+          ]
+        },
+        {
           "group": "Reporting your runtime",
           "pages": [
             "tutorials/report_k8s_envs",
@@ -190,8 +196,7 @@
             "administration/cloud_capture/getting_started",
             "administration/cloud_capture/security"
           ]
-        },
-        "administration/managing_environments/overview"
+        }
       ]
     },
     {
