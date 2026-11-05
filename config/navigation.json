@@ -17,6 +17,7 @@
           "pages": [
             "getting_started/install",
             "getting_started/authenticating_to_kosli",
+            "tutorials/cli_and_http_proxy",
             "tutorials/try_kosli_locally"
           ]
         },
@@ -232,8 +233,7 @@
           "group": "CI/CD",
           "pages": [
             "integrations/ci_cd",
-            "tutorials/trail_summaries_in_ci",
-            "tutorials/cli_and_http_proxy"
+            "tutorials/trail_summaries_in_ci"
           ]
         },
         {
