@@ -48,13 +48,18 @@
           "pages": [
             "faq/faq",
             "troubleshooting/what_do_i_do_if_kosli_is_down",
-            "troubleshooting/docker_api_version_error",
-            "troubleshooting/repo_digest_unavailable",
-            "troubleshooting/zsh_no_such_user",
-            "troubleshooting/github_kosli_api_token",
-            "troubleshooting/subshell_stderr",
-            "troubleshooting/whitespace_path",
-            "understand_kosli/ai_docs_access"
+            "understand_kosli/ai_docs_access",
+            {
+              "group": "Common CLI errors",
+              "pages": [
+                "troubleshooting/docker_api_version_error",
+                "troubleshooting/repo_digest_unavailable",
+                "troubleshooting/github_kosli_api_token",
+                "troubleshooting/subshell_stderr",
+                "troubleshooting/zsh_no_such_user",
+                "troubleshooting/whitespace_path"
+              ]
+            }
           ]
         }
       ]
