@@ -72,16 +72,31 @@
         {
           "group": "Users and access",
           "pages": [
-            "administration/managing_users/roles_in_kosli",
-            "administration/managing_users/mapping_users_to_roles",
-            "administration/managing_users/automated_user_provisioning",
-            "administration/authentication/single_sign_on",
-            "administration/authentication/magic_link",
-            "administration/authentication/github_login",
-            "administration/authentication/api_authentication_methods",
-            "administration/authentication/service_accounts",
-            "administration/authentication/api_key_rotation",
-            "tutorials/rotating_api_keys"
+            {
+              "group": "Users and roles",
+              "pages": [
+                "administration/managing_users/roles_in_kosli",
+                "administration/managing_users/mapping_users_to_roles",
+                "administration/managing_users/automated_user_provisioning"
+              ]
+            },
+            {
+              "group": "Signing in",
+              "pages": [
+                "administration/authentication/single_sign_on",
+                "administration/authentication/magic_link",
+                "administration/authentication/github_login"
+              ]
+            },
+            {
+              "group": "API access",
+              "pages": [
+                "administration/authentication/api_authentication_methods",
+                "administration/authentication/service_accounts",
+                "administration/authentication/api_key_rotation",
+                "tutorials/rotating_api_keys"
+              ]
+            }
           ]
         },
         {
