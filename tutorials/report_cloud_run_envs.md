@@ -1,5 +1,6 @@
 ---
 title: "Report Cloud Run environments to Kosli"
+sidebarTitle: "Cloud Run"
 description: "Learn how to report running artifacts from a Google Cloud Run project and region to Kosli — using the CLI for a quick test or a scheduled Cloud Run Job for production."
 ---
 

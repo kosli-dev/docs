@@ -1,5 +1,6 @@
 ---
 title: "Report AWS environments to Kosli"
+sidebarTitle: "AWS"
 description: "Learn how to report running artifacts from ECS, Lambda, and S3 environments to Kosli — using the CLI for a quick test or a Terraform module for production."
 ---
 
