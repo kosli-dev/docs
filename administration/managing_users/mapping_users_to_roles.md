@@ -1,6 +1,7 @@
 ---
 title: Mapping users to roles
 description: Recommended mappings from common organizational roles to Kosli roles.
+icon: "users-gear"
 ---
 
 When implementing Kosli, you need to map organizational roles to [Kosli roles](/administration/managing_users/roles_in_kosli). This table provides recommended mappings based on typical responsibilities:
