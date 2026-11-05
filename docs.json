@@ -37,6 +37,10 @@
     "timestamp": true
   },
   "favicon": "/favicon-32x32.png",
+  "banner": {
+    "content": "🌱 The docs have a new layout, grouped by what you're here to do.",
+    "dismissible": true
+  },
   "redirects": {
     "$ref": "./config/redirects.json"
   },
