@@ -94,6 +94,26 @@ You can check the status of your email addresses at [github.com/settings/emails]
 If your GitHub organization uses an IP allow list, you also need to allow Kosli's sign-in traffic. See [GitHub sign-in](/administration/authentication/github_login#github-ip-allow-lists) for the addresses to add.
 </Accordion>
 
+<Accordion title="When do I use kosli assert, and when kosli evaluate?">
+Both can stop a pipeline: `kosli assert` exits non-zero on a non-compliant result, and so do `kosli evaluate trail`, `trails` and `input` on a deny. `kosli evaluate policy` only does so when you pass `--assert`. They answer different questions:
+
+- **`kosli assert`** checks a verdict Kosli has already worked out from what you recorded. You write no rules: the rules are your flow templates and environment policies. [`kosli assert artifact`](/client_reference/kosli_assert_artifact) asks whether an artifact is compliant, and [`kosli assert snapshot`](/client_reference/kosli_assert_snapshot) asks whether an environment is.
+- **`kosli evaluate`** runs a Rego policy over trail data and returns allow or deny. Use it for rules that flow templates and environment policies can't express, such as "every pull request has an approver who isn't its author". The `evaluate` commands are in beta.
+
+| | `kosli assert artifact` / `snapshot` | `kosli evaluate` |
+|---|---|---|
+| Answers | Is this artifact or environment compliant? | Does this trail data satisfy my policy? |
+| Rules come from | Flow templates and environment policies in Kosli | A Rego policy you write |
+| Checks | An artifact (by fingerprint) or an environment snapshot | One or more trails, or local JSON with `evaluate input` |
+| Records a result | No | Yes, with `kosli evaluate policy --control`, which records a decision |
+
+Use them together when you work with [controls](/tutorials/working_with_controls): `kosli evaluate policy` records a decision against a control where the judgment is made, an environment policy requires that decision, and `kosli assert artifact --environment` enforces it as the gate before deployment. In short, evaluate where you decide, assert where you deploy.
+
+The other `assert` commands are narrower checks: `kosli assert pullrequest <provider>` (for example [`kosli assert pullrequest github`](/client_reference/kosli_assert_pullrequest_github)) fails if a commit has no pull request, and [`kosli assert status`](/client_reference/kosli_assert_status) fails if the Kosli server is down.
+
+To learn more, see [Enforce policies](/getting_started/enforce_policies) for `assert`, and [Evaluate trails with OPA policies](/tutorials/evaluate_trails_with_opa) and the [Rego policy reference](/policy-reference/rego_policy) for `evaluate`.
+</Accordion>
+
 <Accordion title="Why can't I delete or archive a policy?">
 It's not possible to delete a policy in Kosli. This is by design, because there can be snapshots that were previously evaluated using the policy. Deleting it would compromise the integrity of those historical evaluations.
 
