@@ -81,7 +81,7 @@
   },
   {
     "source": "/api_v2",
-    "destination": "/api-reference/actions/list-actions"
+    "destination": "/api-reference/overview"
   },
   {
     "source": "/getting_started/service-accounts",

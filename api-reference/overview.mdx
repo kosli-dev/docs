@@ -15,7 +15,7 @@ Use the base URL of the instance your organization lives on. It's the address yo
 |---|---|
 | EU (default) | `https://app.kosli.com/api/v2` |
 | US | `https://app.us.kosli.com/api/v2` |
-| [Kosli Dedicated](/administration/customer_kms_keys) | `https://<your-kosli-domain>/api/v2` |
+| [Kosli Dedicated](/administration/dedicated_instance_parameters) | `https://<your-kosli-domain>/api/v2` |
 
 ## Authentication
 
@@ -26,7 +26,7 @@ curl -H "Authorization: Bearer $KOSLI_API_TOKEN" \
   https://app.kosli.com/api/v2/environments/<your-org>
 ```
 
-Use a [service account](/administration/authentication/service_accounts) API key for automation, or a [personal API key](/user/personal_api_keys) for trying things out.
+Use a [service account](/administration/authentication/service_accounts) API key for automation, or a [personal API key](/user/personal_api_keys) for trying things out. For HTTP basic auth and other options, see [API authentication methods](/administration/authentication/api_authentication_methods).
 
 ## Interactive Swagger docs
 
