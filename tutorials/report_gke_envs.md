@@ -1,5 +1,6 @@
 ---
 title: "Report GKE environments to Kosli"
+sidebarTitle: "GKE"
 description: "Learn how to report running pods across your GKE clusters to Kosli — using Cloud Asset Inventory instead of connecting to any cluster control plane."
 ---
 

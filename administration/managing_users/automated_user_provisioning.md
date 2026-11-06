@@ -1,6 +1,7 @@
 ---
 title: Automated user provisioning
 description: "Learn about configuring automated user provisioning (SCIM) with Kosli."
+icon: "user-plus"
 ---
 
 Kosli supports SCIM provisioning and deprovisioning of users. This feature allows users to be added to Kosli by assigning them to the Kosli application within your Identity Provider (IdP). This page explains how to get started.

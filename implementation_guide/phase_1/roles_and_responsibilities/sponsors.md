@@ -70,7 +70,7 @@ Sponsors need visibility into adoption progress, compliance status, and overall 
 Learn more about [Kosli user roles and permissions](/administration/managing_users/roles_in_kosli).
 
 ## Where to Start
-- [**What is Kosli?**](understand_kosli/what_is_kosli/): Understand the value and core ideas
+- [**What is Kosli?**](/understand_kosli/what_is_kosli): Understand the value and core ideas
 - [**Implementing Kosli**](/implementation_guide): A rollout guide aligned to business and technical outcomes
 - [**How Kosli works**](/understand_kosli/how_kosli_works): Understand how Flows, Trails, and Attestations fit together
 

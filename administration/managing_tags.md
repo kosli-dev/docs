@@ -1,5 +1,5 @@
 ---
-title: Managing Tags
+title: Managing tags
 description: Use tags to label and organize Kosli resources with custom key-value pairs via Terraform, CLI, or API.
 ---
 

@@ -27,7 +27,7 @@ mint update         # Update the mint CLI tool
 
 - **`docs.json`** — Theme and site configuration. Uses `$ref` to compose from files in `config/`.
 - **`config/`** — Split config: `navigation.json` (page routing — every new page must be added here), `redirects.json`, `footer.json`.
-- **Content directories** — `understand_kosli/`, `getting_started/`, `administration/`, `integrations/`, `implementation_guide/`, `client_reference/`, `terraform-reference/`, `api-reference/`
+- **Content directories** — `understand_kosli/`, `getting_started/`, `administration/`, `user/`, `integrations/`, `tutorials/`, `implementation_guide/`, `labs/`, `troubleshooting/`, `faq/`, and the reference directories `client_reference/`, `helm/`, `policy-reference/`, `terraform-reference/`, `template-reference/`, `github-action-reference/`. Directory names don't decide where a page appears; `config/navigation.json` does.
 - **`snippets/`** — Reusable MDX fragments (only for content used in 2+ pages)
 - **`changelog/`** — Product changelog
 
