@@ -73,7 +73,7 @@ Depending on the type of your environment, you can scope what to snapshot from t
 | S3 (buckets)               |               |                    |                    |                  |                  |
 | docker (containers)        |       √       |                    |                    |                  |                  |
 | k8s (namespaces)           |       √       |          √         |          √         |         √        |         √        |
-| azure (functions and apps) |       √       |                    |                    |                  |                  |
+| azure (functions and apps) |       √       |          √         |          √         |         √        |         √        |
 | cloud-run (services and jobs) |    √       |          √         |          √         |         √        |         √        |
 
 
