@@ -33,9 +33,9 @@ The request body is JSON:
 | `reason` | Yes | Why the override was made. Shown on the trail and kept in the audit trail. |
 | `description` | No | Free-text description of the override. |
 | `origin_url` | No | Link to where the override was made, such as a CI run or a ticket. |
-| `artifact_fingerprint` | No | Fingerprint of the artifact, when the attestation is attached to an artifact rather than the trail. |
-| `target_artifacts` | No | Template name of the artifact the attestation is for. Requires `git_commit_info`. |
-| `git_commit_info` | No | Git commit to associate with the override. |
+| `artifact_fingerprint` | For artifact attestations | Fingerprint of the artifact the attestation is attached to. See [Override an attestation on an artifact](#override-an-attestation-on-an-artifact). |
+| `target_artifacts` | For artifact attestations | List holding the template name of the artifact the attestation is attached to, such as `["app"]`. Use it instead of `artifact_fingerprint`, together with `git_commit_info`. |
+| `git_commit_info` | With `target_artifacts` | Git commit of the artifact, as an object. Only `sha1` is required; `message`, `author`, `branch`, `timestamp`, and `url` are optional. |
 | `repo_info` | No | Repository the git commit belongs to. |
 | `user_data` | No | Any JSON object or array to store with the override, kept as sent. Use it for structured context such as a ticket ID or who approved the decision. |
 | `annotations` | No | Searchable key-value pairs. Keys may contain only letters, digits, and underscores, and values are strings. |
@@ -107,11 +107,55 @@ The trail becomes non-compliant:
   <img src="/images/tutorials/override-compliant-to-non-compliant.png" alt="A trail marked Non-compliant. Its events show a compliant security-review attestation, followed by an event saying the attestation's status was overridden from True to False, with the original status, the user who reported it, and the override reason" />
 </Frame>
 
+### Override an attestation on an artifact
+
+When the flow template puts the attestation under an artifact, tell Kosli which artifact it belongs to. Use the attestation's own name, such as `unit-tests`, not the qualified `app.unit-tests`. There are two ways to point at the artifact.
+
+By fingerprint:
+
+```shell
+curl -X POST \
+  "https://app.kosli.com/api/v2/attestations/$KOSLI_ORG/my-flow/trail/my-trail/override" \
+  -H "Authorization: Bearer $KOSLI_API_TOKEN" \
+  -H "Content-Type: application/json" \
+  -d '{
+    "attestation_name": "unit-tests",
+    "original_attestation_type": "generic",
+    "artifact_fingerprint": "62ad1a496f7a6f219be23d83c09696c950fad7f9c59c61a24d9a28c7575c43fb",
+    "new_compliance_status": true,
+    "reason": "Flaky test, fixed in the next release"
+  }'
+```
+
+By the artifact's template name and git commit:
+
+```shell
+curl -X POST \
+  "https://app.kosli.com/api/v2/attestations/$KOSLI_ORG/my-flow/trail/my-trail/override" \
+  -H "Authorization: Bearer $KOSLI_API_TOKEN" \
+  -H "Content-Type: application/json" \
+  -d '{
+    "attestation_name": "unit-tests",
+    "original_attestation_type": "generic",
+    "target_artifacts": ["app"],
+    "git_commit_info": {"sha1": "a65f3a61100781a827247a22ca3b22f290d15bc1"},
+    "new_compliance_status": true,
+    "reason": "Flaky test, fixed in the next release"
+  }'
+```
+
+Either way, the artifact and the trail are re-evaluated with the new status.
+
+<Warning>
+If you leave out both `artifact_fingerprint` and `target_artifacts`, the override doesn't attach to the artifact's attestation. Kosli records it as a new, unexpected attestation on the trail instead. The artifact keeps its old status, and an override with `new_compliance_status: false` makes the whole trail non-compliant.
+</Warning>
+
 ## How overrides behave
 
 - **An override applies to the latest attestation with that name.** If a new attestation with the same name is reported after the override, the new attestation's own status applies again. Override again if the decision still holds.
 - **You can override an attestation that hasn't been reported.** If the flow template expects an attestation that is missing, an override with `new_compliance_status: true` marks it compliant and the trail is no longer incomplete.
 - **You can't override an attestation that doesn't exist anywhere.** If the attestation is neither on the trail nor in its template, the request fails with a `400` error.
+- **The artifact must be reported first.** Overriding an attestation on an artifact that isn't on the trail yet fails: with `404` when you use `artifact_fingerprint`, and with `400` when you use `target_artifacts`.
 - **You can't override on an archived flow.**
 
 ## Find overrides in the audit trail
@@ -182,6 +226,7 @@ jobs:
         env:
           KOSLI_API_TOKEN: ${{ secrets.KOSLI_API_TOKEN }}
           KOSLI_ORG: ${{ vars.KOSLI_ORG }}
+          KOSLI_HOST: ${{ vars.KOSLI_HOST }}
           FLOW: ${{ inputs.flow }}
           TRAIL: ${{ inputs.trail }}
           ATTESTATION_NAME: ${{ inputs.attestation_name }}
@@ -200,7 +245,7 @@ jobs:
               new_compliance_status: $compliant, reason: $reason, origin_url: $origin_url}')
 
           curl --fail-with-body -X POST \
-            "https://app.kosli.com/api/v2/attestations/$KOSLI_ORG/$FLOW/trail/$TRAIL/override" \
+            "${KOSLI_HOST:-https://app.kosli.com}/api/v2/attestations/$KOSLI_ORG/$FLOW/trail/$TRAIL/override" \
             -H "Authorization: Bearer $KOSLI_API_TOKEN" \
             -H "Content-Type: application/json" \
             -d "$body"
@@ -209,6 +254,7 @@ jobs:
 A few things make this workflow safer to run:
 
 - **Inputs go through environment variables and `jq`**, not straight into the script, so a value with quotes or shell characters can't break the request or inject commands.
+- **The host comes from the `KOSLI_HOST` repository variable** and falls back to `https://app.kosli.com`. Set it to `https://app.us.kosli.com` or your Kosli Dedicated address if your organization lives on another [instance](/api-reference/overview#base-urls).
 - **`origin_url` links the override back to the workflow run**, so anyone reading the trail can see where it came from.
 - **The `kosli-overrides` [GitHub environment](https://docs.github.com/en/actions/managing-workflow-runs-and-deployments/managing-deployments/managing-environments-for-deployment)** can require approval from named reviewers before the job runs. Store the API key of a dedicated [service account](/administration/authentication/service_accounts) with the Member role as a secret of that environment, so only approved runs can use it.
 
