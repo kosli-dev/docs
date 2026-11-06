@@ -19,6 +19,7 @@ You can tag the following Kosli resource types:
 | :--- | :--- | :--- |
 | Flow | [`kosli_flow`](/terraform-reference/resources/flow) | `flow` |
 | Environment | [`kosli_environment`](/terraform-reference/resources/environment) | `env` |
+| [Repository](/tutorials/repositories) | Not supported | `repo` |
 
 ## Tag key and value rules
 
@@ -75,6 +76,11 @@ You can tag the following Kosli resource types:
   kosli tag env production \
     --set region=eu-west-1 \
     --set tier=critical
+  ```
+
+  ```shell
+  kosli tag repo my-org/my-repo \
+    --set team=platform
   ```
 
   See [`kosli tag`](/client_reference/kosli_tag) for all flags and options.

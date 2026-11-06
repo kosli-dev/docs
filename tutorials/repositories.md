@@ -110,6 +110,58 @@ You should also be able to see the repository in the [Kosli app](https://app.kos
 
 <Frame><img src="/images/repos-list.png" alt="Kosli app showing the repositories list with repos from multiple VCS providers" /></Frame>
 
+## Finding and tagging repositories with the CLI
+
+The commands in this section need Kosli CLI v2.33.0 or higher.
+
+### Filter the repository list
+
+`kosli list repos` returns 15 repos per page by default. Use `--page` and `--page-limit` (maximum 50) to page through larger lists. To narrow the list, filter by name, provider or tag:
+
+```shell
+# Exact match on the full repo name
+kosli list repos --name my-org/my-repo
+
+# Case-insensitive substring match (can't be combined with --name)
+kosli list repos --search payments
+
+# Repos from one VCS provider
+kosli list repos --provider github
+
+# Repos with a tag key, or a key:value pair
+kosli list repos --tag team:platform
+```
+
+You can repeat `--tag` to match more than one tag. See [`kosli list repos`](/client_reference/kosli_list_repos) for all flags.
+
+### Get a single repository
+
+Use `kosli get repo` with the repo name to see its details:
+
+```shell
+kosli get repo my-org/my-repo
+```
+
+The output includes the repo's internal ID and its tags. If repos with the same name exist on more than one VCS provider, add `--provider` (for example `--provider github`) to pick one. You can also fetch a repo by its internal ID with `--repo-id`. See [`kosli get repo`](/client_reference/kosli_get_repo) for all flags.
+
+### Tag a repository
+
+Tag repos with key-value pairs to group them by team, service tier or any other dimension. Then filter on those tags with `kosli list repos --tag`:
+
+```shell
+kosli tag repo my-org/my-repo \
+    --set team=platform \
+    --set tier=critical
+```
+
+Use `--unset` with a key to remove a tag. If the repo name is ambiguous across VCS providers, add `--provider`, or identify the repo by the internal ID from `kosli get repo` with `--repo-id`:
+
+```shell
+kosli tag repo --repo-id <internal-repo-id> --set team=platform
+```
+
+See [Managing tags](/administration/managing_tags) for tag key rules and [`kosli tag`](/client_reference/kosli_tag) for all flags.
+
 ## Tracking builds
 
 A build is recorded in Kosli the first time you attest an artifact. Subsequent attestations for that artifact fingerprint do not create additional build records.
