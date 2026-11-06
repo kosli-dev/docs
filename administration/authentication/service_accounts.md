@@ -39,6 +39,64 @@ See [Roles in Kosli](/administration/managing_users/roles_in_kosli) for the full
 - **Reader** — read-only systems such as dashboards or query tooling.
 - **Admin** — rarely needed; reserve for automation that manages users, roles, or organization-wide settings (for example, Terraform-driven org bootstrap).
 
+## Manage service accounts with the CLI
+
+You can create and manage service accounts and their API keys with the Kosli CLI instead of the UI. These commands assume that `--api-token` and `--org` are [set](/getting_started/install#assigning-flags-via-environment-variables), and the API token belongs to a user or service account allowed to manage service accounts.
+
+Create a service account with `--privilege` set to `admin`, `member`, `snapshotter`, or `reader`:
+
+```shell
+kosli create service-account ci-github-actions \
+    --privilege member \
+    --description "CI pipeline in GitHub Actions"
+```
+
+API keys are created separately. The key value is shown only once, so store it in your secret store straight away. Without `--expires-at`, the key gets the maximum allowed lifetime.
+
+```shell
+kosli create api-key \
+    --service-account ci-github-actions \
+    --description "key for CI" \
+    --expires-at 2027-06-30
+```
+
+To inspect, change, or remove service accounts:
+
+```shell
+kosli list service-accounts
+kosli get service-account ci-github-actions
+kosli update service-account ci-github-actions --privilege reader
+kosli delete service-account ci-github-actions --assume-yes
+```
+
+`kosli update service-account` changes only the flags you pass. `kosli delete service-account` permanently deletes the service account and its API keys. It asks for confirmation, so pass `--assume-yes` in CI or other non-interactive shells.
+
+See the reference pages for all flags: [`kosli create service-account`](/client_reference/kosli_create_service-account), [`kosli list service-accounts`](/client_reference/kosli_list_service-accounts), [`kosli get service-account`](/client_reference/kosli_get_service-account), [`kosli update service-account`](/client_reference/kosli_update_service-account), [`kosli delete service-account`](/client_reference/kosli_delete_service-account), and [`kosli create api-key`](/client_reference/kosli_create_api-key).
+
+## Manage service accounts with Terraform
+
+The Kosli Terraform provider manages service accounts with the [`kosli_service_account`](/terraform-reference/resources/service_account) resource and their API keys with the [`kosli_service_account_api_key`](/terraform-reference/resources/service_account_api_key) resource:
+
+```terraform
+resource "kosli_service_account" "ci" {
+  name        = "ci-github-actions"
+  description = "CI pipeline in GitHub Actions"
+  privilege   = "member"
+}
+
+resource "kosli_service_account_api_key" "ci_key" {
+  service_account_name = kosli_service_account.ci.name
+  description          = "key for CI"
+}
+
+output "ci_api_key" {
+  value     = kosli_service_account_api_key.ci_key.key
+  sensitive = true
+}
+```
+
+The raw `key` is returned only when Terraform creates the key, and is stored in Terraform state as a sensitive value, so protect your state. API keys are immutable: changing `description`, `expires_at`, or `service_account_name` revokes the key and creates a new one. To read an existing service account without managing it, use the [`kosli_service_account` data source](/terraform-reference/data-sources/service_account).
+
 ## Rotate or revoke keys
 
 For zero-downtime rotation and the API-driven flow, see:
