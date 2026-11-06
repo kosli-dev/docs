@@ -1,5 +1,6 @@
 ---
 title: Managing environments
+sidebarTitle: "Manage with Terraform"
 description: Learn how to manage Kosli environments via Terraform, including creating and importing physical and logical environments.
 ---
 
