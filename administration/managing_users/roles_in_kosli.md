@@ -52,6 +52,7 @@ Roles apply to service accounts the same way they apply to users. Wherever this 
 | Add to and revoke from the allowlist | ✅ | ✅ | ❌ | ❌ |
 | **Attestations & Snapshots** | | | |
 | Report attestations | ✅ | ✅ | ❌ | ❌ |
+| [Override attestation compliance](/tutorials/override_attestation_compliance) | ✅ | ✅ | ❌ | ❌ |
 | Report artifacts | ✅ | ✅ | ❌ | ❌ |
 | Report environment snapshots | ✅ | ✅ | ✅ | ❌ |
 | **Actions** | | | |

@@ -1,0 +1,414 @@
+---
+title: "Override an attestation's compliance"
+description: "Waive or revoke the compliance of a single attestation on a trail with the Kosli CLI or API, with a recorded reason that stays in the trail's audit trail."
+---
+
+<Warning>
+**Overrides are not a public Kosli feature yet.** The `kosli attest override` command is hidden from the CLI help and has no [CLI reference](/client_reference) page, and the API endpoint isn't in the [API reference](/api-reference/overview) or the Swagger docs. The command, its flags, the endpoint, and their behavior may change without notice. Only use overrides if your organization's compliance process allows compliance decisions to be overridden manually.
+</Warning>
+
+Sometimes the compliance Kosli calculates for an attestation isn't the decision your organization stands behind. A security scan reports findings that your security team has accepted as false positives, or a review passed but the reviewer turns out not to be independent of the change. An override records that decision on the trail: it sets a new compliance status for one attestation, and stores who made it, when, and why.
+
+An override doesn't delete or edit the original attestation. Both stay in the trail's events, so the audit trail shows the original result and the decision that replaced it.
+
+## Who can override
+
+Overriding is a write to a trail, so it needs the same role as [reporting an attestation](/administration/managing_users/roles_in_kosli): **Admin** or **Member**. Readers and Snapshotters can't override. This applies to users and service accounts alike.
+
+## Send an override
+
+Use the `kosli attest override` command, or send a `POST` request to the trail's `override` endpoint. Both take the same information:
+
+| CLI flag | API field | Required | Description |
+|---|---|---|---|
+| `--name` | `attestation_name` | Yes | Name of the attestation to override, as it appears on the trail or in the [flow template](/getting_started/flows#flow-template). |
+| `--original-attestation-type` | `original_attestation_type` | Yes | Type of the attestation being overridden. Use a built-in type such as `generic`, `junit`, or `snyk`, `custom:<type-name>` for a [custom attestation type](/tutorials/attest_custom), or `system:<type-name>` for a system type. |
+| `--new-compliance-status` | `new_compliance_status` | Yes | `true` to make the attestation compliant, `false` to make it non-compliant. In the CLI, write `--new-compliance-status=false` with the `=` (see [boolean flags](/faq/faq#boolean-flags)). |
+| `--reason` | `reason` | Yes | Why the override was made. Shown on the trail and kept in the audit trail. |
+| `--description` | `description` | No | Free-text description of the override. |
+| `--origin-url` | `origin_url` | No | Link to where the override was made, such as a CI run or a ticket. Defaulted to the CI run URL in some CI systems. |
+| `--fingerprint` | `artifact_fingerprint` | For artifact attestations | Fingerprint of the artifact the attestation is attached to. See [Override an attestation on an artifact](#override-an-attestation-on-an-artifact). |
+| `--commit` | `target_artifacts` and `git_commit_info` | For artifact attestations | Point at the artifact by its template name and git commit instead of its fingerprint. In the API, `git_commit_info` is an object where only `sha1` is required. |
+| `--user-data` | `user_data` | No | JSON to store with the override, such as a ticket ID or who approved the decision. The CLI takes the path to a JSON file. |
+| `--annotate` | `annotations` | No | Searchable key-value pairs. Keys may contain only letters, digits, and underscores. |
+| `--external-url` | `external_urls` | No | Links to external evidence, keyed by a label of your choosing. In the API, each entry is an object with an `href` and an optional `fingerprint`. |
+
+The optional fields are stored on the override, not on the original attestation.
+
+The API endpoint is:
+
+```
+POST /api/v2/attestations/{org}/{flow}/trail/{trail}/override
+```
+
+Use the [base URL](/api-reference/overview#base-urls) of the instance your organization lives on. The endpoint returns `200` with the body `"OK"`. The CLI reads the organization, API token, and host from `KOSLI_ORG`, `KOSLI_API_TOKEN`, and `KOSLI_HOST` like any other `kosli` command.
+
+### Make a non-compliant attestation compliant
+
+A trail is non-compliant because its `security-review` attestation reported findings. The security team has reviewed them and accepts them as false positives:
+
+<Tabs>
+  <Tab title="CLI" icon="terminal">
+  ```shell
+  kosli attest override \
+    --flow my-flow \
+    --trail my-trail \
+    --name security-review \
+    --original-attestation-type generic \
+    --new-compliance-status=true \
+    --reason "Findings are false positives, accepted by security team"
+  ```
+  </Tab>
+  <Tab title="API" icon="code">
+  ```shell
+  curl -X POST \
+    "https://app.kosli.com/api/v2/attestations/$KOSLI_ORG/my-flow/trail/my-trail/override" \
+    -H "Authorization: Bearer $KOSLI_API_TOKEN" \
+    -H "Content-Type: application/json" \
+    -d '{
+      "attestation_name": "security-review",
+      "original_attestation_type": "generic",
+      "new_compliance_status": true,
+      "reason": "Findings are false positives, accepted by security team"
+    }'
+  ```
+  </Tab>
+</Tabs>
+
+The trail becomes compliant. Its events show the original non-compliant attestation and, after it, the override with its reason:
+
+<Frame>
+  <img src="/images/tutorials/override-non-compliant-to-compliant.png" alt="A trail marked Compliant. Its events show a non-compliant security-review attestation, followed by an event saying the attestation's status was overridden from False to True, with the original status, the user who reported it, and the override reason" />
+</Frame>
+
+### Make a compliant attestation non-compliant
+
+An override works in the other direction too. The `security-review` attestation passed, but the reviewer was not independent of the change author:
+
+<Tabs>
+  <Tab title="CLI" icon="terminal">
+  ```shell
+  kosli attest override \
+    --flow my-flow \
+    --trail my-trail \
+    --name security-review \
+    --original-attestation-type generic \
+    --new-compliance-status=false \
+    --reason "Reviewer was not independent of the change author"
+  ```
+  </Tab>
+  <Tab title="API" icon="code">
+  ```shell
+  curl -X POST \
+    "https://app.kosli.com/api/v2/attestations/$KOSLI_ORG/my-flow/trail/my-trail/override" \
+    -H "Authorization: Bearer $KOSLI_API_TOKEN" \
+    -H "Content-Type: application/json" \
+    -d '{
+      "attestation_name": "security-review",
+      "original_attestation_type": "generic",
+      "new_compliance_status": false,
+      "reason": "Reviewer was not independent of the change author"
+    }'
+  ```
+  </Tab>
+</Tabs>
+
+The trail becomes non-compliant:
+
+<Frame>
+  <img src="/images/tutorials/override-compliant-to-non-compliant.png" alt="A trail marked Non-compliant. Its events show a compliant security-review attestation, followed by an event saying the attestation's status was overridden from True to False, with the original status, the user who reported it, and the override reason" />
+</Frame>
+
+### Link the override to a ticket
+
+Use the optional fields to connect the decision to the evidence behind it, such as a risk-acceptance ticket:
+
+<Tabs>
+  <Tab title="CLI" icon="terminal">
+  ```shell
+  echo '{"ticket": "SEC-123", "approved_by": "security-team"}' > override.json
+
+  kosli attest override \
+    --flow my-flow \
+    --trail my-trail \
+    --name security-review \
+    --original-attestation-type generic \
+    --new-compliance-status=true \
+    --reason "Risk accepted by security team" \
+    --user-data override.json \
+    --annotate risk_acceptance=SEC-123 \
+    --external-url ticket=https://example.com/browse/SEC-123
+  ```
+  </Tab>
+  <Tab title="API" icon="code">
+  ```shell
+  curl -X POST \
+    "https://app.kosli.com/api/v2/attestations/$KOSLI_ORG/my-flow/trail/my-trail/override" \
+    -H "Authorization: Bearer $KOSLI_API_TOKEN" \
+    -H "Content-Type: application/json" \
+    -d '{
+      "attestation_name": "security-review",
+      "original_attestation_type": "generic",
+      "new_compliance_status": true,
+      "reason": "Risk accepted by security team",
+      "user_data": {"ticket": "SEC-123", "approved_by": "security-team"},
+      "annotations": {"risk_acceptance": "SEC-123"},
+      "external_urls": {"ticket": {"href": "https://example.com/browse/SEC-123"}}
+    }'
+  ```
+  </Tab>
+</Tabs>
+
+### Override an attestation on an artifact
+
+When the flow template puts the attestation under an artifact, tell Kosli which artifact it belongs to. There are two ways to point at it.
+
+By fingerprint. Use the attestation's own name, such as `unit-tests`:
+
+<Tabs>
+  <Tab title="CLI" icon="terminal">
+  ```shell
+  kosli attest override \
+    --flow my-flow \
+    --trail my-trail \
+    --name unit-tests \
+    --fingerprint 62ad1a496f7a6f219be23d83c09696c950fad7f9c59c61a24d9a28c7575c43fb \
+    --original-attestation-type generic \
+    --new-compliance-status=true \
+    --reason "Flaky test, fixed in the next release"
+  ```
+  </Tab>
+  <Tab title="API" icon="code">
+  ```shell
+  curl -X POST \
+    "https://app.kosli.com/api/v2/attestations/$KOSLI_ORG/my-flow/trail/my-trail/override" \
+    -H "Authorization: Bearer $KOSLI_API_TOKEN" \
+    -H "Content-Type: application/json" \
+    -d '{
+      "attestation_name": "unit-tests",
+      "original_attestation_type": "generic",
+      "artifact_fingerprint": "62ad1a496f7a6f219be23d83c09696c950fad7f9c59c61a24d9a28c7575c43fb",
+      "new_compliance_status": true,
+      "reason": "Flaky test, fixed in the next release"
+    }'
+  ```
+  </Tab>
+</Tabs>
+
+By the artifact's template name and git commit. The CLI takes the qualified name `app.unit-tests` with `--commit`, as other `kosli attest` commands do. The API takes the attestation's own name, with the artifact's template name in `target_artifacts`:
+
+<Tabs>
+  <Tab title="CLI" icon="terminal">
+  ```shell
+  kosli attest override \
+    --flow my-flow \
+    --trail my-trail \
+    --name app.unit-tests \
+    --commit a65f3a61100781a827247a22ca3b22f290d15bc1 \
+    --original-attestation-type generic \
+    --new-compliance-status=true \
+    --reason "Flaky test, fixed in the next release"
+  ```
+
+  Like other `kosli attest` commands, `--commit` is read from the git repository at `--repo-root`, which defaults to the current directory.
+  </Tab>
+  <Tab title="API" icon="code">
+  ```shell
+  curl -X POST \
+    "https://app.kosli.com/api/v2/attestations/$KOSLI_ORG/my-flow/trail/my-trail/override" \
+    -H "Authorization: Bearer $KOSLI_API_TOKEN" \
+    -H "Content-Type: application/json" \
+    -d '{
+      "attestation_name": "unit-tests",
+      "original_attestation_type": "generic",
+      "target_artifacts": ["app"],
+      "git_commit_info": {"sha1": "a65f3a61100781a827247a22ca3b22f290d15bc1"},
+      "new_compliance_status": true,
+      "reason": "Flaky test, fixed in the next release"
+    }'
+  ```
+  </Tab>
+</Tabs>
+
+Either way, the artifact and the trail are re-evaluated with the new status.
+
+<Warning>
+If you don't point at the artifact (no fingerprint, and neither the qualified name with `--commit` in the CLI nor `target_artifacts` in the API), the override doesn't attach to the artifact's attestation. Kosli records it as a new, unexpected attestation on the trail instead. The artifact keeps its old status, and an override to non-compliant makes the whole trail non-compliant.
+</Warning>
+
+## How overrides behave
+
+- **An override applies to the latest attestation with that name.** If a new attestation with the same name is reported after the override, the new attestation's own status applies again. Override again if the decision still holds.
+- **You can override an attestation that hasn't been reported.** If the flow template expects an attestation that is missing, an override with `new_compliance_status: true` marks it compliant and the trail is no longer incomplete.
+- **You can't override an attestation that doesn't exist anywhere.** If the attestation is neither on the trail nor in its template, the request fails with a `400` error.
+- **The artifact must be reported first.** Overriding an attestation on an artifact that isn't on the trail yet fails: with `404` when you point at it by fingerprint, and with `400` when you point at it by template name and commit.
+- **You can't override on an archived flow.**
+
+## Find overrides in the audit trail
+
+Each override is recorded as an `attestation_overridden` event on the trail. In the web app it appears in the trail's events as "Attestation _name_ status overridden from _old_ to _new_", with the reason, the original attestation, its original status, and who made the override.
+
+Through the API, read it from the trail's events:
+
+```shell
+curl -H "Authorization: Bearer $KOSLI_API_TOKEN" \
+  "https://app.kosli.com/api/v2/trails/$KOSLI_ORG/my-flow/my-trail/events"
+```
+
+```json
+{
+  "type": "attestation_overridden",
+  "attestation_name": "security-review",
+  "reason": "Reviewer was not independent of the change author",
+  "new_compliance_status": false,
+  "original_attestation_id": "6c742f1f-0502-4d8d-b46d-99960f6d",
+  "original_attestation_type": "generic",
+  "original_attestation_status": true,
+  "override_attestation_id": "667bc8ad-940c-4601-8f2b-3d20c8b5"
+}
+```
+
+In the trail's compliance status, an overridden attestation carries an `overridden_attestation_id` next to its `attestation_id`, and its `is_compliant` shows the overridden value.
+
+## Run overrides from a manually triggered workflow
+
+To keep overrides out of ad-hoc terminal sessions, run them from a CI workflow that someone triggers by hand. The person who triggers it, the inputs they gave, and the run itself are then recorded in your CI system as well as in Kosli, and you control who can run it with your CI system's permissions.
+
+This GitHub Actions workflow runs on `workflow_dispatch` and takes the override fields as inputs. Pick the CLI or the API version:
+
+<Tabs>
+  <Tab title="CLI" icon="terminal">
+  ```yaml .github/workflows/kosli-override.yml
+  name: Override attestation compliance
+
+  on:
+    workflow_dispatch:
+      inputs:
+        flow:
+          description: Flow name
+          required: true
+        trail:
+          description: Trail name
+          required: true
+        attestation_name:
+          description: Name of the attestation to override
+          required: true
+        attestation_type:
+          description: Type of the attestation, such as generic or custom:<type-name>
+          required: true
+          default: generic
+        compliant:
+          description: New compliance status
+          required: true
+          type: boolean
+        reason:
+          description: Why the override is made
+          required: true
+
+  jobs:
+    override:
+      runs-on: ubuntu-latest
+      environment: kosli-overrides
+      steps:
+        - name: Setup Kosli CLI
+          uses: kosli-dev/setup-cli-action@v5
+
+        - name: Override attestation compliance
+          env:
+            KOSLI_API_TOKEN: ${{ secrets.KOSLI_API_TOKEN }}
+            KOSLI_ORG: ${{ vars.KOSLI_ORG }}
+            KOSLI_HOST: ${{ vars.KOSLI_HOST || 'https://app.kosli.com' }}
+            FLOW: ${{ inputs.flow }}
+            TRAIL: ${{ inputs.trail }}
+            ATTESTATION_NAME: ${{ inputs.attestation_name }}
+            ATTESTATION_TYPE: ${{ inputs.attestation_type }}
+            COMPLIANT: ${{ inputs.compliant }}
+            REASON: ${{ inputs.reason }}
+            ORIGIN_URL: ${{ github.server_url }}/${{ github.repository }}/actions/runs/${{ github.run_id }}
+          run: |
+            kosli attest override \
+              --flow "$FLOW" \
+              --trail "$TRAIL" \
+              --name "$ATTESTATION_NAME" \
+              --original-attestation-type "$ATTESTATION_TYPE" \
+              --new-compliance-status="$COMPLIANT" \
+              --reason "$REASON (triggered by $GITHUB_ACTOR)" \
+              --origin-url "$ORIGIN_URL"
+  ```
+  </Tab>
+  <Tab title="API" icon="code">
+  ```yaml .github/workflows/kosli-override.yml
+  name: Override attestation compliance
+
+  on:
+    workflow_dispatch:
+      inputs:
+        flow:
+          description: Flow name
+          required: true
+        trail:
+          description: Trail name
+          required: true
+        attestation_name:
+          description: Name of the attestation to override
+          required: true
+        attestation_type:
+          description: Type of the attestation, such as generic or custom:<type-name>
+          required: true
+          default: generic
+        compliant:
+          description: New compliance status
+          required: true
+          type: boolean
+        reason:
+          description: Why the override is made
+          required: true
+
+  jobs:
+    override:
+      runs-on: ubuntu-latest
+      environment: kosli-overrides
+      steps:
+        - name: Override attestation compliance
+          env:
+            KOSLI_API_TOKEN: ${{ secrets.KOSLI_API_TOKEN }}
+            KOSLI_ORG: ${{ vars.KOSLI_ORG }}
+            KOSLI_HOST: ${{ vars.KOSLI_HOST || 'https://app.kosli.com' }}
+            FLOW: ${{ inputs.flow }}
+            TRAIL: ${{ inputs.trail }}
+            ATTESTATION_NAME: ${{ inputs.attestation_name }}
+            ATTESTATION_TYPE: ${{ inputs.attestation_type }}
+            COMPLIANT: ${{ inputs.compliant }}
+            REASON: ${{ inputs.reason }}
+            ORIGIN_URL: ${{ github.server_url }}/${{ github.repository }}/actions/runs/${{ github.run_id }}
+          run: |
+            body=$(jq -n \
+              --arg name "$ATTESTATION_NAME" \
+              --arg type "$ATTESTATION_TYPE" \
+              --argjson compliant "$COMPLIANT" \
+              --arg reason "$REASON (triggered by $GITHUB_ACTOR)" \
+              --arg origin_url "$ORIGIN_URL" \
+              '{attestation_name: $name, original_attestation_type: $type,
+                new_compliance_status: $compliant, reason: $reason, origin_url: $origin_url}')
+
+            curl --fail-with-body -X POST \
+              "$KOSLI_HOST/api/v2/attestations/$KOSLI_ORG/$FLOW/trail/$TRAIL/override" \
+              -H "Authorization: Bearer $KOSLI_API_TOKEN" \
+              -H "Content-Type: application/json" \
+              -d "$body"
+  ```
+
+  The API version needs no CLI install. It uses `jq` and `curl`, which GitHub-hosted runners already have.
+  </Tab>
+</Tabs>
+
+A few things make this workflow safer to run:
+
+- **Inputs go through environment variables**, not straight into the script, and are quoted where they're used. The API version also builds the request body with `jq`. Either way, a value with quotes or shell characters can't break the request or inject commands.
+- **The host comes from the `KOSLI_HOST` repository variable** and falls back to `https://app.kosli.com`. Set it to `https://app.us.kosli.com` or your Kosli Dedicated address if your organization lives on another [instance](/api-reference/overview#base-urls).
+- **The origin URL links the override back to the workflow run**, so anyone reading the trail can see where it came from.
+- **The `kosli-overrides` [GitHub environment](https://docs.github.com/en/actions/managing-workflow-runs-and-deployments/managing-deployments/managing-environments-for-deployment)** can require approval from named reviewers before the job runs. Store the API key of a dedicated [service account](/administration/authentication/service_accounts) with the Member role as a secret of that environment, so only approved runs can use it.
+
+<Note>
+Kosli records the service account as the reporter of the override, not the person who triggered the workflow. That's why the workflow adds `$GITHUB_ACTOR` to the reason.
+</Note>
