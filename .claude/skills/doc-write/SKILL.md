@@ -67,6 +67,8 @@ Three rules the table does not carry:
 - Add it to an existing group. Only create a group for two or more sibling pages — a group wrapping a single page adds a click and gives nothing back, which is the shape `audit_navigation.py` flags.
 - Keep pages within three levels of their tab.
 - **Sentence case for group labels**, matching CLAUDE.md's heading rule: "Naming conventions", not "Naming Conventions".
+- **Don't repeat the group label in the sidebar.** When the group label already says what its pages do, set a short `sidebarTitle` in front matter and keep the full `title` for the page heading and search. Under "Reporting your runtime", "Report GKE environments to Kosli" shows as **GKE**. Match what the sibling pages do.
+- **Icons are all or nothing within a group.** If the sibling pages have an `icon`, give the new page one; if none do, don't add one. Tabs carry no icon, except Changelog.
 
 ## When moving, renaming, or deleting a page
 
