@@ -1,6 +1,7 @@
 ---
 title: "Using Kosli CLI with an HTTP proxy"
 description: "This tutorial shows you how to set up an HTTP proxy and configure the Kosli CLI to route all traffic through it."
+icon: "network-wired"
 ---
 
 In enterprises with strict network policies, all egress traffic to external services must go through an HTTP proxy.

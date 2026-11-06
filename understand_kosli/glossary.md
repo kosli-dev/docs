@@ -1,6 +1,7 @@
 ---
 title: 'Glossary'
 description: 'Quick-reference definitions of Kosli terms and concepts.'
+icon: "book"
 ---
 
 A reference list of Kosli terms. For a narrative explanation of how these concepts fit together, see [How Kosli works](/understand_kosli/how_kosli_works).

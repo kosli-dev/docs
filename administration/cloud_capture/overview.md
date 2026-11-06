@@ -1,6 +1,6 @@
 ---
 title: "Cloud Capture"
-sidebarTitle: "Cloud Capture"
+sidebarTitle: "Overview"
 description: "Learn how Cloud Capture, a managed service, snapshots your cloud environments from Kosli's infrastructure, with no software to install."
 tag: "BETA"
 ---

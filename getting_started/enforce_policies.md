@@ -1,7 +1,6 @@
 ---
 title: "Enforce policies"
 description: "Block non-compliant artifacts from deploying by enforcing policies in CI/CD pipelines, via the API, or with Kubernetes admission controllers."
-icon: "shield-check"
 ---
 
 Environment policies define what an artifact needs to be compliant. Policy enforcement gates check artifacts against those requirements and block deployments when they fall short.

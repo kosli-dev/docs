@@ -1,6 +1,7 @@
 ---
 title: Roles in Kosli
 description: Understand the roles in Kosli and their permissions to manage access for users and service accounts within your organization.
+icon: "user-shield"
 ---
 Kosli uses a single role model that applies to both **users** and **[service accounts](/administration/authentication/service_accounts)**. Understanding these roles is essential for assigning the appropriate level of access to your team members and to the automated systems that talk to Kosli on their behalf.
 

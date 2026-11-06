@@ -110,5 +110,25 @@
   {
     "source": "/client_reference/kosli_request_approval",
     "destination": "/client_reference/overview"
+  },
+  {
+    "source": "/kosli_overview/what_is_audit_trail",
+    "destination": "/understand_kosli/what_is_kosli"
+  },
+  {
+    "source": "/implementation_guide/phase_2/sso_configuration",
+    "destination": "/administration/authentication/single_sign_on"
+  },
+  {
+    "source": "/implementation_guide/phase_2/sso_configuration/entra_id_setup",
+    "destination": "/administration/authentication/single_sign_on"
+  },
+  {
+    "source": "/implementation_guide/phase_2/sso_configuration/okta_setup",
+    "destination": "/administration/authentication/single_sign_on"
+  },
+  {
+    "source": "/kosli-logo-dark-main.svg",
+    "destination": "/logo/kosli-logo-dark-main.svg"
   }
 ]

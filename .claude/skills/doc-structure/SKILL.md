@@ -53,7 +53,7 @@ Judgment, not mechanics. Read the group labels and the pages under them and ask:
 - **Does a top-level tab deliver what it promises?** A tab is the strongest navigational claim the site makes. A tab holding a handful of stub pages under an ambitious name over-promises.
 - **Where would a reader look first?** For the five or six most common tasks, trace the path from the landing page. Count the clicks and the guesses.
 
-Weigh a finding by how many readers hit it. A mislabeled group at the top of the Documentation tab matters; a nesting quirk four levels into a reference section does not.
+Weigh a finding by how many readers hit it. A mislabeled group at the top of a tab matters; a nesting quirk four levels into a reference section does not.
 
 ## Step 4 — Changelog coverage
 

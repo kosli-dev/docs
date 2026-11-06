@@ -20,14 +20,14 @@ against the churn. Fill in "Why it matters" properly or expect the issue to sit.
 <!-- The navigation path, exactly as `scripts/audit_navigation.py` reports it. -->
 
 ```
-Documentation > Tutorials > Evaluation
+Environments and runtime > Setting up environments
 ```
 
 **Pages affected:**
 
 <!-- Page paths as they appear in config/navigation.json. -->
 
-- `tutorials/evaluate_trails_with_opa`
+- `administration/managing_environments/overview`
 
 ## What's wrong
 
@@ -51,8 +51,8 @@ and close it instead.
 ## Proposed structure
 
 ```
-Documentation > Tutorials
-  └─ tutorials/evaluate_trails_with_opa
+Environments and runtime
+  └─ administration/managing_environments/overview
 ```
 
 ## URL impact

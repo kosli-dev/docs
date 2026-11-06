@@ -7,7 +7,7 @@ on:
   workflow_dispatch:
     inputs:
       focus:
-        description: 'Optional: limit the audit to one area (e.g. "navigation", "changelog coverage", "Tutorials group")'
+        description: 'Optional: limit the audit to one area (e.g. "navigation", "changelog coverage", "Risks and controls tab")'
         required: false
         type: string
 

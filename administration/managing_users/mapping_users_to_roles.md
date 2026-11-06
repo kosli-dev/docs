@@ -1,6 +1,7 @@
 ---
 title: Mapping users to roles
 description: Recommended mappings from common organizational roles to Kosli roles.
+icon: "users-gear"
 ---
 
 When implementing Kosli, you need to map organizational roles to [Kosli roles](/administration/managing_users/roles_in_kosli). This table provides recommended mappings based on typical responsibilities:
@@ -26,7 +27,7 @@ The key principle: Assign the minimum role required for someone to fulfill their
 
 For detailed guidance on each organizational role's responsibilities during Kosli implementation, see:
 
-- [Implementation Guide: Roles and Responsibilities](/implementation_guide/phase_1/roles_and_responsibilities/overview)
+- [Roles and responsibilities](/implementation_guide/phase_1/roles_and_responsibilities/overview)
 - [Platform Engineers](/implementation_guide/phase_1/roles_and_responsibilities/platform_engineers)
 - [Application Developers](/implementation_guide/phase_1/roles_and_responsibilities/app_developers)
 - [Security & Compliance](/implementation_guide/phase_1/roles_and_responsibilities/security_compliance)

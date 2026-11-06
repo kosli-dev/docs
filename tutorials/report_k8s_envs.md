@@ -1,5 +1,6 @@
 ---
 title: "Report Kubernetes environments to Kosli"
+sidebarTitle: "Kubernetes"
 description: "Learn how to report running artifacts from a Kubernetes cluster to Kosli — using a Helm chart for production, the CLI for a quick test, or an externally scheduled cron job."
 ---
 
