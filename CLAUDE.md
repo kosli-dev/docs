@@ -38,7 +38,7 @@ Reported by the Mintlify GitHub app, alongside this repo's own workflows:
 | `Mintlify Validation (kosli) - vale-spellcheck` | `.vale.ini` + `styles/Kosli/AmericanSpelling.yml` | Mintlify app |
 | `Mintlify Validation (kosli) - link-rot` | Link targets — unreliable, frequently reports `skipping`. **Don't rely on it**; run `mint broken-links` locally (core rule 5) and check `gh pr checks` before assuming links were validated. | Mintlify app |
 | `Mintlify Deployment` | Preview build | Mintlify app |
-| `Doc quality review` | The `doc-review` skill | `doc-review.yml` |
+| `Doc quality review` | The `doc-review` skill | `claude-pr-review.yml` |
 | `Validate PR Title` | Conventional Commits | `pr-quality.yml` |
 | `Test live-docs scripts` | `pytest tests/` — including navigation integrity, so **core rule 2 is enforced**: a page file with no `config/navigation.json` entry fails the build | `pr-quality.yml` |
 
@@ -48,12 +48,12 @@ Because spelling is already enforced, review agents should not spend turns hand-
 
 - **`docs.json`** — Central config: theme, API settings, logos. Uses `$ref` to compose from files in `config/`.
 - **`config/`** — Split config files: `navigation.json` (all page routing), `redirects.json`, `footer.json`.
-- **Content directories** — `understand_kosli/`, `getting_started/`, `administration/`, `integrations/`, `implementation_guide/`, `tutorials/`, `troubleshooting/`, `faq/`, `changelog/`, `client_reference/`, `helm/`, `policy-reference/`, `terraform-reference/`, `template-reference/`, `labs/`
+- **Content directories** — `understand_kosli/`, `getting_started/`, `administration/`, `integrations/`, `implementation_guide/`, `tutorials/`, `troubleshooting/`, `faq/`, `changelog/`, `labs/`, `user/`, `client_reference/`, `helm/`, `policy-reference/`, `terraform-reference/`, `template-reference/`, `github-action-reference/`
 - **`snippets/`** — Reusable MDX content fragments
 - **`style.css`** — Custom CSS overrides applied on top of the Mintlify theme
 - **`scripts/`** — Python scripts that generate "live docs" (mostly under `client_reference/`) and update navigation. See [Live docs](#live-docs) below.
 - **`tests/`** — pytest suite for the live-docs scripts.
-- **`.github/workflows/`** — `doc-review.yml` (Claude-powered PR review), `doc-structure.yml` (monthly navigation and coverage audit that files issues), `pr-quality.yml` (PR title + live-docs tests), `update-cli-docs.yml`, `update-schemas.yml`.
+- **`.github/workflows/`** — `claude-pr-review.yml` (Claude-powered PR review), `doc-structure.yml` (monthly navigation and coverage audit that files issues), `pr-quality.yml` (PR title + live-docs tests), `update-cli-docs.yml`, `update-schemas.yml`.
 - **`schemas/`** — Generated JSON Schema assets. See [Schemas](#schemas) below.
 - **`docs/ADRs/`**: architecture decision records for this repo. Not published: `docs/` is in `.mintignore` and excluded by `scripts/audit_navigation.py`. See [Architecture decisions](#architecture-decisions) below.
 
