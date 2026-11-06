@@ -36,8 +36,30 @@ The request body is JSON:
 | `artifact_fingerprint` | No | Fingerprint of the artifact, when the attestation is attached to an artifact rather than the trail. |
 | `target_artifacts` | No | Template name of the artifact the attestation is for. Requires `git_commit_info`. |
 | `git_commit_info` | No | Git commit to associate with the override. |
+| `repo_info` | No | Repository the git commit belongs to. |
+| `user_data` | No | Any JSON object or array to store with the override, kept as sent. Use it for structured context such as a ticket ID or who approved the decision. |
+| `annotations` | No | Searchable key-value pairs. Keys may contain only letters, digits, and underscores, and values are strings. |
+| `external_urls` | No | Links to external evidence, keyed by a label of your choosing. Each entry is an object with an `href` and an optional `fingerprint`. |
 
 The endpoint returns `200` with the body `"OK"`. The trail's compliance is then recalculated with the new status.
+
+The optional fields are stored on the override, not on the original attestation. For example, this override links the decision to a risk-acceptance ticket:
+
+```shell
+curl -X POST \
+  "https://app.kosli.com/api/v2/attestations/$KOSLI_ORG/my-flow/trail/my-trail/override" \
+  -H "Authorization: Bearer $KOSLI_API_TOKEN" \
+  -H "Content-Type: application/json" \
+  -d '{
+    "attestation_name": "security-review",
+    "original_attestation_type": "generic",
+    "new_compliance_status": true,
+    "reason": "Risk accepted by security team",
+    "user_data": {"ticket": "SEC-123", "approved_by": "security-team"},
+    "annotations": {"risk_acceptance": "SEC-123"},
+    "external_urls": {"ticket": {"href": "https://example.com/browse/SEC-123"}}
+  }'
+```
 
 ### Make a non-compliant attestation compliant
 
