@@ -1,0 +1,41 @@
+---
+title: "Kosli API"
+sidebarTitle: "Overview"
+description: "Base URLs, authentication, and where to find the interactive Swagger docs for the Kosli API."
+icon: "book-open"
+---
+
+The Kosli API is a REST API that the [Kosli CLI](/client_reference), the web app, and the [Terraform provider](/terraform-reference/index) all build on. The endpoint pages in this section are generated from the API's OpenAPI specification.
+
+## Base URLs
+
+Use the base URL of the instance your organization lives on. It's the address you sign in to Kosli at, followed by `/api/v2`:
+
+| Instance | Base URL |
+|---|---|
+| EU (default) | `https://app.kosli.com/api/v2` |
+| US | `https://app.us.kosli.com/api/v2` |
+| [Kosli Dedicated](/administration/dedicated_instance_parameters) | `https://<your-kosli-domain>/api/v2` |
+
+## Authentication
+
+Send a Kosli API key as a bearer token in the `Authorization` header:
+
+```shell
+curl -H "Authorization: Bearer $KOSLI_API_TOKEN" \
+  https://app.kosli.com/api/v2/environments/<your-org>
+```
+
+Use a [service account](/administration/authentication/service_accounts) API key for automation, or a [personal API key](/user/personal_api_keys) for trying things out. For HTTP basic auth and other options, see [API authentication methods](/administration/authentication/api_authentication_methods).
+
+## Interactive Swagger docs
+
+Each instance also serves interactive Swagger docs, generated from the same specification:
+
+| Instance | Swagger docs |
+|---|---|
+| EU (default) | [app.kosli.com/api/v2/doc](https://app.kosli.com/api/v2/doc/) |
+| US | [app.us.kosli.com/api/v2/doc](https://app.us.kosli.com/api/v2/doc/) |
+| Kosli Dedicated | `https://<your-kosli-domain>/api/v2/doc` |
+
+To send requests from Swagger, select **Authorize** and paste your API key. Requests run against the instance you opened the Swagger docs on, so use the one your organization lives on.
