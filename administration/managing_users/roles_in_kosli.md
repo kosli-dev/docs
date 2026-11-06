@@ -241,7 +241,7 @@ For CI/CD pipelines and automated systems, create service accounts with the Memb
 
 ### Regular access reviews
 
-Periodically review user roles and remove access for team members who no longer need it. This is especially important when people change roles or leave the organization.
+Periodically review user roles and remove access for team members who no longer need it. This is especially important when people change roles or leave the organization. To see who was added, removed, or given a new role, and who made each change, [review membership changes](/administration/managing_users/membership_audit_log).
 
 ### Separate concerns
 
