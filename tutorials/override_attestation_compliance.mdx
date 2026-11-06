@@ -274,74 +274,139 @@ In the trail's compliance status, an overridden attestation carries an `overridd
 
 To keep overrides out of ad-hoc terminal sessions, run them from a CI workflow that someone triggers by hand. The person who triggers it, the inputs they gave, and the run itself are then recorded in your CI system as well as in Kosli, and you control who can run it with your CI system's permissions.
 
-This GitHub Actions workflow runs on `workflow_dispatch` and takes the override fields as inputs:
+This GitHub Actions workflow runs on `workflow_dispatch` and takes the override fields as inputs. Pick the CLI or the API version:
 
-```yaml .github/workflows/kosli-override.yml
-name: Override attestation compliance
+<Tabs>
+  <Tab title="CLI" icon="terminal">
+  ```yaml .github/workflows/kosli-override.yml
+  name: Override attestation compliance
 
-on:
-  workflow_dispatch:
-    inputs:
-      flow:
-        description: Flow name
-        required: true
-      trail:
-        description: Trail name
-        required: true
-      attestation_name:
-        description: Name of the attestation to override
-        required: true
-      attestation_type:
-        description: Type of the attestation, such as generic or custom:<type-name>
-        required: true
-        default: generic
-      compliant:
-        description: New compliance status
-        required: true
-        type: boolean
-      reason:
-        description: Why the override is made
-        required: true
+  on:
+    workflow_dispatch:
+      inputs:
+        flow:
+          description: Flow name
+          required: true
+        trail:
+          description: Trail name
+          required: true
+        attestation_name:
+          description: Name of the attestation to override
+          required: true
+        attestation_type:
+          description: Type of the attestation, such as generic or custom:<type-name>
+          required: true
+          default: generic
+        compliant:
+          description: New compliance status
+          required: true
+          type: boolean
+        reason:
+          description: Why the override is made
+          required: true
 
-jobs:
-  override:
-    runs-on: ubuntu-latest
-    environment: kosli-overrides
-    steps:
-      - name: Override attestation compliance
-        env:
-          KOSLI_API_TOKEN: ${{ secrets.KOSLI_API_TOKEN }}
-          KOSLI_ORG: ${{ vars.KOSLI_ORG }}
-          KOSLI_HOST: ${{ vars.KOSLI_HOST }}
-          FLOW: ${{ inputs.flow }}
-          TRAIL: ${{ inputs.trail }}
-          ATTESTATION_NAME: ${{ inputs.attestation_name }}
-          ATTESTATION_TYPE: ${{ inputs.attestation_type }}
-          COMPLIANT: ${{ inputs.compliant }}
-          REASON: ${{ inputs.reason }}
-          ORIGIN_URL: ${{ github.server_url }}/${{ github.repository }}/actions/runs/${{ github.run_id }}
-        run: |
-          body=$(jq -n \
-            --arg name "$ATTESTATION_NAME" \
-            --arg type "$ATTESTATION_TYPE" \
-            --argjson compliant "$COMPLIANT" \
-            --arg reason "$REASON (triggered by $GITHUB_ACTOR)" \
-            --arg origin_url "$ORIGIN_URL" \
-            '{attestation_name: $name, original_attestation_type: $type,
-              new_compliance_status: $compliant, reason: $reason, origin_url: $origin_url}')
+  jobs:
+    override:
+      runs-on: ubuntu-latest
+      environment: kosli-overrides
+      steps:
+        - name: Setup Kosli CLI
+          uses: kosli-dev/setup-cli-action@v5
 
-          curl --fail-with-body -X POST \
-            "${KOSLI_HOST:-https://app.kosli.com}/api/v2/attestations/$KOSLI_ORG/$FLOW/trail/$TRAIL/override" \
-            -H "Authorization: Bearer $KOSLI_API_TOKEN" \
-            -H "Content-Type: application/json" \
-            -d "$body"
-```
+        - name: Override attestation compliance
+          env:
+            KOSLI_API_TOKEN: ${{ secrets.KOSLI_API_TOKEN }}
+            KOSLI_ORG: ${{ vars.KOSLI_ORG }}
+            KOSLI_HOST: ${{ vars.KOSLI_HOST || 'https://app.kosli.com' }}
+            FLOW: ${{ inputs.flow }}
+            TRAIL: ${{ inputs.trail }}
+            ATTESTATION_NAME: ${{ inputs.attestation_name }}
+            ATTESTATION_TYPE: ${{ inputs.attestation_type }}
+            COMPLIANT: ${{ inputs.compliant }}
+            REASON: ${{ inputs.reason }}
+            ORIGIN_URL: ${{ github.server_url }}/${{ github.repository }}/actions/runs/${{ github.run_id }}
+          run: |
+            kosli attest override \
+              --flow "$FLOW" \
+              --trail "$TRAIL" \
+              --name "$ATTESTATION_NAME" \
+              --original-attestation-type "$ATTESTATION_TYPE" \
+              --new-compliance-status="$COMPLIANT" \
+              --reason "$REASON (triggered by $GITHUB_ACTOR)" \
+              --origin-url "$ORIGIN_URL"
+  ```
+  </Tab>
+  <Tab title="API" icon="code">
+  ```yaml .github/workflows/kosli-override.yml
+  name: Override attestation compliance
+
+  on:
+    workflow_dispatch:
+      inputs:
+        flow:
+          description: Flow name
+          required: true
+        trail:
+          description: Trail name
+          required: true
+        attestation_name:
+          description: Name of the attestation to override
+          required: true
+        attestation_type:
+          description: Type of the attestation, such as generic or custom:<type-name>
+          required: true
+          default: generic
+        compliant:
+          description: New compliance status
+          required: true
+          type: boolean
+        reason:
+          description: Why the override is made
+          required: true
+
+  jobs:
+    override:
+      runs-on: ubuntu-latest
+      environment: kosli-overrides
+      steps:
+        - name: Override attestation compliance
+          env:
+            KOSLI_API_TOKEN: ${{ secrets.KOSLI_API_TOKEN }}
+            KOSLI_ORG: ${{ vars.KOSLI_ORG }}
+            KOSLI_HOST: ${{ vars.KOSLI_HOST || 'https://app.kosli.com' }}
+            FLOW: ${{ inputs.flow }}
+            TRAIL: ${{ inputs.trail }}
+            ATTESTATION_NAME: ${{ inputs.attestation_name }}
+            ATTESTATION_TYPE: ${{ inputs.attestation_type }}
+            COMPLIANT: ${{ inputs.compliant }}
+            REASON: ${{ inputs.reason }}
+            ORIGIN_URL: ${{ github.server_url }}/${{ github.repository }}/actions/runs/${{ github.run_id }}
+          run: |
+            body=$(jq -n \
+              --arg name "$ATTESTATION_NAME" \
+              --arg type "$ATTESTATION_TYPE" \
+              --argjson compliant "$COMPLIANT" \
+              --arg reason "$REASON (triggered by $GITHUB_ACTOR)" \
+              --arg origin_url "$ORIGIN_URL" \
+              '{attestation_name: $name, original_attestation_type: $type,
+                new_compliance_status: $compliant, reason: $reason, origin_url: $origin_url}')
+
+            curl --fail-with-body -X POST \
+              "$KOSLI_HOST/api/v2/attestations/$KOSLI_ORG/$FLOW/trail/$TRAIL/override" \
+              -H "Authorization: Bearer $KOSLI_API_TOKEN" \
+              -H "Content-Type: application/json" \
+              -d "$body"
+  ```
+
+  The API version needs no CLI install. It uses `jq` and `curl`, which GitHub-hosted runners already have.
+  </Tab>
+</Tabs>
 
 A few things make this workflow safer to run:
 
-- **Inputs go through environment variables and `jq`**, not straight into the script, so a value with quotes or shell characters can't break the request or inject commands.
+- **Inputs go through environment variables**, not straight into the script, and are quoted where they're used. The API version also builds the request body with `jq`. Either way, a value with quotes or shell characters can't break the request or inject commands.
 - **The host comes from the `KOSLI_HOST` repository variable** and falls back to `https://app.kosli.com`. Set it to `https://app.us.kosli.com` or your Kosli Dedicated address if your organization lives on another [instance](/api-reference/overview#base-urls).
-- **`origin_url` links the override back to the workflow run**, so anyone reading the trail can see where it came from.
+- **The origin URL links the override back to the workflow run**, so anyone reading the trail can see where it came from.
 - **The `kosli-overrides` [GitHub environment](https://docs.github.com/en/actions/managing-workflow-runs-and-deployments/managing-deployments/managing-environments-for-deployment)** can require approval from named reviewers before the job runs. Store the API key of a dedicated [service account](/administration/authentication/service_accounts) with the Member role as a secret of that environment, so only approved runs can use it.
 
 <Note>
