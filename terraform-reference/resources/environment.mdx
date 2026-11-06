@@ -14,6 +14,10 @@ This resource manages the environment configuration and tags. To attach complian
 Destroying this resource archives the environment in Kosli. Archiving requires an API token with the **Admin** role. A Member token can create and update environments, but `terraform destroy` fails with `403 Forbidden`.
 </Note>
 
+<Note>
+Changing `name` renames the environment in place, the same as [`kosli rename environment`](/client_reference/kosli_rename_environment). The environment keeps its identity and history. The old name keeps resolving to the renamed environment until another environment is created with, or renamed to, that name. See [Renaming environments](#renaming-environments).
+</Note>
+
 Kosli environments track deployments and provide visibility into what's running in your infrastructure. Physical environments represent actual runtime locations such as:
 
 - **K8S**: Kubernetes clusters
@@ -122,6 +126,18 @@ terraform import kosli_environment.staging_ecs staging-ecs
 terraform import kosli_environment.data_lake data-lake-s3
 ```
 
+## Renaming environments
+
+Changing `name` renames the environment in place, the same as `kosli rename environment`. The environment keeps its identity, snapshot history and tags, and the plan shows an update rather than a replacement.
+
+After a rename, the old name still resolves to the renamed environment for both reads and writes. `kosli snapshot` commands that still use the old name report into the renamed environment. The old name stops resolving once another environment is created with, or renamed to, that name.
+
+Terraform has no ordering between two resources that are both renamed in one plan. If one resource takes the name another is giving up, such as `a` to `b` together with `b` to `c`, or a swap, the rename that runs first can hit a name that still exists. Apply chained renames in separate steps.
+
+<Note>
+You can't change `type` in Kosli. A plan that changes `type` still replaces the environment, even when `name` changes in the same plan.
+</Note>
+
 ## Destroying environments
 
 Kosli never hard-deletes environments. When you run `terraform destroy` or remove a `kosli_environment` from your configuration, the provider archives the environment. The environment disappears from the environment list in Kosli, but Kosli keeps its snapshot history.
@@ -138,7 +154,7 @@ For querying environment metadata such as `last_modified_at` and `last_reported_
 
 ### Required
 
-- `name` (String) Name of the environment. Must be unique within the organization. Changing this will force recreation of the resource.
+- `name` (String) Name of the environment. Must be unique within the organization. Changing this renames the environment in place, keeping its snapshot history. The old name keeps resolving to the renamed environment until another environment is created with, or renamed to, that name.
 - `type` (String) Type of the environment. Valid values: `K8S`, `ECS`, `S3`, `docker`, `server`, `lambda`. Changing this will force recreation of the resource.
 
 ### Optional
