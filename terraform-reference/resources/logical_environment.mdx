@@ -18,6 +18,10 @@ This resource manages logical environment configuration and tags. For querying e
 Destroying this resource archives the logical environment in Kosli. Archiving requires an API token with the **Admin** role. A Member token can create and update logical environments, but `terraform destroy` fails with `403 Forbidden`.
 </Note>
 
+<Note>
+Changing `name` renames the logical environment in place, the same as [`kosli rename environment`](/client_reference/kosli_rename_environment). The logical environment keeps its identity and history. The old name keeps resolving to the renamed environment until another environment is created with, or renamed to, that name. See [Renaming logical environments](#renaming-logical-environments).
+</Note>
+
 Logical environments in Kosli aggregate multiple physical environments for organizational purposes, providing:
 
 - **Unified visibility**: View compliance status across multiple environments at once
@@ -200,6 +204,14 @@ terraform import kosli_logical_environment.cloud_services cloud-services
 terraform import kosli_logical_environment.future_environments future-environments
 ```
 
+## Renaming logical environments
+
+Changing `name` renames the logical environment in place, the same as `kosli rename environment`. The logical environment keeps its identity, snapshot history, included environments and tags, and the plan shows an update rather than a replacement.
+
+After a rename, the old name still resolves to the renamed logical environment for both reads and writes. The old name stops resolving once another environment is created with, or renamed to, that name.
+
+Terraform has no ordering between two resources that are both renamed in one plan. If one resource takes the name another is giving up, such as `a` to `b` together with `b` to `c`, or a swap, the rename that runs first can hit a name that still exists. Apply chained renames in separate steps.
+
 ## Destroying logical environments
 
 Kosli never hard-deletes environments. When you run `terraform destroy` or remove a `kosli_logical_environment` from your configuration, the provider archives the logical environment. The physical environments it included are not affected.
@@ -215,7 +227,7 @@ Archiving an environment requires a Kosli API token with the **Admin** role. A t
 ### Required
 
 - `included_environments` (List of String) List of physical environment names to aggregate. Only physical environments are allowed (K8S, ECS, S3, docker, server, lambda). Can be empty.
-- `name` (String) Name of the logical environment. Must be unique within the organization. Changing this will force recreation of the resource.
+- `name` (String) Name of the logical environment. Must be unique within the organization. Changing this renames the logical environment in place, keeping its snapshot history. The old name keeps resolving to the renamed environment until another environment is created with, or renamed to, that name.
 
 ### Optional
 
