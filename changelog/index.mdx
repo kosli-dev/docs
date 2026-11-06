@@ -4,6 +4,59 @@ description: "Release notes for Kosli products."
 rss: true
 ---
 
+<Update label="November 5, 2026" description="v2.54.0" tags={["CLI"]}>
+
+## New features
+
+- **Filter Azure apps by name**: `kosli snapshot azure` now takes `--include` and `--include-regex`, or `--exclude` and `--exclude-regex`, to report only some apps in the resource group. Filtered-out apps are never downloaded, so you can exclude a zip-deployed app that your credentials cannot read instead of failing the whole snapshot. See the [`kosli snapshot azure` reference](/client_reference/kosli_snapshot_azure).
+- **Azure China, Azure Government and private clouds**: `kosli snapshot azure --azure-cloud` accepts `public` (default), `china` or `usgov`. `--azure-authority-host` and `--azure-resource-manager-url` point the CLI at your own endpoints.
+
+## Updates
+
+- **Earlier filter checks**: the `kosli snapshot` commands that filter by name now reject an invalid regex before calling the cloud provider, and print a warning when a filter leaves out every resource.
+
+## Bug fixes
+
+- **Zip-deployed apps with unique hostnames**: `kosli snapshot azure` now downloads packages for apps whose SCM host includes a hash and region, which previously failed.
+
+[View on GitHub](https://github.com/kosli-dev/cli/releases/tag/v2.54.0)
+
+</Update>
+
+<Update label="November 4, 2026" description="v2.53.1" tags={["CLI"]}>
+
+## Updates
+
+- Maintenance release with no user-facing changes.
+
+[View on GitHub](https://github.com/kosli-dev/cli/releases/tag/v2.53.1)
+
+</Update>
+
+<Update label="November 4, 2026" description="v0.11.0" tags={["Terraform Provider"]}>
+
+## Updates
+
+- **Rename in place**: changing `name` on `kosli_flow`, `kosli_environment` or `kosli_logical_environment` is now an in-place update instead of destroy and recreate. The resource keeps its trails, snapshots, tags and included environments, and the old name still resolves until another resource takes it. See the [`kosli_flow` reference](/terraform-reference/resources/flow).
+
+[View on GitHub](https://github.com/kosli-dev/terraform-provider-kosli/releases/tag/v0.11.0)
+
+</Update>
+
+<Update label="November 3, 2026" description="v2.53.0" tags={["CLI"]}>
+
+## New features
+
+- **Read back a server-side evaluation (beta)**: `kosli get evaluation` shows an evaluation's status, outcome and decision. `--show-input --output json` adds the input the policy read, and `--fixture --dir` writes the input, params and policy files so you can replay the decision with OPA. See [replaying an evaluation](/policy-reference/rego_policy#replaying-an-evaluation).
+
+## Updates
+
+- **Renaming help text**: `kosli rename flow` and `kosli rename environment` now explain that the old name keeps working for reads and writes until another flow or environment takes it.
+
+[View on GitHub](https://github.com/kosli-dev/cli/releases/tag/v2.53.0)
+
+</Update>
+
 <Update label="October 30, 2026" description="v2.52.0" tags={["CLI"]}>
 
 ## New features
