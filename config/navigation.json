@@ -475,7 +475,15 @@
         {
           "item": "API Reference",
           "icon": "code",
-          "openapi": "https://app.kosli.com/api/v2/openapi.json"
+          "openapi": "https://app.kosli.com/api/v2/openapi.json",
+          "groups": [
+            {
+              "group": "Get started",
+              "pages": [
+                "api-reference/overview"
+              ]
+            }
+          ]
         },
         {
           "item": "GitHub Action Reference",

@@ -8,8 +8,8 @@ import WorkingDirConfigNotice from "/snippets/cli-working-dir-config-notice.mdx"
 <AccordionGroup>
 
 <Accordion title="Where can I find API documentation?">
-Kosli API documentation is available for logged-in Kosli users at [app.kosli.com/api/v2/doc](https://app.kosli.com/api/v2/doc/).
-You can also find the link at [app.kosli.com](https://app.kosli.com) after clicking your avatar (top-right corner of the page).
+See the [API reference](/api-reference/overview) for base URLs, authentication, and every endpoint.
+Each Kosli instance also serves interactive Swagger docs: [app.kosli.com/api/v2/doc](https://app.kosli.com/api/v2/doc/) for EU, [app.us.kosli.com/api/v2/doc](https://app.us.kosli.com/api/v2/doc/) for US, and `https://<your-kosli-domain>/api/v2/doc` for Kosli Dedicated.
 </Accordion>
 
 <Accordion title="Do I have to provide all the flags all the time?">
