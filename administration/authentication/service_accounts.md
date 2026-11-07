@@ -57,7 +57,7 @@ API keys are created separately. The key value is shown only once, so store it i
 kosli create api-key \
     --service-account ci-github-actions \
     --description "key for CI" \
-    --expires-at 2027-06-30
+    --expires-at <YYYY-MM-DD>
 ```
 
 To inspect, change, or remove service accounts:
@@ -69,9 +69,18 @@ kosli update service-account ci-github-actions --privilege reader
 kosli delete service-account ci-github-actions --assume-yes
 ```
 
+To list a service account's API keys, or revoke one:
+
+```shell
+kosli list api-keys --service-account ci-github-actions
+kosli delete api-key <key-id> --service-account ci-github-actions --assume-yes
+```
+
+`kosli list api-keys` shows each active key's metadata, including its ID, but never the key value. `kosli delete api-key` revokes the key immediately and also deletes every key that was created with it.
+
 `kosli update service-account` changes only the flags you pass. `kosli delete service-account` permanently deletes the service account and its API keys. It asks for confirmation, so pass `--assume-yes` in CI or other non-interactive shells.
 
-See the reference pages for all flags: [`kosli create service-account`](/client_reference/kosli_create_service-account), [`kosli list service-accounts`](/client_reference/kosli_list_service-accounts), [`kosli get service-account`](/client_reference/kosli_get_service-account), [`kosli update service-account`](/client_reference/kosli_update_service-account), [`kosli delete service-account`](/client_reference/kosli_delete_service-account), and [`kosli create api-key`](/client_reference/kosli_create_api-key).
+See the reference pages for all flags: [`kosli create service-account`](/client_reference/kosli_create_service-account), [`kosli list service-accounts`](/client_reference/kosli_list_service-accounts), [`kosli get service-account`](/client_reference/kosli_get_service-account), [`kosli update service-account`](/client_reference/kosli_update_service-account), [`kosli delete service-account`](/client_reference/kosli_delete_service-account), [`kosli create api-key`](/client_reference/kosli_create_api-key), [`kosli list api-keys`](/client_reference/kosli_list_api-keys), and [`kosli delete api-key`](/client_reference/kosli_delete_api-key).
 
 ## Manage service accounts with Terraform
 

@@ -219,7 +219,7 @@ To assign or change a user's role:
 
 1. Log in to Kosli as an Admin
 2. Navigate to your organization from the left navigation menu
-3. Go to `Settings` > `Members`
+3. Go to `Settings` > `User Management`
 4. Find the user you want to modify
 5. Select their new role from the dropdown menu
 
@@ -241,7 +241,7 @@ For CI/CD pipelines and automated systems, create service accounts with the Memb
 
 ### Regular access reviews
 
-Periodically review user roles and remove access for team members who no longer need it. This is especially important when people change roles or leave the organization.
+Periodically review user roles and remove access for team members who no longer need it. This is especially important when people change roles or leave the organization. To see who changed membership or roles, and when, use the [Audit Log](/administration/managing_users/membership_audit_log).
 
 ### Separate concerns
 
@@ -256,3 +256,4 @@ Periodically review user roles and remove access for team members who no longer 
 
 - [Mapping users to roles](/administration/managing_users/mapping_users_to_roles) — recommended Kosli roles for common organizational roles.
 - [Service accounts](/administration/authentication/service_accounts) — assigning roles to machine users.
+- [Review membership changes](/administration/managing_users/membership_audit_log): who was added, removed, or given a different role, and who made each change.
