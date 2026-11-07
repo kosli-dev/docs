@@ -3,11 +3,11 @@ title: Managing tags
 description: Use tags to label and organize Kosli resources with custom key-value pairs via Terraform, CLI, or API.
 ---
 
-Tags are custom key-value pairs you attach to Kosli resources. They let you categorize, filter, and add metadata to your flows and environments without changing the resources themselves.
+Tags are custom key-value pairs you attach to Kosli resources. They let you categorize, filter, and add metadata to your flows, environments, controls, and repositories without changing the resources themselves.
 
 ## Why use tags
 
-- **Organize resources** — group related flows or environments by team, project, region, or any other dimension.
+- **Organize resources** — group related resources by team, project, region, or any other dimension.
 - **Drive policy behavior** — reference tags in [Environment Policy](/getting_started/policies) expressions to make attestation requirements conditional. For example, require security scans only for flows tagged `risk-level=high`.
 - **Add operational metadata** — store context such as cost center, service tier, or owner directly on the resource.
 
@@ -19,6 +19,7 @@ You can tag the following Kosli resource types:
 | :--- | :--- | :--- |
 | Flow | [`kosli_flow`](/terraform-reference/resources/flow) | `flow` |
 | Environment | [`kosli_environment`](/terraform-reference/resources/environment) | `env` |
+| [Control](/tutorials/working_with_controls) (beta) | [`kosli_control`](/terraform-reference/resources/control) | `control` |
 | [Repository](/tutorials/repositories) | Not supported | `repo` |
 
 ## Tag key and value rules
@@ -31,7 +32,7 @@ You can tag the following Kosli resource types:
 
 <Tabs>
   <Tab title="Terraform" icon="cubes">
-  Add a `tags` map to any `kosli_environment` or `kosli_flow` resource. Tags are applied via a diff — only changed tags are sent to the API.
+  Add a `tags` map to any `kosli_environment`, `kosli_flow`, or `kosli_control` resource. Tags are applied via a diff — only changed tags are sent to the API.
 
   Tag an environment:
 
@@ -175,8 +176,17 @@ You can tag the following Kosli resource types:
   }
   ```
   </Tab>
+  <Tab title="CLI" icon="terminal">
+  `kosli get` prints a resource's tags in its `Tags` field:
+
+  ```shell
+  kosli get repo my-org/my-repo
+  ```
+
+  `kosli get flow`, `kosli get env`, and `kosli get control` show tags the same way. [`kosli list repos`](/client_reference/kosli_list_repos) has a `TAGS` column.
+  </Tab>
   <Tab title="API" icon="code">
-  Tags are included in the resource response when you fetch an environment or flow via the API.
+  Tags are included in the resource response when you fetch a flow, environment, control, or repository via the API.
   </Tab>
 </Tabs>
 
