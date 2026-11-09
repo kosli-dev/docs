@@ -81,7 +81,7 @@ The commit is read from the git repository at `--repo-root`, which must be the r
 	<Tab title="GitHub">
 	View an example of the `kosli attest pullrequest github` command in GitHub.
 
-	In [this YAML file](https://github.com/cyber-dojo/differ/blob/aca49ec4abe49fb4abf98e4d7b7af3af6b8239c3/.github/workflows/main.yml#L84), which created [this Kosli Event](https://app.kosli.com/cyber-dojo/flows/differ-ci/trails/aca49ec4abe49fb4abf98e4d7b7af3af6b8239c3?attestation_id=41fb211a-a8db-4297-8356-b7eccb4e).
+	In [this YAML file](https://github.com/cyber-dojo/differ/blob/d8dd8e1d64e95cdd09a677a95e874b2ed518bf93/.github/workflows/main.yml#L84), which created [this Kosli Event](https://app.kosli.com/cyber-dojo/flows/differ-ci/trails/d8dd8e1d64e95cdd09a677a95e874b2ed518bf93?attestation_id=f02dd2e4-9498-45ff-860e-06c290c9).
 	</Tab>
 </Tabs>
 
