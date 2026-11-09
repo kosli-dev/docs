@@ -68,7 +68,7 @@ kosli list snapshots aws-prod --output=json
     "from": 1794213778.5473795,
     "to": 0.0,
     "compliant": true,
-    "duration": 24120.035665988922
+    "duration": 37842.050629377365
   },
   {
     "index": 5581,
