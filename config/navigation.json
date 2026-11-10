@@ -587,7 +587,8 @@
       "tab": "Changelog",
       "icon": "clock",
       "pages": [
-        "changelog/index"
+        "changelog/index",
+        "changelog/product-updates"
       ]
     }
   ]
