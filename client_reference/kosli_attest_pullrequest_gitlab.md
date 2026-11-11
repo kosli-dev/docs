@@ -45,7 +45,7 @@ The commit is read from the git repository at `--repo-root`, which must be the r
 | `-f`, `--flow` | string | The Kosli flow name. |
 | `--gitlab-base-url` | string | [optional] Gitlab base URL (only needed for on-prem Gitlab installations). |
 | `--gitlab-org` | string | Gitlab organization. (defaulted if you are running in Gitlab Pipelines: [docs](/integrations/ci_cd) ). |
-| `--gitlab-token` | string | Gitlab token. |
+| `--gitlab-token` | string | Gitlab token. Needs the read_api scope. |
 | `-h`, `--help` | bool | help for gitlab |
 | `-n`, `--name` | string | The name of the attestation as declared in the flow or trail yaml template. |
 | `-o`, `--origin-url` | string | [optional] The url pointing to where the attestation came from or is related. (defaulted to the CI url in some CIs: [docs](/integrations/ci_cd/#defaulted-kosli-command-flags-from-ci-variables) ). |
@@ -98,7 +98,7 @@ kosli attest pullrequest gitlab yourDockerImageName
 	--gitlab-token yourGitlabToken 
 	--gitlab-org yourGitlabOrg 
 	--commit yourArtifactGitCommit 
-	--repository yourGithubGitRepository 
+	--repository yourGitlabGitRepository 
 
 ```
 </Accordion>
@@ -110,7 +110,7 @@ kosli attest pullrequest gitlab
 	--gitlab-token yourGitlabToken 
 	--gitlab-org yourGitlabOrg 
 	--commit yourArtifactGitCommit 
-	--repository yourGithubGitRepository 
+	--repository yourGitlabGitRepository 
 
 ```
 </Accordion>
@@ -121,7 +121,7 @@ kosli attest pullrequest gitlab
 	--gitlab-token yourGitlabToken 
 	--gitlab-org yourGitlabOrg 
 	--commit yourArtifactGitCommit 
-	--repository yourGithubGitRepository 
+	--repository yourGitlabGitRepository 
 
 ```
 </Accordion>
@@ -132,7 +132,7 @@ kosli attest pullrequest gitlab
 	--gitlab-token yourGitlabToken 
 	--gitlab-org yourGitlabOrg 
 	--commit yourArtifactGitCommit 
-	--repository yourGithubGitRepository 
+	--repository yourGitlabGitRepository 
 
 ```
 </Accordion>
@@ -143,7 +143,7 @@ kosli attest pullrequest gitlab
 	--gitlab-token yourGitlabToken 
 	--gitlab-org yourGitlabOrg 
 	--commit yourArtifactGitCommit 
-	--repository yourGithubGitRepository 
+	--repository yourGitlabGitRepository 
 	--attachments=yourAttachmentPathName 
 
 ```
@@ -155,7 +155,7 @@ kosli attest pullrequest gitlab
 	--gitlab-token yourGitlabToken 
 	--gitlab-org yourGitlabOrg 
 	--commit yourArtifactGitCommit 
-	--repository yourGithubGitRepository 
+	--repository yourGitlabGitRepository 
 	--assert
 ```
 </Accordion>
