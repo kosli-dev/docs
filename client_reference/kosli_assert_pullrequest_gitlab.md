@@ -22,7 +22,7 @@ Outside a supported CI, set `--commit` to a full commit SHA: its `HEAD` default 
 | `-D`, `--dry-run` | bool | [optional] Run in dry-run mode. When enabled, no data is sent to Kosli and the CLI exits with 0 exit code regardless of any errors. |
 | `--gitlab-base-url` | string | [optional] Gitlab base URL (only needed for on-prem Gitlab installations). |
 | `--gitlab-org` | string | Gitlab organization. (defaulted if you are running in Gitlab Pipelines: [docs](/integrations/ci_cd) ). |
-| `--gitlab-token` | string | Gitlab token. |
+| `--gitlab-token` | string | Gitlab token. Needs the read_api scope. |
 | `-h`, `--help` | bool | help for gitlab |
 | `--repository` | string | Git repository. (defaulted in some CIs: [docs](/integrations/ci_cd) ). |
 
@@ -46,9 +46,9 @@ These examples all assume that the flags  `--api-token`, `--org`, `--host`, (and
 
 ```shell
 kosli assert mergerequest gitlab \
-	--github-token yourGithubToken \
-	--github-org yourGithubOrg \
+	--gitlab-token yourGitlabToken \
+	--gitlab-org yourGitlabOrg \
 	--commit yourGitCommit \
-	--repository yourGithubGitRepository
+	--repository yourGitlabGitRepository
 ```
 
