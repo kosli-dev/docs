@@ -7,7 +7,7 @@ icon: "cube"
 Manages a Kosli logical environment. Logical environments aggregate multiple physical environments for organizational purposes.
 
 <Warning>
-Logical environments can ONLY contain physical environments (K8S, ECS, S3, docker, server, lambda), not other logical environments. Attempting to include a logical environment will result in an error from the Kosli API.
+Logical environments can ONLY contain physical environments (K8S, ECS, S3, docker, server, lambda, azure-apps, cloud-run), not other logical environments. Attempting to include a logical environment will result in an error from the Kosli API.
 </Warning>
 
 <Warning>
@@ -32,7 +32,7 @@ Logical environments in Kosli aggregate multiple physical environments for organ
 ## Physical environments only
 
 <Warning>
-Logical environments can ONLY contain physical environments (K8S, ECS, S3, docker, server, lambda), not other logical environments. Attempting to include a logical environment will result in an API error.
+Logical environments can ONLY contain physical environments (K8S, ECS, S3, docker, server, lambda, azure-apps, cloud-run), not other logical environments. Attempting to include a logical environment will result in an API error.
 </Warning>
 
 ## Example usage
@@ -226,7 +226,7 @@ Archiving an environment requires a Kosli API token with the **Admin** role. A t
 
 ### Required
 
-- `included_environments` (List of String) List of physical environment names to aggregate. Only physical environments are allowed (K8S, ECS, S3, docker, server, lambda). Can be empty.
+- `included_environments` (List of String) List of physical environment names to aggregate. Only physical environments are allowed (K8S, ECS, S3, docker, server, lambda, azure-apps, cloud-run). Can be empty.
 - `name` (String) Name of the logical environment. Must be unique within the organization. Changing this renames the logical environment in place, keeping its snapshot history. The old name keeps resolving to the renamed environment until another environment is created with, or renamed to, that name.
 
 ### Optional
