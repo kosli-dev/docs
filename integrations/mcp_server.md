@@ -9,7 +9,7 @@ The Kosli MCP server is a [Model Context Protocol](https://modelcontextprotocol.
 It is published from [`kosli-dev/mcp-server`](https://github.com/kosli-dev/mcp-server) and distributed as an npm package (`@kosli/mcp-server`) and as a `.mcpb` bundle for Claude Desktop.
 
 <Warning>
-The Kosli MCP server is in beta. Tool names, parameters, and behavior may change between releases. Pin a version if you need stability: `npx -y @kosli/mcp-server@0.7.0`.
+The Kosli MCP server is in beta. Tool names, parameters, and behavior may change between releases. Pin a version if you need stability: `npx -y @kosli/mcp-server@0.8.0`.
 </Warning>
 
 <Note>
@@ -58,6 +58,22 @@ These are the tool names your client shows as the assistant works, and the name 
     <Note>
       Extensions installed from a file show an "unverified by Anthropic" warning and do not auto-update, so you need to download and reinstall new versions manually. Both limitations go away once the extension is listed in Anthropic's [Connectors Directory](https://claude.com/docs/connectors/building/submission).
     </Note>
+
+    From v0.8.0, you can check that a downloaded bundle was built from `kosli-dev/mcp-server` by its release workflow. Verify its [build provenance](https://docs.github.com/en/actions/security-guides/using-artifact-attestations-to-establish-provenance-for-builds) with the GitHub CLI:
+
+    ```bash
+    gh attestation verify kosli-mcp-server-<version>.mcpb --repo kosli-dev/mcp-server
+    ```
+
+    Each release also attaches `kosli-mcp-server-<version>.cdx.json`, a [CycloneDX](https://cyclonedx.org/) SBOM that lists every package bundled in the `.mcpb`. Use it to check a release against new vulnerability advisories. The attached file isn't signed. To read the signed copy that is attested against the bundle you downloaded, run:
+
+    ```bash
+    gh attestation verify kosli-mcp-server-<version>.mcpb --repo kosli-dev/mcp-server \
+      --predicate-type https://cyclonedx.org/bom --format json \
+      | jq '.[0].verificationResult.statement.predicate' > sbom.cdx.json
+    ```
+
+    The npm package has no SBOM, because npm resolves its dependencies on each install.
   </Tab>
   <Tab title="Claude Desktop (manual)">
     Add the following to `claude_desktop_config.json`, which you can open from **Settings → Developer → Edit Config**:
