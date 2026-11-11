@@ -6,9 +6,11 @@ hidden: true
 ---
 
 {/*
-  Add new entries at the top, newest first. Example:
+  Add new entries at the top, newest first.
+  Keep the rss prop so the feed gets one item per entry, and keep id unique and unchanged once published,
+  because it is the item's anchor in the feed. Example:
 
-  <Update label="November 10, 2026" tags={["Platform"]}>
+  <Update label="November 10, 2026" id="short-unique-id" tags={["tag"]} rss={{ title: "Short headline for the update", date: "2026-11-10" }}>
 
   ## Short headline for the update
 
@@ -16,3 +18,55 @@ hidden: true
 
   </Update>
 */}
+
+<Update
+  label="November 10, 2026"
+  id="new-navigation"
+  tags={["new-navigation"]}
+  rss={{ title: "Finding your way around Kosli's new navigation", date: "2026-11-10" }}
+>
+
+## Finding your way around Kosli's new navigation
+
+Kosli's left-hand menu has a new layout. The old flat list of a dozen links is now four groups: Home, Evidence, Control and Governance. Every page you used before is still there. Most are now under a group heading, but a few have moved to Settings or to the top bar.
+
+<Frame><img src="/images/product-updates/navigation-sidebar.png" width="239" alt="Kosli sidebar expanded, showing the Home, Evidence, Control and Governance groups, with Settings at the bottom" /></Frame>
+
+### Where each page lives now
+
+| Old menu item | Now under |
+| :---- | :---- |
+| Dashboard | Home |
+| Flows | Evidence |
+| Environments | Evidence |
+| Controls | Control |
+| Policies | Control |
+| Actions | Control |
+| Attestations | Governance |
+| Repos | Governance |
+| Spaces | Settings, at the bottom of the sidebar |
+| Integrations | Settings, at the bottom of the sidebar |
+| Settings | Pinned to the bottom of the sidebar |
+| Docs | Support menu (**?**) in the top bar |
+| API v2 docs | Support menu (**?**) in the top bar, now titled API docs |
+
+The organization switcher still sits at the top of the sidebar. It now has a search box, so you can type a few letters to jump between organizations.
+
+### Settings, Spaces and Integrations
+
+**Settings** is pinned to the bottom of the sidebar, next to the name of the organization you're in. Click it to open that organization's settings. Spaces and Integrations now appear in the settings page's own side menu.
+
+<Frame><img src="/images/product-updates/navigation-settings.png" width="316" alt="Kosli settings side menu with User Management, Service accounts, Spaces, Integrations, Notifications, Cloud Capture and General" /></Frame>
+
+### The top bar
+
+The top bar holds search and two menus.
+
+- **Support menu (?):** links to Docs, API docs, Support and Feedback, and the Change log.
+- **User menu (your avatar):** your name and email, your Profile, and Sign out.
+
+<Frame><img src="/images/product-updates/navigation-top-bar.png" width="409" alt="Kosli top bar with the Support menu open, showing Docs, API docs, Support, Feedback and Change log" /></Frame>
+
+We're keen to hear any questions or feedback you have on the new menu.
+
+</Update>
