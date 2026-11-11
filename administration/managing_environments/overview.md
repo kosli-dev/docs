@@ -16,7 +16,7 @@ This page covers managing environments via Terraform. For creating environments 
 
 Kosli has two environment types:
 
-- **<Tooltip tip="A physical environment directly corresponds to a single runtime system. Supported types: K8S, ECS, S3, docker, server, lambda.">Physical environments</Tooltip>** — each maps to a single runtime (e.g. a Kubernetes cluster or ECS service). Managed with the `kosli_environment` resource.
+- **<Tooltip tip="A physical environment directly corresponds to a single runtime system. Supported types: K8S, ECS, S3, docker, server, lambda, azure-apps, cloud-run.">Physical environments</Tooltip>** — each maps to a single runtime (e.g. a Kubernetes cluster or ECS service). Managed with the `kosli_environment` resource.
 - **<Tooltip tip="A logical environment aggregates multiple physical environments into a single view. It can only contain physical environments, not other logical environments.">Logical environments</Tooltip>** — aggregate one or more physical environments into a single view. Managed with the `kosli_logical_environment` resource.
 
 ## Managing physical environments
@@ -31,7 +31,7 @@ resource "kosli_environment" "production" {
 }
 ```
 
-Supported types: `K8S`, `ECS`, `S3`, `docker`, `server`, `lambda`.
+Supported types: `K8S`, `ECS`, `S3`, `docker`, `server`, `lambda`, `azure-apps`, `cloud-run`.
 
 ### Import an existing physical environment
 
