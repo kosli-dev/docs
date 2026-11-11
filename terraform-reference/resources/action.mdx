@@ -1,16 +1,16 @@
 ---
 title: "kosli_action resource"
-description: "Manages a Kosli action. Actions define webhook notifications triggered by environment compliance events."
+description: "Manages a Kosli action. Actions send notifications to webhooks, Slack and email when artifact or environment events occur."
 icon: "cube"
 ---
 
-Manages a Kosli action. Actions define webhook notifications triggered by environment compliance events.
+Manages a Kosli action. Actions send notifications to webhooks, Slack and email when artifact or environment events occur in the monitored environments. At least one of `webhook_url`, `webhooks`, `slack_webhooks` or `emails` is required.
 
 <Note>
 Actions are identified internally by a server-assigned `number`. The `name` is used during import to look up the number.
 </Note>
 
-Use this resource to configure automated notifications when environments change compliance state. Actions send webhooks to external services such as Slack or Microsoft Teams.
+Use this resource to configure automated notifications when environments change compliance state. An action can notify generic webhooks, Slack incoming webhooks and email addresses. See [Targets](#targets).
 
 ## Example usage
 
@@ -28,7 +28,18 @@ resource "kosli_action" "compliance_alerts" {
   name         = "compliance-alerts"
   environments = ["production-k8s"]
   triggers     = ["ON_NON_COMPLIANT_ENV", "ON_COMPLIANT_ENV"]
-  webhook_url  = "https://hooks.slack.com/services/T00000000/B00000000/XXXXXXXX"
+  webhook_url  = "https://alerts.example.com/kosli"
+}
+
+# Action that notifies Slack, email and a generic webhook at once
+resource "kosli_action" "production_alerts" {
+  name         = "production-alerts"
+  environments = ["production-k8s"]
+  triggers     = ["ON_NON_COMPLIANT_ENV"]
+
+  slack_webhooks = ["https://hooks.slack.com/services/T00000000/B00000000/XXXXXXXX"]
+  emails         = ["platform@example.com", "oncall@example.com"]
+  webhooks       = ["https://alerts.example.com/kosli"]
 }
 
 # Action that fires when a running artifact becomes compliant or non-compliant,
@@ -66,9 +77,32 @@ The `triggers` attribute must contain one or more of the following event types:
 `ON_SCALED_ARTIFACT` keeps its historical name for backwards compatibility. Kosli no longer records scaling events, so this trigger fires on artifact changes.
 </Note>
 
+## Targets
+
+An action notifies one or more targets. Set at least one of the target attributes. One action can combine all of them.
+
+| Attribute | Target |
+|---|---|
+| `webhooks` | Generic webhooks, POSTed to as JSON |
+| `slack_webhooks` | Slack incoming webhooks |
+| `emails` | Email addresses |
+| `webhook_url` | A single generic webhook |
+
+You can't set `webhook_url` and `webhooks` together. To add a second webhook to an action that uses `webhook_url`, move the URL into `webhooks`. Terraform updates the action in place.
+
+Webhook URLs must use HTTPS and resolve to a public address. Kosli rejects a URL that points at an internal address.
+
+<Note>
+Importing an action that has exactly one generic webhook stores the URL in `webhook_url`. A configuration that declares the same URL in `webhooks` shows a one-time in-place update on the next plan.
+</Note>
+
 ## Import
 
 Actions can be imported using their name:
+
+<Warning>
+You can't import an action created from the Kosli Slack app. It's tied to a Slack channel subscription that the resource doesn't model. Manage it from Slack, or create a separate action with `slack_webhooks`.
+</Warning>
 
 ```shell
 # Import an existing action by name
@@ -82,7 +116,13 @@ terraform import kosli_action.compliance_alerts compliance-alerts
 - `environments` (List of String) List of environment names this action monitors.
 - `name` (String) Name of the action. Must be unique within the organization. Changing this will force recreation of the resource.
 - `triggers` (List of String) List of trigger event types that activate this action. One or more of `ON_STARTED_ARTIFACT`, `ON_EXITED_ARTIFACT`, `ON_SCALED_ARTIFACT`, `ON_ALLOWED_ARTIFACT`, `ON_COMPLIANT_ENV`, `ON_NON_COMPLIANT_ENV`. See [Triggers](#triggers) for what each one fires on.
-- `webhook_url` (String, Sensitive) Webhook URL to send notifications to.
+
+### Optional
+
+- `emails` (Set of String) Email addresses the notifications are sent to.
+- `slack_webhooks` (Set of String, Sensitive) Slack incoming webhook URLs the notifications are posted to. Must use HTTPS.
+- `webhook_url` (String, Sensitive) A single generic webhook URL to send notifications to. Use `webhooks` for more than one. The two can't be set together.
+- `webhooks` (Set of String, Sensitive) Generic webhook URLs the notifications are POSTed to as JSON (payload version `1.0`). Must use HTTPS.
 
 ### Read-only
 
