@@ -5,10 +5,14 @@ rss: true
 hidden: true
 ---
 
-{/*
-  Add new entries at the top, newest first. Example:
+<span id="product-updates-page" hidden />
 
-  <Update label="November 10, 2026" tags={["Platform"]}>
+{/*
+  Add new entries at the top, newest first. Tags go to the RSS feed only; they are hidden on this page.
+  Keep the rss prop so the feed gets one item per entry, and keep id unique and unchanged once published,
+  because it is the item's anchor in the feed. Example:
+
+  <Update label="November 10, 2026" id="short-unique-id" tags={["tag"]} rss={{ title: "Short headline for the update", date: "2026-11-10" }}>
 
   ## Short headline for the update
 
@@ -17,7 +21,12 @@ hidden: true
   </Update>
 */}
 
-<Update label="November 10, 2026" tags={["new-navigation"]}>
+<Update
+  label="November 10, 2026"
+  id="new-navigation"
+  tags={["new-navigation"]}
+  rss={{ title: "Finding your way around Kosli's new navigation", date: "2026-11-10" }}
+>
 
 ## Finding your way around Kosli's new navigation
 

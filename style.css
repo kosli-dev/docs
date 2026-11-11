@@ -15,3 +15,14 @@
   background-color: #CFD8FF !important;
   color: #111A26 !important;
 }
+
+/* ─── Product updates changelog ───────────────────────────────────────────── */
+/*
+ * Tags on changelog/product-updates.mdx feed RSS categories for an external
+ * consumer and should not show on the page. Scoped to that page through the
+ * #product-updates-page marker so the main changelog keeps its tags and filter.
+ */
+body:has(#product-updates-page) [data-component-part^="update-tag"],
+body:has(#product-updates-page) [data-component-part*="changelog-filter"] {
+  display: none !important;
+}
