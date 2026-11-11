@@ -23,6 +23,6 @@
  * #product-updates-page marker so the main changelog keeps its tags and filter.
  */
 body:has(#product-updates-page) [data-component-part^="update-tag"],
-body:has(#product-updates-page) [data-component-part*="changelog-filter"] {
+body:has(#product-updates-page) #changelog-filters {
   display: none !important;
 }
