@@ -9,7 +9,7 @@ The Kosli MCP server is a [Model Context Protocol](https://modelcontextprotocol.
 It is published from [`kosli-dev/mcp-server`](https://github.com/kosli-dev/mcp-server) and distributed as an npm package (`@kosli/mcp-server`) and as a `.mcpb` bundle for Claude Desktop.
 
 <Warning>
-The Kosli MCP server is in beta. Tool names, parameters, and behavior may change between releases. Pin a version if you need stability: `npx -y @kosli/mcp-server@0.7.0`.
+The Kosli MCP server is in beta. Tool names, parameters, and behavior may change between releases. Pin a version if you need stability: `npx -y @kosli/mcp-server@0.8.0`.
 </Warning>
 
 <Note>
