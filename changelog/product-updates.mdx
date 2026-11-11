@@ -12,7 +12,13 @@ hidden: true
   Keep the rss prop so the feed gets one item per entry, and keep id unique and unchanged once published,
   because it is the item's anchor in the feed. Example:
 
-  <Update label="November 10, 2026" id="short-unique-id" tags={["tag"]} rss={{ title: "Short headline for the update", date: "2026-11-10" }}>
+  <Update
+    label="November 10, 2026"
+    id="short-unique-id"
+    tags={["tag"]}
+    description="One-sentence summary, shown next to the date."
+    rss={{ title: "Short headline for the update", description: "One-sentence summary for the feed.", date: "2026-11-10" }}
+  >
 
   ## Short headline for the update
 
@@ -25,7 +31,12 @@ hidden: true
   label="November 10, 2026"
   id="new-navigation"
   tags={["new-navigation"]}
-  rss={{ title: "Finding your way around Kosli's new navigation", date: "2026-11-10" }}
+  description="Kosli's sidebar is now grouped into Home, Evidence, Control and Governance, with Settings and the top bar holding the rest."
+  rss={{
+    title: "Finding your way around Kosli's new navigation",
+    description: "Kosli's sidebar is now grouped into Home, Evidence, Control and Governance, with Settings and the top bar holding the rest.",
+    date: "2026-11-10"
+  }}
 >
 
 ## Finding your way around Kosli's new navigation
