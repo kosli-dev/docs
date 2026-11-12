@@ -19,8 +19,32 @@ not compressed, and a gzipped file is rejected, because the format and the
 summary below are read from it.
 
 Kosli reads the format, the creation time, the tools that produced it, the
-subject it describes and how many packages it lists. Nothing is checked against
-the artifact; the SBOM is recorded as reported.
+subject it describes and how many packages it lists. A plain SBOM file is not
+checked against the artifact; it is recorded as reported.
+
+The SBOM may also arrive inside an in-toto attestation, as a Sigstore bundle or
+a DSSE envelope. The SPDX or CycloneDX document is then read from it, and the
+bundle or envelope is what is uploaded and checksummed. When the artifact's
+fingerprint is known, because it is calculated from the artifact or given with
+`--fingerprint`, the attestation must list that artifact as its subject, signed
+or not. When the attestation is bound by the artifact's template name and commit
+instead, or to the trail alone, there is no fingerprint to check the subject
+against, so it is not checked. To verify its signature, pass
+`--certificate-identity` (or `--certificate-identity-regexp`) with
+`--certificate-oidc-issuer`, or `--key`. Without them the signature is not
+checked, and even a signed bundle is recorded with `verified` set to false. The
+record is annotated with `verified` and the verification details, as
+`kosli attest in-toto` annotates it. To pick the SBOM from a file holding
+several attestations, or to record provenance, use `kosli attest in-toto`.
+
+Verifying a certificate-signed attestation needs the trust root of the Sigstore instance
+that signed it: Sigstore's public-good instance, or GitHub's own, which signs attestations
+for private repositories. It is fetched over TUF on every run that verifies one, from
+`https://tuf-repo-cdn.sigstore.dev` or `https://tuf-repo.github.com` respectively, and
+cached under `~/.sigstore`, so the runner needs outbound HTTPS to that host and a writable
+`~/.sigstore` directory. A key-signed attestation needs neither, unless it carries a
+transparency log entry or a signed timestamp, which are checked against Sigstore's
+public-good trust root. An unsigned attestation needs neither.
 
 The SBOM file is the only attachment: this command does not accept additional
 attachments, because two or more would be compressed together.
@@ -57,6 +81,9 @@ In other CI systems, set them explicitly to capture repository metadata.
 | :--- | :--- | :--- |
 | `--annotate` | stringToString | [optional] Annotate the attestation with data using key=value. |
 | `-t`, `--artifact-type` | string | The type of the artifact to calculate its SHA256 fingerprint. One of: [oci, docker, file, dir]. Only required if you want Kosli to calculate the fingerprint for you (i.e. when you don't specify '`--fingerprint`' on commands that allow it). |
+| `--certificate-identity` | string | [conditional] The identity a signed attestation's certificate must name, such as a GitHub workflow URL. Use with `--certificate-oidc-issuer`. |
+| `--certificate-identity-regexp` | string | [conditional] A regular expression the identity in a signed attestation's certificate must match. Use instead of `--certificate-identity`, with `--certificate-oidc-issuer`. |
+| `--certificate-oidc-issuer` | string | [conditional] The OIDC issuer a signed attestation's certificate must name, such as https://token.actions.githubusercontent.com. |
 | `-g`, `--commit` | string | [conditional] The git commit for which the attestation is associated to. Becomes required when reporting an attestation for an artifact before reporting it to Kosli. (defaulted in some CIs: [docs](/integrations/ci_cd) ). If both `--commit` and `--repo-root` are left at their defaults and the commit cannot be read from the repository, a warning is printed and the attestation is sent without commit info. |
 | `--description` | string | [optional] attestation description |
 | `-D`, `--dry-run` | bool | [optional] Run in dry-run mode. When enabled, no data is sent to Kosli and the CLI exits with 0 exit code regardless of any errors. |
@@ -66,6 +93,7 @@ In other CI systems, set them explicitly to capture repository metadata.
 | `-F`, `--fingerprint` | string | [conditional] The SHA256 fingerprint of the artifact to attach the attestation to. Only required if the attestation is for an artifact and `--artifact-type` and artifact name/path are not used. |
 | `-f`, `--flow` | string | The Kosli flow name. |
 | `-h`, `--help` | bool | help for sbom |
+| `--key` | string | [conditional] The path to a PEM public key, to verify an attestation signed with a key rather than a certificate. |
 | `-n`, `--name` | string | The name of the attestation as declared in the flow or trail yaml template. |
 | `-o`, `--origin-url` | string | [optional] The url pointing to where the attestation came from or is related. (defaulted to the CI url in some CIs: [docs](/integrations/ci_cd/#defaulted-kosli-command-flags-from-ci-variables) ). |
 | `--redact-commit-info` | strings | [optional] The list of commit info to be redacted before sending to Kosli. Allowed values are one or more of [author, message, branch]. |
@@ -77,7 +105,7 @@ In other CI systems, set them explicitly to capture repository metadata.
 | `--repo-root` | string | [defaulted] The directory where the source git repository is available. It must be the repository's top-level directory. Only used if `--commit` is used or defaulted in CI, see [docs](/integrations/ci_cd/#defaulted-kosli-command-flags-from-ci-variables) . (default ".") |
 | `--repo-url` | string | [conditional] The URL of the repository. Must be a valid URL. All three of `--repo-id`, `--repo-url` and `--repository` must be set to record repository information (defaulted in some CIs: [docs](/integrations/ci_cd) ). |
 | `--repository` | string | [conditional] The name of the repository (e.g. owner/repo-name). All three of `--repo-id`, `--repo-url` and `--repository` must be set to record repository information (defaulted in some CIs: [docs](/integrations/ci_cd) ). |
-| `--sbom-file` | string | The path to the SBOM file. CycloneDX (JSON, XML) and SPDX (JSON, tag-value) are supported. |
+| `--sbom-file` | string | The path to the SBOM file. CycloneDX (JSON, XML) and SPDX (JSON, tag-value) are supported, also inside an in-toto attestation in a Sigstore bundle or DSSE envelope. |
 | `-T`, `--trail` | string | The Kosli trail name. |
 | `-u`, `--user-data` | string | [optional] The path to a JSON file containing additional data you would like to attach to the attestation. The maximum JSON payload size is 1MB. |
 
@@ -106,6 +134,17 @@ kosli attest sbom yourDockerImageName
 	--artifact-type docker 
 	--name yourAttestationName 
 	--sbom-file yourSbomPath 
+
+```
+</Accordion>
+<Accordion title="report an SBOM signed into a Sigstore bundle, verifying who signed it">
+```shell
+kosli attest sbom yourDockerImageName 
+	--artifact-type docker 
+	--name yourAttestationName 
+	--sbom-file yourSbom.sigstore.json 
+	--certificate-identity https://github.com/yourOrg/yourRepo/.github/workflows/build.yml@refs/heads/main 
+	--certificate-oidc-issuer https://token.actions.githubusercontent.com 
 
 ```
 </Accordion>
