@@ -63,7 +63,7 @@ kosli list flows --output=json
     "template": "version: 1\ntrail:\n  attestations:\n    - name: drift-detection\n      type: decision\n",
     "repo_url": "",
     "tags": {},
-    "latest_activity_at": 1794407471.9028635,
+    "latest_activity_at": 1794497037.5656662,
     "latest_state": "COMPLIANT"
   },
   {
@@ -75,7 +75,7 @@ kosli list flows --output=json
     "template": "version: 1\ntrail:\n  attestations:\n    - name: drift-detection\n      type: decision\n",
     "repo_url": "",
     "tags": {},
-    "latest_activity_at": 1794407467.1631155,
+    "latest_activity_at": 1794497030.4831336,
     "latest_state": "COMPLIANT"
   },
   {
@@ -273,8 +273,8 @@ kosli list flows --output=json
       "kind": "run",
       "repo_url": "https://github.com/cyber-dojo/secrets"
     },
-    "latest_activity_at": 1794389759.5778072,
-    "latest_state": "NON-COMPLIANT"
+    "latest_activity_at": 1794477428.4107573,
+    "latest_state": "INCOMPLETE"
   },
   {
     "id": "a43239d6-fa3d-4e58-b7c4-f00b7432",

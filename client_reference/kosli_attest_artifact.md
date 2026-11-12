@@ -6,7 +6,7 @@ description: "Attest an artifact creation to a Kosli flow.  "
 ## Synopsis
 
 ```shell
-kosli attest artifact {IMAGE-NAME | FILE-PATH | DIR-PATH} [flags]
+kosli attest artifact {IMAGE-NAME | FILE-PATH | DIR-PATH} [-- BUILD-COMMAND...] [flags]
 ```
 
 Attest an artifact creation to a Kosli flow.  
@@ -51,6 +51,14 @@ To record repository information, all three of `--repo-id`, `--repo-url`, and `-
 These are automatically set in GitHub Actions, GitLab CI, Bitbucket Pipelines, and Azure DevOps.
 In other CI systems, set them explicitly to capture repository metadata.
 
+Running a build command is experimental (beta) and may change between releases without warning.
+Everything after `--` runs as a build command, and the artifact is attested only if the build succeeds.
+Its fingerprint is calculated after the build. The build command and its duration are recorded in the
+`build_command` and `build_duration_seconds` annotations. Masking in `build_command` only covers the API token and the
+values of environment variables whose names look secret (e.g. containing TOKEN, SECRET, PASS, KEY or AUTH); a secret
+typed literally in the command is recorded as is, so use `--record-build-command=false` to leave out the command.
+If the build fails, nothing is attested and Kosli exits with the build's exit code.
+
 ## Flags
 | Flag | Type | Description |
 | :--- | :--- | :--- |
@@ -68,6 +76,7 @@ In other CI systems, set them explicitly to capture repository metadata.
 | `-f`, `--flow` | string | The Kosli flow name. |
 | `-h`, `--help` | bool | help for artifact |
 | `-n`, `--name` | string | The name of the artifact in the yml template file. |
+| `--record-build-command` | bool | [defaulted] [experimental] Record the build command given after -- in the build_command annotation, with secret values masked. Subject to change. (default true) |
 | `--redact-commit-info` | strings | [optional] The list of commit info to be redacted before sending to Kosli. Allowed values are one or more of [author, message, branch]. |
 | `--registry-password` | string | [conditional] The container registry password or access token. Only required if you want to read container image SHA256 digest from a remote container registry and it is not already accessible via Docker/Podman auth files or a credential helper. |
 | `--registry-provider` | string | [deprecated] The docker registry provider or url. Only required if you want to read docker image SHA256 digest from a remote docker registry. (DEPRECATED: no longer used) |
@@ -146,6 +155,15 @@ kosli attest artifact ANOTHER_FILE.txt
 	--external-url label=https://example.com/attachment 
 	--external-fingerprint label=yourExternalAttachmentFingerprint 
 	--name yourTemplateArtifactName 
+
+```
+</Accordion>
+<Accordion title="[experimental] Build an artifact and attest it in one step (the attestation only happens if the build succeeds)">
+```shell
+kosli attest artifact dist/app 
+	--artifact-type file 
+	--name yourTemplateArtifactName 
+	-- go build -o dist/app ./cmd/app
 ```
 </Accordion>
 </AccordionGroup>
