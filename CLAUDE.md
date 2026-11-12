@@ -230,6 +230,7 @@ When available, prefer skills over ad-hoc approaches:
   </Update>
   ```
   Always prompt the user for the `tags` value (e.g., `"Terraform Provider"`, `"CLI"`) before generating an entry.
+- **Product updates** (`changelog/product-updates.mdx`) — a separate page whose RSS feed the Kosli app shows in its What's new menu. Follow `docs/writing-product-updates.md`: keep each `id` unchanged once published, and use only the tags it lists to limit an entry to some organizations.
 
 ## Deployment
 
