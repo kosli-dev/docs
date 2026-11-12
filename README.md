@@ -29,7 +29,7 @@ mint update         # Update the mint CLI tool
 - **`config/`** — Split config: `navigation.json` (page routing — every new page must be added here), `redirects.json`, `footer.json`.
 - **Content directories** — `understand_kosli/`, `getting_started/`, `administration/`, `user/`, `integrations/`, `tutorials/`, `implementation_guide/`, `labs/`, `troubleshooting/`, `faq/`, and the reference directories `client_reference/`, `helm/`, `policy-reference/`, `terraform-reference/`, `template-reference/`, `github-action-reference/`. Directory names don't decide where a page appears; `config/navigation.json` does.
 - **`snippets/`** — Reusable MDX fragments (only for content used in 2+ pages)
-- **`changelog/`** — Product changelog
+- **`changelog/`** — Product changelog. `changelog/product-updates.mdx` also feeds the What's new menu in the Kosli app: see [Writing a product update](/docs/writing-product-updates.md) before adding an entry.
 
 See [`CLAUDE.md`](CLAUDE.md) for full authoring conventions.
 
