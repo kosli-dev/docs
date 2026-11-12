@@ -8,7 +8,7 @@ hidden: true
 <span id="product-updates-page" hidden />
 
 {/*
-  Add new entries at the top, newest first. Tags go to the RSS feed only; they are hidden on this page.
+  Add new entries at the top, newest first. Tags and the description are for the RSS feed and are hidden on this page with CSS.
   Keep the rss prop so the feed gets one item per entry, and keep id unique and unchanged once published,
   because it is the item's anchor in the feed. Example:
 
@@ -16,7 +16,7 @@ hidden: true
     label="November 10, 2026"
     id="short-unique-id"
     tags={["tag"]}
-    description="One-sentence summary, shown next to the date."
+    description="One-sentence summary, hidden on this page."
     rss={{ title: "Short headline for the update", description: "One-sentence summary for the feed.", date: "2026-11-10" }}
   >
 
