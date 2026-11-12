@@ -8,7 +8,7 @@ hidden: true
 <span id="product-updates-page" hidden />
 
 {/*
-  Add new entries at the top, newest first. Tags and the rss description go to the RSS feed only and are not shown on this page.
+  Add new entries at the top, newest first. Tags and the description are for the RSS feed and are hidden on this page with CSS.
   Keep the rss prop so the feed gets one item per entry, and keep id unique and unchanged once published,
   because it is the item's anchor in the feed. Example:
 
@@ -16,6 +16,7 @@ hidden: true
     label="November 10, 2026"
     id="short-unique-id"
     tags={["tag"]}
+    description="One-sentence summary, hidden on this page."
     rss={{ title: "Short headline for the update", description: "One-sentence summary for the feed.", date: "2026-11-10" }}
   >
 
@@ -30,6 +31,7 @@ hidden: true
   label="November 10, 2026"
   id="new-navigation"
   tags={["new-navigation"]}
+  description="Kosli's sidebar is now grouped into Home, Evidence, Control and Governance, with Settings and the top bar holding the rest."
   rss={{
     title: "Finding your way around Kosli's new navigation",
     description: "Kosli's sidebar is now grouped into Home, Evidence, Control and Governance, with Settings and the top bar holding the rest.",
