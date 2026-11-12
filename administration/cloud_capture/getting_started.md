@@ -172,6 +172,8 @@ A template is text with any of these placeholders:
 |-------------|-------|
 | `{cloud}` | The cloud provider, for example `aws`. |
 | `{account_id}` | The cloud account ID. |
+| `{account_name}` | The name you gave the account, for example `staging`. Empty for an account with no name. See [Account names](#account-names). |
+| `{account}` | The account's name where it has one, and its account ID where it does not. |
 | `{region}` | The region, for example `eu-central-1`. |
 | `{service}` | The service, for example `ecs` or `lambda`. |
 | `{resource}` | The resource's own name, such as the ECS cluster name. |
@@ -181,14 +183,23 @@ How a template is rendered:
 
 - The text between placeholders can only hold letters, digits, `.`, `_` and `-`, and a template must start with a letter, a digit or a placeholder. Placeholder names are case-sensitive and take no formatting.
 - A region's Lambda functions are captured together as one resource, so `{resource}` and every `{tag:Key}` are empty for them. An empty placeholder removes the separator before it: with the default template, a region's Lambda functions report into `123456789012-eu-central-1-lambda`.
+- `{account_name}` is empty for an account with no name, and that account is still captured. When the empty placeholder starts the template, it removes the separator after it instead, so `{account_name}-{service}-{resource}` names a cluster `app` in an unnamed account `ecs-app`. With `{account}-{resource}`, a cluster named `payments` reports into `staging-payments` in an account named `staging`, and into `222222222222-payments` in account `222222222222` with no name.
 - Tag keys are case-sensitive, as AWS stores them, so `{tag:env}` does not read a tag named `Env`. A key may contain colons and spaces, as in `{tag:aws:cloudformation:stack-name}`.
 - A resource that does not carry a tag the template names is not captured, and the scan reports it as failed. So is a resource whose rendered name Kosli does not accept, for example because a tag value contains a space. A tag that is present with an empty value renders empty.
 
 <Warning>
-Give every resource its own name. A template that renders the same name for two resources sends both into one environment, and that environment then switches between the two resources on every scan. This happens with `aws-prod` on an account with two ECS clusters, with a template that has no `{region}` on an account scanned in two regions, and with a template that has no `{account_id}` when two accounts hold a cluster of the same name. It also happens when a `{tag:Key}` placeholder is the only part that would tell resources apart: tag placeholders are empty for Lambda functions, so `aws-{tag:Env}` sends every region's Lambda functions into `aws`. Run a [dry run](#dry-run) to check the names before you rely on them.
+Give every resource its own name. A template that renders the same name for two resources sends both into one environment, and that environment then switches between the two resources on every scan. This happens with `aws-prod` on an account with two ECS clusters, with a template that has no `{region}` on an account scanned in two regions, and with a template that has no `{account_id}` or `{account}` when two accounts hold a cluster of the same name. A template that uses `{account_name}` without `{account_id}` sends same-named clusters in every unnamed account into one environment, so use `{account}` unless every account has a name. Account names do not have to be unique, so two accounts with the same name collide in the same way under `{account_name}` and `{account}`. It also happens when a `{tag:Key}` placeholder is the only part that would tell resources apart: tag placeholders are empty for Lambda functions, so `aws-{tag:Env}` sends every region's Lambda functions into `aws`. Run a [dry run](#dry-run) to check the names before you rely on them.
 </Warning>
 
 Through the API, the template is `environment_name_template` on the same settings resource as the skip tags above. Leaving it out, or sending `null`, uses the default template. A template that breaks the rules above is refused with a `400` response.
+
+### Account names
+
+You can give each registered account a name, such as `staging` or `prod-us`, to use in environment names through `{account_name}` and `{account}`. Naming accounts is optional, so you can name a few and leave the rest.
+
+To name an account, open your organization's **Settings** and go to **Cloud Capture**. In the **Registered accounts** table, open the actions menu in the account's row, select **Edit**, and enter the name in **Account name**. You can also enter it when you select **Register account**. A name starts with a letter or digit and holds only letters, digits, `.`, `_` and `-`. Clear the field and save to remove the name. A named account's row shows its name, with its account ID beneath it.
+
+Through the API, the name is `account_name` on the account's registration, at `/api/v2/cloud-capture/<your-org>/accounts/aws/<account-id>`. The PUT replaces the whole registration, so read it with a GET first and send its `role_arn`, `regions`, `services` and `dry_run` back with the name. A PUT without `account_name` removes the name.
 
 ## Dry run
 
