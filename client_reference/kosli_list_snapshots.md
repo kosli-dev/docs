@@ -64,11 +64,25 @@ kosli list snapshots aws-prod --output=json
 ```json
 [
   {
-    "index": 5588,
-    "from": 1794385498.3975194,
+    "index": 5590,
+    "from": 1794559618.3613522,
     "to": 0.0,
     "compliant": true,
-    "duration": 118525.4910376072
+    "duration": 30518.107545614243
+  },
+  {
+    "index": 5589,
+    "from": 1794559558.5302055,
+    "to": 1794559618.3613522,
+    "compliant": true,
+    "duration": 59.83114671707153
+  },
+  {
+    "index": 5588,
+    "from": 1794385498.3975194,
+    "to": 1794559558.5302055,
+    "compliant": true,
+    "duration": 174060.13268613815
   },
   {
     "index": 5587,
@@ -153,20 +167,6 @@ kosli list snapshots aws-prod --output=json
     "to": 1794124738.387191,
     "compliant": true,
     "duration": 59.881757974624634
-  },
-  {
-    "index": 5575,
-    "from": 1794043978.4395454,
-    "to": 1794124678.505433,
-    "compliant": true,
-    "duration": 80700.06588768959
-  },
-  {
-    "index": 5574,
-    "from": 1794043918.5908046,
-    "to": 1794043978.4395454,
-    "compliant": true,
-    "duration": 59.84874081611633
   }
 ]
 ```

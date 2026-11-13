@@ -66,11 +66,11 @@ kosli diff snapshots aws-beta aws-prod --output=json
 ```json
 {
   "snappish1": {
-    "snapshot_id": "aws-beta#8854",
+    "snapshot_id": "aws-beta#8857",
     "artifacts": []
   },
   "snappish2": {
-    "snapshot_id": "aws-prod#5588",
+    "snapshot_id": "aws-prod#5590",
     "artifacts": []
   },
   "changed": {
