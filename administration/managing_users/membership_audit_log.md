@@ -39,3 +39,14 @@ Select a column header to sort the whole log by that column. Select it again to 
 Active filters appear above the table. Clear them all at once from there.
 
 The page URL includes your search, filters, and sort order. Bookmark or share the URL to come back to the same view.
+
+## List the log with the CLI
+
+You can read the same history with [`kosli list audit-logs`](/client_reference/kosli_list_audit-logs), for example to export it for an access review. Like the page, the command requires org admin rights. It supports the same search, event, role, and source filters, but not a date range. Results come in pages of 15 events by default, so use `--page-limit` and `--page` to fetch the full history.
+
+```shell
+kosli list audit-logs \
+  --event-type removed \
+  --source scim \
+  --output json
+```
