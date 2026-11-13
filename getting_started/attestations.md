@@ -310,8 +310,10 @@ Currently, we support the following types of evidence:
 
     The SBOM can also arrive inside a signed in-toto attestation, as a Sigstore bundle or a DSSE
     envelope. Kosli then uploads and checksums the bundle or envelope, and reads the SPDX or
-    CycloneDX document from inside it. When the artifact's fingerprint is known, the attestation
-    must list that artifact as its subject. To verify who signed it, pass `--certificate-identity`
+    CycloneDX document from inside it. When the artifact's fingerprint is known, calculated or
+    given with `--fingerprint`, the attestation must list that artifact as its subject. Attested
+    to a trail alone, or bound by template name and commit, it has no fingerprint, so the subject
+    is not checked. To verify who signed it, pass `--certificate-identity`
     (or `--certificate-identity-regexp`) with `--certificate-oidc-issuer`, or `--key`. Without
     those flags the signature is not checked, and the record is annotated with `verified` set to
     false. To pick an SBOM or SLSA provenance from a file that holds several attestations, use
