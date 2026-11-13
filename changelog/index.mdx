@@ -4,6 +4,108 @@ description: "Release notes for Kosli products."
 rss: true
 ---
 
+<Update label="November 12, 2026" description="v2.56.0" tags={["CLI"]}>
+
+## New features
+
+- **Record in-toto attestations (beta)**: `kosli attest in-toto` records SLSA provenance or an SBOM that your build already produced, for example with `actions/attest`, `cosign attest` or `docker buildx`. It reads Sigstore bundles, DSSE envelopes, in-toto statements and `.intoto.jsonl` files, and verifies signatures against the signer you pin. See the [`kosli attest in-toto` reference](/client_reference/kosli_attest_in-toto).
+- **Signed SBOMs**: `kosli attest sbom --sbom-file` also accepts an SBOM inside a Sigstore bundle or DSSE envelope. Pass `--certificate-identity` and `--certificate-oidc-issuer`, or `--key`, to verify who signed it. See the [`kosli attest sbom` reference](/client_reference/kosli_attest_sbom).
+- **List the membership audit log**: `kosli list audit-logs` lists member additions, role changes and removals for your org, with filters for user, event type, role and source. It requires org admin rights. See the [`kosli list audit-logs` reference](/client_reference/kosli_list_audit-logs) and [reviewing membership changes](/administration/managing_users/membership_audit_log).
+- **Build and attest in one step (experimental)**: `kosli attest artifact` runs a build command given after `--` and attests the artifact only if the build succeeds. The command and its duration are recorded as annotations, and a failed build exits with the build's exit code. See the [`kosli attest artifact` reference](/client_reference/kosli_attest_artifact).
+
+## Bug fixes
+
+- **`kosli get trail` with partial commit info**: table output no longer crashes when a trail's commit info is incomplete. Missing fields show as `N/A`, as in markdown output.
+
+[View on GitHub](https://github.com/kosli-dev/cli/releases/tag/v2.56.0)
+
+</Update>
+
+<Update label="November 11, 2026" description="v2.55.5" tags={["CLI"]}>
+
+## Updates
+
+- **Go 1.27.4 and OPA 1.22.3**: the CLI is now built with Go 1.27.4, and `kosli evaluate` uses OPA v1.22.3.
+
+## Bug fixes
+
+- **Empty violations in JSON output**: `kosli evaluate` now prints an empty list of violations as `[]` instead of `null`.
+
+[View on GitHub](https://github.com/kosli-dev/cli/releases/tag/v2.55.5)
+
+</Update>
+
+<Update label="November 11, 2026" description="v2.55.4" tags={["CLI"]}>
+
+## Updates
+
+- **GitLab help text**: the `--gitlab-token` help now says the token needs the `read_api` scope, and the GitLab merge request examples use the right flags. See the [`kosli assert pullrequest gitlab` reference](/client_reference/kosli_assert_pullrequest_gitlab).
+
+[View on GitHub](https://github.com/kosli-dev/cli/releases/tag/v2.55.4)
+
+</Update>
+
+<Update label="November 10, 2026" description="v0.12.1" tags={["Terraform Provider"]}>
+
+## Updates
+
+- **Go 1.27**: the provider is now built with Go 1.27. Building it from source or importing its client package requires Go 1.27.3 or later.
+
+[View on GitHub](https://github.com/kosli-dev/terraform-provider-kosli/releases/tag/v0.12.1)
+
+</Update>
+
+<Update label="November 10, 2026" description="v0.12.0" tags={["Terraform Provider"]}>
+
+## New features
+
+- **Email and Slack targets on actions**: `kosli_action` has new `emails`, `slack_webhooks` and `webhooks` attributes, so one action can notify email addresses, Slack and several webhooks. `webhook_url` is now optional. It can be combined with `emails` and `slack_webhooks`, but not with `webhooks`. The `kosli_action` data source returns the same attributes. See the [`kosli_action` reference](/terraform-reference/resources/action).
+- **More environment types**: `kosli_environment` supports the `azure-apps` and `cloud-run` types. See the [`kosli_environment` reference](/terraform-reference/resources/environment).
+
+## Updates
+
+- **Breaking: importing Slack app actions**: `terraform import` now refuses an action created by the Kosli Slack app, because the resource can't model its channel subscription and would drop it on the next update.
+- **Logical environment warning**: setting `type = "logical"` on `kosli_environment` now shows a plan-time warning pointing to `kosli_logical_environment`.
+
+## Bug fixes
+
+- **Drift on action targets**: `kosli_action` now detects notification targets added or changed outside Terraform. Previously only the first target was checked.
+
+[View on GitHub](https://github.com/kosli-dev/terraform-provider-kosli/releases/tag/v0.12.0)
+
+</Update>
+
+<Update label="November 9, 2026" description="v2.55.3" tags={["CLI"]}>
+
+## Updates
+
+- **Retry-After on lock conflicts**: when Kosli answers `409 Conflict` because a trail is locked, the CLI now waits at least the `Retry-After` time the server asks for (up to a minute) before retrying.
+
+[View on GitHub](https://github.com/kosli-dev/cli/releases/tag/v2.55.3)
+
+</Update>
+
+<Update label="November 9, 2026" description="v2.55.2" tags={["CLI"]}>
+
+## Updates
+
+- Maintenance release with no user-facing changes.
+
+[View on GitHub](https://github.com/kosli-dev/cli/releases/tag/v2.55.2)
+
+</Update>
+
+<Update label="November 9, 2026" description="v2.55.1" tags={["CLI"]}>
+
+## Updates
+
+- **Clearer HTTP errors**: when retries run out, the error now names the HTTP status, such as `HTTP 409 Conflict` or `HTTP 429 Too Many Requests`. Error responses that are not JSON, such as a proxy's HTML page, are reported by their status, with a hint to rerun with `--debug`.
+- **Retry jitter**: retry waits are now stretched by a random amount, so parallel CI jobs that fail together don't retry in lockstep.
+
+[View on GitHub](https://github.com/kosli-dev/cli/releases/tag/v2.55.1)
+
+</Update>
+
 <Update label="November 6, 2026" description="v2.55.0" tags={["CLI"]}>
 
 ## Updates
