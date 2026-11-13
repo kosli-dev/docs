@@ -305,8 +305,19 @@ Currently, we support the following types of evidence:
     file and you can verify it by hand. Kosli sets the `sbom_format` and `sbom_sha256`
     annotations for you; you do not pass them with `--annotate`.
 
-    Nothing in the SBOM is checked against the artifact. It is recorded as reported, so the
+    A plain SBOM file is not checked against the artifact. It is recorded as reported, so the
     attestation says what the SBOM claims, not whether the claim is true.
+
+    The SBOM can also arrive inside a signed in-toto attestation, as a Sigstore bundle or a DSSE
+    envelope. Kosli then uploads and checksums the bundle or envelope, and reads the SPDX or
+    CycloneDX document from inside it. When the artifact's fingerprint is known, calculated or
+    given with `--fingerprint`, the attestation must list that artifact as its subject. Attested
+    to a trail alone, or bound by template name and commit, it has no fingerprint, so the subject
+    is not checked. To verify who signed it, pass `--certificate-identity`
+    (or `--certificate-identity-regexp`) with `--certificate-oidc-issuer`, or `--key`. Without
+    those flags the signature is not checked, and the record is annotated with `verified` set to
+    false. To pick an SBOM or SLSA provenance from a file that holds several attestations, use
+    [`kosli attest in-toto`](/client_reference/kosli_attest_in-toto/) (beta).
 
     **What you get depends on the tool, not just the format.** Kosli records what the document
     declares, and tools fill the same fields differently. Three differences catch people out.
@@ -324,8 +335,8 @@ Currently, we support the following types of evidence:
     *A digest that is present is not automatically the artifact's.* The subject identifies what
     the generator scanned. Point one at a tag and it records whatever that tag resolved to on
     that machine. For a multi-architecture image that is a single architecture, and it can be a
-    local image id rather than a registry digest. Kosli does not check the subject against the
-    artifact, so a digest that is present can still belong to something else. Compare the two
+    local image id rather than a registry digest. Kosli does not check a plain SBOM's subject
+    against the artifact, so a digest that is present can still belong to something else. Compare the two
     only where your pipeline pointed the generator at the exact artifact it attests. Otherwise
     check it in the pipeline, where the build can fail, rather than in a policy.
 
