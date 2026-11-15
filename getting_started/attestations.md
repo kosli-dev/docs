@@ -116,7 +116,7 @@ The following sections show how to make each of the four attestations defined in
 ### Attesting with a template
 
 The four attestations above are all made against a Flow named `backend-ci` and a Trail named after the git commit.
-Typically, the Flow and Trail are explicitly setup before making the attestations (e.g. at the start of a CI workflow).
+Typically, the Flow and Trail are explicitly set up before making the attestations (e.g. at the start of a CI workflow).
 
 This is done with the `create flow` and `begin trail` commands, either of which can specify the name of the template yaml file above
 (e.g. `.kosli.yml`) whose contents define overall compliance. For example:
@@ -141,8 +141,8 @@ If any of these attestations are missing, or are individually non-compliant then
 
 ### Attesting without a template
 
-An attestation can also be made against a Flow and Trail **not** previously explicitly setup.
-In this case a Flow and Trail will be automatically setup but there will be no template yaml file defining
+An attestation can also be made against a Flow and Trail **not** previously explicitly set up.
+In this case a Flow and Trail will be automatically set up but there will be no template yaml file defining
 overall compliance. The compliance of any attested artifact will depend only on the compliance of the attestations actually made
 and never because a specific attestation is missing.
 
@@ -387,7 +387,7 @@ Currently, we support the following types of evidence:
 
     If Jira reference is found in a commit message, that reference will be reported as evidence. If the reference is not found in the commit message, Kosli CLI will check if it's a part of a branch name.
 
-    Kosli CLI will also verify and report if the detected issue reference is found and accessible on Jira (reported as compliant) or not (reported as non compliant).
+    Kosli CLI will also verify and report if the detected issue reference is found and accessible on Jira (reported as compliant) or not (reported as non-compliant).
 
     See [attest Jira issue to an artifact or a trail](/client_reference/kosli_attest_jira/) for usage details and examples.
 
@@ -396,7 +396,7 @@ Currently, we support the following types of evidence:
 
     You can report the results of a SonarQube Server or SonarQube Cloud scan to Kosli. Kosli will use the status of the scan's Quality Gate (passing or failing) to determine the compliance status.
 
-    These scan result can be attested in two ways:
+    These scan results can be attested in two ways:
     - Using Kosli's [webhook integration](/integrations/sonar) with Sonar
     - Using [Kosli's CLI](/client_reference/kosli_attest_sonar)
   </Accordion>
