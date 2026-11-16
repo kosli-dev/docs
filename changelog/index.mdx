@@ -4,6 +4,32 @@ description: "Release notes for Kosli products."
 rss: true
 ---
 
+<Update label="November 13, 2026" description="v2.56.1" tags={["CLI"]}>
+
+## New features
+
+- **Read in-toto attestations from GitHub (beta)**: `kosli attest in-toto --source github` reads the attestations GitHub holds for an artifact, where `actions/attest` stores them. It needs `--github-token` with the `attestations: read` permission, and is the default in GitHub Actions. There, a signer you don't pin defaults to a workflow in the repository itself. See the [`kosli attest in-toto` reference](/client_reference/kosli_attest_in-toto).
+- **Aliases for `kosli list audit-logs`**: use `kosli list al` or `kosli list als` for short. See the [`kosli list audit-logs` reference](/client_reference/kosli_list_audit-logs).
+
+## Updates
+
+- **OPA 1.22.4**: `kosli evaluate` now uses OPA v1.22.4.
+
+[View on GitHub](https://github.com/kosli-dev/cli/releases/tag/v2.56.1)
+
+</Update>
+
+<Update label="November 13, 2026" description="v0.13.0" tags={["Terraform Provider"]}>
+
+## New features
+
+- **Manage repo tags**: the new `kosli_repo_tags` resource manages the tags of a Kosli repo by its internal ID.
+- **Look up repos**: the new `kosli_repo` data source finds a single repo by internal ID, or by name and optional VCS provider. The new `kosli_repos` data source lists repos that match filters and returns their internal IDs.
+
+[View on GitHub](https://github.com/kosli-dev/terraform-provider-kosli/releases/tag/v0.13.0)
+
+</Update>
+
 <Update label="November 12, 2026" description="v2.56.0" tags={["CLI"]}>
 
 ## New features
