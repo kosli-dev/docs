@@ -196,7 +196,7 @@ You can tag the following Kosli resource types:
   }
   ```
 
-  The [`kosli_repo`](/terraform-reference/data-sources/repo) and [`kosli_repos`](/terraform-reference/data-sources/repos) data sources return a repo's `tags` the same way.
+  The [`kosli_repo`](/terraform-reference/data-sources/repo) data source returns a repo's `tags` the same way. The [`kosli_repos`](/terraform-reference/data-sources/repos) data source returns `tags` on each entry of its `repos` list.
   </Tab>
   <Tab title="CLI" icon="terminal">
   `kosli get` prints a resource's tags in its `Tags` field:
