@@ -141,6 +141,8 @@ You can tag the following Kosli resource types:
     tags = {}
   }
   ```
+
+  For a repo, set `tags = {}` on its `kosli_repo_tags` resource. Destroying a `kosli_repo_tags` resource also removes every tag on the repo.
   </Tab>
   <Tab title="CLI" icon="terminal">
   Pass one or more `--unset` flags with the keys to remove:
@@ -193,6 +195,8 @@ You can tag the following Kosli resource types:
     value = try(data.kosli_environment.production.tags["managed-by"], "unknown")
   }
   ```
+
+  The [`kosli_repo`](/terraform-reference/data-sources/repo) and [`kosli_repos`](/terraform-reference/data-sources/repos) data sources return a repo's `tags` the same way.
   </Tab>
   <Tab title="CLI" icon="terminal">
   `kosli get` prints a resource's tags in its `Tags` field:
