@@ -20,7 +20,7 @@ You can tag the following Kosli resource types:
 | Flow | [`kosli_flow`](/terraform-reference/resources/flow) | `flow` |
 | Environment | [`kosli_environment`](/terraform-reference/resources/environment) | `env` |
 | [Control](/tutorials/working_with_controls) (beta) | [`kosli_control`](/terraform-reference/resources/control) | `control` |
-| [Repository](/tutorials/repositories) | Not supported | `repo` |
+| [Repository](/tutorials/repositories) | [`kosli_repo_tags`](/terraform-reference/resources/repo_tags) | `repo` |
 
 ## Tag key and value rules
 
@@ -62,7 +62,25 @@ You can tag the following Kosli resource types:
   }
   ```
 
-  See the [`kosli_environment` resource](/terraform-reference/resources/environment) and [`kosli_flow` resource](/terraform-reference/resources/flow) for the full schema.
+  Tag a repo with a `kosli_repo_tags` resource. Kosli records repos itself, so look up the repo's internal ID with the `kosli_repo` or `kosli_repos` data source:
+
+  ```hcl
+  data "kosli_repo" "billing" {
+    name         = "acme/payments/billing"
+    vcs_provider = "github"
+  }
+
+  resource "kosli_repo_tags" "billing" {
+    repo_id = data.kosli_repo.billing.id
+    tags = {
+      team = "payments"
+    }
+  }
+  ```
+
+  `kosli_repo_tags` manages every tag on the repo, so Terraform removes tags added outside it, in the UI or with `kosli tag repo`, on the next apply.
+
+  See the [`kosli_environment` resource](/terraform-reference/resources/environment), [`kosli_flow` resource](/terraform-reference/resources/flow) and [`kosli_repo_tags` resource](/terraform-reference/resources/repo_tags) for the full schema.
   </Tab>
   <Tab title="CLI" icon="terminal">
   Pass one or more `--set` flags with `key=value` pairs. If a key already exists, its value is updated:
