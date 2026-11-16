@@ -34,12 +34,12 @@ Recording provenance and an SBOM takes two commands.
 `--source` chooses where the attestation is read from:
 
 - `github` reads the attestations GitHub holds for the artifact, where `actions/attest`
-  stores them, in the repository given with `--github-org` and `--repository`. It needs
-  `--github-token`, with the `attestations: read` permission. It is the default when
-  running in GitHub Actions. GitHub holds them by the digest that was attested, so name
-  an image by the digest the build pushed, as `yourImageName@sha256:...` with
-  `--artifact-type oci`, or give that digest with `--fingerprint`: a tag may since have
-  moved to another image.
+  stores them, in the repository given with `--github-org` and `--repository`, or with
+  `--repository` alone as `owner/name`. It needs `--github-token`, with the
+  `attestations: read` permission. It is the default when running in GitHub Actions.
+  GitHub holds them by the digest that was attested, so name an image by the digest the
+  build pushed, as `yourImageName@sha256:...` with `--artifact-type oci`, or give that
+  digest with `--fingerprint`: a tag may since have moved to another image.
 - `bundle` reads the file given with `--bundle`: a Sigstore bundle (`.sigstore.json`), a
   DSSE envelope, an in-toto statement, or an `.intoto.jsonl` file with one of these per
   line. It is the default elsewhere, and whenever `--bundle` is given.
@@ -51,15 +51,22 @@ part of, then one made by any attempt of that run, then the newest.
 The statement must list the artifact as its subject. A signed attestation is verified with
 Sigstore against a signer you pin: `--certificate-identity` (or
 `--certificate-identity-regexp`) with `--certificate-oidc-issuer`, or `--key`. There is no
-way to accept any valid certificate. With `--source github` in GitHub Actions, a signer you
-do not pin defaults to a workflow in the repository itself: the issuer
-`https://token.actions.githubusercontent.com` and an identity starting
-`https://github.com/`github-org`/`repository`/.github/workflows/`. Pin the signer yourself
-when a reusable workflow in another repository did the signing. There is no default
-outside GitHub Actions, when `--github-base-url` is given, or when the run is on a server
-other than github.com, and the command stops before reading anything unless a signer is
-pinned. An unsigned attestation is refused unless
+way to accept any valid certificate. An unsigned attestation is refused unless
 `--allow-unsigned` is given, and is then recorded as unverified.
+
+With `--source github` in GitHub Actions, a signer you do not pin defaults to a workflow in
+the repository itself, for an attestation made by the run this command is part of: the
+issuer `https://token.actions.githubusercontent.com`, an identity starting
+`https://github.com/`owner`/`repository`/.github/workflows/`, and a certificate issued
+to that run, in any of its attempts. The identity alone is not enough to trust. It matches
+the workflow file on any branch or pull request, so anyone who can push a branch could
+attest the artifact with a predicate of their own. When the run made no attestation of
+the artifact, the command fails and names the flags that pin a signer. Pin the signer
+yourself, to the workflow file and the ref it runs on, to record an attestation another run
+made, such as from a deployment workflow, or one a reusable workflow in another repository
+signed. There is no default outside GitHub Actions, when `--github-base-url` is given, or
+when the run is on a server other than github.com, and the command stops before reading
+anything unless a signer is pinned.
 
 In a file, an attestation that fails verification, because another signer made it or it
 was changed after signing, fails the command and nothing is recorded, even when another
@@ -85,8 +92,10 @@ The record is annotated with `verified` and, for a signed attestation, `signer_i
 `signer_issuer`, `log_index`, `integrated_time` and `signed_timestamp` where they apply.
 Provenance adds `builder_id`, `build_type` and `workflow`, and an SBOM adds `sbom_format`
 and `sbom_sha256`. The `attestation` external URL links the attestation's transparency
-log entry or, for one read from GitHub that has none, GitHub's listing of the artifact's
-attestations. It is pinned by the SHA-256 of the attestation's bytes.
+log entry, pinned by the SHA-256 of the attestation's bytes. An attestation read from
+GitHub that has no entry in a public log, as in a private repository, links GitHub's API
+listing of the artifact's attestations instead. Reading that listing needs a token, and it
+holds every attestation of the artifact, so it is recorded without a fingerprint.
 
 For provenance, the commit's message, author and time are looked up on GitHub with
 `--github-token` when the statement names a GitHub repository, or else read from the git
@@ -148,7 +157,7 @@ To drop the file from the fingerprint safely, move its entries to `--exclude` an
 | `-F`, `--fingerprint` | string | [conditional] The SHA256 fingerprint of the artifact to attach the attestation to. Only required if the attestation is for an artifact and `--artifact-type` and artifact name/path are not used. |
 | `-f`, `--flow` | string | The Kosli flow name. |
 | `--github-base-url` | string | [optional] The GitHub Enterprise Server to read attestations from with `--source` github, and to look the commit up on when the provenance names a repository there, such as https://github.example.com. Without it github.com is used, never a host taken from the provenance. With `--source` github the signer has no default on such a server and must be pinned. |
-| `--github-org` | string | [conditional] The GitHub organization or user owning the repository to read attestations from, with `--source` github. (defaulted if you are running in GitHub Actions: [docs](/integrations/ci_cd) ). |
+| `--github-org` | string | [conditional] The GitHub organization or user owning the repository to read attestations from, with `--source` github. Not needed when `--repository` names the owner; when both do, they must name the same one. (defaulted if you are running in GitHub Actions: [docs](/integrations/ci_cd) ). |
 | `--github-token` | string | [conditional] A GitHub token. Required with `--source` github, to read the repository's attestations, which needs the 'attestations: read' permission. Also used to look up the commit's message, author and time when the provenance names a GitHub repository. |
 | `-h`, `--help` | bool | help for in-toto |
 | `--key` | string | [conditional] The path to a PEM public key, to verify an attestation signed with a key rather than a certificate. |
@@ -159,7 +168,7 @@ To drop the file from the fingerprint safely, move its entries to `--exclude` an
 | `--registry-username` | string | [conditional] The container registry username. Only required if you want to read container image SHA256 digest from a remote container registry and it is not already accessible via Docker/Podman auth files or a credential helper. |
 | `--repo-provider` | string | [optional] The provider of the repository the provenance names, when its host is not github.com, gitlab.com or bitbucket.org. One of: github, gitlab, bitbucket, bitbucket_cloud, bitbucket_dc, azure-devops, azure_devops_services, azure_devops_server, git, subversion. For a GitHub Enterprise host, also give `--github-base-url` to look the commit up there. |
 | `--repo-root` | string | [defaulted] The git checkout to read the commit's details from when they cannot be looked up. Provenance only. (default ".") |
-| `--repository` | string | [conditional] The GitHub repository to read attestations from, with `--source` github. (defaulted if you are running in GitHub Actions: [docs](/integrations/ci_cd) ). |
+| `--repository` | string | [conditional] The GitHub repository to read attestations from, with `--source` github: its name, or its owner and name as owner/name. (defaulted if you are running in GitHub Actions: [docs](/integrations/ci_cd) ). |
 | `--source` | string | [defaulted] Where to read the attestation from: 'github', the attestations GitHub holds for the artifact in the repository given with `--github-org` and `--repository`, or 'bundle', the file given with `--bundle`. Defaults to 'bundle' when `--bundle` is given, otherwise to 'github' when running in GitHub Actions and to 'bundle' elsewhere. |
 | `-T`, `--trail` | string | The Kosli trail name. |
 
@@ -182,12 +191,17 @@ To drop the file from the fingerprint safely, move its entries to `--exclude` an
 These examples all assume that the flags  `--api-token`, `--org`, `--host`, (and `--flow`, `--trail` when required), are [set/provided](/getting_started/install/#assigning-flags-via-environment-variables). 
 
 <AccordionGroup>
-<Accordion title="in GitHub Actions, record the SLSA provenance actions/attest stored for an image, as the artifact named app.">
+<Accordion title="in the GitHub Actions run that built an image, record the SLSA provenance actions/attest stored for it,">
 ```shell
 
 ```
 </Accordion>
-<Accordion title="The image is named by the digest the build pushed, such as ghcr.io/yourOrg/yourImage@sha256:0123...">
+<Accordion title="as the artifact named app. The image is named by the digest the build pushed, such as">
+```shell
+
+```
+</Accordion>
+<Accordion title="ghcr.io/yourOrg/yourImage@sha256:0123...">
 ```shell
 kosli attest in-toto yourImageName@yourImageDigest 
 	--artifact-type oci 
@@ -207,7 +221,12 @@ kosli attest in-toto yourImageName@yourImageDigest
 
 ```
 </Accordion>
-<Accordion title="outside GitHub Actions, read a repository's attestations and pin the workflow that signed them.">
+<Accordion title="in another run, such as a deployment, or outside GitHub Actions, read a repository's attestations">
+```shell
+
+```
+</Accordion>
+<Accordion title="and pin the workflow that signed them, with the ref it ran on.">
 ```shell
 
 ```
@@ -222,7 +241,7 @@ kosli attest in-toto
 	--github-token yourGithubToken 
 	--predicate-type provenance 
 	--name app 
-	--certificate-identity-regexp '^https://github.com/yourGithubOrg/yourGithubRepo/.github/workflows/' 
+	--certificate-identity https://github.com/yourGithubOrg/yourGithubRepo/.github/workflows/build.yml@refs/heads/main 
 	--certificate-oidc-issuer https://token.actions.githubusercontent.com 
 
 ```
@@ -247,7 +266,7 @@ kosli attest in-toto app.tar.gz
 	--bundle app-sbom.sigstore.json 
 	--predicate-type sbom 
 	--name app.sbom 
-	--certificate-identity-regexp '^https://github.com/yourOrg/yourRepo/' 
+	--certificate-identity https://github.com/yourOrg/yourRepo/.github/workflows/build.yml@refs/heads/main 
 	--certificate-oidc-issuer https://token.actions.githubusercontent.com 
 
 ```
