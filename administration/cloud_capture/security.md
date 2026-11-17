@@ -15,7 +15,7 @@ The Cloud Capture managed service uses the public cloud APIs to extract informat
 
 <Tabs>
 <Tab title="AWS">
-Kosli publishes a CloudFormation template, for use in AWS, showing the permissions needed.  The template is publicly accessible and can be used directly within an `aws cloudformation create-stack` call.
+Kosli publishes a CloudFormation template, for use in AWS, showing the permissions needed.  The template is publicly accessible and can be used directly within an `aws cloudformation create-stack` call. The current version, `aws/v0`, is published at `https://kosli-cloud-capture-templates.s3.eu-central-1.amazonaws.com/aws/v0/kosli-cloud-capture-access-role.yaml`, and the permissions shown on this page are taken from it.
 
 The CloudFormation template we share with you includes a "phone-home" feature that notifies Kosli when a CloudFormation stack has been built from it; this allows us to pick up the AWS AccountId for the account in which you have used the CloudFormation template without you needing to do anything.  This automation is especially useful when you deploy the template as a StackSet within an Organizational Unit.
 

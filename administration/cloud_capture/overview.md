@@ -35,7 +35,7 @@ Cloud Capture connects to your cloud accounts using permissions that you manage.
 | Google Cloud | Google Kubernetes Engine (GKE) | Planned | |
 | Azure | Azure Kubernetes Service (AKS) | Planned | |
 
-Cloud Capture is enabled per organization by Kosli's Customer Success team. Contact them to have it turned on for yours.
+Kosli's Customer Success team enables Cloud Capture for your organization. You then set it up yourself from your organization's Settings page, as described in [Getting started](/administration/cloud_capture/getting_started).
 
 **Beta** platforms are ready to use once Cloud Capture is enabled for your organization.
 
