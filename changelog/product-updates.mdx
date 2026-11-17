@@ -53,49 +53,6 @@ The new page has two tabs: **Status**, which opens first, and **Events**. Everyt
 
 <Frame><img src="/images/product-updates/trail-page-status.png" alt="Kosli trail page showing the header, the Status and Events tabs, and the Status tab listing attestations about the trail and an artifact" /></Frame>
 
-### The header
-
-The top of the page shows the trail's name, its compliance, and a link to its template. The flow's navigation bar no longer appears on the trail page.
-
-### The Status tab
-
-The Status tab lists the trail's artifacts and the attestations about the trail and each artifact. Each row shows when it's been committed, the associated commit, and its state.
-
-- **Open a row** to see its details in a drawer. The drawer shows details for each attestation type, such as JUnit results, Snyk scans, pull requests and decisions. You can switch the drawer to raw JSON.
-- **Artifact compliance** shows next to the artifact's name. Hover over it to see which attestations it comes from.
-- **Rows marked +** were reported but are not in the template. **Rows marked -** are in the template but have not been reported yet.
-- **Go to the event** with the button on each row, which opens the Events tab at that row's event.
-
-### The Events tab
-
-The Events tab lists every event on the trail, a page at a time. Sort it **Newest first** or **Oldest first**, and open any event to see its attestation.
-
-<Frame><img src="/images/product-updates/trail-page-events.png" alt="Kosli trail page Events tab, listing events with the newest first" /></Frame>
-
-### Seeing a trail at an earlier point in time
-
-Every change to a trail is recorded as a trail moment. The **Viewing:** bar above the tabs shows which moment you're looking at, and marks it **Latest** when it's the current one.
-
-- **Step through moments** with the Previous and Next buttons, or jump to the first moment.
-- **See what changed:** the bar names the event that created the moment, with the compliance before and after it. Click it to open that event.
-- **Start from an event:** click the clock on any row in the Events tab to see the trail at the time of that event.
-- **Later reports are grayed out.** On the Status tab, a row that arrived after the moment you're viewing is grayed out, with the time and commit of its later report. On the Events tab, later events are grayed out and the event behind the moment you're viewing is highlighted.
-- **Share what you see:** the page's link includes the moment you're viewing, so anyone who opens it sees the same thing.
-
-<Frame><img src="/images/product-updates/trail-page-moment.png" alt="Kosli trail page Viewing bar at an earlier moment, with Previous and Next buttons and later rows grayed out" /></Frame>
-
-### Downloads
-
-The **Download** button below the tabs offers three files:
-
-| Download | What you get |
-| :---- | :---- |
-| Status PDF | Compliance at the moment you're viewing, stamped with that moment's time |
-| Events PDF | Every event on the trail |
-| Full audit package | The trail as it is now, with the Status and Events PDFs and all evidence files |
-
-The Status and Events PDFs replace the single combined PDF in every trail audit package, whether you download it from the UI, the API or the CLI. You can also download a single attestation or artifact from its drawer.
-
 We're keen to hear any questions or feedback you might have on the new trail page.
 
 </Update>
