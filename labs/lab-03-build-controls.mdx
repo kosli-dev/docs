@@ -142,11 +142,10 @@ Kosli identifies artifacts by their **SHA256 fingerprint**. This uniquely identi
 
     Watch the workflow run and confirm all attestation steps complete successfully. Then in [app.kosli.com](https://app.kosli.com), navigate to your Flow → latest Trail and verify:
 
-    - **Artifacts**: JAR file and Docker image with fingerprints
-    - **Attestations**: Unit tests attached to `application`, SBOM attached to `docker-image`
-    - **Timeline**: When each attestation was recorded
+    - **Status** tab: a section for the JAR file and one for the Docker image, with unit tests attached to `application` and the SBOM attached to `docker-image`
+    - **Events** tab: when each artifact and attestation was recorded
 
-    Click individual attestations to view JUnit test counts and SBOM component details.
+    Select an artifact to see its fingerprint, and select individual attestations to view JUnit test counts and SBOM component details.
   </Step>
 </Steps>
 
