@@ -37,11 +37,13 @@ If you would rather create the role yourself, see [Cloud Capture Security](/admi
 
 The CloudFormation template can be deployed within an AWS account, or can be attached to an AWS Organizational Unit (OU) as a StackSet; this latter option ensures the correct IAM permissions are rolled out to all AWS accounts within the OU.
 
-Kosli is not notified when you create or delete the stack, so you register each account yourself. When the stack is created, open your organization's **Settings**, go to **Cloud Capture**, select **Register account**, and enter the ARN of the role the stack created. If you deploy the template as a StackSet, register every account in the OU, including accounts that join it later. If you delete a stack, also remove its account from the **Registered accounts** table; until you do, scans of that account fail because the role no longer exists.
-
 ### Enable Cloud Capture
 
-When you have created the IAM role, using the CloudFormation template, you can activate Cloud Capture within the Kosli user-interface.  Cloud Capture scans every five minutes unless you [choose another frequency](#scan-frequency), and once you have enabled it, Cloud Capture will pick up your environment the next time it runs - you should see environments and snapshots appearing within a few minutes.
+When you have created the IAM role, using the CloudFormation template, you can activate Cloud Capture within the Kosli user-interface.
+
+Kosli is not notified when you create or delete the stack, so you then register each account yourself. Accounts can only be registered while Cloud Capture is enabled. Open your organization's **Settings**, go to **Cloud Capture**, select **Register account**, and enter the ARN of the role the stack created. If you deploy the template as a StackSet, register every account in the OU, including accounts that join it later. If you delete a stack, also remove its account from the **Registered accounts** table; until you do, scans of that account fail because the role no longer exists.
+
+Cloud Capture scans every five minutes unless you [choose another frequency](#scan-frequency), and picks up a registered account the next time it runs - you should see environments and snapshots appearing within a few minutes.
 
 ### Excluding resources
 
