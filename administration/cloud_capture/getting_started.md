@@ -37,7 +37,7 @@ If you would rather create the role yourself, see [Cloud Capture Security](/admi
 
 The CloudFormation template can be deployed within an AWS account, or can be attached to an AWS Organizational Unit (OU) as a StackSet; this latter option ensures the correct IAM permissions are rolled out to all AWS accounts within the OU.
 
-When used, the CloudFormation template will send your AWS account id to Kosli, so that we are automatically notified that your account is ready to be included in Cloud Capture.  Similarly, if you delete the CloudFormation stack we will be notified and know that the account is no longer to be included.
+Kosli is not notified when you create or delete the stack, so you register each account yourself. When the stack is created, open your organization's **Settings**, go to **Cloud Capture**, select **Register account**, and enter the ARN of the role the stack created. If you deploy the template as a StackSet, register every account in the OU, including accounts that join it later. If you delete a stack, also remove its account from the **Registered accounts** table; until you do, scans of that account fail because the role no longer exists.
 
 ### Enable Cloud Capture
 
