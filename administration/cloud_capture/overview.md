@@ -27,15 +27,19 @@ Cloud Capture connects to your cloud accounts using permissions that you manage.
 
 | Cloud | Service | Status | What Cloud Capture snapshots |
 |---|---|---|---|
-| AWS | Amazon ECS | Available | One environment per cluster |
-| AWS | AWS Lambda | Available | One environment per region, covering its functions |
+| AWS | Amazon ECS | Beta | One environment per cluster |
+| AWS | AWS Lambda | Beta | One environment per region, covering its functions |
 | Azure | Azure App Service | Early access | One environment per resource group, covering its running container-based web apps |
 | Google Cloud | Cloud Run | Early access | One environment per project and region, covering its services and jobs |
 | AWS | Amazon S3 | Planned | |
 | Google Cloud | Google Kubernetes Engine (GKE) | Planned | |
 | Azure | Azure Kubernetes Service (AKS) | Planned | |
 
-**Early access** platforms are enabled per organization. Contact Kosli's Customer Success team to have one turned on for yours.
+Cloud Capture is enabled per organization by Kosli's Customer Success team. Contact them to have it turned on for yours.
+
+**Beta** platforms are ready to use once Cloud Capture is enabled for your organization.
+
+**Early access** platforms need to be enabled separately, on top of Cloud Capture itself.
 
 **Planned** platforms are on the roadmap but not yet available, and the list may change.
 
