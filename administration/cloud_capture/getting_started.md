@@ -13,39 +13,94 @@ Cloud Capture is a managed service that runs on Kosli's infrastructure and conne
 
 ## Overview
 
-Getting started with Cloud Capture involves two steps.
+Getting started with Cloud Capture involves two steps. Each step has instructions for AWS and for GCP.
 
 <Steps>
   <Step title="Prepare your environment">
-    Grant Kosli read-only access to your cloud accounts for Cloud Capture.
+    <Tabs>
+      <Tab title="AWS">
+        In order for Cloud Capture to reach into your AWS cloud, to discover your ECS clusters and Lambdas, you need to grant permission to Kosli to do so. This requires the creation of an IAM role that Kosli can assume; the role will exist within your AWS account.
+
+        To simplify this process, Kosli has created a CloudFormation template that contains a role with the minimum set of permissions needed by Cloud Capture.  The role can be assumed by Kosli and is protected by an external Id; each organization within Kosli has its own external Id.  The CloudFormation template can be downloaded from the Settings page for your organization within the Kosli UI.
+
+        If you would rather create the role yourself, see [Cloud Capture Security](/administration/cloud_capture/security) for the trust policy and the full set of permissions the role needs.
+
+        The CloudFormation template can be deployed within an AWS account, or can be attached to an AWS Organizational Unit (OU) as a StackSet; this latter option ensures the correct IAM permissions are rolled out to all AWS accounts within the OU.
+      </Tab>
+      <Tab title="GCP">
+        <Warning>
+        This setup describes Google Kubernetes Engine (GKE), which is planned. Cloud Run is in early access; contact Kosli's Customer Success team for its setup.
+        </Warning>
+
+        In order for Cloud Capture to reach into your GCP project, to discover your GKE clusters, you need to grant permission to Kosli to do so.  This requires a service account in your project that Cloud Capture can impersonate through workload identity federation; the service account, and the workload identity pool that guards it, exist within your own project.
+
+        To simplify this process, Kosli has created a Terraform configuration that creates that service account, a custom role holding the minimum set of permissions needed by Cloud Capture, and a workload identity pool that accepts only the Kosli-side role created for your organization.
+
+        If you would rather create these resources yourself, see [Cloud Capture Security](/administration/cloud_capture/security) for the service account, workload identity pool and custom role that Cloud Capture needs.
+
+        <Steps>
+          <Step title="Download the Terraform configuration">
+            Download the Terraform configuration from the Settings page for your organization within the Kosli UI.
+
+            You also need two values from Kosli: the Kosli AWS account ID, and the name of the Kosli-side IAM role for your organization. The configuration isn't pre-filled with them. Copy them from the Cloud Capture section of your organization's Settings page in the Kosli UI.
+          </Step>
+          <Step title="Deploy with Infrastructure Manager">
+            Deploy the configuration once in each project that holds GKE clusters you want Cloud Capture to snapshot. Run the following from the directory containing the configuration:
+
+            ```bash
+            gcloud infra-manager deployments apply \
+                projects/<your-gcp-project>/locations/<your-gcp-region>/deployments/kosli-capture \
+                --service-account=projects/<your-gcp-project>/serviceAccounts/<deployer>@<your-gcp-project>.iam.gserviceaccount.com \
+                --local-source=. \
+                --input-values=project_id=<your-gcp-project>,kosli_aws_account_id=<value from Kosli>,kosli_role_name=<value from Kosli>
+            ```
+
+            Infrastructure Manager runs Terraform as the service account you name, so that service account needs permission to enable APIs and to create workload identity pools, service accounts, custom roles and project IAM bindings.
+          </Step>
+          <Step title="Share the outputs with Kosli">
+            Kosli needs two values to connect to your project. The configuration emits both as Terraform outputs:
+
+            - `kosli_capture_provider`: the full resource name of the workload identity provider
+            - `kosli_capture_service_account`: the email of the service account Cloud Capture impersonates
+
+            After the deployment completes, register them with Kosli through the Kosli API's cloud accounts endpoint. You can read them at any time from the deployment's latest revision:
+
+            ```bash
+            gcloud infra-manager revisions describe \
+                "$(gcloud infra-manager deployments describe \
+                    projects/<your-gcp-project>/locations/<your-gcp-region>/deployments/kosli-capture \
+                    --format='value(latestRevision)')" \
+                --format='yaml(applyResults.outputs)'
+            ```
+
+            {/* TODO: Link to the cloud accounts endpoint in the API reference, and show the call, once it is published. */}
+          </Step>
+        </Steps>
+      </Tab>
+    </Tabs>
   </Step>
   <Step title="Enable Cloud Capture">
-    Enable Cloud Capture for your Kosli org, and the regular snapshots will appear in Kosli.
+    <Tabs>
+      <Tab title="AWS">
+        When you have created the IAM role, using the CloudFormation template, you can activate Cloud Capture within the Kosli user-interface.
+
+        To check environment names, or to exclude resources, before any snapshots are recorded, switch on [Dry run](#dry-run) and add [skip tags](#excluding-resources) now, before you register accounts.
+
+        Kosli is not notified when you create or delete the stack, so you then register each account yourself. Accounts can only be registered while Cloud Capture is enabled. Open your organization's **Settings**, go to **Cloud Capture**, select **Register account**, and enter the ARN of the role the stack created. If you deploy the template as a StackSet, register every account in the OU, including accounts that join it later. If you delete a stack, also remove its account from the **Registered accounts** table; until you do, scans of that account fail because the role no longer exists.
+
+        Cloud Capture scans every five minutes unless you [choose another frequency](#scan-frequency), and picks up a registered account the next time it runs - you should see environments and snapshots appearing within a few minutes.
+      </Tab>
+      <Tab title="GCP">
+        When you have deployed the configuration and registered the workload identity provider name and service account email with Kosli, you can activate Cloud Capture within the Kosli user-interface.  Cloud Capture scans every five minutes unless you [choose another frequency](#scan-frequency), and once you have enabled it, Cloud Capture will pick up your environment the next time it runs - you should see environments and snapshots appearing within a few minutes.
+      </Tab>
+    </Tabs>
   </Step>
 </Steps>
 
+## Excluding resources
+
 <Tabs>
 <Tab title="AWS">
-
-### Prepare your environment
-
-In order for Cloud Capture to reach into your AWS cloud, to discover your ECS clusters and Lambdas, you need to grant permission to Kosli to do so. This requires the creation of an IAM role that Kosli can assume; the role will exist within your AWS account.
-
-To simplify this process, Kosli has created a CloudFormation template that contains a role with the minimum set of permissions needed by Cloud Capture.  The role can be assumed by Kosli and is protected by an external Id; each organization within Kosli has its own external Id.  The CloudFormation template can be downloaded from the Settings page for your organization within the Kosli UI.
-
-If you would rather create the role yourself, see [Cloud Capture Security](/administration/cloud_capture/security) for the trust policy and the full set of permissions the role needs.
-
-The CloudFormation template can be deployed within an AWS account, or can be attached to an AWS Organizational Unit (OU) as a StackSet; this latter option ensures the correct IAM permissions are rolled out to all AWS accounts within the OU.
-
-### Enable Cloud Capture
-
-When you have created the IAM role, using the CloudFormation template, you can activate Cloud Capture within the Kosli user-interface.
-
-Kosli is not notified when you create or delete the stack, so you then register each account yourself. Accounts can only be registered while Cloud Capture is enabled. Open your organization's **Settings**, go to **Cloud Capture**, select **Register account**, and enter the ARN of the role the stack created. If you deploy the template as a StackSet, register every account in the OU, including accounts that join it later. If you delete a stack, also remove its account from the **Registered accounts** table; until you do, scans of that account fail because the role no longer exists.
-
-Cloud Capture scans every five minutes unless you [choose another frequency](#scan-frequency), and picks up a registered account the next time it runs - you should see environments and snapshots appearing within a few minutes.
-
-### Excluding resources
 
 If there are resources you do not want Cloud Capture to snapshot, such as a test cluster or a service a vendor runs in your account, exclude them by tag. You choose the tags: in your organization's **Settings**, under **Cloud Capture**, the **Skip tags** panel takes any number of key and value pairs, and Cloud Capture skips every resource that carries one of them.
 
@@ -90,63 +145,6 @@ curl -X PUT "https://app.kosli.com/api/v2/cloud-capture/<your-org>/settings" \
 ```
 </Tab>
 <Tab title="GCP">
-
-<Warning>
-This setup describes Google Kubernetes Engine (GKE), which is planned. Cloud Run is in early access; contact Kosli's Customer Success team for its setup.
-</Warning>
-
-### Prepare your environment
-
-In order for Cloud Capture to reach into your GCP project, to discover your GKE clusters, you need to grant permission to Kosli to do so.  This requires a service account in your project that Cloud Capture can impersonate through workload identity federation; the service account, and the workload identity pool that guards it, exist within your own project.
-
-To simplify this process, Kosli has created a Terraform configuration that creates that service account, a custom role holding the minimum set of permissions needed by Cloud Capture, and a workload identity pool that accepts only the Kosli-side role created for your organization.
-
-If you would rather create these resources yourself, see [Cloud Capture Security](/administration/cloud_capture/security) for the service account, workload identity pool and custom role that Cloud Capture needs.
-
-<Steps>
-  <Step title="Download the Terraform configuration">
-    Download the Terraform configuration from the Settings page for your organization within the Kosli UI.
-
-    You also need two values from Kosli: the Kosli AWS account ID, and the name of the Kosli-side IAM role for your organization. The configuration isn't pre-filled with them. Copy them from the Cloud Capture section of your organization's Settings page in the Kosli UI.
-  </Step>
-  <Step title="Deploy with Infrastructure Manager">
-    Deploy the configuration once in each project that holds GKE clusters you want Cloud Capture to snapshot. Run the following from the directory containing the configuration:
-
-    ```bash
-    gcloud infra-manager deployments apply \
-        projects/<your-gcp-project>/locations/<your-gcp-region>/deployments/kosli-capture \
-        --service-account=projects/<your-gcp-project>/serviceAccounts/<deployer>@<your-gcp-project>.iam.gserviceaccount.com \
-        --local-source=. \
-        --input-values=project_id=<your-gcp-project>,kosli_aws_account_id=<value from Kosli>,kosli_role_name=<value from Kosli>
-    ```
-
-    Infrastructure Manager runs Terraform as the service account you name, so that service account needs permission to enable APIs and to create workload identity pools, service accounts, custom roles and project IAM bindings.
-  </Step>
-  <Step title="Share the outputs with Kosli">
-    Kosli needs two values to connect to your project. The configuration emits both as Terraform outputs:
-
-    - `kosli_capture_provider`: the full resource name of the workload identity provider
-    - `kosli_capture_service_account`: the email of the service account Cloud Capture impersonates
-
-    After the deployment completes, register them with Kosli through the Kosli API's cloud accounts endpoint. You can read them at any time from the deployment's latest revision:
-
-    ```bash
-    gcloud infra-manager revisions describe \
-        "$(gcloud infra-manager deployments describe \
-            projects/<your-gcp-project>/locations/<your-gcp-region>/deployments/kosli-capture \
-            --format='value(latestRevision)')" \
-        --format='yaml(applyResults.outputs)'
-    ```
-
-    {/* TODO: Link to the cloud accounts endpoint in the API reference, and show the call, once it is published. */}
-  </Step>
-</Steps>
-
-### Enable Cloud Capture
-
-When you have deployed the configuration and registered the workload identity provider name and service account email with Kosli, you can activate Cloud Capture within the Kosli user-interface.  Cloud Capture scans every five minutes unless you [choose another frequency](#scan-frequency), and once you have enabled it, Cloud Capture will pick up your environment the next time it runs - you should see environments and snapshots appearing within a few minutes.
-
-### Excluding resources
 
 Excluding resources by label is coming with GCP support.
 </Tab>
