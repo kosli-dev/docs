@@ -15,7 +15,7 @@ The Cloud Capture managed service uses the public cloud APIs to extract informat
 
 <Tabs>
 <Tab title="AWS">
-Kosli publishes a CloudFormation template, for use in AWS, showing the permissions needed.  The template is publicly accessible and can be used directly within an `aws cloudformation create-stack` call.
+Kosli publishes a CloudFormation template, for use in AWS, showing the permissions needed.  The template is publicly accessible and can be used directly within an `aws cloudformation create-stack` call. The current version, `aws/v0`, is published at `https://kosli-cloud-capture-templates.s3.eu-central-1.amazonaws.com/aws/v0/kosli-cloud-capture-access-role.yaml`, and the permissions shown on this page are taken from it.
 
 If you wish to build an IAM role for Cloud Capture without using our published CloudFormation template, the permissions needed are those shown below. The role must contain an Assume Role policy that allows the Kosli account to access the resources, and must include an externalId. Both of these values are supplied by Kosli and cannot be derived; you cannot construct the trust policy without them. Whichever way you create the role, then register the account with the role's ARN, as described in [Getting started](/administration/cloud_capture/getting_started).
 
@@ -92,6 +92,41 @@ Statement:
       - lambda:ListVersionsByFunction
     Resource: "*"
 
+  # Bucket-level settings only. Cloud Capture does not snapshot S3
+  # buckets yet; see the supported platforms on the overview page.
+  - Sid: S3BucketMetadataOnly
+    Effect: Allow
+    Action:
+      - s3:GetBucketLocation
+      - s3:GetBucketLogging
+      - s3:GetBucketPolicyStatus
+      - s3:GetBucketPublicAccessBlock
+      - s3:GetBucketTagging
+      - s3:GetBucketVersioning
+      - s3:GetEncryptionConfiguration
+      - s3:ListAllMyBuckets
+    Resource: "*"
+
+  # The explicit denies below are redundant given the allow-list
+  # above, but they are here so that a security reviewer can
+  # verify the boundary without having to reason about IAM
+  # defaults, and so that any future widening of this policy cannot
+  # accidentally grant data-plane access.
+  - Sid: NeverReadObjectData
+    Effect: Deny
+    Action:
+      - s3:GetObject
+      - s3:GetObjectAcl
+      - s3:GetObjectAttributes
+      - s3:GetObjectTagging
+      - s3:GetObjectTorrent
+      - s3:GetObjectVersion
+      - s3:GetObjectVersionAcl
+      - s3:GetObjectVersionAttributes
+      - s3:GetObjectVersionTagging
+      - s3:ListMultipartUploadParts
+    Resource: "*"
+
   # lambda:GetFunction returns a pre-signed URL to the deployment
   # package. That is source-code access, so it is denied outright.
   - Sid: NeverDownloadFunctionCode
@@ -106,7 +141,7 @@ Statement:
 <Tab title="GCP">
 
 <Warning>
-GCP support is coming soon
+This setup describes Google Kubernetes Engine (GKE), which is planned. Cloud Run is in early access; contact Kosli's Customer Success team for its setup.
 </Warning>
 
 Kosli publishes a Terraform configuration, for use with
