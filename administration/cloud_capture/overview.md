@@ -42,8 +42,9 @@ Cloud Capture connects to your cloud accounts using permissions that you manage.
 ## Security
 
 The security of your cloud infrastructure is the primary driver behind the internal architecture of
-Cloud Capture. You grant a read-only IAM role in your account, protected by an external ID that acts
-as a shared secret between Kosli and you. On Kosli's side, each Cloud Capture job runs under a role
+Cloud Capture. You grant a read-only identity in your cloud account, protected by a trust condition
+that only Kosli can satisfy: an external ID on AWS, which acts as a shared secret between Kosli and
+you, and a workload identity pool on Google Cloud. On Kosli's side, each Cloud Capture job runs under a role
 scoped to your organization alone, so a worker running for another tenant cannot reach your cloud
 account. Cloud Capture holds no tenant data; snapshots go straight to Kosli through the same ingest
 path as your existing pipelines. See [Cloud Capture Security](/administration/cloud_capture/security)

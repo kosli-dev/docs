@@ -90,7 +90,7 @@ curl -X PUT "https://app.kosli.com/api/v2/cloud-capture/<your-org>/settings" \
 <Tab title="GCP">
 
 <Warning>
-GCP support is coming soon
+This setup describes Google Kubernetes Engine (GKE), which is planned. Cloud Run is in early access; contact Kosli's Customer Success team for its setup.
 </Warning>
 
 ### Prepare your environment

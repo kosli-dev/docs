@@ -143,7 +143,7 @@ Statement:
 <Tab title="GCP">
 
 <Warning>
-GCP support is coming soon
+This setup describes Google Kubernetes Engine (GKE), which is planned. Cloud Run is in early access; contact Kosli's Customer Success team for its setup.
 </Warning>
 
 Kosli publishes a Terraform configuration, for use with
