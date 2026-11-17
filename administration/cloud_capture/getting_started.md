@@ -84,6 +84,8 @@ Getting started with Cloud Capture involves two steps. Each step has instruction
       <Tab title="AWS">
         When you have created the IAM role, using the CloudFormation template, you can activate Cloud Capture within the Kosli user-interface.
 
+        To check environment names, or to exclude resources, before any snapshots are recorded, switch on [Dry run](#dry-run) and add [skip tags](#excluding-resources) now, before you register accounts.
+
         Kosli is not notified when you create or delete the stack, so you then register each account yourself. Accounts can only be registered while Cloud Capture is enabled. Open your organization's **Settings**, go to **Cloud Capture**, select **Register account**, and enter the ARN of the role the stack created. If you deploy the template as a StackSet, register every account in the OU, including accounts that join it later. If you delete a stack, also remove its account from the **Registered accounts** table; until you do, scans of that account fail because the role no longer exists.
 
         Cloud Capture scans every five minutes unless you [choose another frequency](#scan-frequency), and picks up a registered account the next time it runs - you should see environments and snapshots appearing within a few minutes.
@@ -92,8 +94,6 @@ Getting started with Cloud Capture involves two steps. Each step has instruction
         When you have deployed the configuration and registered the workload identity provider name and service account email with Kosli, you can activate Cloud Capture within the Kosli user-interface.  Cloud Capture scans every five minutes unless you [choose another frequency](#scan-frequency), and once you have enabled it, Cloud Capture will pick up your environment the next time it runs - you should see environments and snapshots appearing within a few minutes.
       </Tab>
     </Tabs>
-
-    To check the environment names Cloud Capture would use before any snapshots are recorded, start with a [dry run](#dry-run). On AWS you can also keep resources out of Cloud Capture; see [Excluding resources](#excluding-resources).
   </Step>
 </Steps>
 
