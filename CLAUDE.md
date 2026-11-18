@@ -169,7 +169,7 @@ four needs, so they sit in one tab, sorted by form inside it.
 | Environments and runtime | …is reporting, or interpreting, what is actually running |
 | Record evidence | …is instrumenting a pipeline to produce evidence |
 | Reference | …knows what they want and needs exact syntax or values |
-| Changelog | …wants to know what shipped |
+| Product updates | …wants to know what shipped |
 
 If a page fails every test, the structure is wrong, not the page — raise it.
 
