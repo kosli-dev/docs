@@ -291,7 +291,7 @@ kosli evaluate policy \
 | `--name` | The attestation name the decision is recorded under. Defaults to `<control>-decision`. |
 | `--params` | Values the policy reads as `data.params`, as inline JSON or `@file.json`. They must match the params schema of the policy version that runs. |
 
-Kosli evaluates the policy where the trails are stored and records the decision in the same request, so the outcome never passes through your pipeline. The decision carries its evidence: the policy version that ran, the params, the result, and the policy files as an attachment. You can record more than one decision for the same control; the most recent one is used when evaluating compliance.
+Kosli evaluates the policy where the trails are stored and records the decision in the same request, so the outcome never passes through your pipeline. The decision carries its evidence: the policy version that ran, the params, and the result. You can record more than one decision for the same control; the most recent one is used when evaluating compliance.
 
 ### Pinning a policy version
 
@@ -416,7 +416,7 @@ The Decisions tab is the default view. It lists every decision recorded against 
   <img src="/images/tutorials/controls-decisions.png" alt="Decisions tab for a control showing decisions with timestamp, compliant/non-compliant outcome, trail, and artifact fingerprint" />
 </Frame>
 
-Select a decision to open its detail, showing the trail it is recorded on, the trails it was evaluated against and when, the policy and version that judged it, the artifact it applies to, and the evaluated policy bundle (`policy.tar.gz`) attached as evidence.
+Select a decision to open its detail, showing the trail it is recorded on, the trails it was evaluated against and when, the policy and version that judged it, and the artifact it applies to.
 
 <Frame>
   <img src="/images/tutorials/controls-decision-detail.png" alt="Decision detail tray showing the trail, the trail it was evaluated against, the policy and its version, the artifact, and the policy.tar.gz evidence file for a decision" />
