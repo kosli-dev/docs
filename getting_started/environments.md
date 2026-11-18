@@ -30,8 +30,8 @@ Make sure that type of Kosli environment matches the type of the environment you
   <Tab title="UI" icon="desktop">
     You can also create an environment directly from [app.kosli.com](https://app.kosli.com).
 
-    - Make sure you've selected the organization you want to use from the orgs dropdown in the top left corner.
-    - Click on `Environments` in the left navigation menu.
+    - Make sure you've selected the organization you want to use from the organization switcher at the top of the sidebar.
+    - Click **Environments** in the **Evidence** group of the sidebar.
     - Click the `Add new environment` button
     - Fill in the environment name and description and select a type, then click `Save Environment`.
 

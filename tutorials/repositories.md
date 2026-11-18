@@ -106,7 +106,7 @@ After attesting, verify that Kosli captured your repository using the CLI:
 kosli list repos
 ```
 
-You should also be able to see the repository in the [Kosli app](https://app.kosli.com) by navigating to **Repositories** in the sidebar. Your newly captured repository appears in the list, and you can search by name to find it.
+You should also be able to see the repository in the [Kosli app](https://app.kosli.com) by navigating to **Repos**, in the **Governance** group of the sidebar. Your newly captured repository appears in the list, and you can search by name to find it.
 
 <Frame><img src="/images/repos-list.png" alt="Kosli app showing the repositories list with repos from multiple VCS providers" /></Frame>
 

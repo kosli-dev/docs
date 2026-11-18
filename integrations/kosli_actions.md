@@ -83,7 +83,7 @@ Provide a comma-separated list of recipient email addresses. Notifications are s
 
 # Manage Actions in the UI
 
-You can manage Actions for your organization in the Kosli UI from the `Actions` section in the left navigation menu. The Actions sections enables you to:
+You can manage Actions for your organization in the Kosli UI from **Actions**, in the **Control** group of the sidebar. The Actions sections enables you to:
 - **Create Notifications:** Create a new notifications settings.
 - **Delete Notifications:** Remove existing notification settings that are no longer needed.
 - **Update Notifications:** Modify notification settings as needed.

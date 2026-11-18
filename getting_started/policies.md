@@ -44,7 +44,7 @@ kosli get policy prod-requirements
 See [kosli create policy](/client_reference/kosli_create_policy/) for usage details and examples.
 
 <Note>
-Once you create a policy, you will be able to see it in the UI under `policies` in the left navigation menu.
+Once you create a policy, you will be able to see it in the UI under **Policies**, in the **Control** group of the sidebar.
 </Note>
 
 ## Policy rules
