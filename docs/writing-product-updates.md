@@ -1,11 +1,11 @@
 # Writing a product update
 
-[`product-updates.mdx`](/product-updates.mdx) is the list of new
+[`changelog/product-updates.mdx`](/changelog/product-updates.mdx) is the list of new
 features and improvements in the Kosli app. It is not the CLI and Terraform changelog in
 `changelog/index.mdx`, which a workflow writes from release tags.
 
 Each entry on the page is also an item in the page's RSS feed,
-`https://docs.kosli.com/product-updates/rss.xml`. The Kosli app reads that feed
+`https://docs.kosli.com/changelog/product-updates/rss.xml`. The Kosli app reads that feed
 and shows the entries in its **What's new** menu, with an unread badge. So an entry is
 written for two readers: someone on the docs page, and someone in the app who sees only
 the title and a one-sentence summary.

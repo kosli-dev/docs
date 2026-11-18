@@ -603,7 +603,7 @@
         {
           "group": "News",
           "pages": [
-            "product-updates",
+            "changelog/product-updates",
             "changelog/index"
           ]
         }

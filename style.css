@@ -18,7 +18,7 @@
 
 /* ─── Product updates changelog ───────────────────────────────────────────── */
 /*
- * Tags and descriptions on product-updates.mdx are for the RSS feed
+ * Tags and descriptions on changelog/product-updates.mdx are for the RSS feed
  * consumer and should not show on the page. Scoped to that page through the
  * #product-updates-page marker so the main changelog keeps its tags and filter.
  */

@@ -1,13 +1,5 @@
 [
   {
-    "source": "/changelog/product-updates",
-    "destination": "/product-updates"
-  },
-  {
-    "source": "/changelog/product-updates/rss.xml",
-    "destination": "/product-updates/rss.xml"
-  },
-  {
     "source": "/helm/k8s_reporter",
     "destination": "/helm/k8s_reporter/overview"
   },
