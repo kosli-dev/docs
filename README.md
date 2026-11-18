@@ -44,3 +44,5 @@ Mintlify Autopilot keeps three areas in sync with their upstream repositories. I
 - **Changelog** (`changelog/index.mdx`): every Monday and Friday at 09:00 UTC, Autopilot writes an `<Update>` entry for each new release tag of [`kosli-dev/cli`](https://github.com/kosli-dev/cli), [`kosli-dev/terraform-provider-kosli`](https://github.com/kosli-dev/terraform-provider-kosli) and `kosli-dev/server`.
 - **Terraform reference** (`terraform-reference/`): every Monday and Friday at 09:00 UTC, Autopilot syncs the pages to the latest release tag of [`kosli-dev/terraform-provider-kosli`](https://github.com/kosli-dev/terraform-provider-kosli).
 - **GitHub Action reference** (`github-action-reference/setup_cli_action.md`): every Monday at 09:00 UTC, Autopilot syncs the page to the `README.md` and `action.yml` of the latest [`kosli-dev/setup-cli-action`](https://github.com/kosli-dev/setup-cli-action) release.
+
+Autopilot never updates `changelog/product-updates.mdx` on its own. The team writes product updates by hand, and Autopilot only edits the page when a teammate asks it to.
