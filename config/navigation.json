@@ -597,11 +597,16 @@
       ]
     },
     {
-      "tab": "Changelog",
+      "tab": "Product updates",
       "icon": "clock",
-      "pages": [
-        "changelog/index",
-        "changelog/product-updates"
+      "groups": [
+        {
+          "group": "Changelogs",
+          "pages": [
+            "changelog/product-updates",
+            "changelog/index"
+          ]
+        }
       ]
     }
   ]
