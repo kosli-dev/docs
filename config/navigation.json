@@ -601,7 +601,7 @@
       "icon": "clock",
       "groups": [
         {
-          "group": "Changelogs",
+          "group": "News",
           "pages": [
             "changelog/product-updates",
             "changelog/index"
