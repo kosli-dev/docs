@@ -45,7 +45,7 @@ Most of the diff volume in this repo is machine-generated. A finding on a genera
 
 The filename maps to the source: `client_reference/kosli_attest_sonar.md` ← `cmd/kosli/attestSonar.go`; `kosli_create_attestation-type.md` ← `cmd/kosli/createAttestationType.go`; `helm/k8s_reporter/karpenter.mdx` ← `charts/k8s-reporter/mintlify/karpenter.md.gotmpl`.
 
-**Agent-synced from an upstream source of truth — a hand-edit survives but drifts.** `terraform-reference/` (from `kosli-dev/terraform-provider-kosli`) and `github-action-reference/setup_cli_action.md` (from `kosli-dev/setup-cli-action`'s `README.md` and `action.yml`) are written by the `.mintlify/workflows/` agents. Editing them here works, but if the upstream source disagrees the next sync will undo it. Report both the page fix and the upstream mismatch.
+**Agent-synced from an upstream source of truth — a hand-edit survives but drifts.** `terraform-reference/` (from `kosli-dev/terraform-provider-kosli`) and `github-action-reference/setup_cli_action.md` (from `kosli-dev/setup-cli-action`'s `README.md` and `action.yml`) are kept in sync by Mintlify Autopilot. Editing them here works, but if the upstream source disagrees the next sync will undo it. Report both the page fix and the upstream mismatch.
 
 **Not generated, despite the directory:** `client_reference/overview.md` and `client_reference/output_and_verbosity.md` are hand-authored — the regeneration step only removes `kosli*.md`. Only the version string in `overview.md` is stamped by the workflow. Review these normally.
 

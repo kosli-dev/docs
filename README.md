@@ -39,4 +39,8 @@ Opening a PR automatically creates a Mintlify preview environment. Merging to `m
 
 ## Automation
 
-**`.mintlify/workflows/update-changelog.md`** — A Mintlify agent workflow that runs every Monday at 09:00 UTC. It reviews all PRs merged to [`kosli-dev/cli`](https://github.com/kosli-dev/cli) and [`kosli-dev/terraform-provider-kosli`](https://github.com/kosli-dev/terraform-provider-kosli) since the last changelog entry and writes a new `<Update>` block to `changelog/index.mdx`. Notifications are posted to the `#docs` Slack channel.
+Mintlify Autopilot keeps three areas in sync with their upstream repositories. It opens a PR for each update and announces it in the `#pr-reviews` Slack channel.
+
+- **Changelog** (`changelog/index.mdx`): every Monday and Friday at 09:00 UTC, Autopilot writes an `<Update>` entry for each new release tag of [`kosli-dev/cli`](https://github.com/kosli-dev/cli), [`kosli-dev/terraform-provider-kosli`](https://github.com/kosli-dev/terraform-provider-kosli) and `kosli-dev/server`.
+- **Terraform reference** (`terraform-reference/`): every Monday and Friday at 09:00 UTC, Autopilot syncs the pages to the latest release tag of [`kosli-dev/terraform-provider-kosli`](https://github.com/kosli-dev/terraform-provider-kosli).
+- **GitHub Action reference** (`github-action-reference/setup_cli_action.md`): every Monday at 09:00 UTC, Autopilot syncs the page to the `README.md` and `action.yml` of the latest [`kosli-dev/setup-cli-action`](https://github.com/kosli-dev/setup-cli-action) release.

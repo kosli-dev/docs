@@ -32,7 +32,7 @@ Run `scripts/dev_live_docs.sh` to regenerate locally; it restores `client_refere
 
 In the CLI's Go long descriptions, **`^` means backtick** (`^--jq^`, `^jq^`) and `kosli docs` substitutes it. Write `^`, not a literal backtick, when editing those strings.
 
-**Agent-synced from upstream — an edit survives but will drift.** `terraform-reference/` (from `kosli-dev/terraform-provider-kosli`) and `github-action-reference/setup_cli_action.md` (from `kosli-dev/setup-cli-action`'s `README.md` and `action.yml`) are maintained by the `.mintlify/workflows/` agents. Edit the page when it is wrong, but check it against upstream first — if upstream disagrees, the next sync undoes you.
+**Agent-synced from upstream — an edit survives but will drift.** `terraform-reference/` (from `kosli-dev/terraform-provider-kosli`) and `github-action-reference/setup_cli_action.md` (from `kosli-dev/setup-cli-action`'s `README.md` and `action.yml`) are kept in sync by Mintlify Autopilot. Edit the page when it is wrong, but check it against upstream first — if upstream disagrees, the next sync undoes you.
 
 **Hand-authored despite the directory:** `client_reference/overview.md` and `client_reference/output_and_verbosity.md`. Regeneration only removes `kosli*.md`. Edit these freely.
 
@@ -87,7 +87,7 @@ Three rules the table does not carry:
 
 ## Changelog
 
-The changelog is for product changes, not doc changes — a new page describing an existing feature does not get an entry. When documenting a feature that *did* ship, check whether `changelog/index.mdx` already covers it, and make the entry and the page agree. Changelog entries are written by `.mintlify/workflows/update-changelog.md` from release tags; if an entry is wrong, fix the entry too.
+The changelog is for product changes, not doc changes — a new page describing an existing feature does not get an entry. When documenting a feature that *did* ship, check whether `changelog/index.mdx` already covers it, and make the entry and the page agree. Changelog entries are written by Mintlify Autopilot from release tags; if an entry is wrong, fix the entry too.
 
 Follow the existing `<Update>` format exactly and ask which `tags` value applies (`"CLI"`, `"Platform"`, `"Terraform Provider"`, `"GitHub Action"`) before writing one.
 
