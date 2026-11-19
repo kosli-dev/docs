@@ -29,7 +29,8 @@ mint update         # Update the mint CLI tool
 - **`config/`** — Split config: `navigation.json` (page routing — every new page must be added here), `redirects.json`, `footer.json`.
 - **Content directories** — `understand_kosli/`, `getting_started/`, `administration/`, `user/`, `integrations/`, `tutorials/`, `implementation_guide/`, `labs/`, `troubleshooting/`, `faq/`, and the reference directories `client_reference/`, `helm/`, `policy-reference/`, `terraform-reference/`, `template-reference/`, `github-action-reference/`. Directory names don't decide where a page appears; `config/navigation.json` does.
 - **`snippets/`** — Reusable MDX fragments (only for content used in 2+ pages)
-- **`changelog/`** — Product changelog. `changelog/product-updates.mdx` also feeds the What's new menu in the Kosli app: see [Writing a product update](/docs/writing-product-updates.md) before adding an entry.
+- **`changelog/`** — Product changelog.
+- **`product-updates.mdx`** — Product updates. Its RSS feed also feeds the What's new menu in the Kosli app: see [Writing a product update](/docs/writing-product-updates.md) before adding an entry.
 
 See [`CLAUDE.md`](CLAUDE.md) for full authoring conventions.
 
@@ -45,4 +46,4 @@ Mintlify Autopilot keeps three areas in sync with their upstream repositories. I
 - **Terraform reference** (`terraform-reference/`): every Monday and Friday at 09:00 UTC, Autopilot syncs the pages to the latest release tag of [`kosli-dev/terraform-provider-kosli`](https://github.com/kosli-dev/terraform-provider-kosli).
 - **GitHub Action reference** (`github-action-reference/setup_cli_action.md`): every Monday at 09:00 UTC, Autopilot syncs the page to the `README.md` and `action.yml` of the latest [`kosli-dev/setup-cli-action`](https://github.com/kosli-dev/setup-cli-action) release.
 
-Autopilot never updates `changelog/product-updates.mdx` on its own. The team writes product updates by hand, and Autopilot only edits the page when a teammate asks it to.
+Autopilot never updates `product-updates.mdx` on its own. The team writes product updates by hand, and Autopilot only edits the page when a teammate asks it to.
