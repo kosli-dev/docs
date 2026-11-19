@@ -27,6 +27,7 @@ Keys that cannot form a directory tree are rejected and fail the snapshot, namin
 By default each object's SHA256 comes from downloading the object and hashing it. `--fingerprint-source metadata` reads the SHA256 checksum S3 stores for the object instead, which skips the download, the temporary disk and the hashing. Everything else, like the keys, the `.kosli_ignore` rules, the way digests combine into the fingerprint, is the same in both modes, so the fingerprint is identical and a snapshot matches the artifact you attested either way. Two conditions apply:
 - Every contributing object must carry a full-object SHA256 checksum. S3 only stores one when the upload asked for it, for example `aws s3api put-object --checksum-algorithm SHA256`. Objects without one fail the snapshot, all named in one run.
 - A multipart upload gets a composite SHA256, which hashes the checksums of the parts rather than the object content, so it cannot serve as the object's fingerprint. Such an object can be collapsed into a single part in place with `aws s3api copy-object --checksum-algorithm SHA256 --copy-source yourBucket/yourKey --bucket yourBucket --key yourKey`.
+`--skip-unusable-checksums` relaxes both conditions: an object whose SHA256 checksum is missing, composite or undecodable is left out with a warning that names it, and the snapshot is reported from the remaining objects, as if the bucket did not hold the skipped ones. Such a snapshot has a different fingerprint from an artifact attested from the full bucket content, so it does not match that artifact in Kosli until every object carries a usable checksum. When no object is left, an empty snapshot is reported, so the environment shows the bucket as holding no artifact.
 A root `.kosli_ignore` is still downloaded in this mode, because its rules decide which objects contribute; the objects it excludes are never fetched and need no checksum. Reading a checksum does not need fewer permissions than downloading: AWS requires `s3:GetObject` for both, and an SSE-KMS encrypted object additionally needs `kms:GenerateDataKey` and `kms:Decrypt` either way.
 
 To specify paths in a directory artifact that should always be excluded from the SHA256 calculation, you can add a `.kosli_ignore` file to the root of the artifact.
@@ -46,10 +47,11 @@ Paths the list already matches stay excluded whatever is later added there, so k
 | `-D`, `--dry-run` | bool | [optional] Run in dry-run mode. When enabled, no data is sent to Kosli and the CLI exits with 0 exit code regardless of any errors. |
 | `-x`, `--exclude` | strings | [optional] The comma separated list of file and/or directory paths in the S3 bucket to exclude when fingerprinting. Paths match by literal prefix. Cannot be used together with `--include` or `--include-regex`. |
 | `--exclude-regex` | strings | [optional] The comma separated list of Go regular expressions matched against object keys in the S3 bucket to exclude when fingerprinting. Cannot be used together with `--include` or `--include-regex`. |
-| `--fingerprint-source` | string | [defaulted] Where each object's SHA256 comes from when fingerprinting the bucket. Valid sources are: [content, metadata]. 'content' downloads every contributing object and hashes it. 'metadata' reads the SHA256 checksum S3 stores for each object instead, which skips the download but requires every contributing object to have been uploaded with a full-object SHA256 checksum. Both produce the same fingerprint and need the same permissions. (default "content") |
+| `--fingerprint-source` | string | [defaulted] Where each object's SHA256 comes from when fingerprinting the bucket. Valid sources are: [content, metadata]. 'content' downloads every contributing object and hashes it. 'metadata' reads the SHA256 checksum S3 stores for each object instead, which skips the download but requires every contributing object to have been uploaded with a full-object SHA256 checksum, unless `--skip-unusable-checksums` is set. Both produce the same fingerprint and need the same permissions. (default "content") |
 | `-h`, `--help` | bool | help for s3 |
 | `-i`, `--include` | strings | [optional] The comma separated list of file and/or directory paths in the S3 bucket to include when fingerprinting. Paths match by literal prefix. Cannot be used together with `--exclude` or `--exclude-regex`. |
 | `--include-regex` | strings | [optional] The comma separated list of Go regular expressions matched against object keys in the S3 bucket to include when fingerprinting. Cannot be used together with `--exclude` or `--exclude-regex`. |
+| `--skip-unusable-checksums` | bool | [optional] With `--fingerprint-source` metadata, leave out every object whose SHA256 checksum is missing, multipart (composite) or undecodable instead of failing the snapshot. The skipped objects are named in a warning. The fingerprint then covers the remaining objects only, so it does not match an artifact attested from the full bucket content. When no object is left, an empty snapshot is reported, so the environment shows the bucket as holding no artifact. |
 
 
 ## Flags inherited from parent commands
@@ -137,6 +139,20 @@ kosli snapshot s3 yourEnvironmentName
 kosli snapshot s3 yourEnvironmentName 
 	--bucket yourBucketName 
 	--fingerprint-source metadata 
+
+```
+</Accordion>
+<Accordion title="report contents of an AWS S3 bucket from the stored SHA256 checksums,">
+```shell
+
+```
+</Accordion>
+<Accordion title="leaving out the objects that have no usable one">
+```shell
+kosli snapshot s3 yourEnvironmentName 
+	--bucket yourBucketName 
+	--fingerprint-source metadata 
+	--skip-unusable-checksums 
 ```
 </Accordion>
 </AccordionGroup>
