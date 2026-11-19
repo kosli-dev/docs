@@ -82,7 +82,7 @@ To drop the file from the fingerprint safely, move its entries to `--exclude` an
 	<Tab title="GitHub">
 	View an example of the `kosli fingerprint` command in GitHub.
 
-	In [this YAML file](https://github.com/cyber-dojo/snyk-scanning/blob/7ec3715a952611112bb259ed92b6986335183ff3/.github/workflows/artifact_snyk_test.yml#L189)
+	In [this YAML file](https://github.com/cyber-dojo/snyk-scanning/blob/66785384faab54e612390a18cc8d96fc529ee6f6/.github/workflows/artifact_snyk_test.yml#L190)
 	</Tab>
 </Tabs>
 

@@ -1,12 +1,14 @@
 ---
 title: "kosli evaluate trails"
-tag: "BETA"
+tag: "DEPRECATED"
 description: "Evaluate multiple trails against a policy."
 ---
 
-import CliBetaNotice from "/snippets/cli-beta-notice.mdx";
+import CliDeprecatedNotice from "/snippets/cli-deprecated-notice.mdx";
 
-<CliBetaNotice />
+<CliDeprecatedNotice />
+
+use 'kosli evaluate policy --context trail=FLOW-NAME/TRAIL-NAME' instead, which evaluates the policy in Kosli
 
 ## Synopsis
 

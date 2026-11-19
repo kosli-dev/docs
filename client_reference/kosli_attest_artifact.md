@@ -57,7 +57,9 @@ Its fingerprint is calculated after the build. The build command and its duratio
 `build_command` and `build_duration_seconds` annotations. Masking in `build_command` only covers the API token and the
 values of environment variables whose names look secret (e.g. containing TOKEN, SECRET, PASS, KEY or AUTH); a secret
 typed literally in the command is recorded as is, so use `--record-build-command=false` to leave out the command.
-If the build fails, nothing is attested and Kosli exits with the build's exit code.
+If the build fails, nothing is attested and Kosli exits with the build's exit code. With
+`--fail-on-attest-error=false`, a network error, or a 5xx, 429 or 409 (lock conflict) response from Kosli, after
+a successful build prints a warning and exits 0; any other 4xx response, such as an invalid token, still fails.
 
 ## Flags
 | Flag | Type | Description |
@@ -72,6 +74,7 @@ If the build fails, nothing is attested and Kosli exits with the build's exit co
 | `-x`, `--exclude` | strings | [optional] The comma separated list of directories and files to exclude from fingerprinting. Can take glob patterns. Only applicable for `--artifact-type` dir. |
 | `--external-fingerprint` | stringToString | [optional] A SHA256 fingerprint of an external attachment represented by `--external-url`. The format is label=fingerprint (labels cannot contain '.' or '='). This flag can be set multiple times. There must be an external url with a matching label for each external fingerprint. |
 | `--external-url` | stringToString | [optional] Add labeled reference URL for an external resource. The format is label=url (labels cannot contain '.' or '='). This flag can be set multiple times. If the resource is a file or dir, you can optionally add its fingerprint via `--external-fingerprint` |
+| `--fail-on-attest-error` | bool | [defaulted] [experimental] With a build command, fail when the request to Kosli fails. Set to false to print a warning and exit 0 after a successful build, so a Kosli outage does not fail the build. Only a network error, or a 5xx, 429 or 409 (lock conflict) response after the client's retries, is softened; any other 4xx response, such as an invalid token (401) or an unknown flow (404), still fails. Subject to change. (default true) |
 | `-F`, `--fingerprint` | string | [conditional] The SHA256 fingerprint of the artifact. Only required if you don't specify '`--artifact-type`'. |
 | `-f`, `--flow` | string | The Kosli flow name. |
 | `-h`, `--help` | bool | help for artifact |
@@ -108,12 +111,12 @@ If the build fails, nothing is attested and Kosli exits with the build's exit co
 	<Tab title="GitHub">
 	View an example of the `kosli attest artifact` command in GitHub.
 
-	In [this YAML file](https://github.com/cyber-dojo/reusable-actions-workflows/blob/25f0b797c18403de1c8490a9a71bbe9789c809a9/.github/workflows/secure-docker-build.yml#L210), which created [this Kosli Event](https://app.kosli.com/cyber-dojo/flows/differ-ci/trails/d8dd8e1d64e95cdd09a677a95e874b2ed518bf93?attestation_id=d6f1b255-9fa7-4ee3-9438-fb70fdcb).
+	In [this YAML file](https://github.com/cyber-dojo/reusable-actions-workflows/blob/25f0b797c18403de1c8490a9a71bbe9789c809a9/.github/workflows/secure-docker-build.yml#L210), which created [this Kosli Event](https://app.kosli.com/cyber-dojo/flows/differ-ci/trails/6b3ef8b0e2436e882515c3a7310b84dee24bde2f?attestation_id=f741ae29-7cc4-44e5-a2bd-9168c06b).
 	</Tab>
 	<Tab title="GitLab">
 	View an example of the `kosli attest artifact` command in GitLab.
 
-	In [this YAML file](https://gitlab.com/cyber-dojo/creator/-/blob/65fd2bfa2478534ea4bc5ccf30f6bfc6aab7550c/.gitlab/workflows/main.yml#L111), which created [this Kosli Event](https://app.kosli.com/cyber-dojo/flows/creator-ci/trails/fd680a809587fa6e4071fe874d63192f65f251c1?attestation_id=0e7140db-7422-4ea7-954b-fa840a0a).
+	In [this YAML file](https://gitlab.com/cyber-dojo/creator/-/blob/65fd2bfa2478534ea4bc5ccf30f6bfc6aab7550c/.gitlab/workflows/main.yml#L111), which created [this Kosli Event](https://app.kosli.com/cyber-dojo/flows/creator-ci/trails/049c9e06227ba3262b91b585ae6594c1d0f79666?attestation_id=4a4c1d74-d625-49d3-a1db-8bc75ca9).
 	</Tab>
 </Tabs>
 
