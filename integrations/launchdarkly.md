@@ -7,7 +7,7 @@ LaunchDarkly feature flag changes can be tracked in [Kosli trails](/getting_star
 
 ## Setting up in Kosli
 
-To set up the integration, navigate to the LaunchDarkly integration page of your org in the [Kosli app](https://app.kosli.com/).
+To set up the integration, open the LaunchDarkly integration page of your org in the [Kosli app](https://app.kosli.com/): click **Settings** at the bottom of the sidebar, then **Integrations**.
 
 <Frame >
   <img src="/images/launchdarkly-integration.png" alt="Descriptive alt text" />

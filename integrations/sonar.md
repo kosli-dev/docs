@@ -9,7 +9,7 @@ Some parameters must be passed to the Sonar scanner when it is run (e.g. the nam
 
 ## Setting up in Kosli
 
-To set up the integration, navigate to the Sonar integration page for your org in the [Kosli app](https://app.kosli.com/).
+To set up the integration, open the Sonar integration page for your org in the [Kosli app](https://app.kosli.com/): click **Settings** at the bottom of the sidebar, then **Integrations**.
 
 After switching on the integration, you will be provided with a webhook and a secret.
 

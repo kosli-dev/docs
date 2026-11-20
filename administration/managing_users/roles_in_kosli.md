@@ -218,8 +218,8 @@ This procedure does not apply to users provisioned through [automated user provi
 To assign or change a user's role:
 
 1. Log in to Kosli as an Admin
-2. Navigate to your organization from the left navigation menu
-3. Go to `Settings` > `User Management`
+2. Select your organization from the organization switcher at the top of the sidebar
+3. Click **Settings** at the bottom of the sidebar, then **User Management**
 4. Find the user you want to modify
 5. Select their new role from the dropdown menu
 
