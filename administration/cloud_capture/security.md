@@ -285,7 +285,7 @@ To withdraw access, remove the role assignments or the tag from the subscription
 </Tab>
 <Tab title="Google Cloud">
 
-Google Cloud support is in early access, and within it GKE support is in beta.
+Google Cloud support is in early access.
 
 Kosli publishes a Terraform configuration, for use with
 [Infrastructure Manager](https://cloud.google.com/infrastructure-manager/docs), that creates

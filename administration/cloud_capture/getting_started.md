@@ -120,7 +120,7 @@ Getting started with Cloud Capture involves two steps. Each step has instruction
         Cloud Capture scans every five minutes unless you [choose another frequency](#scan-frequency), and picks up a registered subscription the next time it runs - you should see environments and snapshots appearing within a few minutes.
       </Tab>
       <Tab title="Google Cloud">
-        Accounts can only be registered while Cloud Capture is enabled. When you have deployed the configuration, continue the registration form: enter the project ID, the workload identity provider name and the service account email, and choose the regions and services to scan. Cloud Run is selected for a new project. GKE is in beta and is not selected, so select it if you want clusters snapshotted.
+        Accounts can only be registered while Cloud Capture is enabled. When you have deployed the configuration, continue the registration form: enter the project ID, the workload identity provider name and the service account email, and choose the regions and services to scan. Cloud Run is selected for a new project. GKE is not selected, so select it if you want clusters snapshotted.
 
         Cloud Capture never connects to a GKE cluster. It lists the project's clusters and reads their pods from Google's Cloud Asset Inventory, so a private cluster is snapshotted like any other and nothing is installed in it. Cloud Asset Inventory can be a few minutes behind a cluster, so a pod that lives for less time than that may never be seen.
 
@@ -155,7 +155,7 @@ How the tags are matched:
 
 - A resource is skipped when any one of its tags equals any one of the skip tags, key and value both, exactly as AWS stores them. Tags are case-sensitive, so `Env=test` does not match `env=test`. A key on its own does not match: to skip both `env=test` and `env=staging`, add both.
 - The tag is read on the resource Cloud Capture snapshots. An ECS cluster is skipped with everything in it, its services and tasks included; tags on a service or a task definition are not read. A Lambda function is skipped on its own, and the region's Lambda environment in Kosli is made up of the functions that remain. An S3 bucket is only ever snapshotted when it carries an [S3 opt-in tag](#capturing-s3-buckets); a bucket that carries an opt-in tag and a skip tag is skipped.
-- The change takes effect on the next scan. A Kosli environment that was already being captured keeps its last snapshot and receives no new ones; nothing is deleted. Remove the tag, or the skip tag, and the next run picks the resource up again.
+- The change takes effect on the next scan. A Kosli environment that was already being captured keeps its last snapshot and receives no new ones; nothing is deleted. Remove the skip tag from the resource, and the next run picks it up again.
 - Skip tags, like the other Cloud Capture settings, can only be changed while Cloud Capture is enabled.
 - The IAM role created by the CloudFormation template already grants the permissions needed to read tags, `ecs:DescribeClusters` and `lambda:ListTags`, so no change to the role is needed.
 
