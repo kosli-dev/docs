@@ -19,7 +19,7 @@ rss: true
 ## New features
 
 - **Keep the build green during a Kosli outage (experimental)**: when `kosli attest artifact` runs a build command, `--fail-on-attest-error=false` prints a warning and exits 0 if the build succeeds but Kosli can't be reached, or returns a 5xx, 429 or 409 after retries. Other 4xx responses, such as an invalid token, still fail. See the [`kosli attest artifact` reference](/client_reference/kosli_attest_artifact).
-- **Build once, attest to every host**: `kosli attest artifact` with a build command now works with multiple hosts. The build runs once and the attestation goes to each host with its own token. If a host fails, the others are still tried and every failing host is listed.
+- **Build once, attest to every host**: `kosli attest artifact` with a build command now works with multiple hosts, set as comma-separated `--host` and `--api-token` lists. The build runs once and the attestation goes to each host with its own token. If a host fails, the others are still tried and every failing host is listed.
 
 ## Updates
 
