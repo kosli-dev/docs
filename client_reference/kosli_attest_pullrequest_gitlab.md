@@ -81,7 +81,7 @@ The commit is read from the git repository at `--repo-root`, which must be the r
 	<Tab title="GitLab">
 	View an example of the `kosli attest pullrequest gitlab` command in GitLab.
 
-	In [this YAML file](https://gitlab.com/cyber-dojo/creator/-/blob/65fd2bfa2478534ea4bc5ccf30f6bfc6aab7550c/.gitlab/workflows/main.yml#L75), which created [this Kosli Event](https://app.kosli.com/cyber-dojo/flows/creator-ci/trails/049c9e06227ba3262b91b585ae6594c1d0f79666?attestation_id=e16eb816-5054-4d37-bae3-7f523c41).
+	In [this YAML file](https://gitlab.com/cyber-dojo/creator/-/blob/65fd2bfa2478534ea4bc5ccf30f6bfc6aab7550c/.gitlab/workflows/main.yml#L75), which created [this Kosli Event](https://app.kosli.com/cyber-dojo/flows/creator-ci/trails/2bf36429ac734ade22e72033fa3d663080b53b82?attestation_id=c493eba5-b1dd-4507-9da9-236ffeb3).
 	</Tab>
 </Tabs>
 

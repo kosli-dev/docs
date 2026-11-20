@@ -111,12 +111,12 @@ a successful build prints a warning and exits 0; any other 4xx response, such as
 	<Tab title="GitHub">
 	View an example of the `kosli attest artifact` command in GitHub.
 
-	In [this YAML file](https://github.com/cyber-dojo/reusable-actions-workflows/blob/25f0b797c18403de1c8490a9a71bbe9789c809a9/.github/workflows/secure-docker-build.yml#L210), which created [this Kosli Event](https://app.kosli.com/cyber-dojo/flows/differ-ci/trails/6b3ef8b0e2436e882515c3a7310b84dee24bde2f?attestation_id=f741ae29-7cc4-44e5-a2bd-9168c06b).
+	In [this YAML file](https://github.com/cyber-dojo/reusable-actions-workflows/blob/25f0b797c18403de1c8490a9a71bbe9789c809a9/.github/workflows/secure-docker-build.yml#L210), which created [this Kosli Event](https://app.kosli.com/cyber-dojo/flows/differ-ci/trails/0191adf5ea7d0698482162d4eaa8b41d2c5aa7c6?attestation_id=11cf8b7e-ae89-4065-ac14-29fca4fa).
 	</Tab>
 	<Tab title="GitLab">
 	View an example of the `kosli attest artifact` command in GitLab.
 
-	In [this YAML file](https://gitlab.com/cyber-dojo/creator/-/blob/65fd2bfa2478534ea4bc5ccf30f6bfc6aab7550c/.gitlab/workflows/main.yml#L111), which created [this Kosli Event](https://app.kosli.com/cyber-dojo/flows/creator-ci/trails/049c9e06227ba3262b91b585ae6594c1d0f79666?attestation_id=4a4c1d74-d625-49d3-a1db-8bc75ca9).
+	In [this YAML file](https://gitlab.com/cyber-dojo/creator/-/blob/65fd2bfa2478534ea4bc5ccf30f6bfc6aab7550c/.gitlab/workflows/main.yml#L111), which created [this Kosli Event](https://app.kosli.com/cyber-dojo/flows/creator-ci/trails/2bf36429ac734ade22e72033fa3d663080b53b82?attestation_id=d5b49703-6e49-4c2b-a26e-09f227c9).
 	</Tab>
 </Tabs>
 

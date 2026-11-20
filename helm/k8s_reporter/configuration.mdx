@@ -25,6 +25,10 @@ description: All values.yaml options for the Kosli k8s-reporter Helm chart.
   Overrides the fullname used for the created k8s resources. It has higher precedence than `nameOverride`.
 </ParamField>
 
+<ParamField path="imagePullSecrets" type="list" default="[]">
+  Existing Secrets in the same namespace used to pull the reporter image, e.g. from a private registry mirror.
+</ParamField>
+
 <ParamField path="nameOverride" type="string" default="">
   Overrides the name used for the created k8s resources. If `fullnameOverride` is provided, it has higher precedence than this one.
 </ParamField>
@@ -39,6 +43,10 @@ description: All values.yaml options for the Kosli k8s-reporter Helm chart.
 
 <ParamField path="podLabels" type="object" default="{}">
   Custom labels to add to pods.
+</ParamField>
+
+<ParamField path="podSecurityContext" type="object" default="{}">
+  The pod-level security context for the reporter, rendered verbatim, for pod-only fields such as `fsGroup` or `supplementalGroups`.
 </ParamField>
 
 <ParamField path="podTemplateAnnotations" type="object" default="{}">
@@ -73,6 +81,10 @@ description: All values.yaml options for the Kosli k8s-reporter Helm chart.
   Create each Kosli environment (type K8S) if it does not already exist, before reporting the snapshot.
 </ParamField>
 
+<ParamField path="reporterConfig.debug" type="bool" default="false">
+  Whether the reporter prints debug logs.
+</ParamField>
+
 <ParamField path="reporterConfig.dryRun" type="bool" default="false">
   Whether the dry run mode is enabled or not. In dry run mode, the reporter logs the reports to stdout and does not send them to kosli.
 </ParamField>
@@ -98,7 +110,7 @@ description: All values.yaml options for the Kosli k8s-reporter Helm chart.
 </ParamField>
 
 <ParamField path="reporterConfig.securityContext" type="object">
-  The security context for the reporter cronjob. Set to null or {} to disable security context entirely (not recommended). For OpenShift with SCC, explicitly set runAsUser to null to let OpenShift assign the UID from the allowed range. Simply omitting runAsUser from your values override will not work because Helm deep-merges with these defaults. Example OpenShift override:   securityContext:     allowPrivilegeEscalation: false     runAsNonRoot: true     runAsUser: null.
+  The container-level security context for the reporter, rendered verbatim. Set to null to disable security context entirely (not recommended). Pod-only fields such as `supplementalGroups` belong in `podSecurityContext`. For OpenShift with SCC, explicitly set runAsUser to null to let OpenShift assign the UID from the allowed range. Simply omitting runAsUser from your values override will not work because Helm deep-merges with these defaults. Example OpenShift override:   securityContext:     allowPrivilegeEscalation: false     runAsNonRoot: true     runAsUser: null Example for a namespace enforcing the `restricted` Pod Security Standard:   securityContext:     capabilities:       drop: [ALL]     seccompProfile:       type: RuntimeDefault.
 </ParamField>
 
 <ParamField path="reporterConfig.securityContext.allowPrivilegeEscalation" type="bool" default="false">
