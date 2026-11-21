@@ -161,7 +161,8 @@
           "pages": [
             "tutorials/working_with_controls",
             "getting_started/enforce_policies",
-            "tutorials/evaluate_trails_with_opa"
+            "tutorials/evaluate_trails_with_opa",
+            "tutorials/override_attestation_compliance"
           ]
         },
         {
