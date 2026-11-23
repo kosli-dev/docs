@@ -4,6 +4,30 @@ description: "Release notes for Kosli products."
 rss: true
 ---
 
+<Update label="November 20, 2026" description="v2.58.1" tags={["CLI"]}>
+
+No changes to the CLI itself. This release ships version 2.9.0 of the [k8s-reporter Helm chart](/helm/k8s_reporter/overview).
+
+## New features
+
+- **Pod security context**: the new `podSecurityContext` value sets the pod-level security context, for pod-only fields such as `fsGroup` or `supplementalGroups`.
+- **Private registry mirrors**: the new `imagePullSecrets` value lets the reporter pull its image from a private registry.
+- **Debug logs**: set `reporterConfig.debug` to `true` to run the reporter with `--debug`.
+
+## Updates
+
+- **Full container security context**: every key under `reporterConfig.securityContext` is now rendered on the reporter container, so you can set `capabilities` and `seccompProfile` for namespaces that enforce the `restricted` Pod Security Standard. Earlier versions silently dropped all but five keys. A misspelled key or a pod-only field there now makes `helm upgrade` fail with an `unknown field` error, so check your values first. See [Upgrading](/helm/k8s_reporter/upgrading).
+- **Newer default CLI**: the chart now runs CLI v2.58.0 by default, unless you set `image.tag`.
+
+## Bug fixes
+
+- `fsGroup` under `reporterConfig.securityContext` is now rendered on the pod, where Kubernetes accepts it, instead of on the container.
+- An all-numeric `reporterConfig.kosliOrg` no longer fails validation.
+
+[View on GitHub](https://github.com/kosli-dev/cli/releases/tag/v2.58.1)
+
+</Update>
+
 <Update label="November 19, 2026" description="v2.58.0" tags={["CLI"]}>
 
 ## New features
