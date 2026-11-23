@@ -426,6 +426,10 @@ A decision is also an attestation on the trail it is recorded on. On that [trail
 
 A decision recorded while its control was archived shows a warning mark next to it on the trail. Hover the mark to see which control was archived. The mark reflects the control's state when the decision was recorded, so archiving a control later doesn't mark decisions recorded before that.
 
+### Coverage
+
+The Coverage tab shows which environments enforce the control and which don't. An environment enforces a control when the latest version of its policy references the control through [`for_control`](#requiring-controls-in-environment-policies).
+
 ### Versions
 
 The Versions tab lists every version of the control definition — the name, description, and links as they were at each version, with who made the change and when. Because every decision references the control version that was current when it was recorded, this history lets auditors see exactly what the control required at the time of each decision. Changes to the policy that decides the control don't appear here: policy versions are tracked separately, and each decision names the policy version that judged it.
