@@ -15,7 +15,7 @@ The Cloud Capture managed service uses the public cloud APIs to extract informat
 
 <Tabs>
 <Tab title="AWS">
-Kosli publishes a CloudFormation template, for use in AWS, showing the permissions needed.  The template is publicly accessible and can be used directly within an `aws cloudformation create-stack` call. The current version, `v0.2.0`, is published at `https://kosli-cloud-capture-templates.s3.eu-central-1.amazonaws.com/aws/v0.2.0/kosli-cloud-capture-access-role.yaml`, and the permissions shown on this page are taken from it. A published version is never changed; a change to the permissions is a new version, and reaches a role you have deployed only when you update your stack.
+Kosli publishes a CloudFormation template, for use in AWS, showing the permissions needed.  The template is publicly accessible and can be used directly within an `aws cloudformation create-stack` call. The [current version](https://kosli-cloud-capture-templates.s3.eu-central-1.amazonaws.com/aws/v0.2.0/kosli-cloud-capture-access-role.yaml), `v0.2.0`, is published at `https://kosli-cloud-capture-templates.s3.eu-central-1.amazonaws.com/aws/v0.2.0/kosli-cloud-capture-access-role.yaml`, and the permissions shown on this page are taken from it. A published version is never changed; a change to the permissions is a new version, and reaches a role you have deployed only when you update your stack.
 
 Version `v0.2.0` adds one optional parameter to the earlier template, **S3 buckets** (`S3BucketNames`), for [capturing S3 buckets](/administration/cloud_capture/getting_started#capturing-s3-buckets). Left empty, the default, the role is the same as the one the earlier template created: it can read no object and no object key in any bucket. A role created from the earlier template keeps working for ECS and Lambda.
 
@@ -292,7 +292,8 @@ Kosli publishes a Terraform configuration, for use with
 everything Cloud Capture needs to snapshot Cloud Run and Google Kubernetes Engine (GKE).
 Infrastructure Manager runs Terraform as a managed service inside your project, so there is no
 state file or Terraform install for you to manage. Deploy the configuration once in each project
-you want Cloud Capture to snapshot. The current version, `v0.2.0`, is published at
+you want Cloud Capture to snapshot. The [current version](https://kosli-cloud-capture-templates.s3.eu-central-1.amazonaws.com/gcp/v0.2.0/main.tf),
+`v0.2.0`, is published at
 `https://kosli-cloud-capture-templates.s3.eu-central-1.amazonaws.com/gcp/v0.2.0/main.tf`, and what
 this page describes is taken from it. Everything it creates is yours, in your project.
 
