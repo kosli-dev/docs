@@ -292,7 +292,8 @@ Kosli publishes a Terraform configuration, for use with
 everything Cloud Capture needs to snapshot Cloud Run and Google Kubernetes Engine (GKE).
 Infrastructure Manager runs Terraform as a managed service inside your project, so there is no
 state file or Terraform install for you to manage. Deploy the configuration once in each project
-you want Cloud Capture to snapshot. The current version, `v0.2.0`, is published at
+you want Cloud Capture to snapshot. The [current version](https://kosli-cloud-capture-templates.s3.eu-central-1.amazonaws.com/gcp/v0.2.0/main.tf),
+`v0.2.0`, is published at
 `https://kosli-cloud-capture-templates.s3.eu-central-1.amazonaws.com/gcp/v0.2.0/main.tf`, and what
 this page describes is taken from it. Everything it creates is yours, in your project.
 
