@@ -406,7 +406,7 @@ sequenceDiagram
 
 ## Viewing a control
 
-Navigate to **Controls** in the [Kosli app](https://app.kosli.com) and select a control to see its detail view. The header shows the identifier, current version, name, any links, description, and tags. Below it are two tabs: **Decisions** and **Versions**.
+Navigate to **Controls** in the [Kosli app](https://app.kosli.com) and select a control to see its detail view. The header shows the identifier, current version, name, any links, description, and tags. Below it are the **Decisions**, **Coverage**, **Versions**, and **Audit log** tabs.
 
 ### Decisions
 
@@ -424,9 +424,15 @@ Select a decision to open its detail, showing the trail it is recorded on, the t
 
 A decision is also an attestation on the trail it is recorded on. On that [trail's page](/getting_started/trails#view-a-trail-in-the-kosli-app), select the decision on the **Status** or **Events** tab to see its details, including the Ergo report of an Ergo policy, without leaving the trail.
 
+A decision recorded while its control was archived shows a warning mark next to it on the trail. Hover the mark to see which control was archived. The mark reflects the control's state when the decision was recorded, so archiving a control later doesn't mark decisions recorded before that.
+
 ### Versions
 
 The Versions tab lists every version of the control definition — the name, description, and links as they were at each version, with who made the change and when. Because every decision references the control version that was current when it was recorded, this history lets auditors see exactly what the control required at the time of each decision. Changes to the policy that decides the control don't appear here: policy versions are tracked separately, and each decision names the policy version that judged it.
+
+### Audit log
+
+The Audit log tab lists the changes to a control that don't create a new version: each time the control was archived or unarchived, with who did it and when, newest first.
 
 ## Managing your controls catalog
 
@@ -446,7 +452,9 @@ You can also list controls from the CLI with `kosli list controls`, fetch a sing
 
 When a control is retired, archive it rather than deleting it. Archiving moves the control out of the main catalog into its **Archived** view but preserves its full history — past decisions and every version of the definition remain intact for audit — and an archived control can be unarchived later if it comes back into use.
 
-Archive or unarchive a control from its detail page (org admins only), from the CLI with `kosli archive control CONTROL-IDENTIFIER` and `kosli unarchive control CONTROL-IDENTIFIER`, or through the controls API (`POST /api/v2/controls/{org}/{identifier}/archive` and `.../unarchive`). Both actions appear as events in the control's **Versions** tab, alongside Created and Edited events, so the full lifecycle is auditable.
+Archive or unarchive a control from its detail page (org admins only), from the CLI with `kosli archive control CONTROL-IDENTIFIER` and `kosli unarchive control CONTROL-IDENTIFIER`, or through the controls API (`POST /api/v2/controls/{org}/{identifier}/archive` and `.../unarchive`). Archiving and unarchiving don't create a new version or change the control's version number. Kosli records each action as an event in the control's **Audit log** tab instead, so the full lifecycle stays auditable.
+
+You can still record decisions for an archived control. Kosli accepts them and marks them on the trail, so you can spot pipelines that still report against a retired control.
 
 ## What you've accomplished
 
