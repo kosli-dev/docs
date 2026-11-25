@@ -47,6 +47,10 @@ Either expression can be omitted to default to NOW.
 | `-q`, `--quiet` | bool | [optional] Suppress non-critical warning messages. Errors and normal output are not affected. If both `--quiet` and `--debug` are set, `--debug` wins. |
 
 
+## JSON output
+
+With `--output json`, this command prints the response of the [List snapshots](/api-reference/snapshots/list-snapshots) API operation as the server returned it. The shape follows the server's published API spec, not the CLI version.
+
 ## Live Example
 
 To view a live example of 'kosli list snapshots' you can run the command below (for the [cyber-dojo](https://app.kosli.com/cyber-dojo) demo organization).
@@ -64,109 +68,109 @@ kosli list snapshots aws-prod --output=json
 ```json
 [
   {
-    "index": 5629,
-    "from": 1795165858.5129378,
+    "index": 5643,
+    "from": 1795602478.4227748,
     "to": 0.0,
     "compliant": true,
-    "duration": 5008.192062616348
+    "duration": 23135.51939225197
   },
   {
-    "index": 5628,
-    "from": 1795165798.3513625,
-    "to": 1795165858.5129378,
+    "index": 5642,
+    "from": 1795602358.4271886,
+    "to": 1795602478.4227748,
     "compliant": true,
-    "duration": 60.16157531738281
+    "duration": 119.99558615684509
   },
   {
-    "index": 5627,
-    "from": 1795165738.488801,
-    "to": 1795165798.3513625,
+    "index": 5641,
+    "from": 1795602298.60226,
+    "to": 1795602358.4271886,
     "compliant": true,
-    "duration": 59.86256146430969
+    "duration": 59.824928522109985
   },
   {
-    "index": 5626,
-    "from": 1795165678.4643247,
-    "to": 1795165738.488801,
-    "compliant": false,
-    "duration": 60.024476289749146
-  },
-  {
-    "index": 5625,
-    "from": 1795105798.4498813,
-    "to": 1795165678.4643247,
+    "index": 5640,
+    "from": 1795520278.6464095,
+    "to": 1795602298.60226,
     "compliant": true,
-    "duration": 59880.01444339752
+    "duration": 82019.9558506012
   },
   {
-    "index": 5624,
-    "from": 1795105738.3652306,
-    "to": 1795105798.4498813,
+    "index": 5639,
+    "from": 1795520218.526166,
+    "to": 1795520278.6464095,
     "compliant": true,
-    "duration": 60.08465075492859
+    "duration": 60.120243549346924
   },
   {
-    "index": 5623,
-    "from": 1795105678.5140104,
-    "to": 1795105738.3652306,
+    "index": 5638,
+    "from": 1795520158.6435392,
+    "to": 1795520218.526166,
     "compliant": true,
-    "duration": 59.85122013092041
+    "duration": 59.88262677192688
   },
   {
-    "index": 5622,
-    "from": 1795105618.4046922,
-    "to": 1795105678.5140104,
+    "index": 5637,
+    "from": 1795427158.6235,
+    "to": 1795520158.6435392,
     "compliant": true,
-    "duration": 60.109318256378174
+    "duration": 93000.02003908157
   },
   {
-    "index": 5621,
-    "from": 1795105558.4810343,
-    "to": 1795105618.4046922,
+    "index": 5636,
+    "from": 1795427098.4407387,
+    "to": 1795427158.6235,
     "compliant": true,
-    "duration": 59.92365789413452
+    "duration": 60.182761430740356
   },
   {
-    "index": 5620,
-    "from": 1795105498.5133078,
-    "to": 1795105558.4810343,
+    "index": 5635,
+    "from": 1795427038.4670446,
+    "to": 1795427098.4407387,
     "compliant": true,
-    "duration": 59.96772646903992
+    "duration": 59.97369408607483
   },
   {
-    "index": 5619,
-    "from": 1795105438.5261724,
-    "to": 1795105498.5133078,
+    "index": 5634,
+    "from": 1795337338.3972983,
+    "to": 1795427038.4670446,
     "compliant": true,
-    "duration": 59.98713541030884
+    "duration": 89700.06974625587
   },
   {
-    "index": 5618,
-    "from": 1795105258.3714306,
-    "to": 1795105438.5261724,
+    "index": 5633,
+    "from": 1795337278.4823146,
+    "to": 1795337338.3972983,
     "compliant": true,
-    "duration": 180.1547417640686
+    "duration": 59.91498374938965
   },
   {
-    "index": 5617,
-    "from": 1795105198.4445667,
-    "to": 1795105258.3714306,
+    "index": 5632,
+    "from": 1795337158.4429066,
+    "to": 1795337278.4823146,
     "compliant": true,
-    "duration": 59.9268639087677
+    "duration": 120.03940796852112
   },
   {
-    "index": 5616,
-    "from": 1795080718.4478593,
-    "to": 1795105198.4445667,
+    "index": 5631,
+    "from": 1795250818.489393,
+    "to": 1795337158.4429066,
     "compliant": true,
-    "duration": 24479.996707439423
+    "duration": 86339.95351362228
   },
   {
-    "index": 5615,
-    "from": 1795080658.4572291,
-    "to": 1795080718.4478593,
+    "index": 5630,
+    "from": 1795250758.3997214,
+    "to": 1795250818.489393,
     "compliant": true,
-    "duration": 59.99063014984131
+    "duration": 60.08967161178589
+  },
+  {
+    "index": 5629,
+    "from": 1795165858.5129378,
+    "to": 1795250758.3997214,
+    "compliant": true,
+    "duration": 84899.88678359985
   }
 ]
 ```

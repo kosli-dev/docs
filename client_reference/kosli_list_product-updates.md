@@ -53,6 +53,10 @@ Product updates are tracked per user, so the API token must belong to a member o
 | `-q`, `--quiet` | bool | [optional] Suppress non-critical warning messages. Errors and normal output are not affected. If both `--quiet` and `--debug` are set, `--debug` wins. |
 
 
+## JSON output
+
+With `--output json`, this command builds its output from the response of the [List product updates](/api-reference/product-updates/list-product-updates) API operation, selecting or combining what the server returned. The fields follow the server's published API spec, not the CLI version.
+
 ## Examples Use Cases
 
 These examples all assume that the flags  `--api-token`, `--org`, `--host`, (and `--flow`, `--trail` when required), are [set/provided](/getting_started/install/#assigning-flags-via-environment-variables). 
