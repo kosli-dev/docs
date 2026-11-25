@@ -31,3 +31,7 @@ Get a policy's metadata.
 | `-q`, `--quiet` | bool | [optional] Suppress non-critical warning messages. Errors and normal output are not affected. If both `--quiet` and `--debug` are set, `--debug` wins. |
 
 
+## JSON output
+
+With `--output json`, this command prints the response of the [Get policy](/api-reference/policies/get-policy) API operation as the server returned it. The shape follows the server's published API spec, not the CLI version.
+

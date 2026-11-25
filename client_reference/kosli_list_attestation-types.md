@@ -31,3 +31,7 @@ List all Kosli attestation types for an org.
 | `-q`, `--quiet` | bool | [optional] Suppress non-critical warning messages. Errors and normal output are not affected. If both `--quiet` and `--debug` are set, `--debug` wins. |
 
 
+## JSON output
+
+With `--output json`, this command prints the response of the [List custom attestation types](/api-reference/custom-attestation-types/list-custom-attestation-types) API operation as the server returned it. The shape follows the server's published API spec, not the CLI version.
+

@@ -30,6 +30,11 @@ Get the metadata of a specific flow.
 | `--org` | string | The Kosli organization. |
 | `-q`, `--quiet` | bool | [optional] Suppress non-critical warning messages. Errors and normal output are not affected. If both `--quiet` and `--debug` are set, `--debug` wins. |
 
+
+## JSON output
+
+With `--output json`, this command prints the response of the [Get flow](/api-reference/flows/get-flow) API operation as the server returned it. The shape follows the server's published API spec, not the CLI version.
+
 ## Live Example
 
 To view a live example of 'kosli get flow' you can run the command below (for the [cyber-dojo](https://app.kosli.com/cyber-dojo) demo organization).

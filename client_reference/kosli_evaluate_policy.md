@@ -102,6 +102,10 @@ Use `--output json` to print the evaluation as Kosli returns it.
 | `-q`, `--quiet` | bool | [optional] Suppress non-critical warning messages. Errors and normal output are not affected. If both `--quiet` and `--debug` are set, `--debug` wins. |
 
 
+## JSON output
+
+With `--output json`, this command prints JSON that the CLI builds itself. The shape follows the CLI version, not the server's API spec.
+
 ## Examples Use Cases
 
 These examples all assume that the flags  `--api-token`, `--org`, `--host`, (and `--flow`, `--trail` when required), are [set/provided](/getting_started/install/#assigning-flags-via-environment-variables). 

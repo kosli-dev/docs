@@ -46,6 +46,14 @@ or any of the `--flow`, `--trail` or `--fingerprint` flags.
 | `-q`, `--quiet` | bool | [optional] Suppress non-critical warning messages. Errors and normal output are not affected. If both `--quiet` and `--debug` are set, `--debug` wins. |
 
 
+## JSON output
+
+With `--output json`, this command prints the response of one of these API operations as the server returned it, depending on the flags and arguments given. The shape follows the server's published API spec, not the CLI version.
+
+- [Get trail attestation](/api-reference/attestation/get-trail-attestation)
+- [Get artifact attestation](/api-reference/attestation/get-artifact-attestation)
+- [List attestations](/api-reference/attestation/list-attestations)
+
 ## Live Example
 
 To view a live example of 'kosli get attestation' you can run the command below (for the [cyber-dojo](https://app.kosli.com/cyber-dojo) demo organization).

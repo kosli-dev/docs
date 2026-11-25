@@ -35,6 +35,10 @@ to get the raw response for scripting.
 | `-q`, `--quiet` | bool | [optional] Suppress non-critical warning messages. Errors and normal output are not affected. If both `--quiet` and `--debug` are set, `--debug` wins. |
 
 
+## JSON output
+
+With `--output json`, this command prints the response of the [Get a service account](/api-reference/service-accounts/get-a-service-account) API operation as the server returned it. The shape follows the server's published API spec, not the CLI version.
+
 ## Examples Use Cases
 
 These examples all assume that the flags  `--api-token`, `--org`, `--host`, (and `--flow`, `--trail` when required), are [set/provided](/getting_started/install/#assigning-flags-via-environment-variables). 
