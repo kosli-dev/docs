@@ -11,13 +11,13 @@ Cloud Capture is still in active development. Its capabilities and configuration
 
 These settings belong to your Kosli organization, so they apply to every cloud account Cloud Capture scans for you. Find them in your organization's **Settings**, under **Cloud Capture**.
 
-To connect a cloud account, and to choose which of its resources are captured, see the page for your cloud: [AWS](/administration/cloud_capture/aws), [Azure](/administration/cloud_capture/azure) or [Google Cloud](/administration/cloud_capture/google_cloud). Skip tags, and the S3 opt-in tags on AWS, are set for each cloud and are described on those pages.
+To connect a cloud account, and to choose which of its resources are captured, see the page for your cloud: [AWS](/administration/cloud_capture/aws), [Azure](/administration/cloud_capture/azure), or [Google Cloud](/administration/cloud_capture/google_cloud). Skip tags, and the S3 opt-in tags on AWS, are set for each cloud and are described on those pages.
 
 ## Scan frequency
 
 Cloud Capture scans your registered accounts every five minutes unless you choose otherwise. The frequency is a setting of your Kosli organization, so it applies to every account and region Cloud Capture scans for you.
 
-To change it, open your organization's **Settings**, go to **Cloud Capture**, and under **Scan frequency** pick an interval from the list: every 5, 10, 15 or 30 minutes, or every 1, 2, 6, 12 or 24 hours. Select **Save**, and the next scan runs at the new interval; nothing restarts and no snapshots are lost. Like the other Cloud Capture settings, the frequency can only be changed while Cloud Capture is enabled.
+To change it, open your organization's **Settings**, go to **Cloud Capture**, and under **Scan frequency** pick an interval from the list: every 5, 10, 15, or 30 minutes, or every 1, 2, 6, 12, or 24 hours. Select **Save**, and the next scan runs at the new interval; nothing restarts and no snapshots are lost. Like the other Cloud Capture settings, the frequency can only be changed while Cloud Capture is enabled.
 
 Each scan reports what is running in every environment Cloud Capture manages for you, and Kosli records a new snapshot when that differs from the last one. The interval is therefore how long a change can go unnoticed: a deployment that lands and is rolled back inside one interval may never be seen. Five minutes suits most teams; an estate that changes rarely can scan hourly.
 
@@ -33,18 +33,18 @@ A template is text with any of these placeholders:
 
 | Placeholder | Value |
 |-------------|-------|
-| `{cloud}` | The cloud provider: `aws`, `azure` or `gcp`. |
-| `{account_id}` | The cloud account ID: an AWS account ID, an Azure subscription ID or a Google Cloud project ID. |
+| `{cloud}` | The cloud provider: `aws`, `azure`, or `gcp`. |
+| `{account_id}` | The cloud account ID: an AWS account ID, an Azure subscription ID, or a Google Cloud project ID. |
 | `{account_name}` | The name you gave the account, for example `staging`. Empty for an account with no name. See [Account names](#account-names). |
 | `{account}` | The account's name where it has one, and its account ID where it does not. |
 | `{region}` | The region, for example `eu-central-1`. Empty on Azure, which is scanned a subscription at a time. |
-| `{service}` | The service: `ecs`, `lambda` or `s3` on AWS, `apps` on Azure, `cloud-run` or `gke` on Google Cloud. |
-| `{resource}` | The resource's own name: the ECS cluster, S3 bucket, Azure resource group or GKE cluster. |
+| `{service}` | The service: `ecs`, `lambda`, or `s3` on AWS, `apps` on Azure, `cloud-run` or `gke` on Google Cloud. |
+| `{resource}` | The resource's own name: the ECS cluster, S3 bucket, Azure resource group, or GKE cluster. |
 | `{tag:Key}` | The value of the resource's tag `Key`. For example, `aws-{tag:Env}` names a cluster tagged `Env=prod` as `aws-prod`. |
 
 How a template is rendered:
 
-- The text between placeholders can only hold letters, digits, `.`, `_` and `-`, and a template must start with a letter, a digit or a placeholder. Placeholder names are case-sensitive and take no formatting.
+- The text between placeholders can only hold letters, digits, `.`, `_`, and `-`, and a template must start with a letter, a digit, or a placeholder. Placeholder names are case-sensitive and take no formatting.
 - A region's Lambda functions are captured together as one resource, and so are a region's Cloud Run services and jobs, so `{resource}` and every `{tag:Key}` are empty for them. An empty placeholder removes the separator before it: with the default template, a region's Lambda functions report into `123456789012-eu-central-1-lambda`.
 - `{account_name}` is empty for an account with no name, and that account is still captured. When the empty placeholder starts the template, it removes the separator after it instead, so `{account_name}-{service}-{resource}` names a cluster `app` in an unnamed account `ecs-app`. With `{account}-{resource}`, a cluster named `payments` reports into `staging-payments` in an account named `staging`, and into `222222222222-payments` in account `222222222222` with no name.
 - Tag keys are case-sensitive, as AWS stores them, so `{tag:env}` does not read a tag named `Env`. A key may contain colons and spaces, as in `{tag:aws:cloudformation:stack-name}`.
@@ -60,9 +60,9 @@ Through the API, the template is `environment_name_template` on the settings res
 
 You can give each registered account a name, such as `staging` or `prod-us`, to use in environment names through `{account_name}` and `{account}`. Naming accounts is optional, so you can name a few and leave the rest.
 
-To name an account, open your organization's **Settings** and go to **Cloud Capture**. In the **Registered accounts** table, open the actions menu in the account's row, select **Edit**, and enter the name in **Account name**. You can also enter it when you select **Register account**. A name starts with a letter or digit and holds only letters, digits, `.`, `_` and `-`. Clear the field and save to remove the name. A named account's row shows its name, with its account ID beneath it.
+To name an account, open your organization's **Settings** and go to **Cloud Capture**. In the **Registered accounts** table, open the actions menu in the account's row, select **Edit**, and enter the name in **Account name**. You can also enter it when you select **Register account**. A name starts with a letter or digit and holds only letters, digits, `.`, `_`, and `-`. Clear the field and save to remove the name. A named account's row shows its name, with its account ID beneath it.
 
-Through the API, the name is `account_name` on the account's registration, at `/api/v2/cloud-capture/<your-org>/accounts/aws/<account-id>`. The PUT replaces the whole registration, so read it with a GET first and send its `role_arn`, `regions`, `services` and `dry_run` back with the name. A PUT without `account_name` removes the name.
+Through the API, the name is `account_name` on the account's registration, at `/api/v2/cloud-capture/<your-org>/accounts/aws/<account-id>`. The PUT replaces the whole registration, so read it with a GET first and send its `role_arn`, `regions`, `services`, and `dry_run` back with the name. A PUT without `account_name` removes the name.
 
 ## Dry run
 
@@ -76,7 +76,7 @@ Through the API, the organization-wide switch is `dry_run` on the settings resou
 
 ## Using the API
 
-Every setting on this page is a field of one settings resource, along with the skip tags and S3 opt-in tags described on each cloud's page. The settings PUT replaces every setting, not only the one you are changing, so start from what is stored: read the current configuration, take the `enabled`, `default_regions`, `scan_interval_minutes`, `skip_tags`, `opt_in_tags`, `dry_run` and `environment_name_template` values from its `settings` object, change the ones you want, and send those fields back. A field you leave out is reset: `dry_run` to `false`, `environment_name_template` to the [default template](#environment-names), and `skip_tags` and `opt_in_tags` to none, which stops your S3 buckets being captured. The response leaves out `environment_name_template` while your organization uses the default, so leave it out of the PUT in that case too. Sending the example below as it stands would set your default regions, scan interval, skip tags, S3 opt-in tags and dry run to the values shown, and your environment names to the default.
+Every setting on this page is a field of one settings resource, along with the skip tags and S3 opt-in tags described on each cloud's page. The settings PUT replaces every setting, not only the one you are changing, so start from what is stored: read the current configuration, take the `enabled`, `default_regions`, `scan_interval_minutes`, `skip_tags`, `opt_in_tags`, `dry_run`, and `environment_name_template` values from its `settings` object, change the ones you want, and send those fields back. A field you leave out is reset: `dry_run` to `false`, `environment_name_template` to the [default template](#environment-names), and `skip_tags` and `opt_in_tags` to none, which stops your S3 buckets being captured. The response leaves out `environment_name_template` while your organization uses the default, so leave it out of the PUT in that case too. Sending the example below as it stands would set your default regions, scan interval, skip tags, S3 opt-in tags, and dry run to the values shown, and your environment names to the default.
 
 ```bash
 curl "https://app.kosli.com/api/v2/cloud-capture/<your-org>" \
@@ -95,4 +95,4 @@ curl -X PUT "https://app.kosli.com/api/v2/cloud-capture/<your-org>/settings" \
   }'
 ```
 
-`skip_tags` holds one list of tags for each cloud: `aws`, `azure` and `gcp`.
+`skip_tags` holds one list of tags for each cloud: `aws`, `azure`, and `gcp`.

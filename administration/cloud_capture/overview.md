@@ -13,7 +13,7 @@ Cloud Capture is a managed service that runs on Kosli's infrastructure and conne
 
 Kosli also supports reporting from your own cloud accounts by running the Kosli CLI on a schedule. Cloud Capture inverts this, with Kosli running the regular [snapshots](/getting_started/environments) so there is no software for you to install.
 
-To set it up for your organization, follow the page for your cloud: [AWS](/administration/cloud_capture/aws), [Azure](/administration/cloud_capture/azure) or [Google Cloud](/administration/cloud_capture/google_cloud).
+To set it up for your organization, follow the page for your cloud: [AWS](/administration/cloud_capture/aws), [Azure](/administration/cloud_capture/azure), or [Google Cloud](/administration/cloud_capture/google_cloud).
 
 ## Overview
 
@@ -75,7 +75,7 @@ Cloud Capture has been designed to operate with no on-going support from you.  O
 
 Cloud Capture finds the [supported resources](#supported-platforms) within your cloud accounts, in the services you select for each account, and determines which Kosli environment should hold the snapshots. Cloud Capture will create physical environments for you inside Kosli. You choose how those environments are named; see [Environment names](/administration/cloud_capture/getting_started#environment-names).
 
-You can keep a resource out of Cloud Capture by tagging it with any tag you have listed in your Cloud Capture settings; see excluding resources on [AWS](/administration/cloud_capture/aws#excluding-resources), [Azure](/administration/cloud_capture/azure#excluding-resources) or [Google Cloud](/administration/cloud_capture/google_cloud#excluding-resources).
+You can keep a resource out of Cloud Capture by tagging it with any tag you have listed in your Cloud Capture settings; see excluding resources on [AWS](/administration/cloud_capture/aws#excluding-resources), [Azure](/administration/cloud_capture/azure#excluding-resources), or [Google Cloud](/administration/cloud_capture/google_cloud#excluding-resources).
 
 Amazon S3 works the other way round. A bucket is snapshotted only when you opt it in, by tagging it with one of the S3 opt-in tags in your Cloud Capture settings, because a snapshot makes one request to AWS for every object in the bucket and most buckets hold data you would not want reported; see [Capturing S3 buckets](/administration/cloud_capture/aws#capturing-s3-buckets).
 
@@ -83,7 +83,7 @@ As your cloud environment evolves, such as the addition of new AWS ECS clusters 
 
 ## Multiple cloud accounts
 
-Cloud Capture can operate across multiple regions and cloud accounts, such as AWS accounts, Azure subscriptions and Google Cloud projects, allowing you to snapshot development, QA, pre-production, and production workloads with the same process.
+Cloud Capture can operate across multiple regions and cloud accounts, such as AWS accounts, Azure subscriptions, and Google Cloud projects, allowing you to snapshot development, QA, pre-production, and production workloads with the same process.
 
 ## Operation
 

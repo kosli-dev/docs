@@ -1,7 +1,7 @@
 ---
 title: "Cloud Capture on AWS"
 sidebarTitle: "AWS"
-description: "Set up Cloud Capture for your AWS accounts, choose which ECS clusters, Lambda functions and S3 buckets it snapshots, and review the permissions it uses."
+description: "Set up Cloud Capture for your AWS accounts, choose which ECS clusters, Lambda functions, and S3 buckets it snapshots, and review the permissions it uses."
 tag: "BETA"
 ---
 
@@ -15,7 +15,7 @@ Cloud Capture snapshots the Amazon ECS clusters and AWS Lambda functions in the 
 
 <Steps>
   <Step title="Create the IAM role">
-    In order for Cloud Capture to reach into your AWS cloud, to discover your ECS clusters, Lambdas and S3 buckets, you need to grant permission to Kosli to do so. This requires the creation of an IAM role that Kosli can assume; the role will exist within your AWS account.
+    In order for Cloud Capture to reach into your AWS cloud, to discover your ECS clusters, Lambdas, and S3 buckets, you need to grant permission to Kosli to do so. This requires the creation of an IAM role that Kosli can assume; the role will exist within your AWS account.
 
     To simplify this process, Kosli has created a CloudFormation template that contains a role with the minimum set of permissions needed by Cloud Capture.  The role can be assumed by Kosli and is protected by an external Id; each organization within Kosli has its own external Id.  The CloudFormation template can be downloaded from the Settings page for your organization within the Kosli UI.
 
@@ -38,7 +38,7 @@ Cloud Capture snapshots the Amazon ECS clusters and AWS Lambda functions in the 
 
 ## Excluding resources
 
-If there are resources you do not want Cloud Capture to snapshot, such as a test cluster or a service a vendor runs in your account, exclude them by tag. You choose the tags: in your organization's **Settings**, go to **Cloud Capture**, open **AWS** and edit the AWS defaults. The **Skip tags** panel there takes any number of key and value pairs, and Cloud Capture skips every resource that carries one of them.
+If there are resources you do not want Cloud Capture to snapshot, such as a test cluster or a service a vendor runs in your account, exclude them by tag. You choose the tags: in your organization's **Settings**, go to **Cloud Capture**, open **AWS**, and edit the AWS defaults. The **Skip tags** panel there takes any number of key and value pairs, and Cloud Capture skips every resource that carries one of them.
 
 1. Tag the resource in AWS, with any key and value you like. For example, to tag an ECS cluster and a Lambda function with `kosli-capture=false`:
 
@@ -77,7 +77,7 @@ S3 is opt-in, bucket by bucket. An account usually holds many buckets you would 
     This is the permission. The role can list and read objects in the buckets you name and in no others. See [What capturing S3 buckets grants](#what-capturing-s3-buckets-grants) for exactly what it grants.
   </Step>
   <Step title="Choose an S3 opt-in tag">
-    In your organization's **Settings**, go to **Cloud Capture**, open **AWS** and edit the AWS defaults. In the **S3 opt-in tags** panel, beneath **Skip tags**, add a key and a value, for example `kosli-capture-s3` and `true`, and save.
+    In your organization's **Settings**, go to **Cloud Capture**, open **AWS**, and edit the AWS defaults. In the **S3 opt-in tags** panel, beneath **Skip tags**, add a key and a value, for example `kosli-capture-s3` and `true`, and save.
 
     Until you set an opt-in tag, no bucket is captured.
   </Step>
@@ -362,7 +362,7 @@ Statement:
 
 The S3 statements above exist only when you name buckets in the **S3 buckets** parameter. Three things are worth knowing for a security review:
 
-- **The role can read the content of every object in the buckets you name.** Cloud Capture reads the SHA256 checksum S3 stores for each object with a `HeadObject` request, which returns metadata and no content. AWS has no permission for reading a checksum alone: `HeadObject` is authorized by `s3:GetObject`, the permission that also authorizes a download. Cloud Capture downloads one object only, a `.kosli_ignore` file at the root of a bucket if there is one. Reads of object versions, ACLs, tags and attributes stay denied in every bucket, and `s3:GetObject` stays denied in every bucket you did not name.
+- **The role can read the content of every object in the buckets you name.** Cloud Capture reads the SHA256 checksum S3 stores for each object with a `HeadObject` request, which returns metadata and no content. AWS has no permission for reading a checksum alone: `HeadObject` is authorized by `s3:GetObject`, the permission that also authorizes a download. Cloud Capture downloads one object only, a `.kosli_ignore` file at the root of a bucket if there is one. Reads of object versions, ACLs, tags, and attributes stay denied in every bucket, and `s3:GetObject` stays denied in every bucket you did not name.
 - **The role can read the tags of every taggable resource in the account.** Cloud Capture finds the buckets that carry one of your S3 opt-in tags by asking the Resource Groups Tagging API (`tag:GetResources`), which avoids reading the tags of every bucket one by one on every scan. AWS cannot scope that permission to S3 or to particular resources. Cloud Capture asks only for resources of type `s3:bucket` that carry an opt-in tag.
 - **No KMS permission is granted.** Objects encrypted with a KMS key (SSE-KMS) cannot be read, and their bucket's snapshot fails.
 

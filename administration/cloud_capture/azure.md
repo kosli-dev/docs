@@ -17,7 +17,7 @@ Nothing is deployed in Azure. Cloud Capture reads a subscription as a Kosli appl
 
 <Steps>
   <Step title="Consent to the Kosli application">
-    In your organization's **Settings**, go to **Cloud Capture**, open **Azure** and select **Register account**. Follow the **Consent in Azure** link as a Global Administrator of your tenant. Consenting creates the application's service principal in your tenant; it has no access until you grant it some in the next step.
+    In your organization's **Settings**, go to **Cloud Capture**, open **Azure**, and select **Register account**. Follow the **Consent in Azure** link as a Global Administrator of your tenant. Consenting creates the application's service principal in your tenant; it has no access until you grant it some in the next step.
   </Step>
   <Step title="Grant access and tag the subscription">
     The registration form shows three Azure CLI commands with your values filled in. Run them as an owner of the subscription:
@@ -31,7 +31,7 @@ Nothing is deployed in Azure. Cloud Capture reads a subscription as a Kosli appl
     `Reader` lets Cloud Capture list the App Service sites and read tags, and `AcrPull` lets it fingerprint their container images. The `kosli-external-id` tag is how Cloud Capture checks the subscription is yours to read: it refuses to list a subscription whose tag does not carry your organization's external ID.
   </Step>
   <Step title="Register the subscription">
-    Accounts can only be registered while Cloud Capture is enabled. When you have consented to the application, granted it access and tagged the subscription, enter the **Tenant ID** and **Subscription ID** in the same registration form and save it. Register each subscription you want scanned.
+    Accounts can only be registered while Cloud Capture is enabled. When you have consented to the application, granted it access, and tagged the subscription, enter the **Tenant ID** and **Subscription ID** in the same registration form and save it. Register each subscription you want scanned.
 
     Azure has no regions to choose: Cloud Capture scans the whole subscription and reports each resource group that holds running container-based web apps into its own environment.
 
@@ -41,7 +41,7 @@ Nothing is deployed in Azure. Cloud Capture reads a subscription as a Kosli appl
 
 ## Excluding resources
 
-Exclude resources by tagging the resource group that holds them. In your organization's **Settings**, go to **Cloud Capture**, open **Azure** and add the tag to the **Skip tags** panel in the Azure defaults. Cloud Capture skips every resource group that carries one of the tags, with all of the web apps in it; tags on an individual web app are not read.
+Exclude resources by tagging the resource group that holds them. In your organization's **Settings**, go to **Cloud Capture**, open **Azure**, and add the tag to the **Skip tags** panel in the Azure defaults. Cloud Capture skips every resource group that carries one of the tags, with all of the web apps in it; tags on an individual web app are not read.
 
 Key and value must both match the resource group's tag exactly. Through the API, the tags are the `azure` list of `skip_tags`; see [Using the API](/administration/cloud_capture/getting_started#using-the-api).
 

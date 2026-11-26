@@ -17,7 +17,7 @@ In order for Cloud Capture to reach into your Google Cloud project, to discover 
 
 To simplify this process, Kosli has created a Terraform configuration that creates that service account, the read-only roles Cloud Capture needs, and a workload identity pool that accepts only the Kosli-side role created for your organization.
 
-If you would rather create these resources yourself, see [Permissions and security](#permissions-and-security) for the service account, workload identity pool and roles that Cloud Capture needs.
+If you would rather create these resources yourself, see [Permissions and security](#permissions-and-security) for the service account, workload identity pool, and roles that Cloud Capture needs.
 
 <Steps>
   <Step title="Download the Terraform configuration">
@@ -29,7 +29,7 @@ If you would rather create these resources yourself, see [Permissions and securi
         https://kosli-cloud-capture-templates.s3.eu-central-1.amazonaws.com/gcp/v0.2.0/main.tf
     ```
 
-    You also need two values from Kosli: the Kosli AWS account ID, and the name of the Kosli-side IAM role for your organization. The configuration isn't pre-filled with them. In your organization's **Settings**, go to **Cloud Capture**, open **Google Cloud** and select **Register account**; the first step of the form shows both.
+    You also need two values from Kosli: the Kosli AWS account ID, and the name of the Kosli-side IAM role for your organization. The configuration isn't pre-filled with them. In your organization's **Settings**, go to **Cloud Capture**, open **Google Cloud**, and select **Register account**; the first step of the form shows both.
   </Step>
   <Step title="Deploy with Infrastructure Manager">
     Deploy the configuration once in each project that holds Cloud Run services or jobs, or GKE clusters, you want Cloud Capture to snapshot. Run the following from the directory containing the configuration:
@@ -42,7 +42,7 @@ If you would rather create these resources yourself, see [Permissions and securi
         --input-values=project_id=<your-gcp-project>,kosli_aws_account_id=<value from Kosli>,kosli_role_name=<value from Kosli>
     ```
 
-    Infrastructure Manager runs Terraform as the service account you name, so that service account needs permission to enable APIs and to create workload identity pools, service accounts, custom roles and project IAM bindings.
+    Infrastructure Manager runs Terraform as the service account you name, so that service account needs permission to enable APIs and to create workload identity pools, service accounts, custom roles, and project IAM bindings.
   </Step>
   <Step title="Read the two outputs">
     Kosli needs two values to connect to your project. The configuration emits both as Terraform outputs:
@@ -61,7 +61,7 @@ If you would rather create these resources yourself, see [Permissions and securi
     ```
   </Step>
   <Step title="Register the project">
-    Accounts can only be registered while Cloud Capture is enabled. When you have deployed the configuration, continue the registration form: enter the project ID, the workload identity provider name and the service account email, and choose the regions and services to scan. Cloud Run is selected for a new project. GKE is not selected, so select it if you want clusters snapshotted.
+    Accounts can only be registered while Cloud Capture is enabled. When you have deployed the configuration, continue the registration form: enter the project ID, the workload identity provider name, and the service account email, and choose the regions and services to scan. Cloud Run is selected for a new project. GKE is not selected, so select it if you want clusters snapshotted.
 
     Cloud Capture never connects to a GKE cluster. It lists the project's clusters and reads their pods from Google's Cloud Asset Inventory, so a private cluster is snapshotted like any other and nothing is installed in it. Cloud Asset Inventory can be a few minutes behind a cluster, so a pod that lives for less time than that may never be seen.
 
@@ -71,7 +71,7 @@ If you would rather create these resources yourself, see [Permissions and securi
 
 ## Excluding resources
 
-Exclude resources by label. In your organization's **Settings**, go to **Cloud Capture**, open **Google Cloud** and add the label to the **Skip tags** panel in the Google Cloud defaults. Key and value must both match the resource's label exactly.
+Exclude resources by label. In your organization's **Settings**, go to **Cloud Capture**, open **Google Cloud**, and add the label to the **Skip tags** panel in the Google Cloud defaults. Key and value must both match the resource's label exactly.
 
 - A Cloud Run service or job is skipped on its own, and the region's Cloud Run environment in Kosli is made up of the services and jobs that remain.
 - A GKE cluster is skipped with everything in it. The label is read on the cluster; labels on workloads inside it are not read.
@@ -147,7 +147,7 @@ Worth knowing for a security review of GKE:
   labels, annotations, and any environment variables written into the spec in plain text. A value
   taken from a Kubernetes Secret appears as a reference and not as the secret.
 - A project inside a VPC Service Controls perimeter that restricts the Cloud Asset, Kubernetes
-  Engine or Cloud Run API needs an ingress rule that admits the service account, because Cloud
+  Engine, or Cloud Run API needs an ingress rule that admits the service account, because Cloud
   Capture calls from outside the perimeter.
 
 If you wish to grant access for Cloud Capture without using our published configuration, create

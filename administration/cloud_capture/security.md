@@ -26,7 +26,7 @@ Each cloud's page gives the full detail: what you create, the exact permissions,
 Cloud Capture runs as a shared, autoscaled service, but each job runs under a role that is scoped to
 one tenant.
 
-How that scoping is enforced depends on the cloud; see tenant isolation on [AWS](/administration/cloud_capture/aws#tenant-isolation), [Azure](/administration/cloud_capture/azure#tenant-isolation) and [Google Cloud](/administration/cloud_capture/google_cloud#tenant-isolation).
+How that scoping is enforced depends on the cloud; see tenant isolation on [AWS](/administration/cloud_capture/aws#tenant-isolation), [Azure](/administration/cloud_capture/azure#tenant-isolation), and [Google Cloud](/administration/cloud_capture/google_cloud#tenant-isolation).
 
 Cloud Capture itself does not hold any tenant data. Snapshots taken by Cloud Capture are
 immediately sent to Kosli through the same ingest path as your existing pipelines.
