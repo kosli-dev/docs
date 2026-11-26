@@ -158,6 +158,16 @@ opa check --strict --schema input-schema.json --capabilities capabilities.json p
 
 Below `compliance_status`, the input schema does not type fields, so strict mode does not check paths into attestation data.
 
+## Archiving a policy
+
+When you retire a policy, archive it rather than deleting it. Archiving takes the policy out of the default Rego policy list without creating a new version. Its versions, files, and past evaluations stay readable, and its identifier stays taken. Only org admins can archive or unarchive a policy.
+
+Archive or unarchive a policy from the **Settings** tab on its page in the [Kosli app](https://app.kosli.com), from the CLI with [`kosli archive rego-policy`](/client_reference/kosli_archive_rego-policy) and [`kosli unarchive rego-policy`](/client_reference/kosli_unarchive_rego-policy), or through the API (`POST /api/v2/rego-policies/{org}/{identifier}/archive` and `.../unarchive`). To find archived policies, open the **Archived** tab of the policy list or run `kosli list rego-policies --archived`.
+
+The policy's **Audit log** tab lists each archive and unarchive, and each change to its name or description, with who made it and when, newest first.
+
+An archived policy still evaluates: `kosli evaluate policy` runs it by identifier as before. A decision recorded from an archived policy shows a warning mark on the trail, so you can spot pipelines that still depend on a retired policy. The mark reflects the policy's state when the decision was recorded, so archiving a policy later doesn't mark earlier decisions.
+
 ## Safe policy design
 
 Three rules prevent a policy from allowing what it should deny.
