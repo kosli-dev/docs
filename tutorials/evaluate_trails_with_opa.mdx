@@ -34,7 +34,7 @@ To follow this tutorial, you need to:
   ```
 
 <Info>
-You don't need OPA installed. Kosli runs the policy with a built-in Rego evaluator, so you only need to write a `.rego` policy file.
+Kosli runs the policy with a built-in Rego evaluator, so you only need to write a `.rego` policy file. You need OPA installed only to test a policy on your machine with `opa eval`, as in the step on passing parameters.
 </Info>
 
 </Step>
@@ -266,9 +266,9 @@ allow if { count(violations) == 0 }
 
 If `data.params.max_high` is absent, the `violations` rule body fails silently, the set stays empty, and `allow` fires. A misconfigured params file grants compliance rather than denying it.
 
-**Testing with `kosli evaluate input`**
+**Testing locally with `opa eval`**
 
-You can test a policy on your machine without a real trail using [`kosli evaluate input`](/client_reference/kosli_evaluate_input). Create a minimal input file:
+You can test a policy on your machine without a real trail using [`opa eval`](https://www.openpolicyagent.org/docs/cli#eval), which needs [OPA installed](https://www.openpolicyagent.org/docs#1-download-opa). Create a minimal input file:
 
 ```shell
 cat > scan-input.json << 'EOF'
@@ -292,61 +292,74 @@ cat > scan-input.json << 'EOF'
 EOF
 ```
 
-Evaluate with permissive staging thresholds:
+Save the thresholds for each environment as params files:
 
 ```shell
-kosli evaluate input \
-  --input-file scan-input.json \
-  --policy snyk-severity-threshold.rego \
-  --params '{"max_high": 5, "max_medium": 10}'
+echo '{"max_high": 5, "max_medium": 10}' > params-staging.json
+echo '{"max_high": 0, "max_medium": 3}' > params-prod.json
 ```
 
-```plaintext
-RESULT:  ALLOWED
+Evaluate with permissive staging thresholds. `--data params:params-staging.json` loads the file under `data.params`, where Kosli puts the params of an evaluation:
+
+```shell
+opa eval --format pretty \
+  --input scan-input.json \
+  --data snyk-severity-threshold.rego \
+  --data params:params-staging.json \
+  '{"allow": data.policy.allow, "violations": data.policy.violations}'
+```
+
+```json
+{
+  "allow": true,
+  "violations": []
+}
 ```
 
 Apply stricter production thresholds:
 
 ```shell
-kosli evaluate input \
-  --input-file scan-input.json \
-  --policy snyk-severity-threshold.rego \
-  --params '{"max_high": 0, "max_medium": 3}'
+opa eval --format pretty \
+  --input scan-input.json \
+  --data snyk-severity-threshold.rego \
+  --data params:params-prod.json \
+  '{"allow": data.policy.allow, "violations": data.policy.violations}'
 ```
 
-```plaintext
-RESULT:      DENIED
-VIOLATIONS:  artifact 'dashboard': 2 high-severity vulnerabilities exceed limit of 0
-             artifact 'dashboard': 5 medium-severity vulnerabilities exceed limit of 3
+```json
+{
+  "allow": false,
+  "violations": [
+    "artifact 'dashboard': 2 high-severity vulnerabilities exceed limit of 0",
+    "artifact 'dashboard': 5 medium-severity vulnerabilities exceed limit of 3"
+  ]
+}
 ```
 
 Now verify the fail-safe: omit `max_high` from params entirely:
 
 ```shell
-kosli evaluate input \
-  --input-file scan-input.json \
-  --policy snyk-severity-threshold.rego \
-  --params '{"max_medium": 10}'
+echo '{"max_medium": 10}' > params-missing-high.json
 ```
 
-```plaintext
-RESULT:  DENIED
+```shell
+opa eval --format pretty \
+  --input scan-input.json \
+  --data snyk-severity-threshold.rego \
+  --data params:params-missing-high.json \
+  '{"allow": data.policy.allow, "violations": data.policy.violations}'
+```
+
+```json
+{
+  "allow": false,
+  "violations": []
+}
 ```
 
 `allow` is `false` even though no violation message was produced. The missing param causes the compliance check to fail, not to vacuously pass. Always verify this explicitly when writing a policy that relies on params.
 
-You can also load parameters from a file using the `@` prefix:
-
-```shell
-echo '{"max_high": 0, "max_medium": 3}' > params-prod.json
-
-kosli evaluate input \
-  --input-file scan-input.json \
-  --policy snyk-severity-threshold.rego \
-  --params @params-prod.json
-```
-
-The `--params` flag works the same way on `kosli evaluate policy`. Parameters are always available as `data.params` in the policy:
+Pass the same params files to `kosli evaluate policy` with the `@` prefix. Parameters are always available as `data.params` in the policy:
 
 ```shell
 kosli evaluate policy \
@@ -466,7 +479,7 @@ Use `--compliant=value` (with `=`) not `--compliant value` (with a space). Boole
 
 ## What you've accomplished
 
-You have written OPA/Rego policies using the three design rules that prevent false-positive compliance results: fail-safe default, compliance via positive assertion, and violations as diagnostics only. You've evaluated Kosli trails against those policies with `kosli evaluate policy`, tested safety properties locally with `kosli evaluate input`, and recorded evaluation results as attestations.
+You have written OPA/Rego policies using the three design rules that prevent false-positive compliance results: fail-safe default, compliance via positive assertion, and violations as diagnostics only. You've evaluated Kosli trails against those policies with `kosli evaluate policy`, tested safety properties locally with `opa eval`, and recorded evaluation results as attestations.
 
 From here you can:
 * Explore evaluated trails in the [Kosli app](https://app.kosli.com)

@@ -441,19 +441,18 @@ kosli evaluate policy \
   --params '{"pr_attestation_name": "pull-request"}'
 ```
 
-To iterate on a policy without calling Kosli each time, capture the input of an evaluation once with [`kosli get evaluation`](/client_reference/kosli_get_evaluation), then evaluate the policy against it on your machine with [`kosli evaluate input`](/client_reference/kosli_evaluate_input). `kosli evaluate input` follows the [local contract](#local-evaluation), so the policy must declare `package policy`.
+To iterate on a policy without calling Kosli each time, capture what an evaluation was given once with [`kosli get evaluation --fixture`](#replaying-an-evaluation), then evaluate your policy files against it on your machine with [`opa eval`](https://www.openpolicyagent.org/docs/cli#eval). Run it again after each change to the policy:
 
 ```shell
-# Capture the input of an evaluation once
-kosli get evaluation "$EVALUATION_ID" \
-  --show-input --output json | jq '.input' > evaluation-input.json
+# Capture the input and params of an evaluation once
+kosli get evaluation "$EVALUATION_ID" --fixture --dir ./replay
 
 # Iterate on the policy locally
-kosli evaluate input \
-  --input-file evaluation-input.json \
-  --policy my-policy.rego \
-  --params '{"max_high": 0}'
+opa eval --input replay/input.json --data replay/data.json \
+  --bundle policy/ 'data.policy.allow'
 ```
+
+OPA does not refuse the built-in functions Kosli refuses, so type-check the policy against the capabilities file as in [Publishing a policy](#publishing-a-policy), and confirm the result with `kosli evaluate policy --path` before you publish.
 
 ## Local evaluation
 
