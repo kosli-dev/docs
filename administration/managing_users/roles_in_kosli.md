@@ -125,7 +125,7 @@ The following sections provide more details about each Kosli user role, includin
 
   - **Service Accounts**: Create service accounts, and manage the ones they created and those accounts' API keys
   - **Integrations**: Configure integrations with external systems (LaunchDarkly, Sonar)
-  - **Resource Management**: Create and update flows, environments, policies, and attestation types
+  - **Resource Management**: Create and update flows, environments, environment policies, and attestation types
   - **Attestations & Snapshots**: Report attestations and environment snapshots
   - **Actions**: Create, update, and delete actions for automated workflows and notifications
   - **Data Access**: View all trails, artifacts, attestations, and snapshots
