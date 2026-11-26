@@ -19,7 +19,7 @@ You can tag the following Kosli resource types:
 | :--- | :--- | :--- |
 | Flow | [`kosli_flow`](/terraform-reference/resources/flow) | `flow` |
 | Environment | [`kosli_environment`](/terraform-reference/resources/environment) | `env` |
-| [Control](/tutorials/working_with_controls) (beta) | [`kosli_control`](/terraform-reference/resources/control) | `control` |
+| [Control](/tutorials/working_with_controls) | [`kosli_control`](/terraform-reference/resources/control) | `control` |
 | [Repository](/tutorials/repositories) | [`kosli_repo_tags`](/terraform-reference/resources/repo_tags) | `repo` |
 
 ## Tag key and value rules

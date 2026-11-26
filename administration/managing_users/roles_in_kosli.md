@@ -57,7 +57,7 @@ Roles apply to service accounts the same way they apply to users. Wherever this 
 | **Actions** | | | |
 | Create, update, and delete actions | ✅ | ✅ | ❌ | ❌ |
 | View actions | ✅ | ✅ | ✅ | ✅ |
-| **Controls** (beta) | | | |
+| **Controls** | | | |
 | Create, update, archive, and unarchive controls | ✅ | ❌ | ❌ | ❌ |
 | Publish Rego policies (create a policy or a new version of one) | ✅ | ❌ | ❌ | ❌ |
 | Archive and unarchive Rego policies | ✅ | ❌ | ❌ | ❌ |
