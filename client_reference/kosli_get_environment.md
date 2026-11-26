@@ -30,6 +30,11 @@ Get an environment's metadata.
 | `--org` | string | The Kosli organization. |
 | `-q`, `--quiet` | bool | [optional] Suppress non-critical warning messages. Errors and normal output are not affected. If both `--quiet` and `--debug` are set, `--debug` wins. |
 
+
+## JSON output
+
+With `--output json`, this command prints the response of the [Get environment](/api-reference/environments/get-environment) API operation as the server returned it. The shape follows the server's published API spec, not the CLI version.
+
 ## Live Example
 
 To view a live example of 'kosli get environment' you can run the command below (for the [cyber-dojo](https://app.kosli.com/cyber-dojo) demo organization).
@@ -50,9 +55,9 @@ kosli get environment aws-prod --output=json
   "name": "aws-prod",
   "type": "ECS",
   "description": "The ECS cluster for production cyber-dojo",
-  "last_modified_at": 1795083538.4829183,
-  "last_reported_at": 1795083538.4829183,
-  "last_changed_at": 1795080718.4478593,
+  "last_modified_at": 1795692298.4079008,
+  "last_reported_at": 1795692298.4079008,
+  "last_changed_at": 1795687438.5866702,
   "state": true,
   "include_scaling": false,
   "tags": {

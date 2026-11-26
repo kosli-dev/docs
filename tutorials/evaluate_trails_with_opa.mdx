@@ -239,8 +239,6 @@ violations contains msg if {
     msg := sprintf("artifact '%v': %d high-severity vulnerabilities exceed limit of %d", [name, result.high_count, max_high])
 }
 
-# METADATA
-# entrypoint: true
 violations contains msg if {
     some name, artifact in input.trail.compliance_status.artifacts_statuses
     snyk := artifact.attestations_statuses["snyk-container-scan"]

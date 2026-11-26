@@ -54,6 +54,10 @@ and `--output-rule` to add other rules of the policy, like a report, to it.
 | `-q`, `--quiet` | bool | [optional] Suppress non-critical warning messages. Errors and normal output are not affected. If both `--quiet` and `--debug` are set, `--debug` wins. |
 
 
+## JSON output
+
+With `--output json`, this command prints JSON that the CLI builds itself. The shape follows the CLI version, not the server's API spec.
+
 ## Live Examples in different CI systems
 
 <Tabs>

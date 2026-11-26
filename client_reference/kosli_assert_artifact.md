@@ -70,13 +70,17 @@ To drop the file from the fingerprint safely, move its entries to `--exclude` an
 | `-q`, `--quiet` | bool | [optional] Suppress non-critical warning messages. Errors and normal output are not affected. If both `--quiet` and `--debug` are set, `--debug` wins. |
 
 
+## JSON output
+
+With `--output json`, this command prints the response of the [Assert artifact](/api-reference/asserts/assert-artifact) API operation as the server returned it. The shape follows the server's published API spec, not the CLI version.
+
 ## Live Examples in different CI systems
 
 <Tabs>
 	<Tab title="GitHub">
 	View an example of the `kosli assert artifact` command in GitHub.
 
-	In [this YAML file](https://github.com/cyber-dojo/differ/blob/6b3ef8b0e2436e882515c3a7310b84dee24bde2f/.github/workflows/main.yml#L276)
+	In [this YAML file](https://github.com/cyber-dojo/differ/blob/837321fea394a756ed04e95f1ddb2023f4c12c57/.github/workflows/main.yml#L377)
 	</Tab>
 	<Tab title="GitLab">
 	View an example of the `kosli assert artifact` command in GitLab.

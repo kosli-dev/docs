@@ -69,7 +69,7 @@ Attestation types created without a summary fall back to the `jq` evaluation rul
 	<Tab title="GitHub">
 	View an example of the `kosli create attestation-type` command in GitHub.
 
-	In [this YAML file](https://github.com/cyber-dojo/kosli-attestation-types/blob/e115b88d482df7563cb10ac4fe80bdc34aad1209/.github/workflows/main.yml#L50)
+	In [this YAML file](https://github.com/cyber-dojo/kosli-attestation-types/blob/0b0f267bc23f734d1ca662cd4aa4ba2bfd93b89a/.github/workflows/main.yml#L80)
 	</Tab>
 </Tabs>
 

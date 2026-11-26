@@ -42,7 +42,7 @@ Roles apply to service accounts the same way they apply to users. Wherever this 
 | Create environments | ✅ | ✅ | ✅‡ | ❌ |
 | Update environments (description, rename, attach/detach policies) | ✅ | ✅ | ❌ | ❌ |
 | Archive environments | ✅ | ❌ | ❌ | ❌ |
-| Create/update policies | ✅ | ✅ | ❌ | ❌ |
+| Create/update environment policies | ✅ | ✅ | ❌ | ❌ |
 | Create attestation types | ✅ | ✅ | ❌ | ❌ |
 | Update attestation types | ✅ | ✅ | ❌ | ❌ |
 | Archive attestation types | ✅ | Own only\* | ❌ | ❌ |
@@ -59,6 +59,11 @@ Roles apply to service accounts the same way they apply to users. Wherever this 
 | View actions | ✅ | ✅ | ✅ | ✅ |
 | **Controls** (beta) | | | |
 | Create, update, archive, and unarchive controls | ✅ | ❌ | ❌ | ❌ |
+| Publish Rego policies (create a policy or a new version of one) | ✅ | ❌ | ❌ | ❌ |
+| Archive and unarchive Rego policies | ✅ | ❌ | ❌ | ❌ |
+| View Rego policies, their versions, files, and audit log | ✅ | ✅ | ✅ | ✅ |
+| Evaluate trails against a Rego policy | ✅ | ✅ | ❌ | ❌ |
+| View evaluations | ✅ | ✅ | ✅ | ✅ |
 | **Data Access** | | | |
 | View trails and artifacts | ✅ | ✅ | ✅ | ✅ |
 | View attestations | ✅ | ✅ | ✅ | ✅ |
@@ -91,8 +96,9 @@ The following sections provide more details about each Kosli user role, includin
   - **Organization Settings**: Modify organization-wide settings and configurations (Admin only)
   - **Service Accounts**: Create and manage service accounts and their API keys
   - **Integrations**: Configure integrations with external systems (LaunchDarkly, Sonar)
-  - **Resource Management**: Create, update, and archive flows, environments, and attestation types, and create and update policies
+  - **Resource Management**: Create, update, and archive flows, environments, and attestation types, and create and update environment policies
   - **Controls**: Create, update, archive, and unarchive controls (Admin only)
+  - **Rego policies**: Publish, archive, and unarchive Rego policies (Admin only)
   - **Attestations & Snapshots**: Report attestations and environment snapshots
   - **Actions**: Create, update, and delete actions for automated workflows and notifications
   - **Data Access**: View all trails, artifacts, attestations, and snapshots
@@ -119,7 +125,7 @@ The following sections provide more details about each Kosli user role, includin
 
   - **Service Accounts**: Create service accounts, and manage the ones they created and those accounts' API keys
   - **Integrations**: Configure integrations with external systems (LaunchDarkly, Sonar)
-  - **Resource Management**: Create and update flows, environments, policies, and attestation types
+  - **Resource Management**: Create and update flows, environments, environment policies, and attestation types
   - **Attestations & Snapshots**: Report attestations and environment snapshots
   - **Actions**: Create, update, and delete actions for automated workflows and notifications
   - **Data Access**: View all trails, artifacts, attestations, and snapshots
@@ -131,6 +137,7 @@ The following sections provide more details about each Kosli user role, includin
   - Archive attestation types they did not create
   - Manage service accounts they did not create
   - Create, update, archive, or unarchive controls
+  - Publish, archive, or unarchive Rego policies
   - Manage spaces
 
   ### When to assign

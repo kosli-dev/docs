@@ -29,10 +29,10 @@ Cloud Capture connects to your cloud accounts using permissions that you manage.
 |---|---|---|---|
 | AWS | Amazon ECS | Beta | One environment per cluster |
 | AWS | AWS Lambda | Beta | One environment per region, covering its functions |
+| AWS | Amazon S3 | Beta | One environment per bucket, for the buckets you opt in by tag |
 | Azure | Azure App Service | Early access | One environment per resource group, covering its running container-based web apps |
 | Google Cloud | Cloud Run | Early access | One environment per project and region, covering its services and jobs |
-| AWS | Amazon S3 | Planned | |
-| Google Cloud | Google Kubernetes Engine (GKE) | Planned | |
+| Google Cloud | Google Kubernetes Engine (GKE) | Early access | One environment per cluster |
 | Azure | Azure Kubernetes Service (AKS) | Planned | |
 
 Kosli's Customer Success team enables Cloud Capture for your organization. You then set it up yourself from your organization's Settings page, as described in [Getting started](/administration/cloud_capture/getting_started).
@@ -48,7 +48,8 @@ Kosli's Customer Success team enables Cloud Capture for your organization. You t
 The security of your cloud infrastructure is the primary driver behind the internal architecture of
 Cloud Capture. You grant a read-only identity in your cloud account, protected by a trust condition
 that only Kosli can satisfy: an external ID on AWS, which acts as a shared secret between Kosli and
-you, and a workload identity pool on Google Cloud. On Kosli's side, each Cloud Capture job runs under a role
+you, a workload identity pool on Google Cloud, and on Azure an application you consent to and a tag
+on your subscription that carries the same external ID. On Kosli's side, each Cloud Capture job runs under a role
 scoped to your organization alone, so a worker running for another tenant cannot reach your cloud
 account. Cloud Capture holds no tenant data; snapshots go straight to Kosli through the same ingest
 path as your existing pipelines. See [Cloud Capture Security](/administration/cloud_capture/security)
@@ -60,11 +61,13 @@ Cloud Capture has been designed to operate with no on-going support from you.  O
 
 ## Finding resources
 
-Cloud Capture finds all [supported resources](#supported-platforms) within your cloud accounts, and determines which Kosli environment should hold the snapshots. Cloud Capture will create physical environments for you inside Kosli. You choose how those environments are named; see [Environment names](/administration/cloud_capture/getting_started#environment-names).
+Cloud Capture finds the [supported resources](#supported-platforms) within your cloud accounts, in the services you select for each account, and determines which Kosli environment should hold the snapshots. Cloud Capture will create physical environments for you inside Kosli. You choose how those environments are named; see [Environment names](/administration/cloud_capture/getting_started#environment-names).
 
 You can keep a resource out of Cloud Capture by tagging it with any tag you have listed in your Cloud Capture settings; see [Excluding resources](/administration/cloud_capture/getting_started#excluding-resources).
 
-As your cloud environment evolves, such as the addition of new AWS ECS clusters or the retirement of existing Lambdas, Cloud Capture automatically detects the changes. Because Cloud Capture creates physical environments as needed, when your infrastructure changes, Kosli will keep up. No changes to the configuration created during the initial setup are required.
+Amazon S3 works the other way round. A bucket is snapshotted only when you opt it in, by tagging it with one of the S3 opt-in tags in your Cloud Capture settings, because a snapshot makes one request to AWS for every object in the bucket and most buckets hold data you would not want reported; see [Capturing S3 buckets](/administration/cloud_capture/getting_started#capturing-s3-buckets).
+
+As your cloud environment evolves, such as the addition of new AWS ECS clusters or GKE clusters, or the retirement of existing Lambdas, Cloud Capture automatically detects the changes. Because Cloud Capture creates physical environments as needed, when your infrastructure changes, Kosli will keep up. No changes to the configuration created during the initial setup are required.
 
 ## Multiple cloud accounts
 
@@ -72,4 +75,4 @@ Cloud Capture can operate across multiple regions and cloud accounts, such as AW
 
 ## Operation
 
-When Cloud Capture runs against one of your cloud accounts, it starts by gaining temporary credentials for the role you have created. It then uses these credentials to find resources to snapshot, such as all of your AWS ECS clusters or your Google Cloud Run services.  For each resource it identifies, Cloud Capture generates a snapshot within Kosli.
+When Cloud Capture runs against one of your cloud accounts, it starts by gaining temporary credentials for the identity you have granted it. It then uses these credentials to find resources to snapshot, such as all of your AWS ECS clusters or your Google Cloud Run services.  For each resource it identifies, Cloud Capture generates a snapshot within Kosli.

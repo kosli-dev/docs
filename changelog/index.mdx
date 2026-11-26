@@ -4,6 +4,73 @@ description: "Release notes for Kosli products."
 rss: true
 ---
 
+<Update label="November 20, 2026" description="v2.58.1" tags={["CLI"]}>
+
+No changes to the CLI itself. This release ships version 2.9.0 of the [k8s-reporter Helm chart](/helm/k8s_reporter/overview).
+
+## New features
+
+- **Pod security context**: the new `podSecurityContext` value sets the pod-level security context, for pod-only fields such as `fsGroup` or `supplementalGroups`.
+- **Private registry mirrors**: the new `imagePullSecrets` value lets the reporter pull its image from a private registry.
+- **Debug logs**: set `reporterConfig.debug` to `true` to run the reporter with `--debug`.
+
+## Updates
+
+- **Full container security context**: every key under `reporterConfig.securityContext` is now rendered on the reporter container, so you can set `capabilities` and `seccompProfile` for namespaces that enforce the `restricted` Pod Security Standard. Earlier versions silently dropped all but five keys. A misspelled key or a pod-only field there now makes `helm upgrade` fail with an `unknown field` error, so check your values first. See [Upgrading](/helm/k8s_reporter/upgrading).
+- **Newer default CLI**: the chart now runs CLI v2.58.0 by default, unless you set `image.tag`.
+
+## Bug fixes
+
+- `fsGroup` under `reporterConfig.securityContext` is now rendered on the pod, where Kubernetes accepts it, instead of on the container.
+- An all-numeric `reporterConfig.kosliOrg` no longer fails validation.
+
+[View on GitHub](https://github.com/kosli-dev/cli/releases/tag/v2.58.1)
+
+</Update>
+
+<Update label="November 19, 2026" description="v2.58.0" tags={["CLI"]}>
+
+## New features
+
+- **Skip objects without usable checksums**: `kosli snapshot s3 --fingerprint-source metadata --skip-unusable-checksums` leaves out objects whose SHA256 checksum is missing, multipart or undecodable, instead of failing the whole snapshot. A warning names the skipped objects. The resulting fingerprint covers only the remaining objects, so it won't match an artifact attested from the full bucket. See the [`kosli snapshot s3` reference](/client_reference/kosli_snapshot_s3).
+
+[View on GitHub](https://github.com/kosli-dev/cli/releases/tag/v2.58.0)
+
+</Update>
+
+<Update label="November 19, 2026" description="v2.57.1" tags={["CLI"]}>
+
+## New features
+
+- **Keep the build green during a Kosli outage (experimental)**: when `kosli attest artifact` runs a build command, `--fail-on-attest-error=false` prints a warning and exits 0 if the build succeeds but Kosli can't be reached, or returns a 5xx, 429 or 409 after retries. Other 4xx responses, such as an invalid token, still fail. See the [`kosli attest artifact` reference](/client_reference/kosli_attest_artifact).
+- **Build once, attest to every host**: `kosli attest artifact` with a build command now works with multiple hosts, set as comma-separated `--host` and `--api-token` lists. The build runs once and the attestation goes to each host with its own token. If a host fails, the others are still tried and every failing host is listed.
+
+## Updates
+
+- **`kosli evaluate trail` and `kosli evaluate trails` are deprecated**: both now print a deprecation notice on stderr. Use `kosli evaluate policy --context trail=FLOW-NAME/TRAIL-NAME` instead, which evaluates the policy in Kosli. See the [`kosli evaluate policy` reference](/client_reference/kosli_evaluate_policy).
+
+[View on GitHub](https://github.com/kosli-dev/cli/releases/tag/v2.57.1)
+
+</Update>
+
+<Update label="November 16, 2026" description="v2.57.0" tags={["CLI"]}>
+
+## Breaking changes
+
+- **Default GitHub signer tied to the current run (beta)**: with `kosli attest in-toto --source github` and no pinned signer, only attestations made by the current workflow run, including earlier attempts of it, are accepted. Attestations made by another run, such as a deployment workflow, now need a pinned signer: `--certificate-identity` or `--certificate-identity-regexp` with `--certificate-oidc-issuer`, or `--key`. The error names these flags. See the [`kosli attest in-toto` reference](/client_reference/kosli_attest_in-toto).
+
+## New features
+
+- **`owner/name` repositories for in-toto**: with `--source github`, pass `--repository` as `owner/name` instead of also setting `--github-org`. A `--github-org` that conflicts with the owner in `--repository` is now refused with a clear error.
+
+## Updates
+
+- **Cloud Run digests without pull permission**: `kosli snapshot cloud-run` now reads a tag-pinned image's digest from the Artifact Registry API, a metadata read, and falls back to the registry manifest. `--resolve-names` now handles nested image paths and `gcr.io` images, so digest-pinned `gcr.io` images are reported under their tag. See the [`kosli snapshot cloud-run` reference](/client_reference/kosli_snapshot_cloud-run).
+
+[View on GitHub](https://github.com/kosli-dev/cli/releases/tag/v2.57.0)
+
+</Update>
+
 <Update label="November 13, 2026" description="v2.56.1" tags={["CLI"]}>
 
 ## New features
