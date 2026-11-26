@@ -67,7 +67,7 @@ kosli list flows --output=json
     "template": "version: 1\ntrail:\n  attestations:\n    - name: drift-detection\n      type: decision\n",
     "repo_url": "",
     "tags": {},
-    "latest_activity_at": 1795574077.3594954,
+    "latest_activity_at": 1795657775.5866902,
     "latest_state": "COMPLIANT"
   },
   {
@@ -79,7 +79,7 @@ kosli list flows --output=json
     "template": "version: 1\ntrail:\n  attestations:\n    - name: drift-detection\n      type: decision\n",
     "repo_url": "",
     "tags": {},
-    "latest_activity_at": 1795574101.2808046,
+    "latest_activity_at": 1795657780.4801004,
     "latest_state": "COMPLIANT"
   },
   {
@@ -277,7 +277,7 @@ kosli list flows --output=json
       "kind": "run",
       "repo_url": "https://github.com/cyber-dojo/secrets"
     },
-    "latest_activity_at": 1795606132.5150554,
+    "latest_activity_at": 1795691175.7670078,
     "latest_state": "COMPLIANT"
   },
   {
@@ -294,7 +294,7 @@ kosli list flows --output=json
       "workflow_url": "https://github.com/cyber-dojo/snyk-scanning/blob/main/.github/workflows/aws-beta.yml",
       "env": "aws-beta"
     },
-    "latest_activity_at": 1795602469.6625366,
+    "latest_activity_at": 1795687400.4185913,
     "latest_state": "COMPLIANT"
   },
   {
@@ -311,7 +311,7 @@ kosli list flows --output=json
       "kind": "run",
       "workflow_url": "https://github.com/cyber-dojo/snyk-scanning/blob/main/.github/workflows/artifact_snyk_test.yml"
     },
-    "latest_activity_at": 1795602442.9678147,
+    "latest_activity_at": 1795687375.4702342,
     "latest_state": "COMPLIANT"
   },
   {
@@ -328,7 +328,7 @@ kosli list flows --output=json
       "workflow_url": "https://github.com/cyber-dojo/snyk-scanning/blob/main/.github/workflows/aws-prod.yml",
       "env": "aws-prod"
     },
-    "latest_activity_at": 1795602322.347914,
+    "latest_activity_at": 1795687385.1510093,
     "latest_state": "COMPLIANT"
   },
   {
@@ -345,7 +345,7 @@ kosli list flows --output=json
       "kind": "run",
       "workflow_url": "https://github.com/cyber-dojo/snyk-scanning/blob/main/.github/workflows/artifact_snyk_test.yml"
     },
-    "latest_activity_at": 1795602295.0331793,
+    "latest_activity_at": 1795687348.0646653,
     "latest_state": "COMPLIANT"
   },
   {
