@@ -96,7 +96,7 @@ The following sections provide more details about each Kosli user role, includin
   - **Organization Settings**: Modify organization-wide settings and configurations (Admin only)
   - **Service Accounts**: Create and manage service accounts and their API keys
   - **Integrations**: Configure integrations with external systems (LaunchDarkly, Sonar)
-  - **Resource Management**: Create, update, and archive flows, environments, and attestation types, and create and update policies
+  - **Resource Management**: Create, update, and archive flows, environments, and attestation types, and create and update environment policies
   - **Controls**: Create, update, archive, and unarchive controls (Admin only)
   - **Rego policies**: Publish, archive, and unarchive Rego policies (Admin only)
   - **Attestations & Snapshots**: Report attestations and environment snapshots
