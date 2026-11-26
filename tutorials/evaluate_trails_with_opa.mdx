@@ -1,12 +1,7 @@
 ---
 title: "Evaluate trails with OPA policies"
-tag: "BETA"
 description: "Learn how to write safe OPA/Rego policies and evaluate Kosli trails against them with kosli evaluate policy, including design rules that prevent false-positive compliance results."
 ---
-
-<Info>
-**Server-side evaluation is in beta.** `kosli evaluate policy` is available in Kosli but in beta. The CLI flags, the policy input, and the result shape may still change. It is rolled out per organization, so reach out to the Kosli team to enable it for yours.
-</Info>
 
 The `kosli evaluate policy` command lets you evaluate Kosli trails against custom policies written in <Tooltip tip="Rego is the purpose-built declarative policy language used by the Open Policy Agent (OPA) project. It is designed for expressing rules over structured data and is widely used for policy enforcement in cloud-native environments." cta="Learn more" href="https://www.openpolicyagent.org/">[Rego](https://www.openpolicyagent.org/docs/latest/policy-language/)</Tooltip>. This is useful for enforcing rules like "every artifact must have an approved pull request" or "all security scans must pass", and for gating deployments in CI/CD pipelines based on those rules. Kosli evaluates the policy on the server, against the trails as Kosli recorded them, and the CLI prints the result.
 
@@ -24,7 +19,6 @@ To follow this tutorial, you need to:
 
 * [Install Kosli CLI](/getting_started/install).
 * [Get a Kosli API token](/getting_started/authenticating_to_kosli).
-* Have server-side evaluation enabled for your org (see the beta note above).
 * Have a flow with a few trails that carry a pull request attestation, and a trail with a Snyk container scan attestation for the later steps.
 * Set the `KOSLI_API_TOKEN` and `KOSLI_ORG` environment variables:
 
