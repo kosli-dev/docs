@@ -42,3 +42,40 @@ Before you begin, you will need access to your Identity Provider (IdP) — such 
     Once you have completed the SSO configuration in the wizard, please let your Kosli Customer Success representative know. We will then switch your email domain to use SSO and confirm when the migration is complete.
   </Step>
 </Steps>
+
+## Renew the client secret
+
+An OIDC connection authenticates to your IdP with the Client Secret you entered in the wizard. Most IdPs give client secrets an expiry date, and you should also replace a secret you suspect has been exposed. You update the secret on the existing connection, in the same wizard you used to set it up, without recreating the connection.
+
+Before you start, you need:
+
+- Permission in your IdP to manage the Kosli application registration's client secrets.
+- A link to the setup wizard. If you no longer have a working link, ask your Kosli Customer Success representative for one.
+
+<Steps>
+  <Step title="Create a new secret in your IdP">
+    In the Kosli application registration in your IdP, create a new client secret and copy its value. Leave the old secret in place for now. Most IdPs, such as Azure Entra ID, allow several secrets to be valid at once, so sign-in keeps working while you switch over.
+  </Step>
+  <Step title="Open your existing connection in the wizard">
+    Open the wizard link and select **SSO Configuration**. The wizard shows your current connection.
+  </Step>
+  <Step title="Replace the Client Secret">
+    Go to the step with the **Client ID** and **Client Secret** fields, paste the new value into **Client Secret**, and leave **Client ID** unchanged.
+  </Step>
+  <Step title="Test and save">
+    Click through to the **Testing** page, run the test sign-in, and save the configuration.
+  </Step>
+  <Step title="Remove the old secret">
+    Once a test sign-in with the new secret works, delete the old secret in your IdP.
+  </Step>
+</Steps>
+
+<Warning>
+Renew the secret before the old one expires. If the secret Kosli holds expires or is deleted in your IdP, nobody in your organization can sign in to Kosli with SSO until you enter a valid secret in the wizard. Set a reminder ahead of the expiry date your IdP shows.
+</Warning>
+
+SAML connections have no client secret. The equivalent task is renewing your IdP's signing certificate: when it changes, update the IdP metadata in the same way, through **SSO Configuration** in the wizard.
+
+If sign-in fails after the change, check that you copied the secret's value rather than its ID, then contact your Kosli Customer Success representative.
+
+This procedure is separate from [rotating Kosli API keys](/tutorials/rotating_api_keys), which applies to service accounts and personal API keys, not to SSO.
