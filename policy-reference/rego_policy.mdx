@@ -1,6 +1,6 @@
 ---
 title: "Rego Policy"
-description: "Reference for Rego policies that Kosli evaluates on the server with kosli publish rego-policy and kosli evaluate policy, and locally with kosli evaluate trail."
+description: "Reference for Rego policies that Kosli evaluates on the server with kosli publish rego-policy and kosli evaluate policy."
 ---
 
 <Info>
@@ -28,7 +28,7 @@ kosli evaluate policy \
 
 We recommend writing policies with [Ergo](#writing-policies-with-ergo), an open source Rego library maintained by Kosli that expresses requirements as YAML sentences. Plain Rego works too, and both follow the same contract.
 
-The older `kosli evaluate trail` and `kosli evaluate trails` commands evaluate a policy in the CLI instead. They follow a different contract and receive a different input, described in [Local evaluation](#local-evaluation).
+The `kosli evaluate trail` and `kosli evaluate trails` commands are deprecated. Use `kosli evaluate policy --context trail=<flow>/<trail>` instead. The deprecated commands evaluate a policy in the CLI, with a different contract and a different input, described in [Local evaluation](#local-evaluation).
 
 ## Policy contract
 
@@ -135,7 +135,7 @@ kosli publish rego-policy rctl-043 \
   --name "Source code review"
 ```
 
-A policy that imports Ergo cannot be evaluated with `kosli evaluate trail`, which takes a single file. See the [Ergo documentation](https://ergo.kosli.com) for subjects, sentences, and the report format.
+See the [Ergo documentation](https://ergo.kosli.com) for subjects, sentences, and the report format.
 
 ## Publishing a policy
 
@@ -429,17 +429,44 @@ Allows only when every trail in `input.trails` has a compliant pull request atte
   </Tab>
 </Tabs>
 
+## Testing a policy before publishing
+
+To test a policy before publishing it, run `kosli evaluate policy --path` against a real trail: Kosli evaluates the local files exactly as it will evaluate the published policy, and records nothing. This works for Ergo policies and for policies split across several files.
+
+```shell
+kosli evaluate policy \
+  --context trail="$FLOW/$TRAIL_NAME" \
+  --path policy/ \
+  --path lib/ergo.rego \
+  --params '{"pr_attestation_name": "pull-request"}'
+```
+
+To iterate on a policy without calling Kosli each time, capture what an evaluation was given once with [`kosli get evaluation --fixture`](#replaying-an-evaluation), then evaluate your policy files against it on your machine with [`opa eval`](https://www.openpolicyagent.org/docs/cli#eval). Run it again after each change to the policy:
+
+```shell
+# Capture the input and params of an evaluation once
+kosli get evaluation "$EVALUATION_ID" --fixture --dir ./replay
+
+# Iterate on the policy locally
+opa eval --input replay/input.json --data replay/data.json \
+  --bundle policy/ 'data.policy.allow'
+```
+
+OPA does not refuse the built-in functions Kosli refuses, so type-check the policy against the capabilities file as in [Publishing a policy](#publishing-a-policy), and confirm the result with `kosli evaluate policy --path` before you publish.
+
 ## Local evaluation
 
-[`kosli evaluate trail`](/client_reference/kosli_evaluate_trail) and [`kosli evaluate trails`](/client_reference/kosli_evaluate_trails) fetch trail data from Kosli and evaluate a local policy file in the CLI, passed with `--policy`. A local evaluation records nothing: it cannot record a decision against a control. To try a policy on the server's input before publishing it, use `kosli evaluate policy --path` instead.
+<Warning>
+`kosli evaluate trail` and `kosli evaluate trails` are deprecated and will be removed in a future release. Use [`kosli evaluate policy`](/client_reference/kosli_evaluate_policy) instead, and see [Testing a policy before publishing](#testing-a-policy-before-publishing) to try a policy without publishing it.
+</Warning>
 
-To evaluate a policy file on the Kosli server instead, add `--server-side` (beta) to either command. Kosli builds the input from the trails you name as [trail moments](#trail-moment), so the CLI reads no trail data. A policy written for local input may need its field paths changed first. See [Local input data](#local-input-data). The flag can't be combined with `--attestations`, `--show-input` or `--output-rule`, and a server-side evaluation takes at most 100 trails.
+[`kosli evaluate trail`](/client_reference/kosli_evaluate_trail) and [`kosli evaluate trails`](/client_reference/kosli_evaluate_trails) fetch trail data from Kosli and evaluate a local policy file in the CLI, passed with `--policy`. A local evaluation records nothing: it cannot record a decision against a control.
 
-A local evaluation differs from a server-side one:
+When you move a policy from these commands to `kosli evaluate policy`, keep in mind how a local evaluation differs from a server-side one:
 
-- The policy is a single `.rego` file that declares `package policy`. Kosli reads `data.policy.allow` and `data.policy.violations`, with no annotations needed.
+- The policy is a single `.rego` file that declares `package policy`. Kosli reads `data.policy.allow` and `data.policy.violations`, with no annotations needed. On the server, annotate `violations` with `entrypoint: true` to have it returned. See [Policy contract](#policy-contract).
 - No built-in functions are refused, so a policy that passes locally can still fail to compile on the server. Check it against the capabilities file first, as in [Publishing a policy](#publishing-a-policy).
-- The input is the trail as the trails API returns it, not a trail moment.
+- The input is the trail as the trails API returns it, not a trail moment. Field paths that differ need changing. See [Local input data](#local-input-data).
 
 ### Local input data
 
@@ -453,44 +480,6 @@ A local evaluation differs from a server-side one:
 | Trail events, `html_url`, trail-level `git_commit_info` | included | not included |
 
 A local trail with two attestations of the same name keeps only the last one.
-
-Use `--show-input` with `--output json` to print the full input for a given trail. Pipe through `jq` to explore specific fields:
-
-```shell
-kosli evaluate trail "$TRAIL_NAME" \
-  --policy my-policy.rego \
-  --org "$ORG" \
-  --flow "$FLOW" \
-  --show-input \
-  --output json 2>/dev/null | jq '.input'
-```
-
-### Local testing
-
-To test a policy before publishing it, run `kosli evaluate policy --path` against a real trail: Kosli evaluates the local files exactly as it will evaluate the published policy, and records nothing. This works for Ergo policies and for policies split across several files.
-
-```shell
-kosli evaluate policy \
-  --context trail="$FLOW/$TRAIL_NAME" \
-  --path policy/ \
-  --path lib/ergo.rego \
-  --params '{"pr_attestation_name": "pull-request"}'
-```
-
-For the local contract, use [`kosli evaluate input`](/client_reference/kosli_evaluate_input) to test a policy against captured trail data without making live Kosli API calls:
-
-```shell
-# Capture trail data once
-kosli evaluate trail "$TRAIL_NAME" \
-  --policy allow-all.rego \
-  --show-input --output json | jq '.input' > trail-data.json
-
-# Iterate on the policy locally
-kosli evaluate input \
-  --input-file trail-data.json \
-  --policy my-policy.rego \
-  --params '{"max_high": 0}'
-```
 
 ### Local exit codes
 
