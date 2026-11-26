@@ -1,12 +1,7 @@
 ---
 title: "kosli get rego-policy"
-tag: "BETA"
 description: "Get a rego policy, or one version of it."
 ---
-
-import CliBetaNotice from "/snippets/cli-beta-notice.mdx";
-
-<CliBetaNotice />
 
 ## Synopsis
 

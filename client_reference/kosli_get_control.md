@@ -1,12 +1,7 @@
 ---
 title: "kosli get control"
-tag: "BETA"
 description: "Get a Kosli control."
 ---
-
-import CliBetaNotice from "/snippets/cli-beta-notice.mdx";
-
-<CliBetaNotice />
 
 ## Synopsis
 

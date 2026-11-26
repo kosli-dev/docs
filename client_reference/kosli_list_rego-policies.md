@@ -1,12 +1,7 @@
 ---
 title: "kosli list rego-policies"
-tag: "BETA"
 description: "List rego policies for an org."
 ---
-
-import CliBetaNotice from "/snippets/cli-beta-notice.mdx";
-
-<CliBetaNotice />
 
 ## Synopsis
 
@@ -16,11 +11,13 @@ kosli list rego-policies [flags]
 
 List rego policies for an org.
 The results are paginated; use `--page` and `--page-limit` to navigate the pages.
-By default, the policies changed most recently are listed first.
+By default, the policies changed most recently are listed first, and archived policies are
+left out; use `--archived` to list only archived ones.
 
 ## Flags
 | Flag | Type | Description |
 | :--- | :--- | :--- |
+| `--archived` | bool | [optional] List archived rego policies instead of active ones. |
 | `-h`, `--help` | bool | help for rego-policies |
 | `-o`, `--output` | string | [defaulted] The format of the output. Valid formats are: [table, json]. (default "table") |
 | `--page` | int | [defaulted] The page number of a response. (default 1) |
@@ -71,6 +68,13 @@ kosli list rego-policies
 ```shell
 kosli list rego-policies 
 	--search approved 
+
+```
+</Accordion>
+<Accordion title="list archived rego policies instead of active ones">
+```shell
+kosli list rego-policies 
+	--archived 
 
 ```
 </Accordion>

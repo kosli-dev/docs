@@ -1,12 +1,7 @@
 ---
 title: "kosli create control"
-tag: "BETA"
 description: "Create a Kosli control."
 ---
-
-import CliBetaNotice from "/snippets/cli-beta-notice.mdx";
-
-<CliBetaNotice />
 
 ## Synopsis
 

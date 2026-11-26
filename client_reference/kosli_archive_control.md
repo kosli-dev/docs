@@ -1,12 +1,7 @@
 ---
 title: "kosli archive control"
-tag: "BETA"
 description: "Archive a Kosli control."
 ---
-
-import CliBetaNotice from "/snippets/cli-beta-notice.mdx";
-
-<CliBetaNotice />
 
 ## Synopsis
 

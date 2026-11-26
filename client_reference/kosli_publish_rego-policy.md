@@ -1,12 +1,7 @@
 ---
 title: "kosli publish rego-policy"
-tag: "BETA"
 description: "Publish a new version of a rego policy in a Kosli org."
 ---
-
-import CliBetaNotice from "/snippets/cli-beta-notice.mdx";
-
-<CliBetaNotice />
 
 ## Synopsis
 
