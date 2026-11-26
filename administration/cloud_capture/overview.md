@@ -39,7 +39,7 @@ Kosli's Customer Success team enables Cloud Capture for your organization. You t
 
 <CardGroup cols={3}>
   <Card title="AWS" href="/administration/cloud_capture/aws">
-    Amazon ECS, AWS Lambda and Amazon S3
+    Amazon ECS, AWS Lambda, and Amazon S3
   </Card>
   <Card title="Azure" href="/administration/cloud_capture/azure">
     Azure App Service
