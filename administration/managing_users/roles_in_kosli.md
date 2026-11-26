@@ -62,7 +62,7 @@ Roles apply to service accounts the same way they apply to users. Wherever this 
 | Publish Rego policies (create a policy or a new version of one) | ✅ | ❌ | ❌ | ❌ |
 | Archive and unarchive Rego policies | ✅ | ❌ | ❌ | ❌ |
 | View Rego policies, their versions, files, and audit log | ✅ | ✅ | ✅ | ✅ |
-| Evaluate trails against a policy in Kosli (`kosli evaluate policy`) | ✅ | ✅ | ❌ | ❌ |
+| Evaluate trails against a Rego policy | ✅ | ✅ | ❌ | ❌ |
 | View evaluations | ✅ | ✅ | ✅ | ✅ |
 | **Data Access** | | | |
 | View trails and artifacts | ✅ | ✅ | ✅ | ✅ |
