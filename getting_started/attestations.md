@@ -375,10 +375,6 @@ Currently, we support the following types of evidence:
     the alias is undefined and no rule using it runs. A trail-scoped SBOM sits at
     `input.trail.compliance_status.attestations_statuses[sbom_attestation_name].attestation_data.document`.
 
-    If you narrow the input with `kosli evaluate trail --attestations`, name the SBOM there too,
-    dot-qualified as `<artifact>.<name>` for an artifact-scoped one. Anything left out is absent
-    from the input, and a rule reading it does not match rather than failing.
-
     See [attest an SBOM to an artifact or a trail](/client_reference/kosli_attest_sbom/) for usage details and examples.
   </Accordion>
   <Accordion title="Jira issues" icon="clipboard-list-check">
