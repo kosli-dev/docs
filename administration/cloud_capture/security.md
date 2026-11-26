@@ -17,7 +17,7 @@ Each cloud's page gives the full detail: what you create, the exact permissions,
 
 | Cloud | Identity in your account | Trust condition | Access granted | Details |
 |---|---|---|---|---|
-| AWS | An IAM role you create | Only Kosli's AWS account can assume the role, and only with the external ID of your organization | Read-only ECS and Lambda inventory, and object reads only in the S3 buckets you name | [AWS](/administration/cloud_capture/aws#permissions-and-security) |
+| AWS | An IAM role you create | Only Kosli's AWS account can assume the role, and only with the external ID of your organization | Read-only ECS and Lambda inventory, and bucket-level S3 metadata. If you name S3 buckets, the role can also read objects in those buckets and the tags of every taggable resource in the account | [AWS](/administration/cloud_capture/aws#permissions-and-security) |
 | Azure | A Kosli application you consent to | A `kosli-external-id` tag on the subscription that must match the external ID of your organization | The `Reader` and `AcrPull` roles on each subscription you choose | [Azure](/administration/cloud_capture/azure#permissions-and-security) |
 | Google Cloud | A service account you create | A workload identity pool that accepts only Kosli's AWS account and, within it, only the Kosli-side role for your organization | The Cloud Run viewer role and two read-only custom roles | [Google Cloud](/administration/cloud_capture/google_cloud#permissions-and-security) |
 
