@@ -95,7 +95,7 @@ If your GitHub organization uses an IP allow list, you also need to allow Kosli'
 </Accordion>
 
 <Accordion title="When do I use kosli assert, and when kosli evaluate?">
-Both can stop a pipeline: `kosli assert` exits non-zero on a non-compliant result, and so do `kosli evaluate trail`, `trails` and `input` on a deny. `kosli evaluate policy` only does so when you pass `--assert`. They answer different questions:
+Both can stop a pipeline: `kosli assert` exits non-zero on a non-compliant result, and `kosli evaluate policy --assert` exits non-zero on a deny. They answer different questions:
 
 - **`kosli assert`** checks a verdict Kosli has already worked out from what you recorded. You write no rules: the rules are your flow templates and environment policies. [`kosli assert artifact`](/client_reference/kosli_assert_artifact) asks whether an artifact is compliant, and [`kosli assert snapshot`](/client_reference/kosli_assert_snapshot) asks whether an environment is.
 - **`kosli evaluate`** runs a Rego policy over trail data and returns allow or deny. Use it for rules that flow templates and environment policies can't express, such as "every pull request has an approver who isn't its author".
@@ -104,7 +104,7 @@ Both can stop a pipeline: `kosli assert` exits non-zero on a non-compliant resul
 |---|---|---|
 | Answers | Is this artifact or environment compliant? | Does this trail data satisfy my policy? |
 | Rules come from | Flow templates and environment policies in Kosli | A Rego policy you write |
-| Checks | An artifact (by fingerprint) or an environment snapshot | One or more trails, or local JSON with `evaluate input` |
+| Checks | An artifact (by fingerprint) or an environment snapshot | One or more trails (to check local JSON, use [`opa eval`](https://www.openpolicyagent.org/docs/cli#eval)) |
 | Records a result | No | Yes, with `kosli evaluate policy --control`, which records a decision |
 
 Use them together when you work with [controls](/tutorials/working_with_controls): `kosli evaluate policy` records a decision against a control where the judgment is made, an environment policy requires that decision, and `kosli assert artifact --environment` enforces it as the gate before deployment. In short, evaluate where you decide, assert where you deploy.
