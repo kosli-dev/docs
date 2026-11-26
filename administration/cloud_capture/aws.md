@@ -147,7 +147,14 @@ The IAM role defined within the CloudFormation template includes an "assume role
 
 ### All permissions needed
 
-The IAM role defined within the Cloudformation template includes a number of IAM policy statements, granting read-only access to some AWS APIs.  The statements are:
+The IAM role defined within the Cloudformation template includes a number of IAM policy statements, granting read-only access to some AWS APIs. In summary:
+
+- **ECS and Lambda**: read-only inventory calls on every cluster and function. None returns application data, and downloading a function's or a layer's code is explicitly denied.
+- **S3**: bucket-level metadata for every bucket. Object keys and objects can be read only in the buckets you name, and not at all when you name none; see [What capturing S3 buckets grants](#what-capturing-s3-buckets-grants).
+
+The statements in full, with the template's own comments:
+
+<Accordion title="IAM policy statements, version v0.2.0">
 
 ```yaml
 Statement:
@@ -348,6 +355,8 @@ Statement:
       - lambda:GetLayerVersion
     Resource: "*"
 ```
+
+</Accordion>
 
 ### What capturing S3 buckets grants
 

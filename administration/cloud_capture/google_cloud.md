@@ -424,22 +424,6 @@ output "kosli_capture_service_account" {
 
 </Accordion>
 
-### Deploying with Infrastructure Manager
-
-Download the configuration into an empty directory and run the following from it. Infrastructure
-Manager runs Terraform as the service account you name, so that service account needs permission to
-enable APIs and to create workload identity pools, service accounts, custom roles and project IAM
-bindings. The Kosli AWS account ID and role name are shown in the first step of the Google Cloud
-registration form in the Kosli UI.
-
-```bash
-gcloud infra-manager deployments apply \
-    projects/<your-gcp-project>/locations/<your-gcp-region>/deployments/kosli-capture \
-    --service-account=projects/<your-gcp-project>/serviceAccounts/<deployer>@<your-gcp-project>.iam.gserviceaccount.com \
-    --local-source=. \
-    --input-values=project_id=<your-gcp-project>,kosli_aws_account_id=<value from Kosli>,kosli_role_name=<value from Kosli>
-```
-
 ### Tenant isolation
 
 Each Cloud Capture job for your organization runs under the Kosli-side IAM role dedicated to your

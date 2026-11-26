@@ -61,7 +61,7 @@ Nothing is deployed in your Azure tenant. Kosli registers one multi-tenant appli
 
 3. **A tag on the subscription.** You tag the subscription `kosli-external-id` with your organization's external ID. Cloud Capture refuses to list a subscription whose tag does not match the external ID of the organization it is working for.
 
-The registration form in the Kosli UI shows the consent link and the three Azure CLI commands with your values filled in; see [Set up](#set-up).
+[Set up](#set-up) has the consent link and the command for each step.
 
 To withdraw access, remove the role assignments or the tag from the subscription, or delete the application's service principal from your tenant, and remove the subscription from your registered accounts in Kosli.
 
