@@ -204,6 +204,9 @@
           "group": "Cloud Capture",
           "pages": [
             "administration/cloud_capture/overview",
+            "administration/cloud_capture/aws",
+            "administration/cloud_capture/azure",
+            "administration/cloud_capture/google_cloud",
             "administration/cloud_capture/getting_started",
             "administration/cloud_capture/security"
           ]
