@@ -114,10 +114,12 @@ The other `assert` commands are narrower checks: `kosli assert pullrequest <prov
 To learn more, see [Enforce policies](/getting_started/enforce_policies) for `assert`, and [Evaluate trails with OPA policies](/tutorials/evaluate_trails_with_opa) and the [Rego policy reference](/policy-reference/rego_policy) for `evaluate`.
 </Accordion>
 
-<Accordion title="Why can't I delete or archive a policy?">
-It's not possible to delete a policy in Kosli. This is by design, because there can be snapshots that were previously evaluated using the policy. Deleting it would compromise the integrity of those historical evaluations.
+<Accordion title="Why can't I delete or archive an environment policy?">
+It's not possible to delete an environment policy in Kosli. This is by design, because there can be snapshots that were previously evaluated using the policy. Deleting it would compromise the integrity of those historical evaluations.
 
-Archiving policies isn't available yet. If this is something you'd find useful, we'd love to hear about your use case — reach out to us at support@kosli.com.
+Archiving environment policies isn't available yet. If this is something you'd find useful, we'd love to hear about your use case — reach out to us at support@kosli.com.
+
+Rego policies can be archived. See [Archiving a policy](/policy-reference/rego_policy#archiving-a-policy).
 </Accordion>
 
 </AccordionGroup>
