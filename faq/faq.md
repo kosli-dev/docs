@@ -98,7 +98,7 @@ If your GitHub organization uses an IP allow list, you also need to allow Kosli'
 Both can stop a pipeline: `kosli assert` exits non-zero on a non-compliant result, and so do `kosli evaluate trail`, `trails` and `input` on a deny. `kosli evaluate policy` only does so when you pass `--assert`. They answer different questions:
 
 - **`kosli assert`** checks a verdict Kosli has already worked out from what you recorded. You write no rules: the rules are your flow templates and environment policies. [`kosli assert artifact`](/client_reference/kosli_assert_artifact) asks whether an artifact is compliant, and [`kosli assert snapshot`](/client_reference/kosli_assert_snapshot) asks whether an environment is.
-- **`kosli evaluate`** runs a Rego policy over trail data and returns allow or deny. Use it for rules that flow templates and environment policies can't express, such as "every pull request has an approver who isn't its author". The `evaluate` commands are in beta.
+- **`kosli evaluate`** runs a Rego policy over trail data and returns allow or deny. Use it for rules that flow templates and environment policies can't express, such as "every pull request has an approver who isn't its author".
 
 | | `kosli assert artifact` / `snapshot` | `kosli evaluate` |
 |---|---|---|

@@ -62,6 +62,7 @@ These are the tags the server knows:
 |---|---|
 | `new-navigation` | The new navigation |
 | `new-trail-page` | The new trail page |
+| `controls-ga` | Controls |
 
 - **Any other tag is ignored**, and the entry shows to every organization. So check the
   spelling: a mistyped tag shows the entry to everyone.

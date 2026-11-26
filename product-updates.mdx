@@ -29,6 +29,35 @@ rss: true
 */}
 
 <Update
+  label="November 26, 2026"
+  id="controls-ga"
+  tags={["controls-ga"]}
+  description="Controls are now generally available to every Kosli organization: define your controls, decide them with published policies, and gate deployments on the decisions."
+  rss={{
+    title: "Controls are now generally available",
+    description: "Controls are now generally available to every Kosli organization: define your controls, decide them with published policies, and gate deployments on the decisions.",
+    date: "2026-11-26"
+  }}
+>
+
+## Controls are now generally available
+
+Controls are out of beta and turned on for every Kosli organization. Thank you to the teams who trialled them over the last few months. Your feedback shaped what ships today.
+
+A control is a named governance requirement your organization enforces, such as "source code review" or "vulnerability scan passed". Controls connect the evidence you collect in your pipelines to the requirements auditors and control owners ask about. With Controls you can:
+
+- **Mirror your controls catalog** in Kosli, using the identifiers you already use in your GRC system.
+- **Decide a control with policy-as-code.** Publish a policy written with [Ergo](https://ergo.kosli.com) or in plain [Rego](/policy-reference/rego_policy), and Kosli evaluates it against the trails you name and records the outcome as a decision against the control.
+- **Gate deployments on controls** by requiring them in your environment policies.
+- **See a control's history and reach** on its page: every decision, the environments that enforce it, and each version of its definition.
+
+You'll find Controls and Policies under **Control** in the sidebar. To get started, follow [Working with controls](/tutorials/working_with_controls), or read [Controls](/understand_kosli/controls) for how they fit into the SDLC control model.
+
+As Controls are now generally available, we'll keep their CLI commands, API and policy schema stable. We're keen to hear any questions or feedback you have.
+
+</Update>
+
+<Update
   label="November 16, 2026"
   id="new-trail-page"
   tags={["new-trail-page"]}
