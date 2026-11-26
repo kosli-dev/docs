@@ -3,10 +3,6 @@ title: "Rego Policy"
 description: "Reference for Rego policies that Kosli evaluates on the server with kosli publish rego-policy and kosli evaluate policy."
 ---
 
-<Info>
-**Server-side evaluation is in beta.** `kosli publish rego-policy` and `kosli evaluate policy` are available in Kosli but in beta — the CLI flags, the policy input, and the result shape may still change. It is rolled out per organization, so reach out to the Kosli team to enable it for yours.
-</Info>
-
 A Rego policy defines the rules Kosli evaluates trail data against. Kosli evaluates it on the server: an org admin publishes the policy once, and any pipeline evaluates it by identifier against one or more trails. Naming a [control](/tutorials/working_with_controls) records the outcome as a decision against that control. Kosli runs the evaluation with a built-in <Tooltip tip="Rego is the purpose-built declarative policy language used by the Open Policy Agent (OPA) project. It is designed for expressing rules over structured data and is widely used for policy enforcement in cloud-native environments." cta="Learn more" href="https://www.openpolicyagent.org/">Rego</Tooltip> evaluator, with no OPA installation required.
 
 ```shell
