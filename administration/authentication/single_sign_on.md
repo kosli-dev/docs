@@ -76,6 +76,6 @@ Renew the secret before the old one expires. If the secret Kosli holds expires o
 
 SAML connections have no client secret. The equivalent task is renewing your IdP's signing certificate: when it changes, update the IdP metadata in the same way, through **SSO Configuration** in the wizard.
 
-If sign-in fails after the change, check that you copied the secret's value rather than its ID, then contact your Kosli Customer Success representative.
+If sign-in fails after the change, check that you copied the secret's **Value**, not its **Secret ID** (Azure Entra ID shows both). If it still fails, contact your Kosli Customer Success representative.
 
 This procedure is separate from [rotating Kosli API keys](/tutorials/rotating_api_keys), which applies to service accounts and personal API keys, not to SSO.
