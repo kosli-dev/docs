@@ -128,7 +128,7 @@ Use `kosli evaluate policy` on the main-branch build to evaluate the PR trail ag
     </Tabs>
 
     <Tip>
-    If you [publish the policy](/tutorials/working_with_controls#publish-the-policy) and define a [control](/tutorials/working_with_controls) for it, `kosli evaluate policy` can record the outcome on the main trail itself. Evaluate the PR trail with `--context` and `--identifier`, and pass `--control`, `--flow app-main` and `--trail` to record a decision on the main trail in the same request. See [Recording a decision against a control](/tutorials/working_with_controls#recording-a-decision-against-a-control).
+    If you [publish the policy](/tutorials/working_with_controls#publish-the-policy) and define a [control](/tutorials/working_with_controls) for it, `kosli evaluate policy` can record the outcome on the main trail itself. Evaluate the PR trail with `--context` and `--identifier`, and pass `--control`, `--flow app-main` and `--trail` to record a decision on the main trail in the same request. Then replace the `pr-build-compliance` entry in the flow template below with the decision's name (set with `--name`, which defaults to `<control>-decision`) and `type: decision`. See [Recording a decision against a control](/tutorials/working_with_controls#recording-a-decision-against-a-control).
     </Tip>
 
     Add `pr-build-compliance` to your main flow's template so that missing evidence is flagged:
