@@ -20,7 +20,7 @@ After a PR merges, the main-branch build produces the release artifact. But the 
 
 ## Recommended approach
 
-Use `kosli evaluate trail` on the main-branch build to evaluate the PR trail against a Rego policy, then record the result as an attestation on the main trail.
+Use `kosli evaluate policy` on the main-branch build to evaluate the PR trail against a Rego policy, then record the result as an attestation on the main trail.
 
 <Steps>
   <Step title="Identify the PR trail name from the main build">
@@ -38,33 +38,50 @@ Use `kosli evaluate trail` on the main-branch build to evaluate the PR trail aga
   </Step>
 
   <Step title="Check the PR trail compliance">
-    There are two ways to check the PR trail's compliance. Use `kosli evaluate trail` with a Rego policy for a formal, policy-driven check that fails the CI step automatically. Alternatively, use `kosli get trail` with JSON output for a lighter approach that does not require a policy file.
+    There are two ways to check the PR trail's compliance. Use `kosli evaluate policy` with a Rego policy for a formal, policy-driven check that can fail the CI step. Alternatively, use `kosli get trail` with JSON output for a lighter approach that does not require a policy file.
 
     <Tabs>
-      <Tab title="evaluate trail (Rego policy)">
-        Use `kosli evaluate trail` to check the PR trail against a Rego policy. Create a policy file (e.g. `pr-compliant.rego`):
+      <Tab title="evaluate policy (Rego policy)">
+        Create a policy file, `pr-compliant.rego`, that allows the PR trail only when every attestation it requires is present and compliant:
 
         ```rego pr-compliant.rego
         package policy
 
         import rego.v1
 
+        required_attestations := data.params.required_attestations
+
         default allow := false
 
         allow if {
-          input.trail.compliance_status.is_compliant == true
+            count(required_attestations) > 0
+            every name in required_attestations {
+                input.trail.compliance_status.attestations_statuses[name].is_compliant == true
+            }
+        }
+
+        # METADATA
+        # entrypoint: true
+        violations contains msg if {
+            some name in required_attestations
+            not input.trail.compliance_status.attestations_statuses[name].is_compliant == true
+            msg := sprintf("trail '%v/%v': attestation '%v' is missing or not compliant", [input.trail.flow_name, input.trail.trail_name, name])
         }
         ```
 
-        Then evaluate the PR trail:
+        The policy reads the attestation names from `data.params`, so you pass the names your PR flow uses. If the list is missing or empty, `allow` stays `false`. The policy checks attestations on the trail itself. If your PR flow attests tests or scans to an artifact, read them from `compliance_status.artifacts_statuses` instead. See the [Rego policy reference](/policy-reference/rego_policy#input-data) for the input shape.
+
+        Then evaluate the PR trail. Replace the attestation names in `--params` with the ones your PR flow uses:
 
         ```bash
-        kosli evaluate trail "$PR_TRAIL" \
-          --flow app-pr \
-          --policy pr-compliant.rego
+        kosli evaluate policy \
+          --context trail="app-pr/${PR_TRAIL}" \
+          --path pr-compliant.rego \
+          --params '{"required_attestations": ["unit-tests", "snyk-scan", "pull-request"]}' \
+          --assert
         ```
 
-        The command exits with a non-zero code if the trail does not satisfy the policy, which fails the CI step automatically.
+        Kosli evaluates the policy against the PR trail as it recorded it, and the CLI prints the verdict and any violations. With `--assert`, the command exits with code `1` when the policy denies, which fails the CI step. Without it, the command exits `0` on a denial. See [Results and exit codes](/policy-reference/rego_policy#results-and-exit-codes).
       </Tab>
       <Tab title="get trail (JSON + jq)">
         Use `kosli get trail` with JSON output and parse the compliance status:
@@ -84,8 +101,8 @@ Use `kosli evaluate trail` on the main-branch build to evaluate the PR trail aga
     Record a generic attestation on your main-branch trail with the PR trail's compliance result.
 
     <Tabs>
-      <Tab title="evaluate trail (Rego policy)">
-        Because `kosli evaluate trail` fails the CI step on a non-compliant trail, this attestation only runs when the trail is compliant:
+      <Tab title="evaluate policy (Rego policy)">
+        Because `kosli evaluate policy --assert` fails the CI step when the policy denies, this attestation only runs when the PR trail is compliant:
 
         ```bash
         kosli attest generic \
@@ -109,6 +126,10 @@ Use `kosli evaluate trail` on the main-branch build to evaluate the PR trail aga
         ```
       </Tab>
     </Tabs>
+
+    <Tip>
+    If you [publish the policy](/tutorials/working_with_controls#publish-the-policy) and define a [control](/tutorials/working_with_controls) for it, `kosli evaluate policy` can record the outcome on the main trail itself. Evaluate the PR trail with `--context` and `--identifier`, and pass `--control`, `--flow app-main` and `--trail` to record a decision on the main trail in the same request. See [Recording a decision against a control](/tutorials/working_with_controls#recording-a-decision-against-a-control).
+    </Tip>
 
     Add `pr-build-compliance` to your main flow's template so that missing evidence is flagged:
 
@@ -164,7 +185,7 @@ The approach above relies on the Kosli API token used in CI having read access t
 Below is a simplified GitHub Actions workflow for a main-branch build that links back to the PR trail:
 
 <Tabs>
-  <Tab title="evaluate trail (Rego policy)">
+  <Tab title="evaluate policy (Rego policy)">
     ```yaml
     name: Main build
     on:
@@ -205,9 +226,11 @@ Below is a simplified GitHub Actions workflow for a main-branch build that links
           - name: Evaluate PR trail compliance
             if: steps.pr.outputs.found == 'true'
             run: |
-              kosli evaluate trail "${{ steps.pr.outputs.trail }}" \
-                --flow app-pr \
-                --policy pr-compliant.rego
+              kosli evaluate policy \
+                --context trail="app-pr/${{ steps.pr.outputs.trail }}" \
+                --path pr-compliant.rego \
+                --params '{"required_attestations": ["unit-tests", "snyk-scan", "pull-request"]}' \
+                --assert
 
               kosli attest generic \
                 --name pr-build-compliance \
@@ -276,4 +299,4 @@ Below is a simplified GitHub Actions workflow for a main-branch build that links
 
 Kosli is exploring native support for linking trails across flows — removing the need for the scripted approach described above. When available, this will allow you to declare trail dependencies directly in the flow template, with Kosli resolving and evaluating the linked trail's compliance automatically.
 
-Until then, the `kosli evaluate trail` approach described here is the recommended pattern.
+Until then, the `kosli evaluate policy` approach described here is the recommended pattern.
