@@ -1,12 +1,14 @@
 ---
 title: "kosli evaluate input"
-tag: "BETA"
+tag: "DEPRECATED"
 description: "Evaluate a local JSON input against a Rego policy."
 ---
 
-import CliBetaNotice from "/snippets/cli-beta-notice.mdx";
+import CliDeprecatedNotice from "/snippets/cli-deprecated-notice.mdx";
 
-<CliBetaNotice />
+<CliDeprecatedNotice />
+
+use 'opa eval' directly instead
 
 ## Synopsis
 

@@ -1,12 +1,7 @@
 ---
 title: "kosli unarchive control"
-tag: "BETA"
 description: "Unarchive a Kosli control."
 ---
-
-import CliBetaNotice from "/snippets/cli-beta-notice.mdx";
-
-<CliBetaNotice />
 
 ## Synopsis
 

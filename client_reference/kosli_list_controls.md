@@ -1,12 +1,7 @@
 ---
 title: "kosli list controls"
-tag: "BETA"
 description: "List controls for an org."
 ---
-
-import CliBetaNotice from "/snippets/cli-beta-notice.mdx";
-
-<CliBetaNotice />
 
 ## Synopsis
 

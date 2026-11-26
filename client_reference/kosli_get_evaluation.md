@@ -1,12 +1,7 @@
 ---
 title: "kosli get evaluation"
-tag: "BETA"
 description: "Get a server-side evaluation, or what it was given."
 ---
-
-import CliBetaNotice from "/snippets/cli-beta-notice.mdx";
-
-<CliBetaNotice />
 
 ## Synopsis
 

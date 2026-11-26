@@ -1,12 +1,7 @@
 ---
 title: "kosli evaluate policy"
-tag: "BETA"
 description: "Evaluate a policy against a trail in Kosli."
 ---
-
-import CliBetaNotice from "/snippets/cli-beta-notice.mdx";
-
-<CliBetaNotice />
 
 ## Synopsis
 

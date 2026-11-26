@@ -287,7 +287,8 @@
                 "client_reference/kosli_archive_attestation-type",
                 "client_reference/kosli_archive_control",
                 "client_reference/kosli_archive_environment",
-                "client_reference/kosli_archive_flow"
+                "client_reference/kosli_archive_flow",
+                "client_reference/kosli_archive_rego-policy"
               ]
             },
             {
@@ -469,7 +470,8 @@
             {
               "group": "kosli unarchive",
               "pages": [
-                "client_reference/kosli_unarchive_control"
+                "client_reference/kosli_unarchive_control",
+                "client_reference/kosli_unarchive_rego-policy"
               ]
             },
             {

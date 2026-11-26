@@ -1,12 +1,7 @@
 ---
 title: "kosli attest decision"
-tag: "BETA"
 description: "Record a compliance decision against a control in a Kosli trail.  "
 ---
-
-import CliBetaNotice from "/snippets/cli-beta-notice.mdx";
-
-<CliBetaNotice />
 
 ## Synopsis
 
