@@ -112,14 +112,7 @@
       "type": "integer"
     },
     "trail": {
-      "anyOf": [
-        {
-          "$ref": "#/$defs/Trail"
-        },
-        {
-          "type": "null"
-        }
-      ],
+      "$ref": "#/$defs/Trail",
       "default": {
         "attestations": [],
         "artifacts": []
