@@ -137,6 +137,8 @@ See the [Ergo documentation](https://ergo.kosli.com) for subjects, sentences, an
 
 `kosli publish rego-policy IDENTIFIER` stores a new version of the policy. Only org admins can publish, so the team whose trails are evaluated cannot write the policy that judges them. Publishing the same files and input schema as the newest version stores nothing new.
 
+To manage a policy as code, use the [`kosli_rego_policy` Terraform resource](/terraform-reference/resources/rego_policy). It publishes a new version when the files change and archives the policy on destroy.
+
 `--input-schema` declares the input the policy reads: `trail` for a single trail, or `trails` for several. Kosli then validates the version: it compiles the policy in OPA's strict mode against the schema of that input, so a policy that reads a field the input cannot have does not compile. A `trails` policy that reads `input.trail` fails here rather than at evaluation.
 
 To catch these errors before you publish, download the schema Kosli validates against and type-check the policy with `opa check`. Kosli serves one schema for each input: `evaluation-input/trail/v1` for `--input-schema trail`, and `evaluation-input/trails/v1` for `--input-schema trails`. Pass the [capabilities file](https://docs.kosli.com/rego/capabilities/v1.json) Kosli compiles against too, so the same check fails on a [refused built-in function](#restrictions).
