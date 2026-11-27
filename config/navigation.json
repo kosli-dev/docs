@@ -528,7 +528,8 @@
                 "terraform-reference/resources/service_account_api_key",
                 "terraform-reference/resources/control",
                 "terraform-reference/resources/notification_config",
-                "terraform-reference/resources/repo_tags"
+                "terraform-reference/resources/repo_tags",
+                "terraform-reference/resources/rego_policy"
               ]
             },
             {
@@ -545,7 +546,8 @@
                 "terraform-reference/data-sources/control",
                 "terraform-reference/data-sources/notification_config",
                 "terraform-reference/data-sources/repo",
-                "terraform-reference/data-sources/repos"
+                "terraform-reference/data-sources/repos",
+                "terraform-reference/data-sources/rego_policy"
               ]
             },
             {
