@@ -13,7 +13,7 @@ Cloud Capture is a managed service that runs on Kosli's infrastructure and conne
 
 Kosli also supports reporting from your own cloud accounts by running the Kosli CLI on a schedule. Cloud Capture inverts this, with Kosli running the regular [snapshots](/getting_started/environments) so there is no software for you to install.
 
-To set it up for your organization, see [Getting started with Cloud Capture](/administration/cloud_capture/getting_started).
+To set it up for your organization, follow the page for your cloud: [AWS](/administration/cloud_capture/aws), [Azure](/administration/cloud_capture/azure), or [Google Cloud](/administration/cloud_capture/google_cloud).
 
 ## Overview
 
@@ -35,7 +35,19 @@ Cloud Capture connects to your cloud accounts using permissions that you manage.
 | Google Cloud | Google Kubernetes Engine (GKE) | Early access | One environment per cluster |
 | Azure | Azure Kubernetes Service (AKS) | Planned | |
 
-Kosli's Customer Success team enables Cloud Capture for your organization. You then set it up yourself from your organization's Settings page, as described in [Getting started](/administration/cloud_capture/getting_started).
+Kosli's Customer Success team enables Cloud Capture for your organization. You then set it up yourself from your organization's Settings page, following the page for your cloud:
+
+<CardGroup cols={3}>
+  <Card title="AWS" href="/administration/cloud_capture/aws">
+    Amazon ECS, AWS Lambda, and Amazon S3
+  </Card>
+  <Card title="Azure" href="/administration/cloud_capture/azure">
+    Azure App Service
+  </Card>
+  <Card title="Google Cloud" href="/administration/cloud_capture/google_cloud">
+    Cloud Run and GKE
+  </Card>
+</CardGroup>
 
 **Beta** platforms are ready to use once Cloud Capture is enabled for your organization.
 
@@ -53,7 +65,7 @@ on your subscription that carries the same external ID. On Kosli's side, each Cl
 scoped to your organization alone, so a worker running for another tenant cannot reach your cloud
 account. Cloud Capture holds no tenant data; snapshots go straight to Kosli through the same ingest
 path as your existing pipelines. See [Cloud Capture Security](/administration/cloud_capture/security)
-for the isolation model and the full list of permissions.
+for the isolation model, and the page for your cloud for the full list of permissions.
 
 ## Hands-off operation
 
@@ -63,15 +75,15 @@ Cloud Capture has been designed to operate with no on-going support from you.  O
 
 Cloud Capture finds the [supported resources](#supported-platforms) within your cloud accounts, in the services you select for each account, and determines which Kosli environment should hold the snapshots. Cloud Capture will create physical environments for you inside Kosli. You choose how those environments are named; see [Environment names](/administration/cloud_capture/getting_started#environment-names).
 
-You can keep a resource out of Cloud Capture by tagging it with any tag you have listed in your Cloud Capture settings; see [Excluding resources](/administration/cloud_capture/getting_started#excluding-resources).
+You can keep a resource out of Cloud Capture by tagging it with any tag you have listed in your Cloud Capture settings; see excluding resources on [AWS](/administration/cloud_capture/aws#excluding-resources), [Azure](/administration/cloud_capture/azure#excluding-resources), or [Google Cloud](/administration/cloud_capture/google_cloud#excluding-resources).
 
-Amazon S3 works the other way round. A bucket is snapshotted only when you opt it in, by tagging it with one of the S3 opt-in tags in your Cloud Capture settings, because a snapshot makes one request to AWS for every object in the bucket and most buckets hold data you would not want reported; see [Capturing S3 buckets](/administration/cloud_capture/getting_started#capturing-s3-buckets).
+Amazon S3 works the other way round. A bucket is snapshotted only when you opt it in, by tagging it with one of the S3 opt-in tags in your Cloud Capture settings, because a snapshot makes one request to AWS for every object in the bucket and most buckets hold data you would not want reported; see [Capturing S3 buckets](/administration/cloud_capture/aws#capturing-s3-buckets).
 
 As your cloud environment evolves, such as the addition of new AWS ECS clusters or GKE clusters, or the retirement of existing Lambdas, Cloud Capture automatically detects the changes. Because Cloud Capture creates physical environments as needed, when your infrastructure changes, Kosli will keep up. No changes to the configuration created during the initial setup are required.
 
 ## Multiple cloud accounts
 
-Cloud Capture can operate across multiple regions and cloud accounts, such as AWS accounts, Azure subscriptions and Google Cloud projects, allowing you to snapshot development, QA, pre-production, and production workloads with the same process.
+Cloud Capture can operate across multiple regions and cloud accounts, such as AWS accounts, Azure subscriptions, and Google Cloud projects, allowing you to snapshot development, QA, pre-production, and production workloads with the same process.
 
 ## Operation
 
