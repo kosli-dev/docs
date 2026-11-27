@@ -4,6 +4,67 @@ description: "Release notes for Kosli products."
 rss: true
 ---
 
+<Update label="November 26, 2026" description="v0.14.1" tags={["Terraform Provider"]}>
+
+## Updates
+
+- **Controls out of beta**: the `kosli_control` and `kosli_rego_policy` documentation no longer carries a beta notice.
+- **Plainer `403` errors**: `kosli_control` and `kosli_rego_policy` resources, data sources and list resources no longer add a "may not be enabled for your organization" hint to `403` errors. The API error is still reported.
+
+[View on GitHub](https://github.com/kosli-dev/terraform-provider-kosli/releases/tag/v0.14.1)
+
+</Update>
+
+<Update label="November 26, 2026" description="v2.60.0" tags={["CLI"]}>
+
+## New features
+
+- **Archive Rego policies**: `kosli archive rego-policy` and `kosli unarchive rego-policy` archive and restore a Rego policy. `kosli list rego-policies --archived` lists archived policies instead of active ones. See [archiving a policy](/policy-reference/rego_policy) and the [`kosli archive rego-policy` reference](/client_reference/kosli_archive_rego-policy).
+
+## Updates
+
+- **Controls and policy commands out of beta**: the control commands (`create`, `get`, `list`, `update`, `archive` and `unarchive control`), the Rego policy commands (`get`, `list`, `publish`, `archive` and `unarchive rego-policy`), `kosli attest decision`, `kosli evaluate policy` and `kosli get evaluation` no longer carry a beta label. See [working with controls](/tutorials/working_with_controls).
+- **`kosli evaluate input` deprecated**: use `opa eval` directly to evaluate local JSON against a Rego policy. See the [`kosli evaluate input` reference](/client_reference/kosli_evaluate_input).
+
+[View on GitHub](https://github.com/kosli-dev/cli/releases/tag/v2.60.0)
+
+</Update>
+
+<Update label="November 26, 2026" description="v0.14.0" tags={["Terraform Provider"]}>
+
+## New features
+
+- **Manage Rego policies**: the new `kosli_rego_policy` resource publishes versioned Rego policy bundles and waits for Kosli to validate each version. The new `kosli_rego_policy` data source reads a policy's current or a specific version, including its files and digest.
+
+## Bug fixes
+
+- **Updating a control**: changing a `kosli_control`'s `name`, `description`, `links` or `tags` no longer fails the apply with an inconsistent result error.
+
+[View on GitHub](https://github.com/kosli-dev/terraform-provider-kosli/releases/tag/v0.14.0)
+
+</Update>
+
+<Update label="November 26, 2026" description="v2.59.0" tags={["CLI"]}>
+
+## Breaking changes
+
+- **One artifact per S3 snapshot**: `kosli snapshot s3` always reports the bucket as a single artifact named after the bucket. A bucket holding one object used to be reported under that object's name. The fingerprint is unchanged. See the [`kosli snapshot s3` reference](/client_reference/kosli_snapshot_s3).
+- **Empty buckets no longer fail**: when there is nothing to fingerprint (an empty bucket, filters that match no object, or `--skip-unusable-checksums` leaving no object), `kosli snapshot s3` now reports the bucket as an empty artifact instead of exiting with an error. It gets the fingerprint of an empty directory and a timestamp of 0.
+
+[View on GitHub](https://github.com/kosli-dev/cli/releases/tag/v2.59.0)
+
+</Update>
+
+<Update label="November 25, 2026" description="v2.58.2" tags={["CLI"]}>
+
+## Updates
+
+- Maintenance release with no user-facing changes.
+
+[View on GitHub](https://github.com/kosli-dev/cli/releases/tag/v2.58.2)
+
+</Update>
+
 <Update label="November 20, 2026" description="v2.58.1" tags={["CLI"]}>
 
 No changes to the CLI itself. This release ships version 2.9.0 of the [k8s-reporter Helm chart](/helm/k8s_reporter/overview).
